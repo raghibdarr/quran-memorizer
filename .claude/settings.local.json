@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api-docs.quran.com)",
+      "WebFetch(domain:everyayah.com)",
+      "WebFetch(domain:api.quran.com)",
+      "Bash(npx:*)",
+      "Bash(cd:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}

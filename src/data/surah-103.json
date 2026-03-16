@@ -1,0 +1,170 @@
+{
+  "id": 103,
+  "nameSimple": "Al-'Asr",
+  "nameArabic": "العصر",
+  "nameTranslation": "The Declining Day",
+  "revelationPlace": "makkah",
+  "versesCount": 3,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "103:1",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱلْعَصْرِ",
+          "transliteration": "wal-ʿaṣri",
+          "translation": "By the time",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "By time,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "103:2",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِنَّ",
+          "transliteration": "inna",
+          "translation": "Indeed",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْإِنسَـٰنَ",
+          "transliteration": "l-insāna",
+          "translation": "mankind",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لَفِى",
+          "transliteration": "lafī",
+          "translation": "(is) surely, in",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "خُسْرٍ",
+          "transliteration": "khus'rin",
+          "translation": "loss",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Indeed, mankind is in loss,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "103:3",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "Except",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلَّذِينَ",
+          "transliteration": "alladhīna",
+          "translation": "those who",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ءَامَنُوا۟",
+          "transliteration": "āmanū",
+          "translation": "believe",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَعَمِلُوا۟",
+          "transliteration": "waʿamilū",
+          "translation": "and do",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلصَّـٰلِحَـٰتِ",
+          "transliteration": "l-ṣāliḥāti",
+          "translation": "righteous deeds",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَتَوَاصَوْا۟",
+          "transliteration": "watawāṣaw",
+          "translation": "and enjoin (each other)",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "بِٱلْحَقِّ",
+          "transliteration": "bil-ḥaqi",
+          "translation": "to the truth",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "وَتَوَاصَوْا۟",
+          "transliteration": "watawāṣaw",
+          "translation": "and enjoin (each other)",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "بِٱلصَّبْرِ",
+          "transliteration": "bil-ṣabri",
+          "translation": "to [the] patience",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103003.mp3"
+    }
+  ]
+}

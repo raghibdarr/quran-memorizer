@@ -1,0 +1,266 @@
+{
+  "id": 114,
+  "nameSimple": "An-Nas",
+  "nameArabic": "الناس",
+  "nameTranslation": "Mankind",
+  "revelationPlace": "makkah",
+  "versesCount": 6,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "114:1",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "قُلْ",
+          "transliteration": "qul",
+          "translation": "Say",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَعُوذُ",
+          "transliteration": "aʿūdhu",
+          "translation": "I seek refuge",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "بِرَبِّ",
+          "transliteration": "birabbi",
+          "translation": "in (the) Lord",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلنَّاسِ",
+          "transliteration": "l-nāsi",
+          "translation": "(of) mankind",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Say, \"I seek refuge in the Lord of mankind,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "114:2",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مَلِكِ",
+          "transliteration": "maliki",
+          "translation": "(The) King",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلنَّاسِ",
+          "transliteration": "l-nāsi",
+          "translation": "(of) mankind",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "The Sovereign of mankind,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "114:3",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِلَـٰهِ",
+          "transliteration": "ilāhi",
+          "translation": "(The) God",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلنَّاسِ",
+          "transliteration": "l-nāsi",
+          "translation": "(of) mankind",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "The God of mankind,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "114:4",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مِن",
+          "transliteration": "min",
+          "translation": "From",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "شَرِّ",
+          "transliteration": "sharri",
+          "translation": "(the) evil",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْوَسْوَاسِ",
+          "transliteration": "l-waswāsi",
+          "translation": "(of) the whisperer",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْخَنَّاسِ",
+          "transliteration": "l-khanāsi",
+          "translation": "the one who withdraws",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "From the evil of the retreating whisperer -",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "114:5",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلَّذِى",
+          "transliteration": "alladhī",
+          "translation": "The one who",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يُوَسْوِسُ",
+          "transliteration": "yuwaswisu",
+          "translation": "whispers",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "in",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "صُدُورِ",
+          "transliteration": "ṣudūri",
+          "translation": "(the) breasts",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلنَّاسِ",
+          "transliteration": "l-nāsi",
+          "translation": "(of) mankind",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Who whispers [evil] into the breasts of mankind -",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "114:6",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مِنَ",
+          "transliteration": "mina",
+          "translation": "From",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْجِنَّةِ",
+          "transliteration": "l-jinati",
+          "translation": "the jinn",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَٱلنَّاسِ",
+          "transliteration": "wal-nāsi",
+          "translation": "and men",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "From among the jinn and mankind\".",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114006.mp3"
+    }
+  ]
+}

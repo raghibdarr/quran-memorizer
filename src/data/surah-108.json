@@ -1,0 +1,138 @@
+{
+  "id": 108,
+  "nameSimple": "Al-Kawthar",
+  "nameArabic": "الكوثر",
+  "nameTranslation": "The Abundance",
+  "revelationPlace": "makkah",
+  "versesCount": 3,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "108:1",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِنَّآ",
+          "transliteration": "innā",
+          "translation": "Indeed, We",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَعْطَيْنَـٰكَ",
+          "transliteration": "aʿṭaynāka",
+          "translation": "We have given you",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْكَوْثَرَ",
+          "transliteration": "l-kawthara",
+          "translation": "Al-Kauthar",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Indeed, We have granted you, [O Muḥammad], al-Kawthar.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "108:2",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَصَلِّ",
+          "transliteration": "faṣalli",
+          "translation": "So pray",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لِرَبِّكَ",
+          "transliteration": "lirabbika",
+          "translation": "to your Lord",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَٱنْحَرْ",
+          "transliteration": "wa-in'ḥar",
+          "translation": "and sacrifice",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So pray to your Lord and offer sacrifice [to Him alone].",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "108:3",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِنَّ",
+          "transliteration": "inna",
+          "translation": "Indeed",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "شَانِئَكَ",
+          "transliteration": "shāni-aka",
+          "translation": "your enemy ",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "هُوَ",
+          "transliteration": "huwa",
+          "translation": "he (is)",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْأَبْتَرُ",
+          "transliteration": "l-abtaru",
+          "translation": "the one cut off",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Indeed, your enemy is the one cut off.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108003.mp3"
+    }
+  ]
+}

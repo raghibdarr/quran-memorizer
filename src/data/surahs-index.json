@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "nameSimple": "Al-Fatihah",
+    "nameArabic": "الفاتحة",
+    "nameTranslation": "The Opener",
+    "revelationPlace": "makkah",
+    "versesCount": 7
+  },
+  {
+    "id": 103,
+    "nameSimple": "Al-'Asr",
+    "nameArabic": "العصر",
+    "nameTranslation": "The Declining Day",
+    "revelationPlace": "makkah",
+    "versesCount": 3
+  },
+  {
+    "id": 108,
+    "nameSimple": "Al-Kawthar",
+    "nameArabic": "الكوثر",
+    "nameTranslation": "The Abundance",
+    "revelationPlace": "makkah",
+    "versesCount": 3
+  },
+  {
+    "id": 110,
+    "nameSimple": "An-Nasr",
+    "nameArabic": "النصر",
+    "nameTranslation": "The Divine Support",
+    "revelationPlace": "madinah",
+    "versesCount": 3
+  },
+  {
+    "id": 111,
+    "nameSimple": "Al-Masad",
+    "nameArabic": "المسد",
+    "nameTranslation": "The Palm Fiber",
+    "revelationPlace": "makkah",
+    "versesCount": 5
+  },
+  {
+    "id": 112,
+    "nameSimple": "Al-Ikhlas",
+    "nameArabic": "الإخلاص",
+    "nameTranslation": "The Sincerity",
+    "revelationPlace": "makkah",
+    "versesCount": 4
+  },
+  {
+    "id": 113,
+    "nameSimple": "Al-Falaq",
+    "nameArabic": "الفلق",
+    "nameTranslation": "The Daybreak",
+    "revelationPlace": "makkah",
+    "versesCount": 5
+  },
+  {
+    "id": 114,
+    "nameSimple": "An-Nas",
+    "nameArabic": "الناس",
+    "nameTranslation": "Mankind",
+    "revelationPlace": "makkah",
+    "versesCount": 6
+  }
+]

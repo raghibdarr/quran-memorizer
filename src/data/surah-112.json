@@ -1,0 +1,194 @@
+{
+  "id": 112,
+  "nameSimple": "Al-Ikhlas",
+  "nameArabic": "الإخلاص",
+  "nameTranslation": "The Sincerity",
+  "revelationPlace": "makkah",
+  "versesCount": 4,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "112:1",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "قُلْ",
+          "transliteration": "qul",
+          "translation": "Say",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "هُوَ",
+          "transliteration": "huwa",
+          "translation": "He",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱللَّهُ",
+          "transliteration": "l-lahu",
+          "translation": "(is) Allah",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "أَحَدٌ",
+          "transliteration": "aḥadun",
+          "translation": "the One",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Say, \"He is Allāh, [who is] One,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "112:2",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱللَّهُ",
+          "transliteration": "al-lahu",
+          "translation": "Allah",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلصَّمَدُ",
+          "transliteration": "l-ṣamadu",
+          "translation": "the Eternal, the Absolute",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Allāh, the Eternal Refuge.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "112:3",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لَمْ",
+          "transliteration": "lam",
+          "translation": "Not",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَلِدْ",
+          "transliteration": "yalid",
+          "translation": "He begets",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَلَمْ",
+          "transliteration": "walam",
+          "translation": "and not",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "يُولَدْ",
+          "transliteration": "yūlad",
+          "translation": "He is begotten",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He neither begets nor is born,",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "112:4",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلَمْ",
+          "transliteration": "walam",
+          "translation": "And not",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَكُن",
+          "transliteration": "yakun",
+          "translation": "is",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لَّهُۥ",
+          "transliteration": "lahu",
+          "translation": "for Him",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "كُفُوًا",
+          "transliteration": "kufuwan",
+          "translation": "equivalent",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "أَحَدٌۢ",
+          "transliteration": "aḥadun",
+          "translation": "any [one]",
+          "audioUrl": null,
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Nor is there to Him any equivalent.\"",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112004.mp3"
+    }
+  ]
+}
