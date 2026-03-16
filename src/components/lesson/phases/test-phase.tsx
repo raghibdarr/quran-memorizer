@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import type { Surah, TestLevel, Word } from '@/types/quran';
+import type { Surah, TestLevel } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
-import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
@@ -37,9 +36,9 @@ export default function TestPhase({ surah, onComplete, onRetry }: TestPhaseProps
       <div className="text-center">
         <h3 className="text-xl font-bold text-foreground">Test Your Memory</h3>
         <p className="mt-1 text-sm text-muted">
-          {level === 'fill-blank' && 'Level 1: Fill in the blanks'}
-          {level === 'first-letter' && 'Level 2: First letter hints'}
-          {level === 'full-recall' && 'Level 3: Full recall'}
+          {level === 'fill-blank' && 'Level 1: Fill in the missing word'}
+          {level === 'first-letter' && 'Level 2: Recall from letter hints'}
+          {level === 'full-recall' && 'Level 3: Full recall from memory'}
         </p>
       </div>
 
@@ -59,27 +58,15 @@ export default function TestPhase({ surah, onComplete, onRetry }: TestPhaseProps
       </div>
 
       {level === 'fill-blank' && (
-        <FillBlankTest
-          surah={surah}
-          onPass={() => setLevelPassed(true)}
-          onFail={onRetry}
-        />
+        <FillBlankTest surah={surah} onPass={() => setLevelPassed(true)} onFail={onRetry} />
       )}
 
       {level === 'first-letter' && (
-        <FirstLetterTest
-          surah={surah}
-          onPass={() => setLevelPassed(true)}
-          onFail={onRetry}
-        />
+        <FirstLetterTest surah={surah} onPass={() => setLevelPassed(true)} onFail={onRetry} />
       )}
 
       {level === 'full-recall' && (
-        <FullRecallTest
-          surah={surah}
-          onPass={() => setLevelPassed(true)}
-          onFail={onRetry}
-        />
+        <FullRecallTest surah={surah} onPass={() => setLevelPassed(true)} onFail={onRetry} />
       )}
 
       {levelPassed && (
@@ -91,7 +78,7 @@ export default function TestPhase({ surah, onComplete, onRetry }: TestPhaseProps
   );
 }
 
-// --- Fill in the Blank ---
+// === Fill in the Blank (no transliteration shown) ===
 
 function FillBlankTest({
   surah,
@@ -110,15 +97,13 @@ function FillBlankTest({
   const ayah = surah.ayahs[ayahIndex];
   const words = ayah.words.filter((w) => w.charType === 'word');
 
-  // Pick a random word to blank
   const blankIndex = useMemo(
     () => Math.floor(Math.random() * words.length),
     [ayahIndex]
   );
   const blankWord = words[blankIndex];
-  const blankPositions = [blankWord.position];
 
-  // Generate options
+  // Generate options from other words across the surah
   const options = useMemo(() => {
     const allWords = surah.ayahs
       .flatMap((a) => a.words)
@@ -126,7 +111,7 @@ function FillBlankTest({
     const shuffled = allWords.sort(() => Math.random() - 0.5).slice(0, 3);
     const opts = [...shuffled.map((w) => w.textUthmani), blankWord.textUthmani];
     return opts.sort(() => Math.random() - 0.5);
-  }, [ayahIndex]);
+  }, [ayahIndex, blankWord.textUthmani, surah.ayahs]);
 
   const handleSelect = (word: string) => {
     if (answered) return;
@@ -154,8 +139,26 @@ function FillBlankTest({
 
   return (
     <div className="space-y-6">
-      <AyahDisplay ayah={ayah} blankWords={blankPositions} showTranslation={false} />
+      {/* Ayah with blank — NO transliteration */}
+      <div className="rounded-xl bg-white p-5 shadow-sm">
+        <div className="arabic-text flex flex-wrap justify-center gap-x-3 gap-y-1 text-2xl leading-loose">
+          {words.map((word) => (
+            <span
+              key={word.position}
+              className={cn(
+                'inline-block rounded px-1.5 py-0.5',
+                word.position === blankWord.position
+                  ? 'bg-foreground/10 text-transparent select-none min-w-[60px] text-center'
+                  : ''
+              )}
+            >
+              {word.position === blankWord.position ? '____' : word.textUthmani}
+            </span>
+          ))}
+        </div>
+      </div>
 
+      {/* Options — Arabic only, no transliteration */}
       <div className="grid grid-cols-2 gap-2" dir="rtl">
         {options.map((opt, i) => {
           const isCorrect = opt === blankWord.textUthmani;
@@ -177,11 +180,41 @@ function FillBlankTest({
           );
         })}
       </div>
+
+      <p className="text-center text-xs text-muted">
+        Ayah {ayahIndex + 1} of {surah.ayahs.length} &middot; Score: {score}
+      </p>
     </div>
   );
 }
 
-// --- First Letter Test ---
+// === First Letter Hints (show 2-3 meaningful letters per word) ===
+
+function getLetterHint(arabicWord: string): string {
+  // Skip common prefixes: و (wa), ب (bi), ل (li), ف (fa), ال (al-)
+  const prefixes = ['وَ', 'بِ', 'لِ', 'فَ'];
+  let word = arabicWord;
+  let prefix = '';
+
+  for (const p of prefixes) {
+    if (word.startsWith(p) && word.length > p.length + 2) {
+      prefix = p;
+      word = word.slice(p.length);
+      break;
+    }
+  }
+
+  // Handle ال (alif-lam) article
+  if (word.startsWith('ٱل') || word.startsWith('ال')) {
+    prefix += word.slice(0, 2);
+    word = word.slice(2);
+  }
+
+  // Show prefix + first 2 chars of root, then dots
+  const hintChars = word.slice(0, 2);
+  const remainder = word.length > 2 ? '...' : '';
+  return prefix + hintChars + remainder;
+}
 
 function FirstLetterTest({
   surah,
@@ -194,32 +227,42 @@ function FirstLetterTest({
 }) {
   const [ayahIndex, setAyahIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
 
   const ayah = surah.ayahs[ayahIndex];
   const words = ayah.words.filter((w) => w.charType === 'word');
-
-  const firstLetterHints = words
-    .map((w) => w.textUthmani.charAt(0) + '...')
-    .join('  ');
+  const hints = words.map((w) => getLetterHint(w.textUthmani));
 
   const handleRate = (gotIt: boolean) => {
+    const newResults = [...results, gotIt];
+    setResults(newResults);
+
     if (ayahIndex < surah.ayahs.length - 1) {
       setAyahIndex((i) => i + 1);
       setRevealed(false);
     } else {
-      if (gotIt) onPass();
-      else onFail();
+      const passCount = newResults.filter(Boolean).length;
+      if (passCount >= Math.ceil(surah.ayahs.length * 0.5)) {
+        onPass();
+      } else {
+        onFail();
+      }
     }
   };
 
   return (
     <div className="space-y-6">
       <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
-        <p className="arabic-text text-2xl leading-loose text-muted" dir="rtl">
-          {firstLetterHints}
+        <p className="text-xs text-muted mb-3">
+          Ayah {ayahIndex + 1} of {surah.ayahs.length}
         </p>
-        <p className="mt-2 text-xs text-muted">
-          Ayah {ayahIndex + 1} of {surah.ayahs.length} — Try to recite the full ayah
+        <div className="arabic-text flex flex-wrap justify-center gap-x-4 gap-y-1 text-2xl leading-loose" dir="rtl">
+          {hints.map((hint, i) => (
+            <span key={i} className="text-teal/70">{hint}</span>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-muted">
+          Try to recite the full ayah aloud from these hints
         </p>
       </div>
 
@@ -229,7 +272,11 @@ function FirstLetterTest({
         </Button>
       ) : (
         <>
-          <AyahDisplay ayah={ayah} />
+          <div className="rounded-xl bg-success/5 p-5">
+            <p className="arabic-text text-center text-2xl leading-loose">
+              {ayah.textUthmani}
+            </p>
+          </div>
           <div className="flex gap-3">
             <Button onClick={() => handleRate(false)} variant="secondary" className="flex-1">
               Need Practice
@@ -244,7 +291,7 @@ function FirstLetterTest({
   );
 }
 
-// --- Full Recall Test ---
+// === Full Recall (with timer feel, 3-option rating) ===
 
 function FullRecallTest({
   surah,
@@ -255,45 +302,70 @@ function FullRecallTest({
   onPass: () => void;
   onFail: () => void;
 }) {
+  const [started, setStarted] = useState(false);
   const [revealed, setRevealed] = useState(false);
 
   return (
     <div className="space-y-6">
-      {!revealed ? (
+      {!started ? (
         <>
-          <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-12 text-center">
-            <p className="arabic-text text-2xl text-teal">{surah.nameArabic}</p>
-            <p className="mt-2 text-lg font-semibold text-foreground">
-              {surah.nameSimple}
-            </p>
+          <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-10 text-center">
+            <p className="arabic-text text-3xl text-teal">{surah.nameArabic}</p>
+            <p className="mt-2 text-lg font-semibold">{surah.nameSimple}</p>
             <p className="mt-4 text-sm text-muted">
               Recite the entire surah from memory
             </p>
           </div>
-
+          <Button onClick={() => setStarted(true)} className="w-full">
+            Begin Recitation
+          </Button>
+        </>
+      ) : !revealed ? (
+        <>
+          <div className="rounded-2xl bg-teal/5 p-10 text-center">
+            <p className="text-lg font-medium text-teal">Reciting...</p>
+            <p className="mt-2 text-sm text-muted">
+              Take your time. Recite the full surah aloud.
+            </p>
+            <p className="mt-4 arabic-text text-xl text-muted/50">{surah.nameArabic}</p>
+          </div>
           <Button onClick={() => setRevealed(true)} className="w-full">
             Show Full Surah
           </Button>
         </>
       ) : (
         <>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {surah.ayahs.map((ayah) => (
-              <AyahDisplay key={ayah.key} ayah={ayah} />
+              <div key={ayah.key} className="rounded-xl bg-white p-4 shadow-sm">
+                <p className="arabic-text text-center text-2xl leading-loose">
+                  {ayah.textUthmani}
+                </p>
+              </div>
             ))}
           </div>
 
           <div className="space-y-2">
-            <p className="text-center text-sm font-medium text-foreground">
-              How did you do?
-            </p>
-            <div className="flex gap-3">
-              <Button onClick={onFail} variant="secondary" className="flex-1">
-                Need More Practice
-              </Button>
-              <Button onClick={onPass} className="flex-1">
-                I Got It
-              </Button>
+            <p className="text-center text-sm font-medium">How did you do?</p>
+            <div className="flex gap-2">
+              <button
+                onClick={onFail}
+                className="flex-1 rounded-xl bg-red-50 py-3 text-sm font-semibold text-red-600 transition-colors hover:bg-red-100"
+              >
+                Forgot
+              </button>
+              <button
+                onClick={onPass}
+                className="flex-1 rounded-xl bg-amber-50 py-3 text-sm font-semibold text-amber-600 transition-colors hover:bg-amber-100"
+              >
+                Hard but Got It
+              </button>
+              <button
+                onClick={onPass}
+                className="flex-1 rounded-xl bg-green-50 py-3 text-sm font-semibold text-green-600 transition-colors hover:bg-green-100"
+              >
+                Easy
+              </button>
             </div>
           </div>
         </>

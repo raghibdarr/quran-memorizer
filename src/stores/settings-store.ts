@@ -17,7 +17,7 @@ export const useSettingsStore = create<SettingsState>()(
     (set) => ({
       reciter: 'Alafasy_128kbps',
       transliterationEnabled: true,
-      translationEnabled: true,
+      translationEnabled: false,
       playbackSpeed: 1,
       dailyGoalMinutes: 10,
 

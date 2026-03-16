@@ -17,6 +17,8 @@ interface ProgressState {
   completeLesson: (surahId: number) => void;
   getLesson: (surahId: number) => LessonProgress | undefined;
   getCompletedSurahIds: () => number[];
+  resetLesson: (surahId: number) => void;
+  restartPractice: (surahId: number) => void;
 }
 
 function createInitialProgress(surahId: number): LessonProgress {
@@ -196,6 +198,37 @@ export const useProgressStore = create<ProgressState>()(
         Object.values(get().lessons)
           .filter((l) => l.completedAt !== null)
           .map((l) => l.surahId),
+
+      // Full reset — back to Listen phase
+      resetLesson: (surahId) =>
+        set((state) => ({
+          lessons: {
+            ...state.lessons,
+            [surahId]: createInitialProgress(surahId),
+          },
+        })),
+
+      // Practice again — jump to Build phase, keep listen/understand done
+      restartPractice: (surahId) =>
+        set((state) => {
+          const lesson = state.lessons[surahId];
+          if (!lesson) return state;
+          return {
+            lessons: {
+              ...state.lessons,
+              [surahId]: {
+                ...lesson,
+                currentPhase: 'chunk',
+                completedAt: null,
+                phaseData: {
+                  ...lesson.phaseData,
+                  chunk: { currentChunkIndex: 0, completed: false },
+                  test: { currentLevel: 'fill-blank', attempts: 0, completed: false },
+                },
+              },
+            },
+          };
+        }),
     }),
     { name: 'quran-progress' }
   )

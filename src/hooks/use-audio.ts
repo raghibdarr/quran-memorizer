@@ -4,15 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { audioController } from '@/lib/audio';
 
 export function useAudio() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
     const unsubscribe = audioController.subscribe(() => {
-      setIsPlaying(audioController.isPlaying);
-      setCurrentTime(audioController.currentTime);
-      setDuration(audioController.duration);
+      forceUpdate((n) => n + 1);
     });
     return unsubscribe;
   }, []);
@@ -33,13 +29,41 @@ export function useAudio() {
     audioController.stop();
   }, []);
 
+  const togglePlayPause = useCallback((url: string) => {
+    audioController.togglePlayPause(url);
+  }, []);
+
   const setSpeed = useCallback((rate: number) => {
     audioController.setSpeed(rate);
+  }, []);
+
+  const playAndWait = useCallback(async (url: string) => {
+    await audioController.playAndWait(url);
   }, []);
 
   const playSequence = useCallback(async (urls: string[], gapMs?: number) => {
     await audioController.playSequence(urls, gapMs);
   }, []);
 
-  return { play, pause, resume, stop, setSpeed, playSequence, isPlaying, currentTime, duration };
+  const playRepeated = useCallback(async (url: string, times: number, gapMs?: number) => {
+    await audioController.playRepeated(url, times, gapMs);
+  }, []);
+
+  return {
+    play,
+    pause,
+    resume,
+    stop,
+    togglePlayPause,
+    setSpeed,
+    playAndWait,
+    playSequence,
+    playRepeated,
+    isPlaying: audioController.isPlaying,
+    isPaused: audioController.isPaused,
+    isLoading: audioController.isLoading,
+    currentTime: audioController.currentTime,
+    duration: audioController.duration,
+    activeUrl: audioController.activeUrl,
+  };
 }

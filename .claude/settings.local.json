@@ -6,7 +6,9 @@
       "WebFetch(domain:api.quran.com)",
       "Bash(npx:*)",
       "Bash(cd:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(sleep:*)",
+      "Bash(export:*)"
     ]
   }
 }

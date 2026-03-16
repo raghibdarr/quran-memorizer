@@ -10,6 +10,7 @@ interface AyahDisplayProps {
   blankWords?: number[];           // positions to blank out
   dimmed?: boolean;
   showTranslation?: boolean;
+  showTransliteration?: boolean;   // override store setting (e.g. hide during tests)
   onWordClick?: (word: Word) => void;
   className?: string;
 }
@@ -20,12 +21,14 @@ export default function AyahDisplay({
   blankWords = [],
   dimmed = false,
   showTranslation,
+  showTransliteration,
   onWordClick,
   className,
 }: AyahDisplayProps) {
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
   const translationEnabled = useSettingsStore((s) => s.translationEnabled);
   const shouldShowTranslation = showTranslation ?? translationEnabled;
+  const shouldShowTransliteration = showTransliteration ?? transliterationEnabled;
 
   const actualWords = ayah.words.filter((w) => w.charType === 'word');
 
@@ -55,7 +58,7 @@ export default function AyahDisplay({
       </div>
 
       {/* Transliteration */}
-      {transliterationEnabled && (
+      {shouldShowTransliteration && (
         <p className="text-center text-sm text-muted">
           {actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
         </p>

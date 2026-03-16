@@ -13,7 +13,7 @@ interface CompletePhaseProps {
 }
 
 export default function CompletePhase({ surah }: CompletePhaseProps) {
-  const { completeLesson, getCompletedSurahIds } = useProgressStore();
+  const { completeLesson, getCompletedSurahIds, resetLesson, restartPractice } = useProgressStore();
   const { addCardsForSurah } = useReviewStore();
   const { recordActivity, addAyahsMemorized } = useStatsStore();
 
@@ -69,6 +69,21 @@ export default function CompletePhase({ surah }: CompletePhaseProps) {
             <Button className="w-full">Start Next Surah</Button>
           </a>
         )}
+
+        {/* Restart options */}
+        <button
+          onClick={() => restartPractice(surah.id)}
+          className="w-full rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+        >
+          Practice Again (Build & Test)
+        </button>
+        <button
+          onClick={() => resetLesson(surah.id)}
+          className="w-full rounded-xl py-3 text-sm font-medium text-muted transition-colors hover:text-foreground"
+        >
+          Full Reset (Start Over)
+        </button>
+
         <a href="/">
           <Button variant="ghost" className="w-full">
             Back to Home
