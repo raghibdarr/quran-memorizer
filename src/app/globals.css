@@ -24,7 +24,7 @@
   --color-success: var(--color-success);
   --color-muted: var(--color-muted);
   --font-sans: var(--font-jakarta);
-  --font-arabic: var(--font-scheherazade);
+  --font-arabic: var(--font-arabic);
 }
 
 body {

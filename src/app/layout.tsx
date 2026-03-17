@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Scheherazade_New, Plus_Jakarta_Sans } from "next/font/google";
+import { Amiri, Plus_Jakarta_Sans } from "next/font/google";
 import Providers from "@/components/providers";
 import "./globals.css";
 
-const scheherazade = Scheherazade_New({
+const amiri = Amiri({
   subsets: ["arabic"],
   weight: ["400", "700"],
-  variable: "--font-scheherazade",
+  variable: "--font-arabic",
   display: "swap",
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${scheherazade.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${amiri.variable} ${jakarta.variable}`}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>
