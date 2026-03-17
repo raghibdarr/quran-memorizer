@@ -18,6 +18,7 @@ interface ApiWord {
   translation?: { text: string };
   transliteration?: { text: string };
   audio?: { url: string };
+  audio_url?: string;
 }
 
 interface ApiVerse {
@@ -67,7 +68,7 @@ async function fetchSurah(surahId: number) {
 
   // Fetch verses with words and translation (Sahih International = ID 20)
   const versesData = await fetchJson(
-    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&translation_fields=text&translations=20&word_fields=text_uthmani&fields=text_uthmani&per_page=50`
+    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&translation_fields=text&translations=20&word_fields=text_uthmani,audio_url&fields=text_uthmani&per_page=50`
   ) as { verses: ApiVerse[] };
 
   await delay(500);
@@ -111,7 +112,7 @@ async function fetchSurah(surahId: number) {
         textUthmani: word.text_uthmani,
         transliteration: translitWord?.transliteration?.text || word.transliteration?.text || null,
         translation: word.translation?.text || null,
-        audioUrl: word.audio?.url ? `https://audio.qurancdn.com/${word.audio.url}` : null,
+        audioUrl: word.audio_url ? `https://audio.qurancdn.com/${word.audio_url}` : (word.audio?.url ? `https://audio.qurancdn.com/${word.audio.url}` : null),
         charType: word.char_type_name === 'word' ? 'word' as const : 'end' as const,
       };
     });

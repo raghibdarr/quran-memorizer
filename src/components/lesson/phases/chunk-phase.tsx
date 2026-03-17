@@ -551,9 +551,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
               /* Answer revealed */
               <>
                 <div className="rounded-xl bg-success/5 p-5 text-center">
-                  <p className="arabic-text text-4xl leading-loose">
-                    {actualWords.map((w) => w.textUthmani).join(' ')}
-                  </p>
+                  <ArabicText ayah={currentAyah} className="text-4xl leading-loose" />
                   <p className="mt-2 text-sm text-muted">
                     {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
                   </p>

@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react';
 import type { Surah, TestLevel } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
+import ArabicText from '@/components/ui/arabic-text';
+import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
@@ -272,10 +274,8 @@ function FirstLetterTest({
         </Button>
       ) : (
         <>
-          <div className="rounded-xl bg-success/5 p-5">
-            <p className="arabic-text text-center text-2xl leading-loose">
-              {ayah.textUthmani}
-            </p>
+          <div className="rounded-xl bg-success/5 p-5 text-center">
+            <ArabicText ayah={ayah} className="text-2xl leading-loose" />
           </div>
           <div className="flex gap-3">
             <Button onClick={() => handleRate(false)} variant="secondary" className="flex-1">
@@ -337,10 +337,8 @@ function FullRecallTest({
         <>
           <div className="space-y-3">
             {surah.ayahs.map((ayah) => (
-              <div key={ayah.key} className="rounded-xl bg-card p-4 shadow-sm">
-                <p className="arabic-text text-center text-2xl leading-loose">
-                  {ayah.textUthmani}
-                </p>
+              <div key={ayah.key} className="rounded-xl bg-card p-4 shadow-sm text-center">
+                <ArabicText ayah={ayah} className="text-2xl leading-loose" />
               </div>
             ))}
           </div>

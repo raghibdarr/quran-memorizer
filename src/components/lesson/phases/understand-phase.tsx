@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { Surah, Word } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { audioController } from '@/lib/audio';
+import ArabicText from '@/components/ui/arabic-text';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
@@ -23,8 +24,9 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
 
   const handleWordClick = async (word: Word) => {
     setSelectedWord(word);
-    // Play ayah audio since word-level audio isn't available from the API
-    await audioController.play(currentAyah.audioUrl);
+    if (word.audioUrl) {
+      await audioController.play(word.audioUrl);
+    }
   };
 
   const goToAyah = (index: number) => {
@@ -47,33 +49,56 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
         </p>
       </div>
 
-      {/* Ayah navigation tabs */}
-      <div className="flex justify-center gap-2">
-        {surah.ayahs.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goToAyah(i)}
-            className={cn(
-              'flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold transition-all',
-              i === ayahIndex
-                ? 'bg-teal text-white'
-                : exploredAyahs.has(i)
-                ? 'bg-success/10 text-success'
-                : 'bg-foreground/10 text-muted hover:bg-foreground/20'
-            )}
-          >
-            {i + 1}
-          </button>
-        ))}
+      {/* Ayah navigation */}
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => goToAyah(ayahIndex - 1)}
+          disabled={ayahIndex === 0}
+          className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground disabled:opacity-0"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+          Prev
+        </button>
+
+        {/* Dot indicators */}
+        <div className="flex items-center gap-1.5">
+          {surah.ayahs.map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                'h-2 w-2 rounded-full transition-all',
+                i === ayahIndex ? 'bg-teal scale-125' :
+                exploredAyahs.has(i) ? 'bg-success' :
+                'bg-foreground/15'
+              )}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={() => goToAyah(ayahIndex + 1)}
+          disabled={ayahIndex === surah.ayahs.length - 1}
+          className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-teal transition-colors hover:text-teal-light disabled:opacity-0"
+        >
+          Next
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
       </div>
 
+      <p className="text-center text-xs text-muted">
+        Ayah {ayahIndex + 1} of {surah.ayahs.length}
+      </p>
+
       {/* Full ayah in Arabic */}
-      <div className="rounded-xl bg-card p-4 shadow-sm">
-        <p className="arabic-text text-center text-2xl leading-loose">
-          {currentAyah.textUthmani}
-        </p>
+      <div className="rounded-xl bg-card p-4 shadow-sm text-center">
+        <ArabicText ayah={currentAyah} className="text-3xl leading-loose" />
+        {currentAyah.transliteration && (
+          <p className="mt-2 text-center text-sm text-muted">
+            {currentAyah.transliteration}
+          </p>
+        )}
         {currentAyah.translation && (
-          <p className="mt-2 text-center text-sm italic text-muted">
+          <p className="mt-1 text-center text-sm italic text-muted">
             {currentAyah.translation}
           </p>
         )}
@@ -82,7 +107,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
       {/* Word-by-word breakdown */}
       <div>
         <p className="mb-2 text-center text-xs text-muted">
-          Tap a word to see its meaning and hear the ayah
+          Tap a word to hear it and see its meaning
         </p>
         <div className="flex flex-wrap justify-center gap-2" dir="rtl">
           {currentAyah.words

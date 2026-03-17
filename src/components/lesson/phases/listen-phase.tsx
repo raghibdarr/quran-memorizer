@@ -101,10 +101,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
               playingAll && i !== currentAyahIndex && 'opacity-50'
             )}
           >
-            <AyahDisplay
-              ayah={ayah}
-              showTranslation={false}
-            />
+            <AyahDisplay ayah={ayah} />
           </button>
         ))}
       </div>
