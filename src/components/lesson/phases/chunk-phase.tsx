@@ -348,7 +348,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
           <>
             <div className="space-y-3">
               {surah.ayahs.map((ayah) => (
-                <div key={ayah.key} className="rounded-xl bg-white p-4 shadow-sm text-center">
+                <div key={ayah.key} className="rounded-xl bg-card p-4 shadow-sm text-center">
                   <ArabicText ayah={ayah} className="text-2xl leading-loose" />
                 </div>
               ))}
@@ -431,7 +431,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       {/* === TEXT-VISIBLE STEPS (listen-with-text, reinforce-with-text) === */}
       {isTextVisible && (
         <div className="space-y-5">
-          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+          <div className="rounded-2xl bg-card p-6 text-center shadow-sm">
             <ArabicText ayah={currentAyah} className="text-3xl leading-loose" />
             <p className="mt-3 text-sm text-muted">
               {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
@@ -620,7 +620,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
                     'arabic-text rounded-xl border-2 px-4 py-2 text-xl transition-all',
                     isUsed
                       ? 'border-transparent bg-foreground/5 text-foreground/20'
-                      : 'border-foreground/10 bg-white hover:border-gold'
+                      : 'border-foreground/10 bg-card hover:border-gold'
                   )}
                 >
                   {word.text}

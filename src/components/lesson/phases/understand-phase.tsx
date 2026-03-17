@@ -68,7 +68,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
       </div>
 
       {/* Full ayah in Arabic */}
-      <div className="rounded-xl bg-white p-4 shadow-sm">
+      <div className="rounded-xl bg-card p-4 shadow-sm">
         <p className="arabic-text text-center text-2xl leading-loose">
           {currentAyah.textUthmani}
         </p>
@@ -97,7 +97,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
                     'flex flex-col items-center rounded-xl border-2 px-3 py-2.5 transition-all',
                     isSelected
                       ? 'border-gold bg-gold/10 shadow-md'
-                      : 'border-foreground/10 bg-white hover:border-gold/50'
+                      : 'border-foreground/10 bg-card hover:border-gold/50'
                   )}
                 >
                   <span className="arabic-text text-xl leading-normal">{word.textUthmani}</span>

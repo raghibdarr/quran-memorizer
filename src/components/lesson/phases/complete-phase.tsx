@@ -6,6 +6,7 @@ import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
 import Button from '@/components/ui/button';
+import { StarIcon } from '@/components/ui/icons';
 import { getNextSurah } from '@/lib/curriculum';
 
 interface CompletePhaseProps {
@@ -31,7 +32,7 @@ export default function CompletePhase({ surah }: CompletePhaseProps) {
     <div className="flex flex-col items-center space-y-6 py-8 text-center">
       {/* Celebration */}
       <div className="flex h-20 w-20 items-center justify-center rounded-full bg-success/10">
-        <span className="text-4xl">&#9734;</span>
+        <StarIcon size={36} className="text-success" />
       </div>
 
       <div>

@@ -64,9 +64,9 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream">
+    <div className="flex min-h-screen flex-col bg-cream dark:bg-[#141414]">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+      <header className="sticky top-0 z-10 bg-cream dark:bg-[#141414]/95 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto max-w-lg">
           <div className="mb-2 flex items-center justify-between">
             <a href="/" className="text-sm text-muted hover:text-foreground">

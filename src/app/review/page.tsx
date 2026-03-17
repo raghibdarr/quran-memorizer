@@ -8,6 +8,7 @@ import type { ReviewCard, Ayah } from '@/types/quran';
 import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
 import SettingsPanel from '@/components/layout/settings-panel';
+import { StarIcon, CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
 export default function ReviewPage() {
@@ -61,7 +62,7 @@ export default function ReviewPage() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4">
         <div className="text-center">
-          <p className="text-4xl">&#9734;</p>
+          <StarIcon size={40} className="text-teal" />
           <h2 className="mt-4 text-xl font-bold text-foreground">All caught up!</h2>
           <p className="mt-1 text-muted">No reviews due right now. Keep learning!</p>
           <a href="/">
@@ -77,7 +78,7 @@ export default function ReviewPage() {
       <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4">
         <div className="text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
-            <span className="text-3xl">&#10003;</span>
+            <CheckIcon size={28} className="text-success" />
           </div>
           <h2 className="mt-4 text-xl font-bold text-foreground">Review Complete!</h2>
           <p className="mt-1 text-muted">{reviewedCount} ayahs reviewed</p>

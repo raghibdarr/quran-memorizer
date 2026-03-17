@@ -98,7 +98,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
               'w-full rounded-xl p-4 text-left transition-all',
               i === currentAyahIndex
                 ? 'bg-teal/5 ring-2 ring-teal/30'
-                : 'bg-white hover:bg-foreground/[0.02]',
+                : 'bg-card hover:bg-foreground/[0.02]',
               playingAll && i !== currentAyahIndex && 'opacity-50'
             )}
           >
@@ -116,7 +116,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
       </div>
 
       {/* Playback controls */}
-      <div className="sticky bottom-0 space-y-3 rounded-2xl bg-white p-4 shadow-lg">
+      <div className="sticky bottom-0 space-y-3 rounded-2xl bg-card p-4 shadow-lg">
         {/* Play all / Stop */}
         <div className="flex items-center gap-3">
           <button

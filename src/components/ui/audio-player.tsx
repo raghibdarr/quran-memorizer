@@ -25,7 +25,7 @@ export default function AudioPlayer({ url, className }: AudioPlayerProps) {
   };
 
   return (
-    <div className={cn('flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm', className)}>
+    <div className={cn('flex items-center gap-3 rounded-xl bg-card p-3 shadow-sm', className)}>
       {/* Play/Pause */}
       <button
         onClick={handlePlayPause}

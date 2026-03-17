@@ -11,6 +11,21 @@
   --color-success: #2D7A4F;
   --color-muted: #8A8A85;
   --color-text: #2C2C2A;
+  --color-card: #ffffff;
+}
+
+.dark {
+  --background: #141414;
+  --foreground: #E8E6E3;
+  --color-cream: #141414;
+  --color-teal: #4FA8BE;
+  --color-teal-light: #6BC4D8;
+  --color-gold: #D4AA5C;
+  --color-gold-light: #E0BC74;
+  --color-success: #4CAF6E;
+  --color-muted: #8A8A85;
+  --color-text: #E8E6E3;
+  --color-card: #1E1E1E;
 }
 
 @theme inline {
@@ -23,6 +38,7 @@
   --color-gold-light: var(--color-gold-light);
   --color-success: var(--color-success);
   --color-muted: var(--color-muted);
+  --color-card: var(--color-card);
   --font-sans: var(--font-jakarta);
   --font-arabic: var(--font-arabic);
 }
@@ -68,3 +84,7 @@ body {
   vertical-align: middle;
   opacity: 0.4;
 }
+
+/* Dark mode tajweed adjustments */
+.dark .tajweed-text .madda_obligatory { color: #4477FF; }
+.dark .tajweed-text .madd_6 { color: #4477FF; }

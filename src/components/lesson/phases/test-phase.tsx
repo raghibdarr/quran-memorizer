@@ -140,7 +140,7 @@ function FillBlankTest({
   return (
     <div className="space-y-6">
       {/* Ayah with blank — NO transliteration */}
-      <div className="rounded-xl bg-white p-5 shadow-sm">
+      <div className="rounded-xl bg-card p-5 shadow-sm">
         <div className="arabic-text flex flex-wrap justify-center gap-x-3 gap-y-1 text-2xl leading-loose">
           {words.map((word) => (
             <span
@@ -252,7 +252,7 @@ function FirstLetterTest({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
+      <div className="rounded-2xl bg-card p-6 text-center shadow-sm">
         <p className="text-xs text-muted mb-3">
           Ayah {ayahIndex + 1} of {surah.ayahs.length}
         </p>
@@ -337,7 +337,7 @@ function FullRecallTest({
         <>
           <div className="space-y-3">
             {surah.ayahs.map((ayah) => (
-              <div key={ayah.key} className="rounded-xl bg-white p-4 shadow-sm">
+              <div key={ayah.key} className="rounded-xl bg-card p-4 shadow-sm">
                 <p className="arabic-text text-center text-2xl leading-loose">
                   {ayah.textUthmani}
                 </p>
