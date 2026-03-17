@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import type { Surah, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
+import SettingsPanel from '@/components/layout/settings-panel';
 import ListenPhase from './phases/listen-phase';
 import UnderstandPhase from './phases/understand-phase';
 import ChunkPhase from './phases/chunk-phase';
@@ -74,7 +75,7 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
             <h2 className="text-sm font-semibold text-teal">
               {surah.nameSimple}
             </h2>
-            <div className="w-12" />
+            <SettingsPanel />
           </div>
           <PhaseIndicator currentPhase={lesson.currentPhase} />
         </div>

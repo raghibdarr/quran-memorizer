@@ -11,12 +11,14 @@ import Card from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
+import SettingsPanel from '@/components/layout/settings-panel';
 import { cn } from '@/lib/cn';
 
 export default function HomePage() {
   const [surahs, setSurahs] = useState<SurahMeta[]>([]);
   const lessons = useProgressStore((s) => s.lessons);
-  const dueCount = useReviewStore((s) => s.getDueCount());
+  const cards = useReviewStore((s) => s.cards);
+  const dueCount = cards.filter((c) => c.nextReview <= Date.now()).length;
   const stats = useStatsStore();
 
   useEffect(() => {
@@ -47,14 +49,17 @@ export default function HomePage() {
               <h1 className="text-2xl font-bold text-teal">HifzFlow</h1>
               <p className="text-sm text-muted">Quran Memorization</p>
             </div>
-            {stats.currentStreak > 0 && (
-              <div className="flex items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5">
-                <span className="text-sm">&#128293;</span>
-                <span className="text-sm font-bold text-gold">
-                  {stats.currentStreak}
-                </span>
-              </div>
-            )}
+            <div className="flex items-center gap-2">
+              {stats.currentStreak > 0 && (
+                <div className="flex items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5">
+                  <span className="text-sm">&#128293;</span>
+                  <span className="text-sm font-bold text-gold">
+                    {stats.currentStreak}
+                  </span>
+                </div>
+              )}
+              <SettingsPanel />
+            </div>
           </div>
         </div>
       </header>

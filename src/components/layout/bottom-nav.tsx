@@ -10,7 +10,8 @@ const NAV_ITEMS = [
 ];
 
 export default function BottomNav() {
-  const dueCount = useReviewStore((s) => s.getDueCount());
+  const cards = useReviewStore((s) => s.cards);
+  const dueCount = cards.filter((c) => c.nextReview <= Date.now()).length;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-foreground/5 bg-white/95 backdrop-blur-sm">

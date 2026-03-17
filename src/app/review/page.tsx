@@ -1,17 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { getSurah } from '@/lib/quran-data';
 import type { ReviewCard, Ayah } from '@/types/quran';
 import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
+import SettingsPanel from '@/components/layout/settings-panel';
 import { cn } from '@/lib/cn';
 
 export default function ReviewPage() {
-  const dueCards = useReviewStore((s) => s.getDueCards());
-  const reviewCard = useReviewStore((s) => s.reviewCard);
+  const cards = useReviewStore((s) => s.cards);
+  const reviewCardFn = useReviewStore((s) => s.reviewCard);
+  const dueCards = useMemo(() => {
+    const now = Date.now();
+    return cards.filter((c) => c.nextReview <= now).sort((a, b) => a.nextReview - b.nextReview);
+  }, [cards]);
   const { recordActivity } = useStatsStore();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,7 +45,7 @@ export default function ReviewPage() {
 
   const handleRate = (quality: number) => {
     if (!currentCard) return;
-    reviewCard(currentCard.surahId, currentCard.ayahNumber, quality);
+    reviewCardFn(currentCard.surahId, currentCard.ayahNumber, quality);
     recordActivity();
     setReviewedCount((c) => c + 1);
     setRevealed(false);
@@ -94,7 +99,7 @@ export default function ReviewPage() {
           <span className="text-sm font-semibold text-teal">
             Review {currentIndex + 1} / {dueCards.length}
           </span>
-          <div className="w-12" />
+          <SettingsPanel />
         </div>
       </header>
 

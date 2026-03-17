@@ -10,6 +10,7 @@ import type { SurahMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
+import SettingsPanel from '@/components/layout/settings-panel';
 
 export default function ProgressPage() {
   const [surahs, setSurahs] = useState<SurahMeta[]>([]);
@@ -32,7 +33,10 @@ export default function ProgressPage() {
     <div className="min-h-screen bg-cream pb-20">
       <header className="px-4 pt-6 pb-4">
         <div className="mx-auto max-w-lg">
-          <h1 className="text-2xl font-bold text-foreground">Progress</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold text-foreground">Progress</h1>
+            <SettingsPanel />
+          </div>
         </div>
       </header>
 
