@@ -39,3 +39,32 @@ body {
   text-align: right;
   line-height: 2.2;
 }
+
+/* Tajweed color-coded rules (from quran.com API) */
+.tajweed-text tajweed {
+  font-family: inherit;
+}
+.tajweed-text .ham_wasl { color: #AAAAAA; }
+.tajweed-text .laam_shamsiyah { color: #AAAAAA; }
+.tajweed-text .madda_normal { color: #537FFF; }
+.tajweed-text .madda_permissible { color: #4050FF; }
+.tajweed-text .madda_obligatory { color: #000FB5; }
+.tajweed-text .qalaqah { color: #DD0008; }
+.tajweed-text .ikhpiaa { color: #9400A8; }
+.tajweed-text .idghaam_no_ghunnah { color: #169777; }
+.tajweed-text .idghaam_ghunnah { color: #169777; }
+.tajweed-text .ghunnah { color: #FF7E1E; }
+.tajweed-text .iqlabb { color: #26BFFD; }
+.tajweed-text .idhaar { color: #169200; }
+.tajweed-text .idghaam_shafawi { color: #169777; }
+.tajweed-text .ikhpiaa_shafawi { color: #D500B7; }
+.tajweed-text .madd_6 { color: #000FB5; }
+.tajweed-text .madd_2 { color: #537FFF; }
+.tajweed-text .madd_246 { color: #4050FF; }
+.tajweed-text .madd_lin { color: #537FFF; }
+.tajweed-text span.end {
+  color: var(--foreground);
+  font-size: 0.6em;
+  vertical-align: middle;
+  opacity: 0.4;
+}

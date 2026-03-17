@@ -13,11 +13,15 @@ export interface Ayah {
   number: number;
   key: string;              // "114:1"
   textUthmani: string;
+  textUthmaniTajweed?: string; // HTML with <tajweed> tags for color-coded rules
+  textIndopak?: string;        // IndoPak/Nastaliq script
   words: Word[];
   translation: string;
-  transliteration?: string; // Ayah-level transliteration (waqf-style from quran411)
-  audioUrl: string;         // everyayah.com URL
+  transliteration?: string;    // Ayah-level transliteration (waqf-style from quran411)
+  audioUrl: string;            // everyayah.com URL
 }
+
+export type ArabicScriptStyle = 'tajweed' | 'uthmani' | 'indopak';
 
 export interface Surah {
   id: number;
@@ -73,6 +77,7 @@ export interface ReviewCard {
 
 export interface UserSettings {
   reciter: string;
+  arabicScript: ArabicScriptStyle;
   transliterationEnabled: boolean;
   translationEnabled: boolean;
   playbackSpeed: number;

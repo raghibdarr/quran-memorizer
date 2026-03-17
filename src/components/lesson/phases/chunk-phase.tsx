@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { Surah, Ayah } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { audioController } from '@/lib/audio';
+import ArabicText from '@/components/ui/arabic-text';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
@@ -282,10 +283,8 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
           </div>
         ) : (
           <div className="space-y-5">
-            <div className="rounded-xl bg-success/5 p-5">
-              <p className="arabic-text text-center text-2xl leading-loose">
-                {currentChainAyah.words.filter((w) => w.charType === 'word').map((w) => w.textUthmani).join(' ')}
-              </p>
+            <div className="rounded-xl bg-success/5 p-5 text-center">
+              <ArabicText ayah={currentChainAyah} className="text-2xl leading-loose" />
             </div>
 
             {chainAyahIndex < chainAyahs.length - 1 ? (
@@ -349,10 +348,8 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
           <>
             <div className="space-y-3">
               {surah.ayahs.map((ayah) => (
-                <div key={ayah.key} className="rounded-xl bg-white p-4 shadow-sm">
-                  <p className="arabic-text text-center text-2xl leading-loose">
-                    {ayah.textUthmani}
-                  </p>
+                <div key={ayah.key} className="rounded-xl bg-white p-4 shadow-sm text-center">
+                  <ArabicText ayah={ayah} className="text-2xl leading-loose" />
                 </div>
               ))}
             </div>
@@ -435,9 +432,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       {isTextVisible && (
         <div className="space-y-5">
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
-            <p className="arabic-text text-3xl leading-loose">
-              {actualWords.map((w) => w.textUthmani).join(' ')}
-            </p>
+            <ArabicText ayah={currentAyah} className="text-3xl leading-loose" />
             <p className="mt-3 text-sm text-muted">
               {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
             </p>

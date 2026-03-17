@@ -9,6 +9,9 @@
     {
       "number": 1,
       "key": "112:1",
+      "textUthmani": " قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+      "textUthmaniTajweed": "قُلْ هُوَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهُ أَحَ<tajweed class=qalaqah>د</tajweed>ٌ <span class=end>١</span>",
+      "textIndopak": "قُلۡ هُوَ اللّٰهُ اَحَدٌ​ ۚ‏",
       "words": [
         {
           "position": 1,
@@ -58,6 +61,9 @@
     {
       "number": 2,
       "key": "112:2",
+      "textUthmani": "ٱللَّهُ ٱلصَّمَدُ",
+      "textUthmaniTajweed": "ٱللَّهُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّمَ<tajweed class=qalaqah>د</tajweed>ُ <span class=end>٢</span>",
+      "textIndopak": "اَللّٰهُ الصَّمَدُ​ ۚ‏",
       "words": [
         {
           "position": 1,
@@ -91,6 +97,9 @@
     {
       "number": 3,
       "key": "112:3",
+      "textUthmani": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "textUthmaniTajweed": "لَمْ يَلِ<tajweed class=qalaqah>دْ</tajweed> وَلَمْ يُولَ<tajweed class=qalaqah>دْ</tajweed> <span class=end>٣</span>",
+      "textIndopak": "لَمۡ يَلِدۡ   ۙ وَلَمۡ يُوۡلَدۡ ۙ‏",
       "words": [
         {
           "position": 1,
@@ -140,6 +149,9 @@
     {
       "number": 4,
       "key": "112:4",
+      "textUthmani": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+      "textUthmaniTajweed": "وَلَمْ يَك<tajweed class=idgham_wo_ghunnah>ُن ل</tajweed>َّهُ<tajweed class=madda_normal>ۥ</tajweed> كُفُوًا أَحَ<tajweed class=qalaqah>د</tajweed>ُۢ <span class=end>٤</span>",
+      "textIndopak": "وَلَمۡ يَكُنۡ لَّهٗ كُفُوًا اَحَدٌ‏",
       "words": [
         {
           "position": 1,

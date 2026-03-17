@@ -67,7 +67,7 @@ async function fetchSurah(surahId: number) {
 
   // Fetch verses with words and translation (Sahih International = ID 20)
   const versesData = await fetchJson(
-    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&translation_fields=text&translations=20&word_fields=text_uthmani&per_page=50`
+    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&translation_fields=text&translations=20&word_fields=text_uthmani&fields=text_uthmani&per_page=50`
   ) as { verses: ApiVerse[] };
 
   await delay(500);
@@ -83,10 +83,23 @@ async function fetchSurah(surahId: number) {
   const translationsData = await fetchJson(
     `${API_BASE}/quran/translations/20?chapter_number=${surahId}`
   ) as { translations: Array<{ resource_id: number; text: string }> };
-  // Translations come in order matching verses — no verse_key field
   const translationTexts = translationsData.translations.map(
     t => t.text.replace(/<sup[^>]*>.*?<\/sup>/g, '').replace(/<[^>]*>/g, '').trim()
   );
+
+  await delay(500);
+
+  // Fetch tajweed text (HTML with color-coded tajweed rules)
+  const tajweedData = await fetchJson(
+    `${API_BASE}/quran/verses/uthmani_tajweed?chapter_number=${surahId}`
+  ) as { verses: Array<{ verse_key: string; text_uthmani_tajweed: string }> };
+
+  await delay(500);
+
+  // Fetch IndoPak text
+  const indopakData = await fetchJson(
+    `${API_BASE}/quran/verses/indopak?chapter_number=${surahId}`
+  ) as { verses: Array<{ verse_key: string; text_indopak: string }> };
 
   const ayahs = versesData.verses.map((verse, idx) => {
     const translitVerse = translitData.verses[idx];
@@ -107,6 +120,8 @@ async function fetchSurah(surahId: number) {
       number: verse.verse_number,
       key: verse.verse_key,
       textUthmani: verse.text_uthmani,
+      textUthmaniTajweed: tajweedData.verses[idx]?.text_uthmani_tajweed || '',
+      textIndopak: indopakData.verses[idx]?.text_indopak || '',
       words,
       translation: translationTexts[idx] || '',
       audioUrl: getAudioUrl(surahId, verse.verse_number),

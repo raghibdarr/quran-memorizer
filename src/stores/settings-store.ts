@@ -2,10 +2,11 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { UserSettings } from '@/types/quran';
+import type { UserSettings, ArabicScriptStyle } from '@/types/quran';
 
 interface SettingsState extends UserSettings {
   setReciter: (reciter: string) => void;
+  setArabicScript: (style: ArabicScriptStyle) => void;
   toggleTransliteration: () => void;
   toggleTranslation: () => void;
   setPlaybackSpeed: (speed: number) => void;
@@ -16,12 +17,14 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       reciter: 'Alafasy_128kbps',
+      arabicScript: 'tajweed',
       transliterationEnabled: true,
       translationEnabled: false,
       playbackSpeed: 1,
       dailyGoalMinutes: 10,
 
       setReciter: (reciter) => set({ reciter }),
+      setArabicScript: (style) => set({ arabicScript: style }),
       toggleTransliteration: () =>
         set((s) => ({ transliterationEnabled: !s.transliterationEnabled })),
       toggleTranslation: () =>

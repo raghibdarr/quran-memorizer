@@ -9,6 +9,9 @@
     {
       "number": 1,
       "key": "108:1",
+      "textUthmani": " إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed><tajweed class=madda_obligatory>َآ</tajweed> أَعْطَيْنَ<tajweed class=madda_normal>ـٰ</tajweed>كَ <tajweed class=ham_wasl>ٱ</tajweed>لْكَوْثَرَ <span class=end>١</span>",
+      "textIndopak": "اِنَّاۤ اَعۡطَيۡنٰكَ الۡكَوۡثَرَؕ‏",
       "words": [
         {
           "position": 1,
@@ -50,6 +53,9 @@
     {
       "number": 2,
       "key": "108:2",
+      "textUthmani": "فَصَلِّ لِرَبِّكَ وَٱنْحَرْ",
+      "textUthmaniTajweed": "فَصَلِّ لِرَبِّكَ وَ<tajweed class=ham_wasl>ٱ</tajweed>نْحَرْ <span class=end>٢</span>",
+      "textIndopak": "فَصَلِّ لِرَبِّكَ وَانۡحَرۡ ؕ‏",
       "words": [
         {
           "position": 1,
@@ -91,6 +97,9 @@
     {
       "number": 3,
       "key": "108:3",
+      "textUthmani": "إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َ شَانِئَكَ هُوَ <tajweed class=ham_wasl>ٱ</tajweed>لْأَ<tajweed class=qalaqah>بْ</tajweed>تَرُ <span class=end>٣</span>",
+      "textIndopak": "اِنَّ شَانِئَكَ هُوَ الۡاَبۡتَرُ‏",
       "words": [
         {
           "position": 1,
