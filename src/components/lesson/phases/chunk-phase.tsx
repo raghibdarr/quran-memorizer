@@ -187,11 +187,33 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
 
   const [memoryRevealed, setMemoryRevealed] = useState(false);
 
-  const handleMemoryRep = (gotIt: boolean) => {
+  const handleMemoryRep = async (gotIt: boolean) => {
     if (gotIt) {
       setRepCount((c) => c + 1);
+    } else {
+      // On fail, replay the audio to reinforce before next attempt
+      if (currentAyah) {
+        await audioController.playAndWait(currentAyah.audioUrl);
+      }
     }
     setMemoryRevealed(false);
+  };
+
+  // Contextual encouragement for memory steps
+  const getRecallPrompt = (): { title: string; subtitle: string } => {
+    const isFirst = repCount === 0;
+    const isLast = repCount === currentStepReps - 1;
+    const isFinalStep = learnStep === 'final-memory';
+
+    if (isFinalStep) {
+      if (isFirst) return { title: 'Final recall — no peeking!', subtitle: 'Recite the ayah from memory, then check' };
+      if (isLast) return { title: 'Last one — you\'ve got this!', subtitle: 'One more successful recall to prove it\'s solid' };
+      return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Keep going — each recall strengthens the memory' };
+    }
+
+    if (isFirst) return { title: 'Time to test your memory', subtitle: 'Try to recite without looking, then reveal to check' };
+    if (isLast) return { title: 'Almost there!', subtitle: 'One more successful recall before the next step' };
+    return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Repeat — each time makes it stronger' };
   };
 
   // --- Word ordering ---
@@ -478,71 +500,86 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       )}
 
       {/* === TEXT-HIDDEN STEPS (recite-from-memory, final-memory) === */}
-      {!isTextVisible && learnStep !== 'word-order' && (
-        <div className="space-y-5">
-          {/* Rep counter */}
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5">
-              {Array.from({ length: currentStepReps }).map((_, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    'h-3 w-3 rounded-full transition-all',
-                    i < repCount ? 'bg-success scale-110' : 'bg-foreground/10'
-                  )}
-                />
-              ))}
+      {!isTextVisible && learnStep !== 'word-order' && (() => {
+        const prompt = getRecallPrompt();
+        const done = repCount >= currentStepReps;
+
+        return (
+          <div className="space-y-5">
+            {/* Rep counter */}
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1.5">
+                {Array.from({ length: currentStepReps }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      'h-3 w-3 rounded-full transition-all',
+                      i < repCount ? 'bg-success scale-110' : 'bg-foreground/10'
+                    )}
+                  />
+                ))}
+              </div>
             </div>
-            <p className="mt-1 text-xs text-muted">
-              Recall {repCount} / {currentStepReps}
-            </p>
+
+            {done && !memoryRevealed ? (
+              /* All reps completed — advance */
+              <div className="space-y-4 text-center">
+                <div className="rounded-2xl bg-success/5 p-6">
+                  <p className="text-lg font-semibold text-success">
+                    {learnStep === 'final-memory' ? 'Memory locked in!' : 'Looking good!'}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">
+                    {learnStep === 'final-memory'
+                      ? 'Time for a word challenge to confirm'
+                      : 'Let\'s reinforce with the text one more time'}
+                  </p>
+                </div>
+                <Button onClick={advanceLearnStep} className="w-full">
+                  {learnStep === 'final-memory' ? 'Word Challenge' : 'Next Step'}
+                </Button>
+              </div>
+            ) : !memoryRevealed ? (
+              /* Recall prompt */
+              <>
+                <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-8 text-center">
+                  <p className="text-lg font-medium text-foreground">{prompt.title}</p>
+                  <p className="mt-2 text-sm text-muted">{prompt.subtitle}</p>
+                </div>
+                <Button onClick={() => setMemoryRevealed(true)} className="w-full">
+                  I've recited — show me the answer
+                </Button>
+              </>
+            ) : (
+              /* Answer revealed */
+              <>
+                <div className="rounded-xl bg-success/5 p-5 text-center">
+                  <p className="arabic-text text-3xl leading-loose">
+                    {actualWords.map((w) => w.textUthmani).join(' ')}
+                  </p>
+                  <p className="mt-2 text-sm text-muted">
+                    {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
+                  </p>
+                </div>
+                <p className="text-center text-sm text-muted">Did you recite it correctly?</p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => handleMemoryRep(false)}
+                    className="flex-1 rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                  >
+                    Not quite — hear it again
+                  </button>
+                  <Button
+                    onClick={() => handleMemoryRep(true)}
+                    className="flex-1"
+                  >
+                    Got it &#10003;
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
-
-          {!memoryRevealed ? (
-            <>
-              <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-10 text-center">
-                <p className="text-lg font-medium text-muted">Recite from memory...</p>
-                <p className="mt-2 text-sm text-muted">Say the ayah aloud, then reveal to check</p>
-              </div>
-              <Button onClick={() => setMemoryRevealed(true)} className="w-full">
-                Reveal Answer
-              </Button>
-            </>
-          ) : (
-            <>
-              <div className="rounded-xl bg-success/5 p-5 text-center">
-                <p className="arabic-text text-3xl leading-loose">
-                  {actualWords.map((w) => w.textUthmani).join(' ')}
-                </p>
-                <p className="mt-2 text-sm text-muted">
-                  {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
-                </p>
-              </div>
-              <div className="flex gap-3">
-                <Button
-                  onClick={() => handleMemoryRep(false)}
-                  variant="secondary"
-                  className="flex-1"
-                >
-                  Didn't get it
-                </Button>
-                <Button
-                  onClick={() => handleMemoryRep(true)}
-                  className="flex-1"
-                >
-                  Got it &#10003;
-                </Button>
-              </div>
-            </>
-          )}
-
-          {repCount >= currentStepReps && !memoryRevealed && (
-            <Button onClick={advanceLearnStep} className="w-full">
-              {learnStep === 'final-memory' ? 'Word Challenge' : 'Next Step'}
-            </Button>
-          )}
-        </div>
-      )}
+        );
+      })()}
 
       {/* === WORD ORDER STEP === */}
       {learnStep === 'word-order' && (

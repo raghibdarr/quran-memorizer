@@ -23,9 +23,8 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
 
   const handleWordClick = async (word: Word) => {
     setSelectedWord(word);
-    if (word.audioUrl) {
-      await audioController.play(word.audioUrl);
-    }
+    // Play ayah audio since word-level audio isn't available from the API
+    await audioController.play(currentAyah.audioUrl);
   };
 
   const goToAyah = (index: number) => {
@@ -83,7 +82,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
       {/* Word-by-word breakdown */}
       <div>
         <p className="mb-2 text-center text-xs text-muted">
-          Tap a word to hear it and see its meaning
+          Tap a word to see its meaning and hear the ayah
         </p>
         <div className="flex flex-wrap justify-center gap-2" dir="rtl">
           {currentAyah.words
