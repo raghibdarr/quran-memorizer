@@ -8,7 +8,8 @@
       "Bash(cd:*)",
       "Bash(curl:*)",
       "Bash(sleep:*)",
-      "Bash(export:*)"
+      "Bash(export:*)",
+      "WebFetch(domain:quran411.com)"
     ]
   }
 }

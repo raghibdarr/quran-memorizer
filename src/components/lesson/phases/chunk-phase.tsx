@@ -417,7 +417,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
               {actualWords.map((w) => w.textUthmani).join(' ')}
             </p>
             <p className="mt-3 text-sm text-muted">
-              {actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
+              {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
             </p>
           </div>
 
@@ -515,7 +515,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
                   {actualWords.map((w) => w.textUthmani).join(' ')}
                 </p>
                 <p className="mt-2 text-sm text-muted">
-                  {actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
+                  {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
                 </p>
               </div>
               <div className="flex gap-3">

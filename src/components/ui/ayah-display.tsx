@@ -57,10 +57,10 @@ export default function AyahDisplay({
         })}
       </div>
 
-      {/* Transliteration */}
+      {/* Transliteration — prefer ayah-level (waqf-style) over word-level concatenation */}
       {shouldShowTransliteration && (
         <p className="text-center text-sm text-muted">
-          {actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
+          {ayah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
         </p>
       )}
 

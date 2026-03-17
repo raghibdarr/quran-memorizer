@@ -15,6 +15,7 @@ export interface Ayah {
   textUthmani: string;
   words: Word[];
   translation: string;
+  transliteration?: string; // Ayah-level transliteration (waqf-style from quran411)
   audioUrl: string;         // everyayah.com URL
 }
 
