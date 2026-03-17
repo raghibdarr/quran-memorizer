@@ -9,7 +9,9 @@
       "Bash(curl:*)",
       "Bash(sleep:*)",
       "Bash(export:*)",
-      "WebFetch(domain:quran411.com)"
+      "WebFetch(domain:quran411.com)",
+      "WebFetch(domain:quran.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

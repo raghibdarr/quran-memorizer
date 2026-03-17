@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/cn';
+import { CheckIcon } from '@/components/ui/icons';
 import type { LessonPhase } from '@/types/quran';
 
 const PHASES: { key: LessonPhase; label: string }[] = [
@@ -19,14 +20,14 @@ export default function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
   const currentIndex = PHASES.findIndex((p) => p.key === currentPhase);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center justify-center gap-0">
       {PHASES.map((phase, i) => {
         const isActive = i === currentIndex;
         const isComplete = i < currentIndex;
 
         return (
           <div key={phase.key} className="flex items-center">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-14">
               <div
                 className={cn(
                   'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition-colors',
@@ -35,7 +36,7 @@ export default function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
                   !isComplete && !isActive && 'bg-foreground/10 text-muted'
                 )}
               >
-                {isComplete ? '✓' : i + 1}
+                {isComplete ? <CheckIcon size={12} /> : i + 1}
               </div>
               <span
                 className={cn(
@@ -49,7 +50,7 @@ export default function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
             {i < PHASES.length - 1 && (
               <div
                 className={cn(
-                  'mx-1 h-0.5 w-4',
+                  'h-0.5 w-3 -mx-1.5',
                   i < currentIndex ? 'bg-success' : 'bg-foreground/10'
                 )}
               />

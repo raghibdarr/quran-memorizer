@@ -10,8 +10,9 @@ export default function Card({ children, className, onClick }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-2xl bg-card p-5 shadow-sm',
-        onClick && 'cursor-pointer hover:shadow-md transition-shadow',
+        'rounded-2xl bg-card p-5 shadow-sm transition-all',
+        onClick && 'cursor-pointer',
+        'hover:shadow-md hover:brightness-[0.98] dark:hover:brightness-110',
         className
       )}
       onClick={onClick}

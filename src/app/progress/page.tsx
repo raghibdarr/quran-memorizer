@@ -32,7 +32,7 @@ export default function ProgressPage() {
   return (
     <div className="min-h-screen bg-cream pb-20">
       <header className="px-4 pt-6 pb-4">
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-foreground">Progress</h1>
             <SettingsPanel />
@@ -40,7 +40,7 @@ export default function ProgressPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-lg space-y-4 px-4">
+      <main className="mx-auto max-w-2xl space-y-4 px-4">
         {/* Overview stats */}
         <div className="grid grid-cols-2 gap-3">
           <Card className="text-center">

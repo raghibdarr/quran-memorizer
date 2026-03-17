@@ -93,7 +93,7 @@ export default function ReviewPage() {
   return (
     <div className="min-h-screen bg-cream">
       <header className="sticky top-0 bg-cream/95 px-4 py-3 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-lg items-center justify-between">
+        <div className="mx-auto flex max-w-2xl items-center justify-between">
           <a href="/" className="text-sm text-muted hover:text-foreground">
             ← Back
           </a>
@@ -104,7 +104,7 @@ export default function ReviewPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-lg px-4 py-6">
+      <main className="mx-auto max-w-2xl px-4 py-6">
         {ayahData && (
           <div className="space-y-6">
             {!revealed ? (

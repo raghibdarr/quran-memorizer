@@ -68,8 +68,11 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
   const { markChunkComplete, updateChunkIndex } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[surah.id]);
 
-  // Which ayah we're working on
-  const [ayahIndex, setAyahIndex] = useState(lesson?.phaseData.chunk.currentChunkIndex ?? 0);
+  // Which ayah we're working on — clamp to valid range
+  const savedIndex = lesson?.phaseData.chunk.currentChunkIndex ?? 0;
+  const [ayahIndex, setAyahIndex] = useState(
+    Math.min(savedIndex, surah.ayahs.length - 1)
+  );
   const [mainStage, setMainStage] = useState<MainStage>('learning');
 
   // Learning state (6-4-4-6 within a single ayah)
@@ -432,7 +435,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       {isTextVisible && (
         <div className="space-y-5">
           <div className="rounded-2xl bg-card p-6 text-center shadow-sm">
-            <ArabicText ayah={currentAyah} className="text-3xl leading-loose" />
+            <ArabicText ayah={currentAyah} className="text-4xl leading-loose" />
             <p className="mt-3 text-sm text-muted">
               {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
             </p>
@@ -548,7 +551,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
               /* Answer revealed */
               <>
                 <div className="rounded-xl bg-success/5 p-5 text-center">
-                  <p className="arabic-text text-3xl leading-loose">
+                  <p className="arabic-text text-4xl leading-loose">
                     {actualWords.map((w) => w.textUthmani).join(' ')}
                   </p>
                   <p className="mt-2 text-sm text-muted">

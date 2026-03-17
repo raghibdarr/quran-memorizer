@@ -39,10 +39,10 @@ export default function HomePage() {
     : null;
 
   return (
-    <div className="min-h-screen bg-cream pb-20 dark:bg-[#1a1a1a]">
+    <div className="min-h-screen bg-cream pb-20">
       {/* Header */}
       <header className="px-4 pt-6 pb-2">
-        <div className="mx-auto max-w-lg">
+        <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-teal">HifzFlow</h1>
@@ -63,10 +63,10 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-lg space-y-3 px-4 py-4">
+      <main className="mx-auto max-w-2xl space-y-3 px-4 py-4">
         {/* Review Banner */}
         {dueCount > 0 && (
-          <a href="/review">
+          <a href="/review" className="block">
             <Card className="border-l-4 border-l-gold bg-gold/5">
               <div className="flex items-center justify-between">
                 <div>
@@ -85,7 +85,7 @@ export default function HomePage() {
 
         {/* Continue Lesson */}
         {activeLesson && activeSurah && (
-          <a href={`/lesson/${activeLesson.surahId}`}>
+          <a href={`/lesson/${activeLesson.surahId}`} className="block">
             <Card>
               <p className="text-xs font-medium uppercase tracking-wide text-muted">
                 Continue Learning

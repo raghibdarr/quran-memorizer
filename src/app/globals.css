@@ -1,51 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FEFCF9;
-  --foreground: #2C2C2A;
-  --color-cream: #FEFCF9;
-  --color-teal: #1B4D5C;
-  --color-teal-light: #2A6F7F;
-  --color-gold: #C8963E;
-  --color-gold-light: #D4AA5C;
-  --color-success: #2D7A4F;
-  --color-muted: #8A8A85;
-  --color-text: #2C2C2A;
-  --color-card: #ffffff;
+  --bg: #FEFCF9;
+  --fg: #2C2C2A;
+  --c-cream: #FEFCF9;
+  --c-teal: #1B4D5C;
+  --c-teal-light: #2A6F7F;
+  --c-gold: #C8963E;
+  --c-gold-light: #D4AA5C;
+  --c-success: #2D7A4F;
+  --c-muted: #8A8A85;
+  --c-card: #ffffff;
 }
 
 .dark {
-  --background: #141414;
-  --foreground: #E8E6E3;
-  --color-cream: #141414;
-  --color-teal: #4FA8BE;
-  --color-teal-light: #6BC4D8;
-  --color-gold: #D4AA5C;
-  --color-gold-light: #E0BC74;
-  --color-success: #4CAF6E;
-  --color-muted: #8A8A85;
-  --color-text: #E8E6E3;
-  --color-card: #1E1E1E;
+  --bg: #141414;
+  --fg: #E8E6E3;
+  --c-cream: #141414;
+  --c-teal: #4FA8BE;
+  --c-teal-light: #6BC4D8;
+  --c-gold: #D4AA5C;
+  --c-gold-light: #E0BC74;
+  --c-success: #4CAF6E;
+  --c-muted: #9A9A95;
+  --c-card: #1E1E1E;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-cream: var(--color-cream);
-  --color-teal: var(--color-teal);
-  --color-teal-light: var(--color-teal-light);
-  --color-gold: var(--color-gold);
-  --color-gold-light: var(--color-gold-light);
-  --color-success: var(--color-success);
-  --color-muted: var(--color-muted);
-  --color-card: var(--color-card);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-cream: var(--c-cream);
+  --color-teal: var(--c-teal);
+  --color-teal-light: var(--c-teal-light);
+  --color-gold: var(--c-gold);
+  --color-gold-light: var(--c-gold-light);
+  --color-success: var(--c-success);
+  --color-muted: var(--c-muted);
+  --color-card: var(--c-card);
   --font-sans: var(--font-jakarta);
   --font-arabic: var(--font-arabic);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
@@ -54,37 +52,46 @@ body {
   direction: rtl;
   text-align: right;
   line-height: 2.2;
+  zoom: var(--arabic-font-scale, 1);
 }
 
-/* Tajweed color-coded rules (from quran.com API) */
-.tajweed-text tajweed {
-  font-family: inherit;
-}
-.tajweed-text .ham_wasl { color: #AAAAAA; }
-.tajweed-text .laam_shamsiyah { color: #AAAAAA; }
-.tajweed-text .madda_normal { color: #537FFF; }
-.tajweed-text .madda_permissible { color: #4050FF; }
-.tajweed-text .madda_obligatory { color: #000FB5; }
-.tajweed-text .qalaqah { color: #DD0008; }
-.tajweed-text .ikhpiaa { color: #9400A8; }
-.tajweed-text .idghaam_no_ghunnah { color: #169777; }
-.tajweed-text .idghaam_ghunnah { color: #169777; }
-.tajweed-text .ghunnah { color: #FF7E1E; }
-.tajweed-text .iqlabb { color: #26BFFD; }
-.tajweed-text .idhaar { color: #169200; }
-.tajweed-text .idghaam_shafawi { color: #169777; }
-.tajweed-text .ikhpiaa_shafawi { color: #D500B7; }
-.tajweed-text .madd_6 { color: #000FB5; }
-.tajweed-text .madd_2 { color: #537FFF; }
-.tajweed-text .madd_246 { color: #4050FF; }
-.tajweed-text .madd_lin { color: #537FFF; }
+/* Tajweed color-coded rules — matched to quran.com */
+.tajweed-text tajweed { font-family: inherit; }
+
+/* Silent / wasl letters — gray */
+.tajweed-text .ham_wasl,
+.tajweed-text .laam_shamsiyah,
+.tajweed-text .slnt { color: #AAAAAA; }
+
+/* Normal madd (2) — pink */
+.tajweed-text .madda_normal { color: #E07DB3; }
+
+/* Separated madd (2/4/6) — orange */
+.tajweed-text .madda_permissible { color: #E67E22; }
+
+/* Connected madd (4/5) — magenta */
+.tajweed-text .madda_obligatory { color: #DB2777; }
+
+/* Necessary madd (6) — red */
+.tajweed-text .madda_necessary { color: #E74C3C; }
+
+/* Ghunna / Ikhfa / Idghaam / Iqlab — green */
+.tajweed-text .ghunnah,
+.tajweed-text .ikhafa,
+.tajweed-text .idgham_ghunnah,
+.tajweed-text .idgham_wo_ghunnah,
+.tajweed-text .iqlabb { color: #2ECC71; }
+
+/* Qalqala (echo) — cyan */
+.tajweed-text .qalaqah { color: #36D7E4; }
+
+/* Tafkhim (heavy letters) — blue */
+.tajweed-text .tafkhim { color: #4A90D9; }
+
+/* Verse end markers */
 .tajweed-text span.end {
-  color: var(--foreground);
+  color: var(--fg);
   font-size: 0.6em;
   vertical-align: middle;
   opacity: 0.4;
 }
-
-/* Dark mode tajweed adjustments */
-.dark .tajweed-text .madda_obligatory { color: #4477FF; }
-.dark .tajweed-text .madd_6 { color: #4477FF; }

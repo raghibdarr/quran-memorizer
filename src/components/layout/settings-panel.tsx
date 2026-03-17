@@ -37,19 +37,26 @@ export default function SettingsPanel() {
   const {
     arabicScript,
     setArabicScript,
+    arabicFontSize,
+    setArabicFontSize,
     transliterationEnabled,
     toggleTransliteration,
     translationEnabled,
     toggleTranslation,
   } = useSettingsStore();
 
-  // Initialize dark mode from localStorage
+  // Initialize dark mode and font size from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('quran-dark-mode');
     const isDark = saved === 'true';
     setDarkMode(isDark);
     document.documentElement.classList.toggle('dark', isDark);
   }, []);
+
+  // Sync Arabic font size to CSS variable
+  useEffect(() => {
+    document.documentElement.style.setProperty('--arabic-font-scale', String(arabicFontSize));
+  }, [arabicFontSize]);
 
   const handleDarkModeToggle = () => {
     const next = !darkMode;
@@ -93,6 +100,40 @@ export default function SettingsPanel() {
                     {opt.label}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Font Size */}
+            <div className="mt-3">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium text-muted">Arabic Font Size</p>
+                {Math.round(arabicFontSize * 10) !== 10 && (
+                  <button
+                    onClick={() => setArabicFontSize(1)}
+                    className="text-[10px] text-teal hover:underline"
+                  >
+                    Reset
+                  </button>
+                )}
+              </div>
+              <div className="mt-1.5 flex items-center gap-3">
+                <button
+                  onClick={() => setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10))}
+                  disabled={arabicFontSize <= 0.8}
+                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                >
+                  −
+                </button>
+                <div className="flex-1 text-center text-xs text-muted">
+                  {Math.round(arabicFontSize * 100)}%
+                </div>
+                <button
+                  onClick={() => setArabicFontSize(Math.min(1.6, Math.round((arabicFontSize + 0.1) * 10) / 10))}
+                  disabled={arabicFontSize >= 1.6}
+                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                >
+                  +
+                </button>
               </div>
             </div>
 

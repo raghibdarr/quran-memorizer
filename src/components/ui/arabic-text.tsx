@@ -8,7 +8,7 @@ interface ArabicTextProps {
   className?: string;
 }
 
-/** Renders ayah Arabic text in the user's chosen script style (tajweed/uthmani/indopak) */
+/** Renders ayah Arabic text in the user's chosen script style */
 export default function ArabicText({ ayah, className = '' }: ArabicTextProps) {
   const arabicScript = useSettingsStore((s) => s.arabicScript);
 

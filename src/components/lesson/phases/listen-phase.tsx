@@ -4,7 +4,6 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import type { Surah } from '@/types/quran';
 import { useAudio } from '@/hooks/use-audio';
 import { useProgressStore } from '@/stores/progress-store';
-import { useSettingsStore } from '@/stores/settings-store';
 import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
@@ -18,7 +17,7 @@ interface ListenPhaseProps {
 const SPEEDS = [0.75, 1, 1.25];
 
 export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
-  const { isPlaying, activeUrl, setSpeed } = useAudio();
+  const { isPlaying, isPaused, setSpeed } = useAudio();
   const { incrementListenCount } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[surah.id]);
   const playCount = lesson?.phaseData.listen.playCount ?? 0;
@@ -104,11 +103,6 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
           >
             <AyahDisplay
               ayah={ayah}
-              highlightWords={
-                i === currentAyahIndex
-                  ? ayah.words.filter((w) => w.charType === 'word').map((w) => w.position)
-                  : []
-              }
               showTranslation={false}
             />
           </button>
@@ -116,31 +110,69 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
       </div>
 
       {/* Playback controls */}
-      <div className="sticky bottom-0 space-y-3 rounded-2xl bg-card p-4 shadow-lg">
-        {/* Play all / Stop */}
-        <div className="flex items-center gap-3">
+      <div className="sticky bottom-16 space-y-3 rounded-2xl bg-card p-4 shadow-lg">
+        {/* Status text */}
+        <p className="text-center text-xs text-muted">
+          {playingAll
+            ? `Playing ayah ${currentAyahIndex + 1} of ${surah.ayahs.length}`
+            : 'Tap an ayah or press play'}
+        </p>
+
+        {/* Media controls */}
+        <div className="flex items-center justify-center gap-4">
+          {/* Restart */}
           <button
-            onClick={playingAll ? stopPlayback : playAllAyahs}
-            className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-teal text-white shadow transition-transform hover:scale-105"
+            onClick={() => { stopPlayback(); playAllAyahs(); }}
+            disabled={!playingAll}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground disabled:opacity-30"
+            title="Restart"
           >
-            {playingAll ? (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
-                <rect x="3" y="3" width="12" height="12" rx="2" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="1 4 1 10 7 10" />
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+            </svg>
+          </button>
+
+          {/* Play / Pause / Resume */}
+          <button
+            onClick={() => {
+              if (playingAll && isPlaying) {
+                audioController.pause();
+              } else if (playingAll && isPaused) {
+                audioController.resume();
+              } else {
+                playAllAyahs();
+              }
+            }}
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
+          >
+            {playingAll && isPlaying ? (
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <rect x="4" y="3" width="4" height="14" rx="1" />
+                <rect x="12" y="3" width="4" height="14" rx="1" />
               </svg>
             ) : (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
-                <path d="M5 3l10 6-10 6V3z" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M6 4l10 6-10 6V4z" />
               </svg>
             )}
           </button>
 
-          <div className="flex-1">
-            <p className="text-sm font-medium text-foreground">
-              {playingAll ? `Playing ayah ${currentAyahIndex + 1} of ${surah.ayahs.length}...` : 'Play full surah'}
-            </p>
-            <p className="text-xs text-muted">Tap any ayah to play it individually</p>
-          </div>
+          {/* Stop */}
+          <button
+            onClick={stopPlayback}
+            disabled={!playingAll}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground disabled:opacity-30"
+            title="Stop"
+          >
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+              <rect x="4" y="4" width="12" height="12" rx="2" />
+            </svg>
+          </button>
+        </div>
 
+        {/* Speed + Listen counter */}
+        <div className="flex items-center justify-between">
           {/* Speed control */}
           <div className="flex gap-1">
             {SPEEDS.map((s) => (
@@ -156,20 +188,18 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
               </button>
             ))}
           </div>
-        </div>
 
-        {/* Listen counter */}
-        <div className="flex items-center justify-between">
+          {/* Listen counter */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted">
-              Listened {playCount} / 3 times
+            <span className="text-xs text-muted">
+              {playCount} / 3
             </span>
             <div className="flex gap-1">
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
                   className={cn(
-                    'h-2.5 w-2.5 rounded-full transition-colors',
+                    'h-2 w-2 rounded-full transition-colors',
                     i < playCount ? 'bg-success' : 'bg-foreground/10'
                   )}
                 />

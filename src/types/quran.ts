@@ -78,6 +78,7 @@ export interface ReviewCard {
 export interface UserSettings {
   reciter: string;
   arabicScript: ArabicScriptStyle;
+  arabicFontSize: number;       // multiplier: 0.8, 1, 1.2, 1.4
   transliterationEnabled: boolean;
   translationEnabled: boolean;
   playbackSpeed: number;
