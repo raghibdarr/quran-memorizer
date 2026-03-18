@@ -61,6 +61,21 @@ type: project
 - **Use in prayers prompt** (technique #25): After completing a surah, suggest "Recite this in your next prayer."
 - **Multiple repetition patterns**: Currently using 6-4-4-6. Could offer 10/10, 3x3, or 20x (Madinah method) as options in settings.
 
+## External Resources (Tarteel QUL — Primary Data Source for V2)
+
+Tarteel's Quranic Universal Library (qul.tarteel.ai/resources) is a comprehensive open-source resource that could replace most of our current data sources:
+
+- **Quran metadata** (`/resources/quran-metadata`): Division points for rub, hizb, juz, manzil, page numbers. Essential for scaling to full Quran with proper juz/hizb navigation.
+- **Quran scripts** (`/resources/quran-script`): Multiple script styles including Uthmani, IndoPak Nastaleeq, etc. as JSON/SQLite. Could replace our quran.com API fetch for text data.
+- **Fonts** (`/resources/font`): Purpose-built Quranic fonts for each script style. Currently using their IndoPak Nastaleeq font (self-hosted woff2). Should evaluate their other fonts vs Amiri for Uthmani rendering.
+- **Recitations** (`/resources/recitation`): Multiple reciters with audio. Could replace everyayah.com as audio source and enable the multi-reciter feature.
+- **Transliteration** (`/resources/transliteration`): Structured transliteration data as JSON/SQLite. Could replace our quran411.com scraping approach — more reliable and scalable to all 114 surahs.
+- **Mushaf layouts** (`/resources/mushaf-layout`): Full page layouts for mushaf-style rendering. Useful for a "view surah" reference mode.
+
+**Why:** Currently we pull from 3 separate sources (quran.com API, everyayah.com, quran411.com scraping). Tarteel QUL consolidates all of this into one open-source platform with downloadable JSON/SQLite. More reliable, no scraping, proper data formats.
+
+**How to apply:** When scaling beyond MVP, migrate data pipeline to use QUL downloads instead of multiple API calls + scraping. Download once, store as static JSON (same pattern we use now).
+
 ## Technical Debt
 
 - **React Native migration path**: Business logic (Zustand stores, SM-2, lesson progression) copies directly. Components need JSX rewrite (div→View). Audio → expo-av. Storage → expo-sqlite.

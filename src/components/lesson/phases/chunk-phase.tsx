@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import type { Surah, Ayah } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { audioController } from '@/lib/audio';
+import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
+import { useSettingsStore } from '@/stores/settings-store';
 import ArabicText from '@/components/ui/arabic-text';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
@@ -67,6 +69,8 @@ const LEARN_STEPS: LearnStep[] = [
 export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
   const { markChunkComplete, updateChunkIndex } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[surah.id]);
+  const getAudioUrl = (surahId: number, ayahNum: number) =>
+    buildAudioUrl(surahId, ayahNum, useSettingsStore.getState().reciter);
 
   // Which ayah we're working on — clamp to valid range
   const savedIndex = lesson?.phaseData.chunk.currentChunkIndex ?? 0;
@@ -109,7 +113,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
 
   const playOnce = useCallback(async () => {
     if (!currentAyah) return;
-    await audioController.playAndWait(currentAyah.audioUrl);
+    await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
     setRepCount((c) => c + 1);
   }, [currentAyah]);
 
@@ -121,7 +125,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
     const repsLeft = currentStepReps - repCount;
     for (let i = 0; i < repsLeft; i++) {
       if (abortRef.current) break;
-      await audioController.playAndWait(currentAyah.audioUrl);
+      await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
       if (abortRef.current) break;
       setRepCount((c) => c + 1);
       if (i < repsLeft - 1) {
@@ -197,7 +201,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
     } else {
       // On fail, replay the audio to reinforce before next attempt
       if (currentAyah) {
-        await audioController.playAndWait(currentAyah.audioUrl);
+        await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
       }
     }
     setMemoryRevealed(false);

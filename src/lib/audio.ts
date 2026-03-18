@@ -8,6 +8,7 @@ class AudioController {
   private listeners: Set<() => void> = new Set();
   private endedCallbacks: Set<() => void> = new Set();
   private _state: AudioState = 'idle';
+  private _speed: number = 1;
 
   private getAudio(): HTMLAudioElement {
     if (!this.audio) {
@@ -89,12 +90,16 @@ class AudioController {
     this._state = 'loading';
     this.notify();
 
+    // Apply stored speed before playing
+    audio.playbackRate = this._speed;
+
     // Try IndexedDB cache first
     try {
       const cached = await getCachedAudio(url);
       if (cached) {
         const objectUrl = URL.createObjectURL(cached);
         audio.src = objectUrl;
+        audio.playbackRate = this._speed;
         await audio.play();
         return;
       }
@@ -103,6 +108,7 @@ class AudioController {
     }
 
     audio.src = url;
+    audio.playbackRate = this._speed;
     await audio.play();
 
     // Cache in background (don't await)
@@ -146,6 +152,7 @@ class AudioController {
   }
 
   setSpeed(rate: number): void {
+    this._speed = rate;
     const audio = this.getAudio();
     audio.playbackRate = rate;
   }

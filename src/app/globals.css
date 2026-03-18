@@ -56,12 +56,17 @@ body {
 }
 
 .arabic-text-indopak {
-  font-family: var(--font-indopak), 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  font-family: var(--font-indopak), 'Jameel Noori Nastaleeq', serif;
   direction: rtl;
   text-align: right;
   line-height: 2.8;
   zoom: var(--arabic-font-scale, 1);
 }
+
+/* Audio visualizer bars */
+@keyframes bar1 { 0%, 100% { height: 4px; } 50% { height: 16px; } }
+@keyframes bar2 { 0%, 100% { height: 8px; } 50% { height: 12px; } }
+@keyframes bar3 { 0%, 100% { height: 6px; } 50% { height: 14px; } }
 
 /* Tajweed color-coded rules — matched to quran.com */
 .tajweed-text tajweed { font-family: inherit; }

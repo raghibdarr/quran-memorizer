@@ -12,7 +12,7 @@ Guided multi-phase learning flow: Listen → Understand → Chunk → Test → S
 ## Commands
 - `npm run dev` — Start dev server
 - `npx next build` — Production build
-- `npx tsx scripts/fetch-quran-data.ts` — Re-fetch Quran data from API
+- `npx tsx scripts/fetch-quran-data.ts` — Re-fetch Quran data from API (uses QUL transliteration JSON from src/data/english-transliteration-tajweed.json)
 
 ## Project Structure
 - `src/app/` — Next.js pages (home, lesson/[surahId], review, progress)

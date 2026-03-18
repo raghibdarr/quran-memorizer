@@ -11,7 +11,10 @@
       "Bash(export:*)",
       "WebFetch(domain:quran411.com)",
       "WebFetch(domain:quran.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:qul.tarteel.ai)",
+      "Bash(gh api:*)",
+      "Bash(node -e \":*)"
     ]
   }
 }

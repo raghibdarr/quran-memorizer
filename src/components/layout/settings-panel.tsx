@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useSettingsStore } from '@/stores/settings-store';
 import type { ArabicScriptStyle } from '@/types/quran';
 import { SettingsIcon } from '@/components/ui/icons';
@@ -10,6 +11,19 @@ const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
   { value: 'tajweed', label: 'Tajweed' },
   { value: 'uthmani', label: 'Uthmani' },
   { value: 'indopak', label: 'IndoPak' },
+];
+
+const RECITERS: { value: string; label: string }[] = [
+  { value: 'Alafasy_128kbps', label: 'Mishary Alafasy' },
+  { value: 'Husary_128kbps', label: 'Mahmoud Al-Hussary' },
+  { value: 'Abdul_Basit_Murattal_192kbps', label: 'Abdul Basit (Murattal)' },
+  { value: 'Minshawy_Murattal_128kbps', label: 'Al-Minshawy (Murattal)' },
+  { value: 'Nasser_Alqatami_128kbps', label: 'Nasser Al-Qatami' },
+  { value: 'Yasser_Ad-Dussary_128kbps', label: 'Yasser Ad-Dussary' },
+  { value: 'Hudhaify_128kbps', label: 'Ali Al-Hudhaify' },
+  { value: 'Maher_AlMuaiqly_64kbps', label: 'Maher Al-Muaiqly' },
+  { value: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', label: 'Ahmed Al-Ajamy' },
+  { value: 'Muhammad_Jibreel_128kbps', label: 'Muhammad Jibreel' },
 ];
 
 function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void }) {
@@ -35,6 +49,8 @@ export default function SettingsPanel() {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const {
+    reciter,
+    setReciter,
     arabicScript,
     setArabicScript,
     arabicFontSize,
@@ -66,9 +82,23 @@ export default function SettingsPanel() {
     localStorage.setItem('quran-dark-mode', String(next));
   };
 
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const [panelPos, setPanelPos] = useState({ top: 0, right: 0 });
+
+  useEffect(() => {
+    if (open && btnRef.current) {
+      const rect = btnRef.current.getBoundingClientRect();
+      setPanelPos({
+        top: rect.bottom + 8,
+        right: window.innerWidth - rect.right,
+      });
+    }
+  }, [open]);
+
   return (
-    <div className="relative">
+    <div>
       <button
+        ref={btnRef}
         onClick={() => setOpen(!open)}
         className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
         aria-label="Settings"
@@ -76,11 +106,14 @@ export default function SettingsPanel() {
         <SettingsIcon size={18} />
       </button>
 
-      {open && (
+      {open && createPortal(
         <>
-          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="fixed inset-0 z-[60]" onClick={() => setOpen(false)} />
 
-          <div className="absolute right-0 top-10 z-50 w-64 rounded-xl bg-card p-4 shadow-lg border border-foreground/10">
+          <div
+            className="fixed z-[70] w-64 rounded-xl bg-card p-4 shadow-lg border border-foreground/10 max-h-[80vh] overflow-y-auto"
+            style={{ top: panelPos.top, right: panelPos.right }}
+          >
             <h3 className="text-sm font-bold text-foreground">Settings</h3>
 
             {/* Arabic Script */}
@@ -138,6 +171,21 @@ export default function SettingsPanel() {
               </div>
             </div>
 
+            {/* Reciter */}
+            <div className="mt-3">
+              <p className="text-xs font-medium text-muted">Reciter</p>
+              <select
+                value={reciter}
+                onChange={(e) => setReciter(e.target.value)}
+                className="mt-1.5 w-full rounded-lg bg-foreground/5 px-3 py-1.5 text-xs font-medium text-foreground outline-none appearance-none cursor-pointer"
+                style={{ colorScheme: 'auto' }}
+              >
+                {RECITERS.map((r) => (
+                  <option key={r.value} value={r.value} className="bg-card text-foreground">{r.label}</option>
+                ))}
+              </select>
+            </div>
+
             {/* Toggles */}
             <div className="mt-3 space-y-2.5">
               <label className="flex items-center justify-between">
@@ -156,7 +204,8 @@ export default function SettingsPanel() {
               </label>
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </div>
   );

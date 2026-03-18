@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Amiri, Plus_Jakarta_Sans, Noto_Nastaliq_Urdu } from "next/font/google";
+import { Amiri, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import "./globals.css";
 
@@ -10,9 +11,8 @@ const amiri = Amiri({
   display: "swap",
 });
 
-const nastaliq = Noto_Nastaliq_Urdu({
-  subsets: ["arabic"],
-  weight: ["400", "700"],
+const nastaliq = localFont({
+  src: "../../public/fonts/indopak-nastaleeq.woff2",
   variable: "--font-indopak",
   display: "swap",
 });

@@ -36,8 +36,8 @@ export async function getAyah(surahId: number, ayahNumber: number): Promise<Ayah
   return ayah;
 }
 
-export function getAudioUrl(surahId: number, ayahNumber: number): string {
+export function getAudioUrl(surahId: number, ayahNumber: number, reciter = 'Alafasy_128kbps'): string {
   const s = surahId.toString().padStart(3, '0');
   const a = ayahNumber.toString().padStart(3, '0');
-  return `https://everyayah.com/data/Alafasy_128kbps/${s}${a}.mp3`;
+  return `https://everyayah.com/data/${reciter}/${s}${a}.mp3`;
 }

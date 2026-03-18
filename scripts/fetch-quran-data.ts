@@ -102,6 +102,14 @@ async function fetchSurah(surahId: number) {
     `${API_BASE}/quran/verses/indopak?chapter_number=${surahId}`
   ) as { verses: Array<{ verse_key: string; text_indopak: string }> };
 
+  // Load QUL transliteration data (covers entire Quran)
+  const fs2 = await import('fs/promises');
+  const path2 = await import('path');
+  const qulTranslitRaw = await fs2.readFile(
+    path2.join(process.cwd(), 'src', 'data', 'english-transliteration-tajweed.json'), 'utf-8'
+  );
+  const qulTranslit: Record<string, string> = JSON.parse(qulTranslitRaw);
+
   const ayahs = versesData.verses.map((verse, idx) => {
     const translitVerse = translitData.verses[idx];
 
@@ -125,6 +133,7 @@ async function fetchSurah(surahId: number) {
       textIndopak: indopakData.verses[idx]?.text_indopak || '',
       words,
       translation: translationTexts[idx] || '',
+      transliteration: qulTranslit[verse.verse_key] || '',
       audioUrl: getAudioUrl(surahId, verse.verse_number),
     };
   });

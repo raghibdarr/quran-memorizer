@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import type { Surah, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
@@ -26,6 +26,20 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
   const lesson = useProgressStore((s) => s.lessons[surah.id]);
   const [transitioning, setTransitioning] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Track header height and expose as CSS variable
+  useEffect(() => {
+    if (!headerRef.current) return;
+    const observer = new ResizeObserver(([entry]) => {
+      document.documentElement.style.setProperty(
+        '--lesson-header-height',
+        `${entry.contentRect.height + 24}px`
+      );
+    });
+    observer.observe(headerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     startLesson(surah.id);
@@ -86,7 +100,7 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
   return (
     <div className="flex min-h-screen flex-col bg-cream pb-16">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+      <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
