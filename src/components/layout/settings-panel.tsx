@@ -45,12 +45,13 @@ export default function SettingsPanel() {
     toggleTranslation,
   } = useSettingsStore();
 
-  // Initialize dark mode and font size from localStorage
+  // Initialize dark mode from localStorage or system preference
   useEffect(() => {
     const saved = localStorage.getItem('quran-dark-mode');
-    const isDark = saved === 'true';
+    const isDark = saved !== null
+      ? saved === 'true'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
     setDarkMode(isDark);
-    document.documentElement.classList.toggle('dark', isDark);
   }, []);
 
   // Sync Arabic font size to CSS variable

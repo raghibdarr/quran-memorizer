@@ -8,24 +8,26 @@ interface ArabicTextProps {
   className?: string;
 }
 
-/** Renders ayah Arabic text in the user's chosen script style */
+/** Renders ayah Arabic text in the user's chosen script style and font */
 export default function ArabicText({ ayah, className = '' }: ArabicTextProps) {
   const arabicScript = useSettingsStore((s) => s.arabicScript);
-
-  const baseClass = `arabic-text ${className}`;
 
   if (arabicScript === 'tajweed' && ayah.textUthmaniTajweed) {
     return (
       <div
-        className={`${baseClass} tajweed-text`}
+        className={`arabic-text tajweed-text ${className}`}
         dangerouslySetInnerHTML={{ __html: ayah.textUthmaniTajweed }}
       />
     );
   }
 
   if (arabicScript === 'indopak' && ayah.textIndopak) {
-    return <p className={baseClass}>{ayah.textIndopak}</p>;
+    return (
+      <p className={`arabic-text-indopak ${className}`}>
+        {ayah.textIndopak}
+      </p>
+    );
   }
 
-  return <p className={baseClass}>{ayah.textUthmani}</p>;
+  return <p className={`arabic-text ${className}`}>{ayah.textUthmani}</p>;
 }

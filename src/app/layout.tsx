@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Amiri, Plus_Jakarta_Sans } from "next/font/google";
+import { Amiri, Plus_Jakarta_Sans, Noto_Nastaliq_Urdu } from "next/font/google";
 import Providers from "@/components/providers";
 import "./globals.css";
 
@@ -7,6 +7,13 @@ const amiri = Amiri({
   subsets: ["arabic"],
   weight: ["400", "700"],
   variable: "--font-arabic",
+  display: "swap",
+});
+
+const nastaliq = Noto_Nastaliq_Urdu({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-indopak",
   display: "swap",
 });
 
@@ -28,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${amiri.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${amiri.variable} ${nastaliq.variable} ${jakarta.variable}`}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>

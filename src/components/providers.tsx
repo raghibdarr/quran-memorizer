@@ -10,12 +10,14 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
 
-    // Apply dark mode
-    const isDark = localStorage.getItem('quran-dark-mode') === 'true';
+    // Apply dark mode — check localStorage first, fallback to system preference
+    const saved = localStorage.getItem('quran-dark-mode');
+    const isDark = saved !== null
+      ? saved === 'true'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.classList.toggle('dark', isDark);
   }, []);
 
-  // Keep CSS variable in sync with store
   useEffect(() => {
     if (mounted) {
       document.documentElement.style.setProperty('--arabic-font-scale', String(arabicFontSize));

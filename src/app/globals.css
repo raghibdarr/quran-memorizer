@@ -55,6 +55,14 @@ body {
   zoom: var(--arabic-font-scale, 1);
 }
 
+.arabic-text-indopak {
+  font-family: var(--font-indopak), 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 2.8;
+  zoom: var(--arabic-font-scale, 1);
+}
+
 /* Tajweed color-coded rules — matched to quran.com */
 .tajweed-text tajweed { font-family: inherit; }
 

@@ -45,7 +45,7 @@ export default function AyahDisplay({
     }
     if (arabicScript === 'indopak' && ayah.textIndopak) {
       return (
-        <p className="arabic-text text-center text-4xl leading-loose">
+        <p className="arabic-text-indopak text-center text-4xl leading-loose">
           {ayah.textIndopak}
         </p>
       );

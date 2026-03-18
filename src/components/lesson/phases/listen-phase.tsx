@@ -15,6 +15,7 @@ interface ListenPhaseProps {
 }
 
 const SPEEDS = [0.75, 1, 1.25];
+const REQUIRED_LISTENS = 3;
 
 export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
   const { isPlaying, isPaused, setSpeed } = useAudio();
@@ -25,8 +26,11 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
   const [playingAll, setPlayingAll] = useState(false);
   const [currentSpeed, setCurrentSpeed] = useState(1);
   const abortRef = useRef(false);
+  const ayahRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // Cleanup on unmount
+  const canContinue = playCount >= REQUIRED_LISTENS;
+  const remaining = REQUIRED_LISTENS - playCount;
+
   useEffect(() => {
     return () => {
       abortRef.current = true;
@@ -34,8 +38,18 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
     };
   }, []);
 
+  // Autoscroll to current ayah
+  useEffect(() => {
+    if (currentAyahIndex >= 0 && ayahRefs.current[currentAyahIndex]) {
+      ayahRefs.current[currentAyahIndex]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  }, [currentAyahIndex]);
+
   const playAllAyahs = useCallback(async () => {
-    if (playingAll) return; // Prevent duplicate
+    if (playingAll) return;
     abortRef.current = false;
     setPlayingAll(true);
 
@@ -43,8 +57,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
       if (abortRef.current) break;
       setCurrentAyahIndex(i);
       await audioController.playAndWait(surah.ayahs[i].audioUrl);
-      // Small gap between ayahs
-      if (!abortRef.current) {
+      if (!abortRef.current && i < surah.ayahs.length - 1) {
         await new Promise<void>((r) => setTimeout(r, 400));
       }
     }
@@ -63,42 +76,89 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
     setCurrentAyahIndex(-1);
   }, []);
 
+  // Individual ayah play — also counts toward progress
+  const [individualPlays, setIndividualPlays] = useState(new Set<number>());
+
   const playSingleAyah = useCallback(async (index: number) => {
     if (playingAll) return;
     setCurrentAyahIndex(index);
     await audioController.playAndWait(surah.ayahs[index].audioUrl);
     setCurrentAyahIndex(-1);
-  }, [surah, playingAll]);
+
+    // Track individual plays — when all ayahs played, count as one full listen
+    setIndividualPlays((prev) => {
+      const next = new Set(prev);
+      next.add(index);
+      if (next.size >= surah.ayahs.length) {
+        incrementListenCount(surah.id);
+        return new Set();
+      }
+      return next;
+    });
+  }, [surah, playingAll, incrementListenCount]);
 
   const handleSpeedChange = (speed: number) => {
     setCurrentSpeed(speed);
     setSpeed(speed);
   };
 
-  const canContinue = playCount >= 3;
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
+      {/* Header with instruction + counter */}
       <div className="text-center">
         <h3 className="text-xl font-bold text-foreground">Listen & Absorb</h3>
         <p className="mt-1 text-sm text-muted">
-          Listen carefully to the recitation. Focus on the rhythm and pronunciation.
+          Listen to the full recitation {REQUIRED_LISTENS} times before continuing.
+          {'\n'}Focus on the rhythm and pronunciation.
         </p>
       </div>
 
-      {/* Ayah display — tap individual ayahs to play */}
-      <div className="space-y-4">
+      {/* Prominent listen counter at top */}
+      <div className="flex items-center justify-center gap-3 rounded-xl bg-card p-3 border border-foreground/10">
+        <div className="flex gap-1.5">
+          {Array.from({ length: REQUIRED_LISTENS }).map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                'h-3 w-3 rounded-full transition-all',
+                i < playCount ? 'bg-success scale-110' : 'bg-foreground/10'
+              )}
+            />
+          ))}
+        </div>
+        <span className="text-sm font-medium text-foreground">
+          {canContinue
+            ? 'Ready to continue!'
+            : `${playCount} / ${REQUIRED_LISTENS} listens`}
+        </span>
+        {individualPlays.size > 0 && !canContinue && (
+          <span className="text-xs text-muted">
+            ({individualPlays.size}/{surah.ayahs.length} ayahs this round)
+          </span>
+        )}
+      </div>
+
+      {/* Continue button (shown at top when ready) */}
+      {canContinue && (
+        <Button onClick={onComplete} className="w-full">
+          Continue to Understand
+        </Button>
+      )}
+
+      {/* Ayah display */}
+      <div className="space-y-3">
         {surah.ayahs.map((ayah, i) => (
           <button
             key={ayah.key}
+            ref={(el) => { ayahRefs.current[i] = el; }}
             onClick={() => playSingleAyah(i)}
             disabled={playingAll}
             className={cn(
-              'w-full rounded-xl p-4 text-left transition-all',
+              'w-full rounded-xl p-4 text-left transition-all border',
               i === currentAyahIndex
-                ? 'bg-teal/5 ring-2 ring-teal/30'
-                : 'bg-card hover:bg-foreground/[0.02]',
-              playingAll && i !== currentAyahIndex && 'opacity-50'
+                ? 'bg-teal/5 border-teal/30 shadow-md'
+                : 'bg-card border-foreground/8 hover:border-foreground/15',
+              playingAll && i !== currentAyahIndex && 'opacity-40'
             )}
           >
             <AyahDisplay ayah={ayah} />
@@ -106,20 +166,20 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
         ))}
       </div>
 
-      {/* Playback controls */}
-      <div className="sticky bottom-16 space-y-3 rounded-2xl bg-card p-4 shadow-lg">
-        {/* Status text */}
-        <p className="text-center text-xs text-muted">
+      {/* Media controls — sticky above bottom nav */}
+      <div className="sticky bottom-16 rounded-2xl bg-card p-4 shadow-lg border border-foreground/10">
+        {/* Status */}
+        <p className="text-center text-xs text-muted mb-3">
           {playingAll
             ? `Playing ayah ${currentAyahIndex + 1} of ${surah.ayahs.length}`
-            : 'Tap an ayah or press play'}
+            : 'Tap an ayah or press play for full surah'}
         </p>
 
-        {/* Media controls */}
+        {/* Media buttons */}
         <div className="flex items-center justify-center gap-4">
           {/* Restart */}
           <button
-            onClick={() => { stopPlayback(); playAllAyahs(); }}
+            onClick={() => { stopPlayback(); setTimeout(playAllAyahs, 100); }}
             disabled={!playingAll}
             className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground disabled:opacity-30"
             title="Restart"
@@ -130,7 +190,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
             </svg>
           </button>
 
-          {/* Play / Pause / Resume */}
+          {/* Play / Pause */}
           <button
             onClick={() => {
               if (playingAll && isPlaying) {
@@ -168,50 +228,30 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
           </button>
         </div>
 
-        {/* Speed + Listen counter */}
-        <div className="flex items-center justify-between">
-          {/* Speed control */}
-          <div className="flex gap-1">
-            {SPEEDS.map((s) => (
-              <button
-                key={s}
-                onClick={() => handleSpeedChange(s)}
-                className={cn(
-                  'rounded-lg px-2 py-1 text-xs font-semibold transition-colors',
-                  currentSpeed === s ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
-                )}
-              >
-                {s}x
-              </button>
-            ))}
-          </div>
-
-          {/* Listen counter */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted">
-              {playCount} / 3
-            </span>
-            <div className="flex gap-1">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    'h-2 w-2 rounded-full transition-colors',
-                    i < playCount ? 'bg-success' : 'bg-foreground/10'
-                  )}
-                />
-              ))}
-            </div>
-          </div>
+        {/* Speed */}
+        <div className="mt-3 flex justify-center gap-1">
+          {SPEEDS.map((s) => (
+            <button
+              key={s}
+              onClick={() => handleSpeedChange(s)}
+              className={cn(
+                'rounded-lg px-3 py-1 text-xs font-semibold transition-colors',
+                currentSpeed === s ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+              )}
+            >
+              {s}x
+            </button>
+          ))}
         </div>
       </div>
 
+      {/* Bottom continue button */}
       <Button
         onClick={onComplete}
         disabled={!canContinue}
         className="w-full"
       >
-        {canContinue ? 'Continue to Understand' : `Listen ${3 - playCount} more time${3 - playCount !== 1 ? 's' : ''}`}
+        {canContinue ? 'Continue to Understand' : `Listen ${remaining} more time${remaining !== 1 ? 's' : ''}`}
       </Button>
     </div>
   );
