@@ -1,0 +1,2378 @@
+{
+  "id": 71,
+  "nameSimple": "Nuh",
+  "nameArabic": "نوح",
+  "nameTranslation": "Noah",
+  "revelationPlace": "makkah",
+  "versesCount": 28,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "71:1",
+      "textUthmani": " إِنَّآ أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِهِۦٓ أَنْ أَنذِرْ قَوْمَكَ مِن قَبْلِ أَن يَأْتِيَهُمْ عَذَابٌ أَلِيمٌ",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed><tajweed class=madda_obligatory>َآ</tajweed> أَرْسَلْنَا نُوحًا إِلَىٰ قَوْمِه<tajweed class=madda_obligatory>ِۦٓ</tajweed> أَنْ أَ<tajweed class=ikhafa>نذ</tajweed>ِرْ قَوْمَكَ مِ<tajweed class=ikhafa>ن ق</tajweed>َ<tajweed class=qalaqah>بْ</tajweed>لِ أ<tajweed class=idgham_ghunnah>َن ي</tajweed>َأْتِيَهُمْ عَذَابٌ أَل<tajweed class=madda_permissible>ِي</tajweed>مٌ <span class=end>١</span>",
+      "textIndopak": "اِنَّاۤ اَرۡسَلۡنَا نُوۡحًا اِلٰى قَوۡمِهٖۤ اَنۡ اَنۡذِرۡ قَوۡمَكَ مِنۡ قَبۡلِ اَنۡ يَّاۡتِيَهُمۡ عَذَابٌ اَلِيۡمٌ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِنَّآ",
+          "transliteration": "innā",
+          "translation": "Indeed, We",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَرْسَلْنَا",
+          "transliteration": "arsalnā",
+          "translation": "[We] sent",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "نُوحًا",
+          "transliteration": "nūḥan",
+          "translation": "Nuh",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "إِلَىٰ",
+          "transliteration": "ilā",
+          "translation": "to",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "قَوْمِهِۦٓ",
+          "transliteration": "qawmihi",
+          "translation": "his people",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "أَنْ",
+          "transliteration": "an",
+          "translation": "that",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "أَنذِرْ",
+          "transliteration": "andhir",
+          "translation": "Warn",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "قَوْمَكَ",
+          "transliteration": "qawmaka",
+          "translation": "your people",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "مِن",
+          "transliteration": "min",
+          "translation": "from",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "قَبْلِ",
+          "transliteration": "qabli",
+          "translation": "before",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "أَن",
+          "transliteration": "an",
+          "translation": "[that]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "يَأْتِيَهُمْ",
+          "transliteration": "yatiyahum",
+          "translation": "comes to them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "عَذَابٌ",
+          "transliteration": "ʿadhābun",
+          "translation": "a punishment",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_013.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "أَلِيمٌۭ",
+          "transliteration": "alīmun",
+          "translation": "painful",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_001_014.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 15,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Indeed, We sent Noah to his people, [saying], \"Warn your people before there comes to them a painful punishment.\"",
+      "transliteration": "Innaaa arsalnaa Noohan ilaa qawmihee an anzir qawmaka min qabli any yaatiyahum 'azaabun aleem",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "71:2",
+      "textUthmani": "قَالَ يَـٰقَوْمِ إِنِّى لَكُمْ نَذِيرٌ مُّبِينٌ",
+      "textUthmaniTajweed": "قَالَ يَ<tajweed class=madda_normal>ـٰ</tajweed>قَوْمِ إِ<tajweed class=ghunnah>نّ</tajweed>ِى لَكُمْ نَذِي<tajweed class=idgham_ghunnah>رٌ م</tajweed>ُّب<tajweed class=madda_permissible>ِي</tajweed>نٌ <span class=end>٢</span>",
+      "textIndopak": "قَالَ يٰقَوۡمِ اِنِّىۡ لَـكُمۡ نَذِيۡرٌ مُّبِيۡنٌۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "قَالَ",
+          "transliteration": "qāla",
+          "translation": "He said",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَـٰقَوْمِ",
+          "transliteration": "yāqawmi",
+          "translation": "O my people",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "إِنِّى",
+          "transliteration": "innī",
+          "translation": "Indeed, I am",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_002_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "لَكُمْ",
+          "transliteration": "lakum",
+          "translation": "to you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_002_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "نَذِيرٌۭ",
+          "transliteration": "nadhīrun",
+          "translation": "a warner",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_002_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "مُّبِينٌ",
+          "transliteration": "mubīnun",
+          "translation": "clear",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_002_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He said, \"O my people, indeed I am to you a clear warner -",
+      "transliteration": "Qaala yaa-qawmi innee lakum nazeerum mubeen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "71:3",
+      "textUthmani": "أَنِ ٱعْبُدُوا۟ ٱللَّهَ وَٱتَّقُوهُ وَأَطِيعُونِ",
+      "textUthmaniTajweed": "أَنِ <tajweed class=ham_wasl>ٱ</tajweed>عْبُدُو<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed>للَّهَ وَ<tajweed class=ham_wasl>ٱ</tajweed>تَّقُوهُ وَأَطِيع<tajweed class=madda_permissible>ُو</tajweed>نِ <span class=end>٣</span>",
+      "textIndopak": "اَنِ اعۡبُدُوا اللّٰهَ وَاتَّقُوۡهُ وَاَطِيۡعُوۡنِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "أَنِ",
+          "transliteration": "ani",
+          "translation": "That",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱعْبُدُوا۟",
+          "transliteration": "uʿ'budū",
+          "translation": "Worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱللَّهَ",
+          "transliteration": "l-laha",
+          "translation": "Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَٱتَّقُوهُ",
+          "transliteration": "wa-ittaqūhu",
+          "translation": "and fear Him",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_003_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَأَطِيعُونِ",
+          "transliteration": "wa-aṭīʿūni",
+          "translation": "and obey me",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_003_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "To worship Allāh, fear Him and obey me.",
+      "transliteration": "Ani' budul laaha watta-qoohu Wa-atee'oon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "71:4",
+      "textUthmani": "يَغْفِرْ لَكُم مِّن ذُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَىٰٓ أَجَلٍ مُّسَمًّى ۚ إِنَّ أَجَلَ ٱللَّهِ إِذَا جَآءَ لَا يُؤَخَّرُ ۖ لَوْ كُنتُمْ تَعْلَمُونَ",
+      "textUthmaniTajweed": "يَغْفِرْ لَك<tajweed class=idgham_shafawi>ُم م</tajweed>ِّ<tajweed class=ikhafa>ن ذ</tajweed>ُنُوبِكُمْ وَيُؤَخِّرْكُمْ إِلَ<tajweed class=madda_obligatory>ىٰٓ</tajweed> أَجَ<tajweed class=idgham_ghunnah>لٍ م</tajweed>ُّسَ<tajweed class=ghunnah>مّ</tajweed>ًى‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ أَجَلَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ إِذَا ج<tajweed class=madda_obligatory>َا</tajweed>ٓءَ لَا يُؤَخَّرُ‌ۖ لَوْ كُ<tajweed class=ikhafa>نت</tajweed>ُمْ تَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤</span>",
+      "textIndopak": "يَغۡفِرۡ لَـكُمۡ مِّنۡ ذُنُوۡبِكُمۡ وَيُؤَخِّرۡكُمۡ اِلٰٓى اَجَلٍ مُّسَمًّى​ؕ اِنَّ اَجَلَ اللّٰهِ اِذَا جَآءَ لَا يُؤَخَّرُ​​ۘ لَوۡ كُنۡتُمۡ تَعۡلَمُوۡنَ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يَغْفِرْ",
+          "transliteration": "yaghfir",
+          "translation": "He will forgive",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَكُم",
+          "transliteration": "lakum",
+          "translation": "for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مِّن",
+          "transliteration": "min",
+          "translation": "[of]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ذُنُوبِكُمْ",
+          "transliteration": "dhunūbikum",
+          "translation": "your sins",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَيُؤَخِّرْكُمْ",
+          "transliteration": "wayu-akhir'kum",
+          "translation": "and give you respite",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "إِلَىٰٓ",
+          "transliteration": "ilā",
+          "translation": "for",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "أَجَلٍۢ",
+          "transliteration": "ajalin",
+          "translation": "a term",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "مُّسَمًّى ۚ",
+          "transliteration": "musamman",
+          "translation": "specified",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "إِنَّ",
+          "transliteration": "inna",
+          "translation": "Indeed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "أَجَلَ",
+          "transliteration": "ajala",
+          "translation": "(the) term",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "ٱللَّهِ",
+          "transliteration": "l-lahi",
+          "translation": "(of) Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "إِذَا",
+          "transliteration": "idhā",
+          "translation": "when",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_013.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "جَآءَ",
+          "transliteration": "jāa",
+          "translation": "it comes",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_014.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "لَا",
+          "transliteration": "lā",
+          "translation": "not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_015.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 15,
+          "textUthmani": "يُؤَخَّرُ ۖ",
+          "transliteration": "yu-akharu",
+          "translation": "is delayed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_016.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 16,
+          "textUthmani": "لَوْ",
+          "transliteration": "law",
+          "translation": "if",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_018.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 17,
+          "textUthmani": "كُنتُمْ",
+          "transliteration": "kuntum",
+          "translation": "you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_019.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 18,
+          "textUthmani": "تَعْلَمُونَ",
+          "transliteration": "taʿlamūna",
+          "translation": "know",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_004_020.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 19,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He [i.e., Allāh] will forgive you of your sins and delay you for a specified term. Indeed, the time [set by] Allāh, when it comes, will not be delayed, if you only knew.\"",
+      "transliteration": "Yaghfir lakum min zunoobikum Wa-yu'akhkhirkum ilaaa ajalim musammaa; innaa ajalal laahi izaa jaaa'a laa yu'akhkhar; law kuntum ta'lamoon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "71:5",
+      "textUthmani": "قَالَ رَبِّ إِنِّى دَعَوْتُ قَوْمِى لَيْلًا وَنَهَارًا",
+      "textUthmaniTajweed": "قَالَ رَبِّ إِ<tajweed class=ghunnah>نّ</tajweed>ِى دَعَوْتُ قَوْمِى لَيْل<tajweed class=idgham_ghunnah>اً و</tajweed>َنَهَارًا <span class=end>٥</span>",
+      "textIndopak": "قَالَ رَبِّ اِنِّىۡ دَعَوۡتُ قَوۡمِىۡ لَيۡلًا وَّنَهَارًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "قَالَ",
+          "transliteration": "qāla",
+          "translation": "He said",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "رَبِّ",
+          "transliteration": "rabbi",
+          "translation": "My Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "إِنِّى",
+          "transliteration": "innī",
+          "translation": "Indeed, I",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "دَعَوْتُ",
+          "transliteration": "daʿawtu",
+          "translation": "invited",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "قَوْمِى",
+          "transliteration": "qawmī",
+          "translation": "my people",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "لَيْلًۭا",
+          "transliteration": "laylan",
+          "translation": "night",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "وَنَهَارًۭا",
+          "transliteration": "wanahāran",
+          "translation": "and day",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_005_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He said, \"My Lord, indeed I invited my people [to truth] night and day.",
+      "transliteration": "Qaala rabbi innee da'awtu qawmee lailanw Wa-naharaa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "71:6",
+      "textUthmani": "فَلَمْ يَزِدْهُمْ دُعَآءِىٓ إِلَّا فِرَارًا",
+      "textUthmaniTajweed": "فَلَمْ يَزِ<tajweed class=qalaqah>دْ</tajweed>هُمْ دُع<tajweed class=madda_obligatory>َا</tajweed>ٓء<tajweed class=madda_obligatory>ِىٓ</tajweed> إِلَّا فِرَارًا <span class=end>٦</span>",
+      "textIndopak": "فَلَمۡ يَزِدۡهُمۡ دُعَآءِىۡۤ اِلَّا فِرَارًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَلَمْ",
+          "transliteration": "falam",
+          "translation": "But not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَزِدْهُمْ",
+          "transliteration": "yazid'hum",
+          "translation": "increased them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "دُعَآءِىٓ",
+          "transliteration": "duʿāī",
+          "translation": "my invitation",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_006_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "except",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_006_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "فِرَارًۭا",
+          "transliteration": "firāran",
+          "translation": "(in) flight",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_006_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "But my invitation increased them not except in flight [i.e., aversion].",
+      "transliteration": "Falam yazid-hum du'aaa-'eee illaa firaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071006.mp3"
+    },
+    {
+      "number": 7,
+      "key": "71:7",
+      "textUthmani": "وَإِنِّى كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَلُوٓا۟ أَصَـٰبِعَهُمْ فِىٓ ءَاذَانِهِمْ وَٱسْتَغْشَوْا۟ ثِيَابَهُمْ وَأَصَرُّوا۟ وَٱسْتَكْبَرُوا۟ ٱسْتِكْبَارًا",
+      "textUthmaniTajweed": "وَإِ<tajweed class=ghunnah>نّ</tajweed>ِى كُلَّمَا دَعَوْتُهُمْ لِتَغْفِرَ لَهُمْ جَعَل<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> أَصَ<tajweed class=madda_normal>ـٰ</tajweed>بِعَهُمْ ف<tajweed class=madda_obligatory>ِىٓ</tajweed> ءَاذَانِهِمْ وَ<tajweed class=ham_wasl>ٱ</tajweed>سْتَغْشَوْ<tajweed class=slnt>اْ</tajweed> ثِيَابَهُمْ وَأَصَرُّو<tajweed class=slnt>اْ</tajweed> وَ<tajweed class=ham_wasl>ٱ</tajweed>سْتَكْبَرُو<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed>سْتِكْبَارًا <span class=end>٧</span>",
+      "textIndopak": "وَاِنِّىۡ كُلَّمَا دَعَوۡتُهُمۡ لِتَغۡفِرَ لَهُمۡ جَعَلُوۡۤا اَصَابِعَهُمۡ فِىۡۤ اٰذَانِهِمۡ وَاسۡتَغۡشَوۡا ثِيَابَهُمۡ وَاَصَرُّوۡا وَاسۡتَكۡبَرُوا اسۡتِكۡبَارًا​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَإِنِّى",
+          "transliteration": "wa-innī",
+          "translation": "And indeed, I",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "كُلَّمَا",
+          "transliteration": "kullamā",
+          "translation": "every time",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "دَعَوْتُهُمْ",
+          "transliteration": "daʿawtuhum",
+          "translation": "I invited them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "لِتَغْفِرَ",
+          "transliteration": "litaghfira",
+          "translation": "that You may forgive",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "لَهُمْ",
+          "transliteration": "lahum",
+          "translation": "them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "جَعَلُوٓا۟",
+          "transliteration": "jaʿalū",
+          "translation": "they put",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "أَصَـٰبِعَهُمْ",
+          "transliteration": "aṣābiʿahum",
+          "translation": "their fingers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "فِىٓ",
+          "transliteration": "fī",
+          "translation": "in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "ءَاذَانِهِمْ",
+          "transliteration": "ādhānihim",
+          "translation": "their ears",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "وَٱسْتَغْشَوْا۟",
+          "transliteration": "wa-is'taghshaw",
+          "translation": "and covered themselves",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "ثِيَابَهُمْ",
+          "transliteration": "thiyābahum",
+          "translation": "(with) their garments",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "وَأَصَرُّوا۟",
+          "transliteration": "wa-aṣarrū",
+          "translation": "and persisted",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "وَٱسْتَكْبَرُوا۟",
+          "transliteration": "wa-is'takbarū",
+          "translation": "and were arrogant",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_013.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "ٱسْتِكْبَارًۭا",
+          "transliteration": "is'tik'bāran",
+          "translation": "(with) pride",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_007_014.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 15,
+          "textUthmani": "٧",
+          "transliteration": null,
+          "translation": "(7)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And indeed, every time I invited them that You may forgive them, they put their fingers in their ears, covered themselves with their garments, persisted, and were arrogant with [great] arrogance.",
+      "transliteration": "Wa-inee kullamaa da'awtuhum litaghfira lahum ja'alooo asaabi'ahum fee aazaanihim wastaghshaw siyaabahum Wa-asarroo wastakbarus tikbaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071007.mp3"
+    },
+    {
+      "number": 8,
+      "key": "71:8",
+      "textUthmani": "ثُمَّ إِنِّى دَعَوْتُهُمْ جِهَارًا",
+      "textUthmaniTajweed": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ إِ<tajweed class=ghunnah>نّ</tajweed>ِى دَعَوْتُهُمْ جِهَارًا <span class=end>٨</span>",
+      "textIndopak": "ثُمَّ اِنِّىۡ دَعَوۡتُهُمۡ جِهَارًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ثُمَّ",
+          "transliteration": "thumma",
+          "translation": "Then",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_008_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "إِنِّى",
+          "transliteration": "innī",
+          "translation": "indeed, I",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_008_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "دَعَوْتُهُمْ",
+          "transliteration": "daʿawtuhum",
+          "translation": "invited them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_008_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "جِهَارًۭا",
+          "transliteration": "jihāran",
+          "translation": "publicly",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_008_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٨",
+          "transliteration": null,
+          "translation": "(8)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then I invited them publicly.",
+      "transliteration": "Summa innee da'aw-tuhum jihaara",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071008.mp3"
+    },
+    {
+      "number": 9,
+      "key": "71:9",
+      "textUthmani": "ثُمَّ إِنِّىٓ أَعْلَنتُ لَهُمْ وَأَسْرَرْتُ لَهُمْ إِسْرَارًا",
+      "textUthmaniTajweed": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ إِ<tajweed class=ghunnah>نّ</tajweed><tajweed class=madda_obligatory>ِىٓ</tajweed> أَعْلَ<tajweed class=ikhafa>نت</tajweed>ُ لَهُمْ وَأَسْرَرْتُ لَهُمْ إِسْرَارًا <span class=end>٩</span>",
+      "textIndopak": "ثُمَّ اِنِّىۡۤ اَعۡلَـنۡتُ لَهُمۡ وَاَسۡرَرۡتُ لَهُمۡ اِسۡرَارًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ثُمَّ",
+          "transliteration": "thumma",
+          "translation": "Then",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "إِنِّىٓ",
+          "transliteration": "innī",
+          "translation": "indeed, I",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "أَعْلَنتُ",
+          "transliteration": "aʿlantu",
+          "translation": "announced",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "لَهُمْ",
+          "transliteration": "lahum",
+          "translation": "to them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَأَسْرَرْتُ",
+          "transliteration": "wa-asrartu",
+          "translation": "and I confided",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "لَهُمْ",
+          "transliteration": "lahum",
+          "translation": "to them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "إِسْرَارًۭا",
+          "transliteration": "is'rāran",
+          "translation": "secretly",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_009_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "٩",
+          "transliteration": null,
+          "translation": "(9)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then I announced to them and [also] confided to them secretly",
+      "transliteration": "Summaa inneee a'lantu lahum Wa-asrartu lahum israaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071009.mp3"
+    },
+    {
+      "number": 10,
+      "key": "71:10",
+      "textUthmani": "فَقُلْتُ ٱسْتَغْفِرُوا۟ رَبَّكُمْ إِنَّهُۥ كَانَ غَفَّارًا",
+      "textUthmaniTajweed": "فَقُلْتُ <tajweed class=ham_wasl>ٱ</tajweed>سْتَغْفِرُو<tajweed class=slnt>اْ</tajweed> رَبَّكُمْ إِ<tajweed class=ghunnah>نّ</tajweed>َهُ<tajweed class=madda_normal>ۥ</tajweed> كَانَ غَفَّارًا <span class=end>١٠</span>",
+      "textIndopak": "فَقُلۡتُ اسۡتَغۡفِرُوۡا رَبَّكُمۡؕ اِنَّهٗ كَانَ غَفَّارًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَقُلْتُ",
+          "transliteration": "faqul'tu",
+          "translation": "Then I said",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_010_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱسْتَغْفِرُوا۟",
+          "transliteration": "is'taghfirū",
+          "translation": "Ask forgiveness",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_010_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبَّكُمْ",
+          "transliteration": "rabbakum",
+          "translation": "(from) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_010_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "إِنَّهُۥ",
+          "transliteration": "innahu",
+          "translation": "Indeed, He",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_010_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "كَانَ",
+          "transliteration": "kāna",
+          "translation": "is",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_010_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "غَفَّارًۭا",
+          "transliteration": "ghaffāran",
+          "translation": "Oft-Forgiving",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_010_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "١٠",
+          "transliteration": null,
+          "translation": "(10)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And said, 'Ask forgiveness of your Lord. Indeed, He is ever a Perpetual Forgiver.",
+      "transliteration": "Faqultus taghfiroo Rabakum innahoo kaana Ghaffaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071010.mp3"
+    },
+    {
+      "number": 11,
+      "key": "71:11",
+      "textUthmani": "يُرْسِلِ ٱلسَّمَآءَ عَلَيْكُم مِّدْرَارًا",
+      "textUthmaniTajweed": "يُرْسِلِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّم<tajweed class=madda_obligatory>َا</tajweed>ٓءَ عَلَيْك<tajweed class=idgham_shafawi>ُم م</tajweed>ِّ<tajweed class=qalaqah>دْ</tajweed>رَارًا <span class=end>١١</span>",
+      "textIndopak": "يُّرۡسِلِ السَّمَآءَ عَلَيۡكُمۡ مِّدۡرَارًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يُرْسِلِ",
+          "transliteration": "yur'sili",
+          "translation": "He will send down",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_011_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلسَّمَآءَ",
+          "transliteration": "l-samāa",
+          "translation": "(rain from) the sky",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_011_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَلَيْكُم",
+          "transliteration": "ʿalaykum",
+          "translation": "upon you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_011_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مِّدْرَارًۭا",
+          "transliteration": "mid'rāran",
+          "translation": "(in) abundance",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_011_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١١",
+          "transliteration": null,
+          "translation": "(11)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He will send [rain from] the sky upon you in [continuing] showers",
+      "transliteration": "Yursilis samaaa'a 'alaikum midraaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071011.mp3"
+    },
+    {
+      "number": 12,
+      "key": "71:12",
+      "textUthmani": "وَيُمْدِدْكُم بِأَمْوَٰلٍ وَبَنِينَ وَيَجْعَل لَّكُمْ جَنَّـٰتٍ وَيَجْعَل لَّكُمْ أَنْهَـٰرًا",
+      "textUthmaniTajweed": "وَيُمْدِ<tajweed class=qalaqah>دْ</tajweed>ك<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِأَمْو<tajweed class=madda_normal>َٲ</tajweed><tajweed class=idgham_ghunnah>لٍ و</tajweed>َبَنِينَ وَيَ<tajweed class=qalaqah>جْ</tajweed>عَل لَّكُمْ جَ<tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=idgham_ghunnah>تٍ و</tajweed>َيَ<tajweed class=qalaqah>جْ</tajweed>عَل لَّكُمْ أَنْهَ<tajweed class=madda_normal>ـٰ</tajweed>رًا <span class=end>١٢</span>",
+      "textIndopak": "وَّيُمۡدِدۡكُمۡ بِاَمۡوَالٍ وَّبَنِيۡنَ وَيَجۡعَلۡ لَّـكُمۡ جَنّٰتٍ وَّيَجۡعَلۡ لَّـكُمۡ اَنۡهٰرًا ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَيُمْدِدْكُم",
+          "transliteration": "wayum'did'kum",
+          "translation": "And provide you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "بِأَمْوَٰلٍۢ",
+          "transliteration": "bi-amwālin",
+          "translation": "with wealth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَبَنِينَ",
+          "transliteration": "wabanīna",
+          "translation": "and children",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَيَجْعَل",
+          "transliteration": "wayajʿal",
+          "translation": "and make",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "لَّكُمْ",
+          "transliteration": "lakum",
+          "translation": "for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "جَنَّـٰتٍۢ",
+          "transliteration": "jannātin",
+          "translation": "gardens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "وَيَجْعَل",
+          "transliteration": "wayajʿal",
+          "translation": "and make",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "لَّكُمْ",
+          "transliteration": "lakum",
+          "translation": "for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "أَنْهَـٰرًۭا",
+          "transliteration": "anhāran",
+          "translation": "rivers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_012_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "١٢",
+          "transliteration": null,
+          "translation": "(12)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And give you increase in wealth and children and provide for you gardens and provide for you rivers.",
+      "transliteration": "Wa-yumdidkum bi-am-waalinw Wa-baneena Wa-yaj'al lakum Jannaatinw Wa-yaj'al lakum anhaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071012.mp3"
+    },
+    {
+      "number": 13,
+      "key": "71:13",
+      "textUthmani": "مَّا لَكُمْ لَا تَرْجُونَ لِلَّهِ وَقَارًا",
+      "textUthmaniTajweed": "مَّا لَكُمْ لَا تَرْجُونَ لِلَّهِ وَقَارًا <span class=end>١٣</span>",
+      "textIndopak": "مَا لَـكُمۡ لَا تَرۡجُوۡنَ لِلّٰهِ وَقَارًا​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مَّا",
+          "transliteration": "mā",
+          "translation": "What",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_013_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَكُمْ",
+          "transliteration": "lakum",
+          "translation": "(is) for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_013_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لَا",
+          "transliteration": "lā",
+          "translation": "not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_013_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تَرْجُونَ",
+          "transliteration": "tarjūna",
+          "translation": "you attribute",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_013_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "لِلَّهِ",
+          "transliteration": "lillahi",
+          "translation": "to Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_013_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَقَارًۭا",
+          "transliteration": "waqāran",
+          "translation": "grandeur",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_013_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "١٣",
+          "transliteration": null,
+          "translation": "(13)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "What is [the matter] with you that you do not attribute to Allāh [due] grandeur",
+      "transliteration": "Maa lakum laa tarjoona lillaahi waqaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071013.mp3"
+    },
+    {
+      "number": 14,
+      "key": "71:14",
+      "textUthmani": "وَقَدْ خَلَقَكُمْ أَطْوَارًا",
+      "textUthmaniTajweed": "وَقَ<tajweed class=qalaqah>دْ</tajweed> خَلَقَكُمْ أَ<tajweed class=qalaqah>طْ</tajweed>وَارًا <span class=end>١٤</span>",
+      "textIndopak": "وَقَدۡ خَلَقَكُمۡ اَطۡوَارًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَقَدْ",
+          "transliteration": "waqad",
+          "translation": "And indeed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_014_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "خَلَقَكُمْ",
+          "transliteration": "khalaqakum",
+          "translation": "He created you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_014_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "أَطْوَارًا",
+          "transliteration": "aṭwāran",
+          "translation": "(in) stages",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_014_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "١٤",
+          "transliteration": null,
+          "translation": "(14)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "While He has created you in stages?",
+      "transliteration": "Wa-qad khalaqakum at-waaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071014.mp3"
+    },
+    {
+      "number": 15,
+      "key": "71:15",
+      "textUthmani": "أَلَمْ تَرَوْا۟ كَيْفَ خَلَقَ ٱللَّهُ سَبْعَ سَمَـٰوَٰتٍ طِبَاقًا",
+      "textUthmaniTajweed": "أَلَمْ تَرَوْ<tajweed class=slnt>اْ</tajweed> كَيْفَ خَلَقَ <tajweed class=ham_wasl>ٱ</tajweed>للَّهُ سَ<tajweed class=qalaqah>بْ</tajweed>عَ سَمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed><tajweed class=ikhafa>تٍ ط</tajweed>ِبَاقًا <span class=end>١٥</span>",
+      "textIndopak": "اَلَمۡ تَرَوۡا كَيۡفَ خَلَقَ اللّٰهُ سَبۡعَ سَمٰوٰتٍ طِبَاقًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "أَلَمْ",
+          "transliteration": "alam",
+          "translation": "Do not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "تَرَوْا۟",
+          "transliteration": "taraw",
+          "translation": "you see",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "كَيْفَ",
+          "transliteration": "kayfa",
+          "translation": "how",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "خَلَقَ",
+          "transliteration": "khalaqa",
+          "translation": "did create",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱللَّهُ",
+          "transliteration": "l-lahu",
+          "translation": "Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "سَبْعَ",
+          "transliteration": "sabʿa",
+          "translation": "(the) seven",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "سَمَـٰوَٰتٍۢ",
+          "transliteration": "samāwātin",
+          "translation": "heavens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "طِبَاقًۭا",
+          "transliteration": "ṭibāqan",
+          "translation": "(in) layers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_015_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "١٥",
+          "transliteration": null,
+          "translation": "(15)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Do you not consider how Allāh has created seven heavens in layers",
+      "transliteration": "Alam taraw kaifa khalaqal laahu sab'a samaawaatin tibaaqaa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071015.mp3"
+    },
+    {
+      "number": 16,
+      "key": "71:16",
+      "textUthmani": "وَجَعَلَ ٱلْقَمَرَ فِيهِنَّ نُورًا وَجَعَلَ ٱلشَّمْسَ سِرَاجًا",
+      "textUthmaniTajweed": "وَجَعَلَ <tajweed class=ham_wasl>ٱ</tajweed>لْقَمَرَ فِيهِ<tajweed class=ghunnah>نّ</tajweed>َ نُو<tajweed class=idgham_ghunnah>رًا و</tajweed>َجَعَلَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شَّمْسَ سِرَاجًا <span class=end>١٦</span>",
+      "textIndopak": "وَّجَعَلَ الۡقَمَرَ فِيۡهِنَّ نُوۡرًا ۙ وَّجَعَلَ الشَّمۡسَ سِرَاجًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَجَعَلَ",
+          "transliteration": "wajaʿala",
+          "translation": "And made",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْقَمَرَ",
+          "transliteration": "l-qamara",
+          "translation": "the moon",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فِيهِنَّ",
+          "transliteration": "fīhinna",
+          "translation": "therein",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "نُورًۭا",
+          "transliteration": "nūran",
+          "translation": "a light",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَجَعَلَ",
+          "transliteration": "wajaʿala",
+          "translation": "and made",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "ٱلشَّمْسَ",
+          "transliteration": "l-shamsa",
+          "translation": "the sun",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "سِرَاجًۭا",
+          "transliteration": "sirājan",
+          "translation": "a lamp",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_016_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "١٦",
+          "transliteration": null,
+          "translation": "(16)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And made the moon therein a [reflected] light and made the sun a burning lamp?",
+      "transliteration": "Wa-ja'alal qamara feehinna nooranw Wa-ja'alash shamsa siraajaa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071016.mp3"
+    },
+    {
+      "number": 17,
+      "key": "71:17",
+      "textUthmani": "وَٱللَّهُ أَنۢبَتَكُم مِّنَ ٱلْأَرْضِ نَبَاتًا",
+      "textUthmaniTajweed": "وَ<tajweed class=ham_wasl>ٱ</tajweed>للَّهُ أَ<tajweed class=iqlab>نۢب</tajweed>َتَك<tajweed class=idgham_shafawi>ُم م</tajweed>ِّنَ <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ نَبَاتًا <span class=end>١٧</span>",
+      "textIndopak": "وَاللّٰهُ اَنۡۢبَتَكُمۡ مِّنَ الۡاَرۡضِ نَبَاتًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱللَّهُ",
+          "transliteration": "wal-lahu",
+          "translation": "And Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_017_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَنۢبَتَكُم",
+          "transliteration": "anbatakum",
+          "translation": "has caused you to grow",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_017_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مِّنَ",
+          "transliteration": "mina",
+          "translation": "from",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_017_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْأَرْضِ",
+          "transliteration": "l-arḍi",
+          "translation": "the earth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_017_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "نَبَاتًۭا",
+          "transliteration": "nabātan",
+          "translation": "(as) a growth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_017_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "١٧",
+          "transliteration": null,
+          "translation": "(17)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And Allāh has caused you to grow from the earth a [progressive] growth.",
+      "transliteration": "Wallaahu ambatakum minal ardi nabaataa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071017.mp3"
+    },
+    {
+      "number": 18,
+      "key": "71:18",
+      "textUthmani": "ثُمَّ يُعِيدُكُمْ فِيهَا وَيُخْرِجُكُمْ إِخْرَاجًا",
+      "textUthmaniTajweed": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ يُعِيدُكُمْ فِيهَا وَيُخْرِجُكُمْ إِخْرَاجًا <span class=end>١٨</span>",
+      "textIndopak": "ثُمَّ يُعِيۡدُكُمۡ فِيۡهَا وَيُخۡرِجُكُمۡ اِخۡرَاجًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ثُمَّ",
+          "transliteration": "thumma",
+          "translation": "Then",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_018_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يُعِيدُكُمْ",
+          "transliteration": "yuʿīdukum",
+          "translation": "He will return you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_018_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فِيهَا",
+          "transliteration": "fīhā",
+          "translation": "into it",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_018_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَيُخْرِجُكُمْ",
+          "transliteration": "wayukh'rijukum",
+          "translation": "and bring you forth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_018_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "إِخْرَاجًۭا",
+          "transliteration": "ikh'rājan",
+          "translation": "(a new) bringing forth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_018_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "١٨",
+          "transliteration": null,
+          "translation": "(18)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then He will return you into it and extract you [another] extraction.",
+      "transliteration": "Summa yu'eedukum feehaa Wa-ukhrijukum ikhraajaa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071018.mp3"
+    },
+    {
+      "number": 19,
+      "key": "71:19",
+      "textUthmani": "وَٱللَّهُ جَعَلَ لَكُمُ ٱلْأَرْضَ بِسَاطًا",
+      "textUthmaniTajweed": "وَ<tajweed class=ham_wasl>ٱ</tajweed>للَّهُ جَعَلَ لَكُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضَ بِسَاطًا <span class=end>١٩</span>",
+      "textIndopak": "وَاللّٰهُ جَعَلَ لَـكُمُ الۡاَرۡضَ بِسَاطًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱللَّهُ",
+          "transliteration": "wal-lahu",
+          "translation": "And Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_019_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "جَعَلَ",
+          "transliteration": "jaʿala",
+          "translation": "made",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_019_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لَكُمُ",
+          "transliteration": "lakumu",
+          "translation": "for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_019_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْأَرْضَ",
+          "transliteration": "l-arḍa",
+          "translation": "the earth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_019_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "بِسَاطًۭا",
+          "transliteration": "bisāṭan",
+          "translation": "an expanse",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_019_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "١٩",
+          "transliteration": null,
+          "translation": "(19)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And Allāh has made for you the earth an expanse",
+      "transliteration": "Wallaahu ja'ala lakumul arda bisaataa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071019.mp3"
+    },
+    {
+      "number": 20,
+      "key": "71:20",
+      "textUthmani": "لِّتَسْلُكُوا۟ مِنْهَا سُبُلًا فِجَاجًا",
+      "textUthmaniTajweed": "لِّتَسْلُكُو<tajweed class=slnt>اْ</tajweed> مِنْهَا سُبُل<tajweed class=ikhafa>اً ف</tajweed>ِجَاجًا <span class=end>٢٠</span>",
+      "textIndopak": "لِّـتَسۡلُكُوۡا مِنۡهَا سُبُلًا فِجَاجًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لِّتَسْلُكُوا۟",
+          "transliteration": "litaslukū",
+          "translation": "That you may go along",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_020_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مِنْهَا",
+          "transliteration": "min'hā",
+          "translation": "therein",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_020_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "سُبُلًۭا",
+          "transliteration": "subulan",
+          "translation": "(in) paths",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_020_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فِجَاجًۭا",
+          "transliteration": "fijājan",
+          "translation": "wide",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_020_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٠",
+          "transliteration": null,
+          "translation": "(20)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "That you may follow therein roads of passage.'\"",
+      "transliteration": "Litaslukoo minhaa subulan fijaajaa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071020.mp3"
+    },
+    {
+      "number": 21,
+      "key": "71:21",
+      "textUthmani": "قَالَ نُوحٌ رَّبِّ إِنَّهُمْ عَصَوْنِى وَٱتَّبَعُوا۟ مَن لَّمْ يَزِدْهُ مَالُهُۥ وَوَلَدُهُۥٓ إِلَّا خَسَارًا",
+      "textUthmaniTajweed": "قَالَ نُو<tajweed class=idgham_wo_ghunnah>حٌ ر</tajweed>َّبِّ إِ<tajweed class=ghunnah>نّ</tajweed>َهُمْ عَصَوْنِى وَ<tajweed class=ham_wasl>ٱ</tajweed>تَّبَعُو<tajweed class=slnt>اْ</tajweed> م<tajweed class=idgham_wo_ghunnah>َن ل</tajweed>َّمْ يَزِ<tajweed class=qalaqah>دْ</tajweed>هُ مَالُهُ<tajweed class=madda_normal>ۥ</tajweed> وَوَلَدُهُ<tajweed class=madda_obligatory>ۥٓ</tajweed> إِلَّا خَسَارًا <span class=end>٢١</span>",
+      "textIndopak": "قَالَ نُوۡحٌ رَّبِّ اِنَّهُمۡ عَصَوۡنِىۡ وَاتَّبَعُوۡا مَنۡ لَّمۡ يَزِدۡهُ مَالُهٗ وَوَلَدُهٗۤ اِلَّا خَسَارًا​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "قَالَ",
+          "transliteration": "qāla",
+          "translation": "Said",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "نُوحٌۭ",
+          "transliteration": "nūḥun",
+          "translation": "Nuh",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَّبِّ",
+          "transliteration": "rabbi",
+          "translation": "My Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "إِنَّهُمْ",
+          "transliteration": "innahum",
+          "translation": "Indeed, they",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "عَصَوْنِى",
+          "transliteration": "ʿaṣawnī",
+          "translation": "disobeyed me",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَٱتَّبَعُوا۟",
+          "transliteration": "wa-ittabaʿū",
+          "translation": "and followed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "مَن",
+          "transliteration": "man",
+          "translation": "(the one) who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "لَّمْ",
+          "transliteration": "lam",
+          "translation": "(did) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "يَزِدْهُ",
+          "transliteration": "yazid'hu",
+          "translation": "increase him",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "مَالُهُۥ",
+          "transliteration": "māluhu",
+          "translation": "his wealth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "وَوَلَدُهُۥٓ",
+          "transliteration": "wawaladuhu",
+          "translation": "and his children",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "except",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "خَسَارًۭا",
+          "transliteration": "khasāran",
+          "translation": "(in) loss",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_021_013.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "٢١",
+          "transliteration": null,
+          "translation": "(21)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Noah said, \"My Lord, indeed they have disobeyed me and followed him whose wealth and children will not increase him except in loss.",
+      "transliteration": "Qaala Noohur Rabbi innahum 'asawnee wattaba'oo mal lam yazid-hu maaluhoo Wa-waladuhooo illaa khasaara",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071021.mp3"
+    },
+    {
+      "number": 22,
+      "key": "71:22",
+      "textUthmani": "وَمَكَرُوا۟ مَكْرًا كُبَّارًا",
+      "textUthmaniTajweed": "وَمَكَرُو<tajweed class=slnt>اْ</tajweed> مَكْ<tajweed class=ikhafa>رًا ك</tajweed>ُبَّارًا <span class=end>٢٢</span>",
+      "textIndopak": "وَمَكَرُوۡا مَكۡرًا كُبَّارًا​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَمَكَرُوا۟",
+          "transliteration": "wamakarū",
+          "translation": "And they have planned",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_022_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَكْرًۭا",
+          "transliteration": "makran",
+          "translation": "a plan",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_022_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "كُبَّارًۭا",
+          "transliteration": "kubbāran",
+          "translation": "great",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_022_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٢٢",
+          "transliteration": null,
+          "translation": "(22)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And they conspired an immense conspiracy",
+      "transliteration": "Wa-makaroo makran kubbaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071022.mp3"
+    },
+    {
+      "number": 23,
+      "key": "71:23",
+      "textUthmani": "وَقَالُوا۟ لَا تَذَرُنَّ ءَالِهَتَكُمْ وَلَا تَذَرُنَّ وَدًّا وَلَا سُوَاعًا وَلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا",
+      "textUthmaniTajweed": "وَقَالُو<tajweed class=slnt>اْ</tajweed> لَا تَذَرُ<tajweed class=ghunnah>نّ</tajweed>َ ءَالِهَتَكُمْ وَلَا تَذَرُ<tajweed class=ghunnah>نّ</tajweed>َ وَد<tajweed class=idgham_ghunnah>ًّا و</tajweed>َلَا سُوَا<tajweed class=idgham_ghunnah>عًا و</tajweed>َلَا يَغُوثَ وَيَعُوقَ وَنَسْرًا <span class=end>٢٣</span>",
+      "textIndopak": "وَ قَالُوۡا لَا تَذَرُنَّ اٰلِهَتَكُمۡ وَلَا تَذَرُنَّ وَدًّا وَّلَا سُوَاعًا  ۙ وَّ لَا يَغُوۡثَ وَيَعُوۡقَ وَنَسۡرًا​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَقَالُوا۟",
+          "transliteration": "waqālū",
+          "translation": "And they said",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَا",
+          "transliteration": "lā",
+          "translation": "(Do) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "تَذَرُنَّ",
+          "transliteration": "tadharunna",
+          "translation": "leave",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ءَالِهَتَكُمْ",
+          "transliteration": "ālihatakum",
+          "translation": "your gods",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and (do) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "تَذَرُنَّ",
+          "transliteration": "tadharunna",
+          "translation": "leave",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "وَدًّۭا",
+          "transliteration": "waddan",
+          "translation": "Wadd",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "سُوَاعًۭا",
+          "transliteration": "suwāʿan",
+          "translation": "Suwa",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "يَغُوثَ",
+          "transliteration": "yaghūtha",
+          "translation": "Yaguth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "وَيَعُوقَ",
+          "transliteration": "wayaʿūqa",
+          "translation": "and Yauq",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "وَنَسْرًۭا",
+          "transliteration": "wanasran",
+          "translation": "and Nasr",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_023_013.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "٢٣",
+          "transliteration": null,
+          "translation": "(23)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And said, 'Never leave your gods and never leave Wadd or Suwāʿ or Yaghūth and Yaʿūq and Nasr.'",
+      "transliteration": "Wa-qaaloo laa tazarunna aalihatakum Wa-laa tazarunna Waddanw Wa-laa Suwaa'anw Wa-laa Yaghoosa Wa-Ya'ooqa Wa-Nasraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071023.mp3"
+    },
+    {
+      "number": 24,
+      "key": "71:24",
+      "textUthmani": "وَقَدْ أَضَلُّوا۟ كَثِيرًا ۖ وَلَا تَزِدِ ٱلظَّـٰلِمِينَ إِلَّا ضَلَـٰلًا",
+      "textUthmaniTajweed": "وَقَ<tajweed class=qalaqah>دْ</tajweed> أَضَلُّو<tajweed class=slnt>اْ</tajweed> كَثِي<tajweed class=idgham_ghunnah>رًا‌ۖ و</tajweed>َلَا تَزِدِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ظَّ<tajweed class=madda_normal>ـٰ</tajweed>لِمِينَ إِلَّا ضَلَ<tajweed class=madda_normal>ـٰ</tajweed>لاً <span class=end>٢٤</span>",
+      "textIndopak": "وَقَدۡ اَضَلُّوۡا كَثِيۡرًا​ ​ ۚ وَلَا تَزِدِ الظّٰلِمِيۡنَ اِلَّا ضَلٰلًا‏ ﻿﻿",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَقَدْ",
+          "transliteration": "waqad",
+          "translation": "And indeed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَضَلُّوا۟",
+          "transliteration": "aḍallū",
+          "translation": "they have led astray",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "كَثِيرًۭا ۖ",
+          "transliteration": "kathīran",
+          "translation": "many",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "And not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "تَزِدِ",
+          "transliteration": "tazidi",
+          "translation": "increase",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "ٱلظَّـٰلِمِينَ",
+          "transliteration": "l-ẓālimīna",
+          "translation": "the wrongdoers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "except",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "ضَلَـٰلًۭا",
+          "transliteration": "ḍalālan",
+          "translation": "(in) error",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_024_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "٢٤",
+          "transliteration": null,
+          "translation": "(24)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And already they have misled many. And, [my Lord], do not increase the wrongdoers except in error.\"",
+      "transliteration": "Wa-qad adalloo kasee-ranw Wa-laa tazidiz zaalimeena illaa dalaalaa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071024.mp3"
+    },
+    {
+      "number": 25,
+      "key": "71:25",
+      "textUthmani": "مِّمَّا خَطِيٓـَٔـٰتِهِمْ أُغْرِقُوا۟ فَأُدْخِلُوا۟ نَارًا فَلَمْ يَجِدُوا۟ لَهُم مِّن دُونِ ٱللَّهِ أَنصَارًا",
+      "textUthmaniTajweed": "مِّ<tajweed class=ghunnah>مّ</tajweed>َا خَط<tajweed class=madda_obligatory>ِيٓ</tajweed>ـَٔ<tajweed class=madda_normal>ـٰ</tajweed>تِهِمْ أُغْرِقُو<tajweed class=slnt>اْ</tajweed> فَأُ<tajweed class=qalaqah>دْ</tajweed>خِلُو<tajweed class=slnt>اْ</tajweed> نَا<tajweed class=ikhafa>رًا ف</tajweed>َلَمْ يَجِدُو<tajweed class=slnt>اْ</tajweed> لَه<tajweed class=idgham_shafawi>ُم م</tajweed>ِّ<tajweed class=ikhafa>ن د</tajweed>ُونِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ أَ<tajweed class=ikhafa>نص</tajweed>َارًا <span class=end>٢٥</span>",
+      "textIndopak": "مِّمَّا خَطِٓيْئٰتِهِمۡ اُغۡرِقُوۡا فَاُدۡخِلُوۡا نَارًا  ۙ فَلَمۡ يَجِدُوۡا لَهُمۡ مِّنۡ دُوۡنِ اللّٰهِ اَنۡصَارًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مِّمَّا",
+          "transliteration": "mimmā",
+          "translation": "Because of",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "خَطِيٓـَٔـٰتِهِمْ",
+          "transliteration": "khaṭīātihim",
+          "translation": "their sins",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "أُغْرِقُوا۟",
+          "transliteration": "ugh'riqū",
+          "translation": "they were drowned",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فَأُدْخِلُوا۟",
+          "transliteration": "fa-ud'khilū",
+          "translation": "then made to enter",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "نَارًۭا",
+          "transliteration": "nāran",
+          "translation": "(the) Fire",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "فَلَمْ",
+          "transliteration": "falam",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "يَجِدُوا۟",
+          "transliteration": "yajidū",
+          "translation": "they found",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "لَهُم",
+          "transliteration": "lahum",
+          "translation": "for themselves",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "مِّن",
+          "transliteration": "min",
+          "translation": "from",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "دُونِ",
+          "transliteration": "dūni",
+          "translation": "besides",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "ٱللَّهِ",
+          "transliteration": "l-lahi",
+          "translation": "Allah",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "أَنصَارًۭا",
+          "transliteration": "anṣāran",
+          "translation": "any helpers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_025_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "٢٥",
+          "transliteration": null,
+          "translation": "(25)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Because of their sins they were drowned and put into the Fire, and they found not for themselves besides Allāh [any] helpers.",
+      "transliteration": "Mimmaa khateee'-aatihim ughriqoo fa-udkhiloo Naaran falam yajidoo lahum min doonil laahi ansaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071025.mp3"
+    },
+    {
+      "number": 26,
+      "key": "71:26",
+      "textUthmani": "وَقَالَ نُوحٌ رَّبِّ لَا تَذَرْ عَلَى ٱلْأَرْضِ مِنَ ٱلْكَـٰفِرِينَ دَيَّارًا",
+      "textUthmaniTajweed": "وَقَالَ نُو<tajweed class=idgham_wo_ghunnah>حٌ ر</tajweed>َّبِّ لَا تَذَرْ عَلَى <tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ مِنَ <tajweed class=ham_wasl>ٱ</tajweed>لْكَ<tajweed class=madda_normal>ـٰ</tajweed>فِرِينَ دَيَّارًا <span class=end>٢٦</span>",
+      "textIndopak": "وَ قَالَ نُوۡحٌ رَّبِّ لَا تَذَرۡ عَلَى الۡاَرۡضِ مِنَ الۡكٰفِرِيۡنَ دَيَّارًا‏ ﻿﻿",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَقَالَ",
+          "transliteration": "waqāla",
+          "translation": "And said",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "نُوحٌۭ",
+          "transliteration": "nūḥun",
+          "translation": "Nuh",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَّبِّ",
+          "transliteration": "rabbi",
+          "translation": "My Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "لَا",
+          "transliteration": "lā",
+          "translation": "(Do) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "تَذَرْ",
+          "transliteration": "tadhar",
+          "translation": "leave",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "عَلَى",
+          "transliteration": "ʿalā",
+          "translation": "on",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "ٱلْأَرْضِ",
+          "transliteration": "l-arḍi",
+          "translation": "the earth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "مِنَ",
+          "transliteration": "mina",
+          "translation": "any",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "ٱلْكَـٰفِرِينَ",
+          "transliteration": "l-kāfirīna",
+          "translation": "(of) the disbelievers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "دَيَّارًا",
+          "transliteration": "dayyāran",
+          "translation": "(as) an inhabitant",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_026_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "٢٦",
+          "transliteration": null,
+          "translation": "(26)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And Noah said, \"My Lord, do not leave upon the earth from among the disbelievers an inhabitant.",
+      "transliteration": "Wa-qaala Noohur Rabbi laa tazar 'alal ardi minal kaafireena daiyaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071026.mp3"
+    },
+    {
+      "number": 27,
+      "key": "71:27",
+      "textUthmani": "إِنَّكَ إِن تَذَرْهُمْ يُضِلُّوا۟ عِبَادَكَ وَلَا يَلِدُوٓا۟ إِلَّا فَاجِرًا كَفَّارًا",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َكَ إِ<tajweed class=ikhafa>ن ت</tajweed>َذَرْهُمْ يُضِلُّو<tajweed class=slnt>اْ</tajweed> عِبَادَكَ وَلَا يَلِد<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> إِلَّا فَاجِ<tajweed class=ikhafa>رًا ك</tajweed>َفَّارًا <span class=end>٢٧</span>",
+      "textIndopak": "اِنَّكَ اِنۡ تَذَرۡهُمۡ يُضِلُّوۡا عِبَادَكَ وَلَا يَلِدُوۡۤا اِلَّا فَاجِرًا كَفَّارًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِنَّكَ",
+          "transliteration": "innaka",
+          "translation": "Indeed, You",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "إِن",
+          "transliteration": "in",
+          "translation": "if",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "تَذَرْهُمْ",
+          "transliteration": "tadharhum",
+          "translation": "You leave them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "يُضِلُّوا۟",
+          "transliteration": "yuḍillū",
+          "translation": "they will mislead",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "عِبَادَكَ",
+          "transliteration": "ʿibādaka",
+          "translation": "Your slaves",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "يَلِدُوٓا۟",
+          "transliteration": "yalidū",
+          "translation": "they will beget",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "except",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "فَاجِرًۭا",
+          "transliteration": "fājiran",
+          "translation": "a wicked",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "كَفَّارًۭا",
+          "transliteration": "kaffāran",
+          "translation": "a disbeliever",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_027_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "٢٧",
+          "transliteration": null,
+          "translation": "(27)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Indeed, if You leave them, they will mislead Your servants and not beget except [every] wicked one and [confirmed] disbeliever.",
+      "transliteration": "Innaka in tazarhum yudil-loo 'ibaadaka Wa-laa yalidooo illaa faajiran kaffaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071027.mp3"
+    },
+    {
+      "number": 28,
+      "key": "71:28",
+      "textUthmani": "رَّبِّ ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِمَن دَخَلَ بَيْتِىَ مُؤْمِنًا وَلِلْمُؤْمِنِينَ وَٱلْمُؤْمِنَـٰتِ وَلَا تَزِدِ ٱلظَّـٰلِمِينَ إِلَّا تَبَارًۢا",
+      "textUthmaniTajweed": "رَّبِّ <tajweed class=ham_wasl>ٱ</tajweed>غْفِرْ لِى وَلِو<tajweed class=madda_normal>َٲ</tajweed>لِدَىَّ وَلِمَ<tajweed class=ikhafa>ن د</tajweed>َخَلَ بَيْتِىَ مُؤْمِ<tajweed class=idgham_ghunnah>نًا و</tajweed>َلِلْمُؤْمِنِينَ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُؤْمِنَ<tajweed class=madda_normal>ـٰ</tajweed>تِ وَلَا تَزِدِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ظَّ<tajweed class=madda_normal>ـٰ</tajweed>لِمِينَ إِلَّا تَبَارَۢا <span class=end>٢٨</span>",
+      "textIndopak": "رَبِّ اغۡفِرۡلِىۡ وَلِـوَالِدَىَّ وَلِمَنۡ دَخَلَ بَيۡتِىَ مُؤۡمِنًا وَّلِلۡمُؤۡمِنِيۡنَ وَالۡمُؤۡمِنٰتِؕ وَلَا تَزِدِ الظّٰلِمِيۡنَ اِلَّا تَبَارًا‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "رَّبِّ",
+          "transliteration": "rabbi",
+          "translation": "My Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱغْفِرْ",
+          "transliteration": "igh'fir",
+          "translation": "Forgive",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لِى",
+          "transliteration": "lī",
+          "translation": "me",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَلِوَٰلِدَىَّ",
+          "transliteration": "waliwālidayya",
+          "translation": "and my parents",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَلِمَن",
+          "transliteration": "waliman",
+          "translation": "and whoever",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "دَخَلَ",
+          "transliteration": "dakhala",
+          "translation": "enters",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "بَيْتِىَ",
+          "transliteration": "baytiya",
+          "translation": "my house ",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "مُؤْمِنًۭا",
+          "transliteration": "mu'minan",
+          "translation": "a believer",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "وَلِلْمُؤْمِنِينَ",
+          "transliteration": "walil'mu'minīna",
+          "translation": "and the believing men",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "وَٱلْمُؤْمِنَـٰتِ",
+          "transliteration": "wal-mu'mināti",
+          "translation": "and the believing women",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "And (do) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "تَزِدِ",
+          "transliteration": "tazidi",
+          "translation": "increase",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "ٱلظَّـٰلِمِينَ",
+          "transliteration": "l-ẓālimīna",
+          "translation": "the wrongdoers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_013.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "except",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_014.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 15,
+          "textUthmani": "تَبَارًۢا",
+          "transliteration": "tabāran",
+          "translation": "(in) destruction",
+          "audioUrl": "https://audio.qurancdn.com/wbw/071_028_015.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 16,
+          "textUthmani": "٢٨",
+          "transliteration": null,
+          "translation": "(28)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "My Lord, forgive me and my parents and whoever enters my house a believer and the believing men and believing women. And do not increase the wrongdoers except in destruction.\"",
+      "transliteration": "Rabbigh fir lee Wa-liwaa-lidaiya Wa-liman dakhala baitiya mu'minanw Wa-lil-mu'mineena wal-mu'minaati Wa-laa tazidiz zaalimeena illaa tabaaraa",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071028.mp3"
+    }
+  ]
+}

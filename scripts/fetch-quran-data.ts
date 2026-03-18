@@ -5,13 +5,8 @@
  * Run: npx tsx scripts/fetch-quran-data.ts
  */
 
-// All Juz 30 surahs (78-114) + Al-Fatiha
-const MVP_SURAHS = [
-  1,
-  78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
-  91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103,
-  104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114,
-];
+// All 114 surahs
+const ALL_SURAHS = Array.from({ length: 114 }, (_, i) => i + 1);
 
 const API_BASE = 'https://api.quran.com/api/v4';
 const AUDIO_BASE = 'https://everyayah.com/data/Alafasy_128kbps';
@@ -63,6 +58,24 @@ async function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/** Fetch all pages of a paginated verses endpoint */
+async function fetchAllVersePages(url: string): Promise<ApiVerse[]> {
+  const allVerses: ApiVerse[] = [];
+  let page = 1;
+  while (true) {
+    const sep = url.includes('?') ? '&' : '?';
+    const data = await fetchJson(`${url}${sep}page=${page}&per_page=50`) as {
+      verses: ApiVerse[];
+      pagination: { total_pages: number; current_page: number };
+    };
+    allVerses.push(...data.verses);
+    if (data.pagination.current_page >= data.pagination.total_pages) break;
+    page++;
+    await delay(300);
+  }
+  return allVerses;
+}
+
 async function fetchSurah(surahId: number) {
   console.log(`Fetching surah ${surahId}...`);
 
@@ -70,21 +83,21 @@ async function fetchSurah(surahId: number) {
   const chapterData = await fetchJson(`${API_BASE}/chapters/${surahId}?language=en`) as { chapter: ApiChapter };
   const chapter = chapterData.chapter;
 
-  await delay(500);
+  await delay(300);
 
   // Fetch verses with words and translation (Sahih International = ID 20)
-  const versesData = await fetchJson(
-    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&translation_fields=text&translations=20&word_fields=text_uthmani,audio_url&fields=text_uthmani&per_page=50`
-  ) as { verses: ApiVerse[] };
+  const versesAll = await fetchAllVersePages(
+    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&translation_fields=text&translations=20&word_fields=text_uthmani,audio_url&fields=text_uthmani`
+  );
 
-  await delay(500);
+  await delay(300);
 
   // Fetch word transliterations separately
-  const translitData = await fetchJson(
-    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&word_fields=text_uthmani&word_translation_language=en&per_page=50`
-  ) as { verses: ApiVerse[] };
+  const translitAll = await fetchAllVersePages(
+    `${API_BASE}/verses/by_chapter/${surahId}?language=en&words=true&word_fields=text_uthmani&word_translation_language=en`
+  );
 
-  await delay(500);
+  await delay(300);
 
   // Fetch ayah-level translations (Sahih International = resource 20)
   const translationsData = await fetchJson(
@@ -94,14 +107,14 @@ async function fetchSurah(surahId: number) {
     t => t.text.replace(/<sup[^>]*>.*?<\/sup>/g, '').replace(/<[^>]*>/g, '').trim()
   );
 
-  await delay(500);
+  await delay(300);
 
   // Fetch tajweed text (HTML with color-coded tajweed rules)
   const tajweedData = await fetchJson(
     `${API_BASE}/quran/verses/uthmani_tajweed?chapter_number=${surahId}`
   ) as { verses: Array<{ verse_key: string; text_uthmani_tajweed: string }> };
 
-  await delay(500);
+  await delay(300);
 
   // Fetch IndoPak text
   const indopakData = await fetchJson(
@@ -116,8 +129,8 @@ async function fetchSurah(surahId: number) {
   );
   const qulTranslit: Record<string, string> = JSON.parse(qulTranslitRaw);
 
-  const ayahs = versesData.verses.map((verse, idx) => {
-    const translitVerse = translitData.verses[idx];
+  const ayahs = versesAll.map((verse, idx) => {
+    const translitVerse = translitAll[idx];
 
     const words = verse.words.map((word, wIdx) => {
       const translitWord = translitVerse?.words?.[wIdx];
@@ -161,6 +174,9 @@ async function main() {
 
   const dataDir = path.join(process.cwd(), 'src', 'data');
 
+  // Check --skip-existing flag to resume partial fetches
+  const skipExisting = process.argv.includes('--skip-existing');
+
   const index: Array<{
     id: number;
     nameSimple: string;
@@ -170,12 +186,34 @@ async function main() {
     versesCount: number;
   }> = [];
 
-  for (const surahId of MVP_SURAHS) {
+  for (const surahId of ALL_SURAHS) {
+    const filePath = path.join(dataDir, `surah-${surahId}.json`);
+
+    // Skip if file already exists and flag is set
+    if (skipExisting) {
+      try {
+        await fs.access(filePath);
+        // File exists — read metadata for index
+        const existing = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+        index.push({
+          id: existing.id,
+          nameSimple: existing.nameSimple,
+          nameArabic: existing.nameArabic,
+          nameTranslation: existing.nameTranslation,
+          revelationPlace: existing.revelationPlace,
+          versesCount: existing.versesCount,
+        });
+        console.log(`Skipping surah ${surahId} (already exists)`);
+        continue;
+      } catch {
+        // File doesn't exist, fetch it
+      }
+    }
+
     try {
       const surah = await fetchSurah(surahId);
 
       // Write full surah data
-      const filePath = path.join(dataDir, `surah-${surahId}.json`);
       await fs.writeFile(filePath, JSON.stringify(surah, null, 2), 'utf-8');
       console.log(`  -> Saved ${filePath} (${surah.ayahs.length} ayahs)`);
 
@@ -189,16 +227,17 @@ async function main() {
         versesCount: surah.versesCount,
       });
 
-      await delay(500);
+      await delay(300);
     } catch (err) {
       console.error(`  !! Error fetching surah ${surahId}:`, err);
     }
   }
 
-  // Write index
+  // Write index sorted by surah ID
+  index.sort((a, b) => a.id - b.id);
   const indexPath = path.join(dataDir, 'surahs-index.json');
   await fs.writeFile(indexPath, JSON.stringify(index, null, 2), 'utf-8');
-  console.log(`\nSaved index: ${indexPath}`);
+  console.log(`\nSaved index: ${indexPath} (${index.length} surahs)`);
   console.log('Done!');
 }
 

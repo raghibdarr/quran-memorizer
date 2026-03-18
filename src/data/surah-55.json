@@ -1,0 +1,4378 @@
+{
+  "id": 55,
+  "nameSimple": "Ar-Rahman",
+  "nameArabic": "الرحمن",
+  "nameTranslation": "The Beneficent",
+  "revelationPlace": "madinah",
+  "versesCount": 78,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "55:1",
+      "textUthmani": " ٱلرَّحْمَـٰنُ",
+      "textUthmaniTajweed": "ٱ<tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_permissible>ـٰ</tajweed>نُ <span class=end>١</span>",
+      "textIndopak": "اَلرَّحۡمٰنُۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلرَّحْمَـٰنُ",
+          "transliteration": "al-raḥmānu",
+          "translation": "The Most Gracious",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "The Most Merciful",
+      "transliteration": "Ar-Rahmaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "55:2",
+      "textUthmani": "عَلَّمَ ٱلْقُرْءَانَ",
+      "textUthmaniTajweed": "عَلَّمَ <tajweed class=ham_wasl>ٱ</tajweed>لْقُرْء<tajweed class=madda_permissible>َا</tajweed>نَ <span class=end>٢</span>",
+      "textIndopak": "عَلَّمَ الۡقُرۡاٰنَؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "عَلَّمَ",
+          "transliteration": "ʿallama",
+          "translation": "He taught",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْقُرْءَانَ",
+          "transliteration": "l-qur'āna",
+          "translation": "the Quran",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Taught the Qur’ān,",
+      "transliteration": "Allamal Quran",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "55:3",
+      "textUthmani": "خَلَقَ ٱلْإِنسَـٰنَ",
+      "textUthmaniTajweed": "خَلَقَ <tajweed class=ham_wasl>ٱ</tajweed>لْإِ<tajweed class=ikhafa>نس</tajweed>َ<tajweed class=madda_permissible>ـٰ</tajweed>نَ <span class=end>٣</span>",
+      "textIndopak": "خَلَقَ الۡاِنۡسَانَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "خَلَقَ",
+          "transliteration": "khalaqa",
+          "translation": "He created",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْإِنسَـٰنَ",
+          "transliteration": "l-insāna",
+          "translation": "[the] man",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Created man,",
+      "transliteration": "Khalaqal insaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "55:4",
+      "textUthmani": "عَلَّمَهُ ٱلْبَيَانَ",
+      "textUthmaniTajweed": "عَلَّمَهُ <tajweed class=ham_wasl>ٱ</tajweed>لْبَي<tajweed class=madda_permissible>َا</tajweed>نَ <span class=end>٤</span>",
+      "textIndopak": "عَلَّمَهُ الۡبَيَانَ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "عَلَّمَهُ",
+          "transliteration": "ʿallamahu",
+          "translation": "He taught him",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْبَيَانَ",
+          "transliteration": "l-bayāna",
+          "translation": "[the] speech",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "[And] taught him eloquence.",
+      "transliteration": "Allamahul bayaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "55:5",
+      "textUthmani": "ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍ",
+      "textUthmaniTajweed": "ٱ<tajweed class=laam_shamsiyah>ل</tajweed>شَّمْسُ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْقَمَرُ بِحُسْب<tajweed class=madda_permissible>َا</tajweed>نٍ <span class=end>٥</span>",
+      "textIndopak": "اَلشَّمۡسُ وَالۡقَمَرُ بِحُسۡبَانٍ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلشَّمْسُ",
+          "transliteration": "al-shamsu",
+          "translation": "The sun",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "وَٱلْقَمَرُ",
+          "transliteration": "wal-qamaru",
+          "translation": "and the moon",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "بِحُسْبَانٍۢ",
+          "transliteration": "biḥus'bānin",
+          "translation": "by (precise) calculation",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "The sun and the moon [move] by precise calculation,",
+      "transliteration": "Ashshamsu walqamaru bihusbaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "55:6",
+      "textUthmani": "وَٱلنَّجْمُ وَٱلشَّجَرُ يَسْجُدَانِ",
+      "textUthmaniTajweed": "وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=qalaqah>جْ</tajweed>مُ وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شَّجَرُ يَسْجُد<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦</span>",
+      "textIndopak": "وَّالنَّجۡمُ وَالشَّجَرُ يَسۡجُدٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱلنَّجْمُ",
+          "transliteration": "wal-najmu",
+          "translation": "And the stars",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "وَٱلشَّجَرُ",
+          "transliteration": "wal-shajaru",
+          "translation": "and the trees",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يَسْجُدَانِ",
+          "transliteration": "yasjudāni",
+          "translation": "both prostrate",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_006_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And the stars and trees prostrate.",
+      "transliteration": "Wannajmu washshajaru yasjudan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055006.mp3"
+    },
+    {
+      "number": 7,
+      "key": "55:7",
+      "textUthmani": "وَٱلسَّمَآءَ رَفَعَهَا وَوَضَعَ ٱلْمِيزَانَ",
+      "textUthmaniTajweed": "وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّم<tajweed class=madda_obligatory>َا</tajweed>ٓءَ رَفَعَهَا وَوَضَعَ <tajweed class=ham_wasl>ٱ</tajweed>لْمِيز<tajweed class=madda_permissible>َا</tajweed>نَ <span class=end>٧</span>",
+      "textIndopak": "وَالسَّمَآءَ رَفَعَهَا وَوَضَعَ الۡمِيۡزَانَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱلسَّمَآءَ",
+          "transliteration": "wal-samāa",
+          "translation": "And the heaven",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_007_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "رَفَعَهَا",
+          "transliteration": "rafaʿahā",
+          "translation": "He raised it",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_007_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَوَضَعَ",
+          "transliteration": "wawaḍaʿa",
+          "translation": "and He has set up",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_007_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْمِيزَانَ",
+          "transliteration": "l-mīzāna",
+          "translation": "the balance",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_007_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧",
+          "transliteration": null,
+          "translation": "(7)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And the heaven He raised and imposed the balance",
+      "transliteration": "Wassamaaa'a rafa'ahaa Wa-wada'al Meezan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055007.mp3"
+    },
+    {
+      "number": 8,
+      "key": "55:8",
+      "textUthmani": "أَلَّا تَطْغَوْا۟ فِى ٱلْمِيزَانِ",
+      "textUthmaniTajweed": "أَلَّا تَ<tajweed class=qalaqah>طْ</tajweed>غَوْ<tajweed class=slnt>اْ</tajweed> فِى <tajweed class=ham_wasl>ٱ</tajweed>لْمِيز<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٨</span>",
+      "textIndopak": "اَلَّا تَطۡغَوۡا فِى الۡمِيۡزَانِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "أَلَّا",
+          "transliteration": "allā",
+          "translation": "That not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_008_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "تَطْغَوْا۟",
+          "transliteration": "taṭghaw",
+          "translation": "you may transgress",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_008_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_008_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْمِيزَانِ",
+          "transliteration": "l-mīzāni",
+          "translation": "the balance",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_008_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٨",
+          "transliteration": null,
+          "translation": "(8)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "That you not transgress within the balance.",
+      "transliteration": "Allaa tatghaw fil meezaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055008.mp3"
+    },
+    {
+      "number": 9,
+      "key": "55:9",
+      "textUthmani": "وَأَقِيمُوا۟ ٱلْوَزْنَ بِٱلْقِسْطِ وَلَا تُخْسِرُوا۟ ٱلْمِيزَانَ",
+      "textUthmaniTajweed": "وَأَقِيمُو<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed>لْوَزْنَ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْقِسْطِ وَلَا تُخْسِرُو<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed>لْمِيز<tajweed class=madda_permissible>َا</tajweed>نَ <span class=end>٩</span>",
+      "textIndopak": "وَاَقِيۡمُوا الۡوَزۡنَ بِالۡقِسۡطِ وَلَا تُخۡسِرُوا الۡمِيۡزَانَ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَأَقِيمُوا۟",
+          "transliteration": "wa-aqīmū",
+          "translation": "And establish",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_009_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْوَزْنَ",
+          "transliteration": "l-wazna",
+          "translation": "the weight",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_009_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "بِٱلْقِسْطِ",
+          "transliteration": "bil-qis'ṭi",
+          "translation": "in justice",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_009_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and (do) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_009_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "تُخْسِرُوا۟",
+          "transliteration": "tukh'sirū",
+          "translation": "make deficient",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_009_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "ٱلْمِيزَانَ",
+          "transliteration": "l-mīzāna",
+          "translation": "the balance",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_009_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٩",
+          "transliteration": null,
+          "translation": "(9)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And establish weight in justice and do not make deficient the balance.",
+      "transliteration": "Wa-aqeemul wazna bilqisti Wa-laa tukhsirul meezaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055009.mp3"
+    },
+    {
+      "number": 10,
+      "key": "55:10",
+      "textUthmani": "وَٱلْأَرْضَ وَضَعَهَا لِلْأَنَامِ",
+      "textUthmaniTajweed": "وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضَ وَضَعَهَا لِلْأَن<tajweed class=madda_permissible>َا</tajweed>مِ <span class=end>١٠</span>",
+      "textIndopak": "وَالۡاَرۡضَ وَضَعَهَا لِلۡاَنَامِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱلْأَرْضَ",
+          "transliteration": "wal-arḍa",
+          "translation": "And the earth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_010_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "وَضَعَهَا",
+          "transliteration": "waḍaʿahā",
+          "translation": "He laid it",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_010_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لِلْأَنَامِ",
+          "transliteration": "lil'anāmi",
+          "translation": "for the creatures",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_010_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "١٠",
+          "transliteration": null,
+          "translation": "(10)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And the earth He laid [out] for the creatures.",
+      "transliteration": "Wal-arda wada'ahaa lilanaam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055010.mp3"
+    },
+    {
+      "number": 11,
+      "key": "55:11",
+      "textUthmani": "فِيهَا فَـٰكِهَةٌ وَٱلنَّخْلُ ذَاتُ ٱلْأَكْمَامِ",
+      "textUthmaniTajweed": "فِيهَا فَ<tajweed class=madda_normal>ـٰ</tajweed>كِهَ<tajweed class=idgham_ghunnah>ةٌ و</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َخْلُ ذَاتُ <tajweed class=ham_wasl>ٱ</tajweed>لْأَكْم<tajweed class=madda_permissible>َا</tajweed>مِ <span class=end>١١</span>",
+      "textIndopak": "فِيۡهَا فَاكِهَةٌ  ۙ وَّالنَّخۡلُ ذَاتُ الۡاَكۡمَامِ​ ۖ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهَا",
+          "transliteration": "fīhā",
+          "translation": "Therein",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_011_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "فَـٰكِهَةٌۭ",
+          "transliteration": "fākihatun",
+          "translation": "(is) fruit",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_011_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَٱلنَّخْلُ",
+          "transliteration": "wal-nakhlu",
+          "translation": "and date-palms",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_011_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ذَاتُ",
+          "transliteration": "dhātu",
+          "translation": "having",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_011_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْأَكْمَامِ",
+          "transliteration": "l-akmāmi",
+          "translation": "sheaths",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_011_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "١١",
+          "transliteration": null,
+          "translation": "(11)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Therein is fruit and palm trees having sheaths [of dates]",
+      "transliteration": "Feehaa faakihatunw wan-nakhlu zaatul akmaam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055011.mp3"
+    },
+    {
+      "number": 12,
+      "key": "55:12",
+      "textUthmani": "وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ",
+      "textUthmaniTajweed": "وَ<tajweed class=ham_wasl>ٱ</tajweed>لْحَبُّ ذُو <tajweed class=ham_wasl>ٱ</tajweed>لْعَصْفِ وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّيْح<tajweed class=madda_permissible>َا</tajweed>نُ <span class=end>١٢</span>",
+      "textIndopak": "وَالۡحَبُّ ذُو الۡعَصۡفِ وَالرَّيۡحَانُ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَٱلْحَبُّ",
+          "transliteration": "wal-ḥabu",
+          "translation": "And the grain",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_012_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ذُو",
+          "transliteration": "dhū",
+          "translation": "having",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_012_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْعَصْفِ",
+          "transliteration": "l-ʿaṣfi",
+          "translation": "husk",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_012_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَٱلرَّيْحَانُ",
+          "transliteration": "wal-rayḥānu",
+          "translation": "and scented plants",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_012_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١٢",
+          "transliteration": null,
+          "translation": "(12)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And grain having husks and scented plants.",
+      "transliteration": "Walhabbu zul 'asfi war-Raihaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055012.mp3"
+    },
+    {
+      "number": 13,
+      "key": "55:13",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>١٣</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_013_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_013_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_013_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_013_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١٣",
+          "transliteration": null,
+          "translation": "(13)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055013.mp3"
+    },
+    {
+      "number": 14,
+      "key": "55:14",
+      "textUthmani": "خَلَقَ ٱلْإِنسَـٰنَ مِن صَلْصَـٰلٍ كَٱلْفَخَّارِ",
+      "textUthmaniTajweed": "خَلَقَ <tajweed class=ham_wasl>ٱ</tajweed>لْإِ<tajweed class=ikhafa>نس</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>نَ مِ<tajweed class=ikhafa>ن ص</tajweed>َلْصَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=ikhafa>لٍ ك</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed>لْفَخّ<tajweed class=madda_permissible>َا</tajweed>رِ <span class=end>١٤</span>",
+      "textIndopak": "خَلَقَ الۡاِنۡسَانَ مِنۡ صَلۡصَالٍ كَالۡفَخَّارِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "خَلَقَ",
+          "transliteration": "khalaqa",
+          "translation": "He created",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_014_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْإِنسَـٰنَ",
+          "transliteration": "l-insāna",
+          "translation": "the man",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_014_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مِن",
+          "transliteration": "min",
+          "translation": "from",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_014_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "صَلْصَـٰلٍۢ",
+          "transliteration": "ṣalṣālin",
+          "translation": "clay",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_014_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "كَٱلْفَخَّارِ",
+          "transliteration": "kal-fakhāri",
+          "translation": "like the pottery",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_014_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "١٤",
+          "transliteration": null,
+          "translation": "(14)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He created man from clay like [that of] pottery.",
+      "transliteration": "Khalaqal insaana min salsaalin kalfakhkhaar",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055014.mp3"
+    },
+    {
+      "number": 15,
+      "key": "55:15",
+      "textUthmani": "وَخَلَقَ ٱلْجَآنَّ مِن مَّارِجٍ مِّن نَّارٍ",
+      "textUthmaniTajweed": "وَخَلَقَ <tajweed class=ham_wasl>ٱ</tajweed>لْج<tajweed class=madda_necessary>َا</tajweed>ٓ<tajweed class=ghunnah>نّ</tajweed>َ م<tajweed class=idgham_ghunnah>ِن م</tajweed>َّارِ<tajweed class=idgham_ghunnah>جٍ م</tajweed>ّ<tajweed class=idgham_ghunnah>ِن ن</tajweed>ّ<tajweed class=madda_permissible>َا</tajweed>رٍ <span class=end>١٥</span>",
+      "textIndopak": "وَخَلَقَ الۡجَآنَّ مِنۡ مَّارِجٍ مِّنۡ نَّارٍ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَخَلَقَ",
+          "transliteration": "wakhalaqa",
+          "translation": "And He created",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_015_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْجَآنَّ",
+          "transliteration": "l-jāna",
+          "translation": "the jinn",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_015_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مِن",
+          "transliteration": "min",
+          "translation": "from",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_015_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مَّارِجٍۢ",
+          "transliteration": "mārijin",
+          "translation": "a smokeless flame",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_015_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "مِّن",
+          "transliteration": "min",
+          "translation": "of",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_015_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "نَّارٍۢ",
+          "transliteration": "nārin",
+          "translation": "fire",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_015_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "١٥",
+          "transliteration": null,
+          "translation": "(15)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And He created the jinn from a smokeless flame of fire.",
+      "transliteration": "Wa-khalaqal jaaan mim maarijim min naar",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055015.mp3"
+    },
+    {
+      "number": 16,
+      "key": "55:16",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>١٦</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_016_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_016_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_016_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_016_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١٦",
+          "transliteration": null,
+          "translation": "(16)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055016.mp3"
+    },
+    {
+      "number": 17,
+      "key": "55:17",
+      "textUthmani": "رَبُّ ٱلْمَشْرِقَيْنِ وَرَبُّ ٱلْمَغْرِبَيْنِ",
+      "textUthmaniTajweed": "رَبُّ <tajweed class=ham_wasl>ٱ</tajweed>لْمَشْرِقَيْنِ وَرَبُّ <tajweed class=ham_wasl>ٱ</tajweed>لْمَغْرِبَ<tajweed class=madda_permissible>يْ</tajweed>نِ <span class=end>١٧</span>",
+      "textIndopak": "رَبُّ الۡمَشۡرِقَيۡنِ وَ رَبُّ الۡمَغۡرِبَيۡنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "رَبُّ",
+          "transliteration": "rabbu",
+          "translation": "Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_017_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْمَشْرِقَيْنِ",
+          "transliteration": "l-mashriqayni",
+          "translation": "(of) the two Easts",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_017_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَرَبُّ",
+          "transliteration": "warabbu",
+          "translation": "and Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_017_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْمَغْرِبَيْنِ",
+          "transliteration": "l-maghribayni",
+          "translation": "(of) the two Wests",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_017_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١٧",
+          "transliteration": null,
+          "translation": "(17)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "[He is] Lord of the two sunrises and Lord of the two sunsets.",
+      "transliteration": "Rabbul mashriqayni Wa-Rabbul maghribayn",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055017.mp3"
+    },
+    {
+      "number": 18,
+      "key": "55:18",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>١٨</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_018_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_018_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_018_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_018_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١٨",
+          "transliteration": null,
+          "translation": "(18)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055018.mp3"
+    },
+    {
+      "number": 19,
+      "key": "55:19",
+      "textUthmani": "مَرَجَ ٱلْبَحْرَيْنِ يَلْتَقِيَانِ",
+      "textUthmaniTajweed": "مَرَجَ <tajweed class=ham_wasl>ٱ</tajweed>لْبَحْرَيْنِ يَلْتَقِي<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>١٩</span>",
+      "textIndopak": "مَرَجَ الۡبَحۡرَيۡنِ يَلۡتَقِيٰنِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مَرَجَ",
+          "transliteration": "maraja",
+          "translation": "He released",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_019_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْبَحْرَيْنِ",
+          "transliteration": "l-baḥrayni",
+          "translation": "the two seas",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_019_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يَلْتَقِيَانِ",
+          "transliteration": "yaltaqiyāni",
+          "translation": "meeting",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_019_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "١٩",
+          "transliteration": null,
+          "translation": "(19)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He released the two seas, meeting [one another];",
+      "transliteration": "Marajal bahrayni yalta-qiyaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055019.mp3"
+    },
+    {
+      "number": 20,
+      "key": "55:20",
+      "textUthmani": "بَيْنَهُمَا بَرْزَخٌ لَّا يَبْغِيَانِ",
+      "textUthmaniTajweed": "بَيْنَهُمَا بَرْزَ<tajweed class=idgham_wo_ghunnah>خٌ ل</tajweed>َّا يَ<tajweed class=qalaqah>بْ</tajweed>غِي<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٢٠</span>",
+      "textIndopak": "بَيۡنَهُمَا بَرۡزَخٌ لَّا يَبۡغِيٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "بَيْنَهُمَا",
+          "transliteration": "baynahumā",
+          "translation": "Between both of them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_020_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "بَرْزَخٌۭ",
+          "transliteration": "barzakhun",
+          "translation": "(is) a barrier",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_020_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لَّا",
+          "transliteration": "lā",
+          "translation": "not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_020_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "يَبْغِيَانِ",
+          "transliteration": "yabghiyāni",
+          "translation": "they transgress",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_020_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٠",
+          "transliteration": null,
+          "translation": "(20)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Between them is a barrier so neither of them transgresses.",
+      "transliteration": "Bainahumaa barzakhul laa yabghiyaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055020.mp3"
+    },
+    {
+      "number": 21,
+      "key": "55:21",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٢١</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_021_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_021_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_021_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_021_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢١",
+          "transliteration": null,
+          "translation": "(21)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055021.mp3"
+    },
+    {
+      "number": 22,
+      "key": "55:22",
+      "textUthmani": "يَخْرُجُ مِنْهُمَا ٱللُّؤْلُؤُ وَٱلْمَرْجَانُ",
+      "textUthmaniTajweed": "يَخْرُجُ مِنْهُمَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>لُّؤْلُؤُ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْمَرْج<tajweed class=madda_permissible>َا</tajweed>نُ <span class=end>٢٢</span>",
+      "textIndopak": "يَخۡرُجُ مِنۡهُمَا اللُّـؤۡلُـؤُ وَالۡمَرۡجَانُ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يَخْرُجُ",
+          "transliteration": "yakhruju",
+          "translation": "Come forth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_022_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مِنْهُمَا",
+          "transliteration": "min'humā",
+          "translation": "from both of them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_022_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱللُّؤْلُؤُ",
+          "transliteration": "l-lu'lu-u",
+          "translation": "the pearl",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_022_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَٱلْمَرْجَانُ",
+          "transliteration": "wal-marjānu",
+          "translation": "and the coral",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_022_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٢",
+          "transliteration": null,
+          "translation": "(22)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "From both of them emerge pearl and coral.",
+      "transliteration": "Yakhruju minhumal lu-'lu-u wal-marjaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055022.mp3"
+    },
+    {
+      "number": 23,
+      "key": "55:23",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٢٣</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_023_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_023_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_023_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_023_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٣",
+          "transliteration": null,
+          "translation": "(23)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055023.mp3"
+    },
+    {
+      "number": 24,
+      "key": "55:24",
+      "textUthmani": "وَلَهُ ٱلْجَوَارِ ٱلْمُنشَـَٔاتُ فِى ٱلْبَحْرِ كَٱلْأَعْلَـٰمِ",
+      "textUthmaniTajweed": "وَلَهُ <tajweed class=ham_wasl>ٱ</tajweed>لْجَوَارِ <tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=ikhafa>نش</tajweed>َـَٔـاتُ فِى <tajweed class=ham_wasl>ٱ</tajweed>لْبَحْرِ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَعْلَ<tajweed class=madda_permissible>ـٰ</tajweed>مِ <span class=end>٢٤</span>",
+      "textIndopak": "وَلَهُ الۡجَوَارِ الۡمُنۡشَئٰتُ فِى الۡبَحۡرِ كَالۡاَعۡلَامِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلَهُ",
+          "transliteration": "walahu",
+          "translation": "And for Him",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_024_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْجَوَارِ",
+          "transliteration": "l-jawāri",
+          "translation": "(are) the ships",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_024_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْمُنشَـَٔاتُ",
+          "transliteration": "l-munshaātu",
+          "translation": "elevated",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_024_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_024_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْبَحْرِ",
+          "transliteration": "l-baḥri",
+          "translation": "the sea",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_024_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "كَٱلْأَعْلَـٰمِ",
+          "transliteration": "kal-aʿlāmi",
+          "translation": "like mountains",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_024_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٢٤",
+          "transliteration": null,
+          "translation": "(24)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And to Him belong the ships [with sails] elevated in the sea like mountains.",
+      "transliteration": "Wa-lahul jawaaril mun-sha'aatu fil bahri kal-a'laam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055024.mp3"
+    },
+    {
+      "number": 25,
+      "key": "55:25",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٢٥</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_025_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_025_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_025_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_025_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٥",
+          "transliteration": null,
+          "translation": "(25)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055025.mp3"
+    },
+    {
+      "number": 26,
+      "key": "55:26",
+      "textUthmani": "كُلُّ مَنْ عَلَيْهَا فَانٍ",
+      "textUthmaniTajweed": "كُلُّ مَنْ عَلَيْهَا ف<tajweed class=madda_permissible>َا</tajweed>نٍ <span class=end>٢٦</span>",
+      "textIndopak": "كُلُّ مَنۡ عَلَيۡهَا فَانٍ​ ۚ​ ۖ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "كُلُّ",
+          "transliteration": "kullu",
+          "translation": "Everyone",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_026_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَنْ",
+          "transliteration": "man",
+          "translation": "who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_026_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَلَيْهَا",
+          "transliteration": "ʿalayhā",
+          "translation": "(is) on it",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_026_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فَانٍۢ",
+          "transliteration": "fānin",
+          "translation": "(will) perish",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_026_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٦",
+          "transliteration": null,
+          "translation": "(26)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Everyone upon it [i.e., the earth] will perish,",
+      "transliteration": "Kullu man 'alaihaa faan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055026.mp3"
+    },
+    {
+      "number": 27,
+      "key": "55:27",
+      "textUthmani": "وَيَبْقَىٰ وَجْهُ رَبِّكَ ذُو ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+      "textUthmaniTajweed": "وَيَ<tajweed class=qalaqah>بْ</tajweed>قَىٰ وَ<tajweed class=qalaqah>جْ</tajweed>هُ رَبِّكَ ذُو <tajweed class=ham_wasl>ٱ</tajweed>لْجَلَ<tajweed class=madda_normal>ـٰ</tajweed>لِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْإِكْر<tajweed class=madda_permissible>َا</tajweed>مِ <span class=end>٢٧</span>",
+      "textIndopak": "وَّيَبۡقٰى وَجۡهُ رَبِّكَ ذُو الۡجَلٰلِ وَالۡاِكۡرَامِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَيَبْقَىٰ",
+          "transliteration": "wayabqā",
+          "translation": "But will remain",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_027_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "وَجْهُ",
+          "transliteration": "wajhu",
+          "translation": "(the) Face",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_027_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكَ",
+          "transliteration": "rabbika",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_027_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ذُو",
+          "transliteration": "dhū",
+          "translation": "(the) Owner",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_027_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْجَلَـٰلِ",
+          "transliteration": "l-jalāli",
+          "translation": "(of) Majesty",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_027_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَٱلْإِكْرَامِ",
+          "transliteration": "wal-ik'rāmi",
+          "translation": "and Honor",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_027_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٢٧",
+          "transliteration": null,
+          "translation": "(27)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And there will remain the Face of your Lord, Owner of Majesty and Honor.",
+      "transliteration": "Wa-yabqaa wajhu rabbika zul jalaali wal-ikraam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055027.mp3"
+    },
+    {
+      "number": 28,
+      "key": "55:28",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٢٨</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_028_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_028_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_028_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_028_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢٨",
+          "transliteration": null,
+          "translation": "(28)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055028.mp3"
+    },
+    {
+      "number": 29,
+      "key": "55:29",
+      "textUthmani": "يَسْـَٔلُهُۥ مَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ كُلَّ يَوْمٍ هُوَ فِى شَأْنٍ",
+      "textUthmaniTajweed": "يَسْــَٔلُهُ<tajweed class=madda_normal>ۥ</tajweed> مَ<tajweed class=ikhafa>ن ف</tajweed>ِى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ‌ۚ كُلَّ يَوْمٍ هُوَ فِى شَأْنٍ <span class=end>٢٩</span>",
+      "textIndopak": "يَسۡـَٔـلُهٗ مَنۡ فِى السَّمٰوٰتِ وَالۡاَرۡضِ​ؕ كُلَّ يَوۡمٍ هُوَ فِىۡ شَاۡنٍ​ۚ‏ ﻿﻿",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يَسْـَٔلُهُۥ",
+          "transliteration": "yasaluhu",
+          "translation": "Asks Him",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَن",
+          "transliteration": "man",
+          "translation": "whoever",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "(is) in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلسَّمَـٰوَٰتِ",
+          "transliteration": "l-samāwāti",
+          "translation": "the heavens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَٱلْأَرْضِ ۚ",
+          "transliteration": "wal-arḍi",
+          "translation": "and the earth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "كُلَّ",
+          "transliteration": "kulla",
+          "translation": "Every",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "يَوْمٍ",
+          "transliteration": "yawmin",
+          "translation": "day",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "هُوَ",
+          "transliteration": "huwa",
+          "translation": "He",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "(is) in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "شَأْنٍۢ",
+          "transliteration": "shanin",
+          "translation": "a matter",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_029_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "٢٩",
+          "transliteration": null,
+          "translation": "(29)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Whoever is within the heavens and earth asks Him; every day He is in [i.e., bringing about] a matter.",
+      "transliteration": "Yas'aluhoo man fis samaawaati walard; kulla yawmin huwa fee shaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055029.mp3"
+    },
+    {
+      "number": 30,
+      "key": "55:30",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٠</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_030_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_030_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_030_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_030_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣٠",
+          "transliteration": null,
+          "translation": "(30)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055030.mp3"
+    },
+    {
+      "number": 31,
+      "key": "55:31",
+      "textUthmani": "سَنَفْرُغُ لَكُمْ أَيُّهَ ٱلثَّقَلَانِ",
+      "textUthmaniTajweed": "سَنَفْرُغُ لَكُمْ أَيُّهَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ثَّقَل<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣١</span>",
+      "textIndopak": "سَنَفۡرُغُ لَـكُمۡ اَيُّهَ الثَّقَلٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "سَنَفْرُغُ",
+          "transliteration": "sanafrughu",
+          "translation": "Soon We will attend",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_031_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَكُمْ",
+          "transliteration": "lakum",
+          "translation": "to you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_031_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "أَيُّهَ",
+          "transliteration": "ayyuha",
+          "translation": "O you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_031_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلثَّقَلَانِ",
+          "transliteration": "l-thaqalāni",
+          "translation": "two classes",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_031_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣١",
+          "transliteration": null,
+          "translation": "(31)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "We will attend to you, O prominent beings.",
+      "transliteration": "Sanafrughu lakum ayyuhas saqalaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055031.mp3"
+    },
+    {
+      "number": 32,
+      "key": "55:32",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٢</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_032_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_032_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_032_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_032_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣٢",
+          "transliteration": null,
+          "translation": "(32)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055032.mp3"
+    },
+    {
+      "number": 33,
+      "key": "55:33",
+      "textUthmani": "يَـٰمَعْشَرَ ٱلْجِنِّ وَٱلْإِنسِ إِنِ ٱسْتَطَعْتُمْ أَن تَنفُذُوا۟ مِنْ أَقْطَارِ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ فَٱنفُذُوا۟ ۚ لَا تَنفُذُونَ إِلَّا بِسُلْطَـٰنٍ",
+      "textUthmaniTajweed": "يَ<tajweed class=madda_normal>ـٰ</tajweed>مَعْشَرَ <tajweed class=ham_wasl>ٱ</tajweed>لْجِ<tajweed class=ghunnah>نّ</tajweed>ِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْإِ<tajweed class=ikhafa>نس</tajweed>ِ إِنِ <tajweed class=ham_wasl>ٱ</tajweed>سْتَطَعْتُمْ أَ<tajweed class=ikhafa>ن ت</tajweed>َ<tajweed class=ikhafa>نف</tajweed>ُذُو<tajweed class=slnt>اْ</tajweed> مِنْ أَ<tajweed class=qalaqah>قْ</tajweed>طَارِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّمَ<tajweed class=madda_normal>ـٰ</tajweed>و<tajweed class=madda_normal>َٲ</tajweed>تِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَرْضِ فَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=ikhafa>نف</tajweed>ُذُو<tajweed class=slnt>اْ‌ۚ</tajweed> لَا تَ<tajweed class=ikhafa>نف</tajweed>ُذُونَ إِلَّا بِسُلْطَ<tajweed class=madda_permissible>ـٰ</tajweed>نٍ <span class=end>٣٣</span>",
+      "textIndopak": "يٰمَعۡشَرَ الۡجِنِّ وَالۡاِنۡسِ اِنِ اسۡتَطَعۡتُمۡ اَنۡ تَنۡفُذُوۡا مِنۡ اَقۡطَارِ السَّمٰوٰتِ وَالۡاَرۡضِ فَانْفُذُوۡا​ؕ لَا تَنۡفُذُوۡنَ اِلَّا بِسُلۡطٰنٍ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يَـٰمَعْشَرَ",
+          "transliteration": "yāmaʿshara",
+          "translation": "O assembly",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْجِنِّ",
+          "transliteration": "l-jini",
+          "translation": "(of) the jinn",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَٱلْإِنسِ",
+          "transliteration": "wal-insi",
+          "translation": "and the men",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "إِنِ",
+          "transliteration": "ini",
+          "translation": "If",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱسْتَطَعْتُمْ",
+          "transliteration": "is'taṭaʿtum",
+          "translation": "you are able",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "أَن",
+          "transliteration": "an",
+          "translation": "to",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "تَنفُذُوا۟",
+          "transliteration": "tanfudhū",
+          "translation": "pass beyond",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "مِنْ",
+          "transliteration": "min",
+          "translation": "[of]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "أَقْطَارِ",
+          "transliteration": "aqṭāri",
+          "translation": "(the) regions",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "ٱلسَّمَـٰوَٰتِ",
+          "transliteration": "l-samāwāti",
+          "translation": "(of) the heavens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 11,
+          "textUthmani": "وَٱلْأَرْضِ",
+          "transliteration": "wal-arḍi",
+          "translation": "and the earth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_011.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 12,
+          "textUthmani": "فَٱنفُذُوا۟ ۚ",
+          "transliteration": "fa-unfudhū",
+          "translation": "then pass",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_012.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 13,
+          "textUthmani": "لَا",
+          "transliteration": "lā",
+          "translation": "Not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_014.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 14,
+          "textUthmani": "تَنفُذُونَ",
+          "transliteration": "tanfudhūna",
+          "translation": "you (can) pass",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_015.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 15,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "except",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_016.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 16,
+          "textUthmani": "بِسُلْطَـٰنٍۢ",
+          "transliteration": "bisul'ṭānin",
+          "translation": "by authority",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_033_017.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 17,
+          "textUthmani": "٣٣",
+          "transliteration": null,
+          "translation": "(33)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "O company of jinn and mankind, if you are able to pass beyond the regions of the heavens and the earth, then pass. You will not pass except by authority [from Allāh].",
+      "transliteration": "Yaa-ma'sharal jinni wal-insi inis tata'tum an tanfuzoo min aqtaaris samaawaati wal-ardi fanfuzoo; laa tanfuzoona illaa bisultaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055033.mp3"
+    },
+    {
+      "number": 34,
+      "key": "55:34",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٤</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_034_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_034_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_034_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_034_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣٤",
+          "transliteration": null,
+          "translation": "(34)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055034.mp3"
+    },
+    {
+      "number": 35,
+      "key": "55:35",
+      "textUthmani": "يُرْسَلُ عَلَيْكُمَا شُوَاظٌ مِّن نَّارٍ وَنُحَاسٌ فَلَا تَنتَصِرَانِ",
+      "textUthmaniTajweed": "يُرْسَلُ عَلَيْكُمَا شُوَا<tajweed class=idgham_ghunnah>ظٌ م</tajweed>ّ<tajweed class=idgham_ghunnah>ِن ن</tajweed>َّا<tajweed class=idgham_ghunnah>رٍ و</tajweed>َنُحَا<tajweed class=ikhafa>سٌ ف</tajweed>َلَا تَ<tajweed class=ikhafa>نت</tajweed>َصِر<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٥</span>",
+      "textIndopak": "يُرۡسَلُ عَلَيۡكُمَا شُوَاظٌ مِّنۡ نَّارٍ ۙ وَّنُحَاسٌ فَلَا تَنۡتَصِرٰنِ​ۚ‏ ﻿﻿",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يُرْسَلُ",
+          "transliteration": "yur'salu",
+          "translation": "Will be sent",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "عَلَيْكُمَا",
+          "transliteration": "ʿalaykumā",
+          "translation": "against both of you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "شُوَاظٌۭ",
+          "transliteration": "shuwāẓun",
+          "translation": "a flame",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مِّن",
+          "transliteration": "min",
+          "translation": "of",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "نَّارٍۢ",
+          "transliteration": "nārin",
+          "translation": "fire",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَنُحَاسٌۭ",
+          "transliteration": "wanuḥāsun",
+          "translation": "and smoke",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "فَلَا",
+          "transliteration": "falā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "تَنتَصِرَانِ",
+          "transliteration": "tantaṣirāni",
+          "translation": "you will (be able to) defend yourselves",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_035_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "٣٥",
+          "transliteration": null,
+          "translation": "(35)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "There will be sent upon you a flame of fire and smoke, and you will not defend yourselves.",
+      "transliteration": "Yursalu 'alaikumaa shuwaazum min naarinw-wa nuhaasun falaa tantasiraan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055035.mp3"
+    },
+    {
+      "number": 36,
+      "key": "55:36",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٦</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_036_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_036_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_036_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_036_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣٦",
+          "transliteration": null,
+          "translation": "(36)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055036.mp3"
+    },
+    {
+      "number": 37,
+      "key": "55:37",
+      "textUthmani": "فَإِذَا ٱنشَقَّتِ ٱلسَّمَآءُ فَكَانَتْ وَرْدَةً كَٱلدِّهَانِ",
+      "textUthmaniTajweed": "فَإِذَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=ikhafa>نش</tajweed>َقَّتِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سَّم<tajweed class=madda_obligatory>َا</tajweed>ٓءُ فَكَانَتْ وَرْدَ<tajweed class=ikhafa>ةً ك</tajweed>َ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دِّه<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٧</span>",
+      "textIndopak": "فَاِذَا انْشَقَّتِ السَّمَآءُ فَكَانَتۡ وَرۡدَةً كَالدِّهَانِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَإِذَا",
+          "transliteration": "fa-idhā",
+          "translation": "Then when",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_037_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱنشَقَّتِ",
+          "transliteration": "inshaqqati",
+          "translation": "is split",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_037_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلسَّمَآءُ",
+          "transliteration": "l-samāu",
+          "translation": "the heaven",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_037_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فَكَانَتْ",
+          "transliteration": "fakānat",
+          "translation": "and it becomes",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_037_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَرْدَةًۭ",
+          "transliteration": "wardatan",
+          "translation": "rose-colored",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_037_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "كَٱلدِّهَانِ",
+          "transliteration": "kal-dihāni",
+          "translation": "like murky oil",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_037_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٣٧",
+          "transliteration": null,
+          "translation": "(37)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And when the heaven is split open and becomes rose-colored like oil -",
+      "transliteration": "Fa-izan shaqqatis samaaa'u fakaanat wardatan kaddihaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055037.mp3"
+    },
+    {
+      "number": 38,
+      "key": "55:38",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٣٨</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_038_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_038_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_038_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_038_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣٨",
+          "transliteration": null,
+          "translation": "(38)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055038.mp3"
+    },
+    {
+      "number": 39,
+      "key": "55:39",
+      "textUthmani": "فَيَوْمَئِذٍ لَّا يُسْـَٔلُ عَن ذَنۢبِهِۦٓ إِنسٌ وَلَا جَآنٌّ",
+      "textUthmaniTajweed": "فَيَوْمَئِ<tajweed class=idgham_wo_ghunnah>ذٍ ل</tajweed>َّا يُسْــَٔلُ عَ<tajweed class=ikhafa>ن ذ</tajweed>َ<tajweed class=iqlab>نۢب</tajweed>ِه<tajweed class=madda_obligatory>ِۦٓ</tajweed> إِن<tajweed class=idgham_ghunnah>سٌ و</tajweed>َلَا ج<tajweed class=madda_necessary>َا</tajweed>ٓ<tajweed class=ghunnah>نّ</tajweed>ٌ <span class=end>٣٩</span>",
+      "textIndopak": "فَيَوۡمَٮِٕذٍ لَّا يُسۡـَٔـلُ عَنۡ ذَنۡۢبِهٖۤ اِنۡسٌ وَّلَا جَآنٌّ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَيَوْمَئِذٍۢ",
+          "transliteration": "fayawma-idhin",
+          "translation": "Then (on) that Day",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَّا",
+          "transliteration": "lā",
+          "translation": "not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يُسْـَٔلُ",
+          "transliteration": "yus'alu",
+          "translation": "will be asked",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "عَن",
+          "transliteration": "ʿan",
+          "translation": "about",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ذَنۢبِهِۦٓ",
+          "transliteration": "dhanbihi",
+          "translation": "his sin",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "إِنسٌۭ",
+          "transliteration": "insun",
+          "translation": "any man",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "جَآنٌّۭ",
+          "transliteration": "jānnun",
+          "translation": "any jinn",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_039_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "٣٩",
+          "transliteration": null,
+          "translation": "(39)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then on that Day none will be asked about his sin among men or jinn.",
+      "transliteration": "Fa-yawma'izil laa yus'alu 'an zambiheee insunw Wa-laa jaann",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055039.mp3"
+    },
+    {
+      "number": 40,
+      "key": "55:40",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٤٠</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_040_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_040_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_040_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_040_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤٠",
+          "transliteration": null,
+          "translation": "(40)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055040.mp3"
+    },
+    {
+      "number": 41,
+      "key": "55:41",
+      "textUthmani": "يُعْرَفُ ٱلْمُجْرِمُونَ بِسِيمَـٰهُمْ فَيُؤْخَذُ بِٱلنَّوَٰصِى وَٱلْأَقْدَامِ",
+      "textUthmaniTajweed": "يُعْرَفُ <tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=qalaqah>جْ</tajweed>رِمُونَ بِسِيمَ<tajweed class=madda_normal>ـٰ</tajweed>هُمْ فَيُؤْخَذُ بِ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َو<tajweed class=madda_normal>َٲ</tajweed>صِى وَ<tajweed class=ham_wasl>ٱ</tajweed>لْأَ<tajweed class=qalaqah>قْ</tajweed>د<tajweed class=madda_permissible>َا</tajweed>مِ <span class=end>٤١</span>",
+      "textIndopak": "يُعۡرَفُ الۡمُجۡرِمُوۡنَ بِسِيۡمٰهُمۡ فَيُؤۡخَذُ بِالنَّوَاصِىۡ وَ الۡاَقۡدَامِ​ۚ‏ ﻿﻿",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يُعْرَفُ",
+          "transliteration": "yuʿ'rafu",
+          "translation": "Will be known",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_041_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْمُجْرِمُونَ",
+          "transliteration": "l-muj'rimūna",
+          "translation": "the criminals",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_041_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "بِسِيمَـٰهُمْ",
+          "transliteration": "bisīmāhum",
+          "translation": "by their marks",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_041_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فَيُؤْخَذُ",
+          "transliteration": "fayu'khadhu",
+          "translation": "and will be seized",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_041_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "بِٱلنَّوَٰصِى",
+          "transliteration": "bil-nawāṣī",
+          "translation": "by the forelocks",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_041_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَٱلْأَقْدَامِ",
+          "transliteration": "wal-aqdāmi",
+          "translation": "and the feet",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_041_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٤١",
+          "transliteration": null,
+          "translation": "(41)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "The criminals will be known by their marks, and they will be seized by the forelocks and the feet.",
+      "transliteration": "Yu'raful mujrimoona biseemaahum fa'yu'khazu binna-waasi wal-aqdaam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055041.mp3"
+    },
+    {
+      "number": 42,
+      "key": "55:42",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٤٢</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_042_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_042_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_042_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_042_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤٢",
+          "transliteration": null,
+          "translation": "(42)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055042.mp3"
+    },
+    {
+      "number": 43,
+      "key": "55:43",
+      "textUthmani": "هَـٰذِهِۦ جَهَنَّمُ ٱلَّتِى يُكَذِّبُ بِهَا ٱلْمُجْرِمُونَ",
+      "textUthmaniTajweed": "هَ<tajweed class=madda_normal>ـٰ</tajweed>ذِه<tajweed class=madda_normal>ِۦ</tajweed> جَهَ<tajweed class=ghunnah>نّ</tajweed>َمُ <tajweed class=ham_wasl>ٱ</tajweed>لَّتِى يُكَذِّبُ بِهَا <tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=qalaqah>جْ</tajweed>رِم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٣</span>",
+      "textIndopak": "هٰذِهٖ جَهَنَّمُ الَّتِىۡ يُكَذِّبُ بِهَا الۡمُجۡرِمُوۡنَ​ۘ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "هَـٰذِهِۦ",
+          "transliteration": "hādhihi",
+          "translation": "This",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_043_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "جَهَنَّمُ",
+          "transliteration": "jahannamu",
+          "translation": "(is) Hell",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_043_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلَّتِى",
+          "transliteration": "allatī",
+          "translation": "which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_043_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "يُكَذِّبُ",
+          "transliteration": "yukadhibu",
+          "translation": "deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_043_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "بِهَا",
+          "transliteration": "bihā",
+          "translation": "[of it]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_043_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "ٱلْمُجْرِمُونَ",
+          "transliteration": "l-muj'rimūna",
+          "translation": "the criminals",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_043_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٤٣",
+          "transliteration": null,
+          "translation": "(43)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "This is Hell, which the criminals deny.",
+      "transliteration": "Haazihee jahannamul latee yukazzibu bihal mujrimoon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055043.mp3"
+    },
+    {
+      "number": 44,
+      "key": "55:44",
+      "textUthmani": "يَطُوفُونَ بَيْنَهَا وَبَيْنَ حَمِيمٍ ءَانٍ",
+      "textUthmaniTajweed": "يَطُوفُونَ بَيْنَهَا وَبَيْنَ حَمِيمٍ ء<tajweed class=madda_permissible>َا</tajweed>نٍ <span class=end>٤٤</span>",
+      "textIndopak": "يَطُوۡفُوۡنَ بَيۡنَهَا وَبَيۡنَ حَمِيۡمٍ اٰنٍ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يَطُوفُونَ",
+          "transliteration": "yaṭūfūna",
+          "translation": "They will go around",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_044_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "بَيْنَهَا",
+          "transliteration": "baynahā",
+          "translation": "between it",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_044_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَبَيْنَ",
+          "transliteration": "wabayna",
+          "translation": "and between",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_044_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "حَمِيمٍ",
+          "transliteration": "ḥamīmin",
+          "translation": "scalding water",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_044_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ءَانٍۢ",
+          "transliteration": "ānin",
+          "translation": "heated",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_044_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٤٤",
+          "transliteration": null,
+          "translation": "(44)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "They will circulate between it and scalding water, heated [to the utmost degree].",
+      "transliteration": "Yatoofoona bainahaa Wa-baina hameemim aan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055044.mp3"
+    },
+    {
+      "number": 45,
+      "key": "55:45",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٤٥</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_045_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_045_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_045_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_045_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤٥",
+          "transliteration": null,
+          "translation": "(45)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055045.mp3"
+    },
+    {
+      "number": 46,
+      "key": "55:46",
+      "textUthmani": "وَلِمَنْ خَافَ مَقَامَ رَبِّهِۦ جَنَّتَانِ",
+      "textUthmaniTajweed": "وَلِمَنْ خَافَ مَقَامَ رَبِّه<tajweed class=madda_normal>ِۦ</tajweed> جَ<tajweed class=ghunnah>نّ</tajweed>َت<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٤٦</span>",
+      "textIndopak": "وَلِمَنۡ خَافَ مَقَامَ رَبِّهٖ جَنَّتٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلِمَنْ",
+          "transliteration": "waliman",
+          "translation": "But for (him) who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_046_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "خَافَ",
+          "transliteration": "khāfa",
+          "translation": "fears",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_046_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مَقَامَ",
+          "transliteration": "maqāma",
+          "translation": "(the) standing",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_046_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "رَبِّهِۦ",
+          "transliteration": "rabbihi",
+          "translation": "(before) his Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_046_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "جَنَّتَانِ",
+          "transliteration": "jannatāni",
+          "translation": "(are) two gardens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_046_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٤٦",
+          "transliteration": null,
+          "translation": "(46)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "But for he who has feared the position of his Lord are two gardens -",
+      "transliteration": "Wa-liman khaafa maqaama rabbihee jannataan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055046.mp3"
+    },
+    {
+      "number": 47,
+      "key": "55:47",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٤٧</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_047_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_047_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_047_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_047_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤٧",
+          "transliteration": null,
+          "translation": "(47)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055047.mp3"
+    },
+    {
+      "number": 48,
+      "key": "55:48",
+      "textUthmani": "ذَوَاتَآ أَفْنَانٍ",
+      "textUthmaniTajweed": "ذَوَات<tajweed class=madda_obligatory>َآ</tajweed> أَفْن<tajweed class=madda_permissible>َا</tajweed>نٍ <span class=end>٤٨</span>",
+      "textIndopak": "ذَوَاتَاۤ اَفۡنَانٍ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ذَوَاتَآ",
+          "transliteration": "dhawātā",
+          "translation": "Having",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_048_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَفْنَانٍۢ",
+          "transliteration": "afnānin",
+          "translation": "branches",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_048_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٤٨",
+          "transliteration": null,
+          "translation": "(48)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Having [spreading] branches.",
+      "transliteration": "Zawaataaa afnaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055048.mp3"
+    },
+    {
+      "number": 49,
+      "key": "55:49",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٤٩</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_049_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_049_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_049_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_049_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤٩",
+          "transliteration": null,
+          "translation": "(49)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055049.mp3"
+    },
+    {
+      "number": 50,
+      "key": "55:50",
+      "textUthmani": "فِيهِمَا عَيْنَانِ تَجْرِيَانِ",
+      "textUthmaniTajweed": "فِيهِمَا عَيْنَانِ تَ<tajweed class=qalaqah>جْ</tajweed>رِي<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥٠</span>",
+      "textIndopak": "فِيۡهِمَا عَيۡنٰنِ تَجۡرِيٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهِمَا",
+          "transliteration": "fīhimā",
+          "translation": "In both of them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_050_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "عَيْنَانِ",
+          "transliteration": "ʿaynāni",
+          "translation": "(are) two springs",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_050_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "تَجْرِيَانِ",
+          "transliteration": "tajriyāni",
+          "translation": "flowing",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_050_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٥٠",
+          "transliteration": null,
+          "translation": "(50)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "In both of them are two springs, flowing.",
+      "transliteration": "Feehimaa 'aynaani tajriyaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055050.mp3"
+    },
+    {
+      "number": 51,
+      "key": "55:51",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥١</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_051_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_051_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_051_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_051_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥١",
+          "transliteration": null,
+          "translation": "(51)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055051.mp3"
+    },
+    {
+      "number": 52,
+      "key": "55:52",
+      "textUthmani": "فِيهِمَا مِن كُلِّ فَـٰكِهَةٍ زَوْجَانِ",
+      "textUthmaniTajweed": "فِيهِمَا مِ<tajweed class=ikhafa>ن ك</tajweed>ُلِّ فَ<tajweed class=madda_normal>ـٰ</tajweed>كِهَ<tajweed class=ikhafa>ةٍ ز</tajweed>َوْج<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥٢</span>",
+      "textIndopak": "فِيۡهِمَا مِنۡ كُلِّ فَاكِهَةٍ زَوۡجٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهِمَا",
+          "transliteration": "fīhimā",
+          "translation": "In both of them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_052_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مِن",
+          "transliteration": "min",
+          "translation": "[of]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_052_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "كُلِّ",
+          "transliteration": "kulli",
+          "translation": "(are) every",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_052_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "فَـٰكِهَةٍۢ",
+          "transliteration": "fākihatin",
+          "translation": "fruits",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_052_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "زَوْجَانِ",
+          "transliteration": "zawjāni",
+          "translation": "(in) pairs",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_052_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٥٢",
+          "transliteration": null,
+          "translation": "(52)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "In both of them are of every fruit, two kinds.",
+      "transliteration": "Feehimaa min kulli faakihatin zawjaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055052.mp3"
+    },
+    {
+      "number": 53,
+      "key": "55:53",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥٣</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_053_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_053_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_053_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_053_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥٣",
+          "transliteration": null,
+          "translation": "(53)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055053.mp3"
+    },
+    {
+      "number": 54,
+      "key": "55:54",
+      "textUthmani": "مُتَّكِـِٔينَ عَلَىٰ فُرُشٍۭ بَطَآئِنُهَا مِنْ إِسْتَبْرَقٍ ۚ وَجَنَى ٱلْجَنَّتَيْنِ دَانٍ",
+      "textUthmaniTajweed": "مُتَّكِــِٔينَ عَلَىٰ فُرُ<tajweed class=iqlab>شِۭ ب</tajweed>َط<tajweed class=madda_obligatory>َا</tajweed>ٓئِنُهَا مِنْ إِسْتَ<tajweed class=qalaqah>بْ</tajweed>رَ<tajweed class=idgham_ghunnah>قٍ‌ۚ و</tajweed>َجَنَى <tajweed class=ham_wasl>ٱ</tajweed>لْجَ<tajweed class=ghunnah>نّ</tajweed>َتَيْنِ د<tajweed class=madda_permissible>َا</tajweed>نٍ <span class=end>٥٤</span>",
+      "textIndopak": "مُتَّكِـــِٕيۡنَ عَلٰى فُرُشٍۢ بَطَآٮِٕنُهَا مِنۡ اِسۡتَبۡرَقٍ​ؕ وَجَنَی الۡجَـنَّتَيۡنِ دَانٍ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مُتَّكِـِٔينَ",
+          "transliteration": "muttakiīna",
+          "translation": "Reclining",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "عَلَىٰ",
+          "transliteration": "ʿalā",
+          "translation": "on",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فُرُشٍۭ",
+          "transliteration": "furushin",
+          "translation": "couches",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "بَطَآئِنُهَا",
+          "transliteration": "baṭāinuhā",
+          "translation": "(whose) inner linings",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "مِنْ",
+          "transliteration": "min",
+          "translation": "(are) of",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "إِسْتَبْرَقٍۢ ۚ",
+          "transliteration": "is'tabraqin",
+          "translation": "brocade",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "وَجَنَى",
+          "transliteration": "wajanā",
+          "translation": "and (the) fruit",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "ٱلْجَنَّتَيْنِ",
+          "transliteration": "l-janatayni",
+          "translation": "(of) both the gardens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "دَانٍۢ",
+          "transliteration": "dānin",
+          "translation": "(is) near",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_054_010.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "٥٤",
+          "transliteration": null,
+          "translation": "(54)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "[They are] reclining on beds whose linings are of silk brocade, and the fruit of the two gardens is hanging low.",
+      "transliteration": "Muttaki'eena 'alaa furushim bataaa'inuhaa min istabraq; wajanal jannataini daan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055054.mp3"
+    },
+    {
+      "number": 55,
+      "key": "55:55",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥٥</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_055_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_055_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_055_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_055_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥٥",
+          "transliteration": null,
+          "translation": "(55)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055055.mp3"
+    },
+    {
+      "number": 56,
+      "key": "55:56",
+      "textUthmani": "فِيهِنَّ قَـٰصِرَٰتُ ٱلطَّرْفِ لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ",
+      "textUthmaniTajweed": "فِيهِ<tajweed class=ghunnah>نّ</tajweed>َ قَ<tajweed class=madda_normal>ـٰ</tajweed>صِر<tajweed class=madda_normal>َٲ</tajweed>تُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>طَّرْفِ لَمْ يَ<tajweed class=qalaqah>طْ</tajweed>مِثْهُ<tajweed class=ghunnah>نّ</tajweed>َ إِ<tajweed class=ikhafa>نس</tajweed><tajweed class=ikhafa>ٌ ق</tajweed>َ<tajweed class=qalaqah>بْ</tajweed>لَهُمْ وَلَا ج<tajweed class=madda_necessary>َا</tajweed>ٓ<tajweed class=ghunnah>نّ</tajweed>ٌ <span class=end>٥٦</span>",
+      "textIndopak": "فِيۡهِنَّ قٰصِرٰتُ الطَّرۡفِۙ لَمۡ يَطۡمِثۡهُنَّ اِنۡسٌ قَبۡلَهُمۡ وَلَا جَآنٌّ​ۚ‏ ﻿﻿",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهِنَّ",
+          "transliteration": "fīhinna",
+          "translation": "In them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "قَـٰصِرَٰتُ",
+          "transliteration": "qāṣirātu",
+          "translation": "(will be) companions of modest gaze",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلطَّرْفِ",
+          "transliteration": "l-ṭarfi",
+          "translation": "(will be) companions of modest gaze",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "لَمْ",
+          "transliteration": "lam",
+          "translation": "not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "يَطْمِثْهُنَّ",
+          "transliteration": "yaṭmith'hunna",
+          "translation": "has touched them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "إِنسٌۭ",
+          "transliteration": "insun",
+          "translation": "any man",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "قَبْلَهُمْ",
+          "transliteration": "qablahum",
+          "translation": "before them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_008.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 9,
+          "textUthmani": "جَآنٌّۭ",
+          "transliteration": "jānnun",
+          "translation": "any jinn",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_056_009.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 10,
+          "textUthmani": "٥٦",
+          "transliteration": null,
+          "translation": "(56)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "In them are women limiting [their] glances, untouched before them by man or jinnī -",
+      "transliteration": "Feehinna qaasiratut tarfi lam yatmishunna insun qablahum Wa-laa jaaann",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055056.mp3"
+    },
+    {
+      "number": 57,
+      "key": "55:57",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥٧</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_057_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_057_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_057_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_057_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥٧",
+          "transliteration": null,
+          "translation": "(57)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055057.mp3"
+    },
+    {
+      "number": 58,
+      "key": "55:58",
+      "textUthmani": "كَأَنَّهُنَّ ٱلْيَاقُوتُ وَٱلْمَرْجَانُ",
+      "textUthmaniTajweed": "كَأَ<tajweed class=ghunnah>نّ</tajweed>َهُ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>لْيَاقُوتُ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْمَرْج<tajweed class=madda_permissible>َا</tajweed>نُ <span class=end>٥٨</span>",
+      "textIndopak": "كَاَنَّهُنَّ الۡيَاقُوۡتُ وَالۡمَرۡجَانُ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "كَأَنَّهُنَّ",
+          "transliteration": "ka-annahunna",
+          "translation": "As if they were",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_058_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْيَاقُوتُ",
+          "transliteration": "l-yāqūtu",
+          "translation": "rubies",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_058_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَٱلْمَرْجَانُ",
+          "transliteration": "wal-marjānu",
+          "translation": "and coral",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_058_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٥٨",
+          "transliteration": null,
+          "translation": "(58)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "As if they were rubies and coral.",
+      "transliteration": "Ka-annahunnal yaaqootu wal-marjaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055058.mp3"
+    },
+    {
+      "number": 59,
+      "key": "55:59",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٥٩</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_059_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_059_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_059_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_059_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥٩",
+          "transliteration": null,
+          "translation": "(59)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055059.mp3"
+    },
+    {
+      "number": 60,
+      "key": "55:60",
+      "textUthmani": "هَلْ جَزَآءُ ٱلْإِحْسَـٰنِ إِلَّا ٱلْإِحْسَـٰنُ",
+      "textUthmaniTajweed": "هَلْ جَز<tajweed class=madda_obligatory>َا</tajweed>ٓءُ <tajweed class=ham_wasl>ٱ</tajweed>لْإِحْسَ<tajweed class=madda_normal>ـٰ</tajweed>نِ إِلَّا <tajweed class=ham_wasl>ٱ</tajweed>لْإِحْسَ<tajweed class=madda_permissible>ـٰ</tajweed>نُ <span class=end>٦٠</span>",
+      "textIndopak": "هَلۡ جَزَآءُ الْاِحۡسَانِ اِلَّا الۡاِحۡسَانُ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "هَلْ",
+          "transliteration": "hal",
+          "translation": "Is",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_060_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "جَزَآءُ",
+          "transliteration": "jazāu",
+          "translation": "(the) reward",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_060_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْإِحْسَـٰنِ",
+          "transliteration": "l-iḥ'sāni",
+          "translation": "for the good",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_060_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "إِلَّا",
+          "transliteration": "illā",
+          "translation": "but",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_060_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْإِحْسَـٰنُ",
+          "transliteration": "l-iḥ'sānu",
+          "translation": "good",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_060_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٦٠",
+          "transliteration": null,
+          "translation": "(60)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Is the reward for good [anything] but good?",
+      "transliteration": "Hal jazaaa'ul ihsaani illal ihsaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055060.mp3"
+    },
+    {
+      "number": 61,
+      "key": "55:61",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦١</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_061_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_061_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_061_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_061_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦١",
+          "transliteration": null,
+          "translation": "(61)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055061.mp3"
+    },
+    {
+      "number": 62,
+      "key": "55:62",
+      "textUthmani": "وَمِن دُونِهِمَا جَنَّتَانِ",
+      "textUthmaniTajweed": "وَمِ<tajweed class=ikhafa>ن د</tajweed>ُونِهِمَا جَ<tajweed class=ghunnah>نّ</tajweed>َت<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٢</span>",
+      "textIndopak": "وَمِنۡ دُوۡنِهِمَا جَنَّتٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَمِن",
+          "transliteration": "wamin",
+          "translation": "Besides these two",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_062_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "دُونِهِمَا",
+          "transliteration": "dūnihimā",
+          "translation": "Besides these two",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_062_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "جَنَّتَانِ",
+          "transliteration": "jannatāni",
+          "translation": "(are) two gardens",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_062_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٦٢",
+          "transliteration": null,
+          "translation": "(62)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And below them both [in excellence] are two [other] gardens -",
+      "transliteration": "Wa-min doonihimaa jannataan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055062.mp3"
+    },
+    {
+      "number": 63,
+      "key": "55:63",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٣</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_063_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_063_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_063_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_063_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦٣",
+          "transliteration": null,
+          "translation": "(63)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055063.mp3"
+    },
+    {
+      "number": 64,
+      "key": "55:64",
+      "textUthmani": "مُدْهَآمَّتَانِ",
+      "textUthmaniTajweed": "مُ<tajweed class=qalaqah>دْ</tajweed>ه<tajweed class=madda_necessary>َا</tajweed>ٓ<tajweed class=ghunnah>مّ</tajweed>َت<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٤</span>",
+      "textIndopak": "مُدۡهَآمَّتٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مُدْهَآمَّتَانِ",
+          "transliteration": "mud'hāmmatāni",
+          "translation": "Dark green",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_064_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "٦٤",
+          "transliteration": null,
+          "translation": "(64)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Dark green [in color].",
+      "transliteration": "Mudhaaammataan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055064.mp3"
+    },
+    {
+      "number": 65,
+      "key": "55:65",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٥</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_065_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_065_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_065_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_065_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦٥",
+          "transliteration": null,
+          "translation": "(65)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055065.mp3"
+    },
+    {
+      "number": 66,
+      "key": "55:66",
+      "textUthmani": "فِيهِمَا عَيْنَانِ نَضَّاخَتَانِ",
+      "textUthmaniTajweed": "فِيهِمَا عَيْنَانِ نَضَّاخَت<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٦</span>",
+      "textIndopak": "فِيۡهِمَا عَيۡنٰنِ نَضَّاخَتٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهِمَا",
+          "transliteration": "fīhimā",
+          "translation": "In both of them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_066_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "عَيْنَانِ",
+          "transliteration": "ʿaynāni",
+          "translation": "(are) two springs",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_066_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "نَضَّاخَتَانِ",
+          "transliteration": "naḍḍākhatāni",
+          "translation": "gushing forth",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_066_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٦٦",
+          "transliteration": null,
+          "translation": "(66)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "In both of them are two springs, spouting.",
+      "transliteration": "Feehimaa 'aynaani nad-daakhataan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055066.mp3"
+    },
+    {
+      "number": 67,
+      "key": "55:67",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٧</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_067_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_067_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_067_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_067_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦٧",
+          "transliteration": null,
+          "translation": "(67)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055067.mp3"
+    },
+    {
+      "number": 68,
+      "key": "55:68",
+      "textUthmani": "فِيهِمَا فَـٰكِهَةٌ وَنَخْلٌ وَرُمَّانٌ",
+      "textUthmaniTajweed": "فِيهِمَا فَ<tajweed class=madda_normal>ـٰ</tajweed>كِهَ<tajweed class=idgham_ghunnah>ةٌ و</tajweed>َنَخْ<tajweed class=idgham_ghunnah>لٌ و</tajweed>َرُ<tajweed class=ghunnah>مّ</tajweed><tajweed class=madda_permissible>َا</tajweed>نٌ <span class=end>٦٨</span>",
+      "textIndopak": "فِيۡهِمَا فَاكِهَةٌ وَّنَخۡلٌ وَّرُمَّانٌ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهِمَا",
+          "transliteration": "fīhimā",
+          "translation": "In both of them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_068_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "فَـٰكِهَةٌۭ",
+          "transliteration": "fākihatun",
+          "translation": "(are) fruits",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_068_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَنَخْلٌۭ",
+          "transliteration": "wanakhlun",
+          "translation": "and date-palms",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_068_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَرُمَّانٌۭ",
+          "transliteration": "warummānun",
+          "translation": "and pomegranates",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_068_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦٨",
+          "transliteration": null,
+          "translation": "(68)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "In both of them are fruit and palm trees and pomegranates.",
+      "transliteration": "Feehimaa faakihatunw Wa-nakhlunw Wa-rummaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055068.mp3"
+    },
+    {
+      "number": 69,
+      "key": "55:69",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٦٩</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_069_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_069_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_069_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_069_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦٩",
+          "transliteration": null,
+          "translation": "(69)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055069.mp3"
+    },
+    {
+      "number": 70,
+      "key": "55:70",
+      "textUthmani": "فِيهِنَّ خَيْرَٰتٌ حِسَانٌ",
+      "textUthmaniTajweed": "فِيهِ<tajweed class=ghunnah>نّ</tajweed>َ خَيْر<tajweed class=madda_normal>َٲ</tajweed>تٌ حِس<tajweed class=madda_permissible>َا</tajweed>نٌ <span class=end>٧٠</span>",
+      "textIndopak": "فِيۡهِنَّ خَيۡرٰتٌ حِسَانٌ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فِيهِنَّ",
+          "transliteration": "fīhinna",
+          "translation": "In them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_070_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "خَيْرَٰتٌ",
+          "transliteration": "khayrātun",
+          "translation": "(are) good",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_070_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "حِسَانٌۭ",
+          "transliteration": "ḥisānun",
+          "translation": "and beautiful ones",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_070_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٧٠",
+          "transliteration": null,
+          "translation": "(70)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "In them are good and beautiful women -",
+      "transliteration": "Feehinna khairaatun hisaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055070.mp3"
+    },
+    {
+      "number": 71,
+      "key": "55:71",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٧١</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_071_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_071_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_071_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_071_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧١",
+          "transliteration": null,
+          "translation": "(71)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055071.mp3"
+    },
+    {
+      "number": 72,
+      "key": "55:72",
+      "textUthmani": "حُورٌ مَّقْصُورَٰتٌ فِى ٱلْخِيَامِ",
+      "textUthmaniTajweed": "حُو<tajweed class=idgham_ghunnah>رٌ م</tajweed>َّ<tajweed class=qalaqah>قْ</tajweed>صُور<tajweed class=madda_normal>َٲ</tajweed><tajweed class=ikhafa>تٌ ف</tajweed>ِى <tajweed class=ham_wasl>ٱ</tajweed>لْخِي<tajweed class=madda_permissible>َا</tajweed>مِ <span class=end>٧٢</span>",
+      "textIndopak": "حُوۡرٌ مَّقۡصُوۡرٰتٌ فِى الۡخِيَامِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "حُورٌۭ",
+          "transliteration": "ḥūrun",
+          "translation": "Fair ones",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_072_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَّقْصُورَٰتٌۭ",
+          "transliteration": "maqṣūrātun",
+          "translation": "restrained",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_072_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_072_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْخِيَامِ",
+          "transliteration": "l-khiyāmi",
+          "translation": "the pavilions",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_072_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧٢",
+          "transliteration": null,
+          "translation": "(72)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Fair ones reserved in pavilions -",
+      "transliteration": "Hoorum maqsooraatun fil khiyaam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055072.mp3"
+    },
+    {
+      "number": 73,
+      "key": "55:73",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٧٣</span>",
+      "textIndopak": "​فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_073_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_073_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_073_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_073_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧٣",
+          "transliteration": null,
+          "translation": "(73)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055073.mp3"
+    },
+    {
+      "number": 74,
+      "key": "55:74",
+      "textUthmani": "لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ",
+      "textUthmaniTajweed": "لَمْ يَ<tajweed class=qalaqah>طْ</tajweed>مِثْهُ<tajweed class=ghunnah>نّ</tajweed>َ إِ<tajweed class=ikhafa>نس</tajweed><tajweed class=ikhafa>ٌ ق</tajweed>َ<tajweed class=qalaqah>بْ</tajweed>لَهُمْ وَلَا ج<tajweed class=madda_necessary>َا</tajweed>ٓ<tajweed class=ghunnah>نّ</tajweed>ٌ <span class=end>٧٤</span>",
+      "textIndopak": "لَمۡ يَطۡمِثۡهُنَّ اِنۡسٌ قَبۡلَهُمۡ وَلَا جَآنٌّ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لَمْ",
+          "transliteration": "lam",
+          "translation": "Not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_074_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَطْمِثْهُنَّ",
+          "transliteration": "yaṭmith'hunna",
+          "translation": "has touched them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_074_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "إِنسٌۭ",
+          "transliteration": "insun",
+          "translation": "any man",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_074_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "قَبْلَهُمْ",
+          "transliteration": "qablahum",
+          "translation": "before them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_074_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "and not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_074_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "جَآنٌّۭ",
+          "transliteration": "jānnun",
+          "translation": "any jinn",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_074_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٧٤",
+          "transliteration": null,
+          "translation": "(74)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Untouched before them by man or jinnī -",
+      "transliteration": "Lam yatmis-hunna insun qablahum Wa-laa jaaann",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055074.mp3"
+    },
+    {
+      "number": 75,
+      "key": "55:75",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٧٥</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_075_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_075_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_075_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_075_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧٥",
+          "transliteration": null,
+          "translation": "(75)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055075.mp3"
+    },
+    {
+      "number": 76,
+      "key": "55:76",
+      "textUthmani": "مُتَّكِـِٔينَ عَلَىٰ رَفْرَفٍ خُضْرٍ وَعَبْقَرِىٍّ حِسَانٍ",
+      "textUthmaniTajweed": "مُتَّكِــِٔينَ عَلَىٰ رَفْرَفٍ خُضْ<tajweed class=idgham_ghunnah>رٍ و</tajweed>َعَ<tajweed class=qalaqah>بْ</tajweed>قَرِىٍّ حِس<tajweed class=madda_permissible>َا</tajweed>نٍ <span class=end>٧٦</span>",
+      "textIndopak": "مُتَّكِــِٕيۡنَ عَلٰى رَفۡرَفٍ خُضۡرٍ وَّعَبۡقَرِىٍّ حِسَانٍ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مُتَّكِـِٔينَ",
+          "transliteration": "muttakiīna",
+          "translation": "Reclining",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_076_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "عَلَىٰ",
+          "transliteration": "ʿalā",
+          "translation": "on",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_076_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَفْرَفٍ",
+          "transliteration": "rafrafin",
+          "translation": "cushions",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_076_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "خُضْرٍۢ",
+          "transliteration": "khuḍ'rin",
+          "translation": "green",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_076_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَعَبْقَرِىٍّ",
+          "transliteration": "waʿabqariyyin",
+          "translation": "and carpets",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_076_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "حِسَانٍۢ",
+          "transliteration": "ḥisānin",
+          "translation": "beautiful",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_076_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٧٦",
+          "transliteration": null,
+          "translation": "(76)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Reclining on green cushions and beautiful fine carpets.",
+      "transliteration": "Muttaki'eena 'alaa rafrafin khudrinw Wa-'abqariyyin hisaan",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055076.mp3"
+    },
+    {
+      "number": 77,
+      "key": "55:77",
+      "textUthmani": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "textUthmaniTajweed": "فَبِأَىِّ ءَال<tajweed class=madda_obligatory>َا</tajweed>ٓءِ رَبِّكُمَا تُكَذِّب<tajweed class=madda_permissible>َا</tajweed>نِ <span class=end>٧٧</span>",
+      "textIndopak": "فَبِاَىِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَبِأَىِّ",
+          "transliteration": "fabi-ayyi",
+          "translation": "So which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_077_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ءَالَآءِ",
+          "transliteration": "ālāi",
+          "translation": "(of the) favors",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_077_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكُمَا",
+          "transliteration": "rabbikumā",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_077_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تُكَذِّبَانِ",
+          "transliteration": "tukadhibāni",
+          "translation": "will you both deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_077_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧٧",
+          "transliteration": null,
+          "translation": "(77)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So which of the favors of your Lord would you deny?",
+      "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukazzibaan.",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055077.mp3"
+    },
+    {
+      "number": 78,
+      "key": "55:78",
+      "textUthmani": "تَبَـٰرَكَ ٱسْمُ رَبِّكَ ذِى ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+      "textUthmaniTajweed": "تَبَ<tajweed class=madda_normal>ـٰ</tajweed>رَكَ <tajweed class=ham_wasl>ٱ</tajweed>سْمُ رَبِّكَ ذِى <tajweed class=ham_wasl>ٱ</tajweed>لْجَلَ<tajweed class=madda_normal>ـٰ</tajweed>لِ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْإِكْر<tajweed class=madda_permissible>َا</tajweed>مِ <span class=end>٧٨</span>",
+      "textIndopak": "تَبٰـرَكَ اسۡمُ رَبِّكَ ذِى الۡجَـلٰلِ وَالۡاِكۡرَامِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "تَبَـٰرَكَ",
+          "transliteration": "tabāraka",
+          "translation": "Blessed is",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_078_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱسْمُ",
+          "transliteration": "us'mu",
+          "translation": "(the) name",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_078_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "رَبِّكَ",
+          "transliteration": "rabbika",
+          "translation": "(of) your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_078_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ذِى",
+          "transliteration": "dhī",
+          "translation": "Owner",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_078_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْجَلَـٰلِ",
+          "transliteration": "l-jalāli",
+          "translation": "(of) Majesty",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_078_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "وَٱلْإِكْرَامِ",
+          "transliteration": "wal-ik'rāmi",
+          "translation": "and Honor",
+          "audioUrl": "https://audio.qurancdn.com/wbw/055_078_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "٧٨",
+          "transliteration": null,
+          "translation": "(78)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Blessed is the name of your Lord, Owner of Majesty and Honor.",
+      "transliteration": "Tabaarak asmu Rabbika Zil Jalaali wal-Ikraam",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055078.mp3"
+    }
+  ]
+}
