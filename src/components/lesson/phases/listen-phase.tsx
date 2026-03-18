@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
-import type { Surah } from '@/types/quran';
+import type { Surah, Ayah } from '@/types/quran';
 import { useAudio } from '@/hooks/use-audio';
 import { useProgressStore } from '@/stores/progress-store';
 import AyahDisplay from '@/components/ui/ayah-display';
@@ -13,20 +13,22 @@ import { useSettingsStore } from '@/stores/settings-store';
 
 interface ListenPhaseProps {
   surah: Surah;
+  ayahs: Ayah[];
+  lessonId: string;
   onComplete: () => void;
 }
 
 const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5];
 const REQUIRED_LISTENS = 3;
 
-export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
+export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: ListenPhaseProps) {
   const { isPlaying, isPaused, setSpeed } = useAudio();
   const { incrementListenCount } = useProgressStore();
-  const lesson = useProgressStore((s) => s.lessons[surah.id]);
+  const lesson = useProgressStore((s) => s.lessons[lessonId]);
   const playCount = lesson?.phaseData.listen.playCount ?? 0;
   const [currentAyahIndex, setCurrentAyahIndex] = useState(-1);
   const [playingAll, setPlayingAll] = useState(false);
-  const [currentSpeed, setCurrentSpeed] = useState(1);
+  const [currentSpeed, setCurrentSpeed] = useState(() => audioController.speed);
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const abortRef = useRef(false);
   const ayahRefs = useRef<(HTMLElement | null)[]>([]);
@@ -69,11 +71,11 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
     abortRef.current = false;
     setPlayingAll(true);
 
-    for (let i = 0; i < surah.ayahs.length; i++) {
+    for (let i = 0; i < ayahs.length; i++) {
       if (abortRef.current) break;
       setCurrentAyahIndex(i);
-      await audioController.playAndWait(getAudioUrl(surah.id, surah.ayahs[i].number));
-      if (!abortRef.current && i < surah.ayahs.length - 1) {
+      await audioController.playAndWait(getAudioUrl(surah.id, ayahs[i].number));
+      if (!abortRef.current && i < ayahs.length - 1) {
         await new Promise<void>((r) => setTimeout(r, 400));
       }
     }
@@ -81,7 +83,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
     setCurrentAyahIndex(-1);
     setPlayingAll(false);
     if (!abortRef.current) {
-      incrementListenCount(surah.id);
+      incrementListenCount(lessonId);
     }
   }, [surah, incrementListenCount, playingAll]);
 
@@ -113,8 +115,8 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
     setIndividualPlays((prev) => {
       const next = new Set(prev);
       next.add(index);
-      if (next.size >= surah.ayahs.length) {
-        incrementListenCount(surah.id);
+      if (next.size >= ayahs.length) {
+        incrementListenCount(lessonId);
         return new Set();
       }
       return next;
@@ -192,7 +194,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
 
       {/* Ayah cards */}
       <div className="space-y-3">
-        {surah.ayahs.map((ayah, i) => {
+        {ayahs.map((ayah, i) => {
           const isActive = i === currentAyahIndex;
           return (
             <button
@@ -286,7 +288,7 @@ export default function ListenPhase({ surah, onComplete }: ListenPhaseProps) {
           <div className="flex-1 text-center">
             <p className="text-xs text-muted">
               {playingAll
-                ? `Ayah ${currentAyahIndex + 1} / ${surah.ayahs.length}`
+                ? `Ayah ${currentAyahIndex + 1} / ${ayahs.length}`
                 : 'Tap ayah or play'}
             </p>
           </div>

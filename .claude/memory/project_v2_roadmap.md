@@ -18,7 +18,7 @@ type: project
 - **Model**: Tarteel's open-source fine-tuned Whisper model on HuggingFace (Apache 2.0). ~5.75% WER on Quran recitation.
 - **Hosting**: HuggingFace Inference API or Replicate. ~$0.006-0.01 per request.
 - **Scope**: Works well for short ayahs (Juz Amma). Constrained verification (known expected text) is much easier than open-ended recognition.
-- **UX**: "Record & Check" button in Build and Test phases. 2-3 second processing delay. Highlight which words matched/didn't.
+- **UX**: "Record & Check" button in Build and Test phases. Level 3 (full recall) test is the ideal place for voice validation — user recites, then instead of self-assessment, the app verifies automatically. 2-3 second processing delay. Highlight which words matched/didn't.
 - **Cost scaling**: Linear with usage (number of recordings), not with content. Rate-limit or make premium if needed.
 - **Backend requirement**: Need a backend/serverless function for this. Supabase (already planned for V2 auth) could host the API route.
 

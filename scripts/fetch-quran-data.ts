@@ -5,7 +5,13 @@
  * Run: npx tsx scripts/fetch-quran-data.ts
  */
 
-const MVP_SURAHS = [1, 103, 108, 110, 111, 112, 113, 114];
+// All Juz 30 surahs (78-114) + Al-Fatiha
+const MVP_SURAHS = [
+  1,
+  78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+  91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103,
+  104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114,
+];
 
 const API_BASE = 'https://api.quran.com/api/v4';
 const AUDIO_BASE = 'https://everyayah.com/data/Alafasy_128kbps';

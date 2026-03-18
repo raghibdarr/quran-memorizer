@@ -72,6 +72,10 @@ class AudioController {
     return this.currentUrl;
   }
 
+  get speed(): number {
+    return this._speed;
+  }
+
   async play(url: string): Promise<void> {
     const audio = this.getAudio();
 

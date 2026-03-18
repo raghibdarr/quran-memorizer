@@ -1,0 +1,226 @@
+{
+  "id": 106,
+  "nameSimple": "Quraysh",
+  "nameArabic": "قريش",
+  "nameTranslation": "Quraysh",
+  "revelationPlace": "makkah",
+  "versesCount": 4,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "106:1",
+      "textUthmani": " لِإِيلَـٰفِ قُرَيْشٍ",
+      "textUthmaniTajweed": "لِإِيلَ<tajweed class=madda_normal>ـٰ</tajweed>فِ قُر<tajweed class=madda_permissible>َي</tajweed>ْشٍ <span class=end>١</span>",
+      "textIndopak": "لِاِيۡلٰفِ قُرَيۡشٍۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لِإِيلَـٰفِ",
+          "transliteration": "liīlāfi",
+          "translation": "For (the) familiarity",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "قُرَيْشٍ",
+          "transliteration": "qurayshin",
+          "translation": "(of the) Quraish",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_001_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "For the accustomed security of the Quraysh -",
+      "transliteration": "Li-eelaafi quraish",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "106:2",
+      "textUthmani": "إِۦلَـٰفِهِمْ رِحْلَةَ ٱلشِّتَآءِ وَٱلصَّيْفِ",
+      "textUthmaniTajweed": "إ<tajweed class=madda_normal>ِۦ</tajweed>لَ<tajweed class=madda_normal>ـٰ</tajweed>فِهِمْ رِحْلَةَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شِّت<tajweed class=madda_obligatory>َا</tajweed>ٓءِ وَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صّ<tajweed class=madda_permissible>َي</tajweed>ْفِ <span class=end>٢</span>",
+      "textIndopak": "اٖلٰفِهِمۡ رِحۡلَةَ الشِّتَآءِ وَالصَّيۡفِ​ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِۦلَـٰفِهِمْ",
+          "transliteration": "īlāfihim",
+          "translation": "Their familiarity",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "رِحْلَةَ",
+          "transliteration": "riḥ'lata",
+          "translation": "(with the) journey",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلشِّتَآءِ",
+          "transliteration": "l-shitāi",
+          "translation": "(of) winter",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_002_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "وَٱلصَّيْفِ",
+          "transliteration": "wal-ṣayfi",
+          "translation": "and summer",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_002_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Their accustomed security [in] the caravan of winter and summer -",
+      "transliteration": "Eelaafihim rihlatash shitaaa'i wassaif",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "106:3",
+      "textUthmani": "فَلْيَعْبُدُوا۟ رَبَّ هَـٰذَا ٱلْبَيْتِ",
+      "textUthmaniTajweed": "فَلْيَعْبُدُو<tajweed class=slnt>اْ</tajweed> رَبَّ هَ<tajweed class=madda_normal>ـٰ</tajweed>ذَا <tajweed class=ham_wasl>ٱ</tajweed>لْب<tajweed class=madda_permissible>َي</tajweed>ْتِ <span class=end>٣</span>",
+      "textIndopak": "فَلۡيَـعۡبُدُوۡا رَبَّ هٰذَا الۡبَيۡتِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَلْيَعْبُدُوا۟",
+          "transliteration": "falyaʿbudū",
+          "translation": "So let them worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "رَبَّ",
+          "transliteration": "rabba",
+          "translation": "(the) Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "هَـٰذَا",
+          "transliteration": "hādhā",
+          "translation": "(of) this",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْبَيْتِ",
+          "transliteration": "l-bayti",
+          "translation": "House",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_003_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Let them worship the Lord of this House,",
+      "transliteration": "Faly'abudoo rabba haazal bait",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "106:4",
+      "textUthmani": "ٱلَّذِىٓ أَطْعَمَهُم مِّن جُوعٍ وَءَامَنَهُم مِّنْ خَوْفٍۭ",
+      "textUthmaniTajweed": "ٱلَّذ<tajweed class=madda_obligatory>ِىٓ</tajweed> أَ<tajweed class=qalaqah>طْ</tajweed>عَمَه<tajweed class=idgham_shafawi>ُم م</tajweed>ِّ<tajweed class=ikhafa>ن ج</tajweed>ُو<tajweed class=idgham_ghunnah>عٍ و</tajweed>َءَامَنَه<tajweed class=idgham_shafawi>ُم م</tajweed>ِّنْ خ<tajweed class=madda_permissible>َو</tajweed>ْفِۭ <span class=end>٤</span>",
+      "textIndopak": "الَّذِىۡۤ اَطۡعَمَهُمۡ مِّنۡ جُوۡعٍ   ۙ وَّاٰمَنَهُمۡ مِّنۡ خَوۡفٍ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلَّذِىٓ",
+          "transliteration": "alladhī",
+          "translation": "The One Who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَطْعَمَهُم",
+          "transliteration": "aṭʿamahum",
+          "translation": "feeds them",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مِّن",
+          "transliteration": "min",
+          "translation": "[from]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "جُوعٍۢ",
+          "transliteration": "jūʿin",
+          "translation": "(against) hunger",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "وَءَامَنَهُم",
+          "transliteration": "waāmanahum",
+          "translation": "and gives them security",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "مِّنْ",
+          "transliteration": "min",
+          "translation": "from",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_006.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 7,
+          "textUthmani": "خَوْفٍۭ",
+          "transliteration": "khawfin",
+          "translation": "fear",
+          "audioUrl": "https://audio.qurancdn.com/wbw/106_004_007.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 8,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Who has fed them, [saving them] from hunger and made them safe, [saving them] from fear.",
+      "transliteration": "Allazeee at'amahum min joo'inw wa-aamanahum min khawf",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106004.mp3"
+    }
+  ]
+}

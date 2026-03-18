@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { Surah, Word } from '@/types/quran';
+import type { Surah, Ayah, Word } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { audioController } from '@/lib/audio';
 import ArabicText from '@/components/ui/arabic-text';
@@ -10,17 +10,19 @@ import { cn } from '@/lib/cn';
 
 interface UnderstandPhaseProps {
   surah: Surah;
+  ayahs: Ayah[];
+  lessonId: string;
   onComplete: () => void;
 }
 
-export default function UnderstandPhase({ surah, onComplete }: UnderstandPhaseProps) {
+export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: UnderstandPhaseProps) {
   const [ayahIndex, setAyahIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
   const [exploredAyahs, setExploredAyahs] = useState<Set<number>>(new Set([0]));
   const { markUnderstandComplete } = useProgressStore();
 
-  const currentAyah = surah.ayahs[ayahIndex];
-  const allExplored = exploredAyahs.size >= surah.ayahs.length;
+  const currentAyah = ayahs[ayahIndex];
+  const allExplored = exploredAyahs.size >= ayahs.length;
 
   const handleWordClick = async (word: Word) => {
     setSelectedWord(word);
@@ -36,7 +38,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
   };
 
   const handleContinue = () => {
-    markUnderstandComplete(surah.id);
+    markUnderstandComplete(lessonId);
     onComplete();
   };
 
@@ -62,7 +64,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
 
         {/* Dot indicators */}
         <div className="flex items-center gap-1.5">
-          {surah.ayahs.map((_, i) => (
+          {ayahs.map((_, i) => (
             <div
               key={i}
               className={cn(
@@ -77,7 +79,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
 
         <button
           onClick={() => goToAyah(ayahIndex + 1)}
-          disabled={ayahIndex === surah.ayahs.length - 1}
+          disabled={ayahIndex === ayahs.length - 1}
           className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-teal transition-colors hover:text-teal-light disabled:opacity-0"
         >
           Next
@@ -86,7 +88,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
       </div>
 
       <p className="text-center text-xs text-muted">
-        Ayah {ayahIndex + 1} of {surah.ayahs.length}
+        Ayah {ayahIndex + 1} of {ayahs.length}
       </p>
 
       {/* Full ayah in Arabic */}
@@ -162,7 +164,7 @@ export default function UnderstandPhase({ surah, onComplete }: UnderstandPhasePr
       >
         {allExplored
           ? 'Continue to Build'
-          : `Explore all ayahs (${exploredAyahs.size}/${surah.ayahs.length})`}
+          : `Explore all ayahs (${exploredAyahs.size}/${ayahs.length})`}
       </Button>
     </div>
   );

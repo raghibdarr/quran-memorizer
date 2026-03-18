@@ -1,36 +1,41 @@
 'use client';
 
 import { useEffect } from 'react';
-import type { Surah } from '@/types/quran';
+import type { Surah, Ayah, LessonDef } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
 import Button from '@/components/ui/button';
 import { StarIcon } from '@/components/ui/icons';
-import { getNextSurah } from '@/lib/curriculum';
 
 interface CompletePhaseProps {
   surah: Surah;
+  ayahs: Ayah[];
+  lessonDef: LessonDef;
+  totalLessons: number;
+  onPracticeAgain: () => void;
 }
 
-export default function CompletePhase({ surah }: CompletePhaseProps) {
-  const { completeLesson, getCompletedSurahIds, resetLesson, restartPractice } = useProgressStore();
-  const { addCardsForSurah } = useReviewStore();
+export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, onPracticeAgain }: CompletePhaseProps) {
+  const { completeLesson, resetLesson } = useProgressStore();
+  const { addCard } = useReviewStore();
   const { recordActivity, addAyahsMemorized } = useStatsStore();
 
   useEffect(() => {
-    completeLesson(surah.id);
-    addCardsForSurah(surah.id, surah.versesCount);
+    completeLesson(lessonDef.lessonId);
+    // Add review cards for this lesson's ayahs only
+    ayahs.forEach((a) => addCard(surah.id, a.number));
     recordActivity();
-    addAyahsMemorized(surah.versesCount);
-  }, [surah.id, surah.versesCount, completeLesson, addCardsForSurah, recordActivity, addAyahsMemorized]);
+    addAyahsMemorized(ayahs.length);
+  }, [lessonDef.lessonId, surah.id, ayahs, completeLesson, addCard, recordActivity, addAyahsMemorized]);
 
-  const completedIds = getCompletedSurahIds();
-  const nextSurahId = getNextSurah(completedIds);
+  const isMultiLesson = totalLessons > 1;
+  const hasNextLesson = lessonDef.lessonNumber < totalLessons;
+  const nextLessonUrl = `/lesson/${surah.id}/${lessonDef.lessonNumber + 1}`;
+  const surahUrl = `/lesson/${surah.id}`;
 
   return (
     <div className="flex flex-col items-center space-y-6 py-8 text-center">
-      {/* Celebration */}
       <div className="flex h-20 w-20 items-center justify-center rounded-full bg-success/10">
         <StarIcon size={36} className="text-success" />
       </div>
@@ -38,57 +43,63 @@ export default function CompletePhase({ surah }: CompletePhaseProps) {
       <div>
         <h3 className="text-2xl font-bold text-foreground">Lesson Complete!</h3>
         <p className="mt-1 text-muted">
-          You've memorized {surah.nameSimple}
+          {isMultiLesson
+            ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber} of ${totalLessons}`
+            : `You've memorized ${surah.nameSimple}`}
         </p>
       </div>
 
-      {/* Stats */}
       <div className="flex gap-6">
         <div>
-          <p className="text-2xl font-bold text-teal">{surah.versesCount}</p>
+          <p className="text-2xl font-bold text-teal">{ayahs.length}</p>
           <p className="text-xs text-muted">Ayahs learned</p>
         </div>
         <div>
           <p className="text-2xl font-bold text-gold">
-            {surah.ayahs.flatMap((a) => a.words).filter((w) => w.charType === 'word').length}
+            {ayahs.flatMap((a) => a.words).filter((w) => w.charType === 'word').length}
           </p>
           <p className="text-xs text-muted">Words reviewed</p>
         </div>
       </div>
 
-      {/* Review reminder */}
       <div className="w-full rounded-xl bg-teal/5 p-4">
         <p className="text-sm text-teal">
-          These ayahs will appear in your review tomorrow to strengthen your memory.
+          These ayahs will appear in your review to strengthen your memory.
         </p>
       </div>
 
-      {/* Actions */}
       <div className="flex w-full flex-col gap-3">
-        {nextSurahId && (
-          <a href={`/lesson/${nextSurahId}`}>
-            <Button className="w-full">Start Next Surah</Button>
+        {hasNextLesson && (
+          <a href={nextLessonUrl}>
+            <Button className="w-full">
+              Start Lesson {lessonDef.lessonNumber + 1}
+            </Button>
           </a>
         )}
 
-        {/* Restart options */}
+        {isMultiLesson && (
+          <a href={surahUrl}>
+            <Button variant={hasNextLesson ? 'secondary' : 'primary'} className="w-full">
+              Back to {surah.nameSimple}
+            </Button>
+          </a>
+        )}
+
         <button
-          onClick={() => restartPractice(surah.id)}
+          onClick={onPracticeAgain}
           className="w-full rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
         >
           Practice Again (Build & Test)
         </button>
         <button
-          onClick={() => resetLesson(surah.id)}
+          onClick={() => resetLesson(lessonDef.lessonId, surah.id)}
           className="w-full rounded-xl py-3 text-sm font-medium text-muted transition-colors hover:text-foreground"
         >
-          Full Reset (Start Over)
+          Full Reset
         </button>
 
         <a href="/">
-          <Button variant="ghost" className="w-full">
-            Back to Home
-          </Button>
+          <Button variant="ghost" className="w-full">Back to Home</Button>
         </a>
       </div>
     </div>

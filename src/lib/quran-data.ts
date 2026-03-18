@@ -1,4 +1,5 @@
-import type { Surah, SurahMeta, Ayah } from '@/types/quran';
+import type { Surah, SurahMeta, Ayah, LessonDef } from '@/types/quran';
+import { generateLessons } from './curriculum';
 
 const surahCache = new Map<number, Surah>();
 
@@ -10,23 +11,15 @@ export async function getSurahIndex(): Promise<SurahMeta[]> {
 export async function getSurah(id: number): Promise<Surah> {
   if (surahCache.has(id)) return surahCache.get(id)!;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let raw: any;
-  switch (id) {
-    case 1: raw = await import('@/data/surah-1.json'); break;
-    case 103: raw = await import('@/data/surah-103.json'); break;
-    case 108: raw = await import('@/data/surah-108.json'); break;
-    case 110: raw = await import('@/data/surah-110.json'); break;
-    case 111: raw = await import('@/data/surah-111.json'); break;
-    case 112: raw = await import('@/data/surah-112.json'); break;
-    case 113: raw = await import('@/data/surah-113.json'); break;
-    case 114: raw = await import('@/data/surah-114.json'); break;
-    default: throw new Error(`Surah ${id} not available`);
+  try {
+    // Dynamic import using template — works for any surah we have data for
+    const raw = await import(`@/data/surah-${id}.json`);
+    const surah = (raw.default ?? raw) as Surah;
+    surahCache.set(id, surah);
+    return surah;
+  } catch {
+    throw new Error(`Surah ${id} not available`);
   }
-
-  const surah = (raw.default ?? raw) as Surah;
-  surahCache.set(id, surah);
-  return surah;
 }
 
 export async function getAyah(surahId: number, ayahNumber: number): Promise<Ayah> {
@@ -34,6 +27,21 @@ export async function getAyah(surahId: number, ayahNumber: number): Promise<Ayah
   const ayah = surah.ayahs.find(a => a.number === ayahNumber);
   if (!ayah) throw new Error(`Ayah ${surahId}:${ayahNumber} not found`);
   return ayah;
+}
+
+/** Get the ayahs for a specific lesson within a surah */
+export async function getLessonAyahs(surahId: number, lessonNumber: number): Promise<Ayah[]> {
+  const surah = await getSurah(surahId);
+  const lessons = generateLessons(surahId, surah.versesCount);
+  const lesson = lessons.find(l => l.lessonNumber === lessonNumber);
+  if (!lesson) throw new Error(`Lesson ${lessonNumber} not found for surah ${surahId}`);
+  return surah.ayahs.filter(a => a.number >= lesson.ayahStart && a.number <= lesson.ayahEnd);
+}
+
+/** Get lesson definitions for a surah */
+export async function getSurahLessons(surahId: number): Promise<LessonDef[]> {
+  const surah = await getSurah(surahId);
+  return generateLessons(surahId, surah.versesCount);
 }
 
 export function getAudioUrl(surahId: number, ayahNumber: number, reciter = 'Alafasy_128kbps'): string {

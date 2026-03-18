@@ -1,0 +1,350 @@
+{
+  "id": 107,
+  "nameSimple": "Al-Ma'un",
+  "nameArabic": "الماعون",
+  "nameTranslation": "The Small kindnesses",
+  "revelationPlace": "makkah",
+  "versesCount": 7,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "107:1",
+      "textUthmani": " أَرَءَيْتَ ٱلَّذِى يُكَذِّبُ بِٱلدِّينِ",
+      "textUthmaniTajweed": "أَرَءَيْتَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِى يُكَذِّبُ بِ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دّ<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>١</span>",
+      "textIndopak": "اَرَءَيۡتَ الَّذِىۡ يُكَذِّبُ بِالدِّيۡنِؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "أَرَءَيْتَ",
+          "transliteration": "ara-ayta",
+          "translation": "Have you seen",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلَّذِى",
+          "transliteration": "alladhī",
+          "translation": "the one who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_001_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يُكَذِّبُ",
+          "transliteration": "yukadhibu",
+          "translation": "denies",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_001_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "بِٱلدِّينِ",
+          "transliteration": "bil-dīni",
+          "translation": "the Judgment",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_001_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Have you seen the one who denies the Recompense?",
+      "transliteration": "Ara-'aytal lazee yukazzibu biddeen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "107:2",
+      "textUthmani": "فَذَٰلِكَ ٱلَّذِى يَدُعُّ ٱلْيَتِيمَ",
+      "textUthmaniTajweed": "فَذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِى يَدُعُّ <tajweed class=ham_wasl>ٱ</tajweed>لْيَت<tajweed class=madda_permissible>ِي</tajweed>مَ <span class=end>٢</span>",
+      "textIndopak": "فَذٰلِكَ الَّذِىۡ يَدُعُّ الۡيَتِيۡمَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَذَٰلِكَ",
+          "transliteration": "fadhālika",
+          "translation": "Then that",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلَّذِى",
+          "transliteration": "alladhī",
+          "translation": "(is) the one who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يَدُعُّ",
+          "transliteration": "yaduʿʿu",
+          "translation": "repulses",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_002_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْيَتِيمَ",
+          "transliteration": "l-yatīma",
+          "translation": "the orphan",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_002_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "For that is the one who drives away the orphan",
+      "transliteration": "Fazaalikal lazee yadu'ul yateem",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "107:3",
+      "textUthmani": "وَلَا يَحُضُّ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ",
+      "textUthmaniTajweed": "وَلَا يَحُضُّ عَلَىٰ طَعَامِ <tajweed class=ham_wasl>ٱ</tajweed>لْمِسْك<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٣</span>",
+      "textIndopak": "وَ لَا يَحُضُّ عَلٰى طَعَامِ الۡمِسۡكِيۡنِؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلَا",
+          "transliteration": "walā",
+          "translation": "And (does) not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَحُضُّ",
+          "transliteration": "yaḥuḍḍu",
+          "translation": "feel the urge",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَلَىٰ",
+          "transliteration": "ʿalā",
+          "translation": "to",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "طَعَامِ",
+          "transliteration": "ṭaʿāmi",
+          "translation": "feed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_003_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْمِسْكِينِ",
+          "transliteration": "l-mis'kīni",
+          "translation": "the poor",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_003_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And does not encourage the feeding of the poor.",
+      "transliteration": "Wa-la yahuddu 'alaa ta'aamil miskeen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "107:4",
+      "textUthmani": "فَوَيْلٌ لِّلْمُصَلِّينَ",
+      "textUthmaniTajweed": "فَوَيْ<tajweed class=idgham_wo_ghunnah>لٌ ل</tajweed>ِّلْمُصَلّ<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤</span>",
+      "textIndopak": "فَوَيۡلٌ لِّلۡمُصَلِّيۡنَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَوَيْلٌۭ",
+          "transliteration": "fawaylun",
+          "translation": "So woe",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لِّلْمُصَلِّينَ",
+          "transliteration": "lil'muṣallīna",
+          "translation": "to those who pray",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So woe to those who pray",
+      "transliteration": "Fa-wailul lil-musalleen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "107:5",
+      "textUthmani": "ٱلَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ",
+      "textUthmaniTajweed": "ٱلَّذِينَ هُمْ عَ<tajweed class=ikhafa>ن ص</tajweed>َلَاتِهِمْ سَاه<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٥</span>",
+      "textIndopak": "الَّذِيۡنَ هُمۡ عَنۡ صَلَاتِهِمۡ سَاهُوۡنَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلَّذِينَ",
+          "transliteration": "alladhīna",
+          "translation": "Those who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "هُمْ",
+          "transliteration": "hum",
+          "translation": "[they]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَن",
+          "transliteration": "ʿan",
+          "translation": "about",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "صَلَاتِهِمْ",
+          "transliteration": "ṣalātihim",
+          "translation": "their prayers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_005_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "سَاهُونَ",
+          "transliteration": "sāhūna",
+          "translation": "(are) neglectful",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_005_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "[But] who are heedless of their prayer -",
+      "transliteration": "Allazeena hum 'an salaatihim saahoon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "107:6",
+      "textUthmani": "ٱلَّذِينَ هُمْ يُرَآءُونَ",
+      "textUthmaniTajweed": "ٱلَّذِينَ هُمْ يُر<tajweed class=madda_obligatory>َا</tajweed>ٓء<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٦</span>",
+      "textIndopak": "الَّذِيۡنَ هُمۡ يُرَآءُوۡنَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلَّذِينَ",
+          "transliteration": "alladhīna",
+          "translation": "Those who",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "هُمْ",
+          "transliteration": "hum",
+          "translation": "[they]",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يُرَآءُونَ",
+          "transliteration": "yurāūna",
+          "translation": "make show",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_006_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Those who make show [of their deeds]",
+      "transliteration": "Allazeena hum yuraaa'oon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107006.mp3"
+    },
+    {
+      "number": 7,
+      "key": "107:7",
+      "textUthmani": "وَيَمْنَعُونَ ٱلْمَاعُونَ",
+      "textUthmaniTajweed": "وَيَمْنَعُونَ <tajweed class=ham_wasl>ٱ</tajweed>لْمَاع<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٧</span>",
+      "textIndopak": "وَيَمۡنَعُوۡنَ الۡمَاعُوۡنَ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَيَمْنَعُونَ",
+          "transliteration": "wayamnaʿūna",
+          "translation": "And they deny",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_007_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْمَاعُونَ",
+          "transliteration": "l-māʿūna",
+          "translation": "[the] small kindnesses",
+          "audioUrl": "https://audio.qurancdn.com/wbw/107_007_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٧",
+          "transliteration": null,
+          "translation": "(7)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And withhold [simple] assistance.",
+      "transliteration": "Wa-yamna'oonal maa'oon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107007.mp3"
+    }
+  ]
+}

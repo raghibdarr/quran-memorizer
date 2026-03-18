@@ -5,7 +5,7 @@ import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useReviewStore } from '@/stores/review-store';
 import { getSurahIndex } from '@/lib/quran-data';
-import { getSurahOrder } from '@/lib/curriculum';
+import { getSurahOrder, generateLessons } from '@/lib/curriculum';
 import type { SurahMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -14,7 +14,7 @@ import SettingsPanel from '@/components/layout/settings-panel';
 
 export default function ProgressPage() {
   const [surahs, setSurahs] = useState<SurahMeta[]>([]);
-  const lessons = useProgressStore((s) => s.lessons);
+  const progressLessons = useProgressStore((s) => s.lessons);
   const stats = useStatsStore();
   const cards = useReviewStore((s) => s.cards);
 
@@ -27,7 +27,7 @@ export default function ProgressPage() {
     });
   }, []);
 
-  const completedCount = Object.values(lessons).filter((l) => l.completedAt).length;
+  const completedLessonCount = Object.values(progressLessons).filter((l) => l.completedAt).length;
 
   return (
     <div className="min-h-screen bg-cream pb-20">
@@ -41,7 +41,6 @@ export default function ProgressPage() {
       </header>
 
       <main className="mx-auto max-w-2xl space-y-4 px-4">
-        {/* Overview stats */}
         <div className="grid grid-cols-2 gap-3">
           <Card className="text-center">
             <p className="text-3xl font-bold text-teal">{stats.totalAyahsMemorized}</p>
@@ -52,8 +51,8 @@ export default function ProgressPage() {
             <p className="text-xs text-muted">Day Streak</p>
           </Card>
           <Card className="text-center">
-            <p className="text-3xl font-bold text-success">{completedCount}</p>
-            <p className="text-xs text-muted">Surahs Complete</p>
+            <p className="text-3xl font-bold text-success">{completedLessonCount}</p>
+            <p className="text-xs text-muted">Lessons Done</p>
           </Card>
           <Card className="text-center">
             <p className="text-3xl font-bold text-foreground">{cards.length}</p>
@@ -61,7 +60,6 @@ export default function ProgressPage() {
           </Card>
         </div>
 
-        {/* Longest streak */}
         {stats.longestStreak > 0 && (
           <Card>
             <p className="text-sm text-muted">Longest streak</p>
@@ -71,35 +69,36 @@ export default function ProgressPage() {
           </Card>
         )}
 
-        {/* Per-surah progress */}
         <div>
           <h2 className="mb-3 text-lg font-bold text-foreground">Surah Progress</h2>
           <div className="space-y-2">
             {surahs.map((surah) => {
-              const lesson = lessons[surah.id];
-              const isComplete = lesson?.completedAt != null;
-              const phase = lesson?.currentPhase ?? 'not started';
-              const progress = isComplete
-                ? 100
-                : lesson
-                ? ['listen', 'understand', 'chunk', 'test', 'complete'].indexOf(lesson.currentPhase) * 25
-                : 0;
+              const lessons = generateLessons(surah.id, surah.versesCount);
+              const completed = lessons.filter(
+                (l) => progressLessons[l.lessonId]?.completedAt != null
+              ).length;
+              const isComplete = completed === lessons.length && lessons.length > 0;
+              const progress = lessons.length > 0 ? (completed / lessons.length) * 100 : 0;
 
               return (
-                <Card key={surah.id} className="flex items-center gap-3">
-                  <span className="arabic-text text-lg">{surah.nameArabic}</span>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold">{surah.nameSimple}</p>
-                      <span className="text-xs capitalize text-muted">{phase}</span>
+                <a key={surah.id} href={`/lesson/${surah.id}`} className="block">
+                  <Card className="flex items-center gap-3">
+                    <span className="arabic-text text-lg">{surah.nameArabic}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-semibold">{surah.nameSimple}</p>
+                        <span className="text-xs text-muted">
+                          {completed}/{lessons.length}
+                        </span>
+                      </div>
+                      <ProgressBar
+                        value={progress}
+                        color={isComplete ? 'bg-success' : 'bg-teal'}
+                        className="mt-1"
+                      />
                     </div>
-                    <ProgressBar
-                      value={progress}
-                      color={isComplete ? 'bg-success' : 'bg-teal'}
-                      className="mt-1"
-                    />
-                  </div>
-                </Card>
+                  </Card>
+                </a>
               );
             })}
           </div>

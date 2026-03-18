@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef, useCallback } from 'react';
-import type { Surah, LessonPhase } from '@/types/quran';
+import type { Surah, Ayah, LessonDef, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
@@ -17,18 +17,28 @@ import CompletePhase from './phases/complete-phase';
 
 interface LessonContainerProps {
   surah: Surah;
+  ayahs: Ayah[];
+  lessonDef: LessonDef;
+  totalLessons: number;
 }
 
 const PHASE_ORDER: LessonPhase[] = ['listen', 'understand', 'chunk', 'test', 'complete'];
 
-export default function LessonContainer({ surah }: LessonContainerProps) {
+export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons }: LessonContainerProps) {
   const { startLesson, updatePhase, resetLesson } = useProgressStore();
-  const lesson = useProgressStore((s) => s.lessons[surah.id]);
+  const lesson = useProgressStore((s) => s.lessons[lessonDef.lessonId]);
   const [transitioning, setTransitioning] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [chunkStartAtReview, setChunkStartAtReview] = useState(false);
+  // Practice mode: overrides displayed phase without touching the store
+  const [practicePhase, setPracticePhase] = useState<LessonPhase | null>(null);
   const headerRef = useRef<HTMLElement>(null);
 
-  // Track header height and expose as CSS variable
+  useEffect(() => {
+    startLesson(lessonDef.lessonId, surah.id);
+  }, [lessonDef.lessonId, surah.id, startLesson]);
+
+  // Track header height for sticky elements
   useEffect(() => {
     if (!headerRef.current) return;
     const observer = new ResizeObserver(([entry]) => {
@@ -41,18 +51,23 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    startLesson(surah.id);
-  }, [surah.id, startLesson]);
-
   if (!lesson) return null;
 
-  const currentPhaseIndex = PHASE_ORDER.indexOf(lesson.currentPhase);
+  const activePhase: LessonPhase = practicePhase ?? lesson.currentPhase;
+  const currentPhaseIndex = PHASE_ORDER.indexOf(activePhase);
+  const lessonTitle = totalLessons > 1
+    ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
+    : surah.nameSimple;
 
   const goToPhase = (phase: LessonPhase) => {
     setTransitioning(true);
     setTimeout(() => {
-      updatePhase(surah.id, phase);
+      if (practicePhase !== null) {
+        // In practice mode — don't persist to store
+        setPracticePhase(phase);
+      } else {
+        updatePhase(lessonDef.lessonId, phase);
+      }
       setTransitioning(false);
     }, 300);
   };
@@ -64,66 +79,82 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
   };
 
   const handleReset = () => {
-    resetLesson(surah.id);
+    resetLesson(lessonDef.lessonId, surah.id);
     setShowResetConfirm(false);
   };
+
+  const backUrl = totalLessons > 1 ? `/lesson/${surah.id}` : '/';
 
   const phaseMap: Record<LessonPhase, React.ReactNode> = {
     listen: (
       <ListenPhase
         surah={surah}
+        ayahs={ayahs}
+        lessonId={lessonDef.lessonId}
         onComplete={() => goToPhase('understand')}
       />
     ),
     understand: (
       <UnderstandPhase
         surah={surah}
+        ayahs={ayahs}
+        lessonId={lessonDef.lessonId}
         onComplete={() => goToPhase('chunk')}
       />
     ),
     chunk: (
       <ChunkPhase
         surah={surah}
-        onComplete={() => goToPhase('test')}
+        ayahs={ayahs}
+        lessonId={lessonDef.lessonId}
+        startAtReview={chunkStartAtReview}
+        onComplete={() => { setChunkStartAtReview(false); goToPhase('test'); }}
       />
     ),
     test: (
       <TestPhase
         surah={surah}
+        ayahs={ayahs}
+        lessonId={lessonDef.lessonId}
+        totalLessons={totalLessons}
         onComplete={() => goToPhase('complete')}
-        onRetry={() => goToPhase('chunk')}
+        onRetry={() => { setChunkStartAtReview(true); goToPhase('chunk'); }}
       />
     ),
-    complete: <CompletePhase surah={surah} />,
+    complete: (
+      <CompletePhase
+        surah={surah}
+        ayahs={ayahs}
+        lessonDef={lessonDef}
+        totalLessons={totalLessons}
+        onPracticeAgain={() => {
+          setChunkStartAtReview(true);
+          setPracticePhase('chunk');
+        }}
+      />
+    ),
   };
 
   return (
     <div className="flex min-h-screen flex-col bg-cream pb-16">
-      {/* Header */}
       <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <a href="/" className="text-sm text-muted hover:text-foreground">
+              <a href={backUrl} className="text-sm text-muted hover:text-foreground">
                 ← Back
               </a>
-              {currentPhaseIndex > 0 && lesson.currentPhase !== 'complete' && (
-                <button
-                  onClick={goBack}
-                  className="text-xs text-muted hover:text-foreground"
-                >
+              {currentPhaseIndex > 0 && activePhase !== 'complete' && (
+                <button onClick={goBack} className="text-xs text-muted hover:text-foreground">
                   ← Prev Phase
                 </button>
               )}
             </div>
-            <h2 className="text-sm font-semibold text-teal">
-              {surah.nameSimple}
-            </h2>
+            <h2 className="text-sm font-semibold text-teal">{lessonTitle}</h2>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowResetConfirm(true)}
                 className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
-                aria-label="Reset lesson"
                 title="Reset lesson"
               >
                 <RefreshIcon size={14} />
@@ -131,18 +162,22 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
               <SettingsPanel />
             </div>
           </div>
-          <PhaseIndicator currentPhase={lesson.currentPhase} />
+          {totalLessons > 1 && (
+            <p className="mb-2 text-center text-xs text-muted">
+              Ayahs {lessonDef.ayahStart}–{lessonDef.ayahEnd}
+            </p>
+          )}
+          <PhaseIndicator currentPhase={activePhase} />
           <TajweedLegend />
         </div>
       </header>
 
-      {/* Reset confirmation */}
       {showResetConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <div className="mx-4 w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
             <h3 className="text-lg font-bold text-foreground">Reset Progress?</h3>
             <p className="mt-2 text-sm text-muted">
-              This will restart {surah.nameSimple} from the Listen phase. Your review cards won't be affected.
+              This will restart this lesson from the Listen phase.
             </p>
             <div className="mt-4 flex gap-3">
               <button
@@ -162,7 +197,6 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
         </div>
       )}
 
-      {/* Phase content */}
       <main
         className={cn(
           'flex-1 px-4 py-6 transition-opacity duration-300',
@@ -170,7 +204,7 @@ export default function LessonContainer({ surah }: LessonContainerProps) {
         )}
       >
         <div className="mx-auto max-w-2xl">
-          {phaseMap[lesson.currentPhase]}
+          {phaseMap[activePhase]}
         </div>
       </main>
 

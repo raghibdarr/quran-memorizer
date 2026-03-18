@@ -1,0 +1,338 @@
+{
+  "id": 109,
+  "nameSimple": "Al-Kafirun",
+  "nameArabic": "الكافرون",
+  "nameTranslation": "The Disbelievers",
+  "revelationPlace": "makkah",
+  "versesCount": 6,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "109:1",
+      "textUthmani": " قُلْ يَـٰٓأَيُّهَا ٱلْكَـٰفِرُونَ",
+      "textUthmaniTajweed": "قُلْ يَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed>لْكَ<tajweed class=madda_normal>ـٰ</tajweed>فِر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١</span>",
+      "textIndopak": "قُلۡ يٰۤاَيُّهَا الۡكٰفِرُوۡنَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "قُلْ",
+          "transliteration": "qul",
+          "translation": "Say",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَـٰٓأَيُّهَا",
+          "transliteration": "yāayyuhā",
+          "translation": "O",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_001_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْكَـٰفِرُونَ",
+          "transliteration": "l-kāfirūna",
+          "translation": "disbelievers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_001_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Say, \"O disbelievers,",
+      "transliteration": "Qul yaaa-ayyuhal kaafiroon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/109001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "109:2",
+      "textUthmani": "لَآ أَعْبُدُ مَا تَعْبُدُونَ",
+      "textUthmaniTajweed": "ل<tajweed class=madda_obligatory>َآ</tajweed> أَعْبُدُ مَا تَعْبُد<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢</span>",
+      "textIndopak": "لَاۤ اَعۡبُدُ مَا تَعۡبُدُوۡنَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لَآ",
+          "transliteration": "lā",
+          "translation": "Not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَعْبُدُ",
+          "transliteration": "aʿbudu",
+          "translation": "I worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مَا",
+          "transliteration": "mā",
+          "translation": "what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تَعْبُدُونَ",
+          "transliteration": "taʿbudūna",
+          "translation": "you worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_002_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "I do not worship what you worship.",
+      "transliteration": "Laaa a'budu maa t'abudoon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/109002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "109:3",
+      "textUthmani": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
+      "textUthmaniTajweed": "وَل<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>نت</tajweed>ُمْ عَ<tajweed class=madda_normal>ـٰ</tajweed>بِدُونَ م<tajweed class=madda_obligatory>َآ</tajweed> أَعْبُ<tajweed class=qalaqah>د</tajweed>ُ <span class=end>٣</span>",
+      "textIndopak": "وَلَاۤ اَنۡـتُمۡ عٰبِدُوۡنَ مَاۤ اَعۡبُدُ​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلَآ",
+          "transliteration": "walā",
+          "translation": "And not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَنتُمْ",
+          "transliteration": "antum",
+          "translation": "you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَـٰبِدُونَ",
+          "transliteration": "ʿābidūna",
+          "translation": "(are) worshippers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مَآ",
+          "transliteration": "mā",
+          "translation": "(of) what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "أَعْبُدُ",
+          "transliteration": "aʿbudu",
+          "translation": "I worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_003_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Nor are you worshippers of what I worship.",
+      "transliteration": "Wa-laaa antum 'aabidoona maaa a'bud",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/109003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "109:4",
+      "textUthmani": "وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمْ",
+      "textUthmaniTajweed": "وَل<tajweed class=madda_obligatory>َآ</tajweed> أَنَا۟ عَابِ<tajweed class=idgham_ghunnah>دٌ م</tajweed>َّا عَبَ<tajweed class=idgham_mutajanisayn>د</tajweed>تُّمْ <span class=end>٤</span>",
+      "textIndopak": "وَلَاۤ اَنَا عَابِدٌ مَّا عَبَدۡتُّمۡۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلَآ",
+          "transliteration": "walā",
+          "translation": "And not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَنَا۠",
+          "transliteration": "anā",
+          "translation": "I am",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَابِدٌۭ",
+          "transliteration": "ʿābidun",
+          "translation": "a worshipper",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مَّا",
+          "transliteration": "mā",
+          "translation": "(of) what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "عَبَدتُّمْ",
+          "transliteration": "ʿabadttum",
+          "translation": "you worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_004_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Nor will I be a worshipper of what you worship.",
+      "transliteration": "Wa-laaa ana 'abidum maa 'abattum",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/109004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "109:5",
+      "textUthmani": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
+      "textUthmaniTajweed": "وَل<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>نت</tajweed>ُمْ عَ<tajweed class=madda_normal>ـٰ</tajweed>بِدُونَ م<tajweed class=madda_obligatory>َآ</tajweed> أَعْبُ<tajweed class=qalaqah>د</tajweed>ُ <span class=end>٥</span>",
+      "textIndopak": "وَ لَاۤ اَنۡـتُمۡ عٰبِدُوۡنَ مَاۤ اَعۡبُدُ ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَلَآ",
+          "transliteration": "walā",
+          "translation": "And not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَنتُمْ",
+          "transliteration": "antum",
+          "translation": "you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَـٰبِدُونَ",
+          "transliteration": "ʿābidūna",
+          "translation": "(are) worshippers",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مَآ",
+          "transliteration": "mā",
+          "translation": "(of) what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "أَعْبُدُ",
+          "transliteration": "aʿbudu",
+          "translation": "I worship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_005_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Nor will you be worshippers of what I worship.",
+      "transliteration": "Wa-laaa antum 'aabidoona maaa a'bud",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/109005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "109:6",
+      "textUthmani": "لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
+      "textUthmaniTajweed": "لَكُمْ دِينُكُمْ وَلِىَ د<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٦</span>",
+      "textIndopak": "لَـكُمۡ دِيۡنُكُمۡ وَلِىَ دِيۡنِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لَكُمْ",
+          "transliteration": "lakum",
+          "translation": "For you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "دِينُكُمْ",
+          "transliteration": "dīnukum",
+          "translation": "(is) your religion",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وَلِىَ",
+          "transliteration": "waliya",
+          "translation": "and for me",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "دِينِ",
+          "transliteration": "dīni",
+          "translation": "(is) my religion",
+          "audioUrl": "https://audio.qurancdn.com/wbw/109_006_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "For you is your religion, and for me is my religion.\"",
+      "transliteration": "Lakum deenukum Wa-liya deen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/109006.mp3"
+    }
+  ]
+}

@@ -5,24 +5,26 @@ import { persist } from 'zustand/middleware';
 import type { LessonProgress, LessonPhase, TestLevel } from '@/types/quran';
 
 interface ProgressState {
-  lessons: Record<number, LessonProgress>;
-  startLesson: (surahId: number) => void;
-  updatePhase: (surahId: number, phase: LessonPhase) => void;
-  incrementListenCount: (surahId: number) => void;
-  markUnderstandComplete: (surahId: number) => void;
-  updateChunkIndex: (surahId: number, index: number) => void;
-  markChunkComplete: (surahId: number) => void;
-  updateTestLevel: (surahId: number, level: TestLevel) => void;
-  markTestComplete: (surahId: number) => void;
-  completeLesson: (surahId: number) => void;
-  getLesson: (surahId: number) => LessonProgress | undefined;
-  getCompletedSurahIds: () => number[];
-  resetLesson: (surahId: number) => void;
-  restartPractice: (surahId: number) => void;
+  lessons: Record<string, LessonProgress>;  // keyed by lessonId (e.g. "78-3")
+  startLesson: (lessonId: string, surahId: number) => void;
+  updatePhase: (lessonId: string, phase: LessonPhase) => void;
+  incrementListenCount: (lessonId: string) => void;
+  markUnderstandComplete: (lessonId: string) => void;
+  updateChunkIndex: (lessonId: string, index: number) => void;
+  markChunkComplete: (lessonId: string) => void;
+  updateTestLevel: (lessonId: string, level: TestLevel) => void;
+  markTestComplete: (lessonId: string) => void;
+  completeLesson: (lessonId: string) => void;
+  getLesson: (lessonId: string) => LessonProgress | undefined;
+  resetLesson: (lessonId: string, surahId: number) => void;
+  restartPractice: (lessonId: string) => void;
+  getCompletedLessonsBySurah: (surahId: number) => string[];
+  getActiveLessonForSurah: (surahId: number) => LessonProgress | undefined;
 }
 
-function createInitialProgress(surahId: number): LessonProgress {
+function createInitialProgress(lessonId: string, surahId: number): LessonProgress {
   return {
+    lessonId,
     surahId,
     currentPhase: 'listen',
     phaseData: {
@@ -41,59 +43,50 @@ export const useProgressStore = create<ProgressState>()(
     (set, get) => ({
       lessons: {},
 
-      startLesson: (surahId) =>
+      startLesson: (lessonId, surahId) =>
         set((state) => {
-          if (state.lessons[surahId]) return state;
+          if (state.lessons[lessonId]) return state;
           return {
-            lessons: {
-              ...state.lessons,
-              [surahId]: createInitialProgress(surahId),
-            },
+            lessons: { ...state.lessons, [lessonId]: createInitialProgress(lessonId, surahId) },
           };
         }),
 
-      updatePhase: (surahId, phase) =>
+      updatePhase: (lessonId, phase) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
-            lessons: {
-              ...state.lessons,
-              [surahId]: { ...lesson, currentPhase: phase },
-            },
+            lessons: { ...state.lessons, [lessonId]: { ...lesson, currentPhase: phase } },
           };
         }),
 
-      incrementListenCount: (surahId) =>
+      incrementListenCount: (lessonId) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           const newCount = lesson.phaseData.listen.playCount + 1;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 phaseData: {
                   ...lesson.phaseData,
-                  listen: {
-                    playCount: newCount,
-                    completed: newCount >= 3,
-                  },
+                  listen: { playCount: newCount, completed: newCount >= 3 },
                 },
               },
             },
           };
         }),
 
-      markUnderstandComplete: (surahId) =>
+      markUnderstandComplete: (lessonId) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 phaseData: {
                   ...lesson.phaseData,
@@ -104,14 +97,14 @@ export const useProgressStore = create<ProgressState>()(
           };
         }),
 
-      updateChunkIndex: (surahId, index) =>
+      updateChunkIndex: (lessonId, index) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 phaseData: {
                   ...lesson.phaseData,
@@ -122,14 +115,14 @@ export const useProgressStore = create<ProgressState>()(
           };
         }),
 
-      markChunkComplete: (surahId) =>
+      markChunkComplete: (lessonId) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 phaseData: {
                   ...lesson.phaseData,
@@ -140,14 +133,14 @@ export const useProgressStore = create<ProgressState>()(
           };
         }),
 
-      updateTestLevel: (surahId, level) =>
+      updateTestLevel: (lessonId, level) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 phaseData: {
                   ...lesson.phaseData,
@@ -158,14 +151,14 @@ export const useProgressStore = create<ProgressState>()(
           };
         }),
 
-      markTestComplete: (surahId) =>
+      markTestComplete: (lessonId) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 phaseData: {
                   ...lesson.phaseData,
@@ -176,47 +169,33 @@ export const useProgressStore = create<ProgressState>()(
           };
         }),
 
-      completeLesson: (surahId) =>
+      completeLesson: (lessonId) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
-                ...lesson,
-                currentPhase: 'complete',
-                completedAt: Date.now(),
-              },
+              [lessonId]: { ...lesson, currentPhase: 'complete', completedAt: Date.now() },
             },
           };
         }),
 
-      getLesson: (surahId) => get().lessons[surahId],
+      getLesson: (lessonId) => get().lessons[lessonId],
 
-      getCompletedSurahIds: () =>
-        Object.values(get().lessons)
-          .filter((l) => l.completedAt !== null)
-          .map((l) => l.surahId),
-
-      // Full reset — back to Listen phase
-      resetLesson: (surahId) =>
+      resetLesson: (lessonId, surahId) =>
         set((state) => ({
-          lessons: {
-            ...state.lessons,
-            [surahId]: createInitialProgress(surahId),
-          },
+          lessons: { ...state.lessons, [lessonId]: createInitialProgress(lessonId, surahId) },
         })),
 
-      // Practice again — jump to Build phase, keep listen/understand done
-      restartPractice: (surahId) =>
+      restartPractice: (lessonId) =>
         set((state) => {
-          const lesson = state.lessons[surahId];
+          const lesson = state.lessons[lessonId];
           if (!lesson) return state;
           return {
             lessons: {
               ...state.lessons,
-              [surahId]: {
+              [lessonId]: {
                 ...lesson,
                 currentPhase: 'chunk',
                 completedAt: null,
@@ -229,7 +208,26 @@ export const useProgressStore = create<ProgressState>()(
             },
           };
         }),
+
+      getCompletedLessonsBySurah: (surahId) =>
+        Object.values(get().lessons)
+          .filter((l) => l.surahId === surahId && l.completedAt !== null)
+          .map((l) => l.lessonId),
+
+      getActiveLessonForSurah: (surahId) =>
+        Object.values(get().lessons)
+          .find((l) => l.surahId === surahId && l.completedAt === null),
     }),
-    { name: 'quran-progress' }
+    {
+      name: 'quran-progress',
+      version: 2,
+      migrate: (persisted, version) => {
+        if (version < 2) {
+          // Old format used numeric surahId keys — clear and start fresh
+          return { lessons: {} };
+        }
+        return persisted as ProgressState;
+      },
+    }
   )
 );

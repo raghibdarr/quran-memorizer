@@ -42,12 +42,24 @@ export interface SurahMeta {
   versesCount: number;
 }
 
+// Lesson structure
+
+export interface LessonDef {
+  lessonId: string;           // "78-3" = surah 78, lesson 3
+  surahId: number;
+  lessonNumber: number;       // 1-based
+  ayahStart: number;          // first ayah number (inclusive)
+  ayahEnd: number;            // last ayah number (inclusive)
+  ayahCount: number;
+}
+
 // Lesson & progress types
 
 export type LessonPhase = 'listen' | 'understand' | 'chunk' | 'test' | 'complete';
 export type TestLevel = 'fill-blank' | 'first-letter' | 'full-recall';
 
 export interface LessonProgress {
+  lessonId: string;           // e.g. "78-3"
   surahId: number;
   currentPhase: LessonPhase;
   phaseData: {

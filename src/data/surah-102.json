@@ -1,0 +1,394 @@
+{
+  "id": 102,
+  "nameSimple": "At-Takathur",
+  "nameArabic": "التكاثر",
+  "nameTranslation": "The Rivalry in world increase",
+  "revelationPlace": "makkah",
+  "versesCount": 8,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "102:1",
+      "textUthmani": " أَلْهَىٰكُمُ ٱلتَّكَاثُرُ",
+      "textUthmaniTajweed": "أَلْهَ<tajweed class=madda_normal>ـٰ</tajweed>كُمُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>تَّكَاثُرُ <span class=end>١</span>",
+      "textIndopak": "اَلۡهٰٮكُمُ التَّكَاثُرُۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "أَلْهَىٰكُمُ",
+          "transliteration": "alhākumu",
+          "translation": "Diverts you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلتَّكَاثُرُ",
+          "transliteration": "l-takāthuru",
+          "translation": "the competition to increase",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_001_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Competition in [worldly] increase diverts you",
+      "transliteration": "Al-haaku mut-takathur",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "102:2",
+      "textUthmani": "حَتَّىٰ زُرْتُمُ ٱلْمَقَابِرَ",
+      "textUthmaniTajweed": "حَتَّىٰ زُرْتُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْمَقَابِرَ <span class=end>٢</span>",
+      "textIndopak": "حَتّٰى زُرۡتُمُ الۡمَقَابِرَؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "حَتَّىٰ",
+          "transliteration": "ḥattā",
+          "translation": "Until",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "زُرْتُمُ",
+          "transliteration": "zur'tumu",
+          "translation": "you visit",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْمَقَابِرَ",
+          "transliteration": "l-maqābira",
+          "translation": "the graves",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_002_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Until you visit the graveyards.",
+      "transliteration": "Hatta zurtumul maqaabir",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "102:3",
+      "textUthmani": "كَلَّا سَوْفَ تَعْلَمُونَ",
+      "textUthmaniTajweed": "كَلَّا سَوْفَ تَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣</span>",
+      "textIndopak": "كَلَّا سَوۡفَ تَعۡلَمُوۡنَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "كَلَّا",
+          "transliteration": "kallā",
+          "translation": "Nay",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "سَوْفَ",
+          "transliteration": "sawfa",
+          "translation": "Soon",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "تَعْلَمُونَ",
+          "transliteration": "taʿlamūna",
+          "translation": "you will know",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "No! You are going to know.",
+      "transliteration": "Kalla sawfa ta'lamoon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "102:4",
+      "textUthmani": "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",
+      "textUthmaniTajweed": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ كَلَّا سَوْفَ تَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤</span>",
+      "textIndopak": "ثُمَّ كَلَّا سَوۡفَ تَعۡلَمُوۡنَؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ثُمَّ",
+          "transliteration": "thumma",
+          "translation": "Then",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "كَلَّا",
+          "transliteration": "kallā",
+          "translation": "nay",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "سَوْفَ",
+          "transliteration": "sawfa",
+          "translation": "Soon",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_004_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "تَعْلَمُونَ",
+          "transliteration": "taʿlamūna",
+          "translation": "you will know",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_004_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then, no! You are going to know.",
+      "transliteration": "Thumma kalla sawfa ta'lamoon",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "102:5",
+      "textUthmani": "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ ٱلْيَقِينِ",
+      "textUthmaniTajweed": "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ <tajweed class=ham_wasl>ٱ</tajweed>لْيَق<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٥</span>",
+      "textIndopak": "كَلَّا لَوۡ تَعۡلَمُوۡنَ عِلۡمَ الۡيَقِيۡنِؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "كَلَّا",
+          "transliteration": "kallā",
+          "translation": "Nay",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَوْ",
+          "transliteration": "law",
+          "translation": "If",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "تَعْلَمُونَ",
+          "transliteration": "taʿlamūna",
+          "translation": "you know",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "عِلْمَ",
+          "transliteration": "ʿil'ma",
+          "translation": "(with) a knowledge",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_005_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْيَقِينِ",
+          "transliteration": "l-yaqīni",
+          "translation": "(of) certainty",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_005_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "No! If you only knew with knowledge of certainty...",
+      "transliteration": "Kalla law ta'lamoona 'ilmal yaqeen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "102:6",
+      "textUthmani": "لَتَرَوُنَّ ٱلْجَحِيمَ",
+      "textUthmaniTajweed": "لَتَرَوُ<tajweed class=ghunnah>نّ</tajweed>َ <tajweed class=ham_wasl>ٱ</tajweed>لْجَح<tajweed class=madda_permissible>ِي</tajweed>مَ <span class=end>٦</span>",
+      "textIndopak": "لَتَرَوُنَّ الۡجَحِيۡمَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "لَتَرَوُنَّ",
+          "transliteration": "latarawunna",
+          "translation": "Surely you will see",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْجَحِيمَ",
+          "transliteration": "l-jaḥīma",
+          "translation": "the Hellfire",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "You will surely see the Hellfire.",
+      "transliteration": "Latara-wun-nal jaheem",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102006.mp3"
+    },
+    {
+      "number": 7,
+      "key": "102:7",
+      "textUthmani": "ثُمَّ لَتَرَوُنَّهَا عَيْنَ ٱلْيَقِينِ",
+      "textUthmaniTajweed": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ لَتَرَوُ<tajweed class=ghunnah>نّ</tajweed>َهَا عَيْنَ <tajweed class=ham_wasl>ٱ</tajweed>لْيَق<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٧</span>",
+      "textIndopak": "ثُمَّ لَتَرَوُنَّهَا عَيۡنَ الۡيَقِيۡنِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ثُمَّ",
+          "transliteration": "thumma",
+          "translation": "Then",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_007_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَتَرَوُنَّهَا",
+          "transliteration": "latarawunnahā",
+          "translation": "surely you will see it",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_007_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عَيْنَ",
+          "transliteration": "ʿayna",
+          "translation": "(with the) eye",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_007_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْيَقِينِ",
+          "transliteration": "l-yaqīni",
+          "translation": "(of) certainty",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_007_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧",
+          "transliteration": null,
+          "translation": "(7)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then you will surely see it with the eye of certainty.",
+      "transliteration": "Thumma latara-wunnaha 'ainal yaqeen",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102007.mp3"
+    },
+    {
+      "number": 8,
+      "key": "102:8",
+      "textUthmani": "ثُمَّ لَتُسْـَٔلُنَّ يَوْمَئِذٍ عَنِ ٱلنَّعِيمِ",
+      "textUthmaniTajweed": "ثُ<tajweed class=ghunnah>مّ</tajweed>َ لَتُسْــَٔلُ<tajweed class=ghunnah>نّ</tajweed>َ يَوْمَئِذٍ عَنِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َع<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٨</span>",
+      "textIndopak": "ثُمَّ لَـتُسۡـَٔـلُنَّ يَوۡمَٮِٕذٍ عَنِ النَّعِيۡمِ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ثُمَّ",
+          "transliteration": "thumma",
+          "translation": "Then",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_008_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَتُسْـَٔلُنَّ",
+          "transliteration": "latus'alunna",
+          "translation": "surely you will be asked",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_008_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "يَوْمَئِذٍ",
+          "transliteration": "yawma-idhin",
+          "translation": "that Day",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_008_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "عَنِ",
+          "transliteration": "ʿani",
+          "translation": "about",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_008_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلنَّعِيمِ",
+          "transliteration": "l-naʿīmi",
+          "translation": "the pleasures",
+          "audioUrl": "https://audio.qurancdn.com/wbw/102_008_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٨",
+          "transliteration": null,
+          "translation": "(8)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then you will surely be asked that Day about pleasure.",
+      "transliteration": "Thumma latus-alunna yauma-izin 'anin na'eem",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102008.mp3"
+    }
+  ]
+}

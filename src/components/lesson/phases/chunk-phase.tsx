@@ -7,11 +7,15 @@ import { audioController } from '@/lib/audio';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
 import ArabicText from '@/components/ui/arabic-text';
+import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
 interface ChunkPhaseProps {
   surah: Surah;
+  ayahs: Ayah[];
+  lessonId: string;
+  startAtReview?: boolean;
   onComplete: () => void;
 }
 
@@ -66,37 +70,43 @@ const LEARN_STEPS: LearnStep[] = [
   'word-order',
 ];
 
-export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
+export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onComplete }: ChunkPhaseProps) {
   const { markChunkComplete, updateChunkIndex } = useProgressStore();
-  const lesson = useProgressStore((s) => s.lessons[surah.id]);
+  const lesson = useProgressStore((s) => s.lessons[lessonId]);
   const getAudioUrl = (surahId: number, ayahNum: number) =>
     buildAudioUrl(surahId, ayahNum, useSettingsStore.getState().reciter);
 
   // Which ayah we're working on — clamp to valid range
   const savedIndex = lesson?.phaseData.chunk.currentChunkIndex ?? 0;
   const [ayahIndex, setAyahIndex] = useState(
-    Math.min(savedIndex, surah.ayahs.length - 1)
+    Math.min(savedIndex, ayahs.length - 1)
   );
-  const [mainStage, setMainStage] = useState<MainStage>('learning');
+  const [mainStage, setMainStage] = useState<MainStage>(startAtReview ? 'final-chain' : 'learning');
 
   // Learning state (6-4-4-6 within a single ayah)
   const [learnStep, setLearnStep] = useState<LearnStep>('listen-with-text');
   const [repCount, setRepCount] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [isPlayingOnce, setIsPlayingOnce] = useState(false);
   const [completedAyahs, setCompletedAyahs] = useState<Set<number>>(new Set());
+  const [currentSpeed, setCurrentSpeed] = useState(() => audioController.speed);
 
   // Chaining state
   const [chainAyahIndex, setChainAyahIndex] = useState(0);
   const [chainRevealed, setChainRevealed] = useState(false);
+  const [revealedAyahs, setRevealedAyahs] = useState<Set<number>>(new Set());
+
+  // Single-ayah practice mode (returns to final-chain when done)
+  const [practiceReturnStage, setPracticeReturnStage] = useState<MainStage | null>(null);
 
   // Word ordering state
   const [selectedOrder, setSelectedOrder] = useState<number[]>([]);
   const [orderResult, setOrderResult] = useState<'correct' | 'wrong' | null>(null);
-  const [shuffledWords, setShuffledWords] = useState<Array<{ position: number; text: string }>>([]);
+  const [shuffledWords, setShuffledWords] = useState<Array<{ position: number; text: string; transliteration: string | null }>>([]);
 
   const abortRef = useRef(false);
 
-  const currentAyah = surah.ayahs[ayahIndex];
+  const currentAyah = ayahs[ayahIndex];
   const actualWords = useMemo(
     () => currentAyah?.words.filter((w) => w.charType === 'word') ?? [],
     [currentAyah]
@@ -112,9 +122,11 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
   // --- Audio controls ---
 
   const playOnce = useCallback(async () => {
-    if (!currentAyah) return;
+    if (!currentAyah || isPlayingOnce || isAutoPlaying) return;
+    setIsPlayingOnce(true);
     await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
     setRepCount((c) => c + 1);
+    setIsPlayingOnce(false);
   }, [currentAyah]);
 
   const startAutoPlay = useCallback(async () => {
@@ -153,7 +165,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       // Set up word ordering
       if (next === 'word-order') {
         const shuffled = actualWords
-          .map((w) => ({ position: w.position, text: w.textUthmani }))
+          .map((w) => ({ position: w.position, text: w.textUthmani, transliteration: w.transliteration }))
           .sort(() => Math.random() - 0.5);
         setShuffledWords(shuffled);
         setSelectedOrder([]);
@@ -167,25 +179,37 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
     const newCompleted = new Set([...completedAyahs, ayahIndex]);
     setCompletedAyahs(newCompleted);
 
-    if (ayahIndex === 0 && surah.ayahs.length > 1) {
+    // If practicing a single ayah, return to where we came from
+    if (practiceReturnStage) {
+      const returnTo = practiceReturnStage;
+      setPracticeReturnStage(null);
+      setMainStage(returnTo);
+      setChainRevealed(false);
+      setRevealedAyahs(new Set());
+      return;
+    }
+
+    if (ayahIndex === 0 && ayahs.length > 1) {
       // First ayah — skip chaining, go straight to next
       moveToNextAyah();
-    } else if (ayahIndex < surah.ayahs.length - 1) {
+    } else if (ayahIndex < ayahs.length - 1) {
       // Chain all completed ayahs before moving to next
       setMainStage('chaining');
       setChainAyahIndex(0);
       setChainRevealed(false);
+      setRevealedAyahs(new Set());
     } else {
       // Last ayah — final chain of everything
       setMainStage('final-chain');
       setChainRevealed(false);
+      setRevealedAyahs(new Set());
     }
   };
 
   const moveToNextAyah = () => {
     const next = ayahIndex + 1;
     setAyahIndex(next);
-    updateChunkIndex(surah.id, next);
+    updateChunkIndex(lessonId, next);
     setMainStage('learning');
     setLearnStep('listen-with-text');
     setRepCount(0);
@@ -249,75 +273,76 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
   // ============================================================
 
   if (mainStage === 'chaining') {
-    const chainAyahs = surah.ayahs.slice(0, ayahIndex + 1); // all learned so far
-    const currentChainAyah = chainAyahs[chainAyahIndex];
+    const chainAyahs = ayahs.slice(0, ayahIndex + 1);
+    const allRevealed = chainRevealed || revealedAyahs.size >= chainAyahs.length;
+
+    const toggleAyahReveal = (i: number) => {
+      setRevealedAyahs((prev) => {
+        const next = new Set(prev);
+        if (next.has(i)) next.delete(i); else next.add(i);
+        return next;
+      });
+    };
+
+    const revealAll = () => {
+      setChainRevealed(true);
+      setRevealedAyahs(new Set(chainAyahs.map((_, i) => i)));
+    };
+
+    const resetChain = () => {
+      setChainRevealed(false);
+      setRevealedAyahs(new Set());
+    };
 
     return (
       <div className="space-y-6">
         <div className="text-center">
           <h3 className="text-xl font-bold text-foreground">Chain Together</h3>
           <p className="mt-1 text-sm text-muted">
-            Recite ayahs 1–{ayahIndex + 1} in sequence from memory
+            Recite ayahs {chainAyahs[0].number}–{chainAyahs[chainAyahs.length - 1].number} from memory. Tap each to reveal, or reveal all at once.
           </p>
         </div>
 
-        {/* Progress through chain */}
-        <div className="flex justify-center gap-1.5">
-          {chainAyahs.map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                'h-2.5 w-2.5 rounded-full',
-                i < chainAyahIndex ? 'bg-success' :
-                i === chainAyahIndex ? 'bg-teal' :
-                'bg-foreground/10'
-              )}
-            />
-          ))}
+        <div className="space-y-3">
+          {chainAyahs.map((ayah, i) => {
+            const isRevealed = revealedAyahs.has(i) || chainRevealed;
+            return (
+              <button
+                key={ayah.key}
+                onClick={() => !isRevealed && toggleAyahReveal(i)}
+                className={cn(
+                  'w-full rounded-xl p-4 text-left transition-all',
+                  isRevealed
+                    ? 'bg-success/5'
+                    : 'border-2 border-dashed border-foreground/15 cursor-pointer hover:border-foreground/25'
+                )}
+              >
+                {isRevealed ? (
+                  <AyahDisplay ayah={ayah} />
+                ) : (
+                  <p className="text-center text-sm text-muted py-2">
+                    Ayah {ayah.number} — tap to reveal
+                  </p>
+                )}
+              </button>
+            );
+          })}
         </div>
 
-        {!chainRevealed ? (
-          <div className="space-y-5">
-            <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-8 text-center">
-              <p className="text-sm text-muted">Ayah {chainAyahIndex + 1}</p>
-              <p className="mt-3 text-lg font-medium text-foreground">
-                Recite this ayah from memory...
-              </p>
-            </div>
-            <Button onClick={() => setChainRevealed(true)} className="w-full">
-              Show Answer
-            </Button>
-          </div>
-        ) : (
-          <div className="space-y-5">
-            <div className="rounded-xl bg-success/5 p-5 text-center">
-              <ArabicText ayah={currentChainAyah} className="text-2xl leading-loose" />
-            </div>
+        {!allRevealed && (
+          <Button onClick={revealAll} variant="secondary" className="w-full">
+            Reveal All
+          </Button>
+        )}
 
-            {chainAyahIndex < chainAyahs.length - 1 ? (
-              <Button
-                onClick={() => {
-                  setChainAyahIndex((i) => i + 1);
-                  setChainRevealed(false);
-                }}
-                className="w-full"
-              >
-                Next Ayah in Chain
-              </Button>
-            ) : (
-              <div className="flex gap-3">
-                <Button
-                  onClick={() => { setChainAyahIndex(0); setChainRevealed(false); }}
-                  variant="secondary"
-                  className="flex-1"
-                >
-                  Retry Chain
-                </Button>
-                <Button onClick={moveToNextAyah} className="flex-1">
-                  Learn Next Ayah
-                </Button>
-              </div>
-            )}
+        {allRevealed && (
+          <div className="flex gap-3">
+            <Button onClick={resetChain} variant="secondary" className="flex-1">
+              Try Again
+            </Button>
+            <Button onClick={moveToNextAyah} className="flex-1">
+              Learn Next Ayah
+            </Button>
           </div>
         )}
       </div>
@@ -329,54 +354,95 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
   // ============================================================
 
   if (mainStage === 'final-chain') {
+    const firstAyah = ayahs[0].number;
+    const lastAyah = ayahs[ayahs.length - 1].number;
+    const isSingleLesson = ayahs.length === surah.versesCount;
+    const allFinalRevealed = chainRevealed || revealedAyahs.size >= ayahs.length;
+
+    const revealAllFinal = () => {
+      setChainRevealed(true);
+      setRevealedAyahs(new Set(ayahs.map((_, i) => i)));
+    };
+
+    const resetFinalChain = () => {
+      setChainRevealed(false);
+      setRevealedAyahs(new Set());
+    };
+
     return (
       <div className="space-y-6">
         <div className="text-center">
           <h3 className="text-xl font-bold text-foreground">Complete Recitation</h3>
           <p className="mt-1 text-sm text-muted">
-            Recite the entire surah from start to finish.
+            {isSingleLesson
+              ? `Recite ${surah.nameSimple} from start to finish`
+              : `Recite ayahs ${firstAyah}–${lastAyah} from memory`}
           </p>
+          <p className="mt-0.5 text-xs text-muted">Tap each ayah to reveal, or reveal all at once</p>
         </div>
 
-        {!chainRevealed ? (
-          <>
-            <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-8 text-center">
-              <p className="arabic-text text-2xl text-teal">{surah.nameArabic}</p>
-              <p className="mt-2 text-lg font-semibold">{surah.nameSimple}</p>
-              <p className="mt-4 text-sm text-muted">
-                All {surah.versesCount} ayahs from memory
-              </p>
-            </div>
-            <Button onClick={() => setChainRevealed(true)} className="w-full">
-              Show Full Surah
-            </Button>
-          </>
-        ) : (
-          <>
-            <div className="space-y-3">
-              {surah.ayahs.map((ayah) => (
-                <div key={ayah.key} className="rounded-xl bg-card p-4 shadow-sm text-center">
-                  <ArabicText ayah={ayah} className="text-2xl leading-loose" />
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-3">
-              <Button
-                onClick={() => {
-                  setChainRevealed(false);
-                  setAyahIndex(0);
-                  setRepCount(0);
-                  setMainStage('learning');
-                  setLearnStep('listen-with-text');
-                  setCompletedAyahs(new Set());
-                }}
-                variant="secondary"
-                className="flex-1"
+        <div className="space-y-3">
+          {ayahs.map((ayah, i) => {
+            const isRevealed = revealedAyahs.has(i) || chainRevealed;
+            return (
+              <button
+                key={ayah.key}
+                onClick={() => !isRevealed && setRevealedAyahs((prev) => new Set([...prev, i]))}
+                className={cn(
+                  'w-full rounded-xl p-4 text-left transition-all',
+                  isRevealed
+                    ? 'bg-card shadow-sm'
+                    : 'border-2 border-dashed border-foreground/15 cursor-pointer hover:border-foreground/25'
+                )}
               >
-                Start Over
+                {isRevealed ? (
+                  <AyahDisplay ayah={ayah} />
+                ) : (
+                  <p className="text-center text-sm text-muted py-2">
+                    Ayah {ayah.number} — tap to reveal
+                  </p>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {!allFinalRevealed && (
+          <Button onClick={revealAllFinal} variant="secondary" className="w-full">
+            Reveal All
+          </Button>
+        )}
+
+        {allFinalRevealed && (
+          <>
+            {/* Practice specific ayahs */}
+            <div className="rounded-xl bg-foreground/[0.03] p-4">
+              <p className="text-xs font-medium text-muted mb-2">Need to practice a specific ayah?</p>
+              <div className="flex flex-wrap gap-2">
+                {ayahs.map((ayah, i) => (
+                  <button
+                    key={ayah.key}
+                    onClick={() => {
+                      setAyahIndex(i);
+                      setRepCount(0);
+                      setPracticeReturnStage('final-chain');
+                      setMainStage('learning');
+                      setLearnStep('listen-with-text');
+                    }}
+                    className="rounded-lg bg-card border border-foreground/10 px-3 py-1.5 text-xs font-medium text-foreground hover:border-teal transition-colors"
+                  >
+                    Ayah {ayah.number}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <Button onClick={resetFinalChain} variant="secondary" className="flex-1">
+                Try Again
               </Button>
               <Button
-                onClick={() => { markChunkComplete(surah.id); onComplete(); }}
+                onClick={() => { markChunkComplete(lessonId); onComplete(); }}
                 className="flex-1"
               >
                 Continue to Test
@@ -401,9 +467,48 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
         <p className="mt-1 text-sm text-muted">{STEP_LABELS[learnStep]}</p>
       </div>
 
+      {/* Practice mode navigation — switch ayahs or return to recitation */}
+      {practiceReturnStage && (
+        <div className="rounded-xl bg-foreground/[0.03] border border-foreground/10 p-3">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-medium text-muted">Practicing Ayah {currentAyah?.number}</p>
+            <button
+              onClick={() => {
+                const returnTo = practiceReturnStage;
+                setPracticeReturnStage(null);
+                setMainStage(returnTo);
+                setChainRevealed(false);
+                setRevealedAyahs(new Set());
+              }}
+              className="text-xs font-medium text-teal hover:underline"
+            >
+              Skip to final review →
+            </button>
+          </div>
+          <div className="mt-2 flex gap-1.5">
+            {ayahs.map((ayah, i) => (
+              <button
+                key={ayah.key}
+                onClick={() => {
+                  setAyahIndex(i);
+                  setRepCount(0);
+                  setLearnStep('listen-with-text');
+                }}
+                className={cn(
+                  'flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-colors',
+                  i === ayahIndex ? 'bg-teal text-white' : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                )}
+              >
+                {ayah.number}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Ayah progress dots */}
       <div className="flex justify-center gap-1.5">
-        {surah.ayahs.map((_, i) => (
+        {ayahs.map((_, i) => (
           <div
             key={i}
             className={cn(
@@ -417,7 +522,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       </div>
 
       <p className="text-center text-xs font-medium text-teal">
-        Ayah {ayahIndex + 1} of {surah.ayahs.length}
+        Ayah {ayahIndex + 1} of {ayahs.length}
       </p>
 
       {/* Step progress bar */}
@@ -438,11 +543,8 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
       {/* === TEXT-VISIBLE STEPS (listen-with-text, reinforce-with-text) === */}
       {isTextVisible && (
         <div className="space-y-5">
-          <div className="rounded-2xl bg-card p-6 text-center shadow-sm">
-            <ArabicText ayah={currentAyah} className="text-4xl leading-loose" />
-            <p className="mt-3 text-sm text-muted">
-              {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
-            </p>
+          <div className="rounded-2xl bg-card p-6 shadow-sm">
+            <AyahDisplay ayah={currentAyah} />
           </div>
 
           {/* Rep counter */}
@@ -466,7 +568,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
           </div>
 
           {/* Audio controls */}
-          <div className="flex justify-center gap-3">
+          <div className="flex items-center justify-center gap-3">
             {isAutoPlaying ? (
               <button onClick={stopAutoPlay} className="flex h-14 w-14 items-center justify-center rounded-full bg-red-500 text-white shadow-lg">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect x="4" y="4" width="12" height="12" rx="2" /></svg>
@@ -475,7 +577,7 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
               <>
                 <button
                   onClick={playOnce}
-                  disabled={repCount >= currentStepReps}
+                  disabled={repCount >= currentStepReps || isPlayingOnce}
                   className="flex h-14 w-14 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105 disabled:opacity-40"
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6V4z" /></svg>
@@ -491,6 +593,23 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
                 )}
               </>
             )}
+
+          </div>
+
+          {/* Speed buttons */}
+          <div className="flex justify-center gap-1">
+            {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
+              <button
+                key={s}
+                onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); }}
+                className={cn(
+                  'rounded-lg px-3 py-1 text-xs font-semibold transition-colors',
+                  s === currentSpeed ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                )}
+              >
+                {s}x
+              </button>
+            ))}
           </div>
 
           {repCount >= currentStepReps && (
@@ -554,11 +673,8 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
             ) : (
               /* Answer revealed */
               <>
-                <div className="rounded-xl bg-success/5 p-5 text-center">
-                  <ArabicText ayah={currentAyah} className="text-4xl leading-loose" />
-                  <p className="mt-2 text-sm text-muted">
-                    {currentAyah.transliteration || actualWords.map((w) => w.transliteration).filter(Boolean).join(' ')}
-                  </p>
+                <div className="rounded-xl bg-success/5 p-5">
+                  <AyahDisplay ayah={currentAyah} />
                 </div>
                 <p className="text-center text-sm text-muted">Did you recite it correctly?</p>
                 <div className="flex gap-3">
@@ -622,13 +738,16 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
                   onClick={() => handleWordSelect(word.position)}
                   disabled={isUsed || orderResult !== null}
                   className={cn(
-                    'arabic-text rounded-xl border-2 px-4 py-2 text-xl transition-all',
+                    'flex flex-col items-center rounded-xl border-2 px-4 py-2 transition-all',
                     isUsed
                       ? 'border-transparent bg-foreground/5 text-foreground/20'
                       : 'border-foreground/10 bg-card hover:border-gold'
                   )}
                 >
-                  {word.text}
+                  <span className="arabic-text text-xl">{word.text}</span>
+                  {word.transliteration && (
+                    <span className="text-[10px] text-muted" dir="ltr">{word.transliteration}</span>
+                  )}
                 </button>
               );
             })}
@@ -636,9 +755,9 @@ export default function ChunkPhase({ surah, onComplete }: ChunkPhaseProps) {
 
           {orderResult === 'correct' && (
             <Button onClick={completeCurrentAyah} className="w-full">
-              {ayahIndex === 0 && surah.ayahs.length > 1
+              {ayahIndex === 0 && ayahs.length > 1
                 ? 'Learn Next Ayah'
-                : ayahIndex < surah.ayahs.length - 1
+                : ayahIndex < ayahs.length - 1
                 ? 'Chain & Continue'
                 : 'Final Recitation'}
             </Button>

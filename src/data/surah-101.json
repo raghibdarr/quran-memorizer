@@ -1,0 +1,518 @@
+{
+  "id": 101,
+  "nameSimple": "Al-Qari'ah",
+  "nameArabic": "القارعة",
+  "nameTranslation": "The Calamity",
+  "revelationPlace": "makkah",
+  "versesCount": 11,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "101:1",
+      "textUthmani": " ٱلْقَارِعَةُ",
+      "textUthmaniTajweed": "ٱلْقَارِعَةُ <span class=end>١</span>",
+      "textIndopak": "اَلۡقَارِعَةُ ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلْقَارِعَةُ",
+          "transliteration": "al-qāriʿatu",
+          "translation": "The Striking Calamity",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "The Striking Calamity -",
+      "transliteration": "Al-qaari'ah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "101:2",
+      "textUthmani": "مَا ٱلْقَارِعَةُ",
+      "textUthmaniTajweed": "مَا <tajweed class=ham_wasl>ٱ</tajweed>لْقَارِعَةُ <span class=end>٢</span>",
+      "textIndopak": "مَا الۡقَارِعَةُ​ ۚ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "مَا",
+          "transliteration": "mā",
+          "translation": "What",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْقَارِعَةُ",
+          "transliteration": "l-qāriʿatu",
+          "translation": "(is) the Striking Calamity",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "What is the Striking Calamity?",
+      "transliteration": "Mal qaariah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "101:3",
+      "textUthmani": "وَمَآ أَدْرَىٰكَ مَا ٱلْقَارِعَةُ",
+      "textUthmaniTajweed": "وَم<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=qalaqah>دْ</tajweed>رَ<tajweed class=madda_normal>ٮٰ</tajweed>كَ مَا <tajweed class=ham_wasl>ٱ</tajweed>لْقَارِعَةُ <span class=end>٣</span>",
+      "textIndopak": "وَمَاۤ اَدۡرٰٮكَ مَا الۡقَارِعَةُ ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَمَآ",
+          "transliteration": "wamā",
+          "translation": "And what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَدْرَىٰكَ",
+          "transliteration": "adrāka",
+          "translation": "will make you know",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مَا",
+          "transliteration": "mā",
+          "translation": "what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْقَارِعَةُ",
+          "transliteration": "l-qāriʿatu",
+          "translation": "(is) the Striking Calamity",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_003_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And what can make you know what is the Striking Calamity?",
+      "transliteration": "Wa-maa adraaka mal qaari'ah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "101:4",
+      "textUthmani": "يَوْمَ يَكُونُ ٱلنَّاسُ كَٱلْفَرَاشِ ٱلْمَبْثُوثِ",
+      "textUthmaniTajweed": "يَوْمَ يَكُونُ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َاسُ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْفَرَاشِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَ<tajweed class=qalaqah>بْ</tajweed>ث<tajweed class=madda_permissible>ُو</tajweed>ثِ <span class=end>٤</span>",
+      "textIndopak": "يَوۡمَ يَكُوۡنُ النَّاسُ كَالۡفَرَاشِ الۡمَبۡثُوۡثِۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "يَوْمَ",
+          "transliteration": "yawma",
+          "translation": "(The) Day",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "يَكُونُ",
+          "transliteration": "yakūnu",
+          "translation": "will be",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلنَّاسُ",
+          "transliteration": "l-nāsu",
+          "translation": "the mankind",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_004_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "كَٱلْفَرَاشِ",
+          "transliteration": "kal-farāshi",
+          "translation": "like moths",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_004_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "ٱلْمَبْثُوثِ",
+          "transliteration": "l-mabthūthi",
+          "translation": "scattered",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_004_005.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 6,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "It is the Day when people will be like moths, dispersed,",
+      "transliteration": "Yauma ya-koonun naasu kal-farashil mabthooth",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "101:5",
+      "textUthmani": "وَتَكُونُ ٱلْجِبَالُ كَٱلْعِهْنِ ٱلْمَنفُوشِ",
+      "textUthmaniTajweed": "وَتَكُونُ <tajweed class=ham_wasl>ٱ</tajweed>لْجِبَالُ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْعِهْنِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَ<tajweed class=ikhafa>نف</tajweed><tajweed class=madda_permissible>ُو</tajweed>شِ <span class=end>٥</span>",
+      "textIndopak": "وَتَكُوۡنُ الۡجِبَالُ كَالۡعِهۡنِ الۡمَنۡفُوۡشِؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَتَكُونُ",
+          "transliteration": "watakūnu",
+          "translation": "And will be",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "ٱلْجِبَالُ",
+          "transliteration": "l-jibālu",
+          "translation": "the mountains",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "كَٱلْعِهْنِ",
+          "transliteration": "kal-ʿih'ni",
+          "translation": "like wool",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "ٱلْمَنفُوشِ",
+          "transliteration": "l-manfūshi",
+          "translation": "fluffed up",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_005_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And the mountains will be like wool, fluffed up.",
+      "transliteration": "Wa-ta-koonul jibalu kal-'ihnil manfoosh",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "101:6",
+      "textUthmani": "فَأَمَّا مَن ثَقُلَتْ مَوَٰزِينُهُۥ",
+      "textUthmaniTajweed": "فَأَ<tajweed class=ghunnah>مّ</tajweed>َا مَ<tajweed class=ikhafa>ن ث</tajweed>َقُلَتْ مَو<tajweed class=madda_normal>َٲ</tajweed>زِينُهُۥ <span class=end>٦</span>",
+      "textIndopak": "فَاَمَّا مَنۡ ثَقُلَتۡ مَوَازِيۡنُهٗ ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَأَمَّا",
+          "transliteration": "fa-ammā",
+          "translation": "Then as for",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَن",
+          "transliteration": "man",
+          "translation": "(him) whose",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ثَقُلَتْ",
+          "transliteration": "thaqulat",
+          "translation": "(are) heavy",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_006_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مَوَٰزِينُهُۥ",
+          "transliteration": "mawāzīnuhu",
+          "translation": "his scales",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_006_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Then as for one whose scales are heavy [with good deeds],",
+      "transliteration": "Fa-amma man thaqulat mawa-zeenuh",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101006.mp3"
+    },
+    {
+      "number": 7,
+      "key": "101:7",
+      "textUthmani": "فَهُوَ فِى عِيشَةٍ رَّاضِيَةٍ",
+      "textUthmaniTajweed": "فَهُوَ فِى عِيشَ<tajweed class=idgham_wo_ghunnah>ةٍ ر</tajweed>َّاضِيَةٍ <span class=end>٧</span>",
+      "textIndopak": "فَهُوَ فِىۡ عِيۡشَةٍ رَّاضِيَةٍ ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَهُوَ",
+          "transliteration": "fahuwa",
+          "translation": "Then he",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_007_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "فِى",
+          "transliteration": "fī",
+          "translation": "(will be) in",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_007_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "عِيشَةٍۢ",
+          "transliteration": "ʿīshatin",
+          "translation": "a life",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_007_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "رَّاضِيَةٍۢ",
+          "transliteration": "rāḍiyatin",
+          "translation": "pleasant",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_007_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٧",
+          "transliteration": null,
+          "translation": "(7)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "He will be in a pleasant life.",
+      "transliteration": "Fahuwa fee 'ishatir raadiyah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101007.mp3"
+    },
+    {
+      "number": 8,
+      "key": "101:8",
+      "textUthmani": "وَأَمَّا مَنْ خَفَّتْ مَوَٰزِينُهُۥ",
+      "textUthmaniTajweed": "وَأَ<tajweed class=ghunnah>مّ</tajweed>َا مَنْ خَفَّتْ مَو<tajweed class=madda_normal>َٲ</tajweed>زِينُهُۥ <span class=end>٨</span>",
+      "textIndopak": "وَاَمَّا مَنۡ خَفَّتۡ مَوَازِيۡنُهٗ ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَأَمَّا",
+          "transliteration": "wa-ammā",
+          "translation": "But as for",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_008_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَنْ",
+          "transliteration": "man",
+          "translation": "(him) whose",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_008_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "خَفَّتْ",
+          "transliteration": "khaffat",
+          "translation": "(are) light",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_008_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "مَوَٰزِينُهُۥ",
+          "transliteration": "mawāzīnuhu",
+          "translation": "his scales",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_008_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٨",
+          "transliteration": null,
+          "translation": "(8)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "But as for one whose scales are light,",
+      "transliteration": "Wa-amma man khaffat mawa-zeenuh",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101008.mp3"
+    },
+    {
+      "number": 9,
+      "key": "101:9",
+      "textUthmani": "فَأُمُّهُۥ هَاوِيَةٌ",
+      "textUthmaniTajweed": "فَأُ<tajweed class=ghunnah>مّ</tajweed>ُهُ<tajweed class=madda_normal>ۥ</tajweed> هَاوِيَةٌ <span class=end>٩</span>",
+      "textIndopak": "فَاُمُّهٗ هَاوِيَةٌ ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَأُمُّهُۥ",
+          "transliteration": "fa-ummuhu",
+          "translation": "His abode",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_009_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "هَاوِيَةٌۭ",
+          "transliteration": "hāwiyatun",
+          "translation": "(will be the) Pit",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_009_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "٩",
+          "transliteration": null,
+          "translation": "(9)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "His refuge will be an abyss.",
+      "transliteration": "Fa-ummuhu haawiyah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101009.mp3"
+    },
+    {
+      "number": 10,
+      "key": "101:10",
+      "textUthmani": "وَمَآ أَدْرَىٰكَ مَا هِيَهْ",
+      "textUthmaniTajweed": "وَم<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=qalaqah>دْ</tajweed>رَ<tajweed class=madda_normal>ٮٰ</tajweed>كَ مَا هِيَهْ <span class=end>١٠</span>",
+      "textIndopak": "وَمَاۤ اَدۡرٰٮكَ مَا هِيَهۡ ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَمَآ",
+          "transliteration": "wamā",
+          "translation": "And what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_010_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَدْرَىٰكَ",
+          "transliteration": "adrāka",
+          "translation": "will make you know",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_010_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "مَا",
+          "transliteration": "mā",
+          "translation": "what",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_010_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "هِيَهْ",
+          "transliteration": "hiyah",
+          "translation": "it is",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_010_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١٠",
+          "transliteration": null,
+          "translation": "(10)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And what can make you know what that is?",
+      "transliteration": "Wa-maa adraaka maa hiyah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101010.mp3"
+    },
+    {
+      "number": 11,
+      "key": "101:11",
+      "textUthmani": "نَارٌ حَامِيَةٌۢ",
+      "textUthmaniTajweed": "نَارٌ حَامِيَةُۢ <span class=end>١١</span>",
+      "textIndopak": "نَارٌ حَامِيَةٌ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "نَارٌ",
+          "transliteration": "nārun",
+          "translation": "A Fire",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_011_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "حَامِيَةٌۢ",
+          "transliteration": "ḥāmiyatun",
+          "translation": "intensely hot",
+          "audioUrl": "https://audio.qurancdn.com/wbw/101_011_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "١١",
+          "transliteration": null,
+          "translation": "(11)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "It is a Fire, intensely hot.",
+      "transliteration": "Naarun hamiyah",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101011.mp3"
+    }
+  ]
+}

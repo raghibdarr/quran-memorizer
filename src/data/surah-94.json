@@ -1,0 +1,386 @@
+{
+  "id": 94,
+  "nameSimple": "Ash-Sharh",
+  "nameArabic": "الشرح",
+  "nameTranslation": "The Relief",
+  "revelationPlace": "makkah",
+  "versesCount": 8,
+  "ayahs": [
+    {
+      "number": 1,
+      "key": "94:1",
+      "textUthmani": " أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
+      "textUthmaniTajweed": "أَلَمْ نَشْرَحْ لَكَ صَ<tajweed class=qalaqah>دْ</tajweed>رَكَ <span class=end>١</span>",
+      "textIndopak": "اَلَمۡ نَشۡرَحۡ لَـكَ صَدۡرَكَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "أَلَمْ",
+          "transliteration": "alam",
+          "translation": "Have not",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_001_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "نَشْرَحْ",
+          "transliteration": "nashraḥ",
+          "translation": "We expanded",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_001_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "لَكَ",
+          "transliteration": "laka",
+          "translation": "for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_001_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "صَدْرَكَ",
+          "transliteration": "ṣadraka",
+          "translation": "your breast",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_001_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "١",
+          "transliteration": null,
+          "translation": "(1)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Did We not expand for you, [O Muḥammad], your breast?",
+      "transliteration": "Alam nashrah laka sadrak",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094001.mp3"
+    },
+    {
+      "number": 2,
+      "key": "94:2",
+      "textUthmani": "وَوَضَعْنَا عَنكَ وِزْرَكَ",
+      "textUthmaniTajweed": "وَوَضَعْنَا عَ<tajweed class=ikhafa>نك</tajweed>َ وِزْرَكَ <span class=end>٢</span>",
+      "textIndopak": "وَوَضَعۡنَا عَنۡكَ وِزۡرَكَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَوَضَعْنَا",
+          "transliteration": "wawaḍaʿnā",
+          "translation": "And We removed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_002_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "عَنكَ",
+          "transliteration": "ʿanka",
+          "translation": "from you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_002_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "وِزْرَكَ",
+          "transliteration": "wiz'raka",
+          "translation": "your burden",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_002_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٢",
+          "transliteration": null,
+          "translation": "(2)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And We removed from you your burden",
+      "transliteration": "Wa-Wa-d'ana 'anka wizrak",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094002.mp3"
+    },
+    {
+      "number": 3,
+      "key": "94:3",
+      "textUthmani": "ٱلَّذِىٓ أَنقَضَ ظَهْرَكَ",
+      "textUthmaniTajweed": "ٱلَّذ<tajweed class=madda_obligatory>ِىٓ</tajweed> أَ<tajweed class=ikhafa>نق</tajweed>َضَ ظَهْرَكَ <span class=end>٣</span>",
+      "textIndopak": "الَّذِىۡۤ اَنۡقَضَ ظَهۡرَكَۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "ٱلَّذِىٓ",
+          "transliteration": "alladhī",
+          "translation": "Which",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_003_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "أَنقَضَ",
+          "transliteration": "anqaḍa",
+          "translation": "weighed upon",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_003_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ظَهْرَكَ",
+          "transliteration": "ẓahraka",
+          "translation": "your back",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_003_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٣",
+          "transliteration": null,
+          "translation": "(3)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Which had weighed upon your back",
+      "transliteration": "Allazee anqada zahrak",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094003.mp3"
+    },
+    {
+      "number": 4,
+      "key": "94:4",
+      "textUthmani": "وَرَفَعْنَا لَكَ ذِكْرَكَ",
+      "textUthmaniTajweed": "وَرَفَعْنَا لَكَ ذِكْرَكَ <span class=end>٤</span>",
+      "textIndopak": "وَرَفَعۡنَا لَـكَ ذِكۡرَكَؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَرَفَعْنَا",
+          "transliteration": "warafaʿnā",
+          "translation": "And We raised high",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_004_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "لَكَ",
+          "transliteration": "laka",
+          "translation": "for you",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_004_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ذِكْرَكَ",
+          "transliteration": "dhik'raka",
+          "translation": "your reputation",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_004_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٤",
+          "transliteration": null,
+          "translation": "(4)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And raised high for you your repute.",
+      "transliteration": "Wa-raf-'ana laka zikrak",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094004.mp3"
+    },
+    {
+      "number": 5,
+      "key": "94:5",
+      "textUthmani": "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+      "textUthmaniTajweed": "فَإِ<tajweed class=ghunnah>نّ</tajweed>َ مَعَ <tajweed class=ham_wasl>ٱ</tajweed>لْعُسْرِ يُسْرًا <span class=end>٥</span>",
+      "textIndopak": "فَاِنَّ مَعَ الۡعُسۡرِ يُسۡرًا ۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَإِنَّ",
+          "transliteration": "fa-inna",
+          "translation": "So indeed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_005_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَعَ",
+          "transliteration": "maʿa",
+          "translation": "with",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_005_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْعُسْرِ",
+          "transliteration": "l-ʿus'ri",
+          "translation": "the hardship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_005_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "يُسْرًا",
+          "transliteration": "yus'ran",
+          "translation": "(is) ease",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_005_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٥",
+          "transliteration": null,
+          "translation": "(5)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "For indeed, with hardship [will be] ease [i.e., relief].",
+      "transliteration": "Fa-inna ma'al usri yusra",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094005.mp3"
+    },
+    {
+      "number": 6,
+      "key": "94:6",
+      "textUthmani": "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َ مَعَ <tajweed class=ham_wasl>ٱ</tajweed>لْعُسْرِ يُسْرًا <span class=end>٦</span>",
+      "textIndopak": "اِنَّ مَعَ الۡعُسۡرِ يُسۡرًا ؕ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "إِنَّ",
+          "transliteration": "inna",
+          "translation": "Indeed",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_006_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "مَعَ",
+          "transliteration": "maʿa",
+          "translation": "with",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_006_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "ٱلْعُسْرِ",
+          "transliteration": "l-ʿus'ri",
+          "translation": "the hardship",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_006_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "يُسْرًۭا",
+          "transliteration": "yus'ran",
+          "translation": "(is) ease",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_006_004.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 5,
+          "textUthmani": "٦",
+          "transliteration": null,
+          "translation": "(6)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "Indeed, with hardship [will be] ease.",
+      "transliteration": "Inna ma'al 'usri yusra",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094006.mp3"
+    },
+    {
+      "number": 7,
+      "key": "94:7",
+      "textUthmani": "فَإِذَا فَرَغْتَ فَٱنصَبْ",
+      "textUthmaniTajweed": "فَإِذَا فَرَغْتَ فَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=ikhafa>نص</tajweed>َ<tajweed class=qalaqah>بْ</tajweed> <span class=end>٧</span>",
+      "textIndopak": "فَاِذَا فَرَغۡتَ فَانۡصَبۡۙ‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "فَإِذَا",
+          "transliteration": "fa-idhā",
+          "translation": "So when",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_007_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "فَرَغْتَ",
+          "transliteration": "faraghta",
+          "translation": "you have finished",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_007_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فَٱنصَبْ",
+          "transliteration": "fa-inṣab",
+          "translation": "then labor hard",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_007_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٧",
+          "transliteration": null,
+          "translation": "(7)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "So when you have finished [your duties], then stand up [for worship].",
+      "transliteration": "Fa-iza faragh-ta fansab",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094007.mp3"
+    },
+    {
+      "number": 8,
+      "key": "94:8",
+      "textUthmani": "وَإِلَىٰ رَبِّكَ فَٱرْغَب",
+      "textUthmaniTajweed": "وَإِلَىٰ رَبِّكَ فَ<tajweed class=ham_wasl>ٱ</tajweed>رْغَ<tajweed class=qalaqah>ب</tajweed> <span class=end>٨</span>",
+      "textIndopak": "وَاِلٰى رَبِّكَ فَارۡغَب‏",
+      "words": [
+        {
+          "position": 1,
+          "textUthmani": "وَإِلَىٰ",
+          "transliteration": "wa-ilā",
+          "translation": "And to",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_008_001.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 2,
+          "textUthmani": "رَبِّكَ",
+          "transliteration": "rabbika",
+          "translation": "your Lord",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_008_002.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 3,
+          "textUthmani": "فَٱرْغَب",
+          "transliteration": "fa-ir'ghab",
+          "translation": "turn your attention",
+          "audioUrl": "https://audio.qurancdn.com/wbw/094_008_003.mp3",
+          "charType": "word"
+        },
+        {
+          "position": 4,
+          "textUthmani": "٨",
+          "transliteration": null,
+          "translation": "(8)",
+          "audioUrl": null,
+          "charType": "end"
+        }
+      ],
+      "translation": "And to your Lord direct [your] longing.",
+      "transliteration": "Wa-ilaa rabbika far-ghab",
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094008.mp3"
+    }
+  ]
+}
