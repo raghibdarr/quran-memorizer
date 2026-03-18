@@ -51,6 +51,20 @@ export interface LessonDef {
   ayahStart: number;          // first ayah number (inclusive)
   ayahEnd: number;            // last ayah number (inclusive)
   ayahCount: number;
+  juzNumber: number;          // which juz this lesson belongs to
+}
+
+// Juz structure
+
+export interface JuzSurahSegment {
+  surahId: number;
+  ayahStart: number;
+  ayahEnd: number;
+}
+
+export interface JuzMeta {
+  juzNumber: number;
+  verseMappings: JuzSurahSegment[];
 }
 
 // Lesson & progress types

@@ -1,0 +1,827 @@
+[
+  {
+    "juzNumber": 1,
+    "verseMappings": [
+      {
+        "surahId": 1,
+        "ayahStart": 1,
+        "ayahEnd": 7
+      },
+      {
+        "surahId": 2,
+        "ayahStart": 1,
+        "ayahEnd": 141
+      }
+    ]
+  },
+  {
+    "juzNumber": 2,
+    "verseMappings": [
+      {
+        "surahId": 2,
+        "ayahStart": 142,
+        "ayahEnd": 252
+      }
+    ]
+  },
+  {
+    "juzNumber": 3,
+    "verseMappings": [
+      {
+        "surahId": 2,
+        "ayahStart": 253,
+        "ayahEnd": 286
+      },
+      {
+        "surahId": 3,
+        "ayahStart": 1,
+        "ayahEnd": 92
+      }
+    ]
+  },
+  {
+    "juzNumber": 4,
+    "verseMappings": [
+      {
+        "surahId": 3,
+        "ayahStart": 93,
+        "ayahEnd": 200
+      },
+      {
+        "surahId": 4,
+        "ayahStart": 1,
+        "ayahEnd": 23
+      }
+    ]
+  },
+  {
+    "juzNumber": 5,
+    "verseMappings": [
+      {
+        "surahId": 4,
+        "ayahStart": 24,
+        "ayahEnd": 147
+      }
+    ]
+  },
+  {
+    "juzNumber": 6,
+    "verseMappings": [
+      {
+        "surahId": 4,
+        "ayahStart": 148,
+        "ayahEnd": 176
+      },
+      {
+        "surahId": 5,
+        "ayahStart": 1,
+        "ayahEnd": 81
+      }
+    ]
+  },
+  {
+    "juzNumber": 7,
+    "verseMappings": [
+      {
+        "surahId": 5,
+        "ayahStart": 82,
+        "ayahEnd": 120
+      },
+      {
+        "surahId": 6,
+        "ayahStart": 1,
+        "ayahEnd": 110
+      }
+    ]
+  },
+  {
+    "juzNumber": 8,
+    "verseMappings": [
+      {
+        "surahId": 6,
+        "ayahStart": 111,
+        "ayahEnd": 165
+      },
+      {
+        "surahId": 7,
+        "ayahStart": 1,
+        "ayahEnd": 87
+      }
+    ]
+  },
+  {
+    "juzNumber": 9,
+    "verseMappings": [
+      {
+        "surahId": 7,
+        "ayahStart": 88,
+        "ayahEnd": 206
+      },
+      {
+        "surahId": 8,
+        "ayahStart": 1,
+        "ayahEnd": 40
+      }
+    ]
+  },
+  {
+    "juzNumber": 10,
+    "verseMappings": [
+      {
+        "surahId": 8,
+        "ayahStart": 41,
+        "ayahEnd": 75
+      },
+      {
+        "surahId": 9,
+        "ayahStart": 1,
+        "ayahEnd": 92
+      }
+    ]
+  },
+  {
+    "juzNumber": 11,
+    "verseMappings": [
+      {
+        "surahId": 9,
+        "ayahStart": 93,
+        "ayahEnd": 129
+      },
+      {
+        "surahId": 10,
+        "ayahStart": 1,
+        "ayahEnd": 109
+      },
+      {
+        "surahId": 11,
+        "ayahStart": 1,
+        "ayahEnd": 5
+      }
+    ]
+  },
+  {
+    "juzNumber": 12,
+    "verseMappings": [
+      {
+        "surahId": 11,
+        "ayahStart": 6,
+        "ayahEnd": 123
+      },
+      {
+        "surahId": 12,
+        "ayahStart": 1,
+        "ayahEnd": 52
+      }
+    ]
+  },
+  {
+    "juzNumber": 13,
+    "verseMappings": [
+      {
+        "surahId": 12,
+        "ayahStart": 53,
+        "ayahEnd": 111
+      },
+      {
+        "surahId": 13,
+        "ayahStart": 1,
+        "ayahEnd": 43
+      },
+      {
+        "surahId": 14,
+        "ayahStart": 1,
+        "ayahEnd": 52
+      }
+    ]
+  },
+  {
+    "juzNumber": 14,
+    "verseMappings": [
+      {
+        "surahId": 15,
+        "ayahStart": 1,
+        "ayahEnd": 99
+      },
+      {
+        "surahId": 16,
+        "ayahStart": 1,
+        "ayahEnd": 128
+      }
+    ]
+  },
+  {
+    "juzNumber": 15,
+    "verseMappings": [
+      {
+        "surahId": 17,
+        "ayahStart": 1,
+        "ayahEnd": 111
+      },
+      {
+        "surahId": 18,
+        "ayahStart": 1,
+        "ayahEnd": 74
+      }
+    ]
+  },
+  {
+    "juzNumber": 16,
+    "verseMappings": [
+      {
+        "surahId": 18,
+        "ayahStart": 75,
+        "ayahEnd": 110
+      },
+      {
+        "surahId": 19,
+        "ayahStart": 1,
+        "ayahEnd": 98
+      },
+      {
+        "surahId": 20,
+        "ayahStart": 1,
+        "ayahEnd": 135
+      }
+    ]
+  },
+  {
+    "juzNumber": 17,
+    "verseMappings": [
+      {
+        "surahId": 21,
+        "ayahStart": 1,
+        "ayahEnd": 112
+      },
+      {
+        "surahId": 22,
+        "ayahStart": 1,
+        "ayahEnd": 78
+      }
+    ]
+  },
+  {
+    "juzNumber": 18,
+    "verseMappings": [
+      {
+        "surahId": 23,
+        "ayahStart": 1,
+        "ayahEnd": 118
+      },
+      {
+        "surahId": 24,
+        "ayahStart": 1,
+        "ayahEnd": 64
+      },
+      {
+        "surahId": 25,
+        "ayahStart": 1,
+        "ayahEnd": 20
+      }
+    ]
+  },
+  {
+    "juzNumber": 19,
+    "verseMappings": [
+      {
+        "surahId": 25,
+        "ayahStart": 21,
+        "ayahEnd": 77
+      },
+      {
+        "surahId": 26,
+        "ayahStart": 1,
+        "ayahEnd": 227
+      },
+      {
+        "surahId": 27,
+        "ayahStart": 1,
+        "ayahEnd": 55
+      }
+    ]
+  },
+  {
+    "juzNumber": 20,
+    "verseMappings": [
+      {
+        "surahId": 27,
+        "ayahStart": 56,
+        "ayahEnd": 93
+      },
+      {
+        "surahId": 28,
+        "ayahStart": 1,
+        "ayahEnd": 88
+      },
+      {
+        "surahId": 29,
+        "ayahStart": 1,
+        "ayahEnd": 45
+      }
+    ]
+  },
+  {
+    "juzNumber": 21,
+    "verseMappings": [
+      {
+        "surahId": 29,
+        "ayahStart": 46,
+        "ayahEnd": 69
+      },
+      {
+        "surahId": 30,
+        "ayahStart": 1,
+        "ayahEnd": 60
+      },
+      {
+        "surahId": 31,
+        "ayahStart": 1,
+        "ayahEnd": 34
+      },
+      {
+        "surahId": 32,
+        "ayahStart": 1,
+        "ayahEnd": 30
+      },
+      {
+        "surahId": 33,
+        "ayahStart": 1,
+        "ayahEnd": 30
+      }
+    ]
+  },
+  {
+    "juzNumber": 22,
+    "verseMappings": [
+      {
+        "surahId": 33,
+        "ayahStart": 31,
+        "ayahEnd": 73
+      },
+      {
+        "surahId": 34,
+        "ayahStart": 1,
+        "ayahEnd": 54
+      },
+      {
+        "surahId": 35,
+        "ayahStart": 1,
+        "ayahEnd": 45
+      },
+      {
+        "surahId": 36,
+        "ayahStart": 1,
+        "ayahEnd": 27
+      }
+    ]
+  },
+  {
+    "juzNumber": 23,
+    "verseMappings": [
+      {
+        "surahId": 36,
+        "ayahStart": 28,
+        "ayahEnd": 83
+      },
+      {
+        "surahId": 37,
+        "ayahStart": 1,
+        "ayahEnd": 182
+      },
+      {
+        "surahId": 38,
+        "ayahStart": 1,
+        "ayahEnd": 88
+      },
+      {
+        "surahId": 39,
+        "ayahStart": 1,
+        "ayahEnd": 31
+      }
+    ]
+  },
+  {
+    "juzNumber": 24,
+    "verseMappings": [
+      {
+        "surahId": 39,
+        "ayahStart": 32,
+        "ayahEnd": 75
+      },
+      {
+        "surahId": 40,
+        "ayahStart": 1,
+        "ayahEnd": 85
+      },
+      {
+        "surahId": 41,
+        "ayahStart": 1,
+        "ayahEnd": 46
+      }
+    ]
+  },
+  {
+    "juzNumber": 25,
+    "verseMappings": [
+      {
+        "surahId": 41,
+        "ayahStart": 47,
+        "ayahEnd": 54
+      },
+      {
+        "surahId": 42,
+        "ayahStart": 1,
+        "ayahEnd": 53
+      },
+      {
+        "surahId": 43,
+        "ayahStart": 1,
+        "ayahEnd": 89
+      },
+      {
+        "surahId": 44,
+        "ayahStart": 1,
+        "ayahEnd": 59
+      },
+      {
+        "surahId": 45,
+        "ayahStart": 1,
+        "ayahEnd": 37
+      }
+    ]
+  },
+  {
+    "juzNumber": 26,
+    "verseMappings": [
+      {
+        "surahId": 46,
+        "ayahStart": 1,
+        "ayahEnd": 35
+      },
+      {
+        "surahId": 47,
+        "ayahStart": 1,
+        "ayahEnd": 38
+      },
+      {
+        "surahId": 48,
+        "ayahStart": 1,
+        "ayahEnd": 29
+      },
+      {
+        "surahId": 49,
+        "ayahStart": 1,
+        "ayahEnd": 18
+      },
+      {
+        "surahId": 50,
+        "ayahStart": 1,
+        "ayahEnd": 45
+      },
+      {
+        "surahId": 51,
+        "ayahStart": 1,
+        "ayahEnd": 30
+      }
+    ]
+  },
+  {
+    "juzNumber": 27,
+    "verseMappings": [
+      {
+        "surahId": 51,
+        "ayahStart": 31,
+        "ayahEnd": 60
+      },
+      {
+        "surahId": 52,
+        "ayahStart": 1,
+        "ayahEnd": 49
+      },
+      {
+        "surahId": 53,
+        "ayahStart": 1,
+        "ayahEnd": 62
+      },
+      {
+        "surahId": 54,
+        "ayahStart": 1,
+        "ayahEnd": 55
+      },
+      {
+        "surahId": 55,
+        "ayahStart": 1,
+        "ayahEnd": 78
+      },
+      {
+        "surahId": 56,
+        "ayahStart": 1,
+        "ayahEnd": 96
+      },
+      {
+        "surahId": 57,
+        "ayahStart": 1,
+        "ayahEnd": 29
+      }
+    ]
+  },
+  {
+    "juzNumber": 28,
+    "verseMappings": [
+      {
+        "surahId": 58,
+        "ayahStart": 1,
+        "ayahEnd": 22
+      },
+      {
+        "surahId": 59,
+        "ayahStart": 1,
+        "ayahEnd": 24
+      },
+      {
+        "surahId": 60,
+        "ayahStart": 1,
+        "ayahEnd": 13
+      },
+      {
+        "surahId": 61,
+        "ayahStart": 1,
+        "ayahEnd": 14
+      },
+      {
+        "surahId": 62,
+        "ayahStart": 1,
+        "ayahEnd": 11
+      },
+      {
+        "surahId": 63,
+        "ayahStart": 1,
+        "ayahEnd": 11
+      },
+      {
+        "surahId": 64,
+        "ayahStart": 1,
+        "ayahEnd": 18
+      },
+      {
+        "surahId": 65,
+        "ayahStart": 1,
+        "ayahEnd": 12
+      },
+      {
+        "surahId": 66,
+        "ayahStart": 1,
+        "ayahEnd": 12
+      }
+    ]
+  },
+  {
+    "juzNumber": 29,
+    "verseMappings": [
+      {
+        "surahId": 67,
+        "ayahStart": 1,
+        "ayahEnd": 30
+      },
+      {
+        "surahId": 68,
+        "ayahStart": 1,
+        "ayahEnd": 52
+      },
+      {
+        "surahId": 69,
+        "ayahStart": 1,
+        "ayahEnd": 52
+      },
+      {
+        "surahId": 70,
+        "ayahStart": 1,
+        "ayahEnd": 44
+      },
+      {
+        "surahId": 71,
+        "ayahStart": 1,
+        "ayahEnd": 28
+      },
+      {
+        "surahId": 72,
+        "ayahStart": 1,
+        "ayahEnd": 28
+      },
+      {
+        "surahId": 73,
+        "ayahStart": 1,
+        "ayahEnd": 20
+      },
+      {
+        "surahId": 74,
+        "ayahStart": 1,
+        "ayahEnd": 56
+      },
+      {
+        "surahId": 75,
+        "ayahStart": 1,
+        "ayahEnd": 40
+      },
+      {
+        "surahId": 76,
+        "ayahStart": 1,
+        "ayahEnd": 31
+      },
+      {
+        "surahId": 77,
+        "ayahStart": 1,
+        "ayahEnd": 50
+      }
+    ]
+  },
+  {
+    "juzNumber": 30,
+    "verseMappings": [
+      {
+        "surahId": 78,
+        "ayahStart": 1,
+        "ayahEnd": 40
+      },
+      {
+        "surahId": 79,
+        "ayahStart": 1,
+        "ayahEnd": 46
+      },
+      {
+        "surahId": 80,
+        "ayahStart": 1,
+        "ayahEnd": 42
+      },
+      {
+        "surahId": 81,
+        "ayahStart": 1,
+        "ayahEnd": 29
+      },
+      {
+        "surahId": 82,
+        "ayahStart": 1,
+        "ayahEnd": 19
+      },
+      {
+        "surahId": 83,
+        "ayahStart": 1,
+        "ayahEnd": 36
+      },
+      {
+        "surahId": 84,
+        "ayahStart": 1,
+        "ayahEnd": 25
+      },
+      {
+        "surahId": 85,
+        "ayahStart": 1,
+        "ayahEnd": 22
+      },
+      {
+        "surahId": 86,
+        "ayahStart": 1,
+        "ayahEnd": 17
+      },
+      {
+        "surahId": 87,
+        "ayahStart": 1,
+        "ayahEnd": 19
+      },
+      {
+        "surahId": 88,
+        "ayahStart": 1,
+        "ayahEnd": 26
+      },
+      {
+        "surahId": 89,
+        "ayahStart": 1,
+        "ayahEnd": 30
+      },
+      {
+        "surahId": 90,
+        "ayahStart": 1,
+        "ayahEnd": 20
+      },
+      {
+        "surahId": 91,
+        "ayahStart": 1,
+        "ayahEnd": 15
+      },
+      {
+        "surahId": 92,
+        "ayahStart": 1,
+        "ayahEnd": 21
+      },
+      {
+        "surahId": 93,
+        "ayahStart": 1,
+        "ayahEnd": 11
+      },
+      {
+        "surahId": 94,
+        "ayahStart": 1,
+        "ayahEnd": 8
+      },
+      {
+        "surahId": 95,
+        "ayahStart": 1,
+        "ayahEnd": 8
+      },
+      {
+        "surahId": 96,
+        "ayahStart": 1,
+        "ayahEnd": 19
+      },
+      {
+        "surahId": 97,
+        "ayahStart": 1,
+        "ayahEnd": 5
+      },
+      {
+        "surahId": 98,
+        "ayahStart": 1,
+        "ayahEnd": 8
+      },
+      {
+        "surahId": 99,
+        "ayahStart": 1,
+        "ayahEnd": 8
+      },
+      {
+        "surahId": 100,
+        "ayahStart": 1,
+        "ayahEnd": 11
+      },
+      {
+        "surahId": 101,
+        "ayahStart": 1,
+        "ayahEnd": 11
+      },
+      {
+        "surahId": 102,
+        "ayahStart": 1,
+        "ayahEnd": 8
+      },
+      {
+        "surahId": 103,
+        "ayahStart": 1,
+        "ayahEnd": 3
+      },
+      {
+        "surahId": 104,
+        "ayahStart": 1,
+        "ayahEnd": 9
+      },
+      {
+        "surahId": 105,
+        "ayahStart": 1,
+        "ayahEnd": 5
+      },
+      {
+        "surahId": 106,
+        "ayahStart": 1,
+        "ayahEnd": 4
+      },
+      {
+        "surahId": 107,
+        "ayahStart": 1,
+        "ayahEnd": 7
+      },
+      {
+        "surahId": 108,
+        "ayahStart": 1,
+        "ayahEnd": 3
+      },
+      {
+        "surahId": 109,
+        "ayahStart": 1,
+        "ayahEnd": 6
+      },
+      {
+        "surahId": 110,
+        "ayahStart": 1,
+        "ayahEnd": 3
+      },
+      {
+        "surahId": 111,
+        "ayahStart": 1,
+        "ayahEnd": 5
+      },
+      {
+        "surahId": 112,
+        "ayahStart": 1,
+        "ayahEnd": 4
+      },
+      {
+        "surahId": 113,
+        "ayahStart": 1,
+        "ayahEnd": 5
+      },
+      {
+        "surahId": 114,
+        "ayahStart": 1,
+        "ayahEnd": 6
+      }
+    ]
+  }
+]

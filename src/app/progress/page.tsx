@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useReviewStore } from '@/stores/review-store';
-import { getSurahIndex } from '@/lib/quran-data';
-import { getSurahOrder, generateLessons } from '@/lib/curriculum';
-import type { SurahMeta } from '@/types/quran';
+import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
+import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
+import type { SurahMeta, JuzMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
@@ -14,18 +14,31 @@ import SettingsPanel from '@/components/layout/settings-panel';
 
 export default function ProgressPage() {
   const [surahs, setSurahs] = useState<SurahMeta[]>([]);
+  const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
   const progressLessons = useProgressStore((s) => s.lessons);
   const stats = useStatsStore();
   const cards = useReviewStore((s) => s.cards);
 
   useEffect(() => {
     getSurahIndex().then((data) => {
-      const sorted = [...data].sort(
-        (a, b) => getSurahOrder(a.id) - getSurahOrder(b.id)
-      );
-      setSurahs(sorted);
+      setSurahs([...data].sort((a, b) => a.id - b.id));
     });
+    getJuzIndex().then(setJuzIndex);
   }, []);
+
+  // Build juz segments lookup
+  const juzSegmentsBySurah = new Map<number, Array<{ juzNumber: number; ayahStart: number; ayahEnd: number }>>();
+  for (const juz of juzIndex) {
+    for (const m of juz.verseMappings) {
+      if (!juzSegmentsBySurah.has(m.surahId)) juzSegmentsBySurah.set(m.surahId, []);
+      juzSegmentsBySurah.get(m.surahId)!.push({ juzNumber: juz.juzNumber, ayahStart: m.ayahStart, ayahEnd: m.ayahEnd });
+    }
+  }
+
+  const getLessons = (surah: SurahMeta) => {
+    const segs = juzSegmentsBySurah.get(surah.id) ?? [];
+    return generateLessonsWithJuzBoundaries(surah.id, surah.versesCount, segs);
+  };
 
   const completedLessonCount = Object.values(progressLessons).filter((l) => l.completedAt).length;
 
@@ -73,7 +86,7 @@ export default function ProgressPage() {
           <h2 className="mb-3 text-lg font-bold text-foreground">Surah Progress</h2>
           <div className="space-y-2">
             {surahs.map((surah) => {
-              const lessons = generateLessons(surah.id, surah.versesCount);
+              const lessons = getLessons(surah);
               const completed = lessons.filter(
                 (l) => progressLessons[l.lessonId]?.completedAt != null
               ).length;

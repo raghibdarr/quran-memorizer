@@ -1,5 +1,4 @@
 import { getSurah, getSurahLessons } from '@/lib/quran-data';
-import { CURRICULUM_ORDER } from '@/lib/curriculum';
 import LessonContainer from '@/components/lesson/lesson-container';
 import { notFound } from 'next/navigation';
 

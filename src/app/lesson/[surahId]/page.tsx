@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { getSurah } from '@/lib/quran-data';
-import { generateLessons } from '@/lib/curriculum';
+import { getSurah, getJuzSegmentsForSurah } from '@/lib/quran-data';
+import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { useProgressStore } from '@/stores/progress-store';
 import type { Surah, LessonDef } from '@/types/quran';
 import Card from '@/components/ui/card';
@@ -21,9 +21,9 @@ export default function SurahDetailPage() {
   const progressLessons = useProgressStore((s) => s.lessons);
 
   useEffect(() => {
-    getSurah(surahId).then((s) => {
+    Promise.all([getSurah(surahId), getJuzSegmentsForSurah(surahId)]).then(([s, juzSegs]) => {
       setSurah(s);
-      setLessons(generateLessons(surahId, s.versesCount));
+      setLessons(generateLessonsWithJuzBoundaries(surahId, s.versesCount, juzSegs));
     });
   }, [surahId]);
 
@@ -70,7 +70,13 @@ export default function SurahDetailPage() {
       {/* Lesson list */}
       <main className="mx-auto max-w-2xl px-4 py-4">
         <div className="space-y-2">
-          {lessons.map((lesson) => {
+          {lessons.map((lesson, idx) => {
+            // Show juz divider when juz changes between lessons
+            const prevJuz = idx > 0 ? lessons[idx - 1].juzNumber : lesson.juzNumber;
+            const showJuzDivider = lesson.juzNumber !== prevJuz;
+            // Also show for multi-juz surahs at the start
+            const isMultiJuz = lessons.length > 0 && lessons[0].juzNumber !== lessons[lessons.length - 1].juzNumber;
+            const showFirstJuzLabel = isMultiJuz && idx === 0;
             const progress = progressLessons[lesson.lessonId];
             const isComplete = progress?.completedAt != null;
             const isActive = progress && !isComplete;
@@ -79,7 +85,15 @@ export default function SurahDetailPage() {
               : isComplete ? 100 : 0;
 
             return (
-              <a key={lesson.lessonId} href={`/lesson/${surahId}/${lesson.lessonNumber}`} className="block">
+              <div key={lesson.lessonId}>
+                {(showJuzDivider || showFirstJuzLabel) && (
+                  <div className="flex items-center gap-3 py-2">
+                    <div className="h-px flex-1 bg-foreground/10" />
+                    <span className="text-xs font-medium text-teal">Juz {lesson.juzNumber}</span>
+                    <div className="h-px flex-1 bg-foreground/10" />
+                  </div>
+                )}
+              <a href={`/lesson/${surahId}/${lesson.lessonNumber}`} className="block">
                 <Card
                   className={cn(
                     'flex items-center gap-4 transition-all hover:shadow-md',
@@ -117,6 +131,7 @@ export default function SurahDetailPage() {
                   </div>
                 </Card>
               </a>
+              </div>
             );
           })}
         </div>

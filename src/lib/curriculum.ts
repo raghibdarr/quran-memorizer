@@ -20,33 +20,42 @@ export const CURRICULUM_ORDER = [
 ] as const;
 
 const AYAHS_PER_LESSON = 5;
+const MIN_LESSON_AYAHS = 3;
 
-/** Generate lesson definitions for a surah */
-export function generateLessons(surahId: number, versesCount: number): LessonDef[] {
-  // Short surahs = single lesson
-  if (versesCount <= 8) {
+/** Generate lessons for a single contiguous segment of ayahs */
+function generateSegmentLessons(
+  surahId: number,
+  segStart: number,
+  segEnd: number,
+  juzNumber: number,
+  startLessonNum: number,
+): LessonDef[] {
+  const segCount = segEnd - segStart + 1;
+
+  // Short segments = single lesson
+  if (segCount <= 8) {
     return [{
-      lessonId: `${surahId}-1`,
+      lessonId: `${surahId}-${startLessonNum}`,
       surahId,
-      lessonNumber: 1,
-      ayahStart: 1,
-      ayahEnd: versesCount,
-      ayahCount: versesCount,
+      lessonNumber: startLessonNum,
+      ayahStart: segStart,
+      ayahEnd: segEnd,
+      ayahCount: segCount,
+      juzNumber,
     }];
   }
 
   const lessons: LessonDef[] = [];
-  let start = 1;
-  let num = 1;
+  let start = segStart;
+  let num = startLessonNum;
 
-  while (start <= versesCount) {
-    let end = Math.min(start + AYAHS_PER_LESSON - 1, versesCount);
+  while (start <= segEnd) {
+    let end = Math.min(start + AYAHS_PER_LESSON - 1, segEnd);
 
-    // Avoid orphan groups of 1-2 ayahs at the end
-    const remaining = versesCount - end;
-    if (remaining > 0 && remaining <= 2) {
-      // Absorb the remaining into this lesson
-      end = versesCount;
+    // Avoid orphan groups of fewer than MIN_LESSON_AYAHS at the end
+    const remaining = segEnd - end;
+    if (remaining > 0 && remaining < MIN_LESSON_AYAHS) {
+      end = segEnd;
     }
 
     lessons.push({
@@ -56,6 +65,7 @@ export function generateLessons(surahId: number, versesCount: number): LessonDef
       ayahStart: start,
       ayahEnd: end,
       ayahCount: end - start + 1,
+      juzNumber,
     });
 
     start = end + 1;
@@ -63,6 +73,40 @@ export function generateLessons(surahId: number, versesCount: number): LessonDef
   }
 
   return lessons;
+}
+
+/** Generate lesson definitions for a surah (no juz awareness — fallback) */
+export function generateLessons(surahId: number, versesCount: number): LessonDef[] {
+  return generateSegmentLessons(surahId, 1, versesCount, 0, 1);
+}
+
+/** Generate lesson definitions respecting juz boundaries */
+export function generateLessonsWithJuzBoundaries(
+  surahId: number,
+  versesCount: number,
+  juzSegments: Array<{ juzNumber: number; ayahStart: number; ayahEnd: number }>,
+): LessonDef[] {
+  // No juz info — fall back to simple generation
+  if (!juzSegments.length) {
+    return generateLessons(surahId, versesCount);
+  }
+
+  // Single juz segment — same as before but with juzNumber
+  if (juzSegments.length === 1) {
+    return generateSegmentLessons(surahId, 1, versesCount, juzSegments[0].juzNumber, 1);
+  }
+
+  // Multi-juz surah — generate lessons per segment, number sequentially
+  const allLessons: LessonDef[] = [];
+  let lessonNum = 1;
+
+  for (const seg of juzSegments) {
+    const segLessons = generateSegmentLessons(surahId, seg.ayahStart, seg.ayahEnd, seg.juzNumber, lessonNum);
+    allLessons.push(...segLessons);
+    lessonNum += segLessons.length;
+  }
+
+  return allLessons;
 }
 
 export function getNextSurah(completedSurahIds: number[]): number | null {

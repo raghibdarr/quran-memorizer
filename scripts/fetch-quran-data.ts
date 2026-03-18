@@ -238,7 +238,73 @@ async function main() {
   const indexPath = path.join(dataDir, 'surahs-index.json');
   await fs.writeFile(indexPath, JSON.stringify(index, null, 2), 'utf-8');
   console.log(`\nSaved index: ${indexPath} (${index.length} surahs)`);
+
+  // Fetch juz metadata
+  await fetchJuzData(dataDir);
+
   console.log('Done!');
+}
+
+async function fetchJuzData(dataDir: string) {
+  const fs = await import('fs/promises');
+  const path = await import('path');
+
+  console.log('\nFetching juz metadata...');
+  const data = await fetchJson(`${API_BASE}/juzs`) as {
+    juzs: Array<{
+      id: number;
+      juz_number: number;
+      verse_mapping: Record<string, string>;
+    }>;
+  };
+
+  // Group by juz number (API returns 2 entries per juz — one per hizb)
+  const juzMap = new Map<number, Array<{ surahId: number; ayahStart: number; ayahEnd: number }>>();
+
+  for (const juz of data.juzs) {
+    if (!juzMap.has(juz.juz_number)) {
+      juzMap.set(juz.juz_number, []);
+    }
+    const mappings = juzMap.get(juz.juz_number)!;
+
+    for (const [surahId, range] of Object.entries(juz.verse_mapping)) {
+      const [start, end] = range.split('-').map(Number);
+      mappings.push({
+        surahId: Number(surahId),
+        ayahStart: start,
+        ayahEnd: end,
+      });
+    }
+  }
+
+  // Merge overlapping/adjacent segments for the same surah within a juz
+  const juzIndex: Array<{ juzNumber: number; verseMappings: Array<{ surahId: number; ayahStart: number; ayahEnd: number }> }> = [];
+
+  for (const [juzNumber, rawMappings] of juzMap) {
+    // Group by surahId and merge ranges
+    const bySurah = new Map<number, { ayahStart: number; ayahEnd: number }>();
+    for (const m of rawMappings) {
+      const existing = bySurah.get(m.surahId);
+      if (existing) {
+        existing.ayahStart = Math.min(existing.ayahStart, m.ayahStart);
+        existing.ayahEnd = Math.max(existing.ayahEnd, m.ayahEnd);
+      } else {
+        bySurah.set(m.surahId, { ayahStart: m.ayahStart, ayahEnd: m.ayahEnd });
+      }
+    }
+
+    const verseMappings = Array.from(bySurah.entries())
+      .map(([surahId, range]) => ({ surahId, ...range }))
+      .sort((a, b) => a.surahId - b.surahId || a.ayahStart - b.ayahStart);
+
+    juzIndex.push({ juzNumber, verseMappings });
+  }
+
+  juzIndex.sort((a, b) => a.juzNumber - b.juzNumber);
+
+  const juzPath = path.join(dataDir, 'juz-index.json');
+  await fs.writeFile(juzPath, JSON.stringify(juzIndex, null, 2), 'utf-8');
+  console.log(`Saved juz index: ${juzPath} (${juzIndex.length} juz)`);
 }
 
 main();
