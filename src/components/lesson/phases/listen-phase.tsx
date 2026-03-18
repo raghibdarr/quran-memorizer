@@ -109,7 +109,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
   const playSingleAyah = useCallback(async (index: number) => {
     if (playingAll) return;
     setCurrentAyahIndex(index);
-    await audioController.playAndWait(getAudioUrl(surah.id, surah.ayahs[index].number));
+    await audioController.playAndWait(getAudioUrl(surah.id, ayahs[index].number));
     setCurrentAyahIndex(-1);
 
     setIndividualPlays((prev) => {
@@ -121,7 +121,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
       }
       return next;
     });
-  }, [surah, playingAll, incrementListenCount]);
+  }, [surah, ayahs, playingAll, incrementListenCount]);
 
   const handleSpeedChange = (speed: number) => {
     setCurrentSpeed(speed);
