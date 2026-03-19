@@ -116,7 +116,7 @@ export default function PracticeSession({
         try {
           // Wait for model if it's still loading
           if (whisper.modelReady) {
-            const text = await whisper.transcribe(audio);
+            const text = await whisper.transcribe(audio, currentAyah.textUthmani);
             setTranscribedText(text);
             const comparison = compareAyahText(text, currentAyah.textUthmani);
             setWordResults(comparison.wordResults);

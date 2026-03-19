@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface UseWhisperReturn {
-  transcribe: (audio: Float32Array) => Promise<string>;
+  transcribe: (audio: Float32Array, prompt?: string) => Promise<string>;
   isLoading: boolean;
   modelReady: boolean;
   downloadProgress: number;
@@ -70,14 +70,14 @@ export function useWhisper(): UseWhisperReturn {
     workerRef.current = worker;
   }, [modelReady, handleMessage]);
 
-  const transcribe = useCallback(async (audio: Float32Array): Promise<string> => {
+  const transcribe = useCallback(async (audio: Float32Array, prompt?: string): Promise<string> => {
     if (!workerRef.current || !modelReady) {
       throw new Error('Model not ready');
     }
     return new Promise<string>((resolve, reject) => {
       resolveRef.current = resolve;
       rejectRef.current = reject;
-      workerRef.current!.postMessage({ type: 'transcribe', audio });
+      workerRef.current!.postMessage({ type: 'transcribe', audio, prompt });
     });
   }, [modelReady]);
 

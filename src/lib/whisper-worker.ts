@@ -8,7 +8,7 @@
  *
  * Messages:
  *   IN:  { type: 'load' }  — load the model
- *   IN:  { type: 'transcribe', audio: Float32Array }  — transcribe audio
+ *   IN:  { type: 'transcribe', audio: Float32Array, prompt?: string }  — transcribe audio (prompt = expected text for guided recognition)
  *   OUT: { type: 'loading', progress: number }  — model download progress (0-100)
  *   OUT: { type: 'ready' }  — model loaded and ready
  *   OUT: { type: 'result', text: string }  — transcription result
@@ -50,16 +50,23 @@ async function loadModel() {
   }
 }
 
-async function transcribe(audio: Float32Array) {
+async function transcribe(audio: Float32Array, prompt?: string) {
   if (!pipelineFn) {
     postMessage({ type: 'error', message: 'Model not loaded' });
     return;
   }
 
   try {
-    const result = await pipelineFn(audio, {
+    const options: Record<string, unknown> = {
       return_timestamps: false,
-    });
+    };
+
+    // Pass expected text as prompt to guide recognition (dramatically improves accuracy)
+    if (prompt) {
+      options.initial_prompt = prompt;
+    }
+
+    const result = await pipelineFn(audio, options);
 
     const text = typeof result === 'string' ? result : result?.text ?? '';
     postMessage({ type: 'result', text });
@@ -72,10 +79,10 @@ async function transcribe(audio: Float32Array) {
 }
 
 self.onmessage = (event: MessageEvent) => {
-  const { type, audio } = event.data;
+  const { type, audio, prompt } = event.data;
   if (type === 'load') {
     loadModel();
   } else if (type === 'transcribe') {
-    transcribe(audio);
+    transcribe(audio, prompt);
   }
 };
