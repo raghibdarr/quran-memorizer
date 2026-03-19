@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from 'react';
 import type { Ayah, PracticeAyahRating, PracticeAyahResult, PracticeOverallRating, PracticeSession as PracticeSessionType } from '@/types/quran';
 import { useRecorder } from '@/hooks/use-recorder';
 import { useWhisper } from '@/hooks/use-whisper';
-import { compareAyahText } from '@/lib/arabic-compare';
+import { compareAyahText, transliterateArabic } from '@/lib/arabic-compare';
 import { useReviewStore } from '@/stores/review-store';
 import { usePracticeStore } from '@/stores/practice-store';
 import { useSettingsStore } from '@/stores/settings-store';
@@ -203,29 +203,35 @@ export default function PracticeSession({
                 <p className="mt-2 text-sm text-muted italic">{currentAyah.transliteration}</p>
               )}
               {/* Voice recognition results */}
-              {wordResults && (
-                <div className="mt-4 rounded-xl bg-foreground/5 p-3">
-                  <p className="mb-2 text-xs font-medium text-muted">
-                    Accuracy: {Math.round((accuracy ?? 0) * 100)}%
-                  </p>
-                  <p className="arabic-text text-lg leading-loose" dir="rtl">
-                    {wordResults.map((w, i) => (
-                      <span
-                        key={i}
-                        className={cn(
-                          'mx-0.5',
-                          w.correct ? 'text-success' : 'text-red-500 underline decoration-wavy'
-                        )}
-                      >
-                        {w.word}
-                      </span>
-                    ))}
-                  </p>
-                  {transcribedText && (
-                    <p className="mt-2 text-xs text-muted">
-                      Heard: <span dir="rtl">{transcribedText}</span>
-                    </p>
+              {transcribedText != null && (
+                <div className="mt-4 space-y-3 rounded-xl bg-foreground/5 p-3">
+                  {wordResults && (
+                    <>
+                      <p className="text-xs font-medium text-muted">
+                        Accuracy: {Math.round((accuracy ?? 0) * 100)}%
+                      </p>
+                      <p className="arabic-text text-lg leading-loose" dir="rtl">
+                        {wordResults.map((w, i) => (
+                          <span
+                            key={i}
+                            className={cn(
+                              'mx-0.5',
+                              w.correct ? 'text-success' : 'text-red-500 underline decoration-wavy'
+                            )}
+                          >
+                            {w.word}
+                          </span>
+                        ))}
+                      </p>
+                    </>
                   )}
+                  <div className="border-t border-foreground/10 pt-2">
+                    <p className="text-xs font-medium text-muted mb-1">What was heard:</p>
+                    <p className="arabic-text text-base leading-loose" dir="rtl">{transcribedText || '(empty)'}</p>
+                    {transcribedText && (
+                      <p className="mt-1 text-sm text-muted italic">{transliterateArabic(transcribedText)}</p>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

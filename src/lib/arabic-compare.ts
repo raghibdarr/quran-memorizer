@@ -90,3 +90,63 @@ export function compareAyahText(transcribed: string, expected: string): CompareR
 
   return { accuracy, wordResults };
 }
+
+/** Basic Arabic → Latin transliteration for debugging voice recognition output */
+const ARABIC_TO_LATIN: Record<string, string> = {
+  '\u0627': 'a',   // alef
+  '\u0628': 'b',   // ba
+  '\u062A': 't',   // ta
+  '\u062B': 'th',  // tha
+  '\u062C': 'j',   // jim
+  '\u062D': 'H',   // ha (emphatic)
+  '\u062E': 'kh',  // kha
+  '\u062F': 'd',   // dal
+  '\u0630': 'dh',  // dhal
+  '\u0631': 'r',   // ra
+  '\u0632': 'z',   // zayn
+  '\u0633': 's',   // sin
+  '\u0634': 'sh',  // shin
+  '\u0635': 'S',   // sad
+  '\u0636': 'D',   // dad
+  '\u0637': 'T',   // ta (emphatic)
+  '\u0638': 'Z',   // za (emphatic)
+  '\u0639': "'",   // ayn
+  '\u063A': 'gh',  // ghayn
+  '\u0641': 'f',   // fa
+  '\u0642': 'q',   // qaf
+  '\u0643': 'k',   // kaf
+  '\u0644': 'l',   // lam
+  '\u0645': 'm',   // mim
+  '\u0646': 'n',   // nun
+  '\u0647': 'h',   // ha
+  '\u0648': 'w',   // waw
+  '\u064A': 'y',   // ya
+  '\u0629': 'h',   // ta marbuta
+  '\u0649': 'a',   // alef maksura
+  '\u0622': 'aa',  // alef madda
+  '\u0623': 'a',   // alef hamza above
+  '\u0625': 'i',   // alef hamza below
+  '\u0621': "'",   // hamza
+  '\u0626': "'",   // ya hamza
+  '\u0624': "'",   // waw hamza
+  '\u0671': 'a',   // alef wasla
+  '\u0644\u0627': 'la', // lam-alef
+};
+
+export function transliterateArabic(text: string): string {
+  const stripped = stripTashkeel(text);
+  let result = '';
+  for (let i = 0; i < stripped.length; i++) {
+    // Check two-char combos first (lam-alef)
+    const twoChar = stripped[i] + (stripped[i + 1] ?? '');
+    if (ARABIC_TO_LATIN[twoChar]) {
+      result += ARABIC_TO_LATIN[twoChar];
+      i++;
+    } else if (ARABIC_TO_LATIN[stripped[i]]) {
+      result += ARABIC_TO_LATIN[stripped[i]];
+    } else {
+      result += stripped[i]; // keep spaces, punctuation, etc.
+    }
+  }
+  return result;
+}
