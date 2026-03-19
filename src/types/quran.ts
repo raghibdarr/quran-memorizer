@@ -119,6 +119,28 @@ export interface UserStats {
   lastActiveDate: string | null;  // ISO date string
 }
 
+// Practice mode types
+
+export type PracticeAyahRating = 'got-it' | 'hesitated' | 'missed';
+export type PracticeOverallRating = 'smooth' | 'some-mistakes' | 'need-practice';
+
+export interface PracticeAyahResult {
+  surahId: number;
+  ayahNumber: number;
+  rating: PracticeAyahRating;
+  accuracy?: number;  // 0-1 from voice recognition
+}
+
+export interface PracticeSession {
+  id: string;
+  timestamp: number;
+  surahIds: number[];
+  lessonIds: string[];
+  ayahRange: { start: number; end: number };
+  ayahResults: PracticeAyahResult[];
+  overallRating: PracticeOverallRating | null;
+}
+
 // Chunk for progressive building
 
 export interface Chunk {

@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 .claude/screenshots
+
+# ONNX model files (hosted on HuggingFace)
+whisper-quran-onnx/
+whisper-quran-onnx-q8/
+whisper-quran-onnx-quantized/

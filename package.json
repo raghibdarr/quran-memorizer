@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@huggingface/transformers": "^3.8.1",
     "clsx": "^2.1.1",
     "idb-keyval": "^6.2.2",
     "next": "16.1.6",
