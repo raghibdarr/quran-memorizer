@@ -11,9 +11,11 @@ import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import PracticeContainer from '@/components/practice/practice-container';
-import JuzPracticeContainer from '@/components/practice/juz-practice-container';
+import PracticeSession from '@/components/practice/practice-session';
+import Button from '@/components/ui/button';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import type { Ayah } from '@/types/quran';
 
 type Tab = 'learn' | 'practice';
 
@@ -34,6 +36,19 @@ export default function JuzDetailPage() {
   const [activeTab, setActiveTab] = useState<Tab>('learn');
   const [loadedSurahs, setLoadedSurahs] = useState<Record<number, Surah>>({});
   const [practiceDataLoading, setPracticeDataLoading] = useState(false);
+  // Active practice session for juz-level (takes over the whole practice tab)
+  const [activePractice, setActivePractice] = useState<{
+    surahId: number | null; // null = multi-surah / entire juz
+    ayahs: Ayah[];
+    surahIds: number[];
+    title: string;
+    initialStep?: 'ayah-by-ayah' | 'full-passage';
+  } | null>(null);
+  // Lesson selection for practice
+  const [selectedLessonIds, setSelectedLessonIds] = useState<Set<string>>(new Set());
+  const [practiceMode, setPracticeMode] = useState<'lesson' | 'range'>('lesson');
+  // Per-surah ranges for range mode
+  const [surahRanges, setSurahRanges] = useState<Record<number, { start: number; end: number }>>({});
 
   useEffect(() => {
     Promise.all([getJuzIndex(), getSurahIndex()]).then(async ([juzIndex, surahIndex]) => {
@@ -233,58 +248,348 @@ export default function JuzDetailPage() {
             })}
           </div>
         ) : (
-          /* Practice tab — whole-juz button + expanded per-surah sections */
-          <div className="space-y-6">
-            {/* Practice Entire Juz */}
-            {practiceDataLoading ? (
-              <Card className="text-center">
-                <p className="text-sm text-muted">Loading surah data...</p>
-              </Card>
-            ) : allSurahsLoaded ? (
-              <JuzPracticeContainer juzNum={juzNum} sections={loadedSections} />
-            ) : null}
-
-            {/* Per-surah practice sections (all expanded) */}
-            {sections.map((section) => {
-              const loadedSurah = loadedSurahs[section.surah.id];
-              const sectionCompleted = section.lessons.filter(
-                (l) => progressLessons[l.lessonId]?.completedAt != null
-              ).length;
-
-              return (
-                <div key={`practice-${section.surah.id}`}>
-                  <div className="mb-2 flex items-center justify-between">
-                    <div>
-                      <h2 className="text-sm font-bold text-foreground">
-                        {section.surah.nameSimple}
-                        {section.isPartial && (
-                          <span className="ml-1.5 font-normal text-muted">
-                            ({section.ayahStart}&ndash;{section.ayahEnd})
-                          </span>
-                        )}
-                      </h2>
-                      <p className="text-xs text-muted">
-                        {sectionCompleted}/{section.lessons.length} lessons completed
-                      </p>
-                    </div>
-                    <span className="arabic-text text-lg text-muted">{section.surah.nameArabic}</span>
+          /* Practice tab */
+          activePractice ? (
+            /* Active practice session — takes over the view */
+            <div>
+              <button
+                onClick={() => setActivePractice(null)}
+                className="mb-4 text-sm text-muted hover:text-foreground"
+              >
+                &larr; Back to selection
+              </button>
+              {activePractice.surahId != null && loadedSurahs[activePractice.surahId] ? (
+                <PracticeContainer
+                  surah={loadedSurahs[activePractice.surahId]}
+                  lessons={sections.find((s) => s.surah.id === activePractice.surahId)?.lessons ?? []}
+                  defaultAyahRange={(() => {
+                    const sec = sections.find((s) => s.surah.id === activePractice.surahId);
+                    return sec ? { start: sec.ayahStart, end: sec.ayahEnd } : undefined;
+                  })()}
+                />
+              ) : activePractice.ayahs.length > 0 ? (
+                <PracticeSession
+                  surahIds={activePractice.surahIds}
+                  title={activePractice.title}
+                  ayahs={activePractice.ayahs}
+                  lessonIds={[]}
+                  initialStep={activePractice.initialStep ?? 'full-passage'}
+                  surahNames={Object.fromEntries(sections.map((s) => [s.surah.id, s.surah.nameSimple]))}
+                  onDone={() => setActivePractice(null)}
+                />
+              ) : null}
+            </div>
+          ) : (
+            /* Practice selection */
+            <div className="space-y-4">
+              {practiceDataLoading ? (
+                <Card className="text-center">
+                  <p className="text-sm text-muted">Loading surah data...</p>
+                </Card>
+              ) : (
+                <>
+                  {/* By Lesson / By Range toggle */}
+                  <div className="flex gap-1 rounded-xl bg-foreground/5 p-1">
+                    <button
+                      onClick={() => setPracticeMode('lesson')}
+                      className={cn(
+                        'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
+                        practiceMode === 'lesson' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                      )}
+                    >
+                      By Lesson
+                    </button>
+                    <button
+                      onClick={() => setPracticeMode('range')}
+                      className={cn(
+                        'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
+                        practiceMode === 'range' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                      )}
+                    >
+                      By Range
+                    </button>
                   </div>
 
-                  {loadedSurah ? (
-                    <PracticeContainer
-                      surah={loadedSurah}
-                      lessons={section.lessons}
-                      defaultAyahRange={{ start: section.ayahStart, end: section.ayahEnd }}
-                    />
+                  {practiceMode === 'lesson' ? (
+                  <>
+                  {/* Select all / deselect */}
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs text-muted">
+                      {allJuzLessons.length} lesson{allJuzLessons.length !== 1 ? 's' : ''}
+                    </p>
+                    <button
+                      onClick={() => {
+                        if (selectedLessonIds.size === allJuzLessons.length) {
+                          setSelectedLessonIds(new Set());
+                        } else {
+                          setSelectedLessonIds(new Set(allJuzLessons.map((l) => l.lessonId)));
+                        }
+                      }}
+                      className="text-xs font-medium text-teal"
+                    >
+                      {selectedLessonIds.size === allJuzLessons.length ? 'Deselect All' : 'Select All'}
+                    </button>
+                  </div>
+
+                  {/* Lessons grouped by surah */}
+                  {sections.map((section) => {
+                    const sectionCompleted = section.lessons.filter(
+                      (l) => progressLessons[l.lessonId]?.completedAt != null
+                    ).length;
+                    const allSectionSelected = section.lessons.every((l) => selectedLessonIds.has(l.lessonId));
+
+                    return (
+                      <div key={`practice-${section.surah.id}`}>
+                        {/* Surah header with select-all for this surah */}
+                        <div className="mb-2 flex items-center justify-between">
+                          <div>
+                            <h2 className="text-sm font-bold text-foreground">
+                              {section.surah.nameSimple}
+                              {section.isPartial && (
+                                <span className="ml-1.5 font-normal text-muted">
+                                  ({section.ayahStart}&ndash;{section.ayahEnd})
+                                </span>
+                              )}
+                            </h2>
+                            <p className="text-xs text-muted">
+                              {section.lessons.length} lesson{section.lessons.length !== 1 ? 's' : ''}
+                              {sectionCompleted > 0 && ` · ${sectionCompleted} completed`}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => {
+                              setSelectedLessonIds((prev) => {
+                                const next = new Set(prev);
+                                if (allSectionSelected) {
+                                  section.lessons.forEach((l) => next.delete(l.lessonId));
+                                } else {
+                                  section.lessons.forEach((l) => next.add(l.lessonId));
+                                }
+                                return next;
+                              });
+                            }}
+                            className="text-xs font-medium text-teal"
+                          >
+                            {allSectionSelected ? 'Deselect' : 'Select All'}
+                          </button>
+                        </div>
+
+                        {/* Lesson checkboxes */}
+                        <div className="space-y-1.5">
+                          {section.lessons.map((lesson) => {
+                            const isCompleted = progressLessons[lesson.lessonId]?.completedAt != null;
+                            const isSelected = selectedLessonIds.has(lesson.lessonId);
+
+                            return (
+                              <button
+                                key={lesson.lessonId}
+                                onClick={() => {
+                                  setSelectedLessonIds((prev) => {
+                                    const next = new Set(prev);
+                                    if (next.has(lesson.lessonId)) next.delete(lesson.lessonId);
+                                    else next.add(lesson.lessonId);
+                                    return next;
+                                  });
+                                }}
+                                className={cn(
+                                  'flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all',
+                                  isSelected ? 'bg-teal/10 ring-2 ring-teal' : 'bg-card hover:bg-foreground/5'
+                                )}
+                              >
+                                <div
+                                  className={cn(
+                                    'flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold',
+                                    isSelected ? 'bg-teal text-white' :
+                                    isCompleted ? 'bg-success/20 text-success' :
+                                    'bg-foreground/10 text-muted'
+                                  )}
+                                >
+                                  {isSelected ? <CheckIcon size={12} /> : lesson.lessonNumber}
+                                </div>
+                                <div>
+                                  <p className="text-sm font-medium text-foreground">Lesson {lesson.lessonNumber}</p>
+                                  <p className="text-xs text-muted">
+                                    Ayahs {lesson.ayahStart}&ndash;{lesson.ayahEnd}
+                                    {isCompleted && <span className="ml-1 text-success">&#10003;</span>}
+                                  </p>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  </>
                   ) : (
-                    <Card className="text-center">
-                      <p className="text-sm text-muted">Loading...</p>
-                    </Card>
+                  /* By Range — per-surah range pickers */
+                  <>
+                  {sections.map((section) => {
+                    const range = surahRanges[section.surah.id] ?? { start: section.ayahStart, end: section.ayahEnd };
+                    return (
+                      <Card key={`range-${section.surah.id}`}>
+                        <div className="mb-3 flex items-center justify-between">
+                          <h2 className="text-sm font-bold text-foreground">
+                            {section.surah.nameSimple}
+                            {section.isPartial && (
+                              <span className="ml-1.5 font-normal text-muted">
+                                ({section.ayahStart}&ndash;{section.ayahEnd})
+                              </span>
+                            )}
+                          </h2>
+                          <span className="arabic-text text-lg text-muted">{section.surah.nameArabic}</span>
+                        </div>
+                        <div className="flex gap-3">
+                          <div className="flex-1">
+                            <label className="mb-1 block text-xs font-medium text-muted">Start</label>
+                            <select
+                              value={range.start}
+                              onChange={(e) => {
+                                const v = parseInt(e.target.value, 10);
+                                setSurahRanges((prev) => ({
+                                  ...prev,
+                                  [section.surah.id]: { start: v, end: Math.max(v, range.end) },
+                                }));
+                              }}
+                              className="w-full rounded-lg border border-foreground/10 bg-cream px-2 py-1.5 text-sm text-foreground"
+                            >
+                              {Array.from(
+                                { length: section.ayahEnd - section.ayahStart + 1 },
+                                (_, i) => section.ayahStart + i
+                              ).map((n) => (
+                                <option key={n} value={n}>Ayah {n}</option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="flex-1">
+                            <label className="mb-1 block text-xs font-medium text-muted">End</label>
+                            <select
+                              value={range.end}
+                              onChange={(e) => {
+                                setSurahRanges((prev) => ({
+                                  ...prev,
+                                  [section.surah.id]: { ...range, end: parseInt(e.target.value, 10) },
+                                }));
+                              }}
+                              className="w-full rounded-lg border border-foreground/10 bg-cream px-2 py-1.5 text-sm text-foreground"
+                            >
+                              {Array.from(
+                                { length: section.ayahEnd - range.start + 1 },
+                                (_, i) => range.start + i
+                              ).map((n) => (
+                                <option key={n} value={n}>Ayah {n}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </Card>
+                    );
+                  })}
+                  </>
                   )}
-                </div>
-              );
-            })}
-          </div>
+
+                  {/* Spacer for sticky footer */}
+                  <div className="h-28" />
+
+                  {/* Sticky bottom bar */}
+                  {(() => {
+                    let selectedCount = 0;
+                    let canStart = false;
+
+                    if (practiceMode === 'lesson') {
+                      selectedCount = allJuzLessons
+                        .filter((l) => selectedLessonIds.has(l.lessonId))
+                        .reduce((sum, l) => sum + l.ayahCount, 0);
+                      canStart = selectedLessonIds.size > 0;
+                    } else {
+                      selectedCount = sections.reduce((sum, s) => {
+                        const range = surahRanges[s.surah.id] ?? { start: s.ayahStart, end: s.ayahEnd };
+                        return sum + (range.end - range.start + 1);
+                      }, 0);
+                      canStart = selectedCount > 0;
+                    }
+
+                    const startPractice = (mode: 'ayah-by-ayah' | 'full-passage') => {
+                      const allAyahs: Ayah[] = [];
+                      const surahIdList: number[] = [];
+
+                      if (practiceMode === 'lesson') {
+                        for (const section of sections) {
+                          const surah = loadedSurahs[section.surah.id];
+                          if (!surah) continue;
+                          const sectionSelectedLessons = section.lessons
+                            .filter((l) => selectedLessonIds.has(l.lessonId))
+                            .sort((a, b) => a.ayahStart - b.ayahStart);
+                          if (sectionSelectedLessons.length === 0) continue;
+                          for (const lesson of sectionSelectedLessons) {
+                            const lessonAyahs = surah.ayahs.filter(
+                              (a) => a.number >= lesson.ayahStart && a.number <= lesson.ayahEnd
+                            );
+                            allAyahs.push(...lessonAyahs);
+                          }
+                          if (!surahIdList.includes(section.surah.id)) surahIdList.push(section.surah.id);
+                        }
+                      } else {
+                        for (const section of sections) {
+                          const surah = loadedSurahs[section.surah.id];
+                          if (!surah) continue;
+                          const range = surahRanges[section.surah.id] ?? { start: section.ayahStart, end: section.ayahEnd };
+                          const rangeAyahs = surah.ayahs.filter(
+                            (a) => a.number >= range.start && a.number <= range.end
+                          );
+                          allAyahs.push(...rangeAyahs);
+                          if (rangeAyahs.length > 0 && !surahIdList.includes(section.surah.id)) {
+                            surahIdList.push(section.surah.id);
+                          }
+                        }
+                      }
+                      if (allAyahs.length === 0) return;
+
+                      const titleStr = surahIdList.length === 1
+                        ? sections.find((s) => s.surah.id === surahIdList[0])?.surah.nameSimple ?? `Juz ${juzNum}`
+                        : `Juz ${juzNum}`;
+
+                      setActivePractice({
+                        surahId: null,
+                        ayahs: allAyahs,
+                        surahIds: surahIdList,
+                        title: titleStr,
+                        initialStep: mode,
+                      });
+                    };
+
+                    return (
+                      <div className="fixed bottom-[3.25rem] left-0 right-0 z-20 border-t border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+                        <div className="mx-auto max-w-2xl space-y-2">
+                          <p className="text-center text-sm font-medium text-foreground">
+                            {selectedCount} ayah{selectedCount !== 1 ? 's' : ''} selected
+                          </p>
+                          <div className="flex gap-2">
+                            <Button
+                              onClick={() => startPractice('ayah-by-ayah')}
+                              disabled={!canStart}
+                              variant="secondary"
+                              className="flex-1 text-sm"
+                            >
+                              Ayah by Ayah
+                            </Button>
+                            <Button
+                              onClick={() => startPractice('full-passage')}
+                              disabled={!canStart}
+                              className="flex-1 text-sm"
+                            >
+                              All at Once
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </>
+              )}
+            </div>
+          )
         )}
       </main>
 
