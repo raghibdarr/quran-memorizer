@@ -24,6 +24,7 @@ export default function SurahDetailPage() {
   const [lessons, setLessons] = useState<LessonDef[]>([]);
   const progressLessons = useProgressStore((s) => s.lessons);
   const initialTab = searchParams.get('tab') === 'practice' ? 'practice' : 'learn';
+  const reviewLessonNum = searchParams.get('reviewLesson') ? parseInt(searchParams.get('reviewLesson')!, 10) : null;
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
 
   useEffect(() => {
@@ -202,7 +203,7 @@ export default function SurahDetailPage() {
           )
         ) : (
           /* Practice tab */
-          <PracticeContainer surah={surah} lessons={lessons} />
+          <PracticeContainer surah={surah} lessons={lessons} autoStartLesson={reviewLessonNum} />
         )}
       </main>
 

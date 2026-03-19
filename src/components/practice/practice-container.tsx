@@ -11,6 +11,7 @@ interface PracticeContainerProps {
   surah: Surah;
   lessons: LessonDef[];
   defaultAyahRange?: { start: number; end: number };
+  autoStartLesson?: number | null;  // lesson number to auto-start (from review page)
 }
 
 interface ActiveSession {
@@ -19,9 +20,11 @@ interface ActiveSession {
   flowMode: PracticeFlowMode;
 }
 
-export default function PracticeContainer({ surah, lessons, defaultAyahRange }: PracticeContainerProps) {
+export default function PracticeContainer({ surah, lessons, defaultAyahRange, autoStartLesson }: PracticeContainerProps) {
   const progressLessons = useProgressStore((s) => s.lessons);
   const [activeSession, setActiveSession] = useState<ActiveSession | null>(null);
+
+  // Pre-select a lesson from URL param (from review page)
 
   const handleStart = (ayahRange: { start: number; end: number }, lessonIds: string[], flowMode: PracticeFlowMode) => {
     const sessionAyahs = surah.ayahs.filter(
@@ -52,6 +55,7 @@ export default function PracticeContainer({ surah, lessons, defaultAyahRange }: 
       lessons={lessons}
       progressLessons={progressLessons}
       defaultAyahRange={defaultAyahRange}
+      preSelectedLesson={autoStartLesson ?? undefined}
       onStart={handleStart}
     />
   );

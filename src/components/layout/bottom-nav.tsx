@@ -14,7 +14,9 @@ const NAV_ITEMS = [
 export default function BottomNav() {
   const pathname = usePathname();
   const cards = useReviewStore((s) => s.cards);
-  const dueCount = cards.filter((c) => c.nextReview <= Date.now()).length;
+
+  // Count ayahs that are weak (quality 0-2) or shaky (quality 3)
+  const attentionCount = cards.filter((c) => c.lastQuality < 4 && c.lastQuality >= 0 && c.lastReview > 0).length;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-foreground/5 bg-card/95 backdrop-blur-sm">
@@ -32,9 +34,9 @@ export default function BottomNav() {
             >
               <div className="relative">
                 <item.Icon size={20} />
-                {item.showBadge && dueCount > 0 && (
+                {item.showBadge && attentionCount > 0 && (
                   <span className="absolute -right-2 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-white">
-                    {dueCount}
+                    {attentionCount}
                   </span>
                 )}
               </div>

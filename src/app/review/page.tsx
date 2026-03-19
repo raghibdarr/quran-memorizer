@@ -2,161 +2,260 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useReviewStore } from '@/stores/review-store';
-import { useStatsStore } from '@/stores/stats-store';
-import { getSurah } from '@/lib/quran-data';
-import type { ReviewCard, Ayah } from '@/types/quran';
-import AyahDisplay from '@/components/ui/ayah-display';
-import Button from '@/components/ui/button';
+import { useProgressStore } from '@/stores/progress-store';
+import { getSurahIndex, getJuzSegmentsForSurah } from '@/lib/quran-data';
+import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
+import { computeSurahHealth } from '@/lib/review-helpers';
+import type { SurahMeta, LessonDef } from '@/types/quran';
+import type { SurahHealth, LessonHealth } from '@/lib/review-helpers';
+import Card from '@/components/ui/card';
+import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
-import { StarIcon, CheckIcon } from '@/components/ui/icons';
+import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
-  const reviewCardFn = useReviewStore((s) => s.reviewCard);
-  const dueCards = useMemo(() => {
-    const now = Date.now();
-    return cards.filter((c) => c.nextReview <= now).sort((a, b) => a.nextReview - b.nextReview);
+  const [surahIndex, setSurahIndex] = useState<SurahMeta[]>([]);
+  const [surahLessons, setSurahLessons] = useState<Record<number, LessonDef[]>>({});
+  const [loading, setLoading] = useState(true);
+
+  // Get unique surah IDs from review cards
+  const surahIds = useMemo(() => {
+    const ids = new Set(cards.map((c) => c.surahId));
+    return [...ids].sort((a, b) => a - b);
   }, [cards]);
-  const { recordActivity } = useStatsStore();
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [revealed, setRevealed] = useState(false);
-  const [ayahData, setAyahData] = useState<{ card: ReviewCard; ayah: Ayah; surahName: string } | null>(null);
-  const [done, setDone] = useState(false);
-  const [reviewedCount, setReviewedCount] = useState(0);
-
-  const currentCard = dueCards[currentIndex];
-
+  // Load surah index and lessons for all surahs with cards
   useEffect(() => {
-    if (!currentCard) {
-      setDone(true);
-      return;
-    }
-    loadAyah(currentCard);
-  }, [currentIndex]);
+    getSurahIndex().then(async (index) => {
+      setSurahIndex(index);
 
-  async function loadAyah(card: ReviewCard) {
-    const surah = await getSurah(card.surahId);
-    const ayah = surah.ayahs.find((a) => a.number === card.ayahNumber);
-    if (ayah) {
-      setAyahData({ card, ayah, surahName: surah.nameSimple });
-    }
-  }
+      const lessonsMap: Record<number, LessonDef[]> = {};
+      for (const surahId of surahIds) {
+        const surah = index.find((s) => s.id === surahId);
+        if (!surah) continue;
+        const juzSegs = await getJuzSegmentsForSurah(surahId);
+        lessonsMap[surahId] = generateLessonsWithJuzBoundaries(surahId, surah.versesCount, juzSegs);
+      }
+      setSurahLessons(lessonsMap);
+      setLoading(false);
+    });
+  }, [surahIds]);
 
-  const handleRate = (quality: number) => {
-    if (!currentCard) return;
-    reviewCardFn(currentCard.surahId, currentCard.ayahNumber, quality);
-    recordActivity();
-    setReviewedCount((c) => c + 1);
-    setRevealed(false);
+  // Compute health for all surahs
+  const surahHealths = useMemo(() => {
+    return surahIds
+      .map((id) => {
+        const lessons = surahLessons[id];
+        if (!lessons) return null;
+        return computeSurahHealth(id, lessons, cards);
+      })
+      .filter(Boolean) as SurahHealth[];
+  }, [surahIds, surahLessons, cards]);
 
-    if (currentIndex < dueCards.length - 1) {
-      setCurrentIndex((i) => i + 1);
-    } else {
-      setDone(true);
-    }
-  };
+  // Sort: needs attention first
+  const sortedHealths = useMemo(() => {
+    return [...surahHealths].sort((a, b) => {
+      if (a.needsAttention && !b.needsAttention) return -1;
+      if (!a.needsAttention && b.needsAttention) return 1;
+      return (b.totalWeak + b.totalHesitant) - (a.totalWeak + a.totalHesitant);
+    });
+  }, [surahHealths]);
 
-  if (dueCards.length === 0 && !done) {
+  const surahMap = useMemo(() => new Map(surahIndex.map((s) => [s.id, s])), [surahIndex]);
+
+  const totalWeak = surahHealths.reduce((s, h) => s + h.totalWeak, 0);
+  const totalHesitant = surahHealths.reduce((s, h) => s + h.totalHesitant, 0);
+  const totalStrong = surahHealths.reduce((s, h) => s + h.totalStrong, 0);
+
+  if (loading) return null;
+
+  if (surahIds.length === 0) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4">
-        <div className="text-center">
-          <StarIcon size={40} className="text-teal" />
-          <h2 className="mt-4 text-xl font-bold text-foreground">All caught up!</h2>
-          <p className="mt-1 text-muted">No reviews due right now. Keep learning!</p>
-          <a href="/">
-            <Button className="mt-6">Back to Home</Button>
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-  if (done) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4">
-        <div className="text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
-            <CheckIcon size={28} className="text-success" />
-          </div>
-          <h2 className="mt-4 text-xl font-bold text-foreground">Review Complete!</h2>
-          <p className="mt-1 text-muted">{reviewedCount} ayahs reviewed</p>
-          <a href="/">
-            <Button className="mt-6">Back to Home</Button>
-          </a>
-        </div>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4 pb-20">
+        <StarIcon size={40} className="text-teal" />
+        <h2 className="mt-4 text-xl font-bold text-foreground">No reviews yet</h2>
+        <p className="mt-1 text-center text-muted">Complete lessons to build your review dashboard</p>
+        <a href="/" className="mt-6 rounded-xl bg-teal px-6 py-3 font-semibold text-white">
+          Start Learning
+        </a>
+        <BottomNav />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-cream">
-      <header className="sticky top-0 bg-cream/95 px-4 py-3 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-2xl items-center justify-between">
-          <a href="/" className="text-sm text-muted hover:text-foreground">
-            ← Back
-          </a>
-          <span className="text-sm font-semibold text-teal">
-            Review {currentIndex + 1} / {dueCards.length}
-          </span>
+    <div className="min-h-screen bg-cream pb-20">
+      {/* Sticky top bar */}
+      <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+        <div className="mx-auto max-w-2xl flex items-center justify-between">
+          <a href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</a>
+          <span className="text-sm font-semibold text-teal">Review</span>
           <SettingsPanel />
+        </div>
+      </div>
+
+      <header className="px-4 pt-4 pb-4">
+        <div className="mx-auto max-w-2xl">
+          {/* Summary stats */}
+          <div className="flex justify-center gap-6">
+            <div className="text-center">
+              <p className="text-lg font-bold text-success">{totalStrong}</p>
+              <p className="text-[10px] text-muted">Strong</p>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold text-gold">{totalHesitant}</p>
+              <p className="text-[10px] text-muted">Shaky</p>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold text-red-400">{totalWeak}</p>
+              <p className="text-[10px] text-muted">Weak</p>
+            </div>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-2xl px-4 py-6">
-        {ayahData && (
-          <div className="space-y-6">
-            {!revealed ? (
-              <>
-                <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-8 text-center">
-                  <p className="text-sm text-muted">{ayahData.surahName}</p>
-                  <p className="mt-1 text-lg font-semibold text-foreground">
-                    Ayah {ayahData.card.ayahNumber}
-                  </p>
-                  <p className="mt-4 text-sm text-muted">
-                    Try to recite this ayah from memory
-                  </p>
-                </div>
+      <main className="mx-auto max-w-2xl px-4 space-y-4">
+        {sortedHealths.map((surahHealth) => {
+          const surah = surahMap.get(surahHealth.surahId);
+          if (!surah) return null;
 
-                <Button onClick={() => setRevealed(true)} className="w-full">
-                  Show Ayah
-                </Button>
-              </>
-            ) : (
-              <>
-                <AyahDisplay ayah={ayahData.ayah} />
-
-                <div className="space-y-2">
-                  <p className="text-center text-sm font-medium text-foreground">
-                    How well did you remember?
-                  </p>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleRate(1)}
-                      className="flex-1 rounded-xl bg-red-50 py-3 text-sm font-semibold text-red-600 transition-colors hover:bg-red-100"
-                    >
-                      Forgot
-                    </button>
-                    <button
-                      onClick={() => handleRate(3)}
-                      className="flex-1 rounded-xl bg-amber-50 py-3 text-sm font-semibold text-amber-600 transition-colors hover:bg-amber-100"
-                    >
-                      Hard
-                    </button>
-                    <button
-                      onClick={() => handleRate(5)}
-                      className="flex-1 rounded-xl bg-green-50 py-3 text-sm font-semibold text-green-600 transition-colors hover:bg-green-100"
-                    >
-                      Easy
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        )}
+          return (
+            <SurahHealthCard
+              key={surahHealth.surahId}
+              surah={surah}
+              health={surahHealth}
+            />
+          );
+        })}
       </main>
+
+      <BottomNav />
+    </div>
+  );
+}
+
+function SurahHealthCard({ surah, health }: { surah: SurahMeta; health: SurahHealth }) {
+  const [expanded, setExpanded] = useState(false);
+  const progressLessons = useProgressStore((s) => s.lessons);
+
+  const totalAyahs = health.totalStrong + health.totalHesitant + health.totalWeak + health.totalNotLearned;
+
+  return (
+    <div>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full text-left"
+      >
+        <Card className={cn(
+          'transition-all',
+          health.needsAttention && 'border border-gold/20'
+        )}>
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <h3 className="text-sm font-bold text-foreground">{surah.nameSimple}</h3>
+              <p className="text-xs text-muted">
+                {health.lessons.length} lesson{health.lessons.length !== 1 ? 's' : ''}
+                {health.totalWeak > 0 && <span className="text-red-400"> · {health.totalWeak} weak</span>}
+                {health.totalHesitant > 0 && <span className="text-gold"> · {health.totalHesitant} shaky</span>}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="arabic-text text-lg text-muted">{surah.nameArabic}</span>
+              <span className={cn('text-muted transition-transform text-xs', expanded && 'rotate-180')}>▼</span>
+            </div>
+          </div>
+
+          {/* Health bar */}
+          {totalAyahs > 0 && (
+            <div className="mt-2 flex h-2 overflow-hidden rounded-full bg-foreground/5">
+              {health.totalStrong > 0 && (
+                <div className="bg-success" style={{ width: `${(health.totalStrong / totalAyahs) * 100}%` }} />
+              )}
+              {health.totalHesitant > 0 && (
+                <div className="bg-gold" style={{ width: `${(health.totalHesitant / totalAyahs) * 100}%` }} />
+              )}
+              {health.totalWeak > 0 && (
+                <div className="bg-red-400" style={{ width: `${(health.totalWeak / totalAyahs) * 100}%` }} />
+              )}
+            </div>
+          )}
+        </Card>
+      </button>
+
+      {/* Expanded lesson list */}
+      {expanded && (
+        <div className="mt-2 space-y-1.5 pl-2">
+          {health.lessons.map((lessonHealth) => {
+            const hasIssues = lessonHealth.weakCount > 0 || lessonHealth.hesitantCount > 0;
+            const allNotLearned = lessonHealth.notLearnedCount === lessonHealth.ayahs.length;
+            const lessonTotal = lessonHealth.ayahs.length;
+            const progress = progressLessons[lessonHealth.lesson.lessonId];
+            const isLessonComplete = progress?.completedAt != null;
+
+            // Build practice URL with flagged weak ayahs
+            const weakAyahNumbers = lessonHealth.ayahs
+              .filter((a) => a.health === 'weak' || a.health === 'shaky')
+              .map((a) => a.ayahNumber);
+
+            const practiceUrl = `/lesson/${surah.id}?tab=practice&reviewLesson=${lessonHealth.lesson.lessonNumber}`;
+
+            return (
+              <a
+                key={lessonHealth.lesson.lessonId}
+                href={practiceUrl}
+                className={cn(
+                  'flex items-center gap-3 rounded-xl p-3 transition-all',
+                  hasIssues ? 'bg-card hover:shadow-md' :
+                  allNotLearned ? 'bg-foreground/3 opacity-60' :
+                  'bg-card hover:shadow-md'
+                )}
+              >
+                {/* Lesson number */}
+                <div className={cn(
+                  'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold',
+                  hasIssues ? 'bg-gold/20 text-gold' :
+                  allNotLearned ? 'bg-foreground/10 text-muted' :
+                  'bg-success/20 text-success'
+                )}>
+                  {lessonHealth.lesson.lessonNumber}
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground">
+                    Lesson {lessonHealth.lesson.lessonNumber}
+                    <span className="ml-1.5 font-normal text-muted">
+                      Ayahs {lessonHealth.lesson.ayahStart}–{lessonHealth.lesson.ayahEnd}
+                    </span>
+                  </p>
+
+                  {/* Mini health bar */}
+                  <div className="mt-1 flex h-1.5 overflow-hidden rounded-full bg-foreground/5">
+                    {lessonHealth.strongCount > 0 && (
+                      <div className="bg-success" style={{ width: `${(lessonHealth.strongCount / lessonTotal) * 100}%` }} />
+                    )}
+                    {lessonHealth.hesitantCount > 0 && (
+                      <div className="bg-gold" style={{ width: `${(lessonHealth.hesitantCount / lessonTotal) * 100}%` }} />
+                    )}
+                    {lessonHealth.weakCount > 0 && (
+                      <div className="bg-red-400" style={{ width: `${(lessonHealth.weakCount / lessonTotal) * 100}%` }} />
+                    )}
+                  </div>
+
+                  {hasIssues && (
+                    <p className="mt-0.5 text-[10px] text-muted">
+                      {lessonHealth.weakCount > 0 && <span className="text-red-400">{lessonHealth.weakCount} weak</span>}
+                      {lessonHealth.weakCount > 0 && lessonHealth.hesitantCount > 0 && ' · '}
+                      {lessonHealth.hesitantCount > 0 && <span className="text-gold">{lessonHealth.hesitantCount} shaky</span>}
+                    </p>
+                  )}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

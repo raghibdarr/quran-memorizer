@@ -15,6 +15,7 @@ interface PracticeSelectionProps {
   lessons: LessonDef[];
   progressLessons: Record<string, LessonProgress>;
   defaultAyahRange?: { start: number; end: number };
+  preSelectedLesson?: number;  // lesson number to pre-select (from review page)
   onStart: (ayahRange: { start: number; end: number }, lessonIds: string[], flowMode: PracticeFlowMode) => void;
 }
 
@@ -23,10 +24,17 @@ export default function PracticeSelection({
   lessons,
   progressLessons,
   defaultAyahRange,
+  preSelectedLesson,
   onStart,
 }: PracticeSelectionProps) {
   const [mode, setMode] = useState<SelectionMode>('lesson');
-  const [selectedLessonIds, setSelectedLessonIds] = useState<Set<string>>(new Set());
+  const [selectedLessonIds, setSelectedLessonIds] = useState<Set<string>>(() => {
+    if (preSelectedLesson) {
+      const lesson = lessons.find((l) => l.lessonNumber === preSelectedLesson);
+      if (lesson) return new Set([lesson.lessonId]);
+    }
+    return new Set();
+  });
   const [rangeStart, setRangeStart] = useState(defaultAyahRange?.start ?? 1);
   const [rangeEnd, setRangeEnd] = useState(defaultAyahRange?.end ?? surah.versesCount);
 

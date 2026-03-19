@@ -4,10 +4,19 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { UserStats } from '@/types/quran';
 
+interface LastActivity {
+  type: 'lesson' | 'practice';
+  url: string;
+  label: string;
+  timestamp: number;
+}
+
 interface StatsState extends UserStats {
+  lastActivity: LastActivity | null;
   recordActivity: () => void;
   addAyahsMemorized: (count: number) => void;
   addMinutesLearned: (minutes: number) => void;
+  setLastActivity: (activity: LastActivity) => void;
 }
 
 function getToday(): string {
@@ -28,6 +37,7 @@ export const useStatsStore = create<StatsState>()(
       totalAyahsMemorized: 0,
       totalMinutesLearned: 0,
       lastActiveDate: null,
+      lastActivity: null,
 
       recordActivity: () =>
         set((state) => {
@@ -56,6 +66,8 @@ export const useStatsStore = create<StatsState>()(
         set((state) => ({
           totalMinutesLearned: state.totalMinutesLearned + minutes,
         })),
+
+      setLastActivity: (activity) => set({ lastActivity: activity }),
     }),
     { name: 'quran-stats' }
   )

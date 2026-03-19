@@ -61,8 +61,8 @@ export default function HomePage() {
   useEffect(() => { localStorage.setItem('home-tab', tab); }, [tab]);
   const progressLessons = useProgressStore((s) => s.lessons);
   const cards = useReviewStore((s) => s.cards);
-  const dueCount = cards.filter((c) => c.nextReview <= Date.now()).length;
   const stats = useStatsStore();
+  const lastActivity = useStatsStore((s) => s.lastActivity);
 
   useEffect(() => {
     getSurahIndex().then(setAllSurahs);
@@ -154,27 +154,21 @@ export default function HomePage() {
       </header>
 
       <main className="mx-auto max-w-2xl space-y-3 px-4 py-4">
-        {dueCount > 0 && (
-          <a href="/review" className="block">
-            <Card className="border-l-4 border-l-gold bg-gold/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-semibold text-foreground">
-                    {dueCount} ayah{dueCount !== 1 ? 's' : ''} due for review
-                  </p>
-                  <p className="text-sm text-muted">Keep your memorization strong</p>
-                </div>
-                <BookIcon size={24} className="text-gold" />
-              </div>
+        {/* Continue card — based on last activity */}
+        {lastActivity ? (
+          <a href={lastActivity.url} className="block">
+            <Card className="border-l-4 border-l-teal">
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">
+                Continue {lastActivity.type === 'lesson' ? 'Learning' : 'Practicing'}
+              </p>
+              <p className="mt-1 text-lg font-bold text-foreground">{lastActivity.label}</p>
             </Card>
           </a>
-        )}
-
-        {activeProgress && activeSurah && (
+        ) : activeProgress && activeSurah ? (
           <a href={`/lesson/${activeSurah.id}`} className="block">
-            <Card>
+            <Card className="border-l-4 border-l-teal">
               <p className="text-xs font-medium uppercase tracking-wide text-muted">Continue Learning</p>
-              <div className="mt-2 flex items-center justify-between">
+              <div className="mt-1 flex items-center justify-between">
                 <div>
                   <p className="text-lg font-bold text-foreground">{activeSurah.nameSimple}</p>
                   <p className="text-sm capitalize text-teal">{activeProgress.currentPhase} phase</p>
@@ -183,7 +177,7 @@ export default function HomePage() {
               </div>
             </Card>
           </a>
-        )}
+        ) : null}
 
         <div className="grid grid-cols-3 gap-3">
           <Card className="text-center">

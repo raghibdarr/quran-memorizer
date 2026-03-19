@@ -25,6 +25,7 @@ interface PracticeSessionProps {
   lessonIds: string[];
   initialStep?: SessionStep;
   surahNames?: Record<number, string>;  // surahId → name, for cross-surah dividers
+  flaggedAyahs?: number[];  // ayah numbers to highlight as weak (from review page)
   onDone: () => void;
 }
 
@@ -42,7 +43,7 @@ const RATING_COLORS: Record<PracticeAyahRating, string> = {
 
 const RATING_LABELS: Record<PracticeAyahRating, string> = {
   'got-it': 'Got it',
-  'hesitated': 'Hesitated',
+  'hesitated': 'Shaky',
   'missed': 'Missed',
 };
 
@@ -53,6 +54,7 @@ export default function PracticeSession({
   lessonIds,
   initialStep = 'ayah-by-ayah',
   surahNames = {},
+  flaggedAyahs = [],
   onDone,
 }: PracticeSessionProps) {
   const isMultiSurah = surahIds.length > 1;
@@ -259,7 +261,10 @@ export default function PracticeSession({
 
         {/* Ayah card */}
         <Card className="text-center">
-          <p className="mb-3 text-xs text-muted">{ayahLabel(currentAyah)}</p>
+          <p className="mb-3 text-xs text-muted">
+            {flaggedAyahs.includes(currentAyah.number) && <span className="mr-1 inline-block h-2 w-2 rounded-full bg-red-500" />}
+            {ayahLabel(currentAyah)}
+          </p>
           {revealed ? (
             <div>
               <ArabicText ayah={currentAyah} className="text-center text-4xl leading-loose" />
@@ -464,7 +469,10 @@ export default function PracticeSession({
                         </div>
                       ) : null}
                     </div>
-                    <p className="text-xs text-muted">{ayahLabel(ayah)}</p>
+                    <p className="text-xs text-muted">
+                      {flaggedAyahs.includes(ayah.number) && <span className="mr-1 inline-block h-2 w-2 rounded-full bg-red-500" />}
+                      {ayahLabel(ayah)}
+                    </p>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <button
@@ -664,7 +672,7 @@ export default function PracticeSession({
         </div>
         <div className="text-center">
           <p className="text-lg font-bold text-gold">{hesitatedCount}</p>
-          <p className="text-[10px] text-muted">Hesitated</p>
+          <p className="text-[10px] text-muted">Shaky</p>
         </div>
         <div className="text-center">
           <p className="text-lg font-bold text-red-500">{missedCount}</p>

@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import type { Surah, Ayah, LessonDef, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
+import { useStatsStore } from '@/stores/stats-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
 import BottomNav from '@/components/layout/bottom-nav';
@@ -34,8 +35,20 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   const [practicePhase, setPracticePhase] = useState<LessonPhase | null>(null);
   const headerRef = useRef<HTMLElement>(null);
 
+  const { setLastActivity } = useStatsStore();
+
   useEffect(() => {
     startLesson(lessonDef.lessonId, surah.id);
+    // Track last activity for home page continue card
+    const label = totalLessons > 1
+      ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
+      : surah.nameSimple;
+    setLastActivity({
+      type: 'lesson',
+      url: `/lesson/${surah.id}/${lessonDef.lessonNumber}`,
+      label,
+      timestamp: Date.now(),
+    });
   }, [lessonDef.lessonId, surah.id, startLesson]);
 
   // Track header height for sticky elements
