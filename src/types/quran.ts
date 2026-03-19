@@ -78,8 +78,14 @@ export interface LessonProgress {
   currentPhase: LessonPhase;
   phaseData: {
     listen: { playCount: number; completed: boolean };
-    understand: { wordsReviewed: number; quizPassed: boolean; completed: boolean };
-    chunk: { currentChunkIndex: number; completed: boolean };
+    understand: { wordsReviewed: number; quizPassed: boolean; completed: boolean; exploredAyahs?: number[] };
+    chunk: {
+      currentChunkIndex: number;
+      completed: boolean;
+      stage?: 'learning' | 'chaining' | 'final-chain';
+      learnStep?: 'listen-with-text' | 'recite-from-memory' | 'reinforce-with-text' | 'final-memory' | 'word-order';
+      repCount?: number;
+    };
     test: { currentLevel: TestLevel; attempts: number; completed: boolean };
   };
   startedAt: number;

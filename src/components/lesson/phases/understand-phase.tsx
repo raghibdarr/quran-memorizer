@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Surah, Ayah, Word } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { audioController } from '@/lib/audio';
@@ -16,10 +16,19 @@ interface UnderstandPhaseProps {
 }
 
 export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: UnderstandPhaseProps) {
+  const lesson = useProgressStore((s) => s.lessons[lessonId]);
+  const savedExplored = lesson?.phaseData.understand.exploredAyahs;
   const [ayahIndex, setAyahIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
-  const [exploredAyahs, setExploredAyahs] = useState<Set<number>>(new Set([0]));
-  const { markUnderstandComplete } = useProgressStore();
+  const [exploredAyahs, setExploredAyahs] = useState<Set<number>>(
+    savedExplored ? new Set(savedExplored) : new Set([0])
+  );
+  const { markUnderstandComplete, updateExploredAyahs } = useProgressStore();
+
+  // Persist explored ayahs
+  useEffect(() => {
+    updateExploredAyahs(lessonId, [...exploredAyahs]);
+  }, [exploredAyahs, lessonId, updateExploredAyahs]);
 
   const currentAyah = ayahs[ayahIndex];
   const allExplored = exploredAyahs.size >= ayahs.length;
@@ -166,6 +175,15 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
           ? 'Continue to Build'
           : `Explore all ayahs (${exploredAyahs.size}/${ayahs.length})`}
       </Button>
+
+      {!allExplored && (
+        <button
+          onClick={handleContinue}
+          className="mx-auto block text-xs text-muted hover:text-foreground transition-colors"
+        >
+          Already know the meanings? Skip to Build →
+        </button>
+      )}
     </div>
   );
 }

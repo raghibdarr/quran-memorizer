@@ -328,6 +328,15 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
       <Button onClick={onComplete} disabled={!canContinue} className="w-full">
         {canContinue ? 'Continue to Understand' : `Listen ${remaining} more time${remaining !== 1 ? 's' : ''}`}
       </Button>
+
+      {!canContinue && (
+        <button
+          onClick={onComplete}
+          className="mx-auto block text-xs text-muted hover:text-foreground transition-colors"
+        >
+          Already familiar? Skip to Understand →
+        </button>
+      )}
     </div>
   );
 }

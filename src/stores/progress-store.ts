@@ -10,7 +10,9 @@ interface ProgressState {
   updatePhase: (lessonId: string, phase: LessonPhase) => void;
   incrementListenCount: (lessonId: string) => void;
   markUnderstandComplete: (lessonId: string) => void;
+  updateExploredAyahs: (lessonId: string, explored: number[]) => void;
   updateChunkIndex: (lessonId: string, index: number) => void;
+  updateChunkState: (lessonId: string, state: { index: number; stage: string; learnStep: string; repCount: number }) => void;
   markChunkComplete: (lessonId: string) => void;
   updateTestLevel: (lessonId: string, level: TestLevel) => void;
   markTestComplete: (lessonId: string) => void;
@@ -97,6 +99,24 @@ export const useProgressStore = create<ProgressState>()(
           };
         }),
 
+      updateExploredAyahs: (lessonId, explored) =>
+        set((state) => {
+          const lesson = state.lessons[lessonId];
+          if (!lesson) return state;
+          return {
+            lessons: {
+              ...state.lessons,
+              [lessonId]: {
+                ...lesson,
+                phaseData: {
+                  ...lesson.phaseData,
+                  understand: { ...lesson.phaseData.understand, exploredAyahs: explored },
+                },
+              },
+            },
+          };
+        }),
+
       updateChunkIndex: (lessonId, index) =>
         set((state) => {
           const lesson = state.lessons[lessonId];
@@ -109,6 +129,30 @@ export const useProgressStore = create<ProgressState>()(
                 phaseData: {
                   ...lesson.phaseData,
                   chunk: { ...lesson.phaseData.chunk, currentChunkIndex: index },
+                },
+              },
+            },
+          };
+        }),
+
+      updateChunkState: (lessonId, { index, stage, learnStep, repCount }) =>
+        set((state) => {
+          const lesson = state.lessons[lessonId];
+          if (!lesson) return state;
+          return {
+            lessons: {
+              ...state.lessons,
+              [lessonId]: {
+                ...lesson,
+                phaseData: {
+                  ...lesson.phaseData,
+                  chunk: {
+                    ...lesson.phaseData.chunk,
+                    currentChunkIndex: index,
+                    stage: stage as LessonProgress['phaseData']['chunk']['stage'],
+                    learnStep: learnStep as LessonProgress['phaseData']['chunk']['learnStep'],
+                    repCount,
+                  },
                 },
               },
             },

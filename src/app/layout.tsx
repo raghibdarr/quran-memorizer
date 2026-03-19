@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Amiri, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import "./globals.css";
 
-const amiri = Amiri({
-  subsets: ["arabic"],
-  weight: ["400", "700"],
+const kfgqpc = localFont({
+  src: "../../public/fonts/kfgqpc-hafs.woff",
   variable: "--font-arabic",
   display: "swap",
 });
@@ -35,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${amiri.variable} ${nastaliq.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${kfgqpc.variable} ${nastaliq.variable} ${jakarta.variable}`}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>

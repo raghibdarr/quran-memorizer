@@ -98,8 +98,9 @@ body {
 /* Qalqala (echo) — cyan */
 .tajweed-text .qalaqah { color: #36D7E4; }
 
-/* Tafkhim (heavy letters) — blue */
-.tajweed-text .tafkhim { color: #4A90D9; }
+/* Tafkhim (heavy letters) — dark blue matching quran.com */
+.tajweed-text .tafkhim { color: #1B4B99; }
+.dark .tajweed-text .tafkhim { color: #5B8FD9; }
 
 /* Verse end markers */
 .tajweed-text span.end {

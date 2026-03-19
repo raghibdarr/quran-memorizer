@@ -14,26 +14,46 @@ const PHASES: { key: LessonPhase; label: string }[] = [
 
 interface PhaseIndicatorProps {
   currentPhase: LessonPhase;
+  onPhaseClick?: (phase: LessonPhase) => void;
 }
 
-export default function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
+export default function PhaseIndicator({ currentPhase, onPhaseClick }: PhaseIndicatorProps) {
   const currentIndex = PHASES.findIndex((p) => p.key === currentPhase);
 
+  const prevPhase = currentIndex > 0 ? PHASES[currentIndex - 1] : null;
+
   return (
-    <div className="flex items-center justify-center gap-0">
+    <div className="flex items-center justify-center">
+      <div className="relative flex items-center gap-0">
+        {/* Prev phase arrow — sits just left of the first circle */}
+        {prevPhase && onPhaseClick && (
+          <button
+            onClick={() => onPhaseClick(prevPhase.key)}
+            className="absolute -left-8 flex h-7 w-7 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
+            title={`Back to ${prevPhase.label}`}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+          </button>
+        )}
       {PHASES.map((phase, i) => {
         const isActive = i === currentIndex;
         const isComplete = i < currentIndex;
+        const canClick = isComplete && onPhaseClick;
 
         return (
           <div key={phase.key} className="flex items-center">
-            <div className="flex flex-col items-center w-14">
+            <button
+              onClick={() => canClick && onPhaseClick(phase.key)}
+              disabled={!canClick}
+              className={cn('flex flex-col items-center w-14', canClick && 'cursor-pointer')}
+            >
               <div
                 className={cn(
                   'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition-colors',
                   isComplete && 'bg-success text-white',
                   isActive && 'bg-teal text-white',
-                  !isComplete && !isActive && 'bg-foreground/10 text-muted'
+                  !isComplete && !isActive && 'bg-foreground/10 text-muted',
+                  canClick && 'hover:ring-2 hover:ring-success/50'
                 )}
               >
                 {isComplete ? <CheckIcon size={12} /> : i + 1}
@@ -46,7 +66,7 @@ export default function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
               >
                 {phase.label}
               </span>
-            </div>
+            </button>
             {i < PHASES.length - 1 && (
               <div
                 className={cn(
@@ -58,6 +78,7 @@ export default function PhaseIndicator({ currentPhase }: PhaseIndicatorProps) {
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

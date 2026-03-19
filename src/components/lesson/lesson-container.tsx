@@ -140,16 +140,9 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
       <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <a href={backUrl} className="text-sm text-muted hover:text-foreground">
-                ← Back
-              </a>
-              {currentPhaseIndex > 0 && activePhase !== 'complete' && (
-                <button onClick={goBack} className="text-xs text-muted hover:text-foreground">
-                  ← Prev Phase
-                </button>
-              )}
-            </div>
+            <a href={backUrl} className="text-sm text-muted hover:text-foreground">
+              ← Back
+            </a>
             <h2 className="text-sm font-semibold text-teal">{lessonTitle}</h2>
             <div className="flex items-center gap-1">
               <button
@@ -167,7 +160,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
               Ayahs {lessonDef.ayahStart}–{lessonDef.ayahEnd}
             </p>
           )}
-          <PhaseIndicator currentPhase={activePhase} />
+          <PhaseIndicator currentPhase={activePhase} onPhaseClick={goToPhase} />
           <TajweedLegend />
         </div>
       </header>
