@@ -43,9 +43,22 @@ export default function HomePage() {
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState<SortOption>('number-asc');
-  const [view, setView] = useState<ViewMode>('grid');
-  const [tab, setTab] = useState<BrowseTab>('surahs');
+  const [sort, setSort] = useState<SortOption>(() => {
+    if (typeof window !== 'undefined') return (localStorage.getItem('home-sort') as SortOption) ?? 'number-asc';
+    return 'number-asc';
+  });
+  const [view, setView] = useState<ViewMode>(() => {
+    if (typeof window !== 'undefined') return (localStorage.getItem('home-view') as ViewMode) ?? 'grid';
+    return 'grid';
+  });
+  const [tab, setTab] = useState<BrowseTab>(() => {
+    if (typeof window !== 'undefined') return (localStorage.getItem('home-tab') as BrowseTab) ?? 'surahs';
+    return 'surahs';
+  });
+
+  useEffect(() => { localStorage.setItem('home-sort', sort); }, [sort]);
+  useEffect(() => { localStorage.setItem('home-view', view); }, [view]);
+  useEffect(() => { localStorage.setItem('home-tab', tab); }, [tab]);
   const progressLessons = useProgressStore((s) => s.lessons);
   const cards = useReviewStore((s) => s.cards);
   const dueCount = cards.filter((c) => c.nextReview <= Date.now()).length;
@@ -378,10 +391,11 @@ export default function HomePage() {
               // Surah range label
               const firstSurah = surahMap.get(juz.verseMappings[0]?.surahId);
               const lastSurah = surahMap.get(juz.verseMappings[juz.verseMappings.length - 1]?.surahId);
+              const surahCount = juz.verseMappings.length;
               const rangeLabel = firstSurah && lastSurah
                 ? firstSurah.id === lastSurah.id
                   ? firstSurah.nameSimple
-                  : `${firstSurah.nameSimple} — ${lastSurah.nameSimple}`
+                  : `${firstSurah.nameSimple} → ${lastSurah.nameSimple}`
                 : '';
 
               return (
@@ -397,7 +411,7 @@ export default function HomePage() {
                       {isComplete && <CheckIcon size={14} className="text-success" />}
                     </div>
                     <p className="mt-0.5 text-xs text-muted">{rangeLabel}</p>
-                    <p className="mt-0.5 text-xs text-muted">{juzLessons.length} lessons</p>
+                    <p className="mt-0.5 text-[11px] text-muted/60">{surahCount} surahs · {juzLessons.length} lessons</p>
                     {(isActive || isComplete) && (
                       <div className="mt-2">
                         <ProgressBar value={progress} />
