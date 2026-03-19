@@ -44,7 +44,7 @@ export default function ProgressPage() {
 
   return (
     <div className="min-h-screen bg-cream pb-20">
-      <header className="px-4 pt-6 pb-4">
+      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-foreground">Progress</h1>

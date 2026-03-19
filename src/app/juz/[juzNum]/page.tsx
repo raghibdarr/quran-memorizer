@@ -123,13 +123,17 @@ export default function JuzDetailPage() {
 
   return (
     <div className="min-h-screen bg-cream pb-20">
-      <header className="px-4 pt-6 pb-4 border-b border-foreground/5">
+      {/* Sticky top bar */}
+      <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+        <div className="mx-auto max-w-2xl flex items-center justify-between">
+          <a href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</a>
+          <SettingsPanel />
+        </div>
+      </div>
+
+      <header className="px-4 pt-4 pb-4 border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
-          <div className="flex items-center justify-between">
-            <a href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</a>
-            <SettingsPanel />
-          </div>
-          <div className="mt-4 text-center">
+          <div className="text-center">
             <h1 className="text-2xl font-bold text-teal">Juz {juzNum}</h1>
             <p className="text-sm text-muted">
               {sections.length} surah{sections.length !== 1 ? 's' : ''} · {allJuzLessons.length} lessons
