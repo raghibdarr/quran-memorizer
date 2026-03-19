@@ -8,13 +8,14 @@ import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
 type SelectionMode = 'lesson' | 'range';
+export type PracticeFlowMode = 'ayah-by-ayah' | 'full-passage';
 
 interface PracticeSelectionProps {
   surah: Surah;
   lessons: LessonDef[];
   progressLessons: Record<string, LessonProgress>;
   defaultAyahRange?: { start: number; end: number };
-  onStart: (ayahRange: { start: number; end: number }, lessonIds: string[]) => void;
+  onStart: (ayahRange: { start: number; end: number }, lessonIds: string[], flowMode: PracticeFlowMode) => void;
 }
 
 export default function PracticeSelection({
@@ -44,10 +45,10 @@ export default function PracticeSelection({
   };
 
   const selectAll = () => {
-    if (selectedLessonIds.size === completedLessons.length) {
+    if (selectedLessonIds.size === lessons.length) {
       setSelectedLessonIds(new Set());
     } else {
-      setSelectedLessonIds(new Set(completedLessons.map((l) => l.lessonId)));
+      setSelectedLessonIds(new Set(lessons.map((l) => l.lessonId)));
     }
   };
 
@@ -60,18 +61,19 @@ export default function PracticeSelection({
       .reduce((sum, l) => sum + l.ayahCount, 0);
   }, [mode, rangeStart, rangeEnd, lessons, selectedLessonIds]);
 
-  const handleStart = () => {
+  const getAyahRange = () => {
     if (mode === 'range') {
-      onStart({ start: rangeStart, end: rangeEnd }, []);
-    } else {
-      const selected = lessons
-        .filter((l) => selectedLessonIds.has(l.lessonId))
-        .sort((a, b) => a.lessonNumber - b.lessonNumber);
-      if (selected.length === 0) return;
-      const start = selected[0].ayahStart;
-      const end = selected[selected.length - 1].ayahEnd;
-      onStart({ start, end }, selected.map((l) => l.lessonId));
+      return { start: rangeStart, end: rangeEnd, lessonIds: [] as string[] };
     }
+    const selected = lessons
+      .filter((l) => selectedLessonIds.has(l.lessonId))
+      .sort((a, b) => a.lessonNumber - b.lessonNumber);
+    if (selected.length === 0) return null;
+    return {
+      start: selected[0].ayahStart,
+      end: selected[selected.length - 1].ayahEnd,
+      lessonIds: selected.map((l) => l.lessonId),
+    };
   };
 
   const canStart = mode === 'range' ? rangeEnd >= rangeStart : selectedLessonIds.size > 0;
@@ -102,59 +104,50 @@ export default function PracticeSelection({
 
       {mode === 'lesson' ? (
         <div className="space-y-2">
-          {completedLessons.length === 0 ? (
-            <Card className="text-center">
-              <p className="text-sm text-muted">
-                Complete at least one lesson to practice it here.
-              </p>
-            </Card>
-          ) : (
-            <>
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-muted">
-                  {completedLessons.length} completed lesson{completedLessons.length !== 1 ? 's' : ''}
-                </p>
-                <button onClick={selectAll} className="text-xs font-medium text-teal">
-                  {selectedLessonIds.size === completedLessons.length ? 'Deselect All' : 'Select All'}
-                </button>
-              </div>
-              {lessons.map((lesson) => {
-                const isCompleted = progressLessons[lesson.lessonId]?.completedAt != null;
-                const isSelected = selectedLessonIds.has(lesson.lessonId);
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-muted">
+              {lessons.length} lesson{lessons.length !== 1 ? 's' : ''}
+              {completedLessons.length > 0 && ` · ${completedLessons.length} completed`}
+            </p>
+            <button onClick={selectAll} className="text-xs font-medium text-teal">
+              {selectedLessonIds.size === lessons.length ? 'Deselect All' : 'Select All'}
+            </button>
+          </div>
+          {lessons.map((lesson) => {
+            const isCompleted = progressLessons[lesson.lessonId]?.completedAt != null;
+            const isSelected = selectedLessonIds.has(lesson.lessonId);
 
-                return (
-                  <button
-                    key={lesson.lessonId}
-                    disabled={!isCompleted}
-                    onClick={() => toggleLesson(lesson.lessonId)}
-                    className={cn(
-                      'flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all',
-                      isCompleted
-                        ? isSelected
-                          ? 'bg-teal/10 ring-2 ring-teal'
-                          : 'bg-card hover:bg-foreground/5'
-                        : 'cursor-not-allowed bg-foreground/3 opacity-50'
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold',
-                        isSelected ? 'bg-teal text-white' :
-                        isCompleted ? 'bg-success/20 text-success' :
-                        'bg-foreground/10 text-muted'
-                      )}
-                    >
-                      {isSelected ? <CheckIcon size={14} /> : lesson.lessonNumber}
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Lesson {lesson.lessonNumber}</p>
-                      <p className="text-xs text-muted">Ayahs {lesson.ayahStart}–{lesson.ayahEnd}</p>
-                    </div>
-                  </button>
-                );
-              })}
-            </>
-          )}
+            return (
+              <button
+                key={lesson.lessonId}
+                onClick={() => toggleLesson(lesson.lessonId)}
+                className={cn(
+                  'flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all',
+                  isSelected
+                    ? 'bg-teal/10 ring-2 ring-teal'
+                    : 'bg-card hover:bg-foreground/5'
+                )}
+              >
+                <div
+                  className={cn(
+                    'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold',
+                    isSelected ? 'bg-teal text-white' :
+                    isCompleted ? 'bg-success/20 text-success' :
+                    'bg-foreground/10 text-muted'
+                  )}
+                >
+                  {isSelected ? <CheckIcon size={14} /> : lesson.lessonNumber}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Lesson {lesson.lessonNumber}</p>
+                  <p className="text-xs text-muted">
+                    Ayahs {lesson.ayahStart}–{lesson.ayahEnd}
+                    {isCompleted && <span className="ml-1 text-success">✓</span>}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
         </div>
       ) : (
         <Card>
@@ -191,14 +184,40 @@ export default function PracticeSelection({
         </Card>
       )}
 
-      {/* Footer */}
-      <div className="rounded-xl bg-foreground/5 p-3 text-center">
-        <p className="text-sm font-medium text-foreground">{selectedAyahCount} ayah{selectedAyahCount !== 1 ? 's' : ''} selected</p>
-      </div>
+      {/* Spacer for sticky footer */}
+      <div className="h-28" />
 
-      <Button onClick={handleStart} disabled={!canStart} className="w-full">
-        Start Practice
-      </Button>
+      {/* Sticky bottom bar */}
+      <div className="fixed bottom-[3.25rem] left-0 right-0 z-20 border-t border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+        <div className="mx-auto max-w-2xl space-y-2">
+          <p className="text-center text-sm font-medium text-foreground">
+            {selectedAyahCount} ayah{selectedAyahCount !== 1 ? 's' : ''} selected
+          </p>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => {
+                const range = getAyahRange();
+                if (range) onStart({ start: range.start, end: range.end }, range.lessonIds, 'ayah-by-ayah');
+              }}
+              disabled={!canStart}
+              variant="secondary"
+              className="flex-1 text-sm"
+            >
+              Ayah by Ayah
+            </Button>
+            <Button
+              onClick={() => {
+                const range = getAyahRange();
+                if (range) onStart({ start: range.start, end: range.end }, range.lessonIds, 'full-passage');
+              }}
+              disabled={!canStart}
+              className="flex-1 text-sm"
+            >
+              All at Once
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { usePracticeStore } from '@/stores/practice-store';
 import { useSettingsStore } from '@/stores/settings-store';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
+import ArabicText from '@/components/ui/arabic-text';
 import { cn } from '@/lib/cn';
 
 type SessionStep = 'ayah-by-ayah' | 'full-passage' | 'results';
@@ -19,6 +20,7 @@ interface PracticeSessionProps {
   title: string;
   ayahs: Ayah[];
   lessonIds: string[];
+  initialStep?: SessionStep;
   onDone: () => void;
 }
 
@@ -45,10 +47,11 @@ export default function PracticeSession({
   title,
   ayahs,
   lessonIds,
+  initialStep = 'ayah-by-ayah',
   onDone,
 }: PracticeSessionProps) {
   const isMultiSurah = surahIds.length > 1;
-  const [step, setStep] = useState<SessionStep>('ayah-by-ayah');
+  const [step, setStep] = useState<SessionStep>(initialStep);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [results, setResults] = useState<PracticeAyahResult[]>([]);
@@ -62,7 +65,8 @@ export default function PracticeSession({
   const whisper = useWhisper();
   const { reviewCard } = useReviewStore();
   const { addSession } = usePracticeStore();
-  const arabicScript = useSettingsStore((s) => s.arabicScript);
+  const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
+  const translationEnabled = useSettingsStore((s) => s.translationEnabled);
 
   const currentAyah = ayahs[currentIdx];
 
@@ -161,15 +165,6 @@ export default function PracticeSession({
     onDone();
   };
 
-  const getArabicText = (ayah: Ayah) => {
-    if (arabicScript === 'tajweed' && ayah.textUthmaniTajweed) {
-      return <span dangerouslySetInnerHTML={{ __html: ayah.textUthmaniTajweed }} />;
-    }
-    if (arabicScript === 'indopak' && ayah.textIndopak) {
-      return ayah.textIndopak;
-    }
-    return ayah.textUthmani;
-  };
 
   // --- STEP 1: Ayah-by-ayah ---
   if (step === 'ayah-by-ayah') {
@@ -196,9 +191,7 @@ export default function PracticeSession({
           </p>
           {revealed ? (
             <div>
-              <p className="arabic-text text-2xl leading-loose" dir="rtl">
-                {getArabicText(currentAyah)}
-              </p>
+              <ArabicText ayah={currentAyah} className="text-2xl leading-loose" />
               {currentAyah.transliteration && (
                 <p className="mt-2 text-sm text-muted italic">{currentAyah.transliteration}</p>
               )}
@@ -320,73 +313,125 @@ export default function PracticeSession({
   }
 
   // --- STEP 2: Full passage ---
+  // Per-ayah ratings for full-passage mode
+  const [passageAyahRatings, setPassageAyahRatings] = useState<Record<number, PracticeAyahRating>>({});
+  const allAyahsRated = revealed && ayahs.every((a) => passageAyahRatings[a.number] || results.find((r) => r.ayahNumber === a.number));
+
+  const ratePassageAyah = (ayahNumber: number, rating: PracticeAyahRating) => {
+    setPassageAyahRatings((prev) => ({ ...prev, [ayahNumber]: rating }));
+    // Also add to results for SM-2
+    const ayah = ayahs.find((a) => a.number === ayahNumber);
+    if (ayah) {
+      setResults((prev) => {
+        // Replace if already rated
+        const filtered = prev.filter((r) => r.ayahNumber !== ayahNumber);
+        return [...filtered, { surahId: getAyahSurahId(ayah), ayahNumber, rating }];
+      });
+    }
+  };
+
   if (step === 'full-passage') {
+    const hasPriorResults = results.length > 0 && !Object.keys(passageAyahRatings).length;
     return (
       <div className="space-y-4">
         <div className="text-center">
-          <h3 className="text-lg font-bold text-foreground">Full Passage Recitation</h3>
+          <h3 className="text-lg font-bold text-foreground">
+            {hasPriorResults ? 'Recite Together' : title}
+          </h3>
           <p className="mt-1 text-sm text-muted">
-            Now try reciting all {ayahs.length} ayahs together
+            {hasPriorResults
+              ? `Now try reciting all ${ayahs.length} ayahs together`
+              : `Recite all ${ayahs.length} ayahs, then reveal to check`}
           </p>
         </div>
 
-        <Card>
-          {revealed ? (
+        {!revealed ? (
+          <>
+            <Card>
+              <div className="py-12 text-center">
+                <p className="text-lg text-muted">Recite from memory...</p>
+                <p className="mt-1 text-xs text-muted">
+                  Ayahs {ayahs[0].number}–{ayahs[ayahs.length - 1].number}
+                </p>
+              </div>
+            </Card>
+            <Button onClick={handleReveal} className="w-full">
+              Reveal Text
+            </Button>
+          </>
+        ) : (
+          <>
+            {/* Revealed ayahs with per-ayah rating */}
             <div className="space-y-3">
               {ayahs.map((ayah) => {
-                const result = results.find((r) => r.ayahNumber === ayah.number);
+                const priorResult = results.find((r) => r.ayahNumber === ayah.number);
+                const currentRating = passageAyahRatings[ayah.number] ?? priorResult?.rating;
                 return (
-                  <div key={ayah.number} className="border-b border-foreground/5 pb-3 last:border-0 last:pb-0">
-                    <p className="arabic-text text-xl leading-loose" dir="rtl">
-                      {getArabicText(ayah)}
+                  <Card key={ayah.number} className="space-y-2">
+                    <p className="text-xs text-muted">
+                      {isMultiSurah ? ayah.key : `Ayah ${ayah.number}`}
                     </p>
-                    {result && (
-                      <span className={cn('mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium', RATING_COLORS[result.rating])}>
-                        {RATING_LABELS[result.rating]}
-                      </span>
+                    <ArabicText ayah={ayah} className="text-xl leading-loose" />
+                    {transliterationEnabled && ayah.transliteration && (
+                      <p className="text-sm text-muted italic">{ayah.transliteration}</p>
                     )}
-                  </div>
+                    {translationEnabled && ayah.translation && (
+                      <p className="text-sm text-muted">{ayah.translation}</p>
+                    )}
+                    {/* Per-ayah rating */}
+                    <div className="flex gap-1.5 pt-1">
+                      {(['got-it', 'hesitated', 'missed'] as PracticeAyahRating[]).map((rating) => (
+                        <button
+                          key={rating}
+                          onClick={() => ratePassageAyah(ayah.number, rating)}
+                          className={cn(
+                            'flex-1 rounded-lg py-1.5 text-xs font-semibold transition-colors',
+                            currentRating === rating
+                              ? RATING_COLORS[rating]
+                              : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                          )}
+                        >
+                          {RATING_LABELS[rating]}
+                        </button>
+                      ))}
+                    </div>
+                  </Card>
                 );
               })}
             </div>
-          ) : (
-            <div className="py-12 text-center">
-              <p className="text-lg text-muted">Recite the full passage...</p>
-              <p className="mt-1 text-xs text-muted">
-                Ayahs {ayahs[0].number}–{ayahs[ayahs.length - 1].number}
-              </p>
-            </div>
-          )}
-        </Card>
 
-        {!revealed ? (
-          <Button onClick={handleReveal} className="w-full">
-            Reveal Full Text
-          </Button>
-        ) : (
-          <div className="space-y-2">
-            <p className="text-center text-xs font-medium text-muted">Overall, how did it go?</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => finishSession('smooth')}
-                className="flex-1 rounded-xl bg-success/10 py-3 text-sm font-semibold text-success transition-colors"
-              >
-                Smooth
-              </button>
-              <button
-                onClick={() => finishSession('some-mistakes')}
-                className="flex-1 rounded-xl bg-gold/10 py-3 text-sm font-semibold text-gold transition-colors"
-              >
-                Some mistakes
-              </button>
-              <button
-                onClick={() => finishSession('need-practice')}
-                className="flex-1 rounded-xl bg-red-500/10 py-3 text-sm font-semibold text-red-500 transition-colors"
-              >
-                Need practice
-              </button>
-            </div>
-          </div>
+            {/* Overall rating — only show after all ayahs rated */}
+            {allAyahsRated && (
+              <div className="space-y-2">
+                <p className="text-center text-xs font-medium text-muted">Overall, how did it go?</p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => finishSession('smooth')}
+                    className="flex-1 rounded-xl bg-success/10 py-3 text-sm font-semibold text-success transition-colors"
+                  >
+                    Smooth
+                  </button>
+                  <button
+                    onClick={() => finishSession('some-mistakes')}
+                    className="flex-1 rounded-xl bg-gold/10 py-3 text-sm font-semibold text-gold transition-colors"
+                  >
+                    Some mistakes
+                  </button>
+                  <button
+                    onClick={() => finishSession('need-practice')}
+                    className="flex-1 rounded-xl bg-red-500/10 py-3 text-sm font-semibold text-red-500 transition-colors"
+                  >
+                    Need practice
+                  </button>
+                </div>
+              </div>
+            )}
+            {!allAyahsRated && (
+              <p className="text-center text-xs text-muted">
+                Rate each ayah above, then give an overall rating
+              </p>
+            )}
+          </>
         )}
       </div>
     );
@@ -396,8 +441,9 @@ export default function PracticeSession({
   const gotItCount = results.filter((r) => r.rating === 'got-it').length;
   const hesitatedCount = results.filter((r) => r.rating === 'hesitated').length;
   const missedCount = results.filter((r) => r.rating === 'missed').length;
-  const overallScore = Math.round((gotItCount / results.length) * 100);
+  const overallScore = results.length > 0 ? Math.round((gotItCount / results.length) * 100) : 0;
   const hasWeakAyahs = hesitatedCount + missedCount > 0;
+  const hasAyahResults = results.length > 0;
 
   return (
     <div className="space-y-4">

@@ -52,6 +52,7 @@ export default function JuzPracticeContainer({ juzNum, sections }: JuzPracticeCo
         title={`Juz ${juzNum}`}
         ayahs={activeSession.ayahs}
         lessonIds={[]}
+        initialStep="full-passage"
         onDone={() => setActiveSession(null)}
       />
     );

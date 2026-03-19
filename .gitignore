@@ -46,3 +46,5 @@ next-env.d.ts
 whisper-quran-onnx/
 whisper-quran-onnx-q8/
 whisper-quran-onnx-quantized/
+whisper-base-quran-onnx/
+whisper-base-quran-onnx-quantized/
