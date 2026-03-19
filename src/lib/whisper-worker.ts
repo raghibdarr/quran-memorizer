@@ -31,7 +31,7 @@ async function loadModel() {
 
     pipelineFn = await pipeline(
       'automatic-speech-recognition',
-      'raghibdarr/whisper-tiny-ar-quran-onnx',
+      'raghibdarr/whisper-base-ar-quran-onnx',
       {
         progress_callback: (progress: any) => {
           if (progress.status === 'progress' && progress.progress) {
