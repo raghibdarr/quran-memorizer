@@ -44,6 +44,7 @@ export default function PracticeContainer({ surah, lessons, defaultAyahRange, au
         ayahs={activeSession.ayahs}
         lessonIds={activeSession.lessonIds}
         initialStep={activeSession.flowMode === 'full-passage' ? 'full-passage' : 'ayah-by-ayah'}
+        allLessonDefs={lessons}
         onDone={handleDone}
       />
     );

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type { Surah, Ayah, LessonDef, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
@@ -36,6 +37,8 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   const headerRef = useRef<HTMLElement>(null);
 
   const { setLastActivity } = useStatsStore();
+  const searchParams = useSearchParams();
+  const fromParam = searchParams.get('from');
 
   useEffect(() => {
     startLesson(lessonDef.lessonId, surah.id);
@@ -43,9 +46,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     const label = totalLessons > 1
       ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
       : surah.nameSimple;
+    const fromSuffix = fromParam ? `?from=${fromParam}` : '';
     setLastActivity({
       type: 'lesson',
-      url: `/lesson/${surah.id}/${lessonDef.lessonNumber}`,
+      url: `/lesson/${surah.id}/${lessonDef.lessonNumber}${fromSuffix}`,
       label,
       timestamp: Date.now(),
     });
@@ -96,7 +100,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     setShowResetConfirm(false);
   };
 
-  const backUrl = totalLessons > 1 ? `/lesson/${surah.id}` : '/';
+  const backUrl = fromParam ? `/${fromParam}` : `/lesson/${surah.id}`;
 
   const phaseMap: Record<LessonPhase, React.ReactNode> = {
     listen: (

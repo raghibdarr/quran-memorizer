@@ -208,7 +208,7 @@ export default function JuzDetailPage() {
                         : isComplete ? 100 : 0;
 
                       return (
-                        <a key={lesson.lessonId} href={`/lesson/${lesson.surahId}/${lesson.lessonNumber}`} className="block">
+                        <a key={lesson.lessonId} href={`/lesson/${lesson.surahId}/${lesson.lessonNumber}?from=juz/${juzNum}`} className="block">
                           <Card
                             className={cn(
                               'flex items-center gap-4 transition-all hover:shadow-md',
@@ -279,6 +279,7 @@ export default function JuzDetailPage() {
                   lessonIds={[]}
                   initialStep={activePractice.initialStep ?? 'full-passage'}
                   surahNames={Object.fromEntries(sections.map((s) => [s.surah.id, s.surah.nameSimple]))}
+                  allLessonDefs={allJuzLessons}
                   onDone={() => setActivePractice(null)}
                 />
               ) : null}

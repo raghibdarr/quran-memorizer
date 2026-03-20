@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
-import type { Ayah, PracticeAyahRating, PracticeAyahResult, PracticeOverallRating, PracticeSession as PracticeSessionType } from '@/types/quran';
+import type { Ayah, LessonDef, PracticeAyahRating, PracticeAyahResult, PracticeSession as PracticeSessionType } from '@/types/quran';
 import { useRecorder } from '@/hooks/use-recorder';
 import { useWhisper } from '@/hooks/use-whisper';
 import { useAudio } from '@/hooks/use-audio';
@@ -9,6 +9,7 @@ import { audioController } from '@/lib/audio';
 import { useReciterAudioUrl } from '@/hooks/use-ayah-audio';
 import { compareAyahText, transliterateArabic } from '@/lib/arabic-compare';
 import { useReviewStore } from '@/stores/review-store';
+import { useProgressStore } from '@/stores/progress-store';
 import { usePracticeStore } from '@/stores/practice-store';
 import { useSettingsStore } from '@/stores/settings-store';
 import Button from '@/components/ui/button';
@@ -26,6 +27,7 @@ interface PracticeSessionProps {
   initialStep?: SessionStep;
   surahNames?: Record<number, string>;  // surahId → name, for cross-surah dividers
   flaggedAyahs?: number[];  // ayah numbers to highlight as weak (from review page)
+  allLessonDefs?: LessonDef[];  // lesson definitions for auto-completion
   onDone: () => void;
 }
 
@@ -55,6 +57,7 @@ export default function PracticeSession({
   initialStep = 'ayah-by-ayah',
   surahNames = {},
   flaggedAyahs = [],
+  allLessonDefs = [],
   onDone,
 }: PracticeSessionProps) {
   const isMultiSurah = surahIds.length > 1;
@@ -62,7 +65,6 @@ export default function PracticeSession({
   const [currentIdx, setCurrentIdx] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [results, setResults] = useState<PracticeAyahResult[]>([]);
-  const [overallRating, setOverallRating] = useState<PracticeOverallRating | null>(null);
   const [transcribedText, setTranscribedText] = useState<string | null>(null);
   const [wordResults, setWordResults] = useState<Array<{ word: string; correct: boolean }> | null>(null);
   const [accuracy, setAccuracy] = useState<number | null>(null);
@@ -82,7 +84,9 @@ export default function PracticeSession({
   const whisper = useWhisper();
   const audio = useAudio();
   const getAudioUrl = useReciterAudioUrl();
-  const { reviewCard } = useReviewStore();
+  const { reviewCard, cards: reviewCards } = useReviewStore();
+  const { startLesson, completeLesson } = useProgressStore();
+  const progressLessons = useProgressStore((s) => s.lessons);
   const { addSession } = usePracticeStore();
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
   const translationEnabled = useSettingsStore((s) => s.translationEnabled);
@@ -164,8 +168,8 @@ export default function PracticeSession({
       setCurrentIdx((i) => i + 1);
       resetAyahState();
     } else {
-      setStep('full-passage');
-      resetAyahState();
+      // All ayahs rated — go straight to results
+      finishSession([...results, result]);
     }
   };
 
@@ -195,21 +199,51 @@ export default function PracticeSession({
 
   const handleReveal = () => setRevealed(true);
 
-  const finishSession = (overall: PracticeOverallRating) => {
-    setOverallRating(overall);
-    for (const result of results) {
+  const finishSession = (resultsToSave?: PracticeAyahResult[]) => {
+    const finalResults = resultsToSave ?? results;
+
+    // Update review cards with ratings
+    for (const result of finalResults) {
       reviewCard(result.surahId, result.ayahNumber, RATING_QUALITY[result.rating]);
     }
+
+    // Auto-complete lessons where all ayahs are now "got-it"
+    if (allLessonDefs.length > 0) {
+      // Build quality map with this session's updates applied
+      const updatedQualities = new Map<string, number>();
+      for (const card of reviewCards) {
+        updatedQualities.set(`${card.surahId}:${card.ayahNumber}`, card.lastQuality);
+      }
+      for (const result of finalResults) {
+        updatedQualities.set(`${result.surahId}:${result.ayahNumber}`, RATING_QUALITY[result.rating]);
+      }
+
+      // Check each lesson: if all its ayahs are strong (quality >= 4), auto-complete
+      for (const lesson of allLessonDefs) {
+        if (progressLessons[lesson.lessonId]?.completedAt) continue; // already done
+        let allStrong = true;
+        for (let n = lesson.ayahStart; n <= lesson.ayahEnd; n++) {
+          const q = updatedQualities.get(`${lesson.surahId}:${n}`);
+          if (q === undefined || q < 4) { allStrong = false; break; }
+        }
+        if (allStrong) {
+          startLesson(lesson.lessonId, lesson.surahId);
+          completeLesson(lesson.lessonId);
+        }
+      }
+    }
+
     const session: PracticeSessionType = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       timestamp: Date.now(),
       surahIds,
       lessonIds,
       ayahRange: { start: ayahs[0].number, end: ayahs[ayahs.length - 1].number },
-      ayahResults: results,
-      overallRating: overall,
+      ayahResults: finalResults,
+      overallRating: null,
     };
     addSession(session);
+    setResults(finalResults);
     setStep('results');
   };
 
@@ -605,35 +639,15 @@ export default function PracticeSession({
           </div>
         </div>
 
-        {/* Overall rating — only show after all ayahs rated */}
+        {/* Finish button — show after all ayahs rated */}
         {allAyahsRated && (
-          <div className="space-y-2">
-            <p className="text-center text-xs font-medium text-muted">Overall, how did it go?</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => finishSession('smooth')}
-                className="flex-1 rounded-xl bg-success/10 py-3 text-sm font-semibold text-success transition-colors"
-              >
-                Smooth
-              </button>
-              <button
-                onClick={() => finishSession('some-mistakes')}
-                className="flex-1 rounded-xl bg-gold/10 py-3 text-sm font-semibold text-gold transition-colors"
-              >
-                Some mistakes
-              </button>
-              <button
-                onClick={() => finishSession('need-practice')}
-                className="flex-1 rounded-xl bg-red-500/10 py-3 text-sm font-semibold text-red-500 transition-colors"
-              >
-                Need practice
-              </button>
-            </div>
-          </div>
+          <Button onClick={() => finishSession()} className="w-full">
+            See Results
+          </Button>
         )}
         {!allAyahsRated && revealedAyahs.size > 0 && (
           <p className="text-center text-xs text-muted">
-            Rate each revealed ayah, then give an overall rating
+            Rate each revealed ayah to see results
           </p>
         )}
       </div>
@@ -680,11 +694,6 @@ export default function PracticeSession({
         </div>
       </div>
 
-      {overallRating && (
-        <div className="rounded-xl bg-foreground/5 p-3 text-center text-sm text-muted">
-          Overall: <span className="font-medium text-foreground capitalize">{overallRating.replace('-', ' ')}</span>
-        </div>
-      )}
 
       {/* Per-ayah results */}
       <div className="space-y-1">
