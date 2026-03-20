@@ -9,7 +9,7 @@ import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
 import BottomNav from '@/components/layout/bottom-nav';
 import TajweedLegend from '@/components/ui/tajweed-legend';
-import { RefreshIcon } from '@/components/ui/icons';
+import { TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import ListenPhase from './phases/listen-phase';
 import UnderstandPhase from './phases/understand-phase';
@@ -164,10 +164,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowResetConfirm(true)}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-red-400/70 transition-colors hover:bg-red-500/10 hover:text-red-400"
                 title="Reset lesson"
               >
-                <RefreshIcon size={14} />
+                <TrashIcon size={14} />
               </button>
               <SettingsPanel />
             </div>

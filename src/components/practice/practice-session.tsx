@@ -70,6 +70,19 @@ export default function PracticeSession({
   const [accuracy, setAccuracy] = useState<number | null>(null);
   const [isTranscribing, setIsTranscribing] = useState(false);
 
+  // Flagged ayahs from retry (merged with prop)
+  const [flaggedFromRetry, setFlaggedFromRetry] = useState<Record<number, PracticeAyahRating>>({});
+  const activeFlaggedAyahs = Object.keys(flaggedFromRetry).length > 0
+    ? Object.keys(flaggedFromRetry).map(Number)
+    : flaggedAyahs;
+
+  const getFlagDotColor = (ayahNumber: number) => {
+    const rating = flaggedFromRetry[ayahNumber];
+    if (rating === 'missed') return 'bg-red-400';
+    if (rating === 'hesitated') return 'bg-gold';
+    return 'bg-gold'; // default for prop-based flags
+  };
+
   // Full-passage mode state
   const [passageAyahRatings, setPassageAyahRatings] = useState<Record<number, PracticeAyahRating>>({});
   const [revealedAyahs, setRevealedAyahs] = useState<Set<string>>(new Set());
@@ -296,7 +309,7 @@ export default function PracticeSession({
         {/* Ayah card */}
         <Card className="text-center">
           <p className="mb-3 text-xs text-muted">
-            {flaggedAyahs.includes(currentAyah.number) && <span className="mr-1 inline-block h-2 w-2 rounded-full bg-red-500" />}
+            {activeFlaggedAyahs.includes(currentAyah.number) && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', getFlagDotColor(currentAyah.number))} />}
             {ayahLabel(currentAyah)}
           </p>
           {revealed ? (
@@ -504,7 +517,7 @@ export default function PracticeSession({
                       ) : null}
                     </div>
                     <p className="text-xs text-muted">
-                      {flaggedAyahs.includes(ayah.number) && <span className="mr-1 inline-block h-2 w-2 rounded-full bg-red-500" />}
+                      {activeFlaggedAyahs.includes(ayah.number) && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', getFlagDotColor(ayah.number))} />}
                       {ayahLabel(ayah)}
                     </p>
                   </div>
@@ -721,8 +734,21 @@ export default function PracticeSession({
       {/* Actions */}
       <div className="flex flex-col gap-3">
         {hasWeakAyahs && (
-          <Button onClick={onDone} className="w-full">
-            Retry Weak Ayahs
+          <Button onClick={() => {
+            // Restart with all ayahs, flagging the weak ones with their ratings
+            const weakMap: Record<number, PracticeAyahRating> = {};
+            for (const r of results) {
+              if (r.rating !== 'got-it') weakMap[r.ayahNumber] = r.rating;
+            }
+            setFlaggedFromRetry(weakMap);
+            setResults([]);
+            setCurrentIdx(0);
+            setPassageAyahRatings({});
+            setRevealedAyahs(new Set());
+            resetAyahState();
+            setStep(initialStep);
+          }} className="w-full">
+            Retry with Weak Flagged
           </Button>
         )}
         <Button onClick={onDone} variant={hasWeakAyahs ? 'secondary' : 'primary'} className="w-full">

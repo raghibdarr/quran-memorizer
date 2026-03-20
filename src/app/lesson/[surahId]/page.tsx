@@ -47,7 +47,7 @@ export default function SurahDetailPage() {
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
-          <a href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</a>
+          <a href={reviewLessonNum ? '/review' : '/'} className="text-sm text-muted hover:text-foreground">&larr; Back</a>
           <SettingsPanel />
         </div>
       </div>

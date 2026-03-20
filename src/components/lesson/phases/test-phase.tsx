@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import type { Surah, Ayah, TestLevel } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
+import { useReviewStore } from '@/stores/review-store';
+import { useAudio } from '@/hooks/use-audio';
 import ArabicText from '@/components/ui/arabic-text';
 import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
@@ -47,7 +49,8 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
   };
 
   const handleResult = (score: number, total: number, mistakes: number[]) => {
-    const passed = score >= Math.ceil(total * 0.5);
+    // Level 3 (full recall) always passes — user already chose "Continue Anyway" or all got-it
+    const passed = level === 'full-recall' ? true : score >= Math.ceil(total * 0.5);
     setResultScreen({ type: passed ? 'pass' : 'fail', score, total, mistakes });
     if (passed) setLevelPassed(true);
   };
@@ -82,57 +85,70 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
         ))}
       </div>
 
-      {/* Result screen (pass or fail) */}
+      {/* Result screen */}
       {resultScreen ? (
         <div className="space-y-5 py-4">
           <div className="text-center">
-            <div className={cn(
-              'mx-auto flex h-16 w-16 items-center justify-center rounded-full',
-              resultScreen.type === 'pass' ? 'bg-success/10' : 'bg-red-500/10'
-            )}>
-              {resultScreen.type === 'pass' ? (
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2D7A4F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-              ) : (
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
-              )}
-            </div>
+            {(() => {
+              const isFlawless = resultScreen.score === resultScreen.total;
+              const isAlmostPerfect = resultScreen.score >= resultScreen.total - 1 && !isFlawless;
+              const isGood = resultScreen.type === 'pass' && !isFlawless && !isAlmostPerfect;
+              const isFail = resultScreen.type === 'fail';
+              // For level 3: use score-based messaging, not pass/fail
+              const isLevel3 = level === 'full-recall';
+              const iconColor = isFlawless ? 'bg-success/10' :
+                isAlmostPerfect ? 'bg-success/10' :
+                isFail && !isLevel3 ? 'bg-red-500/10' :
+                'bg-gold/10';
 
-            <h3 className="mt-3 text-lg font-bold text-foreground">
-              {resultScreen.type === 'fail'
-                ? 'Not quite there yet'
-                : resultScreen.score === resultScreen.total
-                ? 'Flawless!'
-                : resultScreen.score >= resultScreen.total - 1
-                ? 'Almost perfect!'
-                : 'Passed!'}
-            </h3>
+              return (
+                <>
+                  <div className={cn('mx-auto flex h-16 w-16 items-center justify-center rounded-full', iconColor)}>
+                    {isFlawless || isAlmostPerfect ? (
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2D7A4F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    ) : isFail && !isLevel3 ? (
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
+                    ) : (
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8963E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                    )}
+                  </div>
 
-            <p className="mt-1 text-2xl font-bold text-foreground">
-              {resultScreen.score} / {resultScreen.total}
-            </p>
+                  <h3 className="mt-3 text-lg font-bold text-foreground">
+                    {isFlawless ? 'Flawless!'
+                      : isAlmostPerfect ? 'Almost perfect!'
+                      : isFail && !isLevel3 ? 'Not quite there yet'
+                      : resultScreen.mistakes.length > 0 ? 'Some ayahs need work'
+                      : 'Well done!'}
+                  </h3>
 
-            <p className="mt-1 text-sm text-muted">
-              {resultScreen.type === 'fail'
-                ? 'Go back and practice the ayahs you struggled with, then try again.'
-                : resultScreen.mistakes.length > 0
-                ? `You got ${resultScreen.mistakes.length} wrong — review them below.`
-                : 'No mistakes — well done!'}
-            </p>
+                  <p className="mt-1 text-2xl font-bold text-foreground">
+                    {resultScreen.score} / {resultScreen.total}
+                  </p>
+
+                  <p className="mt-1 text-sm text-muted">
+                    {isFlawless ? 'No mistakes — well done!'
+                      : isFail && !isLevel3 ? 'Go back and practice the ayahs you struggled with, then try again.'
+                      : resultScreen.mistakes.length > 0 ? `${resultScreen.mistakes.length} ayah${resultScreen.mistakes.length !== 1 ? 's' : ''} flagged for review.`
+                      : 'Great job!'}
+                  </p>
+                </>
+              );
+            })()}
           </div>
 
           {/* Show mistakes */}
           {resultScreen.mistakes.length > 0 && (
             <div className="space-y-2">
-              <p className="text-xs font-medium text-muted">Mistakes:</p>
+              <p className="text-xs font-medium text-muted">Needs practice:</p>
               {resultScreen.mistakes.map((idx) => (
-                <div key={idx} className="rounded-xl bg-red-500/5 border border-red-500/10 p-3">
+                <div key={idx} className="rounded-xl bg-gold/5 border border-gold/10 p-3">
                   <AyahDisplay ayah={ayahs[idx]} />
                 </div>
               ))}
             </div>
           )}
 
-          {resultScreen.type === 'pass' ? (
+          {resultScreen.type === 'pass' || level === 'full-recall' ? (
             <Button onClick={advanceLevel} className="w-full">
               {level === 'full-recall' ? 'Complete Lesson' : 'Next Level'}
             </Button>
@@ -148,7 +164,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
             <FillBlankTest ayahs={ayahs} onResult={handleResult} />
           )}
           {level === 'first-letter' && (
-            <FirstLetterTest ayahs={ayahs} onResult={handleResult} />
+            <FirstLetterTest surah={surah} ayahs={ayahs} onResult={handleResult} />
           )}
           {level === 'full-recall' && (
             <FullRecallTest
@@ -191,11 +207,17 @@ function FillBlankTest({
 
   const optionWords = useMemo(() => {
     const allWords = ayahs.flatMap((a) => a.words).filter((w) => w.charType === 'word');
-    const others = allWords
-      .filter((w) => w.textUthmani !== blankWord.textUthmani)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-    const opts = [...others.map((w) => ({ text: w.textUthmani, transliteration: w.transliteration })),
+    // Deduplicate by text and exclude words matching the blank
+    const seen = new Set<string>([blankWord.textUthmani]);
+    const others: Array<{ text: string; transliteration: string | null }> = [];
+    for (const w of allWords.sort(() => Math.random() - 0.5)) {
+      if (!seen.has(w.textUthmani)) {
+        seen.add(w.textUthmani);
+        others.push({ text: w.textUthmani, transliteration: w.transliteration });
+        if (others.length >= 3) break;
+      }
+    }
+    const opts = [...others,
       { text: blankWord.textUthmani, transliteration: blankWord.transliteration }]
       .sort(() => Math.random() - 0.5);
     return opts;
@@ -307,9 +329,11 @@ function getLetterHint(arabicWord: string): string {
 }
 
 function FirstLetterTest({
+  surah,
   ayahs,
   onResult,
 }: {
+  surah: Surah;
   ayahs: Ayah[];
   onResult: (score: number, total: number, mistakes: number[]) => void;
 }) {
@@ -317,6 +341,16 @@ function FirstLetterTest({
   const [revealed, setRevealed] = useState(false);
   const [score, setScore] = useState(0);
   const [mistakes, setMistakes] = useState<number[]>([]);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const getAudioUrl = (surahId: number, ayahNum: number) =>
+    buildAudioUrl(surahId, ayahNum, useSettingsStore.getState().reciter);
+
+  const playAyah = async () => {
+    setIsPlaying(true);
+    await audioController.playAndWait(getAudioUrl(surah.id, ayahs[ayahIndex].number));
+    setIsPlaying(false);
+  };
 
   const ayah = ayahs[ayahIndex];
   const words = ayah.words.filter((w) => w.charType === 'word');
@@ -358,7 +392,29 @@ function FirstLetterTest({
         </Button>
       ) : (
         <>
-          <div className="rounded-xl bg-success/5 p-5">
+          <div className={cn(
+            'rounded-xl p-5 transition-none',
+            isPlaying ? 'bg-teal/5 border border-teal/30' : 'bg-success/5'
+          )}>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                {isPlaying && (
+                  <div className="flex items-end gap-[2px] h-4">
+                    <div className="w-[3px] bg-teal rounded-full animate-[bar1_0.8s_ease-in-out_infinite]" />
+                    <div className="w-[3px] bg-teal rounded-full animate-[bar2_0.8s_ease-in-out_infinite_0.2s]" />
+                    <div className="w-[3px] bg-teal rounded-full animate-[bar3_0.8s_ease-in-out_infinite_0.4s]" />
+                  </div>
+                )}
+                <span className="text-xs text-muted">Ayah {ayah.number}</span>
+              </div>
+              <button
+                onClick={playAyah}
+                className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                title="Play ayah"
+              >
+                <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+              </button>
+            </div>
             <AyahDisplay ayah={ayah} />
           </div>
           <p className="text-center text-sm text-muted">Did you recite it correctly?</p>
@@ -376,7 +432,21 @@ function FirstLetterTest({
   );
 }
 
-// === Full Recall ===
+// === Full Recall (practice-style per-ayah rating) ===
+
+type RecallRating = 'got-it' | 'shaky' | 'missed';
+
+const RECALL_COLORS: Record<RecallRating, string> = {
+  'got-it': 'text-success bg-success/10',
+  'shaky': 'text-gold bg-gold/10',
+  'missed': 'text-red-400 bg-red-400/10',
+};
+
+const RECALL_LABELS: Record<RecallRating, string> = {
+  'got-it': 'Got it',
+  'shaky': 'Shaky',
+  'missed': 'Missed',
+};
 
 function FullRecallTest({
   surah,
@@ -392,84 +462,305 @@ function FullRecallTest({
   onResult: (score: number, total: number, mistakes: number[]) => void;
 }) {
   const [started, setStarted] = useState(false);
-  const [revealed, setRevealed] = useState(false);
+  const [revealedAyahs, setRevealedAyahs] = useState<Set<string>>(new Set());
+  const [ratings, setRatings] = useState<Record<string, RecallRating>>({});
+  const [flaggedRatings, setFlaggedRatings] = useState<Record<string, RecallRating>>({});
+  const { reviewCard, addCard } = useReviewStore();
+
+  // Audio state
+  const { isPlaying: audioIsPlaying, isPaused: audioIsPaused } = useAudio();
+  const [playingAll, setPlayingAll] = useState(false);
+  const [playingIdx, setPlayingIdx] = useState(-1);
+  const [currentSpeed, setCurrentSpeed] = useState(1);
+  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+  const abortRef = useRef(false);
 
   const getAudioUrl = (surahId: number, ayahNum: number) =>
     buildAudioUrl(surahId, ayahNum, useSettingsStore.getState().reciter);
 
-  const playAyah = async (ayah: Ayah) => {
-    await audioController.play(getAudioUrl(surah.id, ayah.number));
+  const allRevealed = revealedAyahs.size === ayahs.length;
+  const allRated = ayahs.every((a) => ratings[a.key]);
+
+  const toggleReveal = (key: string) => {
+    setRevealedAyahs((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key); else next.add(key);
+      return next;
+    });
   };
 
-  return (
-    <div className="space-y-6">
-      {!started ? (
-        <>
-          <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-10 text-center">
-            <p className="arabic-text text-3xl text-teal">{surah.nameArabic}</p>
-            <p className="mt-2 text-lg font-semibold">{lessonLabel}</p>
-            <p className="mt-4 text-sm text-muted">
-              Recite all {ayahs.length} ayahs from memory
-            </p>
-          </div>
-          <Button onClick={() => setStarted(true)} className="w-full">
-            Begin Recitation
-          </Button>
-        </>
-      ) : !revealed ? (
-        <>
-          <div className="rounded-2xl bg-teal/5 p-10 text-center">
-            <p className="text-lg font-medium text-teal">Recite now</p>
-            <p className="mt-2 text-sm text-muted">
-              Take your time. Recite aloud, then reveal to check.
-            </p>
-            <p className="mt-4 arabic-text text-xl text-muted/50">{surah.nameArabic}</p>
-          </div>
-          <Button onClick={() => setRevealed(true)} className="w-full">
-            Reveal & Check
-          </Button>
-        </>
-      ) : (
-        <>
-          <div className="space-y-3">
-            {ayahs.map((ayah) => (
-              <div key={ayah.key} className="rounded-xl bg-card p-4 shadow-sm relative">
-                <button
-                  onClick={() => playAyah(ayah)}
-                  className="absolute top-3 left-3 text-muted hover:text-teal transition-colors"
-                  title="Play ayah"
-                >
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z" /></svg>
-                </button>
-                <AyahDisplay ayah={ayah} />
-              </div>
-            ))}
-          </div>
+  const revealAll = () => setRevealedAyahs(new Set(ayahs.map((a) => a.key)));
+  const hideAll = () => setRevealedAyahs(new Set());
 
-          <div className="space-y-2">
-            <p className="text-center text-sm font-medium">How did you do?</p>
-            <div className="flex gap-2">
+  const rateAyah = (key: string, rating: RecallRating) => {
+    setRatings((prev) => ({ ...prev, [key]: rating }));
+  };
+
+  const playAyah = useCallback(async (ayah: Ayah, idx: number) => {
+    if (playingAll) return;
+    setPlayingIdx(idx);
+    await audioController.playAndWait(getAudioUrl(surah.id, ayah.number));
+    setPlayingIdx(-1);
+  }, [playingAll, surah.id]);
+
+  const playAllAyahs = useCallback(async () => {
+    if (playingAll) return;
+    abortRef.current = false;
+    setPlayingAll(true);
+    for (let i = 0; i < ayahs.length; i++) {
+      if (abortRef.current) break;
+      setPlayingIdx(i);
+      await audioController.playAndWait(getAudioUrl(surah.id, ayahs[i].number));
+      if (!abortRef.current && i < ayahs.length - 1) {
+        await new Promise<void>((r) => setTimeout(r, 400));
+      }
+    }
+    setPlayingIdx(-1);
+    setPlayingAll(false);
+  }, [ayahs, playingAll, surah.id]);
+
+  const stopPlayback = useCallback(() => {
+    abortRef.current = true;
+    audioController.stop();
+    setPlayingAll(false);
+    setPlayingIdx(-1);
+  }, []);
+
+  const RECALL_QUALITY: Record<RecallRating, number> = {
+    'got-it': 5,
+    'shaky': 3,
+    'missed': 1,
+  };
+
+  const handleFinish = () => {
+    // Update review cards with per-ayah ratings
+    for (const ayah of ayahs) {
+      const rating = ratings[ayah.key];
+      if (rating) {
+        addCard(surah.id, ayah.number); // ensure card exists
+        reviewCard(surah.id, ayah.number, RECALL_QUALITY[rating]);
+      }
+    }
+
+    const gotItCount = ayahs.filter((a) => ratings[a.key] === 'got-it').length;
+    const mistakes = ayahs
+      .map((a, i) => ({ idx: i, rating: ratings[a.key] }))
+      .filter((r) => r.rating !== 'got-it')
+      .map((r) => r.idx);
+    onResult(gotItCount, ayahs.length, mistakes);
+  };
+
+  const handleRetry = () => {
+    // Save ratings for flag colors, then reset
+    const newFlagged: Record<string, RecallRating> = {};
+    for (const a of ayahs) {
+      if (ratings[a.key] && ratings[a.key] !== 'got-it') {
+        newFlagged[a.key] = ratings[a.key];
+      }
+    }
+    setFlaggedRatings(newFlagged);
+    setRatings({});
+    setRevealedAyahs(new Set());
+    stopPlayback();
+  };
+
+  const hasWeakAyahs = Object.values(ratings).some((r) => r !== 'got-it');
+
+  const getFlagDotColor = (key: string) => {
+    const r = flaggedRatings[key];
+    if (r === 'missed') return 'bg-red-400';
+    if (r === 'shaky') return 'bg-gold';
+    return '';
+  };
+
+  if (!started) {
+    return (
+      <div className="space-y-6">
+        <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-10 text-center">
+          <p className="arabic-text text-3xl text-teal">{surah.nameArabic}</p>
+          <p className="mt-2 text-lg font-semibold">{lessonLabel}</p>
+          <p className="mt-4 text-sm text-muted">
+            Recite all {ayahs.length} ayahs from memory, then reveal and rate each one
+          </p>
+        </div>
+        <Button onClick={() => setStarted(true)} className="w-full">
+          Begin Recitation
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      {/* Reveal toggle */}
+      <button
+        onClick={allRevealed ? hideAll : revealAll}
+        className="w-full rounded-xl bg-foreground/5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
+      >
+        {allRevealed ? 'Hide All' : 'Reveal All'}
+      </button>
+
+      {/* Per-ayah cards */}
+      <div className="space-y-3">
+        {ayahs.map((ayah, idx) => {
+          const isRevealed = revealedAyahs.has(ayah.key);
+          const rating = ratings[ayah.key];
+          const isFlagged = !!flaggedRatings[ayah.key];
+          const flagColor = getFlagDotColor(ayah.key);
+          const isAyahPlaying = playingIdx === idx;
+
+          return (
+            <div
+              key={ayah.key}
+              className={cn(
+                'rounded-xl p-4 transition-none',
+                isAyahPlaying ? 'bg-teal/5 border border-teal/30' :
+                isRevealed ? 'bg-card shadow-sm' :
+                'border-2 border-dashed border-foreground/15'
+              )}
+            >
+              {isRevealed ? (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {isAyahPlaying && audioIsPlaying ? (
+                        <div className="flex items-end gap-[2px] h-4">
+                          <div className="w-[3px] bg-teal rounded-full animate-[bar1_0.8s_ease-in-out_infinite]" />
+                          <div className="w-[3px] bg-teal rounded-full animate-[bar2_0.8s_ease-in-out_infinite_0.2s]" />
+                          <div className="w-[3px] bg-teal rounded-full animate-[bar3_0.8s_ease-in-out_infinite_0.4s]" />
+                        </div>
+                      ) : null}
+                      <p className="text-xs text-muted">
+                        {isFlagged && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', flagColor)} />}
+                        Ayah {ayah.number}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => playAyah(ayah, idx)}
+                        className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                      >
+                        <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                      </button>
+                      <button
+                        onClick={() => toggleReveal(ayah.key)}
+                        className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                      >
+                        <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                          <line x1="1" y1="1" x2="23" y2="23" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <AyahDisplay ayah={ayah} />
+                  <div className="flex gap-1.5 pt-1">
+                    {(['got-it', 'shaky', 'missed'] as RecallRating[]).map((r) => (
+                      <button
+                        key={r}
+                        onClick={() => rateAyah(ayah.key, r)}
+                        className={cn(
+                          'flex-1 rounded-lg py-1.5 text-xs font-semibold transition-colors',
+                          rating === r ? RECALL_COLORS[r] : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                        )}
+                      >
+                        {RECALL_LABELS[r]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <button onClick={() => toggleReveal(ayah.key)} className="w-full">
+                  <p className="text-center text-sm text-muted py-2">
+                    {isFlagged && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', flagColor)} />}
+                    Ayah {ayah.number} — tap to reveal
+                  </p>
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Sticky media controls — show after all revealed */}
+      {allRevealed && (
+        <div className="sticky bottom-16 rounded-2xl bg-card p-3 shadow-lg border border-foreground/10">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                if (playingAll && audioIsPlaying) audioController.pause();
+                else if (playingAll && audioIsPaused) audioController.resume();
+                else playAllAyahs();
+              }}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
+            >
+              {playingAll && audioIsPlaying ? (
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1" /><rect x="9.5" y="2" width="3.5" height="12" rx="1" /></svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z" /></svg>
+              )}
+            </button>
+            <button
+              onClick={stopPlayback}
+              disabled={!playingAll}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" /></svg>
+            </button>
+            <div className="flex-1 text-center">
+              <p className="text-xs text-muted">
+                {playingAll ? `Ayah ${playingIdx + 1} / ${ayahs.length}` : 'Tap play or ayah'}
+              </p>
+            </div>
+            <div className="relative">
               <button
-                onClick={() => onResult(0, 1, [0])}
-                className="flex-1 rounded-xl bg-red-500/10 py-3 text-sm font-semibold text-red-500 transition-colors hover:bg-red-500/20"
+                onClick={() => setShowSpeedMenu(!showSpeedMenu)}
+                className="rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
               >
-                Forgot
+                {currentSpeed}x
               </button>
-              <button
-                onClick={() => onResult(1, 1, [])}
-                className="flex-1 rounded-xl bg-amber-500/10 py-3 text-sm font-semibold text-amber-500 transition-colors hover:bg-amber-500/20"
-              >
-                Struggled
-              </button>
-              <button
-                onClick={() => onResult(1, 1, [])}
-                className="flex-1 rounded-xl bg-green-500/10 py-3 text-sm font-semibold text-green-500 transition-colors hover:bg-green-500/20"
-              >
-                Easy
-              </button>
+              {showSpeedMenu && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowSpeedMenu(false)} />
+                  <div className="absolute bottom-8 right-0 z-50 rounded-lg bg-card shadow-lg border border-foreground/10 py-1">
+                    {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); setShowSpeedMenu(false); }}
+                        className={cn(
+                          'block w-full px-4 py-1.5 text-left text-xs font-medium',
+                          s === currentSpeed ? 'text-teal bg-teal/5' : 'text-foreground hover:bg-foreground/5'
+                        )}
+                      >
+                        {s}x
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
-        </>
+        </div>
+      )}
+
+      {/* Actions */}
+      {allRated && (
+        <div className="space-y-3">
+          {hasWeakAyahs && (
+            <Button onClick={handleRetry} variant="secondary" className="w-full">
+              Retry with Weak Flagged
+            </Button>
+          )}
+          <Button onClick={handleFinish} className="w-full">
+            {hasWeakAyahs ? 'Continue Anyway' : 'Complete Level'}
+          </Button>
+        </div>
+      )}
+      {!allRated && revealedAyahs.size > 0 && (
+        <p className="text-center text-xs text-muted">
+          Rate each revealed ayah to continue
+        </p>
       )}
     </div>
   );
