@@ -1,6 +1,6 @@
-# HifzFlow — Quran Memorization App
+# Takrar — Quran Memorization App
 
-Beginner-focused Quran memorization web app targeting Juz Amma.
+Guided Quran memorization web app.
 Guided multi-phase learning flow: Listen → Understand → Chunk → Test → Spaced Review.
 
 ## Tech Stack

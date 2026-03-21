@@ -23,9 +23,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "HifzFlow — Quran Memorization",
+  title: "Takrar — Quran Memorization",
   description:
-    "A guided Quran memorization app for beginners. Learn Juz Amma step by step with listen, understand, chunk, and test phases.",
+    "A guided Quran memorization app. Learn step by step through repitition — listen, understand, chain ayahs, test and review.",
 };
 
 export default function RootLayout({
