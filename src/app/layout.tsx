@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   title: "Takrar — Quran Memorization",
   description:
     "A guided Quran memorization app. Learn step by step through repitition — listen, understand, chain ayahs, test and review.",
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

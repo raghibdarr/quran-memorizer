@@ -136,9 +136,12 @@ export default function HomePage() {
       <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-2 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-teal">Takrar</h1>
-              <p className="text-sm text-muted">Quran Memorization</p>
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Takrar" className="h-10 w-10 rounded-lg" />
+              <div>
+                <h1 className="text-2xl font-bold text-teal">Takrar</h1>
+                <p className="text-sm text-muted">Quran Memorization</p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               {stats.currentStreak > 0 && (
