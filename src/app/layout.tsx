@@ -38,7 +38,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${kfgqpc.variable} ${nastaliq.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${kfgqpc.variable} ${nastaliq.variable} ${jakarta.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('quran-dark-mode');var d=s!==null?s==='true':window.matchMedia('(prefers-color-scheme:dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>
