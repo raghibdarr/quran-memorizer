@@ -5,18 +5,34 @@ import { createClient } from '@/lib/supabase/client'
 
 export default function AuthCallbackPage() {
   useEffect(() => {
-    const supabase = createClient()
-    const url = new URL(window.location.href)
-    const code = url.searchParams.get('code')
+    const handleCallback = async () => {
+      const supabase = createClient()
 
-    if (code) {
-      supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
-        // Redirect to home regardless — session is set via cookies
+      // Supabase PKCE flow: the hash or search params contain the auth data
+      // Try exchangeCodeForSession first, then check if session already exists
+      const url = new URL(window.location.href)
+      const code = url.searchParams.get('code')
+
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code)
+        if (!error) {
+          window.location.href = '/'
+          return
+        }
+      }
+
+      // Fallback: check if session was set via hash fragment (implicit flow)
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
         window.location.href = '/'
-      })
-    } else {
+        return
+      }
+
+      // No session — redirect home anyway
       window.location.href = '/'
     }
+
+    handleCallback()
   }, [])
 
   return (
