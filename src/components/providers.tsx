@@ -19,6 +19,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       ? saved === 'true'
       : window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.classList.toggle('dark', isDark);
+
+    // Clean up auth code from URL after OAuth redirect
+    if (window.location.search.includes('code=')) {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
   }, []);
 
   // Migration: create lesson review cards for already-completed lessons (runs once)
