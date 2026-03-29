@@ -7,6 +7,7 @@ import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
+import UserButton from '@/components/auth/user-button';
 import BottomNav from '@/components/layout/bottom-nav';
 import TajweedLegend from '@/components/ui/tajweed-legend';
 import { TrashIcon } from '@/components/ui/icons';
@@ -170,6 +171,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
                 <TrashIcon size={14} />
               </button>
               <SettingsPanel />
+              <UserButton />
             </div>
           </div>
           {totalLessons > 1 && (

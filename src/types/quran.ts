@@ -105,6 +105,22 @@ export interface ReviewCard {
   lastQuality: number;      // 0-5
 }
 
+// Lesson-level spaced repetition
+
+export interface LessonReviewCard {
+  lessonId: string;          // e.g. "78-3"
+  surahId: number;
+  lessonNumber: number;
+  ayahStart: number;
+  ayahEnd: number;
+  easeFactor: number;        // Default 2.5
+  interval: number;          // Days until next review
+  repetitions: number;
+  nextReview: number;        // Timestamp
+  lastReview: number;        // Timestamp
+  lastQuality: number;       // 0-5
+}
+
 // User settings & stats
 
 export interface UserSettings {

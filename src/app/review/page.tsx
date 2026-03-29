@@ -3,22 +3,31 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useReviewStore } from '@/stores/review-store';
 import { useProgressStore } from '@/stores/progress-store';
-import { getSurahIndex, getJuzSegmentsForSurah } from '@/lib/quran-data';
+import { getSurahIndex, getJuzSegmentsForSurah, getSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { computeSurahHealth } from '@/lib/review-helpers';
-import type { SurahMeta, LessonDef } from '@/types/quran';
-import type { SurahHealth, LessonHealth } from '@/lib/review-helpers';
+import type { SurahMeta, LessonDef, LessonReviewCard } from '@/types/quran';
+import type { SurahHealth } from '@/lib/review-helpers';
+import ReviewSession from '@/components/review/review-session';
 import Card from '@/components/ui/card';
+import Button from '@/components/ui/button';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
+import UserButton from '@/components/auth/user-button';
 import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
+type PageView = 'dashboard' | 'session';
+
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
+  const lessonCards = useReviewStore((s) => s.lessonCards);
+
   const [surahIndex, setSurahIndex] = useState<SurahMeta[]>([]);
   const [surahLessons, setSurahLessons] = useState<Record<number, LessonDef[]>>({});
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState<PageView>('dashboard');
+  const [sessionCards, setSessionCards] = useState<LessonReviewCard[]>([]);
 
   // Get unique surah IDs from review cards
   const surahIds = useMemo(() => {
@@ -69,8 +78,69 @@ export default function ReviewPage() {
   const totalHesitant = surahHealths.reduce((s, h) => s + h.totalHesitant, 0);
   const totalStrong = surahHealths.reduce((s, h) => s + h.totalStrong, 0);
 
+  const dueCards = useMemo(
+    () => lessonCards.filter((c) => c.nextReview <= Date.now()).sort((a, b) => a.nextReview - b.nextReview),
+    [lessonCards]
+  );
+  const dueCount = dueCards.length;
+
+
+  // Start review for all due cards
+  const startReview = () => {
+    setSessionCards(dueCards);
+    setView('session');
+  };
+
+  // Start review for a specific surah's due lessons
+  // Start review for a specific surah's due lessons only
+  const startSurahReview = (surahId: number) => {
+    const surahDue = dueCards.filter((c) => c.surahId === surahId);
+    if (surahDue.length === 0) return;
+    setSessionCards(surahDue);
+    setView('session');
+  };
+
+  // Start review for a single lesson
+  const startLessonReview = (lessonId: string) => {
+    const card = lessonCards.find((c) => c.lessonId === lessonId);
+    if (!card) return;
+    setSessionCards([card]);
+    setView('session');
+  };
+
   if (loading) return null;
 
+  // Review session view
+  if (view === 'session' && sessionCards.length > 0) {
+    return (
+      <div className="min-h-screen bg-cream pb-20">
+        <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+          <div className="mx-auto max-w-2xl flex items-center justify-between">
+            <button
+              onClick={() => setView('dashboard')}
+              className="text-sm text-muted hover:text-foreground"
+            >
+              &larr; Exit Review
+            </button>
+            <span className="text-sm font-semibold text-teal">Review Session</span>
+            <div className="flex items-center gap-2">
+              <SettingsPanel />
+              <UserButton />
+            </div>
+          </div>
+        </div>
+
+        <main className="mx-auto max-w-2xl px-4 py-6">
+          <ReviewSession
+            dueCards={sessionCards}
+            onComplete={() => setView('dashboard')}
+          />
+        </main>
+      </div>
+    );
+  }
+
+  // Empty state
   if (surahIds.length === 0) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4 pb-20">
@@ -85,6 +155,7 @@ export default function ReviewPage() {
     );
   }
 
+  // Dashboard view
   return (
     <div className="min-h-screen bg-cream pb-20">
       {/* Sticky top bar */}
@@ -92,12 +163,45 @@ export default function ReviewPage() {
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <a href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</a>
           <span className="text-sm font-semibold text-teal">Review</span>
-          <SettingsPanel />
+          <div className="flex items-center gap-2">
+            <SettingsPanel />
+            <UserButton />
+          </div>
         </div>
       </div>
 
       <header className="px-4 pt-4 pb-4">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-2xl space-y-4">
+          {/* Due review banner */}
+          {dueCount > 0 && (
+            <button onClick={startReview} className="w-full">
+              <Card className="border-2 border-teal/30 bg-teal/5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-lg font-bold text-teal">
+                      {dueCount} lesson{dueCount !== 1 ? 's' : ''} due
+                    </p>
+                    <p className="text-xs text-muted">Tap to start your review session</p>
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-white">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </Card>
+            </button>
+          )}
+
+          {dueCount === 0 && lessonCards.length > 0 && (
+            <Card className="bg-success/5 border border-success/20">
+              <div className="text-center">
+                <p className="text-sm font-bold text-success">All caught up!</p>
+                <p className="mt-0.5 text-xs text-muted">No lessons due for review right now</p>
+              </div>
+            </Card>
+          )}
+
           {/* Summary stats */}
           <div className="flex justify-center gap-6">
             <div className="text-center">
@@ -121,11 +225,17 @@ export default function ReviewPage() {
           const surah = surahMap.get(surahHealth.surahId);
           if (!surah) return null;
 
+          const surahDueCount = dueCards.filter((c) => c.surahId === surahHealth.surahId).length;
+          const surahLessonCount = lessonCards.filter((c) => c.surahId === surahHealth.surahId).length;
+
           return (
             <SurahHealthCard
               key={surahHealth.surahId}
               surah={surah}
               health={surahHealth}
+              dueCount={surahDueCount}
+              onStartReview={() => startSurahReview(surahHealth.surahId)}
+              onStartLessonReview={startLessonReview}
             />
           );
         })}
@@ -136,7 +246,19 @@ export default function ReviewPage() {
   );
 }
 
-function SurahHealthCard({ surah, health }: { surah: SurahMeta; health: SurahHealth }) {
+function SurahHealthCard({
+  surah,
+  health,
+  dueCount,
+  onStartReview,
+  onStartLessonReview,
+}: {
+  surah: SurahMeta;
+  health: SurahHealth;
+  dueCount: number;
+  onStartReview: () => void;
+  onStartLessonReview: (lessonId: string) => void;
+}) {
   const [expanded, setExpanded] = useState(false);
   const progressLessons = useProgressStore((s) => s.lessons);
 
@@ -154,7 +276,14 @@ function SurahHealthCard({ surah, health }: { surah: SurahMeta; health: SurahHea
         )}>
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <h3 className="text-sm font-bold text-foreground">{surah.nameSimple}</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-foreground">{surah.nameSimple}</h3>
+                {dueCount > 0 && (
+                  <span className="rounded-full bg-teal/10 px-2 py-0.5 text-[10px] font-bold text-teal">
+                    {dueCount} due
+                  </span>
+                )}
+              </div>
               <p className="text-xs text-muted">
                 {health.lessons.length} lesson{health.lessons.length !== 1 ? 's' : ''}
                 {health.totalWeak > 0 && <span className="text-red-400"> · {health.totalWeak} weak</span>}
@@ -187,26 +316,29 @@ function SurahHealthCard({ surah, health }: { surah: SurahMeta; health: SurahHea
       {/* Expanded lesson list */}
       {expanded && (
         <div className="mt-2 space-y-1.5 pl-2">
+          {/* Surah review button — only when there are due lessons */}
+          {dueCount > 0 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onStartReview(); }}
+              className="mb-2 w-full rounded-xl bg-teal/10 px-4 py-2.5 text-sm font-semibold text-teal transition-colors hover:bg-teal/20"
+            >
+              Review {dueCount} due lesson{dueCount !== 1 ? 's' : ''}
+            </button>
+          )}
+
           {health.lessons.map((lessonHealth) => {
             const hasIssues = lessonHealth.weakCount > 0 || lessonHealth.hesitantCount > 0;
             const allNotLearned = lessonHealth.notLearnedCount === lessonHealth.ayahs.length;
             const lessonTotal = lessonHealth.ayahs.length;
-            const progress = progressLessons[lessonHealth.lesson.lessonId];
-            const isLessonComplete = progress?.completedAt != null;
-
-            // Build practice URL with flagged weak ayahs
-            const weakAyahNumbers = lessonHealth.ayahs
-              .filter((a) => a.health === 'weak' || a.health === 'shaky')
-              .map((a) => a.ayahNumber);
-
-            const practiceUrl = `/lesson/${surah.id}?tab=practice&reviewLesson=${lessonHealth.lesson.lessonNumber}`;
+            const isComplete = progressLessons[lessonHealth.lesson.lessonId]?.completedAt != null;
 
             return (
-              <a
+              <button
                 key={lessonHealth.lesson.lessonId}
-                href={practiceUrl}
+                onClick={() => isComplete && onStartLessonReview(lessonHealth.lesson.lessonId)}
+                disabled={!isComplete}
                 className={cn(
-                  'flex items-center gap-3 rounded-xl p-3 transition-all',
+                  'flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all',
                   hasIssues ? 'bg-card hover:shadow-md' :
                   allNotLearned ? 'bg-foreground/3 opacity-60' :
                   'bg-card hover:shadow-md'
@@ -251,7 +383,7 @@ function SurahHealthCard({ surah, health }: { surah: SurahMeta; health: SurahHea
                     </p>
                   )}
                 </div>
-              </a>
+              </button>
             );
           })}
         </div>

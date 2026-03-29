@@ -19,7 +19,7 @@ interface CompletePhaseProps {
 
 export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, onPracticeAgain }: CompletePhaseProps) {
   const { completeLesson, resetLesson } = useProgressStore();
-  const { addCard, cards } = useReviewStore();
+  const { addCard, addLessonCard, cards } = useReviewStore();
   const { recordActivity, addAyahsMemorized } = useStatsStore();
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -34,8 +34,9 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
 
   useEffect(() => {
     completeLesson(lessonDef.lessonId);
-    // Add review cards for this lesson's ayahs only
+    // Add review cards for this lesson's ayahs and the lesson itself
     ayahs.forEach((a) => addCard(surah.id, a.number));
+    addLessonCard(lessonDef, surah.id);
     recordActivity();
     addAyahsMemorized(ayahs.length);
   }, [lessonDef.lessonId, surah.id, ayahs, completeLesson, addCard, recordActivity, addAyahsMemorized]);

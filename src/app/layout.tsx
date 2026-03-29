@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   description:
     "A guided Quran memorization app. Learn step by step through repitition — listen, understand, chain ayahs, test and review.",
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: "/logos/light-16.svg",
+    apple: "/logos/light-48.svg",
   },
 };
 

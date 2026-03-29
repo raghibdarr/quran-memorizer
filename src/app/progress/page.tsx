@@ -12,6 +12,7 @@ import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
+import UserButton from '@/components/auth/user-button';
 import { cn } from '@/lib/cn';
 
 export default function ProgressPage() {
@@ -83,7 +84,10 @@ export default function ProgressPage() {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-foreground">Progress</h1>
-            <SettingsPanel />
+            <div className="flex items-center gap-2">
+              <SettingsPanel />
+              <UserButton />
+            </div>
           </div>
         </div>
       </header>

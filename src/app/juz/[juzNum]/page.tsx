@@ -10,6 +10,7 @@ import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
+import UserButton from '@/components/auth/user-button';
 import PracticeContainer from '@/components/practice/practice-container';
 import PracticeSession from '@/components/practice/practice-session';
 import Button from '@/components/ui/button';
@@ -127,7 +128,10 @@ export default function JuzDetailPage() {
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <a href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</a>
-          <SettingsPanel />
+          <div className="flex items-center gap-2">
+            <SettingsPanel />
+            <UserButton />
+          </div>
         </div>
       </div>
 

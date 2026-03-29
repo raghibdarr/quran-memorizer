@@ -11,6 +11,8 @@ import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
+import UserButton from '@/components/auth/user-button';
+import Logo from '@/components/ui/logo';
 import { FlameIcon, BookIcon, CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
@@ -137,7 +139,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img src="/logo.svg" alt="Takrar" className="h-10 w-10 rounded-lg" />
+              <Logo size={48} className="h-10 w-10 rounded-lg" />
               <div>
                 <h1 className="text-2xl font-bold text-teal">Takrar</h1>
                 <p className="text-sm text-muted">Quran Memorization</p>
@@ -151,6 +153,7 @@ export default function HomePage() {
                 </div>
               )}
               <SettingsPanel />
+              <UserButton />
             </div>
           </div>
         </div>
