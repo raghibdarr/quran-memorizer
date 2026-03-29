@@ -2,7 +2,12 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import type { User } from '@supabase/supabase-js'
+import type { User, SupabaseClient } from '@supabase/supabase-js'
+
+// Helper to bypass missing DB type generation — user_data table has: user_id, store_name, data (jsonb), updated_at
+function fromUserData(supabase: SupabaseClient) {
+  return supabase.from('user_data') as any
+}
 
 type SyncStatus = 'idle' | 'syncing' | 'synced' | 'error' | 'offline'
 
@@ -286,15 +291,13 @@ export function useSync(user: User | null) {
       data: getLocalData(storeName) ?? {},
     }))
 
-    const { error } = await supabase
-      .from('user_data')
+    const { error } = await fromUserData(supabase)
       .upsert(rows, { onConflict: 'user_id,store_name' })
 
     if (error) throw error
 
     // Update timestamps after upload
-    const { data } = await supabase
-      .from('user_data')
+    const { data } = await fromUserData(supabase)
       .select('store_name, updated_at')
       .eq('user_id', user.id)
     if (data) {
@@ -310,8 +313,7 @@ export function useSync(user: User | null) {
     if (!user) return false
     const supabase = supabaseRef.current
 
-    const { data, error } = await supabase
-      .from('user_data')
+    const { data, error } = await fromUserData(supabase)
       .select('store_name, data, updated_at')
       .eq('user_id', user.id)
 
@@ -340,8 +342,7 @@ export function useSync(user: User | null) {
     const supabase = supabaseRef.current
 
     // 1. Fetch cloud data
-    const { data: cloudRows, error } = await supabase
-      .from('user_data')
+    const { data: cloudRows, error } = await fromUserData(supabase)
       .select('store_name, data, updated_at')
       .eq('user_id', user.id)
 
@@ -390,15 +391,13 @@ export function useSync(user: User | null) {
 
     // 3. Upload merged data
     if (mergedRows.length > 0) {
-      const { error: upsertError } = await supabase
-        .from('user_data')
+      const { error: upsertError } = await fromUserData(supabase)
         .upsert(mergedRows, { onConflict: 'user_id,store_name' })
       if (upsertError) throw upsertError
     }
 
     // 4. Update timestamps
-    const { data: updatedRows } = await supabase
-      .from('user_data')
+    const { data: updatedRows } = await fromUserData(supabase)
       .select('store_name, updated_at')
       .eq('user_id', user.id)
     if (updatedRows) {
@@ -413,8 +412,7 @@ export function useSync(user: User | null) {
     if (!user) return false
     const supabase = supabaseRef.current
 
-    const { count, error } = await supabase
-      .from('user_data')
+    const { count, error } = await fromUserData(supabase)
       .select('*', { count: 'exact', head: true })
       .eq('user_id', user.id)
 

@@ -20,8 +20,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       : window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.classList.toggle('dark', isDark);
 
-    // Clean up auth code from URL after OAuth redirect
-    if (window.location.search.includes('code=')) {
+    // Clean up auth code from URL after OAuth redirect (but not on the callback page — it needs the code)
+    if (window.location.search.includes('code=') && !window.location.pathname.startsWith('/auth/callback')) {
       window.history.replaceState({}, '', window.location.pathname);
     }
   }, []);
