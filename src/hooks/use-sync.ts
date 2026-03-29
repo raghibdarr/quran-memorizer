@@ -174,15 +174,24 @@ function mergeStats(
   local: Record<string, unknown>,
   cloud: Record<string, unknown>
 ): Record<string, unknown> {
+  // Pick the more recent daily activity data
+  const localDate = (local.dailyActivityDate as string) ?? '';
+  const cloudDate = (cloud.dailyActivityDate as string) ?? '';
+  const dailyActivityDate = localDate >= cloudDate ? localDate : cloudDate;
+  const dailyActivities = localDate >= cloudDate
+    ? (local.dailyActivities as number) ?? 0
+    : (cloud.dailyActivities as number) ?? 0;
+
   return {
     currentStreak: Math.max((local.currentStreak as number) ?? 0, (cloud.currentStreak as number) ?? 0),
     longestStreak: Math.max((local.longestStreak as number) ?? 0, (cloud.longestStreak as number) ?? 0),
     totalAyahsMemorized: Math.max((local.totalAyahsMemorized as number) ?? 0, (cloud.totalAyahsMemorized as number) ?? 0),
-    totalMinutesLearned: Math.max((local.totalMinutesLearned as number) ?? 0, (cloud.totalMinutesLearned as number) ?? 0),
     lastActiveDate: [local.lastActiveDate, cloud.lastActiveDate]
       .filter(Boolean)
       .sort()
       .pop() ?? null,
+    dailyActivities,
+    dailyActivityDate: dailyActivityDate || null,
     lastActivity: pickMoreRecent(
       local.lastActivity as Record<string, unknown> | null,
       cloud.lastActivity as Record<string, unknown> | null

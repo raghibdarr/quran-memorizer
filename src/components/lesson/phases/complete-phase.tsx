@@ -18,7 +18,7 @@ interface CompletePhaseProps {
 }
 
 export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, onPracticeAgain }: CompletePhaseProps) {
-  const { completeLesson, resetLesson } = useProgressStore();
+  const { completeLesson, resetLesson, getLesson } = useProgressStore();
   const { addCard, addLessonCard, cards } = useReviewStore();
   const { recordActivity, addAyahsMemorized } = useStatsStore();
 
@@ -33,13 +33,18 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
   }, [ayahs, cards, surah.id]);
 
   useEffect(() => {
+    // Only count ayahs and record activity on first completion (not replays)
+    const wasAlreadyComplete = getLesson(lessonDef.lessonId)?.completedAt != null;
+
     completeLesson(lessonDef.lessonId);
-    // Add review cards for this lesson's ayahs and the lesson itself
     ayahs.forEach((a) => addCard(surah.id, a.number));
     addLessonCard(lessonDef, surah.id);
-    recordActivity();
-    addAyahsMemorized(ayahs.length);
-  }, [lessonDef.lessonId, surah.id, ayahs, completeLesson, addCard, recordActivity, addAyahsMemorized]);
+
+    if (!wasAlreadyComplete) {
+      recordActivity();
+      addAyahsMemorized(ayahs.length);
+    }
+  }, [lessonDef.lessonId, surah.id]);
 
   const isMultiLesson = totalLessons > 1;
   const hasNextLesson = lessonDef.lessonNumber < totalLessons;

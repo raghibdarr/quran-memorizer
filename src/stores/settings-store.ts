@@ -11,7 +11,7 @@ interface SettingsState extends UserSettings {
   toggleTransliteration: () => void;
   toggleTranslation: () => void;
   setPlaybackSpeed: (speed: number) => void;
-  setDailyGoal: (minutes: number) => void;
+  setDailyGoalActivities: (count: number) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -23,7 +23,7 @@ export const useSettingsStore = create<SettingsState>()(
       transliterationEnabled: true,
       translationEnabled: false,
       playbackSpeed: 1,
-      dailyGoalMinutes: 10,
+      dailyGoalActivities: 2,
 
       setReciter: (reciter) => set({ reciter }),
       setArabicScript: (style) => set({ arabicScript: style }),
@@ -33,8 +33,18 @@ export const useSettingsStore = create<SettingsState>()(
       toggleTranslation: () =>
         set((s) => ({ translationEnabled: !s.translationEnabled })),
       setPlaybackSpeed: (speed) => set({ playbackSpeed: speed }),
-      setDailyGoal: (minutes) => set({ dailyGoalMinutes: minutes }),
+      setDailyGoalActivities: (count) => set({ dailyGoalActivities: count }),
     }),
-    { name: 'quran-settings' }
+    {
+      name: 'quran-settings',
+      version: 1,
+      migrate: (persisted: any, version: number) => {
+        if (version === 0) {
+          delete persisted.dailyGoalMinutes;
+          persisted.dailyGoalActivities = 2;
+        }
+        return persisted;
+      },
+    }
   )
 );

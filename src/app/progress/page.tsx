@@ -101,7 +101,7 @@ export default function ProgressPage() {
           </Card>
           <Card className="text-center">
             <p className="text-3xl font-bold text-gold">{stats.currentStreak}</p>
-            <p className="text-xs text-muted">Day Streak</p>
+            <p className="text-xs text-muted">{stats.currentStreak === 1 ? 'Day' : 'Day'} Streak</p>
           </Card>
           <Card className="text-center">
             <p className="text-3xl font-bold text-success">{completedLessonCount}</p>

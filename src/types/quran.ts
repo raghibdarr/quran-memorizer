@@ -130,15 +130,16 @@ export interface UserSettings {
   transliterationEnabled: boolean;
   translationEnabled: boolean;
   playbackSpeed: number;
-  dailyGoalMinutes: number;
+  dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 
 export interface UserStats {
   currentStreak: number;
   longestStreak: number;
   totalAyahsMemorized: number;
-  totalMinutesLearned: number;
   lastActiveDate: string | null;  // ISO date string
+  dailyActivities: number;        // activities completed today
+  dailyActivityDate: string | null; // ISO date for dailyActivities
 }
 
 // Practice mode types

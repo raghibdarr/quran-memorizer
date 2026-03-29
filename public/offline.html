@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Takrar — Offline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #FEFCF9;
+      color: #2C2C2A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #141414; color: #E8E6E3; }
+      .card { background: #1E1E1E; }
+    }
+    .card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 24rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; color: #1B4D5C; }
+    p { margin-top: 0.75rem; font-size: 0.875rem; opacity: 0.7; line-height: 1.5; }
+    button {
+      margin-top: 1.5rem;
+      background: #1B4D5C;
+      color: #fff;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>You're offline</h1>
+    <p>No internet connection available. Your progress is saved locally and will sync when you're back online.</p>
+    <button onclick="window.location.reload()">Try Again</button>
+  </div>
+</body>
+</html>

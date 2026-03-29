@@ -59,6 +59,8 @@ export default function SettingsPanel() {
     toggleTransliteration,
     translationEnabled,
     toggleTranslation,
+    dailyGoalActivities,
+    setDailyGoalActivities,
   } = useSettingsStore();
 
   // Initialize dark mode from localStorage or system preference
@@ -202,6 +204,30 @@ export default function SettingsPanel() {
                 <span className="text-xs text-foreground">Translation</span>
                 <Toggle enabled={translationEnabled} onToggle={toggleTranslation} />
               </label>
+            </div>
+
+            {/* Daily Goal */}
+            <div className="mt-3">
+              <p className="text-xs font-medium text-muted">Daily Goal</p>
+              <div className="mt-1.5 flex items-center gap-3">
+                <button
+                  onClick={() => setDailyGoalActivities(Math.max(1, dailyGoalActivities - 1))}
+                  disabled={dailyGoalActivities <= 1}
+                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                >
+                  −
+                </button>
+                <div className="flex-1 text-center text-xs text-muted">
+                  {dailyGoalActivities} / day
+                </div>
+                <button
+                  onClick={() => setDailyGoalActivities(Math.min(10, dailyGoalActivities + 1))}
+                  disabled={dailyGoalActivities >= 10}
+                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
         </>,

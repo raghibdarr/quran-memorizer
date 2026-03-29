@@ -28,7 +28,15 @@ export const metadata: Metadata = {
     "A guided Quran memorization app. Learn step by step through repitition — listen, understand, chain ayahs, test and review.",
   icons: {
     icon: "/logos/light-16.svg",
-    apple: "/logos/light-48.svg",
+    apple: "/icons/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Takrar",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
   },
 };
 

@@ -15,7 +15,6 @@ interface StatsState extends UserStats {
   lastActivity: LastActivity | null;
   recordActivity: () => void;
   addAyahsMemorized: (count: number) => void;
-  addMinutesLearned: (minutes: number) => void;
   setLastActivity: (activity: LastActivity) => void;
 }
 
@@ -35,14 +34,23 @@ export const useStatsStore = create<StatsState>()(
       currentStreak: 0,
       longestStreak: 0,
       totalAyahsMemorized: 0,
-      totalMinutesLearned: 0,
       lastActiveDate: null,
+      dailyActivities: 0,
+      dailyActivityDate: null,
       lastActivity: null,
 
       recordActivity: () =>
         set((state) => {
           const today = getToday();
-          if (state.lastActiveDate === today) return state;
+          const isNewDay = state.lastActiveDate !== today;
+
+          // Always increment daily activities (reset if new day)
+          const dailyActivities = isNewDay ? 1 : state.dailyActivities + 1;
+
+          // Streak only updates on first activity of the day
+          if (!isNewDay) {
+            return { dailyActivities, dailyActivityDate: today };
+          }
 
           const yesterday = getYesterday();
           const newStreak =
@@ -54,6 +62,8 @@ export const useStatsStore = create<StatsState>()(
             currentStreak: newStreak,
             longestStreak: Math.max(state.longestStreak, newStreak),
             lastActiveDate: today,
+            dailyActivities,
+            dailyActivityDate: today,
           };
         }),
 
@@ -62,13 +72,20 @@ export const useStatsStore = create<StatsState>()(
           totalAyahsMemorized: state.totalAyahsMemorized + count,
         })),
 
-      addMinutesLearned: (minutes) =>
-        set((state) => ({
-          totalMinutesLearned: state.totalMinutesLearned + minutes,
-        })),
-
       setLastActivity: (activity) => set({ lastActivity: activity }),
     }),
-    { name: 'quran-stats' }
+    {
+      name: 'quran-stats',
+      version: 1,
+      migrate: (persisted: any, version: number) => {
+        if (version === 0) {
+          // Remove old totalMinutesLearned, add new daily tracking fields
+          delete persisted.totalMinutesLearned;
+          persisted.dailyActivities = 0;
+          persisted.dailyActivityDate = null;
+        }
+        return persisted;
+      },
+    }
   )
 );

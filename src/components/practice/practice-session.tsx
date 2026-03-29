@@ -12,6 +12,7 @@ import { useReviewStore } from '@/stores/review-store';
 import { useProgressStore } from '@/stores/progress-store';
 import { usePracticeStore } from '@/stores/practice-store';
 import { useSettingsStore } from '@/stores/settings-store';
+import { useStatsStore } from '@/stores/stats-store';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import ArabicText from '@/components/ui/arabic-text';
@@ -101,6 +102,7 @@ export default function PracticeSession({
   const { startLesson, completeLesson } = useProgressStore();
   const progressLessons = useProgressStore((s) => s.lessons);
   const { addSession } = usePracticeStore();
+  const recordActivity = useStatsStore((s) => s.recordActivity);
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
   const translationEnabled = useSettingsStore((s) => s.translationEnabled);
 
@@ -256,6 +258,7 @@ export default function PracticeSession({
       overallRating: null,
     };
     addSession(session);
+    recordActivity();
     setResults(finalResults);
     setStep('results');
   };

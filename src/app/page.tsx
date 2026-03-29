@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
+import { useSettingsStore } from '@/stores/settings-store';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
@@ -63,8 +64,21 @@ export default function HomePage() {
   useEffect(() => { localStorage.setItem('home-tab', tab); }, [tab]);
   const progressLessons = useProgressStore((s) => s.lessons);
   const cards = useReviewStore((s) => s.cards);
+  const lessonCards = useReviewStore((s) => s.lessonCards);
   const stats = useStatsStore();
   const lastActivity = useStatsStore((s) => s.lastActivity);
+  const dailyGoalActivities = useSettingsStore((s) => s.dailyGoalActivities);
+
+  // Compute today's activity count
+  const today = new Date().toISOString().split('T')[0];
+  const todayActivities = stats.dailyActivityDate === today ? stats.dailyActivities : 0;
+  const dailyProgress = Math.min((todayActivities / dailyGoalActivities) * 100, 100);
+
+  // Due reviews count
+  const dueReviewCount = useMemo(() => {
+    const now = Date.now();
+    return lessonCards.filter((c) => c.nextReview <= now).length;
+  }, [lessonCards]);
 
   useEffect(() => {
     getSurahIndex().then(setAllSurahs);
@@ -127,11 +141,20 @@ export default function HomePage() {
     ? allSurahs.find((s) => s.id === activeProgress.surahId)
     : null;
 
-  // Count completed surahs
-  const completedSurahCount = allSurahs.filter((s) => {
-    const lessons = getLessons(s);
-    return lessons.length > 0 && lessons.every((l) => progressLessons[l.lessonId]?.completedAt != null);
-  }).length;
+  // Count completed lessons and surahs
+  const { completedLessonCount, totalLessonCount, completedSurahCount } = useMemo(() => {
+    let completed = 0;
+    let total = 0;
+    let surahsDone = 0;
+    for (const s of allSurahs) {
+      const lessons = getLessons(s);
+      total += lessons.length;
+      const done = lessons.filter((l) => progressLessons[l.lessonId]?.completedAt != null).length;
+      completed += done;
+      if (done === lessons.length && lessons.length > 0) surahsDone++;
+    }
+    return { completedLessonCount: completed, totalLessonCount: total, completedSurahCount: surahsDone };
+  }, [allSurahs, progressLessons, juzSegmentsBySurah]);
 
   return (
     <div className="min-h-screen bg-cream pb-20">
@@ -150,6 +173,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5">
                   <FlameIcon size={14} className="text-gold" />
                   <span className="text-sm font-bold text-gold">{stats.currentStreak}</span>
+                  <span className="text-[10px] text-gold/70">day{stats.currentStreak !== 1 ? 's' : ''}</span>
                 </div>
               )}
               <SettingsPanel />
@@ -186,17 +210,32 @@ export default function HomePage() {
         ) : null}
 
         <div className="grid grid-cols-3 gap-3">
-          <Card className="text-center">
-            <p className="text-xl font-bold text-teal">{stats.totalAyahsMemorized}</p>
-            <p className="text-xs text-muted">Ayahs</p>
+          <Card className="flex flex-col items-center justify-center py-3">
+            <div className="relative h-10 w-10">
+              <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-foreground/10" />
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="2.5"
+                  strokeDasharray={`${dailyProgress} 100`}
+                  strokeLinecap="round" className={todayActivities >= dailyGoalActivities ? 'text-success' : 'text-teal'} />
+              </svg>
+              <span className={cn(
+                'absolute inset-0 flex items-center justify-center text-[11px] font-bold',
+                todayActivities >= dailyGoalActivities ? 'text-success' : 'text-teal'
+              )}>
+                {todayActivities}/{dailyGoalActivities}
+              </span>
+            </div>
+            <p className="mt-1.5 text-xs text-muted">Today</p>
           </Card>
-          <Card className="text-center">
-            <p className="text-xl font-bold text-gold">{stats.currentStreak}</p>
-            <p className="text-xs text-muted">Day Streak</p>
-          </Card>
-          <Card className="text-center">
-            <p className="text-xl font-bold text-success">{completedSurahCount}</p>
-            <p className="text-xs text-muted">Surahs</p>
+          <a href="/review" className="block">
+            <Card className="flex h-full flex-col items-center justify-center py-3">
+              <p className="text-xl font-bold text-gold">{dueReviewCount}</p>
+              <p className="mt-1 text-xs text-muted">Due Reviews</p>
+            </Card>
+          </a>
+          <Card className="flex flex-col items-center justify-center py-3">
+            <p className="text-xl font-bold text-teal">{completedLessonCount}<span className="text-sm font-normal text-muted">/{totalLessonCount}</span></p>
+            <p className="mt-1 text-xs text-muted">Lessons</p>
           </Card>
         </div>
 

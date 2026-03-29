@@ -24,6 +24,17 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     if (window.location.search.includes('code=') && !window.location.pathname.startsWith('/auth/callback')) {
       window.history.replaceState({}, '', window.location.pathname);
     }
+
+    // Register service worker (production only); unregister on localhost
+    if ('serviceWorker' in navigator) {
+      if (window.location.hostname === 'localhost') {
+        navigator.serviceWorker.getRegistrations().then((regs) =>
+          regs.forEach((r) => r.unregister())
+        );
+      } else {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+    }
   }, []);
 
   // Migration: create lesson review cards for already-completed lessons (runs once)
