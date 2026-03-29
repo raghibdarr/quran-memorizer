@@ -15,6 +15,7 @@ import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import Logo from '@/components/ui/logo';
 import { FlameIcon, BookIcon, CheckIcon } from '@/components/ui/icons';
+import InstallBanner from '@/components/ui/install-banner';
 import { cn } from '@/lib/cn';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
@@ -184,6 +185,8 @@ export default function HomePage() {
       </header>
 
       <main className="mx-auto max-w-2xl space-y-3 px-4 py-4">
+        <InstallBanner />
+
         {/* Continue card — based on last activity */}
         {lastActivity ? (
           <a href={lastActivity.url} className="block">
