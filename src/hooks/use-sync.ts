@@ -182,6 +182,14 @@ function mergeStats(
     ? (local.dailyActivities as number) ?? 0
     : (cloud.dailyActivities as number) ?? 0;
 
+  // Merge activity logs: take max per date
+  const localLog = (local.activityLog as Record<string, number>) ?? {};
+  const cloudLog = (cloud.activityLog as Record<string, number>) ?? {};
+  const mergedLog: Record<string, number> = { ...localLog };
+  for (const [date, count] of Object.entries(cloudLog)) {
+    mergedLog[date] = Math.max(mergedLog[date] ?? 0, count);
+  }
+
   return {
     currentStreak: Math.max((local.currentStreak as number) ?? 0, (cloud.currentStreak as number) ?? 0),
     longestStreak: Math.max((local.longestStreak as number) ?? 0, (cloud.longestStreak as number) ?? 0),
@@ -192,6 +200,7 @@ function mergeStats(
       .pop() ?? null,
     dailyActivities,
     dailyActivityDate: dailyActivityDate || null,
+    activityLog: mergedLog,
     lastActivity: pickMoreRecent(
       local.lastActivity as Record<string, unknown> | null,
       cloud.lastActivity as Record<string, unknown> | null

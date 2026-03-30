@@ -218,7 +218,7 @@ export default function SettingsPanel() {
                   −
                 </button>
                 <div className="flex-1 text-center text-xs text-muted">
-                  {dailyGoalActivities} / day
+                  <span className="mr-1 font-semibold text-teal">{dailyGoalActivities}</span>{dailyGoalActivities === 1 ? 'lesson, review or practice' : 'lessons, reviews or practices'} / day
                 </div>
                 <button
                   onClick={() => setDailyGoalActivities(Math.min(10, dailyGoalActivities + 1))}

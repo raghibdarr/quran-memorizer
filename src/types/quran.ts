@@ -140,6 +140,7 @@ export interface UserStats {
   lastActiveDate: string | null;  // ISO date string
   dailyActivities: number;        // activities completed today
   dailyActivityDate: string | null; // ISO date for dailyActivities
+  activityLog: Record<string, number>; // ISO date → activity count (for heatmap)
 }
 
 // Practice mode types

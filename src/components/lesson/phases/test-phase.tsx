@@ -127,7 +127,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
 
                   <p className="mt-1 text-sm text-muted">
                     {isFlawless ? 'No mistakes — well done!'
-                      : isFail && !isLevel3 ? 'Go back and practice the ayahs you struggled with, then try again.'
+                      : isFail && !isLevel3 ? 'Go back and review the ayahs you struggled with, then try again.'
                       : resultScreen.mistakes.length > 0 ? `${resultScreen.mistakes.length} ayah${resultScreen.mistakes.length !== 1 ? 's' : ''} flagged for review.`
                       : 'Great job!'}
                   </p>
@@ -139,7 +139,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
           {/* Show mistakes */}
           {resultScreen.mistakes.length > 0 && (
             <div className="space-y-2">
-              <p className="text-xs font-medium text-muted">Needs practice:</p>
+              <p className="text-xs font-medium text-muted">Needs work:</p>
               {resultScreen.mistakes.map((idx) => (
                 <div key={idx} className="rounded-xl bg-gold/5 border border-gold/10 p-3">
                   <AyahDisplay ayah={ayahs[idx]} />
@@ -154,7 +154,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
             </Button>
           ) : (
             <Button onClick={onRetry} className="w-full">
-              Review & Practice
+              Review & Retry
             </Button>
           )}
         </div>

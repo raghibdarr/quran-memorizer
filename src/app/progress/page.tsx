@@ -4,33 +4,32 @@ import { useEffect, useState, useMemo } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useReviewStore } from '@/stores/review-store';
-import { usePracticeStore } from '@/stores/practice-store';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
-import type { SurahMeta, JuzMeta, LessonDef } from '@/types/quran';
+import type { SurahMeta, JuzMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
-import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
+import CalendarHeatmap from '@/components/progress/calendar-heatmap';
+import TimelineChart from '@/components/progress/timeline-chart';
 import { cn } from '@/lib/cn';
+
+type ProgressTab = 'calendar' | 'timeline';
 
 export default function ProgressPage() {
   const [surahs, setSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
+  const [tab, setTab] = useState<ProgressTab>('calendar');
   const progressLessons = useProgressStore((s) => s.lessons);
   const stats = useStatsStore();
-  const cards = useReviewStore((s) => s.cards);
-  const practiceSessions = usePracticeStore((s) => s.sessions);
+  const lessonCards = useReviewStore((s) => s.lessonCards);
 
   useEffect(() => {
-    getSurahIndex().then((data) => {
-      setSurahs([...data].sort((a, b) => a.id - b.id));
-    });
+    getSurahIndex().then((data) => setSurahs([...data].sort((a, b) => a.id - b.id)));
     getJuzIndex().then(setJuzIndex);
   }, []);
 
-  // Build juz segments lookup
   const juzSegmentsBySurah = useMemo(() => {
     const map = new Map<number, Array<{ juzNumber: number; ayahStart: number; ayahEnd: number }>>();
     for (const juz of juzIndex) {
@@ -42,41 +41,43 @@ export default function ProgressPage() {
     return map;
   }, [juzIndex]);
 
-  const getLessons = (surah: SurahMeta) => {
-    const segs = juzSegmentsBySurah.get(surah.id) ?? [];
-    return generateLessonsWithJuzBoundaries(surah.id, surah.versesCount, segs);
-  };
-
   const completedLessonCount = Object.values(progressLessons).filter((l) => l.completedAt).length;
 
-  // Surahs with any activity (started lessons or review cards)
-  const surahsWithActivity = useMemo(() => {
-    const activeSurahIds = new Set<number>();
-    // From lesson progress
-    for (const lesson of Object.values(progressLessons)) {
-      activeSurahIds.add(lesson.surahId);
-    }
-    // From review cards
-    for (const card of cards) {
-      activeSurahIds.add(card.surahId);
-    }
-    return surahs.filter((s) => activeSurahIds.has(s.id));
-  }, [surahs, progressLessons, cards]);
+  const totalReviews = useMemo(() => {
+    return lessonCards.filter((c) => c.repetitions > 0).length;
+  }, [lessonCards]);
 
-  // Count surahs needing attention (have weak/shaky ayahs)
-  const surahsNeedingAttention = useMemo(() => {
-    const weakCards = cards.filter((c) => c.lastQuality < 4);
-    const surahIds = new Set(weakCards.map((c) => c.surahId));
-    return surahIds.size;
-  }, [cards]);
+  const surahsStarted = useMemo(() => {
+    const ids = new Set<number>();
+    for (const lesson of Object.values(progressLessons)) ids.add(lesson.surahId);
+    return ids.size;
+  }, [progressLessons]);
 
-  // Count fully completed surahs
   const completedSurahCount = useMemo(() => {
-    return surahsWithActivity.filter((s) => {
-      const lessons = getLessons(s);
-      return lessons.length > 0 && lessons.every((l) => progressLessons[l.lessonId]?.completedAt != null);
-    }).length;
-  }, [surahsWithActivity, progressLessons, juzSegmentsBySurah]);
+    let count = 0;
+    for (const s of surahs) {
+      const segs = juzSegmentsBySurah.get(s.id) ?? [];
+      const lessons = generateLessonsWithJuzBoundaries(s.id, s.versesCount, segs);
+      if (lessons.length > 0 && lessons.every((l) => progressLessons[l.lessonId]?.completedAt != null)) {
+        count++;
+      }
+    }
+    return count;
+  }, [surahs, progressLessons, juzSegmentsBySurah]);
+
+  // Enrich activityLog with backfilled data from lesson completedAt timestamps
+  const enrichedActivityLog = useMemo(() => {
+    const log: Record<string, number> = { ...stats.activityLog };
+    for (const lesson of Object.values(progressLessons)) {
+      if (lesson.completedAt) {
+        const date = new Date(lesson.completedAt).toISOString().split('T')[0];
+        log[date] = Math.max(log[date] ?? 0, 1);
+      }
+    }
+    return log;
+  }, [stats.activityLog, progressLessons]);
+
+  const hasActivity = Object.keys(progressLessons).length > 0;
 
   return (
     <div className="min-h-screen bg-cream pb-20">
@@ -101,90 +102,65 @@ export default function ProgressPage() {
           </Card>
           <Card className="text-center">
             <p className="text-3xl font-bold text-gold">{stats.currentStreak}</p>
-            <p className="text-xs text-muted">{stats.currentStreak === 1 ? 'Day' : 'Day'} Streak</p>
+            <p className="text-xs text-muted">Day Streak</p>
+            {stats.longestStreak > 1 && (
+              <p className="mt-0.5 text-[10px] text-muted/60">Best: {stats.longestStreak} days</p>
+            )}
           </Card>
           <Card className="text-center">
             <p className="text-3xl font-bold text-success">{completedLessonCount}</p>
             <p className="text-xs text-muted">Lessons Done</p>
           </Card>
           <Card className="text-center">
-            <p className="text-3xl font-bold text-foreground">{practiceSessions.length}</p>
-            <p className="text-xs text-muted">Practice Sessions</p>
+            <p className="text-3xl font-bold text-foreground">{totalReviews}</p>
+            <p className="text-xs text-muted">Reviews Done</p>
           </Card>
         </div>
 
-        {/* Summary row */}
+        {/* Summary */}
         <Card className="flex items-center justify-between">
           <div>
             <p className="text-sm text-muted">Surahs started</p>
-            <p className="text-lg font-bold text-foreground">{surahsWithActivity.length}</p>
+            <p className="text-lg font-bold text-foreground">{surahsStarted}</p>
           </div>
           <div className="text-right">
             <p className="text-sm text-muted">Completed</p>
             <p className="text-lg font-bold text-success">{completedSurahCount}</p>
           </div>
-          {surahsNeedingAttention > 0 && (
-            <div className="text-right">
-              <p className="text-sm text-muted">Need review</p>
-              <a href="/review" className="text-lg font-bold text-red-400">{surahsNeedingAttention}</a>
-            </div>
-          )}
         </Card>
 
-        {stats.longestStreak > 1 && (
+        {/* Tabs */}
+        <div className="flex gap-1 rounded-xl bg-foreground/10 p-1">
+          {([['calendar', 'Calendar'], ['timeline', 'Timeline']] as const).map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setTab(key)}
+              className={cn(
+                'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+                tab === key
+                  ? 'bg-teal text-white shadow-sm'
+                  : 'text-muted hover:text-foreground'
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab content */}
+        {tab === 'calendar' && (
           <Card>
-            <p className="text-sm text-muted">Longest streak</p>
-            <p className="text-lg font-bold text-gold">
-              {stats.longestStreak} day{stats.longestStreak !== 1 ? 's' : ''}
-            </p>
+            <CalendarHeatmap activityLog={enrichedActivityLog} />
           </Card>
         )}
 
-        {/* Surah progress — only surahs with activity */}
-        {surahsWithActivity.length > 0 && (
-          <div>
-            <h2 className="mb-3 text-lg font-bold text-foreground">Surah Progress</h2>
-            <div className="space-y-2">
-              {surahsWithActivity.map((surah) => {
-                const lessons = getLessons(surah);
-                const completed = lessons.filter(
-                  (l) => progressLessons[l.lessonId]?.completedAt != null
-                ).length;
-                const started = lessons.filter(
-                  (l) => progressLessons[l.lessonId] != null
-                ).length;
-                const isComplete = completed === lessons.length && lessons.length > 0;
-                const progress = lessons.length > 0 ? (completed / lessons.length) * 100 : 0;
-
-                return (
-                  <a key={surah.id} href={`/lesson/${surah.id}`} className="block">
-                    <Card className={cn(
-                      'flex items-center gap-3 transition-all hover:shadow-md',
-                      isComplete && 'border border-success/20 bg-success/5'
-                    )}>
-                      <span className="arabic-text text-lg">{surah.nameArabic}</span>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-semibold">{surah.nameSimple}</p>
-                          <span className="text-xs text-muted">
-                            {completed}/{lessons.length} lessons
-                          </span>
-                        </div>
-                        <ProgressBar
-                          value={progress}
-                          color={isComplete ? 'bg-success' : 'bg-teal'}
-                          className="mt-1"
-                        />
-                      </div>
-                    </Card>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
+        {tab === 'timeline' && (
+          <Card>
+            <TimelineChart lessons={progressLessons} />
+          </Card>
         )}
 
-        {surahsWithActivity.length === 0 && (
+        {!hasActivity && (
           <div className="py-12 text-center">
             <p className="text-lg text-muted">No progress yet</p>
             <p className="mt-1 text-sm text-muted">Start a lesson to track your progress</p>

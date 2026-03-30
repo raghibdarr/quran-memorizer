@@ -81,7 +81,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
 
       {weakAyahs.length > 0 ? (
         <div className="w-full rounded-xl bg-gold/5 border border-gold/20 p-4">
-          <p className="text-sm font-medium text-gold">Some ayahs need practice</p>
+          <p className="text-sm font-medium text-gold">Some ayahs need review</p>
           <p className="mt-1 text-xs text-muted">
             {weakAyahs.map((a) => `Ayah ${a.number}`).join(', ')} — flagged in your{' '}
             <a href="/review" className="text-teal underline">Review</a> for follow-up.
@@ -116,7 +116,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           onClick={onPracticeAgain}
           className="w-full rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
         >
-          Practice Again (Build & Test)
+          Revise This Lesson
         </button>
         <button
           onClick={() => setShowResetConfirm(true)}

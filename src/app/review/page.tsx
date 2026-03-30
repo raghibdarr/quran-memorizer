@@ -174,7 +174,7 @@ export default function ReviewPage() {
         <div className="mx-auto max-w-2xl space-y-4">
           {/* Due review banner */}
           {dueCount > 0 && (
-            <button onClick={startReview} className="w-full">
+            <button onClick={startReview} className="w-full text-left">
               <Card className="border-2 border-teal/30 bg-teal/5">
                 <div className="flex items-center justify-between">
                   <div>

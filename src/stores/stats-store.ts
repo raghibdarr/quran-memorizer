@@ -37,6 +37,7 @@ export const useStatsStore = create<StatsState>()(
       lastActiveDate: null,
       dailyActivities: 0,
       dailyActivityDate: null,
+      activityLog: {},
       lastActivity: null,
 
       recordActivity: () =>
@@ -47,9 +48,13 @@ export const useStatsStore = create<StatsState>()(
           // Always increment daily activities (reset if new day)
           const dailyActivities = isNewDay ? 1 : state.dailyActivities + 1;
 
+          // Update activity log for heatmap
+          const activityLog = { ...state.activityLog };
+          activityLog[today] = (activityLog[today] ?? 0) + 1;
+
           // Streak only updates on first activity of the day
           if (!isNewDay) {
-            return { dailyActivities, dailyActivityDate: today };
+            return { dailyActivities, dailyActivityDate: today, activityLog };
           }
 
           const yesterday = getYesterday();
@@ -64,6 +69,7 @@ export const useStatsStore = create<StatsState>()(
             lastActiveDate: today,
             dailyActivities,
             dailyActivityDate: today,
+            activityLog,
           };
         }),
 
@@ -76,13 +82,20 @@ export const useStatsStore = create<StatsState>()(
     }),
     {
       name: 'quran-stats',
-      version: 1,
+      version: 2,
       migrate: (persisted: any, version: number) => {
         if (version === 0) {
-          // Remove old totalMinutesLearned, add new daily tracking fields
           delete persisted.totalMinutesLearned;
           persisted.dailyActivities = 0;
           persisted.dailyActivityDate = null;
+          persisted.activityLog = {};
+        }
+        if (version <= 1) {
+          persisted.activityLog = {};
+          // Seed from existing dailyActivities if present
+          if (persisted.dailyActivityDate && persisted.dailyActivities > 0) {
+            persisted.activityLog[persisted.dailyActivityDate] = persisted.dailyActivities;
+          }
         }
         return persisted;
       },

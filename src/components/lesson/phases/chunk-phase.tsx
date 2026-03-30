@@ -94,6 +94,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     (savedChunk?.learnStep as LearnStep) ?? 'listen-with-text'
   );
   const [repCount, setRepCount] = useState(savedChunk?.repCount ?? 0);
+  const [showExplainer, setShowExplainer] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return !localStorage.getItem('chunk-explainer-seen');
+  });
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isPlayingOnce, setIsPlayingOnce] = useState(false);
   const [completedAyahs, setCompletedAyahs] = useState<Set<number>>(() => {
@@ -531,7 +535,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             <p className="text-center text-sm text-muted">Could you recite these together smoothly?</p>
             <div className="flex gap-3">
               <Button onClick={resetChain} variant="secondary" className="flex-1">
-                Need More Practice
+                Try Again
               </Button>
               <Button onClick={moveToNextAyah} className="flex-1">
                 Got It — Next Ayah
@@ -716,7 +720,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           <>
             {/* Practice specific ayahs */}
             <div className="rounded-xl bg-foreground/[0.03] p-4">
-              <p className="text-xs font-medium text-muted mb-2">Need to practice a specific ayah?</p>
+              <p className="text-xs font-medium text-muted mb-2">Need to work on a specific ayah?</p>
               <div className="flex flex-wrap gap-2">
                 {ayahs.map((ayah, i) => (
                   <button
@@ -740,7 +744,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             <p className="text-center text-sm text-muted">Could you recite them all smoothly?</p>
             <div className="flex gap-3">
               <Button onClick={resetFinalChain} variant="secondary" className="flex-1">
-                Need More Practice
+                Try Again
               </Button>
               <Button
                 onClick={() => { markChunkComplete(lessonId); onComplete(); }}
@@ -772,7 +776,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
       {practiceReturnStage && (
         <div className="rounded-xl bg-foreground/[0.03] border border-foreground/10 p-3">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-muted">Practicing Ayah {currentAyah?.number}</p>
+            <p className="text-xs font-medium text-muted">Revising Ayah {currentAyah?.number}</p>
             <button
               onClick={() => {
                 const returnTo = practiceReturnStage;
@@ -921,7 +925,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             <p className="mt-2 text-sm text-muted">
               {repCount < currentStepReps
                 ? `${currentStepReps - repCount} repetitions remaining`
-                : 'Done! Move to next step.'}
+                : `${repCount} completed`}
             </p>
           </div>
 
@@ -935,20 +939,18 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               <>
                 <button
                   onClick={playOnce}
-                  disabled={repCount >= currentStepReps || isPlayingOnce}
+                  disabled={isPlayingOnce}
                   className="flex h-14 w-14 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105 disabled:opacity-40"
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6V4z" /></svg>
                 </button>
-                {repCount < currentStepReps && (
-                  <button
-                    onClick={startAutoPlay}
-                    className="flex h-14 items-center gap-2 rounded-full bg-gold text-white px-5 shadow-lg transition-transform hover:scale-105"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4h10l-3-3 1-1 5 5-5 5-1-1 3-3H2V4zm12 8H4l3 3-1 1-5-5 5-5 1 1-3 3h10v2z" /></svg>
-                    <span className="text-sm font-semibold">Auto</span>
-                  </button>
-                )}
+                <button
+                  onClick={startAutoPlay}
+                  className="flex h-14 items-center gap-2 rounded-full bg-gold text-white px-5 shadow-lg transition-transform hover:scale-105"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4h10l-3-3 1-1 5 5-5 5-1-1 3-3H2V4zm12 8H4l3 3-1 1-5-5 5-5 1 1-3 3h10v2z" /></svg>
+                  <span className="text-sm font-semibold">Auto</span>
+                </button>
               </>
             )}
 
@@ -1001,21 +1003,27 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             </div>
 
             {done && !memoryRevealed ? (
-              /* All reps completed — advance */
+              /* All reps completed — advance or keep going */
               <div className="space-y-4 text-center">
                 <div className="rounded-2xl bg-success/5 p-6">
                   <p className="text-lg font-semibold text-success">
                     {learnStep === 'final-memory' ? 'Memory locked in!' : 'Looking good!'}
                   </p>
                   <p className="mt-1 text-sm text-muted">
-                    {learnStep === 'final-memory'
-                      ? 'Time for a word challenge to confirm'
-                      : 'Let\'s reinforce with the text one more time'}
+                    {repCount} completed — {learnStep === 'final-memory'
+                      ? 'ready for a word challenge'
+                      : 'ready for the next step'}
                   </p>
                 </div>
                 <Button onClick={advanceLearnStep} className="w-full">
                   {learnStep === 'final-memory' ? 'Word Challenge' : 'Next Step'}
                 </Button>
+                <button
+                  onClick={() => setMemoryRevealed(false)}
+                  className="w-full rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                >
+                  Keep Reciting
+                </button>
               </div>
             ) : !memoryRevealed ? (
               /* Recall prompt */
@@ -1124,6 +1132,42 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           {orderResult === 'wrong' && (
             <p className="text-center text-sm text-red-500">Not quite — try again!</p>
           )}
+        </div>
+      )}
+      {/* One-time explainer overlay */}
+      {showExplainer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="mx-4 w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
+            <h3 className="text-xl font-bold text-foreground">Build Your Memory</h3>
+            <p className="mt-2 text-sm text-muted leading-relaxed">
+              Each ayah goes through 4 steps to build deep memorization:
+            </p>
+            <div className="mt-5 space-y-4">
+              {[
+                { step: '1', label: 'Listen with text', desc: 'Hear the recitation while reading along' },
+                { step: '2', label: 'Recite from memory', desc: 'Try to recite without looking' },
+                { step: '3', label: 'Reinforce with text', desc: 'Listen again to strengthen recall' },
+                { step: '4', label: 'Final recall', desc: 'Recite from memory one last time' },
+              ].map((s) => (
+                <div key={s.step} className="flex items-start gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal/10 text-sm font-bold text-teal">{s.step}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{s.label}</p>
+                    <p className="mt-0.5 text-sm text-muted">{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-sm text-muted leading-relaxed">
+              After each ayah, you'll chain them together to build full passages.
+            </p>
+            <button
+              onClick={() => { localStorage.setItem('chunk-explainer-seen', 'true'); setShowExplainer(false); }}
+              className="mt-5 w-full rounded-xl bg-teal py-3 text-sm font-semibold text-white"
+            >
+              Got It
+            </button>
+          </div>
         </div>
       )}
     </div>

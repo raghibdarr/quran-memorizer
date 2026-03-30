@@ -16,6 +16,7 @@ import UserButton from '@/components/auth/user-button';
 import Logo from '@/components/ui/logo';
 import { FlameIcon, BookIcon, CheckIcon } from '@/components/ui/icons';
 import InstallBanner from '@/components/ui/install-banner';
+import OnboardingOverlay from '@/components/ui/onboarding-overlay';
 import { cn } from '@/lib/cn';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
@@ -473,6 +474,7 @@ export default function HomePage() {
       </main>
 
       <BottomNav />
+      <OnboardingOverlay />
     </div>
   );
 }
