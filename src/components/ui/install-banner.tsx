@@ -7,10 +7,27 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
 }
 
+// Capture the event globally before React hydrates — it only fires once
+let _deferredPrompt: BeforeInstallPromptEvent | null = null;
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    _deferredPrompt = e as BeforeInstallPromptEvent;
+  });
+}
+
+function isIOSSafari(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isStandalone = (window.navigator as any).standalone === true;
+  return isIOS && !isStandalone;
+}
+
 export default function InstallBanner() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showIOSPrompt, setShowIOSPrompt] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(true); // default true to avoid flash
 
   useEffect(() => {
     // Don't show if already installed as standalone
@@ -19,17 +36,23 @@ export default function InstallBanner() {
     // Don't show if previously dismissed
     if (localStorage.getItem('pwa-banner-dismissed')) return;
 
-    // Android/Chrome: capture the beforeinstallprompt event
+    setDismissed(false);
+
+    // Check if we already captured the event before React mounted
+    if (_deferredPrompt) {
+      setDeferredPrompt(_deferredPrompt);
+    }
+
+    // Also listen for future events (in case it hasn't fired yet)
     const handler = (e: Event) => {
       e.preventDefault();
+      _deferredPrompt = e as BeforeInstallPromptEvent;
       setDeferredPrompt(e as BeforeInstallPromptEvent);
     };
     window.addEventListener('beforeinstallprompt', handler);
 
-    // iOS: detect Safari on iOS (no beforeinstallprompt support)
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-    if (isIOS && isSafari) {
+    // iOS Safari detection
+    if (isIOSSafari()) {
       setShowIOSPrompt(true);
     }
 
@@ -42,6 +65,7 @@ export default function InstallBanner() {
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === 'accepted') {
       setDeferredPrompt(null);
+      _deferredPrompt = null;
     }
   };
 
@@ -49,6 +73,7 @@ export default function InstallBanner() {
     setDismissed(true);
     setDeferredPrompt(null);
     setShowIOSPrompt(false);
+    _deferredPrompt = null;
     localStorage.setItem('pwa-banner-dismissed', '1');
   };
 
