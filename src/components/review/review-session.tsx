@@ -47,6 +47,7 @@ function formatNextReview(timestamp: number): string {
 export default function ReviewSession({ dueCards, onComplete }: ReviewSessionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [hiddenAyahs, setHiddenAyahs] = useState<Set<number>>(new Set());
   const [ayahRatings, setAyahRatings] = useState<Record<number, AyahRating>>({});
   const [submitted, setSubmitted] = useState(false);
   const [lessonData, setLessonData] = useState<LessonData | null>(null);
@@ -245,22 +246,23 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
         <div className="space-y-5">
           <div className="rounded-2xl bg-card p-6 text-center shadow-sm">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal/10">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-teal">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                <line x1="12" y1="19" x2="12" y2="23" />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-teal">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
             </div>
             <p className="text-sm font-medium text-foreground">
               Recite this passage from memory
             </p>
             <p className="mt-1 text-xs text-muted">
-              Try to recall the full passage, then tap to reveal and rate each ayah
+              Try to recall the full passage, then rate how well you remembered each ayah
             </p>
           </div>
 
-          <Button onClick={() => setRevealed(true)} className="w-full">
-            Reveal Text
+          <Button onClick={() => {
+            setRevealed(true);
+            setHiddenAyahs(new Set(lessonData.ayahs.map((a) => a.number)));
+          }} className="w-full">
+            I've Recited — Rate My Recall
           </Button>
         </div>
       )}
@@ -268,10 +270,27 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
       {/* Revealed — ayah cards with play + rating */}
       {revealed && (
         <div className="space-y-3">
+          {/* Hide All / Show All toggle */}
+          {!submitted && (
+            <button
+              onClick={() => {
+                if (hiddenAyahs.size === 0) {
+                  setHiddenAyahs(new Set(lessonData.ayahs.map((a) => a.number)));
+                } else {
+                  setHiddenAyahs(new Set());
+                }
+              }}
+              className="w-full rounded-lg bg-foreground/5 py-2 text-xs font-medium text-muted hover:bg-foreground/10"
+            >
+              {hiddenAyahs.size === 0 ? 'Hide All' : 'Show All'}
+            </button>
+          )}
+
           {/* Ayah cards — tappable to play, with visualizer and rating */}
           {lessonData.ayahs.map((ayah, i) => {
             const isActive = i === currentAyahIndex;
             const rating = ayahRatings[ayah.number];
+            const isHidden = hiddenAyahs.has(ayah.number);
 
             return (
               <div
@@ -307,7 +326,34 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
                   )}
                 </button>
 
-                <AyahDisplay ayah={ayah} />
+                {/* Eye toggle — hide/reveal */}
+                {!submitted && (
+                  <button
+                    onClick={() => setHiddenAyahs((prev) => {
+                      const next = new Set(prev);
+                      if (next.has(ayah.number)) next.delete(ayah.number);
+                      else next.add(ayah.number);
+                      return next;
+                    })}
+                    className="absolute top-3 right-3 text-muted/40 hover:text-muted"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {isHidden ? (
+                        <><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94" /><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19" /><line x1="1" y1="1" x2="23" y2="23" /></>
+                      ) : (
+                        <><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></>
+                      )}
+                    </svg>
+                  </button>
+                )}
+
+                {isHidden && !submitted ? (
+                  <div className="py-4 text-center">
+                    <p className="text-sm text-muted">Hidden — tap eye to reveal</p>
+                  </div>
+                ) : (
+                  <AyahDisplay ayah={ayah} />
+                )}
 
                 {/* Per-ayah rating buttons */}
                 {!submitted && (

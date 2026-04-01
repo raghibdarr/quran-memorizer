@@ -12,7 +12,7 @@ export default function Card({ children, className, onClick }: CardProps) {
       className={cn(
         'rounded-2xl bg-card p-5 shadow-sm transition-all',
         onClick && 'cursor-pointer',
-        'hover:shadow-md hover:brightness-[0.98] dark:hover:brightness-110',
+        'hover:shadow-md hover:bg-foreground/[0.02] dark:hover:brightness-110',
         className
       )}
       onClick={onClick}

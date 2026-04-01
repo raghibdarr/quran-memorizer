@@ -38,10 +38,16 @@ const RATING_QUALITY: Record<PracticeAyahRating, number> = {
   'missed': 1,
 };
 
-const RATING_COLORS: Record<PracticeAyahRating, string> = {
-  'got-it': 'text-success bg-success/10',
-  'hesitated': 'text-gold bg-gold/10',
-  'missed': 'text-red-500 bg-red-500/10',
+const RATING_COLORS_SELECTED: Record<PracticeAyahRating, string> = {
+  'got-it': 'bg-success text-white',
+  'hesitated': 'bg-gold text-white',
+  'missed': 'bg-red-500 text-white',
+};
+
+const RATING_COLORS_UNSELECTED: Record<PracticeAyahRating, string> = {
+  'got-it': 'bg-success/10 text-success hover:bg-success/20',
+  'hesitated': 'bg-gold/10 text-gold hover:bg-gold/20',
+  'missed': 'bg-red-400/10 text-red-400 hover:bg-red-400/20',
 };
 
 const RATING_LABELS: Record<PracticeAyahRating, string> = {
@@ -98,7 +104,7 @@ export default function PracticeSession({
   const whisper = useWhisper();
   const audio = useAudio();
   const getAudioUrl = useReciterAudioUrl();
-  const { reviewCard, cards: reviewCards } = useReviewStore();
+  const { reviewCard, cards: reviewCards, addLessonCard, lessonCards } = useReviewStore();
   const { startLesson, completeLesson } = useProgressStore();
   const progressLessons = useProgressStore((s) => s.lessons);
   const { addSession } = usePracticeStore();
@@ -234,18 +240,37 @@ export default function PracticeSession({
         updatedQualities.set(`${result.surahId}:${result.ayahNumber}`, RATING_QUALITY[result.rating]);
       }
 
-      // Check each lesson: if all its ayahs are strong (quality >= 4), auto-complete
+      // For each lesson whose ayahs were practiced:
+      // 1. Ensure a lesson review card exists (so it enters the review cycle)
+      // 2. Auto-complete if all ayahs are strong
+      const practicedSurahAyahs = new Set(finalResults.map((r) => `${r.surahId}:${r.ayahNumber}`));
       for (const lesson of allLessonDefs) {
-        if (progressLessons[lesson.lessonId]?.completedAt) continue; // already done
-        let allStrong = true;
+        // Check if any of this lesson's ayahs were in this practice session
+        let touched = false;
         for (let n = lesson.ayahStart; n <= lesson.ayahEnd; n++) {
-          const q = updatedQualities.get(`${lesson.surahId}:${n}`);
-          if (q === undefined || q < 4) { allStrong = false; break; }
+          if (practicedSurahAyahs.has(`${lesson.surahId}:${n}`)) { touched = true; break; }
         }
-        if (allStrong) {
-          startLesson(lesson.lessonId, lesson.surahId);
-          completeLesson(lesson.lessonId);
-          addAyahsMemorized(lesson.ayahEnd - lesson.ayahStart + 1);
+        if (!touched) continue;
+
+        // Ensure lesson review card exists
+        const hasLessonCard = lessonCards.some((c) => c.lessonId === lesson.lessonId);
+        if (!hasLessonCard) {
+          addLessonCard(lesson, lesson.surahId, true);
+        }
+
+        // Auto-complete if all ayahs in the lesson have been rated (any quality)
+        // This matches lesson flow behaviour where completion doesn't require all green
+        if (!progressLessons[lesson.lessonId]?.completedAt) {
+          let allRated = true;
+          for (let n = lesson.ayahStart; n <= lesson.ayahEnd; n++) {
+            const q = updatedQualities.get(`${lesson.surahId}:${n}`);
+            if (q === undefined) { allRated = false; break; }
+          }
+          if (allRated) {
+            startLesson(lesson.lessonId, lesson.surahId);
+            completeLesson(lesson.lessonId);
+            addAyahsMemorized(lesson.ayahEnd - lesson.ayahStart + 1);
+          }
         }
       }
     }
@@ -422,7 +447,7 @@ export default function PracticeSession({
                   onClick={() => rateAyah(rating)}
                   className={cn(
                     'flex-1 rounded-xl py-3 text-sm font-semibold transition-colors',
-                    RATING_COLORS[rating]
+                    RATING_COLORS_SELECTED[rating]
                   )}
                 >
                   {RATING_LABELS[rating]}
@@ -561,8 +586,8 @@ export default function PracticeSession({
                           className={cn(
                             'flex-1 rounded-lg py-1.5 text-xs font-semibold transition-colors',
                             currentRating === rating
-                              ? RATING_COLORS[rating]
-                              : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                              ? RATING_COLORS_SELECTED[rating]
+                              : RATING_COLORS_UNSELECTED[rating]
                           )}
                         >
                           {RATING_LABELS[rating]}
@@ -657,17 +682,10 @@ export default function PracticeSession({
           </div>
         </div>
 
-        {/* Finish button — show after all ayahs rated */}
-        {allAyahsRated && (
-          <Button onClick={() => finishSession()} className="w-full">
-            See Results
-          </Button>
-        )}
-        {!allAyahsRated && revealedAyahs.size > 0 && (
-          <p className="text-center text-xs text-muted">
-            Rate each revealed ayah to see results
-          </p>
-        )}
+        {/* Finish button — always visible, disabled until all rated */}
+        <Button onClick={() => finishSession()} disabled={!allAyahsRated} className="w-full">
+          {allAyahsRated ? 'See Results' : `Rate all ${ayahs.length} ayahs to continue`}
+        </Button>
       </div>
     );
   }
@@ -720,7 +738,7 @@ export default function PracticeSession({
             key={result.ayahNumber}
             className={cn(
               'flex items-center justify-between rounded-lg px-3 py-2',
-              RATING_COLORS[result.rating]
+              RATING_COLORS_SELECTED[result.rating]
             )}
           >
             <span className="text-sm">

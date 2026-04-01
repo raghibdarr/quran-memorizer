@@ -163,22 +163,22 @@ export default function ProgressPage() {
           </div>
           <div className="flex-1 space-y-1.5">
             <p className="text-xs font-medium text-foreground">Ayah Breakdown</p>
-            <div className="flex items-center gap-2 text-[11px]">
+            <div className="flex items-center gap-2 text-xs">
               <span className="inline-block h-2 w-2 rounded-full bg-success" />
               <span className="text-muted">Strong</span>
               <span className="ml-auto font-semibold text-foreground">{ayahBreakdown.strong}</span>
             </div>
-            <div className="flex items-center gap-2 text-[11px]">
+            <div className="flex items-center gap-2 text-xs">
               <span className="inline-block h-2 w-2 rounded-full bg-gold" />
               <span className="text-muted">Shaky</span>
               <span className="ml-auto font-semibold text-foreground">{ayahBreakdown.medium}</span>
             </div>
-            <div className="flex items-center gap-2 text-[11px]">
+            <div className="flex items-center gap-2 text-xs">
               <span className="inline-block h-2 w-2 rounded-full bg-red-400" />
               <span className="text-muted">Weak</span>
               <span className="ml-auto font-semibold text-foreground">{ayahBreakdown.weak}</span>
             </div>
-            <div className="flex items-center gap-2 text-[11px]">
+            <div className="flex items-center gap-2 text-xs">
               <span className="inline-block h-2 w-2 rounded-full bg-foreground/10" />
               <span className="text-muted">Not started</span>
               <span className="ml-auto font-semibold text-foreground">{ayahBreakdown.uncovered}</span>

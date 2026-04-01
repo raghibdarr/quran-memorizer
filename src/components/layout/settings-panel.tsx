@@ -87,21 +87,22 @@ export default function SettingsPanel() {
   const btnRef = useRef<HTMLButtonElement>(null);
   const [panelPos, setPanelPos] = useState({ top: 0, right: 0 });
 
-  useEffect(() => {
-    if (open && btnRef.current) {
+  const handleToggle = () => {
+    if (!open && btnRef.current) {
       const rect = btnRef.current.getBoundingClientRect();
       setPanelPos({
         top: rect.bottom + 8,
         right: window.innerWidth - rect.right,
       });
     }
-  }, [open]);
+    setOpen(!open);
+  };
 
   return (
     <div>
       <button
         ref={btnRef}
-        onClick={() => setOpen(!open)}
+        onClick={handleToggle}
         className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
         aria-label="Settings"
       >
