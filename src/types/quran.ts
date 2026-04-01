@@ -172,3 +172,28 @@ export interface Chunk {
   words: Word[];
   position: number;
 }
+
+// Essentials — duas, dhikr, key ayahs
+
+export interface EssentialItem {
+  id: string;
+  category: 'dua' | 'dhikr' | 'ayah';
+  title: string;
+  titleArabic?: string;
+  description: string;
+  arabic: string;
+  transliteration: string;
+  translation: string;
+  audioUrl?: string;
+  source?: string;
+  repetitions?: number;
+  surahId?: number;        // For Quranic ayahs — pull tajweed/indopak from surah data
+  ayahNumber?: number;
+}
+
+export interface EssentialCollection {
+  id: string;
+  title: string;
+  description: string;
+  items: EssentialItem[];
+}

@@ -20,6 +20,7 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
   const savedExplored = lesson?.phaseData.understand.exploredAyahs;
   const [ayahIndex, setAyahIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
+  const [revealedTranslations, setRevealedTranslations] = useState<Set<number>>(new Set());
   const [exploredAyahs, setExploredAyahs] = useState<Set<number>>(
     savedExplored ? new Set(savedExplored) : new Set([0])
   );
@@ -109,9 +110,18 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
           </p>
         )}
         {currentAyah.translation && (
-          <p className="mt-1 text-center text-sm italic text-muted">
-            {currentAyah.translation}
-          </p>
+          revealedTranslations.has(ayahIndex) ? (
+            <p className="mt-1 text-center text-sm italic text-muted">
+              {currentAyah.translation}
+            </p>
+          ) : (
+            <button
+              onClick={() => setRevealedTranslations((prev) => new Set([...prev, ayahIndex]))}
+              className="mt-2 text-xs font-medium text-teal hover:text-teal-light transition-colors"
+            >
+              Tap to see translation
+            </button>
+          )
         )}
       </div>
 

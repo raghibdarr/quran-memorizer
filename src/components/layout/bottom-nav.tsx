@@ -2,12 +2,13 @@
 
 import { usePathname } from 'next/navigation';
 import { useReviewStore } from '@/stores/review-store';
-import { HomeIcon, BookIcon, BarChartIcon } from '@/components/ui/icons';
+import { HomeIcon, BookIcon, StarIcon, BarChartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home', Icon: HomeIcon },
   { href: '/review', label: 'Review', Icon: BookIcon },
+  { href: '/essentials', label: 'Essentials', Icon: StarIcon },
   { href: '/progress', label: 'Progress', Icon: BarChartIcon },
 ];
 
