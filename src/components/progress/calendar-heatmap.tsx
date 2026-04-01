@@ -174,7 +174,7 @@ export default function CalendarHeatmap({ activityLog }: Props) {
                   : cell.count > 0
                   ? 'font-medium text-foreground'
                   : 'text-muted/40'
-              } ${cell.day !== null ? getIntensityClass(cell.count) : ''}`}
+              } ${cell.day !== null ? `${getIntensityClass(cell.count)} hover:bg-foreground/10` : ''}`}
             >
               {cell.day !== null && (
                 <>

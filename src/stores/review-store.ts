@@ -52,13 +52,21 @@ export const useReviewStore = create<ReviewState>()(
         }),
 
       reviewCard: (surahId, ayahNumber, quality) =>
-        set((state) => ({
-          cards: state.cards.map((c) =>
-            c.surahId === surahId && c.ayahNumber === ayahNumber
-              ? processReview(c, quality)
-              : c
-          ),
-        })),
+        set((state) => {
+          const exists = state.cards.some((c) => c.surahId === surahId && c.ayahNumber === ayahNumber);
+          if (exists) {
+            return {
+              cards: state.cards.map((c) =>
+                c.surahId === surahId && c.ayahNumber === ayahNumber
+                  ? processReview(c, quality)
+                  : c
+              ),
+            };
+          }
+          // Create new card if it doesn't exist (e.g. from practice mode)
+          const newCard = processReview(createNewCard(surahId, ayahNumber), quality);
+          return { cards: [...state.cards, newCard] };
+        }),
 
       getDueCards: () => getDueCards(get().cards),
 

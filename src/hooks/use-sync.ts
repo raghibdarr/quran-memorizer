@@ -190,14 +190,18 @@ function mergeStats(
     mergedLog[date] = Math.max(mergedLog[date] ?? 0, count);
   }
 
+  // Current streak comes from whichever side was active most recently
+  // (Math.max would prevent streak from ever resetting after a missed day)
+  const localLastActive = (local.lastActiveDate as string) ?? '';
+  const cloudLastActive = (cloud.lastActiveDate as string) ?? '';
+  const mostRecentSide = localLastActive >= cloudLastActive ? local : cloud;
+  const currentStreak = (mostRecentSide.currentStreak as number) ?? 0;
+
   return {
-    currentStreak: Math.max((local.currentStreak as number) ?? 0, (cloud.currentStreak as number) ?? 0),
+    currentStreak,
     longestStreak: Math.max((local.longestStreak as number) ?? 0, (cloud.longestStreak as number) ?? 0),
     totalAyahsMemorized: Math.max((local.totalAyahsMemorized as number) ?? 0, (cloud.totalAyahsMemorized as number) ?? 0),
-    lastActiveDate: [local.lastActiveDate, cloud.lastActiveDate]
-      .filter(Boolean)
-      .sort()
-      .pop() ?? null,
+    lastActiveDate: localLastActive >= cloudLastActive ? localLastActive : cloudLastActive || null,
     dailyActivities,
     dailyActivityDate: dailyActivityDate || null,
     activityLog: mergedLog,

@@ -118,13 +118,21 @@ export default function TimelineChart({ lessons }: Props) {
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging.current) return;
-    const idx = findNearest(e.clientX);
-    if (idx !== null) setSelectedIdx(idx);
+    // On mouse (non-touch), select on hover without needing to click
+    // On touch, only select while dragging
+    if (e.pointerType === 'mouse' || isDragging.current) {
+      const idx = findNearest(e.clientX);
+      if (idx !== null) setSelectedIdx(idx);
+    }
   };
 
   const handlePointerUp = () => {
     isDragging.current = false;
+  };
+
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    isDragging.current = false;
+    if (e.pointerType === 'mouse') setSelectedIdx(null);
   };
 
   const selected = selectedIdx !== null ? points[selectedIdx] : null;
@@ -146,7 +154,7 @@ export default function TimelineChart({ lessons }: Props) {
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onPointerLeave={handlePointerUp}
+          onPointerLeave={handlePointerLeave}
         >
           {/* Grid lines */}
           {yLines.map((v) => (

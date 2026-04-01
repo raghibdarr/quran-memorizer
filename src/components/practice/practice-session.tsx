@@ -103,6 +103,7 @@ export default function PracticeSession({
   const progressLessons = useProgressStore((s) => s.lessons);
   const { addSession } = usePracticeStore();
   const recordActivity = useStatsStore((s) => s.recordActivity);
+  const addAyahsMemorized = useStatsStore((s) => s.addAyahsMemorized);
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
   const translationEnabled = useSettingsStore((s) => s.translationEnabled);
 
@@ -244,6 +245,7 @@ export default function PracticeSession({
         if (allStrong) {
           startLesson(lesson.lessonId, lesson.surahId);
           completeLesson(lesson.lessonId);
+          addAyahsMemorized(lesson.ayahEnd - lesson.ayahStart + 1);
         }
       }
     }
