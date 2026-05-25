@@ -197,3 +197,72 @@ export interface EssentialCollection {
   description: string;
   items: EssentialItem[];
 }
+
+// Hifdh curriculum planner
+
+export type PlanGoalType = 'surah' | 'juz' | 'full-quran';
+
+export interface HifdhPlan {
+  id: string;
+  createdAt: number;
+
+  goalType: PlanGoalType;
+  goalSurahIds: number[];        // Ordered list of surah ids in scope
+  goalJuzNumbers: number[];      // Preserved so the dashboard can display the selection
+  deadline: string | null;       // ISO date yyyy-mm-dd or null
+
+  knownSurahIds: number[];       // Excluded from new lessons (still reviewed elsewhere)
+
+  lessonsPerDay: number;         // 1-5
+  studyDays: number[];           // 0=Sun ... 6=Sat
+
+  completedLessonIds: string[];  // Plan-scoped completions (union with global progress on load)
+
+  revisionFrequencyDays: number; // How often to revise completed surahs (default 7)
+  revisionFrequencyAuto?: boolean; // When true, frequency adapts to completed surah count
+  lastRevisedAt: Record<number, number>; // surahId -> timestamp
+
+  // One-off "catch up" bump: extra lessons added to today's plan only.
+  catchUpDate?: string | null;         // ISO yyyy-mm-dd the bonus applies to
+  catchUpBonus?: number;               // Extra lessons on top of lessonsPerDay
+
+  // Completion celebration
+  finishCelebrated?: boolean;
+
+  // Partial pre-assessment: specific lessons to skip
+  knownLessonIds?: string[];
+}
+
+export interface SurahRevisionTask {
+  surahId: number;
+  surahName: string;
+  lastRevised: number | null;
+  daysSinceRevision: number;
+  // Scope of revision within the plan (partial for juz-scoped plans)
+  isPartial: boolean;
+  ayahStart: number;
+  ayahEnd: number;
+  totalAyahsInSurah: number;
+}
+
+export interface TodaysPlan {
+  date: string;                                  // ISO yyyy-mm-dd
+  reviews: LessonReviewCard[];                   // SM-2 due lesson cards
+  revisions: SurahRevisionTask[];                // Full-surah revisions due today
+  newLessons: LessonDef[];                       // New lessons scheduled for today
+  isRestDay: boolean;
+  isComplete: boolean;                           // reviews + revisions + new lessons all done
+  completedNewLessonIds: string[];               // Of today's new lessons, which are already done
+}
+
+export interface PlanProgress {
+  totalLessons: number;
+  completedLessons: number;
+  percentage: number;                            // 0-100
+  lessonsRemaining: number;
+  projectedFinishDate: string | null;            // ISO date, null if no deadline & pace=0
+  daysRemaining: number | null;                  // null if no deadline
+  isOnTrack: boolean;
+  lessonsBehind: number;                         // 0 if on track or no deadline
+  currentPace: number;                           // lessons/day over the last 7 days
+}

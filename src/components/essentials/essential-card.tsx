@@ -21,8 +21,9 @@ export default function EssentialCard({ item }: Props) {
   const arabicScript = useSettingsStore((s) => s.arabicScript);
   const arabicClass = arabicScript === 'indopak' ? 'arabic-text-indopak' : 'arabic-text';
   const memorized = useEssentialsStore((s) => s.memorized[item.id]);
+  const favorite = useEssentialsStore((s) => s.favorites[item.id]);
   const counter = useEssentialsStore((s) => s.counters[item.id] ?? 0);
-  const { toggleMemorized, incrementCounter, resetCounter } = useEssentialsStore();
+  const { toggleMemorized, incrementCounter, resetCounter, toggleFavorite } = useEssentialsStore();
 
   // Load Quranic ayah data for tajweed/indopak rendering
   useEffect(() => {
@@ -68,6 +69,18 @@ export default function EssentialCard({ item }: Props) {
           <p className="mt-0.5 text-xs text-muted">{item.description}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
+          <button
+            onClick={(e) => { e.stopPropagation(); toggleFavorite(item.id); }}
+            className={cn(
+              'flex h-8 w-8 items-center justify-center rounded-full transition-colors',
+              favorite ? 'text-gold' : 'text-muted/40 hover:text-muted'
+            )}
+            aria-label={favorite ? 'Unfavorite' : 'Favorite'}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill={favorite ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </button>
           {item.audioUrl && (
             <button
               onClick={playAudio}

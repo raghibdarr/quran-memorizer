@@ -17,6 +17,8 @@ const STORE_NAMES = [
   'quran-stats',
   'quran-settings',
   'quran-practice',
+  'quran-plan',
+  'quran-essentials',
 ] as const
 
 type StoreName = typeof STORE_NAMES[number]
@@ -261,6 +263,83 @@ function mergeSettings(
   return cloudIsNewer ? cloud : local
 }
 
+/**
+ * Merge plans. If both sides have the same plan id: union completedLessonIds,
+ * take the later lastRevisedAt per surah, and pull remaining fields from whichever
+ * side is newer. If ids differ, the newer side wins wholesale.
+ */
+function mergePlan(
+  local: Record<string, unknown>,
+  cloud: Record<string, unknown>,
+  cloudIsNewer: boolean
+): Record<string, unknown> {
+  const localPlan = local.plan as Record<string, unknown> | null
+  const cloudPlan = cloud.plan as Record<string, unknown> | null
+
+  if (!localPlan && !cloudPlan) return { plan: null }
+  if (!localPlan) return { plan: cloudPlan }
+  if (!cloudPlan) return { plan: localPlan }
+
+  if (localPlan.id !== cloudPlan.id) {
+    return { plan: cloudIsNewer ? cloudPlan : localPlan }
+  }
+
+  const localCompleted = (localPlan.completedLessonIds ?? []) as string[]
+  const cloudCompleted = (cloudPlan.completedLessonIds ?? []) as string[]
+  const completedLessonIds = Array.from(new Set([...localCompleted, ...cloudCompleted]))
+
+  const localRevised = (localPlan.lastRevisedAt ?? {}) as Record<string, number>
+  const cloudRevised = (cloudPlan.lastRevisedAt ?? {}) as Record<string, number>
+  const lastRevisedAt: Record<string, number> = { ...localRevised }
+  for (const [k, v] of Object.entries(cloudRevised)) {
+    lastRevisedAt[k] = Math.max(lastRevisedAt[k] ?? 0, v)
+  }
+
+  const base = cloudIsNewer ? cloudPlan : localPlan
+  return {
+    plan: {
+      ...base,
+      completedLessonIds,
+      lastRevisedAt,
+    },
+  }
+}
+
+/**
+ * Merge essentials: union-style for memorized + favorites, take max for counters.
+ * Per-device counters reset on completion, so max is a safe pick.
+ */
+function mergeEssentials(
+  local: Record<string, unknown>,
+  cloud: Record<string, unknown>
+): Record<string, unknown> {
+  const memorized = {
+    ...(cloud.memorized ?? {}),
+    ...(local.memorized ?? {}),
+  } as Record<string, boolean>
+  // For "true" wins (union of memorized)
+  for (const [k, v] of Object.entries((cloud.memorized ?? {}) as Record<string, boolean>)) {
+    if (v) memorized[k] = true
+  }
+
+  const favorites = {
+    ...(cloud.favorites ?? {}),
+    ...(local.favorites ?? {}),
+  } as Record<string, boolean>
+  for (const [k, v] of Object.entries((cloud.favorites ?? {}) as Record<string, boolean>)) {
+    if (v) favorites[k] = true
+  }
+
+  const localCounters = (local.counters ?? {}) as Record<string, number>
+  const cloudCounters = (cloud.counters ?? {}) as Record<string, number>
+  const counters: Record<string, number> = { ...cloudCounters }
+  for (const [k, v] of Object.entries(localCounters)) {
+    counters[k] = Math.max(counters[k] ?? 0, v)
+  }
+
+  return { memorized, favorites, counters }
+}
+
 /** Dispatch to the right merge function per store */
 function mergeStore(
   storeName: StoreName,
@@ -274,6 +353,8 @@ function mergeStore(
     case 'quran-stats': return mergeStats(local, cloud)
     case 'quran-practice': return mergePractice(local, cloud)
     case 'quran-settings': return mergeSettings(local, cloud, cloudIsNewer)
+    case 'quran-plan': return mergePlan(local, cloud, cloudIsNewer)
+    case 'quran-essentials': return mergeEssentials(local, cloud)
   }
 }
 
@@ -451,6 +532,7 @@ export function useSync(user: User | null) {
       if ('cards' in obj && Array.isArray(obj.cards) && obj.cards.length > 0) return true
       if ('totalAyahsMemorized' in obj && (obj.totalAyahsMemorized as number) > 0) return true
       if ('sessions' in obj && Array.isArray(obj.sessions) && obj.sessions.length > 0) return true
+      if ('plan' in obj && obj.plan != null) return true
       return false
     })
   }, [])

@@ -1,11 +1,12 @@
 # Takrar Roadmap
 
-Last updated: 2026-03-29
+Last updated: 2026-05-25
 
 ---
 
 ## Completed
 
+### Foundations
 - [x] Lesson splitting & Juz 30 expansion (37 surahs, ~5 ayah lessons)
 - [x] Spaced repetition review UI (SM-2 card flow with per-ayah rating)
 - [x] Review page redesign (due cards, surah-focused review, single-lesson review)
@@ -14,94 +15,79 @@ Last updated: 2026-03-29
 - [x] Logo redesign & theme-aware variants
 - [x] Lesson-level review cards (SM-2 scheduling per lesson)
 
----
+### P0 (formerly Ship-ASAP)
+- [x] PWA / Offline support — service worker (`public/sw.js`), manifest (`src/app/manifest.ts`), install banner, offline fallback
+- [x] Streak & Daily Goal fix — auditied, "X day streak" label, daily goal indicator on home
 
-## P0 — Ship ASAP
+### P1
+- [x] Onboarding flow — swipeable explainer cards (4 cards, dismissible)
+- [x] Progress page revamp — calendar heatmap, timeline chart, ayah breakdown ring, stats grid
+- [x] Chunk phase polish (commit `febffba`) — 6-4-4-6 pattern preserved as default; specific UX items (one-time tooltip, replay-beyond-minimum) not verified in code
 
-### PWA / Offline Support
-- Service worker + web manifest
-- Offline fallback page
-- Audio already cached via IndexedDB — this is mostly config
-- **Why**: App store review takes months; PWA is the stop-gap for mobile users
+### P2
+- [x] Understand phase refinement — tap-to-reveal translation, no quiz gate
+- [x] Hifdh Mode / Curriculum Planner — full feature, see notes below
+- [x] Duas / Dhikr / Essentials section — basic version live (needs UX polish, see open work)
 
-### Fix Streak & Daily Goal
-- Audit streak tracking — may be broken (stuck on 5)
-- Clear label: "5 day streak" not just a number + flame icon
-- Define what counts as a "day" (any lesson or review activity?)
-- Daily goal progress indicator on home page (e.g., "2/3 lessons today")
-
----
-
-## P1 — Core UX Polish
-
-### Onboarding Flow
-- Welcome screen → 3-4 swipeable cards explaining Listen → Understand → Memorize → Test → Review
-- Pick first surah → drop into lesson
-- One-time, dismissible
-
-### Progress Page Revamp
-- Calendar heatmap (days colored by activity — lessons, reviews)
-- Streak + total stats (ayahs memorized, lessons completed, total reviews)
-- Timeline chart (cumulative progress over time, like Quran Tracker)
-- Remove surah cards (that's the review tab's job now)
-- Review tab shows ALL completed lessons (green/yellow/red), not just problematic ones
-
-### Simplify Terminology
-- Kill the word "practice" from UI entirely
-- Two verbs only: **Learn** (5-phase lesson flow) and **Review** (spaced repetition)
-- Home page: "Continue learning" / Review tab: "X lessons to review"
-
-### Chunk Phase Polish
-- One-time tooltip overlay explaining the 6-4-4-6 pattern on first entry
-- Allow replay beyond the minimum — once they hit 6, show "completed (tap to replay)" instead of locking
-- Don't offer customization yet — default is pedagogically sound, avoid decision paralysis
+### P3
+- [x] Calendar heatmap (local) — wired on progress page
 
 ---
 
-## P2 — Feature Expansion
+## Hifdh Planner — shipped detail
 
-### Understand Phase Refinement
-- "Tap to reveal" translation instead of auto-showing everything
-- No quiz gate, no pass/fail — just a moment of reflection
-- Users who don't care swipe through in 5 seconds
+Everything in `.claude/hifdh-curriculum-spec.md` plus polish layer:
 
-### Hifdh Mode / Curriculum Planner
-- Goal setting: "Memorize Juz 30 by Ramadan" or "2 new lessons per week"
-- Smart scheduling: daily plan generated from goal + pace ("Today: Learn An-Naba L4, Review 3 due")
-- Adaptive: falls behind → plan adjusts, ahead → accelerates
-- Integrated, not separate — users with a goal see "Today's Plan", users without see surah grid
-- Layer on top of existing SM-2 review system
-
-### Duas / Dhikr / Essentials Section
-- Duas: witr, daily adhkar, salah duas, travel duas
-- Dhikr: tasbih sequences, prayer bead sequences
-- Key ayahs: Ayatul Kursi, last 2 of Al-Baqarah, Surah Mulk
-- Simpler flow than full lessons: listen → repeat → self-test
-- Separate "Essentials" or "Collections" section within the app
+- Goal types: single/multi surah, single/multi juz, full Quran (custom-range via From–To helper in surah picker)
+- Optional deadline + auto-pace calculation with intensive/impossible thresholds
+- Pre-assessment: surah-level + per-lesson partial pre-assessment
+- Pacing: 1–5 grid + Custom input (max 20 lessons/day)
+- Study days with rest-day-aware projection
+- Today's Plan card on home: due reviews + revisions + new lessons + behind-schedule banner + catch-up action
+- `/plan` dashboard: progress ring, pace/deadline/study-days/revision-freq editors, surah breakdown, delete
+- `/plan/edit` — change scope mid-plan with feasibility warnings
+- `/plan/revise/[surahId]` — scope-aware revision (only renders the ayahs in your plan scope)
+- Revision frequency: presets (Intensive/Balanced/Light) + Auto mode that adapts to completed surah count
+- Finish-early celebration modal
+- Lesson-completion hook (plan auto-marks completions)
+- Cloud sync (`quran-plan` in use-sync.ts with union-merge for completedLessonIds and lastRevisedAt)
 
 ---
 
-## P3 — Social & Gamification
+## Open
 
-### Calendar Heatmap (local first)
-- GitHub-contributions-style grid on progress page
-- Colored by daily activity (lessons + reviews)
-- No backend needed — uses local data
+### Terminology cleanup (P1, partial)
+Original goal: kill "practice" from UI, unify on **Learn** + **Review**. Status as of audit:
+- Bottom nav and some surfaces done
+- **Still exposing "Practice"**: juz page tab toggle (`/juz/[juzNum]`, "Learn / Practice"), home page "Continue Practicing" label, whole `src/components/practice/` directory + `practice-store.ts`
+- Decide: kill the practice flow entirely (and migrate any unique value into Learn/Review), OR keep it but rename in UI ("Drill"? "Recite"?)
 
-### Activity Feed + Friends
-- Chronological feed: "Raghi completed Al-Ikhlas L2", "Sara reviewed 5 lessons"
-- Milestones: "Raghi finished memorizing Surah An-Naba"
+### Essentials polish (P2)
+The section works but is basic. Concrete improvements:
+- Search across all items
+- Filter by category (dua / dhikr / ayah)
+- Favorites / pin frequently used
+- Sequential card-flow mode for adhkar (one-at-a-time swipe)
+- Unify expand-reveal with the tap-to-reveal pattern from understand phase
+- Audio "play all" for whole collection
+- Better collection cards on index (progress bars, not just count)
+
+### Social & Gamification (P3) — needs schema design first
+Not a session item. Requires Supabase schema decisions before any frontend.
+
+#### Activity feed + friends
+- Chronological feed: "Raghi completed Al-Ikhlas L2", milestones ("finished memorizing Surah An-Naba")
 - Privacy: opt-in (some users memorize privately)
-- Needs Supabase tables: friendships, activity_events
+- Needs Supabase tables: `friendships`, `activity_events`, RLS policies
 
-### Leaderboard + Groups (StepUp-style)
+#### Leaderboard + Groups (StepUp-style)
 - Daily/weekly/monthly rankings
 - Metrics: lessons completed, review streak, ayahs memorized
 - Create/join multiple groups (halaqah, family, friends)
-- Needs Supabase tables: groups, group_members, leaderboard views
+- Needs Supabase tables: `groups`, `group_members`, leaderboard views
 
-### Unit Tests
-- Targeted tests for pure functions: processReview, processLessonReview, generateLessonsWithJuzBoundaries
+### Unit Tests (P3)
+- Targeted tests for pure functions: `processReview`, `processLessonReview`, `generateLessonsWithJuzBoundaries`, plan-lib helpers
 - SM-2 math bugs are silent and only surface weeks later
 - Skip UI component tests for now
 
@@ -113,15 +99,15 @@ Last updated: 2026-03-29
 - Push notifications for review reminders
 - Widgets (daily ayah, streak)
 - App Store / Play Store distribution
-- React Native migration path: business logic (Zustand stores, SM-2, lesson progression) copies directly. Components need JSX rewrite (div→View). Audio → expo-av. Storage → expo-sqlite. Keep /lib with zero React deps for portability.
+- React Native migration path: business logic (Zustand stores, SM-2, lesson progression, plan-lib) copies directly. Components need JSX rewrite (div→View). Audio → expo-av. Storage → expo-sqlite. Keep `/lib` with zero React deps for portability.
 
 ---
 
-## Ideas from Previous Roadmap / Discussions
+## Ideas / Backlog (unprioritized)
 
-Collected from earlier conversations — not prioritized yet, preserved for future consideration.
+Collected from earlier conversations — preserved for future consideration.
 
-### Audio Improvements
+### Audio
 - **Word-by-word highlighting**: Sync audio position to highlight each word during playback. Requires word timing data from quran.com API (available for some reciters).
 - **Multiple reciters**: Currently only Mishary Alafasy. Add Al-Hussary (slower, recommended for beginners), Abdul Basit, etc. everyayah.com has many reciters.
 - **Audio scrubbing/seeking**: Proper seek bar for audio playback.
@@ -130,7 +116,7 @@ Collected from earlier conversations — not prioritized yet, preserved for futu
 - **Programmatic waqf transformation**: Automate verse-ending vowel changes for scaling beyond manually-scraped data (~90% of cases are systematic).
 - **Simplified transliteration style**: Remove scholarly diacritics (ḥ→h, ṣ→s, ʿ→') for beginner-friendliness.
 
-### UX Ideas (from Reddit research)
+### UX (from Reddit research)
 - **Recording & playback**: User records their recitation and plays it back to self-assess.
 - **Arabic writing/tracing**: Digital whiteboard mode where user traces Arabic letters/words.
 - **Similar passage tracker**: Flag verses that resemble each other across surahs to avoid confusion.
@@ -145,6 +131,13 @@ Tarteel's Quranic Universal Library (qul.tarteel.ai/resources) could replace cur
 - Transliteration (structured JSON, replaces quran411 scraping)
 - Mushaf layouts (for mushaf-style reference view)
 - Currently pulling from 3 sources (quran.com API, everyayah.com, quran411 scraping). QUL consolidates into one open-source platform.
+
+### Planner enhancements (future)
+- Multiple concurrent plans
+- Collaborative plans (study group with shared progress)
+- AI-optimised ordering (based on surah difficulty, user performance)
+- Calendar export (add study sessions to Google Calendar)
+- Streak freeze (like Duolingo — use a "freeze" to keep streak on a missed day)
 
 ### Monetization (think about later)
 - **Freemium**: First few surahs free, unlock full content for one-time £5-10.

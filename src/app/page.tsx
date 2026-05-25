@@ -5,6 +5,9 @@ import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useSettingsStore } from '@/stores/settings-store';
+import { usePlanStore } from '@/stores/plan-store';
+import TodaysPlanCard from '@/components/plan/todays-plan';
+import PlanCelebration from '@/components/plan/plan-celebration';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
@@ -70,6 +73,7 @@ export default function HomePage() {
   const stats = useStatsStore();
   const lastActivity = useStatsStore((s) => s.lastActivity);
   const dailyGoalActivities = useSettingsStore((s) => s.dailyGoalActivities);
+  const plan = usePlanStore((s) => s.plan);
 
   // Compute today's activity count
   const today = new Date().toISOString().split('T')[0];
@@ -188,8 +192,25 @@ export default function HomePage() {
       <main className="mx-auto max-w-2xl space-y-3 px-4 py-4">
         <InstallBanner />
 
-        {/* Continue card — based on last activity */}
-        {lastActivity ? (
+        {plan ? (
+          <TodaysPlanCard />
+        ) : (
+          <a href="/plan/setup" className="block">
+            <Card className="border-l-4 border-l-gold">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted">Hifdh Planner</p>
+                  <p className="mt-0.5 text-base font-bold text-foreground">Set a memorization goal</p>
+                  <p className="mt-0.5 text-xs text-muted">Get a personalised daily plan with reviews and pacing.</p>
+                </div>
+                <span className="shrink-0 rounded-full bg-gold/10 px-3 py-1.5 text-[11px] font-semibold text-gold">Start →</span>
+              </div>
+            </Card>
+          </a>
+        )}
+
+        {/* Continue card — hidden when a plan is active (plan card takes over) */}
+        {!plan && lastActivity ? (
           <a href={lastActivity.url} className="block">
             <Card className="border-l-4 border-l-teal">
               <p className="text-xs font-medium uppercase tracking-wide text-muted">
@@ -198,7 +219,7 @@ export default function HomePage() {
               <p className="mt-1 text-lg font-bold text-foreground">{lastActivity.label}</p>
             </Card>
           </a>
-        ) : activeProgress && activeSurah ? (
+        ) : !plan && activeProgress && activeSurah ? (
           <a href={`/lesson/${activeSurah.id}`} className="block">
             <Card className="border-l-4 border-l-teal">
               <p className="text-xs font-medium uppercase tracking-wide text-muted">Continue Learning</p>
@@ -475,6 +496,7 @@ export default function HomePage() {
 
       <BottomNav />
       <OnboardingOverlay />
+      <PlanCelebration />
     </div>
   );
 }

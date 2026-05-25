@@ -5,6 +5,7 @@ import type { Surah, Ayah, LessonDef } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
+import { usePlanStore } from '@/stores/plan-store';
 import Button from '@/components/ui/button';
 import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
@@ -21,6 +22,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
   const { completeLesson, resetLesson, getLesson } = useProgressStore();
   const { addCard, addLessonCard, cards } = useReviewStore();
   const { recordActivity, addAyahsMemorized } = useStatsStore();
+  const markPlanLessonCompleted = usePlanStore((s) => s.markLessonCompleted);
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
@@ -39,6 +41,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
     completeLesson(lessonDef.lessonId);
     ayahs.forEach((a) => addCard(surah.id, a.number));
     addLessonCard(lessonDef, surah.id);
+    markPlanLessonCompleted(lessonDef.lessonId);
 
     if (!wasAlreadyComplete) {
       recordActivity();
