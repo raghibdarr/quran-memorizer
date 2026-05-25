@@ -16,7 +16,11 @@ import { CURRICULUM_ORDER, generateLessonsWithJuzBoundaries } from './curriculum
 const MS_PER_DAY = 86_400_000;
 
 export function todayIso(): string {
-  return new Date().toISOString().split('T')[0];
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }
 
 export function startOfTodayMs(): number {
@@ -25,17 +29,23 @@ export function startOfTodayMs(): number {
   return d.getTime();
 }
 
-function isoToDate(iso: string): Date {
-  return new Date(iso + 'T00:00:00');
+/** Parse a YYYY-MM-DD string as a UTC Date at midnight, for safe arithmetic. */
+function isoToDateUTC(iso: string): Date {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d));
+}
+
+function dateUTCToIso(d: Date): string {
+  return d.toISOString().split('T')[0];
 }
 
 /** Number of calendar days from `fromIso` to `toIso` (toIso - fromIso). Negative if toIso is earlier. */
 export function daysBetween(fromIso: string, toIso: string): number {
-  return Math.round((isoToDate(toIso).getTime() - isoToDate(fromIso).getTime()) / MS_PER_DAY);
+  return Math.round((isoToDateUTC(toIso).getTime() - isoToDateUTC(fromIso).getTime()) / MS_PER_DAY);
 }
 
 export function isStudyDay(dateIso: string, studyDays: number[]): boolean {
-  const dow = isoToDate(dateIso).getDay();
+  const dow = isoToDateUTC(dateIso).getUTCDay();
   return studyDays.includes(dow);
 }
 
@@ -45,19 +55,19 @@ export function countStudyDays(fromIso: string, toIso: string, studyDays: number
   if (total <= 0) return 0;
   const set = new Set(studyDays);
   let count = 0;
-  const cursor = isoToDate(fromIso);
+  const cursor = isoToDateUTC(fromIso);
   for (let i = 0; i < total; i++) {
-    if (set.has(cursor.getDay())) count++;
-    cursor.setDate(cursor.getDate() + 1);
+    if (set.has(cursor.getUTCDay())) count++;
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
   return count;
 }
 
 /** Add N calendar days to an ISO date. */
 export function addDaysIso(iso: string, days: number): string {
-  const d = isoToDate(iso);
-  d.setDate(d.getDate() + days);
-  return d.toISOString().split('T')[0];
+  const d = isoToDateUTC(iso);
+  d.setUTCDate(d.getUTCDate() + days);
+  return dateUTCToIso(d);
 }
 
 // ---------- Goal resolution ----------
@@ -341,14 +351,14 @@ export function computePlanProgress(
     const effectivePace = plan.lessonsPerDay > 0 ? plan.lessonsPerDay : 1;
     // Project forward in study days
     let pending = remaining;
-    const cursor = isoToDate(today);
+    const cursor = isoToDateUTC(today);
     const studyDaysSet = new Set(plan.studyDays);
     // Hard cap so a pathological config can't infinite-loop
     for (let i = 0; i < 20_000 && pending > 0; i++) {
-      cursor.setDate(cursor.getDate() + 1);
-      if (studyDaysSet.has(cursor.getDay())) pending -= effectivePace;
+      cursor.setUTCDate(cursor.getUTCDate() + 1);
+      if (studyDaysSet.has(cursor.getUTCDay())) pending -= effectivePace;
     }
-    projectedFinishDate = cursor.toISOString().split('T')[0];
+    projectedFinishDate = dateUTCToIso(cursor);
   }
 
   return {
