@@ -113,7 +113,7 @@ export default function ReviewPage() {
   // Review session view
   if (view === 'session' && sessionCards.length > 0) {
     return (
-      <div className="min-h-screen bg-cream pb-20">
+      <div className="min-h-screen bg-cream pb-24">
         <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
           <div className="mx-auto max-w-2xl flex items-center justify-between">
             <button
@@ -147,7 +147,7 @@ export default function ReviewPage() {
         <StarIcon size={40} className="text-teal" />
         <h2 className="mt-4 text-xl font-bold text-foreground">No reviews yet</h2>
         <p className="mt-1 text-center text-muted">Complete lessons to build your review dashboard</p>
-        <a href="/" className="mt-6 rounded-xl bg-teal px-6 py-3 font-semibold text-white">
+        <a href="/" className="mt-6 rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
           Start Learning
         </a>
         <BottomNav />
@@ -157,7 +157,7 @@ export default function ReviewPage() {
 
   // Dashboard view
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
@@ -183,7 +183,7 @@ export default function ReviewPage() {
                     </p>
                     <p className="text-xs text-muted">Tap to start your review session</p>
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-on-teal">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M8 5v14l11-7z" />
                     </svg>

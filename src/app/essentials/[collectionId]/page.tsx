@@ -70,7 +70,7 @@ export default function CollectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
@@ -92,7 +92,7 @@ export default function CollectionPage() {
             {collection.items.length > 1 && (
               <button
                 onClick={() => setReciteOpen(true)}
-                className="shrink-0 rounded-full bg-teal px-3 py-1.5 text-xs font-semibold text-white hover:brightness-110"
+                className="shrink-0 rounded-full bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal hover:brightness-110"
               >
                 Recite all →
               </button>
@@ -120,7 +120,7 @@ export default function CollectionPage() {
                     className={cn(
                       'shrink-0 rounded-lg px-3 py-1 text-xs font-semibold transition-colors',
                       category === c
-                        ? 'bg-teal text-white'
+                        ? 'bg-teal text-on-teal'
                         : 'bg-foreground/5 text-muted hover:bg-foreground/10',
                     )}
                   >

@@ -9,7 +9,10 @@ import { useSettingsStore } from '@/stores/settings-store';
 import { audioController } from '@/lib/audio';
 import { getAudioUrl as buildAudioUrl, getSurah } from '@/lib/quran-data';
 import AyahDisplay from '@/components/ui/ayah-display';
+import BeadProgress from '@/components/ui/bead-progress';
 import Button from '@/components/ui/button';
+import MediaControlsBar from '@/components/ui/media-controls-bar';
+import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
 
 interface ReviewSessionProps {
@@ -32,8 +35,6 @@ interface LessonData {
   ayahs: Ayah[];
 }
 
-const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5];
-
 function formatNextReview(timestamp: number): string {
   const days = Math.round((timestamp - Date.now()) / 86_400_000);
   if (days <= 0) return 'later today';
@@ -54,11 +55,9 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
   const [loading, setLoading] = useState(true);
 
   // Audio state
-  const { isPlaying, isPaused, setSpeed } = useAudio();
+  const { isPlaying } = useAudio();
   const [currentAyahIndex, setCurrentAyahIndex] = useState(-1);
   const [playingAll, setPlayingAll] = useState(false);
-  const [currentSpeed, setCurrentSpeed] = useState(() => audioController.speed);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const abortRef = useRef(false);
   const ayahRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -145,12 +144,6 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
     setCurrentAyahIndex(-1);
   }, [lessonData, playingAll]);
 
-  const handleSpeedChange = (speed: number) => {
-    setCurrentSpeed(speed);
-    setSpeed(speed);
-    setShowSpeedMenu(false);
-  };
-
   // --- Rating & submission ---
 
   const rateAyah = useCallback((ayahNumber: number, rating: AyahRating) => {
@@ -215,19 +208,21 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
 
   return (
     <div className="space-y-5">
-      {/* Progress indicator */}
-      <div className="flex items-center gap-3">
-        <div className="flex-1">
-          <div className="flex h-1.5 overflow-hidden rounded-full bg-foreground/10">
-            <div
-              className="bg-teal transition-all duration-300"
-              style={{ width: `${((currentIndex + (submitted ? 1 : 0)) / dueCards.length) * 100}%` }}
-            />
-          </div>
-        </div>
-        <span className="text-xs font-medium text-muted">
-          {currentIndex + 1} / {dueCards.length}
+      {/* Progress — card counter pill + beads */}
+      <div className="flex items-center justify-between gap-3">
+        <span className="ink-border flex items-center gap-1.5 rounded-full bg-card px-3 py-1.5 text-xs font-semibold text-foreground">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <rect x="3" y="7" width="15" height="13" rx="2" />
+            <path d="M7 7V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-1" />
+          </svg>
+          Card {currentIndex + 1} of {dueCards.length}
         </span>
+        <BeadProgress
+          total={dueCards.length}
+          filled={currentIndex + (submitted ? 1 : 0)}
+          size="sm"
+          className="flex-1 justify-end"
+        />
       </div>
 
       {/* Lesson info */}
@@ -241,21 +236,26 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
         <span className="arabic-text text-xl text-muted/60">{lessonData.surah.nameArabic}</span>
       </div>
 
-      {/* Recite prompt */}
+      {/* Recite prompt — top card of the deck */}
       {!revealed && (
         <div className="space-y-5">
-          <div className="rounded-2xl bg-card p-6 text-center shadow-sm">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal/10">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-teal">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
+          <div className="relative">
+            {/* Stack edges — the rest of the deck behind */}
+            <div className="absolute inset-0 translate-x-[10px] translate-y-[10px] rotate-[1.2deg] rounded-2xl border-[1.5px] border-ink/40 bg-cream" aria-hidden />
+            <div className="absolute inset-0 translate-x-[5px] translate-y-[5px] rotate-[-0.8deg] rounded-2xl border-[1.5px] border-ink/60 bg-card-raised" aria-hidden />
+            <div className="tactile-card relative rounded-2xl bg-card p-6 text-center">
+              <div className="mx-auto mb-3 flex items-center gap-2.5" style={{ width: 'fit-content' }} aria-hidden>
+                <span className="h-px w-10 bg-gold/50" />
+                <span className="h-2 w-2 rotate-45 bg-gold" />
+                <span className="h-px w-10 bg-gold/50" />
+              </div>
+              <p className="text-sm font-medium text-foreground">
+                Recite this passage from memory
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                Try to recall the full passage, then rate how well you remembered each ayah
+              </p>
             </div>
-            <p className="text-sm font-medium text-foreground">
-              Recite this passage from memory
-            </p>
-            <p className="mt-1 text-xs text-muted">
-              Try to recall the full passage, then rate how well you remembered each ayah
-            </p>
           </div>
 
           <Button onClick={() => {
@@ -280,7 +280,7 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
                   setHiddenAyahs(new Set());
                 }
               }}
-              className="w-full rounded-lg bg-foreground/5 py-2 text-xs font-medium text-muted hover:bg-foreground/10"
+              className="pressable w-full rounded-lg border border-foreground/15 bg-card py-2.5 text-xs font-semibold text-muted hover:text-foreground"
             >
               {hiddenAyahs.size === 0 ? 'Hide All' : 'Show All'}
             </button>
@@ -297,10 +297,10 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
                 key={ayah.key}
                 ref={(el) => { ayahRefs.current[i] = el; }}
                 className={cn(
-                  'rounded-xl p-4 transition-all border relative',
+                  'tactile-raise-sm relative rounded-xl border-[1.5px] p-4 transition-all',
                   isActive
-                    ? 'bg-teal/5 border-teal/30 shadow-md'
-                    : 'bg-card border-foreground/8',
+                    ? 'border-teal/60 bg-teal/5'
+                    : 'border-ink bg-card',
                   playingAll && !isActive && 'opacity-40'
                 )}
               >
@@ -352,55 +352,33 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
                     <p className="text-sm text-muted">Hidden — tap eye to reveal</p>
                   </div>
                 ) : (
-                  <AyahDisplay ayah={ayah} />
+                  <>
+                    <div className="mx-auto mb-3 mt-5 flex w-fit items-center gap-2.5" aria-hidden>
+                      <span className="h-px w-8 bg-gold/50" />
+                      <span className="h-1.5 w-1.5 rotate-45 bg-gold" />
+                      <span className="h-px w-8 bg-gold/50" />
+                    </div>
+                    <AyahDisplay ayah={ayah} />
+                  </>
                 )}
 
                 {/* Per-ayah rating buttons */}
                 {!submitted && (
-                  <div className="mt-3 flex gap-2">
-                    <button
-                      onClick={() => rateAyah(ayah.number, 'got-it')}
-                      className={cn(
-                        'flex-1 rounded-lg py-2 text-xs font-semibold transition-colors',
-                        rating === 'got-it'
-                          ? 'bg-success text-white'
-                          : 'bg-success/10 text-success hover:bg-success/20'
-                      )}
-                    >
-                      Got it
-                    </button>
-                    <button
-                      onClick={() => rateAyah(ayah.number, 'hesitated')}
-                      className={cn(
-                        'flex-1 rounded-lg py-2 text-xs font-semibold transition-colors',
-                        rating === 'hesitated'
-                          ? 'bg-gold text-white'
-                          : 'bg-gold/10 text-gold hover:bg-gold/20'
-                      )}
-                    >
-                      Hesitated
-                    </button>
-                    <button
-                      onClick={() => rateAyah(ayah.number, 'missed')}
-                      className={cn(
-                        'flex-1 rounded-lg py-2 text-xs font-semibold transition-colors',
-                        rating === 'missed'
-                          ? 'bg-red-500 text-white'
-                          : 'bg-red-400/10 text-red-400 hover:bg-red-400/20'
-                      )}
-                    >
-                      Missed
-                    </button>
-                  </div>
+                  <RatingButtons
+                    className="mt-3"
+                    size="sm"
+                    value={rating}
+                    onRate={(r) => rateAyah(ayah.number, r)}
+                  />
                 )}
 
                 {/* Show rating after submit */}
                 {submitted && rating && (
                   <div className={cn(
-                    'mt-2 rounded-lg px-3 py-1 text-center text-xs font-medium',
-                    rating === 'got-it' && 'bg-success/10 text-success',
-                    rating === 'hesitated' && 'bg-gold/10 text-gold',
-                    rating === 'missed' && 'bg-red-400/10 text-red-400',
+                    'mt-2 rounded-lg border px-3 py-1 text-center text-xs font-medium',
+                    rating === 'got-it' && 'border-success/30 bg-success/10 text-success',
+                    rating === 'hesitated' && 'border-gold/30 bg-gold/10 text-gold-deep',
+                    rating === 'missed' && 'border-miss/30 bg-miss/10 text-miss',
                   )}>
                     {rating === 'got-it' ? 'Got it' : rating === 'hesitated' ? 'Hesitated' : 'Missed'}
                   </div>
@@ -409,95 +387,17 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
             );
           })}
 
-          {/* Media controls bar — same as listen-phase */}
+          {/* Media controls */}
           {!submitted && (
-            <div className="sticky bottom-16 rounded-2xl bg-card p-3 shadow-lg border border-foreground/10">
-              <div className="flex items-center gap-3">
-                {/* Restart */}
-                <button
-                  onClick={restartPlayback}
-                  disabled={!playingAll}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
-                  title="Restart from beginning"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="1 4 1 10 7 10" />
-                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
-                  </svg>
-                </button>
-
-                {/* Play / Pause */}
-                <button
-                  onClick={() => {
-                    if (playingAll && isPlaying) audioController.pause();
-                    else if (playingAll && isPaused) audioController.resume();
-                    else playAllAyahs();
-                  }}
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
-                >
-                  {playingAll && isPlaying ? (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                      <rect x="3" y="2" width="3.5" height="12" rx="1" />
-                      <rect x="9.5" y="2" width="3.5" height="12" rx="1" />
-                    </svg>
-                  ) : (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M4 2l10 6-10 6V2z" />
-                    </svg>
-                  )}
-                </button>
-
-                {/* Stop */}
-                <button
-                  onClick={stopPlayback}
-                  disabled={!playingAll}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
-                  title="Stop"
-                >
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                    <rect x="3" y="3" width="10" height="10" rx="1.5" />
-                  </svg>
-                </button>
-
-                {/* Status */}
-                <div className="flex-1 text-center">
-                  <p className="text-xs text-muted">
-                    {playingAll
-                      ? `Ayah ${currentAyahIndex + 1} / ${lessonData.ayahs.length}`
-                      : 'Tap ayah or play'}
-                  </p>
-                </div>
-
-                {/* Speed dropdown */}
-                <div className="relative">
-                  <button
-                    onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-                    className="rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
-                  >
-                    {currentSpeed}x
-                  </button>
-                  {showSpeedMenu && (
-                    <>
-                      <div className="fixed inset-0 z-40" onClick={() => setShowSpeedMenu(false)} />
-                      <div className="absolute bottom-8 right-0 z-50 rounded-lg bg-card shadow-lg border border-foreground/10 py-1">
-                        {SPEEDS.map((s) => (
-                          <button
-                            key={s}
-                            onClick={() => handleSpeedChange(s)}
-                            className={cn(
-                              'block w-full px-4 py-1.5 text-left text-xs font-medium',
-                              s === currentSpeed ? 'text-teal bg-teal/5' : 'text-foreground hover:bg-foreground/5'
-                            )}
-                          >
-                            {s}x
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
+            <MediaControlsBar
+              playingAll={playingAll}
+              currentIdx={currentAyahIndex}
+              total={lessonData.ayahs.length}
+              idleLabel="Tap ayah or play"
+              onPlayAll={playAllAyahs}
+              onStop={stopPlayback}
+              onRestart={restartPlayback}
+            />
           )}
 
           {/* Submit / Next buttons */}
@@ -514,10 +414,10 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
           {submitted && (
             <div className="space-y-3">
               <div className={cn(
-                'rounded-xl p-3 text-center text-sm font-medium',
-                worstRating === 'got-it' && 'bg-success/10 text-success',
-                worstRating === 'hesitated' && 'bg-gold/10 text-gold',
-                worstRating === 'missed' && 'bg-red-400/10 text-red-400',
+                'rounded-xl border-[1.5px] p-3 text-center text-sm font-medium',
+                worstRating === 'got-it' && 'border-success/30 bg-success/10 text-success',
+                worstRating === 'hesitated' && 'border-gold/30 bg-gold/10 text-gold-deep',
+                worstRating === 'missed' && 'border-miss/30 bg-miss/10 text-miss',
               )}>
                 {worstRating === 'got-it' && `Great recall! Next review ${nextReviewLabel}.`}
                 {worstRating === 'hesitated' && `Good effort — next review ${nextReviewLabel}.`}

@@ -16,6 +16,8 @@ import { useStatsStore } from '@/stores/stats-store';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import ArabicText from '@/components/ui/arabic-text';
+import MediaControlsBar from '@/components/ui/media-controls-bar';
+import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
 
 type SessionStep = 'ayah-by-ayah' | 'full-passage' | 'results';
@@ -38,16 +40,10 @@ const RATING_QUALITY: Record<PracticeAyahRating, number> = {
   'missed': 1,
 };
 
-const RATING_COLORS_SELECTED: Record<PracticeAyahRating, string> = {
-  'got-it': 'bg-success text-white',
-  'hesitated': 'bg-gold text-white',
-  'missed': 'bg-red-500 text-white',
-};
-
-const RATING_COLORS_UNSELECTED: Record<PracticeAyahRating, string> = {
-  'got-it': 'bg-success/10 text-success hover:bg-success/20',
-  'hesitated': 'bg-gold/10 text-gold hover:bg-gold/20',
-  'missed': 'bg-red-400/10 text-red-400 hover:bg-red-400/20',
+const RATING_RESULT_TINTS: Record<PracticeAyahRating, string> = {
+  'got-it': 'border-success/30 bg-success/10 text-success',
+  'hesitated': 'border-gold/30 bg-gold/10 text-gold-deep',
+  'missed': 'border-miss/30 bg-miss/10 text-miss',
 };
 
 const RATING_LABELS: Record<PracticeAyahRating, string> = {
@@ -85,7 +81,7 @@ export default function PracticeSession({
 
   const getFlagDotColor = (ayahNumber: number) => {
     const rating = flaggedFromRetry[ayahNumber];
-    if (rating === 'missed') return 'bg-red-400';
+    if (rating === 'missed') return 'bg-miss';
     if (rating === 'hesitated') return 'bg-gold';
     return 'bg-gold'; // default for prop-based flags
   };
@@ -96,8 +92,6 @@ export default function PracticeSession({
   // Audio playback state
   const [playingAll, setPlayingAll] = useState(false);
   const [currentPlayingAyahIdx, setCurrentPlayingAyahIdx] = useState(-1);
-  const [currentSpeed, setCurrentSpeed] = useState(1);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const abortPlayRef = useRef(false);
 
   const recorder = useRecorder();
@@ -170,12 +164,6 @@ export default function PracticeSession({
     setPlayingAll(false);
     setCurrentPlayingAyahIdx(-1);
   }, []);
-
-  const handleSpeedChange = (speed: number) => {
-    setCurrentSpeed(speed);
-    audio.setSpeed(speed);
-    setShowSpeedMenu(false);
-  };
 
   const rateAyah = (rating: PracticeAyahRating) => {
     const result: PracticeAyahResult = {
@@ -337,7 +325,7 @@ export default function PracticeSession({
         </div>
 
         {/* Ayah card */}
-        <Card className="text-center">
+        <Card variant="tactile" className="text-center">
           <p className="mb-3 text-xs text-muted">
             {activeFlaggedAyahs.includes(currentAyah.number) && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', getFlagDotColor(currentAyah.number))} />}
             {ayahLabel(currentAyah)}
@@ -365,7 +353,7 @@ export default function PracticeSession({
                             key={i}
                             className={cn(
                               'mx-0.5',
-                              w.correct ? 'text-success' : 'text-red-500 underline decoration-wavy'
+                              w.correct ? 'text-success' : 'text-miss underline decoration-wavy'
                             )}
                           >
                             {w.word}
@@ -404,7 +392,7 @@ export default function PracticeSession({
                 className={cn(
                   'flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full transition-all',
                   recorder.isRecording
-                    ? 'bg-red-500 text-white animate-pulse'
+                    ? 'bg-miss text-on-miss animate-pulse'
                     : 'bg-teal/10 text-teal hover:bg-teal/20'
                 )}
                 title={recorder.isRecording ? 'Stop recording' : 'Start recording'}
@@ -440,20 +428,10 @@ export default function PracticeSession({
               </button>
             </div>
             <p className="text-center text-xs font-medium text-muted">How did you do?</p>
-            <div className="flex gap-2">
-              {(['got-it', 'hesitated', 'missed'] as PracticeAyahRating[]).map((rating) => (
-                <button
-                  key={rating}
-                  onClick={() => rateAyah(rating)}
-                  className={cn(
-                    'flex-1 rounded-xl py-3 text-sm font-semibold transition-colors',
-                    RATING_COLORS_SELECTED[rating]
-                  )}
-                >
-                  {RATING_LABELS[rating]}
-                </button>
-              ))}
-            </div>
+            <RatingButtons
+              onRate={(r) => rateAyah(r)}
+              labels={{ hesitated: 'Shaky' }}
+            />
           </div>
         )}
 
@@ -473,11 +451,11 @@ export default function PracticeSession({
         )}
 
         {whisper.error && (
-          <p className="text-center text-xs text-red-500">Voice model: {whisper.error}</p>
+          <p className="text-center text-xs text-miss">Voice model: {whisper.error}</p>
         )}
 
         {recorder.error && (
-          <p className="text-center text-xs text-red-500">{recorder.error}</p>
+          <p className="text-center text-xs text-miss">{recorder.error}</p>
         )}
       </div>
     );
@@ -531,8 +509,8 @@ export default function PracticeSession({
                 </div>
               )}
               <Card className={cn(
-                'space-y-2 transition-all border',
-                isAyahPlaying ? 'border-teal/30 bg-teal/5' : 'border-transparent'
+                'tactile-raise-sm space-y-2 border-[1.5px] transition-all',
+                isAyahPlaying ? 'border-teal/60 bg-teal/5' : 'border-ink'
               )}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -578,22 +556,13 @@ export default function PracticeSession({
                       <p className="text-center text-sm italic text-muted">{ayah.translation}</p>
                     )}
                     {/* Per-ayah rating */}
-                    <div className="flex gap-1.5 pt-1">
-                      {(['got-it', 'hesitated', 'missed'] as PracticeAyahRating[]).map((rating) => (
-                        <button
-                          key={rating}
-                          onClick={() => ratePassageAyah(ayah.number, rating)}
-                          className={cn(
-                            'flex-1 rounded-lg py-1.5 text-xs font-semibold transition-colors',
-                            currentRating === rating
-                              ? RATING_COLORS_SELECTED[rating]
-                              : RATING_COLORS_UNSELECTED[rating]
-                          )}
-                        >
-                          {RATING_LABELS[rating]}
-                        </button>
-                      ))}
-                    </div>
+                    <RatingButtons
+                      className="pt-1"
+                      size="sm"
+                      value={currentRating}
+                      onRate={(r) => ratePassageAyah(ayah.number, r)}
+                      labels={{ hesitated: 'Shaky' }}
+                    />
                   </>
                 ) : (
                   <div className="py-4 text-center">
@@ -607,80 +576,13 @@ export default function PracticeSession({
         </div>
 
         {/* Sticky media controls */}
-        <div className="sticky bottom-16 rounded-2xl bg-card p-3 shadow-lg border border-foreground/10">
-          <div className="flex items-center gap-3">
-            {/* Play / Pause */}
-            <button
-              onClick={() => {
-                if (playingAll && audio.isPlaying) audioController.pause();
-                else if (playingAll && audio.isPaused) audioController.resume();
-                else playAllAyahs();
-              }}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
-            >
-              {playingAll && audio.isPlaying ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <rect x="3" y="2" width="3.5" height="12" rx="1" />
-                  <rect x="9.5" y="2" width="3.5" height="12" rx="1" />
-                </svg>
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                  <path d="M4 2l10 6-10 6V2z" />
-                </svg>
-              )}
-            </button>
-
-            {/* Stop */}
-            <button
-              onClick={stopPlayback}
-              disabled={!playingAll}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
-              title="Stop"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="3" y="3" width="10" height="10" rx="1.5" />
-              </svg>
-            </button>
-
-            {/* Status */}
-            <div className="flex-1 text-center">
-              <p className="text-xs text-muted">
-                {playingAll
-                  ? `Ayah ${currentPlayingAyahIdx + 1} / ${ayahs.length}`
-                  : 'Tap play or ayah'}
-              </p>
-            </div>
-
-            {/* Speed dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-                className="rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
-              >
-                {currentSpeed}x
-              </button>
-              {showSpeedMenu && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setShowSpeedMenu(false)} />
-                  <div className="absolute bottom-8 right-0 z-50 rounded-lg bg-card shadow-lg border border-foreground/10 py-1">
-                    {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => handleSpeedChange(s)}
-                        className={cn(
-                          'block w-full px-4 py-1.5 text-left text-xs font-medium',
-                          s === currentSpeed ? 'text-teal bg-teal/5' : 'text-foreground hover:bg-foreground/5'
-                        )}
-                      >
-                        {s}x
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+        <MediaControlsBar
+          playingAll={playingAll}
+          currentIdx={currentPlayingAyahIdx}
+          total={ayahs.length}
+          onPlayAll={playAllAyahs}
+          onStop={stopPlayback}
+        />
 
         {/* Finish button — always visible, disabled until all rated */}
         <Button onClick={() => finishSession()} disabled={!allAyahsRated} className="w-full">
@@ -705,7 +607,7 @@ export default function PracticeSession({
             'mx-auto flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold',
             overallScore >= 80 ? 'bg-success/10 text-success' :
             overallScore >= 50 ? 'bg-gold/10 text-gold' :
-            'bg-red-500/10 text-red-500'
+            'bg-miss/10 text-miss'
           )}
         >
           {overallScore}%
@@ -725,7 +627,7 @@ export default function PracticeSession({
           <p className="text-[10px] text-muted">Shaky</p>
         </div>
         <div className="text-center">
-          <p className="text-lg font-bold text-red-500">{missedCount}</p>
+          <p className="text-lg font-bold text-miss">{missedCount}</p>
           <p className="text-[10px] text-muted">Missed</p>
         </div>
       </div>
@@ -737,8 +639,8 @@ export default function PracticeSession({
           <div
             key={result.ayahNumber}
             className={cn(
-              'flex items-center justify-between rounded-lg px-3 py-2',
-              RATING_COLORS_SELECTED[result.rating]
+              'flex items-center justify-between rounded-lg border px-3 py-2',
+              RATING_RESULT_TINTS[result.rating]
             )}
           >
             <span className="text-sm">

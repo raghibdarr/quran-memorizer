@@ -4,10 +4,19 @@ import { useEffect, useRef, useState } from 'react';
 import type { EssentialItem, Ayah } from '@/types/quran';
 import { audioController } from '@/lib/audio';
 import { getSurah } from '@/lib/quran-data';
+import { useAudio } from '@/hooks/use-audio';
 import { useSettingsStore } from '@/stores/settings-store';
 import { useEssentialsStore } from '@/stores/essentials-store';
 import ArabicText from '@/components/ui/arabic-text';
 import { cn } from '@/lib/cn';
+
+function fmtTime(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
+  const total = Math.floor(seconds);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
 
 interface Props {
   items: EssentialItem[];
@@ -19,11 +28,45 @@ export default function ReciteMode({ items, onClose }: Props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [autoplay, setAutoplay] = useState(false);
   const [quranAyah, setQuranAyah] = useState<Ayah | null>(null);
+  const [scrubTime, setScrubTime] = useState<number | null>(null);
   const arabicScript = useSettingsStore((s) => s.arabicScript);
   const arabicClass = arabicScript === 'indopak' ? 'arabic-text-indopak' : 'arabic-text';
   const memorized = useEssentialsStore((s) => s.memorized);
   const { toggleMemorized } = useEssentialsStore();
+  const { currentTime, duration, seek } = useAudio();
   const touchStartX = useRef(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const hasDuration = duration > 0 && isPlaying;
+  const displayTime = scrubTime !== null ? scrubTime : currentTime;
+  const progress = hasDuration ? (displayTime / duration) * 100 : 0;
+
+  const seekFromClientX = (clientX: number) => {
+    const el = trackRef.current;
+    if (!el || !hasDuration) return null;
+    const rect = el.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    return ratio * duration;
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!hasDuration) return;
+    const t = seekFromClientX(e.clientX);
+    if (t === null) return;
+    setScrubTime(t);
+    (e.target as Element).setPointerCapture(e.pointerId);
+  };
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (scrubTime === null) return;
+    const t = seekFromClientX(e.clientX);
+    if (t !== null) setScrubTime(t);
+  };
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (scrubTime === null) return;
+    seek(scrubTime);
+    setScrubTime(null);
+    try { (e.target as Element).releasePointerCapture(e.pointerId); } catch { /* ignore */ }
+  };
 
   const item = items[index];
   const total = items.length;
@@ -176,6 +219,33 @@ export default function ReciteMode({ items, onClose }: Props) {
 
       {/* Footer controls */}
       <div className="border-t border-foreground/5 bg-cream px-4 py-3">
+        {item.audioUrl && (
+          <div className="mx-auto mb-2 flex max-w-2xl items-center gap-2">
+            <span className="w-9 text-[10px] tabular-nums text-muted text-left">{fmtTime(displayTime)}</span>
+            <div
+              ref={trackRef}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
+              className={cn('relative h-3 flex-1 touch-none', hasDuration ? 'cursor-pointer' : 'cursor-default')}
+            >
+              <div className="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 overflow-hidden rounded-full bg-foreground/10">
+                <div
+                  className="h-full rounded-full bg-teal"
+                  style={{ width: `${progress}%`, transition: scrubTime !== null ? 'none' : 'width 100ms linear' }}
+                />
+              </div>
+              {hasDuration && (
+                <div
+                  className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal shadow-sm"
+                  style={{ left: `${progress}%`, transition: scrubTime !== null ? 'none' : 'left 100ms linear' }}
+                />
+              )}
+            </div>
+            <span className="w-9 text-[10px] tabular-nums text-muted text-right">{fmtTime(duration)}</span>
+          </div>
+        )}
         <div className="mx-auto flex max-w-2xl items-center gap-2">
           <button
             onClick={() => setIndex(Math.max(0, index - 1))}
@@ -192,7 +262,7 @@ export default function ReciteMode({ items, onClose }: Props) {
                 disabled={isPlaying && autoplay}
                 className={cn(
                   'flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors',
-                  isPlaying ? 'bg-teal text-white' : 'bg-foreground/5 text-muted hover:bg-foreground/10',
+                  isPlaying ? 'bg-teal text-on-teal' : 'bg-foreground/5 text-muted hover:bg-foreground/10',
                 )}
                 aria-label="Play"
               >
@@ -204,7 +274,7 @@ export default function ReciteMode({ items, onClose }: Props) {
                 onClick={() => setAutoplay((v) => !v)}
                 className={cn(
                   'shrink-0 rounded-full px-3 py-2 text-[10px] font-semibold transition-colors',
-                  autoplay ? 'bg-teal text-white' : 'bg-foreground/5 text-muted hover:bg-foreground/10',
+                  autoplay ? 'bg-teal text-on-teal' : 'bg-foreground/5 text-muted hover:bg-foreground/10',
                 )}
                 aria-label="Toggle autoplay"
               >
@@ -215,7 +285,7 @@ export default function ReciteMode({ items, onClose }: Props) {
 
           <button
             onClick={() => (index < total - 1 ? setIndex(index + 1) : onClose())}
-            className="flex-1 rounded-xl bg-teal py-2.5 text-sm font-semibold text-white hover:brightness-110"
+            className="flex-1 rounded-xl bg-teal py-2.5 text-sm font-semibold text-on-teal hover:brightness-110"
           >
             {index < total - 1 ? 'Next →' : 'Done'}
           </button>

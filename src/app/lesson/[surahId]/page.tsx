@@ -44,7 +44,7 @@ export default function SurahDetailPage() {
   const overallProgress = lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0;
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
@@ -79,7 +79,7 @@ export default function SurahDetailPage() {
               onClick={() => setActiveTab('learn')}
               className={cn(
                 'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                activeTab === 'learn' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                activeTab === 'learn' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
               )}
             >
               Learn
@@ -88,7 +88,7 @@ export default function SurahDetailPage() {
               onClick={() => setActiveTab('practice')}
               className={cn(
                 'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                activeTab === 'practice' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                activeTab === 'practice' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
               )}
             >
               Practice
@@ -117,7 +117,7 @@ export default function SurahDetailPage() {
                   )}>
                     {isComplete ? (
                       <>
-                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-success text-white">
+                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-success text-on-success">
                           <CheckIcon size={20} />
                         </div>
                         <p className="text-sm font-semibold text-foreground">Lesson Complete</p>
@@ -175,8 +175,8 @@ export default function SurahDetailPage() {
                         <div
                           className={cn(
                             'flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold',
-                            isComplete ? 'bg-success text-white' :
-                            isActive ? 'bg-teal text-white' :
+                            isComplete ? 'bg-success text-on-success' :
+                            isActive ? 'bg-teal text-on-teal' :
                             'bg-foreground/10 text-muted'
                           )}
                         >

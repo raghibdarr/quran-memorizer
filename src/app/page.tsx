@@ -17,7 +17,7 @@ import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import Logo from '@/components/ui/logo';
-import { FlameIcon, BookIcon, CheckIcon } from '@/components/ui/icons';
+import { FlameIcon, BookIcon, CheckIcon, ArrowRightIcon } from '@/components/ui/icons';
 import InstallBanner from '@/components/ui/install-banner';
 import OnboardingOverlay from '@/components/ui/onboarding-overlay';
 import { cn } from '@/lib/cn';
@@ -163,7 +163,7 @@ export default function HomePage() {
   }, [allSurahs, progressLessons, juzSegmentsBySurah]);
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-2 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
@@ -176,10 +176,10 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-2">
               {stats.currentStreak > 0 && (
-                <div className="flex items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5">
-                  <FlameIcon size={14} className="text-gold" />
-                  <span className="text-sm font-bold text-gold">{stats.currentStreak}</span>
-                  <span className="text-[10px] text-gold/70">day{stats.currentStreak !== 1 ? 's' : ''}</span>
+                <div className="flex items-center gap-1.5 rounded-full border-[1.5px] border-gold/40 bg-gold/10 px-3 py-1.5">
+                  <FlameIcon size={14} className="text-gold-deep" />
+                  <span className="text-sm font-bold text-gold-deep">{stats.currentStreak}</span>
+                  <span className="text-[10px] text-gold-deep/70">day{stats.currentStreak !== 1 ? 's' : ''}</span>
                 </div>
               )}
               <SettingsPanel />
@@ -196,14 +196,14 @@ export default function HomePage() {
           <TodaysPlanCard />
         ) : (
           <a href="/plan/setup" className="block">
-            <Card className="border-l-4 border-l-gold">
+            <Card variant="tactile" pressable className="bg-gold/10">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-muted">Hifdh Planner</p>
-                  <p className="mt-0.5 text-base font-bold text-foreground">Set a memorization goal</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh Planner</p>
+                  <p className="mt-1 text-lg font-bold text-foreground">Set a memorization goal</p>
                   <p className="mt-0.5 text-xs text-muted">Get a personalised daily plan with reviews and pacing.</p>
                 </div>
-                <span className="shrink-0 rounded-full bg-gold/10 px-3 py-1.5 text-[11px] font-semibold text-gold">Start →</span>
+                <span className="tactile-chip shrink-0 rounded-full bg-gold px-3.5 py-2 text-xs font-bold text-on-gold">Start →</span>
               </div>
             </Card>
           </a>
@@ -212,23 +212,26 @@ export default function HomePage() {
         {/* Continue card — hidden when a plan is active (plan card takes over) */}
         {!plan && lastActivity ? (
           <a href={lastActivity.url} className="block">
-            <Card className="border-l-4 border-l-teal">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted">
+            <Card variant="tactile" pressable className="p-6">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-teal">
                 Continue {lastActivity.type === 'lesson' ? 'Learning' : 'Practicing'}
               </p>
-              <p className="mt-1 text-lg font-bold text-foreground">{lastActivity.label}</p>
+              <div className="mt-1.5 flex items-center justify-between gap-3">
+                <p className="text-xl font-bold text-foreground">{lastActivity.label}</p>
+                <ArrowRightIcon size={20} className="shrink-0 text-teal" />
+              </div>
             </Card>
           </a>
         ) : !plan && activeProgress && activeSurah ? (
           <a href={`/lesson/${activeSurah.id}`} className="block">
-            <Card className="border-l-4 border-l-teal">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted">Continue Learning</p>
-              <div className="mt-1 flex items-center justify-between">
+            <Card variant="tactile" pressable className="p-6">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Continue Learning</p>
+              <div className="mt-1.5 flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-lg font-bold text-foreground">{activeSurah.nameSimple}</p>
-                  <p className="text-sm capitalize text-teal">{activeProgress.currentPhase} phase</p>
+                  <p className="text-xl font-bold text-foreground">{activeSurah.nameSimple}</p>
+                  <p className="mt-0.5 text-sm capitalize text-teal">{activeProgress.currentPhase} phase</p>
                 </div>
-                <span className="arabic-text text-2xl text-muted">{activeSurah.nameArabic}</span>
+                <span className="arabic-text text-3xl text-gold-deep/80">{activeSurah.nameArabic}</span>
               </div>
             </Card>
           </a>
@@ -253,8 +256,8 @@ export default function HomePage() {
             <p className="mt-1.5 text-xs text-muted">Today</p>
           </Card>
           <a href="/review" className="block">
-            <Card className="flex h-full flex-col items-center justify-center py-3">
-              <p className="text-xl font-bold text-gold">{dueReviewCount}</p>
+            <Card pressable className="flex h-full flex-col items-center justify-center py-3">
+              <p className="text-xl font-bold text-gold-deep">{dueReviewCount}</p>
               <p className="mt-1 text-xs text-muted">Due Reviews</p>
             </Card>
           </a>
@@ -265,13 +268,13 @@ export default function HomePage() {
         </div>
 
         {/* Surahs / Juz Tab Toggle */}
-        <div className="flex gap-1 rounded-xl bg-foreground/10 p-1">
+        <div className="flex gap-1 rounded-xl border border-foreground/10 bg-foreground/5 p-1">
           <button
             onClick={() => setTab('surahs')}
             className={cn(
-              'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+              'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
               tab === 'surahs'
-                ? 'bg-teal text-white shadow-sm'
+                ? 'ink-border bg-teal text-on-teal'
                 : 'text-muted hover:text-foreground'
             )}
           >
@@ -280,9 +283,9 @@ export default function HomePage() {
           <button
             onClick={() => setTab('juz')}
             className={cn(
-              'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+              'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
               tab === 'juz'
-                ? 'bg-teal text-white shadow-sm'
+                ? 'ink-border bg-teal text-on-teal'
                 : 'text-muted hover:text-foreground'
             )}
           >
@@ -299,22 +302,22 @@ export default function HomePage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by name or number..."
-                className="w-full rounded-xl border border-foreground/10 bg-card px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
+                className="w-full rounded-xl border-[1.5px] border-foreground/15 bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-teal focus:outline-none"
               />
             </div>
 
             {/* Sort & View Toggle */}
             <div className="mb-3 flex items-center gap-2">
-              <div className="flex flex-1 gap-2 overflow-x-auto pb-1">
+              <div className="scrollbar-hide flex flex-1 gap-2 overflow-x-auto py-1 [mask-image:linear-gradient(to_right,black_88%,transparent)]">
                 {(Object.keys(SORT_LABELS) as SortOption[]).map((option) => (
                   <button
                     key={option}
                     onClick={() => setSort(option)}
                     className={cn(
-                      'shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors',
+                      'pressable shrink-0 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors',
                       sort === option
-                        ? 'bg-teal text-white'
-                        : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                        ? 'ink-border bg-teal text-on-teal'
+                        : 'border border-foreground/15 bg-card text-muted hover:text-foreground'
                     )}
                   >
                     {SORT_LABELS[option]}
@@ -323,7 +326,7 @@ export default function HomePage() {
               </div>
               <button
                 onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
-                className="shrink-0 rounded-lg bg-foreground/5 p-2 text-muted transition-colors hover:bg-foreground/10"
+                className="pressable shrink-0 rounded-lg border border-foreground/15 bg-card p-2.5 text-muted transition-colors hover:text-foreground"
                 title={view === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
               >
                 {view === 'grid' ? (
@@ -357,16 +360,16 @@ export default function HomePage() {
                   return (
                     <a key={surah.id} href={`/lesson/${surah.id}`}>
                       <Card
-                        className={cn(
-                          'transition-all hover:shadow-md',
-                          isComplete && 'border border-success/20 bg-success/5'
-                        )}
+                        pressable
+                        className={cn(isComplete && 'bg-success/5')}
                       >
                         <div className="flex items-start justify-between">
                           <span className="arabic-text text-xl">{surah.nameArabic}</span>
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-2">
                             {isComplete && <CheckIcon size={14} className="text-success" />}
-                            <span className="text-xs font-medium text-muted">{surah.id}</span>
+                            <span className="flex h-6 w-6 shrink-0 rotate-45 items-center justify-center rounded-[7px] border-[1.5px] border-gold/50">
+                              <span className="-rotate-45 text-[9px] font-bold text-gold-deep">{surah.id}</span>
+                            </span>
                           </div>
                         </div>
                         <p className="mt-1 text-sm font-semibold text-foreground">{surah.nameSimple}</p>
@@ -405,7 +408,7 @@ export default function HomePage() {
                       key={surah.id}
                       href={`/lesson/${surah.id}`}
                       className={cn(
-                        'flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
+                        'pressable flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
                         isComplete && 'bg-success/5'
                       )}
                     >
@@ -465,10 +468,8 @@ export default function HomePage() {
               return (
                 <a key={juz.juzNumber} href={`/juz/${juz.juzNumber}`}>
                   <Card
-                    className={cn(
-                      'transition-all hover:shadow-md',
-                      isComplete && 'border border-success/20 bg-success/5'
-                    )}
+                    pressable
+                    className={cn(isComplete && 'bg-success/5')}
                   >
                     <div className="flex items-start justify-between">
                       <p className="text-lg font-bold text-teal">Juz {juz.juzNumber}</p>

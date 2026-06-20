@@ -9,7 +9,9 @@ import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
 import ArabicText from '@/components/ui/arabic-text';
 import AyahDisplay from '@/components/ui/ayah-display';
+import BeadProgress from '@/components/ui/bead-progress';
 import Button from '@/components/ui/button';
+import MediaControlsBar from '@/components/ui/media-controls-bar';
 import { cn } from '@/lib/cn';
 
 interface ChunkPhaseProps {
@@ -74,7 +76,7 @@ const LEARN_STEPS: LearnStep[] = [
 export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onComplete }: ChunkPhaseProps) {
   const { markChunkComplete, updateChunkIndex, updateChunkState } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[lessonId]);
-  const { isPlaying: audioIsPlaying, isPaused: audioIsPaused } = useAudio();
+  const { isPlaying: audioIsPlaying } = useAudio();
   const getAudioUrl = (surahId: number, ayahNum: number) =>
     buildAudioUrl(surahId, ayahNum, useSettingsStore.getState().reciter);
 
@@ -313,7 +315,6 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
   // Shared chain audio helpers
   const [chainPlaying, setChainPlaying] = useState(false);
   const [chainPlayingIdx, setChainPlayingIdx] = useState(-1);
-  const [showChainSpeedMenu, setShowChainSpeedMenu] = useState(false);
   const chainAbortRef = useRef(false);
 
   const playChainAyah = async (ayah: Ayah, idx: number) => {
@@ -389,7 +390,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   'w-full rounded-xl p-4 text-left transition-all',
                   isAyahPlaying ? 'bg-teal/5 border border-teal/30' :
                   isRevealed ? 'bg-success/5' :
-                  'border-2 border-dashed border-foreground/15'
+                  'border-2 border-dashed border-foreground/25 bg-card/50'
                 )}
               >
                 {isRevealed ? (
@@ -443,63 +444,15 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         </div>
 
         {/* Media controls — only show after all revealed */}
-        {allRevealed && <div className="sticky bottom-16 rounded-2xl bg-card p-3 shadow-lg border border-foreground/10">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                if (chainPlaying && audioIsPlaying) audioController.pause();
-                else if (chainPlaying && audioIsPaused) audioController.resume();
-                else playChainAll(chainAyahs);
-              }}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
-            >
-              {chainPlaying && audioIsPlaying ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1" /><rect x="9.5" y="2" width="3.5" height="12" rx="1" /></svg>
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z" /></svg>
-              )}
-            </button>
-            <button
-              onClick={stopChainPlay}
-              disabled={!chainPlaying}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" /></svg>
-            </button>
-            <div className="flex-1 text-center">
-              <p className="text-xs text-muted">
-                {chainPlaying ? `Ayah ${chainPlayingIdx + 1} / ${chainAyahs.length}` : 'Tap play or ayah'}
-              </p>
-            </div>
-            <div className="relative">
-              <button
-                onClick={() => setShowChainSpeedMenu(!showChainSpeedMenu)}
-                className="rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
-              >
-                {currentSpeed}x
-              </button>
-              {showChainSpeedMenu && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setShowChainSpeedMenu(false)} />
-                  <div className="absolute bottom-8 right-0 z-50 rounded-lg bg-card shadow-lg border border-foreground/10 py-1">
-                    {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); setShowChainSpeedMenu(false); }}
-                        className={cn(
-                          'block w-full px-4 py-1.5 text-left text-xs font-medium',
-                          s === currentSpeed ? 'text-teal bg-teal/5' : 'text-foreground hover:bg-foreground/5'
-                        )}
-                      >
-                        {s}x
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>}
+        {allRevealed && (
+          <MediaControlsBar
+            playingAll={chainPlaying}
+            currentIdx={chainPlayingIdx}
+            total={chainAyahs.length}
+            onPlayAll={() => playChainAll(chainAyahs)}
+            onStop={stopChainPlay}
+          />
+        )}
 
         {!allRevealed && (
           <Button onClick={revealAll} variant="secondary" className="w-full">
@@ -524,7 +477,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                       setMainStage('learning');
                       setLearnStep('listen-with-text');
                     }}
-                    className="rounded-lg bg-card border border-foreground/10 px-3 py-1.5 text-xs font-medium text-foreground hover:border-teal transition-colors"
+                    className="tactile-chip rounded-lg bg-card px-3.5 py-2 text-xs font-semibold text-foreground hover:border-teal"
                   >
                     Ayah {ayah.number}
                   </button>
@@ -597,8 +550,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                 className={cn(
                   'w-full rounded-xl p-4 text-left transition-all',
                   isAyahPlaying ? 'bg-teal/5 border border-teal/30' :
-                  isRevealed ? 'bg-card shadow-sm' :
-                  'border-2 border-dashed border-foreground/15'
+                  isRevealed ? 'border border-foreground/10 bg-card' :
+                  'border-2 border-dashed border-foreground/25 bg-card/50'
                 )}
               >
                 {isRevealed ? (
@@ -652,63 +605,15 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         </div>
 
         {/* Media controls — only show after all revealed */}
-        {allFinalRevealed && <div className="sticky bottom-16 rounded-2xl bg-card p-3 shadow-lg border border-foreground/10">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                if (chainPlaying && audioIsPlaying) audioController.pause();
-                else if (chainPlaying && audioIsPaused) audioController.resume();
-                else playChainAll(ayahs);
-              }}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
-            >
-              {chainPlaying && audioIsPlaying ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1" /><rect x="9.5" y="2" width="3.5" height="12" rx="1" /></svg>
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z" /></svg>
-              )}
-            </button>
-            <button
-              onClick={stopChainPlay}
-              disabled={!chainPlaying}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" /></svg>
-            </button>
-            <div className="flex-1 text-center">
-              <p className="text-xs text-muted">
-                {chainPlaying ? `Ayah ${chainPlayingIdx + 1} / ${ayahs.length}` : 'Tap play or ayah'}
-              </p>
-            </div>
-            <div className="relative">
-              <button
-                onClick={() => setShowChainSpeedMenu(!showChainSpeedMenu)}
-                className="rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
-              >
-                {currentSpeed}x
-              </button>
-              {showChainSpeedMenu && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setShowChainSpeedMenu(false)} />
-                  <div className="absolute bottom-8 right-0 z-50 rounded-lg bg-card shadow-lg border border-foreground/10 py-1">
-                    {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); setShowChainSpeedMenu(false); }}
-                        className={cn(
-                          'block w-full px-4 py-1.5 text-left text-xs font-medium',
-                          s === currentSpeed ? 'text-teal bg-teal/5' : 'text-foreground hover:bg-foreground/5'
-                        )}
-                      >
-                        {s}x
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>}
+        {allFinalRevealed && (
+          <MediaControlsBar
+            playingAll={chainPlaying}
+            currentIdx={chainPlayingIdx}
+            total={ayahs.length}
+            onPlayAll={() => playChainAll(ayahs)}
+            onStop={stopChainPlay}
+          />
+        )}
 
         {!allFinalRevealed && (
           <Button onClick={revealAllFinal} variant="secondary" className="w-full">
@@ -733,7 +638,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                       setMainStage('learning');
                       setLearnStep('listen-with-text');
                     }}
-                    className="rounded-lg bg-card border border-foreground/10 px-3 py-1.5 text-xs font-medium text-foreground hover:border-teal transition-colors"
+                    className="tactile-chip rounded-lg bg-card px-3.5 py-2 text-xs font-semibold text-foreground hover:border-teal"
                   >
                     Ayah {ayah.number}
                   </button>
@@ -766,15 +671,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
   const stepIndex = LEARN_STEPS.indexOf(learnStep);
 
   return (
-    <div className="space-y-6">
-      <div className="text-center">
-        <h3 className="text-xl font-bold text-foreground">Build Your Memory</h3>
-        <p className="mt-1 text-sm text-muted">{STEP_LABELS[learnStep]}</p>
-      </div>
-
+    <div className="space-y-5">
       {/* Practice mode navigation — switch ayahs or return to recitation */}
       {practiceReturnStage && (
-        <div className="rounded-xl bg-foreground/[0.03] border border-foreground/10 p-3">
+        <div className="rounded-xl border border-foreground/10 bg-foreground/[0.03] p-3">
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-muted">Revising Ayah {currentAyah?.number}</p>
             <button
@@ -805,7 +705,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                 }}
                 className={cn(
                   'flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-colors',
-                  i === ayahIndex ? 'bg-teal text-white' : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                  i === ayahIndex ? 'bg-teal text-on-teal' : 'bg-foreground/5 text-muted hover:bg-foreground/10'
                 )}
               >
                 {ayah.number}
@@ -815,8 +715,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         </div>
       )}
 
-      {/* Ayah navigation */}
-      <div className="flex items-center justify-center gap-3">
+      {/* Ayah navigation — one compact row */}
+      <div className="flex items-center justify-center gap-3" aria-label={`Ayah ${ayahIndex + 1} of ${ayahs.length}`}>
         <button
           onClick={() => {
             if (ayahIndex > 0) {
@@ -827,11 +727,12 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           }}
           disabled={ayahIndex === 0}
           className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-20"
+          aria-label="Previous ayah"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
         </button>
 
-        <div className="flex gap-1.5">
+        <div className="flex items-center gap-1.5">
           {ayahs.map((_, i) => {
             const isCompleted = completedAyahs.has(i);
             const isCurrent = i === ayahIndex;
@@ -847,11 +748,12 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   }
                 }}
                 disabled={!canNavigate}
+                aria-label={`Ayah ${i + 1}${isCompleted ? ' (done)' : ''}`}
                 className={cn(
-                  'h-3 w-3 rounded-full transition-all',
-                  isCurrent ? 'bg-teal scale-125' :
-                  isCompleted ? 'bg-success cursor-pointer hover:scale-110' :
-                  'bg-foreground/10'
+                  'h-2.5 w-2.5 rounded-full transition-all',
+                  isCurrent ? 'h-3 w-3 bg-teal' :
+                  isCompleted ? 'bg-gold cursor-pointer hover:scale-110' :
+                  'border-[1.5px] border-foreground/25'
                 )}
               />
             );
@@ -868,60 +770,40 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           }}
           disabled={ayahIndex >= ayahs.length - 1 || !completedAyahs.has(ayahIndex)}
           className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-20"
+          aria-label="Next ayah"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
         </button>
       </div>
 
-      <p className="text-center text-xs font-medium text-teal">
-        Ayah {ayahIndex + 1} of {ayahs.length}
-      </p>
-
-      {/* Skip to Test */}
-      {!practiceReturnStage && (
-        <button
-          onClick={() => { markChunkComplete(lessonId); onComplete(); }}
-          className="mx-auto block text-xs text-muted hover:text-foreground transition-colors"
-        >
-          Already memorized? Skip to Test →
-        </button>
-      )}
-
-      {/* Step progress bar */}
-      <div className="flex gap-1">
-        {LEARN_STEPS.map((step, i) => (
-          <div
-            key={step}
-            className={cn(
-              'h-1.5 flex-1 rounded-full transition-colors',
-              i < stepIndex ? 'bg-success' :
-              i === stepIndex ? 'bg-teal' :
-              'bg-foreground/10'
-            )}
-          />
-        ))}
+      {/* Step strip — segments + the instruction as the single heading */}
+      <div className="space-y-2.5">
+        <div className="flex gap-1">
+          {LEARN_STEPS.map((step, i) => (
+            <div
+              key={step}
+              className={cn(
+                'h-1 flex-1 rounded-full transition-colors',
+                i < stepIndex ? 'bg-gold/70' :
+                i === stepIndex ? 'bg-teal' :
+                'bg-foreground/10'
+              )}
+            />
+          ))}
+        </div>
+        <p className="text-center text-[15px] font-semibold text-foreground">{STEP_LABELS[learnStep]}</p>
       </div>
 
       {/* === TEXT-VISIBLE STEPS (listen-with-text, reinforce-with-text) === */}
       {isTextVisible && (
         <div className="space-y-5">
-          <div className="rounded-2xl bg-card p-6 shadow-sm">
+          <div className="tactile-card rounded-2xl bg-card p-6">
             <AyahDisplay ayah={currentAyah} />
           </div>
 
-          {/* Rep counter */}
+          {/* Rep beads */}
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1.5">
-              {Array.from({ length: currentStepReps }).map((_, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    'h-3 w-3 rounded-full transition-all',
-                    i < repCount ? 'bg-success scale-110' : 'bg-foreground/10'
-                  )}
-                />
-              ))}
-            </div>
+            <BeadProgress total={currentStepReps} filled={repCount} showCurrent />
             <p className="mt-2 text-sm text-muted">
               {repCount < currentStepReps
                 ? `${currentStepReps - repCount} repetitions remaining`
@@ -932,7 +814,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           {/* Audio controls */}
           <div className="flex items-center justify-center gap-3">
             {isAutoPlaying ? (
-              <button onClick={stopAutoPlay} className="flex h-14 w-14 items-center justify-center rounded-full bg-red-500 text-white shadow-lg">
+              <button onClick={stopAutoPlay} className="tactile-btn flex h-14 w-14 items-center justify-center rounded-full bg-miss text-on-miss">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><rect x="4" y="4" width="12" height="12" rx="2" /></svg>
               </button>
             ) : (
@@ -940,13 +822,14 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                 <button
                   onClick={playOnce}
                   disabled={isPlayingOnce}
-                  className="flex h-14 w-14 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105 disabled:opacity-40"
+                  className="tactile-btn flex h-14 w-14 items-center justify-center rounded-full bg-teal text-on-teal hover:bg-teal-light disabled:opacity-40"
+                  aria-label="Play once"
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6V4z" /></svg>
                 </button>
                 <button
                   onClick={startAutoPlay}
-                  className="flex h-14 items-center gap-2 rounded-full bg-gold text-white px-5 shadow-lg transition-transform hover:scale-105"
+                  className="tactile-btn flex h-14 items-center gap-2 rounded-full bg-gold px-5 text-on-gold"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4h10l-3-3 1-1 5 5-5 5-1-1 3-3H2V4zm12 8H4l3 3-1 1-5-5 5-5 1 1-3 3h10v2z" /></svg>
                   <span className="text-sm font-semibold">Auto</span>
@@ -957,14 +840,14 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           </div>
 
           {/* Speed buttons */}
-          <div className="flex justify-center gap-1">
+          <div className="flex justify-center gap-1.5">
             {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
               <button
                 key={s}
                 onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); }}
                 className={cn(
-                  'rounded-lg px-3 py-1 text-xs font-semibold transition-colors',
-                  s === currentSpeed ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                  'pressable rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors',
+                  s === currentSpeed ? 'ink-border bg-teal text-on-teal' : 'text-muted hover:text-foreground'
                 )}
               >
                 {s}x
@@ -987,25 +870,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
 
         return (
           <div className="space-y-5">
-            {/* Rep counter */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1.5">
-                {Array.from({ length: currentStepReps }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      'h-3 w-3 rounded-full transition-all',
-                      i < repCount ? 'bg-success scale-110' : 'bg-foreground/10'
-                    )}
-                  />
-                ))}
-              </div>
-            </div>
+            {/* Rep beads */}
+            <BeadProgress total={currentStepReps} filled={repCount} showCurrent />
 
             {done && !memoryRevealed ? (
               /* All reps completed — advance or keep going */
               <div className="space-y-4 text-center">
-                <div className="rounded-2xl bg-success/5 p-6">
+                <div className="rounded-2xl border-[1.5px] border-success/30 bg-success/5 p-6">
                   <p className="text-lg font-semibold text-success">
                     {learnStep === 'final-memory' ? 'Memory locked in!' : 'Looking good!'}
                   </p>
@@ -1020,7 +891,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                 </Button>
                 <button
                   onClick={() => setMemoryRevealed(false)}
-                  className="w-full rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                  className="tactile-chip w-full rounded-xl bg-card py-3 text-sm font-semibold text-foreground"
                 >
                   Keep Reciting
                 </button>
@@ -1028,7 +899,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             ) : !memoryRevealed ? (
               /* Recall prompt */
               <>
-                <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-8 text-center">
+                <div className="rounded-2xl border-2 border-dashed border-foreground/25 bg-card/50 p-8 text-center">
                   <p className="text-lg font-medium text-foreground">{prompt.title}</p>
                   <p className="mt-2 text-sm text-muted">{prompt.subtitle}</p>
                 </div>
@@ -1039,14 +910,14 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             ) : (
               /* Answer revealed */
               <>
-                <div className="rounded-xl bg-success/5 p-5">
+                <div className="tactile-card rounded-2xl bg-card p-5">
                   <AyahDisplay ayah={currentAyah} />
                 </div>
                 <p className="text-center text-sm text-muted">Did you recite it correctly?</p>
                 <div className="flex gap-3">
                   <button
                     onClick={() => handleMemoryRep(false)}
-                    className="flex-1 rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                    className="tactile-chip flex-1 rounded-xl bg-card py-3 text-sm font-semibold text-foreground"
                   >
                     Not quite — hear it again
                   </button>
@@ -1071,7 +942,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           </p>
 
           <div
-            className="flex min-h-[56px] flex-wrap justify-center gap-2 rounded-xl border-2 border-dashed border-foreground/20 p-3"
+            className="flex min-h-[56px] flex-wrap justify-center gap-2 rounded-xl border-2 border-dashed border-foreground/25 bg-card/50 p-3"
             dir="rtl"
           >
             {selectedOrder.length === 0 && (
@@ -1084,9 +955,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   key={i}
                   className={cn(
                     'arabic-text rounded-lg px-3 py-1.5 text-xl',
-                    orderResult === 'wrong' ? 'bg-red-100 text-red-600' :
-                    orderResult === 'correct' ? 'bg-success/10 text-success' :
-                    'bg-teal/10 text-teal'
+                    orderResult === 'wrong' ? 'border border-miss/30 bg-miss/10 text-miss' :
+                    orderResult === 'correct' ? 'border border-success/30 bg-success/10 text-success' :
+                    'border border-teal/30 bg-teal/10 text-teal'
                   )}
                 >
                   {word?.textUthmani}
@@ -1104,10 +975,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   onClick={() => handleWordSelect(word.position)}
                   disabled={isUsed || orderResult !== null}
                   className={cn(
-                    'flex flex-col items-center rounded-xl border-2 px-4 py-2 transition-all',
+                    'flex flex-col items-center rounded-xl px-4 py-2',
                     isUsed
-                      ? 'border-transparent bg-foreground/5 text-foreground/20'
-                      : 'border-foreground/10 bg-card hover:border-gold'
+                      ? 'border-[1.5px] border-transparent bg-foreground/5 text-foreground/20'
+                      : 'tactile-chip bg-card hover:border-gold'
                   )}
                 >
                   <span className="arabic-text text-xl">{word.text}</span>
@@ -1130,14 +1001,25 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           )}
 
           {orderResult === 'wrong' && (
-            <p className="text-center text-sm text-red-500">Not quite — try again!</p>
+            <p className="text-center text-sm text-miss">Not quite — try again!</p>
           )}
         </div>
       )}
+
+      {/* Skip to Test — tucked at the bottom, out of the content's way */}
+      {!practiceReturnStage && (
+        <button
+          onClick={() => { markChunkComplete(lessonId); onComplete(); }}
+          className="mx-auto block pt-2 text-xs text-muted transition-colors hover:text-foreground"
+        >
+          Already memorized? Skip to Test →
+        </button>
+      )}
+
       {/* One-time explainer overlay */}
       {showExplainer && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="mx-4 w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
+          <div className="tactile-card mx-4 w-full max-w-sm rounded-2xl bg-card p-6">
             <h3 className="text-xl font-bold text-foreground">Build Your Memory</h3>
             <p className="mt-2 text-sm text-muted leading-relaxed">
               Each ayah goes through 4 steps to build deep memorization:
@@ -1163,7 +1045,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             </p>
             <button
               onClick={() => { localStorage.setItem('chunk-explainer-seen', 'true'); setShowExplainer(false); }}
-              className="mt-5 w-full rounded-xl bg-teal py-3 text-sm font-semibold text-white"
+              className="tactile-btn mt-5 w-full rounded-xl bg-teal py-3 text-sm font-semibold text-on-teal hover:bg-teal-light"
             >
               Got It
             </button>

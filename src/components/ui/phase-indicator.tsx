@@ -50,10 +50,10 @@ export default function PhaseIndicator({ currentPhase, onPhaseClick }: PhaseIndi
               <div
                 className={cn(
                   'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition-colors',
-                  isComplete && 'bg-success text-white',
-                  isActive && 'bg-teal text-white',
-                  !isComplete && !isActive && 'bg-foreground/10 text-muted',
-                  canClick && 'hover:ring-2 hover:ring-success/50'
+                  isComplete && 'border-[1.5px] border-gold-deep/40 bg-gold text-on-gold',
+                  isActive && 'ink-border bg-teal text-on-teal',
+                  !isComplete && !isActive && 'border-[1.5px] border-foreground/20 text-muted',
+                  canClick && 'hover:ring-2 hover:ring-gold/50'
                 )}
               >
                 {isComplete ? <CheckIcon size={12} /> : i + 1}
@@ -61,7 +61,7 @@ export default function PhaseIndicator({ currentPhase, onPhaseClick }: PhaseIndi
               <span
                 className={cn(
                   'mt-1 text-[10px]',
-                  isActive ? 'font-semibold text-teal' : 'text-muted'
+                  isActive ? 'font-semibold text-teal' : isComplete ? 'font-medium text-gold-deep' : 'text-muted'
                 )}
               >
                 {phase.label}
@@ -71,7 +71,7 @@ export default function PhaseIndicator({ currentPhase, onPhaseClick }: PhaseIndi
               <div
                 className={cn(
                   'h-0.5 w-3 -mx-1.5',
-                  i < currentIndex ? 'bg-success' : 'bg-foreground/10'
+                  i < currentIndex ? 'bg-gold/60' : 'bg-foreground/10'
                 )}
               />
             )}

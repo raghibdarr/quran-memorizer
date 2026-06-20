@@ -5,8 +5,8 @@ import { cn } from '@/lib/cn';
 type Variant = 'primary' | 'secondary' | 'ghost';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-teal text-white hover:bg-teal-light',
-  secondary: 'border-2 border-gold text-gold hover:bg-gold hover:text-white',
+  primary: 'tactile-btn bg-teal text-on-teal hover:bg-teal-light',
+  secondary: 'tactile-btn bg-gold/10 text-gold-deep hover:bg-gold/20',
   ghost: 'text-muted hover:text-foreground hover:bg-foreground/5',
 };
 
@@ -24,7 +24,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        'rounded-xl px-6 py-3 font-semibold transition-colors duration-200',
+        'rounded-xl px-6 py-3 font-semibold',
         'disabled:opacity-40 disabled:cursor-not-allowed',
         variants[variant],
         className

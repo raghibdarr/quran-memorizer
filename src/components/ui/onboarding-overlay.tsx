@@ -166,7 +166,7 @@ export default function OnboardingOverlay() {
 
         <button
           onClick={next}
-          className="w-full max-w-sm rounded-xl bg-teal py-3.5 text-sm font-semibold text-white"
+          className="w-full max-w-sm rounded-xl bg-teal py-3.5 text-sm font-semibold text-on-teal"
         >
           {isLast ? 'Start Learning' : 'Next'}
         </button>

@@ -75,7 +75,7 @@ export default function PlanDashboardPage() {
 
   if (!plan) {
     return (
-      <div className="min-h-screen bg-cream pb-20">
+      <div className="min-h-screen bg-cream pb-24">
         <main className="mx-auto max-w-2xl px-4 py-10">
           <Card className="text-center">
             <h1 className="text-xl font-bold text-teal">No plan yet</h1>
@@ -94,7 +94,7 @@ export default function PlanDashboardPage() {
 
   if (!progress) {
     return (
-      <div className="min-h-screen bg-cream pb-20">
+      <div className="min-h-screen bg-cream pb-24">
         <main className="mx-auto max-w-2xl px-4 py-10">
           <p className="text-center text-sm text-muted">Loading plan…</p>
         </main>
@@ -120,7 +120,7 @@ export default function PlanDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <div>
@@ -216,7 +216,7 @@ export default function PlanDashboardPage() {
                       className={cn(
                         'rounded-xl border-2 py-2 text-sm font-semibold transition-colors',
                         !isCustom && plan.lessonsPerDay === n
-                          ? 'border-teal bg-teal text-white'
+                          ? 'border-teal bg-teal text-on-teal'
                           : 'border-foreground/10 text-foreground hover:border-teal/30',
                       )}
                     >
@@ -231,7 +231,7 @@ export default function PlanDashboardPage() {
                     className={cn(
                       'rounded-xl border-2 py-2 text-xs font-semibold transition-colors',
                       isCustom
-                        ? 'border-teal bg-teal text-white'
+                        ? 'border-teal bg-teal text-on-teal'
                         : 'border-foreground/10 text-foreground hover:border-teal/30',
                     )}
                   >
@@ -321,7 +321,7 @@ export default function PlanDashboardPage() {
                   className={cn(
                     'flex-1 rounded-lg border-2 py-2 text-xs font-semibold transition-colors',
                     selected
-                      ? 'border-teal bg-teal text-white'
+                      ? 'border-teal bg-teal text-on-teal'
                       : 'border-foreground/10 text-muted hover:border-teal/30',
                   )}
                 >
@@ -398,12 +398,12 @@ export default function PlanDashboardPage() {
                       className={cn(
                         'rounded-xl border-2 py-2 text-xs font-semibold transition-colors',
                         freq === p.days
-                          ? 'border-teal bg-teal text-white'
+                          ? 'border-teal bg-teal text-on-teal'
                           : 'border-foreground/10 text-foreground hover:border-teal/30',
                       )}
                     >
                       <span className="block">{p.label}</span>
-                      <span className={cn('block text-[10px] font-normal', freq === p.days ? 'text-white/80' : 'text-muted')}>
+                      <span className={cn('block text-[10px] font-normal', freq === p.days ? 'text-on-teal/80' : 'text-muted')}>
                         {p.days}d
                       </span>
                     </button>
@@ -489,7 +489,7 @@ export default function PlanDashboardPage() {
                     setShowDelete(false);
                     router.push('/');
                   }}
-                  className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-medium text-white"
+                  className="flex-1 rounded-xl bg-miss py-2.5 text-sm font-medium text-on-miss"
                 >
                   Delete
                 </button>

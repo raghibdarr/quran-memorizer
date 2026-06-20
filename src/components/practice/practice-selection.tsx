@@ -94,7 +94,7 @@ export default function PracticeSelection({
           onClick={() => setMode('lesson')}
           className={cn(
             'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-            mode === 'lesson' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+            mode === 'lesson' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
           )}
         >
           By Lesson
@@ -103,7 +103,7 @@ export default function PracticeSelection({
           onClick={() => setMode('range')}
           className={cn(
             'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-            mode === 'range' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+            mode === 'range' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
           )}
         >
           By Range
@@ -139,7 +139,7 @@ export default function PracticeSelection({
                 <div
                   className={cn(
                     'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold',
-                    isSelected ? 'bg-teal text-white' :
+                    isSelected ? 'bg-teal text-on-teal' :
                     isCompleted ? 'bg-success/20 text-success' :
                     'bg-foreground/10 text-muted'
                   )}

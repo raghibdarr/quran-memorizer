@@ -86,7 +86,7 @@ export default function EssentialCard({ item }: Props) {
               onClick={playAudio}
               className={cn(
                 'flex h-8 w-8 items-center justify-center rounded-full transition-colors',
-                isPlaying ? 'bg-teal text-white' : 'bg-foreground/5 text-muted hover:bg-foreground/10'
+                isPlaying ? 'bg-teal text-on-teal' : 'bg-foreground/5 text-muted hover:bg-foreground/10'
               )}
             >
               <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
@@ -138,7 +138,7 @@ export default function EssentialCard({ item }: Props) {
                 className={cn(
                   'relative flex h-20 w-20 items-center justify-center rounded-full transition-all',
                   counter >= item.repetitions
-                    ? 'bg-success text-white'
+                    ? 'bg-success text-on-success'
                     : 'bg-teal/10 text-teal active:scale-95'
                 )}
               >

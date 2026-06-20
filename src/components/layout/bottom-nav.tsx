@@ -17,7 +17,10 @@ export default function BottomNav() {
   const dueCount = useReviewStore((s) => s.getDueLessonCount());
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-foreground/5 bg-card/95 backdrop-blur-sm">
+    <nav
+      className="fixed bottom-0 left-0 right-0 z-50 border-t-[1.5px] border-foreground/10 bg-card/95 backdrop-blur-sm"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
       <div className="mx-auto flex max-w-2xl">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
@@ -28,19 +31,19 @@ export default function BottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                'relative flex flex-1 flex-col items-center gap-0.5 py-2 transition-colors',
+                'pressable relative flex flex-1 flex-col items-center gap-1 py-2.5 transition-colors',
                 isActive ? 'text-teal' : 'text-muted hover:text-teal'
               )}
             >
               <div className="relative">
-                <item.Icon size={20} />
+                <item.Icon size={22} />
                 {showBadge && (
-                  <span className="absolute -top-1.5 -right-2.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-teal px-1 text-[9px] font-bold text-white">
+                  <span className="absolute -top-1.5 -right-2.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-teal px-1 text-[9px] font-bold text-on-teal">
                     {dueCount > 99 ? '99+' : dueCount}
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-medium">{item.label}</span>
+              <span className={cn('text-[11px]', isActive ? 'font-semibold' : 'font-medium')}>{item.label}</span>
             </a>
           );
         })}

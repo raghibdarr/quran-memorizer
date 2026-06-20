@@ -8,6 +8,7 @@ import { useAudio } from '@/hooks/use-audio';
 import ArabicText from '@/components/ui/arabic-text';
 import AyahDisplay from '@/components/ui/ayah-display';
 import Button from '@/components/ui/button';
+import MediaControlsBar from '@/components/ui/media-controls-bar';
 import { cn } from '@/lib/cn';
 import { audioController } from '@/lib/audio';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
@@ -78,7 +79,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
             className={cn(
               'h-2 flex-1 rounded-full max-w-16',
               l === level ? 'bg-teal' :
-              i < ['fill-blank', 'first-letter', 'full-recall'].indexOf(level) ? 'bg-success' :
+              i < ['fill-blank', 'first-letter', 'full-recall'].indexOf(level) ? 'bg-gold/70' :
               'bg-foreground/10'
             )}
           />
@@ -468,11 +469,9 @@ function FullRecallTest({
   const { reviewCard, addCard } = useReviewStore();
 
   // Audio state
-  const { isPlaying: audioIsPlaying, isPaused: audioIsPaused } = useAudio();
+  const { isPlaying: audioIsPlaying } = useAudio();
   const [playingAll, setPlayingAll] = useState(false);
   const [playingIdx, setPlayingIdx] = useState(-1);
-  const [currentSpeed, setCurrentSpeed] = useState(1);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const abortRef = useRef(false);
 
   const getAudioUrl = (surahId: number, ayahNum: number) =>
@@ -685,63 +684,13 @@ function FullRecallTest({
 
       {/* Sticky media controls — show after all revealed */}
       {allRevealed && (
-        <div className="sticky bottom-16 rounded-2xl bg-card p-3 shadow-lg border border-foreground/10">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                if (playingAll && audioIsPlaying) audioController.pause();
-                else if (playingAll && audioIsPaused) audioController.resume();
-                else playAllAyahs();
-              }}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-lg transition-transform hover:scale-105"
-            >
-              {playingAll && audioIsPlaying ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1" /><rect x="9.5" y="2" width="3.5" height="12" rx="1" /></svg>
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z" /></svg>
-              )}
-            </button>
-            <button
-              onClick={stopPlayback}
-              disabled={!playingAll}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" /></svg>
-            </button>
-            <div className="flex-1 text-center">
-              <p className="text-xs text-muted">
-                {playingAll ? `Ayah ${playingIdx + 1} / ${ayahs.length}` : 'Tap play or ayah'}
-              </p>
-            </div>
-            <div className="relative">
-              <button
-                onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-                className="rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
-              >
-                {currentSpeed}x
-              </button>
-              {showSpeedMenu && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setShowSpeedMenu(false)} />
-                  <div className="absolute bottom-8 right-0 z-50 rounded-lg bg-card shadow-lg border border-foreground/10 py-1">
-                    {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); setShowSpeedMenu(false); }}
-                        className={cn(
-                          'block w-full px-4 py-1.5 text-left text-xs font-medium',
-                          s === currentSpeed ? 'text-teal bg-teal/5' : 'text-foreground hover:bg-foreground/5'
-                        )}
-                      >
-                        {s}x
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+        <MediaControlsBar
+          playingAll={playingAll}
+          currentIdx={playingIdx}
+          total={ayahs.length}
+          onPlayAll={playAllAyahs}
+          onStop={stopPlayback}
+        />
       )}
 
       {/* Actions */}

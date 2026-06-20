@@ -94,7 +94,7 @@ export default function InstallBanner() {
           {deferredPrompt && (
             <button
               onClick={handleInstall}
-              className="rounded-lg bg-teal px-3 py-1.5 text-xs font-semibold text-white"
+              className="rounded-lg bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal"
             >
               Install
             </button>

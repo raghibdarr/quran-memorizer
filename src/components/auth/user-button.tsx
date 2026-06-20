@@ -48,7 +48,7 @@ export default function UserButton() {
       {auth.user ? (
         <button
           onClick={() => setShowModal(true)}
-          className="relative flex h-8 w-8 items-center justify-center rounded-full bg-teal text-xs font-bold text-white"
+          className="relative flex h-8 w-8 items-center justify-center rounded-full bg-teal text-xs font-bold text-on-teal"
           title={auth.user.email ?? 'Account'}
         >
           {(auth.user.email?.[0] ?? '?').toUpperCase()}

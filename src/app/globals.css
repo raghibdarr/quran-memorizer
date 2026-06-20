@@ -8,22 +8,44 @@
   --c-teal-light: #2A6F7F;
   --c-gold: #C8963E;
   --c-gold-light: #D4AA5C;
+  --c-gold-deep: #8A6320;
   --c-success: #2D7A4F;
+  --c-miss: #B5482E;
   --c-muted: #8A8A85;
   --c-card: #ffffff;
+  --c-card-raised: #FFFDF8;
+  --c-ink: #36332C;
+  --c-on-teal: #FEFCF9;
+  --c-on-gold: #3F2A07;
+  --c-on-success: #F2FBF5;
+  --c-on-miss: #FFF5F2;
+  --shadow-card-color: rgba(27, 77, 92, 0.16);
+  --shadow-btn-color: rgba(54, 51, 44, 0.85);
+  --shadow-chip-color: rgba(54, 51, 44, 0.5);
 }
 
 .dark {
-  --bg: #141414;
+  --bg: #1C1C1A;
   --fg: #E8E6E3;
-  --c-cream: #141414;
+  --c-cream: #1C1C1A;
   --c-teal: #4FA8BE;
   --c-teal-light: #6BC4D8;
   --c-gold: #D4AA5C;
   --c-gold-light: #E0BC74;
+  --c-gold-deep: #E0BC74;
   --c-success: #4CAF6E;
+  --c-miss: #E07B61;
   --c-muted: #9A9A95;
-  --c-card: #1E1E1E;
+  --c-card: #272725;
+  --c-card-raised: #2D2D29;
+  --c-ink: rgba(235, 232, 226, 0.42);
+  --c-on-teal: #0A2E38;
+  --c-on-gold: #3A2706;
+  --c-on-success: #0A2E16;
+  --c-on-miss: #3A1006;
+  --shadow-card-color: rgba(0, 0, 0, 0.5);
+  --shadow-btn-color: rgba(0, 0, 0, 0.7);
+  --shadow-chip-color: rgba(0, 0, 0, 0.5);
 }
 
 @theme inline {
@@ -34,9 +56,17 @@
   --color-teal-light: var(--c-teal-light);
   --color-gold: var(--c-gold);
   --color-gold-light: var(--c-gold-light);
+  --color-gold-deep: var(--c-gold-deep);
   --color-success: var(--c-success);
+  --color-miss: var(--c-miss);
   --color-muted: var(--c-muted);
   --color-card: var(--c-card);
+  --color-card-raised: var(--c-card-raised);
+  --color-ink: var(--c-ink);
+  --color-on-teal: var(--c-on-teal);
+  --color-on-gold: var(--c-on-gold);
+  --color-on-success: var(--c-on-success);
+  --color-on-miss: var(--c-on-miss);
   --font-sans: var(--font-jakarta);
   --font-arabic: var(--font-arabic);
 }
@@ -45,6 +75,111 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Paper grain — full-screen print texture, multiply on paper / screen on slate */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.032;
+  mix-blend-mode: multiply;
+}
+
+.dark body::after {
+  opacity: 0.05;
+  mix-blend-mode: screen;
+}
+
+/* === Tactile print physics === */
+
+.ink-border {
+  border: 1.5px solid var(--c-ink);
+}
+
+.tactile-card {
+  border: 1.5px solid var(--c-ink);
+  box-shadow: 4px 4px 0 var(--shadow-card-color);
+}
+
+/* List-card tier: smaller offset for stacked cards — pair with a border utility */
+.tactile-raise-sm {
+  box-shadow: 2px 2px 0 var(--shadow-chip-color);
+}
+
+.tactile-btn {
+  border: 1.5px solid var(--c-ink);
+  box-shadow: 3px 3px 0 var(--shadow-btn-color);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.tactile-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--shadow-btn-color);
+}
+
+.tactile-btn:disabled {
+  box-shadow: none;
+  border-color: color-mix(in srgb, var(--c-ink) 45%, transparent);
+}
+
+.tactile-chip {
+  border: 1.5px solid var(--c-ink);
+  box-shadow: 2px 2px 0 var(--shadow-chip-color);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.tactile-chip:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--shadow-chip-color);
+}
+
+.pressable {
+  transition: transform 120ms ease;
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes bead-pop {
+  0% { transform: scale(0.3); }
+  60% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes phase-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* New card rising to the front of the deck */
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .arabic-text {

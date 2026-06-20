@@ -123,7 +123,7 @@ export default function JuzDetailPage() {
   const allSurahsLoaded = loadedSections.length === sections.length;
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
@@ -156,7 +156,7 @@ export default function JuzDetailPage() {
               onClick={() => setActiveTab('learn')}
               className={cn(
                 'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                activeTab === 'learn' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                activeTab === 'learn' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
               )}
             >
               Learn
@@ -165,7 +165,7 @@ export default function JuzDetailPage() {
               onClick={() => setActiveTab('practice')}
               className={cn(
                 'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                activeTab === 'practice' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                activeTab === 'practice' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
               )}
             >
               Practice
@@ -222,8 +222,8 @@ export default function JuzDetailPage() {
                             <div
                               className={cn(
                                 'flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold',
-                                isComplete ? 'bg-success text-white' :
-                                isActive ? 'bg-teal text-white' :
+                                isComplete ? 'bg-success text-on-success' :
+                                isActive ? 'bg-teal text-on-teal' :
                                 'bg-foreground/10 text-muted'
                               )}
                             >
@@ -303,7 +303,7 @@ export default function JuzDetailPage() {
                       onClick={() => setPracticeMode('lesson')}
                       className={cn(
                         'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                        practiceMode === 'lesson' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                        practiceMode === 'lesson' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
                       )}
                     >
                       By Lesson
@@ -312,7 +312,7 @@ export default function JuzDetailPage() {
                       onClick={() => setPracticeMode('range')}
                       className={cn(
                         'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                        practiceMode === 'range' ? 'bg-teal text-white' : 'text-muted hover:text-foreground'
+                        practiceMode === 'range' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
                       )}
                     >
                       By Range
@@ -408,7 +408,7 @@ export default function JuzDetailPage() {
                                 <div
                                   className={cn(
                                     'flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold',
-                                    isSelected ? 'bg-teal text-white' :
+                                    isSelected ? 'bg-teal text-on-teal' :
                                     isCompleted ? 'bg-success/20 text-success' :
                                     'bg-foreground/10 text-muted'
                                   )}

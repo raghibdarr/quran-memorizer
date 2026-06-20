@@ -321,7 +321,7 @@ export default function PlanSetupPage() {
                       setRangeTo('');
                     }}
                     disabled={!rangeFrom || !rangeTo}
-                    className="rounded-lg bg-teal px-3 py-1 text-xs font-semibold text-white disabled:opacity-40"
+                    className="rounded-lg bg-teal px-3 py-1 text-xs font-semibold text-on-teal disabled:opacity-40"
                   >
                     Add
                   </button>
@@ -356,7 +356,7 @@ export default function PlanSetupPage() {
                         <span
                           className={cn(
                             'flex h-5 w-5 items-center justify-center rounded border-2',
-                            selected ? 'border-teal bg-teal text-white' : 'border-foreground/20',
+                            selected ? 'border-teal bg-teal text-on-teal' : 'border-foreground/20',
                           )}
                         >
                           {selected && <CheckIcon size={12} />}
@@ -381,7 +381,7 @@ export default function PlanSetupPage() {
                         className={cn(
                           'rounded-xl border-2 py-2 text-sm font-semibold transition-colors',
                           selected
-                            ? 'border-teal bg-teal text-white'
+                            ? 'border-teal bg-teal text-on-teal'
                             : 'border-foreground/10 text-foreground hover:border-teal/30',
                         )}
                       >
@@ -441,7 +441,7 @@ export default function PlanSetupPage() {
                         <span
                           className={cn(
                             'flex h-5 w-5 items-center justify-center rounded border-2',
-                            known ? 'border-success bg-success text-white' : 'border-foreground/20',
+                            known ? 'border-success bg-success text-on-success' : 'border-foreground/20',
                           )}
                         >
                           {known && <CheckIcon size={12} />}
@@ -476,7 +476,7 @@ export default function PlanSetupPage() {
                               <span
                                 className={cn(
                                   'flex h-4 w-4 items-center justify-center rounded border-2',
-                                  lessonKnown ? 'border-success bg-success text-white' : 'border-foreground/20',
+                                  lessonKnown ? 'border-success bg-success text-on-success' : 'border-foreground/20',
                                 )}
                               >
                                 {lessonKnown && <CheckIcon size={10} />}
@@ -568,7 +568,7 @@ export default function PlanSetupPage() {
                           className={cn(
                             'rounded-xl border-2 py-2 text-sm font-semibold transition-colors',
                             !isCustom && lessonsPerDay === n
-                              ? 'border-teal bg-teal text-white'
+                              ? 'border-teal bg-teal text-on-teal'
                               : 'border-foreground/10 text-foreground hover:border-teal/30',
                           )}
                         >
@@ -583,7 +583,7 @@ export default function PlanSetupPage() {
                         className={cn(
                           'rounded-xl border-2 py-2 text-xs font-semibold transition-colors',
                           isCustom
-                            ? 'border-teal bg-teal text-white'
+                            ? 'border-teal bg-teal text-on-teal'
                             : 'border-foreground/10 text-foreground hover:border-teal/30',
                         )}
                       >
@@ -643,7 +643,7 @@ export default function PlanSetupPage() {
                       className={cn(
                         'flex-1 rounded-lg border-2 py-2 text-xs font-semibold transition-colors',
                         selected
-                          ? 'border-teal bg-teal text-white'
+                          ? 'border-teal bg-teal text-on-teal'
                           : 'border-foreground/10 text-muted hover:border-teal/30',
                       )}
                       title={DAY_NAMES[d]}

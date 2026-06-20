@@ -56,6 +56,14 @@ Everything in `.claude/hifdh-curriculum-spec.md` plus polish layer:
 
 ## Open
 
+### UI overhaul — tactile print (in progress, 2026-06-10)
+Core implemented — see `.claude/plans/ui-overhaul-tactile-print.md` for the design language
+(ink borders, offset shadows, press physics, beads, dark-mode contrast fix, safe-area).
+Done: tokens/primitives, home, lesson phases (Build declutter), review, practice, bottom nav.
+**Remaining:** screen passes for progress, plan pages, essentials, settings panel, auth modal,
+onboarding (they inherit tokens but haven't had a deliberate pass); review-session card stack
+not yet eyeballed with real due cards.
+
 ### Terminology cleanup (P1, partial)
 Original goal: kill "practice" from UI, unify on **Learn** + **Review**. Status as of audit:
 - Bottom nav and some surfaces done
@@ -96,6 +104,7 @@ Not a session item. Requires Supabase schema decisions before any frontend.
 ## Future / Native App
 
 - Voice recognition: whisper-large-v3 on-device (browser limited to whisper-base)
+- Quran-specific pause/waqf detection: `obadx/recitation-segmenter-v2` (Wav2Vec2-BERT, 850h Quran data, 99.5% accuracy, MIT). Nice-to-have for a Tarteel-esque correctness UI as the segmentation layer alongside whisper ASR. Currently 0.6B params / ~3GB GPU — would need distillation/quantization for on-device, or run server-side. Evaluate after whisper-large-v3 is integrated.
 - Push notifications for review reminders
 - Widgets (daily ayah, streak)
 - App Store / Play Store distribution

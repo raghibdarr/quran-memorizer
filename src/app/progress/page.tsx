@@ -134,7 +134,7 @@ export default function ProgressPage() {
   const hasActivity = Object.keys(progressLessons).length > 0;
 
   return (
-    <div className="min-h-screen bg-cream pb-20">
+    <div className="min-h-screen bg-cream pb-24">
       <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
@@ -232,7 +232,7 @@ export default function ProgressPage() {
               className={cn(
                 'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
                 tab === key
-                  ? 'bg-teal text-white shadow-sm'
+                  ? 'bg-teal text-on-teal shadow-sm'
                   : 'text-muted hover:text-foreground'
               )}
             >
@@ -258,7 +258,7 @@ export default function ProgressPage() {
           <div className="py-12 text-center">
             <p className="text-lg text-muted">No progress yet</p>
             <p className="mt-1 text-sm text-muted">Start a lesson to track your progress</p>
-            <a href="/" className="mt-4 inline-block rounded-xl bg-teal px-6 py-3 font-semibold text-white">
+            <a href="/" className="mt-4 inline-block rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
               Start Learning
             </a>
           </div>

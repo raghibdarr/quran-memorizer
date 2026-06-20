@@ -114,7 +114,7 @@ export default function TodaysPlanCard() {
           ) : (
             <button
               onClick={() => applyCatchUp(progress.lessonsBehind, todayIso())}
-              className="rounded-full bg-gold px-3 py-1 text-[11px] font-semibold text-white hover:brightness-110"
+              className="rounded-full bg-gold px-3 py-1 text-[11px] font-semibold text-on-gold hover:brightness-110"
             >
               Catch up today
             </button>
@@ -185,7 +185,7 @@ export default function TodaysPlanCard() {
                 className={cn(
                   'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2',
                   done
-                    ? 'border-success bg-success text-white'
+                    ? 'border-success bg-success text-on-success'
                     : 'border-teal/40 text-teal',
                 )}
               >

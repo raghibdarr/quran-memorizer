@@ -98,6 +98,15 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
         </div>
       )}
 
+      {!hasNextLesson && (
+        <div className="w-full rounded-xl border border-teal/15 bg-teal/5 p-4 text-center">
+          <p className="text-sm font-semibold text-teal">Use this in your next prayer</p>
+          <p className="mt-1 text-xs text-muted">
+            Reciting {surah.nameSimple} during salah is the best way to solidify what you&apos;ve memorized.
+          </p>
+        </div>
+      )}
+
       <div className="flex w-full flex-col gap-3">
         {hasNextLesson && (
           <a href={nextLessonUrl}>
@@ -144,7 +153,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
                 </button>
                 <button
                   onClick={() => { resetLesson(lessonDef.lessonId, surah.id); setShowResetConfirm(false); }}
-                  className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-medium text-white"
+                  className="flex-1 rounded-xl bg-miss py-2.5 text-sm font-medium text-on-miss"
                 >
                   Reset
                 </button>

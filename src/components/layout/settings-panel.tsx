@@ -5,25 +5,13 @@ import { createPortal } from 'react-dom';
 import { useSettingsStore } from '@/stores/settings-store';
 import type { ArabicScriptStyle } from '@/types/quran';
 import { SettingsIcon } from '@/components/ui/icons';
+import { RECITERS } from '@/lib/audio';
 import { cn } from '@/lib/cn';
 
 const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
   { value: 'tajweed', label: 'Tajweed' },
   { value: 'uthmani', label: 'Uthmani' },
   { value: 'indopak', label: 'IndoPak' },
-];
-
-const RECITERS: { value: string; label: string }[] = [
-  { value: 'Alafasy_128kbps', label: 'Mishary Alafasy' },
-  { value: 'Husary_128kbps', label: 'Mahmoud Al-Hussary' },
-  { value: 'Abdul_Basit_Murattal_192kbps', label: 'Abdul Basit (Murattal)' },
-  { value: 'Minshawy_Murattal_128kbps', label: 'Al-Minshawy (Murattal)' },
-  { value: 'Nasser_Alqatami_128kbps', label: 'Nasser Al-Qatami' },
-  { value: 'Yasser_Ad-Dussary_128kbps', label: 'Yasser Ad-Dussary' },
-  { value: 'Hudhaify_128kbps', label: 'Ali Al-Hudhaify' },
-  { value: 'Maher_AlMuaiqly_64kbps', label: 'Maher Al-Muaiqly' },
-  { value: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', label: 'Ahmed Al-Ajamy' },
-  { value: 'Muhammad_Jibreel_128kbps', label: 'Muhammad Jibreel' },
 ];
 
 function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void }) {
@@ -130,7 +118,7 @@ export default function SettingsPanel() {
                     className={cn(
                       'flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-colors',
                       arabicScript === opt.value
-                        ? 'bg-teal text-white'
+                        ? 'bg-teal text-on-teal'
                         : 'bg-foreground/5 text-muted hover:bg-foreground/10'
                     )}
                   >
@@ -184,7 +172,7 @@ export default function SettingsPanel() {
                 style={{ colorScheme: 'auto' }}
               >
                 {RECITERS.map((r) => (
-                  <option key={r.value} value={r.value} className="bg-card text-foreground">{r.label}</option>
+                  <option key={r.id} value={r.id} className="bg-card text-foreground">{r.name}</option>
                 ))}
               </select>
             </div>

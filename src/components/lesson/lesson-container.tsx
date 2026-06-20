@@ -154,7 +154,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream pb-16">
+    <div
+      className="flex min-h-screen flex-col bg-cream"
+      style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}
+    >
       <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
@@ -186,7 +189,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
       {showResetConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-          <div className="mx-4 w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
+          <div className="tactile-card mx-4 w-full max-w-sm rounded-2xl bg-card p-6">
             <h3 className="text-lg font-bold text-foreground">Reset Progress?</h3>
             <p className="mt-2 text-sm text-muted">
               This will restart this lesson from the Listen phase.
@@ -194,13 +197,13 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
             <div className="mt-4 flex gap-3">
               <button
                 onClick={() => setShowResetConfirm(false)}
-                className="flex-1 rounded-xl border border-foreground/10 py-2.5 text-sm font-medium text-foreground"
+                className="tactile-chip flex-1 rounded-xl bg-card py-2.5 text-sm font-semibold text-foreground"
               >
                 Cancel
               </button>
               <button
                 onClick={handleReset}
-                className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-medium text-white"
+                className="tactile-chip flex-1 rounded-xl bg-miss py-2.5 text-sm font-semibold text-on-miss"
               >
                 Reset
               </button>
@@ -211,11 +214,11 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
       <main
         className={cn(
-          'flex-1 px-4 py-6 transition-opacity duration-300',
+          'flex-1 overflow-x-clip px-4 py-6 transition-opacity duration-300',
           transitioning ? 'opacity-0' : 'opacity-100'
         )}
       >
-        <div className="mx-auto max-w-2xl">
+        <div key={activePhase} className="mx-auto max-w-2xl animate-[phase-in_300ms_ease-out]">
           {phaseMap[activePhase]}
         </div>
       </main>
