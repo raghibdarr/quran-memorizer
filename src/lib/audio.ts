@@ -2,6 +2,41 @@ import { getCachedAudio, cacheAudio } from './storage';
 
 type AudioState = 'idle' | 'playing' | 'paused' | 'loading';
 
+export interface ReciterOption {
+  id: string;          // everyayah directory id
+  name: string;        // display name
+  hint?: string;       // optional one-line hint
+}
+
+/** Reciters available on everyayah.com. Single source of truth — used by both the AudioController and the settings UI. */
+export const RECITERS: ReciterOption[] = [
+  { id: 'Alafasy_128kbps', name: 'Mishary Alafasy', hint: 'Default — clear, modern' },
+  { id: 'Husary_128kbps', name: 'Mahmoud Al-Hussary', hint: 'Slower, beginner-friendly' },
+  { id: 'Abdul_Basit_Murattal_192kbps', name: 'Abdul Basit (Murattal)', hint: 'Slow, ornate' },
+  { id: 'Minshawy_Murattal_128kbps', name: 'Al-Minshawy (Murattal)', hint: 'Classical' },
+  { id: 'Nasser_Alqatami_128kbps', name: 'Nasser Al-Qatami' },
+  { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Ad-Dussary' },
+  { id: 'Hudhaify_128kbps', name: 'Ali Al-Hudhaify' },
+  { id: 'Maher_AlMuaiqly_64kbps', name: 'Maher Al-Muaiqly' },
+  { id: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', name: 'Ahmed Al-Ajamy' },
+  { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel' },
+];
+
+const EVERYAYAH_HOST_PREFIX = 'everyayah.com/data/';
+
+/**
+ * Swap the reciter segment in an everyayah URL. Non-everyayah URLs pass through.
+ * Returns the original URL if it doesn't match the expected pattern.
+ */
+export function transformReciterUrl(url: string, reciterId: string): string {
+  const idx = url.indexOf(EVERYAYAH_HOST_PREFIX);
+  if (idx === -1) return url;
+  const after = url.slice(idx + EVERYAYAH_HOST_PREFIX.length);
+  const slashIdx = after.indexOf('/');
+  if (slashIdx === -1) return url;
+  return url.slice(0, idx + EVERYAYAH_HOST_PREFIX.length) + reciterId + after.slice(slashIdx);
+}
+
 class AudioController {
   private audio: HTMLAudioElement | null = null;
   private currentUrl: string | null = null;
@@ -9,6 +44,15 @@ class AudioController {
   private endedCallbacks: Set<() => void> = new Set();
   private _state: AudioState = 'idle';
   private _speed: number = 1;
+  private _reciter: string = 'Alafasy_128kbps';
+
+  setReciter(reciterId: string): void {
+    this._reciter = reciterId;
+  }
+
+  private resolveUrl(url: string): string {
+    return transformReciterUrl(url, this._reciter);
+  }
 
   private getAudio(): HTMLAudioElement {
     if (!this.audio) {
@@ -78,8 +122,9 @@ class AudioController {
 
   async play(url: string): Promise<void> {
     const audio = this.getAudio();
+    const resolved = this.resolveUrl(url);
 
-    // If same URL is already playing, ignore (prevent duplicates)
+    // If same (caller) URL is already playing, ignore (prevent duplicates)
     if (this.currentUrl === url && this.isPlaying) return;
 
     // If same URL is paused, just resume
@@ -90,16 +135,16 @@ class AudioController {
 
     // Stop current playback before starting new
     this.stop();
-    this.currentUrl = url;
+    this.currentUrl = url; // Track caller URL so togglePlayPause/activeUrl still match
     this._state = 'loading';
     this.notify();
 
     // Apply stored speed before playing
     audio.playbackRate = this._speed;
 
-    // Try IndexedDB cache first
+    // Try IndexedDB cache first — keyed by resolved URL so per-reciter cache is separate
     try {
-      const cached = await getCachedAudio(url);
+      const cached = await getCachedAudio(resolved);
       if (cached) {
         const objectUrl = URL.createObjectURL(cached);
         audio.src = objectUrl;
@@ -111,14 +156,14 @@ class AudioController {
       // Fall through to direct play
     }
 
-    audio.src = url;
+    audio.src = resolved;
     audio.playbackRate = this._speed;
     await audio.play();
 
     // Cache in background (don't await)
-    fetch(url)
+    fetch(resolved)
       .then((res) => (res.ok ? res.blob() : null))
-      .then((blob) => { if (blob) cacheAudio(url, blob); })
+      .then((blob) => { if (blob) cacheAudio(resolved, blob); })
       .catch(() => {});
   }
 
@@ -159,6 +204,14 @@ class AudioController {
     this._speed = rate;
     const audio = this.getAudio();
     audio.playbackRate = rate;
+  }
+
+  /** Seek the currently loaded audio to `time` seconds. No-op if nothing is loaded. */
+  seek(time: number): void {
+    if (!this.audio || !this.currentUrl) return;
+    const clamped = Math.max(0, Math.min(time, this.audio.duration || 0));
+    this.audio.currentTime = clamped;
+    this.notify();
   }
 
   /** Returns a promise that resolves when current audio ends */
