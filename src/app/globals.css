@@ -19,9 +19,10 @@
   --c-on-gold: #3F2A07;
   --c-on-success: #F2FBF5;
   --c-on-miss: #FFF5F2;
-  --shadow-card-color: rgba(27, 77, 92, 0.16);
+  --shadow-card-color: rgba(48, 44, 38, 0.32);
   --shadow-btn-color: rgba(54, 51, 44, 0.85);
   --shadow-chip-color: rgba(54, 51, 44, 0.5);
+  --scrim-tint: #2A2722;
 }
 
 .dark {
@@ -46,6 +47,7 @@
   --shadow-card-color: rgba(0, 0, 0, 0.5);
   --shadow-btn-color: rgba(0, 0, 0, 0.7);
   --shadow-chip-color: rgba(0, 0, 0, 0.5);
+  --scrim-tint: #000000;
 }
 
 @theme inline {
@@ -104,6 +106,21 @@ body::after {
 .tactile-card {
   border: 1.5px solid var(--c-ink);
   box-shadow: 4px 4px 0 var(--shadow-card-color);
+}
+
+/* Stacked deck cards: tiny neutral contact seam instead of the teal hero offset */
+.tactile-card--stacked {
+  box-shadow: 1px 1px 0 rgba(54, 51, 44, 0.22);
+}
+
+.dark .tactile-card--stacked {
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* Deck cards need an OPAQUE ink edge in dark mode (default --c-ink is translucent,
+   which would let the card behind bleed through the 1.5px border itself) */
+.dark .card-deck-item {
+  border-color: #5A5852;
 }
 
 /* List-card tier: smaller offset for stacked cards — pair with a border utility */

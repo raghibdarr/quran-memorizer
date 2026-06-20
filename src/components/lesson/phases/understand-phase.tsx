@@ -28,12 +28,15 @@ const ARC_TRANSITION: Transition = { duration: 0.92, ease: 'easeInOut', times: [
 // up to the top on "prev". Kept shallow so the fan doesn't reach the words below.
 const STACK_SLOTS = [
   { x: 0,  y: 0,  z: 0,    rotateZ: 0,   scale: 1,    opacity: 1 },
-  { x: 11, y: 11, z: -52,  rotateZ: 2.5, scale: 0.95, opacity: 0.95 },
-  { x: 19, y: 20, z: -100, rotateZ: 4.5, scale: 0.91, opacity: 0.82 },
-  { x: 25, y: 27, z: -144, rotateZ: 6,   scale: 0.88, opacity: 0.66 },
-  { x: 30, y: 33, z: -184, rotateZ: 7.5, scale: 0.85, opacity: 0.52 },
-  { x: 33, y: 37, z: -218, rotateZ: 9,   scale: 0.83, opacity: 0.4 },
+  { x: 11, y: 11, z: -52,  rotateZ: 2.5, scale: 0.95, opacity: 1 },
+  { x: 19, y: 20, z: -100, rotateZ: 4.5, scale: 0.91, opacity: 1 },
+  { x: 25, y: 27, z: -144, rotateZ: 6,   scale: 0.88, opacity: 1 },
+  { x: 30, y: 33, z: -184, rotateZ: 7.5, scale: 0.85, opacity: 1 },
+  { x: 33, y: 37, z: -218, rotateZ: 9,   scale: 0.83, opacity: 1 },
 ];
+// Cards stay fully OPAQUE; depth-dimming comes from an opaque scrim painted on top
+// (alpha grows with offset) so nothing shows through to the cards/page behind.
+const SCRIM_ALPHA = [0, 0.06, 0.12, 0.18, 0.24, 0.3];
 function slotFor(offset: number) {
   return STACK_SLOTS[Math.min(offset, STACK_SLOTS.length - 1)];
 }
@@ -212,7 +215,10 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
             return (
               <motion.div
                 key={idx}
-                className="tactile-card absolute inset-0 select-none overflow-hidden rounded-2xl bg-card p-6 text-center"
+                className={cn(
+                  'tactile-card card-deck-item absolute inset-0 select-none overflow-hidden rounded-2xl bg-card p-6 text-center',
+                  !isFront && 'tactile-card--stacked'
+                )}
                 style={{
                   touchAction: 'pan-y',
                   cursor: isFront ? 'grab' : 'default',
@@ -228,7 +234,18 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
                 onDragEnd={isFront ? handleDragEnd : undefined}
                 whileDrag={{ cursor: 'grabbing' }}
               >
-                {renderFace(ayah, idx)}
+                {/* Opaque depth scrim — dims deeper cards without any see-through */}
+                {offset > 0 && (
+                  <motion.div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-2xl"
+                    style={{ background: 'var(--scrim-tint)', zIndex: 5 }}
+                    initial={false}
+                    animate={{ opacity: SCRIM_ALPHA[Math.min(offset, SCRIM_ALPHA.length - 1)] }}
+                    transition={isBigMover ? ARC_TRANSITION : SPRING}
+                  />
+                )}
+                <div className="relative z-10">{renderFace(ayah, idx)}</div>
               </motion.div>
             );
           })}
