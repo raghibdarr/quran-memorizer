@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, type PanInfo, type Transition } from 'motion/react';
 import type { Surah, Ayah, Word } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
+import { useSettingsStore } from '@/stores/settings-store';
 import { audioController } from '@/lib/audio';
 import ArabicText from '@/components/ui/arabic-text';
 import Button from '@/components/ui/button';
@@ -58,9 +59,52 @@ function arcKeyframes(from: Slot, to: Slot, wp: typeof ARC_WP_NEXT) {
   };
 }
 
+// Split an ayah's tajweed HTML into one colored-markup string per word. The tags
+// (<tajweed class=...>, <span class=end>) are space-free internally once tokenized,
+// so every space that lands in a TEXT run is a genuine word break. Caller drops the
+// trailing end-marker token and count-checks against the word list before trusting it.
+function splitTajweedByWord(html: string): string[] {
+  const tokens = html.match(/<[^>]+>|[^<]+/g) || [];
+  const words: string[] = [];
+  let current = '';
+  for (const tok of tokens) {
+    if (tok[0] === '<') {
+      current += tok;
+      continue;
+    }
+    const parts = tok.split(' ');
+    for (let i = 0; i < parts.length; i++) {
+      if (i > 0) {
+        if (current.trim()) words.push(current);
+        current = '';
+      }
+      current += parts[i];
+    }
+  }
+  if (current.trim()) words.push(current);
+  return words;
+}
+
+// Tokens that are only Quranic pause/sajdah/rub marks (e.g. ۖ ۚ ۞ ۩) sit between words
+// in the script but aren't words themselves — drop them so the per-word split lines up.
+const NON_WORD_MARK = /^[ۖ-۞۩ࣰ-ࣿ\s]+$/;
+
+// quran.com's word audio_url numbers files by word POSITION (it counts pause marks as
+// their own slots), but the CDN actually stores word audio CONSECUTIVELY — one file per
+// real word, 1..N. So for any ayah with an internal pause mark the stored URL points one
+// (or more) files too far, playing the NEXT word (and the tail 404s). Renumber by the
+// word's consecutive index among real words to hit the correct file.
+function wordAudioUrl(word: Word, index: number): string | null {
+  if (!word.audioUrl) return null;
+  return word.audioUrl.replace(/_\d+\.mp3$/, `_${String(index + 1).padStart(3, '0')}.mp3`);
+}
+
 export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: UnderstandPhaseProps) {
   const lesson = useProgressStore((s) => s.lessons[lessonId]);
   const savedExplored = lesson?.phaseData.understand.exploredAyahs;
+  const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
+  const translationEnabled = useSettingsStore((s) => s.translationEnabled);
+  const arabicScript = useSettingsStore((s) => s.arabicScript);
   const [ayahIndex, setAyahIndex] = useState(0);
   const [nav, setNav] = useState<{ dir: 'next' | 'prev'; viaButton: boolean }>({ dir: 'next', viaButton: false });
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
@@ -78,15 +122,50 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
   const currentAyah = ayahs[ayahIndex];
   const allExplored = exploredAyahs.size >= ayahs.length;
 
+  // Per-word Arabic for the chips/detail in the user's chosen script. Word data is
+  // plain Uthmani only, so tajweed/indopak are derived from the ayah-level fields and
+  // fall back to Uthmani whenever the split doesn't line up 1:1 with the words.
+  const actualWords = useMemo(
+    () => currentAyah.words.filter((w) => w.charType === 'word'),
+    [currentAyah]
+  );
+  const tajweedWords = useMemo(() => {
+    if (!currentAyah.textUthmaniTajweed) return null;
+    const parts = splitTajweedByWord(currentAyah.textUthmaniTajweed)
+      .filter((p) => !p.includes('class=end'))
+      .filter((p) => !NON_WORD_MARK.test(p.replace(/<[^>]+>/g, '')));
+    return parts.length === actualWords.length ? parts : null;
+  }, [currentAyah, actualWords]);
+  const indopakWords = useMemo(() => {
+    if (!currentAyah.textIndopak) return null;
+    const parts = currentAyah.textIndopak.trim().split(/\s+/).filter((p) => !NON_WORD_MARK.test(p));
+    return parts.length === actualWords.length ? parts : null;
+  }, [currentAyah, actualWords]);
+  const renderWordArabic = (wi: number, fallback: string, sizeClass: string) => {
+    if (arabicScript === 'tajweed' && tajweedWords && wi >= 0) {
+      return (
+        <span
+          className={cn('arabic-text tajweed-text', sizeClass)}
+          dangerouslySetInnerHTML={{ __html: tajweedWords[wi] }}
+        />
+      );
+    }
+    if (arabicScript === 'indopak' && indopakWords && wi >= 0) {
+      return <span className={cn('arabic-text-indopak', sizeClass)}>{indopakWords[wi]}</span>;
+    }
+    return <span className={cn('arabic-text', sizeClass)}>{fallback}</span>;
+  };
+
   // Stable arc paths (front→back for next, back→front for prev) so unrelated re-renders
   // don't restart a mid-flight button arc.
   const nextArc = useMemo(() => arcKeyframes(STACK_SLOTS[0], slotFor(ayahs.length - 1), ARC_WP_NEXT), [ayahs.length]);
   const prevArc = useMemo(() => arcKeyframes(slotFor(ayahs.length - 1), STACK_SLOTS[0], ARC_WP_PREV), [ayahs.length]);
 
-  const handleWordClick = async (word: Word) => {
+  const handleWordClick = async (word: Word, index: number) => {
     setSelectedWord(word);
-    if (word.audioUrl) {
-      await audioController.play(word.audioUrl);
+    const url = wordAudioUrl(word, index);
+    if (url) {
+      await audioController.play(url);
     }
   };
 
@@ -120,12 +199,29 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
         <span className="h-px w-8 bg-gold/50" />
       </div>
       <ArabicText ayah={ayah} className="text-3xl leading-loose" />
-      {ayah.transliteration && (
+      {transliterationEnabled && ayah.transliteration && (
         <p className="mt-2 text-center text-sm text-muted">{ayah.transliteration}</p>
       )}
       {ayah.translation && (
-        revealedTranslations.has(idx) ? (
+        translationEnabled ? (
           <p className="mt-1 text-center text-sm italic text-muted">{ayah.translation}</p>
+        ) : revealedTranslations.has(idx) ? (
+          <button
+            onPointerDownCapture={(e) => e.stopPropagation()}
+            onClick={() =>
+              setRevealedTranslations((prev) => {
+                const next = new Set(prev);
+                next.delete(idx);
+                return next;
+              })
+            }
+            className="group mt-1 flex flex-col items-center gap-0.5"
+          >
+            <span className="text-center text-sm italic text-muted">{ayah.translation}</span>
+            <span className="text-[10px] font-medium text-muted/50 transition-colors group-hover:text-muted">
+              Tap to hide
+            </span>
+          </button>
         ) : (
           <button
             onPointerDownCapture={(e) => e.stopPropagation()}
@@ -148,43 +244,17 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
         </p>
       </div>
 
-      {/* Ayah navigation */}
-      <div className="flex items-center justify-between">
+      {/* Ayah navigation — Prev / counter / Next on a single row to save vertical space */}
+      <div className="flex items-center justify-between gap-2">
         <button
           onClick={() => goPrev(true)}
           disabled={ayahIndex === 0}
-          className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground disabled:opacity-0"
+          className="flex items-center gap-1 rounded-lg px-2 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground disabled:opacity-0"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
           Prev
         </button>
 
-        {/* Dot indicators */}
-        <div className="flex items-center gap-1.5">
-          {ayahs.map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                'rounded-full transition-all',
-                i === ayahIndex ? 'h-3 w-3 bg-teal' :
-                exploredAyahs.has(i) ? 'h-2.5 w-2.5 bg-gold' :
-                'h-2.5 w-2.5 border-[1.5px] border-foreground/25'
-              )}
-            />
-          ))}
-        </div>
-
-        <button
-          onClick={() => goNext(true)}
-          disabled={ayahIndex === ayahs.length - 1}
-          className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-teal transition-colors hover:text-teal-light disabled:opacity-0"
-        >
-          Next
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
-        </button>
-      </div>
-
-      <div className="flex justify-center">
         <span className="ink-border tactile-raise-sm inline-flex items-center gap-1.5 rounded-full bg-card px-3.5 py-1.5 text-xs font-semibold text-foreground">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1.014 1.014 0 0 1 -.514 1.31l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.902a1.014 1.014 0 0 1 .514 -1.31z" />
@@ -193,6 +263,15 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
           </svg>
           Ayah {ayahIndex + 1} of {ayahs.length}
         </span>
+
+        <button
+          onClick={() => goNext(true)}
+          disabled={ayahIndex === ayahs.length - 1}
+          className="flex items-center gap-1 rounded-lg px-2 py-2 text-sm font-medium text-teal transition-colors hover:text-teal-light disabled:opacity-0"
+        >
+          Next
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
       </div>
 
       {/* === 3D shuffling card stack (pb gives the fanned deck room above the words) === */}
@@ -254,54 +333,54 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
 
       {/* Word-by-word breakdown */}
       <div key={ayahIndex} className="animate-[card-rise_320ms_ease-out]">
-        <p className="mb-2 text-center text-xs text-muted">
-          Tap a word to hear it and see its meaning
-        </p>
         <div className="flex flex-wrap justify-center gap-2" dir="rtl">
-          {currentAyah.words
-            .filter((w) => w.charType === 'word')
-            .map((word) => {
-              const isSelected = selectedWord?.position === word.position;
-              return (
-                <button
-                  key={`${currentAyah.key}-${word.position}`}
-                  onClick={() => handleWordClick(word)}
-                  className={cn(
-                    'pressable tactile-raise-sm flex flex-col items-center rounded-xl border-[1.5px] px-3 py-2.5 transition-all',
-                    isSelected
-                      ? 'border-gold bg-gold/10'
-                      : 'border-ink bg-card hover:border-gold/60'
-                  )}
-                >
-                  <span className="arabic-text text-xl leading-normal">{word.textUthmani}</span>
-                  {word.transliteration && (
-                    <span className="mt-0.5 text-[10px] text-muted" dir="ltr">
-                      {word.transliteration}
-                    </span>
-                  )}
-                  {isSelected && word.translation && (
-                    <span className="mt-1 text-xs font-semibold text-teal" dir="ltr">
-                      {word.translation}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+          {actualWords.map((word, wi) => {
+            const isSelected = selectedWord?.position === word.position;
+            return (
+              <button
+                key={`${currentAyah.key}-${word.position}`}
+                onClick={() => handleWordClick(word, wi)}
+                className={cn(
+                  'tactile-chip flex items-center justify-center rounded-xl px-4 py-2.5',
+                  isSelected
+                    ? 'border-gold bg-gold/10'
+                    : 'bg-card hover:border-gold/60'
+                )}
+              >
+                {renderWordArabic(wi, word.textUthmani, 'text-2xl leading-normal')}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Selected word detail */}
-      {selectedWord && (
-        <div className="tactile-raise-sm rounded-2xl border-[1.5px] border-teal/50 bg-teal/5 p-4 text-center">
-          <p className="arabic-text text-3xl">{selectedWord.textUthmani}</p>
-          {selectedWord.transliteration && (
-            <p className="mt-1 text-sm text-muted">{selectedWord.transliteration}</p>
-          )}
-          {selectedWord.translation && (
-            <p className="mt-1 text-sm font-semibold text-teal">{selectedWord.translation}</p>
-          )}
-        </div>
-      )}
+      {/* Selected word meaning — always rendered with reserved height so the grid above
+          never reflows on tap and the meaning keeps one stable home (no pop-in shift) */}
+      <div className="tactile-raise-sm flex min-h-[7.5rem] flex-col items-center justify-center rounded-2xl border-[1.5px] border-teal/50 bg-teal/5 p-4 text-center">
+        {selectedWord ? (
+          <div key={selectedWord.position} className="animate-[phase-in_240ms_ease-out]">
+            {renderWordArabic(
+              actualWords.findIndex((w) => w.position === selectedWord.position),
+              selectedWord.textUthmani,
+              'text-3xl'
+            )}
+            {transliterationEnabled && selectedWord.transliteration && (
+              <p className="mt-1 text-sm text-muted" dir="ltr">{selectedWord.transliteration}</p>
+            )}
+            {selectedWord.translation && (
+              <p className="mt-1 text-sm font-semibold text-teal" dir="ltr">{selectedWord.translation}</p>
+            )}
+          </div>
+        ) : (
+          <p className="flex items-center gap-2 text-sm text-muted">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="12" y1="19" x2="12" y2="5" />
+              <polyline points="5 12 12 5 19 12" />
+            </svg>
+            Tap any word above to hear it and read its meaning
+          </p>
+        )}
+      </div>
 
       <Button
         onClick={handleContinue}
