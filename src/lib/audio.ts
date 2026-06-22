@@ -158,7 +158,16 @@ class AudioController {
 
     audio.src = resolved;
     audio.playbackRate = this._speed;
-    await audio.play();
+    try {
+      await audio.play();
+    } catch {
+      // Source failed to load (e.g. a missing word-audio file 404s → NotSupportedError)
+      // or playback was interrupted. The 'error' listener already resets state; swallow
+      // here so it never surfaces as an unhandled runtime rejection to the caller.
+      this._state = 'idle';
+      this.notify();
+      return;
+    }
 
     // Cache in background (don't await)
     fetch(resolved)
