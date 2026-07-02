@@ -17,46 +17,25 @@ interface UnderstandPhaseProps {
   onComplete: () => void;
 }
 
-// Slow, slightly bouncy spring so the carousel rotation is legible and physical
-const SPRING: Transition = { type: 'spring', duration: 0.85, bounce: 0.16 };
-// Button presses get an eased 3-keyframe path so the card visibly arcs around
-// (a drag carries the card on its own throw; a button has no throw to inherit).
-const ARC_TRANSITION: Transition = { duration: 0.92, ease: 'easeInOut', times: [0, 0.5, 1] };
+// Snappy, lightly bouncy spring for the deck shuffle.
+const SPRING: Transition = { type: 'spring', duration: 0.7, bounce: 0.18 };
 
-// Cycling-carousel slots. Parent is preserve-3d, so these translateZ depths are real
-// (lower z genuinely renders behind). offset is cyclic: 0 = top/front (active), growing
-// DOWN the deck — the largest offset is the bottom card (the PREVIOUS ayah), which sweeps
-// up to the top on "prev". Kept shallow so the fan doesn't reach the words below.
+// Clean offset stack — every card is the SAME size (no scale-down); depth is just a small
+// down-right step, like a real deck. offset is LINEAR (idx - current ayah): 0 = front,
+// 1..3 = upcoming ayahs peeking below (capped at 3 via slotFor). Done ayahs (offset < 0)
+// get tossed to DONE_SLOT; prev brings one back from there.
 const STACK_SLOTS = [
-  { x: 0,  y: 0,  z: 0,    rotateZ: 0,   scale: 1,    opacity: 1 },
-  { x: 11, y: 11, z: -52,  rotateZ: 2.5, scale: 0.95, opacity: 1 },
-  { x: 19, y: 20, z: -100, rotateZ: 4.5, scale: 0.91, opacity: 1 },
-  { x: 25, y: 27, z: -144, rotateZ: 6,   scale: 0.88, opacity: 1 },
-  { x: 30, y: 33, z: -184, rotateZ: 7.5, scale: 0.85, opacity: 1 },
-  { x: 33, y: 37, z: -218, rotateZ: 9,   scale: 0.83, opacity: 1 },
+  { x: 0,  y: 0,  rotateZ: 0, scale: 1, opacity: 1 },
+  { x: 7,  y: 11, rotateZ: 0, scale: 1, opacity: 1 },
+  { x: 14, y: 22, rotateZ: 0, scale: 1, opacity: 1 },
+  { x: 20, y: 32, rotateZ: 0, scale: 1, opacity: 1 },
 ];
-// Cards stay fully OPAQUE; depth-dimming comes from an opaque scrim painted on top
-// (alpha grows with offset) so nothing shows through to the cards/page behind.
-const SCRIM_ALPHA = [0, 0.06, 0.12, 0.18, 0.24, 0.3];
+const DONE_SLOT = { x: -240, y: -16, rotateZ: -9, scale: 1, opacity: 0 };
+const MAX_BELOW = STACK_SLOTS.length - 1; // most cards shown behind the front
+// Cards stay OPAQUE; a light opaque scrim grows with depth so deeper cards read as dimmer.
+const SCRIM_ALPHA = [0, 0.04, 0.08, 0.12];
 function slotFor(offset: number) {
   return STACK_SLOTS[Math.min(offset, STACK_SLOTS.length - 1)];
-}
-
-// Mid-arc waypoints the moving card passes through.
-//   next → flung LEFT (like a drag-left throw) before the carousel sweeps it to the back
-//   prev → lifted UP and toward the viewer, rising from the back to the top
-const ARC_WP_NEXT = { x: -110, y: -6, z: 25, rotateZ: -12, scale: 1.02, opacity: 1 };
-const ARC_WP_PREV = { x: -6, y: -40, z: 70, rotateZ: -5, scale: 1.05, opacity: 1 };
-type Slot = typeof STACK_SLOTS[number];
-function arcKeyframes(from: Slot, to: Slot, wp: typeof ARC_WP_NEXT) {
-  return {
-    x: [from.x, wp.x, to.x],
-    y: [from.y, wp.y, to.y],
-    z: [from.z, wp.z, to.z],
-    rotateZ: [from.rotateZ, wp.rotateZ, to.rotateZ],
-    scale: [from.scale, wp.scale, to.scale],
-    opacity: [from.opacity, wp.opacity, to.opacity],
-  };
 }
 
 // Split an ayah's tajweed HTML into one colored-markup string per word. The tags
@@ -106,7 +85,6 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
   const translationEnabled = useSettingsStore((s) => s.translationEnabled);
   const arabicScript = useSettingsStore((s) => s.arabicScript);
   const [ayahIndex, setAyahIndex] = useState(0);
-  const [nav, setNav] = useState<{ dir: 'next' | 'prev'; viaButton: boolean }>({ dir: 'next', viaButton: false });
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
   const [revealedTranslations, setRevealedTranslations] = useState<Set<number>>(new Set());
   const [exploredAyahs, setExploredAyahs] = useState<Set<number>>(
@@ -156,11 +134,6 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
     return <span className={cn('arabic-text', sizeClass)}>{fallback}</span>;
   };
 
-  // Stable arc paths (front→back for next, back→front for prev) so unrelated re-renders
-  // don't restart a mid-flight button arc.
-  const nextArc = useMemo(() => arcKeyframes(STACK_SLOTS[0], slotFor(ayahs.length - 1), ARC_WP_NEXT), [ayahs.length]);
-  const prevArc = useMemo(() => arcKeyframes(slotFor(ayahs.length - 1), STACK_SLOTS[0], ARC_WP_PREV), [ayahs.length]);
-
   const handleWordClick = async (word: Word, index: number) => {
     setSelectedWord(word);
     const url = wordAudioUrl(word, index);
@@ -169,19 +142,18 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
     }
   };
 
-  const goTo = (index: number, dir: 'next' | 'prev', viaButton: boolean) => {
-    setNav({ dir, viaButton });
+  const goTo = (index: number) => {
     setAyahIndex(index);
     setSelectedWord(null);
     setExploredAyahs((prev) => new Set([...prev, index]));
   };
-  const goNext = (viaButton = false) => { if (ayahIndex < ayahs.length - 1) goTo(ayahIndex + 1, 'next', viaButton); };
-  const goPrev = (viaButton = false) => { if (ayahIndex > 0) goTo(ayahIndex - 1, 'prev', viaButton); };
+  const goNext = () => { if (ayahIndex < ayahs.length - 1) goTo(ayahIndex + 1); };
+  const goPrev = () => { if (ayahIndex > 0) goTo(ayahIndex - 1); };
 
   const handleDragEnd = (_e: unknown, info: PanInfo) => {
     const power = info.offset.x + info.velocity.x * 0.2;
-    if (power < -70) goNext(false);
-    else if (power > 70) goPrev(false);
+    if (power < -70) goNext();
+    else if (power > 70) goPrev();
     // otherwise elastic constraints spring it back to center
   };
 
@@ -247,7 +219,7 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
       {/* Ayah navigation — Prev / counter / Next on a single row to save vertical space */}
       <div className="flex items-center justify-between gap-2">
         <button
-          onClick={() => goPrev(true)}
+          onClick={() => goPrev()}
           disabled={ayahIndex === 0}
           className="flex items-center gap-1 rounded-lg px-2 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground disabled:opacity-0"
         >
@@ -265,7 +237,7 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
         </span>
 
         <button
-          onClick={() => goNext(true)}
+          onClick={() => goNext()}
           disabled={ayahIndex === ayahs.length - 1}
           className="flex items-center gap-1 rounded-lg px-2 py-2 text-sm font-medium text-teal transition-colors hover:text-teal-light disabled:opacity-0"
         >
@@ -274,54 +246,51 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
         </button>
       </div>
 
-      {/* === 3D shuffling card stack (pb gives the fanned deck room above the words) === */}
-      <div className="pb-8">
+      {/* === Card stack — clean offset deck; pb gives the peeking cards room above the words === */}
+      <div className="pb-10">
         <div className="relative" style={{ perspective: '1300px', transformStyle: 'preserve-3d' }}>
-          {/* Invisible sizer: gives the stack its height (cards are absolute) */}
+          {/* Invisible sizer: gives the stack its height (cards are absolute, inset-0 = this size) */}
           <div className="invisible rounded-2xl p-6 text-center" aria-hidden>
             {renderFace(currentAyah, ayahIndex)}
           </div>
 
           {ayahs.map((ayah, idx) => {
-            // Cyclic offset: 0 = front, growing downward; the largest = bottom = previous ayah
-            const offset = (idx - ayahIndex + ayahs.length) % ayahs.length;
+            // Linear depth: 0 = front, 1..3 = upcoming ayahs peeking below; < 0 = done (tossed off).
+            const offset = idx - ayahIndex;
             const isFront = offset === 0;
-            // The one card making the big front↔back move gets the throw-arc on a button press
-            const isBigMover = nav.viaButton && (
-              (nav.dir === 'next' && offset === ayahs.length - 1) ||
-              (nav.dir === 'prev' && offset === 0)
-            );
+            const isDone = offset < 0;
+            const belowCount = Math.min(MAX_BELOW, ayahs.length - 1 - ayahIndex);
+            const isDeepest = offset === belowCount; // only this card carries the grounding shadow
+            const scrimIdx = Math.max(0, Math.min(offset, SCRIM_ALPHA.length - 1));
             return (
               <motion.div
                 key={idx}
-                className={cn(
-                  'tactile-card card-deck-item absolute inset-0 select-none overflow-hidden rounded-2xl bg-card p-6 text-center',
-                  !isFront && 'tactile-card--stacked'
-                )}
+                className="tactile-card card-deck-item absolute inset-0 select-none overflow-hidden rounded-2xl bg-card p-6 text-center"
                 style={{
                   touchAction: 'pan-y',
                   cursor: isFront ? 'grab' : 'default',
                   pointerEvents: isFront ? 'auto' : 'none',
-                  zIndex: ayahs.length - offset,
+                  zIndex: isDone ? 50 : ayahs.length - offset,
+                  boxShadow: isDeepest ? '4px 4px 0 var(--shadow-card-color)' : 'none',
                 }}
                 initial={false}
-                animate={isBigMover ? (nav.dir === 'next' ? nextArc : prevArc) : slotFor(offset)}
-                transition={isBigMover ? ARC_TRANSITION : SPRING}
+                animate={isDone ? DONE_SLOT : slotFor(offset)}
+                transition={SPRING}
                 drag={isFront ? 'x' : false}
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.5}
                 onDragEnd={isFront ? handleDragEnd : undefined}
                 whileDrag={{ cursor: 'grabbing' }}
               >
-                {/* Opaque depth scrim — dims deeper cards without any see-through */}
+                {/* Light opaque depth scrim on the cards behind */}
                 {offset > 0 && (
                   <motion.div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-2xl"
                     style={{ background: 'var(--scrim-tint)', zIndex: 5 }}
                     initial={false}
-                    animate={{ opacity: SCRIM_ALPHA[Math.min(offset, SCRIM_ALPHA.length - 1)] }}
-                    transition={isBigMover ? ARC_TRANSITION : SPRING}
+                    animate={{ opacity: SCRIM_ALPHA[scrimIdx] }}
+                    transition={SPRING}
                   />
                 )}
                 <div className="relative z-10">{renderFace(ayah, idx)}</div>
