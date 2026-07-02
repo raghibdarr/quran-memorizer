@@ -1,4 +1,11 @@
 import type { LessonDef } from '@/types/quran';
+import ayahWeightsJson from '@/data/ayah-weights.json';
+
+// Per-ayah real-word counts (regenerate with scripts/generate-ayah-weights.mjs).
+// Lessons pack to a WORD budget, not a flat ayah count — five heavyweight Baqarah
+// ayahs are not the same day's work as five Juz-30 ayahs, and a giant ayah like
+// 2:282 (128 words) becomes its own lesson.
+const AYAH_WEIGHTS: Record<string, number[]> = ayahWeightsJson;
 
 // All 114 surahs — Juz 30 first (short/familiar), then rest by traditional order
 export const CURRICULUM_ORDER = [
@@ -19,10 +26,25 @@ export const CURRICULUM_ORDER = [
   55, 56, 57,
 ] as const;
 
-const AYAHS_PER_LESSON = 5;
-const MIN_LESSON_AYAHS = 3;
+const TARGET_WORDS_PER_LESSON = 45; // soft budget: one lesson's memorization load
+const MAX_AYAHS_PER_LESSON = 5;     // cap so many tiny ayahs still form small lessons
+const MIN_LESSON_AYAHS = 3;         // orphan tails smaller than this may merge...
+const LIGHT_ORPHAN_WORDS = 20;      // ...but only when they're this light
+const SINGLE_LESSON_MAX_AYAHS = 8;  // a short segment stays one lesson...
+const SINGLE_LESSON_MAX_WORDS = 60; // ...if it's also light enough overall
 
-/** Generate lessons for a single contiguous segment of ayahs */
+function ayahWords(surahId: number, ayahNumber: number): number {
+  // Fallback ~average-short-ayah weight keeps packing sane if a surah is missing
+  return AYAH_WEIGHTS[String(surahId)]?.[ayahNumber - 1] ?? 8;
+}
+
+function rangeWords(surahId: number, start: number, end: number): number {
+  let total = 0;
+  for (let a = start; a <= end; a++) total += ayahWords(surahId, a);
+  return total;
+}
+
+/** Generate lessons for a single contiguous segment of ayahs, packed to a word budget */
 function generateSegmentLessons(
   surahId: number,
   segStart: number,
@@ -32,8 +54,8 @@ function generateSegmentLessons(
 ): LessonDef[] {
   const segCount = segEnd - segStart + 1;
 
-  // Short segments = single lesson
-  if (segCount <= 8) {
+  // Short AND light segments = single lesson (e.g. Al-Fatihah, the short surahs)
+  if (segCount <= SINGLE_LESSON_MAX_AYAHS && rangeWords(surahId, segStart, segEnd) <= SINGLE_LESSON_MAX_WORDS) {
     return [{
       lessonId: `${surahId}-${startLessonNum}`,
       surahId,
@@ -50,11 +72,23 @@ function generateSegmentLessons(
   let num = startLessonNum;
 
   while (start <= segEnd) {
-    let end = Math.min(start + AYAHS_PER_LESSON - 1, segEnd);
+    // Greedy-fill: take ayahs while under both the ayah cap and the word budget.
+    // A single over-budget ayah (e.g. 2:282, 128 words) becomes its own lesson.
+    let end = start;
+    let words = ayahWords(surahId, start);
+    while (
+      end < segEnd &&
+      end - start + 1 < MAX_AYAHS_PER_LESSON &&
+      words + ayahWords(surahId, end + 1) <= TARGET_WORDS_PER_LESSON
+    ) {
+      end++;
+      words += ayahWords(surahId, end);
+    }
 
-    // Avoid orphan groups of fewer than MIN_LESSON_AYAHS at the end
+    // Merge a light orphan tail instead of leaving a stub lesson; a heavy tail
+    // (long ayahs) stays its own small-but-real lesson.
     const remaining = segEnd - end;
-    if (remaining > 0 && remaining < MIN_LESSON_AYAHS) {
+    if (remaining > 0 && remaining < MIN_LESSON_AYAHS && rangeWords(surahId, end + 1, segEnd) <= LIGHT_ORPHAN_WORDS) {
       end = segEnd;
     }
 

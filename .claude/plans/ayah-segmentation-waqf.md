@@ -1,7 +1,9 @@
 # Ayah Segmentation by Waqf Marks — Design & Implementation Plan
 
 *Drafted 2026-07-02. Status: Phases A + B implemented 2026-07-02 (src/lib/segments.ts + Understand deck);
-C reshaped (see Phase C note), D pending owner migration decision, E deferred.*
+C = pursue QUL word timestamps (owner chose; research pending), D implemented 2026-07-03
+(word-budget lesson packing, owner accepted progress reset — old lessonIds orphaned harmlessly),
+E deferred.*
 
 ## The three problems this solves
 
@@ -99,12 +101,14 @@ Validation data point: 2:282 has 16 marks → 17 segments (sizes 2–17 words); 
 - Open pedagogy decision (owner) stands: for an over-long unmarked stretch, drill-only sub-split
   (always chained back, never shown as a stop) vs keep whole.
 
-### Phase D — Load-weighted lessons
-- Weight ayahs by segment/word count; pack lessons to a target load instead of ayah count
-  (2:282 becomes its own lesson). Floor so tiny lessons don't occur. Touches lesson-def
-  generation + plan math (`src/lib/plan*`); migration concern: existing lessonIds are
-  "surah-lessonNumber" — renumbering affects saved progress/plans, needs a migration or
-  versioned lesson map.
+### Phase D — Load-weighted lessons — DONE 2026-07-03
+- `scripts/generate-ayah-weights.mjs` → `src/data/ayah-weights.json` (per-ayah real-word
+  counts, ~16KB static import; regenerate after any surah-data refresh).
+- `curriculum.ts` packs lessons to a 45-word soft budget (max 5 ayahs; ≤8-ayah AND ≤60-word
+  segments stay single lessons; ≤20-word orphan tails merge). A single over-budget ayah is
+  its own lesson: 2:282 → "Ayahs 282–282"; Al-Baqarah ≈ 165 lessons (was ~58); Juz-30 short
+  surahs pack like before. Owner accepted the lessonId renumbering (no migration; old saved
+  lesson entries are orphaned but harmless).
 
 ### Phase E (future) — Tier-3 grammar boundaries
 - Corpus treebank → compute kāfī boundaries inside unmarked stretches; both-edge validation.

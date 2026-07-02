@@ -7,6 +7,13 @@ import {
   getSurahOrder,
   isMvpSurah,
 } from './curriculum';
+import ayahWeights from '@/data/ayah-weights.json';
+
+const WEIGHTS = ayahWeights as Record<string, number[]>;
+const lessonWords = (l: { surahId: number; ayahStart: number; ayahEnd: number }) =>
+  WEIGHTS[String(l.surahId)]
+    .slice(l.ayahStart - 1, l.ayahEnd)
+    .reduce((a, b) => a + b, 0);
 
 describe('generateLessons (no juz info)', () => {
   it('short surah (<= 8 ayahs) yields a single lesson covering all ayahs', () => {
@@ -59,6 +66,46 @@ describe('generateLessons (no juz info)', () => {
       expect(l.lessonId).toBe(`78-${i + 1}`);
       expect(l.lessonNumber).toBe(i + 1);
     });
+  });
+});
+
+describe('load-weighted lesson packing', () => {
+  it('Al-Fatihah stays a single lesson', () => {
+    expect(generateLessons(1, 7)).toHaveLength(1);
+  });
+
+  it('2:282 (the longest ayah, 128 words) becomes its own lesson', () => {
+    const lessons = generateLessons(2, 286);
+    const lesson = lessons.find((l) => l.ayahStart <= 282 && 282 <= l.ayahEnd)!;
+    expect(lesson.ayahStart).toBe(282);
+    expect(lesson.ayahEnd).toBe(282);
+  });
+
+  it('heavy surahs pack fewer ayahs per lesson than light ones', () => {
+    const baqarah = generateLessons(2, 286);
+    const naba = generateLessons(78, 40);
+    const avg = (ls: typeof baqarah) => ls.reduce((a, l) => a + l.ayahCount, 0) / ls.length;
+    expect(avg(baqarah)).toBeLessThan(avg(naba));
+  });
+
+  it('every surah is fully covered by contiguous lessons within the word budget', () => {
+    for (const [sid, weights] of Object.entries(WEIGHTS)) {
+      const surahId = Number(sid);
+      const lessons = generateLessons(surahId, weights.length);
+      expect(lessons[0].ayahStart).toBe(1);
+      expect(lessons[lessons.length - 1].ayahEnd).toBe(weights.length);
+      for (let i = 1; i < lessons.length; i++) {
+        expect(lessons[i].ayahStart).toBe(lessons[i - 1].ayahEnd + 1);
+      }
+      for (const l of lessons) {
+        // Multi-ayah lessons respect the budget (+ light-orphan slack);
+        // only a single giant ayah may exceed it.
+        if (l.ayahCount > 1) {
+          expect(lessonWords(l), l.lessonId).toBeLessThanOrEqual(45 + 20);
+        }
+        expect(l.ayahCount).toBeLessThanOrEqual(8);
+      }
+    }
   });
 });
 
