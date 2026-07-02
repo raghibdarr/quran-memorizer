@@ -1,6 +1,7 @@
 # Ayah Segmentation by Waqf Marks — Design & Implementation Plan
 
-*Drafted 2026-07-02. Status: agreed in principle, not yet implemented.*
+*Drafted 2026-07-02. Status: Phases A + B implemented 2026-07-02 (src/lib/segments.ts + Understand deck);
+C reshaped (see Phase C note), D pending owner migration decision, E deferred.*
 
 ## The three problems this solves
 
@@ -87,12 +88,16 @@ Validation data point: 2:282 has 16 marks → 17 segments (sizes 2–17 words); 
 - `exploredAyahs` gating: an ayah counts as explored when all its segments were visited.
 - Keep the new stacked-deck visuals (uniform size, depleting stack, single grounding shadow).
 
-### Phase C — Build/Test chunks from segments
-- Replace `generateChunks` word-count logic with segments (keep the existing chaining:
-  1 → 1+2 → 1+2+3 …).
-- Open pedagogy decision (owner): inside an over-long unmarked segment, allow *drill-only*
-  word-split (always chained back, never shown as a stop), or keep whole. Test on real long
-  ayahs before deciding.
+### Phase C — Build/Test chunks from segments — RESHAPED (discovery 2026-07-02)
+- `generateChunks`/`src/lib/chunks.ts` turned out to be DEAD CODE (never imported) — deleted.
+  chunk-phase.tsx already learns ayah-by-ayah (6-4-4-6 + chaining) with FULL-AYAH audio, so the
+  feared arbitrary 3-word chunks never actually ran. Test-phase blanks are quizzes, not taught
+  stops — fine as-is.
+- Making Build segment-aware therefore needs SEGMENT AUDIO: either stitched word-by-word clips
+  (choppy) or timestamp slices of the full-ayah recording (QUL/Tarteel publish word-level
+  timestamps for some reciters — data-sourcing task). Owner decision before building.
+- Open pedagogy decision (owner) stands: for an over-long unmarked stretch, drill-only sub-split
+  (always chained back, never shown as a stop) vs keep whole.
 
 ### Phase D — Load-weighted lessons
 - Weight ayahs by segment/word count; pack lessons to a target load instead of ayah count

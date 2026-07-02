@@ -6,6 +6,7 @@ import type { Surah, Ayah, Word } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { useSettingsStore } from '@/stores/settings-store';
 import { audioController } from '@/lib/audio';
+import { segmentAyah, buildAyahWordData, type AyahSegment } from '@/lib/segments';
 import ArabicText from '@/components/ui/arabic-text';
 import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
@@ -38,36 +39,6 @@ function slotFor(offset: number) {
   return STACK_SLOTS[Math.min(offset, STACK_SLOTS.length - 1)];
 }
 
-// Split an ayah's tajweed HTML into one colored-markup string per word. The tags
-// (<tajweed class=...>, <span class=end>) are space-free internally once tokenized,
-// so every space that lands in a TEXT run is a genuine word break. Caller drops the
-// trailing end-marker token and count-checks against the word list before trusting it.
-function splitTajweedByWord(html: string): string[] {
-  const tokens = html.match(/<[^>]+>|[^<]+/g) || [];
-  const words: string[] = [];
-  let current = '';
-  for (const tok of tokens) {
-    if (tok[0] === '<') {
-      current += tok;
-      continue;
-    }
-    const parts = tok.split(' ');
-    for (let i = 0; i < parts.length; i++) {
-      if (i > 0) {
-        if (current.trim()) words.push(current);
-        current = '';
-      }
-      current += parts[i];
-    }
-  }
-  if (current.trim()) words.push(current);
-  return words;
-}
-
-// Tokens that are only Quranic pause/sajdah/rub marks (e.g. ۖ ۚ ۞ ۩) sit between words
-// in the script but aren't words themselves — drop them so the per-word split lines up.
-const NON_WORD_MARK = /^[ۖ-۞۩ࣰ-ࣿ\s]+$/;
-
 // quran.com's word audio_url numbers files by word POSITION (it counts pause marks as
 // their own slots), but the CDN actually stores word audio CONSECUTIVELY — one file per
 // real word, 1..N. So for any ayah with an internal pause mark the stored URL points one
@@ -84,12 +55,36 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
   const translationEnabled = useSettingsStore((s) => s.translationEnabled);
   const arabicScript = useSettingsStore((s) => s.arabicScript);
-  const [ayahIndex, setAyahIndex] = useState(0);
+  // Deck items: one per waqf segment — short ayahs (the common case) are exactly one item
+  const deckItems = useMemo(
+    () => ayahs.flatMap((ayah, ayahIdx) => segmentAyah(ayah).map((seg) => ({ ayah, ayahIdx, seg }))),
+    [ayahs]
+  );
+  const [itemIndex, setItemIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
   const [revealedTranslations, setRevealedTranslations] = useState<Set<number>>(new Set());
-  const [exploredAyahs, setExploredAyahs] = useState<Set<number>>(
-    savedExplored ? new Set(savedExplored) : new Set([0])
-  );
+  // Segment-level visits; an ayah counts as explored once ALL its segments were seen.
+  const [visitedItems, setVisitedItems] = useState<Set<number>>(() => {
+    const v = new Set<number>([0]);
+    if (savedExplored) {
+      deckItems.forEach((it, i) => {
+        if (savedExplored.includes(it.ayahIdx)) v.add(i);
+      });
+    }
+    return v;
+  });
+  const exploredAyahs = useMemo(() => {
+    const visitedPerAyah = new Map<number, number>();
+    visitedItems.forEach((i) => {
+      const it = deckItems[i];
+      if (it) visitedPerAyah.set(it.ayahIdx, (visitedPerAyah.get(it.ayahIdx) ?? 0) + 1);
+    });
+    const explored = new Set<number>();
+    deckItems.forEach((it) => {
+      if ((visitedPerAyah.get(it.ayahIdx) ?? 0) >= it.seg.count) explored.add(it.ayahIdx);
+    });
+    return explored;
+  }, [visitedItems, deckItems]);
   const { markUnderstandComplete, updateExploredAyahs } = useProgressStore();
 
   // Persist explored ayahs
@@ -97,28 +92,15 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
     updateExploredAyahs(lessonId, [...exploredAyahs]);
   }, [exploredAyahs, lessonId, updateExploredAyahs]);
 
-  const currentAyah = ayahs[ayahIndex];
+  const currentItem = deckItems[itemIndex];
+  const currentAyah = currentItem.ayah;
   const allExplored = exploredAyahs.size >= ayahs.length;
 
-  // Per-word Arabic for the chips/detail in the user's chosen script. Word data is
-  // plain Uthmani only, so tajweed/indopak are derived from the ayah-level fields and
-  // fall back to Uthmani whenever the split doesn't line up 1:1 with the words.
-  const actualWords = useMemo(
-    () => currentAyah.words.filter((w) => w.charType === 'word'),
-    [currentAyah]
-  );
-  const tajweedWords = useMemo(() => {
-    if (!currentAyah.textUthmaniTajweed) return null;
-    const parts = splitTajweedByWord(currentAyah.textUthmaniTajweed)
-      .filter((p) => !p.includes('class=end'))
-      .filter((p) => !NON_WORD_MARK.test(p.replace(/<[^>]+>/g, '')));
-    return parts.length === actualWords.length ? parts : null;
-  }, [currentAyah, actualWords]);
-  const indopakWords = useMemo(() => {
-    if (!currentAyah.textIndopak) return null;
-    const parts = currentAyah.textIndopak.trim().split(/\s+/).filter((p) => !NON_WORD_MARK.test(p));
-    return parts.length === actualWords.length ? parts : null;
-  }, [currentAyah, actualWords]);
+  // Per-word Arabic in the user's chosen script for every ayah (word data is plain
+  // Uthmani only; tajweed/indopak derive from the ayah-level fields with count-checked
+  // fallbacks). Memoized once — segment faces, stacked cards, and chips all draw on it.
+  const ayahData = useMemo(() => ayahs.map((a) => buildAyahWordData(a)), [ayahs]);
+  const { words: actualWords, tajweedWords, indopakWords } = ayahData[currentItem.ayahIdx];
   const renderWordArabic = (wi: number, fallback: string, sizeClass: string) => {
     if (arabicScript === 'tajweed' && tajweedWords && wi >= 0) {
       return (
@@ -143,12 +125,12 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
   };
 
   const goTo = (index: number) => {
-    setAyahIndex(index);
+    setItemIndex(index);
     setSelectedWord(null);
-    setExploredAyahs((prev) => new Set([...prev, index]));
+    setVisitedItems((prev) => new Set([...prev, index]));
   };
-  const goNext = () => { if (ayahIndex < ayahs.length - 1) goTo(ayahIndex + 1); };
-  const goPrev = () => { if (ayahIndex > 0) goTo(ayahIndex - 1); };
+  const goNext = () => { if (itemIndex < deckItems.length - 1) goTo(itemIndex + 1); };
+  const goPrev = () => { if (itemIndex > 0) goTo(itemIndex - 1); };
 
   const handleDragEnd = (_e: unknown, info: PanInfo) => {
     const power = info.offset.x + info.velocity.x * 0.2;
@@ -162,50 +144,90 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
     onComplete();
   };
 
-  // Card face — reused by the invisible height sizer and every stacked card
-  const renderFace = (ayah: Ayah, idx: number) => (
-    <>
-      <div className="mx-auto mb-4 flex w-fit items-center gap-2.5" aria-hidden>
-        <span className="h-px w-8 bg-gold/50" />
-        <span className="h-1.5 w-1.5 rotate-45 bg-gold" />
-        <span className="h-px w-8 bg-gold/50" />
-      </div>
-      <ArabicText ayah={ayah} className="text-3xl leading-loose" />
-      {transliterationEnabled && ayah.transliteration && (
-        <p className="mt-2 text-center text-sm text-muted">{ayah.transliteration}</p>
-      )}
-      {ayah.translation && (
-        translationEnabled ? (
-          <p className="mt-1 text-center text-sm italic text-muted">{ayah.translation}</p>
-        ) : revealedTranslations.has(idx) ? (
-          <button
-            onPointerDownCapture={(e) => e.stopPropagation()}
-            onClick={() =>
-              setRevealedTranslations((prev) => {
-                const next = new Set(prev);
-                next.delete(idx);
-                return next;
-              })
-            }
-            className="group mt-1 flex flex-col items-center gap-0.5"
-          >
-            <span className="text-center text-sm italic text-muted">{ayah.translation}</span>
-            <span className="text-[10px] font-medium text-muted/50 transition-colors group-hover:text-muted">
-              Tap to hide
-            </span>
-          </button>
+  // Card face — reused by the invisible height sizer and every deck card.
+  // An item is one waqf segment; short ayahs have exactly one whole-ayah item.
+  const renderFace = (item: { ayah: Ayah; ayahIdx: number; seg: AyahSegment }) => {
+    const { ayah, ayahIdx, seg } = item;
+    const isWhole = seg.count === 1;
+    const data = ayahData[ayahIdx];
+    const segWords = data.words.slice(seg.wordStart, seg.wordEnd + 1);
+    const segTranslit = segWords.map((w) => w.transliteration).filter(Boolean).join(' ');
+    return (
+      <>
+        <div className="mx-auto mb-4 flex w-fit items-center gap-2.5" aria-hidden>
+          <span className="h-px w-8 bg-gold/50" />
+          <span className="h-1.5 w-1.5 rotate-45 bg-gold" />
+          <span className="h-px w-8 bg-gold/50" />
+        </div>
+        {isWhole ? (
+          <ArabicText ayah={ayah} className="text-3xl leading-loose" />
+        ) : arabicScript === 'tajweed' && data.tajweedWords ? (
+          <div
+            className="arabic-text tajweed-text text-3xl leading-loose"
+            dangerouslySetInnerHTML={{
+              // The boundary word's tajweed token already carries its pause mark
+              // (ZWNJ-glued in the source HTML) — only append when it doesn't.
+              __html:
+                data.tajweedWords.slice(seg.wordStart, seg.wordEnd + 1).join(' ') +
+                (seg.endMark &&
+                !data.tajweedWords[seg.wordEnd].replace(/<[^>]+>/g, '').includes(seg.endMark)
+                  ? ` ${seg.endMark}`
+                  : ''),
+            }}
+          />
+        ) : arabicScript === 'indopak' && data.indopakWords ? (
+          <p className="arabic-text-indopak text-3xl leading-loose">
+            {data.indopakWords.slice(seg.wordStart, seg.wordEnd + 1).join(' ')}
+          </p>
         ) : (
-          <button
-            onPointerDownCapture={(e) => e.stopPropagation()}
-            onClick={() => setRevealedTranslations((prev) => new Set([...prev, idx]))}
-            className="mt-2 text-xs font-medium text-teal transition-colors hover:text-teal-light"
-          >
-            Tap to see translation
-          </button>
-        )
-      )}
-    </>
-  );
+          <p className="arabic-text text-3xl leading-loose">
+            {segWords.map((w) => w.textUthmani).join(' ')}
+          </p>
+        )}
+        {transliterationEnabled && (isWhole ? ayah.transliteration : segTranslit) && (
+          <p className="mt-2 text-center text-sm text-muted">
+            {isWhole ? ayah.transliteration : segTranslit}
+          </p>
+        )}
+        {ayah.translation && (
+          translationEnabled ? (
+            <p className="mt-1 text-center text-sm italic text-muted">
+              {ayah.translation}
+              {!isWhole && <span className="text-xs not-italic text-muted/70"> (full ayah)</span>}
+            </p>
+          ) : revealedTranslations.has(ayahIdx) ? (
+            <button
+              onPointerDownCapture={(e) => e.stopPropagation()}
+              onClick={() =>
+                setRevealedTranslations((prev) => {
+                  const next = new Set(prev);
+                  next.delete(ayahIdx);
+                  return next;
+                })
+              }
+              className="group mt-1 flex flex-col items-center gap-0.5"
+            >
+              <span className="text-center text-sm italic text-muted">
+                {ayah.translation}
+                {!isWhole && <span className="text-xs not-italic text-muted/70"> (full ayah)</span>}
+              </span>
+              <span className="text-[10px] font-medium text-muted/50 transition-colors group-hover:text-muted">
+                Tap to hide
+              </span>
+            </button>
+          ) : (
+            <button
+              onPointerDownCapture={(e) => e.stopPropagation()}
+              onClick={() => setRevealedTranslations((prev) => new Set([...prev, ayahIdx]))}
+              className="mt-2 text-xs font-medium text-teal transition-colors hover:text-teal-light"
+            >
+              Tap to see translation
+            </button>
+          )
+        )}
+      </>
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -220,7 +242,7 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
       <div className="flex items-center justify-between gap-2">
         <button
           onClick={() => goPrev()}
-          disabled={ayahIndex === 0}
+          disabled={itemIndex === 0}
           className="flex items-center gap-1 rounded-lg px-2 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground disabled:opacity-0"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
@@ -233,12 +255,14 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
             <path d="M15 4h1a1 1 0 0 1 1 1v3.5" />
             <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />
           </svg>
-          Ayah {ayahIndex + 1} of {ayahs.length}
+          {currentItem.seg.count > 1
+            ? `Ayah ${currentItem.ayahIdx + 1} of ${ayahs.length} · part ${currentItem.seg.index + 1}/${currentItem.seg.count}`
+            : `Ayah ${currentItem.ayahIdx + 1} of ${ayahs.length}`}
         </span>
 
         <button
           onClick={() => goNext()}
-          disabled={ayahIndex === ayahs.length - 1}
+          disabled={itemIndex === deckItems.length - 1}
           className="flex items-center gap-1 rounded-lg px-2 py-2 text-sm font-medium text-teal transition-colors hover:text-teal-light disabled:opacity-0"
         >
           Next
@@ -251,26 +275,26 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
         <div className="relative" style={{ perspective: '1300px', transformStyle: 'preserve-3d' }}>
           {/* Invisible sizer: gives the stack its height (cards are absolute, inset-0 = this size) */}
           <div className="invisible rounded-2xl p-6 text-center" aria-hidden>
-            {renderFace(currentAyah, ayahIndex)}
+            {renderFace(currentItem)}
           </div>
 
-          {ayahs.map((ayah, idx) => {
-            // Linear depth: 0 = front, 1..3 = upcoming ayahs peeking below; < 0 = done (tossed off).
-            const offset = idx - ayahIndex;
+          {deckItems.map((item, idx) => {
+            // Linear depth: 0 = front, 1..3 = upcoming cards peeking below; < 0 = done (tossed off).
+            const offset = idx - itemIndex;
             const isFront = offset === 0;
             const isDone = offset < 0;
-            const belowCount = Math.min(MAX_BELOW, ayahs.length - 1 - ayahIndex);
+            const belowCount = Math.min(MAX_BELOW, deckItems.length - 1 - itemIndex);
             const isDeepest = offset === belowCount; // only this card carries the grounding shadow
             const scrimIdx = Math.max(0, Math.min(offset, SCRIM_ALPHA.length - 1));
             return (
               <motion.div
-                key={idx}
+                key={`${item.ayah.key}#${item.seg.index}`}
                 className="tactile-card card-deck-item absolute inset-0 select-none overflow-hidden rounded-2xl bg-card p-6 text-center"
                 style={{
                   touchAction: 'pan-y',
                   cursor: isFront ? 'grab' : 'default',
                   pointerEvents: isFront ? 'auto' : 'none',
-                  zIndex: isDone ? 50 : ayahs.length - offset,
+                  zIndex: isDone ? 50 : deckItems.length - offset,
                   boxShadow: isDeepest ? '4px 4px 0 var(--shadow-card-color)' : 'none',
                 }}
                 initial={false}
@@ -293,17 +317,18 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
                     transition={SPRING}
                   />
                 )}
-                <div className="relative z-10">{renderFace(ayah, idx)}</div>
+                <div className="relative z-10">{renderFace(item)}</div>
               </motion.div>
             );
           })}
         </div>
       </div>
 
-      {/* Word-by-word breakdown */}
-      <div key={ayahIndex} className="animate-[card-rise_320ms_ease-out]">
+      {/* Word-by-word breakdown — scoped to the current segment */}
+      <div key={itemIndex} className="animate-[card-rise_320ms_ease-out]">
         <div className="flex flex-wrap justify-center gap-2" dir="rtl">
-          {actualWords.map((word, wi) => {
+          {actualWords.slice(currentItem.seg.wordStart, currentItem.seg.wordEnd + 1).map((word, i) => {
+            const wi = currentItem.seg.wordStart + i; // absolute index in the ayah (audio + tajweed)
             const isSelected = selectedWord?.position === word.position;
             return (
               <button
