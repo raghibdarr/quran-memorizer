@@ -7,8 +7,11 @@ import { audioController } from '@/lib/audio';
 import { useAudio } from '@/hooks/use-audio';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
+import { segmentAyah } from '@/lib/segments';
+import { loadSegmentTimings, segmentRangeMs, type SurahTimings } from '@/lib/segment-audio';
 import ArabicText from '@/components/ui/arabic-text';
 import AyahDisplay from '@/components/ui/ayah-display';
+import SegmentArabic from '@/components/ui/segment-arabic';
 import BeadProgress from '@/components/ui/bead-progress';
 import Button from '@/components/ui/button';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
@@ -80,11 +83,20 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
   const getAudioUrl = (surahId: number, ayahNum: number) =>
     buildAudioUrl(surahId, ayahNum, useSettingsStore.getState().reciter);
 
-  // Restore saved state
+  // Learning units: one per waqf segment — long ayahs are learned part by part,
+  // then chained; short ayahs (the common case) are a single whole-ayah unit.
+  const units = useMemo(
+    () => ayahs.flatMap((ayah, ayahIdx) => segmentAyah(ayah).map((seg) => ({ ayah, ayahIdx, seg }))),
+    [ayahs]
+  );
+  const firstUnitOfAyah = (ayahIdx: number) =>
+    Math.max(0, units.findIndex((u) => u.ayahIdx === ayahIdx));
+
+  // Restore saved state (currentChunkIndex is a UNIT index)
   const savedChunk = lesson?.phaseData.chunk;
   const savedIndex = savedChunk?.currentChunkIndex ?? 0;
-  const [ayahIndex, setAyahIndex] = useState(
-    Math.min(savedIndex, ayahs.length - 1)
+  const [unitIndex, setUnitIndex] = useState(
+    Math.min(savedIndex, units.length - 1)
   );
   const [mainStage, setMainStage] = useState<MainStage>(
     startAtReview ? 'final-chain'
@@ -103,12 +115,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isPlayingOnce, setIsPlayingOnce] = useState(false);
   const [completedAyahs, setCompletedAyahs] = useState<Set<number>>(() => {
-    // Mark ayahs before the saved index as completed
+    // Mark ayahs before the saved unit's ayah as completed
     const completed = new Set<number>();
-    for (let i = 0; i < savedIndex; i++) completed.add(i);
+    const savedAyah = units[Math.min(savedIndex, units.length - 1)].ayahIdx;
+    for (let i = 0; i < savedAyah; i++) completed.add(i);
     // If we're on a chaining or final-chain stage, the current ayah is also completed
     if (savedChunk?.stage === 'chaining' || savedChunk?.stage === 'final-chain') {
-      completed.add(savedIndex);
+      completed.add(savedAyah);
     }
     return completed;
   });
@@ -121,7 +134,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
 
   // Single-ayah practice mode (returns to chain when done)
   const [practiceReturnStage, setPracticeReturnStage] = useState<MainStage | null>(null);
-  const [savedAyahIndex, setSavedAyahIndex] = useState<number | null>(null);
+  const [savedUnitIndex, setSavedUnitIndex] = useState<number | null>(null);
 
   // Word ordering state
   const [selectedOrder, setSelectedOrder] = useState<number[]>([]);
@@ -130,22 +143,63 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
 
   const abortRef = useRef(false);
 
-  const currentAyah = ayahs[ayahIndex];
+  const unit = units[unitIndex];
+  const ayahIndex = unit.ayahIdx;
+  const currentAyah = unit.ayah;
+  const isSplitUnit = unit.seg.count > 1;
   const actualWords = useMemo(
     () => currentAyah?.words.filter((w) => w.charType === 'word') ?? [],
     [currentAyah]
   );
+  // Words scoped to the current learning unit
+  const unitWords = useMemo(
+    () => actualWords.slice(unit.seg.wordStart, unit.seg.wordEnd + 1),
+    [actualWords, unit.seg.wordStart, unit.seg.wordEnd]
+  );
+  const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
+  const unitTranslit = useMemo(
+    () => unitWords.map((w) => w.transliteration).filter(Boolean).join(' '),
+    [unitWords]
+  );
+
+  // Word timings for segment-precise audio (covered reciters only; null → full-ayah
+  // fallback). Keyed so a reciter/surah switch never reads the previous pair's data.
+  const reciter = useSettingsStore((s) => s.reciter);
+  const timingsKey = `${reciter}/${surah.id}`;
+  const [loadedTimings, setLoadedTimings] = useState<{ key: string; data: SurahTimings | null }>({ key: '', data: null });
+  useEffect(() => {
+    let live = true;
+    loadSegmentTimings(reciter, surah.id).then((data) => {
+      if (live) setLoadedTimings({ key: `${reciter}/${surah.id}`, data });
+    });
+    return () => { live = false; };
+  }, [reciter, surah.id]);
+  const timings = loadedTimings.key === timingsKey ? loadedTimings.data : null;
+
+  // Play the current unit: a waqf segment plays as a slice of the real recitation
+  // when word timings cover it; otherwise (or for whole-ayah units) the full ayah.
+  const playUnitAudio = useCallback(async () => {
+    const url = buildAudioUrl(surah.id, currentAyah.number, useSettingsStore.getState().reciter);
+    if (isSplitUnit && timings) {
+      const range = segmentRangeMs(timings, currentAyah.number, unit.seg);
+      if (range) {
+        await audioController.playRangeAndWait(url, range.startMs, range.endMs);
+        return;
+      }
+    }
+    await audioController.playAndWait(url);
+  }, [surah.id, currentAyah, isSplitUnit, timings, unit.seg]);
 
   // Persist chunk state on changes
   useEffect(() => {
     if (practiceReturnStage) return; // Don't save while drilling into a single ayah
     updateChunkState(lessonId, {
-      index: ayahIndex,
+      index: unitIndex,
       stage: mainStage,
       learnStep,
       repCount,
     });
-  }, [ayahIndex, mainStage, learnStep, repCount, lessonId, practiceReturnStage, updateChunkState]);
+  }, [unitIndex, mainStage, learnStep, repCount, lessonId, practiceReturnStage, updateChunkState]);
 
   const currentStepReps = learnStep !== 'word-order' ? STEP_REPS[learnStep] : 0;
   const isTextVisible = learnStep === 'listen-with-text' || learnStep === 'reinforce-with-text';
@@ -159,10 +213,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
   const playOnce = useCallback(async () => {
     if (!currentAyah || isPlayingOnce || isAutoPlaying) return;
     setIsPlayingOnce(true);
-    await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
+    await playUnitAudio();
     setRepCount((c) => c + 1);
     setIsPlayingOnce(false);
-  }, [currentAyah]);
+  }, [currentAyah, isPlayingOnce, isAutoPlaying, playUnitAudio]);
 
   const startAutoPlay = useCallback(async () => {
     if (isAutoPlaying || !currentAyah) return;
@@ -172,7 +226,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     const repsLeft = currentStepReps - repCount;
     for (let i = 0; i < repsLeft; i++) {
       if (abortRef.current) break;
-      await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
+      await playUnitAudio();
       if (abortRef.current) break;
       setRepCount((c) => c + 1);
       if (i < repsLeft - 1) {
@@ -180,7 +234,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
       }
     }
     setIsAutoPlaying(false);
-  }, [currentAyah, repCount, currentStepReps, isAutoPlaying]);
+  }, [currentAyah, repCount, currentStepReps, isAutoPlaying, playUnitAudio]);
 
   const stopAutoPlay = useCallback(() => {
     abortRef.current = true;
@@ -197,9 +251,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
       setLearnStep(next);
       setRepCount(0);
 
-      // Set up word ordering
+      // Set up word ordering (scoped to the current unit)
       if (next === 'word-order') {
-        const shuffled = actualWords
+        const shuffled = unitWords
           .map((w) => ({ position: w.position, text: w.textUthmani, transliteration: w.transliteration }))
           .sort(() => Math.random() - 0.5);
         setShuffledWords(shuffled);
@@ -209,7 +263,20 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     }
   };
 
-  // After completing an ayah (all steps), either chain or move to next
+  // After completing a unit: next part of the same ayah, or hand over to ayah completion
+  const completeCurrentUnit = () => {
+    const nextUnit = units[unitIndex + 1];
+    if (nextUnit && nextUnit.ayahIdx === ayahIndex) {
+      setUnitIndex(unitIndex + 1);
+      updateChunkIndex(lessonId, unitIndex + 1);
+      setLearnStep('listen-with-text');
+      setRepCount(0);
+      return;
+    }
+    completeCurrentAyah();
+  };
+
+  // After completing an ayah (all parts), either chain or move to next
   const completeCurrentAyah = () => {
     const newCompleted = new Set([...completedAyahs, ayahIndex]);
     setCompletedAyahs(newCompleted);
@@ -218,10 +285,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     if (practiceReturnStage) {
       const returnTo = practiceReturnStage;
       setPracticeReturnStage(null);
-      // Restore the ayah index we were at before drilling
-      if (savedAyahIndex !== null) {
-        setAyahIndex(savedAyahIndex);
-        setSavedAyahIndex(null);
+      // Restore the unit we were at before drilling
+      if (savedUnitIndex !== null) {
+        setUnitIndex(savedUnitIndex);
+        setSavedUnitIndex(null);
       }
       setMainStage(returnTo);
       setChainRevealed(false);
@@ -247,8 +314,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
   };
 
   const moveToNextAyah = () => {
-    const next = ayahIndex + 1;
-    setAyahIndex(next);
+    // Called once the current ayah's LAST unit is done → next unit = next ayah's first part
+    const next = unitIndex + 1;
+    setUnitIndex(next);
     updateChunkIndex(lessonId, next);
     setMainStage('learning');
     setLearnStep('listen-with-text');
@@ -265,7 +333,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     } else {
       // On fail, replay the audio to reinforce before next attempt
       if (currentAyah) {
-        await audioController.playAndWait(getAudioUrl(surah.id, currentAyah.number));
+        await playUnitAudio();
       }
     }
     setMemoryRevealed(false);
@@ -295,7 +363,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     const newOrder = [...selectedOrder, position];
     setSelectedOrder(newOrder);
 
-    const correctOrder = actualWords.map((w) => w.position);
+    const correctOrder = unitWords.map((w) => w.position);
     const isCorrectSoFar = newOrder.every((p, i) => p === correctOrder[i]);
 
     if (!isCorrectSoFar) {
@@ -470,8 +538,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   <button
                     key={ayah.key}
                     onClick={() => {
-                      setSavedAyahIndex(ayahIndex);
-                      setAyahIndex(i);
+                      setSavedUnitIndex(unitIndex);
+                      setUnitIndex(firstUnitOfAyah(i));
                       setRepCount(0);
                       setPracticeReturnStage('chaining');
                       setMainStage('learning');
@@ -631,8 +699,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   <button
                     key={ayah.key}
                     onClick={() => {
-                      setSavedAyahIndex(ayahIndex);
-                      setAyahIndex(i);
+                      setSavedUnitIndex(unitIndex);
+                      setUnitIndex(firstUnitOfAyah(i));
                       setRepCount(0);
                       setPracticeReturnStage('final-chain');
                       setMainStage('learning');
@@ -681,9 +749,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               onClick={() => {
                 const returnTo = practiceReturnStage;
                 setPracticeReturnStage(null);
-                if (savedAyahIndex !== null) {
-                  setAyahIndex(savedAyahIndex);
-                  setSavedAyahIndex(null);
+                if (savedUnitIndex !== null) {
+                  setUnitIndex(savedUnitIndex);
+                  setSavedUnitIndex(null);
                 }
                 setMainStage(returnTo);
                 setChainRevealed(false);
@@ -695,11 +763,11 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             </button>
           </div>
           <div className="mt-2 flex gap-1.5">
-            {ayahs.slice(0, practiceReturnStage === 'final-chain' ? ayahs.length : (savedAyahIndex ?? ayahIndex) + 1).map((ayah, i) => (
+            {ayahs.slice(0, practiceReturnStage === 'final-chain' ? ayahs.length : (savedUnitIndex !== null ? units[savedUnitIndex].ayahIdx : ayahIndex) + 1).map((ayah, i) => (
               <button
                 key={ayah.key}
                 onClick={() => {
-                  setAyahIndex(i);
+                  setUnitIndex(firstUnitOfAyah(i));
                   setRepCount(0);
                   setLearnStep('listen-with-text');
                 }}
@@ -720,7 +788,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         <button
           onClick={() => {
             if (ayahIndex > 0) {
-              setAyahIndex(ayahIndex - 1);
+              setUnitIndex(firstUnitOfAyah(ayahIndex - 1));
               setLearnStep('listen-with-text');
               setRepCount(0);
             }
@@ -742,7 +810,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                 key={i}
                 onClick={() => {
                   if (canNavigate) {
-                    setAyahIndex(i);
+                    setUnitIndex(firstUnitOfAyah(i));
                     setLearnStep('listen-with-text');
                     setRepCount(0);
                   }
@@ -763,7 +831,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         <button
           onClick={() => {
             if (ayahIndex < ayahs.length - 1 && completedAyahs.has(ayahIndex)) {
-              setAyahIndex(ayahIndex + 1);
+              setUnitIndex(firstUnitOfAyah(ayahIndex + 1));
               setLearnStep('listen-with-text');
               setRepCount(0);
             }
@@ -791,14 +859,30 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             />
           ))}
         </div>
-        <p className="text-center text-[15px] font-semibold text-foreground">{STEP_LABELS[learnStep]}</p>
+        <p className="text-center text-[15px] font-semibold text-foreground">
+          {STEP_LABELS[learnStep]}
+          {isSplitUnit && (
+            <span className="ml-2 text-xs font-medium text-muted">
+              part {unit.seg.index + 1}/{unit.seg.count}
+            </span>
+          )}
+        </p>
       </div>
 
       {/* === TEXT-VISIBLE STEPS (listen-with-text, reinforce-with-text) === */}
       {isTextVisible && (
         <div className="space-y-5">
           <div className="tactile-card rounded-2xl bg-card p-6">
-            <AyahDisplay ayah={currentAyah} />
+            {isSplitUnit ? (
+              <div className="space-y-3">
+                <SegmentArabic ayah={currentAyah} seg={unit.seg} className="text-center text-4xl leading-loose" />
+                {transliterationEnabled && unitTranslit && (
+                  <p className="text-center text-sm text-muted">{unitTranslit}</p>
+                )}
+              </div>
+            ) : (
+              <AyahDisplay ayah={currentAyah} />
+            )}
           </div>
 
           {/* Rep beads */}
@@ -911,7 +995,16 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               /* Answer revealed */
               <>
                 <div className="tactile-card rounded-2xl bg-card p-5">
-                  <AyahDisplay ayah={currentAyah} />
+                  {isSplitUnit ? (
+                    <div className="space-y-3">
+                      <SegmentArabic ayah={currentAyah} seg={unit.seg} className="text-center text-4xl leading-loose" />
+                      {transliterationEnabled && unitTranslit && (
+                        <p className="text-center text-sm text-muted">{unitTranslit}</p>
+                      )}
+                    </div>
+                  ) : (
+                    <AyahDisplay ayah={currentAyah} />
+                  )}
                 </div>
                 <p className="text-center text-sm text-muted">Did you recite it correctly?</p>
                 <div className="flex gap-3">
@@ -949,7 +1042,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               <span className="text-sm text-muted py-2">Tap words below...</span>
             )}
             {selectedOrder.map((pos, i) => {
-              const word = actualWords.find((w) => w.position === pos);
+              const word = unitWords.find((w) => w.position === pos);
               return (
                 <span
                   key={i}
@@ -991,8 +1084,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           </div>
 
           {orderResult === 'correct' && (
-            <Button onClick={completeCurrentAyah} className="w-full">
-              {ayahIndex === 0 && ayahs.length > 1
+            <Button onClick={completeCurrentUnit} className="w-full">
+              {units[unitIndex + 1]?.ayahIdx === ayahIndex
+                ? `Next Part (${unit.seg.index + 2}/${unit.seg.count})`
+                : ayahIndex === 0 && ayahs.length > 1
                 ? 'Learn Next Ayah'
                 : ayahIndex < ayahs.length - 1
                 ? 'Chain & Continue'

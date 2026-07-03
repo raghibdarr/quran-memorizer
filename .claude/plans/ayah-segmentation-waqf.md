@@ -90,7 +90,34 @@ Validation data point: 2:282 has 16 marks → 17 segments (sizes 2–17 words); 
 - `exploredAyahs` gating: an ayah counts as explored when all its segments were visited.
 - Keep the new stacked-deck visuals (uniform size, depleting stack, single grounding shadow).
 
-### Phase C — Build/Test chunks from segments — RESHAPED (discovery 2026-07-02)
+### Phase C — RESOLVED 2026-07-03: QUL word timestamps (research verified)
+
+Owner chose QUL timestamps over word-clip stitching. Research findings (5-agent verified run):
+- **Word-level timestamps exist for 6 of our 10 reciters** via QUL's public API
+  (`qul.tarteel.ai/api/v1/audio/ayah_segments/{id}?chapter=N`): Alafasy 18, Husary 20,
+  Abdul Basit Murattal 15, Minshawy Murattal 24, Yasser Al-Dosari 26, Maher Al-Muaiqly 13.
+- **The timestamps align to files byte-identical to our everyayah files** (MD5-verified for
+  Alafasy/Minshawy/Yasser on 2:282; size-verified Husary/Abdul Basit) → no audio-source
+  switch needed, EXCEPT Maher: QUL aligns to the 128kbps encode → switch his RECITERS id
+  from `Maher_AlMuaiqly_64kbps` to `MaherAlMuaiqly128kbps` (exact dir name, no underscores).
+- **No word data exists anywhere** for Nasser Al-Qatami, Hudhaify, Ahmed Al-Ajamy, Muhammad
+  Jibreel (Qatami/Jibreel have surah-level ayah offsets only, word arrays empty — verified)
+  → those fall back to full-ayah playback indefinitely.
+- **Format**: rows `[word_1based, start_ms, end_ms]` relative to the per-ayah mp3 (live API
+  sometimes 4-element `[seg_idx, word, start, end]`; malformed 1-element rows exist — parse
+  defensively). Word numbering EXCLUDES the ayah-end marker = matches our `realWords`.
+- **Chosen path**: one-time export → `public/segments/{everyayahDir}/{surah}.json` committed
+  to the repo, lazy-loaded per surah; segment playback = seek/stop within the existing
+  per-ayah audio (AudioController.playRange with ~100ms pre / ~150ms post padding, neighbor
+  expansion for missing words). Deliberately NOT the live APIs: legacy quran.com API is
+  unlabeled-gray-zone, and the new apis.quran.foundation ToS forbids caching >1 week
+  (incompatible with offline-first).
+- **Licensing**: attribute QUL/Tarteel + quran-align (Colin Fair, CC BY 4.0 — REQUIRED) +
+  EveryAyah recordings; owner should email Tarteel to confirm terms for the 6 resources.
+- Export + sampled audio-identity verification: `scripts/export-segments.mjs` (manifest at
+  `public/segments/manifest.json`).
+
+#### Original Phase C notes — RESHAPED (discovery 2026-07-02)
 - `generateChunks`/`src/lib/chunks.ts` turned out to be DEAD CODE (never imported) — deleted.
   chunk-phase.tsx already learns ayah-by-ayah (6-4-4-6 + chaining) with FULL-AYAH audio, so the
   feared arbitrary 3-word chunks never actually ran. Test-phase blanks are quizzes, not taught

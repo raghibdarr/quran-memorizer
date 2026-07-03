@@ -37,11 +37,15 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: 'quran-settings',
-      version: 1,
+      version: 2,
       migrate: (persisted: any, version: number) => {
         if (version === 0) {
           delete persisted.dailyGoalMinutes;
           persisted.dailyGoalActivities = 2;
+        }
+        if (version <= 1 && persisted.reciter === 'Maher_AlMuaiqly_64kbps') {
+          // Maher moved to the 128kbps encode QUL's word timestamps align to
+          persisted.reciter = 'MaherAlMuaiqly128kbps';
         }
         return persisted;
       },

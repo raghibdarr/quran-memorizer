@@ -7,8 +7,8 @@ import { useProgressStore } from '@/stores/progress-store';
 import { useSettingsStore } from '@/stores/settings-store';
 import { audioController } from '@/lib/audio';
 import { segmentAyah, buildAyahWordData, type AyahSegment } from '@/lib/segments';
-import ArabicText from '@/components/ui/arabic-text';
 import Button from '@/components/ui/button';
+import SegmentArabic from '@/components/ui/segment-arabic';
 import { cn } from '@/lib/cn';
 
 interface UnderstandPhaseProps {
@@ -159,31 +159,7 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
           <span className="h-1.5 w-1.5 rotate-45 bg-gold" />
           <span className="h-px w-8 bg-gold/50" />
         </div>
-        {isWhole ? (
-          <ArabicText ayah={ayah} className="text-3xl leading-loose" />
-        ) : arabicScript === 'tajweed' && data.tajweedWords ? (
-          <div
-            className="arabic-text tajweed-text text-3xl leading-loose"
-            dangerouslySetInnerHTML={{
-              // The boundary word's tajweed token already carries its pause mark
-              // (ZWNJ-glued in the source HTML) — only append when it doesn't.
-              __html:
-                data.tajweedWords.slice(seg.wordStart, seg.wordEnd + 1).join(' ') +
-                (seg.endMark &&
-                !data.tajweedWords[seg.wordEnd].replace(/<[^>]+>/g, '').includes(seg.endMark)
-                  ? ` ${seg.endMark}`
-                  : ''),
-            }}
-          />
-        ) : arabicScript === 'indopak' && data.indopakWords ? (
-          <p className="arabic-text-indopak text-3xl leading-loose">
-            {data.indopakWords.slice(seg.wordStart, seg.wordEnd + 1).join(' ')}
-          </p>
-        ) : (
-          <p className="arabic-text text-3xl leading-loose">
-            {segWords.map((w) => w.textUthmani).join(' ')}
-          </p>
-        )}
+        <SegmentArabic ayah={ayah} seg={seg} data={data} className="text-3xl leading-loose" />
         {transliterationEnabled && (isWhole ? ayah.transliteration : segTranslit) && (
           <p className="mt-2 text-center text-sm text-muted">
             {isWhole ? ayah.transliteration : segTranslit}

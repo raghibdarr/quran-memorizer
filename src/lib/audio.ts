@@ -17,7 +17,9 @@ export const RECITERS: ReciterOption[] = [
   { id: 'Nasser_Alqatami_128kbps', name: 'Nasser Al-Qatami' },
   { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Ad-Dussary' },
   { id: 'Hudhaify_128kbps', name: 'Ali Al-Hudhaify' },
-  { id: 'Maher_AlMuaiqly_64kbps', name: 'Maher Al-Muaiqly' },
+  // 128kbps (exact everyayah dir name, no underscores): QUL's word timestamps align to
+  // this encode, not the old 64kbps directory — see segment-audio.ts
+  { id: 'MaherAlMuaiqly128kbps', name: 'Maher Al-Muaiqly' },
   { id: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', name: 'Ahmed Al-Ajamy' },
   { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel' },
 ];
@@ -45,6 +47,8 @@ class AudioController {
   private _state: AudioState = 'idle';
   private _speed: number = 1;
   private _reciter: string = 'Alafasy_128kbps';
+  /** Tears down the active playRange guard (timeupdate listener + safety timer) */
+  private rangeCleanup: (() => void) | null = null;
 
   setReciter(reciterId: string): void {
     this._reciter = reciterId;
@@ -63,6 +67,7 @@ class AudioController {
         this.notify();
       });
       this.audio.addEventListener('ended', () => {
+        this.rangeCleanup?.();
         this._state = 'idle';
         this.notify();
         this.endedCallbacks.forEach((cb) => cb());
@@ -176,6 +181,97 @@ class AudioController {
       .catch(() => {});
   }
 
+  /**
+   * Play only [startMs, endMs] of a per-ayah file — segment audio sliced out of the
+   * recording via QUL word timestamps (see src/lib/segment-audio.ts). Resolves once
+   * playback starts; waitForEnd()/playRangeAndWait() resolve when the range finishes,
+   * so the drill helpers (playSequence/playRepeated) compose with ranges unchanged.
+   */
+  async playRange(url: string, startMs: number, endMs: number): Promise<void> {
+    const audio = this.getAudio();
+    const resolved = this.resolveUrl(url);
+
+    this.stop();
+    this.currentUrl = url;
+    this._state = 'loading';
+    this.notify();
+    audio.playbackRate = this._speed;
+
+    // Same cache-first source selection as play()
+    let src = resolved;
+    let fromCache = false;
+    try {
+      const cached = await getCachedAudio(resolved);
+      if (cached) {
+        src = URL.createObjectURL(cached);
+        fromCache = true;
+      }
+    } catch {
+      // fall through to network
+    }
+    audio.src = src;
+    audio.playbackRate = this._speed;
+
+    // Seeking needs metadata (duration/seekability) first
+    await new Promise<void>((resolve) => {
+      if (audio.readyState >= 1) return resolve();
+      const done = () => {
+        audio.removeEventListener('loadedmetadata', done);
+        audio.removeEventListener('error', done);
+        resolve();
+      };
+      audio.addEventListener('loadedmetadata', done);
+      audio.addEventListener('error', done);
+    });
+    try {
+      audio.currentTime = Math.max(0, startMs / 1000);
+    } catch {
+      // unseekable — play from the top rather than not at all
+    }
+
+    // Stop guard: timeupdate only ticks ~4x/sec, so back it up with a wall-clock
+    // timer scaled by playback rate.
+    const endSec = endMs / 1000;
+    const finish = () => {
+      this.rangeCleanup?.();
+      audio.pause();
+      this._state = 'idle';
+      this.notify();
+      this.endedCallbacks.forEach((cb) => cb());
+      this.endedCallbacks.clear();
+    };
+    const onTime = () => {
+      if (audio.currentTime >= endSec - 0.04) finish();
+    };
+    const timer = setTimeout(finish, Math.max(0, endMs - startMs) / this._speed + 800);
+    audio.addEventListener('timeupdate', onTime);
+    this.rangeCleanup = () => {
+      audio.removeEventListener('timeupdate', onTime);
+      clearTimeout(timer);
+      this.rangeCleanup = null;
+    };
+
+    try {
+      await audio.play();
+    } catch {
+      finish();
+      return;
+    }
+
+    if (!fromCache) {
+      fetch(resolved)
+        .then((res) => (res.ok ? res.blob() : null))
+        .then((blob) => { if (blob) cacheAudio(resolved, blob); })
+        .catch(() => {});
+    }
+  }
+
+  /** Play a range and wait for it to finish */
+  async playRangeAndWait(url: string, startMs: number, endMs: number): Promise<void> {
+    await this.playRange(url, startMs, endMs);
+    await this.waitForEnd();
+  }
+
   pause(): void {
     if (this.audio && this.isPlaying) {
       this.audio.pause();
@@ -199,6 +295,7 @@ class AudioController {
   }
 
   stop(): void {
+    this.rangeCleanup?.();
     if (this.audio) {
       this.audio.pause();
       this.audio.currentTime = 0;
