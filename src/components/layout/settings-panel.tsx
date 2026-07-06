@@ -218,6 +218,11 @@ export default function SettingsPanel() {
                 </button>
               </div>
             </div>
+
+            {/* Data credits — quran-align is CC BY 4.0, so this attribution is a license requirement */}
+            <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
+              Recitations: EveryAyah.com · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0)
+            </p>
           </div>
         </>,
         document.body

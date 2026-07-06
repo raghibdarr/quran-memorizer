@@ -117,6 +117,26 @@ Owner chose QUL timestamps over word-clip stitching. Research findings (5-agent 
 - Export + sampled audio-identity verification: `scripts/export-segments.mjs` (manifest at
   `public/segments/manifest.json`).
 
+#### Segment-data export status (updated 2026-07-03)
+- **Client code SHIPPED** (`1f41b98`): Build learns long ayahs part-by-part; playRange slices
+  segment audio when `public/segments/{reciterDir}/{surah}.json` exists, else full-ayah
+  fallback — so the app is correct at every partial-export state.
+- **Data exported so far: 1/684 surah-files** (Alafasy surah 1). QUL rate-limits bursts hard
+  (502/503 after ~a few requests; our research runs burned goodwill the same day). Script is
+  RESUMABLE: `node scripts/export-segments.mjs` skips existing files, writes the manifest
+  after each reciter, exports smallest surahs first, and paces at ~1.5s/request with
+  exponential backoff to 90s.
+- **To check progress:** `ls public/segments/*/ | wc -l` per dir (target 114 each), or read
+  `public/segments/manifest.json`.
+- **If throttling persists:** run overnight, or plan B — free QUL account → per-recitation
+  bulk JSON download from each resource page (ids 118, 110, 115, 108, 103, 113), then adapt
+  the script's normalize step to the downloaded files.
+- **When complete:** commit `public/segments/` as one data commit, then a by-ear QA pass
+  (~20 sliced segments per reciter, incl. ayah-final words which can carry trailing silence).
+- **Licensing decision (owner, 2026-07-03):** no email to Tarteel (accepted small risk);
+  attribution REQUIRED for quran-align (CC BY 4.0) shipped as a credit line in the Settings
+  panel footer.
+
 #### Original Phase C notes — RESHAPED (discovery 2026-07-02)
 - `generateChunks`/`src/lib/chunks.ts` turned out to be DEAD CODE (never imported) — deleted.
   chunk-phase.tsx already learns ayah-by-ayah (6-4-4-6 + chaining) with FULL-AYAH audio, so the

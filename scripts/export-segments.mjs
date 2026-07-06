@@ -80,7 +80,10 @@ for (const [dir, recitationId] of Object.entries(RECITERS)) {
   const sampleUrls = [];
 
   const WINDOW = 40; // ayahs per request — whole-surah queries 502 on big surahs
-  for (let surah = 1; surah <= 114; surah++) {
+  // Smallest surahs first so progress accrues before the giant ones hit throttling
+  const surahOrder = Array.from({ length: 114 }, (_, i) => i + 1)
+    .sort((a, b) => verseCounts.get(a) - verseCounts.get(b));
+  for (const surah of surahOrder) {
     const outFile = join(outRoot, dir, `${surah}.json`);
     const to = verseCounts.get(surah);
     // Resumable: a previous run's non-empty file counts as done
@@ -115,12 +118,11 @@ for (const [dir, recitationId] of Object.entries(RECITERS)) {
         }
         if (!data?.pagination?.next_page) break;
         page = data.pagination.next_page;
-        await sleep(800);
+        await sleep(1500);
       }
-      await sleep(800);
+      await sleep(1500);
     }
     writeFileSync(outFile, JSON.stringify(bySurahAyah));
-    if (surah % 20 === 0) console.log(`  ...surah ${surah}/114`);
   }
 
   // Sampled audio-identity verification: QUL audio_url vs the everyayah file Takrar plays
@@ -143,8 +145,9 @@ for (const [dir, recitationId] of Object.entries(RECITERS)) {
     ayahsMissingSegments: missingAyahs,
     audioIdentitySample: { match, mismatch, unchecked, sampled: sampleUrls.length },
   };
+  // Written per reciter so an interrupted run still records durable progress
+  writeFileSync(join(outRoot, 'manifest.json'), JSON.stringify(manifest, null, 2));
   console.log(`  ayahs=${totalAyahs} rows=${totalRows} dropped=${dropped} missing=${missingAyahs} verify: ${match}✓ ${mismatch}✗ ${unchecked}?`);
 }
 
-writeFileSync(join(outRoot, 'manifest.json'), JSON.stringify(manifest, null, 2));
 console.log('\nDone. Manifest written to public/segments/manifest.json');
