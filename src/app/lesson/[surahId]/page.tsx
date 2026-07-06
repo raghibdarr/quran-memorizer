@@ -72,9 +72,13 @@ export default function SurahDetailPage() {
               {completedCount} / {lessons.length} lessons completed
             </p>
           </div>
+        </div>
+      </header>
 
-          {/* Learn / Practice tab toggle */}
-          <div className="mt-4 flex gap-1 rounded-xl bg-foreground/5 p-1">
+      {/* Learn / Practice tab toggle — pins below the top bar on scroll */}
+      <div className="sticky top-14 z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
+        <div className="mx-auto max-w-2xl">
+          <div className="flex gap-1 rounded-xl bg-foreground/5 p-1">
             <button
               onClick={() => setActiveTab('learn')}
               className={cn(
@@ -95,7 +99,7 @@ export default function SurahDetailPage() {
             </button>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="mx-auto max-w-2xl px-4 py-4">
         {activeTab === 'learn' ? (

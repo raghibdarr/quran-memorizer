@@ -10,6 +10,7 @@ import TodaysPlanCard from '@/components/plan/todays-plan';
 import PlanCelebration from '@/components/plan/plan-celebration';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
+import { fuzzySurahScore } from '@/lib/fuzzy';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -100,20 +101,25 @@ export default function HomePage() {
   };
 
   const surahs = useMemo(() => {
-    let filtered = allSurahs;
-
+    // While searching, rank fuzzily by relevance (typos, spelling variants, and
+    // article-less names all match); the sort chips apply to browsing only.
     if (search.trim()) {
-      const q = search.trim().toLowerCase();
-      filtered = filtered.filter(
-        (s) =>
-          s.nameSimple.toLowerCase().includes(q) ||
-          s.nameArabic.includes(q) ||
-          s.nameTranslation.toLowerCase().includes(q) ||
-          s.id.toString() === q
-      );
+      return allSurahs
+        .map((s) => ({
+          s,
+          score: fuzzySurahScore(search, {
+            id: s.id,
+            name: s.nameSimple,
+            translation: s.nameTranslation,
+            arabic: s.nameArabic,
+          }),
+        }))
+        .filter((x) => x.score > 0)
+        .sort((a, b) => b.score - a.score || a.s.id - b.s.id)
+        .map((x) => x.s);
     }
 
-    const sorted = [...filtered];
+    const sorted = [...allSurahs];
     switch (sort) {
       case 'number-asc':
         sorted.sort((a, b) => a.id - b.id);
@@ -164,7 +170,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-cream pb-24">
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-2 backdrop-blur-sm">
+      <header className="px-4 pt-6 pb-2">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -267,36 +273,37 @@ export default function HomePage() {
           </Card>
         </div>
 
-        {/* Surahs / Juz Tab Toggle */}
-        <div className="flex gap-1 rounded-xl border border-foreground/10 bg-foreground/5 p-1">
-          <button
-            onClick={() => setTab('surahs')}
-            className={cn(
-              'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
-              tab === 'surahs'
-                ? 'ink-border bg-teal text-on-teal'
-                : 'text-muted hover:text-foreground'
-            )}
-          >
-            Surahs
-          </button>
-          <button
-            onClick={() => setTab('juz')}
-            className={cn(
-              'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
-              tab === 'juz'
-                ? 'ink-border bg-teal text-on-teal'
-                : 'text-muted hover:text-foreground'
-            )}
-          >
-            Juz
-          </button>
-        </div>
+        {/* Browse controls — pin to the top once scrolled past */}
+        <div className="sticky top-0 z-20 -mx-4 space-y-3 bg-cream/95 px-4 pb-3 pt-2 backdrop-blur-sm">
+          {/* Surahs / Juz Tab Toggle */}
+          <div className="flex gap-1 rounded-xl border border-foreground/10 bg-foreground/5 p-1">
+            <button
+              onClick={() => setTab('surahs')}
+              className={cn(
+                'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+                tab === 'surahs'
+                  ? 'ink-border bg-teal text-on-teal'
+                  : 'text-muted hover:text-foreground'
+              )}
+            >
+              Surahs
+            </button>
+            <button
+              onClick={() => setTab('juz')}
+              className={cn(
+                'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+                tab === 'juz'
+                  ? 'ink-border bg-teal text-on-teal'
+                  : 'text-muted hover:text-foreground'
+              )}
+            >
+              Juz
+            </button>
+          </div>
 
-        {tab === 'surahs' ? (
-          <div>
-            {/* Search */}
-            <div className="mb-3">
+          {tab === 'surahs' && (
+            <>
+              {/* Search */}
               <input
                 type="text"
                 value={search}
@@ -304,44 +311,48 @@ export default function HomePage() {
                 placeholder="Search by name or number..."
                 className="w-full rounded-xl border-[1.5px] border-foreground/15 bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-teal focus:outline-none"
               />
-            </div>
 
-            {/* Sort & View Toggle */}
-            <div className="mb-3 flex items-center gap-2">
-              <div className="scrollbar-hide flex flex-1 gap-2 overflow-x-auto py-1 [mask-image:linear-gradient(to_right,black_88%,transparent)]">
-                {(Object.keys(SORT_LABELS) as SortOption[]).map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => setSort(option)}
-                    className={cn(
-                      'pressable shrink-0 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors',
-                      sort === option
-                        ? 'ink-border bg-teal text-on-teal'
-                        : 'border border-foreground/15 bg-card text-muted hover:text-foreground'
-                    )}
-                  >
-                    {SORT_LABELS[option]}
-                  </button>
-                ))}
+              {/* Sort & View Toggle */}
+              <div className="flex items-center gap-2">
+                <div className="scrollbar-hide flex flex-1 gap-2 overflow-x-auto py-1 [mask-image:linear-gradient(to_right,black_88%,transparent)]">
+                  {(Object.keys(SORT_LABELS) as SortOption[]).map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => setSort(option)}
+                      className={cn(
+                        'pressable shrink-0 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors',
+                        sort === option
+                          ? 'ink-border bg-teal text-on-teal'
+                          : 'border border-foreground/15 bg-card text-muted hover:text-foreground'
+                      )}
+                    >
+                      {SORT_LABELS[option]}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
+                  className="pressable shrink-0 rounded-lg border border-foreground/15 bg-card p-2.5 text-muted transition-colors hover:text-foreground"
+                  title={view === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
+                >
+                  {view === 'grid' ? (
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                      <line x1="2" y1="4" x2="14" y2="4" /><line x1="2" y1="8" x2="14" y2="8" /><line x1="2" y1="12" x2="14" y2="12" />
+                    </svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="1" y="1" width="6" height="6" rx="1" /><rect x="9" y="1" width="6" height="6" rx="1" />
+                      <rect x="1" y="9" width="6" height="6" rx="1" /><rect x="9" y="9" width="6" height="6" rx="1" />
+                    </svg>
+                  )}
+                </button>
               </div>
-              <button
-                onClick={() => setView(view === 'grid' ? 'list' : 'grid')}
-                className="pressable shrink-0 rounded-lg border border-foreground/15 bg-card p-2.5 text-muted transition-colors hover:text-foreground"
-                title={view === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
-              >
-                {view === 'grid' ? (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                    <line x1="2" y1="4" x2="14" y2="4" /><line x1="2" y1="8" x2="14" y2="8" /><line x1="2" y1="12" x2="14" y2="12" />
-                  </svg>
-                ) : (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="1" y="1" width="6" height="6" rx="1" /><rect x="9" y="1" width="6" height="6" rx="1" />
-                    <rect x="1" y="9" width="6" height="6" rx="1" /><rect x="9" y="9" width="6" height="6" rx="1" />
-                  </svg>
-                )}
-              </button>
-            </div>
+            </>
+          )}
+        </div>
 
+        {tab === 'surahs' ? (
+          <div>
             {surahs.length === 0 && search.trim() && (
               <p className="py-8 text-center text-sm text-muted">No surahs found</p>
             )}
