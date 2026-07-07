@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
@@ -64,6 +64,8 @@ export default function HomePage() {
     if (typeof window !== 'undefined') return (localStorage.getItem('home-tab') as BrowseTab) ?? 'surahs';
     return 'surahs';
   });
+  // Natural (unstuck) position of the browse controls — search focus docks to it
+  const controlsAnchorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { localStorage.setItem('home-sort', sort); }, [sort]);
   useEffect(() => { localStorage.setItem('home-view', view); }, [view]);
@@ -273,6 +275,9 @@ export default function HomePage() {
           </Card>
         </div>
 
+        {/* Anchor marking the controls' natural position (scroll target on search focus) */}
+        <div ref={controlsAnchorRef} className="h-0 mb-0!" aria-hidden />
+
         {/* Browse controls — pin to the top once scrolled past */}
         <div className="sticky top-0 z-20 -mx-4 space-y-3 bg-cream/95 px-4 pb-3 pt-2 backdrop-blur-sm">
           {/* Surahs / Juz Tab Toggle */}
@@ -303,11 +308,18 @@ export default function HomePage() {
 
           {tab === 'surahs' && (
             <>
-              {/* Search */}
+              {/* Search — on focus, dock the controls to their pinned position so
+                  the input stays put while results grow/shrink underneath */}
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                onFocus={() => {
+                  const anchor = controlsAnchorRef.current;
+                  if (!anchor) return;
+                  const y = anchor.getBoundingClientRect().top + window.scrollY;
+                  if (window.scrollY < y) window.scrollTo({ top: y, behavior: 'smooth' });
+                }}
                 placeholder="Search by name or number..."
                 className="w-full rounded-xl border-[1.5px] border-foreground/15 bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-teal focus:outline-none"
               />
@@ -352,7 +364,9 @@ export default function HomePage() {
         </div>
 
         {tab === 'surahs' ? (
-          <div>
+          /* min-height keeps the page from collapsing (and the scroll from jumping)
+             as search results shrink while typing */
+          <div className="min-h-[75vh]">
             {surahs.length === 0 && search.trim() && (
               <p className="py-8 text-center text-sm text-muted">No surahs found</p>
             )}

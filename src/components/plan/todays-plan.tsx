@@ -75,7 +75,7 @@ export default function TodaysPlanCard() {
     (newLessonCount === 0 || completedCount === newLessonCount);
 
   return (
-    <Card className="border-l-4 border-l-teal">
+    <Card>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-muted">Today&apos;s Plan</p>
