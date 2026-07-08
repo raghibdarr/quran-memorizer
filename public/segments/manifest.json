@@ -1,0 +1,76 @@
+{
+  "source": "https://qul.tarteel.ai (Tarteel QUL); original alignments: quran-align by Colin Fair (CC BY 4.0)",
+  "reciters": {
+    "Abdul_Basit_Murattal_192kbps": {
+      "importedFrom": "ayah-recitation-abdul-basit-abdul-samad-murattal-hafs-950.json",
+      "ayahsWithSegments": 6236,
+      "segmentRows": 77947,
+      "malformedRowsDropped": 0,
+      "ayahsMissingSegments": 0,
+      "ayahsWithWordOverflow": 3,
+      "audioIdentitySample": {
+        "match": 12,
+        "mismatch": 0,
+        "unchecked": 0,
+        "sampled": 12
+      }
+    },
+    "MaherAlMuaiqly128kbps": {
+      "importedFrom": "ayah-recitation-maher-al-mu-aiqly-murattal-hafs-948.json",
+      "ayahsWithSegments": 6236,
+      "segmentRows": 78356,
+      "malformedRowsDropped": 0,
+      "ayahsMissingSegments": 0,
+      "ayahsWithWordOverflow": 3,
+      "audioIdentitySample": {
+        "match": 11,
+        "mismatch": 1,
+        "unchecked": 0,
+        "sampled": 12
+      }
+    },
+    "Alafasy_128kbps": {
+      "importedFrom": "ayah-recitation-mishari-rashid-al-afasy-murattal-hafs-953.json",
+      "ayahsWithSegments": 6236,
+      "segmentRows": 77991,
+      "malformedRowsDropped": 0,
+      "ayahsMissingSegments": 0,
+      "ayahsWithWordOverflow": 3,
+      "audioIdentitySample": {
+        "match": 12,
+        "mismatch": 0,
+        "unchecked": 0,
+        "sampled": 12
+      }
+    },
+    "Minshawy_Murattal_128kbps": {
+      "importedFrom": "ayah-recitation-muhammad-siddiq-al-minshawi-murattal-hafs-959.json",
+      "ayahsWithSegments": 6236,
+      "segmentRows": 77986,
+      "malformedRowsDropped": 0,
+      "ayahsMissingSegments": 0,
+      "ayahsWithWordOverflow": 3,
+      "audioIdentitySample": {
+        "match": 12,
+        "mismatch": 0,
+        "unchecked": 0,
+        "sampled": 12
+      }
+    },
+    "Yasser_Ad-Dussary_128kbps": {
+      "importedFrom": "ayah-recitation-yasser-al-dosari-murattal-hafs-961.json",
+      "ayahsWithSegments": 6236,
+      "segmentRows": 78159,
+      "malformedRowsDropped": 0,
+      "ayahsMissingSegments": 0,
+      "ayahsWithWordOverflow": 2,
+      "audioIdentitySample": {
+        "match": 12,
+        "mismatch": 0,
+        "unchecked": 0,
+        "sampled": 12
+      }
+    }
+  },
+  "importedAt": "2026-07-08"
+}
