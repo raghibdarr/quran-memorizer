@@ -338,6 +338,26 @@ Ordering is by irreversible-failure risk for public users, then severity, then d
 
 ---
 
+### M11 — Mobile-native elevation & store launch (owner priority; direction approved)
+**Size:** ~8-10 sessions across five sub-milestones (M11a-e)
+
+**Goal:** Make Takrar feel indistinguishable from a polished native app, then ship it to the
+App Store / Play Store via Capacitor.
+
+**Direction (owner-approved 2026-07-12):** "Native Stack" — flat push/pop stack navigation,
+edge-swipe-back, collapsing large-title headers, everything-is-a-bottom-sheet — plus two
+paper accents: dealt-in staggered lists with settling tilt, and a gliding paper-chip tab
+indicator. Whole-screen rotation explicitly rejected as gimmicky. Full contract, motion
+tokens, audit-fail checklist, sub-milestones (M11a device spike FIRST), tactile-budget rule
+and the owner tuning checkpoint: **`.claude/plans/m11-mobile-native-spec.md`**; approved
+interactive mockup: `.claude/plans/assets/m11-approved-mockup.html`.
+
+**Sequencing:** M11a (Capacitor spike on the owner's phone) can run immediately; M11b-e
+after M0 at minimum — a store launch multiplies users of any remaining data-loss window.
+Owner decides how M11 interleaves with M2-M10.
+
+---
+
 ## 4. Decision log
 
 **Made calls:**

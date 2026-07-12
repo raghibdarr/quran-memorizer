@@ -1,0 +1,1075 @@
+<meta charset="utf-8">
+<title>Takrar — Native Stack (Direction A)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+/* ============ TAKRAR TACTILE-PRINT TOKENS (verbatim from globals.css) ============ */
+:root{
+  --bg:#FEFCF9; --fg:#2C2C2A;
+  --c-cream:#FEFCF9; --c-teal:#1B4D5C; --c-teal-light:#2A6F7F;
+  --c-gold:#C8963E; --c-gold-light:#D4AA5C; --c-gold-deep:#8A6320;
+  --c-success:#2D7A4F; --c-miss:#B5482E; --c-muted:#8A8A85;
+  --c-card:#ffffff; --c-card-raised:#FFFDF8; --c-ink:#36332C;
+  --c-on-teal:#FEFCF9; --c-on-gold:#3F2A07; --c-on-success:#F2FBF5; --c-on-miss:#FFF5F2;
+  --shadow-card-color:rgba(48,44,38,0.32);
+  --shadow-btn-color:rgba(54,51,44,0.85);
+  --shadow-chip-color:rgba(54,51,44,0.5);
+  --scrim-tint:#2A2722;
+  --deck-edge:var(--c-ink);
+  --grain-blend:multiply; --grain-op:0.032;
+  /* Native-stack motion language */
+  --nav-ease:cubic-bezier(.32,.72,0,1);      /* screen push/pop — iOS nav curve */
+  --nav-dur:320ms;
+  --spring-pop:cubic-bezier(.34,1.45,.64,1); /* playful overshoot for small elements */
+  --spring-settle:cubic-bezier(.22,1.2,.36,1);
+  --press-dur:120ms;
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+  --tabbar-h:calc(60px + var(--sab));
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1C1C1A; --fg:#E8E6E3;
+    --c-cream:#1C1C1A; --c-teal:#4FA8BE; --c-teal-light:#6BC4D8;
+    --c-gold:#D4AA5C; --c-gold-light:#E0BC74; --c-gold-deep:#E0BC74;
+    --c-success:#4CAF6E; --c-miss:#E07B61; --c-muted:#9A9A95;
+    --c-card:#272725; --c-card-raised:#2D2D29; --c-ink:rgba(235,232,226,0.42);
+    --c-on-teal:#0A2E38; --c-on-gold:#3A2706; --c-on-success:#0A2E16; --c-on-miss:#3A1006;
+    --shadow-card-color:rgba(0,0,0,0.5);
+    --shadow-btn-color:rgba(0,0,0,0.7);
+    --shadow-chip-color:rgba(0,0,0,0.5);
+    --scrim-tint:#000000;
+    --deck-edge:#5A5852;
+    --grain-blend:screen; --grain-op:0.05;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1C1C1A; --fg:#E8E6E3;
+  --c-cream:#1C1C1A; --c-teal:#4FA8BE; --c-teal-light:#6BC4D8;
+  --c-gold:#D4AA5C; --c-gold-light:#E0BC74; --c-gold-deep:#E0BC74;
+  --c-success:#4CAF6E; --c-miss:#E07B61; --c-muted:#9A9A95;
+  --c-card:#272725; --c-card-raised:#2D2D29; --c-ink:rgba(235,232,226,0.42);
+  --c-on-teal:#0A2E38; --c-on-gold:#3A2706; --c-on-success:#0A2E16; --c-on-miss:#3A1006;
+  --shadow-card-color:rgba(0,0,0,0.5);
+  --shadow-btn-color:rgba(0,0,0,0.7);
+  --shadow-chip-color:rgba(0,0,0,0.5);
+  --scrim-tint:#000000;
+  --deck-edge:#5A5852;
+  --grain-blend:screen; --grain-op:0.05;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:'Plus Jakarta Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow:hidden; position:fixed; inset:0;
+  -webkit-font-smoothing:antialiased;
+  user-select:none; -webkit-user-select:none;
+  touch-action:manipulation;
+}
+/* Paper grain — full-screen print texture */
+body::after{
+  content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat; opacity:var(--grain-op); mix-blend-mode:var(--grain-blend);
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+svg{display:block}
+
+/* ============ Tactile physics ============ */
+.tactile-card{border:1.5px solid var(--c-ink);box-shadow:4px 4px 0 var(--shadow-card-color)}
+.tactile-raise-sm{box-shadow:2px 2px 0 var(--shadow-chip-color)}
+.ink-border{border:1.5px solid var(--c-ink)}
+.tactile-btn{
+  border:1.5px solid var(--c-ink); box-shadow:3px 3px 0 var(--shadow-btn-color);
+  transition:transform var(--press-dur) ease,box-shadow var(--press-dur) ease,background-color 150ms ease;
+}
+.tactile-btn:active:not(:disabled){transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow-btn-color)}
+.tactile-chip{
+  border:1.5px solid var(--c-ink); box-shadow:2px 2px 0 var(--shadow-chip-color);
+  transition:transform var(--press-dur) ease,box-shadow var(--press-dur) ease,background-color 150ms ease;
+}
+.tactile-chip:active:not(:disabled){transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow-chip-color)}
+.pressable{transition:transform var(--press-dur) ease}
+.pressable:active{transform:scale(0.96)}
+
+.arabic{
+  font-family:'KFGQPC Uthmanic Script HAFS','Traditional Arabic','Scheherazade New','Amiri',serif;
+  direction:rtl; line-height:1.9;
+}
+
+/* ============ App shell / nav stack ============ */
+#app{position:fixed;inset:0;overflow:hidden;background:var(--bg)}
+.screen{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  background:var(--bg); visibility:hidden;
+}
+.screen.active{visibility:visible}
+.scroll{
+  flex:1; overflow-y:auto; overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  padding-bottom:calc(var(--tabbar-h) + 24px);
+}
+.scroll::-webkit-scrollbar{display:none}
+
+/* Tab roots crossfade + rise on switch */
+.tabroot{z-index:1}
+.tabroot.tab-enter .scroll > *{animation:none}
+.tabroot.tab-in{animation:tab-in 200ms ease-out both}
+@keyframes tab-in{from{opacity:0;transform:translateY(6px) scale(.995)}to{opacity:1;transform:none}}
+
+/* Pushed screens */
+#screen-lesson{
+  z-index:10; transform:translateX(103%); visibility:visible;
+  box-shadow:-6px 0 24px rgba(0,0,0,.18);
+  will-change:transform;
+}
+#screen-lesson.in{transform:translateX(0)}
+#screen-lesson.animating{transition:transform var(--nav-dur) var(--nav-ease)}
+#push-dim{
+  position:absolute; inset:0; z-index:5; background:var(--scrim-tint);
+  opacity:0; pointer-events:none; will-change:opacity;
+}
+#push-dim.animating{transition:opacity var(--nav-dur) var(--nav-ease)}
+.tabroot.under{will-change:transform}
+.tabroot.under.animating{transition:transform var(--nav-dur) var(--nav-ease)}
+#edge-back{
+  position:absolute; left:0; top:0; bottom:0; width:26px; z-index:15;
+  display:none; touch-action:pan-y;
+}
+#edge-back.on{display:block}
+
+/* ============ Headers: large title + collapsing compact bar ============ */
+.navbar{
+  position:sticky; top:0; z-index:4;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:calc(var(--sat) + 8px) 16px 8px;
+  min-height:calc(var(--sat) + 52px);
+  background:transparent; border-bottom:1.5px solid transparent;
+  transition:background-color 200ms ease,border-color 200ms ease;
+}
+.navbar .bar-title{
+  font-size:17px; font-weight:800; letter-spacing:-.01em;
+  opacity:0; transform:translateY(6px);
+  transition:opacity 180ms ease,transform 180ms var(--spring-settle);
+}
+.navbar.scrolled{
+  background:color-mix(in srgb,var(--c-card) 88%,transparent);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom-color:color-mix(in srgb,var(--c-ink) 55%,transparent);
+}
+.navbar.scrolled .bar-title{opacity:1;transform:none}
+.large-title{
+  padding:2px 20px 4px; font-size:34px; font-weight:800; letter-spacing:-.02em; line-height:1.1;
+}
+.subtitle-row{padding:0 20px 14px;display:flex;align-items:center;gap:8px}
+.icon-btn{
+  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  color:var(--fg);
+}
+.icon-btn.chip{background:var(--c-card)}
+
+/* ============ Components ============ */
+.section{padding:0 16px}
+.section-h{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:22px 4px 10px;
+}
+.section-h h2{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.section-h .see{font-size:13px;font-weight:700;color:var(--c-teal);padding:4px 6px}
+
+.streak-chip{
+  display:inline-flex;align-items:center;gap:6px;border-radius:999px;
+  background:var(--c-card);padding:6px 12px 6px 9px;
+  font-size:13px;font-weight:700;
+}
+.streak-chip svg{color:var(--c-gold)}
+
+.hero{
+  border-radius:18px;background:var(--c-teal);color:var(--c-on-teal);
+  padding:18px 18px 16px;position:relative;overflow:hidden;
+}
+.hero .eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.hero h3{font-size:22px;font-weight:800;margin:6px 0 2px;letter-spacing:-.01em}
+.hero .meta{font-size:13px;opacity:.8;font-weight:600}
+.hero .deco{position:absolute;top:-22px;left:-10px;font-size:98px;opacity:.09;pointer-events:none;line-height:1}
+.track{height:8px;border-radius:99px;background:color-mix(in srgb,var(--c-on-teal) 26%,transparent);margin:14px 0 12px;overflow:hidden}
+.track .fill{height:100%;border-radius:99px;background:var(--c-gold);width:0;transition:width 700ms var(--spring-settle) 300ms}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:50px;border-radius:13px;font-size:15.5px;font-weight:800;width:100%;
+}
+.btn-gold{background:var(--c-gold);color:var(--c-on-gold)}
+.btn-teal{background:var(--c-teal);color:var(--c-on-teal)}
+.btn-card{background:var(--c-card);color:var(--fg)}
+
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.stat{
+  background:var(--c-card);border-radius:14px;padding:12px 8px 10px;text-align:center;
+}
+.stat b{display:block;font-size:21px;font-weight:800;letter-spacing:-.01em}
+.stat span{font-size:11px;font-weight:700;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em}
+.stat i{display:block;font-style:normal;margin:0 auto 4px;width:20px;height:20px;color:var(--c-teal)}
+
+.list{display:flex;flex-direction:column;gap:10px}
+.row-card{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:var(--c-card);border-radius:15px;padding:13px 14px;min-height:64px;
+  transition:transform var(--press-dur) ease,box-shadow var(--press-dur) ease;
+}
+.row-card:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow-chip-color)}
+.row-num{
+  width:38px;height:38px;flex:none;border-radius:11px;display:grid;place-items:center;
+  font-size:14px;font-weight:800;background:var(--c-card-raised);
+}
+.row-main{flex:1;min-width:0}
+.row-main b{display:block;font-size:15.5px;font-weight:800;letter-spacing:-.01em}
+.row-main small{font-size:12px;font-weight:600;color:var(--c-muted)}
+.row-ar{font-size:21px;color:var(--c-teal);flex:none}
+.row-prog{height:4px;border-radius:99px;background:color-mix(in srgb,var(--c-ink) 14%,transparent);margin-top:7px;overflow:hidden;max-width:130px}
+.row-prog i{display:block;height:100%;border-radius:99px;background:var(--c-success)}
+.pill{
+  flex:none;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  padding:4px 8px;border-radius:99px;
+}
+.pill-done{background:color-mix(in srgb,var(--c-success) 16%,var(--c-card));color:var(--c-success);border:1.5px solid var(--c-success)}
+.pill-due{background:color-mix(in srgb,var(--c-gold) 18%,var(--c-card));color:var(--c-gold-deep);border:1.5px solid var(--c-gold)}
+
+.search-pill{
+  display:flex;align-items:center;gap:10px;background:var(--c-card);
+  border-radius:13px;padding:0 14px;min-height:46px;color:var(--c-muted);
+  font-size:15px;font-weight:600;margin-bottom:12px;
+}
+
+/* Staggered entrance */
+.enter{animation:deal-in-l 460ms var(--spring-settle) both;animation-delay:calc(var(--d,0)*46ms)}
+.enter:nth-child(even){animation-name:deal-in-r}
+@keyframes rise-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes deal-in-l{from{opacity:0;transform:translateY(20px) rotate(-1.5deg)}to{opacity:1;transform:none}}
+@keyframes deal-in-r{from{opacity:0;transform:translateY(20px) rotate(1.5deg)}to{opacity:1;transform:none}}
+
+/* Skeleton shimmer */
+.skel{
+  border-radius:14px;border:1.5px solid color-mix(in srgb,var(--c-ink) 35%,transparent);
+  background:var(--c-card);position:relative;overflow:hidden;
+}
+.skel::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(100deg,transparent 30%,color-mix(in srgb,var(--c-gold) 14%,transparent) 50%,transparent 70%);
+  background-size:220% 100%;animation:shimmer 1.3s linear infinite;
+}
+@keyframes shimmer{from{background-position:180% 0}to{background-position:-80% 0}}
+
+/* ============ Tab bar ============ */
+#tabbar{
+  position:absolute;left:0;right:0;bottom:0;z-index:20;
+  background:color-mix(in srgb,var(--c-card) 94%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1.5px solid var(--c-ink);
+  padding-bottom:var(--sab);
+  display:flex;
+  transition:transform var(--nav-dur) var(--nav-ease);
+}
+#tabbar.hidden-bar{transform:translateY(110%)}
+#tab-chip{position:absolute;top:6px;height:46px;left:0;width:80px;border:1.5px solid var(--c-ink);border-radius:13px;background:var(--c-card-raised,var(--c-card));box-shadow:2px 2px 0 var(--shadow-chip-color);z-index:0;pointer-events:none;transition:transform 420ms var(--spring-pop);will-change:transform}
+@media (prefers-reduced-motion:reduce){#tab-chip{transition:none}}
+.tab{
+  z-index:1;
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:9px 0 7px;color:var(--c-muted);position:relative;min-height:58px;
+  transition:transform var(--press-dur) ease;
+}
+.tab:active{transform:scale(.92)}
+.tab.on{color:var(--c-teal)}
+.tab .ic{position:relative}
+.tab.on .ic{animation:tab-bounce 380ms var(--spring-pop)}
+@keyframes tab-bounce{0%{transform:scale(1)}40%{transform:scale(1.18) translateY(-2px)}100%{transform:scale(1)}}
+.tab span{font-size:10.5px;font-weight:700}
+.tab.on span{font-weight:800}
+.badge{
+  position:absolute;top:-5px;right:-10px;min-width:17px;height:17px;border-radius:99px;
+  background:var(--c-gold);color:var(--c-on-gold);font-size:10px;font-weight:800;
+  display:grid;place-items:center;padding:0 4px;border:1.5px solid var(--c-ink);
+}
+
+/* ============ Lesson screen ============ */
+.lesson-nav{
+  display:flex;align-items:center;gap:6px;
+  padding:calc(var(--sat) + 8px) 12px 8px;
+  border-bottom:1.5px solid color-mix(in srgb,var(--c-ink) 45%,transparent);
+  background:var(--bg);
+}
+.back-btn{
+  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--c-teal);
+}
+.lesson-nav .t{flex:1;text-align:center;margin-right:44px}
+.lesson-nav .t b{display:block;font-size:16px;font-weight:800}
+.lesson-nav .t small{font-size:11.5px;font-weight:700;color:var(--c-muted)}
+.pips{display:flex;justify-content:center;gap:22px;padding:14px 0 4px}
+.pip{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--c-muted)}
+.pip i{width:11px;height:11px;border-radius:99px;border:1.5px solid var(--c-ink);background:var(--c-card);font-style:normal}
+.pip.done i{background:var(--c-success);border-color:var(--c-success)}
+.pip.now{color:var(--c-teal)}
+.pip.now i{background:var(--c-gold);transform:scale(1.28);border-color:var(--c-ink)}
+
+.ayah-strip{
+  margin:14px 16px 0;padding:14px 16px;border-radius:15px;background:var(--c-card);
+  font-size:23px;text-align:center;
+}
+.ayah-strip .w{padding:1px 3px;border-radius:6px;transition:background-color 250ms ease,color 250ms ease}
+.ayah-strip .w.hot{background:var(--c-gold);color:var(--c-on-gold)}
+.deck-zone{flex:1;display:flex;flex-direction:column;padding:8px 22px 0;min-height:0}
+.deck-count{text-align:center;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--c-muted);padding:12px 0 10px}
+.deck{position:relative;flex:1;max-height:440px;min-height:230px;margin-bottom:30px;touch-action:pan-y}
+.deck-card{
+  position:absolute;inset:0;border-radius:20px;background:var(--c-card);
+  border:1.5px solid var(--deck-edge);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:20px;will-change:transform;
+}
+.deck-card .ar{font-size:52px;color:var(--fg);line-height:1.6}
+.deck-card .tr{font-size:14px;font-weight:700;color:var(--c-gold-deep);letter-spacing:.02em}
+.deck-card .en{font-size:16.5px;font-weight:700;color:var(--c-teal)}
+.deck-card .hear{
+  margin-top:10px;display:inline-flex;align-items:center;gap:7px;border-radius:99px;
+  padding:9px 16px;font-size:13px;font-weight:800;background:var(--c-card-raised);color:var(--fg);
+}
+.deck-card.pos0{z-index:3;box-shadow:4px 4px 0 var(--shadow-card-color)}
+.deck-card.pos1{z-index:2;transform:translateY(14px) scale(.95);box-shadow:1px 1px 0 rgba(54,51,44,.22)}
+.deck-card.pos2{z-index:1;transform:translateY(27px) scale(.9);opacity:.85;box-shadow:1px 1px 0 rgba(54,51,44,.22)}
+.deck-card.pos-hide{opacity:0;transform:translateY(36px) scale(.86);z-index:0;pointer-events:none}
+.deck-card.promoting{transition:transform 340ms var(--spring-pop),opacity 260ms ease,box-shadow 200ms ease}
+.deck-done{
+  position:absolute;inset:0;border-radius:20px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;text-align:center;
+  background:var(--c-card);opacity:0;pointer-events:none;transform:scale(.92);
+  transition:opacity 260ms ease,transform 340ms var(--spring-pop);
+}
+.deck-done.show{opacity:1;pointer-events:auto;transform:none}
+.deck-done .big{font-size:40px;color:var(--c-success)}
+.deck-done b{font-size:19px;font-weight:800}
+.deck-done small{font-size:13px;font-weight:600;color:var(--c-muted);max-width:210px}
+.lesson-actions{
+  display:flex;gap:12px;padding:16px 20px calc(var(--sab) + 18px);
+}
+.lesson-actions .btn{flex:1}
+.hint{text-align:center;font-size:11.5px;font-weight:700;color:var(--c-muted);padding-bottom:8px}
+.lesson-actions{margin-top:auto}
+
+/* ============ Bottom sheets ============ */
+#sheet-scrim{
+  position:absolute;inset:0;z-index:30;background:var(--scrim-tint);
+  opacity:0;pointer-events:none;transition:opacity 260ms ease;
+}
+#sheet-scrim.on{opacity:.44;pointer-events:auto}
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;z-index:40;
+  background:var(--bg);border-top:1.5px solid var(--c-ink);
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -4px 0 var(--shadow-card-color);
+  transform:translateY(105%);will-change:transform;
+  padding-bottom:calc(var(--sab) + 16px);
+  max-height:86dvh;display:flex;flex-direction:column;
+}
+.sheet.animating{transition:transform 380ms var(--spring-settle)}
+.sheet.open{transform:translateY(0)}
+.grab-zone{padding:10px 0 2px;flex:none;touch-action:none;cursor:grab}
+.grabber{width:42px;height:5px;border-radius:99px;background:color-mix(in srgb,var(--c-ink) 55%,transparent);margin:0 auto}
+.sheet h3{font-size:19px;font-weight:800;text-align:center;padding:8px 20px 2px}
+.sheet .sheet-body{overflow-y:auto;overscroll-behavior:contain;padding:10px 20px 6px}
+.set-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:56px;padding:8px 0;
+  border-bottom:1.5px solid color-mix(in srgb,var(--c-ink) 22%,transparent);
+}
+.set-row:last-child{border-bottom:none}
+.set-row .lab b{display:block;font-size:15px;font-weight:800}
+.set-row .lab small{font-size:12px;font-weight:600;color:var(--c-muted)}
+.seg{
+  display:flex;background:var(--c-card);border-radius:12px;padding:3px;gap:2px;
+}
+.seg button{
+  min-height:38px;padding:0 13px;border-radius:9px;font-size:13px;font-weight:800;color:var(--c-muted);
+  transition:transform var(--press-dur) ease;
+}
+.seg button:active{transform:scale(.94)}
+.seg button.on{background:var(--c-teal);color:var(--c-on-teal);border:1.5px solid var(--c-ink);box-shadow:2px 2px 0 var(--shadow-chip-color)}
+.switch{
+  width:56px;height:32px;border-radius:99px;background:var(--c-card);position:relative;flex:none;
+  transition:background-color 200ms ease;
+}
+.switch::after{
+  content:'';position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:99px;
+  background:var(--c-cream);border:1.5px solid var(--c-ink);box-shadow:1.5px 1.5px 0 var(--shadow-chip-color);
+  transition:transform 260ms var(--spring-pop);
+}
+.switch.on{background:var(--c-success)}
+.switch.on::after{transform:translateX(24px)}
+.stepper{display:flex;align-items:center;gap:4px}
+.stepper button{
+  width:44px;height:44px;border-radius:12px;background:var(--c-card);
+  display:grid;place-items:center;font-size:20px;font-weight:800;
+}
+.stepper b{min-width:64px;text-align:center;font-size:15px;font-weight:800}
+
+/* Complete sheet */
+.beads{display:flex;justify-content:center;gap:10px;padding:14px 0 4px}
+.bead{width:16px;height:16px;border-radius:99px;border:1.5px solid var(--c-ink);background:var(--c-card)}
+.sheet.open .bead.f{background:var(--c-gold);animation:bead-pop 460ms var(--spring-pop) both;animation-delay:calc(var(--b,0)*90ms + 150ms)}
+@keyframes bead-pop{0%{transform:scale(.3)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+.complete-copy{text-align:center;padding:4px 28px 8px}
+.complete-copy .ar{font-size:30px;color:var(--c-teal);padding:6px 0 2px}
+.complete-copy p{font-size:13.5px;font-weight:600;color:var(--c-muted)}
+.sheet-actions{display:flex;flex-direction:column;gap:10px;padding:12px 20px 2px}
+
+/* ============ Review / other tabs ============ */
+.due-hero{border-radius:18px;background:var(--c-gold);color:var(--c-on-gold);padding:18px}
+.due-hero h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.due-hero .meta{font-size:13px;font-weight:700;opacity:.75;margin-top:2px}
+.health-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.health{border-radius:14px;padding:11px 8px;text-align:center;background:var(--c-card)}
+.health b{display:block;font-size:20px;font-weight:800}
+.health span{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
+.health.h-strong b,.health.h-strong span{color:var(--c-success)}
+.health.h-shaky b,.health.h-shaky span{color:var(--c-gold-deep)}
+.health.h-weak b,.health.h-weak span{color:var(--c-miss)}
+
+.ring-wrap{display:flex;justify-content:center;padding:8px 0 4px}
+.ring-box{position:relative;width:172px;height:172px}
+.ring-box svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-center b{font-size:33px;font-weight:800;letter-spacing:-.02em}
+.ring-center span{font-size:11px;font-weight:800;color:var(--c-muted);text-transform:uppercase;letter-spacing:.08em}
+.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:4px 2px}
+.heat i{aspect-ratio:1;border-radius:6px;border:1.5px solid color-mix(in srgb,var(--c-ink) 30%,transparent);background:var(--c-card)}
+.heat i.l1{background:color-mix(in srgb,var(--c-teal) 25%,var(--c-card))}
+.heat i.l2{background:color-mix(in srgb,var(--c-teal) 55%,var(--c-card))}
+.heat i.l3{background:var(--c-teal)}
+
+.ess-card{
+  display:flex;align-items:center;gap:14px;background:var(--c-card);border-radius:16px;
+  padding:16px;width:100%;text-align:left;min-height:76px;
+  transition:transform var(--press-dur) ease,box-shadow var(--press-dur) ease;
+}
+.ess-card:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--shadow-chip-color)}
+.ess-ic{width:46px;height:46px;flex:none;border-radius:13px;display:grid;place-items:center;background:var(--c-teal);color:var(--c-on-teal)}
+.ess-ic.g{background:var(--c-gold);color:var(--c-on-gold)}
+.ess-ic.s{background:var(--c-success);color:var(--c-on-success)}
+
+.demo-note{
+  margin:18px 16px 0;padding:10px 14px;border-radius:12px;font-size:11.5px;font-weight:700;
+  color:var(--c-muted);border:1.5px dashed color-mix(in srgb,var(--c-ink) 55%,transparent);
+  text-align:center;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-delay:0ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+
+<div id="app">
+
+  <!-- ================= HOME TAB ================= -->
+  <div class="screen tabroot active" id="tab-home">
+    <div class="scroll" data-collapse>
+      <div class="navbar">
+        <span class="bar-title">Takrar</span>
+        <button class="icon-btn chip tactile-chip" aria-label="Settings" onclick="openSheet('settings')">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        </button>
+      </div>
+      <h1 class="large-title enter" style="--d:0">Takrar</h1>
+      <div class="subtitle-row enter" style="--d:1">
+        <span class="streak-chip ink-border tactile-raise-sm">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.9 3.6-.8 5.5-2.4 7.2C8 10.9 7 12.6 7 15a5 5 0 0 0 10 0c0-1.5-.5-2.7-1.2-3.8-.4 1-1 1.8-1.8 2.3.3-2.8-.6-6.6-2-9.5-.2-.8 0-1.6 0-2Z"/></svg>
+          12-day streak
+        </span>
+        <span class="streak-chip ink-border tactile-raise-sm" style="color:var(--c-muted)">Sat 12 Jul</span>
+      </div>
+
+      <div class="section">
+        <div class="hero tactile-card enter" style="--d:2">
+          <div class="deco arabic">ﲿ</div>
+          <div class="eyebrow">Today's plan &middot; Day 34 of 90</div>
+          <h3>Al-Kahf &middot; Ayahs 6&ndash;8</h3>
+          <div class="meta">New lesson &middot; est. 12 min</div>
+          <div class="track"><div class="fill" data-fill="37%"></div></div>
+          <button class="btn btn-gold tactile-btn" onclick="pushLesson()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1 1 0 0 0 0-1.8l-10-6.4A1.05 1.05 0 0 0 8 5.6Z"/></svg>
+            Start today's lesson
+          </button>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat ink-border tactile-raise-sm enter" style="--d:3"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></i><b>132</b><span>Ayahs</span></div>
+          <div class="stat ink-border tactile-raise-sm enter" style="--d:4"><i style="color:var(--c-gold)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.9 3.6-.8 5.5-2.4 7.2C8 10.9 7 12.6 7 15a5 5 0 0 0 10 0c0-1.5-.5-2.7-1.2-3.8-.4 1-1 1.8-1.8 2.3.3-2.8-.6-6.6-2-9.5-.2-.8 0-1.6 0-2Z"/></svg></i><b>12</b><span>Streak</span></div>
+          <div class="stat ink-border tactile-raise-sm enter" style="--d:5"><i style="color:var(--c-miss)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><b>8</b><span>Due</span></div>
+        </div>
+
+        <div class="section-h enter" style="--d:6"><h2>Surahs</h2><button class="see pressable">Juz view</button></div>
+        <div class="search-pill ink-border enter" style="--d:6">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          Search surahs&hellip;
+        </div>
+        <div class="list">
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:7" onclick="pushLesson()">
+            <span class="row-num ink-border">1</span>
+            <span class="row-main"><b>Al-Fatihah</b><small>The Opener &middot; 7 ayahs</small></span>
+            <span class="pill pill-done">Memorized</span>
+            <span class="row-ar arabic">الفاتحة</span>
+          </button>
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:8" onclick="pushLesson()">
+            <span class="row-num ink-border">18</span>
+            <span class="row-main"><b>Al-Kahf</b><small>The Cave &middot; 110 ayahs</small><span class="row-prog"><i style="width:12%"></i></span></span>
+            <span class="row-ar arabic">الكهف</span>
+          </button>
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:9" onclick="pushLesson()">
+            <span class="row-num ink-border">36</span>
+            <span class="row-main"><b>Ya-Sin</b><small>Ya Sin &middot; 83 ayahs</small></span>
+            <span class="row-ar arabic">يس</span>
+          </button>
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:10" onclick="pushLesson()">
+            <span class="row-num ink-border">67</span>
+            <span class="row-main"><b>Al-Mulk</b><small>The Sovereignty &middot; 30 ayahs</small><span class="row-prog"><i style="width:40%"></i></span></span>
+            <span class="pill pill-due">3 due</span>
+            <span class="row-ar arabic">الملك</span>
+          </button>
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:11" onclick="pushLesson()">
+            <span class="row-num ink-border">112</span>
+            <span class="row-main"><b>Al-Ikhlas</b><small>The Sincerity &middot; 4 ayahs</small></span>
+            <span class="pill pill-done">Memorized</span>
+            <span class="row-ar arabic">الإخلاص</span>
+          </button>
+        </div>
+        <div class="demo-note enter" style="--d:12">Prototype &middot; tap a surah to push a lesson, drag from the left edge to go back, gear opens the settings sheet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= REVIEW TAB ================= -->
+  <div class="screen tabroot" id="tab-review">
+    <div class="scroll" data-collapse>
+      <div class="navbar"><span class="bar-title">Review</span><span style="width:44px"></span></div>
+      <h1 class="large-title">Review</h1>
+      <div class="subtitle-row"><span class="streak-chip ink-border tactile-raise-sm" style="color:var(--c-muted)">Spaced repetition &middot; 23 lessons tracked</span></div>
+      <div class="section" id="review-skel">
+        <div class="skel" style="height:118px"></div>
+        <div class="health-row">
+          <div class="skel" style="height:70px"></div>
+          <div class="skel" style="height:70px"></div>
+          <div class="skel" style="height:70px"></div>
+        </div>
+        <div class="skel" style="height:64px;margin-top:22px"></div>
+        <div class="skel" style="height:64px;margin-top:10px"></div>
+        <div class="skel" style="height:64px;margin-top:10px"></div>
+      </div>
+      <div class="section" id="review-real" hidden>
+        <div class="due-hero tactile-card enter" style="--d:0">
+          <h3>8 lessons due today</h3>
+          <div class="meta">Oldest: Al-Mulk &middot; Lesson 3 &middot; 2 days overdue</div>
+          <div style="height:14px"></div>
+          <button class="btn btn-teal tactile-btn">Start review session</button>
+        </div>
+        <div class="health-row">
+          <div class="health h-strong ink-border tactile-raise-sm enter" style="--d:1"><b>14</b><span>Strong</span></div>
+          <div class="health h-shaky ink-border tactile-raise-sm enter" style="--d:2"><b>6</b><span>Shaky</span></div>
+          <div class="health h-weak ink-border tactile-raise-sm enter" style="--d:3"><b>3</b><span>Weak</span></div>
+        </div>
+        <div class="section-h enter" style="--d:4"><h2>By surah</h2></div>
+        <div class="list">
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:5">
+            <span class="row-num ink-border">67</span>
+            <span class="row-main"><b>Al-Mulk</b><small>3 lessons due &middot; last reviewed 4d ago</small></span>
+            <span class="pill pill-due">Due</span>
+          </button>
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:6">
+            <span class="row-num ink-border">1</span>
+            <span class="row-main"><b>Al-Fatihah</b><small>Strong &middot; next due in 6 days</small></span>
+            <span class="pill pill-done">Strong</span>
+          </button>
+          <button class="row-card ink-border tactile-raise-sm enter" style="--d:7">
+            <span class="row-num ink-border">112</span>
+            <span class="row-main"><b>Al-Ikhlas</b><small>Shaky &middot; 1 lesson due</small></span>
+            <span class="pill pill-due">Shaky</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ESSENTIALS TAB ================= -->
+  <div class="screen tabroot" id="tab-essentials">
+    <div class="scroll" data-collapse>
+      <div class="navbar"><span class="bar-title">Essentials</span><span style="width:44px"></span></div>
+      <h1 class="large-title">Essentials</h1>
+      <div class="subtitle-row"><span class="streak-chip ink-border tactile-raise-sm" style="color:var(--c-muted)">Duas &amp; adhkar collections</span></div>
+      <div class="section list">
+        <button class="ess-card ink-border tactile-raise-sm enter" style="--d:0">
+          <span class="ess-ic ink-border"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg></span>
+          <span class="row-main"><b>Salah Essentials</b><small>12 items &middot; 8 memorized</small><span class="row-prog"><i style="width:66%"></i></span></span>
+          <span class="row-ar arabic" style="font-size:17px">الصلاة</span>
+        </button>
+        <button class="ess-card ink-border tactile-raise-sm enter" style="--d:1">
+          <span class="ess-ic g ink-border"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span>
+          <span class="row-main"><b>Morning &amp; Evening Adhkar</b><small>24 items &middot; 5 memorized</small><span class="row-prog"><i style="width:21%"></i></span></span>
+          <span class="row-ar arabic" style="font-size:17px">أذكار</span>
+        </button>
+        <button class="ess-card ink-border tactile-raise-sm enter" style="--d:2">
+          <span class="ess-ic s ink-border"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.7-9.3-9A5.6 5.6 0 0 1 12 6.4 5.6 5.6 0 0 1 21.3 12C19 16.3 12 21 12 21Z"/></svg></span>
+          <span class="row-main"><b>Daily Duas</b><small>18 items &middot; 11 memorized</small><span class="row-prog"><i style="width:61%"></i></span></span>
+          <span class="row-ar arabic" style="font-size:17px">دعاء</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PROGRESS TAB ================= -->
+  <div class="screen tabroot" id="tab-progress">
+    <div class="scroll" data-collapse>
+      <div class="navbar"><span class="bar-title">Progress</span><span style="width:44px"></span></div>
+      <h1 class="large-title">Progress</h1>
+      <div class="subtitle-row"><span class="streak-chip ink-border tactile-raise-sm" style="color:var(--c-muted)">Plan: Juz 30 + Al-Kahf by Ramadan</span></div>
+      <div class="section">
+        <div class="ring-wrap enter" style="--d:0">
+          <div class="ring-box">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="var(--c-card)" stroke-width="9"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="var(--c-ink)" stroke-width="10.5" opacity=".18"/>
+              <circle id="ring" cx="50" cy="50" r="42" fill="none" stroke="var(--c-teal)" stroke-width="9" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="264"/>
+            </svg>
+            <div class="ring-center"><b>68%</b><span>of plan</span></div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat ink-border tactile-raise-sm enter" style="--d:1"><b>132</b><span>Ayahs</span></div>
+          <div class="stat ink-border tactile-raise-sm enter" style="--d:2"><b>89</b><span>Reviews</span></div>
+          <div class="stat ink-border tactile-raise-sm enter" style="--d:3"><b>5/7</b><span>This week</span></div>
+        </div>
+        <div class="section-h enter" style="--d:4"><h2>Last 5 weeks</h2></div>
+        <div class="heat enter" style="--d:5">
+          <i class="l1"></i><i class="l2"></i><i></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i>
+          <i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i>
+          <i class="l3"></i><i class="l2"></i><i class="l1"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i>
+          <i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="l1"></i><i class="l3"></i><i class="l2"></i>
+          <i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i></i><i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- push dim under lesson -->
+  <div id="push-dim"></div>
+
+  <!-- ================= LESSON (PUSHED) ================= -->
+  <div class="screen" id="screen-lesson" style="visibility:visible">
+    <div class="lesson-nav">
+      <button class="back-btn pressable" onclick="popLesson()" aria-label="Back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="t"><b>Al-Fatihah</b><small>Lesson 1 &middot; Ayah 1</small></div>
+    </div>
+    <div class="pips">
+      <div class="pip done"><i></i>Listen</div>
+      <div class="pip now"><i></i>Understand</div>
+      <div class="pip"><i></i>Build</div>
+      <div class="pip"><i></i>Test</div>
+    </div>
+    <div class="ayah-strip ink-border tactile-raise-sm arabic" id="ayah-strip">
+      <span class="w hot">بِسْمِ</span> <span class="w">ٱللَّهِ</span> <span class="w">ٱلرَّحْمَـٰنِ</span> <span class="w">ٱلرَّحِيمِ</span>
+    </div>
+    <div class="deck-zone">
+      <div class="deck-count" id="deck-count">Word 1 of 4</div>
+      <div class="deck" id="deck">
+        <div class="deck-done" id="deck-done">
+          <div class="big"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <b>All 4 words done</b>
+          <small>You know every word of Bismillah. Ready to build the ayah?</small>
+        </div>
+      </div>
+      <div class="hint" id="deck-hint">Swipe the card or tap &ldquo;Got it&rdquo;</div>
+    </div>
+    <div class="lesson-actions" id="deck-actions">
+      <button class="btn btn-card tactile-chip" style="flex:0 0 116px" onclick="replayWord()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg>
+        Again
+      </button>
+      <button class="btn btn-teal tactile-btn" onclick="gotIt()">Got it</button>
+    </div>
+    <div class="lesson-actions" id="done-actions" style="display:none">
+      <button class="btn btn-gold tactile-btn" onclick="openSheet('complete')">Complete phase</button>
+    </div>
+  </div>
+
+  <!-- ================= TAB BAR ================= -->
+  <nav id="tabbar">
+    <span id="tab-chip" aria-hidden="true"></span>
+    <button class="tab on" data-tab="home">
+      <span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10.5 9-7.5 9 7.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20Z"/><path d="M9 21.5v-8h6v8"/></svg></span>
+      <span>Home</span>
+    </button>
+    <button class="tab" data-tab="review">
+      <span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg><span class="badge">8</span></span>
+      <span>Review</span>
+    </button>
+    <button class="tab" data-tab="essentials">
+      <span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9 2.9-6Z"/></svg></span>
+      <span>Essentials</span>
+    </button>
+    <button class="tab" data-tab="progress">
+      <span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+      <span>Progress</span>
+    </button>
+  </nav>
+
+  <!-- edge-swipe-back capture zone -->
+  <div id="edge-back"></div>
+
+  <!-- ================= SHEETS ================= -->
+  <div id="sheet-scrim" onclick="closeSheets()"></div>
+
+  <div class="sheet" id="sheet-settings" role="dialog" aria-label="Settings">
+    <div class="grab-zone" data-grab><div class="grabber"></div></div>
+    <h3>Settings</h3>
+    <div class="sheet-body">
+      <div class="set-row">
+        <div class="lab"><b>Appearance</b><small>Follows your device by default</small></div>
+        <div class="seg ink-border" id="theme-seg">
+          <button data-th="light">Light</button>
+          <button data-th="" class="on">Auto</button>
+          <button data-th="dark">Dark</button>
+        </div>
+      </div>
+      <div class="set-row">
+        <div class="lab"><b>Arabic script</b><small>Uthmani or IndoPak</small></div>
+        <div class="seg ink-border">
+          <button class="on">Uthmani</button>
+          <button>IndoPak</button>
+        </div>
+      </div>
+      <div class="set-row">
+        <div class="lab"><b>Word-by-word audio</b><small>Play each word as you study</small></div>
+        <button class="switch ink-border on" onclick="this.classList.toggle('on')" aria-label="Word-by-word audio"></button>
+      </div>
+      <div class="set-row">
+        <div class="lab"><b>Tajweed colors</b><small>Color-coded recitation rules</small></div>
+        <button class="switch ink-border" onclick="this.classList.toggle('on')" aria-label="Tajweed colors"></button>
+      </div>
+      <div class="set-row">
+        <div class="lab"><b>Daily goal</b><small>Ayahs per day</small></div>
+        <div class="stepper">
+          <button class="tactile-chip" onclick="stepGoal(-1)" aria-label="Decrease">&minus;</button>
+          <b id="goal-val">3 ayahs</b>
+          <button class="tactile-chip" onclick="stepGoal(1)" aria-label="Increase">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet" id="sheet-complete" role="dialog" aria-label="Phase complete">
+    <div class="grab-zone" data-grab><div class="grabber"></div></div>
+    <div class="beads">
+      <span class="bead f" style="--b:0"></span><span class="bead f" style="--b:1"></span>
+      <span class="bead f" style="--b:2"></span><span class="bead f" style="--b:3"></span>
+    </div>
+    <h3>Understand complete</h3>
+    <div class="complete-copy">
+      <div class="ar arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+      <p>&ldquo;In the name of Allah, the Most Gracious, the Most Merciful.&rdquo; Next: rebuild the ayah from memory, chunk by chunk.</p>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn btn-teal tactile-btn" onclick="continueToBuild()">Continue to Build</button>
+      <button class="btn btn-card tactile-chip" onclick="closeSheets();popLesson()">Back to Surahs</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const W=()=>window.innerWidth;
+
+/* ---------- collapsing large-title headers ---------- */
+$$('.scroll[data-collapse]').forEach(sc=>{
+  const bar=sc.querySelector('.navbar');
+  sc.addEventListener('scroll',()=>bar.classList.toggle('scrolled',sc.scrollTop>42),{passive:true});
+});
+
+/* ---------- tab switching ---------- */
+const TABS=['home','review','essentials','progress'];
+let curTab='home', reviewLoaded=false;
+$$('#tabbar .tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=btn.dataset.tab;
+    if(t===curTab){ $('#tab-'+t+' .scroll').scrollTo({top:0,behavior:REDUCED?'auto':'smooth'}); return; }
+    $$('#tabbar .tab').forEach(b=>b.classList.toggle('on',b===btn));
+    placeChip(btn);
+    const prev=$('#tab-'+curTab), next=$('#tab-'+t);
+    prev.classList.remove('active','tab-in');
+    next.classList.add('active');
+    if(!REDUCED){ next.classList.remove('tab-in'); void next.offsetWidth; next.classList.add('tab-in'); next.querySelectorAll('.enter').forEach(el=>{el.style.animation='none';}); void next.offsetWidth; next.querySelectorAll('.enter').forEach(el=>{el.style.animation='';}); }
+    curTab=t;
+    if(t==='review'&&!reviewLoaded){
+      reviewLoaded=true;
+      setTimeout(()=>{ $('#review-skel').hidden=true; $('#review-real').hidden=false; }, REDUCED?0:1000);
+    }
+    if(t==='progress') setTimeout(()=>{ $('#ring').style.transition='stroke-dashoffset 900ms cubic-bezier(.22,1.2,.36,1)'; $('#ring').style.strokeDashoffset=264*(1-0.68); },60);
+  });
+});
+
+/* ---------- push / pop lesson (parallax stack) ---------- */
+const lesson=$('#screen-lesson'), dim=$('#push-dim'), tabbar=$('#tabbar'), edge=$('#edge-back');
+let lessonOpen=false;
+function underEl(){ return $('#tab-'+curTab); }
+
+function setStackAnimating(on){
+  [lesson,dim,underEl()].forEach(el=>el.classList.toggle('animating',on&&!REDUCED));
+}
+function pushLesson(){
+  if(lessonOpen) return;
+  const u=underEl();
+  u.classList.add('under');
+  setStackAnimating(true);
+  void lesson.offsetWidth; /* flush so the transition has a start frame */
+  lesson.classList.add('in','active');
+  lesson.style.transform='';
+  u.style.transform='translateX(-28%)';
+  dim.style.opacity='.28';
+  tabbar.classList.add('hidden-bar');
+  lessonOpen=true; edge.classList.add('on');
+  clearTimeout(pushLesson._t);
+  pushLesson._t=setTimeout(()=>setStackAnimating(false), REDUCED?20:360);
+}
+function popLesson(){
+  if(!lessonOpen) return;
+  const u=underEl();
+  setStackAnimating(true);
+  void lesson.offsetWidth;
+  lesson.classList.remove('in');
+  lesson.style.transform='';
+  u.style.transform='';
+  dim.style.opacity='0';
+  tabbar.classList.remove('hidden-bar');
+  lessonOpen=false; edge.classList.remove('on');
+  clearTimeout(popLesson._t);
+  popLesson._t=setTimeout(()=>{ setStackAnimating(false); u.classList.remove('under'); lesson.classList.remove('active'); }, REDUCED?20:360);
+}
+
+/* ---------- edge-swipe-back gesture ---------- */
+let eb=null;
+edge.addEventListener('pointerdown',e=>{
+  if(!lessonOpen) return;
+  eb={x0:e.clientX,t0:performance.now(),dx:0};
+  edge.setPointerCapture(e.pointerId);
+  setStackAnimating(false);
+});
+edge.addEventListener('pointermove',e=>{
+  if(!eb) return;
+  eb.dx=Math.max(0,e.clientX-eb.x0);
+  const p=Math.min(1,eb.dx/W());
+  lesson.style.transform=`translateX(${eb.dx}px)`;
+  underEl().style.transform=`translateX(${-28*(1-p)}%)`;
+  dim.style.opacity=String(.28*(1-p));
+});
+function endEdge(e){
+  if(!eb) return;
+  const v=eb.dx/Math.max(1,performance.now()-eb.t0); // px per ms
+  const commit=eb.dx>W()*0.34||v>0.55;
+  eb=null;
+  if(commit) popLesson();
+  else{ // cancel — spring back
+    setStackAnimating(true);
+    void lesson.offsetWidth;
+    lesson.style.transform='translateX(0)'; underEl().style.transform='translateX(-28%)'; dim.style.opacity='.28';
+    setTimeout(()=>setStackAnimating(false),360);
+  }
+}
+edge.addEventListener('pointerup',endEdge);
+edge.addEventListener('pointercancel',endEdge);
+
+/* ---------- word deck (Understand phase) ---------- */
+const WORDS=[
+  {ar:'بِسْمِ',tr:"bis'mi",en:'In (the) name'},
+  {ar:'ٱللَّهِ',tr:'l-lahi',en:'(of) Allah'},
+  {ar:'ٱلرَّحْمَـٰنِ',tr:'l-raḥmāni',en:'the Most Gracious'},
+  {ar:'ٱلرَّحِيمِ',tr:'l-raḥīmi',en:'the Most Merciful'},
+];
+const deck=$('#deck');
+let deckIdx=0, deckCards=[];
+
+function buildDeck(){
+  deckCards.forEach(c=>c.remove());
+  deckCards=WORDS.map((w,i)=>{
+    const d=document.createElement('div');
+    d.className='deck-card';
+    d.innerHTML=`<div class="ar arabic">${w.ar}</div><div class="tr">${w.tr}</div><div class="en">${w.en}</div>
+      <button class="hear ink-border tactile-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Hear it</button>`;
+    deck.insertBefore(d,$('#deck-done'));
+    return d;
+  });
+  deckIdx=0;
+  layoutDeck(false);
+  attachDrag();
+  $('#deck-done').classList.remove('show');
+  $('#deck-actions').style.display='';
+  $('#done-actions').style.display='none';
+  $('#deck-hint').style.visibility='';
+}
+function layoutDeck(animate){
+  deckCards.forEach((c,i)=>{
+    const rel=i-deckIdx;
+    if(rel<0) return; /* dismissed cards finish their fling, then hide below */
+    c.style.display='';
+    c.classList.toggle('promoting',animate&&!REDUCED);
+    c.classList.remove('pos0','pos1','pos2','pos-hide');
+    c.classList.add(rel===0?'pos0':rel===1?'pos1':rel===2?'pos2':'pos-hide');
+  });
+  const n=Math.min(deckIdx+1,WORDS.length);
+  $('#deck-count').textContent=deckIdx>=WORDS.length?'Phase done':`Word ${n} of ${WORDS.length}`;
+  $$('#ayah-strip .w').forEach((w,i)=>w.classList.toggle('hot',i===deckIdx));
+}
+function advanceDeck(dir){ // dir: -1 fling left, 1 fling right
+  if(deckIdx>=WORDS.length) return;
+  const c=deckCards[deckIdx];
+  c.style.transition=REDUCED?'none':'transform 300ms cubic-bezier(.32,.72,0,1),opacity 240ms ease';
+  c.style.transform=`translate(${dir*130}%,-6%) rotate(${dir*9}deg)`;
+  c.style.opacity='0';
+  deckIdx++;
+  setTimeout(()=>{ c.style.display='none'; }, REDUCED?0:320);
+  setTimeout(()=>{ layoutDeck(true); }, REDUCED?0:40);
+  if(deckIdx>=WORDS.length){
+    setTimeout(()=>{
+      $('#deck-done').classList.add('show');
+      $('#deck-actions').style.display='none';
+      $('#done-actions').style.display='';
+      $('#deck-hint').style.visibility='hidden';
+    }, REDUCED?0:260);
+  }
+}
+function gotIt(){ advanceDeck(-1); }
+function replayWord(){ // little shake as "playing" feedback
+  if(deckIdx>=WORDS.length) return;
+  const c=deckCards[deckIdx], hear=c.querySelector('.hear');
+  hear.style.transition='transform 140ms ease'; hear.style.transform='scale(1.08)';
+  setTimeout(()=>hear.style.transform='',150);
+}
+/* swipe gesture on front card */
+let dg=null;
+function attachDrag(){
+  deckCards.forEach(c=>{
+    c.onpointerdown=e=>{
+      if(c!==deckCards[deckIdx]||deckIdx>=WORDS.length) return;
+      if(e.target.closest('.hear')) return;
+      dg={c,x0:e.clientX,y0:e.clientY,t0:performance.now(),dx:0};
+      c.setPointerCapture(e.pointerId);
+      c.style.transition='none';
+    };
+    c.onpointermove=e=>{
+      if(!dg||dg.c!==c) return;
+      dg.dx=e.clientX-dg.x0;
+      const dy=(e.clientY-dg.y0)*0.25;
+      c.style.transform=`translate(${dg.dx}px,${dy}px) rotate(${dg.dx*0.045}deg)`;
+    };
+    c.onpointerup=c.onpointercancel=e=>{
+      if(!dg||dg.c!==c) return;
+      const v=Math.abs(dg.dx)/Math.max(1,performance.now()-dg.t0);
+      const commit=Math.abs(dg.dx)>92||v>0.6;
+      const dir=dg.dx<0?-1:1; dg=null;
+      if(commit){ advanceDeck(dir); }
+      else{
+        c.style.transition=REDUCED?'none':'transform 340ms cubic-bezier(.34,1.45,.64,1)';
+        c.style.transform='';
+      }
+    };
+  });
+}
+function continueToBuild(){
+  closeSheets();
+  setTimeout(buildDeck, 380); // demo loops back to the deck
+}
+buildDeck();
+
+/* ---------- bottom sheets ---------- */
+let openSheetEl=null;
+function openSheet(name){
+  const s=$('#sheet-'+name);
+  openSheetEl=s;
+  s.classList.add('animating');
+  void s.offsetWidth;
+  s.classList.add('open'); $('#sheet-scrim').classList.add('on');
+  setTimeout(()=>s.classList.remove('animating'),REDUCED?20:420);
+}
+function closeSheets(){
+  if(!openSheetEl) return;
+  const s=openSheetEl; openSheetEl=null;
+  s.classList.add('animating');
+  void s.offsetWidth;
+  s.classList.remove('open'); s.style.transform=''; $('#sheet-scrim').classList.remove('on');
+  setTimeout(()=>s.classList.remove('animating'),REDUCED?20:420);
+}
+/* sheet drag-to-dismiss */
+$$('.sheet').forEach(s=>{
+  const gz=s.querySelector('[data-grab]');
+  let sg=null;
+  gz.addEventListener('pointerdown',e=>{
+    sg={y0:e.clientY,t0:performance.now(),dy:0};
+    gz.setPointerCapture(e.pointerId);
+    s.classList.remove('animating');
+  });
+  gz.addEventListener('pointermove',e=>{
+    if(!sg) return;
+    sg.dy=Math.max(0,e.clientY-sg.y0);
+    s.style.transform=`translateY(${sg.dy}px)`;
+  });
+  const up=()=>{
+    if(!sg) return;
+    const v=sg.dy/Math.max(1,performance.now()-sg.t0);
+    const commit=sg.dy>110||v>0.5;
+    sg=null;
+    if(commit){ closeSheets(); }
+    else{
+      s.classList.add('animating');
+      void s.offsetWidth;
+      s.style.transform='translateY(0)';
+      setTimeout(()=>{ s.classList.remove('animating'); s.style.transform=''; },420);
+    }
+  };
+  gz.addEventListener('pointerup',up);
+  gz.addEventListener('pointercancel',up);
+});
+
+/* ---------- settings: theme + goal ---------- */
+$('#theme-seg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  $$('#theme-seg button').forEach(x=>x.classList.toggle('on',x===b));
+  if(b.dataset.th) document.documentElement.dataset.theme=b.dataset.th;
+  else delete document.documentElement.dataset.theme;
+});
+let goal=3;
+function stepGoal(d){ goal=Math.min(10,Math.max(1,goal+d)); $('#goal-val').textContent=goal+(goal===1?' ayah':' ayahs'); }
+
+/* other segmented controls (script picker) */
+$$('.seg:not(#theme-seg)').forEach(seg=>{
+  seg.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    seg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  });
+});
+
+/* ---------- first paint: hero progress fill ---------- */
+window.addEventListener('load',()=>{
+  $$('.fill[data-fill]').forEach(f=>f.style.width=f.dataset.fill);
+});
+
+function placeChip(btn,instant){const c=document.getElementById('tab-chip');if(!c||!btn)return;if(instant)c.style.transition='none';c.style.width=(btn.offsetWidth-14)+'px';c.style.transform='translateX('+(btn.offsetLeft+7)+'px)';if(instant){void c.offsetWidth;c.style.transition='';}}
+placeChip(document.querySelector('#tabbar .tab.on'),true);
+requestAnimationFrame(()=>placeChip(document.querySelector('#tabbar .tab.on'),true));
+window.addEventListener('load',()=>placeChip(document.querySelector('#tabbar .tab.on'),true));
+window.addEventListener('resize',()=>placeChip(document.querySelector('#tabbar .tab.on'),true));
+</script>
