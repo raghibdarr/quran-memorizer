@@ -23,6 +23,8 @@ export const usePracticeStore = create<PracticeState>()(
       getSessionsForSurah: (surahId) =>
         get().sessions.filter((s) => s.surahIds.includes(surahId)),
     }),
-    { name: 'quran-practice' }
+    // version + passthrough migrate: zustand DISCARDS persisted state on a version
+    // mismatch without a migrate fn — every store must carry both (M2)
+    { name: 'quran-practice', version: 1, migrate: (p) => p as never }
   )
 );

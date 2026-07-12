@@ -1,20 +1,11 @@
-import { STORE_NAMES, getLocalData, setLocalData, mergeStore, type StoreName } from '@/hooks/use-sync'
+import { STORE_NAMES, FLAG_KEYS, mergeStore, type StoreName } from '@/lib/sync/merge'
+import { getLocalData, setLocalData } from '@/lib/sync/local'
 
 // Full-progress backup for signed-out users (and belt-and-braces for everyone):
 // one takrar-backup.json holding every persisted store plus the small localStorage
 // flags. Import routes each store through the SAME per-store merge functions the
 // cloud sync uses — never a blind overwrite, so importing an older backup cannot
 // destroy newer local progress (unions/max/most-advanced win per store).
-
-const FLAG_KEYS = [
-  'quran-dark-mode',
-  'onboarding-complete',
-  'chunk-explainer-seen',
-  'lesson-review-migration-v4',
-  'home-sort',
-  'home-view',
-  'home-tab',
-] as const
 
 export interface TakrarBackup {
   format: 'takrar-backup'

@@ -93,7 +93,9 @@ export const useReviewStore = create<ReviewState>()(
 
       getDueLessonCount: () => getDueLessonCards(get().lessonCards).length,
     }),
-    { name: 'quran-reviews' }
+    // version + passthrough migrate: zustand DISCARDS persisted state on a version
+    // mismatch without a migrate fn — every store must carry both (M2)
+    { name: 'quran-reviews', version: 1, migrate: (p) => p as never }
   )
 );
 

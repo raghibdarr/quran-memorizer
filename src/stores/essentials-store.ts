@@ -40,6 +40,8 @@ export const useEssentialsStore = create<EssentialsState>()(
           favorites: { ...state.favorites, [itemId]: !state.favorites[itemId] },
         })),
     }),
-    { name: 'quran-essentials' }
+    // version + passthrough migrate: zustand DISCARDS persisted state on a version
+    // mismatch without a migrate fn — every store must carry both (M2)
+    { name: 'quran-essentials', version: 1, migrate: (p) => p as never }
   )
 );

@@ -5,6 +5,7 @@ import { useSettingsStore } from '@/stores/settings-store';
 import { getSurahIndex, getJuzSegmentsForSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { SyncProvider } from '@/components/sync-provider';
+import { rehydrateStores } from '@/lib/sync/rehydrate';
 import type { LessonReviewCard } from '@/types/quran';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -99,7 +100,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       reviewParsed.state = reviewState;
       localStorage.setItem('quran-reviews', JSON.stringify(reviewParsed));
       localStorage.setItem(migrationKey, '1');
-      window.location.reload();
+      // Rehydrate the live store in place — no hard reload (M2)
+      await rehydrateStores(['quran-reviews']);
     })();
   }, [mounted]);
 

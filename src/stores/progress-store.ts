@@ -265,13 +265,19 @@ export const useProgressStore = create<ProgressState>()(
     {
       name: 'quran-progress',
       version: 2,
-      migrate: (persisted, version) => {
-        if (version < 2) {
-          // Old format used numeric surahId keys — clear and start fresh
-          return { lessons: {} };
-        }
-        return persisted as ProgressState;
-      },
+      migrate: migrateProgress,
     }
   )
 );
+
+/**
+ * DOCUMENTED DECISION (pinned by fixtures.test.ts): pre-v2 progress used numeric
+ * surahId keys and is deliberately DISCARDED rather than migrated — the old
+ * shape can't be mapped onto lessonIds reliably.
+ */
+export function migrateProgress(persisted: unknown, version: number) {
+  if (version < 2) {
+    return { lessons: {} };
+  }
+  return persisted as ProgressState;
+}

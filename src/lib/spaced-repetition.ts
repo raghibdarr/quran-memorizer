@@ -36,7 +36,18 @@ export function createLessonReviewCard(lessonDef: LessonDef, surahId: number, du
   };
 }
 
-export function processReview(card: ReviewCard, quality: number): ReviewCard {
+// The one SM-2 core shared by ayah- and lesson-level cards (deduped in M2 —
+// the two copies had already started to drift risk).
+interface Sm2Fields {
+  easeFactor: number;
+  interval: number;
+  repetitions: number;
+  nextReview: number;
+  lastReview: number;
+  lastQuality: number;
+}
+
+function applySm2<T extends Sm2Fields>(card: T, quality: number): T {
   const updated = { ...card };
 
   if (quality < 3) {
@@ -62,54 +73,34 @@ export function processReview(card: ReviewCard, quality: number): ReviewCard {
 
   updated.lastReview = Date.now();
   updated.lastQuality = quality;
+  // Due dates are LOCAL START-OF-DAY (see dates.ts) — cards mature at midnight
   updated.nextReview = startOfDayMs(Date.now() + updated.interval * DAY_MS);
 
   return updated;
+}
+
+export function processReview(card: ReviewCard, quality: number): ReviewCard {
+  return applySm2(card, quality);
+}
+
+export function processLessonReview(card: LessonReviewCard, quality: number): LessonReviewCard {
+  return applySm2(card, quality);
 }
 
 export function isDue(card: ReviewCard | LessonReviewCard): boolean {
   return card.nextReview <= Date.now();
 }
 
-export function getDueCards(cards: ReviewCard[]): ReviewCard[] {
+function dueSorted<T extends { nextReview: number }>(cards: T[]): T[] {
   return cards
-    .filter(isDue)
+    .filter((c) => c.nextReview <= Date.now())
     .sort((a, b) => a.nextReview - b.nextReview);
+}
+
+export function getDueCards(cards: ReviewCard[]): ReviewCard[] {
+  return dueSorted(cards);
 }
 
 export function getDueLessonCards(cards: LessonReviewCard[]): LessonReviewCard[] {
-  return cards
-    .filter(isDue)
-    .sort((a, b) => a.nextReview - b.nextReview);
-}
-
-export function processLessonReview(card: LessonReviewCard, quality: number): LessonReviewCard {
-  const updated = { ...card };
-
-  if (quality < 3) {
-    updated.repetitions = 0;
-    updated.interval = 1;
-  } else {
-    if (updated.repetitions === 0) {
-      updated.interval = 1;
-    } else if (updated.repetitions === 1) {
-      updated.interval = 3;
-    } else if (updated.repetitions === 2) {
-      updated.interval = 7;
-    } else {
-      updated.interval = Math.round(updated.interval * updated.easeFactor);
-    }
-    updated.repetitions += 1;
-  }
-
-  updated.easeFactor = Math.max(
-    MIN_EASE_FACTOR,
-    updated.easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
-  );
-
-  updated.lastReview = Date.now();
-  updated.lastQuality = quality;
-  updated.nextReview = startOfDayMs(Date.now() + updated.interval * DAY_MS);
-
-  return updated;
+  return dueSorted(cards);
 }

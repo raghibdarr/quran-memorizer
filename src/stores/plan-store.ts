@@ -180,6 +180,8 @@ export const usePlanStore = create<PlanState>()(
           };
         }),
     }),
-    { name: 'quran-plan' },
+    // version + passthrough migrate: zustand DISCARDS persisted state on a version
+    // mismatch without a migrate fn — every store must carry both (M2)
+    { name: 'quran-plan', version: 1, migrate: (p) => p as never },
   ),
 );

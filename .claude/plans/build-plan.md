@@ -86,6 +86,7 @@ Ordering is by irreversible-failure risk for public users, then severity, then d
 ---
 
 ### M2 — Sync engine hardening: pure merge lib, property tests, versioning, CAS, Playwright smoke
+**STATUS: 🟡 SESSIONS 1-2 DONE 2026-07-12** — merge engine extracted to pure src/lib/sync/merge.ts (+local.ts IO, rehydrate.ts) with fast-check property tests + golden fixtures (24 new tests); all 7 stores schema-versioned with passthrough migrates; payload envelope {__v,state} with never-clobber-newer (planStoreMerge, test-pinned); CAS push on a rev column (supabase/migrations/002_user_data_rev.sql — legacy-upsert fallback until applied) with conflict re-merge retries; typed Supabase client (zero as-any); dirty-hash upload skip + lastSyncedAt; ALL window.location.reload() removed from sync/providers (store rehydration); SM-2 core deduped; onboarding/explainer flags now sync (quran-flags row). REMAINING (session 3): Playwright smoke in CI; two-tab concurrent-edit simulation; OWNER ACTIONS: apply migration 002 in Supabase before/with the next deploy; the M0 /plan/revise signed-in sync check.
 **Size:** 3 sessions
 
 **Goal:** Make the 633-line untested sync merge provably safe — extracted, property-tested, schema-versioned, race-free — before any milestone changes store shapes, and land the app-wide regression net.
