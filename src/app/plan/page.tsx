@@ -188,10 +188,15 @@ export default function PlanDashboardPage() {
             )}
             {!plan.deadline && progress.lessonsRemaining === 0 && 'Plan complete — ma shaa Allah'}
             {plan.deadline && progress.isOnTrack && (
-              <>On track · {progress.daysRemaining ?? 0}d remaining</>
+              <>On track · {Math.max(0, progress.daysRemaining ?? 0)}d remaining</>
             )}
             {plan.deadline && !progress.isOnTrack && (
-              <>{progress.lessonsBehind} lesson{progress.lessonsBehind === 1 ? '' : 's'} behind · {progress.daysRemaining ?? 0}d remaining</>
+              <>
+                {progress.lessonsBehind} lesson{progress.lessonsBehind === 1 ? '' : 's'} behind
+                {(progress.daysRemaining ?? 0) > 0
+                  ? <> · {progress.daysRemaining}d remaining</>
+                  : (progress.daysRemaining === 0 ? <> · due today</> : <> · deadline passed</>)}
+              </>
             )}
           </div>
         </Card>

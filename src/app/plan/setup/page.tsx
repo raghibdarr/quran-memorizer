@@ -93,9 +93,10 @@ export default function PlanSetupPage() {
       completedLessonIds: [],
       revisionFrequencyDays: 7,
       lastRevisedAt: {},
+      knownLessonIds,
     };
     return getPlanLessons(provisional, allSurahs, juzIndex).length;
-  }, [goalType, goalSurahIds, selectedJuzNumbers, knownSurahIds, allSurahs, juzIndex]);
+  }, [goalType, goalSurahIds, selectedJuzNumbers, knownSurahIds, knownLessonIds, allSurahs, juzIndex]);
 
   // Auto-pace suggestion when deadline is set
   const paceSuggestion = useMemo(() => {
@@ -198,7 +199,10 @@ export default function PlanSetupPage() {
     lessonsPerDay >= 1 &&
     lessonsPerDay <= 20 &&
     (!useDeadline || deadline > todayIso()) &&
-    totalLessons - knownSurahIds.length > 0;
+    // totalLessons already excludes known surahs/lessons (getPlanLessons skips them) —
+    // subtracting knownSurahIds.length again double-counted and could disable Next
+    // for a hafiz who marked most of a juz known.
+    totalLessons > 0;
 
   const handleCreate = () => {
     createPlan({
@@ -625,7 +629,7 @@ export default function PlanSetupPage() {
                       year: 'numeric',
                     })}
                   </span>{' '}
-                  ({totalLessons - knownSurahIds.length > 0 ? totalLessons : 0} lessons).
+                  ({totalLessons} lessons).
                 </p>
               )}
             </Card>

@@ -190,7 +190,9 @@ export default function SettingsPanel() {
                 style={{ colorScheme: 'auto' }}
               >
                 {RECITERS.map((r) => (
-                  <option key={r.id} value={r.id} className="bg-card text-foreground">{r.name}</option>
+                  <option key={r.id} value={r.id} className="bg-card text-foreground">
+                    {r.name}{r.hint ? ` — ${r.hint}` : ''}
+                  </option>
                 ))}
               </select>
             </div>

@@ -50,6 +50,7 @@ Ordering is by irreversible-failure risk for public users, then severity, then d
 ---
 
 ### M1 — Quick-wins batch: all 15 audited S-effort fixes
+**STATUS: ✅ DONE 2026-07-12** (all 15 shipped; SM-2 day-truncation + shared local-date helper covered by new dates.test.ts; three stale spaced-repetition tests updated to the new start-of-day contract; preview-verified: parts gate label, reciter hints, start-card time note.)
 **Size:** 1–2 sessions
 
 **Goal:** Ship every quick win from UX audit §5 as one batch — cheap, independent, each removes a persona pain point.

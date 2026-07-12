@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSettingsStore } from '@/stores/settings-store';
 
 const TAJWEED_RULES = [
@@ -14,8 +14,18 @@ const TAJWEED_RULES = [
 ];
 
 export default function TajweedLegend() {
-  const [open, setOpen] = useState(false);
+  // Auto-expand ONCE the first time a user sees tajweed script, so the multicolor
+  // text is explained rather than mysterious; collapsed thereafter as before.
+  const [open, setOpen] = useState(
+    () => typeof window !== 'undefined' && localStorage.getItem('tajweed-legend-seen') == null
+  );
   const arabicScript = useSettingsStore((s) => s.arabicScript);
+
+  useEffect(() => {
+    if (arabicScript === 'tajweed' && open && localStorage.getItem('tajweed-legend-seen') == null) {
+      localStorage.setItem('tajweed-legend-seen', '1');
+    }
+  }, [arabicScript, open]);
 
   if (arabicScript !== 'tajweed') return null;
 

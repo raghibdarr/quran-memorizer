@@ -10,24 +10,14 @@ import type {
   SurahRevisionTask,
 } from '@/types/quran';
 import { CURRICULUM_ORDER, generateLessonsWithJuzBoundaries } from './curriculum';
+import { todayIso, startOfTodayMs } from './dates';
 
 // ---------- Date helpers ----------
+// Day-boundary logic lives in src/lib/dates.ts (ONE local-time definition of "today");
+// re-exported here so existing importers keep working.
+export { todayIso, startOfTodayMs };
 
 const MS_PER_DAY = 86_400_000;
-
-export function todayIso(): string {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = String(now.getMonth() + 1).padStart(2, '0');
-  const d = String(now.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
-export function startOfTodayMs(): number {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  return d.getTime();
-}
 
 /** Parse a YYYY-MM-DD string as a UTC Date at midnight, for safe arithmetic. */
 function isoToDateUTC(iso: string): Date {

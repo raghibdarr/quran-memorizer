@@ -2,6 +2,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { todayIso, yesterdayIso } from '@/lib/dates';
 import type { UserStats } from '@/types/quran';
 
 interface LastActivity {
@@ -18,15 +19,11 @@ interface StatsState extends UserStats {
   setLastActivity: (activity: LastActivity) => void;
 }
 
-function getToday(): string {
-  return new Date().toISOString().split('T')[0];
-}
-
-function getYesterday(): string {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().split('T')[0];
-}
+// Day boundaries are LOCAL (src/lib/dates.ts) — the old toISOString() versions
+// flipped the day at UTC midnight, disagreeing with the plan's local dates
+// (evening activity could count toward "tomorrow" and silently break streaks).
+const getToday = todayIso;
+const getYesterday = yesterdayIso;
 
 export const useStatsStore = create<StatsState>()(
   persist(

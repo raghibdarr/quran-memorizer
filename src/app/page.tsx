@@ -11,6 +11,7 @@ import PlanCelebration from '@/components/plan/plan-celebration';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { fuzzySurahScore } from '@/lib/fuzzy';
+import { startOfTodayMs } from '@/lib/dates';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -83,10 +84,15 @@ export default function HomePage() {
   const todayActivities = stats.dailyActivityDate === today ? stats.dailyActivities : 0;
   const dailyProgress = Math.min((todayActivities / dailyGoalActivities) * 100, 100);
 
-  // Due reviews count
-  const dueReviewCount = useMemo(() => {
+  // Due reviews count — overdue = matured before today (missed on a previous day)
+  const { dueReviewCount, overdueReviewCount } = useMemo(() => {
     const now = Date.now();
-    return lessonCards.filter((c) => c.nextReview <= now).length;
+    const todayStart = startOfTodayMs();
+    const due = lessonCards.filter((c) => c.nextReview <= now);
+    return {
+      dueReviewCount: due.length,
+      overdueReviewCount: due.filter((c) => c.nextReview < todayStart).length,
+    };
   }, [lessonCards]);
 
   useEffect(() => {
@@ -266,7 +272,9 @@ export default function HomePage() {
           <a href="/review" className="block">
             <Card pressable className="flex h-full flex-col items-center justify-center py-3">
               <p className="text-xl font-bold text-gold-deep">{dueReviewCount}</p>
-              <p className="mt-1 text-xs text-muted">Due Reviews</p>
+              <p className="mt-1 text-xs text-muted">
+                {overdueReviewCount > 0 ? `Due · ${overdueReviewCount} overdue` : 'Due Reviews'}
+              </p>
             </Card>
           </a>
           <Card className="flex flex-col items-center justify-center py-3">

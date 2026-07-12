@@ -360,17 +360,18 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
 
   const handleWordSelect = (position: number) => {
     if (orderResult !== null) return;
-    const newOrder = [...selectedOrder, position];
-    setSelectedOrder(newOrder);
-
     const correctOrder = unitWords.map((w) => w.position);
-    const isCorrectSoFar = newOrder.every((p, i) => p === correctOrder[i]);
 
-    if (!isCorrectSoFar) {
+    // Reject only the wrong tap — the already-correct prefix stays, so one slip
+    // doesn't wipe the whole sequence.
+    if (position !== correctOrder[selectedOrder.length]) {
       setOrderResult('wrong');
-      setTimeout(() => { setSelectedOrder([]); setOrderResult(null); }, 800);
+      setTimeout(() => setOrderResult(null), 600);
       return;
     }
+
+    const newOrder = [...selectedOrder, position];
+    setSelectedOrder(newOrder);
     if (newOrder.length === correctOrder.length) {
       setOrderResult('correct');
     }

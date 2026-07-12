@@ -359,6 +359,8 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
       >
         {allExplored
           ? 'Continue to Build'
+          : deckItems.length > ayahs.length
+          ? `Explore all parts (${visitedItems.size}/${deckItems.length})`
           : `Explore all ayahs (${exploredAyahs.size}/${ayahs.length})`}
       </Button>
 

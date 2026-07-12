@@ -7,6 +7,7 @@ import { getSurah } from '@/lib/quran-data';
 import { useAudio } from '@/hooks/use-audio';
 import { useSettingsStore } from '@/stores/settings-store';
 import { useEssentialsStore } from '@/stores/essentials-store';
+import { useStatsStore } from '@/stores/stats-store';
 import ArabicText from '@/components/ui/arabic-text';
 import { cn } from '@/lib/cn';
 
@@ -284,7 +285,16 @@ export default function ReciteMode({ items, onClose }: Props) {
           )}
 
           <button
-            onClick={() => (index < total - 1 ? setIndex(index + 1) : onClose())}
+            onClick={() => {
+              if (index < total - 1) {
+                setIndex(index + 1);
+              } else {
+                // Finishing a recite session is real practice — count it toward
+                // the daily goal/streak like the other three nav pillars do.
+                useStatsStore.getState().recordActivity();
+                onClose();
+              }
+            }}
             className="flex-1 rounded-xl bg-teal py-2.5 text-sm font-semibold text-on-teal hover:brightness-110"
           >
             {index < total - 1 ? 'Next →' : 'Done'}

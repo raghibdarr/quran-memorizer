@@ -11,6 +11,7 @@ import {
   computeTodaysPlan,
   getPlanLessons,
   todayIso,
+  startOfTodayMs,
 } from '@/lib/plan';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -126,7 +127,7 @@ export default function TodaysPlanCard() {
       <div className="mt-3 space-y-1.5">
         {reviewCount > 0 && (
           <a
-            href="/review"
+            href="/review?start=1"
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
           >
             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-teal/40 text-teal">
@@ -136,7 +137,14 @@ export default function TodaysPlanCard() {
               <p className="text-sm font-semibold text-foreground">
                 Review {reviewCount} {reviewCount === 1 ? 'lesson' : 'lessons'}
               </p>
-              <p className="text-[11px] text-muted">Spaced repetition — due now</p>
+              <p className="text-[11px] text-muted">
+                {(() => {
+                  const overdue = todaysPlan.reviews.filter((c) => c.nextReview < startOfTodayMs()).length;
+                  return overdue > 0
+                    ? `${reviewCount - overdue} due today · ${overdue} overdue`
+                    : 'Spaced repetition — due today';
+                })()}
+              </p>
             </div>
             <ArrowRightIcon size={14} className="shrink-0 text-muted" />
           </a>

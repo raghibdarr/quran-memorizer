@@ -81,8 +81,14 @@ export default function OnboardingOverlay() {
   };
 
   const next = () => {
-    if (step < CARDS.length - 1) setStep(step + 1);
-    else dismiss();
+    if (step < CARDS.length - 1) {
+      setStep(step + 1);
+    } else {
+      // Final card promises "pick your first surah and start" — deliver on it
+      // instead of dropping the user back on Home to figure it out.
+      dismiss();
+      window.location.href = '/lesson/1';
+    }
   };
 
   const prev = () => {

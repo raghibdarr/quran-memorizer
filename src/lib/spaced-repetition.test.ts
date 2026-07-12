@@ -9,6 +9,7 @@ import {
   processLessonReview,
   processReview,
 } from './spaced-repetition';
+import { startOfDayMs } from './dates';
 
 const DAY = 86_400_000;
 const NOW = new Date('2026-05-25T12:00:00Z').getTime();
@@ -52,7 +53,7 @@ describe('createLessonReviewCard', () => {
   it('schedules 1 day out by default', () => {
     const c = createLessonReviewCard(lessonDef(), 1);
     expect(c.interval).toBe(1);
-    expect(c.nextReview).toBe(NOW + DAY);
+    expect(c.nextReview).toBe(startOfDayMs(NOW + DAY)); // local midnight, not now+24h
   });
 
   it('schedules immediately when dueNow=true', () => {
@@ -68,7 +69,7 @@ describe('processReview — quality < 3 (failure)', () => {
     const out = processReview(card, 2);
     expect(out.repetitions).toBe(0);
     expect(out.interval).toBe(1);
-    expect(out.nextReview).toBe(NOW + DAY);
+    expect(out.nextReview).toBe(startOfDayMs(NOW + DAY)); // local midnight, not now+24h
     expect(out.lastQuality).toBe(2);
   });
 
@@ -135,7 +136,7 @@ describe('processLessonReview', () => {
     const out = processLessonReview(lc, 4);
     expect(out.repetitions).toBe(1);
     expect(out.interval).toBe(1);
-    expect(out.nextReview).toBe(NOW + DAY);
+    expect(out.nextReview).toBe(startOfDayMs(NOW + DAY)); // local midnight, not now+24h
   });
 
   it('failure path resets repetitions on lesson cards too', () => {

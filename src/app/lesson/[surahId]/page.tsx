@@ -139,6 +139,7 @@ export default function SurahDetailPage() {
                       <>
                         <p className="text-sm font-semibold text-foreground">Start Lesson</p>
                         <p className="mt-1 text-xs text-muted">{surah.versesCount} ayahs</p>
+                        <p className="mt-1 text-[11px] text-muted/70">~20–40 min — stop anytime, progress saves</p>
                       </>
                     )}
                   </Card>

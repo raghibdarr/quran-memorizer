@@ -1,4 +1,5 @@
 import type { ReviewCard, LessonReviewCard, LessonDef } from '@/types/quran';
+import { startOfDayMs } from './dates';
 
 const MIN_EASE_FACTOR = 1.3;
 const DAY_MS = 86_400_000;
@@ -26,7 +27,10 @@ export function createLessonReviewCard(lessonDef: LessonDef, surahId: number, du
     easeFactor: 2.5,
     interval: dueNow ? 0 : 1,
     repetitions: 0,
-    nextReview: dueNow ? Date.now() : Date.now() + DAY_MS,
+    // Due dates are LOCAL START-OF-DAY: a card due "tomorrow" is due from midnight,
+    // not from this exact clock time tomorrow (which made "done today" un-complete
+    // itself when a card matured mid-day after the user's session).
+    nextReview: dueNow ? Date.now() : startOfDayMs(Date.now() + DAY_MS),
     lastReview: 0,
     lastQuality: 0,
   };
@@ -58,7 +62,7 @@ export function processReview(card: ReviewCard, quality: number): ReviewCard {
 
   updated.lastReview = Date.now();
   updated.lastQuality = quality;
-  updated.nextReview = Date.now() + updated.interval * DAY_MS;
+  updated.nextReview = startOfDayMs(Date.now() + updated.interval * DAY_MS);
 
   return updated;
 }
@@ -105,7 +109,7 @@ export function processLessonReview(card: LessonReviewCard, quality: number): Le
 
   updated.lastReview = Date.now();
   updated.lastQuality = quality;
-  updated.nextReview = Date.now() + updated.interval * DAY_MS;
+  updated.nextReview = startOfDayMs(Date.now() + updated.interval * DAY_MS);
 
   return updated;
 }

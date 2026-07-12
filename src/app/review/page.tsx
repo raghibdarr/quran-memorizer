@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useReviewStore } from '@/stores/review-store';
 import { useProgressStore } from '@/stores/progress-store';
 import { getSurahIndex, getJuzSegmentsForSurah, getSurah } from '@/lib/quran-data';
@@ -22,6 +23,11 @@ type PageView = 'dashboard' | 'session';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
+  // ?start=1 (the today's-plan review row) deep-links straight into a session and
+  // routes back to the plan afterwards — no dashboard hop in either direction.
+  const searchParams = useSearchParams();
+  const fromPlan = searchParams.get('start') === '1';
+  const autoStarted = useRef(false);
 
   const [surahIndex, setSurahIndex] = useState<SurahMeta[]>([]);
   const [surahLessons, setSurahLessons] = useState<Record<number, LessonDef[]>>({});
@@ -91,6 +97,14 @@ export default function ReviewPage() {
     setView('session');
   };
 
+  // Auto-start when arriving from the plan's review row
+  useEffect(() => {
+    if (loading || autoStarted.current || !fromPlan || dueCards.length === 0) return;
+    autoStarted.current = true;
+    setSessionCards(dueCards);
+    setView('session');
+  }, [loading, fromPlan, dueCards]);
+
   // Start review for a specific surah's due lessons
   // Start review for a specific surah's due lessons only
   const startSurahReview = (surahId: number) => {
@@ -133,7 +147,11 @@ export default function ReviewPage() {
         <main className="mx-auto max-w-2xl px-4 py-6">
           <ReviewSession
             dueCards={sessionCards}
-            onComplete={() => setView('dashboard')}
+            onComplete={() => {
+              // Came from the plan → return to the remaining plan tasks
+              if (fromPlan) window.location.href = '/';
+              else setView('dashboard');
+            }}
           />
         </main>
       </div>
