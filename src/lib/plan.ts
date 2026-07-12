@@ -10,55 +10,14 @@ import type {
   SurahRevisionTask,
 } from '@/types/quran';
 import { CURRICULUM_ORDER, generateLessonsWithJuzBoundaries } from './curriculum';
-import { todayIso, startOfTodayMs } from './dates';
+import { todayIso, startOfTodayMs, daysBetween, isStudyDay, countStudyDays, addDaysIso, isoToDateUTC, dateUTCToIso } from './dates';
 
 // ---------- Date helpers ----------
-// Day-boundary logic lives in src/lib/dates.ts (ONE local-time definition of "today");
-// re-exported here so existing importers keep working.
-export { todayIso, startOfTodayMs };
+// ALL day-boundary and calendar logic lives in src/lib/dates.ts (ONE local-time
+// definition of "today"); re-exported here so existing importers keep working.
+export { todayIso, startOfTodayMs, daysBetween, isStudyDay, countStudyDays, addDaysIso };
 
 const MS_PER_DAY = 86_400_000;
-
-/** Parse a YYYY-MM-DD string as a UTC Date at midnight, for safe arithmetic. */
-function isoToDateUTC(iso: string): Date {
-  const [y, m, d] = iso.split('-').map(Number);
-  return new Date(Date.UTC(y, m - 1, d));
-}
-
-function dateUTCToIso(d: Date): string {
-  return d.toISOString().split('T')[0];
-}
-
-/** Number of calendar days from `fromIso` to `toIso` (toIso - fromIso). Negative if toIso is earlier. */
-export function daysBetween(fromIso: string, toIso: string): number {
-  return Math.round((isoToDateUTC(toIso).getTime() - isoToDateUTC(fromIso).getTime()) / MS_PER_DAY);
-}
-
-export function isStudyDay(dateIso: string, studyDays: number[]): boolean {
-  const dow = isoToDateUTC(dateIso).getUTCDay();
-  return studyDays.includes(dow);
-}
-
-/** How many study days exist in [fromIso, toIso] inclusive. */
-export function countStudyDays(fromIso: string, toIso: string, studyDays: number[]): number {
-  const total = daysBetween(fromIso, toIso) + 1;
-  if (total <= 0) return 0;
-  const set = new Set(studyDays);
-  let count = 0;
-  const cursor = isoToDateUTC(fromIso);
-  for (let i = 0; i < total; i++) {
-    if (set.has(cursor.getUTCDay())) count++;
-    cursor.setUTCDate(cursor.getUTCDate() + 1);
-  }
-  return count;
-}
-
-/** Add N calendar days to an ISO date. */
-export function addDaysIso(iso: string, days: number): string {
-  const d = isoToDateUTC(iso);
-  d.setUTCDate(d.getUTCDate() + days);
-  return dateUTCToIso(d);
-}
 
 // ---------- Goal resolution ----------
 

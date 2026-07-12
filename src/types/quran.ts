@@ -141,6 +141,8 @@ export interface UserStats {
   dailyActivities: number;        // activities completed today
   dailyActivityDate: string | null; // ISO date for dailyActivities
   activityLog: Record<string, number>; // ISO date → activity count (for heatmap)
+  streakFreezes: number; // banked freezes (earned 1 per week of streak, max 2)
+  frozenDates: Record<string, true>; // days a freeze was auto-spent on
 }
 
 // Practice mode types

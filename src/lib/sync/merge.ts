@@ -39,8 +39,8 @@ export const FLAG_KEYS = [
  */
 export const STORE_SCHEMA_VERSIONS: Record<SyncRowName, number> = {
   'quran-progress': 2,
-  'quran-reviews': 1,
-  'quran-stats': 2,
+  'quran-reviews': 2, // v2 (M3): stored nextReview truncated to local start-of-day
+  'quran-stats': 3, // v3 (M3): streakFreezes/frozenDates added, future dates clamped
   'quran-settings': 2,
   'quran-practice': 1,
   'quran-plan': 1,
@@ -186,6 +186,13 @@ function mergeStats(
 
   return {
     currentStreak,
+    // Freeze bank rides with the streak it protects (max would resurrect a
+    // spent freeze); frozen days are monotone facts, so union is safe
+    streakFreezes: (mostRecentSide.streakFreezes as number) ?? 0,
+    frozenDates: {
+      ...((cloud.frozenDates ?? {}) as Record<string, true>),
+      ...((local.frozenDates ?? {}) as Record<string, true>),
+    },
     longestStreak: Math.max((local.longestStreak as number) ?? 0, (cloud.longestStreak as number) ?? 0),
     totalAyahsMemorized: Math.max((local.totalAyahsMemorized as number) ?? 0, (cloud.totalAyahsMemorized as number) ?? 0),
     lastActiveDate: (localLastActive >= cloudLastActive ? localLastActive : cloudLastActive) || null,

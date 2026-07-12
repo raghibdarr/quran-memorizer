@@ -47,6 +47,12 @@ const statsArb = fc.record({
     fc.integer({ min: 1, max: 20 }),
     { maxKeys: 3 }
   ),
+  streakFreezes: fc.integer({ min: 0, max: 2 }),
+  frozenDates: fc.dictionary(
+    fc.constantFrom('2026-01-02', '2026-02-16'),
+    fc.constant(true as const),
+    { maxKeys: 2 }
+  ),
   lastActivity: fc.constant(null),
 })
 
@@ -113,6 +119,19 @@ describe('merge properties (fast-check)', () => {
       }
       expect(merged.longestStreak).toBe(Math.max(a.longestStreak, b.longestStreak))
       expect(merged.totalAyahsMemorized).toBe(Math.max(a.totalAyahsMemorized, b.totalAyahsMemorized))
+    }))
+  })
+
+  it('stats: freeze bank rides with the more recently active side; frozen days union', () => {
+    fc.assert(fc.property(statsArb, statsArb, (a, b) => {
+      const merged = mergeStore('quran-stats', a, b, true) as typeof a & { frozenDates: Record<string, true> }
+      const recent = a.lastActiveDate >= b.lastActiveDate ? a : b
+      expect(merged.streakFreezes).toBe(recent.streakFreezes)
+      expect(merged.currentStreak).toBe(recent.currentStreak)
+      // A day frozen on either device stays frozen — never double-charged
+      for (const day of [...Object.keys(a.frozenDates), ...Object.keys(b.frozenDates)]) {
+        expect(merged.frozenDates[day]).toBe(true)
+      }
     }))
   })
 

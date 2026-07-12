@@ -6,11 +6,15 @@ import { getSurahIndex, getJuzSegmentsForSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { SyncProvider } from '@/components/sync-provider';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
+import { useDayRollover } from '@/hooks/use-day-rollover';
 import type { LessonReviewCard } from '@/types/quran';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const arabicFontSize = useSettingsStore((s) => s.arabicFontSize);
+
+  // Settle streak state on load / tab return / midnight rollover (M3)
+  useDayRollover();
 
   useEffect(() => {
     setMounted(true);

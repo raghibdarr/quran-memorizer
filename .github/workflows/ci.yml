@@ -17,6 +17,12 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run test:run
+      - name: Date suite timezone matrix (incl. DST zones; TZ env only works on Linux)
+        run: |
+          for tz in UTC America/New_York Pacific/Auckland Asia/Karachi; do
+            echo "--- TZ=$tz"
+            TZ=$tz npx vitest run src/lib/dates.test.ts src/lib/streak.test.ts src/stores/migrations.test.ts
+          done
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
         env:

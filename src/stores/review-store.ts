@@ -4,6 +4,20 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ReviewCard, LessonReviewCard, LessonDef } from '@/types/quran';
 import { createNewCard, processReview, getDueCards, createLessonReviewCard, processLessonReview, getDueLessonCards } from '@/lib/spaced-repetition';
+import { startOfDayMs } from '@/lib/dates';
+
+/** Exported for migration tests. v2 truncates stored due times to the LOCAL
+ *  start of day (M3): cards scheduled before the SM-2 day-truncation fix carry
+ *  arbitrary times of day, so a card reviewed at 8pm would only mature at 8pm —
+ *  truncating matures everything at local midnight (always in the user's favor). */
+export function migrateReviews(persisted: any, version: number) {
+  if (version <= 1) {
+    const truncate = (c: any) => ({ ...c, nextReview: startOfDayMs(c.nextReview ?? 0) });
+    persisted.cards = (persisted.cards ?? []).map(truncate);
+    persisted.lessonCards = (persisted.lessonCards ?? []).map(truncate);
+  }
+  return persisted;
+}
 
 interface ReviewState {
   // Ayah-level cards (existing, used for health analytics)
@@ -93,9 +107,7 @@ export const useReviewStore = create<ReviewState>()(
 
       getDueLessonCount: () => getDueLessonCards(get().lessonCards).length,
     }),
-    // version + passthrough migrate: zustand DISCARDS persisted state on a version
-    // mismatch without a migrate fn — every store must carry both (M2)
-    { name: 'quran-reviews', version: 1, migrate: (p) => p as never }
+    { name: 'quran-reviews', version: 2, migrate: migrateReviews }
   )
 );
 

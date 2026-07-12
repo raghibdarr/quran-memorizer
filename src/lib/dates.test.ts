@@ -1,7 +1,12 @@
-import { describe, expect, it } from 'vitest'
-import { todayIso, yesterdayIso, startOfTodayMs, startOfDayMs } from './dates'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { todayIso, yesterdayIso, startOfTodayMs, startOfDayMs, isoFromMs, daysBetween, addDaysIso, isStudyDay, countStudyDays } from './dates'
 import { processLessonReview, processReview, createNewCard, createLessonReviewCard, isDue } from './spaced-repetition'
 import type { LessonReviewCard } from '@/types/quran'
+
+// NOTE ON TIMEZONES: these tests are written TZ-agnostically (local Date
+// constructors + invariant assertions) so they are meaningful in ANY zone.
+// CI re-runs this file under a 3-zone TZ matrix (incl. DST zones) — see ci.yml.
+// TZ env is unreliable on Windows Node, so locally they run in the system zone.
 
 describe('local date helpers', () => {
   it('todayIso is a local date, not UTC', () => {
@@ -20,6 +25,59 @@ describe('local date helpers', () => {
     const d = new Date(startOfDayMs(Date.now()))
     expect([d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds()]).toEqual([0, 0, 0, 0])
     expect(startOfDayMs(Date.now())).toBe(startOfTodayMs())
+  })
+})
+
+describe('near-midnight day attribution (acceptance: 11:55pm vs 12:05am)', () => {
+  afterEach(() => vi.useRealTimers())
+
+  it('activity at 23:55 and 00:05 local lands on the respective calendar days', () => {
+    vi.useFakeTimers()
+
+    vi.setSystemTime(new Date(2026, 6, 11, 23, 55)) // July 11, 11:55pm LOCAL
+    expect(todayIso()).toBe('2026-07-11')
+    expect(isoFromMs(Date.now())).toBe('2026-07-11')
+
+    vi.setSystemTime(new Date(2026, 6, 12, 0, 5)) // ten minutes later
+    expect(todayIso()).toBe('2026-07-12')
+    expect(yesterdayIso()).toBe('2026-07-11')
+    // Stats (todayIso) and plan (isStudyDay/daysBetween on todayIso) read the
+    // SAME string — cross-module day agreement is structural, pinned here.
+    expect(daysBetween('2026-07-11', todayIso())).toBe(1)
+  })
+})
+
+describe('calendar arithmetic on day strings (DST-immune)', () => {
+  it('daysBetween and addDaysIso are exact across DST transitions', () => {
+    // US spring-forward 2026-03-08 and fall-back 2026-11-01: a local-time diff
+    // would yield 23h/25h "days"; UTC-space arithmetic must stay integer-exact.
+    expect(daysBetween('2026-03-07', '2026-03-09')).toBe(2)
+    expect(daysBetween('2026-10-31', '2026-11-02')).toBe(2)
+    expect(addDaysIso('2026-03-08', 1)).toBe('2026-03-09')
+    expect(addDaysIso('2026-11-01', -1)).toBe('2026-10-31')
+    expect(addDaysIso('2026-12-31', 1)).toBe('2027-01-01')
+    expect(daysBetween('2026-07-12', '2026-07-11')).toBe(-1)
+  })
+
+  it('startOfDayMs stays within the same local day across a DST-transition day', () => {
+    // 11pm on the US spring-forward day (a 23h day in DST zones): truncation
+    // must land on THAT day's local midnight, not drift a day.
+    const elevenPm = new Date(2026, 2, 8, 23, 0).getTime()
+    expect(new Date(startOfDayMs(elevenPm)).getDate()).toBe(8)
+    expect(isoFromMs(startOfDayMs(elevenPm))).toBe('2026-03-08')
+    expect(isoFromMs(elevenPm)).toBe('2026-03-08')
+  })
+
+  it('isStudyDay reads the weekday of the day string itself', () => {
+    expect(isStudyDay('2026-07-12', [0])).toBe(true) // a Sunday
+    expect(isStudyDay('2026-07-13', [0])).toBe(false) // a Monday
+  })
+
+  it('countStudyDays counts inclusively and respects the plan days', () => {
+    // Mon 2026-07-13 .. Sun 2026-07-19 on a Mon–Fri plan
+    expect(countStudyDays('2026-07-13', '2026-07-19', [1, 2, 3, 4, 5])).toBe(5)
+    expect(countStudyDays('2026-07-13', '2026-07-13', [1])).toBe(1)
+    expect(countStudyDays('2026-07-14', '2026-07-13', [0, 1, 2, 3, 4, 5, 6])).toBe(0)
   })
 })
 
