@@ -13,9 +13,13 @@ import {
   getTodaysNewLessons,
   isStudyDay,
   resolveGoalSurahIds,
+  staggeredLastRevised,
   suggestedPace,
   todayIso,
 } from './plan';
+import { createSeededCard } from './spaced-repetition';
+import { qualityToHealth } from './review-helpers';
+import { startOfDayMs } from './dates';
 
 const NOW = new Date('2026-05-25T12:00:00Z').getTime();
 
@@ -340,6 +344,128 @@ describe('getRevisionTasks', () => {
     });
     const tasks = getRevisionTasks(plan, oneLessonPlanLessons, completedProgress, TEST_SURAHS, NOW);
     expect(tasks).toEqual([]); // not yet due again
+  });
+});
+
+// ---------- M4: known = tracked ----------
+
+describe('known-surah revision eligibility (M4)', () => {
+  it('ACCEPTANCE: all of a juz known → zero new lessons, populated revision schedule', () => {
+    const plan = makePlan({
+      goalType: 'juz',
+      goalJuzNumbers: [30],
+      goalSurahIds: [78, 114],
+      knownSurahIds: [78, 114],
+      knownTracking: true,
+      revisionFrequencyDays: 7,
+      lastRevisedAt: { 78: NOW - 8 * 86_400_000, 114: NOW - 2 * 86_400_000 },
+    });
+    expect(getPlanLessons(plan, TEST_SURAHS, TEST_JUZ_INDEX)).toEqual([]);
+
+    const tasks = getRevisionTasks(plan, [], {}, TEST_SURAHS, NOW);
+    expect(tasks).toHaveLength(1); // 78 overdue, 114 revised recently
+    expect(tasks[0].surahId).toBe(78);
+    // Known surahs have no plan lessons — the whole surah is the revision scope
+    expect(tasks[0].isPartial).toBe(false);
+    expect(tasks[0].ayahStart).toBe(1);
+    expect(tasks[0].ayahEnd).toBe(40);
+  });
+
+  it('legacy plans (knownTracking undefined) keep the old known-means-hidden behavior', () => {
+    const plan = makePlan({
+      knownSurahIds: [78],
+      knownTracking: undefined,
+      lastRevisedAt: { 78: NOW - 30 * 86_400_000 },
+    });
+    expect(getRevisionTasks(plan, [], {}, TEST_SURAHS, NOW)).toEqual([]);
+  });
+
+  it('known surahs without lastRevisedAt fall back to plan creation for the timer', () => {
+    const plan = makePlan({
+      createdAt: NOW - 10 * 86_400_000,
+      knownSurahIds: [114],
+      knownTracking: true,
+      revisionFrequencyDays: 7,
+    });
+    const tasks = getRevisionTasks(plan, [], {}, TEST_SURAHS, NOW);
+    expect(tasks).toHaveLength(1);
+    expect(tasks[0].surahId).toBe(114);
+  });
+
+  it('ACCEPTANCE: toggling known off restores lesson availability', () => {
+    const known = makePlan({ goalType: 'juz', goalJuzNumbers: [30], goalSurahIds: [78, 114], knownSurahIds: [78] });
+    const unknown = { ...known, knownSurahIds: [] };
+    const withKnown = getPlanLessons(known, TEST_SURAHS, TEST_JUZ_INDEX);
+    const without = getPlanLessons(unknown, TEST_SURAHS, TEST_JUZ_INDEX);
+    expect(withKnown.some((l) => l.surahId === 78)).toBe(false);
+    expect(without.some((l) => l.surahId === 78)).toBe(true);
+    // Seeded review-card ratings live in the review store — untouched by the toggle
+  });
+
+  it('revision frequency auto-tier counts known surahs too', () => {
+    const plan = makePlan({
+      goalType: 'maintain',
+      goalSurahIds: Array.from({ length: 20 }, (_, i) => i + 1),
+      knownSurahIds: Array.from({ length: 20 }, (_, i) => i + 1),
+      knownTracking: true,
+      revisionFrequencyAuto: true,
+    });
+    // 20 known surahs → 14-day tier (not the 3-day beginner tier)
+    const surahs = plan.goalSurahIds.map((sid) => surah(sid, 10));
+    const tasks = getRevisionTasks(plan, [], {}, surahs, NOW);
+    // With lastRevisedAt empty and createdAt=NOW nothing is due — the point is no crash
+    // and the tier math; pin it via effectiveRevisionFrequency directly:
+    expect(effectiveRevisionFrequency(plan, 20)).toBe(14);
+    expect(tasks).toEqual([]);
+  });
+});
+
+describe('staggeredLastRevised (M4)', () => {
+  it('spreads offsets across the window so a fraction is due immediately', () => {
+    const ids = Array.from({ length: 16 }, (_, i) => i + 1);
+    const stamps = staggeredLastRevised(ids, 7, {}, NOW);
+    const offsets = ids.map((id) => (NOW - stamps[id]) / 86_400_000);
+    expect(Math.min(...offsets)).toBe(0);
+    expect(Math.max(...offsets)).toBe(7); // offset === frequency → due today
+    expect(offsets.filter((o) => o >= 7)).toHaveLength(2); // 16 ids over 0..7 cycle
+  });
+
+  it('never overwrites an existing revision timestamp', () => {
+    const existing = { 5: 12345 };
+    expect(staggeredLastRevised([5, 6], 7, existing, NOW)[5]).toBe(12345);
+  });
+});
+
+describe('createSeededCard (M4)', () => {
+  it('ACCEPTANCE: seeded cards read as shaky — never strong, never absent', () => {
+    const card = createSeededCard(78, 1, 0);
+    expect(qualityToHealth(card.lastQuality)).toBe('shaky');
+    expect(card.repetitions).toBe(1);
+    expect(card.lastReview).toBe(0); // a real review always outranks it in sync merges
+  });
+
+  it('staggers due dates over a week of local midnights', () => {
+    const days = Array.from({ length: 14 }, (_, i) => createSeededCard(78, i + 1, i).nextReview);
+    const unique = new Set(days);
+    expect(unique.size).toBe(7); // 14 ayahs cycle through 7 distinct due days
+    for (const d of unique) {
+      expect(d).toBe(startOfDayMs(d)); // each is a local midnight
+      expect(d).toBeGreaterThan(NOW); // none dumped into today's queue
+    }
+  });
+});
+
+describe('maintain goal type (M4)', () => {
+  it('resolves scope from surahIds and yields zero lessons when all are known', () => {
+    const ids = resolveGoalSurahIds('maintain', { surahIds: [114, 78] }, TEST_JUZ_INDEX);
+    expect(ids).toEqual(expect.arrayContaining([78, 114]));
+    const plan = makePlan({
+      goalType: 'maintain',
+      goalSurahIds: ids,
+      knownSurahIds: ids,
+      knownTracking: true,
+    });
+    expect(getPlanLessons(plan, TEST_SURAHS, TEST_JUZ_INDEX)).toEqual([]);
   });
 });
 

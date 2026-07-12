@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { HifdhPlan, PlanGoalType, JuzMeta } from '@/types/quran';
-import { resolveGoalSurahIds } from '@/lib/plan';
+import { resolveGoalSurahIds, staggeredLastRevised } from '@/lib/plan';
 
 export interface CreatePlanConfig {
   goalType: PlanGoalType;
@@ -23,6 +23,8 @@ interface PlanState {
 
   createPlan: (config: CreatePlanConfig) => void;
   deletePlan: () => void;
+  /** Legacy-plan opt-in/out for M4 known-surah tracking (the dashboard banner). */
+  setKnownTracking: (enabled: boolean) => void;
 
   updatePace: (lessonsPerDay: number) => void;
   updateDeadline: (deadline: string | null) => void;
@@ -62,6 +64,9 @@ export const usePlanStore = create<PlanState>()(
           { surahIds: config.surahIds, juzNumbers: config.juzNumbers },
           config.juzIndex,
         );
+        // A maintain plan is "everything in scope is already known" — pure revision
+        const knownSurahIds = config.goalType === 'maintain' ? goalSurahIds : config.knownSurahIds;
+        const frequency = config.revisionFrequencyDays ?? 7;
         const plan: HifdhPlan = {
           id: makePlanId(),
           createdAt: Date.now(),
@@ -69,19 +74,34 @@ export const usePlanStore = create<PlanState>()(
           goalSurahIds,
           goalJuzNumbers: config.juzNumbers ?? [],
           deadline: config.deadline,
-          knownSurahIds: config.knownSurahIds,
+          knownSurahIds,
+          knownTracking: true,
           knownLessonIds: config.knownLessonIds ?? [],
           lessonsPerDay: Math.max(1, Math.min(20, config.lessonsPerDay)),
           studyDays: config.studyDays.length > 0 ? config.studyDays : [0, 1, 2, 3, 4, 5, 6],
           completedLessonIds: [],
-          revisionFrequencyDays: config.revisionFrequencyDays ?? 7,
-          lastRevisedAt: {},
+          revisionFrequencyDays: frequency,
+          lastRevisedAt: staggeredLastRevised(knownSurahIds, frequency),
           catchUpDate: null,
           catchUpBonus: 0,
           finishCelebrated: false,
         };
         set({ plan });
       },
+
+      setKnownTracking: (enabled) =>
+        set((s) => {
+          if (!s.plan) return s;
+          return {
+            plan: {
+              ...s.plan,
+              knownTracking: enabled,
+              lastRevisedAt: enabled
+                ? staggeredLastRevised(s.plan.knownSurahIds, s.plan.revisionFrequencyDays, s.plan.lastRevisedAt)
+                : s.plan.lastRevisedAt,
+            },
+          };
+        }),
 
       deletePlan: () => set({ plan: null }),
 
@@ -117,9 +137,15 @@ export const usePlanStore = create<PlanState>()(
         set((s) => {
           if (!s.plan) return s;
           const known = new Set(s.plan.knownSurahIds);
-          if (known.has(surahId)) known.delete(surahId);
-          else known.add(surahId);
-          return { plan: { ...s.plan, knownSurahIds: Array.from(known) } };
+          const turningOn = !known.has(surahId);
+          if (turningOn) known.add(surahId);
+          else known.delete(surahId);
+          // Marking known = "revised as of now" so the revision timer starts today.
+          // Un-marking keeps lastRevisedAt (harmless) and any seeded card ratings.
+          const lastRevisedAt = turningOn && s.plan.lastRevisedAt[surahId] == null
+            ? { ...s.plan.lastRevisedAt, [surahId]: Date.now() }
+            : s.plan.lastRevisedAt;
+          return { plan: { ...s.plan, knownSurahIds: Array.from(known), lastRevisedAt } };
         }),
 
       markLessonCompleted: (lessonId) => {

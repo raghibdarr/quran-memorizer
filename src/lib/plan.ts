@@ -159,7 +159,30 @@ export function effectiveRevisionFrequency(plan: HifdhPlan, completedSurahCount:
     : plan.revisionFrequencyDays;
 }
 
-/** Surah revisions due today (completed surahs past the revision interval). */
+/**
+ * Stagger initial revision timestamps for known surahs so they don't all come
+ * due on the same day (M4): surah i gets an offset of i % (frequency+1) days
+ * back — roughly 1/frequency of them due immediately, the rest spread across
+ * the window. Existing timestamps are never overwritten.
+ */
+export function staggeredLastRevised(
+  surahIds: number[],
+  frequencyDays: number,
+  existing: Record<number, number> = {},
+  now = Date.now(),
+): Record<number, number> {
+  const out: Record<number, number> = { ...existing };
+  surahIds.forEach((id, i) => {
+    if (out[id] == null) out[id] = now - (i % (frequencyDays + 1)) * MS_PER_DAY;
+  });
+  return out;
+}
+
+/**
+ * Surah revisions due today: surahs completed within the plan, PLUS attested-known
+ * surahs when the plan tracks them (M4 "known = tracked" — known surahs skip
+ * lessons but join the revision cycle instead of vanishing).
+ */
 export function getRevisionTasks(
   plan: HifdhPlan,
   planLessons: LessonDef[],
@@ -168,8 +191,10 @@ export function getRevisionTasks(
   now: number,
 ): SurahRevisionTask[] {
   const completedSurahs = getCompletedPlanSurahs(plan, planLessons, progressLessons);
+  const knownIds = plan.knownTracking ? plan.knownSurahIds : [];
+  const candidateSurahs = Array.from(new Set([...completedSurahs, ...knownIds]));
   const byId = new Map(allSurahs.map((s) => [s.id, s]));
-  const frequency = effectiveRevisionFrequency(plan, completedSurahs.length);
+  const frequency = effectiveRevisionFrequency(plan, candidateSurahs.length);
   const thresholdMs = frequency * MS_PER_DAY;
 
   // Map surahId -> latest lesson completion time (fallback start for revision timer)
@@ -187,19 +212,22 @@ export function getRevisionTasks(
   }
 
   const tasks: SurahRevisionTask[] = [];
-  for (const surahId of completedSurahs) {
+  for (const surahId of candidateSurahs) {
     const surah = byId.get(surahId);
     if (!surah) continue;
     const explicitLast = plan.lastRevisedAt[surahId];
-    const effectiveLast = explicitLast ?? surahCompletionTs.get(surahId) ?? now;
+    // Known-only surahs have no completion timestamp — fall back to plan creation
+    // (marking known and plan setup both seed lastRevisedAt, so this is a net)
+    const effectiveLast = explicitLast ?? surahCompletionTs.get(surahId) ?? plan.createdAt ?? now;
     const elapsed = now - effectiveLast;
     if (elapsed < thresholdMs) continue;
 
+    // Known surahs carry no plan lessons — the revision scope is the whole surah
     const scope = surahLessons.get(surahId) ?? [];
     const ayahStart = scope.reduce((min, l) => Math.min(min, l.ayahStart), Infinity);
     const ayahEnd = scope.reduce((max, l) => Math.max(max, l.ayahEnd), 0);
     const scopedAyahCount = ayahEnd - ayahStart + 1;
-    const isPartial = scopedAyahCount < surah.versesCount;
+    const isPartial = scope.length > 0 && scopedAyahCount < surah.versesCount;
 
     tasks.push({
       surahId,

@@ -202,7 +202,7 @@ export interface EssentialCollection {
 
 // Hifdh curriculum planner
 
-export type PlanGoalType = 'surah' | 'juz' | 'full-quran';
+export type PlanGoalType = 'surah' | 'juz' | 'full-quran' | 'maintain';
 
 export interface HifdhPlan {
   id: string;
@@ -213,7 +213,12 @@ export interface HifdhPlan {
   goalJuzNumbers: number[];      // Preserved so the dashboard can display the selection
   deadline: string | null;       // ISO date yyyy-mm-dd or null
 
-  knownSurahIds: number[];       // Excluded from new lessons (still reviewed elsewhere)
+  knownSurahIds: number[];       // Excluded from new lessons; revision-eligible when knownTracking
+
+  // M4 "known = tracked": known surahs join the revision schedule and get seeded
+  // SM-2 cards. true on new plans; undefined = legacy plan (opt-in banner shown);
+  // false = owner of a legacy plan explicitly declined.
+  knownTracking?: boolean;
 
   lessonsPerDay: number;         // 1-5
   studyDays: number[];           // 0=Sun ... 6=Sat

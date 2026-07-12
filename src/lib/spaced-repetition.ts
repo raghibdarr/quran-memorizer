@@ -17,6 +17,26 @@ export function createNewCard(surahId: number, ayahNumber: number): ReviewCard {
   };
 }
 
+/**
+ * Card for an ayah the user attests to already knowing (M4 "known = tracked").
+ * Conservative "shaky" strength — lastQuality 3 renders as shaky in the health
+ * dashboard, never strong — and due dates staggered across the next 7 days by
+ * `stagger` (ayah index) so marking a whole juz known doesn't dump every ayah
+ * into one session. An honest rating on first real recall recalibrates it.
+ */
+export function createSeededCard(surahId: number, ayahNumber: number, stagger = 0): ReviewCard {
+  return {
+    surahId,
+    ayahNumber,
+    easeFactor: 2.3,
+    interval: 3,
+    repetitions: 1,
+    nextReview: startOfDayMs(Date.now() + (1 + (stagger % 7)) * DAY_MS),
+    lastReview: 0, // never actually reviewed — a real review always wins the sync merge
+    lastQuality: 3,
+  };
+}
+
 export function createLessonReviewCard(lessonDef: LessonDef, surahId: number, dueNow = false): LessonReviewCard {
   return {
     lessonId: lessonDef.lessonId,

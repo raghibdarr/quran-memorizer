@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ReviewCard, LessonReviewCard, LessonDef } from '@/types/quran';
-import { createNewCard, processReview, getDueCards, createLessonReviewCard, processLessonReview, getDueLessonCards } from '@/lib/spaced-repetition';
+import { createNewCard, createSeededCard, processReview, getDueCards, createLessonReviewCard, processLessonReview, getDueLessonCards } from '@/lib/spaced-repetition';
 import { startOfDayMs } from '@/lib/dates';
 
 /** Exported for migration tests. v2 truncates stored due times to the LOCAL
@@ -24,6 +24,9 @@ interface ReviewState {
   cards: ReviewCard[];
   addCard: (surahId: number, ayahNumber: number) => void;
   addCardsForSurah: (surahId: number, ayahCount: number) => void;
+  /** Seed shaky-strength cards for an attested-known ayah range (M4). Existing
+   *  cards are never overwritten — a real rating always outranks an attestation. */
+  seedKnownAyahs: (surahId: number, ayahStart: number, ayahEnd: number) => void;
   reviewCard: (surahId: number, ayahNumber: number, quality: number) => void;
   getDueCards: () => ReviewCard[];
   getDueCount: () => number;
@@ -63,6 +66,18 @@ export const useReviewStore = create<ReviewState>()(
             }
           }
           return { cards: newCards };
+        }),
+
+      seedKnownAyahs: (surahId, ayahStart, ayahEnd) =>
+        set((state) => {
+          const existing = new Set(state.cards.map((c) => `${c.surahId}:${c.ayahNumber}`));
+          const seeded: typeof state.cards = [];
+          for (let n = ayahStart; n <= ayahEnd; n++) {
+            if (!existing.has(`${surahId}:${n}`)) {
+              seeded.push(createSeededCard(surahId, n, n - ayahStart));
+            }
+          }
+          return seeded.length > 0 ? { cards: [...state.cards, ...seeded] } : state;
         }),
 
       reviewCard: (surahId, ayahNumber, quality) =>

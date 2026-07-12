@@ -7,10 +7,15 @@ import { getJuzIndex, getSurah, getSurahIndex } from '@/lib/quran-data';
 import { getPlanLessons } from '@/lib/plan';
 import { usePlanStore } from '@/stores/plan-store';
 import { useStatsStore } from '@/stores/stats-store';
-import AyahDisplay from '@/components/ui/ayah-display';
+import PracticeSession from '@/components/practice/practice-session';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { StarIcon } from '@/components/ui/icons';
+
+// Revision is a RECALL TEST, not a read-through (M4, audit m8/§4a-6): each ayah
+// starts hidden, the user recites from memory, reveals to check, and self-rates.
+// Ratings feed the same SM-2 ayah cards as practice — revision and review are
+// one system, so the health dashboard reflects how revision actually went.
 
 export default function RevisePage({ params }: { params: Promise<{ surahId: string }> }) {
   const { surahId } = use(params);
@@ -25,7 +30,7 @@ export default function RevisePage({ params }: { params: Promise<{ surahId: stri
   const [surah, setSurah] = useState<Surah | null>(null);
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
-  const [submitted, setSubmitted] = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     getSurah(id).then(setSurah).catch(() => setSurah(null));
@@ -33,8 +38,8 @@ export default function RevisePage({ params }: { params: Promise<{ surahId: stri
     getJuzIndex().then(setJuzIndex);
   }, [id]);
 
-  // Determine which ayahs are in the plan's scope for this surah.
-  // If no plan, or plan doesn't cover this surah, show the whole surah.
+  // Determine which ayahs are in the plan's scope for this surah. Known surahs
+  // carry no plan lessons, so they (like no-plan visitors) get the whole surah.
   const { scopedAyahs, isPartial, scopeStart, scopeEnd } = useMemo(() => {
     if (!surah) return { scopedAyahs: [] as Ayah[], isPartial: false, scopeStart: 1, scopeEnd: 0 };
     if (!plan || !allSurahs.length || !juzIndex.length) {
@@ -64,11 +69,8 @@ export default function RevisePage({ params }: { params: Promise<{ surahId: stri
     return { scopedAyahs: filtered, isPartial: partial, scopeStart: start, scopeEnd: end };
   }, [surah, plan, allSurahs, juzIndex, id]);
 
-  const handleDone = () => {
-    if (submitted) return;
-    setSubmitted(true);
+  const finishRevision = () => {
     markSurahRevised(id);
-    recordActivity();
     if (surah) {
       setLastActivity({
         type: 'practice',
@@ -91,7 +93,7 @@ export default function RevisePage({ params }: { params: Promise<{ surahId: stri
   const lastRevised = plan?.lastRevisedAt[id] ?? null;
 
   return (
-    <div className="min-h-screen bg-cream pb-28">
+    <div className="min-h-screen bg-cream pb-16">
       <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <div>
@@ -106,51 +108,62 @@ export default function RevisePage({ params }: { params: Promise<{ surahId: stri
       </header>
 
       <main className="mx-auto max-w-2xl space-y-3 px-4 py-3">
-        <Card>
-          <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/10">
-              <StarIcon size={18} className="text-gold" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground">
-                {isPartial ? 'Recite this portion from memory' : 'Recite from memory'}
-              </p>
-              <p className="mt-0.5 text-xs text-muted">
-                {isPartial
-                  ? `Recite ayahs ${scopeStart}–${scopeEnd} out loud. The rest of the surah isn't in your plan yet.`
-                  : 'Recite the full surah out loud. Use the ayahs below only if you get stuck.'}
-              </p>
-              {lastRevised && (
-                <p className="mt-1 text-[11px] text-muted/70">
-                  Last revised {new Date(lastRevised).toLocaleDateString(undefined, { dateStyle: 'medium' })}
-                </p>
-              )}
-            </div>
-          </div>
-        </Card>
-
-        <Card className="space-y-8 py-8">
-          {scopedAyahs.map((ayah) => (
-            <div key={ayah.number}>
-              <div className="mb-2 flex items-center justify-center gap-2 text-[11px] font-semibold text-muted">
-                <span>Ayah {ayah.number}</span>
+        {!started ? (
+          <>
+            <Card>
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/10">
+                  <StarIcon size={18} className="text-gold" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">
+                    {isPartial ? 'Recite this portion from memory' : 'Recite from memory'}
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted">
+                    Every ayah starts hidden. Recite out loud, reveal to check yourself, and rate honestly —
+                    your ratings keep the health dashboard truthful.
+                  </p>
+                  {lastRevised && (
+                    <p className="mt-1 text-[11px] text-muted/70">
+                      Last revised {new Date(lastRevised).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+                    </p>
+                  )}
+                </div>
               </div>
-              <AyahDisplay ayah={ayah} />
+            </Card>
+            <Button className="w-full" onClick={() => setStarted(true)}>
+              Start recall test ({scopedAyahs.length} ayahs)
+            </Button>
+            <div className="flex flex-col items-center gap-1 pt-1">
+              <button
+                onClick={() => { recordActivity(); finishRevision(); }}
+                className="text-xs font-medium text-muted underline-offset-2 hover:text-foreground hover:underline"
+              >
+                I revised this elsewhere — just mark it revised
+              </button>
             </div>
-          ))}
-        </Card>
+          </>
+        ) : (
+          <PracticeSession
+            surahIds={[id]}
+            title={`Revise ${surah.nameSimple}`}
+            ayahs={scopedAyahs}
+            lessonIds={[]}
+            initialStep="full-passage"
+            onDone={finishRevision}
+          />
+        )}
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-2xl gap-3">
-          <Button variant="ghost" className="flex-1" onClick={() => router.push('/')}>
-            Cancel
-          </Button>
-          <Button className="flex-1" onClick={handleDone} disabled={submitted}>
-            {submitted ? 'Saving…' : 'Mark as revised'}
-          </Button>
+      {!started && (
+        <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm">
+          <div className="mx-auto max-w-2xl">
+            <Button variant="ghost" className="w-full" onClick={() => router.push('/')}>
+              Cancel
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

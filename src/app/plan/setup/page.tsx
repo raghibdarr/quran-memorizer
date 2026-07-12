@@ -14,6 +14,7 @@ import {
   todayIso,
 } from '@/lib/plan';
 import { usePlanStore } from '@/stores/plan-store';
+import { useReviewStore } from '@/stores/review-store';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { CheckIcon } from '@/components/ui/icons';
@@ -28,6 +29,7 @@ export default function PlanSetupPage() {
   const router = useRouter();
   const createPlan = usePlanStore((s) => s.createPlan);
   const existingPlan = usePlanStore((s) => s.plan);
+  const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
 
   const [step, setStep] = useState<Step>(1);
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
@@ -175,7 +177,10 @@ export default function PlanSetupPage() {
   const toggleStudyDay = (d: number) =>
     setStudyDays((prev) => (prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d].sort()));
 
-  const skipPreAssessment = goalType === 'surah';
+  // Maintain plans skip pre-assessment (everything selected IS the known set).
+  // Surah goals get it too (m17) — hand-picked surahs are MORE likely part-known.
+  const isMaintain = goalType === 'maintain';
+  const skipPreAssessment = isMaintain;
   const totalSteps = skipPreAssessment ? 3 : 4;
   const visibleStep = skipPreAssessment && step > 1 ? step - 1 : step;
 
@@ -192,30 +197,51 @@ export default function PlanSetupPage() {
   const canAdvanceFrom1 =
     (goalType === 'full-quran') ||
     (goalType === 'juz' && selectedJuzNumbers.length > 0) ||
-    (goalType === 'surah' && selectedSurahIds.length > 0);
+    ((goalType === 'surah' || goalType === 'maintain') && selectedSurahIds.length > 0);
 
   const canAdvanceFrom3 =
     studyDays.length > 0 &&
-    lessonsPerDay >= 1 &&
-    lessonsPerDay <= 20 &&
-    (!useDeadline || deadline > todayIso()) &&
-    // totalLessons already excludes known surahs/lessons (getPlanLessons skips them) —
-    // subtracting knownSurahIds.length again double-counted and could disable Next
-    // for a hafiz who marked most of a juz known.
-    totalLessons > 0;
+    (isMaintain || (
+      lessonsPerDay >= 1 &&
+      lessonsPerDay <= 20 &&
+      (!useDeadline || deadline > todayIso()) &&
+      // totalLessons already excludes known surahs/lessons (getPlanLessons skips them) —
+      // subtracting knownSurahIds.length again double-counted and could disable Next
+      // for a hafiz who marked most of a juz known.
+      totalLessons > 0
+    ));
 
   const handleCreate = () => {
+    const effectiveKnownSurahIds = isMaintain ? goalSurahIds : knownSurahIds;
     createPlan({
       goalType,
-      surahIds: goalType === 'surah' ? selectedSurahIds : undefined,
+      surahIds: goalType === 'surah' || isMaintain ? selectedSurahIds : undefined,
       juzNumbers: goalType === 'juz' ? selectedJuzNumbers : undefined,
-      deadline: useDeadline ? deadline : null,
-      knownSurahIds,
-      knownLessonIds,
-      lessonsPerDay,
+      deadline: !isMaintain && useDeadline ? deadline : null,
+      knownSurahIds: effectiveKnownSurahIds,
+      knownLessonIds: isMaintain ? [] : knownLessonIds,
+      lessonsPerDay: isMaintain ? 1 : lessonsPerDay,
       studyDays,
       juzIndex,
     });
+
+    // Known = tracked (M4): seed shaky-strength SM-2 cards for everything attested
+    const byId = new Map(allSurahs.map((s) => [s.id, s]));
+    for (const id of effectiveKnownSurahIds) {
+      const surah = byId.get(id);
+      if (surah) seedKnownAyahs(id, 1, surah.versesCount);
+    }
+    if (!isMaintain) {
+      for (const lessonId of knownLessonIds) {
+        const surahId = parseInt(lessonId.split('-')[0], 10);
+        const surah = byId.get(surahId);
+        if (!surah) continue;
+        const lesson = generateLessonsWithJuzBoundaries(surahId, surah.versesCount, juzSegsFor(surahId))
+          .find((l) => l.lessonId === lessonId);
+        if (lesson) seedKnownAyahs(surahId, lesson.ayahStart, lesson.ayahEnd);
+      }
+    }
+
     router.push('/');
   };
 
@@ -227,9 +253,9 @@ export default function PlanSetupPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">Step {visibleStep} of {totalSteps}</p>
               <h1 className="text-xl font-bold text-teal">
-                {step === 1 && 'What do you want to memorize?'}
+                {step === 1 && (isMaintain ? 'What do you already know?' : 'What do you want to memorize?')}
                 {step === 2 && 'Do you already know any of these?'}
-                {step === 3 && 'Set your pace'}
+                {step === 3 && (isMaintain ? 'Set your revision rhythm' : 'Set your pace')}
                 {step === 4 && 'Ready to start'}
               </h1>
             </div>
@@ -260,8 +286,8 @@ export default function PlanSetupPage() {
       <main className="mx-auto max-w-2xl space-y-4 px-4 py-4">
         {step === 1 && (
           <>
-            <div className="grid grid-cols-3 gap-3">
-              {(['surah', 'juz', 'full-quran'] as PlanGoalType[]).map((type) => (
+            <div className="grid grid-cols-2 gap-3">
+              {(['surah', 'juz', 'full-quran', 'maintain'] as PlanGoalType[]).map((type) => (
                 <button
                   key={type}
                   onClick={() => setGoalType(type)}
@@ -273,16 +299,26 @@ export default function PlanSetupPage() {
                   )}
                 >
                   <p className="text-sm font-bold text-foreground">
-                    {type === 'surah' ? 'Surahs' : type === 'juz' ? 'Juz' : 'Full Quran'}
+                    {type === 'surah' ? 'Surahs' : type === 'juz' ? 'Juz' : type === 'full-quran' ? 'Full Quran' : 'Maintain'}
                   </p>
                   <p className="mt-1 text-[11px] text-muted">
-                    {type === 'surah' ? 'Pick any surahs' : type === 'juz' ? 'Pick any juz' : 'All 114 surahs'}
+                    {type === 'surah' ? 'Pick any surahs' : type === 'juz' ? 'Pick any juz' : type === 'full-quran' ? 'All 114 surahs' : 'Revise what I know'}
                   </p>
                 </button>
               ))}
             </div>
 
-            {goalType === 'surah' && (
+            {isMaintain && (
+              <Card className="border border-gold/20 bg-gold/5">
+                <p className="text-sm text-foreground">
+                  A maintenance plan has <span className="font-semibold">no new lessons</span> — pick the surahs
+                  you already know and Takrar cycles them through revision so nothing fades.
+                </p>
+                <p className="mt-1.5 text-xs text-muted">Tip: use the range boxes below to add a whole juz at once (Juz 30 = surahs 78–114).</p>
+              </Card>
+            )}
+
+            {(goalType === 'surah' || isMaintain) && (
               <Card>
                 <input
                   type="text"
@@ -505,6 +541,18 @@ export default function PlanSetupPage() {
 
         {step === 3 && (
           <>
+            {isMaintain && (
+              <Card>
+                <p className="text-sm font-semibold text-foreground">Revision only</p>
+                <p className="mt-0.5 text-xs text-muted">
+                  {selectedSurahIds.length} surah{selectedSurahIds.length === 1 ? '' : 's'} will rotate through
+                  your revision schedule — no new lessons, no deadline. You can adjust the revision frequency
+                  any time from the plan dashboard.
+                </p>
+              </Card>
+            )}
+            {!isMaintain && (
+            <>
             <Card>
               <div className="flex items-center justify-between">
                 <div>
@@ -633,10 +681,16 @@ export default function PlanSetupPage() {
                 </p>
               )}
             </Card>
+            </>
+            )}
 
             <Card>
-              <p className="text-sm font-semibold text-foreground">Study days</p>
-              <p className="text-xs text-muted">Rest days will only show reviews — no new lessons.</p>
+              <p className="text-sm font-semibold text-foreground">{isMaintain ? 'Revision days' : 'Study days'}</p>
+              <p className="text-xs text-muted">
+                {isMaintain
+                  ? 'Revision tasks only appear on these days.'
+                  : 'Rest days will only show reviews — no new lessons.'}
+              </p>
               <div className="mt-3 flex gap-1.5">
                 {DAY_LABELS.map((label, d) => {
                   const selected = studyDays.includes(d);
@@ -671,18 +725,26 @@ export default function PlanSetupPage() {
                   `Memorize ${selectedJuzNumbers.length === 1 ? `Juz ${selectedJuzNumbers[0]}` : `${selectedJuzNumbers.length} juz`}`}
                 {goalType === 'surah' &&
                   `Memorize ${selectedSurahIds.length} surah${selectedSurahIds.length === 1 ? '' : 's'}`}
+                {isMaintain &&
+                  `Maintain ${selectedSurahIds.length} surah${selectedSurahIds.length === 1 ? '' : 's'}`}
               </p>
               <p className="text-xs text-muted">
-                {totalLessons} lessons{knownSurahIds.length > 0 && ` (${knownSurahIds.length} surah${knownSurahIds.length === 1 ? '' : 's'} already known)`}
+                {isMaintain
+                  ? 'No new lessons — pure revision'
+                  : <>{totalLessons} lessons{knownSurahIds.length > 0 && ` (${knownSurahIds.length} surah${knownSurahIds.length === 1 ? '' : 's'} already known)`}</>}
               </p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">Pace</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+                {isMaintain ? 'Rhythm' : 'Pace'}
+              </p>
               <p className="mt-0.5 text-sm text-foreground">
-                {lessonsPerDay} lesson{lessonsPerDay === 1 ? '' : 's'}/day on{' '}
-                {studyDays.length === 7 ? 'every day' : `${studyDays.length} day${studyDays.length === 1 ? '' : 's'} a week`}
+                {isMaintain
+                  ? `Revision on ${studyDays.length === 7 ? 'every day' : `${studyDays.length} day${studyDays.length === 1 ? '' : 's'} a week`}`
+                  : `${lessonsPerDay} lesson${lessonsPerDay === 1 ? '' : 's'}/day on ${studyDays.length === 7 ? 'every day' : `${studyDays.length} day${studyDays.length === 1 ? '' : 's'} a week`}`}
               </p>
             </div>
+            {!isMaintain && (
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                 {useDeadline ? 'Deadline' : 'Projected finish'}
@@ -695,8 +757,11 @@ export default function PlanSetupPage() {
                     : '—'}
               </p>
             </div>
+            )}
             <p className="pt-2 text-xs text-muted">
-              You&apos;ll also see due reviews and periodic revisions of completed surahs each day.
+              {isMaintain
+                ? 'Your surahs start at "shaky" strength — honest ratings during revision recalibrate them.'
+                : 'You’ll also see due reviews and periodic revisions of completed surahs each day.'}
             </p>
           </Card>
         )}

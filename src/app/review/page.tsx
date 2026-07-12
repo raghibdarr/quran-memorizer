@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useReviewStore } from '@/stores/review-store';
 import { useProgressStore } from '@/stores/progress-store';
+import { usePlanStore } from '@/stores/plan-store';
 import { getSurahIndex, getJuzSegmentsForSurah, getSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { computeSurahHealth } from '@/lib/review-helpers';
@@ -23,6 +24,7 @@ type PageView = 'dashboard' | 'session';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
+  const plan = usePlanStore((s) => s.plan);
   // ?start=1 (the today's-plan review row) deep-links straight into a session and
   // routes back to the plan afterwards — no dashboard hop in either direction.
   const searchParams = useSearchParams();
@@ -158,15 +160,20 @@ export default function ReviewPage() {
     );
   }
 
-  // Empty state
+  // Empty state — route a hafiz to revision, not the beginner-lesson funnel (M4)
   if (surahIds.length === 0) {
+    const isHafiz = (plan?.knownSurahIds.length ?? 0) > 0 || plan?.goalType === 'maintain';
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4 pb-20">
         <StarIcon size={40} className="text-teal" />
         <h2 className="mt-4 text-xl font-bold text-foreground">No reviews yet</h2>
-        <p className="mt-1 text-center text-muted">Complete lessons to build your review dashboard</p>
+        <p className="mt-1 text-center text-muted">
+          {isHafiz
+            ? 'Your revision schedule lives on the home screen — recall tests there feed this dashboard'
+            : 'Complete lessons to build your review dashboard'}
+        </p>
         <a href="/" className="mt-6 rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
-          Start Learning
+          {isHafiz ? 'Revise what I know' : 'Start Learning'}
         </a>
         <BottomNav />
       </div>

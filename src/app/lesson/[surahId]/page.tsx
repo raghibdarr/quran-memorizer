@@ -5,6 +5,8 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { getSurah, getJuzSegmentsForSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { useProgressStore } from '@/stores/progress-store';
+import { usePlanStore } from '@/stores/plan-store';
+import { useReviewStore } from '@/stores/review-store';
 import type { Surah, LessonDef } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -24,6 +26,9 @@ export default function SurahDetailPage() {
   const [surah, setSurah] = useState<Surah | null>(null);
   const [lessons, setLessons] = useState<LessonDef[]>([]);
   const progressLessons = useProgressStore((s) => s.lessons);
+  const plan = usePlanStore((s) => s.plan);
+  const toggleKnownSurah = usePlanStore((s) => s.toggleKnownSurah);
+  const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
   const initialTab = searchParams.get('tab') === 'practice' ? 'practice' : 'learn';
   const reviewLessonNum = searchParams.get('reviewLesson') ? parseInt(searchParams.get('reviewLesson')!, 10) : null;
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
@@ -42,6 +47,19 @@ export default function SurahDetailPage() {
     (l) => progressLessons[l.lessonId]?.completedAt != null
   ).length;
   const overallProgress = lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0;
+
+  // Browse-level "I already know this" (M4/m9): only offered when a plan exists,
+  // the surah is in its scope, and nothing has been learned here yet
+  const isKnown = plan?.knownSurahIds.includes(surahId) ?? false;
+  const canMarkKnown =
+    plan != null &&
+    plan.goalSurahIds.includes(surahId) &&
+    (isKnown || completedCount === 0);
+  const handleToggleKnown = () => {
+    if (!surah) return;
+    if (!isKnown) seedKnownAyahs(surahId, 1, surah.versesCount);
+    toggleKnownSurah(surahId);
+  };
 
   return (
     <div className="min-h-screen bg-cream pb-24">
@@ -72,6 +90,25 @@ export default function SurahDetailPage() {
               {completedCount} / {lessons.length} lessons completed
             </p>
           </div>
+          {canMarkKnown && (
+            <div className="mt-3 text-center">
+              {isKnown ? (
+                <button
+                  onClick={handleToggleKnown}
+                  className="rounded-full bg-success/10 px-4 py-1.5 text-xs font-semibold text-success"
+                >
+                  ✓ Marked as known — in your revision cycle (tap to undo)
+                </button>
+              ) : (
+                <button
+                  onClick={handleToggleKnown}
+                  className="rounded-full border border-foreground/15 px-4 py-1.5 text-xs font-semibold text-muted hover:border-teal/40 hover:text-teal"
+                >
+                  I already know this surah
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </header>
 
@@ -95,7 +132,7 @@ export default function SurahDetailPage() {
                 activeTab === 'practice' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
               )}
             >
-              Practice
+              Review
             </button>
           </div>
         </div>
