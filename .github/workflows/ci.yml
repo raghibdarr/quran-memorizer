@@ -17,3 +17,8 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run test:run
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder

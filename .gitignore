@@ -48,3 +48,6 @@ whisper-quran-onnx-q8/
 whisper-quran-onnx-quantized/
 whisper-base-quran-onnx/
 whisper-base-quran-onnx-quantized/
+# Playwright
+/test-results/
+/playwright-report/
