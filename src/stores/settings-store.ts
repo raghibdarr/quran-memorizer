@@ -18,10 +18,11 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       reciter: 'Alafasy_128kbps',
-      // New-user defaults: plain Uthmani (unexplained multicolor tajweed intimidates
-      // beginners — legend auto-opens once when they switch it on) and translation
+      // New-user defaults (owner call 2026-07-12): tajweed stays the default script —
+      // the legend now auto-expands the first time it's seen, which answers the
+      // "unexplained colors" audit finding without hiding tajweed. Translation
       // visible (meaning-first). Existing users' persisted choices are untouched.
-      arabicScript: 'uthmani',
+      arabicScript: 'tajweed',
       arabicFontSize: 1,
       transliterationEnabled: true,
       translationEnabled: true,
