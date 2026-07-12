@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build"
+  # Deploy gate: main auto-deploys, so a red test or type error must fail the build
+  command = "npm run test:run && npx tsc --noEmit && npm run build"
   publish = ".next"
 
 [[plugins]]

@@ -11,7 +11,7 @@ function fromUserData(supabase: SupabaseClient) {
 
 type SyncStatus = 'idle' | 'syncing' | 'synced' | 'error' | 'offline'
 
-const STORE_NAMES = [
+export const STORE_NAMES = [
   'quran-progress',
   'quran-reviews',
   'quran-stats',
@@ -21,11 +21,11 @@ const STORE_NAMES = [
   'quran-essentials',
 ] as const
 
-type StoreName = typeof STORE_NAMES[number]
+export type StoreName = typeof STORE_NAMES[number]
 
 // --- localStorage helpers ---
 
-function getLocalData(storeName: StoreName): Record<string, unknown> | null {
+export function getLocalData(storeName: StoreName): Record<string, unknown> | null {
   try {
     const raw = localStorage.getItem(storeName)
     if (!raw) return null
@@ -36,7 +36,7 @@ function getLocalData(storeName: StoreName): Record<string, unknown> | null {
   }
 }
 
-function setLocalData(storeName: StoreName, data: unknown) {
+export function setLocalData(storeName: StoreName, data: unknown) {
   try {
     const existing = localStorage.getItem(storeName)
     if (existing) {
@@ -340,8 +340,8 @@ function mergeEssentials(
   return { memorized, favorites, counters }
 }
 
-/** Dispatch to the right merge function per store */
-function mergeStore(
+/** Dispatch to the right merge function per store (also used by backup import — src/lib/backup.ts) */
+export function mergeStore(
   storeName: StoreName,
   local: Record<string, unknown>,
   cloud: Record<string, unknown>,

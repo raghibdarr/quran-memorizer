@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSettingsStore } from '@/stores/settings-store';
 import { getSurahIndex, getJuzSegmentsForSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
+import { SyncProvider } from '@/components/sync-provider';
 import type { LessonReviewCard } from '@/types/quran';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -112,5 +113,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  return <>{children}</>;
+  // SyncProvider here (not in UserButton) so cloud sync runs on every route
+  return <SyncProvider>{children}</SyncProvider>;
 }

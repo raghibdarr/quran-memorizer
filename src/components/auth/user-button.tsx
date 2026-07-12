@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useAuth } from '@/hooks/use-auth'
-import { useSync } from '@/hooks/use-sync'
+import { useSyncStatus } from '@/components/sync-provider'
 import AuthModal from './auth-modal'
 
 function AccountMenu({ email, onSignOut, onClose }: { email: string; onSignOut: () => void; onClose: () => void }) {
@@ -40,7 +40,7 @@ function AccountMenu({ email, onSignOut, onClose }: { email: string; onSignOut: 
 
 export default function UserButton() {
   const auth = useAuth()
-  const { status: syncStatus } = useSync(auth.user)
+  const { status: syncStatus } = useSyncStatus()
   const [showModal, setShowModal] = useState(false)
 
   return (

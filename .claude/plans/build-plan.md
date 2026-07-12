@@ -22,6 +22,7 @@ Ordering is by irreversible-failure risk for public users, then severity, then d
 ## 3. Milestones
 
 ### M0 — Data-loss triage: sync mount fix, backup export/import, deploy gate
+**STATUS: ✅ DONE 2026-07-12** (sync mounted app-wide via SyncProvider; backup export/import shipped with merge-based restore + 7 unit tests; anonymous sign-in verified absent; Netlify gate + GitHub Actions CI added; CLAUDE.md rewritten. Live Supabase-timestamp check on /plan/revise still owed — needs the owner signed in.)
 **Size:** 1–2 sessions
 
 **Goal:** Close the two active data-loss windows (plan pages that never sync; signed-out users with no backup path) before anything else changes store shapes.

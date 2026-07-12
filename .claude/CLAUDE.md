@@ -1,37 +1,57 @@
 # Takrar — Quran Memorization App
 
-Guided Quran memorization web app.
-Guided multi-phase learning flow: Listen → Understand → Chunk → Test → Spaced Review.
+Guided Quran memorization PWA. Lesson flow: Listen → Understand (word-by-word + waqf-segment
+deck) → Build ("chunk": 6-4-4-6 reps per segment with sliced audio, then chaining) → Test →
+SM-2 spaced review. Plus: practice mode (self-rated, on-device Whisper voice compare), Hifdh
+planner (daily plan), essentials (duas/dhikr), progress stats, streaks.
 
 ## Tech Stack
-- Next.js 16 (App Router), TypeScript, Tailwind CSS v4
-- Zustand for state management
-- localStorage/IndexedDB (idb-keyval) for V1 (no backend)
-- Fonts: Scheherazade New (Arabic), Plus Jakarta Sans (UI)
+- Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Motion (framer-motion successor)
+- Zustand stores persisted to localStorage; IndexedDB (idb-keyval) audio cache
+- Supabase: auth (email/Google/magic-link) + cloud sync — per-store JSONB snapshots in a
+  `user_data` table, merged per-store in `src/hooks/use-sync.ts`, mounted app-wide via
+  `SyncProvider` in `src/components/providers.tsx`
+- Backup export/import (signed-out data safety): `src/lib/backup.ts`, UI in settings panel
+- Deployed on Netlify. **Pushing main auto-deploys — commit only; push when the owner says.**
+- Deploy gate: netlify.toml runs `npm run test:run && npx tsc --noEmit && npm run build`;
+  GitHub Actions (.github/workflows/ci.yml) runs tsc + vitest per push
 
 ## Commands
-- `npm run dev` — Start dev server
-- `npx next build` — Production build
-- `npx tsx scripts/fetch-quran-data.ts` — Re-fetch Quran data from API (uses QUL transliteration JSON from src/data/english-transliteration-tajweed.json)
+- `npm run dev` — dev server · `npm run build` — production build
+- `npm run test:run` — vitest suite (must stay green; deploys depend on it)
+- `npx tsx scripts/fetch-quran-data.ts` — re-fetch Quran data
+- `node scripts/generate-ayah-weights.mjs` — regenerate per-ayah word counts (lesson packing)
+- `node scripts/import-segments.mjs <folder>` — import QUL word-timing downloads
 
 ## Project Structure
-- `src/app/` — Next.js pages (home, lesson/[surahId], review, progress)
-- `src/components/` — UI (ui/, lesson/phases/, layout/)
-- `src/stores/` — Zustand stores (progress, review, settings, stats)
-- `src/lib/` — Pure logic (audio, spaced-repetition, chunks, curriculum, quran-data)
-- `src/data/` — Static JSON (surah data fetched from quran.com API v4)
-- `src/types/quran.ts` — All TypeScript type definitions
+- `src/app/` — routes (home, lesson/[surahId]/[lessonNum], juz/[juzNum], review, plan/*,
+  essentials, progress, auth)
+- `src/components/` — ui/, lesson/phases/, practice/, plan/, layout/, auth/
+- `src/stores/` — Zustand: progress, review, settings, stats, practice, plan, essentials
+- `src/lib/` — pure logic: audio (playRange = segment slicing), segments (waqf segmentation),
+  segment-audio (word timings), curriculum (word-budget lesson packing), spaced-repetition,
+  plan, fuzzy (search), backup
+- `src/data/` — static JSON: surah data, ayah-weights.json; `public/segments/` — word timings
+  (5 reciters; provenance in its manifest.json — CC BY 4.0 attribution required in settings)
+- `.claude/plans/` — build-plan.md (ACTIVE roadmap: milestones M0-M11), audit docs, design
+  specs. **Read build-plan.md before starting milestone work.**
 
-## Design Tokens
-- Colors: cream (#FEFCF9), teal (#1B4D5C), gold (#C8963E), success (#2D7A4F), muted (#8A8A85)
-- Arabic text: use `arabic-text` CSS class (RTL, Scheherazade New font, line-height 2.2)
-- Mobile-first layout, max-w-lg centered content
+## Design Tokens ("tactile print")
+- Cream #FEFCF9 paper, teal #1B4D5C, gold #C8963E, ink #36332C; 1.5px ink borders; HARD
+  offset shadows (no blur); press-collapse physics (.tactile-btn/.tactile-chip/.pressable);
+  full dark theme. All in `src/app/globals.css`.
+- Arabic: `arabic-text` class (RTL); tajweed via per-word HTML (see SegmentArabic component)
+- Tactile treatment is a BUDGET: interactive + hero elements only (see m11 spec)
 
 ## Key Conventions
-- Mobile-first design (375px base)
-- Arabic text uses dir="rtl" and Scheherazade New font
-- Self-assessment over AI voice recognition
-- No backend auth for V1 — all state in localStorage
+- Mobile-first (375px base); bottom tab nav; M11 (mobile-native elevation + Capacitor store
+  launch) is specced in `.claude/plans/m11-mobile-native-spec.md`
+- Self-assessment is the source of truth for recall; voice is assistive only
+- Never split ayah text at invented points — waqf marks only (src/lib/segments.ts;
+  `.claude/plans/ayah-segmentation-waqf.md`)
+- Word-audio files are numbered by CONSECUTIVE real-word index (see wordAudioUrl)
+- lessonIds are "surahId-lessonNumber" under the word-budget packing (curriculum.ts)
 
 ## Reference
-- Full product spec: `.claude/app-spec-context.md`
+- Product spec: `.claude/app-spec-context.md` · Roadmap: `.claude/plans/build-plan.md`
+  (supersedes .claude/roadmap.md)

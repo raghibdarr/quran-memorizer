@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useSettingsStore } from '@/stores/settings-store';
+import { downloadBackup, importBackup } from '@/lib/backup';
 import type { ArabicScriptStyle } from '@/types/quran';
 import { SettingsIcon } from '@/components/ui/icons';
 import { RECITERS } from '@/lib/audio';
@@ -74,6 +75,23 @@ export default function SettingsPanel() {
 
   const btnRef = useRef<HTMLButtonElement>(null);
   const [panelPos, setPanelPos] = useState({ top: 0, right: 0 });
+
+  // Backup export/import (see src/lib/backup.ts — merge-based restore, never overwrite)
+  const importFileRef = useRef<HTMLInputElement>(null);
+  const [backupMsg, setBackupMsg] = useState<string | null>(null);
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    try {
+      const parsed = JSON.parse(await file.text());
+      const restored = importBackup(parsed);
+      setBackupMsg(`Restored ${restored} data set${restored === 1 ? '' : 's'} — reloading…`);
+      setTimeout(() => window.location.reload(), 700);
+    } catch (err) {
+      setBackupMsg(err instanceof Error ? err.message : 'Import failed — is this a Takrar backup file?');
+    }
+  };
 
   const handleToggle = () => {
     if (!open && btnRef.current) {
@@ -217,6 +235,38 @@ export default function SettingsPanel() {
                   +
                 </button>
               </div>
+            </div>
+
+            {/* Data — backup & restore */}
+            <div className="mt-3">
+              <p className="text-xs font-medium text-muted">Your Data</p>
+              <div className="mt-1.5 flex gap-1.5">
+                <button
+                  onClick={() => {
+                    try { downloadBackup(); setBackupMsg('Backup downloaded ✓'); }
+                    catch { setBackupMsg('Export failed — try again'); }
+                  }}
+                  className="flex-1 rounded-lg bg-foreground/5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-foreground/10"
+                >
+                  Export backup
+                </button>
+                <button
+                  onClick={() => importFileRef.current?.click()}
+                  className="flex-1 rounded-lg bg-foreground/5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-foreground/10"
+                >
+                  Import backup
+                </button>
+                <input
+                  ref={importFileRef}
+                  type="file"
+                  accept="application/json,.json"
+                  className="hidden"
+                  onChange={handleImportFile}
+                />
+              </div>
+              <p className="mt-1.5 text-[10px] leading-snug text-muted/80">
+                {backupMsg ?? 'Progress lives on this device — export a backup, or sign in to sync.'}
+              </p>
             </div>
 
             {/* Data credits — quran-align is CC BY 4.0, so this attribution is a license requirement */}
