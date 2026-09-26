@@ -8,6 +8,7 @@ import { SyncProvider } from '@/components/sync-provider';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
 import { useDayRollover } from '@/hooks/use-day-rollover';
 import { initNativeShell, isNative } from '@/lib/native';
+import { installPressHaptics } from '@/lib/haptics';
 import AppBadgeSync from '@/components/app-badge-sync';
 import EdgeSwipeBack from '@/components/edge-swipe-back';
 import { useNavHistoryTracking } from '@/hooks/use-app-back';
@@ -49,7 +50,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       }
     }
 
-    return initNativeShell();
+    const stopShell = initNativeShell();
+    const stopPressHaptics = installPressHaptics();
+    return () => {
+      stopShell();
+      stopPressHaptics();
+    };
   }, []);
 
   // Migration: create lesson review cards for already-completed lessons (runs once)

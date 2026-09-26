@@ -10,6 +10,7 @@ import { segmentAyah, buildAyahWordData, type AyahSegment } from '@/lib/segments
 import Button from '@/components/ui/button';
 import SegmentArabic from '@/components/ui/segment-arabic';
 import { cn } from '@/lib/cn';
+import { haptic } from '@/lib/haptics';
 
 interface UnderstandPhaseProps {
   surah: Surah;
@@ -125,6 +126,7 @@ export default function UnderstandPhase({ surah, ayahs, lessonId, onComplete }: 
   };
 
   const goTo = (index: number) => {
+    if (index !== itemIndex) haptic.selection();
     setItemIndex(index);
     setSelectedWord(null);
     setVisitedItems((prev) => new Set([...prev, index]));

@@ -9,6 +9,8 @@ import type { ArabicScriptStyle } from '@/types/quran';
 import { SettingsIcon } from '@/components/ui/icons';
 import { RECITERS } from '@/lib/audio';
 import { cn } from '@/lib/cn';
+import { haptic, hapticsEnabled, setHapticsEnabled } from '@/lib/haptics';
+import { isNative } from '@/lib/native';
 
 const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
   { value: 'tajweed', label: 'Tajweed' },
@@ -52,6 +54,7 @@ export default function SettingsPanel() {
     dailyGoalActivities,
     setDailyGoalActivities,
   } = useSettingsStore();
+  const [haptics, setHaptics] = useState(hapticsEnabled);
 
   // Initialize dark mode from localStorage or system preference
   useEffect(() => {
@@ -147,7 +150,7 @@ export default function SettingsPanel() {
               </div>
               <div className="mt-1.5 flex items-center gap-3">
                 <button
-                  onClick={() => setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10))}
+                  onClick={() => { haptic.selection(); setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10)); }}
                   disabled={arabicFontSize <= 0.8}
                   className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
@@ -157,7 +160,7 @@ export default function SettingsPanel() {
                   {Math.round(arabicFontSize * 100)}%
                 </div>
                 <button
-                  onClick={() => setArabicFontSize(Math.min(1.6, Math.round((arabicFontSize + 0.1) * 10) / 10))}
+                  onClick={() => { haptic.selection(); setArabicFontSize(Math.min(1.6, Math.round((arabicFontSize + 0.1) * 10) / 10)); }}
                   disabled={arabicFontSize >= 1.6}
                   className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
@@ -199,6 +202,20 @@ export default function SettingsPanel() {
                 <span className="text-sm text-foreground">Translation</span>
                 <Toggle enabled={translationEnabled} onToggle={toggleTranslation} />
               </label>
+
+              {isNative() && (
+                <label className="flex min-h-11 cursor-pointer items-center justify-between">
+                  <span className="text-sm text-foreground">Haptics</span>
+                  <Toggle
+                    enabled={haptics}
+                    onToggle={() => {
+                      setHapticsEnabled(!haptics);
+                      setHaptics(!haptics);
+                      if (!haptics) haptic.press();
+                    }}
+                  />
+                </label>
+              )}
             </div>
 
             {/* Daily Goal */}
@@ -206,7 +223,7 @@ export default function SettingsPanel() {
               <p className="text-xs font-medium text-muted">Daily Goal</p>
               <div className="mt-1.5 flex items-center gap-3">
                 <button
-                  onClick={() => setDailyGoalActivities(Math.max(1, dailyGoalActivities - 1))}
+                  onClick={() => { haptic.selection(); setDailyGoalActivities(Math.max(1, dailyGoalActivities - 1)); }}
                   disabled={dailyGoalActivities <= 1}
                   className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
@@ -216,7 +233,7 @@ export default function SettingsPanel() {
                   <span className="mr-1 font-semibold text-teal">{dailyGoalActivities}</span>{dailyGoalActivities === 1 ? 'lesson, review or practice' : 'lessons, reviews or practices'} / day
                 </div>
                 <button
-                  onClick={() => setDailyGoalActivities(Math.min(10, dailyGoalActivities + 1))}
+                  onClick={() => { haptic.selection(); setDailyGoalActivities(Math.min(10, dailyGoalActivities + 1)); }}
                   disabled={dailyGoalActivities >= 10}
                   className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >

@@ -15,6 +15,7 @@ import { lessonHref } from '@/lib/routes';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import { DayCompleteSummary } from '@/components/plan/day-complete';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
+import { haptic } from '@/lib/haptics';
 
 interface CompletePhaseProps {
   surah: Surah;
@@ -49,6 +50,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
     ayahs.forEach((a) => addCard(surah.id, a.number));
     addLessonCard(lessonDef, surah.id);
     markPlanLessonCompleted(lessonDef.lessonId);
+    haptic.success();
 
     if (!wasAlreadyComplete) {
       recordActivity();

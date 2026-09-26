@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useStatsStore } from '@/stores/stats-store';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
@@ -11,6 +11,7 @@ import { addLocalDays, endOfDayMs } from '@/lib/dates';
 import Button from '@/components/ui/button';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { CheckIcon, FlameIcon } from '@/components/ui/icons';
+import { haptic } from '@/lib/haptics';
 
 /** One line tying today to the streak and the goal — shared by Home and lesson-complete */
 export function DayCompleteSummary() {
@@ -77,6 +78,9 @@ export default function DayCompleteMoment() {
 
   const open = ready && shouldCelebrateDay(dayStatus, { todayIso: today, celebratedOn, activitiesToday });
   const acknowledge = () => markDayCelebrated(today);
+  useEffect(() => {
+    if (open) haptic.success();
+  }, [open]);
 
   return (
     <BottomSheet open={open} onClose={acknowledge} title="That's today's plan done" titleHidden>

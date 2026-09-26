@@ -15,6 +15,7 @@ import MediaControlsBar from '@/components/ui/media-controls-bar';
 import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
 import { RETENTION } from '@/lib/retention';
+import { haptic } from '@/lib/haptics';
 import { daysBetween, isoFromMs, startOfTodayMs, todayIso } from '@/lib/dates';
 
 interface ReviewSessionProps {
@@ -196,6 +197,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
 
   const handleNext = useCallback(() => {
     if (isLastCard) {
+      haptic.success();
       onComplete();
     } else if (isLastInBatch) {
       stopPlayback();

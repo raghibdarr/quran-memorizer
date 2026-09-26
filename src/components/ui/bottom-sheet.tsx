@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn } from '@/lib/cn';
+import { haptic } from '@/lib/haptics';
 
 // Motion (M11 spec §3): entrances settle with --spring-settle; exits glide out on
 // the iOS sheet curve, and a flicked sheet leaves at the speed it was thrown.
@@ -35,6 +36,7 @@ type Drag = {
   fromHandle: boolean;
   active: boolean;
   dy: number;
+  pastThreshold: boolean;
   // Last two samples, for the release velocity (an average over the whole drag
   // would under-read a slow drag that ends in a flick)
   prevY: number;
@@ -129,7 +131,7 @@ export default function BottomSheet({ open, onClose, title, titleHidden, dismiss
     const fromHandle = !!(target as HTMLElement | null)?.closest?.('[data-sheet-handle]');
     if (!fromHandle && sheet.scrollTop > 0) return;
     const t = performance.now();
-    drag.current = { startY: y, fromHandle, active: false, dy: 0, prevY: y, prevT: t, lastY: y, lastT: t };
+    drag.current = { startY: y, fromHandle, active: false, dy: 0, pastThreshold: false, prevY: y, prevT: t, lastY: y, lastT: t };
   };
 
   /** Returns true while the drag owns the gesture (the caller then blocks scrolling) */
@@ -155,6 +157,11 @@ export default function BottomSheet({ open, onClose, title, titleHidden, dismiss
     d.lastY = y;
     d.lastT = performance.now();
     sheet.style.transform = `translateY(${d.dy}px)`;
+    const past = d.dy > Math.min(DISMISS_DISTANCE_MAX, sheet.offsetHeight * DISMISS_FRACTION);
+    if (past !== d.pastThreshold) {
+      d.pastThreshold = past;
+      haptic.selection();
+    }
     scrim.style.opacity = String(Math.max(0, 1 - Math.max(0, d.dy) / sheet.offsetHeight));
     return true;
   };

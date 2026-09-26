@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useReviewQueue } from '@/hooks/use-review-queue';
 import { HomeIcon, BookIcon, StarIcon, BarChartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import { haptic } from '@/lib/haptics';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home', Icon: HomeIcon },
@@ -127,6 +128,7 @@ export default function BottomNav() {
               key={item.href}
               href={item.href}
               aria-current={isActive ? 'page' : undefined}
+              onClick={isActive ? undefined : haptic.selection}
               className={cn(
                 'relative flex min-h-12 flex-1 flex-col items-center justify-center gap-0.5 rounded-full py-1.5 transition-colors',
                 isActive ? 'text-teal' : 'text-muted hover:text-foreground',
