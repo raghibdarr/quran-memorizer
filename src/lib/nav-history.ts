@@ -37,6 +37,12 @@ export function canGoBack(): boolean {
   return read().length > 1;
 }
 
+/** Where an in-app back would land, or null when back falls through to the parent route */
+export function previousEntry(): string | null {
+  const stack = read();
+  return stack.length > 1 ? stack[stack.length - 2] : null;
+}
+
 /**
  * Browser-initiated back (hardware back button, swipe, history) carries no React
  * transition type — mark the document so the CSS pop animation plays instead.

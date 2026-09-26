@@ -9,6 +9,7 @@ import { useAppBack } from '@/hooks/use-app-back';
 import ReviewSession from '@/components/review/review-session';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
+import CloseButton from '@/components/ui/close-button';
 
 type Frozen = { cards: LessonReviewCard[]; early: ReadonlySet<string> };
 
@@ -24,7 +25,8 @@ export default function ReviewSessionScreen() {
   const params = useSearchParams();
   const queue = useReviewQueue();
   const lessonCards = useReviewStore((s) => s.lessonCards);
-  const exit = useAppBack(params.get('from') === 'plan' ? '/' : '/review');
+  const exitHref = params.get('from') === 'plan' ? '/' : '/review';
+  const exit = useAppBack(exitHref);
 
   // Frozen on first render: ratings update the stores during the session, and the
   // session must not reshuffle (or shrink) underneath the user
@@ -45,9 +47,7 @@ export default function ReviewSessionScreen() {
     <div className="min-h-dvh bg-cream pb-8">
       <div className="sticky top-[var(--safe-top)] z-10 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between">
-          <button onClick={exit} className="-ml-2 flex min-h-11 items-center px-2 text-sm text-muted hover:text-foreground">
-            &larr; Exit Review
-          </button>
+          <CloseButton fallback={exitHref} label="Close review" />
           <span className="text-sm font-semibold text-teal">Review Session</span>
           <div className="flex items-center gap-2">
             <SettingsPanel />

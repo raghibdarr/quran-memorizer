@@ -157,14 +157,14 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           onClick={() => setShowResetConfirm(true)}
           className="w-full rounded-xl py-3 text-sm font-medium text-red-400/70 transition-colors hover:text-red-400"
         >
-          Full Reset
+          Start lesson over
         </button>
 
         <ConfirmSheet
           open={showResetConfirm}
-          title="Reset lesson?"
-          message="This will erase all progress for this lesson and restart from the Listen phase."
-          confirmLabel="Reset lesson"
+          title="Start this lesson over?"
+          message="You'll go back to Listen, and this lesson won't count as done until you finish it again. Your reviews and streak aren't affected."
+          confirmLabel="Start over"
           destructive
           onConfirm={() => { resetLesson(lessonDef.lessonId, surah.id); setShowResetConfirm(false); }}
           onCancel={() => setShowResetConfirm(false)}

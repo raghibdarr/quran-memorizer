@@ -68,7 +68,7 @@ test.describe('smoke', () => {
     await page.goto('/review?start=1')
     // The ?start=1 deep link must auto-open the session on the due card
     await expect(page.getByText('Review Session')).toBeVisible()
-    await expect(page.getByText(/exit review/i)).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Close review' })).toBeVisible()
   })
 
   test('a long overdue queue runs in capped batches with a continue/stop break (M5)', async ({ page }) => {

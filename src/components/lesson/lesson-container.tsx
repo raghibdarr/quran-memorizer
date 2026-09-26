@@ -9,10 +9,10 @@ import { useStatsStore } from '@/stores/stats-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
-import { useAppBack } from '@/hooks/use-app-back';
+import CloseButton from '@/components/ui/close-button';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
 import TajweedLegend from '@/components/ui/tajweed-legend';
-import { TrashIcon } from '@/components/ui/icons';
+import { RestartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import ListenPhase from './phases/listen-phase';
 import UnderstandPhase from './phases/understand-phase';
@@ -27,8 +27,6 @@ interface LessonContainerProps {
   lessonDef: LessonDef;
   totalLessons: number;
 }
-
-const PHASE_ORDER: LessonPhase[] = ['listen', 'understand', 'chunk', 'test', 'complete'];
 
 export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons }: LessonContainerProps) {
   const { startLesson, updatePhase, resetLesson } = useProgressStore();
@@ -72,14 +70,11 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     return () => observer.disconnect();
   }, []);
 
-  // Before any early return — hooks must run in the same order every render
   const backUrl = fromParam ? `/${fromParam}` : `/lesson/${surah.id}`;
-  const goBackToParent = useAppBack(backUrl);
 
   if (!lesson) return null;
 
   const activePhase: LessonPhase = practicePhase ?? lesson.currentPhase;
-  const currentPhaseIndex = PHASE_ORDER.indexOf(activePhase);
   const lessonTitle = totalLessons > 1
     ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
     : surah.nameSimple;
@@ -95,12 +90,6 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
       }
       setTransitioning(false);
     }, 300);
-  };
-
-  const goBack = () => {
-    if (currentPhaseIndex > 0) {
-      goToPhase(PHASE_ORDER[currentPhaseIndex - 1]);
-    }
   };
 
   const handleReset = () => {
@@ -167,17 +156,16 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
       <header ref={headerRef} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
-            <button onClick={goBackToParent} className="-ml-2 flex min-h-11 items-center px-2 text-sm text-muted hover:text-foreground">
-              ← Back
-            </button>
+            <CloseButton fallback={backUrl} label="Close lesson" />
             <h2 className="text-sm font-semibold text-teal">{lessonTitle}</h2>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowResetConfirm(true)}
-                className="flex h-11 w-11 items-center justify-center rounded-full text-red-400/70 transition-colors hover:bg-red-500/10 hover:text-red-400"
-                title="Reset lesson"
+                className="pressable flex h-11 w-11 items-center justify-center rounded-full text-muted hover:bg-foreground/5 hover:text-foreground"
+                title="Start lesson over"
+                aria-label="Start lesson over"
               >
-                <TrashIcon size={14} />
+                <RestartIcon size={17} />
               </button>
               <SettingsPanel />
               <UserButton />
@@ -195,9 +183,9 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
       <ConfirmSheet
         open={showResetConfirm}
-        title="Reset progress?"
-        message="This will restart this lesson from the Listen phase."
-        confirmLabel="Reset lesson"
+        title="Start this lesson over?"
+        message="You'll go back to Listen, and this lesson won't count as done until you finish it again. Your reviews and streak aren't affected."
+        confirmLabel="Start over"
         destructive
         onConfirm={handleReset}
         onCancel={() => setShowResetConfirm(false)}
