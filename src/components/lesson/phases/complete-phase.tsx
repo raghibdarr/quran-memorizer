@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useMemo, useState } from 'react';
 import type { Surah, Ayah, LessonDef } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
@@ -9,6 +11,7 @@ import { usePlanStore } from '@/stores/plan-store';
 import Button from '@/components/ui/button';
 import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import { lessonHref } from '@/lib/routes';
 
 interface CompletePhaseProps {
   surah: Surah;
@@ -51,7 +54,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
 
   const isMultiLesson = totalLessons > 1;
   const hasNextLesson = lessonDef.lessonNumber < totalLessons;
-  const nextLessonUrl = `/lesson/${surah.id}/${lessonDef.lessonNumber + 1}`;
+  const nextLessonUrl = lessonHref(surah.id, lessonDef.lessonNumber + 1);
   const surahUrl = `/lesson/${surah.id}`;
 
   return (
@@ -87,7 +90,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           <p className="text-sm font-medium text-gold">Some ayahs need review</p>
           <p className="mt-1 text-xs text-muted">
             {weakAyahs.map((a) => `Ayah ${a.number}`).join(', ')} — flagged in your{' '}
-            <a href="/review" className="text-teal underline">Review</a> for follow-up.
+            <Link href="/review" className="text-teal underline">Review</Link> for follow-up.
           </p>
         </div>
       ) : (
@@ -109,19 +112,19 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
 
       <div className="flex w-full flex-col gap-3">
         {hasNextLesson && (
-          <a href={nextLessonUrl}>
+          <Link href={nextLessonUrl}>
             <Button className="w-full">
               Start Lesson {lessonDef.lessonNumber + 1}
             </Button>
-          </a>
+          </Link>
         )}
 
         {isMultiLesson && (
-          <a href={surahUrl}>
+          <Link href={surahUrl}>
             <Button variant={hasNextLesson ? 'secondary' : 'primary'} className="w-full">
               Back to {surah.nameSimple}
             </Button>
-          </a>
+          </Link>
         )}
 
         <button
@@ -162,9 +165,9 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           </div>
         )}
 
-        <a href="/">
+        <Link href="/">
           <Button variant="ghost" className="w-full">Back to Home</Button>
-        </a>
+        </Link>
       </div>
     </div>
   );

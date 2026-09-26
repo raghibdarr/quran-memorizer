@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useMemo, useState } from 'react';
 import { getEssentialsIndex } from '@/lib/essentials-data';
 import type { EssentialCollection } from '@/types/quran';
@@ -106,7 +108,7 @@ export default function EssentialsPage() {
               const favCount = collection.items.filter((i) => favorites[i.id]).length;
 
               return (
-                <a key={collection.id} href={`/essentials/${collection.id}`} className="block">
+                <Link key={collection.id} href={`/essentials/${collection.id}`} className="block">
                   <Card className="transition-all hover:shadow-md">
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0 flex-1">
@@ -127,7 +129,7 @@ export default function EssentialsPage() {
                       <p className="mt-1.5 text-[10px] text-gold">★ {favCount} favorited</p>
                     )}
                   </Card>
-                </a>
+                </Link>
               );
             })}
           </>

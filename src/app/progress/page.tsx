@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useState, useMemo } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
@@ -258,9 +260,9 @@ export default function ProgressPage() {
           <div className="py-12 text-center">
             <p className="text-lg text-muted">No progress yet</p>
             <p className="mt-1 text-sm text-muted">Start a lesson to track your progress</p>
-            <a href="/" className="mt-4 inline-block rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
+            <Link href="/" className="mt-4 inline-block rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
               Start Learning
-            </a>
+            </Link>
           </div>
         )}
       </main>

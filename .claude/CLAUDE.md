@@ -12,20 +12,34 @@ planner (daily plan), essentials (duas/dhikr), progress stats, streaks.
   `user_data` table, merged per-store in `src/hooks/use-sync.ts`, mounted app-wide via
   `SyncProvider` in `src/components/providers.tsx`
 - Backup export/import (signed-out data safety): `src/lib/backup.ts`, UI in settings panel
+- **Static export** (`output: 'export'` → `out/`): the SAME bundle is served by Netlify and shipped
+  inside the Capacitor iOS/Android apps (`android/`, `ios/`, capacitor.config.ts). Nothing may need a
+  server: no middleware, API routes, server actions, or request-time rendering. Every dynamic
+  route enumerates params (src/lib/static-params.ts). Lessons are ONE page: `/learn?s=&l=` — build
+  lesson URLs only via `lessonHref` (src/lib/routes.ts).
+- In-app navigation must be client-side (`<Link>`/router): the native shells answer every
+  extensionless path with the ROOT index.html, so a full page load to a deep path renders Home
+  (Home recovers via useShellRouteRecovery). Never `<a href="/...">` or `window.location` for app routes.
 - Deployed on Netlify. **Pushing main auto-deploys — commit only; push when the owner says.**
 - Deploy gate: netlify.toml runs `npm run test:run && npx tsc --noEmit && npm run build`;
-  GitHub Actions (.github/workflows/ci.yml) runs tsc + vitest per push
+  GitHub Actions: ci.yml (tsc, vitest + TZ matrix, dev smoke, static smoke); android.yml
+  (debug APK artifact, manual or mobile/** branches)
 
 ## Commands
 - `npm run dev` — dev server · `npm run build` — production build
 - `npm run test:run` — vitest suite (must stay green; deploys depend on it)
+- `npm run test:e2e` — Playwright smoke vs dev · `npm run test:e2e:static` — same smoke vs `out/`
+  under web AND native-style routing (build first)
+- `npm run serve:web` / `serve:native` — serve `out/` like Netlify / like the Capacitor shells
+- `npx cap sync` — copy `out/` + plugins into the native projects (after every build)
 - `npx tsx scripts/fetch-quran-data.ts` — re-fetch Quran data
 - `node scripts/generate-ayah-weights.mjs` — regenerate per-ayah word counts (lesson packing)
 - `node scripts/import-segments.mjs <folder>` — import QUL word-timing downloads
 
 ## Project Structure
-- `src/app/` — routes (home, lesson/[surahId]/[lessonNum], juz/[juzNum], review, plan/*,
-  essentials, progress, auth)
+- `src/app/` — routes (home, lesson/[surahId] = surah page, learn = lesson player, juz/[juzNum],
+  review, plan/*, essentials, progress, auth). Dynamic routes = server page.tsx (params) +
+  *-client.tsx
 - `src/components/` — ui/, lesson/phases/, practice/, plan/, layout/, auth/
 - `src/stores/` — Zustand: progress, review, settings, stats, practice, plan, essentials
 - `src/lib/` — pure logic: audio (playRange = segment slicing), segments (waqf segmentation),

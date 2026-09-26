@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
@@ -23,6 +25,8 @@ import { FlameIcon, BookIcon, CheckIcon, ArrowRightIcon } from '@/components/ui/
 import InstallBanner from '@/components/ui/install-banner';
 import OnboardingOverlay from '@/components/ui/onboarding-overlay';
 import { cn } from '@/lib/cn';
+import { normalizeAppUrl } from '@/lib/routes';
+import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
 type ViewMode = 'grid' | 'list';
@@ -50,6 +54,7 @@ function buildJuzSegmentsBySurah(juzIndex: JuzMeta[]) {
 }
 
 export default function HomePage() {
+  useShellRouteRecovery();
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
   const [search, setSearch] = useState('');
@@ -209,7 +214,7 @@ export default function HomePage() {
         {plan ? (
           <TodaysPlanCard />
         ) : (
-          <a href="/plan/setup" className="block">
+          <Link href="/plan/setup" className="block">
             <Card variant="tactile" pressable className="bg-gold/10">
               <div className="flex items-center justify-between gap-3">
                 <div>
@@ -220,12 +225,12 @@ export default function HomePage() {
                 <span className="tactile-chip shrink-0 rounded-full bg-gold px-3.5 py-2 text-xs font-bold text-on-gold">Start →</span>
               </div>
             </Card>
-          </a>
+          </Link>
         )}
 
         {/* Continue card — hidden when a plan is active (plan card takes over) */}
         {!plan && lastActivity ? (
-          <a href={lastActivity.url} className="block">
+          <Link href={normalizeAppUrl(lastActivity.url)} className="block">
             <Card variant="tactile" pressable className="p-6">
               <p className="text-[11px] font-bold uppercase tracking-wider text-teal">
                 Continue {lastActivity.type === 'lesson' ? 'Learning' : 'Practicing'}
@@ -235,9 +240,9 @@ export default function HomePage() {
                 <ArrowRightIcon size={20} className="shrink-0 text-teal" />
               </div>
             </Card>
-          </a>
+          </Link>
         ) : !plan && activeProgress && activeSurah ? (
-          <a href={`/lesson/${activeSurah.id}`} className="block">
+          <Link href={`/lesson/${activeSurah.id}`} className="block">
             <Card variant="tactile" pressable className="p-6">
               <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Continue Learning</p>
               <div className="mt-1.5 flex items-center justify-between gap-3">
@@ -248,7 +253,7 @@ export default function HomePage() {
                 <span className="arabic-text text-3xl text-gold-deep/80">{activeSurah.nameArabic}</span>
               </div>
             </Card>
-          </a>
+          </Link>
         ) : null}
 
         <div className="grid grid-cols-3 gap-3">
@@ -269,14 +274,14 @@ export default function HomePage() {
             </div>
             <p className="mt-1.5 text-xs text-muted">Today</p>
           </Card>
-          <a href="/review" className="block">
+          <Link href="/review" className="block">
             <Card pressable className="flex h-full flex-col items-center justify-center py-3">
               <p className="text-xl font-bold text-gold-deep">{dueReviewCount}</p>
               <p className="mt-1 text-xs text-muted">
                 {overdueReviewCount > 0 ? `Due · ${overdueReviewCount} overdue` : 'Due Reviews'}
               </p>
             </Card>
-          </a>
+          </Link>
           <Card className="flex flex-col items-center justify-center py-3">
             <p className="text-xl font-bold text-teal">{completedLessonCount}<span className="text-sm font-normal text-muted">/{totalLessonCount}</span></p>
             <p className="mt-1 text-xs text-muted">Lessons</p>
@@ -391,7 +396,7 @@ export default function HomePage() {
                   const progress = lessons.length > 0 ? (completedLessons / lessons.length) * 100 : 0;
 
                   return (
-                    <a key={surah.id} href={`/lesson/${surah.id}`}>
+                    <Link key={surah.id} href={`/lesson/${surah.id}`}>
                       <Card
                         pressable
                         className={cn(isComplete && 'bg-success/5')}
@@ -421,7 +426,7 @@ export default function HomePage() {
                           </div>
                         )}
                       </Card>
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
@@ -437,7 +442,7 @@ export default function HomePage() {
                   const progress = lessons.length > 0 ? (completedLessons / lessons.length) * 100 : 0;
 
                   return (
-                    <a
+                    <Link
                       key={surah.id}
                       href={`/lesson/${surah.id}`}
                       className={cn(
@@ -463,7 +468,7 @@ export default function HomePage() {
                         )}
                         {isComplete && <CheckIcon size={12} className="text-success" />}
                       </div>
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
@@ -499,7 +504,7 @@ export default function HomePage() {
                 : '';
 
               return (
-                <a key={juz.juzNumber} href={`/juz/${juz.juzNumber}`}>
+                <Link key={juz.juzNumber} href={`/juz/${juz.juzNumber}`}>
                   <Card
                     pressable
                     className={cn(isComplete && 'bg-success/5')}
@@ -521,7 +526,7 @@ export default function HomePage() {
                       </div>
                     )}
                   </Card>
-                </a>
+                </Link>
               );
             })}
           </div>

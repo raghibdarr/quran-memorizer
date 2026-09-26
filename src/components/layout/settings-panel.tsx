@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useSettingsStore } from '@/stores/settings-store';
 import { downloadBackup, importBackup } from '@/lib/backup';
+import { rehydrateStores } from '@/lib/sync/rehydrate';
 import type { ArabicScriptStyle } from '@/types/quran';
 import { SettingsIcon } from '@/components/ui/icons';
 import { RECITERS } from '@/lib/audio';
@@ -86,8 +87,9 @@ export default function SettingsPanel() {
     try {
       const parsed = JSON.parse(await file.text());
       const restored = importBackup(parsed);
-      setBackupMsg(`Restored ${restored} data set${restored === 1 ? '' : 's'} — reloading…`);
-      setTimeout(() => window.location.reload(), 700);
+      setBackupMsg(`Restored ${restored} data set${restored === 1 ? '' : 's'}`);
+      // Rehydrate in place — a reload inside the native shell lands on the root page
+      await rehydrateStores();
     } catch (err) {
       setBackupMsg(err instanceof Error ? err.message : 'Import failed — is this a Takrar backup file?');
     }

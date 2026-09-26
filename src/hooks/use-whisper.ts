@@ -61,10 +61,9 @@ export function useWhisper(): UseWhisperReturn {
     setIsLoading(true);
     setError(null);
 
-    const worker = new Worker(
-      new URL('@/lib/whisper-worker.ts', import.meta.url),
-      { type: 'module' }
-    );
+    // Plain-JS worker in /public — the bundler shipped the old TypeScript worker
+    // through uncompiled, so voice recognition could never load in production
+    const worker = new Worker('/workers/whisper-worker.js', { type: 'module' });
     worker.onmessage = handleMessage;
     worker.postMessage({ type: 'load' });
     workerRef.current = worker;

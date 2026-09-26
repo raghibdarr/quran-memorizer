@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { JuzMeta, SurahMeta } from '@/types/quran';
@@ -128,8 +130,8 @@ export default function PlanDashboardPage() {
             <h1 className="text-xl font-bold text-teal">{goalLabel}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/plan/edit" className="text-xs font-semibold text-teal hover:underline">Edit goal</a>
-            <a href="/" className="text-xs font-semibold text-muted hover:text-foreground">Home</a>
+            <Link href="/plan/edit" className="text-xs font-semibold text-teal hover:underline">Edit goal</Link>
+            <Link href="/" className="text-xs font-semibold text-muted hover:text-foreground">Home</Link>
           </div>
         </div>
       </header>
@@ -441,7 +443,7 @@ export default function PlanDashboardPage() {
               const pct = s.total > 0 ? (s.done / s.total) * 100 : 0;
               const complete = s.done === s.total && s.total > 0;
               return (
-                <a
+                <Link
                   key={s.surahId}
                   href={`/lesson/${s.surahId}`}
                   className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-foreground/5"
@@ -460,7 +462,7 @@ export default function PlanDashboardPage() {
                   ) : (
                     <ArrowRightIcon size={12} className="text-muted" />
                   )}
-                </a>
+                </Link>
               );
             })}
           </div>

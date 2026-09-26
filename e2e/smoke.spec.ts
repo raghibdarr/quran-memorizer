@@ -20,7 +20,7 @@ test.describe('smoke', () => {
     })
 
     // Cold load straight into Al-Ikhlas lesson 1 (avoids the home onboarding overlay)
-    await page.goto('/lesson/112/1')
+    await page.goto('/learn?s=112&l=1')
     await expect(page.getByText('Listen & Absorb')).toBeVisible()
 
     // → Understand

@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useMemo, useState } from 'react';
 import type { JuzMeta, SurahMeta } from '@/types/quran';
 import { usePlanStore } from '@/stores/plan-store';
@@ -17,6 +19,7 @@ import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import { ArrowRightIcon, BookIcon, CheckIcon, RefreshIcon, StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import { lessonHref } from '@/lib/routes';
 
 export default function TodaysPlanCard() {
   const plan = usePlanStore((s) => s.plan);
@@ -102,12 +105,12 @@ export default function TodaysPlanCard() {
                 : `${itemsRemaining} ${itemsRemaining === 1 ? 'task' : 'tasks'} left`}
           </p>
         </div>
-        <a
+        <Link
           href="/plan"
           className="text-[11px] font-semibold text-teal hover:underline"
         >
           Manage
-        </a>
+        </Link>
       </div>
 
       {/* Overall progress (maintain plans have no lesson track) */}
@@ -168,7 +171,7 @@ export default function TodaysPlanCard() {
       {/* Checklist */}
       <div className="mt-3 space-y-1.5">
         {reviewCount > 0 && (
-          <a
+          <Link
             href="/review?start=1"
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
           >
@@ -189,11 +192,11 @@ export default function TodaysPlanCard() {
               </p>
             </div>
             <ArrowRightIcon size={14} className="shrink-0 text-muted" />
-          </a>
+          </Link>
         )}
 
         {todaysPlan.revisions.map((rev) => (
-          <a
+          <Link
             key={`rev-${rev.surahId}`}
             href={`/plan/revise/${rev.surahId}`}
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
@@ -216,16 +219,16 @@ export default function TodaysPlanCard() {
               </p>
             </div>
             <ArrowRightIcon size={14} className="shrink-0 text-muted" />
-          </a>
+          </Link>
         ))}
 
         {todaysPlan.newLessons.map((lesson) => {
           const surah = surahById.get(lesson.surahId);
           const done = todaysPlan.completedNewLessonIds.includes(lesson.lessonId);
           return (
-            <a
+            <Link
               key={lesson.lessonId}
-              href={`/lesson/${lesson.surahId}/${lesson.lessonNumber}`}
+              href={lessonHref(lesson.surahId, lesson.lessonNumber)}
               className={cn(
                 'flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
                 done && 'opacity-60',
@@ -258,7 +261,7 @@ export default function TodaysPlanCard() {
                 </p>
               </div>
               <ArrowRightIcon size={14} className="shrink-0 text-muted" />
-            </a>
+            </Link>
           );
         })}
 

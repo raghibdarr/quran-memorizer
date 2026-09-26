@@ -7,6 +7,7 @@ import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { SyncProvider } from '@/components/sync-provider';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
 import { useDayRollover } from '@/hooks/use-day-rollover';
+import { initNativeShell, isNative } from '@/lib/native';
 import type { LessonReviewCard } from '@/types/quran';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -31,9 +32,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       window.history.replaceState({}, '', window.location.pathname);
     }
 
-    // Register service worker (production only); unregister on localhost
+    // Service worker: web production only. Unregistered on localhost AND inside the
+    // native shells — there the whole app is already bundled on-device
     if ('serviceWorker' in navigator) {
-      if (window.location.hostname === 'localhost') {
+      if (window.location.hostname === 'localhost' || isNative()) {
         navigator.serviceWorker.getRegistrations().then((regs) =>
           regs.forEach((r) => r.unregister())
         );
@@ -41,6 +43,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       }
     }
+
+    return initNativeShell();
   }, []);
 
   // Migration: create lesson review cards for already-completed lessons (runs once)

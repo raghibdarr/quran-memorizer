@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import type { Surah, Ayah, LessonDef, LessonPhase } from '@/types/quran';
@@ -17,6 +19,7 @@ import UnderstandPhase from './phases/understand-phase';
 import ChunkPhase from './phases/chunk-phase';
 import TestPhase from './phases/test-phase';
 import CompletePhase from './phases/complete-phase';
+import { lessonHref } from '@/lib/routes';
 
 interface LessonContainerProps {
   surah: Surah;
@@ -47,10 +50,9 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     const label = totalLessons > 1
       ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
       : surah.nameSimple;
-    const fromSuffix = fromParam ? `?from=${fromParam}` : '';
     setLastActivity({
       type: 'lesson',
-      url: `/lesson/${surah.id}/${lessonDef.lessonNumber}${fromSuffix}`,
+      url: lessonHref(surah.id, lessonDef.lessonNumber, fromParam),
       label,
       timestamp: Date.now(),
     });
@@ -161,9 +163,9 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
       <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
-            <a href={backUrl} className="text-sm text-muted hover:text-foreground">
+            <Link href={backUrl} className="text-sm text-muted hover:text-foreground">
               ← Back
-            </a>
+            </Link>
             <h2 className="text-sm font-semibold text-teal">{lessonTitle}</h2>
             <div className="flex items-center gap-1">
               <button

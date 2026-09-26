@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 function BookIcon() {
   return (
@@ -65,6 +66,7 @@ const CARDS = [
 ];
 
 export default function OnboardingOverlay() {
+  const router = useRouter();
   const [visible, setVisible] = useState(false);
   const [step, setStep] = useState(0);
   const touchStartX = useRef(0);
@@ -87,7 +89,7 @@ export default function OnboardingOverlay() {
       // Final card promises "pick your first surah and start" — deliver on it
       // instead of dropping the user back on Home to figure it out.
       dismiss();
-      window.location.href = '/lesson/1';
+      router.push('/lesson/1');
     }
   };
 

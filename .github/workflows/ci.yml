@@ -28,3 +28,10 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
+      # The static export is the shipped artifact (web AND native) — smoke it under
+      # both hosting models, including Capacitor-style root-index fallback routing
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
+      - run: npm run test:e2e:static

@@ -1,12 +1,22 @@
 [build]
   # Deploy gate: main auto-deploys, so a red test or type error must fail the build
   command = "npm run test:run && npx tsc --noEmit && npm run build"
-  publish = ".next"
+  # Static export — the same out/ bundle the Capacitor apps ship (M11a)
+  publish = "out"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Lessons moved from /lesson/<surah>/<lesson> to /learn?s=&l= (src/lib/routes.ts);
+# keep old bookmarks and shared links working
+[[redirects]]
+  from = "/lesson/:surah/:lesson"
+  to = "/learn?s=:surah&l=:lesson"
+  status = 301
 
 [[headers]]
   for = "/sw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

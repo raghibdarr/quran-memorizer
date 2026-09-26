@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 import { useReviewStore } from '@/stores/review-store';
 import { HomeIcon, BookIcon, StarIcon, BarChartIcon } from '@/components/ui/icons';
@@ -27,7 +29,7 @@ export default function BottomNav() {
           const showBadge = item.href === '/review' && dueCount > 0;
 
           return (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className={cn(
@@ -44,7 +46,7 @@ export default function BottomNav() {
                 )}
               </div>
               <span className={cn('text-[11px]', isActive ? 'font-semibold' : 'font-medium')}>{item.label}</span>
-            </a>
+            </Link>
           );
         })}
       </div>

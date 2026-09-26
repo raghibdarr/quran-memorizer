@@ -4,9 +4,32 @@
     {
       "name": "takrar",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "cwd": "C:\\Users\\raghi\\quran-memorizer",
       "port": 3000
+    },
+    {
+      "name": "takrar-native",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/serve-static.mjs",
+        "native",
+        "4174"
+      ],
+      "port": 4174
+    },
+    {
+      "name": "takrar-web-static",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/serve-static.mjs",
+        "web",
+        "4173"
+      ],
+      "port": 4173
     }
   ]
 }

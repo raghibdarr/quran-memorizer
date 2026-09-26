@@ -1,42 +1,30 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 export default function AuthCallbackPage() {
+  const router = useRouter()
+
   useEffect(() => {
     const handleCallback = async () => {
       const supabase = createClient()
 
-      // Supabase PKCE flow: the hash or search params contain the auth data
-      // Try exchangeCodeForSession first, then check if session already exists
-      const url = new URL(window.location.href)
-      const code = url.searchParams.get('code')
+      // Supabase PKCE flow: the search params carry the auth code. Whatever the
+      // outcome (code exchanged, session already set via hash, or nothing), go home.
+      const code = new URL(window.location.href).searchParams.get('code')
+      if (code) await supabase.auth.exchangeCodeForSession(code)
+      else await supabase.auth.getSession()
 
-      if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession(code)
-        if (!error) {
-          window.location.href = '/'
-          return
-        }
-      }
-
-      // Fallback: check if session was set via hash fragment (implicit flow)
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session) {
-        window.location.href = '/'
-        return
-      }
-
-      // No session — redirect home anyway
-      window.location.href = '/'
+      router.replace('/')
     }
 
     handleCallback()
-  }, [])
+  }, [router])
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-cream">
+    <div className="flex min-h-dvh items-center justify-center bg-cream">
       <div className="h-8 w-8 animate-spin rounded-full border-2 border-teal border-t-transparent" />
     </div>
   )

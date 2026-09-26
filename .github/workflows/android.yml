@@ -1,0 +1,39 @@
+name: Android debug APK
+
+# Builds an installable debug APK from the static export (M11a). The owner's
+# machine has no Android SDK; GitHub's ubuntu runners do. Download the artifact
+# from the run page and sideload it (Settings → install unknown apps).
+# Runs manually, or on pushes to mobile/** branches — never deploys anything.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['mobile/**']
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - run: npm run build
+        env:
+          # Public by design (anon key) — set as repo secrets to get working sync in the APK
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://example.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'ci-placeholder' }}
+      - run: npx cap sync android
+      - run: ./gradlew assembleDebug
+        working-directory: android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: takrar-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
