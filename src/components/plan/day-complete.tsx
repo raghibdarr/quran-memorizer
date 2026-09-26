@@ -22,7 +22,7 @@ const timeLabel = (hour: number, minute: number) =>
  * The reminder offer (M8), asked at an earned moment — right after finishing a
  * day — rather than on first launch, and only once: either answer is final.
  */
-function ReminderOffer() {
+export function ReminderOffer() {
   const enabled = useReminderStore((s) => s.enabled);
   const answered = useReminderStore((s) => s.offerAnswered);
   const answerOffer = useReminderStore((s) => s.answerOffer);

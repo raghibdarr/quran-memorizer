@@ -13,7 +13,7 @@ import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
-import { DayCompleteSummary } from '@/components/plan/day-complete';
+import { DayCompleteSummary, ReminderOffer } from '@/components/plan/day-complete';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
 import { haptic } from '@/lib/haptics';
 
@@ -32,7 +32,14 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
   const markPlanLessonCompleted = usePlanStore((s) => s.markLessonCompleted);
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const { plan, dayStatus } = useTodaysPlan();
+  const { plan, dayStatus, today } = useTodaysPlan();
+  const markDayCelebrated = useStatsStore((s) => s.markDayCelebrated);
+  const dayDoneHere = !!plan && dayStatus.mode === 'plan' && dayStatus.complete;
+  // This screen IS the day-complete moment when the lesson finished the day —
+  // Home must not celebrate the same day a second time
+  useEffect(() => {
+    if (dayDoneHere) markDayCelebrated(today);
+  }, [dayDoneHere, markDayCelebrated, today]);
 
   // Check which ayahs in this lesson are weak/shaky
   const weakAyahs = useMemo(() => {
@@ -86,6 +93,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
             <div className="mt-2">
               <DayCompleteSummary />
             </div>
+            <ReminderOffer />
           </div>
         ) : dayStatus.remaining > 0 ? (
           <Link href="/" className="w-full rounded-xl border border-teal/20 bg-teal/5 p-3 text-sm font-medium text-teal">
