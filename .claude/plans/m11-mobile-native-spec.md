@@ -172,22 +172,22 @@ What the spike must change / measure:
 
 ## 5c. M11b status — ✅ DONE 2026-09-26 (navigation shell)
 
-- **Screen transitions** via React  in a root  (templates remount per
-  route; layouts don't). Direction from  route depth (tab roots 0, sections 1, flows 2):
-  deeper = push (new screen in from the right over the old receding 28% + dimming, 320ms nav-ease),
-  shallower = pop, tab↔tab = crossfade. Every internal link goes through ,
-  which tags the direction automatically.
-- **Back** ( / , edge swipe, Android hardware back): an in-app history stack
-  () pops when possible, else goes to the screen's parent. React renders history
-  traversals synchronously (scroll restoration) and never runs view transitions for them, so
-   starts the view transition by hand around history.back() (root snapshots,
-   CSS). Gotcha recorded in code: rAF never fires while a VT callback is pending.
-- **Tab bar** named : anchored during screen moves, slides away into full-screen flows
-  (lesson, revision, review session, setup/edit) and back; bottom-pinned UI uses .
-- **Routed review sessions**:  (legacy  redirects).
+- **Screen transitions** via React `<ViewTransition>` in a root `src/app/template.tsx` (templates
+  remount per route; layouts don't). Direction from `src/lib/nav.ts` route depth (tab roots 0,
+  sections 1, flows 2): deeper = push (new screen in from the right over the old receding 28% +
+  dimming, 320ms nav-ease), shallower = pop, tab↔tab = crossfade. Every internal link goes through
+  `src/components/app-link.tsx`, which tags the direction automatically.
+- **Back** (`useAppBack` / `BackButton`, edge swipe, Android hardware back): an in-app history stack
+  (`src/lib/nav-history.ts`) pops when possible, else goes to the screen's parent. React renders
+  history traversals synchronously (scroll restoration) and never runs view transitions for them, so
+  `animatedHistoryBack` starts the view transition by hand around history.back() (root snapshots,
+  `html[data-nav-dir]` CSS). Gotcha recorded in code: rAF never fires while a VT callback is pending.
+- **Tab bar** named `tab-bar`: anchored during screen moves, slides away into full-screen flows
+  (lesson, revision, review session, setup/edit) and back; bottom-pinned UI uses `--tabbar-clearance`.
+- **Routed review sessions**: `/review/session?stream|surah|lesson|from` (legacy `/review?start=1` redirects).
 - **Edge-swipe-back** (iOS app + installed iOS PWA; Android keeps its system gesture): finger-tracked,
   commit at 35% width or a flick, spring-back otherwise.
-- **Android hardware back**: Capacitor  → animated pop, or exit at the root.
+- **Android hardware back**: Capacitor `backButton` → animated pop, or exit at the root.
 - Verified by Playwright probes: push/pop/tab/into-flow animations, edge-swipe cancel + commit.
 - Deferred: the surah page's in-tab practice selection→session stays an in-page view (not routed yet);
   scroll restoration on back relies on Next defaults; collapsing large-title headers are M11d.
