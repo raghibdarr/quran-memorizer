@@ -24,7 +24,8 @@ import { useAppBack } from '@/hooks/use-app-back';
 
 type Step = 1 | 2 | 3 | 4;
 
-const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+// Two letters: "S M T W T F S" left users guessing which S is Sunday (persona test)
+const DAY_LABELS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 /** Without in-app history, setup exits to Home */
@@ -704,6 +705,8 @@ export default function PlanSetupPage() {
                     <button
                       key={d}
                       onClick={() => toggleStudyDay(d)}
+                      aria-label={DAY_NAMES[d]}
+                      aria-pressed={selected}
                       className={cn(
                         'flex-1 rounded-lg border-2 py-2 text-xs font-semibold transition-colors',
                         selected

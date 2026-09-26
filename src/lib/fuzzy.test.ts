@@ -68,3 +68,11 @@ describe('fuzzySurahScore', () => {
     expect(topResult('nas')).toBe(114);
   });
 });
+
+describe('search honorifics', () => {
+  it('"Yasin sharif" still finds Ya-Sin', () => {
+    const target = { id: 36, name: 'Ya-Sin', translation: 'Ya Sin' };
+    expect(fuzzySurahScore('Yasin sharif', target)).toBeGreaterThan(0);
+    expect(fuzzySurahScore('yaseen shareef', target)).toBeGreaterThan(0);
+  });
+});

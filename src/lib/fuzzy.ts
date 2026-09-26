@@ -79,7 +79,8 @@ export function fuzzySurahScore(query: string, target: FuzzySurahTarget): number
   if (/^\d+$/.test(rawQ)) return target.id === Number(rawQ) ? 100 : 0;
   if (target.arabic && target.arabic.includes(rawQ)) return 95;
 
-  const q = normalizeName(rawQ);
+  // Honorifics people type after a name ("Yasin sharif") aren't part of it
+  const q = normalizeName(rawQ.replace(/\b(shari+f|sharee?f|sharief)\b/gi, '').trim() || rawQ);
   if (!q) return 0;
   const name = normalizeName(target.name);
   const core = stripArticle(name);

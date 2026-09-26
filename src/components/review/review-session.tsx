@@ -481,7 +481,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
                 {worstRating === 'missed' && `No worries — next review ${nextReviewLabel}.`}
               </div>
               <Button onClick={handleNext} className="w-full">
-                {isLastCard ? 'Finish Review' : isLastInBatch ? 'Finish Batch' : 'Next Lesson'}
+                {isLastCard ? 'Finish Review' : isLastInBatch ? 'Finish Batch' : 'Next review'}
               </Button>
             </div>
           )}

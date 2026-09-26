@@ -25,7 +25,9 @@ import { addDaysIso } from '@/lib/dates';
 import { NAV_BACK, NAV_FORWARD } from '@/lib/nav';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
 
-const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+// Two letters: "S M T W T F S" left users guessing which S is Sunday (persona test)
+const DAY_LABELS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export default function PlanDashboardPage() {
   const router = useRouter();
@@ -324,6 +326,8 @@ export default function PlanDashboardPage() {
                 <button
                   key={d}
                   onClick={() => toggleStudyDay(d)}
+                  aria-label={DAY_NAMES[d]}
+                  aria-pressed={selected}
                   className={cn(
                     'flex-1 rounded-lg border-2 py-2 text-xs font-semibold transition-colors',
                     selected
