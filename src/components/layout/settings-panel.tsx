@@ -64,6 +64,9 @@ function ReminderSettings() {
   );
 }
 
+/** Large enough for low vision; the preview line shows what each step means */
+const MAX_ARABIC_SCALE = 2;
+
 const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
   { value: 'tajweed', label: 'Tajweed' },
   { value: 'uthmani', label: 'Uthmani' },
@@ -207,16 +210,27 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => { haptic.selection(); setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10)); }}
                   disabled={arabicFontSize <= 0.8}
+                  aria-label="Smaller Arabic text"
                   className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   −
                 </button>
-                <div className="flex-1 text-center text-xs text-muted">
-                  {Math.round(arabicFontSize * 100)}%
+                {/* Live preview: the stepper changes something you can see */}
+                <div className="min-w-0 flex-1 overflow-hidden text-center">
+                  <p
+                    dir="rtl"
+                    className={cn('leading-loose text-foreground', arabicScript === 'indopak' ? 'arabic-text-indopak' : 'arabic-text')}
+                    style={{ fontSize: '1.125rem' }}
+                    aria-hidden
+                  >
+                    {arabicScript === 'indopak' ? 'بِسۡمِ اللّٰہِ الرَّحۡمٰنِ الرَّحِیۡمِ' : 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'}
+                  </p>
+                  <p className="text-[11px] text-muted">{Math.round(arabicFontSize * 100)}%</p>
                 </div>
                 <button
-                  onClick={() => { haptic.selection(); setArabicFontSize(Math.min(1.6, Math.round((arabicFontSize + 0.1) * 10) / 10)); }}
-                  disabled={arabicFontSize >= 1.6}
+                  onClick={() => { haptic.selection(); setArabicFontSize(Math.min(MAX_ARABIC_SCALE, Math.round((arabicFontSize + 0.1) * 10) / 10)); }}
+                  disabled={arabicFontSize >= MAX_ARABIC_SCALE}
+                  aria-label="Larger Arabic text"
                   className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   +

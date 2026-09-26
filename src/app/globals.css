@@ -11,7 +11,7 @@
   --c-gold-deep: #8A6320;
   --c-success: #2D7A4F;
   --c-miss: #B5482E;
-  --c-muted: #8A8A85;
+  --c-muted: #6F6F6A; /* ≥4.5:1 on cream and card (was #8A8A85, 3.4:1) */
   --c-card: #ffffff;
   --c-card-raised: #FFFDF8;
   --c-ink: #36332C;

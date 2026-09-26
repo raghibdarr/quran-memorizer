@@ -42,7 +42,7 @@ export default function SegmentedControl<T extends string>({
             onChange(o.value);
           }}
           className={cn(
-            'pressable relative z-[1] flex-1 rounded-lg py-2 text-sm font-semibold',
+            'pressable relative z-[1] min-h-11 flex-1 rounded-lg py-2 text-sm font-semibold',
             o.value === value ? 'text-on-teal' : 'text-muted hover:text-foreground'
           )}
         >

@@ -341,7 +341,7 @@ export default function HomePage() {
                       key={option}
                       onClick={() => setSort(option)}
                       className={cn(
-                        'pressable shrink-0 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors',
+                        'pressable hit-44 shrink-0 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors',
                         sort === option
                           ? 'ink-border bg-teal text-on-teal'
                           : 'border border-foreground/15 bg-card text-muted hover:text-foreground'
