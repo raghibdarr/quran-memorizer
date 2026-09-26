@@ -5,8 +5,10 @@ interface IconProps {
 
 export function FlameIcon({ size = 16, className = '' }: IconProps) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 23c-4.97 0-8-3.03-8-7 0-2.45 1.4-5.1 3.03-7.13C8.5 7.17 10 5.5 10.73 3.62c.16-.4.72-.4.87 0C12.37 5.5 13.5 7.17 15 8.87 16.6 10.9 18 13.55 18 16c0 3.97-3.03 7-6 7zm0-2c2.76 0 4-2.24 4-5 0-1.52-.76-3.27-2.1-5.07-.5-.67-1.04-1.3-1.52-1.84a24.5 24.5 0 0 0-1.48 1.84C9.56 12.73 8 14.48 8 16c0 2.76 1.24 5 4 5z" />
+    // Curling tip + side flicker + lighter inner flame — the old symmetric shape read as a water drop
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M12.6 1.8C13.3 4.4 15.6 6.3 17.2 8.4 18.8 10.5 19.6 12.6 19.6 14.9 19.6 19.1 16.2 22.2 12 22.2 7.8 22.2 4.4 19.1 4.4 14.9 4.4 12.3 5.5 10.2 7.1 8.6 7.2 10.1 7.9 11.3 9 11.9 8.7 8.2 10.2 4.6 12.6 1.8Z" />
+      <path fill="#fff" fillOpacity={0.5} d="M12 20.4C10 20.4 8.5 19 8.5 17.2 8.5 15.6 9.5 14.3 10.8 13.1 11 14.2 11.6 14.9 12.4 15.2 12.3 13.8 12.8 12.5 13.7 11.5 14.8 13.1 15.5 15 15.5 17 15.5 19 14 20.4 12 20.4Z" />
     </svg>
   );
 }

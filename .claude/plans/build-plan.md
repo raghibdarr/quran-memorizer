@@ -423,6 +423,15 @@ DEVIATION: the streak still counts any activity (not full plan completion) — f
 - Opportunistic while in audio code: resolve Husary segment-reciter silent fallback — add timing files or remove from `SEGMENT_AUDIO_RECITERS` (tech-debt #11)
 - Fold a hide-words assertion into the existing Playwright smoke, not a new spec (§6.4 addition)
 
+**Candidate data sources (researched 2026-09-26, qud.dev / QUD³ by WiderLabs):** *Quranic Universal
+Audio* — ~57 fully timed recitations (ayah/word/letter), CC BY 4.0 for timings (recordings stay the
+reciters'/hosts'), github.com/QUD-Technologies/quranic-universal-audio; timings are against SURAH-level
+files, so either seek within surah MP3s or slice at build time, and verify word_idx vs our QUL word
+numbering. Would take word-timed reciters 5 → ~57 and enable letter-level highlighting. *Quranic
+Phonemizer* — MIT Python lib, run at build time for per-word tajweed-rule/phoneme metadata ("why is
+this letter coloured?"). Aligner (hosted, no license) and Universal Data (alpha, no license) — not
+usable until licensed; ask on their Discord. Credit line required for CC BY 4.0.
+
 **Scope OUT:** side-by-side mutashabihat distinguish drill (v2, after data-only ships); voice-compare in reviews (deferred — needs Whisper self-hosting first, §6.5/tech-debt #13); recite-full-range blind test (backlog).
 
 **Acceptance criteria:**

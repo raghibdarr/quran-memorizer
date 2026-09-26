@@ -185,7 +185,7 @@ export default function HomePage() {
             <div className="flex items-center gap-2">
               {stats.currentStreak > 0 && (
                 <div className="flex items-center gap-1.5 rounded-full border-[1.5px] border-gold/40 bg-gold/10 px-3 py-1.5">
-                  <FlameIcon size={14} className="text-gold-deep" />
+                  <FlameIcon size={16} className="text-gold-deep" />
                   <span className="text-sm font-bold text-gold-deep">{stats.currentStreak}</span>
                   <span className="text-[10px] text-gold-deep/70">day{stats.currentStreak !== 1 ? 's' : ''}</span>
                 </div>

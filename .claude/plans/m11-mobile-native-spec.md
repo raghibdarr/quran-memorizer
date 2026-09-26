@@ -22,6 +22,10 @@ direction chosen from a two-direction ultracode exploration.
 - B accent 2 — **gliding paper-chip tab indicator**: the active tab sits on a small raised
   tactile chip (ink border + hard 2px shadow) that GLIDES between tab slots on switch
   (~420ms `--spring-pop` overshoot) instead of the highlight teleporting.
+- **OWNER UPDATE 2026-09-26 — tab bar is now a FLOATING GLASS PILL** (reference: the common iOS-style
+  floating tab bar): frosted translucent pill above the home indicator, content visible behind it, active
+  tab on a tinted pill. The accent-2 glide is kept (the tinted pill glides with --spring-pop) but it is
+  no longer an ink-bordered paper chip. Shipped in src/components/layout/bottom-nav.tsx.
 - REJECTED from B (owner, explicitly): whole-screen rotation on navigation ("gimmicky").
   No screen-level card dealing, no toss-to-go-back rotation.
 
