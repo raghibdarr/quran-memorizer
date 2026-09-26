@@ -101,7 +101,7 @@ test.describe('smoke', () => {
       await page.getByRole('button', { name: /rate my recall/i }).click()
       await page.getByRole('button', { name: 'Got it' }).click()
       await page.getByRole('button', { name: 'Submit Review' }).click()
-      await page.getByRole('button', { name: i < 9 ? 'Next Lesson' : 'Finish Batch' }).click()
+      await page.getByRole('button', { name: i < 9 ? 'Next review' : 'Finish Batch' }).click()
     }
 
     // The break: explicit framing, ratings already saved, a real choice
