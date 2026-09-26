@@ -434,7 +434,17 @@ with streak explained, renegotiated deadline, no "-Nd", first session capped at 
 - Mutashabihat v1, data-only: known-pairs dataset shipped; "this ayah has a twin in Surah X" surfaced in Understand/Test with the differing word highlighted via WordText (§4b-2)
 - Ayah-level quick review: wire the existing unused ayah cards/store into a 5-minute "drill your weakest ayat" session, seeded by M5 leech flags (§4b-7; tech-debt #15 — wire it or delete it)
 - Historical weak-spot log: persist per-ayah miss history into a "recurring weak ayat" view — Tarteel paywalls this; our data already flows (§4b-4); if session budget runs out, explicitly bump to backlog
-- Opportunistic while in audio code: resolve Husary segment-reciter silent fallback — add timing files or remove from `SEGMENT_AUDIO_RECITERS` (tech-debt #11)
+- **QUD Universal Audio timings (added 2026-09-26 at the owner's prompt):** a build-time script
+  (`scripts/import-qud-timings.mjs`) converts QUD word timings into our per-reciter segment-timing
+  format, for reciters whose audio we can serve (EveryAyah per-ayah files re-based from the surah-level
+  offsets, or seek within the reciter's surah MP3s). Word indices mapped to our QUL word numbering
+  with a golden test on three surahs (incl. one with waqf-split ayahs). Word-timed reciters go from 5
+  toward ~57; picker shows which reciters support word highlighting. CC BY 4.0 credit added to the
+  settings attribution line. Also resolves the Husary segment-reciter silent fallback (tech-debt #11)
+  if QUD covers Husary; otherwise remove Husary from `SEGMENT_AUDIO_RECITERS`.
+- **Stretch — tajweed explainer (QUD Phonemizer, MIT):** a build-time Python step emits per-word
+  tajweed-rule tags; tapping a coloured letter in tajweed script shows the rule's name + one-line
+  explanation. Bump to backlog if the session budget runs out.
 - Fold a hide-words assertion into the existing Playwright smoke, not a new spec (§6.4 addition)
 
 **Candidate data sources (researched 2026-09-26, qud.dev / QUD³ by WiderLabs):** *Quranic Universal
@@ -444,7 +454,8 @@ files, so either seek within surah MP3s or slice at build time, and verify word_
 numbering. Would take word-timed reciters 5 → ~57 and enable letter-level highlighting. *Quranic
 Phonemizer* — MIT Python lib, run at build time for per-word tajweed-rule/phoneme metadata ("why is
 this letter coloured?"). Aligner (hosted, no license) and Universal Data (alpha, no license) — not
-usable until licensed; ask on their Discord. Credit line required for CC BY 4.0.
+usable until licensed; ask on their Discord. Credit line required for CC BY 4.0. The two usable ones
+are now Scope IN items above; letter-level highlighting stays backlog.
 
 **Scope OUT:** side-by-side mutashabihat distinguish drill (v2, after data-only ships); voice-compare in reviews (deferred — needs Whisper self-hosting first, §6.5/tech-debt #13); recite-full-range blind test (backlog).
 
@@ -453,6 +464,7 @@ usable until licensed; ask on their Discord. Credit line required for CC BY 4.0.
 - Repeat count / pause / A-B loop settings audibly change playback and persist; grep confirms one source of truth for playback speed
 - A known mutashabih ayah shows its twin reference with the differing word highlighted in Understand (fixture-driven preview)
 - "Drill weakest ayat" launches from `/review`, consumes ayah cards seeded by leech flags, updates their scheduling (unit test on card consumption), completes in ~5 minutes
+- QUD import: golden test pins word-index mapping on three surahs; at least 20 reciters word-highlight in Build with audible/visual sync checked on a long ayah; the CC BY 4.0 credit names QUD
 
 **Verification:** extended Playwright smoke green in CI; manual audio-loop test on mobile Safari + Android Chrome; store inspection of ayah-card state changes.
 
