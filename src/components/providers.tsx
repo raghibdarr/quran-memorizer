@@ -10,6 +10,7 @@ import { useDayRollover } from '@/hooks/use-day-rollover';
 import { initNativeShell, isNative } from '@/lib/native';
 import { installPressHaptics } from '@/lib/haptics';
 import AppBadgeSync from '@/components/app-badge-sync';
+import ReminderSync from '@/components/reminder-sync';
 import EdgeSwipeBack from '@/components/edge-swipe-back';
 import { useNavHistoryTracking } from '@/hooks/use-app-back';
 import type { LessonReviewCard } from '@/types/quran';
@@ -138,6 +139,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SyncProvider>
       <AppBadgeSync />
+      <ReminderSync />
       <EdgeSwipeBack />
       {children}
     </SyncProvider>

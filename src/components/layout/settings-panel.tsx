@@ -11,6 +11,58 @@ import { RECITERS } from '@/lib/audio';
 import { cn } from '@/lib/cn';
 import { haptic, hapticsEnabled, setHapticsEnabled } from '@/lib/haptics';
 import { isNative } from '@/lib/native';
+import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+
+/** Daily reminder (M8, native only): on/off + time. Permission is asked on the switch, never unprompted. */
+function ReminderSettings() {
+  const enabled = useReminderStore((s) => s.enabled);
+  const time = useReminderStore((s) => s.time);
+  const setEnabled = useReminderStore((s) => s.setEnabled);
+  const setTime = useReminderStore((s) => s.setTime);
+  const [blocked, setBlocked] = useState(false);
+
+  const toggle = async () => {
+    if (enabled) {
+      setEnabled(false);
+      return;
+    }
+    const result = await turnOnReminders();
+    setBlocked(result === 'blocked');
+  };
+
+  return (
+    <div className="mt-5">
+      <label className="flex min-h-11 cursor-pointer items-center justify-between">
+        <span>
+          <span className="block text-sm text-foreground">Daily reminder</span>
+          <span className="block text-xs text-muted">Only on days with something to do</span>
+        </span>
+        <Toggle enabled={enabled} onToggle={toggle} />
+      </label>
+      {enabled && (
+        <label className="mt-1 flex min-h-11 items-center justify-between">
+          <span className="text-sm text-foreground">Time</span>
+          <input
+            type="time"
+            value={`${pad(time.hour)}:${pad(time.minute)}`}
+            onChange={(e) => {
+              const [h, m] = e.target.value.split(':').map(Number);
+              if (Number.isFinite(h) && Number.isFinite(m)) setTime({ hour: h, minute: m });
+            }}
+            className="min-h-11 rounded-xl bg-foreground/5 px-3 text-base font-medium text-foreground"
+          />
+        </label>
+      )}
+      {blocked && (
+        <p className="mt-1 text-xs text-muted">
+          Notifications are turned off for Takrar. Allow them in your phone&apos;s settings, then try again.
+        </p>
+      )}
+    </div>
+  );
+}
 
 const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
   { value: 'tajweed', label: 'Tajweed' },
@@ -21,6 +73,9 @@ const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
 function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void }) {
   return (
     <button
+      type="button"
+      role="switch"
+      aria-checked={enabled}
       onClick={onToggle}
       className={cn(
         'relative h-7 w-12 shrink-0 rounded-full transition-colors',
@@ -217,6 +272,8 @@ export default function SettingsPanel() {
                 </label>
               )}
             </div>
+
+            {isNative() && <ReminderSettings />}
 
             {/* Daily Goal */}
             <div className="mt-5">

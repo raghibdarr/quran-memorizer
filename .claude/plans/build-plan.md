@@ -365,6 +365,23 @@ with streak explained, renegotiated deadline, no "-Nd", first session capped at 
 ### M8 — Reminders: web push, email digest, sync pitch
 **Size:** 2–3 sessions
 
+**STATUS 2026-09-26 — native local reminders ✅ (per §2a revision); web push, email digest and the
+sync pitch still open.** What landed:
+- `src/lib/reminders.ts` (pure, 7 tests): plans the next week of reminders at the user's time by
+  running the app's own planner (computeTodaysPlan / buildReviewQueue) as of each day. Skips days with
+  nothing to do and today once it's done; copy names the streams ("Sabqi: 2 reviews · Manzil: revise
+  Al-Mulk · New: An-Naba lesson 3"); the streak line only on the reminder whose day decides it; after
+  the week, one comeback nudge on the first day M7's gentle re-entry applies (lapse threshold + 1).
+- `src/lib/reminder-notifications.ts` + `src/components/reminder-sync.tsx`: reschedules on every state
+  change and every return to the app (debounced), owns ids 7100–7115 only, taps deep-link in-app.
+- Settings: "Daily reminder" switch + time (native only, per-device store `reminder-prefs`, not
+  synced); permission asked only from that switch or the one-time offer on the day-complete sheet.
+- Android: monochrome status icon `ic_stat_takrar`; SCHEDULE_EXACT_ALARM removed (inexact delivery is
+  fine for a nudge; Play restricts exact alarms).
+- Needs on-device check: permission prompt, delivery at the chosen time, tap routing, reboot survival.
+- Open: sync pitch (blocked in the native app on M11e native OAuth; could ship web-first), optional
+  web push, owner-gated email digest.
+
 **Goal:** Give the SM-2/tier engine a voice — installed-PWA push at the user's hour, a weekly email digest for the fully lapsed — and pitch cloud sync at moments of earned value.
 
 **Why now:** The #1 product gap (zero notification code; "an SRS you're never reminded of silently dies" — §4a-1, audit M23). Deliberately after M3/M6/M7: reminders fired against a contradictory "due" model, with no day-complete state to point at, landing returners in floods, would burn the one-shot notification permission forever. Introduces Takrar's first server secret, so it also waits for M2's hardened sync. Notification content reads M5's tiers ("Sabqi due: An-Naba · 2 manzil surahs"), not a flat count.

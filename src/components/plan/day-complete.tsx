@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useStatsStore } from '@/stores/stats-store';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
@@ -12,6 +12,52 @@ import Button from '@/components/ui/button';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { CheckIcon, FlameIcon } from '@/components/ui/icons';
 import { haptic } from '@/lib/haptics';
+import { isNative } from '@/lib/native';
+import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
+
+const timeLabel = (hour: number, minute: number) =>
+  new Date(2000, 0, 1, hour, minute).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+/**
+ * The reminder offer (M8), asked at an earned moment — right after finishing a
+ * day — rather than on first launch, and only once: either answer is final.
+ */
+function ReminderOffer() {
+  const enabled = useReminderStore((s) => s.enabled);
+  const answered = useReminderStore((s) => s.offerAnswered);
+  const answerOffer = useReminderStore((s) => s.answerOffer);
+  const time = useReminderStore((s) => s.time);
+  const [result, setResult] = useState<'on' | 'blocked' | null>(null);
+
+  if (result === 'on') {
+    return <p className="mt-4 text-xs text-muted">Reminder set for {timeLabel(time.hour, time.minute)} — change it in Settings.</p>;
+  }
+  if (result === 'blocked') {
+    return <p className="mt-4 text-xs text-muted">Notifications are off for Takrar — you can allow them in your phone&apos;s settings.</p>;
+  }
+  if (!isNative() || enabled || answered) return null;
+
+  return (
+    <div className="mt-4 rounded-2xl bg-foreground/5 px-4 py-3">
+      <p className="text-sm font-medium text-foreground">Want a nudge on days with something to do?</p>
+      <div className="mt-2 flex items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={async () => {
+            answerOffer();
+            setResult(await turnOnReminders());
+          }}
+          className="pressable min-h-11 rounded-xl bg-teal/10 px-4 text-sm font-semibold text-teal"
+        >
+          Remind me at {timeLabel(time.hour, time.minute)}
+        </button>
+        <button type="button" onClick={answerOffer} className="min-h-11 px-3 text-sm text-muted">
+          No thanks
+        </button>
+      </div>
+    </div>
+  );
+}
 
 /** One line tying today to the streak and the goal — shared by Home and lesson-complete */
 export function DayCompleteSummary() {
@@ -95,6 +141,7 @@ export default function DayCompleteMoment() {
         <div className="mt-4">
           <DayCompleteSummary />
         </div>
+        <ReminderOffer />
         <Button className="mt-5 w-full" onClick={acknowledge}>
           Alhamdulillah
         </Button>
