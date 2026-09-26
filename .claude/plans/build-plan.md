@@ -17,6 +17,31 @@ Ordering is by irreversible-failure risk for public users, then severity, then d
 6. **Habit loop (M6) → lapse recovery (M7) → reminders (M8)** in that strict order: a push notification must point at a truthful "done today" and land returners in triaged re-entry, not a 34-card flood — the notification permission is one-shot and a bad first impression burns it forever.
 7. **Beginner redesign (M9) and drills (M10) last** — not least important, but their core work needs the M2 regression net (1152-line chunk-phase refactor) and M9's WordText respectively; M1 already blunted persona A's sharpest edges.
 
+### 2a. Revised sequencing — 2026-09-26 (owner: "finish the project end to end, mobile included")
+
+State at resumption: M0–M4 ✅ committed on local `main`, **none pushed** (live site = 2026-07-12 build). Remaining: M5–M10 + M11a–e.
+
+The owner's mobile priority is folded in by interleaving M11 rather than appending it. Order of work:
+
+1. **M11a — static export + Capacitor scaffold (code spike)**, moved to FIRST. The real technical risk
+   is not "can a WebView feel native" but "does this Next.js app export statically": every later
+   milestone must stay export-compatible, so learn it now while it's cheap. Detail: m11 spec §7.
+2. **M5 — retention engine v2.** Overdue: M4's seeding must not reach users without M5's caps (risk #3).
+3. ⛳ **Owner checkpoint A (async — work continues on local main):** push decision for M0–M5,
+   apply migration 002, signed-in sync spot-checks, sideload the debug APK.
+4. **M6 habit loop → M7 lapse recovery** (unchanged order; M6 badging gets a native path too).
+5. **M11b nav shell → M11c sheets & ergonomics → M11d motion & accents** — pulled ahead of M8–M10
+   so welcome-back, drill and reminder screens are born inside the native stack instead of retrofitted.
+   ⛳ **Owner checkpoint B** (required by the M11 spec: on-device tactile-budget + dial tuning).
+   Non-blocking: M8–M10 proceed on default dials meanwhile.
+6. **M8 reminders — REVISED:** the store app uses on-device **local notifications**
+   (`@capacitor/local-notifications`), scheduled from the pure scheduler. No server, no VAPID keys,
+   no secrets — the old infra blocker disappears for the primary platform. Web push becomes optional
+   polish; the email digest stays owner-gated (needs a provider).
+7. **M9 beginner redesign → M10 drills** (unchanged content).
+8. **M11e — store packaging & compliance** (m11 spec §8): account deletion, privacy policy, native
+   OAuth, Sign in with Apple decision, icons/splash, haptics, listings. Gated on owner accounts.
+
 ---
 
 ## 3. Milestones
@@ -144,7 +169,7 @@ Ordering is by irreversible-failure risk for public users, then severity, then d
 ---
 
 ### M4 — Known-surah blocker (B1): known = tracked, revision-first entry paths
-**STATUS: ✅ DONE 2026-07-12** — known surahs now revision-eligible when plan.knownTracking (getRevisionTasks candidates = completed ∪ known; whole-surah scope, lastRevisedAt→createdAt fallback; auto-frequency tier counts known); SM-2 seeding via review-store.seedKnownAyahs → createSeededCard (ease 2.3, reps 1, lastQuality 3 = shaky in health dashboard, lastReview 0 so real reviews win merges, due dates staggered over 7 local midnights) wired into plan setup, browse affordance, and legacy banner — existing cards never overwritten; 'maintain' goal type (3-step setup: pick surahs → rhythm → start; no pace/deadline; knownSurahIds = scope; staggeredLastRevised spreads initial revisions, offset==frequency due immediately); /plan/revise/[surahId] is now a RECALL TEST (PracticeSession full-passage: hidden ayahs → recite → reveal → per-ayah rating feeding the same SM-2 ayah cards; "just mark revised" escape kept) — revision and review are one system; browse-level "I already know this surah" chip on the surah page (in-plan, nothing-learned-yet only; undo keeps ratings); /review empty state routes hafiz to revision not the beginner funnel; surah-page tab renamed Practice→Review (m18); legacy plans gated by an opt-in banner on Today's Plan (knownTracking undefined → "Track them"/"Keep them out", backup pointer included); today's-plan card fixed to render without a lesson track (maintain). 191→201 tests green (acceptance: juz-known → 0 lessons + revision schedule; toggle-off restores lessons; seeded = shaky never strong; stagger spread pinned). Persona-C walkthrough verified in preview: maintain plan in 5 taps → 15 seeded shaky cards + staggered lastRevisedAt → recall test rated got-it/shaky/missed → SM-2 q5/q3/q1 + health bar shows strong/shaky/weak split → lastRevisedAt updated + streak recorded; legacy banner + browse chip + hafiz empty state screenshot-verified.
+**STATUS: ✅ DONE 2026-07-12** — known surahs now revision-eligible when plan.knownTracking (getRevisionTasks candidates = completed ∪ known; whole-surah scope, lastRevisedAt→createdAt fallback; auto-frequency tier counts known); SM-2 seeding via review-store.seedKnownAyahs → createSeededCard (ease 2.3, reps 1, lastQuality 3 = shaky in health dashboard, lastReview 0 so real reviews win merges, due dates staggered over 7 local midnights) wired into plan setup, browse affordance, and legacy banner — existing cards never overwritten; 'maintain' goal type (3-step setup: pick surahs → rhythm → start; no pace/deadline; knownSurahIds = scope; staggeredLastRevised spreads initial revisions, offset==frequency due immediately); /plan/revise/[surahId] is now a RECALL TEST (PracticeSession full-passage: hidden ayahs → recite → reveal → per-ayah rating feeding the same SM-2 ayah cards; "just mark revised" escape kept) — revision and review are one system; browse-level "I already know this surah" chip on the surah page (in-plan, nothing-learned-yet only; undo keeps ratings); /review empty state routes hafiz to revision not the beginner funnel; surah-page tab renamed Practice→Review (m18); legacy plans gated by an opt-in banner on Today's Plan (knownTracking undefined → "Track them"/"Keep them out", backup pointer included); today's-plan card fixed to render without a lesson track (maintain). 181→191 tests green (acceptance: juz-known → 0 lessons + revision schedule; toggle-off restores lessons; seeded = shaky never strong; stagger spread pinned). Persona-C walkthrough verified in preview: maintain plan in 5 taps → 15 seeded shaky cards + staggered lastRevisedAt → recall test rated got-it/shaky/missed → SM-2 q5/q3/q1 + health bar shows strong/shaky/weak split → lastRevisedAt updated + streak recorded; legacy banner + browse chip + hafiz empty state screenshot-verified.
 **Size:** 2–3 sessions
 
 **Goal:** Redefine "known" from hide-everywhere to skip-lessons-but-seed-retention, giving the revision hafiz (persona C) a first-class home.

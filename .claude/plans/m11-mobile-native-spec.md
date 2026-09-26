@@ -117,6 +117,60 @@ Sequencing vs the main plan: M11a can run ANY time (zero code change). M11b-e sh
 follow M0 (deploy gate + data safety) at minimum — a store launch multiplies users of
 whatever data-loss windows remain. Owner prioritizes the rest of the interleave.
 
+## 5a. Packaging architecture (added 2026-09-26, from a codebase survey)
+
+**Decision: bundle a static export inside the native shell; do NOT point Capacitor at the live URL.**
+A remote-URL wrapper fails offline, flashes white on launch, and is the classic App Store 4.2
+("minimum functionality / repackaged website") rejection. A bundled build is offline-first by
+construction and is the same artifact the web deploy serves (one truth for web + native).
+
+Why it's feasible here (verified):
+- No API routes; no Server Actions; all Quran data is client-imported JSON chunks (`quran-data.ts`).
+- `src/lib/supabase/server.ts` has **zero importers** and the browser client keeps its session in
+  localStorage, so `middleware.ts` (a cookie refresh "for Server Components") is dead weight — delete it.
+
+What the spike must change / measure:
+1. `next.config`: `output: 'export'`, `images.unoptimized`, `trailingSlash: true`.
+2. Dynamic routes need `generateStaticParams`, which can't live in `'use client'` files → split
+   each into a server `page.tsx` (params) + client component. Counts: surah 114, juz 30,
+   revise 114, essentials collections, and **lesson/[surahId]/[lessonNum] ≈ 2,259 pages** — measure
+   the export size. Fallback if too heavy: move lesson number to a query param
+   (`/lesson/112/?l=1` under the surah route) so it's 114 pages.
+3. `useSearchParams` pages (review, surah detail) need `<Suspense>` boundaries for export.
+4. Service worker: skip registration inside Capacitor (assets are already local; the existing
+   `hostname === 'localhost'` guard already covers both shells — make it explicit via
+   `Capacitor.isNativePlatform()`).
+5. Netlify: publish `out/` as static (drop the Next runtime plugin); SPA-style 404 handling.
+6. Capacitor: `@capacitor/core`, `cli`, `android`, `ios`; `webDir: 'out'`; generate `android/` and
+   `ios/` projects; disable WKWebView's native swipe-back (conflicts with M11b edge-swipe).
+
+**Build tooling reality (owner's machine is Windows; no JDK / Android SDK / Xcode present):**
+- Android: a GitHub Actions job builds a debug APK on ubuntu (SDK preinstalled) and uploads it as
+  an artifact for sideloading — OR the owner installs Android Studio locally. Either needs an owner OK
+  (the CI route means pushing a non-main branch; that does not trigger a Netlify production deploy).
+- iOS: requires macOS. Options: a macOS GitHub Actions runner + fastlane (needs Apple Developer
+  account secrets for device/TestFlight builds), or any Mac with Xcode. Simulator-only builds need no account.
+
+## 5b. Store compliance checklist (added 2026-09-26 — none of these exist yet)
+
+- [ ] **In-app account deletion** — required by Apple 5.1.1(v) and Google Play. Plan: a
+      `security definer` SQL function `delete_my_account()` (deletes `auth.users` where id = auth.uid();
+      `user_data` cascades) + a confirm sheet in settings. Migration 003, owner applies.
+- [ ] **Privacy policy page** — both stores require a URL. Static `/privacy` route: local-first
+      storage, optional Supabase sync, mic audio processed on-device (Whisper), no ads/tracking.
+- [ ] **Native OAuth** — Google blocks sign-in inside embedded WebViews (`disallowed_useragent`).
+      Use `@capacitor/browser` + a custom-scheme deep link back into the app + `exchangeCodeForSession`.
+      Magic links need the same deep-link handling.
+- [ ] **Apple 4.8** — offering Google sign-in on iOS requires also offering Sign in with Apple.
+      Owner decision: add Apple sign-in (Supabase supports it; needs Apple Developer config) or hide
+      Google on iOS and keep email/password + magic link.
+- [ ] Permission strings: `NSMicrophoneUsageDescription` (voice check) / Android `RECORD_AUDIO`;
+      notification permission (M8).
+- [ ] Icons (adaptive Android, full iOS set), splash, status-bar styling, app name + bundle id
+      (bundle id is permanent after first upload — owner confirms before M11e).
+- [ ] Store listings, screenshots, Play data-safety form, App Privacy labels, content rating.
+- [ ] OWNER: Apple Developer Program ($99/yr), Google Play Console ($25 once), signing keys.
+
 ## 6. Known risks (from the direction's own tradeoffs)
 
 1. Stack navigation on Next.js App Router is the hard part (keeping the parent mounted,
