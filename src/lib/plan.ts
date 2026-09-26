@@ -297,7 +297,10 @@ export function computeTodaysPlan(
       newLessons = [];
       completedNewLessonIds = [];
     }
-    revisions = revisions.slice(0, 1);
+    // Revisions already done today count against the one — otherwise finishing it
+    // just promotes the next due surah and the day never ends
+    const revisedToday = Object.values(plan.lastRevisedAt).filter((ts) => ts >= dayStart.getTime() && ts <= now).length;
+    revisions = revisions.slice(0, Math.max(0, 1 - revisedToday));
   }
 
   // "Nothing left today" — a maintain plan (no new lessons) can complete too

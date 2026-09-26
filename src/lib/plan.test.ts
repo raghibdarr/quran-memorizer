@@ -705,4 +705,13 @@ describe('M7: spread catch-up and returner re-entry', () => {
     expect(back.revisions.length).toBeLessThanOrEqual(1);
     expect(normal.revisions.length).toBe(2);
   });
+
+  it('re-entry: finishing the one revision never pulls in the next (the finish line stays put)', () => {
+    const plan = makePlan({ goalSurahIds: [1, 114], knownSurahIds: [1, 114], knownTracking: true, lastRevisedAt: { 1: NOW - 40 * DAY, 114: NOW - 40 * DAY } });
+    const before = computeTodaysPlan(plan, lessonsFor(3), {}, [], TEST_SURAHS, NOW, { reentryDay: 0 });
+    expect(before.revisions).toHaveLength(1);
+    const revised = { ...plan, lastRevisedAt: { ...plan.lastRevisedAt, [before.revisions[0].surahId]: NOW - 1000 } };
+    const after = computeTodaysPlan(revised, lessonsFor(3), {}, [], TEST_SURAHS, NOW, { reentryDay: 0 });
+    expect(after.revisions).toEqual([]);
+  });
 });
