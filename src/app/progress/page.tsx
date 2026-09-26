@@ -6,6 +6,8 @@ import { useEffect, useState, useMemo } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useReviewStore } from '@/stores/review-store';
+import { usePlanStore } from '@/stores/plan-store';
+import { computeGoalAyahProgress } from '@/lib/plan';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
@@ -28,6 +30,7 @@ export default function ProgressPage() {
   const stats = useStatsStore();
   const lessonCards = useReviewStore((s) => s.lessonCards);
   const ayahCards = useReviewStore((s) => s.cards);
+  const plan = usePlanStore((s) => s.plan);
 
   useEffect(() => {
     getSurahIndex().then((data) => setSurahs([...data].sort((a, b) => a.id - b.id)));
@@ -63,6 +66,22 @@ export default function ProgressPage() {
     const pct = TOTAL_QURAN_AYAHS > 0 ? Math.round((strong / TOTAL_QURAN_AYAHS) * 1000) / 10 : 0;
     return { strong, medium, weak, covered, uncovered, pct };
   }, [ayahCards]);
+
+  // Headline progress (M6, audit M19): measured against YOUR goal, not all 6,236
+  // ayahs — the old /6236 hero read ~0% for months. Whole-Quran coverage is kept
+  // as a secondary line.
+  const hero = useMemo(() => {
+    const quranPct = Math.floor((ayahBreakdown.covered / TOTAL_QURAN_AYAHS) * 1000) / 10;
+    if (plan && surahs.length && juzIndex.length) {
+      if (plan.goalType === 'maintain') {
+        const pct = ayahBreakdown.covered > 0 ? Math.floor((ayahBreakdown.strong / ayahBreakdown.covered) * 100) : 0;
+        return { pct, label: 'strong recall', sub: `across ${ayahBreakdown.covered} ayahs you know`, quranPct };
+      }
+      const goal = computeGoalAyahProgress(plan, surahs, juzIndex, progressLessons);
+      return { pct: goal.percentage, label: 'of your goal', sub: `${goal.memorized} of ${goal.total} ayahs memorized`, quranPct };
+    }
+    return { pct: quranPct, label: 'of the Quran', sub: `${ayahBreakdown.covered} ayahs memorized`, quranPct: null as number | null };
+  }, [plan, surahs, juzIndex, progressLessons, ayahBreakdown]);
 
   // This week: activities from the last 7 days
   const thisWeekCount = useMemo(() => {
@@ -157,15 +176,21 @@ export default function ProgressPage() {
             <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
               <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="3" className="text-foreground/10" />
               <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="3"
-                strokeDasharray={`${ayahBreakdown.pct} 100`}
+                strokeDasharray={`${hero.pct} 100`}
                 strokeLinecap="round" className="text-teal transition-all duration-700" />
             </svg>
             <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-teal">
-              {ayahBreakdown.pct}%
+              {hero.pct}%
             </span>
           </div>
           <div className="flex-1 space-y-1.5">
-            <p className="text-xs font-medium text-foreground">Ayah Breakdown</p>
+            <div>
+              <p className="text-sm font-bold text-foreground">{hero.pct}% {hero.label}</p>
+              <p className="text-[11px] text-muted">
+                {hero.sub}
+                {hero.quranPct !== null && ` · ${hero.quranPct}% of the whole Quran`}
+              </p>
+            </div>
             <div className="flex items-center gap-2 text-xs">
               <span className="inline-block h-2 w-2 rounded-full bg-success" />
               <span className="text-muted">Strong</span>

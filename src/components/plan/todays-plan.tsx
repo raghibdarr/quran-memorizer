@@ -2,19 +2,11 @@
 
 import Link from 'next/link';
 
-import { useEffect, useMemo, useState } from 'react';
-import type { JuzMeta, SurahMeta } from '@/types/quran';
+import { useMemo } from 'react';
 import { usePlanStore } from '@/stores/plan-store';
-import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
-import { getJuzIndex, getSurahIndex } from '@/lib/quran-data';
-import {
-  computePlanProgress,
-  computeTodaysPlan,
-  getPlanLessons,
-  todayIso,
-  startOfTodayMs,
-} from '@/lib/plan';
+import { todayIso, startOfTodayMs } from '@/lib/plan';
+import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import { ArrowRightIcon, BookIcon, CheckIcon, RefreshIcon, StarIcon } from '@/components/ui/icons';
@@ -22,38 +14,13 @@ import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
 
 export default function TodaysPlanCard() {
-  const plan = usePlanStore((s) => s.plan);
   const applyCatchUp = usePlanStore((s) => s.applyCatchUp);
   const setKnownTracking = usePlanStore((s) => s.setKnownTracking);
-  const progressLessons = useProgressStore((s) => s.lessons);
-  const lessonCards = useReviewStore((s) => s.lessonCards);
   const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
-
-  const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
-  const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
-
-  useEffect(() => {
-    getSurahIndex().then(setAllSurahs);
-    getJuzIndex().then(setJuzIndex);
-  }, []);
-
-  const planLessons = useMemo(() => {
-    if (!plan || !allSurahs.length || !juzIndex.length) return [];
-    return getPlanLessons(plan, allSurahs, juzIndex);
-  }, [plan, allSurahs, juzIndex]);
+  // progress is null for maintain plans (zero lessons by design) — the card still renders
+  const { plan, todaysPlan, progress, allSurahs, dayStatus } = useTodaysPlan();
 
   const surahById = useMemo(() => new Map(allSurahs.map((s) => [s.id, s])), [allSurahs]);
-
-  const todaysPlan = useMemo(() => {
-    if (!plan || !allSurahs.length) return null;
-    return computeTodaysPlan(plan, planLessons, progressLessons, lessonCards, allSurahs);
-  }, [plan, planLessons, progressLessons, lessonCards, allSurahs]);
-
-  const progress = useMemo(() => {
-    // Maintain plans have zero lessons by design — the card must still render
-    if (!plan || !planLessons.length) return null;
-    return computePlanProgress(plan, planLessons, progressLessons);
-  }, [plan, planLessons, progressLessons]);
 
   if (!plan || !todaysPlan) return null;
 
@@ -84,7 +51,8 @@ export default function TodaysPlanCard() {
     (sabqiCount > 0 ? 1 : 0) + (manzilReviewCount > 0 ? 1 : 0) + revisionCount + (newLessonCount - completedCount);
   const revisionPending = sabqiCount + manzilReviewCount + revisionCount > 0;
 
-  const allDone = revisionPending === false && completedCount === newLessonCount;
+  // THE shared definition (src/lib/day-status.ts) — same as the home ring
+  const allDone = dayStatus.remaining === 0;
 
   return (
     <Card>
@@ -99,11 +67,13 @@ export default function TodaysPlanCard() {
                 : `${itemsRemaining} ${itemsRemaining === 1 ? 'task' : 'tasks'} left`}
           </p>
         </div>
+        {/* Plan dashboard entry — a real tap target, not an 11px link (M6, audit m16) */}
         <Link
           href="/plan"
-          className="text-[11px] font-semibold text-teal hover:underline"
+          className="pressable -my-1 flex min-h-11 items-center gap-1 rounded-full border border-teal/25 px-3 text-xs font-semibold text-teal hover:bg-teal/5"
         >
-          Manage
+          Your plan
+          <ArrowRightIcon size={12} />
         </Link>
       </div>
 

@@ -10,6 +10,7 @@ import {
   getCompletedPlanSurahs,
   getPlanLessons,
   getRevisionTasks,
+  computeGoalAyahProgress,
   computeTodaysPlan,
   getTodaysNewLessons,
   isStudyDay,
@@ -512,6 +513,60 @@ describe('computeTodaysPlan — three streams (M5)', () => {
     expect(today.isRestDay).toBe(true);
     expect(today.sabqi).toHaveLength(1);
     expect(today.revisions).toEqual([]);
+  });
+});
+
+describe('deadline-free pace nudge (M6)', () => {
+  const DAY = 86_400_000;
+  const lessonsFor = (n: number): LessonDef[] =>
+    Array.from({ length: n }, (_, i) => ({ lessonId: `2-${i + 1}`, surahId: 2, lessonNumber: i + 1, ayahStart: i + 1, ayahEnd: i + 1, ayahCount: 1, juzNumber: 1 }));
+  const doneAt = (id: string, ts: number): LessonProgress =>
+    ({ lessonId: id, surahId: 2, currentPhase: 'complete', phaseData: {} as LessonProgress['phaseData'], startedAt: 0, completedAt: ts });
+
+  it('a plan created today or yesterday is never behind (creation day and today are free)', () => {
+    expect(computePlanProgress(makePlan({ createdAt: NOW }), lessonsFor(20), {}).lessonsBehind).toBe(0);
+    expect(computePlanProgress(makePlan({ createdAt: NOW - DAY }), lessonsFor(20), {}).lessonsBehind).toBe(0);
+  });
+
+  it('counts study days after creation through yesterday at the chosen pace', () => {
+    // created 5 days ago → 4 counted days (creation+1 … yesterday), 1/day, 1 done
+    const plan = makePlan({ createdAt: NOW - 5 * DAY, lessonsPerDay: 1 });
+    const progress = { '2-1': doneAt('2-1', NOW - 2 * DAY) };
+    const r = computePlanProgress(plan, lessonsFor(20), progress);
+    expect(r.lessonsBehind).toBe(3);
+    expect(r.isOnTrack).toBe(false);
+  });
+
+  it('lessons finished before the plan existed are not credited as pace', () => {
+    const plan = makePlan({ createdAt: NOW - 3 * DAY, lessonsPerDay: 1 });
+    const progress = { '2-1': doneAt('2-1', NOW - 30 * DAY), '2-2': doneAt('2-2', NOW - 30 * DAY) };
+    // expected = 2 (already done) + 2 days × 1 = 4; completed = 2
+    expect(computePlanProgress(plan, lessonsFor(20), progress).lessonsBehind).toBe(2);
+  });
+
+  it('rest days carry no expectation', () => {
+    const plan = makePlan({ createdAt: NOW - 5 * DAY, lessonsPerDay: 1, studyDays: [9] });
+    expect(computePlanProgress(plan, lessonsFor(20), {}).lessonsBehind).toBe(0);
+  });
+});
+
+describe('computeGoalAyahProgress (M6)', () => {
+  const juzPlan = () => makePlan({ goalType: 'juz', goalJuzNumbers: [30], goalSurahIds: [78, 114] });
+
+  it('ACCEPTANCE: a day-1 Juz-30 user sees a meaningful nonzero percentage', () => {
+    const lessons = getPlanLessons(juzPlan(), TEST_SURAHS, TEST_JUZ_INDEX);
+    const nas = lessons.find((l) => l.surahId === 114)!;
+    const progress = { [nas.lessonId]: { lessonId: nas.lessonId, surahId: 114, currentPhase: 'complete', phaseData: {} as LessonProgress['phaseData'], startedAt: 0, completedAt: NOW } as LessonProgress };
+    const p = computeGoalAyahProgress(juzPlan(), TEST_SURAHS, TEST_JUZ_INDEX, progress);
+    expect(p.total).toBe(46); // 40 (An-Naba) + 6 (An-Nas)
+    expect(p.memorized).toBe(6);
+    expect(p.percentage).toBe(13);
+  });
+
+  it('known surahs count as memorized; 99.x% never rounds up to 100', () => {
+    const p = computeGoalAyahProgress({ ...juzPlan(), knownSurahIds: [78] }, TEST_SURAHS, TEST_JUZ_INDEX, {});
+    expect(p.memorized).toBe(40);
+    expect(p.percentage).toBe(86); // 40/46 = 86.9 → 86
   });
 });
 

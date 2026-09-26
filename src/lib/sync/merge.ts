@@ -203,7 +203,15 @@ function mergeStats(
       local.lastActivity as Record<string, unknown> | null,
       cloud.lastActivity as Record<string, unknown> | null
     ),
+    // Latest day wins: celebrating on one device must not re-fire on another
+    dayCompleteCelebratedOn: maxIso(local.dayCompleteCelebratedOn, cloud.dayCompleteCelebratedOn),
   }
+}
+
+function maxIso(a: unknown, b: unknown): string | null {
+  const x = typeof a === 'string' ? a : ''
+  const y = typeof b === 'string' ? b : ''
+  return (x >= y ? x : y) || null
 }
 
 function pickMoreRecent(

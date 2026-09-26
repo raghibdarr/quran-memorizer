@@ -12,6 +12,8 @@ import Button from '@/components/ui/button';
 import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
+import { useTodaysPlan } from '@/hooks/use-todays-plan';
+import { DayCompleteSummary } from '@/components/plan/day-complete';
 
 interface CompletePhaseProps {
   surah: Surah;
@@ -28,6 +30,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
   const markPlanLessonCompleted = usePlanStore((s) => s.markLessonCompleted);
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const { plan, dayStatus } = useTodaysPlan();
 
   // Check which ayahs in this lesson are weak/shaky
   const weakAyahs = useMemo(() => {
@@ -71,6 +74,22 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
             : `You've memorized ${surah.nameSimple}`}
         </p>
       </div>
+
+      {/* Plan-aware close (M6): ties this lesson to today's plan, the streak and the goal */}
+      {plan && dayStatus.mode === 'plan' && (
+        dayStatus.complete ? (
+          <div className="w-full rounded-xl border border-success/25 bg-success/5 p-4">
+            <p className="text-sm font-bold text-success">That&apos;s your plan done for today</p>
+            <div className="mt-2">
+              <DayCompleteSummary />
+            </div>
+          </div>
+        ) : dayStatus.remaining > 0 ? (
+          <Link href="/" className="w-full rounded-xl border border-teal/20 bg-teal/5 p-3 text-sm font-medium text-teal">
+            {dayStatus.remaining} more {dayStatus.remaining === 1 ? 'item' : 'items'} on today&apos;s plan →
+          </Link>
+        ) : null
+      )}
 
       <div className="flex gap-6">
         <div>

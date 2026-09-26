@@ -8,6 +8,7 @@ import { SyncProvider } from '@/components/sync-provider';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
 import { useDayRollover } from '@/hooks/use-day-rollover';
 import { initNativeShell, isNative } from '@/lib/native';
+import AppBadgeSync from '@/components/app-badge-sync';
 import type { LessonReviewCard } from '@/types/quran';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -124,5 +125,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   }
 
   // SyncProvider here (not in UserButton) so cloud sync runs on every route
-  return <SyncProvider>{children}</SyncProvider>;
+  return (
+    <SyncProvider>
+      <AppBadgeSync />
+      {children}
+    </SyncProvider>
+  );
 }

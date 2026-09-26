@@ -16,6 +16,9 @@ interface LastActivity {
 
 interface StatsState extends UserStats {
   lastActivity: LastActivity | null;
+  /** Local day the day-complete moment last fired — its replay guard (M6). Synced. */
+  dayCompleteCelebratedOn: string | null;
+  markDayCelebrated: (dayIso: string) => void;
   recordActivity: () => void;
   /** Settle streak state for today (freezes / breaks) without recording activity —
    *  run on load and day rollover so the UI never paints a stale streak. */
@@ -85,6 +88,9 @@ export const useStatsStore = create<StatsState>()(
       streakFreezes: 0,
       frozenDates: {},
       lastActivity: null,
+      dayCompleteCelebratedOn: null,
+
+      markDayCelebrated: (dayIso) => set({ dayCompleteCelebratedOn: dayIso }),
 
       recordActivity: () =>
         set((state) => {

@@ -248,6 +248,27 @@ the rotation budget doesn't subtract rest days (the 2× headroom absorbs them).
 ---
 
 ### M6 — Habit loop closure: one "done today", a day-complete moment, honest progress, badging
+**STATUS: ✅ DONE 2026-09-26** — ONE definition of done-today: pure `src/lib/day-status.ts`
+(plan users: each review, revision and new lesson counted individually, rebuilt from today's
+timestamps; planless: the activity goal) consumed via `useTodaysPlan` by the home ring, Today's
+Plan, the lesson-complete screen and the badge — no direct `dailyGoalActivities` reads remain on
+plan paths. `useDayClock` (end-of-local-day "now", ticks at midnight) makes every screen roll over
+when left open overnight; `useReviewQueue` is the single due count (home tile, nav badge, review
+page, plan card agree — they didn't). Day-complete moment on Home: fires the first time the last
+plan task is done after real work today (marking surahs known can't trigger it), shows streak +
+goal % + tomorrow's preview (the planner re-run for tomorrow — computeTodaysPlan/PlanProgress now
+honor their `now`), acknowledged once and synced (`dayCompleteCelebratedOn`, max-merged).
+Lesson-complete screen is plan-aware ("That's your plan done for today" / "N more items").
+Progress hero = ayah-weighted % of YOUR goal (`computeGoalAyahProgress`, known surahs count,
+floors so 99.6% never claims 100); maintain plans show strong-recall %; whole-Quran % is a
+secondary line. Home lessons tile plan-scoped. Deadline-free plans get the behind-schedule nudge
+(pace × study days after creation through yesterday — creation day and today never held against
+the user). Plan entry promoted from an 11px link to a 44px "Your plan" button. Web Badging API:
+remaining items on the installed icon when you leave, cleared on open. Maskable icons regenerated
+(the old one had transparent corners) + 512 added. 229 unit tests; Playwright: day-complete fires
+once, survives reload (dev + static web + native).
+DEVIATION: the streak still counts any activity (not full plan completion) — forgive-by-design
+(decision log 5); the ring/plan carry plan completion. Real-device badge check is owner-side.
 **Size:** 1–2 sessions
 
 **Goal:** Give every day a visible close — one done-today definition, one celebration — and make the headline progress metrics and app icon tell the truth.

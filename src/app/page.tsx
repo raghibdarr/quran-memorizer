@@ -4,16 +4,13 @@ import Link from 'next/link';
 
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
-import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
-import { useSettingsStore } from '@/stores/settings-store';
 import { usePlanStore } from '@/stores/plan-store';
 import TodaysPlanCard from '@/components/plan/todays-plan';
 import PlanCelebration from '@/components/plan/plan-celebration';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { fuzzySurahScore } from '@/lib/fuzzy';
-import { startOfTodayMs, todayIso } from '@/lib/dates';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -21,12 +18,15 @@ import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import Logo from '@/components/ui/logo';
-import { FlameIcon, BookIcon, CheckIcon, ArrowRightIcon } from '@/components/ui/icons';
+import { FlameIcon, CheckIcon, ArrowRightIcon } from '@/components/ui/icons';
 import InstallBanner from '@/components/ui/install-banner';
 import OnboardingOverlay from '@/components/ui/onboarding-overlay';
 import { cn } from '@/lib/cn';
 import { normalizeAppUrl } from '@/lib/routes';
+import { useReviewQueue } from '@/hooks/use-review-queue';
 import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
+import { useTodaysPlan } from '@/hooks/use-todays-plan';
+import DayCompleteMoment from '@/components/plan/day-complete';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
 type ViewMode = 'grid' | 'list';
@@ -77,28 +77,19 @@ export default function HomePage() {
   useEffect(() => { localStorage.setItem('home-view', view); }, [view]);
   useEffect(() => { localStorage.setItem('home-tab', tab); }, [tab]);
   const progressLessons = useProgressStore((s) => s.lessons);
-  const cards = useReviewStore((s) => s.cards);
-  const lessonCards = useReviewStore((s) => s.lessonCards);
   const stats = useStatsStore();
   const lastActivity = useStatsStore((s) => s.lastActivity);
-  const dailyGoalActivities = useSettingsStore((s) => s.dailyGoalActivities);
   const plan = usePlanStore((s) => s.plan);
 
-  // Compute today's activity count
-  const today = todayIso();
-  const todayActivities = stats.dailyActivityDate === today ? stats.dailyActivities : 0;
-  const dailyProgress = Math.min((todayActivities / dailyGoalActivities) * 100, 100);
+  // THE "done today" (src/lib/day-status.ts): plan-driven for plan users,
+  // the activity goal otherwise — the ring never disagrees with the plan card
+  const { dayStatus, progress: planProgress } = useTodaysPlan();
+  const dailyProgress = dayStatus.total > 0 ? Math.min((dayStatus.done / dayStatus.total) * 100, 100) : 0;
+  const restDayIdle = dayStatus.isRestDay && dayStatus.total === 0;
 
-  // Due reviews count — overdue = matured before today (missed on a previous day)
-  const { dueReviewCount, overdueReviewCount } = useMemo(() => {
-    const now = Date.now();
-    const todayStart = startOfTodayMs();
-    const due = lessonCards.filter((c) => c.nextReview <= now);
-    return {
-      dueReviewCount: due.length,
-      overdueReviewCount: due.filter((c) => c.nextReview < todayStart).length,
-    };
-  }, [lessonCards]);
+  // Due reviews — the SAME queue the plan card and review page use (M5 streams,
+  // incl. sabqi check-ins), so the three counts can never disagree
+  const { dueCount: dueReviewCount, overdueCount: overdueReviewCount } = useReviewQueue();
 
   useEffect(() => {
     getSurahIndex().then(setAllSurahs);
@@ -167,18 +158,16 @@ export default function HomePage() {
     : null;
 
   // Count completed lessons and surahs
-  const { completedLessonCount, totalLessonCount, completedSurahCount } = useMemo(() => {
+  const { completedLessonCount, completedSurahCount } = useMemo(() => {
     let completed = 0;
-    let total = 0;
     let surahsDone = 0;
     for (const s of allSurahs) {
-      const lessons = getLessons(s);
-      total += lessons.length;
+      const lessons = generateLessonsWithJuzBoundaries(s.id, s.versesCount, juzSegmentsBySurah.get(s.id) ?? []);
       const done = lessons.filter((l) => progressLessons[l.lessonId]?.completedAt != null).length;
       completed += done;
       if (done === lessons.length && lessons.length > 0) surahsDone++;
     }
-    return { completedLessonCount: completed, totalLessonCount: total, completedSurahCount: surahsDone };
+    return { completedLessonCount: completed, completedSurahCount: surahsDone };
   }, [allSurahs, progressLessons, juzSegmentsBySurah]);
 
   return (
@@ -211,6 +200,7 @@ export default function HomePage() {
       <main className="mx-auto max-w-2xl space-y-3 px-4 py-4">
         <InstallBanner />
 
+        {plan && <DayCompleteMoment />}
         {plan ? (
           <TodaysPlanCard />
         ) : (
@@ -263,16 +253,16 @@ export default function HomePage() {
                 <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-foreground/10" />
                 <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="2.5"
                   strokeDasharray={`${dailyProgress} 100`}
-                  strokeLinecap="round" className={todayActivities >= dailyGoalActivities ? 'text-success' : 'text-teal'} />
+                  strokeLinecap="round" className={dayStatus.complete ? 'text-success' : 'text-teal'} />
               </svg>
               <span className={cn(
                 'absolute inset-0 flex items-center justify-center text-[11px] font-bold',
-                todayActivities >= dailyGoalActivities ? 'text-success' : 'text-teal'
+                dayStatus.complete ? 'text-success' : 'text-teal'
               )}>
-                {todayActivities}/{dailyGoalActivities}
+                {restDayIdle ? '—' : dayStatus.complete ? <CheckIcon size={14} /> : `${dayStatus.done}/${dayStatus.total}`}
               </span>
             </div>
-            <p className="mt-1.5 text-xs text-muted">Today</p>
+            <p className="mt-1.5 text-xs text-muted">{restDayIdle ? 'Rest day' : 'Today'}</p>
           </Card>
           <Link href="/review" className="block">
             <Card pressable className="flex h-full flex-col items-center justify-center py-3">
@@ -282,9 +272,21 @@ export default function HomePage() {
               </p>
             </Card>
           </Link>
+          {/* Plan-scoped when there's a plan (audit m6) — "/2259" read as "you've done nothing" */}
           <Card className="flex flex-col items-center justify-center py-3">
-            <p className="text-xl font-bold text-teal">{completedLessonCount}<span className="text-sm font-normal text-muted">/{totalLessonCount}</span></p>
-            <p className="mt-1 text-xs text-muted">Lessons</p>
+            {planProgress ? (
+              <>
+                <p className="text-xl font-bold text-teal">{planProgress.completedLessons}<span className="text-sm font-normal text-muted">/{planProgress.totalLessons}</span></p>
+                <p className="mt-1 text-xs text-muted">Plan lessons</p>
+              </>
+            ) : (
+              <>
+                <p className="text-xl font-bold text-teal">{completedLessonCount}</p>
+                <p className="mt-1 text-xs text-muted">
+                  {completedSurahCount > 0 ? `Lessons · ${completedSurahCount} surah${completedSurahCount === 1 ? '' : 's'}` : 'Lessons done'}
+                </p>
+              </>
+            )}
           </Card>
         </div>
 

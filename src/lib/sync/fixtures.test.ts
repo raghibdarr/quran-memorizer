@@ -46,7 +46,7 @@ const FIXTURES: Record<SyncRowName, Record<string, unknown>> = {
     currentStreak: 12, longestStreak: 30, totalAyahsMemorized: 45,
     lastActiveDate: '2026-07-11', dailyActivities: 2, dailyActivityDate: '2026-07-11',
     activityLog: { '2026-07-10': 3, '2026-07-11': 2 },
-    streakFreezes: 1, frozenDates: { '2026-07-05': true },
+    streakFreezes: 1, frozenDates: { '2026-07-05': true }, dayCompleteCelebratedOn: '2026-07-11',
     lastActivity: { type: 'lesson', url: '/lesson/112/1', label: 'Al-Ikhlas — Lesson 1', timestamp: 1780100000000 },
   },
   'quran-settings': {

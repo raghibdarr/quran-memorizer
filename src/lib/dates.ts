@@ -45,6 +45,24 @@ export function startOfDayMs(ts: number): number {
   return d.getTime()
 }
 
+/** Last millisecond of the local day containing `ts` (DST-safe: next local midnight − 1) */
+export function endOfDayMs(ts: number): number {
+  return addLocalDays(startOfDayMs(ts), 1) - 1
+}
+
+/**
+ * Local midnight `days` calendar days after the local day containing `ts`.
+ * Calendar arithmetic, NOT `ts + days·24h`: across a DST change a day is 23h or
+ * 25h, and fixed-24h steps land on the wrong day (e.g. 00:30 on a fall-back day
+ * + 24h is still the same date).
+ */
+export function addLocalDays(ts: number, days: number): number {
+  const d = new Date(ts)
+  d.setHours(0, 0, 0, 0)
+  d.setDate(d.getDate() + days)
+  return d.getTime()
+}
+
 // ---------- Calendar arithmetic on YYYY-MM-DD day strings ----------
 // Parsed as UTC midnights so day-diff math is exact integers even when the
 // span crosses a DST transition (local parsing would yield 23h/25h "days").

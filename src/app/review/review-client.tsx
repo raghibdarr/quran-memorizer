@@ -10,7 +10,8 @@ import { usePlanStore } from '@/stores/plan-store';
 import { getSurahIndex, getJuzSegmentsForSurah, getSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { computeSurahHealth } from '@/lib/review-helpers';
-import { buildReviewQueue, getLeeches, RETENTION, type Stream } from '@/lib/retention';
+import { getLeeches, RETENTION, type Stream } from '@/lib/retention';
+import { useReviewQueue } from '@/hooks/use-review-queue';
 import type { SurahMeta, LessonDef, LessonReviewCard } from '@/types/quran';
 import type { SurahHealth } from '@/lib/review-helpers';
 import ReviewSession from '@/components/review/review-session';
@@ -27,7 +28,6 @@ type PageView = 'dashboard' | 'session';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
-  const progressLessons = useProgressStore((s) => s.lessons);
   const plan = usePlanStore((s) => s.plan);
   // ?start=1 (the today's-plan review row) deep-links straight into a session and
   // routes back to the plan afterwards — no dashboard hop in either direction.
@@ -97,10 +97,7 @@ export default function ReviewPage() {
 
   // Today's review queue (M5): recent (sabqi) lessons first — they're the most
   // fragile — then older (manzil) SM-2-due lessons, most overdue first
-  const queue = useMemo(
-    () => buildReviewQueue(lessonCards, progressLessons, Date.now()),
-    [lessonCards, progressLessons]
-  );
+  const queue = useReviewQueue();
   const dueCards = useMemo(() => [...queue.sabqi, ...queue.manzil], [queue]);
   const dueCount = dueCards.length;
   const leeches = useMemo(() => getLeeches(cards), [cards]);

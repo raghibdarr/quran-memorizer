@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
-import { useReviewStore } from '@/stores/review-store';
+import { useReviewQueue } from '@/hooks/use-review-queue';
 import { HomeIcon, BookIcon, StarIcon, BarChartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
@@ -16,7 +16,7 @@ const NAV_ITEMS = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-  const dueCount = useReviewStore((s) => s.getDueLessonCount());
+  const { dueCount } = useReviewQueue();
 
   return (
     <nav

@@ -10,7 +10,7 @@ import type {
   SurahRevisionTask,
 } from '@/types/quran';
 import { CURRICULUM_ORDER, generateLessonsWithJuzBoundaries } from './curriculum';
-import { todayIso, startOfTodayMs, daysBetween, isStudyDay, countStudyDays, addDaysIso, isoToDateUTC, dateUTCToIso } from './dates';
+import { todayIso, startOfTodayMs, daysBetween, isStudyDay, countStudyDays, addDaysIso, isoToDateUTC, dateUTCToIso, isoFromMs } from './dates';
 import { buildReviewQueue, planManzil } from './retention';
 
 // ---------- Date helpers ----------
@@ -116,7 +116,8 @@ export function getTodaysNewLessons(
     }
   }
 
-  const bonus = plan.catchUpDate === todayIso() ? (plan.catchUpBonus ?? 0) : 0;
+  // The catch-up bonus belongs to the day being planned, not wall-clock today
+  const bonus = plan.catchUpDate === isoFromMs(dayStartMs) ? (plan.catchUpBonus ?? 0) : 0;
   const target = plan.lessonsPerDay + bonus;
   const slots = Math.max(0, target - completedToday.length);
   const all = [...completedToday, ...incomplete.slice(0, slots)];
@@ -267,7 +268,8 @@ export function computeTodaysPlan(
   // work and surah rotation pause.
   const queue = buildReviewQueue(lessonCards, progressLessons, now);
   const dueReviews = [...queue.sabqi, ...queue.manzil];
-  const date = todayIso();
+  // Derived from `now`, so the same function can preview tomorrow (M6 day-complete)
+  const date = isoFromMs(now);
   const isRest = !isStudyDay(date, plan.studyDays);
 
   const dayStart = new Date(now);
@@ -307,6 +309,34 @@ export function computeTodaysPlan(
 
 // ---------- Progress / pacing ----------
 
+/**
+ * Ayah-weighted progress toward the plan's GOAL (M6, audit M19): memorized ayahs
+ * in scope ÷ ayahs in scope. Ayah-weighting keeps a 5-ayah lesson from counting
+ * like a 20-ayah one; attested-known surahs and lessons count as memorized. This
+ * is the headline number — whole-Quran coverage is only a secondary stat.
+ */
+export function computeGoalAyahProgress(
+  plan: HifdhPlan,
+  allSurahs: SurahMeta[],
+  juzIndex: JuzMeta[],
+  progressLessons: Record<string, LessonProgress>,
+): { memorized: number; total: number; percentage: number } {
+  const scope = getPlanLessons({ ...plan, knownSurahIds: [], knownLessonIds: [] }, allSurahs, juzIndex);
+  const knownSurahs = new Set(plan.knownSurahIds);
+  const knownLessons = new Set(plan.knownLessonIds ?? []);
+  let memorized = 0;
+  let total = 0;
+  for (const l of scope) {
+    total += l.ayahCount;
+    if (knownSurahs.has(l.surahId) || knownLessons.has(l.lessonId) || progressLessons[l.lessonId]?.completedAt) {
+      memorized += l.ayahCount;
+    }
+  }
+  // Floor, never round up: 99.6% must not claim a finished goal
+  const percentage = total > 0 ? Math.floor((memorized / total) * 100) : 0;
+  return { memorized, total, percentage };
+}
+
 export function computePlanProgress(
   plan: HifdhPlan,
   planLessons: LessonDef[],
@@ -326,7 +356,7 @@ export function computePlanProgress(
   }).length;
   const currentPace = recentCompletions / 7;
 
-  const today = todayIso();
+  const today = isoFromMs(now);
   let projectedFinishDate: string | null = null;
   let daysRemaining: number | null = null;
   let isOnTrack = true;
@@ -336,6 +366,22 @@ export function computePlanProgress(
     daysRemaining = daysBetween(today, plan.deadline);
     const studyDaysLeft = countStudyDays(today, plan.deadline, plan.studyDays);
     const expectedCompleted = total - studyDaysLeft * plan.lessonsPerDay;
+    lessonsBehind = Math.max(0, expectedCompleted - completed);
+    isOnTrack = lessonsBehind === 0;
+  } else {
+    // Deadline-free plans (the default) get a pace nudge too (M6, audit m5).
+    // Expected = lessons already done when the plan began + the chosen pace on
+    // every study day from the day AFTER creation through YESTERDAY — the
+    // creation day and today are never held against the user.
+    const firstCountedDay = addDaysIso(isoFromMs(plan.createdAt), 1);
+    const yesterday = addDaysIso(today, -1);
+    const studyDaysElapsed = daysBetween(firstCountedDay, yesterday) >= 0
+      ? countStudyDays(firstCountedDay, yesterday, plan.studyDays)
+      : 0;
+    const doneAtStart = planLessons.filter(
+      (l) => (progressLessons[l.lessonId]?.completedAt ?? Infinity) < plan.createdAt,
+    ).length;
+    const expectedCompleted = Math.min(total, doneAtStart + studyDaysElapsed * plan.lessonsPerDay);
     lessonsBehind = Math.max(0, expectedCompleted - completed);
     isOnTrack = lessonsBehind === 0;
   }

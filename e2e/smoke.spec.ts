@@ -111,4 +111,62 @@ test.describe('smoke', () => {
     await page.getByRole('button', { name: 'Continue with 2 more' }).click()
     await expect(page.getByText('Card 1 of 2')).toBeVisible()
   })
+
+  test('finishing the last plan task shows the day-complete moment exactly once (M6)', async ({ page }) => {
+    await stubAudio(page)
+    // Today's new lesson is already done; one recent review remains
+    await page.addInitScript(() => {
+      if (localStorage.getItem('e2e-seeded')) return // seed once — reload must keep real state
+      localStorage.setItem('e2e-seeded', '1')
+      const DAY = 864e5
+      const now = Date.now()
+      const d = new Date()
+      const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+      const done = (id: string, s: number, ts: number) =>
+        ({ lessonId: id, surahId: s, currentPhase: 'complete', phaseData: {}, startedAt: ts - 6e5, completedAt: ts })
+      localStorage.setItem('onboarding-complete', 'true')
+      localStorage.setItem('lesson-review-migration-v4', '1')
+      localStorage.setItem('quran-progress', JSON.stringify({ version: 2, state: { lessons: {
+        '112-1': done('112-1', 112, now - 60_000),
+        '114-1': done('114-1', 114, now - 3 * DAY),
+      } } }))
+      localStorage.setItem('quran-reviews', JSON.stringify({ version: 2, state: { cards: [], lessonCards: [
+        { lessonId: '114-1', surahId: 114, lessonNumber: 1, ayahStart: 1, ayahEnd: 2, easeFactor: 2.5, interval: 1, repetitions: 1, nextReview: now - DAY, lastReview: now - 2 * DAY, lastQuality: 4 },
+      ] } }))
+      localStorage.setItem('quran-stats', JSON.stringify({ version: 3, state: {
+        currentStreak: 11, longestStreak: 11, totalAyahsMemorized: 20, lastActiveDate: today,
+        dailyActivities: 1, dailyActivityDate: today, activityLog: { [today]: 1 },
+        streakFreezes: 0, frozenDates: {}, lastActivity: null, dayCompleteCelebratedOn: null,
+      } }))
+      localStorage.setItem('quran-plan', JSON.stringify({ version: 1, state: { plan: {
+        id: 'p1', createdAt: now - DAY, goalType: 'surah', goalSurahIds: [112, 113, 114], goalJuzNumbers: [],
+        deadline: null, knownSurahIds: [], knownTracking: true, knownLessonIds: [], lessonsPerDay: 1,
+        studyDays: [0, 1, 2, 3, 4, 5, 6], completedLessonIds: ['112-1'], revisionFrequencyDays: 7,
+        lastRevisedAt: { 114: now - 3 * DAY }, catchUpDate: null, catchUpBonus: 0, finishCelebrated: false,
+      } } }))
+    })
+
+    await page.goto('/')
+    await expect(page.getByText('1 task left')).toBeVisible()
+    const moment = page.getByRole('dialog', { name: /today's plan done/i })
+    await expect(moment).toHaveCount(0) // not before the last task
+
+    await page.getByText('Review 1 recent lesson').click()
+    await page.getByRole('button', { name: /rate my recall/i }).click()
+    for (const rate of await page.getByRole('button', { name: 'Got it' }).all()) await rate.click()
+    await page.getByRole('button', { name: 'Submit Review' }).click()
+    await page.getByRole('button', { name: 'Finish Review' }).click()
+
+    // Back on Home (plan deep-link returns there): the moment, tied to streak + tomorrow
+    await expect(moment).toBeVisible()
+    await expect(moment.getByText('Day 11 streak')).toBeVisible()
+    await expect(moment.getByText(/tomorrow/i)).toBeVisible()
+    await moment.getByRole('button', { name: 'Alhamdulillah' }).click()
+    await expect(moment).toHaveCount(0)
+
+    // Replay-guarded: never again today
+    await page.reload()
+    await expect(page.getByText('All done for today')).toBeVisible()
+    await expect(moment).toHaveCount(0)
+  })
 })
