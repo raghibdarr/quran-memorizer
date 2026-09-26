@@ -3,6 +3,7 @@
 import Link from '@/components/app-link';
 
 import { useMemo } from 'react';
+import { useProgressStore } from '@/stores/progress-store';
 import { usePlanStore } from '@/stores/plan-store';
 import { useReviewStore } from '@/stores/review-store';
 import { startOfTodayMs } from '@/lib/plan';
@@ -20,7 +21,8 @@ export default function TodaysPlanCard() {
   const setKnownTracking = usePlanStore((s) => s.setKnownTracking);
   const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
   // progress is null for maintain plans (zero lessons by design) — the card still renders
-  const { plan, todaysPlan, progress, allSurahs, dayStatus, today, reentryDay } = useTodaysPlan();
+  const { plan, todaysPlan, progress, allSurahs, planLessons, dayStatus, today, reentryDay } = useTodaysPlan();
+  const progressLessons = useProgressStore((s) => s.lessons);
 
   const surahById = useMemo(() => new Map(allSurahs.map((s) => [s.id, s])), [allSurahs]);
 
@@ -55,6 +57,13 @@ export default function TodaysPlanCard() {
 
   // THE shared definition (src/lib/day-status.ts) — same as the home ring
   const allDone = dayStatus.remaining === 0;
+
+  // A rest day is a day off, not a locked door: offer the next lesson as optional
+  // extra (planner persona: a plan started on a rest day otherwise opens on nothing)
+  const optionalNext = todaysPlan.isRestDay
+    ? planLessons.find((l) => !progressLessons[l.lessonId]?.completedAt && !(plan.knownLessonIds ?? []).includes(l.lessonId))
+    : undefined;
+  const planFinished = progress != null && progress.lessonsRemaining === 0;
 
   return (
     <Card>
@@ -283,15 +292,35 @@ export default function TodaysPlanCard() {
 
         {todaysPlan.isRestDay && sabqiCount + manzilReviewCount === 0 && (
           <p className="px-3 py-2 text-xs text-muted">
-            No reviews due. Enjoy your rest day.
+            No reviews due. Enjoy your rest day{optionalNext ? ' — or keep going if you like:' : '.'}
           </p>
+        )}
+
+        {optionalNext && (
+          <Link
+            href={lessonHref(optionalNext.surahId, optionalNext.lessonNumber)}
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
+          >
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-foreground/20 text-muted">
+              <BookIcon size={11} />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-foreground">
+                Learn {surahById.get(optionalNext.surahId)?.nameSimple ?? `Surah ${optionalNext.surahId}`} · L{optionalNext.lessonNumber}
+              </p>
+              <p className="text-[11px] text-muted">Optional · counts toward your plan</p>
+            </div>
+            <ArrowRightIcon size={14} className="shrink-0 text-muted" />
+          </Link>
         )}
 
         {!todaysPlan.isRestDay && totalTasks === 0 && (
           <p className="px-3 py-2 text-xs text-muted">
             {plan.goalType === 'maintain'
               ? 'Nothing due today — your revision cycle is up to date.'
-              : 'Plan complete. Reviews will continue automatically.'}
+              : planFinished
+                ? 'Plan complete. Reviews will continue automatically.'
+                : 'Nothing left for today.'}
           </p>
         )}
       </div>
