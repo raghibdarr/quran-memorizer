@@ -4,6 +4,15 @@ import { cn } from '@/lib/cn';
 import { CheckIcon } from '@/components/ui/icons';
 import type { LessonPhase } from '@/types/quran';
 
+/** User-facing phase names — the stored keys ('chunk' …) never reach the screen */
+export const PHASE_LABELS: Record<LessonPhase, string> = {
+  listen: 'Listen',
+  understand: 'Understand',
+  chunk: 'Build',
+  test: 'Test',
+  complete: 'Done',
+};
+
 const PHASES: { key: LessonPhase; label: string }[] = [
   { key: 'listen', label: 'Listen' },
   { key: 'understand', label: 'Understand' },

@@ -69,6 +69,24 @@ const STEP_LABELS: Record<LearnStep, string> = {
   'word-order': 'Arrange the words in order',
 };
 
+/**
+ * Deterministic shuffle (seeded LCG) that never returns the original order for
+ * 2+ items. Used when a lesson RESUMES on the word challenge: the random shuffle
+ * made on entering the step isn't persisted, and render must stay pure.
+ */
+function seededShuffle<T>(items: T[], seedText: string): T[] {
+  let seed = 0;
+  for (const ch of seedText) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
+  const next = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32;
+  const out = [...items];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  if (out.length > 1 && out.every((x, i) => x === items[i])) out.push(out.shift()!);
+  return out;
+}
+
 const LEARN_STEPS: LearnStep[] = [
   'listen-with-text',
   'recite-from-memory',
@@ -162,6 +180,16 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     [actualWords, unit.seg.wordStart, unit.seg.wordEnd]
   );
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
+  // Resumed straight onto the word challenge: no shuffle was made this session
+  const resumeShuffle = useMemo(
+    () =>
+      seededShuffle(
+        unitWords.map((w) => ({ position: w.position, text: w.textUthmani, transliteration: w.transliteration })),
+        `${lessonId}/${unitIndex}`,
+      ),
+    [unitWords, lessonId, unitIndex],
+  );
+  const wordChips = shuffledWords.length > 0 ? shuffledWords : resumeShuffle;
   const unitTranslit = useMemo(
     () => unitWords.map((w) => w.transliteration).filter(Boolean).join(' '),
     [unitWords]
@@ -898,7 +926,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             <BeadProgress total={currentStepReps} filled={repCount} showCurrent />
             <p className="mt-2 text-sm text-muted">
               {repCount < currentStepReps
-                ? `${currentStepReps - repCount} repetitions remaining`
+                ? `${currentStepReps - repCount} ${currentStepReps - repCount === 1 ? 'repetition' : 'repetitions'} remaining`
                 : `${repCount} completed`}
             </p>
           </div>
@@ -1047,7 +1075,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             dir="rtl"
           >
             {selectedOrder.length === 0 && (
-              <span className="text-sm text-muted py-2">Tap words below...</span>
+              <span dir="ltr" className="text-sm text-muted py-2">Tap the words below in order</span>
             )}
             {selectedOrder.map((pos, i) => {
               const word = unitWords.find((w) => w.position === pos);
@@ -1068,7 +1096,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           </div>
 
           <div className="flex flex-wrap justify-center gap-2" dir="rtl">
-            {shuffledWords.map((word) => {
+            {wordChips.map((word) => {
               const isUsed = selectedOrder.includes(word.position);
               return (
                 <button
@@ -1123,14 +1151,15 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
       <BottomSheet open={showExplainer} onClose={dismissExplainer} title="Build your memory">
           <div>
             <p className="text-sm text-muted leading-relaxed">
-              Each ayah goes through 4 steps to build deep memorization:
+              Each ayah goes through {LEARN_STEPS.length} steps to build deep memorization:
             </p>
             <div className="mt-5 space-y-4">
               {[
-                { step: '1', label: 'Listen with text', desc: 'Hear the recitation while reading along' },
-                { step: '2', label: 'Recite from memory', desc: 'Try to recite without looking' },
-                { step: '3', label: 'Reinforce with text', desc: 'Listen again to strengthen recall' },
-                { step: '4', label: 'Final recall', desc: 'Recite from memory one last time' },
+                { step: '1', label: 'Listen with text', desc: `Hear it ${STEP_REPS['listen-with-text']} times, reading along and repeating aloud` },
+                { step: '2', label: 'Recite from memory', desc: `Recite it ${STEP_REPS['recite-from-memory']} times without looking, then check` },
+                { step: '3', label: 'Reinforce with text', desc: `Hear it ${STEP_REPS['reinforce-with-text']} more times to strengthen recall` },
+                { step: '4', label: 'Final recall', desc: `Recite it ${STEP_REPS['final-memory']} more times from memory` },
+                { step: '5', label: 'Word challenge', desc: 'Put the words back in order' },
               ].map((s) => (
                 <div key={s.step} className="flex items-start gap-3">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal/10 text-sm font-bold text-teal">{s.step}</span>
@@ -1142,7 +1171,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               ))}
             </div>
             <p className="mt-5 text-sm text-muted leading-relaxed">
-              After each ayah, you'll chain them together to build full passages.
+              After each ayah, you&apos;ll chain them together to build full passages.
             </p>
             <button
               onClick={dismissExplainer}

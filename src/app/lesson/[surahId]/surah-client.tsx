@@ -22,6 +22,7 @@ import { lessonHref } from '@/lib/routes';
 import BackButton from '@/components/ui/back-button';
 import { Skeleton, SkeletonRows } from '@/components/ui/skeleton';
 import { useDeal } from '@/hooks/use-deal';
+import { PHASE_LABELS } from '@/components/ui/phase-indicator';
 import SegmentedControl from '@/components/ui/segmented-control';
 
 type Tab = 'learn' | 'practice';
@@ -135,13 +136,13 @@ export default function SurahDetailPage() {
             <p className="arabic-text text-3xl">{surah.nameArabic}</p>
             <h1 ref={titleRef} className="mt-1 text-xl font-bold text-foreground">{surah.nameSimple}</h1>
             <p className="text-sm text-muted">
-              {surah.nameTranslation} &middot; {surah.versesCount} ayahs &middot; {lessons.length} lessons
+              {surah.nameTranslation} &middot; {surah.versesCount} ayahs &middot; {lessons.length} {lessons.length === 1 ? 'lesson' : 'lessons'}
             </p>
           </div>
           <div className="mt-3">
             <ProgressBar value={overallProgress} />
             <p className="mt-1 text-center text-xs text-muted">
-              {completedCount} / {lessons.length} lessons completed
+              {completedCount} / {lessons.length} {lessons.length === 1 ? 'lesson' : 'lessons'} completed
             </p>
           </div>
           {canMarkKnown && (
@@ -208,7 +209,7 @@ export default function SurahDetailPage() {
                         <p className="text-sm font-semibold text-foreground">Continue Lesson</p>
                         <div className="mt-2">
                           <ProgressBar value={phaseProgress} className="h-1.5" />
-                          <p className="mt-1 text-xs capitalize text-teal">{progress.currentPhase} phase</p>
+                          <p className="mt-1 text-xs text-teal">{PHASE_LABELS[progress.currentPhase]} step</p>
                         </div>
                       </>
                     ) : (
@@ -275,7 +276,7 @@ export default function SurahDetailPage() {
                             <div className="mt-1.5">
                               <ProgressBar value={phaseProgress} className="h-1" />
                               <p className="mt-0.5 text-[10px] capitalize text-teal">
-                                {progress.currentPhase} phase
+                                {PHASE_LABELS[progress.currentPhase]} step
                               </p>
                             </div>
                           )}

@@ -20,6 +20,7 @@ import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import type { Ayah } from '@/types/quran';
 import { lessonHref } from '@/lib/routes';
+import { PHASE_LABELS } from '@/components/ui/phase-indicator';
 import BackButton from '@/components/ui/back-button';
 
 type Tab = 'learn' | 'practice';
@@ -251,7 +252,7 @@ export default function JuzDetailPage() {
                                 <div className="mt-1.5">
                                   <ProgressBar value={phaseProgress} className="h-1" />
                                   <p className="mt-0.5 text-[10px] capitalize text-teal">
-                                    {progress.currentPhase} phase
+                                    {PHASE_LABELS[progress.currentPhase]} step
                                   </p>
                                 </div>
                               )}

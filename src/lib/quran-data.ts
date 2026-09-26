@@ -30,13 +30,29 @@ export async function getJuzSegmentsForSurah(surahId: number): Promise<Array<{ j
   return segments.sort((a, b) => a.ayahStart - b.ayahStart);
 }
 
+/**
+ * The tajweed text source writes the dagger alif as U+0672 (alef with wavy hamza
+ * above) where the Uthmani text has U+0670 (superscript alef) — e.g. صِرَٲطَ vs
+ * صِرَٰطَ, ~1,560 times across the Quran. The Arabic font has no U+0672 glyph, so
+ * it rendered as a broken box in the default script.
+ */
+export function normalizeTajweedText(html: string): string {
+  return html.replace(/ٲ/g, 'ٰ');
+}
+
 export async function getSurah(id: number): Promise<Surah> {
   if (surahCache.has(id)) return surahCache.get(id)!;
 
   try {
     // Dynamic import using template — works for any surah we have data for
     const raw = await import(`@/data/surah-${id}.json`);
-    const surah = (raw.default ?? raw) as Surah;
+    const data = (raw.default ?? raw) as Surah;
+    const surah: Surah = {
+      ...data,
+      ayahs: data.ayahs.map((a) =>
+        a.textUthmaniTajweed ? { ...a, textUthmaniTajweed: normalizeTajweedText(a.textUthmaniTajweed) } : a,
+      ),
+    };
     surahCache.set(id, surah);
     return surah;
   } catch {

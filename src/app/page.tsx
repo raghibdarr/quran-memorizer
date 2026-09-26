@@ -30,6 +30,7 @@ import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
 import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
+import { PHASE_LABELS } from '@/components/ui/phase-indicator';
 import SegmentedControl from '@/components/ui/segmented-control';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
@@ -248,7 +249,7 @@ export default function HomePage() {
               <div className="mt-1.5 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-xl font-bold text-foreground">{activeSurah.nameSimple}</p>
-                  <p className="mt-0.5 text-sm capitalize text-teal">{activeProgress.currentPhase} phase</p>
+                  <p className="mt-0.5 text-sm text-teal">{PHASE_LABELS[activeProgress.currentPhase]} step</p>
                 </div>
                 <span className="arabic-text text-3xl text-gold-deep/80">{activeSurah.nameArabic}</span>
               </div>
