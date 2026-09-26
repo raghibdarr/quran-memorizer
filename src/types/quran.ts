@@ -232,6 +232,9 @@ export interface HifdhPlan {
   revisionFrequencyDays: number; // How often to revise completed surahs (default 7)
   revisionFrequencyAuto?: boolean; // When true, frequency adapts to completed surah count
   lastRevisedAt: Record<number, number>; // surahId -> timestamp
+  /** Real full-surah revisions only (display: "Nd since last"). lastRevisedAt also holds
+   *  scheduling seeds from setup / marking known, which must never read as history. */
+  revisedAt?: Record<number, number>;
 
   // One-off "catch up" bump: extra lessons added to today's plan only.
   catchUpDate?: string | null;         // ISO yyyy-mm-dd the catch-up starts

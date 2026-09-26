@@ -1,6 +1,8 @@
 import type { ReviewCard, LessonDef } from '@/types/quran';
 
-export type AyahHealth = 'strong' | 'shaky' | 'weak' | 'not-learned';
+/** 'unchecked' = has a card but was never rated (attested-known, or learned but not yet reviewed) —
+ *  shown as such rather than guessed as a strength (persona test: known surahs read as "48 Shaky") */
+export type AyahHealth = 'strong' | 'shaky' | 'weak' | 'unchecked' | 'not-learned';
 
 export interface LessonHealth {
   lesson: LessonDef;
@@ -8,6 +10,7 @@ export interface LessonHealth {
   strongCount: number;
   hesitantCount: number;
   weakCount: number;
+  uncheckedCount: number;
   notLearnedCount: number;
 }
 
@@ -17,6 +20,7 @@ export interface SurahHealth {
   totalStrong: number;
   totalHesitant: number;
   totalWeak: number;
+  totalUnchecked: number;
   totalNotLearned: number;
   needsAttention: boolean;
 }
@@ -40,12 +44,14 @@ export function computeSurahHealth(
   let totalStrong = 0;
   let totalHesitant = 0;
   let totalWeak = 0;
+  let totalUnchecked = 0;
   let totalNotLearned = 0;
 
   const lessonHealths: LessonHealth[] = lessons.map((lesson) => {
     let strongCount = 0;
     let hesitantCount = 0;
     let weakCount = 0;
+    let uncheckedCount = 0;
     let notLearnedCount = 0;
 
     const ayahs: LessonHealth['ayahs'] = [];
@@ -56,6 +62,10 @@ export function computeSurahHealth(
         notLearnedCount++;
         totalNotLearned++;
         ayahs.push({ ayahNumber: n, health: 'not-learned', quality: -1 });
+      } else if (card.lastReview === 0) {
+        uncheckedCount++;
+        totalUnchecked++;
+        ayahs.push({ ayahNumber: n, health: 'unchecked', quality: card.lastQuality });
       } else {
         const health = qualityToHealth(card.lastQuality);
         ayahs.push({ ayahNumber: n, health, quality: card.lastQuality });
@@ -65,7 +75,7 @@ export function computeSurahHealth(
       }
     }
 
-    return { lesson, ayahs, strongCount, hesitantCount, weakCount, notLearnedCount };
+    return { lesson, ayahs, strongCount, hesitantCount, weakCount, uncheckedCount, notLearnedCount };
   });
 
   return {
@@ -74,6 +84,7 @@ export function computeSurahHealth(
     totalStrong,
     totalHesitant,
     totalWeak,
+    totalUnchecked,
     totalNotLearned,
     needsAttention: totalWeak > 0 || totalHesitant > 0,
   };

@@ -88,6 +88,7 @@ export default function ReviewPage() {
   const surahMap = useMemo(() => new Map(surahIndex.map((s) => [s.id, s])), [surahIndex]);
 
   const totalWeak = surahHealths.reduce((s, h) => s + h.totalWeak, 0);
+  const totalUnchecked = surahHealths.reduce((s, h) => s + h.totalUnchecked, 0);
   const totalHesitant = surahHealths.reduce((s, h) => s + h.totalHesitant, 0);
   const totalStrong = surahHealths.reduce((s, h) => s + h.totalStrong, 0);
 
@@ -200,6 +201,12 @@ export default function ReviewPage() {
               <p className="text-lg font-bold text-red-400">{totalWeak}</p>
               <p className="text-[10px] text-muted">Weak</p>
             </div>
+            {totalUnchecked > 0 && (
+              <div className="text-center">
+                <p className="text-lg font-bold text-muted">{totalUnchecked}</p>
+                <p className="text-[10px] text-muted">Not checked yet</p>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -278,7 +285,7 @@ function SurahHealthCard({
   const [expanded, setExpanded] = useState(false);
   const progressLessons = useProgressStore((s) => s.lessons);
 
-  const totalAyahs = health.totalStrong + health.totalHesitant + health.totalWeak + health.totalNotLearned;
+  const totalAyahs = health.totalStrong + health.totalHesitant + health.totalWeak + health.totalUnchecked + health.totalNotLearned;
 
   return (
     <div>
@@ -304,6 +311,7 @@ function SurahHealthCard({
                 {health.lessons.length} lesson{health.lessons.length !== 1 ? 's' : ''}
                 {health.totalWeak > 0 && <span className="text-red-400"> · {health.totalWeak} weak</span>}
                 {health.totalHesitant > 0 && <span className="text-gold"> · {health.totalHesitant} shaky</span>}
+                {health.totalUnchecked > 0 && <span> · {health.totalUnchecked} not checked yet</span>}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -323,6 +331,9 @@ function SurahHealthCard({
               )}
               {health.totalWeak > 0 && (
                 <div className="bg-red-400" style={{ width: `${(health.totalWeak / totalAyahs) * 100}%` }} />
+              )}
+              {health.totalUnchecked > 0 && (
+                <div className="bg-foreground/15" style={{ width: `${(health.totalUnchecked / totalAyahs) * 100}%` }} />
               )}
             </div>
           )}
@@ -388,6 +399,9 @@ function SurahHealthCard({
                     )}
                     {lessonHealth.weakCount > 0 && (
                       <div className="bg-red-400" style={{ width: `${(lessonHealth.weakCount / lessonTotal) * 100}%` }} />
+                    )}
+                    {lessonHealth.uncheckedCount > 0 && (
+                      <div className="bg-foreground/15" style={{ width: `${(lessonHealth.uncheckedCount / lessonTotal) * 100}%` }} />
                     )}
                   </div>
 

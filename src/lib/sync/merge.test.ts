@@ -175,6 +175,16 @@ describe('merge properties (fast-check)', () => {
     }))
   })
 
+  it('plan: real revisions (revisedAt) from either device survive, max per surah; absent stays absent', () => {
+    const plan = (revisedAt?: Record<string, number>) => ({
+      plan: { id: 'p', completedLessonIds: [], lastRevisedAt: {}, ...(revisedAt ? { revisedAt } : {}) },
+    })
+    const merged = mergeStore('quran-plan', plan({ '1': 5, '112': 9 }), plan({ '1': 7 }), true) as { plan: { revisedAt?: Record<string, number> } }
+    expect(merged.plan.revisedAt).toEqual({ '1': 7, '112': 9 })
+    const neither = mergeStore('quran-plan', plan(), plan(), true) as { plan: Record<string, unknown> }
+    expect('revisedAt' in neither.plan).toBe(false)
+  })
+
   it('essentials: memorized is a true-wins union; counters take the max', () => {
     fc.assert(fc.property(essentialsArb, essentialsArb, (a, b) => {
       const merged = mergeStore('quran-essentials', a, b, true) as typeof a

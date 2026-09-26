@@ -342,8 +342,11 @@ export default function PlanDashboardPage() {
         <Card>
           {(() => {
             const completedCount = surahBreakdown.filter((s) => s.done === s.total && s.total > 0).length;
+            // Same candidate set the planner rotates (getRevisionTasks): completed + tracked known surahs
+            const trackedKnown = plan.knownTracking ? plan.knownSurahIds.length : 0;
+            const inRevision = completedCount + trackedKnown;
             const auto = !!plan.revisionFrequencyAuto;
-            const effective = effectiveRevisionFrequency(plan, completedCount);
+            const effective = effectiveRevisionFrequency(plan, inRevision);
             const freq = auto ? effective : plan.revisionFrequencyDays;
             const presets: Array<{ days: number; label: string }> = [
               { days: 3, label: 'Intensive' },
@@ -351,14 +354,15 @@ export default function PlanDashboardPage() {
               { days: 14, label: 'Light' },
             ];
             let recommendation: string;
-            if (completedCount === 0) {
+            const have = `You have ${inRevision} surah${inRevision === 1 ? '' : 's'} in revision${trackedKnown > 0 ? ` (${trackedKnown} you already knew)` : ''}.`;
+            if (inRevision === 0) {
               recommendation = 'Revisions kick in once you finish your first surah.';
-            } else if (completedCount <= 5) {
-              recommendation = `You have ${completedCount} completed surah${completedCount === 1 ? '' : 's'}. Intensive (3d) helps lock early wins in.`;
-            } else if (completedCount <= 15) {
-              recommendation = `You have ${completedCount} completed surahs. Weekly (7d) is the sweet spot at this stage.`;
+            } else if (inRevision <= 5) {
+              recommendation = `${have} Intensive (3d) helps lock early wins in.`;
+            } else if (inRevision <= 15) {
+              recommendation = `${have} Weekly (7d) is the sweet spot at this stage.`;
             } else {
-              recommendation = `You have ${completedCount} completed surahs. Light (14d) keeps the daily plan from flooding.`;
+              recommendation = `${have} Light (14d) keeps the daily plan from flooding.`;
             }
 
             return (

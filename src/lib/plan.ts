@@ -236,8 +236,9 @@ export function getRevisionTasks(
     candidates.push({
       surahId,
       surahName: surah.nameSimple,
-      lastRevised: explicitLast ?? null,
-      daysSinceRevision: Math.floor((now - effectiveLast) / MS_PER_DAY),
+      // Display fields read REAL revisions only — scheduling seeds aren't history
+      lastRevised: plan.revisedAt?.[surahId] ?? null,
+      daysSinceRevision: plan.revisedAt?.[surahId] != null ? Math.floor((now - plan.revisedAt[surahId]) / MS_PER_DAY) : Infinity,
       isPartial,
       ayahStart: Number.isFinite(ayahStart) ? ayahStart : 1,
       ayahEnd: ayahEnd > 0 ? ayahEnd : surah.versesCount,

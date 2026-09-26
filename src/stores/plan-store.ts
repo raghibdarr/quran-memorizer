@@ -169,6 +169,7 @@ export const usePlanStore = create<PlanState>()(
             plan: {
               ...s.plan,
               lastRevisedAt: { ...s.plan.lastRevisedAt, [surahId]: Date.now() },
+              revisedAt: { ...(s.plan.revisedAt ?? {}), [surahId]: Date.now() },
             },
           };
         }),

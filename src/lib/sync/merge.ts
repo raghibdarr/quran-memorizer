@@ -344,8 +344,15 @@ function mergePlan(
     lastRevisedAt[k] = Math.max(lastRevisedAt[k] ?? 0, v)
   }
 
+  const revisedAt: Record<string, number> = { ...((localPlan.revisedAt ?? {}) as Record<string, number>) }
+  for (const [k, v] of Object.entries((cloudPlan.revisedAt ?? {}) as Record<string, number>)) {
+    revisedAt[k] = Math.max(revisedAt[k] ?? 0, v)
+  }
+
   const base = cloudIsNewer ? cloudPlan : localPlan
-  return { plan: { ...base, completedLessonIds, lastRevisedAt } }
+  // Only present once some device recorded a real revision (keeps older plans' shape — idempotent)
+  const hasRevised = localPlan.revisedAt != null || cloudPlan.revisedAt != null
+  return { plan: { ...base, completedLessonIds, lastRevisedAt, ...(hasRevised ? { revisedAt } : {}) } }
 }
 
 /** Essentials: union for memorized/favorites ("true" wins), max for counters. */

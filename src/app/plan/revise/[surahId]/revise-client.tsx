@@ -92,7 +92,7 @@ export default function RevisePage() {
     );
   }
 
-  const lastRevised = plan?.lastRevisedAt[id] ?? null;
+  const lastRevised = plan?.revisedAt?.[id] ?? null;
 
   return (
     <div className="min-h-dvh bg-cream pb-16">

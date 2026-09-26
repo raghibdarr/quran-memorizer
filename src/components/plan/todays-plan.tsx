@@ -105,7 +105,7 @@ export default function TodaysPlanCard() {
             Track your {plan.knownSurahIds.length} known surah{plan.knownSurahIds.length === 1 ? '' : 's'} for revision?
           </p>
           <p className="mt-0.5 text-[11px] text-muted">
-            They&apos;ll join your revision schedule at &quot;shaky&quot; strength — recall tests keep them from fading.
+            They&apos;ll join your revision schedule, marked &quot;not checked yet&quot; until your first recall — recall tests keep them from fading.
             (You can export a backup first from Settings.)
           </p>
           <div className="mt-2 flex gap-2">
@@ -230,7 +230,7 @@ export default function TodaysPlanCard() {
                   </p>
                   <p className="text-[11px] text-muted">
                     {rev.isPartial ? 'Plan-scope recall' : 'Full-surah recall'}
-                    {rev.daysSinceRevision !== Infinity && ` · ${rev.daysSinceRevision}d since last`}
+                    {rev.daysSinceRevision !== Infinity && reentryDay === null && ` · ${rev.daysSinceRevision}d since last`}
                   </p>
                 </div>
                 <ArrowRightIcon size={14} className="shrink-0 text-muted" />
