@@ -2,7 +2,7 @@
 
 import Link from '@/components/app-link';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import { getSurah, getJuzSegmentsForSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
@@ -20,6 +20,9 @@ import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
 import BackButton from '@/components/ui/back-button';
+import { Skeleton, SkeletonRows } from '@/components/ui/skeleton';
+import { useDeal } from '@/hooks/use-deal';
+import SegmentedControl from '@/components/ui/segmented-control';
 
 type Tab = 'learn' | 'practice';
 
@@ -36,6 +39,25 @@ export default function SurahDetailPage() {
   const initialTab = searchParams.get('tab') === 'practice' ? 'practice' : 'learn';
   const reviewLessonNum = searchParams.get('reviewLesson') ? parseInt(searchParams.get('reviewLesson')!, 10) : null;
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+  const deal = useDeal(`${activeTab}-${surah ? 1 : 0}`);
+
+  // Collapsing large title: once the h1 scrolls under the top bar, a compact
+  // title fades in there (iOS large-title pattern)
+  const barRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [titleCollapsed, setTitleCollapsed] = useState(false);
+  const loaded = surah != null;
+  useEffect(() => {
+    const bar = barRef.current;
+    const title = titleRef.current;
+    if (!loaded || !bar || !title) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setTitleCollapsed(!entry.isIntersecting && entry.boundingClientRect.top < bar.getBoundingClientRect().bottom),
+      { rootMargin: `-${Math.round(bar.getBoundingClientRect().bottom)}px 0px 0px 0px` }
+    );
+    io.observe(title);
+    return () => io.disconnect();
+  }, [loaded]);
 
   useEffect(() => {
     Promise.all([getSurah(surahId), getJuzSegmentsForSurah(surahId)]).then(([s, juzSegs]) => {
@@ -46,7 +68,24 @@ export default function SurahDetailPage() {
 
   // Keep the tab bar while loading: a screen with no tab bar makes the transition
   // slide it away and pop it back a moment later
-  if (!surah) return <div className="min-h-dvh bg-cream"><BottomNav /></div>;
+  if (!surah) {
+    return (
+      <div className="min-h-dvh bg-cream pb-24">
+        <div className="sticky top-[var(--safe-top)] z-10 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+          <div className="mx-auto flex max-w-2xl items-center justify-between">
+            <BackButton fallback={reviewLessonNum ? '/review' : '/'} />
+          </div>
+        </div>
+        <div className="mx-auto max-w-2xl px-4 pt-6" role="status" aria-label="Loading surah">
+          <Skeleton className="mx-auto h-9 w-40" />
+          <Skeleton className="mx-auto mt-3 h-5 w-28" />
+          <Skeleton className="mt-6 h-2 w-full rounded-full" />
+          <div className="mt-8"><SkeletonRows count={5} /></div>
+        </div>
+        <BottomNav />
+      </div>
+    );
+  }
 
   const isSingleLesson = lessons.length === 1;
   const completedCount = lessons.filter(
@@ -70,9 +109,18 @@ export default function SurahDetailPage() {
   return (
     <div className="min-h-dvh bg-cream pb-24">
       {/* Sticky top bar */}
-      <div className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
-        <div className="mx-auto max-w-2xl flex items-center justify-between">
+      <div ref={barRef} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+        <div className="relative mx-auto max-w-2xl flex items-center justify-between">
           <BackButton fallback={reviewLessonNum ? '/review' : '/'} />
+          <p
+            aria-hidden={!titleCollapsed}
+            className={cn(
+              'pointer-events-none absolute inset-x-16 truncate text-center text-sm font-semibold text-foreground transition-[opacity,transform] duration-200',
+              titleCollapsed ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-0'
+            )}
+          >
+            {surah.nameSimple}
+          </p>
           <div className="flex items-center gap-2">
             <SettingsPanel />
             <UserButton />
@@ -85,7 +133,7 @@ export default function SurahDetailPage() {
         <div className="mx-auto max-w-2xl">
           <div className="text-center">
             <p className="arabic-text text-3xl">{surah.nameArabic}</p>
-            <h1 className="mt-1 text-xl font-bold text-foreground">{surah.nameSimple}</h1>
+            <h1 ref={titleRef} className="mt-1 text-xl font-bold text-foreground">{surah.nameSimple}</h1>
             <p className="text-sm text-muted">
               {surah.nameTranslation} &middot; {surah.versesCount} ayahs &middot; {lessons.length} lessons
             </p>
@@ -121,26 +169,11 @@ export default function SurahDetailPage() {
       {/* Learn / Practice tab toggle — pins below the top bar on scroll */}
       <div className="sticky top-[calc(var(--safe-top)+3.5rem)] z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
-          <div className="flex gap-1 rounded-xl bg-foreground/5 p-1">
-            <button
-              onClick={() => setActiveTab('learn')}
-              className={cn(
-                'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                activeTab === 'learn' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
-              )}
-            >
-              Learn
-            </button>
-            <button
-              onClick={() => setActiveTab('practice')}
-              className={cn(
-                'flex-1 rounded-lg py-2 text-sm font-medium transition-colors',
-                activeTab === 'practice' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
-              )}
-            >
-              Review
-            </button>
-          </div>
+          <SegmentedControl
+            options={[{ value: 'learn', label: 'Learn' }, { value: 'practice', label: 'Review' }]}
+            value={activeTab}
+            onChange={setActiveTab}
+          />
         </div>
       </div>
 
@@ -158,7 +191,7 @@ export default function SurahDetailPage() {
                 : isComplete ? 100 : 0;
               return (
                 <Link href={lessonHref(surahId, 1)} className="block">
-                  <Card className={cn(
+                  <Card pressable className={cn(
                     'text-center transition-all hover:shadow-md',
                     isComplete && 'border border-success/20 bg-success/5'
                   )}>
@@ -191,7 +224,7 @@ export default function SurahDetailPage() {
             })()
           ) : (
             /* Multi-lesson surah: lesson list */
-            <div className="space-y-2">
+            <div key={activeTab} className="space-y-2" {...deal.container}>
               {lessons.map((lesson, idx) => {
                 const prevJuz = idx > 0 ? lessons[idx - 1].juzNumber : lesson.juzNumber;
                 const showJuzDivider = lesson.juzNumber !== prevJuz;
@@ -205,7 +238,7 @@ export default function SurahDetailPage() {
                   : isComplete ? 100 : 0;
 
                 return (
-                  <div key={lesson.lessonId}>
+                  <div key={lesson.lessonId} className="deal-in" style={deal.row(idx)}>
                     {(showJuzDivider || showFirstJuzLabel) && (
                       <div className="flex items-center gap-3 py-2">
                         <div className="h-px flex-1 bg-foreground/10" />
@@ -215,6 +248,7 @@ export default function SurahDetailPage() {
                     )}
                     <Link href={lessonHref(surahId, lesson.lessonNumber)} className="block">
                       <Card
+                        pressable
                         className={cn(
                           'flex items-center gap-4 transition-all hover:shadow-md',
                           isComplete && 'border border-success/20 bg-success/5'

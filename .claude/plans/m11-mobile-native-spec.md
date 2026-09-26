@@ -190,7 +190,7 @@ What the spike must change / measure:
 - **Android hardware back**: Capacitor `backButton` → animated pop, or exit at the root.
 - Verified by Playwright probes: push/pop/tab/into-flow animations, edge-swipe cancel + commit.
 - Deferred: the surah page's in-tab practice selection→session stays an in-page view (not routed yet);
-  scroll restoration on back relies on Next defaults; collapsing large-title headers are M11d.
+  scroll restoration on back relies on Next defaults; collapsing large-title headers are M11d (surah page done, §5e).
 
 ## 5d. M11c status — ✅ DONE 2026-09-26 (sheets & ergonomics)
 
@@ -207,6 +207,32 @@ What the spike must change / measure:
   area (visual size unchanged).
 - Verified: settings sheet light/dark screenshots, drag-dismiss + Esc + scroll-lock release
   (Playwright), full smoke green.
+
+## 5e. M11d status — FIRST BATCH DONE 2026-09-26 (Home + surah flow) — ⏸ OWNER CHECKPOINT B
+
+Per §5, accents land on Home and one pushed flow (Home → surah page) first; app-wide rollout
+waits for the owner's on-device dial tuning.
+- **Motion dials**: one block at the top of the motion section of `globals.css` — deal tilt/travel/
+  stagger/duration, chip glide, push duration, parallax, scrim dim, the two springs. Every
+  accent reads these; tune there only.
+- **Dealt-in lists** (`src/hooks/use-deal.ts` + `.deal-in`): Home surah grid/list + juz grid and
+  the surah lesson list. Deal on first paint, tab/view switch, and data arrival only; rows mounted
+  later (search, scroll) appear plainly; stagger caps at 12 rows.
+- **Gliding chip** (`src/components/ui/segmented-control.tsx`): Home Surahs/Juz and surah
+  Learn/Review toggles.
+- **Skeletons** (`src/components/ui/skeleton.tsx`, gold shimmer, never a spinner): Home browse
+  grid while data loads; the surah page loading shell (with a working back button).
+- **Collapsing large title**: the surah page's compact name fades into the sticky bar once the h1
+  scrolls under it.
+- **Press coverage**: settings steppers, media-bar skip/speed buttons, surah lesson cards;
+  `.pressable` no longer squishes disabled controls and keeps colour transitions.
+- **Reduced motion**: one global guard.
+- Verified (Playwright probes): deal delays 0/46/92ms, settles to no animation, re-deals on
+  tab switch; chip mid-glide then lands exactly on the segment; title opacity 0→1→0 on
+  scroll down/up; skeleton renders under a throttled chunk load. Smoke green (11 static, 5 dev).
+- **Owner checkpoint B**: on a phone, judge the tactile budget and the dials (does the tilt read
+  as "dealt paper" or as wobble? is the stagger too slow on long lists?). After that, roll the
+  accents out to Review, Progress, Essentials, juz/revise pages and the remaining toggles.
 
 ## 5b. Store compliance checklist (added 2026-09-26 — none of these exist yet)
 

@@ -156,10 +156,10 @@ body::after {
 }
 
 .pressable {
-  transition: transform 120ms ease;
+  transition: transform 120ms ease, background-color 150ms ease, color 150ms ease;
 }
 
-.pressable:active {
+.pressable:not(:disabled):active {
   transform: scale(0.97);
 }
 
@@ -269,15 +269,13 @@ body::after {
    the right, revealing the one beneath. Tab switch: a quick crossfade. */
 :root {
   --nav-ease: cubic-bezier(.32, .72, 0, 1);
-  --nav-duration: 320ms;
+  /* --nav-duration, parallax and dimming live in MOTION DIALS below */
 }
 
 ::view-transition { pointer-events: none; }
 
 @keyframes nav-in-from-right { from { transform: translateX(100%); } }
 @keyframes nav-out-to-right { to { transform: translateX(100%); } }
-@keyframes nav-recede { to { transform: translateX(-28%); filter: brightness(0.82); } }
-@keyframes nav-return { from { transform: translateX(-28%); filter: brightness(0.82); } }
 @keyframes nav-fade-out { to { opacity: 0; } }
 @keyframes nav-fade-in { from { opacity: 0; } }
 
@@ -396,5 +394,81 @@ html, body { overscroll-behavior-y: none; }
     width: max(100%, 44px);
     height: max(100%, 44px);
     transform: translate(-50%, -50%);
+  }
+}
+
+/* ======================= MOTION DIALS (M11d) =======================
+   Single-number tunables for the owner's on-device tuning pass (M11 spec §2).
+   Everything motion-related reads these — change a value here, nowhere else. */
+:root {
+  --dial-deal-tilt: 0.9deg;        /* dealt-in list tilt (mockup ±1.5°; production one notch quieter) */
+  --dial-deal-travel: 20px;        /* how far each row rises as it's dealt */
+  --dial-deal-stagger: 46ms;       /* delay between rows */
+  --dial-deal-duration: 460ms;
+  --dial-chip-duration: 300ms;     /* segmented-control chip glide */
+  --dial-push-duration: 320ms;     /* screen push/pop */
+  --dial-parallax: -28%;           /* how far the covered screen recedes */
+  --dial-scrim-dim: 0.82;          /* brightness of the covered screen */
+  --spring-pop: cubic-bezier(.34, 1.45, .64, 1);
+  --spring-settle: cubic-bezier(.22, 1.2, .36, 1);
+  --nav-duration: var(--dial-push-duration);
+}
+@keyframes nav-recede { to { transform: translateX(var(--dial-parallax)); filter: brightness(var(--dial-scrim-dim)); } }
+@keyframes nav-return { from { transform: translateX(var(--dial-parallax)); filter: brightness(var(--dial-scrim-dim)); } }
+
+/* Dealt-in lists (accent 1): rows rise and settle with an alternating tilt on
+   first paint and tab switch only — once a container is settled, rows mounted
+   later (search, scrolling) appear plainly. See src/hooks/use-deal.ts. */
+@keyframes deal-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--dial-deal-travel)) rotate(calc(var(--dial-deal-tilt) * var(--deal-sign, 1)));
+  }
+  to { opacity: 1; transform: none; }
+}
+.deal-in {
+  animation: deal-in var(--dial-deal-duration) var(--spring-settle) both;
+  animation-delay: calc(var(--deal-i, 0) * var(--dial-deal-stagger));
+}
+[data-deal-settled] .deal-in { animation: none; }
+
+/* Gliding chip (accent 3): the selected segment's chip slides between equal
+   segments (p-1 = 0.25rem inset, gap-1 = 0.25rem). See segmented-control.tsx. */
+.segmented-chip {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  width: calc((100% - 0.5rem - (var(--seg-n) - 1) * 0.25rem) / var(--seg-n));
+  transform: translateX(calc(var(--seg-i) * (100% + 0.25rem)));
+  transition: transform var(--dial-chip-duration) var(--spring-settle);
+}
+.segmented button { transition: color var(--dial-chip-duration) ease, transform 120ms ease; }
+
+/* Skeletons: the paper card at rest, with a slow gold shimmer — never a spinner */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid color-mix(in srgb, var(--c-ink) 18%, transparent);
+  background: var(--c-card);
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-gold) 16%, transparent), transparent);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer { to { transform: translateX(100%); } }
+
+/* Global reduced-motion guard (M11d): anything that moves, doesn't */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

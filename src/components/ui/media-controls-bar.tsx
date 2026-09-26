@@ -132,7 +132,7 @@ export default function MediaControlsBar({
           <button
             onClick={onRestart}
             disabled={!playingAll}
-            className="hit-44 flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
+            className="pressable hit-44 flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
             title="Restart"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -156,7 +156,7 @@ export default function MediaControlsBar({
         <button
           onClick={onStop}
           disabled={!playingAll}
-          className="hit-44 flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
+          className="pressable hit-44 flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
           title="Stop"
         >
           <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" /></svg>
@@ -171,7 +171,7 @@ export default function MediaControlsBar({
         <div className="relative">
           <button
             onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-            className="hit-44 rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
+            className="pressable hit-44 rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
           >
             {storedSpeed}x
           </button>

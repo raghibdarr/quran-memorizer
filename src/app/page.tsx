@@ -28,6 +28,9 @@ import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
+import { useDeal } from '@/hooks/use-deal';
+import { Skeleton } from '@/components/ui/skeleton';
+import SegmentedControl from '@/components/ui/segmented-control';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
 type ViewMode = 'grid' | 'list';
@@ -98,6 +101,11 @@ export default function HomePage() {
   }, []);
 
   const juzSegmentsBySurah = useMemo(() => buildJuzSegmentsBySurah(juzIndex), [juzIndex]);
+
+  // Browse rows are dealt in on first paint, tab/view switch, and when data lands
+  const browseLoaded = tab === 'surahs' ? allSurahs.length > 0 : allSurahs.length > 0 && juzIndex.length > 0;
+  const dealKey = `${tab}-${view}-${browseLoaded ? 1 : 0}`;
+  const deal = useDeal(dealKey);
 
   /** Generate juz-aware lessons for a surah */
   const getLessons = (surah: SurahMeta) => {
@@ -298,30 +306,13 @@ export default function HomePage() {
         {/* Browse controls — pin to the top once scrolled past */}
         <div className="sticky top-[var(--safe-top)] z-20 -mx-4 space-y-3 bg-cream/95 px-4 pb-3 pt-2 backdrop-blur-sm">
           {/* Surahs / Juz Tab Toggle */}
-          <div className="flex gap-1 rounded-xl border border-foreground/10 bg-foreground/5 p-1">
-            <button
-              onClick={() => setTab('surahs')}
-              className={cn(
-                'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
-                tab === 'surahs'
-                  ? 'ink-border bg-teal text-on-teal'
-                  : 'text-muted hover:text-foreground'
-              )}
-            >
-              Surahs
-            </button>
-            <button
-              onClick={() => setTab('juz')}
-              className={cn(
-                'pressable flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
-                tab === 'juz'
-                  ? 'ink-border bg-teal text-on-teal'
-                  : 'text-muted hover:text-foreground'
-              )}
-            >
-              Juz
-            </button>
-          </div>
+          <SegmentedControl
+            options={[{ value: 'surahs', label: 'Surahs' }, { value: 'juz', label: 'Juz' }]}
+            value={tab}
+            onChange={setTab}
+            className="border border-foreground/10"
+            chipClassName="ink-border"
+          />
 
           {tab === 'surahs' && (
             <>
@@ -388,9 +379,13 @@ export default function HomePage() {
               <p className="py-8 text-center text-sm text-muted">No surahs found</p>
             )}
 
-            {view === 'grid' ? (
-              <div className="grid grid-cols-2 gap-3">
-                {surahs.map((surah) => {
+            {!browseLoaded ? (
+              <div className="grid grid-cols-2 gap-3" role="status" aria-label="Loading surahs">
+                {Array.from({ length: 8 }, (_, i) => <Skeleton key={i} className="h-[6.5rem]" />)}
+              </div>
+            ) : view === 'grid' ? (
+              <div key={dealKey} className="grid grid-cols-2 gap-3" {...deal.container}>
+                {surahs.map((surah, i) => {
                   const lessons = getLessons(surah);
                   const completedLessons = lessons.filter(
                     (l) => progressLessons[l.lessonId]?.completedAt != null
@@ -400,7 +395,7 @@ export default function HomePage() {
                   const progress = lessons.length > 0 ? (completedLessons / lessons.length) * 100 : 0;
 
                   return (
-                    <Link key={surah.id} href={`/lesson/${surah.id}`}>
+                    <Link key={surah.id} href={`/lesson/${surah.id}`} className="deal-in" style={deal.row(i)}>
                       <Card
                         pressable
                         className={cn(isComplete && 'bg-success/5')}
@@ -435,8 +430,8 @@ export default function HomePage() {
                 })}
               </div>
             ) : (
-              <div className="space-y-1">
-                {surahs.map((surah) => {
+              <div key={dealKey} className="space-y-1" {...deal.container}>
+                {surahs.map((surah, i) => {
                   const lessons = getLessons(surah);
                   const completedLessons = lessons.filter(
                     (l) => progressLessons[l.lessonId]?.completedAt != null
@@ -450,9 +445,10 @@ export default function HomePage() {
                       key={surah.id}
                       href={`/lesson/${surah.id}`}
                       className={cn(
-                        'pressable flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
+                        'deal-in pressable flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
                         isComplete && 'bg-success/5'
                       )}
+                      style={deal.row(i)}
                     >
                       <span className="w-8 text-right text-xs font-medium text-muted">{surah.id}</span>
                       <span className="arabic-text text-lg leading-none">{surah.nameArabic}</span>
@@ -480,8 +476,13 @@ export default function HomePage() {
           </div>
         ) : (
           /* Juz Tab */
-          <div className="grid grid-cols-2 gap-3">
-            {juzIndex.map((juz) => {
+          !browseLoaded ? (
+            <div className="grid grid-cols-2 gap-3" role="status" aria-label="Loading juz">
+              {Array.from({ length: 8 }, (_, i) => <Skeleton key={i} className="h-[5.5rem]" />)}
+            </div>
+          ) : (
+          <div key={dealKey} className="grid grid-cols-2 gap-3" {...deal.container}>
+            {juzIndex.map((juz, i) => {
               // Get all lessons in this juz across all its surahs
               const juzLessons = juz.verseMappings.flatMap((mapping) => {
                 const surah = surahMap.get(mapping.surahId);
@@ -508,7 +509,7 @@ export default function HomePage() {
                 : '';
 
               return (
-                <Link key={juz.juzNumber} href={`/juz/${juz.juzNumber}`}>
+                <Link key={juz.juzNumber} href={`/juz/${juz.juzNumber}`} className="deal-in" style={deal.row(i)}>
                   <Card
                     pressable
                     className={cn(isComplete && 'bg-success/5')}
@@ -534,6 +535,7 @@ export default function HomePage() {
               );
             })}
           </div>
+          )
         )}
       </main>
 

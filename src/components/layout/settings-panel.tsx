@@ -149,7 +149,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10))}
                   disabled={arabicFontSize <= 0.8}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   −
                 </button>
@@ -159,7 +159,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setArabicFontSize(Math.min(1.6, Math.round((arabicFontSize + 0.1) * 10) / 10))}
                   disabled={arabicFontSize >= 1.6}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   +
                 </button>
@@ -208,7 +208,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setDailyGoalActivities(Math.max(1, dailyGoalActivities - 1))}
                   disabled={dailyGoalActivities <= 1}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   −
                 </button>
@@ -218,7 +218,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setDailyGoalActivities(Math.min(10, dailyGoalActivities + 1))}
                   disabled={dailyGoalActivities >= 10}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="pressable flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   +
                 </button>
