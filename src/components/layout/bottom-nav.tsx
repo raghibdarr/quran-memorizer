@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 import { useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useReviewQueue } from '@/hooks/use-review-queue';
@@ -66,7 +66,8 @@ export default function BottomNav() {
     <nav
       aria-label="Main"
       className="fixed inset-x-0 z-50 px-4"
-      style={{ bottom: 'calc(env(safe-area-inset-bottom) + 10px)' }}
+      // Named so screen transitions leave it anchored (and slide it away into flows)
+      style={{ bottom: 'calc(env(safe-area-inset-bottom) + 10px)', viewTransitionName: 'tab-bar' }}
     >
       <div
         className={cn(

@@ -14,11 +14,13 @@ import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import { useAppBack } from '@/hooks/use-app-back';
 
 type Step = 1 | 2;
 
 export default function PlanEditPage() {
   const router = useRouter();
+  const leave = useAppBack('/plan');
   const plan = usePlanStore((s) => s.plan);
   const updateGoalScope = usePlanStore((s) => s.updateGoalScope);
   const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
@@ -182,7 +184,7 @@ export default function PlanEditPage() {
         .find((l) => l.lessonId === lessonId);
       if (lesson) seedKnownAyahs(surahId, lesson.ayahStart, lesson.ayahEnd);
     }
-    router.push('/plan');
+    leave();
   };
 
   // Juz-segments helper for lesson enumeration per-surah (for partial pre-assessment)
@@ -480,7 +482,7 @@ export default function PlanEditPage() {
             <Button
               variant="ghost"
               className="flex-1"
-              onClick={() => (step > 1 ? setStep(1) : router.push('/plan'))}
+              onClick={() => (step > 1 ? setStep(1) : leave())}
             >
               {step > 1 ? 'Back' : 'Cancel'}
             </Button>

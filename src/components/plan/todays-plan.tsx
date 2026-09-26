@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
 import { useMemo } from 'react';
 import { usePlanStore } from '@/stores/plan-store';
@@ -184,7 +184,7 @@ export default function TodaysPlanCard() {
           <section>
             <StreamLabel name="Sabqi" hint="Keep the last two weeks fresh" />
             <ReviewRow
-              href="/review?start=1&stream=sabqi"
+              href="/review/session?from=plan&stream=sabqi"
               title={`Review ${sabqiCount} recent ${sabqiCount === 1 ? 'lesson' : 'lessons'}`}
               sub={reviewBreakdown(sabqiCount - earlyCount - sabqiOverdue, sabqiOverdue, earlyCount)}
             />
@@ -196,7 +196,7 @@ export default function TodaysPlanCard() {
             <StreamLabel name="Manzil" hint="Cycle everything older so nothing fades" />
             {manzilReviewCount > 0 && (
               <ReviewRow
-                href="/review?start=1&stream=manzil"
+                href="/review/session?from=plan&stream=manzil"
                 title={`Review ${manzilReviewCount} older ${manzilReviewCount === 1 ? 'lesson' : 'lessons'}`}
                 sub={reviewBreakdown(manzilReviewCount - manzilOverdue, manzilOverdue, 0)}
               />

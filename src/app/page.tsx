@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { useProgressStore } from '@/stores/progress-store';

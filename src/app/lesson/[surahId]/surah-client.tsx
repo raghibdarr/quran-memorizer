@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
@@ -19,6 +19,7 @@ import PracticeContainer from '@/components/practice/practice-container';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
+import BackButton from '@/components/ui/back-button';
 
 type Tab = 'learn' | 'practice';
 
@@ -43,7 +44,9 @@ export default function SurahDetailPage() {
     });
   }, [surahId]);
 
-  if (!surah) return null;
+  // Keep the tab bar while loading: a screen with no tab bar makes the transition
+  // slide it away and pop it back a moment later
+  if (!surah) return <div className="min-h-dvh bg-cream"><BottomNav /></div>;
 
   const isSingleLesson = lessons.length === 1;
   const completedCount = lessons.filter(
@@ -69,7 +72,7 @@ export default function SurahDetailPage() {
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
-          <Link href={reviewLessonNum ? '/review' : '/'} className="text-sm text-muted hover:text-foreground">&larr; Back</Link>
+          <BackButton fallback={reviewLessonNum ? '/review' : '/'} />
           <div className="flex items-center gap-2">
             <SettingsPanel />
             <UserButton />

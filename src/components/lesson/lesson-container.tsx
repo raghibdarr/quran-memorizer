@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -10,7 +9,7 @@ import { useStatsStore } from '@/stores/stats-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
-import BottomNav from '@/components/layout/bottom-nav';
+import { useAppBack } from '@/hooks/use-app-back';
 import TajweedLegend from '@/components/ui/tajweed-legend';
 import { TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
@@ -72,6 +71,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     return () => observer.disconnect();
   }, []);
 
+  // Before any early return — hooks must run in the same order every render
+  const backUrl = fromParam ? `/${fromParam}` : `/lesson/${surah.id}`;
+  const goBackToParent = useAppBack(backUrl);
+
   if (!lesson) return null;
 
   const activePhase: LessonPhase = practicePhase ?? lesson.currentPhase;
@@ -104,7 +107,6 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     setShowResetConfirm(false);
   };
 
-  const backUrl = fromParam ? `/${fromParam}` : `/lesson/${surah.id}`;
 
   const phaseMap: Record<LessonPhase, React.ReactNode> = {
     listen: (
@@ -159,14 +161,14 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   return (
     <div
       className="flex min-h-screen flex-col bg-cream"
-      style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}
+      style={{ paddingBottom: 'var(--tabbar-clearance)' }}
     >
       <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
-            <Link href={backUrl} className="text-sm text-muted hover:text-foreground">
+            <button onClick={goBackToParent} className="-ml-2 flex min-h-11 items-center px-2 text-sm text-muted hover:text-foreground">
               ← Back
-            </Link>
+            </button>
             <h2 className="text-sm font-semibold text-teal">{lessonTitle}</h2>
             <div className="flex items-center gap-1">
               <button
@@ -226,7 +228,6 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         </div>
       </main>
 
-      <BottomNav />
     </div>
   );
 }

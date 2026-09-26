@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -20,6 +20,7 @@ import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import type { Ayah } from '@/types/quran';
 import { lessonHref } from '@/lib/routes';
+import BackButton from '@/components/ui/back-button';
 
 type Tab = 'learn' | 'practice';
 
@@ -106,7 +107,9 @@ export default function JuzDetailPage() {
     ).then(() => setPracticeDataLoading(false));
   }, [activeTab, sections, loadedSurahs]);
 
-  if (!juz) return null;
+  // Keep the tab bar while loading: a screen with no tab bar makes the transition
+  // slide it away and pop it back a moment later
+  if (!juz) return <div className="min-h-dvh bg-cream"><BottomNav /></div>;
 
   const allJuzLessons = sections.flatMap((s) => s.lessons);
   const completedCount = allJuzLessons.filter(
@@ -130,7 +133,7 @@ export default function JuzDetailPage() {
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
-          <Link href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</Link>
+          <BackButton fallback="/" />
           <div className="flex items-center gap-2">
             <SettingsPanel />
             <UserButton />

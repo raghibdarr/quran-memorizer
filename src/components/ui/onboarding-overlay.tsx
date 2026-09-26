@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { NAV_FORWARD } from '@/lib/nav';
 
 function BookIcon() {
   return (
@@ -89,7 +90,7 @@ export default function OnboardingOverlay() {
       // Final card promises "pick your first surah and start" — deliver on it
       // instead of dropping the user back on Home to figure it out.
       dismiss();
-      router.push('/lesson/1');
+      router.push('/lesson/1', { transitionTypes: [NAV_FORWARD] });
     }
   };
 

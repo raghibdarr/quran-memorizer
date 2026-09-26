@@ -20,6 +20,8 @@ planner (daily plan), essentials (duas/dhikr), progress stats, streaks.
 - In-app navigation must be client-side (`<Link>`/router): the native shells answer every
   extensionless path with the ROOT index.html, so a full page load to a deep path renders Home
   (Home recovers via useShellRouteRecovery). Never `<a href="/...">` or `window.location` for app routes.
+- Links: import Link from `@/components/app-link` (auto push/pop/tab transition types — src/lib/nav.ts).
+  Back: `BackButton` / `useAppBack(parent)` only — they pop the in-app stack with the pop animation.
 - Deployed on Netlify. **Pushing main auto-deploys — commit only; push when the owner says.**
 - Deploy gate: netlify.toml runs `npm run test:run && npx tsc --noEmit && npm run build`;
   GitHub Actions: ci.yml (tsc, vitest + TZ matrix, dev smoke, static smoke); android.yml

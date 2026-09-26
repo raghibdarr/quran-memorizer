@@ -196,7 +196,7 @@ export default function PracticeSelection({
       <div className="h-28" />
 
       {/* Sticky bottom bar */}
-      <div className="fixed bottom-[3.25rem] left-0 right-0 z-20 border-t border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+      <div className="fixed left-0 right-0 z-20 border-t border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm" style={{ bottom: 'var(--tabbar-clearance)' }}>
         <div className="mx-auto max-w-2xl space-y-2">
           <p className="text-center text-sm font-medium text-foreground">
             {selectedAyahCount} ayah{selectedAyahCount !== 1 ? 's' : ''} selected

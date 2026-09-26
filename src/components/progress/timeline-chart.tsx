@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import type { LessonProgress } from '@/types/quran';
 import { isoFromMs } from '@/lib/dates';
 
@@ -30,7 +30,8 @@ export default function TimelineChart({ lessons }: Props) {
 
   const points = [...dayMap.entries()].map(([date, count]) => ({
     date,
-    ts: new Date(date).getTime(),
+    // Local noon: new Date('YYYY-MM-DD') parses as UTC midnight, the PREVIOUS day west of Greenwich
+    ts: new Date(date + 'T12:00:00').getTime(),
     count,
   }));
 
@@ -64,12 +65,12 @@ export default function TimelineChart({ lessons }: Props) {
   const areaPoints = `${toX(minTs)},${padTop + plotH} ${polylinePoints} ${toX(maxTs)},${padTop + plotH}`;
 
   const formatDate = (date: string) => {
-    const d = new Date(date);
+    const d = new Date(date + 'T12:00:00');
     return `${d.getDate()} ${MONTHS[d.getMonth()]}`;
   };
 
   const formatDateLong = (date: string) => {
-    const d = new Date(date);
+    const d = new Date(date + 'T12:00:00');
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
@@ -92,8 +93,9 @@ export default function TimelineChart({ lessons }: Props) {
     }
   }
 
-  // Find nearest point
-  const findNearest = useCallback((clientX: number) => {
+  // Find nearest point. A plain function: it was a useCallback AFTER the early
+  // return above — a hook-order violation that crashed the chart once data arrived.
+  const findNearest = (clientX: number) => {
     const svg = svgRef.current;
     if (!svg) return null;
     const rect = svg.getBoundingClientRect();
@@ -109,7 +111,7 @@ export default function TimelineChart({ lessons }: Props) {
       }
     }
     return closest;
-  }, [points]);
+  };
 
   const handlePointerDown = (e: React.PointerEvent) => {
     isDragging.current = true;

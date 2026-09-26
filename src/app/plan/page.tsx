@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -22,6 +22,7 @@ import BottomNav from '@/components/layout/bottom-nav';
 import { ArrowRightIcon, CheckIcon, TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { addDaysIso } from '@/lib/dates';
+import { NAV_BACK, NAV_FORWARD } from '@/lib/nav';
 
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -85,7 +86,7 @@ export default function PlanDashboardPage() {
             <p className="mt-2 text-sm text-muted">
               Set a hifdh goal and get a daily plan tailored to your pace.
             </p>
-            <Button className="mt-4 w-full" onClick={() => router.push('/plan/setup')}>
+            <Button className="mt-4 w-full" onClick={() => router.push('/plan/setup', { transitionTypes: [NAV_FORWARD] })}>
               Create a plan
             </Button>
           </Card>
@@ -491,7 +492,7 @@ export default function PlanDashboardPage() {
                   onClick={() => {
                     deletePlan();
                     setShowDelete(false);
-                    router.push('/');
+                    router.replace('/', { transitionTypes: [NAV_BACK] });
                   }}
                   className="flex-1 rounded-xl bg-miss py-2.5 text-sm font-medium text-on-miss"
                 >

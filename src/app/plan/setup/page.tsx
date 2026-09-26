@@ -20,14 +20,19 @@ import Card from '@/components/ui/card';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { isoFromMs } from '@/lib/dates';
+import { useAppBack } from '@/hooks/use-app-back';
 
 type Step = 1 | 2 | 3 | 4;
 
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+/** Without in-app history, setup exits to Home */
+const existingPlanFallback = () => '/';
+
 export default function PlanSetupPage() {
   const router = useRouter();
+  const leave = useAppBack(existingPlanFallback());
   const createPlan = usePlanStore((s) => s.createPlan);
   const existingPlan = usePlanStore((s) => s.plan);
   const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
@@ -192,7 +197,7 @@ export default function PlanSetupPage() {
   const goBack = () => {
     if (step === 3 && skipPreAssessment) setStep(1);
     else if (step > 1) setStep((step - 1) as Step);
-    else router.push('/');
+    else leave();
   };
 
   const canAdvanceFrom1 =
@@ -243,7 +248,7 @@ export default function PlanSetupPage() {
       }
     }
 
-    router.push('/');
+    leave();
   };
 
   return (
@@ -262,7 +267,7 @@ export default function PlanSetupPage() {
             </div>
             {existingPlan && step === 1 && (
               <button
-                onClick={() => router.push('/plan')}
+                onClick={leave}
                 className="text-xs font-semibold text-muted hover:text-foreground"
               >
                 Cancel

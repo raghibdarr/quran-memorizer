@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -13,6 +13,7 @@ import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import { cn } from '@/lib/cn';
+import BackButton from '@/components/ui/back-button';
 
 type CategoryFilter = 'all' | 'dua' | 'dhikr' | 'ayah';
 
@@ -65,8 +66,9 @@ export default function CollectionPage() {
 
   if (!collection) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-cream">
+      <div className="flex min-h-dvh items-center justify-center bg-cream">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-teal border-t-transparent" />
+        <BottomNav />
       </div>
     );
   }
@@ -77,9 +79,7 @@ export default function CollectionPage() {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/essentials" className="text-sm text-muted hover:text-foreground">
-                ← Back
-              </Link>
+              <BackButton fallback="/essentials" />
             </div>
             <div className="flex items-center gap-2">
               <SettingsPanel />

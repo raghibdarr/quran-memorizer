@@ -11,6 +11,7 @@ import PracticeSession from '@/components/practice/practice-session';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { StarIcon } from '@/components/ui/icons';
+import { useAppBack } from '@/hooks/use-app-back';
 
 // Revision is a RECALL TEST, not a read-through (M4, audit m8/§4a-6): each ayah
 // starts hidden, the user recites from memory, reveals to check, and self-rates.
@@ -69,6 +70,7 @@ export default function RevisePage() {
     return { scopedAyahs: filtered, isPartial: partial, scopeStart: start, scopeEnd: end };
   }, [surah, plan, allSurahs, juzIndex, id]);
 
+  const leave = useAppBack('/');
   const finishRevision = () => {
     markSurahRevised(id);
     if (surah) {
@@ -79,7 +81,7 @@ export default function RevisePage() {
         timestamp: Date.now(),
       });
     }
-    router.push('/');
+    leave();
   };
 
   if (!surah) {
@@ -158,7 +160,7 @@ export default function RevisePage() {
       {!started && (
         <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm">
           <div className="mx-auto max-w-2xl">
-            <Button variant="ghost" className="w-full" onClick={() => router.push('/')}>
+            <Button variant="ghost" className="w-full" onClick={leave}>
               Cancel
             </Button>
           </div>

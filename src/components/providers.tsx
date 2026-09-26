@@ -9,6 +9,8 @@ import { rehydrateStores } from '@/lib/sync/rehydrate';
 import { useDayRollover } from '@/hooks/use-day-rollover';
 import { initNativeShell, isNative } from '@/lib/native';
 import AppBadgeSync from '@/components/app-badge-sync';
+import EdgeSwipeBack from '@/components/edge-swipe-back';
+import { useNavHistoryTracking } from '@/hooks/use-app-back';
 import type { LessonReviewCard } from '@/types/quran';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -17,6 +19,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   // Settle streak state on load / tab return / midnight rollover (M3)
   useDayRollover();
+  // In-app back stack + browser-back marking for screen transitions (M11b)
+  useNavHistoryTracking();
 
   useEffect(() => {
     setMounted(true);
@@ -128,6 +132,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SyncProvider>
       <AppBadgeSync />
+      <EdgeSwipeBack />
       {children}
     </SyncProvider>
   );

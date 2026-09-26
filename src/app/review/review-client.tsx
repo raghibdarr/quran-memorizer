@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/app-link';
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useReviewStore } from '@/stores/review-store';
 import { useProgressStore } from '@/stores/progress-store';
@@ -12,9 +12,9 @@ import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { computeSurahHealth } from '@/lib/review-helpers';
 import { getLeeches, RETENTION, type Stream } from '@/lib/retention';
 import { useReviewQueue } from '@/hooks/use-review-queue';
-import type { SurahMeta, LessonDef, LessonReviewCard } from '@/types/quran';
+import type { SurahMeta, LessonDef } from '@/types/quran';
 import type { SurahHealth } from '@/lib/review-helpers';
-import ReviewSession from '@/components/review/review-session';
+import { NAV_FORWARD } from '@/lib/nav';
 import Card from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import BottomNav from '@/components/layout/bottom-nav';
@@ -23,28 +23,24 @@ import UserButton from '@/components/auth/user-button';
 import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
-type PageView = 'dashboard' | 'session';
-
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
   const plan = usePlanStore((s) => s.plan);
-  // ?start=1 (the today's-plan review row) deep-links straight into a session and
-  // routes back to the plan afterwards — no dashboard hop in either direction.
+  // Legacy deep link ?start=1[&stream=…] (bookmarks, older builds) → the session
+  // SCREEN, /review/session (M11b)
   const router = useRouter();
   const searchParams = useSearchParams();
   const fromPlan = searchParams.get('start') === '1';
-  // ?stream=sabqi|manzil — the plan card links each review stream separately (M5)
   const streamParam = searchParams.get('stream') as Stream | null;
-  const autoStarted = useRef(false);
+  useEffect(() => {
+    if (!fromPlan) return;
+    router.replace(`/review/session?from=plan${streamParam ? `&stream=${streamParam}` : ''}`);
+  }, [fromPlan, streamParam, router]);
 
   const [surahIndex, setSurahIndex] = useState<SurahMeta[]>([]);
   const [surahLessons, setSurahLessons] = useState<Record<number, LessonDef[]>>({});
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState<PageView>('dashboard');
-  const [sessionCards, setSessionCards] = useState<LessonReviewCard[]>([]);
-  // Frozen at session start, like sessionCards — ratings mustn't reshuffle a running session
-  const [sessionEarly, setSessionEarly] = useState<ReadonlySet<string>>(new Set());
 
   // Get unique surah IDs from review cards
   const surahIds = useMemo(() => {
@@ -102,79 +98,21 @@ export default function ReviewPage() {
   const dueCount = dueCards.length;
   const leeches = useMemo(() => getLeeches(cards), [cards]);
 
-  const startSession = (list: LessonReviewCard[]) => {
-    setSessionCards(list);
-    setSessionEarly(new Set(queue.earlyIds));
-    setView('session');
-  };
-
-  // Start review for all due cards
-  const startReview = () => startSession(dueCards);
-
-  // Auto-start when arriving from the plan's review row
-  useEffect(() => {
-    if (loading || autoStarted.current || !fromPlan) return;
-    const list = streamParam === 'sabqi' ? queue.sabqi : streamParam === 'manzil' ? queue.manzil : dueCards;
-    if (list.length === 0) return;
-    autoStarted.current = true;
-    startSession(list);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, fromPlan, streamParam, queue, dueCards]);
-
-  // Start review for a specific surah's due lessons
-  // Start review for a specific surah's due lessons only
+  // Sessions are their own screen (M11b) — pushed, so back closes them
+  const openSession = (query = '') =>
+    router.push(`/review/session${query}`, { transitionTypes: [NAV_FORWARD] });
+  const startReview = () => openSession();
   const startSurahReview = (surahId: number) => {
-    const surahDue = dueCards.filter((c) => c.surahId === surahId);
-    if (surahDue.length === 0) return;
-    startSession(surahDue);
+    if (dueCards.some((c) => c.surahId === surahId)) openSession(`?surah=${surahId}`);
   };
-
-  // Start review for a single lesson
   const startLessonReview = (lessonId: string) => {
-    const card = lessonCards.find((c) => c.lessonId === lessonId);
-    if (!card) return;
-    // A hand-picked lesson is a deliberate review, never an early touch
-    setSessionCards([card]);
-    setSessionEarly(new Set());
-    setView('session');
+    if (lessonCards.some((c) => c.lessonId === lessonId)) openSession(`?lesson=${lessonId}`);
   };
 
-  if (loading) return null;
-
-  // Review session view
-  if (view === 'session' && sessionCards.length > 0) {
-    return (
-      <div className="min-h-screen bg-cream pb-24">
-        <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
-          <div className="mx-auto max-w-2xl flex items-center justify-between">
-            <button
-              onClick={() => setView('dashboard')}
-              className="text-sm text-muted hover:text-foreground"
-            >
-              &larr; Exit Review
-            </button>
-            <span className="text-sm font-semibold text-teal">Review Session</span>
-            <div className="flex items-center gap-2">
-              <SettingsPanel />
-              <UserButton />
-            </div>
-          </div>
-        </div>
-
-        <main className="mx-auto max-w-2xl px-4 py-6">
-          <ReviewSession
-            dueCards={sessionCards}
-            earlyIds={sessionEarly}
-            onComplete={() => {
-              // Came from the plan → return to the remaining plan tasks
-              if (fromPlan) router.push('/');
-              else setView('dashboard');
-            }}
-          />
-        </main>
-      </div>
-    );
-  }
+  if (fromPlan) return null;
+  // Keep the tab bar while loading: a screen with no tab bar makes the transition
+  // slide it away and pop it back a moment later
+  if (loading) return <div className="min-h-dvh bg-cream"><BottomNav /></div>;
 
   // Empty state — route a hafiz to revision, not the beginner-lesson funnel (M4)
   if (surahIds.length === 0) {

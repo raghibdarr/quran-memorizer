@@ -97,7 +97,7 @@ export default function MediaControlsBar({
   return (
     <div
       className={cn('sticky rounded-2xl bg-card p-3 tactile-card', className)}
-      style={{ bottom: 'calc(4.5rem + env(safe-area-inset-bottom))' }}
+      style={{ bottom: 'var(--tabbar-clearance)' }}
     >
       {/* Scrubber + time */}
       <div className="mb-2 flex items-center gap-2 px-1">

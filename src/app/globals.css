@@ -261,3 +261,99 @@ body::after {
   vertical-align: middle;
   opacity: 0.4;
 }
+
+/* ---------- Screen transitions (M11b — native stack grammar) ----------
+   Types come from src/lib/nav.ts via the root template's <ViewTransition>.
+   Push: the new screen slides in from the right over the old one, which recedes
+   ~28% and dims (the "scrim"). Pop: the reverse — the top screen slides away to
+   the right, revealing the one beneath. Tab switch: a quick crossfade. */
+:root {
+  --nav-ease: cubic-bezier(.32, .72, 0, 1);
+  --nav-duration: 320ms;
+}
+
+::view-transition { pointer-events: none; }
+
+@keyframes nav-in-from-right { from { transform: translateX(100%); } }
+@keyframes nav-out-to-right { to { transform: translateX(100%); } }
+@keyframes nav-recede { to { transform: translateX(-28%); filter: brightness(0.82); } }
+@keyframes nav-return { from { transform: translateX(-28%); filter: brightness(0.82); } }
+@keyframes nav-fade-out { to { opacity: 0; } }
+@keyframes nav-fade-in { from { opacity: 0; } }
+
+::view-transition-group(.nav-forward),
+::view-transition-group(.nav-back),
+::view-transition-group(.nav-auto) { animation-duration: var(--nav-duration); }
+
+/* push */
+::view-transition-old(.nav-forward) { animation: var(--nav-duration) var(--nav-ease) both nav-recede; }
+::view-transition-new(.nav-forward) {
+  animation: var(--nav-duration) var(--nav-ease) both nav-in-from-right;
+  box-shadow: -12px 0 32px rgb(0 0 0 / 0.12);
+}
+
+/* pop (typed, or browser/hardware back marked on <html>) */
+::view-transition-old(.nav-back),
+html[data-nav-dir='back']::view-transition-old(.nav-auto) {
+  animation: var(--nav-duration) var(--nav-ease) both nav-out-to-right;
+  box-shadow: -12px 0 32px rgb(0 0 0 / 0.12);
+  z-index: 1;
+}
+::view-transition-new(.nav-back),
+html[data-nav-dir='back']::view-transition-new(.nav-auto) {
+  animation: var(--nav-duration) var(--nav-ease) both nav-return;
+}
+
+/* after an edge-swipe the top screen is already off-screen: just settle the one beneath */
+html[data-nav-dir='swipe']::view-transition-old(.nav-auto) { display: none; }
+html[data-nav-dir='swipe']::view-transition-new(.nav-auto) {
+  animation: 220ms var(--nav-ease) both nav-return;
+}
+
+/* untyped and unmarked (query-only changes, redirects): no motion */
+::view-transition-old(.nav-auto),
+::view-transition-new(.nav-auto) { animation: none; }
+html[data-nav-dir]::view-transition-old(.nav-auto),
+html[data-nav-dir]::view-transition-new(.nav-auto) { animation-duration: var(--nav-duration); }
+
+/* tab switch */
+::view-transition-old(.nav-tab) { animation: 120ms ease-out both nav-fade-out; }
+::view-transition-new(.nav-tab) { animation: 180ms ease-out 40ms both nav-fade-in; }
+
+/* The floating tab bar stays put while screens move; it slides away into
+   full-screen flows and back out of them */
+@keyframes tabbar-down { to { transform: translateY(140%); } }
+@keyframes tabbar-up { from { transform: translateY(140%); } }
+::view-transition-group(tab-bar) { animation: none; z-index: 100; }
+::view-transition-old(tab-bar) { display: none; }
+::view-transition-new(tab-bar) { animation: none; }
+::view-transition-old(tab-bar):only-child { display: block; animation: 260ms var(--nav-ease) both tabbar-down; }
+::view-transition-new(tab-bar):only-child { animation: 300ms var(--nav-ease) both tabbar-up; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Space the floating tab bar occupies — anything pinned to the bottom sits above
+   it. Full-screen flows (no tab bar; <html data-flow>) only keep the safe area. */
+:root { --tabbar-clearance: calc(env(safe-area-inset-bottom) + 5rem); }
+html[data-flow] { --tabbar-clearance: calc(env(safe-area-inset-bottom) + 1rem); }
+
+/* Back navigations started by animatedHistoryBack (src/lib/nav-history.ts): React
+   doesn't run view transitions for history traversals, so these are document-root
+   transitions — the tab bar, separately named, still stays put. */
+html[data-nav-dir='back']::view-transition-old(root) {
+  animation: var(--nav-duration) var(--nav-ease) both nav-out-to-right;
+  box-shadow: -12px 0 32px rgb(0 0 0 / 0.12);
+  z-index: 1;
+}
+html[data-nav-dir='back']::view-transition-new(root) {
+  animation: var(--nav-duration) var(--nav-ease) both nav-return;
+}
+html[data-nav-dir='swipe']::view-transition-old(root) { display: none; }
+html[data-nav-dir='swipe']::view-transition-new(root) { animation: 220ms var(--nav-ease) both nav-return; }
