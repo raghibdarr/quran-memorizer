@@ -14,9 +14,20 @@
 //
 // The OS switches (iOS "System Haptics", Android "Touch feedback") still apply;
 // the in-app toggle is per device, so it lives in localStorage, not synced settings.
+//
+// iOS uses @capacitor/haptics (UIFeedbackGenerator — the Taptic Engine, already
+// crisp). Android uses the app's own SystemHaptics plugin
+// (android/.../SystemHapticsPlugin.java): @capacitor/haptics' Android side runs
+// the motor with fixed waveforms and feels like an old buzz.
 
+import { registerPlugin } from '@capacitor/core';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
-import { isNative } from './native';
+import { isNative, nativePlatform } from './native';
+
+type HapticKind = 'press' | 'selection' | 'success';
+const SystemHaptics = registerPlugin<{ perform(options: { type: HapticKind }): Promise<void> }>('SystemHaptics');
+const onAndroid = () => nativePlatform() === 'android';
+const android = (type: HapticKind) => SystemHaptics.perform({ type }).catch(() => {});
 
 const KEY = 'haptics-enabled';
 
@@ -36,16 +47,22 @@ export function setHapticsEnabled(on: boolean) {
 
 const active = () => isNative() && hapticsEnabled();
 
-// Both native implementations drop selectionChanged() unless a selection
-// "session" was started first — start one on first use and keep it open
+// iOS drops selectionChanged() unless a selection "session" was started
+// first — start one on first use and keep it open
 let selectionReady = false;
 
 export const haptic = {
   press() {
-    if (active()) Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
+    if (!active()) return;
+    if (onAndroid()) android('press');
+    else Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
   },
   selection() {
     if (!active()) return;
+    if (onAndroid()) {
+      android('selection');
+      return;
+    }
     if (!selectionReady) {
       selectionReady = true;
       Haptics.selectionStart()
@@ -56,7 +73,9 @@ export const haptic = {
     Haptics.selectionChanged().catch(() => {});
   },
   success() {
-    if (active()) Haptics.notification({ type: NotificationType.Success }).catch(() => {});
+    if (!active()) return;
+    if (onAndroid()) android('success');
+    else Haptics.notification({ type: NotificationType.Success }).catch(() => {});
   },
 };
 

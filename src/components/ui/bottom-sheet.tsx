@@ -5,11 +5,13 @@ import { createPortal } from 'react-dom';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 
-// Motion (M11 spec §3): entrances settle with --spring-settle; exits glide out on
-// the iOS sheet curve, and a flicked sheet leaves at the speed it was thrown.
+// Motion (M11 spec §3): entrances settle with --spring-settle. A tap/Esc close
+// starts gently and eases out (a curve that leaves at full speed covers ~75px
+// in its first frame and reads as a jump, not a slide); a flicked sheet leaves
+// at the speed it was thrown.
 const ENTER = { duration: 460, easing: 'cubic-bezier(.22,1.2,.36,1)' };
-const EXIT_DURATION = 340;
-const EXIT_EASING = 'cubic-bezier(.32,.72,0,1)';
+const EXIT_DURATION = 400;
+const EXIT_EASING = 'cubic-bezier(.4,0,.2,1)';
 const FLICK_EXIT_EASING = 'cubic-bezier(.2,.6,.35,1)';
 const SNAP_BACK = { duration: 360, easing: 'cubic-bezier(.34,1.3,.64,1)' };
 const DISMISS_FRACTION = 0.3; // dragged past this share of the sheet's height…
@@ -98,7 +100,7 @@ export default function BottomSheet({ open, onClose, title, titleHidden, dismiss
     const v = releaseVelocity.current;
     releaseVelocity.current = 0;
     const flicked = v > 0.3;
-    const duration = flicked ? Math.min(EXIT_DURATION, Math.max(160, (remaining / v) * 1.5)) : EXIT_DURATION;
+    const duration = flicked ? Math.min(EXIT_DURATION, Math.max(200, (remaining / v) * 1.5)) : EXIT_DURATION;
     const easing = flicked ? FLICK_EXIT_EASING : EXIT_EASING;
     const scrimFrom = Number(scrim.style.opacity || 1);
 
@@ -259,7 +261,8 @@ export default function BottomSheet({ open, onClose, title, titleHidden, dismiss
           'border-t-[1.5px] border-ink/15 shadow-[0_-8px_40px_rgb(0_0_0/0.18)]',
           className,
         )}
-        style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
+        // Own compositor layer up front: no first-frame raster hitch on open/close
+        style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))', willChange: 'transform' }}
       >
         <div
           data-sheet-handle

@@ -136,7 +136,7 @@ export default function ReviewPage() {
 
   // Dashboard view
   return (
-    <div className="min-h-dvh bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
       {/* Sticky top bar */}
       <div className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">

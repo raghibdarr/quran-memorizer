@@ -180,7 +180,7 @@ export default function HomePage() {
   }, [allSurahs, progressLessons, juzSegmentsBySurah]);
 
   return (
-    <div className="min-h-dvh bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
       <header className="px-4 pt-6 pb-2">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">

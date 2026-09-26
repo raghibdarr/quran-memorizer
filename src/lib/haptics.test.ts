@@ -2,8 +2,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const calls: string[] = [];
 let native = true;
+let platform: 'ios' | 'android' = 'ios';
 
-vi.mock('./native', () => ({ isNative: () => native }));
+vi.mock('./native', () => ({ isNative: () => native, nativePlatform: () => platform }));
+vi.mock('@capacitor/core', () => ({
+  registerPlugin: () => ({ perform: async ({ type }: { type: string }) => void calls.push(`system:${type}`) }),
+}));
 vi.mock('@capacitor/haptics', () => ({
   ImpactStyle: { Light: 'LIGHT' },
   NotificationType: { Success: 'SUCCESS' },
@@ -28,9 +32,10 @@ describe('haptics', () => {
     calls.length = 0;
     store.clear();
     native = true;
+    platform = 'ios';
   });
 
-  it('starts a selection session before the first tick, once', async () => {
+  it('starts a selection session before the first tick, once (iOS)', async () => {
     const { haptic } = await import('./haptics');
     haptic.selection();
     await flush();
@@ -45,6 +50,16 @@ describe('haptics', () => {
     haptic.success();
     await flush();
     expect(calls).toEqual(['impact:LIGHT', 'notification:SUCCESS']);
+  });
+
+  it('uses the system haptic effects on Android, not motor waveforms', async () => {
+    const { haptic } = await import('./haptics');
+    platform = 'android';
+    haptic.press();
+    haptic.selection();
+    haptic.success();
+    await flush();
+    expect(calls).toEqual(['system:press', 'system:selection', 'system:success']);
   });
 
   it('is silent on the web and when switched off', async () => {

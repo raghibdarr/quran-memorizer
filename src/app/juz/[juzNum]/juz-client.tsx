@@ -129,7 +129,7 @@ export default function JuzDetailPage() {
   const allSurahsLoaded = loadedSections.length === sections.length;
 
   return (
-    <div className="min-h-dvh bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
       {/* Sticky top bar */}
       <div className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
@@ -579,7 +579,7 @@ export default function JuzDetailPage() {
                     };
 
                     return (
-                      <div className="fixed bottom-[3.25rem] left-0 right-0 z-20 border-t border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+                      <div className="fixed left-0 right-0 z-20 border-t border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm" style={{ bottom: 'var(--tabbar-clearance)' }}>
                         <div className="mx-auto max-w-2xl space-y-2">
                           <p className="text-center text-sm font-medium text-foreground">
                             {selectedCount} ayah{selectedCount !== 1 ? 's' : ''} selected

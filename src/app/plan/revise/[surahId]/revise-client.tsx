@@ -158,7 +158,7 @@ export default function RevisePage() {
       </main>
 
       {!started && (
-        <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm">
+        <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
           <div className="mx-auto max-w-2xl">
             <Button variant="ghost" className="w-full" onClick={leave}>
               Cancel

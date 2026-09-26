@@ -80,7 +80,7 @@ export default function PlanDashboardPage() {
 
   if (!plan) {
     return (
-      <div className="min-h-dvh bg-cream pb-24">
+      <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
         <main className="mx-auto max-w-2xl px-4 py-10">
           <Card className="text-center">
             <h1 className="text-xl font-bold text-teal">No plan yet</h1>
@@ -99,7 +99,7 @@ export default function PlanDashboardPage() {
 
   if (!progress) {
     return (
-      <div className="min-h-dvh bg-cream pb-24">
+      <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
         <main className="mx-auto max-w-2xl px-4 py-10">
           <p className="text-center text-sm text-muted">Loading plan…</p>
         </main>
@@ -125,7 +125,7 @@ export default function PlanDashboardPage() {
   };
 
   return (
-    <div className="min-h-dvh bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
       <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <div>

@@ -70,7 +70,7 @@ export default function SurahDetailPage() {
   // slide it away and pop it back a moment later
   if (!surah) {
     return (
-      <div className="min-h-dvh bg-cream pb-24">
+      <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
         <div className="sticky top-[var(--safe-top)] z-10 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
           <div className="mx-auto flex max-w-2xl items-center justify-between">
             <BackButton fallback={reviewLessonNum ? '/review' : '/'} />
@@ -107,7 +107,7 @@ export default function SurahDetailPage() {
   };
 
   return (
-    <div className="min-h-dvh bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]">
       {/* Sticky top bar */}
       <div ref={barRef} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="relative mx-auto max-w-2xl flex items-center justify-between">

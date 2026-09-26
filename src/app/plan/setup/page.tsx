@@ -773,7 +773,7 @@ export default function PlanSetupPage() {
         )}
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm">
+      <div className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
         <div className="mx-auto flex max-w-2xl gap-3">
           <Button variant="ghost" className="flex-1" onClick={goBack}>
             {step > 1 ? 'Back' : 'Cancel'}
