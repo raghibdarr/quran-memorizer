@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useReviewQueue } from '@/hooks/use-review-queue';
 import { HomeIcon, BookIcon, StarIcon, BarChartIcon } from '@/components/ui/icons';
@@ -20,16 +21,46 @@ function activeIndex(pathname: string): number {
   return i === -1 ? 0 : i;
 }
 
+// Each page renders its own BottomNav, so it REMOUNTS on every tab switch — a CSS
+// transition never sees a change. The last active tab is remembered here (module
+// scope survives client-side navigation) and the new instance animates from it.
+let lastActiveIndex: number | null = null;
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /**
  * Floating glass tab bar (owner direction 2026-09-26). A frosted pill hovering
  * above the home indicator — content scrolls visibly behind it — with the active
- * tab on a tinted pill that GLIDES between tabs (the spring from the approved M11
- * motion language) rather than jumping.
+ * tab on a tinted glass pill that SLIDES between tabs, stretching slightly in
+ * flight like a drop of liquid glass, and the new tab's icon pops in.
  */
 export default function BottomNav() {
   const pathname = usePathname();
   const { dueCount } = useReviewQueue();
   const active = activeIndex(pathname);
+  const pillRef = useRef<HTMLSpanElement>(null);
+  const iconRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useLayoutEffect(() => {
+    const from = lastActiveIndex;
+    lastActiveIndex = active;
+    const pill = pillRef.current;
+    if (from === null || from === active || !pill || prefersReducedMotion()) return;
+    const distance = Math.abs(active - from);
+    pill.animate(
+      [
+        { transform: `translateX(${from * 100}%) scale(1, 1)` },
+        { transform: `translateX(${((from + active) / 2) * 100}%) scale(${1 + 0.14 * Math.min(distance, 3)}, 0.9)`, offset: 0.45 },
+        { transform: `translateX(${active * 100}%) scale(1, 1)` },
+      ],
+      { duration: 380 + 40 * Math.min(distance, 3), easing: 'cubic-bezier(.32,.72,0,1)' },
+    );
+    iconRefs.current[active]?.animate(
+      [{ transform: 'scale(0.82)' }, { transform: 'scale(1)' }],
+      { duration: 360, delay: 120, easing: 'cubic-bezier(.34,1.45,.64,1)', fill: 'backwards' },
+    );
+  }, [active]);
 
   return (
     <nav
@@ -49,8 +80,9 @@ export default function BottomNav() {
       >
         {/* The gliding active pill */}
         <span
+          ref={pillRef}
           aria-hidden
-          className="pointer-events-none absolute inset-y-1.5 left-1.5 rounded-full bg-teal/15 transition-transform duration-[420ms] ease-[cubic-bezier(.34,1.45,.64,1)] motion-reduce:transition-none dark:bg-teal/25"
+          className="pointer-events-none absolute inset-y-1.5 left-1.5 rounded-full border border-white/50 bg-teal/15 dark:border-white/10 dark:bg-teal/25"
           style={{ width: `calc((100% - 0.75rem) / ${NAV_ITEMS.length})`, transform: `translateX(${active * 100}%)` }}
         />
 
@@ -67,7 +99,7 @@ export default function BottomNav() {
                 isActive ? 'text-teal' : 'text-muted hover:text-foreground',
               )}
             >
-              <span className="relative">
+              <span className="relative" ref={(el) => { iconRefs.current[i] = el; }}>
                 <item.Icon size={21} />
                 {showBadge && (
                   <span className="absolute -top-1.5 -right-2.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-teal px-1 text-[9px] font-bold text-on-teal ring-2 ring-card">
