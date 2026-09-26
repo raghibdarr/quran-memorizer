@@ -1,12 +1,15 @@
 #!/usr/bin/env node
-// Post-build fix for a Next.js 16 static-export mismatch (present in 16.1–16.3):
-// the exporter writes per-segment prefetch payloads as NESTED paths
+// Post-build fix for a WINDOWS-ONLY Next.js 16 static-export bug (16.1–16.3):
+// the exporter derives segment-payload filenames with path.relative(), which
+// yields backslashes on Windows, and only replaces "/" when dot-joining — so on
+// Windows it writes NESTED paths
 //   out/plan/setup/__next.plan/setup/__PAGE__.txt
-// but the client router requests them DOT-JOINED
+// while the client router requests them DOT-JOINED
 //   /plan/setup/__next.plan.setup.__PAGE__.txt
-// so every segment prefetch 404s (navigation survives by falling back to the
-// full payload, but each prefetch is a wasted round trip). This renames each
-// nested file to the name the client asks for. Idempotent; runs as `postbuild`.
+// and every segment prefetch 404s. Linux builds (Netlify, CI) already write the
+// dot-joined names, so there this is a no-op; it matters for local Windows builds
+// (and APKs built from them). Renames each nested file to the requested name.
+// Idempotent; runs as `postbuild`.
 
 import fs from 'node:fs';
 import path from 'node:path';

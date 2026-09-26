@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '@/lib/cn'
+import { isNative } from '@/lib/native'
 import Button from '@/components/ui/button'
 
 type AuthView =
@@ -67,6 +68,10 @@ export default function AuthModal({
   onClearError,
 }: AuthModalProps) {
   const [view, setView] = useState<AuthView>(initialView)
+  // Inside the native apps, flows that bounce through an email link or an external
+  // OAuth page can't return to the app until deep links land (M11e) — and Google's
+  // OAuth is blocked in embedded WebViews outright. Email + password works everywhere.
+  const native = isNative()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const backdropRef = useRef<HTMLDivElement>(null)
@@ -204,8 +209,8 @@ export default function AuthModal({
               </div>
             )}
 
-            {/* Google OAuth — sign-in and sign-up only */}
-            {(view === 'sign-in' || view === 'sign-up') && (
+            {/* Google OAuth — sign-in and sign-up only (web only for now) */}
+            {(view === 'sign-in' || view === 'sign-up') && !native && (
               <>
                 <button
                   type="button"
@@ -258,8 +263,8 @@ export default function AuthModal({
               </div>
             )}
 
-            {/* Forgot password link */}
-            {view === 'sign-in' && (
+            {/* Forgot password link (the reset email link can't reopen the native app yet) */}
+            {view === 'sign-in' && !native && (
               <button
                 type="button"
                 onClick={() => switchView('forgot-password')}
@@ -288,11 +293,13 @@ export default function AuthModal({
                       Sign up
                     </button>
                   </p>
-                  <p>
-                    <button type="button" onClick={() => switchView('magic-link')} className="text-teal hover:underline">
-                      Sign in with magic link
-                    </button>
-                  </p>
+                  {!native && (
+                    <p>
+                      <button type="button" onClick={() => switchView('magic-link')} className="text-teal hover:underline">
+                        Sign in with magic link
+                      </button>
+                    </p>
+                  )}
                 </>
               )}
               {view === 'sign-up' && (

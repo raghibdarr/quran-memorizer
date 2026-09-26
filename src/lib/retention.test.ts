@@ -237,3 +237,63 @@ describe('leech detection', () => {
     expect(c.failStreak).toBe(1)
   })
 })
+
+describe('pre-release hardening (review findings)', () => {
+  it('REGRESSION: the early-touch threshold is day-granular — no mid-day flip', () => {
+    // Last touched Mon 18:00; on Thu the answer must be the same at 10:00 and 19:00
+    const mon18 = new Date(2026, 8, 21, 18, 0).getTime()
+    const thu10 = new Date(2026, 8, 24, 10, 0).getTime()
+    const thu19 = new Date(2026, 8, 24, 19, 0).getTime()
+    const c = card('1-1', { lastReview: mon18, nextReview: thu19 + 10 * DAY })
+    const progress = { '1-1': { ...done('1-1', 0), completedAt: mon18 - DAY } }
+    const morning = buildReviewQueue([c], progress, thu10)
+    const evening = buildReviewQueue([c], progress, thu19)
+    expect(morning.earlyIds.size).toBe(evening.earlyIds.size)
+  })
+
+  it('REGRESSION: a no-record card reviewed today still counts against the cap after leaving sabqi', () => {
+    // It just reached 3 reps (now "manzil" by the youth fallback) — its touch must still count
+    const reviewedToday = card('9-1', { repetitions: 3, lastReview: NOW - 1000, nextReview: TODAY + 7 * DAY })
+    const stale = ['1-1', '1-2', '1-3', '1-4'].map((id) => card(id, { lastReview: NOW - 5 * DAY }))
+    const progress = Object.fromEntries(['1-1', '1-2', '1-3', '1-4'].map((id) => [id, done(id, 7)]))
+    const q = buildReviewQueue([reviewedToday, ...stale], progress, NOW)
+    expect(q.earlyIds.size).toBe(RETENTION.SABQI_DAILY_CAP - 1)
+  })
+
+  it('REGRESSION: a surah revised "in the future" (clock skew) is not treated as revised today for days', () => {
+    const its = items([20, 20], (i) => (i === 0 ? NOW + 3 * DAY : NOW - 20 * DAY))
+    const plan = planManzil(its, { cycleDays: 7, now: NOW })
+    expect(plan.today).toEqual([2]) // surah 1 isn't 'done today', so it can't eat today's budget
+    expect(plan.scheduledDay[1]).toBeLessThanOrEqual(7)
+    // …and it stays that way tomorrow (a plain clamp-to-now would re-count it daily)
+    const tomorrow = planManzil(its, { cycleDays: 7, now: NOW + DAY })
+    expect(tomorrow.scheduledDay[1]).not.toBe(7)
+  })
+
+  it('rest days carry no rotation work and no capacity', () => {
+    const its = items(Array(6).fill(15), () => NOW - 30 * DAY)
+    const todayDow = new Date(NOW).getDay()
+    const restToday = planManzil(its, { cycleDays: 7, now: NOW, studyDays: [(todayDow + 1) % 7] })
+    expect(restToday.today).toEqual([])
+  })
+
+  it('PROPERTY: with any study-day set, surahs land only on study days, by the first study day after due', () => {
+    fc.assert(
+      fc.property(
+        fc.array(fc.record({ ayahCount: fc.integer({ min: 3, max: 80 }), ago: fc.integer({ min: 1, max: 40 }) }), { minLength: 1, maxLength: 40 }),
+        fc.integer({ min: 3, max: 21 }),
+        fc.uniqueArray(fc.integer({ min: 0, max: 6 }), { minLength: 1, maxLength: 7 }),
+        (raw, cycle, studyDays) => {
+          const its = raw.map((r, i) => ({ surahId: i + 1, ayahCount: r.ayahCount, lastTouched: NOW - r.ago * DAY - 3600_000 }))
+          const plan = planManzil(its, { cycleDays: cycle, now: NOW, studyDays })
+          for (const it of its) {
+            const d = plan.scheduledDay[it.surahId]
+            expect(studyDays).toContain(new Date(TODAY + d * DAY + 12 * 3600_000).getDay())
+            expect(d).toBeLessThanOrEqual(cycle + 6)
+          }
+        },
+      ),
+      { numRuns: 300 },
+    )
+  })
+})

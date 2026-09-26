@@ -3,6 +3,8 @@
 // store's state combine. Every merge must be safe to run repeatedly and in any
 // order — property tests in merge.test.ts pin idempotence/commutativity/no-loss.
 
+import { startOfDayMs } from '../dates'
+
 export const STORE_NAMES = [
   'quran-progress',
   'quran-reviews',
@@ -50,6 +52,15 @@ export const STORE_SCHEMA_VERSIONS: Record<SyncRowName, number> = {
 
 // ---------- Cloud payload envelope ----------
 // New rows are { __v, state }; legacy rows are the bare state (treated as v0).
+//
+// TWO-STAGE ROLLOUT. The app live before this release cannot read envelopes: it
+// would take `{__v, state}` for the store's whole state and merge garbage — and
+// its tabs/devices stay alive for days after a deploy. So:
+//   stage 1 (this release): READ both forms, WRITE bare state (old clients keep working)
+//   stage 2 (a later release, once no stage-0 client remains): flip WRITE_ENVELOPE on.
+// Stage-1 clients already refuse enveloped rows from newer versions (planStoreMerge),
+// so stage 2 is safe to ship whenever. Roll-forward only: see build-plan owner notes.
+export const WRITE_ENVELOPE = false
 
 export interface CloudPayload {
   state: Record<string, unknown>
@@ -58,6 +69,38 @@ export interface CloudPayload {
 
 export function wrapPayload(state: Record<string, unknown>, schemaVersion: number): Record<string, unknown> {
   return { __v: schemaVersion, state }
+}
+
+/** The row body to write for this release (see WRITE_ENVELOPE) */
+export function encodeCloudRow(state: Record<string, unknown>, schemaVersion: number): Record<string, unknown> {
+  return WRITE_ENVELOPE ? wrapPayload(state, schemaVersion) : state
+}
+
+/**
+ * Idempotent normalization of state arriving from ANOTHER client (a cloud row or
+ * a backup), which may predate this build's migrations — zustand `migrate` only
+ * runs on this device's own persisted envelope, never on merged-in data. Every
+ * step must be a no-op on already-current data.
+ */
+export function normalizeIncoming(storeName: SyncRowName, state: Record<string, unknown>): Record<string, unknown> {
+  if (storeName === 'quran-reviews') {
+    // v2: due dates are local midnights (M3)
+    const truncate = (cards: unknown) =>
+      Array.isArray(cards)
+        ? cards.map((c: Record<string, unknown>) =>
+            typeof c.nextReview === 'number' ? { ...c, nextReview: startOfDayMs(c.nextReview) } : c)
+        : cards
+    return { ...state, cards: truncate(state.cards), lessonCards: truncate(state.lessonCards) }
+  }
+  if (storeName === 'quran-stats') {
+    // v3: freeze fields exist (M3)
+    return {
+      ...state,
+      streakFreezes: typeof state.streakFreezes === 'number' ? state.streakFreezes : 0,
+      frozenDates: state.frozenDates && typeof state.frozenDates === 'object' ? state.frozenDates : {},
+    }
+  }
+  return state
 }
 
 export function readPayload(data: Record<string, unknown> | null | undefined): CloudPayload | null {
@@ -113,7 +156,11 @@ function mergeProgress(
 
 /**
  * Merge review cards: per ayah (surahId:ayahNumber) and per lessonId, keep the
- * copy with more repetitions, tie-broken by later lastReview.
+ * copy reviewed MOST RECENTLY, tie-broken by more repetitions. Recency — not
+ * repetition count — is the truth: a lapse legitimately resets repetitions to 0,
+ * and "most reps wins" silently undid every failed review (and its leech count)
+ * whenever another copy had more reps. Seeded "known" cards carry lastReview 0,
+ * so any real review beats them.
  */
 function mergeReviews(
   local: Record<string, unknown>,
@@ -123,10 +170,10 @@ function mergeReviews(
     a: Record<string, unknown>,
     b: Record<string, unknown>
   ): Record<string, unknown> => {
-    const aReps = (a.repetitions as number) ?? 0
-    const bReps = (b.repetitions as number) ?? 0
-    if (aReps !== bReps) return aReps > bReps ? a : b
-    return ((a.lastReview as number) ?? 0) >= ((b.lastReview as number) ?? 0) ? a : b
+    const aLast = (a.lastReview as number) ?? 0
+    const bLast = (b.lastReview as number) ?? 0
+    if (aLast !== bLast) return aLast > bLast ? a : b
+    return ((a.repetitions as number) ?? 0) >= ((b.repetitions as number) ?? 0) ? a : b
   }
 
   const cardMap = new Map<string, Record<string, unknown>>()
@@ -187,8 +234,12 @@ function mergeStats(
   return {
     currentStreak,
     // Freeze bank rides with the streak it protects (max would resurrect a
-    // spent freeze); frozen days are monotone facts, so union is safe
-    streakFreezes: (mostRecentSide.streakFreezes as number) ?? 0,
+    // spent freeze); frozen days are monotone facts, so union is safe. On a
+    // lastActiveDate TIE (common: reconcile spends freezes without moving it)
+    // the smaller bank wins — the other side hasn't seen the spend yet.
+    streakFreezes: localLastActive === cloudLastActive
+      ? Math.min((local.streakFreezes as number) ?? 0, (cloud.streakFreezes as number) ?? 0)
+      : (mostRecentSide.streakFreezes as number) ?? 0,
     frozenDates: {
       ...((cloud.frozenDates ?? {}) as Record<string, true>),
       ...((local.frozenDates ?? {}) as Record<string, true>),
@@ -369,12 +420,14 @@ export function planStoreMerge(opts: {
   if (cloud && cloud.schemaVersion > clientVersion) {
     return { newLocal: null, upload: null, blockedByNewerSchema: true }
   }
+  // Data from another client may predate this build's migrations
+  const cloudState = cloud ? normalizeIncoming(storeName, cloud.state) : null
   if (!local && !cloud) return { newLocal: null, upload: null, blockedByNewerSchema: false }
-  if (!local && cloud) return { newLocal: cloud.state, upload: null, blockedByNewerSchema: false }
+  if (!local && cloudState) return { newLocal: cloudState, upload: null, blockedByNewerSchema: false }
   if (local && !cloud) return { newLocal: null, upload: local, blockedByNewerSchema: false }
 
   if (cloudIsNewer) {
-    const merged = mergeStore(storeName, local!, cloud!.state, true)
+    const merged = mergeStore(storeName, local!, cloudState!, true)
     return { newLocal: merged, upload: merged, blockedByNewerSchema: false }
   }
   return { newLocal: null, upload: local, blockedByNewerSchema: false }

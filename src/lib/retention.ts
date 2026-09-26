@@ -12,9 +12,16 @@
 //            predictions (least-recently-touched first, under a daily budget).
 
 import type { LessonProgress, LessonReviewCard, ReviewCard } from '@/types/quran';
-import { startOfDayMs } from './dates';
+import { addLocalDays, daysBetween, isoFromMs, startOfDayMs } from './dates';
 
 const DAY_MS = 86_400_000;
+
+/** Whole local calendar days from `from` to `to` (both timestamps). Day-granular
+ *  on purpose: elapsed-millisecond comparisons made a lesson cross a threshold
+ *  mid-afternoon, so "all done" could un-complete itself in the evening. */
+function localDaysBetween(from: number, to: number): number {
+  return daysBetween(isoFromMs(from), isoFromMs(to));
+}
 
 /** Tunables — single numbers, deliberately listed in one place. */
 export const RETENTION = {
@@ -36,15 +43,25 @@ export const RETENTION = {
 
 export type Stream = 'sabqi' | 'manzil';
 
-function lastTouch(card: LessonReviewCard, progress?: LessonProgress): number {
-  return Math.max(card.lastReview ?? 0, progress?.completedAt ?? 0);
+/**
+ * A clock-skewed device can sync timestamps from the FUTURE. Clamping to `now`
+ * isn't enough — the value would read as "touched today" again every day until
+ * the real clock caught up — so a future touch counts as "just before today".
+ */
+export function clampTouch(ts: number, now: number): number {
+  return ts > now ? startOfDayMs(now) - 1 : ts;
 }
 
-/** Recent (sabqi) = completed within the window. Cards with no completion record
- *  (e.g. minted by practice) fall back to SM-2 youth: still in the 1/3/7 ladder. */
+function lastTouch(card: LessonReviewCard, progress: LessonProgress | undefined, now: number): number {
+  return clampTouch(Math.max(card.lastReview ?? 0, progress?.completedAt ?? 0), now);
+}
+
+/** Recent (sabqi) = completed within the last SABQI_WINDOW_DAYS calendar days.
+ *  Cards with no completion record (e.g. minted by practice) fall back to SM-2
+ *  youth: still in the 1/3/7 ladder. */
 export function streamOf(card: LessonReviewCard, progress: LessonProgress | undefined, now: number): Stream {
   const completedAt = progress?.completedAt;
-  if (completedAt) return now - completedAt < RETENTION.SABQI_WINDOW_DAYS * DAY_MS ? 'sabqi' : 'manzil';
+  if (completedAt) return localDaysBetween(Math.min(completedAt, now), now) < RETENTION.SABQI_WINDOW_DAYS ? 'sabqi' : 'manzil';
   return card.repetitions < 3 ? 'sabqi' : 'manzil';
 }
 
@@ -77,10 +94,18 @@ export function buildReviewQueue(
       (stream === 'sabqi' ? dueSabqi : dueManzil).push(card);
       continue;
     }
-    if (stream !== 'sabqi') continue;
-    const touched = lastTouch(card, progress);
-    if (touched >= todayStart) touchedTodayRecent++;
-    else if (now - touched >= RETENTION.SABQI_MAX_GAP_DAYS * DAY_MS) earlyCandidates.push(card);
+    const touched = lastTouch(card, progress, now);
+    // Today's touches count against the cap even if the review itself just moved
+    // the card out of sabqi (a no-completion-record card reaching 3 reps) —
+    // otherwise finishing one check-in makes a new one appear
+    const recentByDate = !!progress?.completedAt && stream === 'sabqi';
+    if (touched >= todayStart) {
+      if (recentByDate || !progress?.completedAt) touchedTodayRecent++;
+      continue;
+    }
+    if (stream === 'sabqi' && localDaysBetween(touched, now) >= RETENTION.SABQI_MAX_GAP_DAYS) {
+      earlyCandidates.push(card);
+    }
   }
 
   const byDue = (a: LessonReviewCard, b: LessonReviewCard) => a.nextReview - b.nextReview;
@@ -92,7 +117,7 @@ export function buildReviewQueue(
   // (a checklist that refills as you complete it is a treadmill, not a plan).
   const slots = Math.max(0, RETENTION.SABQI_DAILY_CAP - touchedTodayRecent - dueSabqi.length);
   earlyCandidates.sort((a, b) =>
-    lastTouch(a, progressLessons[a.lessonId]) - lastTouch(b, progressLessons[b.lessonId]));
+    lastTouch(a, progressLessons[a.lessonId], now) - lastTouch(b, progressLessons[b.lessonId], now));
   const early = earlyCandidates.slice(0, slots);
 
   return {
@@ -137,12 +162,26 @@ export interface ManzilPlan {
  */
 export function planManzil(
   items: ManzilItem[],
-  opts: { cycleDays: number; now: number; minDailyAyahs?: number },
+  opts: { cycleDays: number; now: number; minDailyAyahs?: number; studyDays?: number[] },
 ): ManzilPlan {
   const cycle = Math.max(1, Math.round(opts.cycleDays));
   const todayStart = startOfDayMs(opts.now);
+  const horizon = cycle * 4 + 7;
+
+  // Rotation only runs on the plan's study days — capacity is counted in study
+  // days, or a Mon/Wed/Fri plan's cycle silently stretches to 9-10 days
+  const studySet = opts.studyDays && opts.studyDays.length ? new Set(opts.studyDays) : null;
+  const isStudy: boolean[] = [];
+  const studyThrough: number[] = []; // study days in [0..d]
+  for (let d = 0, n = 0; d <= horizon; d++) {
+    const study = !studySet || studySet.has(new Date(addLocalDays(todayStart, d)).getDay());
+    isStudy.push(study);
+    studyThrough.push((n += study ? 1 : 0));
+  }
+  const studyPerCycle = Math.max(1, studyThrough[cycle - 1]);
+
   const total = items.reduce((s, it) => s + it.ayahCount, 0);
-  const budget = Math.max(opts.minDailyAyahs ?? RETENTION.MANZIL_MIN_DAILY_AYAHS, Math.ceil((2 * total) / cycle));
+  const budget = Math.max(opts.minDailyAyahs ?? RETENTION.MANZIL_MIN_DAILY_AYAHS, Math.ceil((2 * total) / studyPerCycle));
   const scheduledDay: Record<number, number> = {};
   if (items.length === 0) return { today: [], scheduledDay, budget };
 
@@ -151,7 +190,9 @@ export function planManzil(
   let usedToday = 0;
   type Pending = ManzilItem & { due: number };
   let pending: Pending[] = [];
-  for (const it of items) {
+  for (const raw of items) {
+    // A future timestamp (clock-skewed device) must not count as revised today
+    const it = { ...raw, lastTouched: clampTouch(raw.lastTouched, opts.now) };
     if (it.lastTouched >= todayStart) {
       usedToday += it.ayahCount; // revised today — done, and it counts against today
       scheduledDay[it.surahId] = cycle;
@@ -162,17 +203,19 @@ export function planManzil(
   pending.sort((a, b) => a.due - b.due || a.lastTouched - b.lastTouched || a.surahId - b.surahId);
 
   const today: number[] = [];
-  for (let day = 0; pending.length > 0 && day <= cycle * 4; day++) {
+  for (let day = 0; pending.length > 0 && day <= horizon; day++) {
+    if (!isStudy[day]) continue; // rest day: no rotation work, no capacity
     let used = day === 0 ? usedToday : 0;
     let tookAny = day === 0 && usedToday > 0;
 
-    // Would the remaining load due within some horizon h overflow h days of capacity?
+    // Would the remaining load due within some horizon overflow the STUDY days
+    // available after today to do it?
     const mustPull = (rest: Pending[]) => {
       let cum = 0;
       for (const p of rest) {
         cum += p.ayahCount;
-        const h = p.due - day; // days AFTER today available for work due by p.due
-        if (h >= 1 && cum > h * budget) return true;
+        const h = studyThrough[Math.min(p.due, horizon)] - studyThrough[day];
+        if (p.due > day && cum > h * budget) return true;
       }
       return false;
     };
@@ -194,7 +237,7 @@ export function planManzil(
     }
     pending = kept;
   }
-  for (const p of pending) scheduledDay[p.surahId] = cycle; // unreachable safety net
+  for (const p of pending) scheduledDay[p.surahId] = horizon; // unreachable safety net
 
   return { today, scheduledDay, budget };
 }

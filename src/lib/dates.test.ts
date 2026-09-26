@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { todayIso, yesterdayIso, startOfTodayMs, startOfDayMs, isoFromMs, daysBetween, addDaysIso, isStudyDay, countStudyDays } from './dates'
+import { todayIso, yesterdayIso, startOfTodayMs, startOfDayMs, isoFromMs, daysBetween, addDaysIso, isStudyDay, countStudyDays, addLocalDays, endOfDayMs } from './dates'
 import { processLessonReview, processReview, createNewCard, createLessonReviewCard, isDue } from './spaced-repetition'
 import type { LessonReviewCard } from '@/types/quran'
 
@@ -93,7 +93,7 @@ describe('SM-2 due dates are local start-of-day', () => {
     const updated = processLessonReview(baseLessonCard, 5)
     const due = new Date(updated.nextReview)
     expect([due.getHours(), due.getMinutes()]).toEqual([0, 0])
-    expect(updated.nextReview).toBe(startOfDayMs(Date.now() + updated.interval * 86_400_000))
+    expect(updated.nextReview).toBe(addLocalDays(Date.now(), updated.interval))
   })
 
   it('ayah cards behave the same', () => {
@@ -116,5 +116,24 @@ describe('SM-2 due dates are local start-of-day', () => {
     )
     const due = new Date(card.nextReview)
     expect([due.getHours(), due.getMinutes()]).toEqual([0, 0])
+  })
+})
+
+describe('calendar-day stepping (review finding: SM-2 due dates across DST)', () => {
+  it('addLocalDays lands on local midnight N calendar days later, even from 00:30 on a clock-change day', () => {
+    // EU fall-back 2026-10-25 and spring-forward 2026-03-29; US 2026-11-01 / 2026-03-08.
+    // In a DST zone, 00:30 + 24h can stay on the same date — calendar stepping never does.
+    for (const [y, m, d] of [[2026, 9, 25], [2026, 2, 29], [2026, 10, 1], [2026, 2, 8]]) {
+      const halfPastMidnight = new Date(y, m, d, 0, 30).getTime()
+      const next = new Date(addLocalDays(halfPastMidnight, 1))
+      expect([next.getDate(), next.getHours(), next.getMinutes()]).toEqual([new Date(y, m, d + 1).getDate(), 0, 0])
+      expect(isoFromMs(addLocalDays(halfPastMidnight, 7))).toBe(isoFromMs(new Date(y, m, d + 7, 12).getTime()))
+    }
+  })
+
+  it('endOfDayMs is the last millisecond before the next local midnight', () => {
+    const noon = new Date(2026, 9, 25, 12).getTime()
+    expect(endOfDayMs(noon) + 1).toBe(addLocalDays(noon, 1))
+    expect(isoFromMs(endOfDayMs(noon))).toBe(isoFromMs(noon))
   })
 })

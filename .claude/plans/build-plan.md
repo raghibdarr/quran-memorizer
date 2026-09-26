@@ -42,6 +42,33 @@ The owner's mobile priority is folded in by interleaving M11 rather than appendi
 8. **M11e — store packaging & compliance** (m11 spec §8): account deletion, privacy policy, native
    OAuth, Sign in with Apple decision, icons/splash, haptics, listings. Gated on owner accounts.
 
+### 2b. Pre-release hardening (2026-09-26) — adversarial review of M2–M6 before the first push
+
+Three independent reviewers (data safety, scheduling, static-export/native) found real bugs; all
+verified findings fixed with regression tests (249 unit tests; smoke incl. a native reload-loop check):
+- **Sync:** the live (pre-M2) app can't read the `{__v,state}` envelope → TWO-STAGE rollout: this
+  release reads both, WRITES BARE (`WRITE_ENVELOPE=false` in merge.ts); flip it in a later release.
+  "Cloud is newer" now uses persisted per-row SEEN MARKERS (only advanced to versions merged or
+  written) — the old end-of-sync timestamp refresh marked other devices' writes seen without merging
+  them. Review merge picks the most RECENT review (reps-max undid every lapse + leech count).
+  Canonical (key-sorted) dirty hash (JSONB reorders keys → every store re-uploaded every 30s).
+  Rehydrate before uploads. Incoming cloud/backup data normalized (idempotent) since zustand migrate
+  never sees it. Backups carry per-store versions; newer-version stores refused. Freeze-bank tie → min.
+- **Scheduling:** sabqi gap/window day-granular (no mid-day un-completion); SM-2 due dates stepped in
+  calendar days (DST); rest-day-aware rotation capacity; clock-skew future timestamps; streak never
+  extends backwards; next-review label; plan-edit parity (maintain plans editable, known seeding).
+- **Native/static:** reload loop on unexported deep paths (known-route check + burst guard);
+  install banner hidden in the native app; Google/magic-link/reset hidden natively until deep links
+  (M11e); SW network-first for router payloads + v2 caches; open redirect via `?from=`; restored
+  dark mode applied immediately.
+- **OWNER NOTES for the first push:** (1) ROLL FORWARD ONLY — rolling Netlify back past this deploy
+  makes the old unversioned stores discard their data (zustand). (2) During the changeover a device
+  still running the old app merges with its old rules; only the M3 freeze bank can be lost. (3) Apply
+  migration 002 any time (CAS falls back to upserts until then).
+- Deferred to M11e (native, unverified): Whisper worker loads Transformers.js + model from CDNs at
+  runtime (offline + App Review 2.5.2 grey area) → bundle it; Netlify `lesson/112.html` vs
+  `lesson/112/` resolution to verify on a deploy preview.
+
 ---
 
 ## 3. Milestones

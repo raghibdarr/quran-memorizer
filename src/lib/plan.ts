@@ -245,7 +245,7 @@ export function getRevisionTasks(
 
   const rotation = planManzil(
     candidates.map((c) => ({ surahId: c.surahId, ayahCount: c.ayahEnd - c.ayahStart + 1, lastTouched: c.lastTouched })),
-    { cycleDays: frequency, now },
+    { cycleDays: frequency, now, studyDays: plan.studyDays },
   );
   const byCandidate = new Map(candidates.map((c) => [c.surahId, c]));
   // The planner orders today's picks least-recently-touched first

@@ -124,8 +124,8 @@ static export (47 MB / 3,305 files — was 160 MB / 25,888 before lessons moved 
 page); middleware + dead server auth removed; 5 dynamic routes split server-params/client;
 Suspense for search-param pages; 30 `<a href>` → `<Link>` and every `window.location` nav → router;
 Home route-recovery for the native root-index fallback (+ legacy `/lesson/<s>/<l>` normalizer and
-Netlify 301); Next 16.1.6 → 16.3.6; post-build `flatten-segments` fixing a Next static-export
-segment-prefetch 404 bug (still present in 16.3.6); Capacitor 8 android/ + ios/ (SPM, no CocoaPods),
+Netlify 301); Next 16.1.6 → 16.3.6; post-build `flatten-segments` fixing a WINDOWS-ONLY Next static-export
+segment-prefetch 404 bug (path.relative backslashes; Linux/Netlify/CI builds are unaffected); Capacitor 8 android/ + ios/ (SPM, no CocoaPods),
 SystemBars insets 'native', splash hide-on-mount, status bar follows the app theme, mic permission
 strings; `serve-static.mjs` emulating Netlify AND Capacitor routing; smoke green on dev + web + native;
 android.yml builds a debug APK. Found + fixed en route: the Whisper worker shipped as raw

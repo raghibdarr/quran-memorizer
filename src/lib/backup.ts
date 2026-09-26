@@ -1,4 +1,4 @@
-import { STORE_NAMES, FLAG_KEYS, mergeStore, type StoreName } from '@/lib/sync/merge'
+import { STORE_NAMES, FLAG_KEYS, STORE_SCHEMA_VERSIONS, mergeStore, normalizeIncoming, type StoreName } from '@/lib/sync/merge'
 import { getLocalData, setLocalData } from '@/lib/sync/local'
 
 // Full-progress backup for signed-out users (and belt-and-braces for everyone):
@@ -13,6 +13,10 @@ export interface TakrarBackup {
   exportedAt: string
   stores: Partial<Record<StoreName, Record<string, unknown>>>
   flags: Partial<Record<(typeof FLAG_KEYS)[number], string>>
+  /** Per-store schema version at export (absent on the earliest backups) — lets a
+   *  future build route old backups through migrations, and this build refuse a
+   *  store exported by a NEWER build instead of misreading it. */
+  versions?: Partial<Record<StoreName, number>>
 }
 
 // --- Pure core (unit-tested; no browser APIs) ---
@@ -31,8 +35,11 @@ export function applyBackupToSnapshot(
 ): Partial<Record<StoreName, Record<string, unknown>>> {
   const out: Partial<Record<StoreName, Record<string, unknown>>> = {}
   for (const storeName of STORE_NAMES) {
-    const imported = backup.stores[storeName]
-    if (!imported || typeof imported !== 'object') continue
+    const raw = backup.stores[storeName]
+    if (!raw || typeof raw !== 'object') continue
+    // A store written by a newer app version is left alone (same rule as sync)
+    if ((backup.versions?.[storeName] ?? 0) > STORE_SCHEMA_VERSIONS[storeName]) continue
+    const imported = normalizeIncoming(storeName, raw)
     const local = snapshot[storeName] ?? null
     out[storeName] = local
       ? mergeStore(storeName, local, imported, true)
@@ -60,9 +67,13 @@ export function validateBackup(parsed: unknown): TakrarBackup {
 
 export function buildBackup(): TakrarBackup {
   const stores: TakrarBackup['stores'] = {}
+  const versions: TakrarBackup['versions'] = {}
   for (const storeName of STORE_NAMES) {
     const data = getLocalData(storeName)
-    if (data) stores[storeName] = data
+    if (data) {
+      stores[storeName] = data
+      versions[storeName] = STORE_SCHEMA_VERSIONS[storeName]
+    }
   }
   const flags: TakrarBackup['flags'] = {}
   for (const key of FLAG_KEYS) {
@@ -75,6 +86,7 @@ export function buildBackup(): TakrarBackup {
     exportedAt: new Date().toISOString(),
     stores,
     flags,
+    versions,
   }
 }
 
@@ -93,7 +105,7 @@ export function downloadBackup() {
 
 /**
  * Import a backup: merge every store into localStorage and restore flags.
- * Returns the number of stores restored; caller should reload so Zustand rehydrates.
+ * Returns the number of stores restored; the caller rehydrates the live stores.
  */
 export function importBackup(parsed: unknown): number {
   const backup = validateBackup(parsed)

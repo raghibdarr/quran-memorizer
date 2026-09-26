@@ -9,6 +9,7 @@ import {
 } from '@/lib/curriculum';
 import { countStudyDays, resolveGoalSurahIds, suggestedPace, todayIso } from '@/lib/plan';
 import { usePlanStore } from '@/stores/plan-store';
+import { useReviewStore } from '@/stores/review-store';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { CheckIcon } from '@/components/ui/icons';
@@ -20,6 +21,7 @@ export default function PlanEditPage() {
   const router = useRouter();
   const plan = usePlanStore((s) => s.plan);
   const updateGoalScope = usePlanStore((s) => s.updateGoalScope);
+  const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
 
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
@@ -44,7 +46,7 @@ export default function PlanEditPage() {
   useEffect(() => {
     if (!plan) return;
     setGoalType(plan.goalType);
-    setSelectedSurahIds(plan.goalType === 'surah' ? plan.goalSurahIds : []);
+    setSelectedSurahIds(plan.goalType === 'surah' || plan.goalType === 'maintain' ? plan.goalSurahIds : []);
     setSelectedJuzNumbers(plan.goalType === 'juz' ? plan.goalJuzNumbers : []);
     setKnownSurahIds(plan.knownSurahIds);
     setKnownLessonIds(plan.knownLessonIds ?? []);
@@ -136,26 +138,50 @@ export default function PlanEditPage() {
       prev.includes(lessonId) ? prev.filter((x) => x !== lessonId) : [...prev, lessonId],
     );
 
-  const skipPreAssessment = goalType === 'surah';
+  // Same flow as setup (M4): maintain plans ARE their known set, so they skip
+  // pre-assessment; surah goals get it (hand-picked surahs are often part-known)
+  const isMaintain = goalType === 'maintain';
+  const skipPreAssessment = isMaintain;
   const totalSteps = skipPreAssessment ? 1 : 2;
   const visibleStep = step;
 
   const canAdvance =
     goalType === 'full-quran' ||
     (goalType === 'juz' && selectedJuzNumbers.length > 0) ||
-    (goalType === 'surah' && selectedSurahIds.length > 0);
+    ((goalType === 'surah' || isMaintain) && selectedSurahIds.length > 0);
 
   const handleSave = () => {
+    const nextKnownSurahIds = isMaintain ? goalSurahIds : knownSurahIds.filter((id) => goalSurahIds.includes(id));
+    const nextKnownLessonIds = isMaintain ? [] : knownLessonIds.filter((lid) => {
+      const surahId = parseInt(lid.split('-')[0], 10);
+      return goalSurahIds.includes(surahId);
+    });
     updateGoalScope({
       goalType,
       goalSurahIds,
       goalJuzNumbers: goalType === 'juz' ? selectedJuzNumbers : [],
-      knownSurahIds: knownSurahIds.filter((id) => goalSurahIds.includes(id)),
-      knownLessonIds: knownLessonIds.filter((lid) => {
-        const surahId = parseInt(lid.split('-')[0], 10);
-        return goalSurahIds.includes(surahId);
-      }),
+      knownSurahIds: nextKnownSurahIds,
+      knownLessonIds: nextKnownLessonIds,
     });
+
+    // Known = tracked (M4), same as setup: newly-known material gets shaky-strength
+    // cards (existing ratings are never overwritten)
+    const wasKnownSurah = new Set(plan?.knownSurahIds ?? []);
+    const wasKnownLesson = new Set(plan?.knownLessonIds ?? []);
+    const byId = new Map(allSurahs.map((s) => [s.id, s]));
+    for (const id of nextKnownSurahIds) {
+      const surah = byId.get(id);
+      if (surah && !wasKnownSurah.has(id)) seedKnownAyahs(id, 1, surah.versesCount);
+    }
+    for (const lessonId of nextKnownLessonIds) {
+      if (wasKnownLesson.has(lessonId)) continue;
+      const surahId = parseInt(lessonId.split('-')[0], 10);
+      const surah = byId.get(surahId);
+      if (!surah) continue;
+      const lesson = generateLessonsWithJuzBoundaries(surahId, surah.versesCount, juzSegsFor(surahId))
+        .find((l) => l.lessonId === lessonId);
+      if (lesson) seedKnownAyahs(surahId, lesson.ayahStart, lesson.ayahEnd);
+    }
     router.push('/plan');
   };
 
@@ -196,8 +222,8 @@ export default function PlanEditPage() {
       <main className="mx-auto max-w-2xl space-y-4 px-4 py-4">
         {step === 1 && (
           <>
-            <div className="grid grid-cols-3 gap-3">
-              {(['surah', 'juz', 'full-quran'] as PlanGoalType[]).map((type) => (
+            <div className="grid grid-cols-2 gap-3">
+              {(['surah', 'juz', 'full-quran', 'maintain'] as PlanGoalType[]).map((type) => (
                 <button
                   key={type}
                   onClick={() => setGoalType(type)}
@@ -209,13 +235,13 @@ export default function PlanEditPage() {
                   )}
                 >
                   <p className="text-sm font-bold text-foreground">
-                    {type === 'surah' ? 'Surahs' : type === 'juz' ? 'Juz' : 'Full Quran'}
+                    {type === 'surah' ? 'Surahs' : type === 'juz' ? 'Juz' : type === 'full-quran' ? 'Full Quran' : 'Maintain'}
                   </p>
                 </button>
               ))}
             </div>
 
-            {goalType === 'surah' && (
+            {(goalType === 'surah' || isMaintain) && (
               <Card>
                 <input
                   type="text"

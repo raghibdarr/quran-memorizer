@@ -1,8 +1,7 @@
 import type { ReviewCard, LessonReviewCard, LessonDef } from '@/types/quran';
-import { startOfDayMs } from './dates';
+import { addLocalDays } from './dates';
 
 const MIN_EASE_FACTOR = 1.3;
-const DAY_MS = 86_400_000;
 
 export function createNewCard(surahId: number, ayahNumber: number): ReviewCard {
   return {
@@ -31,7 +30,7 @@ export function createSeededCard(surahId: number, ayahNumber: number, stagger = 
     easeFactor: 2.3,
     interval: 3,
     repetitions: 1,
-    nextReview: startOfDayMs(Date.now() + (1 + (stagger % 7)) * DAY_MS),
+    nextReview: addLocalDays(Date.now(), 1 + (stagger % 7)),
     lastReview: 0, // never actually reviewed — a real review always wins the sync merge
     lastQuality: 3,
   };
@@ -50,7 +49,7 @@ export function createLessonReviewCard(lessonDef: LessonDef, surahId: number, du
     // Due dates are LOCAL START-OF-DAY: a card due "tomorrow" is due from midnight,
     // not from this exact clock time tomorrow (which made "done today" un-complete
     // itself when a card matured mid-day after the user's session).
-    nextReview: dueNow ? Date.now() : startOfDayMs(Date.now() + DAY_MS),
+    nextReview: dueNow ? Date.now() : addLocalDays(Date.now(), 1),
     lastReview: 0,
     lastQuality: 0,
   };
@@ -104,8 +103,9 @@ function applySm2<T extends Sm2Fields>(card: T, quality: number): T {
 
   updated.lastReview = Date.now();
   updated.lastQuality = quality;
-  // Due dates are LOCAL START-OF-DAY (see dates.ts) — cards mature at midnight
-  updated.nextReview = startOfDayMs(Date.now() + updated.interval * DAY_MS);
+  // Due dates are LOCAL MIDNIGHTS, stepped in calendar days (see dates.ts
+  // addLocalDays) — fixed 24h steps landed on the wrong day across DST changes
+  updated.nextReview = addLocalDays(Date.now(), updated.interval);
 
   return updated;
 }

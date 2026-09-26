@@ -194,6 +194,10 @@ export const usePlanStore = create<PlanState>()(
       updateGoalScope: (scope) =>
         set((s) => {
           if (!s.plan) return s;
+          // Newly-known surahs join the rotation staggered (like setup), instead of
+          // all falling back to plan.createdAt and jumping the queue as "oldest"
+          const wasKnown = new Set(s.plan.knownSurahIds);
+          const added = scope.knownSurahIds.filter((id) => !wasKnown.has(id));
           return {
             plan: {
               ...s.plan,
@@ -202,6 +206,9 @@ export const usePlanStore = create<PlanState>()(
               goalJuzNumbers: scope.goalJuzNumbers,
               knownSurahIds: scope.knownSurahIds,
               knownLessonIds: scope.knownLessonIds,
+              lastRevisedAt: added.length
+                ? staggeredLastRevised(added, s.plan.revisionFrequencyDays, s.plan.lastRevisedAt)
+                : s.plan.lastRevisedAt,
             },
           };
         }),

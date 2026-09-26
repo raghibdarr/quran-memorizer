@@ -170,3 +170,15 @@ test.describe('smoke', () => {
     await expect(moment).toHaveCount(0)
   })
 })
+
+test('native shell: a deep link to a page the export lacks lands on Home — no reload loop', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'native', 'Capacitor-style root-index fallback only')
+  await page.addInitScript(() => localStorage.setItem('onboarding-complete', 'true'))
+  let loads = 0
+  page.on('load', () => { loads++ })
+  // Passes the route pattern, but no such collection was exported
+  await page.goto('/essentials/no-such-collection')
+  await expect(page).toHaveURL(/\/$/, { timeout: 15_000 })
+  await page.waitForTimeout(1500)
+  expect(loads).toBeLessThan(8) // a loop runs away into dozens
+})

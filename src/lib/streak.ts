@@ -85,6 +85,9 @@ export function recordActiveDay(
   studyDays: number[] = ALL_DAYS,
 ): StreakFields {
   if (state.lastActiveDate === todayIsoStr) return state
+  // Today is EARLIER than the last active day (westward travel, or a synced device
+  // in a later timezone): treat as the same day — never extend a streak backwards
+  if (state.lastActiveDate && daysBetween(state.lastActiveDate, todayIsoStr) < 0) return state
 
   const settled = reconcileStreak(state, todayIsoStr, studyDays)
   const newStreak = settled.currentStreak + 1

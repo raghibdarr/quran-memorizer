@@ -90,3 +90,17 @@ describe('applyBackupToSnapshot', () => {
     expect(Object.keys(merged)).not.toContain('evil-store')
   })
 })
+
+describe('backup versioning (review finding)', () => {
+  const base = { format: 'takrar-backup' as const, version: 1 as const, exportedAt: '2026-09-26T00:00:00Z', flags: {} }
+
+  it('refuses a store exported by a NEWER app version instead of misreading it', () => {
+    const backup: TakrarBackup = { ...base, stores: { 'quran-plan': { plan: null } }, versions: { 'quran-plan': 99 } }
+    expect(applyBackupToSnapshot(backup, {})).toEqual({})
+  })
+
+  it('normalizes old-format stores on import (stats gain freeze fields)', () => {
+    const backup: TakrarBackup = { ...base, stores: { 'quran-stats': { currentStreak: 4 } } }
+    expect(applyBackupToSnapshot(backup, {})['quran-stats']).toMatchObject({ currentStreak: 4, streakFreezes: 0, frozenDates: {} })
+  })
+})

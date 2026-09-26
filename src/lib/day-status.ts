@@ -27,8 +27,10 @@ export function planDayStatus(
   const todayStart = startOfDayMs(now);
   // Done = touched today. Reviews and revisions leave the plan once done, so the
   // totals are rebuilt from timestamps rather than remembered.
-  const reviewsDone = lessonCards.filter((c) => c.lastReview >= todayStart).length;
-  const revisionsDone = Object.values(lastRevisedAt).filter((ts) => ts >= todayStart).length;
+  // Bounded by `now` too: a clock-skewed device's future timestamps aren't today's work
+  const isToday = (ts: number) => ts >= todayStart && ts <= now;
+  const reviewsDone = lessonCards.filter((c) => isToday(c.lastReview)).length;
+  const revisionsDone = Object.values(lastRevisedAt).filter(isToday).length;
   const lessonsDone = todaysPlan.completedNewLessonIds.length;
 
   const remaining =

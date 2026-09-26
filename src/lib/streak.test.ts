@@ -133,3 +133,13 @@ describe('missedStudyDays', () => {
     expect(missedStudyDays('2026-07-10', '2026-07-13', WEEKDAYS, {})).toEqual([])
   })
 })
+
+describe('clock going backwards (review finding)', () => {
+  it('activity on a day BEFORE lastActiveDate changes nothing — no streak inflation', () => {
+    const ahead = state({ currentStreak: 5, lastActiveDate: '2026-09-27' })
+    const back = recordActiveDay(ahead, '2026-09-26', ALL_DAYS)
+    expect(back).toBe(ahead)
+    // and returning to the real "next" day extends exactly once
+    expect(recordActiveDay(back, '2026-09-28', ALL_DAYS).currentStreak).toBe(6)
+  })
+})

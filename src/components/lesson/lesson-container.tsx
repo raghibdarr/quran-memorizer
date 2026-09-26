@@ -19,7 +19,7 @@ import UnderstandPhase from './phases/understand-phase';
 import ChunkPhase from './phases/chunk-phase';
 import TestPhase from './phases/test-phase';
 import CompletePhase from './phases/complete-phase';
-import { lessonHref } from '@/lib/routes';
+import { lessonHref, safeFromPath } from '@/lib/routes';
 
 interface LessonContainerProps {
   surah: Surah;
@@ -42,7 +42,8 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
   const { setLastActivity } = useStatsStore();
   const searchParams = useSearchParams();
-  const fromParam = searchParams.get('from');
+  // Validated: it becomes a back link, and '/evil.com' would make '//evil.com'
+  const fromParam = safeFromPath(searchParams.get('from'));
 
   useEffect(() => {
     startLesson(lessonDef.lessonId, surah.id);

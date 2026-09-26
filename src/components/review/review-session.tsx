@@ -15,7 +15,7 @@ import MediaControlsBar from '@/components/ui/media-controls-bar';
 import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
 import { RETENTION } from '@/lib/retention';
-import { startOfTodayMs } from '@/lib/dates';
+import { daysBetween, isoFromMs, startOfTodayMs, todayIso } from '@/lib/dates';
 
 interface ReviewSessionProps {
   dueCards: LessonReviewCard[];
@@ -39,8 +39,10 @@ interface LessonData {
   ayahs: Ayah[];
 }
 
+/** Calendar days until the (midnight-aligned) due date — never elapsed ms, which
+ *  called a due-tomorrow card "later today" after lunch */
 function formatNextReview(timestamp: number): string {
-  const days = Math.round((timestamp - Date.now()) / 86_400_000);
+  const days = daysBetween(todayIso(), isoFromMs(timestamp));
   if (days <= 0) return 'later today';
   if (days === 1) return 'tomorrow';
   if (days < 7) return `in ${days} days`;

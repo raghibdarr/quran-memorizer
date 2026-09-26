@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { isNative } from '@/lib/native';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
@@ -30,6 +31,10 @@ export default function InstallBanner() {
   const [dismissed, setDismissed] = useState(true); // default true to avoid flash
 
   useEffect(() => {
+    // The native apps ARE installed — an "Add to Home Screen" banner there is wrong
+    // (WKWebView looks like iOS Safari to the sniffing below)
+    if (isNative()) return;
+
     // Don't show if already installed as standalone
     if (window.matchMedia('(display-mode: standalone)').matches) return;
 

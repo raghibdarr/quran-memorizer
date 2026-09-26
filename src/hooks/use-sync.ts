@@ -7,9 +7,10 @@ import {
   STORE_NAMES,
   FLAGS_STORE,
   STORE_SCHEMA_VERSIONS,
+  WRITE_ENVELOPE,
   planStoreMerge,
   readPayload,
-  wrapPayload,
+  encodeCloudRow,
   type SyncRowName,
   type StoreName,
 } from '@/lib/sync/merge'
@@ -20,8 +21,9 @@ import {
   getLastSyncedHashes,
   setLastSyncedHashes,
   setLastSyncedAt,
-  getCloudTimestamps,
-  setCloudTimestamps,
+  getSeenMarkers,
+  setSeenMarker,
+  clearSeenMarkers,
 } from '@/lib/sync/local'
 import { rehydrateStores } from '@/lib/sync/rehydrate'
 
@@ -29,9 +31,11 @@ import { rehydrateStores } from '@/lib/sync/rehydrate'
 // this hook is the IO orchestrator. Pushes are compare-and-set on a `rev`
 // column (see supabase/migrations/002_user_data_rev.sql): a stale push updates
 // zero rows, and the store is re-fetched, re-merged and retried instead of
-// clobbering another device's write. Cloud payloads carry their schemaVersion;
-// an older client never merges or overwrites a newer client's data. Cloud
+// clobbering another device's write. Enveloped payloads carry their
+// schemaVersion; an older client never merges or overwrites a newer client's
+// data (this release still WRITES bare state — see WRITE_ENVELOPE). Cloud
 // downloads REHYDRATE the zustand stores in place — no window.location.reload().
+// "Is the cloud newer?" is answered by per-row SEEN MARKERS (src/lib/sync/local.ts).
 
 const SYNC_ROWS: SyncRowName[] = [...STORE_NAMES, FLAGS_STORE]
 const MAX_CAS_RETRIES = 2
@@ -89,7 +93,8 @@ export function useSync(user: User | null) {
    */
   const syncPass = useCallback(async (names: SyncRowName[], cloudRows: Map<string, CloudRow>): Promise<SyncRowName[]> => {
     const supabase = supabaseRef.current
-    const ts = getCloudTimestamps()
+    const userId = user!.id
+    const seen = getSeenMarkers(userId)
     const hashes = getLastSyncedHashes()
     const changedLocal: StoreName[] = []
     const uploads: Array<{ name: SyncRowName; state: Record<string, unknown>; expectedRev: number | null }> = []
@@ -99,8 +104,11 @@ export function useSync(user: User | null) {
       const cloudRow = cloudRows.get(name) ?? null
       const cloud = cloudRow?.payload ?? null
 
-      const lastKnown = ts[name]
-      const cloudIsNewer = !!cloudRow && (!lastKnown || cloudRow.updated_at > lastKnown)
+      const marker = seen[name]
+      const cloudIsNewer = !!cloudRow && (
+        !marker ||
+        (casSupportedRef.current ? cloudRow.rev !== marker.rev : cloudRow.updated_at !== marker.updatedAt)
+      )
 
       const plan = planStoreMerge({ storeName: name, local, cloud, cloudIsNewer })
 
@@ -117,53 +125,75 @@ export function useSync(user: User | null) {
         if (name !== FLAGS_STORE) changedLocal.push(name as StoreName)
       }
 
-      if (plan.upload) {
-        const h = stateHash(plan.upload)
-        // Skip unchanged stores (dirty check) — but always create a missing cloud row
-        if (cloudRow && hashes[name] === h && cloudRow.payload && stateHash(cloudRow.payload.state) === h) continue
-        uploads.push({ name, state: plan.upload, expectedRev: cloudRow ? cloudRow.rev : null })
+      // This cloud version is now part of local state
+      if (cloudRow && cloudIsNewer) {
+        setSeenMarker(userId, name, { rev: cloudRow.rev, updatedAt: cloudRow.updated_at })
       }
 
-      if (cloudRow) ts[name] = cloudRow.updated_at
+      if (plan.upload) {
+        const h = stateHash(plan.upload)
+        const cloudMatches = !!cloudRow?.payload && stateHash(cloudRow.payload.state) === h
+        // A pre-release enveloped row gets rewritten in this release's format
+        const needsRewrite = !WRITE_ENVELOPE && (cloudRow?.payload?.schemaVersion ?? 0) > 0
+        // Skip unchanged stores (dirty check) — but always create a missing cloud row
+        if (cloudRow && cloudMatches && !needsRewrite) {
+          hashes[name] = h
+          continue
+        }
+        uploads.push({ name, state: plan.upload, expectedRev: cloudRow ? cloudRow.rev : null })
+      }
     }
+    setLastSyncedHashes(hashes)
 
-    // Push with compare-and-set
+    // Load merged data into the live stores BEFORE any network await: a user
+    // action during the uploads would otherwise persist the pre-merge in-memory
+    // state over the merged copy we just wrote to localStorage.
+    if (changedLocal.length) await rehydrateStores(changedLocal)
+
+    // Push with compare-and-set. After each successful write the marker moves
+    // to the version WE wrote; a conflict leaves it alone, so the next pass sees
+    // the other device's version as newer and merges it.
     const conflicts: SyncRowName[] = []
     for (const up of uploads) {
-      const data = wrapPayload(up.state, STORE_SCHEMA_VERSIONS[up.name])
+      const data = encodeCloudRow(up.state, STORE_SCHEMA_VERSIONS[up.name])
+      let written: { rev?: number | null; updated_at: string } | null = null
 
       if (!casSupportedRef.current) {
-        const { error } = await supabase.from('user_data').upsert(
-          { user_id: user!.id, store_name: up.name, data },
+        const { data: rows, error } = await supabase.from('user_data').upsert(
+          { user_id: userId, store_name: up.name, data },
           { onConflict: 'user_id,store_name' }
-        )
+        ).select('updated_at')
         if (error) throw error
+        written = rows?.[0] ?? null
       } else if (up.expectedRev === null) {
-        const { error } = await supabase.from('user_data').insert(
-          { user_id: user!.id, store_name: up.name, data, rev: 1 }
-        )
+        const { data: rows, error } = await supabase.from('user_data')
+          .insert({ user_id: userId, store_name: up.name, data, rev: 1 })
+          .select('rev, updated_at')
         if (error) {
           if (error.code === '23505') { conflicts.push(up.name); continue } // someone inserted first
           throw error
         }
+        written = rows?.[0] ?? null
       } else {
-        const { data: updated, error } = await supabase.from('user_data')
+        const { data: rows, error } = await supabase.from('user_data')
           .update({ data, rev: up.expectedRev + 1 })
-          .eq('user_id', user!.id)
+          .eq('user_id', userId)
           .eq('store_name', up.name)
           .eq('rev', up.expectedRev)
-          .select('store_name')
+          .select('rev, updated_at')
         if (error) throw error
-        if (!updated || updated.length === 0) { conflicts.push(up.name); continue } // stale rev
+        if (!rows || rows.length === 0) { conflicts.push(up.name); continue } // stale rev
+        written = rows[0]
       }
 
+      if (written) {
+        setSeenMarker(userId, up.name, { rev: written.rev ?? 0, updatedAt: written.updated_at })
+      }
       const hashesNow = getLastSyncedHashes()
       hashesNow[up.name] = stateHash(up.state)
       setLastSyncedHashes(hashesNow)
     }
 
-    setCloudTimestamps(ts)
-    if (changedLocal.length) await rehydrateStores(changedLocal)
     return conflicts
   }, [user])
 
@@ -177,12 +207,8 @@ export function useSync(user: User | null) {
       if (conflicts.length === 0) break
       names = conflicts
     }
-
-    // Record fresh cloud timestamps after our own writes
-    const finalRows = await fetchCloudRows()
-    const ts = getCloudTimestamps()
-    for (const [name, row] of finalRows) ts[name] = row.updated_at
-    setCloudTimestamps(ts)
+    // No blanket "mark everything as seen" refresh here: markers only ever
+    // advance to versions this device merged or wrote (see syncPass).
     setLastSyncedAt(Date.now())
   }, [user, fetchCloudRows, syncPass])
 
@@ -238,12 +264,18 @@ export function useSync(user: User | null) {
     }
   }, [user, sync])
 
-  // Reset when user signs out
+  // Reset when user signs out. Only on a real signed-in → signed-out transition:
+  // `user` is also null for the moment before auth loads on every app start,
+  // and wiping the markers then would treat every row as foreign on cold start.
+  const prevUserIdRef = useRef<string | null>(null)
   useEffect(() => {
+    const wasSignedIn = prevUserIdRef.current !== null
+    prevUserIdRef.current = user?.id ?? null
     if (!user) {
       initialSyncDone.current = false
-      setCloudTimestamps({})
       setStatus('idle')
+      // Signed-out edits must be MERGED on the next sign-in, not assumed current
+      if (wasSignedIn) clearSeenMarkers()
     }
   }, [user])
 

@@ -90,6 +90,9 @@ export default function SettingsPanel() {
       setBackupMsg(`Restored ${restored} data set${restored === 1 ? '' : 's'}`);
       // Rehydrate in place — a reload inside the native shell lands on the root page
       await rehydrateStores();
+      // Restored flags that live outside the stores take effect now, not next launch
+      const dark = localStorage.getItem('quran-dark-mode');
+      if (dark !== null) document.documentElement.classList.toggle('dark', dark === 'true');
     } catch (err) {
       setBackupMsg(err instanceof Error ? err.message : 'Import failed — is this a Takrar backup file?');
     }

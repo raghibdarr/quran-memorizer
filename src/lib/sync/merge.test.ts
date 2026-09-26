@@ -6,7 +6,11 @@ import {
   wrapPayload,
   readPayload,
   STORE_SCHEMA_VERSIONS,
+  WRITE_ENVELOPE,
+  encodeCloudRow,
+  normalizeIncoming,
 } from './merge'
+import { stateHash } from './local'
 
 // --- Arbitraries (deciding fields only, so ties are value-identical) ---
 
@@ -98,17 +102,35 @@ describe('merge properties (fast-check)', () => {
     }))
   })
 
-  it('reviews: idempotent; merged repetitions per card equal the max of both sides', () => {
+  it('reviews: idempotent; each card resolves to its most recently reviewed copy', () => {
     fc.assert(fc.property(reviewsArb, reviewsArb, (a, b) => {
       expect(mergeStore('quran-reviews', a, a, true)).toEqual(a)
       const merged = mergeStore('quran-reviews', a, b, true) as typeof a
-      const repsOf = (s: typeof a) => new Map(s.lessonCards.map((c) => [c.lessonId, c.repetitions]))
-      const [ra, rb, rm] = [repsOf(a), repsOf(b), repsOf(merged)]
-      for (const id of new Set([...ra.keys(), ...rb.keys()])) {
-        expect(rm.get(id)).toBe(Math.max(ra.get(id) ?? -1, rb.get(id) ?? -1))
+      const byId = (s: typeof a) => new Map(s.lessonCards.map((c) => [c.lessonId, c]))
+      const [ca, cb, cm] = [byId(a), byId(b), byId(merged)]
+      for (const id of new Set([...ca.keys(), ...cb.keys()])) {
+        const x = ca.get(id), y = cb.get(id)
+        const lastReview = Math.max(x?.lastReview ?? -1, y?.lastReview ?? -1)
+        expect(cm.get(id)!.lastReview).toBe(lastReview)
       }
-      expect(rm.size).toBe(new Set([...ra.keys(), ...rb.keys()]).size)
+      expect(cm.size).toBe(new Set([...ca.keys(), ...cb.keys()]).size)
     }))
+  })
+
+  it('reviews REGRESSION: a lapse on one device survives the merge with a higher-reps copy', () => {
+    const cloudCard = { lessonId: '1-1', repetitions: 5, interval: 30, lastReview: 1000, failStreak: 0, lapses: 0 }
+    const lapsed = { lessonId: '1-1', repetitions: 0, interval: 1, lastReview: 2000, failStreak: 1, lapses: 1 }
+    for (const [l, c] of [[lapsed, cloudCard], [cloudCard, lapsed]]) {
+      const merged = mergeStore('quran-reviews', { cards: [], lessonCards: [l] }, { cards: [], lessonCards: [c] }, true) as { lessonCards: typeof lapsed[] }
+      expect(merged.lessonCards[0]).toEqual(lapsed)
+    }
+  })
+
+  it('reviews: a seeded "known" card (lastReview 0) never beats a real rating', () => {
+    const seeded = { surahId: 78, ayahNumber: 1, repetitions: 1, lastReview: 0, lastQuality: 3 }
+    const realFail = { surahId: 78, ayahNumber: 1, repetitions: 0, lastReview: 500, lastQuality: 1 }
+    const merged = mergeStore('quran-reviews', { cards: [seeded], lessonCards: [] }, { cards: [realFail], lessonCards: [] }, true) as { cards: unknown[] }
+    expect(merged.cards).toEqual([realFail])
   })
 
   it('stats: activity log takes the max per date; longest streak never shrinks', () => {
@@ -126,7 +148,11 @@ describe('merge properties (fast-check)', () => {
     fc.assert(fc.property(statsArb, statsArb, (a, b) => {
       const merged = mergeStore('quran-stats', a, b, true) as typeof a & { frozenDates: Record<string, true> }
       const recent = a.lastActiveDate >= b.lastActiveDate ? a : b
-      expect(merged.streakFreezes).toBe(recent.streakFreezes)
+      // On a tie the smaller bank wins (the other side hasn't seen a spend yet)
+      const expected = a.lastActiveDate === b.lastActiveDate
+        ? Math.min(a.streakFreezes, b.streakFreezes)
+        : recent.streakFreezes
+      expect(merged.streakFreezes).toBe(expected)
       expect(merged.currentStreak).toBe(recent.currentStreak)
       // A day frozen on either device stays frozen — never double-charged
       for (const day of [...Object.keys(a.frozenDates), ...Object.keys(b.frozenDates)]) {
@@ -236,5 +262,44 @@ describe('planStoreMerge', () => {
     })
     expect(plan.upload).toBe(local)
     expect(plan.newLocal).toBeNull()
+  })
+})
+
+describe('pre-release hardening (review findings)', () => {
+  it('stage 1 writes BARE state — the live pre-envelope app must keep reading rows', () => {
+    const state = { lessons: {} }
+    expect(WRITE_ENVELOPE).toBe(false)
+    expect(encodeCloudRow(state, 2)).toBe(state)
+    // …while envelopes written by a later stage are still read correctly
+    expect(readPayload(wrapPayload(state, 2))).toEqual({ state, schemaVersion: 2 })
+  })
+
+  it('incoming reviews are normalized to local-midnight due dates (idempotent)', () => {
+    const noon = new Date(2026, 8, 26, 12, 0).getTime()
+    const once = normalizeIncoming('quran-reviews', { cards: [{ nextReview: noon }], lessonCards: [{ nextReview: noon }] })
+    expect((once.cards as Array<{ nextReview: number }>)[0].nextReview).toBe(new Date(2026, 8, 26).getTime())
+    expect(normalizeIncoming('quran-reviews', once)).toEqual(once)
+  })
+
+  it('incoming stats from an older client gain the freeze fields', () => {
+    const s = normalizeIncoming('quran-stats', { currentStreak: 3 })
+    expect(s).toMatchObject({ currentStreak: 3, streakFreezes: 0, frozenDates: {} })
+  })
+
+  it('planStoreMerge normalizes the cloud side before merging or adopting it', () => {
+    const noon = new Date(2026, 8, 26, 12, 0).getTime()
+    const plan = planStoreMerge({
+      storeName: 'quran-reviews',
+      local: null,
+      cloud: { state: { cards: [], lessonCards: [{ lessonId: '1-1', nextReview: noon }] }, schemaVersion: 0 },
+      cloudIsNewer: true,
+    })
+    expect((plan.newLocal!.lessonCards as Array<{ nextReview: number }>)[0].nextReview).toBe(new Date(2026, 8, 26).getTime())
+  })
+
+  it('the dirty-check hash ignores key order (Postgres JSONB reorders keys)', () => {
+    expect(stateHash({ b: 1, a: { d: [1, { y: 2, x: 1 }], c: 'z' } }))
+      .toBe(stateHash({ a: { c: 'z', d: [1, { x: 1, y: 2 }] }, b: 1 }))
+    expect(stateHash({ a: [1, 2] })).not.toBe(stateHash({ a: [2, 1] })) // array order still matters
   })
 })

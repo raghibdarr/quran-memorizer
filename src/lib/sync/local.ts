@@ -74,8 +74,23 @@ function hashString(s: string): number {
   return h
 }
 
+/** JSON with object keys sorted at every level. Postgres JSONB reorders keys, so a
+ *  plain JSON.stringify of a round-tripped row never matched the local state. */
+export function canonicalJson(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`
+  if (value && typeof value === 'object') {
+    const obj = value as Record<string, unknown>
+    return `{${Object.keys(obj)
+      .filter((k) => obj[k] !== undefined)
+      .sort()
+      .map((k) => `${JSON.stringify(k)}:${canonicalJson(obj[k])}`)
+      .join(',')}}`
+  }
+  return JSON.stringify(value) ?? 'null'
+}
+
 export function stateHash(state: Record<string, unknown> | null): number {
-  return state ? hashString(JSON.stringify(state)) : 0
+  return state ? hashString(canonicalJson(state)) : 0
 }
 
 const HASHES_KEY = 'sync-last-hashes'
@@ -110,17 +125,43 @@ export function getLastSyncedAt(): number | null {
   }
 }
 
-// ---------- Cloud row timestamps (survive reloads within a session) ----------
+// ---------- Seen markers ----------
+// For each row: the exact cloud version this device's local state already
+// incorporates. Set ONLY when we merged that version in or wrote it ourselves —
+// never by blanket-refreshing from a later fetch (which marked other devices'
+// writes as seen without merging them, so our next push overwrote them).
+// "Cloud is newer" = the cloud row differs from the marker. Persisted (not
+// session-scoped) so a cold start doesn't treat every row as foreign, and keyed
+// to the signed-in user.
 
-export function getCloudTimestamps(): Record<string, string> {
-  try {
-    const raw = sessionStorage.getItem('sync-timestamps')
-    return raw ? JSON.parse(raw) : {}
-  } catch { return {} }
+export interface SeenMarker {
+  rev: number
+  updatedAt: string
 }
 
-export function setCloudTimestamps(ts: Record<string, string>) {
+const SEEN_KEY = 'sync-seen'
+
+export function getSeenMarkers(userId: string): Record<string, SeenMarker> {
   try {
-    sessionStorage.setItem('sync-timestamps', JSON.stringify(ts))
+    const raw = localStorage.getItem(SEEN_KEY)
+    const parsed = raw ? JSON.parse(raw) : null
+    return parsed && parsed.userId === userId ? parsed.rows ?? {} : {}
+  } catch {
+    return {}
+  }
+}
+
+export function setSeenMarker(userId: string, name: string, marker: SeenMarker) {
+  try {
+    const rows = getSeenMarkers(userId)
+    rows[name] = marker
+    localStorage.setItem(SEEN_KEY, JSON.stringify({ userId, rows }))
+  } catch { /* ignore */ }
+}
+
+export function clearSeenMarkers() {
+  try {
+    localStorage.removeItem(SEEN_KEY)
+    sessionStorage.removeItem('sync-timestamps') // pre-marker session cache
   } catch { /* ignore */ }
 }
