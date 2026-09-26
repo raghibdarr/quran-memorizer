@@ -396,6 +396,7 @@ export default function PracticeSession({
                     : 'bg-teal/10 text-teal hover:bg-teal/20'
                 )}
                 title={recorder.isRecording ? 'Stop recording' : 'Start recording'}
+                aria-label={recorder.isRecording ? 'Stop recording' : 'Record my recitation'}
               >
                 {isTranscribing ? (
                   <LoadingSpinner />
@@ -534,6 +535,7 @@ export default function PracticeSession({
                       onClick={() => playAyah(ayah, idx)}
                       className="hit-44 rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
                       title="Play ayah"
+                      aria-label="Play ayah"
                     >
                       <PlayIcon />
                     </button>
@@ -541,6 +543,8 @@ export default function PracticeSession({
                       onClick={() => togglePassageAyah(ayah.key)}
                       className="hit-44 rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
                       title={isAyahRevealed ? 'Hide' : 'Reveal'}
+                      aria-label={isAyahRevealed ? 'Hide ayah text' : 'Reveal ayah text'}
+                      aria-pressed={isAyahRevealed}
                     >
                       {isAyahRevealed ? <EyeOffIcon /> : <EyeIcon />}
                     </button>

@@ -134,6 +134,7 @@ export default function MediaControlsBar({
             disabled={!playingAll}
             className="pressable hit-44 flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
             title="Restart"
+            aria-label="Restart from the first ayah"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="1 4 1 10 7 10" />
@@ -144,6 +145,7 @@ export default function MediaControlsBar({
 
         <button
           onClick={handlePlayPause}
+          aria-label={playingAll && isPlaying ? 'Pause' : 'Play all'}
           className="tactile-btn flex h-12 w-12 items-center justify-center rounded-full bg-teal text-on-teal hover:bg-teal-light"
         >
           {playingAll && isPlaying ? (
@@ -158,6 +160,7 @@ export default function MediaControlsBar({
           disabled={!playingAll}
           className="pressable hit-44 flex h-8 w-8 items-center justify-center rounded-full text-muted hover:text-foreground disabled:opacity-30"
           title="Stop"
+          aria-label="Stop"
         >
           <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" /></svg>
         </button>
@@ -171,6 +174,8 @@ export default function MediaControlsBar({
         <div className="relative">
           <button
             onClick={() => setShowSpeedMenu(!showSpeedMenu)}
+            aria-label={`Playback speed ${storedSpeed}x`}
+            aria-expanded={showSpeedMenu}
             className="pressable hit-44 rounded-lg bg-foreground/5 px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-foreground/10"
           >
             {storedSpeed}x

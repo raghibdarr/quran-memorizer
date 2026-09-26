@@ -491,6 +491,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                           onClick={() => toggleAyahReveal(i)}
                           className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                           title="Hide"
+                          aria-label="Hide text"
                         >
                           <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
@@ -652,6 +653,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                           onClick={() => toggleFinalAyahReveal(i)}
                           className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                           title="Hide"
+                          aria-label="Hide text"
                         >
                           <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />

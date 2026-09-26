@@ -412,6 +412,7 @@ function FirstLetterTest({
                 onClick={playAyah}
                 className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                 title="Play ayah"
+                aria-label="Play ayah"
               >
                 <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
               </button>
