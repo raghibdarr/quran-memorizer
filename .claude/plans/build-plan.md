@@ -201,6 +201,25 @@ The owner's mobile priority is folded in by interleaving M11 rather than appendi
 ---
 
 ### M5 — Retention engine v2: sabaq/sabqi/manzil tiers, flood caps, leech escalation
+**STATUS: ✅ DONE 2026-09-26** — pure DOM-free scheduler `src/lib/retention.ts` (tunables in one
+`RETENTION` object): `buildReviewQueue` splits SM-2-due lesson reviews into sabqi (completed <14d)
+and manzil, most-overdue first, and adds capped sabqi "early touches" for recent lessons untouched
+3+ days (reviewed via `processEarlyLessonReview` — a pass records the touch without growing the
+interval, a fail lapses; today's touches count against the cap so the list never refills);
+`planManzil` = earliest-deadline-first surah rotation under a daily ayah budget of
+max(20, 2·total/cycle), pulling a surah forward only when upcoming load would overflow, so every
+memorized surah lands within its cycle and no day floods (property-tested, 300 random runs);
+`getRevisionTasks` now returns the planner's picks. Leeches: optional `failStreak`/`lapses` on both
+card types (no migration — absent = 0; golden fixture extended), ≥3 in a row → "Needs focused
+practice" list on /review linking to that lesson's practice tab. Review sessions run in batches of
+10 ("Card 3 of 10 · 40 due") with a "Batch done — continue / stop for today" break. Today's Plan is
+three labelled streams in revise-before-new order (Sabqi → Manzil → Sabaq) with one-line hints;
+?stream= deep-links each; maintain plans can now reach isComplete. Also fixed 7 leftover UTC
+`toISOString()` day computations M3 missed (home "today", heatmap, progress week count, timeline,
+plan-setup projected finish, default deadline). 215 unit tests; new Playwright assertion: 12
+overdue → capped batch → break → continue (dev + static web + static native).
+DEVIATIONS: leech drilling links to the existing practice tab (M10 builds the dedicated drill);
+the rotation budget doesn't subtract rest days (the 2× headroom absorbs them).
 **Size:** 2–3 sessions
 
 **Goal:** Re-bucket the flat SM-2 queue into the three-stream method-faithful cycle with per-day caps, batched overdue sessions, a manzil rotation layer, and leech detection.

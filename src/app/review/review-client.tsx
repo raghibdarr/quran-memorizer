@@ -10,6 +10,7 @@ import { usePlanStore } from '@/stores/plan-store';
 import { getSurahIndex, getJuzSegmentsForSurah, getSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { computeSurahHealth } from '@/lib/review-helpers';
+import { buildReviewQueue, getLeeches, RETENTION, type Stream } from '@/lib/retention';
 import type { SurahMeta, LessonDef, LessonReviewCard } from '@/types/quran';
 import type { SurahHealth } from '@/lib/review-helpers';
 import ReviewSession from '@/components/review/review-session';
@@ -26,12 +27,15 @@ type PageView = 'dashboard' | 'session';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
+  const progressLessons = useProgressStore((s) => s.lessons);
   const plan = usePlanStore((s) => s.plan);
   // ?start=1 (the today's-plan review row) deep-links straight into a session and
   // routes back to the plan afterwards — no dashboard hop in either direction.
   const router = useRouter();
   const searchParams = useSearchParams();
   const fromPlan = searchParams.get('start') === '1';
+  // ?stream=sabqi|manzil — the plan card links each review stream separately (M5)
+  const streamParam = searchParams.get('stream') as Stream | null;
   const autoStarted = useRef(false);
 
   const [surahIndex, setSurahIndex] = useState<SurahMeta[]>([]);
@@ -39,6 +43,8 @@ export default function ReviewPage() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<PageView>('dashboard');
   const [sessionCards, setSessionCards] = useState<LessonReviewCard[]>([]);
+  // Frozen at session start, like sessionCards — ratings mustn't reshuffle a running session
+  const [sessionEarly, setSessionEarly] = useState<ReadonlySet<string>>(new Set());
 
   // Get unique surah IDs from review cards
   const surahIds = useMemo(() => {
@@ -89,41 +95,50 @@ export default function ReviewPage() {
   const totalHesitant = surahHealths.reduce((s, h) => s + h.totalHesitant, 0);
   const totalStrong = surahHealths.reduce((s, h) => s + h.totalStrong, 0);
 
-  const dueCards = useMemo(
-    () => lessonCards.filter((c) => c.nextReview <= Date.now()).sort((a, b) => a.nextReview - b.nextReview),
-    [lessonCards]
+  // Today's review queue (M5): recent (sabqi) lessons first — they're the most
+  // fragile — then older (manzil) SM-2-due lessons, most overdue first
+  const queue = useMemo(
+    () => buildReviewQueue(lessonCards, progressLessons, Date.now()),
+    [lessonCards, progressLessons]
   );
+  const dueCards = useMemo(() => [...queue.sabqi, ...queue.manzil], [queue]);
   const dueCount = dueCards.length;
+  const leeches = useMemo(() => getLeeches(cards), [cards]);
 
-
-  // Start review for all due cards
-  const startReview = () => {
-    setSessionCards(dueCards);
+  const startSession = (list: LessonReviewCard[]) => {
+    setSessionCards(list);
+    setSessionEarly(new Set(queue.earlyIds));
     setView('session');
   };
 
+  // Start review for all due cards
+  const startReview = () => startSession(dueCards);
+
   // Auto-start when arriving from the plan's review row
   useEffect(() => {
-    if (loading || autoStarted.current || !fromPlan || dueCards.length === 0) return;
+    if (loading || autoStarted.current || !fromPlan) return;
+    const list = streamParam === 'sabqi' ? queue.sabqi : streamParam === 'manzil' ? queue.manzil : dueCards;
+    if (list.length === 0) return;
     autoStarted.current = true;
-    setSessionCards(dueCards);
-    setView('session');
-  }, [loading, fromPlan, dueCards]);
+    startSession(list);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, fromPlan, streamParam, queue, dueCards]);
 
   // Start review for a specific surah's due lessons
   // Start review for a specific surah's due lessons only
   const startSurahReview = (surahId: number) => {
     const surahDue = dueCards.filter((c) => c.surahId === surahId);
     if (surahDue.length === 0) return;
-    setSessionCards(surahDue);
-    setView('session');
+    startSession(surahDue);
   };
 
   // Start review for a single lesson
   const startLessonReview = (lessonId: string) => {
     const card = lessonCards.find((c) => c.lessonId === lessonId);
     if (!card) return;
+    // A hand-picked lesson is a deliberate review, never an early touch
     setSessionCards([card]);
+    setSessionEarly(new Set());
     setView('session');
   };
 
@@ -152,6 +167,7 @@ export default function ReviewPage() {
         <main className="mx-auto max-w-2xl px-4 py-6">
           <ReviewSession
             dueCards={sessionCards}
+            earlyIds={sessionEarly}
             onComplete={() => {
               // Came from the plan → return to the remaining plan tasks
               if (fromPlan) router.push('/');
@@ -209,7 +225,12 @@ export default function ReviewPage() {
                     <p className="text-lg font-bold text-teal">
                       {dueCount} lesson{dueCount !== 1 ? 's' : ''} due
                     </p>
-                    <p className="text-xs text-muted">Tap to start your review session</p>
+                    <p className="text-xs text-muted">
+                      {queue.overdueCount > 0 ? `${queue.overdueCount} overdue · ` : ''}
+                      {dueCount > RETENTION.REVIEW_BATCH_SIZE
+                        ? `In batches of ${RETENTION.REVIEW_BATCH_SIZE} — stop whenever you need`
+                        : 'Tap to start your review session'}
+                    </p>
                   </div>
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal text-on-teal">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -249,6 +270,38 @@ export default function ReviewPage() {
       </header>
 
       <main className="mx-auto max-w-2xl px-4 space-y-4">
+        {/* Leeches (M5): ayahs failed several reviews in a row need isolated drilling,
+            not more of the same spaced review */}
+        {leeches.length > 0 && (
+          <Card className="border border-miss/25">
+            <p className="text-sm font-bold text-foreground">Needs focused practice</p>
+            <p className="mt-0.5 text-xs text-muted">
+              Missed {RETENTION.LEECH_THRESHOLD}+ reviews in a row — drill these on their own before the next review.
+            </p>
+            <div className="mt-2 space-y-1">
+              {leeches.slice(0, 8).map((c) => {
+                const surah = surahMap.get(c.surahId);
+                const lesson = surahLessons[c.surahId]?.find((l) => c.ayahNumber >= l.ayahStart && c.ayahNumber <= l.ayahEnd);
+                const href = lesson
+                  ? `/lesson/${c.surahId}?tab=practice&reviewLesson=${lesson.lessonNumber}`
+                  : `/lesson/${c.surahId}?tab=practice`;
+                return (
+                  <Link
+                    key={`${c.surahId}:${c.ayahNumber}`}
+                    href={href}
+                    className="flex min-h-11 items-center justify-between rounded-lg px-2 text-sm hover:bg-foreground/5"
+                  >
+                    <span className="font-medium text-foreground">
+                      {surah?.nameSimple ?? `Surah ${c.surahId}`} <span className="text-muted">· ayah {c.ayahNumber}</span>
+                    </span>
+                    <span className="text-xs text-miss">missed {c.failStreak}× in a row</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </Card>
+        )}
+
         {sortedHealths.map((surahHealth) => {
           const surah = surahMap.get(surahHealth.surahId);
           if (!surah) return null;

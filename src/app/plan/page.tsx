@@ -21,6 +21,7 @@ import ProgressBar from '@/components/ui/progress-bar';
 import BottomNav from '@/components/layout/bottom-nav';
 import { ArrowRightIcon, CheckIcon, TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import { addDaysIso } from '@/lib/dates';
 
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -284,11 +285,7 @@ export default function PlanDashboardPage() {
                 updateDeadline(
                   plan.deadline
                     ? null
-                    : (() => {
-                        const d = new Date();
-                        d.setDate(d.getDate() + 60);
-                        return d.toISOString().split('T')[0];
-                      })(),
+                    : addDaysIso(todayIso(), 60),
                 )
               }
               className={cn(

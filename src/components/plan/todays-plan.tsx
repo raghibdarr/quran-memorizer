@@ -42,17 +42,12 @@ export default function TodaysPlanCard() {
     return getPlanLessons(plan, allSurahs, juzIndex);
   }, [plan, allSurahs, juzIndex]);
 
-  const dueReviews = useMemo(() => {
-    const now = Date.now();
-    return lessonCards.filter((c) => c.nextReview <= now);
-  }, [lessonCards]);
-
   const surahById = useMemo(() => new Map(allSurahs.map((s) => [s.id, s])), [allSurahs]);
 
   const todaysPlan = useMemo(() => {
     if (!plan || !allSurahs.length) return null;
-    return computeTodaysPlan(plan, planLessons, progressLessons, dueReviews, allSurahs);
-  }, [plan, planLessons, progressLessons, dueReviews, allSurahs]);
+    return computeTodaysPlan(plan, planLessons, progressLessons, lessonCards, allSurahs);
+  }, [plan, planLessons, progressLessons, lessonCards, allSurahs]);
 
   const progress = useMemo(() => {
     // Maintain plans have zero lessons by design — the card must still render
@@ -73,24 +68,23 @@ export default function TodaysPlanCard() {
     setKnownTracking(true);
   };
 
-  const reviewCount = todaysPlan.reviews.length;
+  const sabqiCount = todaysPlan.sabqi.length;
+  const manzilReviewCount = todaysPlan.manzil.length;
   const revisionCount = todaysPlan.revisions.length;
   const newLessonCount = todaysPlan.newLessons.length;
   const completedCount = todaysPlan.completedNewLessonIds.length;
+  const earlyCount = todaysPlan.earlyReviewIds.length;
+  const todayStart = startOfTodayMs();
+  const manzilOverdue = todaysPlan.manzil.filter((c) => c.nextReview < todayStart).length;
+  const sabqiOverdue = todaysPlan.sabqi.filter((c) => c.nextReview < todayStart).length;
 
-  const totalTasks = reviewCount + revisionCount + newLessonCount;
-  const doneTasks =
-    (reviewCount === 0 ? 1 : 0) * 0 /* reviews batch-link */ +
-    completedCount;
-  // Reviews page handles reviews as a batch — we show a single "Review X lessons" item
-  // Keep simple: tasks remaining = reviews (batched) + revisions + incomplete new lessons
+  const totalTasks = sabqiCount + manzilReviewCount + revisionCount + newLessonCount;
+  // Each review stream is one batched row (the review page runs it as a session)
   const itemsRemaining =
-    (reviewCount > 0 ? 1 : 0) + revisionCount + (newLessonCount - completedCount);
+    (sabqiCount > 0 ? 1 : 0) + (manzilReviewCount > 0 ? 1 : 0) + revisionCount + (newLessonCount - completedCount);
+  const revisionPending = sabqiCount + manzilReviewCount + revisionCount > 0;
 
-  const allDone =
-    reviewCount === 0 &&
-    revisionCount === 0 &&
-    (newLessonCount === 0 || completedCount === newLessonCount);
+  const allDone = revisionPending === false && completedCount === newLessonCount;
 
   return (
     <Card>
@@ -168,104 +162,110 @@ export default function TodaysPlanCard() {
         </div>
       )}
 
-      {/* Checklist */}
-      <div className="mt-3 space-y-1.5">
-        {reviewCount > 0 && (
-          <Link
-            href="/review?start=1"
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
-          >
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-teal/40 text-teal">
-              <RefreshIcon size={11} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-foreground">
-                Review {reviewCount} {reviewCount === 1 ? 'lesson' : 'lessons'}
-              </p>
-              <p className="text-[11px] text-muted">
-                {(() => {
-                  const overdue = todaysPlan.reviews.filter((c) => c.nextReview < startOfTodayMs()).length;
-                  return overdue > 0
-                    ? `${reviewCount - overdue} due today · ${overdue} overdue`
-                    : 'Spaced repetition — due today';
-                })()}
-              </p>
-            </div>
-            <ArrowRightIcon size={14} className="shrink-0 text-muted" />
-          </Link>
+      {/* Checklist — the three streams of the hifdh cycle, revision before new (M5) */}
+      <div className="mt-3 space-y-3">
+        {sabqiCount > 0 && (
+          <section>
+            <StreamLabel name="Sabqi" hint="Keep the last two weeks fresh" />
+            <ReviewRow
+              href="/review?start=1&stream=sabqi"
+              title={`Review ${sabqiCount} recent ${sabqiCount === 1 ? 'lesson' : 'lessons'}`}
+              sub={reviewBreakdown(sabqiCount - earlyCount - sabqiOverdue, sabqiOverdue, earlyCount)}
+            />
+          </section>
         )}
 
-        {todaysPlan.revisions.map((rev) => (
-          <Link
-            key={`rev-${rev.surahId}`}
-            href={`/plan/revise/${rev.surahId}`}
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
-          >
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-gold/40 text-gold">
-              <StarIcon size={11} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-foreground">
-                Revise {rev.surahName}
-                {rev.isPartial && (
-                  <span className="ml-1 text-[11px] font-normal text-muted">
-                    · ayahs {rev.ayahStart}–{rev.ayahEnd}
-                  </span>
-                )}
-              </p>
-              <p className="text-[11px] text-muted">
-                {rev.isPartial ? 'Plan-scope recall' : 'Full-surah recall'}
-                {rev.daysSinceRevision !== Infinity && ` · ${rev.daysSinceRevision}d since last`}
-              </p>
-            </div>
-            <ArrowRightIcon size={14} className="shrink-0 text-muted" />
-          </Link>
-        ))}
-
-        {todaysPlan.newLessons.map((lesson) => {
-          const surah = surahById.get(lesson.surahId);
-          const done = todaysPlan.completedNewLessonIds.includes(lesson.lessonId);
-          return (
-            <Link
-              key={lesson.lessonId}
-              href={lessonHref(lesson.surahId, lesson.lessonNumber)}
-              className={cn(
-                'flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
-                done && 'opacity-60',
-              )}
-            >
-              <span
-                className={cn(
-                  'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2',
-                  done
-                    ? 'border-success bg-success text-on-success'
-                    : 'border-teal/40 text-teal',
-                )}
+        {(manzilReviewCount > 0 || revisionCount > 0) && (
+          <section>
+            <StreamLabel name="Manzil" hint="Cycle everything older so nothing fades" />
+            {manzilReviewCount > 0 && (
+              <ReviewRow
+                href="/review?start=1&stream=manzil"
+                title={`Review ${manzilReviewCount} older ${manzilReviewCount === 1 ? 'lesson' : 'lessons'}`}
+                sub={reviewBreakdown(manzilReviewCount - manzilOverdue, manzilOverdue, 0)}
+              />
+            )}
+            {todaysPlan.revisions.map((rev) => (
+              <Link
+                key={`rev-${rev.surahId}`}
+                href={`/plan/revise/${rev.surahId}`}
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
               >
-                {done ? <CheckIcon size={11} /> : <BookIcon size={11} />}
-              </span>
-              <div className="min-w-0 flex-1">
-                <p
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-gold/40 text-gold">
+                  <StarIcon size={11} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-foreground">
+                    Revise {rev.surahName}
+                    {rev.isPartial && (
+                      <span className="ml-1 text-[11px] font-normal text-muted">
+                        · ayahs {rev.ayahStart}–{rev.ayahEnd}
+                      </span>
+                    )}
+                  </p>
+                  <p className="text-[11px] text-muted">
+                    {rev.isPartial ? 'Plan-scope recall' : 'Full-surah recall'}
+                    {rev.daysSinceRevision !== Infinity && ` · ${rev.daysSinceRevision}d since last`}
+                  </p>
+                </div>
+                <ArrowRightIcon size={14} className="shrink-0 text-muted" />
+              </Link>
+            ))}
+          </section>
+        )}
+
+        {newLessonCount > 0 && (
+          <section>
+            <StreamLabel
+              name="Sabaq"
+              hint={revisionPending && completedCount < newLessonCount ? 'New memorization — best after the revision above' : 'Today’s new memorization'}
+            />
+            {todaysPlan.newLessons.map((lesson) => {
+              const surah = surahById.get(lesson.surahId);
+              const done = todaysPlan.completedNewLessonIds.includes(lesson.lessonId);
+              return (
+                <Link
+                  key={lesson.lessonId}
+                  href={lessonHref(lesson.surahId, lesson.lessonNumber)}
                   className={cn(
-                    'text-sm font-semibold text-foreground',
-                    done && 'line-through',
+                    'flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5',
+                    done && 'opacity-60',
                   )}
                 >
-                  Learn {surah?.nameSimple ?? `Surah ${lesson.surahId}`}
-                  {lesson.lessonNumber > 1 || !surah || lesson.ayahCount < surah.versesCount
-                    ? ` · L${lesson.lessonNumber}`
-                    : ''}
-                </p>
-                <p className="text-[11px] text-muted">
-                  Ayahs {lesson.ayahStart}–{lesson.ayahEnd}
-                </p>
-              </div>
-              <ArrowRightIcon size={14} className="shrink-0 text-muted" />
-            </Link>
-          );
-        })}
+                  <span
+                    className={cn(
+                      'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2',
+                      done
+                        ? 'border-success bg-success text-on-success'
+                        : 'border-teal/40 text-teal',
+                    )}
+                  >
+                    {done ? <CheckIcon size={11} /> : <BookIcon size={11} />}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p
+                      className={cn(
+                        'text-sm font-semibold text-foreground',
+                        done && 'line-through',
+                      )}
+                    >
+                      Learn {surah?.nameSimple ?? `Surah ${lesson.surahId}`}
+                      {lesson.lessonNumber > 1 || !surah || lesson.ayahCount < surah.versesCount
+                        ? ` · L${lesson.lessonNumber}`
+                        : ''}
+                    </p>
+                    <p className="text-[11px] text-muted">
+                      Ayahs {lesson.ayahStart}–{lesson.ayahEnd}
+                    </p>
+                  </div>
+                  <ArrowRightIcon size={14} className="shrink-0 text-muted" />
+                </Link>
+              );
+            })}
+          </section>
+        )}
 
-        {todaysPlan.isRestDay && reviewCount === 0 && (
+        {todaysPlan.isRestDay && sabqiCount + manzilReviewCount === 0 && (
           <p className="px-3 py-2 text-xs text-muted">
             No reviews due. Enjoy your rest day.
           </p>
@@ -280,5 +280,41 @@ export default function TodaysPlanCard() {
         )}
       </div>
     </Card>
+  );
+}
+
+/** "3 due today · 7 overdue · 2 quick check-ins" — zero parts omitted */
+function reviewBreakdown(dueToday: number, overdue: number, early: number): string {
+  return [
+    dueToday > 0 && `${dueToday} due today`,
+    overdue > 0 && `${overdue} overdue`,
+    early > 0 && `${early} quick check-in${early === 1 ? '' : 's'}`,
+  ].filter(Boolean).join(' · ');
+}
+
+/** Stream header: the traditional name plus a one-line in-context explanation */
+function StreamLabel({ name, hint }: { name: string; hint: string }) {
+  return (
+    <p className="px-3 pb-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted">
+      {name} <span className="font-normal normal-case tracking-normal text-muted/80">· {hint}</span>
+    </p>
+  );
+}
+
+function ReviewRow({ href, title, sub }: { href: string; title: string; sub: string }) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/5"
+    >
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-teal/40 text-teal">
+        <RefreshIcon size={11} />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-semibold text-foreground">{title}</p>
+        {sub && <p className="text-[11px] text-muted">{sub}</p>}
+      </div>
+      <ArrowRightIcon size={14} className="shrink-0 text-muted" />
+    </Link>
   );
 }

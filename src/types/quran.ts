@@ -103,6 +103,8 @@ export interface ReviewCard {
   nextReview: number;       // Timestamp
   lastReview: number;       // Timestamp
   lastQuality: number;      // 0-5
+  failStreak?: number;      // Consecutive failed reviews (q<3) — leech signal (M5); absent = 0
+  lapses?: number;          // Total failed reviews ever; absent = 0
 }
 
 // Lesson-level spaced repetition
@@ -119,6 +121,8 @@ export interface LessonReviewCard {
   nextReview: number;        // Timestamp
   lastReview: number;        // Timestamp
   lastQuality: number;       // 0-5
+  failStreak?: number;       // Consecutive failed reviews (q<3); absent = 0
+  lapses?: number;           // Total failed reviews ever; absent = 0
 }
 
 // User settings & stats
@@ -254,8 +258,12 @@ export interface SurahRevisionTask {
 
 export interface TodaysPlan {
   date: string;                                  // ISO yyyy-mm-dd
-  reviews: LessonReviewCard[];                   // SM-2 due lesson cards
-  revisions: SurahRevisionTask[];                // Full-surah revisions due today
+  reviews: LessonReviewCard[];                   // All lesson reviews today = sabqi + manzil
+  sabqi: LessonReviewCard[];                     // Recent lessons (SM-2 due + capped early touches)
+  manzil: LessonReviewCard[];                    // Older lessons due under SM-2
+  earlyReviewIds: string[];                      // Sabqi lessons reviewed ahead of their SM-2 date
+  overdueReviewCount: number;                    // Due reviews that were due before today
+  revisions: SurahRevisionTask[];                // Manzil whole-surah rotation picks for today
   newLessons: LessonDef[];                       // New lessons scheduled for today
   isRestDay: boolean;
   isComplete: boolean;                           // reviews + revisions + new lessons all done

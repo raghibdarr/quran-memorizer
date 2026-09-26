@@ -13,7 +13,7 @@ import PlanCelebration from '@/components/plan/plan-celebration';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { fuzzySurahScore } from '@/lib/fuzzy';
-import { startOfTodayMs } from '@/lib/dates';
+import { startOfTodayMs, todayIso } from '@/lib/dates';
 import type { SurahMeta, JuzMeta } from '@/types/quran';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
@@ -85,7 +85,7 @@ export default function HomePage() {
   const plan = usePlanStore((s) => s.plan);
 
   // Compute today's activity count
-  const today = new Date().toISOString().split('T')[0];
+  const today = todayIso();
   const todayActivities = stats.dailyActivityDate === today ? stats.dailyActivities : 0;
   const dailyProgress = Math.min((todayActivities / dailyGoalActivities) * 100, 100);
 

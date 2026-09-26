@@ -35,6 +35,8 @@ const FIXTURES: Record<SyncRowName, Record<string, unknown>> = {
   'quran-reviews': {
     cards: [
       { surahId: 112, ayahNumber: 1, easeFactor: 2.6, interval: 7, repetitions: 3, nextReview: 1780700000000, lastReview: 1780100000000, lastQuality: 5 },
+      // M5 leech fields — optional, absent on legacy cards
+      { surahId: 67, ayahNumber: 14, easeFactor: 1.9, interval: 1, repetitions: 0, nextReview: 1780200000000, lastReview: 1780100000000, lastQuality: 1, failStreak: 3, lapses: 5 },
     ],
     lessonCards: [
       { lessonId: '112-1', surahId: 112, lessonNumber: 1, ayahStart: 1, ayahEnd: 4, easeFactor: 2.5, interval: 3, repetitions: 2, nextReview: 1780400000000, lastReview: 1780100000000, lastQuality: 4 },

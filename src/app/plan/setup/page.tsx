@@ -19,6 +19,7 @@ import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import { isoFromMs } from '@/lib/dates';
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -132,7 +133,7 @@ export default function PlanSetupPage() {
       if (set.has(d.getDay())) remaining--;
       if (remaining > 0) d.setDate(d.getDate() + 1);
     }
-    return d.toISOString().split('T')[0];
+    return isoFromMs(d.getTime());
   }, [useDeadline, totalLessons, lessonsPerDay, studyDays]);
 
   // Filtered surah list for the picker

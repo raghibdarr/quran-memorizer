@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ReviewCard, LessonReviewCard, LessonDef } from '@/types/quran';
-import { createNewCard, createSeededCard, processReview, getDueCards, createLessonReviewCard, processLessonReview, getDueLessonCards } from '@/lib/spaced-repetition';
+import { createNewCard, createSeededCard, processReview, getDueCards, createLessonReviewCard, processLessonReview, processEarlyLessonReview, getDueLessonCards } from '@/lib/spaced-repetition';
 import { startOfDayMs } from '@/lib/dates';
 
 /** Exported for migration tests. v2 truncates stored due times to the LOCAL
@@ -34,7 +34,8 @@ interface ReviewState {
   // Lesson-level cards (new, used for spaced review sessions)
   lessonCards: LessonReviewCard[];
   addLessonCard: (lessonDef: LessonDef, surahId: number, dueNow?: boolean) => void;
-  reviewLessonCard: (lessonId: string, quality: number) => void;
+  /** early = a sabqi touch ahead of the SM-2 date (M5): a pass records the touch only */
+  reviewLessonCard: (lessonId: string, quality: number, early?: boolean) => void;
   getDueLessonCards: () => LessonReviewCard[];
   getDueLessonCount: () => number;
 }
@@ -109,11 +110,11 @@ export const useReviewStore = create<ReviewState>()(
           return { lessonCards: [...state.lessonCards, createLessonReviewCard(lessonDef, surahId, dueNow)] };
         }),
 
-      reviewLessonCard: (lessonId, quality) =>
+      reviewLessonCard: (lessonId, quality, early = false) =>
         set((state) => ({
           lessonCards: state.lessonCards.map((c) =>
             c.lessonId === lessonId
-              ? processLessonReview(c, quality)
+              ? (early ? processEarlyLessonReview(c, quality) : processLessonReview(c, quality))
               : c
           ),
         })),

@@ -65,10 +65,21 @@ interface Sm2Fields {
   nextReview: number;
   lastReview: number;
   lastQuality: number;
+  failStreak?: number;
+  lapses?: number;
+}
+
+/** Consecutive-failure and lapse bookkeeping (leech detection, M5) — algorithm-agnostic */
+function trackFailures<T extends Sm2Fields>(card: T, quality: number): Pick<T, 'failStreak' | 'lapses'> {
+  const failed = quality < 3;
+  return {
+    failStreak: failed ? (card.failStreak ?? 0) + 1 : 0,
+    lapses: (card.lapses ?? 0) + (failed ? 1 : 0),
+  } as Pick<T, 'failStreak' | 'lapses'>;
 }
 
 function applySm2<T extends Sm2Fields>(card: T, quality: number): T {
-  const updated = { ...card };
+  const updated = { ...card, ...trackFailures(card, quality) };
 
   if (quality < 3) {
     updated.repetitions = 0;
@@ -105,6 +116,16 @@ export function processReview(card: ReviewCard, quality: number): ReviewCard {
 
 export function processLessonReview(card: LessonReviewCard, quality: number): LessonReviewCard {
   return applySm2(card, quality);
+}
+
+/**
+ * A review done AHEAD of the SM-2 date (sabqi early touch, M5). A pass says little
+ * about spacing, so it must not grow the interval — only the touch is recorded.
+ * A failure is real evidence and lapses the card exactly like an on-time review.
+ */
+export function processEarlyLessonReview(card: LessonReviewCard, quality: number): LessonReviewCard {
+  if (quality < 3) return applySm2(card, quality);
+  return { ...card, ...trackFailures(card, quality), lastReview: Date.now(), lastQuality: quality };
 }
 
 export function isDue(card: ReviewCard | LessonReviewCard): boolean {

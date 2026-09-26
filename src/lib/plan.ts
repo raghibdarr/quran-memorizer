@@ -11,6 +11,7 @@ import type {
 } from '@/types/quran';
 import { CURRICULUM_ORDER, generateLessonsWithJuzBoundaries } from './curriculum';
 import { todayIso, startOfTodayMs, daysBetween, isStudyDay, countStudyDays, addDaysIso, isoToDateUTC, dateUTCToIso } from './dates';
+import { buildReviewQueue, planManzil } from './retention';
 
 // ---------- Date helpers ----------
 // ALL day-boundary and calendar logic lives in src/lib/dates.ts (ONE local-time
@@ -179,9 +180,11 @@ export function staggeredLastRevised(
 }
 
 /**
- * Surah revisions due today: surahs completed within the plan, PLUS attested-known
- * surahs when the plan tracks them (M4 "known = tracked" — known surahs skip
- * lessons but join the revision cycle instead of vanishing).
+ * Today's manzil revisions: every memorized surah — completed within the plan,
+ * PLUS attested-known surahs when the plan tracks them (M4 "known = tracked") —
+ * rotates through whole-surah recall once per revision cycle. The rotation
+ * planner (src/lib/retention.ts, M5) caps and spreads the daily load, so a batch
+ * of surahs finished together never floods one day (audit M15).
  */
 export function getRevisionTasks(
   plan: HifdhPlan,
@@ -195,7 +198,6 @@ export function getRevisionTasks(
   const candidateSurahs = Array.from(new Set([...completedSurahs, ...knownIds]));
   const byId = new Map(allSurahs.map((s) => [s.id, s]));
   const frequency = effectiveRevisionFrequency(plan, candidateSurahs.length);
-  const thresholdMs = frequency * MS_PER_DAY;
 
   // Map surahId -> latest lesson completion time (fallback start for revision timer)
   const surahCompletionTs = new Map<number, number>();
@@ -211,7 +213,7 @@ export function getRevisionTasks(
     surahLessons.get(l.surahId)!.push(l);
   }
 
-  const tasks: SurahRevisionTask[] = [];
+  const candidates: Array<SurahRevisionTask & { lastTouched: number }> = [];
   for (const surahId of candidateSurahs) {
     const surah = byId.get(surahId);
     if (!surah) continue;
@@ -219,8 +221,6 @@ export function getRevisionTasks(
     // Known-only surahs have no completion timestamp — fall back to plan creation
     // (marking known and plan setup both seed lastRevisedAt, so this is a net)
     const effectiveLast = explicitLast ?? surahCompletionTs.get(surahId) ?? plan.createdAt ?? now;
-    const elapsed = now - effectiveLast;
-    if (elapsed < thresholdMs) continue;
 
     // Known surahs carry no plan lessons — the revision scope is the whole surah
     const scope = surahLessons.get(surahId) ?? [];
@@ -229,30 +229,44 @@ export function getRevisionTasks(
     const scopedAyahCount = ayahEnd - ayahStart + 1;
     const isPartial = scope.length > 0 && scopedAyahCount < surah.versesCount;
 
-    tasks.push({
+    candidates.push({
       surahId,
       surahName: surah.nameSimple,
       lastRevised: explicitLast ?? null,
-      daysSinceRevision: Math.floor(elapsed / MS_PER_DAY),
+      daysSinceRevision: Math.floor((now - effectiveLast) / MS_PER_DAY),
       isPartial,
       ayahStart: Number.isFinite(ayahStart) ? ayahStart : 1,
       ayahEnd: ayahEnd > 0 ? ayahEnd : surah.versesCount,
       totalAyahsInSurah: surah.versesCount,
+      lastTouched: effectiveLast,
     });
   }
-  // Oldest revision first
-  tasks.sort((a, b) => (a.lastRevised ?? 0) - (b.lastRevised ?? 0));
-  return tasks;
+
+  const rotation = planManzil(
+    candidates.map((c) => ({ surahId: c.surahId, ayahCount: c.ayahEnd - c.ayahStart + 1, lastTouched: c.lastTouched })),
+    { cycleDays: frequency, now },
+  );
+  const byCandidate = new Map(candidates.map((c) => [c.surahId, c]));
+  // The planner orders today's picks least-recently-touched first
+  return rotation.today.map((id) => {
+    const { lastTouched: _, ...task } = byCandidate.get(id)!;
+    return task;
+  });
 }
 
 export function computeTodaysPlan(
   plan: HifdhPlan,
   planLessons: LessonDef[],
   progressLessons: Record<string, LessonProgress>,
-  dueReviews: LessonReviewCard[],
+  lessonCards: LessonReviewCard[],
   allSurahs: SurahMeta[],
   now = Date.now(),
 ): TodaysPlan {
+  // Review streams (M5): sabqi = recent lessons (incl. capped early touches),
+  // manzil = older SM-2-due lessons. Reviews run on rest days too — only NEW
+  // work and surah rotation pause.
+  const queue = buildReviewQueue(lessonCards, progressLessons, now);
+  const dueReviews = [...queue.sabqi, ...queue.manzil];
   const date = todayIso();
   const isRest = !isStudyDay(date, plan.studyDays);
 
@@ -270,15 +284,19 @@ export function computeTodaysPlan(
     revisions = getRevisionTasks(plan, planLessons, progressLessons, allSurahs, now);
   }
 
+  // "Nothing left today" — a maintain plan (no new lessons) can complete too
   const isComplete =
     dueReviews.length === 0 &&
     revisions.length === 0 &&
-    newLessons.length > 0 &&
     completedNewLessonIds.length === newLessons.length;
 
   return {
     date,
     reviews: dueReviews,
+    sabqi: queue.sabqi,
+    manzil: queue.manzil,
+    earlyReviewIds: [...queue.earlyIds],
+    overdueReviewCount: queue.overdueCount,
     revisions,
     newLessons,
     isRestDay: isRest,

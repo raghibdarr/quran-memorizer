@@ -70,4 +70,45 @@ test.describe('smoke', () => {
     await expect(page.getByText('Review Session')).toBeVisible()
     await expect(page.getByText(/exit review/i)).toBeVisible()
   })
+
+  test('a long overdue queue runs in capped batches with a continue/stop break (M5)', async ({ page }) => {
+    await stubAudio(page)
+    // 12 overdue one-ayah lessons — more than one batch of 10
+    await page.addInitScript(() => {
+      const DAY = 864e5
+      const now = Date.now()
+      const ids = [103, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 97]
+      localStorage.setItem('quran-reviews', JSON.stringify({
+        version: 2,
+        state: {
+          cards: [],
+          lessonCards: ids.map((s, i) => ({
+            lessonId: `${s}-1`, surahId: s, lessonNumber: 1, ayahStart: 1, ayahEnd: 1,
+            easeFactor: 2.5, interval: 7, repetitions: 3, nextReview: now - (i + 2) * DAY,
+            lastReview: now - 30 * DAY, lastQuality: 4,
+          })),
+        },
+      }))
+      localStorage.setItem('lesson-review-migration-v4', '1')
+      localStorage.setItem('onboarding-complete', 'true')
+    })
+
+    await page.goto('/review?start=1')
+    await expect(page.getByText('Card 1 of 10')).toBeVisible()
+    await expect(page.getByText('· 12 due')).toBeVisible()
+
+    for (let i = 0; i < 10; i++) {
+      await page.getByRole('button', { name: /rate my recall/i }).click()
+      await page.getByRole('button', { name: 'Got it' }).click()
+      await page.getByRole('button', { name: 'Submit Review' }).click()
+      await page.getByRole('button', { name: i < 9 ? 'Next Lesson' : 'Finish Batch' }).click()
+    }
+
+    // The break: explicit framing, ratings already saved, a real choice
+    await expect(page.getByText('Batch done — 10 of 12 reviewed')).toBeVisible()
+    await expect(page.getByText(/2 more due · 2 overdue/)).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Stop for today' })).toBeVisible()
+    await page.getByRole('button', { name: 'Continue with 2 more' }).click()
+    await expect(page.getByText('Card 1 of 2')).toBeVisible()
+  })
 })

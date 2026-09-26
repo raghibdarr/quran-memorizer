@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { HifdhPlan, JuzMeta, LessonDef, LessonProgress, SurahMeta } from '@/types/quran';
+import type { HifdhPlan, JuzMeta, LessonDef, LessonProgress, LessonReviewCard, SurahMeta } from '@/types/quran';
 import {
   addDaysIso,
   autoRevisionFrequencyDays,
@@ -10,6 +10,7 @@ import {
   getCompletedPlanSurahs,
   getPlanLessons,
   getRevisionTasks,
+  computeTodaysPlan,
   getTodaysNewLessons,
   isStudyDay,
   resolveGoalSurahIds,
@@ -470,6 +471,49 @@ describe('maintain goal type (M4)', () => {
 });
 
 // ---------- Revision frequency auto ----------
+
+describe('computeTodaysPlan — three streams (M5)', () => {
+  const DAY = 86_400_000;
+  const lessonCard = (id: string, o: Partial<LessonReviewCard> = {}): LessonReviewCard => {
+    const [s, l] = id.split('-').map(Number);
+    return {
+      lessonId: id, surahId: s, lessonNumber: l, ayahStart: 1, ayahEnd: 6,
+      easeFactor: 2.5, interval: 7, repetitions: 3, nextReview: NOW - DAY,
+      lastReview: NOW - 8 * DAY, lastQuality: 4, ...o,
+    };
+  };
+  const complete = (id: string, daysAgo: number): LessonProgress => ({
+    lessonId: id, surahId: Number(id.split('-')[0]), currentPhase: 'complete',
+    phaseData: {} as LessonProgress['phaseData'], startedAt: 0, completedAt: NOW - daysAgo * DAY,
+  });
+
+  it('splits due lesson reviews into sabqi (recent) and manzil (older); reviews = both', () => {
+    const cards = [lessonCard('114-1'), lessonCard('78-1')];
+    const progress = { '114-1': complete('114-1', 3), '78-1': complete('78-1', 90) };
+    const today = computeTodaysPlan(makePlan(), [], progress, cards, TEST_SURAHS, NOW);
+    expect(today.sabqi.map((c) => c.lessonId)).toEqual(['114-1']);
+    expect(today.manzil.map((c) => c.lessonId)).toEqual(['78-1']);
+    expect(today.reviews).toHaveLength(2);
+    expect(today.overdueReviewCount).toBe(2);
+  });
+
+  it('a maintain plan with nothing due counts as complete (no new-lesson requirement)', () => {
+    const plan = makePlan({ goalType: 'maintain', goalSurahIds: [114], knownSurahIds: [114], knownTracking: true, lastRevisedAt: { 114: NOW - 1000 } });
+    const today = computeTodaysPlan(plan, [], {}, [], TEST_SURAHS, NOW);
+    expect(today.newLessons).toEqual([]);
+    expect(today.revisions).toEqual([]);
+    expect(today.isComplete).toBe(true);
+  });
+
+  it('reviews still show on a rest day; surah rotation and new lessons pause', () => {
+    // Day 9 never occurs, so every day is a rest day
+    const plan = makePlan({ studyDays: [9], knownSurahIds: [78], knownTracking: true, lastRevisedAt: { 78: NOW - 30 * DAY } });
+    const today = computeTodaysPlan(plan, [], { '114-1': complete('114-1', 3) }, [lessonCard('114-1')], TEST_SURAHS, NOW);
+    expect(today.isRestDay).toBe(true);
+    expect(today.sabqi).toHaveLength(1);
+    expect(today.revisions).toEqual([]);
+  });
+});
 
 describe('autoRevisionFrequencyDays', () => {
   it('intensive for early progress', () => {

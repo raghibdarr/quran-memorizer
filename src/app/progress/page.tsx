@@ -16,6 +16,7 @@ import UserButton from '@/components/auth/user-button';
 import CalendarHeatmap from '@/components/progress/calendar-heatmap';
 import TimelineChart from '@/components/progress/timeline-chart';
 import { cn } from '@/lib/cn';
+import { isoFromMs } from '@/lib/dates';
 
 type ProgressTab = 'calendar' | 'timeline';
 
@@ -70,7 +71,7 @@ export default function ProgressPage() {
     for (let i = 0; i < 7; i++) {
       const d = new Date(now);
       d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split('T')[0];
+      const dateStr = isoFromMs(d.getTime());
       total += stats.activityLog[dateStr] ?? 0;
     }
     return total;
@@ -126,7 +127,7 @@ export default function ProgressPage() {
     const log: Record<string, number> = { ...stats.activityLog };
     for (const lesson of Object.values(progressLessons)) {
       if (lesson.completedAt) {
-        const date = new Date(lesson.completedAt).toISOString().split('T')[0];
+        const date = isoFromMs(lesson.completedAt);
         log[date] = Math.max(log[date] ?? 0, 1);
       }
     }

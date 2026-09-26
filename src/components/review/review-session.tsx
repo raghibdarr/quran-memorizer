@@ -14,9 +14,13 @@ import Button from '@/components/ui/button';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
 import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
+import { RETENTION } from '@/lib/retention';
+import { startOfTodayMs } from '@/lib/dates';
 
 interface ReviewSessionProps {
   dueCards: LessonReviewCard[];
+  /** Sabqi lessons being touched ahead of their SM-2 date (M5) — a pass must not advance them */
+  earlyIds?: ReadonlySet<string>;
   onComplete: () => void;
 }
 
@@ -45,8 +49,12 @@ function formatNextReview(timestamp: number): string {
   return `in about ${Math.round(days / 30)} month${Math.round(days / 30) !== 1 ? 's' : ''}`;
 }
 
-export default function ReviewSession({ dueCards, onComplete }: ReviewSessionProps) {
+export default function ReviewSession({ dueCards, earlyIds, onComplete }: ReviewSessionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Batching (M5, audit M14): long queues run in batches with an explicit
+  // continue-or-stop break — never "Card 1 of 34". Ratings persist per card, so
+  // stopping early loses nothing.
+  const [batchBreak, setBatchBreak] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [hiddenAyahs, setHiddenAyahs] = useState<Set<number>>(new Set());
   const [ayahRatings, setAyahRatings] = useState<Record<number, AyahRating>>({});
@@ -71,6 +79,11 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
 
   const currentCard = dueCards[currentIndex];
   const isLastCard = currentIndex === dueCards.length - 1;
+  const batchSize = RETENTION.REVIEW_BATCH_SIZE;
+  const batched = dueCards.length > batchSize;
+  const batchStart = Math.floor(currentIndex / batchSize) * batchSize;
+  const batchLen = Math.min(batchSize, dueCards.length - batchStart);
+  const isLastInBatch = currentIndex - batchStart === batchLen - 1;
 
   // Load surah data for current card
   useEffect(() => {
@@ -162,16 +175,29 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
 
     const qualities = lessonData.ayahs.map((a) => ratingToQuality(ayahRatings[a.number] ?? 'missed'));
     const worstQuality = Math.min(...qualities);
-    reviewLessonCard(currentCard.lessonId, worstQuality);
+    reviewLessonCard(currentCard.lessonId, worstQuality, earlyIds?.has(currentCard.lessonId) ?? false);
 
     recordActivity();
     stopPlayback();
     setSubmitted(true);
-  }, [lessonData, ayahRatings, currentCard, reviewAyahCard, reviewLessonCard, recordActivity, stopPlayback]);
+  }, [lessonData, ayahRatings, currentCard, earlyIds, reviewAyahCard, reviewLessonCard, recordActivity, stopPlayback]);
+
+  const advance = useCallback(() => {
+    setBatchBreak(false);
+    setCurrentIndex((i) => i + 1);
+    setRevealed(false);
+    setAyahRatings({});
+    setSubmitted(false);
+    setCurrentAyahIndex(-1);
+    setPlayingAll(false);
+  }, []);
 
   const handleNext = useCallback(() => {
     if (isLastCard) {
       onComplete();
+    } else if (isLastInBatch) {
+      stopPlayback();
+      setBatchBreak(true);
     } else {
       setCurrentIndex((i) => i + 1);
       setRevealed(false);
@@ -180,7 +206,33 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
       setCurrentAyahIndex(-1);
       setPlayingAll(false);
     }
-  }, [isLastCard, onComplete]);
+  }, [isLastCard, isLastInBatch, onComplete, stopPlayback]);
+
+  if (batchBreak) {
+    const remaining = dueCards.slice(currentIndex + 1);
+    const overdueLeft = remaining.filter((c) => c.nextReview < startOfTodayMs()).length;
+    return (
+      <div className="space-y-5 py-6 text-center">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-success/15 text-success">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M20 6 9 17l-5-5" /></svg>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-foreground">Batch done — {currentIndex + 1} of {dueCards.length} reviewed</h3>
+          <p className="mt-1 text-sm text-muted">
+            {remaining.length} more due{overdueLeft > 0 ? ` · ${overdueLeft} overdue` : ''}. Your ratings are saved — stopping here is fine.
+          </p>
+        </div>
+        <div className="space-y-2">
+          <Button onClick={advance} className="w-full">
+            Continue with {Math.min(batchSize, remaining.length)} more
+          </Button>
+          <Button variant="ghost" onClick={onComplete} className="w-full">
+            Stop for today
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   if (!currentCard || loading || !lessonData) {
     return (
@@ -215,11 +267,12 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
             <rect x="3" y="7" width="15" height="13" rx="2" />
             <path d="M7 7V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-1" />
           </svg>
-          Card {currentIndex + 1} of {dueCards.length}
+          Card {currentIndex - batchStart + 1} of {batchLen}
+          {batched && <span className="font-normal text-muted">· {dueCards.length} due</span>}
         </span>
         <BeadProgress
-          total={dueCards.length}
-          filled={currentIndex + (submitted ? 1 : 0)}
+          total={batchLen}
+          filled={currentIndex - batchStart + (submitted ? 1 : 0)}
           size="sm"
           className="flex-1 justify-end"
         />
@@ -424,7 +477,7 @@ export default function ReviewSession({ dueCards, onComplete }: ReviewSessionPro
                 {worstRating === 'missed' && `No worries — next review ${nextReviewLabel}.`}
               </div>
               <Button onClick={handleNext} className="w-full">
-                {isLastCard ? 'Finish Review' : 'Next Lesson'}
+                {isLastCard ? 'Finish Review' : isLastInBatch ? 'Finish Batch' : 'Next Lesson'}
               </Button>
             </div>
           )}

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import type { LessonProgress } from '@/types/quran';
+import { isoFromMs } from '@/lib/dates';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -23,7 +24,7 @@ export default function TimelineChart({ lessons }: Props) {
   // Build cumulative data points (one per day)
   const dayMap = new Map<string, number>();
   completions.forEach((ts, i) => {
-    const date = new Date(ts).toISOString().split('T')[0];
+    const date = isoFromMs(ts);
     dayMap.set(date, i + 1);
   });
 
