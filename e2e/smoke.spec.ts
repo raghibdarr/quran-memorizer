@@ -182,3 +182,55 @@ test('native shell: a deep link to a page the export lacks lands on Home — no 
   await page.waitForTimeout(1500)
   expect(loads).toBeLessThan(8) // a loop runs away into dozens
 })
+
+test('a returner after 30 days gets welcome-back and a capped first day (M7)', async ({ page }) => {
+  await stubAudio(page)
+  await page.addInitScript(() => {
+    if (localStorage.getItem('e2e-seeded')) return
+    localStorage.setItem('e2e-seeded', '1')
+    const DAY = 864e5
+    const now = Date.now()
+    const iso = (t: number) => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}` }
+    const away = iso(now - 30 * DAY)
+    localStorage.setItem('onboarding-complete', 'true')
+    localStorage.setItem('lesson-review-migration-v4', '1')
+    const ids = Array.from({ length: 40 }, (_, i) => 78 + (i % 37))
+    const lessons: Record<string, unknown> = {}
+    const lessonCards = ids.slice(0, 37).map((s, i) => {
+      lessons[`${s}-1`] = { lessonId: `${s}-1`, surahId: s, currentPhase: 'complete', phaseData: {}, startedAt: 0, completedAt: now - 60 * DAY }
+      return { lessonId: `${s}-1`, surahId: s, lessonNumber: 1, ayahStart: 1, ayahEnd: 1, easeFactor: 2.5, interval: 7, repetitions: 3, nextReview: now - (20 + i) * DAY, lastReview: now - 31 * DAY, lastQuality: 4 }
+    })
+    localStorage.setItem('quran-progress', JSON.stringify({ version: 2, state: { lessons } }))
+    localStorage.setItem('quran-reviews', JSON.stringify({ version: 2, state: { cards: [], lessonCards } }))
+    localStorage.setItem('quran-stats', JSON.stringify({ version: 3, state: {
+      currentStreak: 23, longestStreak: 40, totalAyahsMemorized: 300, lastActiveDate: away,
+      dailyActivities: 2, dailyActivityDate: away, activityLog: { [away]: 2 }, streakFreezes: 0, frozenDates: {},
+      lastActivity: null, dayCompleteCelebratedOn: null, reentry: null,
+    } }))
+    localStorage.setItem('quran-plan', JSON.stringify({ version: 1, state: { plan: {
+      id: 'p1', createdAt: now - 90 * DAY, goalType: 'juz', goalSurahIds: ids.slice(0, 37), goalJuzNumbers: [30],
+      deadline: iso(now - 10 * DAY), knownSurahIds: [], knownTracking: true, knownLessonIds: [], lessonsPerDay: 1,
+      studyDays: [0, 1, 2, 3, 4, 5, 6], completedLessonIds: [], revisionFrequencyDays: 14, lastRevisedAt: {},
+      catchUpDate: null, catchUpBonus: 0, finishCelebrated: false,
+    } } }))
+  })
+
+  await page.goto('/')
+  const welcome = page.getByRole('dialog', { name: 'Welcome back' })
+  await expect(welcome).toBeVisible()
+  await expect(welcome.getByText(/been 30 days/)).toBeVisible()
+  await expect(welcome.getByText(/23-day streak paused/)).toBeVisible() // explained, not silently reset
+  await expect(welcome.getByText(/best is still 40 days/)).toBeVisible()
+  await welcome.getByRole('button', { name: 'Ease back in' }).click()
+  await expect(welcome).toHaveCount(0)
+
+  // The lapsed deadline is renegotiated, never shown as "-N days"
+  await expect(page.getByText(/target date .* has passed/i)).toBeVisible()
+  await expect(page.locator('body')).not.toContainText(/-\d+\s*d(ays)?\b/)
+  await expect(page.getByText(/Easing back in · \d+ more reviews/)).toBeVisible()
+
+  // First session: capped at 10 — no 37-card dump
+  await page.goto('/review?start=1')
+  await expect(page.getByText('Card 1 of 10')).toBeVisible()
+  await expect(page.getByText(/· \d+ due/)).toHaveCount(0)
+})

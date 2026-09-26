@@ -27,6 +27,7 @@ import { useReviewQueue } from '@/hooks/use-review-queue';
 import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
+import WelcomeBack from '@/components/welcome-back';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
 type ViewMode = 'grid' | 'list';
@@ -200,6 +201,7 @@ export default function HomePage() {
       <main className="mx-auto max-w-2xl space-y-3 px-4 py-4">
         <InstallBanner />
 
+        <WelcomeBack />
         {plan && <DayCompleteMoment />}
         {plan ? (
           <TodaysPlanCard />

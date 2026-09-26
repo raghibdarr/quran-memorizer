@@ -20,7 +20,7 @@ const revision = (surahId: number): SurahRevisionTask => ({
 })
 function plan(o: Partial<TodaysPlan> = {}): TodaysPlan {
   return {
-    date: '2026-09-26', reviews: [], sabqi: [], manzil: [], earlyReviewIds: [], overdueReviewCount: 0,
+    date: '2026-09-26', reviews: [], sabqi: [], manzil: [], earlyReviewIds: [], overdueReviewCount: 0, deferredReviewCount: 0,
     revisions: [], newLessons: [], isRestDay: false, isComplete: false, completedNewLessonIds: [], ...o,
   }
 }

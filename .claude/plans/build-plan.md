@@ -323,6 +323,20 @@ DEVIATION: the streak still counts any activity (not full plan completion) — f
 ---
 
 ### M7 — Lapse recovery + returner experience
+**STATUS: ✅ DONE 2026-09-26** — pure `src/lib/recovery.ts`: `detectLapse` (>14-day gap),
+`reentryDay` (bounded 7-day re-entry), weakest-first triage (lowest rating → failure streak → ease
+→ most overdue) under a cap of 10 on the return day, +5/day after; today's reviews count against
+the cap (no treadmill); `planDebtRecovery` spreads review backlog + lessons-behind across study
+days (reviews first, lessons only once the backlog fits a day, never more than double pace);
+`catchUpSpread`; `suggestNewDeadline`. Stats store records a synced `reentry` {startedOn, gapDays,
+streakBefore, acknowledged} during the on-load reconcile BEFORE the streak break (mergeStats: later
+return wins, acknowledgement ORs). The queue/plan take the re-entry day: capped weakest-first
+reviews (deferred count surfaced), no new lessons on day one, one surah revision a day. Home shows a
+Welcome-back moment (gap named, the paused streak + best shown, today's lighter plan explained).
+Catch-up is SPREAD (`catchUpUntil`; "+1/day for N days" replaces the 0–10 one-day lump). A passed
+target date becomes "has passed — Set <suggested> / Drop the deadline" (never "-Nd"); dropping it
+leaves the M6 deadline-free pace nudge. 261 unit tests; Playwright: 30-day returner → welcome-back
+with streak explained, renegotiated deadline, no "-Nd", first session capped at 10 (web + native).
 **Size:** 2 sessions
 
 **Goal:** Detect a lapse on load and offer triaged, capped, emotionally-sane re-entry: welcome-back mode, multi-day catch-up covering review debt, and deadline renegotiation.

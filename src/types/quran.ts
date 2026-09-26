@@ -234,8 +234,9 @@ export interface HifdhPlan {
   lastRevisedAt: Record<number, number>; // surahId -> timestamp
 
   // One-off "catch up" bump: extra lessons added to today's plan only.
-  catchUpDate?: string | null;         // ISO yyyy-mm-dd the bonus applies to
-  catchUpBonus?: number;               // Extra lessons on top of lessonsPerDay
+  catchUpDate?: string | null;         // ISO yyyy-mm-dd the catch-up starts
+  catchUpBonus?: number;               // Extra lessons per study day on top of lessonsPerDay
+  catchUpUntil?: string | null;        // Last day of a SPREAD catch-up (M7); absent = one day only
 
   // Completion celebration
   finishCelebrated?: boolean;
@@ -263,6 +264,7 @@ export interface TodaysPlan {
   manzil: LessonReviewCard[];                    // Older lessons due under SM-2
   earlyReviewIds: string[];                      // Sabqi lessons reviewed ahead of their SM-2 date
   overdueReviewCount: number;                    // Due reviews that were due before today
+  deferredReviewCount: number;                   // Held back by a returner's re-entry cap (M7)
   revisions: SurahRevisionTask[];                // Manzil whole-surah rotation picks for today
   newLessons: LessonDef[];                       // New lessons scheduled for today
   isRestDay: boolean;

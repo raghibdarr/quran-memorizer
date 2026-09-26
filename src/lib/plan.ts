@@ -116,8 +116,11 @@ export function getTodaysNewLessons(
     }
   }
 
-  // The catch-up bonus belongs to the day being planned, not wall-clock today
-  const bonus = plan.catchUpDate === isoFromMs(dayStartMs) ? (plan.catchUpBonus ?? 0) : 0;
+  // The catch-up bonus belongs to the day being planned, not wall-clock today;
+  // a spread catch-up (M7) covers every day from catchUpDate through catchUpUntil
+  const day = isoFromMs(dayStartMs);
+  const inCatchUp = !!plan.catchUpDate && day >= plan.catchUpDate && day <= (plan.catchUpUntil ?? plan.catchUpDate);
+  const bonus = inCatchUp ? (plan.catchUpBonus ?? 0) : 0;
   const target = plan.lessonsPerDay + bonus;
   const slots = Math.max(0, target - completedToday.length);
   const all = [...completedToday, ...incomplete.slice(0, slots)];
@@ -262,11 +265,12 @@ export function computeTodaysPlan(
   lessonCards: LessonReviewCard[],
   allSurahs: SurahMeta[],
   now = Date.now(),
+  opts: { reentryDay?: number | null } = {},
 ): TodaysPlan {
   // Review streams (M5): sabqi = recent lessons (incl. capped early touches),
   // manzil = older SM-2-due lessons. Reviews run on rest days too — only NEW
   // work and surah rotation pause.
-  const queue = buildReviewQueue(lessonCards, progressLessons, now);
+  const queue = buildReviewQueue(lessonCards, progressLessons, now, { reentryDay: opts.reentryDay });
   const dueReviews = [...queue.sabqi, ...queue.manzil];
   // Derived from `now`, so the same function can preview tomorrow (M6 day-complete)
   const date = isoFromMs(now);
@@ -286,6 +290,16 @@ export function computeTodaysPlan(
     revisions = getRevisionTasks(plan, planLessons, progressLessons, allSurahs, now);
   }
 
+  // Returner re-entry (M7): day one is reviews only; while settling back in, one
+  // surah revision a day at most — the rest of the rotation waits
+  if (opts.reentryDay != null) {
+    if (opts.reentryDay === 0) {
+      newLessons = [];
+      completedNewLessonIds = [];
+    }
+    revisions = revisions.slice(0, 1);
+  }
+
   // "Nothing left today" — a maintain plan (no new lessons) can complete too
   const isComplete =
     dueReviews.length === 0 &&
@@ -299,6 +313,7 @@ export function computeTodaysPlan(
     manzil: queue.manzil,
     earlyReviewIds: [...queue.earlyIds],
     overdueReviewCount: queue.overdueCount,
+    deferredReviewCount: queue.deferredCount,
     revisions,
     newLessons,
     isRestDay: isRest,

@@ -37,7 +37,8 @@ interface PlanState {
   markLessonCompleted: (lessonId: string) => void;
   markSurahRevised: (surahId: number) => void;
 
-  applyCatchUp: (bonusLessons: number, dateIso: string) => void;
+  /** Extra lessons per study day from `dateIso` through `untilIso` (M7 spreads debt; absent = that day only) */
+  applyCatchUp: (bonusLessons: number, dateIso: string, untilIso?: string) => void;
   markFinishCelebrated: () => void;
 
   updateGoalScope: (scope: {
@@ -181,11 +182,11 @@ export const usePlanStore = create<PlanState>()(
           return { plan: { ...s.plan, knownLessonIds: Array.from(known) } };
         }),
 
-      applyCatchUp: (bonusLessons, dateIso) =>
+      applyCatchUp: (bonusLessons, dateIso, untilIso) =>
         set((s) => {
           if (!s.plan) return s;
           const clamped = Math.max(0, Math.min(10, Math.floor(bonusLessons)));
-          return { plan: { ...s.plan, catchUpDate: dateIso, catchUpBonus: clamped } };
+          return { plan: { ...s.plan, catchUpDate: dateIso, catchUpBonus: clamped, catchUpUntil: untilIso ?? null } };
         }),
 
       markFinishCelebrated: () =>

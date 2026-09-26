@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 import { usePlanStore } from '@/stores/plan-store';
 import { useReviewStore } from '@/stores/review-store';
-import { todayIso, startOfTodayMs } from '@/lib/plan';
+import { startOfTodayMs } from '@/lib/plan';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
+import { catchUpSpread, suggestNewDeadline } from '@/lib/recovery';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import { ArrowRightIcon, BookIcon, CheckIcon, RefreshIcon, StarIcon } from '@/components/ui/icons';
@@ -15,10 +16,11 @@ import { lessonHref } from '@/lib/routes';
 
 export default function TodaysPlanCard() {
   const applyCatchUp = usePlanStore((s) => s.applyCatchUp);
+  const updateDeadline = usePlanStore((s) => s.updateDeadline);
   const setKnownTracking = usePlanStore((s) => s.setKnownTracking);
   const seedKnownAyahs = useReviewStore((s) => s.seedKnownAyahs);
   // progress is null for maintain plans (zero lessons by design) — the card still renders
-  const { plan, todaysPlan, progress, allSurahs, dayStatus } = useTodaysPlan();
+  const { plan, todaysPlan, progress, allSurahs, dayStatus, today, reentryDay } = useTodaysPlan();
 
   const surahById = useMemo(() => new Map(allSurahs.map((s) => [s.id, s])), [allSurahs]);
 
@@ -114,23 +116,67 @@ export default function TodaysPlanCard() {
         </div>
       )}
 
-      {progress && progress.lessonsBehind > 0 && !todaysPlan.isRestDay && (
-        <div className="mt-3 flex items-center justify-between gap-3 rounded-lg bg-gold/10 px-3 py-2 text-xs text-gold">
-          <span>
-            {progress.lessonsBehind} {progress.lessonsBehind === 1 ? 'lesson' : 'lessons'} behind schedule
-          </span>
-          {plan.catchUpDate === todayIso() && (plan.catchUpBonus ?? 0) > 0 ? (
-            <span className="font-semibold">+{plan.catchUpBonus} today</span>
-          ) : (
-            <button
-              onClick={() => applyCatchUp(progress.lessonsBehind, todayIso())}
-              className="rounded-full bg-gold px-3 py-1 text-[11px] font-semibold text-on-gold hover:brightness-110"
-            >
-              Catch up today
-            </button>
-          )}
+      {/* Returner re-entry (M7): the reduced day, explained */}
+      {reentryDay !== null && todaysPlan.deferredReviewCount > 0 && (
+        <div className="mt-3 rounded-lg bg-teal/5 px-3 py-2 text-xs text-teal">
+          Easing back in · {todaysPlan.deferredReviewCount} more {todaysPlan.deferredReviewCount === 1 ? 'review' : 'reviews'} spread over the coming days
         </div>
       )}
+
+      {/* Target date passed (M7, audit M13): renegotiate instead of "-N days" */}
+      {plan.deadline && plan.deadline < today && progress && progress.lessonsRemaining > 0 && (() => {
+        const suggested = suggestNewDeadline(progress.lessonsRemaining, plan.lessonsPerDay, plan.studyDays, today);
+        const fmt = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+        return (
+          <div className="mt-3 rounded-lg bg-gold/10 px-3 py-2.5 text-xs text-gold-deep">
+            <p className="font-semibold">Your target date ({fmt(plan.deadline)}) has passed</p>
+            <p className="mt-0.5 text-muted">At your pace, {progress.lessonsRemaining} lessons fit by {fmt(suggested)}.</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                onClick={() => updateDeadline(suggested)}
+                className="rounded-full bg-gold px-3 py-1.5 text-[11px] font-semibold text-on-gold hover:brightness-110"
+              >
+                Set {fmt(suggested)}
+              </button>
+              <button
+                onClick={() => updateDeadline(null)}
+                className="rounded-full px-3 py-1.5 text-[11px] font-semibold text-muted hover:text-foreground"
+              >
+                Drop the deadline
+              </button>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Behind schedule: the debt is SPREAD over coming days (M7, audit M16) — never a
+          one-day lump. Hidden while a returner is easing back in. */}
+      {progress && progress.lessonsBehind > 0 && !todaysPlan.isRestDay && reentryDay === null
+        && !(plan.deadline && plan.deadline < today) && (() => {
+        const activeCatchUp = !!plan.catchUpDate && (plan.catchUpBonus ?? 0) > 0
+          && today >= plan.catchUpDate && today <= (plan.catchUpUntil ?? plan.catchUpDate);
+        const spread = catchUpSpread(progress.lessonsBehind, plan.lessonsPerDay, plan.studyDays, today);
+        const fmt = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+        return (
+          <div className="mt-3 flex items-center justify-between gap-3 rounded-lg bg-gold/10 px-3 py-2 text-xs text-gold">
+            <span>
+              {progress.lessonsBehind} {progress.lessonsBehind === 1 ? 'lesson' : 'lessons'} behind schedule
+            </span>
+            {activeCatchUp ? (
+              <span className="font-semibold">
+                +{plan.catchUpBonus}/day{plan.catchUpUntil && plan.catchUpUntil !== plan.catchUpDate ? ` until ${fmt(plan.catchUpUntil)}` : ' today'}
+              </span>
+            ) : spread ? (
+              <button
+                onClick={() => applyCatchUp(spread.extraPerDay, spread.from, spread.until)}
+                className="rounded-full bg-gold px-3 py-1 text-[11px] font-semibold text-on-gold hover:brightness-110"
+              >
+                Catch up: +{spread.extraPerDay}/day{spread.studyDays > 1 ? ` for ${spread.studyDays} days` : ''}
+              </button>
+            ) : null}
+          </div>
+        );
+      })()}
 
       {/* Checklist — the three streams of the hifdh cycle, revision before new (M5) */}
       <div className="mt-3 space-y-3">

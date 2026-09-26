@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { todayIso } from '@/lib/dates';
 import { recordActiveDay, reconcileStreak, ALL_DAYS, type StreakFields } from '@/lib/streak';
+import { detectLapse, reentryDay, type Reentry } from '@/lib/recovery';
 import { usePlanStore } from '@/stores/plan-store';
 import type { UserStats } from '@/types/quran';
 
@@ -19,6 +20,9 @@ interface StatsState extends UserStats {
   /** Local day the day-complete moment last fired — its replay guard (M6). Synced. */
   dayCompleteCelebratedOn: string | null;
   markDayCelebrated: (dayIso: string) => void;
+  /** Set when the user returns after a long gap (M7) — drives welcome-back + triaged re-entry. Synced. */
+  reentry: Reentry | null;
+  acknowledgeReentry: () => void;
   recordActivity: () => void;
   /** Settle streak state for today (freezes / breaks) without recording activity —
    *  run on load and day rollover so the UI never paints a stale streak. */
@@ -89,8 +93,12 @@ export const useStatsStore = create<StatsState>()(
       frozenDates: {},
       lastActivity: null,
       dayCompleteCelebratedOn: null,
+      reentry: null,
 
       markDayCelebrated: (dayIso) => set({ dayCompleteCelebratedOn: dayIso }),
+
+      acknowledgeReentry: () =>
+        set((s) => (s.reentry ? { reentry: { ...s.reentry, acknowledged: true } } : s)),
 
       recordActivity: () =>
         set((state) => {
@@ -119,16 +127,25 @@ export const useStatsStore = create<StatsState>()(
 
       reconcile: () =>
         set((state) => {
-          const settled = reconcileStreak(streakFields(state), todayIso(), planStudyDays());
+          const today = todayIso();
+          // Lapse detection runs BEFORE the streak break below, so the streak the
+          // returner had is captured and shown — never silently reset (M7)
+          let reentry = state.reentry;
+          const gap = detectLapse(state.lastActiveDate, today);
+          if (gap !== null && (!reentry || reentryDay(reentry, today) === null)) {
+            reentry = { startedOn: today, gapDays: gap, streakBefore: state.currentStreak, acknowledged: false };
+          }
+          const settled = reconcileStreak(streakFields(state), today, planStudyDays());
           // Only publish on an actual change — this runs on every load/rollover tick
           if (
             settled.currentStreak === state.currentStreak &&
             settled.streakFreezes === state.streakFreezes &&
-            settled.frozenDates === state.frozenDates
+            settled.frozenDates === state.frozenDates &&
+            reentry === state.reentry
           ) {
             return state;
           }
-          return settled;
+          return { ...settled, reentry };
         }),
 
       addAyahsMemorized: (count) =>

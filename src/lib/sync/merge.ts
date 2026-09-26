@@ -256,7 +256,17 @@ function mergeStats(
     ),
     // Latest day wins: celebrating on one device must not re-fire on another
     dayCompleteCelebratedOn: maxIso(local.dayCompleteCelebratedOn, cloud.dayCompleteCelebratedOn),
+    reentry: mergeReentry(local.reentry, cloud.reentry),
   }
+}
+
+/** The more recent return wins; welcoming someone back on one device counts everywhere */
+function mergeReentry(a: unknown, b: unknown): Record<string, unknown> | null {
+  const x = a && typeof a === 'object' ? (a as Record<string, unknown>) : null
+  const y = b && typeof b === 'object' ? (b as Record<string, unknown>) : null
+  if (!x || !y) return x ?? y
+  if (x.startedOn !== y.startedOn) return (x.startedOn as string) > (y.startedOn as string) ? x : y
+  return { ...x, acknowledged: !!x.acknowledged || !!y.acknowledged }
 }
 
 function maxIso(a: unknown, b: unknown): string | null {

@@ -13,6 +13,7 @@
 
 import type { LessonProgress, LessonReviewCard, ReviewCard } from '@/types/quran';
 import { addLocalDays, daysBetween, isoFromMs, startOfDayMs } from './dates';
+import { triageReviews } from './recovery';
 
 const DAY_MS = 86_400_000;
 
@@ -74,12 +75,15 @@ export interface ReviewQueue {
   earlyIds: Set<string>;
   /** Of the SM-2-due lessons, how many were already due before today */
   overdueCount: number;
+  /** Due reviews held back by a returner's re-entry cap (M7) — they come on later days */
+  deferredCount: number;
 }
 
 export function buildReviewQueue(
   lessonCards: LessonReviewCard[],
   progressLessons: Record<string, LessonProgress>,
   now: number,
+  opts: { reentryDay?: number | null } = {},
 ): ReviewQueue {
   const todayStart = startOfDayMs(now);
   const dueSabqi: LessonReviewCard[] = [];
@@ -111,6 +115,23 @@ export function buildReviewQueue(
   const byDue = (a: LessonReviewCard, b: LessonReviewCard) => a.nextReview - b.nextReview;
   dueSabqi.sort(byDue);
   dueManzil.sort(byDue);
+  const overdueCount = [...dueSabqi, ...dueManzil].filter((c) => c.nextReview < todayStart).length;
+
+  // Returner re-entry (M7): a small, weakest-first day instead of the whole backlog,
+  // and no optional check-ins on top
+  if (opts.reentryDay != null) {
+    const doneToday = lessonCards.filter((c) => c.lastReview >= todayStart && c.lastReview <= now).length;
+    const { kept, deferred } = triageReviews([...dueSabqi, ...dueManzil], opts.reentryDay, doneToday);
+    const keep = new Set(kept.map((c) => c.lessonId));
+    const sabqiIds = new Set(dueSabqi.map((c) => c.lessonId));
+    return {
+      sabqi: kept.filter((c) => sabqiIds.has(c.lessonId)),
+      manzil: kept.filter((c) => !sabqiIds.has(c.lessonId) && keep.has(c.lessonId)),
+      earlyIds: new Set(),
+      overdueCount,
+      deferredCount: deferred,
+    };
+  }
 
   // Early touches fill whatever the daily recent-lesson cap leaves. Lessons already
   // touched today count against it, so finishing one never pulls in another
@@ -124,7 +145,8 @@ export function buildReviewQueue(
     sabqi: [...dueSabqi, ...early],
     manzil: dueManzil,
     earlyIds: new Set(early.map((c) => c.lessonId)),
-    overdueCount: [...dueSabqi, ...dueManzil].filter((c) => c.nextReview < todayStart).length,
+    overdueCount,
+    deferredCount: 0,
   };
 }
 

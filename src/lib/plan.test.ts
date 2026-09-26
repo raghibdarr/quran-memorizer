@@ -673,3 +673,36 @@ describe('suggestedPace', () => {
     expect(result?.pace).toBe(1);
   });
 });
+
+describe('M7: spread catch-up and returner re-entry', () => {
+  const DAY = 86_400_000;
+  const lessonsFor = (n: number): LessonDef[] =>
+    Array.from({ length: n }, (_, i) => ({ lessonId: `2-${i + 1}`, surahId: 2, lessonNumber: i + 1, ayahStart: i + 1, ayahEnd: i + 1, ayahCount: 1, juzNumber: 1 }));
+
+  it('a spread catch-up adds its bonus on every day in range — and not after', () => {
+    const today = todayIso();
+    const plan = makePlan({ lessonsPerDay: 1, catchUpDate: today, catchUpBonus: 1, catchUpUntil: addDaysIso(today, 2) });
+    const dayStart = (offset: number) => new Date(`${addDaysIso(today, offset)}T00:00:00`).getTime();
+    expect(getTodaysNewLessons(plan, lessonsFor(20), {}, dayStart(0)).all).toHaveLength(2);
+    expect(getTodaysNewLessons(plan, lessonsFor(20), {}, dayStart(2)).all).toHaveLength(2);
+    expect(getTodaysNewLessons(plan, lessonsFor(20), {}, dayStart(3)).all).toHaveLength(1);
+  });
+
+  it('ACCEPTANCE: re-entry day 0 → at most 10 reviews (weakest first), no new lessons, one revision', () => {
+    const cards: LessonReviewCard[] = Array.from({ length: 40 }, (_, i) => ({
+      lessonId: `2-${i + 1}`, surahId: 2, lessonNumber: i + 1, ayahStart: i + 1, ayahEnd: i + 1,
+      easeFactor: 2.5, interval: 7, repetitions: 3, nextReview: NOW - (i + 1) * DAY, lastReview: NOW - 40 * DAY, lastQuality: i === 25 ? 1 : 4,
+    }));
+    // Two short surahs (7 + 6 ayahs) both fit a normal day's rotation budget
+    const plan = makePlan({ goalSurahIds: [1, 114], knownSurahIds: [1, 114], knownTracking: true, lastRevisedAt: { 1: NOW - 40 * DAY, 114: NOW - 40 * DAY } });
+    const normal = computeTodaysPlan(plan, lessonsFor(3), {}, cards, TEST_SURAHS, NOW);
+    const back = computeTodaysPlan(plan, lessonsFor(3), {}, cards, TEST_SURAHS, NOW, { reentryDay: 0 });
+    expect(normal.reviews.length).toBe(40);
+    expect(back.reviews.length).toBe(10);
+    expect(back.reviews.map((c) => c.lessonId)).toContain('2-26'); // the weakest made the cut
+    expect(back.deferredReviewCount).toBe(30);
+    expect(back.newLessons).toEqual([]);
+    expect(back.revisions.length).toBeLessThanOrEqual(1);
+    expect(normal.revisions.length).toBe(2);
+  });
+});

@@ -12,6 +12,7 @@ import { computePlanProgress, computeTodaysPlan, getPlanLessons } from '@/lib/pl
 import { activityDayStatus, planDayStatus } from '@/lib/day-status';
 import { isoFromMs } from '@/lib/dates';
 import { useDayClock } from './use-day-clock';
+import { useReentryDay } from './use-reentry';
 
 /**
  * Today's plan + THE day status (src/lib/day-status.ts) for any surface that
@@ -29,6 +30,7 @@ export function useTodaysPlan() {
   // on screens left open overnight (and render stays pure)
   const dayEnd = useDayClock();
   const today = isoFromMs(dayEnd);
+  const reentryDay = useReentryDay();
 
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
@@ -43,8 +45,8 @@ export function useTodaysPlan() {
   );
 
   const todaysPlan = useMemo(
-    () => (plan && allSurahs.length ? computeTodaysPlan(plan, planLessons, progressLessons, lessonCards, allSurahs, dayEnd) : null),
-    [plan, planLessons, progressLessons, lessonCards, allSurahs, dayEnd],
+    () => (plan && allSurahs.length ? computeTodaysPlan(plan, planLessons, progressLessons, lessonCards, allSurahs, dayEnd, { reentryDay }) : null),
+    [plan, planLessons, progressLessons, lessonCards, allSurahs, dayEnd, reentryDay],
   );
 
   const progress = useMemo(
@@ -72,6 +74,7 @@ export function useTodaysPlan() {
     activitiesToday,
     dayEnd,
     today,
+    reentryDay,
     ready: allSurahs.length > 0 && juzIndex.length > 0,
   };
 }
