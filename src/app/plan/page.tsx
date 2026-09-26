@@ -23,6 +23,7 @@ import { ArrowRightIcon, CheckIcon, TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { addDaysIso } from '@/lib/dates';
 import { NAV_BACK, NAV_FORWARD } from '@/lib/nav';
+import ConfirmSheet from '@/components/ui/confirm-sheet';
 
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -79,7 +80,7 @@ export default function PlanDashboardPage() {
 
   if (!plan) {
     return (
-      <div className="min-h-screen bg-cream pb-24">
+      <div className="min-h-dvh bg-cream pb-24">
         <main className="mx-auto max-w-2xl px-4 py-10">
           <Card className="text-center">
             <h1 className="text-xl font-bold text-teal">No plan yet</h1>
@@ -98,7 +99,7 @@ export default function PlanDashboardPage() {
 
   if (!progress) {
     return (
-      <div className="min-h-screen bg-cream pb-24">
+      <div className="min-h-dvh bg-cream pb-24">
         <main className="mx-auto max-w-2xl px-4 py-10">
           <p className="text-center text-sm text-muted">Loading plan…</p>
         </main>
@@ -124,8 +125,8 @@ export default function PlanDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream pb-24">
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
+    <div className="min-h-dvh bg-cream pb-24">
+      <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">Your plan</p>
@@ -436,7 +437,7 @@ export default function PlanDashboardPage() {
         {/* Surah breakdown */}
         <Card>
           <p className="text-sm font-semibold text-foreground">Surahs in plan</p>
-          <div className="mt-3 space-y-1 max-h-[50vh] overflow-y-auto">
+          <div className="mt-3 space-y-1 max-h-[50dvh] overflow-y-auto">
             {surahBreakdown.map((s) => {
               const pct = s.total > 0 ? (s.done / s.total) * 100 : 0;
               const complete = s.done === s.total && s.total > 0;
@@ -474,34 +475,19 @@ export default function PlanDashboardPage() {
           <TrashIcon size={14} /> Delete plan
         </button>
 
-        {showDelete && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-            <div className="mx-4 w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
-              <h3 className="text-lg font-bold text-foreground">Delete plan?</h3>
-              <p className="mt-2 text-sm text-muted">
-                This removes your goal and daily plan. Your lesson progress and reviews stay intact.
-              </p>
-              <div className="mt-4 flex gap-3">
-                <button
-                  onClick={() => setShowDelete(false)}
-                  className="flex-1 rounded-xl border border-foreground/10 py-2.5 text-sm font-medium text-foreground"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => {
-                    deletePlan();
-                    setShowDelete(false);
-                    router.replace('/', { transitionTypes: [NAV_BACK] });
-                  }}
-                  className="flex-1 rounded-xl bg-miss py-2.5 text-sm font-medium text-on-miss"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        <ConfirmSheet
+          open={showDelete}
+          title="Delete plan?"
+          message="This removes your goal and daily plan. Your lesson progress and reviews stay intact."
+          confirmLabel="Delete plan"
+          destructive
+          onConfirm={() => {
+            deletePlan();
+            setShowDelete(false);
+            router.replace('/', { transitionTypes: [NAV_BACK] });
+          }}
+          onCancel={() => setShowDelete(false)}
+        />
       </main>
 
       <BottomNav />

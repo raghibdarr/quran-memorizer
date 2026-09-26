@@ -144,14 +144,14 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
 
       {/* Pinned counter (appears when original scrolls out) */}
       {counterPinned && (
-        <div className="fixed left-0 right-0 z-20 px-4" style={{ top: 'var(--lesson-header-height, 140px)' }}>
+        <div className="fixed left-0 right-0 z-20 px-4" style={{ top: 'calc(var(--safe-top) + var(--lesson-header-height, 140px))' }}>
           <div className="tactile-card mx-auto flex max-w-2xl items-center justify-center gap-3 rounded-xl bg-card px-4 py-2">
             <BeadProgress total={REQUIRED_LISTENS} filled={playCount} size="sm" />
             <span className="text-xs font-medium text-foreground">
               {canContinue ? 'Ready!' : `${playCount} / ${REQUIRED_LISTENS} listens`}
             </span>
             {canContinue && (
-              <button onClick={onComplete} className="tactile-chip ml-2 rounded-lg bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal">
+              <button onClick={onComplete} className="hit-44 tactile-chip ml-2 rounded-lg bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal">
                 Continue
               </button>
             )}

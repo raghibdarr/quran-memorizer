@@ -4,6 +4,7 @@ import { useStatsStore } from '@/stores/stats-store';
 import { useReentryDay } from '@/hooks/use-reentry';
 import { useReviewQueue } from '@/hooks/use-review-queue';
 import Button from '@/components/ui/button';
+import BottomSheet from '@/components/ui/bottom-sheet';
 import { FlameIcon } from '@/components/ui/icons';
 
 /**
@@ -19,7 +20,8 @@ export default function WelcomeBack() {
   const day = useReentryDay();
   const { dueCount, deferredCount } = useReviewQueue();
 
-  if (!reentry || reentry.acknowledged || day === null) return null;
+  const open = !!reentry && !reentry.acknowledged && day !== null;
+  if (!reentry) return null;
 
   const streakLine =
     reentry.streakBefore > 1
@@ -29,15 +31,9 @@ export default function WelcomeBack() {
         : null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="welcome-back-title"
-    >
-      <div className="tactile-card w-full max-w-sm rounded-2xl bg-card p-6 text-center">
-        <h2 id="welcome-back-title" className="text-xl font-bold text-foreground">Welcome back</h2>
-        <p className="mt-2 text-sm text-muted">
+    <BottomSheet open={open} onClose={acknowledge} title="Welcome back" className="text-center">
+      <div className="pb-1">
+        <p className="text-sm text-muted">
           It&apos;s been {reentry.gapDays} days. What you memorized is still here — and so is every bit of your progress.
         </p>
         {streakLine && (
@@ -58,6 +54,6 @@ export default function WelcomeBack() {
           Ease back in
         </Button>
       </div>
-    </div>
+    </BottomSheet>
   );
 }

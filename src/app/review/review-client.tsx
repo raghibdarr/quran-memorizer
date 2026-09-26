@@ -118,7 +118,7 @@ export default function ReviewPage() {
   if (surahIds.length === 0) {
     const isHafiz = (plan?.knownSurahIds.length ?? 0) > 0 || plan?.goalType === 'maintain';
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4 pb-20">
+      <div className="flex min-h-dvh flex-col items-center justify-center bg-cream px-4 pb-20">
         <StarIcon size={40} className="text-teal" />
         <h2 className="mt-4 text-xl font-bold text-foreground">No reviews yet</h2>
         <p className="mt-1 text-center text-muted">
@@ -136,9 +136,9 @@ export default function ReviewPage() {
 
   // Dashboard view
   return (
-    <div className="min-h-screen bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-24">
       {/* Sticky top bar */}
-      <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+      <div className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <Link href="/" className="text-sm text-muted hover:text-foreground">&larr; Back</Link>
           <span className="text-sm font-semibold text-teal">Review</span>

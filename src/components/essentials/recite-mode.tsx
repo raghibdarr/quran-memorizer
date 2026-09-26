@@ -141,12 +141,12 @@ export default function ReciteMode({ items, onClose }: Props) {
   if (!item) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-cream">
+    <div className="fixed inset-0 z-50 flex flex-col bg-cream pt-[var(--safe-top)]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-foreground/5 px-4 py-3">
         <button
           onClick={onClose}
-          className="rounded-lg px-3 py-1.5 text-sm font-medium text-muted hover:text-foreground"
+          className="hit-44 rounded-lg px-3 py-1.5 text-sm font-medium text-muted hover:text-foreground"
         >
           ✕ Close
         </button>

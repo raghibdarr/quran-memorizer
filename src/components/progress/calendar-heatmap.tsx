@@ -114,7 +114,7 @@ export default function CalendarHeatmap({ activityLog }: Props) {
       <div className="mb-1 flex items-center justify-between">
         <button
           onClick={prevMonth}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-foreground/5 hover:text-foreground"
+          className="hit-44 flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-foreground/5 hover:text-foreground"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6" /></svg>
         </button>
@@ -127,7 +127,7 @@ export default function CalendarHeatmap({ activityLog }: Props) {
         <button
           onClick={nextMonth}
           disabled={isCurrentMonth}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-foreground/5 hover:text-foreground disabled:opacity-20"
+          className="hit-44 flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-foreground/5 hover:text-foreground disabled:opacity-20"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6" /></svg>
         </button>

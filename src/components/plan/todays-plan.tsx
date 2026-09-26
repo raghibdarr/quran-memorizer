@@ -102,13 +102,13 @@ export default function TodaysPlanCard() {
           <div className="mt-2 flex gap-2">
             <button
               onClick={enableKnownTracking}
-              className="rounded-full bg-teal px-3 py-1 text-[11px] font-semibold text-on-teal hover:brightness-110"
+              className="hit-44 rounded-full bg-teal px-3 py-1 text-[11px] font-semibold text-on-teal hover:brightness-110"
             >
               Track them
             </button>
             <button
               onClick={() => setKnownTracking(false)}
-              className="rounded-full px-3 py-1 text-[11px] font-semibold text-muted hover:text-foreground"
+              className="hit-44 rounded-full px-3 py-1 text-[11px] font-semibold text-muted hover:text-foreground"
             >
               Keep them out
             </button>
@@ -134,13 +134,13 @@ export default function TodaysPlanCard() {
             <div className="mt-2 flex flex-wrap gap-2">
               <button
                 onClick={() => updateDeadline(suggested)}
-                className="rounded-full bg-gold px-3 py-1.5 text-[11px] font-semibold text-on-gold hover:brightness-110"
+                className="hit-44 rounded-full bg-gold px-3 py-1.5 text-[11px] font-semibold text-on-gold hover:brightness-110"
               >
                 Set {fmt(suggested)}
               </button>
               <button
                 onClick={() => updateDeadline(null)}
-                className="rounded-full px-3 py-1.5 text-[11px] font-semibold text-muted hover:text-foreground"
+                className="hit-44 rounded-full px-3 py-1.5 text-[11px] font-semibold text-muted hover:text-foreground"
               >
                 Drop the deadline
               </button>
@@ -169,7 +169,7 @@ export default function TodaysPlanCard() {
             ) : spread ? (
               <button
                 onClick={() => applyCatchUp(spread.extraPerDay, spread.from, spread.until)}
-                className="rounded-full bg-gold px-3 py-1 text-[11px] font-semibold text-on-gold hover:brightness-110"
+                className="hit-44 rounded-full bg-gold px-3 py-1 text-[11px] font-semibold text-on-gold hover:brightness-110"
               >
                 Catch up: +{spread.extraPerDay}/day{spread.studyDays > 1 ? ` for ${spread.studyDays} days` : ''}
               </button>

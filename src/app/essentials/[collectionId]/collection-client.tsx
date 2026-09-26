@@ -74,8 +74,8 @@ export default function CollectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream pb-24">
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
+    <div className="min-h-dvh bg-cream pb-24">
+      <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -94,7 +94,7 @@ export default function CollectionPage() {
             {collection.items.length > 1 && (
               <button
                 onClick={() => setReciteOpen(true)}
-                className="shrink-0 rounded-full bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal hover:brightness-110"
+                className="hit-44 shrink-0 rounded-full bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal hover:brightness-110"
               >
                 Recite all →
               </button>

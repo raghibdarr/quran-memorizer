@@ -192,6 +192,22 @@ What the spike must change / measure:
 - Deferred: the surah page's in-tab practice selection→session stays an in-page view (not routed yet);
   scroll restoration on back relies on Next defaults; collapsing large-title headers are M11d.
 
+## 5d. M11c status — ✅ DONE 2026-09-26 (sheets & ergonomics)
+
+- `src/components/ui/bottom-sheet.tsx`: THE modal surface — grab handle, spring entrance
+  (--spring-settle), drag-to-dismiss (120px or a flick; rubber-band upward), scrim tap, Esc, body
+  scroll lock, focus in/restore, stays mounted through its exit animation, reduced-motion aware.
+  `confirm-sheet.tsx` for yes/no. Migrated: settings (was a positioned desktop popover), auth +
+  account menu, lesson/complete-phase reset confirms, delete-plan confirm, day-complete,
+  welcome-back, plan-finished celebration, Build explainer. Recite mode + onboarding stay full-screen.
+- Sweeps: `vh` → `dvh` (23 sites); safe-area top via `--safe-top` (body padding, sticky headers pin
+  below the status bar, a fixed status-bar backing, full-screen overlays pad themselves); inputs ≥16px
+  on touch devices (no iOS focus zoom); `overscroll-behavior` none on the app, contain on sheets;
+  44px targets — settings controls rebuilt at 44px, 32 small controls get a `.hit-44` invisible hit
+  area (visual size unchanged).
+- Verified: settings sheet light/dark screenshots, drag-dismiss + Esc + scroll-lock release
+  (Playwright), full smoke green.
+
 ## 5b. Store compliance checklist (added 2026-09-26 — none of these exist yet)
 
 - [ ] **In-app account deletion** — required by Apple 5.1.1(v) and Google Play. Plan: a

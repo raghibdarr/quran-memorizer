@@ -7,6 +7,7 @@ import { useProgressStore } from '@/stores/progress-store';
 import { getJuzIndex, getSurahIndex } from '@/lib/quran-data';
 import { computePlanProgress, getPlanLessons } from '@/lib/plan';
 import Button from '@/components/ui/button';
+import BottomSheet from '@/components/ui/bottom-sheet';
 import { StarIcon } from '@/components/ui/icons';
 
 export default function PlanCelebration() {
@@ -30,8 +31,7 @@ export default function PlanCelebration() {
   }, [plan, allSurahs, juzIndex, progressLessons]);
 
   if (!plan || !progress) return null;
-  if (progress.percentage < 100) return null;
-  if (plan.finishCelebrated) return null;
+  const open = progress.percentage >= 100 && !plan.finishCelebrated;
 
   const goalLabel =
     plan.goalType === 'full-quran'
@@ -43,8 +43,8 @@ export default function PlanCelebration() {
         : `${plan.goalSurahIds.length} surah${plan.goalSurahIds.length === 1 ? '' : 's'}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-sm rounded-2xl bg-card p-6 text-center shadow-xl">
+    <BottomSheet open={open} onClose={() => markFinishCelebrated()} title="Plan complete" titleHidden>
+      <div className="pb-1 text-center">
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gold/15">
           <StarIcon size={44} className="text-gold" />
         </div>
@@ -60,6 +60,6 @@ export default function PlanCelebration() {
           Continue
         </Button>
       </div>
-    </div>
+    </BottomSheet>
   );
 }

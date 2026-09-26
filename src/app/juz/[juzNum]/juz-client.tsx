@@ -129,9 +129,9 @@ export default function JuzDetailPage() {
   const allSurahsLoaded = loadedSections.length === sections.length;
 
   return (
-    <div className="min-h-screen bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-24">
       {/* Sticky top bar */}
-      <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+      <div className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <BackButton fallback="/" />
           <div className="flex items-center gap-2">
@@ -159,7 +159,7 @@ export default function JuzDetailPage() {
       </header>
 
       {/* Learn / Practice tab toggle — pins below the top bar on scroll */}
-      <div className="sticky top-14 z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
+      <div className="sticky top-[calc(var(--safe-top)+3.5rem)] z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex gap-1 rounded-xl bg-foreground/5 p-1">
             <button

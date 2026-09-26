@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { createPortal } from 'react-dom'
-import { cn } from '@/lib/cn'
+import { useState, useEffect } from 'react'
+import BottomSheet from '@/components/ui/bottom-sheet'
 import { isNative } from '@/lib/native'
 import Button from '@/components/ui/button'
 
@@ -74,7 +73,6 @@ export default function AuthModal({
   const native = isNative()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const backdropRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (isPasswordRecovery) setView('new-password')
@@ -122,18 +120,13 @@ export default function AuthModal({
     }
   }
 
-  if (!open) return null
-
-  const content = (
-    <div
-      ref={backdropRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-      onClick={(e) => { if (e.target === backdropRef.current) onClose() }}
-    >
-      <div className="w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
+  // A bottom sheet (M11c): drag down, tap outside or Esc to close
+  return (
+    <BottomSheet open={open} onClose={onClose} title="Account" titleHidden>
+      <div>
         {/* Close button */}
-        <div className="flex justify-end">
-          <button onClick={onClose} className="text-muted hover:text-foreground">
+        <div className="-mt-2 flex justify-end">
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center text-muted hover:text-foreground" aria-label="Close">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -321,8 +314,6 @@ export default function AuthModal({
           </form>
         )}
       </div>
-    </div>
+    </BottomSheet>
   )
-
-  return createPortal(content, document.body)
 }

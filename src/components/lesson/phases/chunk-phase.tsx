@@ -16,6 +16,7 @@ import BeadProgress from '@/components/ui/bead-progress';
 import Button from '@/components/ui/button';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
 import { cn } from '@/lib/cn';
+import BottomSheet from '@/components/ui/bottom-sheet';
 
 interface ChunkPhaseProps {
   surah: Surah;
@@ -112,6 +113,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     if (typeof window === 'undefined') return false;
     return !localStorage.getItem('chunk-explainer-seen');
   });
+  const dismissExplainer = () => {
+    localStorage.setItem('chunk-explainer-seen', 'true');
+    setShowExplainer(false);
+  };
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isPlayingOnce, setIsPlayingOnce] = useState(false);
   const [completedAyahs, setCompletedAyahs] = useState<Set<number>>(() => {
@@ -478,13 +483,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                       <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => playChainAyah(ayah, i)}
-                          className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                          className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                         >
                           <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
                         </button>
                         <button
                           onClick={() => toggleAyahReveal(i)}
-                          className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                          className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                           title="Hide"
                         >
                           <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -639,13 +644,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                       <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => playChainAyah(ayah, i)}
-                          className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                          className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                         >
                           <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
                         </button>
                         <button
                           onClick={() => toggleFinalAyahReveal(i)}
-                          className="rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
+                          className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
                           title="Hide"
                         >
                           <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1112,12 +1117,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         </button>
       )}
 
-      {/* One-time explainer overlay */}
-      {showExplainer && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="tactile-card mx-4 w-full max-w-sm rounded-2xl bg-card p-6">
-            <h3 className="text-xl font-bold text-foreground">Build Your Memory</h3>
-            <p className="mt-2 text-sm text-muted leading-relaxed">
+      {/* One-time explainer (a bottom sheet, M11c) */}
+      <BottomSheet open={showExplainer} onClose={dismissExplainer} title="Build your memory">
+          <div>
+            <p className="text-sm text-muted leading-relaxed">
               Each ayah goes through 4 steps to build deep memorization:
             </p>
             <div className="mt-5 space-y-4">
@@ -1140,14 +1143,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               After each ayah, you'll chain them together to build full passages.
             </p>
             <button
-              onClick={() => { localStorage.setItem('chunk-explainer-seen', 'true'); setShowExplainer(false); }}
-              className="tactile-btn mt-5 w-full rounded-xl bg-teal py-3 text-sm font-semibold text-on-teal hover:bg-teal-light"
+              onClick={dismissExplainer}
+              className="tactile-btn mt-5 min-h-12 w-full rounded-xl bg-teal text-sm font-semibold text-on-teal hover:bg-teal-light"
             >
               Got It
             </button>
           </div>
-        </div>
-      )}
+      </BottomSheet>
     </div>
   );
 }

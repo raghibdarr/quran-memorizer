@@ -116,12 +116,12 @@ export default function OnboardingOverlay() {
   const isLast = step === CARDS.length - 1;
 
   return (
-    <div className="fixed inset-0 z-[80] flex flex-col bg-cream">
+    <div className="fixed inset-0 z-[80] flex flex-col bg-cream pt-[var(--safe-top)]">
       {/* Skip button */}
       <div className="flex justify-end px-4 pt-4">
         <button
           onClick={dismiss}
-          className="rounded-lg px-3 py-1.5 text-xs font-medium text-muted hover:text-foreground"
+          className="hit-44 rounded-lg px-3 py-1.5 text-xs font-medium text-muted hover:text-foreground"
         >
           Skip
         </button>

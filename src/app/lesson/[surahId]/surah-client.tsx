@@ -68,9 +68,9 @@ export default function SurahDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-24">
       {/* Sticky top bar */}
-      <div className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+      <div className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <BackButton fallback={reviewLessonNum ? '/review' : '/'} />
           <div className="flex items-center gap-2">
@@ -101,14 +101,14 @@ export default function SurahDetailPage() {
               {isKnown ? (
                 <button
                   onClick={handleToggleKnown}
-                  className="rounded-full bg-success/10 px-4 py-1.5 text-xs font-semibold text-success"
+                  className="hit-44 rounded-full bg-success/10 px-4 py-1.5 text-xs font-semibold text-success"
                 >
                   ✓ Marked as known — in your revision cycle (tap to undo)
                 </button>
               ) : (
                 <button
                   onClick={handleToggleKnown}
-                  className="rounded-full border border-foreground/15 px-4 py-1.5 text-xs font-semibold text-muted hover:border-teal/40 hover:text-teal"
+                  className="hit-44 rounded-full border border-foreground/15 px-4 py-1.5 text-xs font-semibold text-muted hover:border-teal/40 hover:text-teal"
                 >
                   I already know this surah
                 </button>
@@ -119,7 +119,7 @@ export default function SurahDetailPage() {
       </header>
 
       {/* Learn / Practice tab toggle — pins below the top bar on scroll */}
-      <div className="sticky top-14 z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
+      <div className="sticky top-[calc(var(--safe-top)+3.5rem)] z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex gap-1 rounded-xl bg-foreground/5 p-1">
             <button

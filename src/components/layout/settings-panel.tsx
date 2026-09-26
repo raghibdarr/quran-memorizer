@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import BottomSheet from '@/components/ui/bottom-sheet';
 import { useSettingsStore } from '@/stores/settings-store';
 import { downloadBackup, importBackup } from '@/lib/backup';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
@@ -21,14 +21,14 @@ function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void 
     <button
       onClick={onToggle}
       className={cn(
-        'h-5 w-9 rounded-full transition-colors',
+        'relative h-7 w-12 shrink-0 rounded-full transition-colors',
         enabled ? 'bg-teal' : 'bg-foreground/20'
       )}
     >
       <div
         className={cn(
-          'h-4 w-4 rounded-full bg-white shadow transition-transform',
-          enabled ? 'translate-x-4.5' : 'translate-x-0.5'
+          'h-6 w-6 rounded-full bg-white shadow transition-transform duration-300 ease-[cubic-bezier(.34,1.45,.64,1)] motion-reduce:transition-none',
+          enabled ? 'translate-x-5.5' : 'translate-x-0.5'
         )}
       />
     </button>
@@ -74,8 +74,6 @@ export default function SettingsPanel() {
     localStorage.setItem('quran-dark-mode', String(next));
   };
 
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const [panelPos, setPanelPos] = useState({ top: 0, right: 0 });
 
   // Backup export/import (see src/lib/backup.ts — merge-based restore, never overwrite)
   const importFileRef = useRef<HTMLInputElement>(null);
@@ -98,40 +96,23 @@ export default function SettingsPanel() {
     }
   };
 
-  const handleToggle = () => {
-    if (!open && btnRef.current) {
-      const rect = btnRef.current.getBoundingClientRect();
-      setPanelPos({
-        top: rect.bottom + 8,
-        right: window.innerWidth - rect.right,
-      });
-    }
-    setOpen(!open);
-  };
 
   return (
     <div>
       <button
-        ref={btnRef}
-        onClick={handleToggle}
-        className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
+        onClick={() => setOpen(true)}
+        className="flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
         aria-label="Settings"
       >
         <SettingsIcon size={18} />
       </button>
 
-      {open && createPortal(
-        <>
-          <div className="fixed inset-0 z-[60]" onClick={() => setOpen(false)} />
-
-          <div
-            className="fixed z-[70] w-64 rounded-xl bg-card p-4 shadow-lg border border-foreground/10 max-h-[80vh] overflow-y-auto"
-            style={{ top: panelPos.top, right: panelPos.right }}
-          >
-            <h3 className="text-sm font-bold text-foreground">Settings</h3>
+      {/* A bottom sheet (M11c) — was a desktop popover positioned off the gear */}
+      <BottomSheet open={open} onClose={() => setOpen(false)} title="Settings">
+          <div>
 
             {/* Arabic Script */}
-            <div className="mt-3">
+            <div className="mt-5">
               <p className="text-xs font-medium text-muted">Arabic Script</p>
               <div className="mt-1.5 flex gap-1.5">
                 {SCRIPT_OPTIONS.map((opt) => (
@@ -139,7 +120,7 @@ export default function SettingsPanel() {
                     key={opt.value}
                     onClick={() => setArabicScript(opt.value)}
                     className={cn(
-                      'flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-colors',
+                      'min-h-11 flex-1 rounded-xl text-center text-sm font-medium transition-colors',
                       arabicScript === opt.value
                         ? 'bg-teal text-on-teal'
                         : 'bg-foreground/5 text-muted hover:bg-foreground/10'
@@ -152,13 +133,13 @@ export default function SettingsPanel() {
             </div>
 
             {/* Font Size */}
-            <div className="mt-3">
+            <div className="mt-5">
               <div className="flex items-center justify-between">
                 <p className="text-xs font-medium text-muted">Arabic Font Size</p>
                 {Math.round(arabicFontSize * 10) !== 10 && (
                   <button
                     onClick={() => setArabicFontSize(1)}
-                    className="text-[10px] text-teal hover:underline"
+                    className="-my-3 px-2 py-3 text-xs text-teal hover:underline"
                   >
                     Reset
                   </button>
@@ -168,7 +149,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10))}
                   disabled={arabicFontSize <= 0.8}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   −
                 </button>
@@ -178,7 +159,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setArabicFontSize(Math.min(1.6, Math.round((arabicFontSize + 0.1) * 10) / 10))}
                   disabled={arabicFontSize >= 1.6}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   +
                 </button>
@@ -186,12 +167,12 @@ export default function SettingsPanel() {
             </div>
 
             {/* Reciter */}
-            <div className="mt-3">
+            <div className="mt-5">
               <p className="text-xs font-medium text-muted">Reciter</p>
               <select
                 value={reciter}
                 onChange={(e) => setReciter(e.target.value)}
-                className="mt-1.5 w-full rounded-lg bg-foreground/5 px-3 py-1.5 text-xs font-medium text-foreground outline-none appearance-none cursor-pointer"
+                className="mt-1.5 min-h-11 w-full rounded-xl bg-foreground/5 px-3 text-base font-medium text-foreground outline-none appearance-none cursor-pointer"
                 style={{ colorScheme: 'auto' }}
               >
                 {RECITERS.map((r) => (
@@ -203,31 +184,31 @@ export default function SettingsPanel() {
             </div>
 
             {/* Toggles */}
-            <div className="mt-3 space-y-2.5">
-              <label className="flex items-center justify-between">
-                <span className="text-xs text-foreground">Dark Mode</span>
+            <div className="mt-3 space-y-0.5">
+              <label className="flex min-h-11 cursor-pointer items-center justify-between">
+                <span className="text-sm text-foreground">Dark Mode</span>
                 <Toggle enabled={darkMode} onToggle={handleDarkModeToggle} />
               </label>
 
-              <label className="flex items-center justify-between">
-                <span className="text-xs text-foreground">Transliteration</span>
+              <label className="flex min-h-11 cursor-pointer items-center justify-between">
+                <span className="text-sm text-foreground">Transliteration</span>
                 <Toggle enabled={transliterationEnabled} onToggle={toggleTransliteration} />
               </label>
 
-              <label className="flex items-center justify-between">
-                <span className="text-xs text-foreground">Translation</span>
+              <label className="flex min-h-11 cursor-pointer items-center justify-between">
+                <span className="text-sm text-foreground">Translation</span>
                 <Toggle enabled={translationEnabled} onToggle={toggleTranslation} />
               </label>
             </div>
 
             {/* Daily Goal */}
-            <div className="mt-3">
+            <div className="mt-5">
               <p className="text-xs font-medium text-muted">Daily Goal</p>
               <div className="mt-1.5 flex items-center gap-3">
                 <button
                   onClick={() => setDailyGoalActivities(Math.max(1, dailyGoalActivities - 1))}
                   disabled={dailyGoalActivities <= 1}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   −
                 </button>
@@ -237,7 +218,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => setDailyGoalActivities(Math.min(10, dailyGoalActivities + 1))}
                   disabled={dailyGoalActivities >= 10}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-foreground/5 text-sm font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/5 text-base font-bold text-muted hover:bg-foreground/10 disabled:opacity-30"
                 >
                   +
                 </button>
@@ -245,7 +226,7 @@ export default function SettingsPanel() {
             </div>
 
             {/* Data — backup & restore */}
-            <div className="mt-3">
+            <div className="mt-5">
               <p className="text-xs font-medium text-muted">Your Data</p>
               <div className="mt-1.5 flex gap-1.5">
                 <button
@@ -253,13 +234,13 @@ export default function SettingsPanel() {
                     try { downloadBackup(); setBackupMsg('Backup downloaded ✓'); }
                     catch { setBackupMsg('Export failed — try again'); }
                   }}
-                  className="flex-1 rounded-lg bg-foreground/5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-foreground/10"
+                  className="min-h-11 flex-1 rounded-xl bg-foreground/5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
                 >
                   Export backup
                 </button>
                 <button
                   onClick={() => importFileRef.current?.click()}
-                  className="flex-1 rounded-lg bg-foreground/5 py-2 text-xs font-medium text-foreground transition-colors hover:bg-foreground/10"
+                  className="min-h-11 flex-1 rounded-xl bg-foreground/5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
                 >
                   Import backup
                 </button>
@@ -281,9 +262,7 @@ export default function SettingsPanel() {
               Recitations: EveryAyah.com · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0)
             </p>
           </div>
-        </>,
-        document.body
-      )}
+      </BottomSheet>
     </div>
   );
 }

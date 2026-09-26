@@ -86,7 +86,7 @@ export default function RevisePage() {
 
   if (!surah) {
     return (
-      <div className="min-h-screen bg-cream p-6">
+      <div className="min-h-dvh bg-cream p-6">
         <p className="text-center text-sm text-muted">Loading surah…</p>
       </div>
     );
@@ -95,8 +95,8 @@ export default function RevisePage() {
   const lastRevised = plan?.lastRevisedAt[id] ?? null;
 
   return (
-    <div className="min-h-screen bg-cream pb-16">
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
+    <div className="min-h-dvh bg-cream pb-16">
+      <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">Revision</p>

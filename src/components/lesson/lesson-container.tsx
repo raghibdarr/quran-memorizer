@@ -10,6 +10,7 @@ import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import { useAppBack } from '@/hooks/use-app-back';
+import ConfirmSheet from '@/components/ui/confirm-sheet';
 import TajweedLegend from '@/components/ui/tajweed-legend';
 import { TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
@@ -160,10 +161,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
   return (
     <div
-      className="flex min-h-screen flex-col bg-cream"
+      className="flex min-h-dvh flex-col bg-cream"
       style={{ paddingBottom: 'var(--tabbar-clearance)' }}
     >
-      <header ref={headerRef} className="sticky top-0 z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+      <header ref={headerRef} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex items-center justify-between">
             <button onClick={goBackToParent} className="-ml-2 flex min-h-11 items-center px-2 text-sm text-muted hover:text-foreground">
@@ -173,7 +174,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowResetConfirm(true)}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-red-400/70 transition-colors hover:bg-red-500/10 hover:text-red-400"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-red-400/70 transition-colors hover:bg-red-500/10 hover:text-red-400"
                 title="Reset lesson"
               >
                 <TrashIcon size={14} />
@@ -192,30 +193,15 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         </div>
       </header>
 
-      {showResetConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-          <div className="tactile-card mx-4 w-full max-w-sm rounded-2xl bg-card p-6">
-            <h3 className="text-lg font-bold text-foreground">Reset Progress?</h3>
-            <p className="mt-2 text-sm text-muted">
-              This will restart this lesson from the Listen phase.
-            </p>
-            <div className="mt-4 flex gap-3">
-              <button
-                onClick={() => setShowResetConfirm(false)}
-                className="tactile-chip flex-1 rounded-xl bg-card py-2.5 text-sm font-semibold text-foreground"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleReset}
-                className="tactile-chip flex-1 rounded-xl bg-miss py-2.5 text-sm font-semibold text-on-miss"
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmSheet
+        open={showResetConfirm}
+        title="Reset progress?"
+        message="This will restart this lesson from the Listen phase."
+        confirmLabel="Reset lesson"
+        destructive
+        onConfirm={handleReset}
+        onCancel={() => setShowResetConfirm(false)}
+      />
 
       <main
         className={cn(

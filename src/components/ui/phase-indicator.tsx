@@ -29,7 +29,7 @@ export default function PhaseIndicator({ currentPhase, onPhaseClick }: PhaseIndi
         {prevPhase && onPhaseClick && (
           <button
             onClick={() => onPhaseClick(prevPhase.key)}
-            className="absolute -left-8 flex h-7 w-7 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
+            className="hit-44 absolute -left-8 flex h-7 w-7 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
             title={`Back to ${prevPhase.label}`}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>

@@ -532,14 +532,14 @@ export default function PracticeSession({
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => playAyah(ayah, idx)}
-                      className="rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
+                      className="hit-44 rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
                       title="Play ayah"
                     >
                       <PlayIcon />
                     </button>
                     <button
                       onClick={() => togglePassageAyah(ayah.key)}
-                      className="rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
+                      className="hit-44 rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
                       title={isAyahRevealed ? 'Hide' : 'Reveal'}
                     >
                       {isAyahRevealed ? <EyeOffIcon /> : <EyeIcon />}

@@ -357,3 +357,44 @@ html[data-nav-dir='back']::view-transition-new(root) {
 }
 html[data-nav-dir='swipe']::view-transition-old(root) { display: none; }
 html[data-nav-dir='swipe']::view-transition-new(root) { animation: 220ms var(--nav-ease) both nav-return; }
+
+/* ---------- Safe areas (M11c) ----------
+   In the native shells the WebView draws under the status bar (edge-to-edge;
+   capacitor.config SystemBars/contentInset). The body starts below it, sticky
+   headers pin below it, and a fixed backing keeps scrolled content from showing
+   through the clock. In browsers the inset is 0 and all of this is inert. */
+:root { --safe-top: env(safe-area-inset-top, 0px); }
+body { padding-top: var(--safe-top); }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--safe-top);
+  background: var(--c-cream);
+  z-index: 45;
+  pointer-events: none;
+}
+
+/* iOS zooms the page when focusing an input under 16px — never let it */
+@media (pointer: coarse) {
+  input, select, textarea { font-size: max(16px, 1em); }
+}
+
+/* No rubber-band dragging of the whole app; scroll containers keep their own */
+html, body { overscroll-behavior-y: none; }
+
+/* Tap-target floor (M11c): grows the invisible HIT AREA of a small control to
+   44×44 without changing how it looks or lays out. In the components layer so an
+   element's own positioning utilities (e.g. absolute) still win. */
+@layer components {
+  .hit-44 { position: relative; }
+  .hit-44::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}

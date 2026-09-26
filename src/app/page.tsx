@@ -172,7 +172,7 @@ export default function HomePage() {
   }, [allSurahs, progressLessons, juzSegmentsBySurah]);
 
   return (
-    <div className="min-h-screen bg-cream pb-24">
+    <div className="min-h-dvh bg-cream pb-24">
       <header className="px-4 pt-6 pb-2">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
@@ -296,7 +296,7 @@ export default function HomePage() {
         <div ref={controlsAnchorRef} className="h-0 mb-0!" aria-hidden />
 
         {/* Browse controls — pin to the top once scrolled past */}
-        <div className="sticky top-0 z-20 -mx-4 space-y-3 bg-cream/95 px-4 pb-3 pt-2 backdrop-blur-sm">
+        <div className="sticky top-[var(--safe-top)] z-20 -mx-4 space-y-3 bg-cream/95 px-4 pb-3 pt-2 backdrop-blur-sm">
           {/* Surahs / Juz Tab Toggle */}
           <div className="flex gap-1 rounded-xl border border-foreground/10 bg-foreground/5 p-1">
             <button
@@ -383,7 +383,7 @@ export default function HomePage() {
         {tab === 'surahs' ? (
           /* min-height keeps the page from collapsing (and the scroll from jumping)
              as search results shrink while typing */
-          <div className="min-h-[75vh]">
+          <div className="min-h-[75dvh]">
             {surahs.length === 0 && search.trim() && (
               <p className="py-8 text-center text-sm text-muted">No surahs found</p>
             )}

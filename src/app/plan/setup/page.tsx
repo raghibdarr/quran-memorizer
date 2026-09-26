@@ -252,8 +252,8 @@ export default function PlanSetupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream pb-28">
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
+    <div className="min-h-dvh bg-cream pb-28">
+      <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div>
@@ -383,7 +383,7 @@ export default function PlanSetupPage() {
                 <p className="mt-2 text-xs text-muted">
                   {selectedSurahIds.length} selected
                 </p>
-                <div className="mt-3 max-h-[50vh] space-y-1 overflow-y-auto">
+                <div className="mt-3 max-h-[50dvh] space-y-1 overflow-y-auto">
                   {visibleSurahs.map((s) => {
                     const selected = selectedSurahIds.includes(s.id);
                     return (
@@ -459,7 +459,7 @@ export default function PlanSetupPage() {
             <p className="mt-1 text-xs text-muted/70">
               {knownSurahIds.length} surah{knownSurahIds.length === 1 ? '' : 's'}, {knownLessonIds.length} lesson{knownLessonIds.length === 1 ? '' : 's'} marked as known
             </p>
-            <div className="mt-3 max-h-[55vh] space-y-1 overflow-y-auto">
+            <div className="mt-3 max-h-[55dvh] space-y-1 overflow-y-auto">
               {goalSurahs.map((s) => {
                 const known = knownSurahIds.includes(s.id);
                 const expanded = expandedSurah === s.id;
@@ -496,7 +496,7 @@ export default function PlanSetupPage() {
                       {scopedLessons.length > 1 && !known && (
                         <button
                           onClick={() => setExpandedSurah(expanded ? null : s.id)}
-                          className="shrink-0 rounded-md px-2 py-1 text-[10px] font-semibold text-muted hover:text-foreground"
+                          className="hit-44 shrink-0 rounded-md px-2 py-1 text-[10px] font-semibold text-muted hover:text-foreground"
                         >
                           {expanded ? 'Hide' : knownCount > 0 ? `${knownCount}/${scopedLessons.length}` : 'Lessons'}
                         </button>

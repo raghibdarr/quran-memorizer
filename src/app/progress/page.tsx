@@ -156,8 +156,8 @@ export default function ProgressPage() {
   const hasActivity = Object.keys(progressLessons).length > 0;
 
   return (
-    <div className="min-h-screen bg-cream pb-24">
-      <header className="sticky top-0 z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
+    <div className="min-h-dvh bg-cream pb-24">
+      <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-foreground">Progress</h1>

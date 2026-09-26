@@ -9,6 +9,7 @@ import { computeGoalAyahProgress, computeTodaysPlan } from '@/lib/plan';
 import { shouldCelebrateDay } from '@/lib/day-status';
 import { addLocalDays, endOfDayMs } from '@/lib/dates';
 import Button from '@/components/ui/button';
+import BottomSheet from '@/components/ui/bottom-sheet';
 import { CheckIcon, FlameIcon } from '@/components/ui/icons';
 
 /** One line tying today to the streak and the goal — shared by Home and lesson-complete */
@@ -74,27 +75,18 @@ export default function DayCompleteMoment() {
   const celebratedOn = useStatsStore((s) => s.dayCompleteCelebratedOn);
   const markDayCelebrated = useStatsStore((s) => s.markDayCelebrated);
 
-  if (!ready || !shouldCelebrateDay(dayStatus, { todayIso: today, celebratedOn, activitiesToday })) return null;
+  const open = ready && shouldCelebrateDay(dayStatus, { todayIso: today, celebratedOn, activitiesToday });
   const acknowledge = () => markDayCelebrated(today);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="day-complete-title"
-      onClick={acknowledge}
-    >
-      <div
-        className="tactile-card w-full max-w-sm rounded-2xl bg-card p-6 text-center"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <BottomSheet open={open} onClose={acknowledge} title="That's today's plan done" titleHidden>
+      <div className="pb-1 text-center">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/15 text-success">
           <CheckIcon size={30} />
         </div>
-        <h2 id="day-complete-title" className="mt-4 text-xl font-bold text-foreground">
+        <p className="mt-4 text-xl font-bold text-foreground" aria-hidden>
           That&apos;s today&apos;s plan done
-        </h2>
+        </p>
         <p className="mt-1 text-sm text-muted">Every review, revision and lesson — finished.</p>
         <div className="mt-4">
           <DayCompleteSummary />
@@ -103,6 +95,6 @@ export default function DayCompleteMoment() {
           Alhamdulillah
         </Button>
       </div>
-    </div>
+    </BottomSheet>
   );
 }

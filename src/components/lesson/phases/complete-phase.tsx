@@ -14,6 +14,7 @@ import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import { DayCompleteSummary } from '@/components/plan/day-complete';
+import ConfirmSheet from '@/components/ui/confirm-sheet';
 
 interface CompletePhaseProps {
   surah: Surah;
@@ -159,30 +160,15 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           Full Reset
         </button>
 
-        {showResetConfirm && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-            <div className="mx-4 w-full max-w-sm rounded-2xl bg-card p-6 shadow-xl">
-              <h3 className="text-lg font-bold text-foreground">Reset Lesson?</h3>
-              <p className="mt-2 text-sm text-muted">
-                This will erase all progress for this lesson and restart from the Listen phase.
-              </p>
-              <div className="mt-4 flex gap-3">
-                <button
-                  onClick={() => setShowResetConfirm(false)}
-                  className="flex-1 rounded-xl border border-foreground/10 py-2.5 text-sm font-medium text-foreground"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => { resetLesson(lessonDef.lessonId, surah.id); setShowResetConfirm(false); }}
-                  className="flex-1 rounded-xl bg-miss py-2.5 text-sm font-medium text-on-miss"
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        <ConfirmSheet
+          open={showResetConfirm}
+          title="Reset lesson?"
+          message="This will erase all progress for this lesson and restart from the Listen phase."
+          confirmLabel="Reset lesson"
+          destructive
+          onConfirm={() => { resetLesson(lessonDef.lessonId, surah.id); setShowResetConfirm(false); }}
+          onCancel={() => setShowResetConfirm(false)}
+        />
 
         <Link href="/">
           <Button variant="ghost" className="w-full">Back to Home</Button>

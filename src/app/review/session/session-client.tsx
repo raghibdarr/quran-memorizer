@@ -43,7 +43,7 @@ export default function ReviewSessionScreen() {
 
   return (
     <div className="min-h-dvh bg-cream pb-8">
-      <div className="sticky top-0 z-10 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
+      <div className="sticky top-[var(--safe-top)] z-10 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between">
           <button onClick={exit} className="-ml-2 flex min-h-11 items-center px-2 text-sm text-muted hover:text-foreground">
             &larr; Exit Review
