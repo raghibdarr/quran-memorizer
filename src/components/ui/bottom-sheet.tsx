@@ -29,6 +29,8 @@ interface BottomSheetProps {
   titleHidden?: boolean;
   /** Celebrations/acknowledgements can require their button; default: drag, scrim and Esc close */
   dismissible?: boolean;
+  /** A labelled "Done" beside the title — for panels with no button of their own (settings, account) */
+  doneButton?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -58,7 +60,7 @@ type Drag = {
  * scrollable element's browser pan cancels pointer streams on the first move —
  * only a non-passive touchmove can claim the gesture from the scroller.
  */
-export default function BottomSheet({ open, onClose, title, titleHidden, dismissible = true, className, children }: BottomSheetProps) {
+export default function BottomSheet({ open, onClose, title, titleHidden, dismissible = true, doneButton, className, children }: BottomSheetProps) {
   const [rendered, setRendered] = useState(open);
   const sheetRef = useRef<HTMLDivElement>(null);
   const scrimRef = useRef<HTMLDivElement>(null);
@@ -272,10 +274,22 @@ export default function BottomSheet({ open, onClose, title, titleHidden, dismiss
           <span className="h-1.5 w-10 rounded-full bg-foreground/20" aria-hidden />
         </div>
         <div className="px-5">
-          {title && (
-            <h2 id={titleId} className={cn('pb-3 text-lg font-bold text-foreground', titleHidden && 'sr-only')}>
-              {title}
-            </h2>
+          {title && !titleHidden && doneButton ? (
+            // A visible, labelled way out — the grab handle alone isn't discoverable
+            <div className="flex items-start justify-between gap-3 pb-3">
+              <h2 id={titleId} className="text-lg font-bold text-foreground">
+                {title}
+              </h2>
+              <button type="button" onClick={onClose} className="-my-2.5 -mr-2 min-h-11 px-2 text-sm font-semibold text-teal">
+                Done
+              </button>
+            </div>
+          ) : (
+            title && (
+              <h2 id={titleId} className={cn('pb-3 text-lg font-bold text-foreground', titleHidden && 'sr-only')}>
+                {title}
+              </h2>
+            )
           )}
           {children}
         </div>

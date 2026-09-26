@@ -8,7 +8,7 @@ import BottomSheet from '@/components/ui/bottom-sheet'
 
 function AccountMenu({ open, email, onSignOut, onClose }: { open: boolean; email: string; onSignOut: () => void; onClose: () => void }) {
   return (
-    <BottomSheet open={open} onClose={onClose} title="Account">
+    <BottomSheet open={open} onClose={onClose} title="Account" doneButton>
       <p className="-mt-2 text-sm text-muted">{email}</p>
       <button
         onClick={onSignOut}

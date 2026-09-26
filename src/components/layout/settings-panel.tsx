@@ -166,7 +166,7 @@ export default function SettingsPanel() {
       </button>
 
       {/* A bottom sheet (M11c) — was a desktop popover positioned off the gear */}
-      <BottomSheet open={open} onClose={() => setOpen(false)} title="Settings">
+      <BottomSheet open={open} onClose={() => setOpen(false)} title="Settings" doneButton>
           <div>
 
             {/* Arabic Script */}
