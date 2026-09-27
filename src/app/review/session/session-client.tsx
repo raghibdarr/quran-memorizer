@@ -6,6 +6,7 @@ import type { LessonReviewCard } from '@/types/quran';
 import { useReviewStore } from '@/stores/review-store';
 import { useReviewQueue } from '@/hooks/use-review-queue';
 import { useAppBack } from '@/hooks/use-app-back';
+import { useContinueToday } from '@/hooks/use-today-run';
 import ReviewSession from '@/components/review/review-session';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
@@ -25,8 +26,10 @@ export default function ReviewSessionScreen() {
   const params = useSearchParams();
   const queue = useReviewQueue();
   const lessonCards = useReviewStore((s) => s.lessonCards);
-  const exitHref = params.get('from') === 'plan' ? '/' : '/review';
+  const fromParam = params.get('from');
+  const exitHref = fromParam === 'plan' || fromParam === 'today' ? '/' : '/review';
   const exit = useAppBack(exitHref);
+  const continueToday = useContinueToday();
 
   // Frozen on first render: ratings update the stores during the session, and the
   // session must not reshuffle (or shrink) underneath the user
@@ -58,7 +61,7 @@ export default function ReviewSessionScreen() {
 
       <main className="mx-auto max-w-2xl px-4 py-6">
         {frozen.cards.length > 0 ? (
-          <ReviewSession dueCards={frozen.cards} earlyIds={frozen.early} onComplete={exit} />
+          <ReviewSession dueCards={frozen.cards} earlyIds={frozen.early} onComplete={fromParam === 'today' ? continueToday : exit} />
         ) : (
           <div className="py-16 text-center">
             <p className="text-sm font-semibold text-foreground">Nothing to review here right now</p>

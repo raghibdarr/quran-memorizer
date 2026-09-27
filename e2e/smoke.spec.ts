@@ -98,9 +98,9 @@ test.describe('smoke', () => {
     await expect(page.getByText('· 12 due')).toBeVisible()
 
     for (let i = 0; i < 10; i++) {
-      await page.getByRole('button', { name: /rate my recall/i }).click()
-      await page.getByRole('button', { name: 'Got it' }).click()
-      await page.getByRole('button', { name: 'Submit Review' }).click()
+      await page.getByRole('button', { name: /i've recited it/i }).click()
+      // The one-tap path: every ayah fine
+      await page.getByRole('button', { name: /all good/i }).click()
       await page.getByRole('button', { name: i < 9 ? 'Next review' : 'Finish Batch' }).click()
     }
 
@@ -152,9 +152,10 @@ test.describe('smoke', () => {
     await expect(moment).toHaveCount(0) // not before the last task
 
     await page.getByText('Review 1 recent lesson').click()
-    await page.getByRole('button', { name: /rate my recall/i }).click()
+    await page.getByRole('button', { name: /i've recited it/i }).click()
+    // The per-ayah path
     for (const rate of await page.getByRole('button', { name: 'Got it' }).all()) await rate.click()
-    await page.getByRole('button', { name: 'Submit Review' }).click()
+    await page.getByRole('button', { name: 'Submit review' }).click()
     await page.getByRole('button', { name: 'Finish Review' }).click()
 
     // Back on Home (plan deep-link returns there): the moment, tied to streak + tomorrow

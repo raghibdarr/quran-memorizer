@@ -14,6 +14,7 @@ import ProgressBar from '@/components/ui/progress-bar';
 import { ArrowRightIcon, BookIcon, CheckIcon, RefreshIcon, StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
+import { formatTodayTime, nextTodayHref } from '@/lib/today-run';
 import { formatLessonTime } from '@/lib/lesson-time';
 import { lessonWordCounts } from '@/lib/curriculum';
 
@@ -99,6 +100,17 @@ export default function TodaysPlanCard() {
         </div>
         <ProgressBar value={progress.percentage} className="mt-1" />
       </div>
+      )}
+
+      {/* One run through the whole day (persona tests): reviews → revisions → new lesson,
+          without a trip back here in between */}
+      {!allDone && nextTodayHref(todaysPlan) && (
+        <Link href={nextTodayHref(todaysPlan)!} className="mt-3 block">
+          <span className="tactile-btn flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-teal text-sm font-semibold text-on-teal">
+            Start today · {formatTodayTime(todaysPlan)}
+            <ArrowRightIcon size={14} />
+          </span>
+        </Link>
       )}
 
       {showKnownBanner && (

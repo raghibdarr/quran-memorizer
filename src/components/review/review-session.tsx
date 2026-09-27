@@ -166,17 +166,18 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
     setAyahRatings((prev) => ({ ...prev, [ayahNumber]: rating }));
   }, []);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback((ratings: Record<number, AyahRating> = ayahRatings) => {
     if (!lessonData) return;
+    if (ratings !== ayahRatings) setAyahRatings(ratings);
 
     for (const ayah of lessonData.ayahs) {
-      const rating = ayahRatings[ayah.number];
+      const rating = ratings[ayah.number];
       if (rating) {
         reviewAyahCard(currentCard.surahId, ayah.number, ratingToQuality(rating));
       }
     }
 
-    const qualities = lessonData.ayahs.map((a) => ratingToQuality(ayahRatings[a.number] ?? 'missed'));
+    const qualities = lessonData.ayahs.map((a) => ratingToQuality(ratings[a.number] ?? 'missed'));
     const worstQuality = Math.min(...qualities);
     reviewLessonCard(currentCard.lessonId, worstQuality, earlyIds?.has(currentCard.lessonId) ?? false);
 
@@ -184,6 +185,14 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
     stopPlayback();
     setSubmitted(true);
   }, [lessonData, ayahRatings, currentCard, earlyIds, reviewAyahCard, reviewLessonCard, recordActivity, stopPlayback]);
+
+  // The fast path (commuter persona): most reviews go fine — one tap, not one per ayah
+  const markRestGotIt = useCallback(() => {
+    if (!lessonData) return;
+    const filled = { ...ayahRatings };
+    for (const a of lessonData.ayahs) filled[a.number] ??= 'got-it';
+    handleSubmit(filled);
+  }, [lessonData, ayahRatings, handleSubmit]);
 
   const advance = useCallback(() => {
     setBatchBreak(false);
@@ -317,9 +326,9 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
 
           <Button onClick={() => {
             setRevealed(true);
-            setHiddenAyahs(new Set(lessonData.ayahs.map((a) => a.number)));
+            setHiddenAyahs(new Set());
           }} className="w-full">
-            I've Recited — Rate My Recall
+            I&apos;ve recited it, show me
           </Button>
         </div>
       )}
@@ -444,33 +453,8 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
             );
           })}
 
-          {/* Media controls */}
-          {!submitted && (
-            <MediaControlsBar
-              playingAll={playingAll}
-              currentIdx={currentAyahIndex}
-              total={lessonData.ayahs.length}
-              idleLabel="Tap ayah or play"
-              onPlayAll={playAllAyahs}
-              onStop={stopPlayback}
-              onRestart={restartPlayback}
-            />
-          )}
-
-          {/* Submit / Next buttons */}
-          {!submitted && (
-            <Button
-              onClick={handleSubmit}
-              disabled={!allRated}
-              className="w-full"
-            >
-              {allRated ? 'Submit Review' : `Rate all ${lessonData.ayahs.length} ayahs to continue`}
-            </Button>
-          )}
-
           {submitted && (
-            <div className="space-y-3">
-              <div className={cn(
+            <div className={cn(
                 'rounded-xl border-[1.5px] p-3 text-center text-sm font-medium',
                 worstRating === 'got-it' && 'border-success/30 bg-success/10 text-success',
                 worstRating === 'hesitated' && 'border-gold/30 bg-gold/10 text-gold-deep',
@@ -479,12 +463,42 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
                 {worstRating === 'got-it' && `Great recall! Next review ${nextReviewLabel}.`}
                 {worstRating === 'hesitated' && `Good effort — next review ${nextReviewLabel}.`}
                 {worstRating === 'missed' && `No worries — next review ${nextReviewLabel}.`}
-              </div>
+            </div>
+          )}
+
+          {/* Pinned footer: the player and the one action that matters now stay in
+              thumb reach (they used to sit below the fold, under the player) */}
+          <div className="sticky bottom-0 z-10 -mx-4 space-y-2 bg-cream/95 px-4 pt-2 backdrop-blur-sm" style={{ paddingBottom: 'var(--tabbar-clearance)' }}>
+            {!submitted && (
+              <MediaControlsBar
+                className="static"
+                playingAll={playingAll}
+                currentIdx={currentAyahIndex}
+                total={lessonData.ayahs.length}
+                idleLabel="Tap ayah or play"
+                onPlayAll={playAllAyahs}
+                onStop={stopPlayback}
+                onRestart={restartPlayback}
+              />
+            )}
+            {submitted ? (
               <Button onClick={handleNext} className="w-full">
                 {isLastCard ? 'Finish Review' : isLastInBatch ? 'Finish Batch' : 'Next review'}
               </Button>
-            </div>
-          )}
+            ) : allRated ? (
+              <Button onClick={() => handleSubmit()} className="w-full">
+                Submit review
+              </Button>
+            ) : Object.keys(ayahRatings).length === 0 ? (
+              <Button onClick={markRestGotIt} className="w-full">
+                All good — I got every ayah
+              </Button>
+            ) : (
+              <Button onClick={markRestGotIt} variant="secondary" className="w-full">
+                The rest were fine — submit
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </div>

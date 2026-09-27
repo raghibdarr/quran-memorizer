@@ -12,6 +12,7 @@ import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
 import { StarIcon } from '@/components/ui/icons';
 import { useAppBack } from '@/hooks/use-app-back';
+import { inTodayRun, useContinueToday } from '@/hooks/use-today-run';
 
 // Revision is a RECALL TEST, not a read-through (M4, audit m8/§4a-6): each ayah
 // starts hidden, the user recites from memory, reveals to check, and self-rates.
@@ -71,6 +72,7 @@ export default function RevisePage() {
   }, [surah, plan, allSurahs, juzIndex, id]);
 
   const leave = useAppBack('/');
+  const continueToday = useContinueToday();
   const finishRevision = () => {
     markSurahRevised(id);
     if (surah) {
@@ -81,7 +83,8 @@ export default function RevisePage() {
         timestamp: Date.now(),
       });
     }
-    leave();
+    if (inTodayRun()) continueToday();
+    else leave();
   };
 
   if (!surah) {
