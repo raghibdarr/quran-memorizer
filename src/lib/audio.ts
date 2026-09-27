@@ -10,7 +10,7 @@ export interface ReciterOption {
 
 /** Reciters available on everyayah.com. Single source of truth — used by both the AudioController and the settings UI. */
 export const RECITERS: ReciterOption[] = [
-  { id: 'Alafasy_128kbps', name: 'Mishary Alafasy', hint: 'Default — clear, modern' },
+  { id: 'Alafasy_128kbps', name: 'Mishary Alafasy', hint: 'Default, clear and modern' },
   { id: 'Husary_128kbps', name: 'Mahmoud Al-Hussary', hint: 'Slower, beginner-friendly' },
   { id: 'Abdul_Basit_Murattal_192kbps', name: 'Abdul Basit (Murattal)', hint: 'Slow, ornate' },
   { id: 'Minshawy_Murattal_128kbps', name: 'Al-Minshawy (Murattal)', hint: 'Classical' },

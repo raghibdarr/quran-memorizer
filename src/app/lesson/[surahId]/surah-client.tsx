@@ -154,7 +154,7 @@ export default function SurahDetailPage() {
                   onClick={handleToggleKnown}
                   className="hit-44 rounded-full bg-success/10 px-4 py-1.5 text-xs font-semibold text-success"
                 >
-                  ✓ Marked as known — in your revision cycle (tap to undo)
+                  ✓ Marked as known and in your revision cycle. Tap to undo.
                 </button>
               ) : (
                 <button
@@ -234,8 +234,8 @@ export default function SurahDetailPage() {
                         <p className="mt-1 text-xs text-muted">{surah.versesCount} ayahs</p>
                         <p className="mt-1 text-[11px] text-muted/70">
                           {isKnown
-                            ? 'Optional — you already know this; it’s in your revision cycle'
-                            : `${formatLessonTime(lessonWordCounts(lesson))} — stop anytime, progress saves`}
+                            ? 'Optional. You already know this one, and it’s in your revision cycle.'
+                            : `${formatLessonTime(lessonWordCounts(lesson))} · stop anytime, your progress saves`}
                         </p>
                       </>
                     )}

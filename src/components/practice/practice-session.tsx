@@ -580,7 +580,7 @@ export default function PracticeSession({
                   </>
                 ) : (
                   <div className="py-4 text-center">
-                    <p className="text-sm text-muted">Hidden — tap eye to reveal</p>
+                    <p className="text-sm text-muted">Hidden. Tap the eye to reveal.</p>
                   </div>
                 )}
               </Card>
@@ -635,7 +635,7 @@ export default function PracticeSession({
           {overallScore}%
         </div>
         <h3 className="mt-3 text-xl font-bold text-foreground">Practice Complete</h3>
-        <p className="text-sm text-muted">{title} — {ayahs.length} ayahs</p>
+        <p className="text-sm text-muted">{title} · {ayahs.length} ayahs</p>
       </div>
 
       {/* Summary stats */}

@@ -31,10 +31,10 @@ export function ReminderOffer() {
   const [result, setResult] = useState<'on' | 'blocked' | null>(null);
 
   if (result === 'on') {
-    return <p className="mt-4 text-xs text-muted">Reminder set for {timeLabel(time.hour, time.minute)} — change it in Settings.</p>;
+    return <p className="mt-4 text-xs text-muted">Reminder set for {timeLabel(time.hour, time.minute)}. You can change it in Settings.</p>;
   }
   if (result === 'blocked') {
-    return <p className="mt-4 text-xs text-muted">Notifications are off for Takrar — you can allow them in your phone&apos;s settings.</p>;
+    return <p className="mt-4 text-xs text-muted">Notifications are off for Takrar. You can turn them on in your phone&apos;s settings.</p>;
   }
   if (!isNative() || enabled || answered) return null;
 
@@ -140,7 +140,7 @@ export default function DayCompleteMoment() {
         <p className="mt-4 text-xl font-bold text-foreground" aria-hidden>
           That&apos;s today&apos;s plan done
         </p>
-        <p className="mt-1 text-sm text-muted">Every review, revision and lesson — finished.</p>
+        <p className="mt-1 text-sm text-muted">Every review, revision and lesson is done.</p>
         <div className="mt-4">
           <DayCompleteSummary />
         </div>

@@ -121,7 +121,7 @@ export function planReminders(state: ReminderState): Reminder[] {
       id: REMINDER_ID_BASE + COMEBACK_DAY,
       at: atOnDay(state.now, COMEBACK_DAY, state.time),
       title: 'Your hifdh is waiting',
-      body: 'Come back to a short first day — your weakest reviews first, nothing piled up.',
+      body: 'Your first day back is short, with your weakest reviews first. Nothing has piled up.',
       url: '/',
     });
   }

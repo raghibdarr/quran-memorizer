@@ -57,7 +57,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
   };
 
   const lessonLabel = totalLessons > 1
-    ? `${surah.nameSimple} — Lesson ${lessonId.split('-')[1]}`
+    ? `${surah.nameSimple} · Lesson ${lessonId.split('-')[1]}`
     : surah.nameSimple;
 
   return (
@@ -127,7 +127,7 @@ export default function TestPhase({ surah, ayahs, lessonId, totalLessons, onComp
                   </p>
 
                   <p className="mt-1 text-sm text-muted">
-                    {isFlawless ? 'No mistakes — well done!'
+                    {isFlawless ? 'No mistakes. Well done!'
                       : isFail && !isLevel3 ? 'Go back and review the ayahs you struggled with, then try again.'
                       : resultScreen.mistakes.length > 0 ? `${resultScreen.mistakes.length} ayah${resultScreen.mistakes.length !== 1 ? 's' : ''} flagged for review.`
                       : 'Great job!'}
@@ -674,7 +674,7 @@ function FullRecallTest({
                 <button onClick={() => toggleReveal(ayah.key)} className="w-full">
                   <p className="text-center text-sm text-muted py-2">
                     {isFlagged && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', flagColor)} />}
-                    Ayah {ayah.number} — tap to reveal
+                    Ayah {ayah.number} · tap to reveal
                   </p>
                 </button>
               )}

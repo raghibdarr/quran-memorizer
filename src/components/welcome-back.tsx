@@ -25,7 +25,7 @@ export default function WelcomeBack() {
 
   const streakLine =
     reentry.streakBefore > 1
-      ? `Your ${reentry.streakBefore}-day streak paused while you were away — your best is still ${Math.max(longestStreak, reentry.streakBefore)} days. Today starts the next one.`
+      ? `Your ${reentry.streakBefore}-day streak paused while you were away. Your best is still ${Math.max(longestStreak, reentry.streakBefore)} days. Today starts the next one.`
       : longestStreak > 1
         ? `Your best streak is ${longestStreak} days. Today starts the next one.`
         : null;
@@ -34,7 +34,7 @@ export default function WelcomeBack() {
     <BottomSheet open={open} onClose={acknowledge} title="Welcome back" className="text-center">
       <div className="pb-1">
         <p className="text-sm text-muted">
-          It&apos;s been {reentry.gapDays} days. What you memorized is still here — and so is every bit of your progress.
+          It&apos;s been {reentry.gapDays} days. What you memorized is still here, and so is all your progress.
         </p>
         {streakLine && (
           <p className="mt-3 flex items-start justify-center gap-1.5 text-left text-sm text-gold-deep">

@@ -67,7 +67,7 @@ const STEP_LABELS: Record<LearnStep, string> = {
   'listen-with-text': 'Listen & repeat aloud with the text',
   'recite-from-memory': 'Now recite from memory',
   'reinforce-with-text': 'Listen again to reinforce',
-  'final-memory': 'Final recall — recite from memory',
+  'final-memory': 'Final recall from memory',
   'word-order': 'Arrange the words in order',
 };
 
@@ -402,14 +402,14 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     const isFinalStep = learnStep === 'final-memory';
 
     if (isFinalStep) {
-      if (isFirst) return { title: 'Final recall — no peeking!', subtitle: 'Recite the ayah from memory, then check' };
-      if (isLast) return { title: 'Last one — you\'ve got this!', subtitle: 'One more successful recall to prove it\'s solid' };
-      return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Keep going — each recall strengthens the memory' };
+      if (isFirst) return { title: 'Final recall. No peeking!', subtitle: 'Recite the ayah from memory, then check' };
+      if (isLast) return { title: 'Last one!', subtitle: 'One more good recall and it\'s solid' };
+      return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Each recall makes it stick a little more' };
     }
 
     if (isFirst) return { title: 'Time to test your memory', subtitle: 'Try to recite without looking, then reveal to check' };
     if (isLast) return { title: 'Almost there!', subtitle: 'One more successful recall before the next step' };
-    return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Repeat — each time makes it stronger' };
+    return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Each time makes it stronger' };
   };
 
   // --- Word ordering ---
@@ -560,7 +560,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                     className="w-full cursor-pointer"
                   >
                     <p className="text-center text-sm text-muted py-2">
-                      Ayah {ayah.number} — tap to reveal
+                      Ayah {ayah.number} · tap to reveal
                     </p>
                   </button>
                 )}
@@ -587,7 +587,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         )}
         {!allRevealed && (
           <button onClick={() => moveToNextAyah()} className="mx-auto block min-h-11 px-3 text-xs text-muted hover:text-foreground">
-            Skip chaining — next ayah →
+            Skip chaining, go to the next ayah →
           </button>
         )}
 
@@ -622,7 +622,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                 Try Again
               </Button>
               <Button onClick={() => moveToNextAyah()} className="flex-1">
-                Got It — Next Ayah
+                Got it, next ayah
               </Button>
             </div>
           </div>
@@ -727,7 +727,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                     className="w-full cursor-pointer"
                   >
                     <p className="text-center text-sm text-muted py-2">
-                      Ayah {ayah.number} — tap to reveal
+                      Ayah {ayah.number} · tap to reveal
                     </p>
                   </button>
                 )}
@@ -913,7 +913,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         && learnStep === 'listen-with-text' && repCount === 0 && (
         <div className="flex items-center gap-3 rounded-xl bg-success/5 px-4 py-3">
           <p className="flex-1 text-xs text-foreground">
-            <span className="font-semibold text-success">Ayah {ayahs[ayahIndex - 1].number} done ✓</span> Progress saved — a good place to stop if you need to.
+            <span className="font-semibold text-success">Ayah {ayahs[ayahIndex - 1].number} done ✓</span> Progress saved. This is a good place to stop if you need to.
           </p>
           {onPause && (
             <button onClick={onPause} className="min-h-11 shrink-0 rounded-lg px-3 text-xs font-semibold text-teal hover:bg-teal/10">
@@ -1044,7 +1044,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                     {learnStep === 'final-memory' ? 'Memory locked in!' : 'Looking good!'}
                   </p>
                   <p className="mt-1 text-sm text-muted">
-                    {repCount} completed — {learnStep === 'final-memory'
+                    {repCount} done, {learnStep === 'final-memory'
                       ? 'ready for a word challenge'
                       : 'ready for the next step'}
                   </p>
@@ -1067,7 +1067,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                   <p className="mt-2 text-sm text-muted">{prompt.subtitle}</p>
                 </div>
                 <Button onClick={() => setMemoryRevealed(true)} className="w-full">
-                  I've recited — show me the answer
+                  I've recited it, show me
                 </Button>
               </>
             ) : (
@@ -1091,7 +1091,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
                     onClick={() => handleMemoryRep(false)}
                     className="tactile-chip flex-1 rounded-xl bg-card py-3 text-sm font-semibold text-foreground"
                   >
-                    Not quite — hear it again
+                    Not quite, play it again
                   </button>
                   <Button
                     onClick={() => handleMemoryRep(true)}
@@ -1175,7 +1175,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           )}
 
           {orderResult === 'wrong' && (
-            <p className="text-center text-sm text-miss">Not quite — try again!</p>
+            <p className="text-center text-sm text-miss">Not quite. Try again.</p>
           )}
         </div>
       )}
@@ -1186,7 +1186,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
           Skip this step
         </button>
         <button onClick={skipAyah} className="min-h-11 px-2 text-xs text-muted transition-colors hover:text-foreground">
-          I know this ayah — skip it
+          I know this ayah, skip it
         </button>
       </div>
 

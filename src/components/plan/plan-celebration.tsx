@@ -50,7 +50,7 @@ export default function PlanCelebration() {
         </div>
         <h2 className="mt-4 text-xl font-bold text-teal">Alhamdulillah</h2>
         <p className="mt-2 text-sm text-foreground">
-          You&apos;ve completed your plan — {goalLabel}.
+          You&apos;ve completed your plan: {goalLabel}.
         </p>
         <p className="mt-1 text-xs text-muted">
           {progress.totalLessons} lesson{progress.totalLessons === 1 ? '' : 's'} memorized.

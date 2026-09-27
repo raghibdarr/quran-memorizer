@@ -167,7 +167,7 @@ export default function ReviewPage() {
                     <p className="text-xs text-muted">
                       {queue.overdueCount > 0 ? `${queue.overdueCount} overdue · ` : ''}
                       {dueCount > RETENTION.REVIEW_BATCH_SIZE
-                        ? `In batches of ${RETENTION.REVIEW_BATCH_SIZE} — stop whenever you need`
+                        ? `In batches of ${RETENTION.REVIEW_BATCH_SIZE}. Stop whenever you need to.`
                         : 'Tap to start your review session'}
                     </p>
                   </div>
@@ -221,7 +221,7 @@ export default function ReviewPage() {
           <Card className="border border-miss/25">
             <p className="text-sm font-bold text-foreground">Needs focused practice</p>
             <p className="mt-0.5 text-xs text-muted">
-              Missed {RETENTION.LEECH_THRESHOLD}+ reviews in a row — drill these on their own before the next review.
+              Missed {RETENTION.LEECH_THRESHOLD}+ reviews in a row. Practice these on their own before the next review.
             </p>
             <div className="mt-2 space-y-1">
               {leeches.slice(0, 8).map((c) => {

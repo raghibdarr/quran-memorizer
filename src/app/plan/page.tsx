@@ -194,7 +194,7 @@ export default function PlanDashboardPage() {
             {!plan.deadline && progress.projectedFinishDate && progress.lessonsRemaining > 0 && (
               <>Projected finish: {new Date(progress.projectedFinishDate + 'T00:00:00').toLocaleDateString(undefined, { dateStyle: 'long' })}</>
             )}
-            {!plan.deadline && progress.lessonsRemaining === 0 && 'Plan complete — ma shaa Allah'}
+            {!plan.deadline && progress.lessonsRemaining === 0 && 'Plan complete. Ma shaa Allah!'}
             {plan.deadline && progress.isOnTrack && (
               <>On track · {Math.max(0, progress.daysRemaining ?? 0)}d remaining</>
             )}
@@ -288,7 +288,7 @@ export default function PlanDashboardPage() {
                 )}
                 {plan.lessonsPerDay > 5 && (
                   <p className="mt-2 text-xs text-gold">
-                    Intensive pace — traditional hifdh is 1–2/day. Above 5 is retreat/Ramadan-intensive territory.
+                    That is an intensive pace. Traditional hifdh is 1–2 lessons a day; more than 5 is usually for a retreat or Ramadan.
                   </p>
                 )}
               </>

@@ -4,7 +4,7 @@ export const dynamic = 'force-static';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Takrar — Quran Memorization',
+    name: 'Takrar · Quran Memorization',
     short_name: 'Takrar',
     description: 'A guided Quran memorization app with spaced repetition.',
     start_url: '/',

@@ -48,7 +48,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     startLesson(lessonDef.lessonId, surah.id);
     // Track last activity for home page continue card
     const label = totalLessons > 1
-      ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
+      ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber}`
       : surah.nameSimple;
     setLastActivity({
       type: 'lesson',
@@ -78,7 +78,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
   const activePhase: LessonPhase = practicePhase ?? lesson.currentPhase;
   const lessonTitle = totalLessons > 1
-    ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber}`
+    ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber}`
     : surah.nameSimple;
 
   const goToPhase = (phase: LessonPhase) => {

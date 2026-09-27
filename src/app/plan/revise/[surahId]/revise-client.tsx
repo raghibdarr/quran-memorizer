@@ -125,8 +125,8 @@ export default function RevisePage() {
                     {isPartial ? 'Recite this portion from memory' : 'Recite from memory'}
                   </p>
                   <p className="mt-0.5 text-xs text-muted">
-                    Every ayah starts hidden. Recite out loud, reveal to check yourself, and rate honestly —
-                    your ratings keep the health dashboard truthful.
+                    Every ayah starts hidden. Recite out loud, then reveal to check yourself. Honest ratings keep
+                    your strength data accurate.
                   </p>
                   {lastRevised && (
                     <p className="mt-1 text-[11px] text-muted/70">
@@ -144,7 +144,7 @@ export default function RevisePage() {
                 onClick={() => { recordActivity(); finishRevision(); }}
                 className="text-xs font-medium text-muted underline-offset-2 hover:text-foreground hover:underline"
               >
-                I revised this elsewhere — just mark it revised
+                I revised this elsewhere, mark it done
               </button>
             </div>
           </>

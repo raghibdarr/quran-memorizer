@@ -119,7 +119,7 @@ export default function TodaysPlanCard() {
             Track your {plan.knownSurahIds.length} known surah{plan.knownSurahIds.length === 1 ? '' : 's'} for revision?
           </p>
           <p className="mt-0.5 text-[11px] text-muted">
-            They&apos;ll join your revision schedule, marked &quot;not checked yet&quot; until your first recall — recall tests keep them from fading.
+            They&apos;ll join your revision schedule, marked &quot;not checked yet&quot; until you first recite them. Regular recall keeps them from fading.
             (You can export a backup first from Settings.)
           </p>
           <div className="mt-2 flex gap-2">
@@ -257,7 +257,7 @@ export default function TodaysPlanCard() {
           <section>
             <StreamLabel
               name="Sabaq"
-              hint={revisionPending && completedCount < newLessonCount ? 'New memorization — best after the revision above' : 'Today’s new memorization'}
+              hint={revisionPending && completedCount < newLessonCount ? 'New memorization, best done after the revision above' : 'Today’s new memorization'}
             />
             {todaysPlan.newLessons.map((lesson) => {
               const surah = surahById.get(lesson.surahId);
@@ -307,7 +307,7 @@ export default function TodaysPlanCard() {
 
         {todaysPlan.isRestDay && sabqiCount + manzilReviewCount === 0 && (
           <p className="px-3 py-2 text-xs text-muted">
-            No reviews due. Enjoy your rest day{optionalNext ? ' — or keep going if you like:' : '.'}
+            No reviews due. Enjoy your rest day{optionalNext ? ', or keep going if you like:' : '.'}
           </p>
         )}
 
@@ -332,7 +332,7 @@ export default function TodaysPlanCard() {
         {!todaysPlan.isRestDay && totalTasks === 0 && (
           <p className="px-3 py-2 text-xs text-muted">
             {plan.goalType === 'maintain'
-              ? 'Nothing due today — your revision cycle is up to date.'
+              ? 'Nothing due today. Your revision cycle is up to date.'
               : planFinished
                 ? 'Plan complete. Reviews will continue automatically.'
                 : 'Nothing left for today.'}

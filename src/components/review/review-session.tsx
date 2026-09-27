@@ -230,9 +230,9 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M20 6 9 17l-5-5" /></svg>
         </div>
         <div>
-          <h3 className="text-lg font-bold text-foreground">Batch done — {currentIndex + 1} of {dueCards.length} reviewed</h3>
+          <h3 className="text-lg font-bold text-foreground">Batch done: {currentIndex + 1} of {dueCards.length} reviewed</h3>
           <p className="mt-1 text-sm text-muted">
-            {remaining.length} more due{overdueLeft > 0 ? ` · ${overdueLeft} overdue` : ''}. Your ratings are saved — stopping here is fine.
+            {remaining.length} more due{overdueLeft > 0 ? ` · ${overdueLeft} overdue` : ''}. Your ratings are saved, so stopping here is fine.
           </p>
         </div>
         <div className="space-y-2">
@@ -297,7 +297,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
           {lessonData.surah.nameSimple}
         </h3>
         <p className="text-sm text-muted">
-          Lesson {currentCard.lessonNumber} — Ayahs {currentCard.ayahStart}–{currentCard.ayahEnd}
+          Lesson {currentCard.lessonNumber} · Ayahs {currentCard.ayahStart}–{currentCard.ayahEnd}
         </p>
         <span className="arabic-text text-xl text-muted/60">{lessonData.surah.nameArabic}</span>
       </div>
@@ -415,7 +415,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
 
                 {isHidden && !submitted ? (
                   <div className="py-4 text-center">
-                    <p className="text-sm text-muted">Hidden — tap eye to reveal</p>
+                    <p className="text-sm text-muted">Hidden. Tap the eye to reveal.</p>
                   </div>
                 ) : (
                   <>
@@ -461,8 +461,8 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
                 worstRating === 'missed' && 'border-miss/30 bg-miss/10 text-miss',
               )}>
                 {worstRating === 'got-it' && `Great recall! Next review ${nextReviewLabel}.`}
-                {worstRating === 'hesitated' && `Good effort — next review ${nextReviewLabel}.`}
-                {worstRating === 'missed' && `No worries — next review ${nextReviewLabel}.`}
+                {worstRating === 'hesitated' && `Good effort. Next review ${nextReviewLabel}.`}
+                {worstRating === 'missed' && `No worries. Next review ${nextReviewLabel}.`}
             </div>
           )}
 
@@ -491,11 +491,11 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
               </Button>
             ) : Object.keys(ayahRatings).length === 0 ? (
               <Button onClick={markRestGotIt} className="w-full">
-                All good — I got every ayah
+                All good, I got every ayah
               </Button>
             ) : (
               <Button onClick={markRestGotIt} variant="secondary" className="w-full">
-                The rest were fine — submit
+                The rest were fine, submit
               </Button>
             )}
           </div>

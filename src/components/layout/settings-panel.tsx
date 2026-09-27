@@ -153,7 +153,7 @@ export default function SettingsPanel() {
       const dark = localStorage.getItem('quran-dark-mode');
       if (dark !== null) document.documentElement.classList.toggle('dark', dark === 'true');
     } catch (err) {
-      setBackupMsg(err instanceof Error ? err.message : 'Import failed — is this a Takrar backup file?');
+      setBackupMsg(err instanceof Error ? err.message : 'Import failed. Is this a Takrar backup file?');
     }
   };
 
@@ -249,7 +249,7 @@ export default function SettingsPanel() {
               >
                 {RECITERS.map((r) => (
                   <option key={r.id} value={r.id} className="bg-card text-foreground">
-                    {r.name}{r.hint ? ` — ${r.hint}` : ''}
+                    {r.name}{r.hint ? ` · ${r.hint}` : ''}
                   </option>
                 ))}
               </select>
@@ -320,7 +320,7 @@ export default function SettingsPanel() {
                 <button
                   onClick={() => {
                     try { downloadBackup(); setBackupMsg('Backup downloaded ✓'); }
-                    catch { setBackupMsg('Export failed — try again'); }
+                    catch { setBackupMsg('Export failed. Please try again.'); }
                   }}
                   className="min-h-11 flex-1 rounded-xl bg-foreground/5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
                 >
@@ -341,7 +341,7 @@ export default function SettingsPanel() {
                 />
               </div>
               <p className="mt-1.5 text-[10px] leading-snug text-muted/80">
-                {backupMsg ?? 'Progress lives on this device — export a backup, or sign in to sync.'}
+                {backupMsg ?? 'Your progress is saved on this device. Export a backup, or sign in to sync it.'}
               </p>
             </div>
 

@@ -465,11 +465,11 @@ export default function PlanEditPage() {
             >
               {feasibility.impossible ? (
                 <>
-                  This scope would need <strong>{feasibility.required} lessons/day</strong> — beyond the 20/day sanity ceiling. Extend the deadline before saving.
+                  This scope would need <strong>{feasibility.required} lessons/day</strong>, more than the 20 a day limit. Extend the deadline before saving.
                 </>
               ) : feasibility.intensive ? (
                 <>
-                  This scope requires <strong>{feasibility.required} lessons/day</strong> to hit your deadline — intensive (above the typical 5/day). Bump your pace or extend the deadline after saving.
+                  This scope requires <strong>{feasibility.required} lessons/day</strong> to hit your deadline. That is intensive (most people do up to 5 a day), so raise your pace or extend the deadline after saving.
                 </>
               ) : (
                 <>

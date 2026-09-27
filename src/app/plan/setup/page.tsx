@@ -322,7 +322,7 @@ export default function PlanSetupPage() {
             {isMaintain && (
               <Card className="border border-gold/20 bg-gold/5">
                 <p className="text-sm text-foreground">
-                  A maintenance plan has <span className="font-semibold">no new lessons</span> — pick the surahs
+                  A maintenance plan has <span className="font-semibold">no new lessons</span>. Pick the surahs
                   you already know and Takrar cycles them through revision so nothing fades.
                 </p>
                 <p className="mt-1.5 text-xs text-muted">Tip: use the range boxes below to add a whole juz at once (Juz 30 = surahs 78–114).</p>
@@ -447,7 +447,7 @@ export default function PlanSetupPage() {
 
             {goalType === 'full-quran' && (
               <Card>
-                <p className="text-sm text-foreground">You're setting a goal to memorize the entire Quran — all 114 surahs, 6236 ayahs.</p>
+                <p className="text-sm text-foreground">You're setting a goal to memorize the whole Quran: all 114 surahs and 6,236 ayahs.</p>
                 <p className="mt-2 text-xs text-muted">
                   The curriculum orders surahs shortest-first (Juz 30, 29, 28, then the rest in traditional order).
                 </p>
@@ -557,7 +557,7 @@ export default function PlanSetupPage() {
                 <p className="text-sm font-semibold text-foreground">Revision only</p>
                 <p className="mt-0.5 text-xs text-muted">
                   {selectedSurahIds.length} surah{selectedSurahIds.length === 1 ? '' : 's'} will rotate through
-                  your revision schedule — no new lessons, no deadline. You can adjust the revision frequency
+                  your revision schedule, with no new lessons and no deadline. You can change the revision frequency
                   any time from the plan dashboard.
                 </p>
               </Card>
@@ -568,7 +568,7 @@ export default function PlanSetupPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold text-foreground">Target date</p>
-                  <p className="text-xs text-muted">Optional — we&apos;ll calculate the pace for you</p>
+                  <p className="text-xs text-muted">Optional. We&apos;ll work out the pace for you.</p>
                 </div>
                 <button
                   onClick={() => setUseDeadline((v) => !v)}
@@ -604,9 +604,9 @@ export default function PlanSetupPage() {
                           : 'text-muted',
                     )}>
                       {paceSuggestion.impossible
-                        ? `This would need ${Math.ceil(totalLessons / Math.max(1, countStudyDays(todayIso(), deadline, studyDays)))} lessons/day — beyond the 20/day ceiling. Extend the date.`
+                        ? `This would need ${Math.ceil(totalLessons / Math.max(1, countStudyDays(todayIso(), deadline, studyDays)))} lessons a day, more than the 20 a day limit. Pick a later date.`
                         : paceSuggestion.ambitious
-                          ? `Deadline requires ${paceSuggestion.pace} lessons/day — intensive. Extend the date for a gentler pace.`
+                          ? `This date needs ${paceSuggestion.pace} lessons a day, which is intensive. A later date gives a gentler pace.`
                           : `To finish by this date: ${paceSuggestion.pace} lesson${paceSuggestion.pace > 1 ? 's' : ''}/day on study days.`}
                     </p>
                   )}
@@ -617,7 +617,7 @@ export default function PlanSetupPage() {
             <Card>
               <p className="text-sm font-semibold text-foreground">Lessons per day</p>
               <p className="text-xs text-muted">
-                {useDeadline ? 'Auto-calculated from your deadline — adjust if needed' : 'How many new lessons will you tackle on a study day?'}
+                {useDeadline ? 'Worked out from your deadline. Change it if you like.' : 'How many new lessons will you tackle on a study day?'}
               </p>
               {(() => {
                 const isCustom = lessonsPerDay > 5 || customPaceOpen;
@@ -672,7 +672,7 @@ export default function PlanSetupPage() {
                     )}
                     {lessonsPerDay > 5 && (
                       <p className="mt-2 text-xs text-gold">
-                        Intensive pace — traditional hifdh is 1–2/day. Above 5 is retreat/Ramadan-intensive territory. Plan realistically.
+                        That is an intensive pace. Traditional hifdh is 1–2 lessons a day; more than 5 is usually for a retreat or Ramadan.
                       </p>
                     )}
                   </>
@@ -700,7 +700,7 @@ export default function PlanSetupPage() {
               <p className="text-xs text-muted">
                 {isMaintain
                   ? 'Revision tasks only appear on these days.'
-                  : 'Rest days will only show reviews — no new lessons.'}
+                  : 'Rest days only show reviews, no new lessons.'}
               </p>
               <div className="mt-3 flex gap-1.5">
                 {DAY_LABELS.map((label, d) => {
@@ -743,7 +743,7 @@ export default function PlanSetupPage() {
               </p>
               <p className="text-xs text-muted">
                 {isMaintain
-                  ? 'No new lessons — pure revision'
+                  ? 'No new lessons, revision only'
                   : <>{totalLessons} lessons{knownSurahIds.length > 0 && ` (${knownSurahIds.length} surah${knownSurahIds.length === 1 ? '' : 's'} already known)`}</>}
               </p>
             </div>
@@ -773,7 +773,7 @@ export default function PlanSetupPage() {
             )}
             <p className="pt-2 text-xs text-muted">
               {isMaintain
-                ? 'Your surahs start at "shaky" strength — honest ratings during revision recalibrate them.'
+                ? 'Your known surahs show as "not checked yet" until you first recite them. Your ratings then set their strength.'
                 : 'You’ll also see due reviews and periodic revisions of completed surahs each day.'}
             </p>
           </Card>

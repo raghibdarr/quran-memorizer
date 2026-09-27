@@ -80,7 +80,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
         <h3 className="text-2xl font-bold text-foreground">Lesson Complete!</h3>
         <p className="mt-1 text-muted">
           {isMultiLesson
-            ? `${surah.nameSimple} — Lesson ${lessonDef.lessonNumber} of ${totalLessons}`
+            ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber} of ${totalLessons}`
             : `You've memorized ${surah.nameSimple}`}
         </p>
       </div>
@@ -119,7 +119,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
         <div className="w-full rounded-xl bg-gold/5 border border-gold/20 p-4">
           <p className="text-sm font-medium text-gold">Some ayahs need review</p>
           <p className="mt-1 text-xs text-muted">
-            {weakAyahs.map((a) => `Ayah ${a.number}`).join(', ')} — flagged in your{' '}
+            {weakAyahs.map((a) => `Ayah ${a.number}`).join(', ')} will come back sooner in your{' '}
             <Link href="/review" className="text-teal underline">Review</Link> for follow-up.
           </p>
         </div>

@@ -105,7 +105,7 @@ test.describe('smoke', () => {
     }
 
     // The break: explicit framing, ratings already saved, a real choice
-    await expect(page.getByText('Batch done — 10 of 12 reviewed')).toBeVisible()
+    await expect(page.getByText('Batch done: 10 of 12 reviewed')).toBeVisible()
     await expect(page.getByText(/2 more due · 2 overdue/)).toBeVisible()
     await expect(page.getByRole('button', { name: 'Stop for today' })).toBeVisible()
     await page.getByRole('button', { name: 'Continue with 2 more' }).click()

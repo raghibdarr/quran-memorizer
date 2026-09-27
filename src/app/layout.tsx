@@ -23,9 +23,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Takrar — Quran Memorization",
+  title: "Takrar · Quran Memorization",
   description:
-    "A guided Quran memorization app. Learn step by step through repitition — listen, understand, chain ayahs, test and review.",
+    "A guided Quran memorization app. Listen, understand, repeat, chain the ayahs together, then test and review.",
   icons: {
     icon: "/logos/light-16.svg",
     apple: "/icons/apple-touch-icon.png",
