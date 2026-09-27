@@ -21,7 +21,7 @@ function pathOf(href: string): string {
 export function routeDepth(href: string): number {
   const path = pathOf(href);
   if (TAB_ROOTS.has(path)) return 0;
-  if (/^\/(learn|review\/session|plan\/(revise\/\d+|setup|edit))$/.test(path)) return 2;
+  if (/^\/(learn|recite|listen|review\/session|plan\/(revise\/\d+|setup|edit))$/.test(path)) return 2;
   return 1;
 }
 

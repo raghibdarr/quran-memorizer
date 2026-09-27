@@ -11,6 +11,11 @@ export function lessonHref(surahId: number, lessonNumber: number, from?: string 
   return from ? `${base}&from=${encodeURIComponent(from)}` : base;
 }
 
+/** Recite a whole surah from memory (hidden text, peek per ayah, rating optional) */
+export const reciteHref = (surahId: number) => `/recite?s=${surahId}`;
+/** Listen to a whole surah while the text follows along */
+export const listenHref = (surahId: number) => `/listen?s=${surahId}`;
+
 const LEGACY_LESSON = /^\/lesson\/(\d+)\/(\d+)\/?(?:\?(.*))?$/;
 
 /**
@@ -42,7 +47,7 @@ const inRange = (v: string, max: number) => {
  * retries… an infinite reload loop. Only known routes are ever recovered.
  */
 export function isAppRoute(pathname: string): boolean {
-  if (['/', '/learn', '/review', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback'].includes(pathname)) {
+  if (['/', '/learn', '/recite', '/listen', '/review', '/review/session', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback'].includes(pathname)) {
     return true;
   }
   let m: RegExpExecArray | null;

@@ -121,14 +121,17 @@ export default function ReviewPage() {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center bg-cream px-4 pb-20">
         <StarIcon size={40} className="text-teal" />
-        <h2 className="mt-4 text-xl font-bold text-foreground">No reviews yet</h2>
-        <p className="mt-1 text-center text-muted">
+        <h2 className="mt-4 text-xl font-bold text-foreground">Nothing to review yet</h2>
+        <p className="mt-1 max-w-sm text-center text-muted">
           {isHafiz
-            ? 'Your revision schedule lives on the home screen — recall tests there feed this dashboard'
-            : 'Complete lessons to build your review dashboard'}
+            ? 'Your revision schedule is on the home screen. Each recall you rate there shows up here.'
+            : 'Lessons you finish come back here for review.'}
+        </p>
+        <p className="mt-3 max-w-sm text-center text-sm text-muted">
+          Already know a surah? Open it and tap <span className="font-semibold text-foreground">Recite from memory</span>.
         </p>
         <Link href="/" className="mt-6 rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
-          {isHafiz ? 'Revise what I know' : 'Start Learning'}
+          {isHafiz ? 'Revise what I know' : 'Find a surah'}
         </Link>
         <BottomNav />
       </div>

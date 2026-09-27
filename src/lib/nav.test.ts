@@ -5,6 +5,7 @@ describe('navigation grammar', () => {
   it('assigns depths: tab roots, section details, flows', () => {
     expect(['/', '/review', '/essentials', '/progress'].map(routeDepth)).toEqual([0, 0, 0, 0])
     expect(['/lesson/112', '/juz/30', '/plan', '/essentials/tasbih'].map(routeDepth)).toEqual([1, 1, 1, 1])
+    expect(['/recite?s=67', '/listen?s=67'].map(routeDepth)).toEqual([2, 2])
     expect(['/learn?s=1&l=1', '/plan/revise/78', '/plan/setup', '/plan/edit', '/review/session?stream=sabqi'].map(routeDepth))
       .toEqual([2, 2, 2, 2, 2])
   })

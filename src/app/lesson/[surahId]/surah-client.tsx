@@ -16,9 +16,9 @@ import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import PracticeContainer from '@/components/practice/practice-container';
-import { CheckIcon } from '@/components/ui/icons';
+import { CheckIcon, MicIcon, PlayIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
-import { lessonHref } from '@/lib/routes';
+import { lessonHref, listenHref, reciteHref } from '@/lib/routes';
 import BackButton from '@/components/ui/back-button';
 import { Skeleton, SkeletonRows } from '@/components/ui/skeleton';
 import { useDeal } from '@/hooks/use-deal';
@@ -166,6 +166,20 @@ export default function SurahDetailPage() {
               )}
             </div>
           )}
+
+          {/* Recite or listen straight away — no lesson required (persona tests) */}
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <Link href={listenHref(surahId)} className="block">
+              <span className="tactile-chip flex min-h-12 items-center justify-center gap-2 rounded-xl bg-card text-sm font-semibold text-foreground">
+                <PlayIcon size={14} /> Listen
+              </span>
+            </Link>
+            <Link href={reciteHref(surahId)} className="block">
+              <span className="tactile-chip flex min-h-12 items-center justify-center gap-2 rounded-xl bg-card text-sm font-semibold text-foreground">
+                <MicIcon size={15} /> Recite from memory
+              </span>
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -173,7 +187,7 @@ export default function SurahDetailPage() {
       <div className="sticky top-[calc(var(--safe-top)+3.5rem)] z-10 bg-cream/95 px-4 py-2 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <SegmentedControl
-            options={[{ value: 'learn', label: 'Learn' }, { value: 'practice', label: 'Review' }]}
+            options={[{ value: 'learn', label: 'Learn' }, { value: 'practice', label: 'Practice' }]}
             value={activeTab}
             onChange={setActiveTab}
           />

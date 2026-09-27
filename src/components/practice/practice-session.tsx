@@ -32,6 +32,8 @@ interface PracticeSessionProps {
   flaggedAyahs?: number[];  // ayah numbers to highlight as weak (from review page)
   allLessonDefs?: LessonDef[];  // lesson definitions for auto-completion
   onDone: () => void;
+  /** Recite mode: rating each ayah is optional — rated ones feed your strength data, and you can finish anytime */
+  ratingOptional?: boolean;
 }
 
 const RATING_QUALITY: Record<PracticeAyahRating, number> = {
@@ -62,6 +64,7 @@ export default function PracticeSession({
   flaggedAyahs = [],
   allLessonDefs = [],
   onDone,
+  ratingOptional = false,
 }: PracticeSessionProps) {
   const isMultiSurah = surahIds.length > 1;
   const [step, setStep] = useState<SessionStep>(initialStep);
@@ -211,6 +214,11 @@ export default function PracticeSession({
 
   const finishSession = (resultsToSave?: PracticeAyahResult[]) => {
     const finalResults = resultsToSave ?? results;
+    // Recited without rating anything: nothing to record, nothing to show
+    if (finalResults.length === 0) {
+      onDone();
+      return;
+    }
 
     // Update review cards with ratings
     for (const result of finalResults) {
@@ -474,7 +482,9 @@ export default function PracticeSession({
           <p className="mt-1 text-sm text-muted">
             {hasPriorResults
               ? `Now try reciting all ${ayahs.length} ayahs together`
-              : `Recite all ${ayahs.length} ayahs, then reveal to check`}
+              : ratingOptional
+                ? 'Recite from memory. Tap the eye to peek at an ayah or the play button to hear it. Rating is optional.'
+                : `Recite all ${ayahs.length} ayahs, then reveal to check`}
           </p>
         </div>
 
@@ -579,19 +589,27 @@ export default function PracticeSession({
           })}
         </div>
 
-        {/* Sticky media controls */}
-        <MediaControlsBar
-          playingAll={playingAll}
-          currentIdx={currentPlayingAyahIdx}
-          total={ayahs.length}
-          onPlayAll={playAllAyahs}
-          onStop={stopPlayback}
-        />
-
-        {/* Finish button — always visible, disabled until all rated */}
-        <Button onClick={() => finishSession()} disabled={!allAyahsRated} className="w-full">
-          {allAyahsRated ? 'See Results' : `Rate all ${ayahs.length} ayahs to continue`}
-        </Button>
+        {/* Pinned footer: player + finish stay in thumb reach (they used to sit under
+            the tab bar / below the fold) */}
+        <div className="sticky bottom-0 z-10 -mx-4 space-y-2 bg-cream/95 px-4 pt-2 backdrop-blur-sm" style={{ paddingBottom: 'var(--tabbar-clearance)' }}>
+          <MediaControlsBar
+            className="static"
+            playingAll={playingAll}
+            currentIdx={currentPlayingAyahIdx}
+            total={ayahs.length}
+            onPlayAll={playAllAyahs}
+            onStop={stopPlayback}
+          />
+          {ratingOptional ? (
+            <Button onClick={() => finishSession()} className="w-full">
+              {Object.keys(passageAyahRatings).length > 0 ? `Finish · ${Object.keys(passageAyahRatings).length} rated` : 'Finish'}
+            </Button>
+          ) : (
+            <Button onClick={() => finishSession()} disabled={!allAyahsRated} className="w-full">
+              {allAyahsRated ? 'See Results' : `Rate all ${ayahs.length} ayahs to continue`}
+            </Button>
+          )}
+        </div>
       </div>
     );
   }
