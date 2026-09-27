@@ -22,6 +22,7 @@ import BottomNav from '@/components/layout/bottom-nav';
 import { ArrowRightIcon, CheckIcon, TrashIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { addDaysIso } from '@/lib/dates';
+import { suggestNewDeadline } from '@/lib/recovery';
 import { NAV_BACK, NAV_FORWARD } from '@/lib/nav';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
 
@@ -174,7 +175,7 @@ export default function PlanDashboardPage() {
               <div>
                 <p className="text-[11px] uppercase tracking-wide text-muted">Current pace</p>
                 <p className="text-sm font-semibold text-foreground">
-                  {progress.currentPace} lessons/day
+                  {progress.currentPace > 0 ? `${progress.currentPace} lessons/day` : 'None this week'}
                 </p>
               </div>
             </div>
@@ -197,7 +198,25 @@ export default function PlanDashboardPage() {
             {plan.deadline && progress.isOnTrack && (
               <>On track · {Math.max(0, progress.daysRemaining ?? 0)}d remaining</>
             )}
-            {plan.deadline && !progress.isOnTrack && (
+            {plan.deadline && !progress.isOnTrack && (progress.daysRemaining ?? 0) < 0 && (() => {
+              // Passed: offer the re-date choice here too, not a deficit count (returner persona)
+              const suggested = suggestNewDeadline(progress.lessonsRemaining, plan.lessonsPerDay, plan.studyDays, todayIso());
+              const fmt = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+              return (
+                <>
+                  <p>Your target date has passed. At your pace, the {progress.lessonsRemaining} lessons left fit by {fmt(suggested)}.</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <button onClick={() => updateDeadline(suggested)} className="hit-44 rounded-full bg-gold px-3 py-1.5 text-[11px] font-semibold text-on-gold">
+                      Set {fmt(suggested)}
+                    </button>
+                    <button onClick={() => updateDeadline(null)} className="hit-44 rounded-full px-3 py-1.5 text-[11px] font-semibold text-muted hover:text-foreground">
+                      Drop the deadline
+                    </button>
+                  </div>
+                </>
+              );
+            })()}
+            {plan.deadline && !progress.isOnTrack && (progress.daysRemaining ?? 0) >= 0 && (
               <>
                 {progress.lessonsBehind} lesson{progress.lessonsBehind === 1 ? '' : 's'} behind
                 {(progress.daysRemaining ?? 0) > 0

@@ -8,6 +8,7 @@ import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import { computeGoalAyahProgress, computeTodaysPlan } from '@/lib/plan';
 import { shouldCelebrateDay } from '@/lib/day-status';
 import { addLocalDays, endOfDayMs } from '@/lib/dates';
+import { RECOVERY } from '@/lib/recovery';
 import Button from '@/components/ui/button';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { CheckIcon, FlameIcon } from '@/components/ui/icons';
@@ -61,7 +62,7 @@ export function ReminderOffer() {
 
 /** One line tying today to the streak and the goal — shared by Home and lesson-complete */
 export function DayCompleteSummary() {
-  const { plan, allSurahs, juzIndex, planLessons, dayEnd } = useTodaysPlan();
+  const { plan, allSurahs, juzIndex, planLessons, dayEnd, reentryDay } = useTodaysPlan();
   const streak = useStatsStore((s) => s.currentStreak);
   const progressLessons = useProgressStore((s) => s.lessons);
   const lessonCards = useReviewStore((s) => s.lessonCards);
@@ -77,8 +78,10 @@ export function DayCompleteSummary() {
   const tomorrow = useMemo(() => {
     if (!plan || !allSurahs.length) return null;
     const tomorrowEnd = endOfDayMs(addLocalDays(dayEnd, 1));
-    return computeTodaysPlan(plan, planLessons, progressLessons, lessonCards, allSurahs, tomorrowEnd);
-  }, [plan, planLessons, progressLessons, lessonCards, allSurahs, dayEnd]);
+    // A returner's tomorrow is still an easing day: forecast it with the same caps
+    const tomorrowReentry = reentryDay != null && reentryDay + 1 < RECOVERY.REENTRY_MAX_DAYS ? reentryDay + 1 : null;
+    return computeTodaysPlan(plan, planLessons, progressLessons, lessonCards, allSurahs, tomorrowEnd, { reentryDay: tomorrowReentry });
+  }, [plan, planLessons, progressLessons, lessonCards, allSurahs, dayEnd, reentryDay]);
 
   let tomorrowLine: string | null = null;
   if (tomorrow) {

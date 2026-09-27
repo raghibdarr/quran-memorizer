@@ -102,7 +102,7 @@ export default function HomePage() {
 
   // Due reviews — the SAME queue the plan card and review page use (M5 streams,
   // incl. sabqi check-ins), so the three counts can never disagree
-  const { dueCount: dueReviewCount, overdueCount: overdueReviewCount } = useReviewQueue();
+  const { dueCount: dueReviewCount, overdueCount: overdueReviewCount, deferredCount } = useReviewQueue();
 
   useEffect(() => {
     getSurahIndex().then(setAllSurahs);
@@ -311,7 +311,10 @@ export default function HomePage() {
             <Card pressable className="flex h-full flex-col items-center justify-center py-3">
               <p className="text-xl font-bold text-gold-deep">{dueReviewCount}</p>
               <p className="mt-1 text-xs text-muted">
-                {overdueReviewCount > 0 ? `Due · ${overdueReviewCount} overdue` : 'Due Reviews'}
+                {/* Easing back in: the held-back backlog is "later", not a wall of "overdue" */}
+                {deferredCount > 0
+                  ? `Due · ${deferredCount} more later`
+                  : overdueReviewCount > 0 ? `Due · ${overdueReviewCount} overdue` : 'Due Reviews'}
               </p>
             </Card>
           </Link>
