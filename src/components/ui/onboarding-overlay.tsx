@@ -1,185 +1,275 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import type { Ayah, ArabicScriptStyle } from '@/types/quran';
 import { NAV_FORWARD } from '@/lib/nav';
+import { getSurah } from '@/lib/quran-data';
+import { lessonHref, listenHref } from '@/lib/routes';
+import { lessonWordCounts } from '@/lib/curriculum';
+import { formatLessonTime } from '@/lib/lesson-time';
+import { setIntent, type Intent } from '@/lib/intent';
+import { useSettingsStore } from '@/stores/settings-store';
+import ArabicText from '@/components/ui/arabic-text';
+import { ChevronLeftIcon } from '@/components/ui/icons';
+import { cn } from '@/lib/cn';
 
-function BookIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--c-teal)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-    </svg>
-  );
-}
+type Step = 'welcome' | 'intent' | 'look' | 'finish';
+const STEPS: Step[] = ['welcome', 'intent', 'look', 'finish'];
 
-function StepsIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--c-teal)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-    </svg>
-  );
-}
-
-function RepeatIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--c-teal)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="17 1 21 5 17 9" /><path d="M3 11V9a4 4 0 014-4h14" /><polyline points="7 23 3 19 7 15" /><path d="M21 13v2a4 4 0 01-4 4H3" />
-    </svg>
-  );
-}
-
-function StartIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--c-teal)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" fill="var(--c-teal)" />
-    </svg>
-  );
-}
-
-const CARDS = [
-  {
-    icon: BookIcon,
-    title: 'Welcome to Takrar',
-    subtitle: 'Memorize the Quran through structured repetition — step by step, ayah by ayah.',
-  },
-  {
-    icon: StepsIcon,
-    title: 'How It Works',
-    subtitle: 'Each lesson takes you through 5 phases:',
-    phases: [
-      { label: 'Listen', desc: 'Hear the recitation' },
-      { label: 'Understand', desc: 'Learn the meaning' },
-      { label: 'Build', desc: 'Memorize through repetition' },
-      { label: 'Test', desc: 'Prove your recall' },
-      { label: 'Done', desc: 'Lesson complete!' },
-    ],
-  },
-  {
-    icon: RepeatIcon,
-    title: 'Spaced Review',
-    subtitle: 'Completed lessons come back for review on a schedule — so you never forget what you\'ve learned.',
-  },
-  {
-    icon: StartIcon,
-    title: 'Ready?',
-    subtitle: 'Pick your first surah and start memorizing.',
-  },
+const INTENTS: { value: Intent; title: string; sub: string }[] = [
+  { value: 'learn', title: "I'm new to memorizing", sub: 'Start with a first surah, one ayah at a time' },
+  { value: 'memorized-some', title: "I've memorized some already", sub: 'Keep what you know and add more' },
+  { value: 'revise', title: 'I want to keep what I know', sub: 'Recite from memory and check yourself' },
+  { value: 'listen', title: 'I just want to read and listen', sub: 'Follow the text while it is recited' },
 ];
 
+const SCRIPTS: { value: ArabicScriptStyle; label: string; note: string }[] = [
+  { value: 'tajweed', label: 'Tajweed', note: 'Colours mark pronunciation rules' },
+  { value: 'uthmani', label: 'Uthmani', note: 'The Madinah mushaf style' },
+  { value: 'indopak', label: 'IndoPak', note: 'Common in South Asia' },
+];
+
+const FIRST_SURAHS = [
+  { id: 1, name: 'Al-Fatihah', ayahs: 7, why: 'The opening. Recited in every prayer.' },
+  { id: 112, name: 'Al-Ikhlas', ayahs: 4, why: 'Short and a gentle first step.' },
+];
+
+/**
+ * First run (redesigned 2026-09-27 from the persona tests). Asks what the person
+ * came to do, lets them set the script and size they read best, then hands off to
+ * the right place: a first lesson, plan setup, or Recite/Listen. Skippable at
+ * every step; no permissions, no sign-in.
+ */
 export default function OnboardingOverlay() {
   const router = useRouter();
-  const [visible, setVisible] = useState(false);
-  const [step, setStep] = useState(0);
-  const touchStartX = useRef(0);
+  // Client-only render (Providers waits for mount), so storage can be read up front
+  const [visible, setVisible] = useState(() => typeof window !== 'undefined' && !localStorage.getItem('onboarding-complete'));
+  const [step, setStep] = useState<Step>('welcome');
+  const [intent, setIntentState] = useState<Intent | null>(null);
+  const [sample, setSample] = useState<Ayah | null>(null);
+  const arabicScript = useSettingsStore((s) => s.arabicScript);
+  const setArabicScript = useSettingsStore((s) => s.setArabicScript);
+  const arabicFontSize = useSettingsStore((s) => s.arabicFontSize);
+  const setArabicFontSize = useSettingsStore((s) => s.setArabicFontSize);
 
+  // The script preview is a real ayah, so tajweed colours and IndoPak forms show as they will
   useEffect(() => {
-    if (!localStorage.getItem('onboarding-complete')) {
-      setVisible(true);
-    }
-  }, []);
+    if (step === 'look' && !sample) getSurah(1).then((s) => setSample(s.ayahs[0]));
+  }, [step, sample]);
 
   const dismiss = () => {
     localStorage.setItem('onboarding-complete', 'true');
     setVisible(false);
   };
 
-  const next = () => {
-    if (step < CARDS.length - 1) {
-      setStep(step + 1);
-    } else {
-      // Final card promises "pick your first surah and start" — deliver on it
-      // instead of dropping the user back on Home to figure it out.
-      dismiss();
-      router.push('/lesson/1', { transitionTypes: [NAV_FORWARD] });
-    }
+  const finishTo = (href: string | null) => {
+    dismiss();
+    if (href) router.push(href, { transitionTypes: [NAV_FORWARD] });
   };
 
-  const prev = () => {
-    if (step > 0) setStep(step - 1);
+  const back = () => {
+    const i = STEPS.indexOf(step);
+    if (i > 0) setStep(STEPS[i - 1]);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) next();
-      else prev();
-    }
+  const chooseIntent = (value: Intent) => {
+    setIntentState(value);
+    setIntent(value);
+    setStep('look');
   };
 
   if (!visible) return null;
 
-  const card = CARDS[step];
-  const isLast = step === CARDS.length - 1;
+  const stepIndex = STEPS.indexOf(step);
 
   return (
-    <div className="fixed inset-0 z-[80] flex flex-col bg-cream pt-[var(--safe-top)]">
-      {/* Skip button */}
-      <div className="flex justify-end px-4 pt-4">
-        <button
-          onClick={dismiss}
-          className="hit-44 rounded-lg px-3 py-1.5 text-xs font-medium text-muted hover:text-foreground"
-        >
+    <div className="fixed inset-0 z-[80] flex flex-col overflow-y-auto bg-cream pt-[var(--safe-top)]">
+      <div className="flex items-center justify-between px-4 pt-3">
+        {stepIndex > 0 ? (
+          <button onClick={back} className="-ml-1 flex min-h-11 items-center gap-0.5 px-2 text-sm text-muted hover:text-foreground">
+            <ChevronLeftIcon size={18} /> Back
+          </button>
+        ) : <span />}
+        <button onClick={dismiss} className="min-h-11 px-3 text-sm font-medium text-muted hover:text-foreground">
           Skip
         </button>
       </div>
 
-      {/* Card content */}
-      <div
-        className="flex flex-1 flex-col items-center justify-center px-8"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="w-full max-w-sm text-center">
-          <div className="flex justify-center"><card.icon /></div>
-
-          <h2 className="mt-6 text-2xl font-bold text-teal">{card.title}</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{card.subtitle}</p>
-
-          {/* Phase list for card 2 */}
-          {card.phases && (
-            <div className="mt-5 space-y-2">
-              {card.phases.map((phase, i) => (
-                <div key={i} className="flex items-center gap-3 rounded-xl bg-card px-4 py-2.5 text-left">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal/10 text-xs font-bold text-teal">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <span className="text-sm font-semibold text-foreground">{phase.label}</span>
-                    <span className="ml-1.5 text-xs text-muted">— {phase.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Bottom: dots + button */}
-      <div className="flex flex-col items-center gap-5 px-8 pb-10">
-        {/* Dot indicators */}
-        <div className="flex items-center gap-2">
-          {CARDS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setStep(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === step ? 'w-6 bg-teal' : 'w-2 bg-foreground/15'
-              }`}
-            />
+      <div className="mx-auto flex w-full max-w-sm flex-1 flex-col px-6 pb-10">
+        {/* Progress dots */}
+        <div className="mt-2 flex justify-center gap-2" aria-hidden>
+          {STEPS.map((s, i) => (
+            <span key={s} className={cn('h-2 rounded-full transition-all', i === stepIndex ? 'w-6 bg-teal' : 'w-2 bg-foreground/15')} />
           ))}
         </div>
 
-        <button
-          onClick={next}
-          className="w-full max-w-sm rounded-xl bg-teal py-3.5 text-sm font-semibold text-on-teal"
-        >
-          {isLast ? 'Start Learning' : 'Next'}
-        </button>
+        {step === 'welcome' && (
+          <div className="flex flex-1 flex-col justify-center text-center">
+            <p className="arabic-text text-4xl text-teal">تكرار</p>
+            <h2 className="mt-4 text-2xl font-bold text-teal">Welcome to Takrar</h2>
+            <p className="mt-3 text-base leading-relaxed text-muted">
+              Memorize the Quran through steady repetition, keep what you already know, or simply recite and listen.
+            </p>
+            <button onClick={() => setStep('intent')} className="tactile-btn mt-10 min-h-12 w-full rounded-xl bg-teal text-base font-semibold text-on-teal">
+              Get started
+            </button>
+          </div>
+        )}
+
+        {step === 'intent' && (
+          <div className="flex flex-1 flex-col justify-center">
+            <h2 className="text-center text-2xl font-bold text-teal">What brings you here?</h2>
+            <p className="mt-2 text-center text-sm text-muted">You can do all of these later. This just decides where you start.</p>
+            <div className="mt-6 space-y-2.5">
+              {INTENTS.map((o) => (
+                <button
+                  key={o.value}
+                  onClick={() => chooseIntent(o.value)}
+                  className={cn(
+                    'tactile-chip w-full rounded-xl bg-card px-4 py-3.5 text-left',
+                    intent === o.value && 'border-teal',
+                  )}
+                >
+                  <span className="block text-base font-semibold text-foreground">{o.title}</span>
+                  <span className="mt-0.5 block text-sm text-muted">{o.sub}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step === 'look' && (
+          <div className="flex flex-1 flex-col justify-center">
+            <h2 className="text-center text-2xl font-bold text-teal">How should the Quran look?</h2>
+            <p className="mt-2 text-center text-sm text-muted">Pick the script you read best, and a comfortable size.</p>
+
+            <div className="mt-5 rounded-2xl bg-card px-4 py-5 text-center">
+              {sample ? <ArabicText ayah={sample} className="text-3xl leading-loose" /> : <div className="h-14" />}
+            </div>
+
+            <div className="mt-4 grid grid-cols-3 gap-2" role="radiogroup" aria-label="Arabic script">
+              {SCRIPTS.map((s) => (
+                <button
+                  key={s.value}
+                  role="radio"
+                  aria-checked={arabicScript === s.value}
+                  onClick={() => setArabicScript(s.value)}
+                  className={cn(
+                    'min-h-12 rounded-xl px-2 text-sm font-semibold transition-colors',
+                    arabicScript === s.value ? 'bg-teal text-on-teal' : 'bg-foreground/5 text-muted hover:text-foreground',
+                  )}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-center text-xs text-muted">{SCRIPTS.find((s) => s.value === arabicScript)?.note}</p>
+
+            <div className="mt-5 flex items-center gap-3">
+              <button
+                onClick={() => setArabicFontSize(Math.max(0.8, Math.round((arabicFontSize - 0.1) * 10) / 10))}
+                disabled={arabicFontSize <= 0.8}
+                aria-label="Smaller Arabic text"
+                className="pressable flex h-12 w-12 items-center justify-center rounded-xl bg-foreground/5 text-lg font-bold text-muted disabled:opacity-30"
+              >
+                −
+              </button>
+              <p className="flex-1 text-center text-sm text-muted">Text size {Math.round(arabicFontSize * 100)}%</p>
+              <button
+                onClick={() => setArabicFontSize(Math.min(2, Math.round((arabicFontSize + 0.1) * 10) / 10))}
+                disabled={arabicFontSize >= 2}
+                aria-label="Larger Arabic text"
+                className="pressable flex h-12 w-12 items-center justify-center rounded-xl bg-foreground/5 text-lg font-bold text-muted disabled:opacity-30"
+              >
+                +
+              </button>
+            </div>
+
+            <button onClick={() => setStep('finish')} className="tactile-btn mt-8 min-h-12 w-full rounded-xl bg-teal text-base font-semibold text-on-teal">
+              Continue
+            </button>
+          </div>
+        )}
+
+        {step === 'finish' && (
+          <div className="flex flex-1 flex-col justify-center">
+            {(intent === 'learn' || intent === null) && (
+              <>
+                <h2 className="text-center text-2xl font-bold text-teal">Where would you like to start?</h2>
+                <p className="mt-2 text-center text-sm text-muted">Progress saves as you go, so you can stop whenever you need to.</p>
+                <div className="mt-6 space-y-2.5">
+                  {FIRST_SURAHS.map((s) => (
+                    <button
+                      key={s.id}
+                      onClick={() => finishTo(lessonHref(s.id, 1))}
+                      className="tactile-chip w-full rounded-xl bg-card px-4 py-3.5 text-left"
+                    >
+                      <span className="flex items-baseline justify-between gap-2">
+                        <span className="text-base font-semibold text-foreground">{s.name}</span>
+                        <span className="text-xs text-muted">
+                          {s.ayahs} ayahs · {formatLessonTime(lessonWordCounts({ surahId: s.id, ayahStart: 1, ayahEnd: s.ayahs }))}
+                        </span>
+                      </span>
+                      <span className="mt-0.5 block text-sm text-muted">{s.why}</span>
+                    </button>
+                  ))}
+                </div>
+                <button onClick={() => finishTo(null)} className="mt-4 min-h-11 text-sm font-medium text-teal">
+                  I&apos;ll choose from the list
+                </button>
+              </>
+            )}
+
+            {intent === 'memorized-some' && (
+              <FinishCard
+                title="Let's build a plan around what you know"
+                body="Tell the planner which surahs you already have. It schedules their revision next to your new lessons, so nothing fades while you add more."
+                primary={{ label: 'Set up my plan', onClick: () => finishTo('/plan/setup') }}
+                secondary={{ label: 'Look around first', onClick: () => finishTo(null) }}
+              />
+            )}
+
+            {intent === 'revise' && (
+              <FinishCard
+                title="Keep what you know"
+                body="Open any surah you know and tap Recite from memory. Peek at an ayah or hear it whenever you stumble. A revision plan can also schedule this for you."
+                primary={{ label: 'Plan my revision', onClick: () => finishTo('/plan/setup?goal=maintain') }}
+                secondary={{ label: 'Choose a surah', onClick: () => finishTo(null) }}
+              />
+            )}
+
+            {intent === 'listen' && (
+              <FinishCard
+                title="Read and listen"
+                body="Open any surah and tap Listen. The text follows the recitation, and you can tap any ayah to play from there."
+                primary={{ label: 'Listen to Al-Fatihah', onClick: () => finishTo(listenHref(1)) }}
+                secondary={{ label: 'Choose a surah', onClick: () => finishTo(null) }}
+              />
+            )}
+          </div>
+        )}
       </div>
+    </div>
+  );
+}
+
+function FinishCard({ title, body, primary, secondary }: {
+  title: string;
+  body: string;
+  primary: { label: string; onClick: () => void };
+  secondary: { label: string; onClick: () => void };
+}) {
+  return (
+    <div className="text-center">
+      <h2 className="text-2xl font-bold text-teal">{title}</h2>
+      <p className="mt-3 text-base leading-relaxed text-muted">{body}</p>
+      <button onClick={primary.onClick} className="tactile-btn mt-8 min-h-12 w-full rounded-xl bg-teal text-base font-semibold text-on-teal">
+        {primary.label}
+      </button>
+      <button onClick={secondary.onClick} className="mt-3 min-h-11 w-full text-sm font-medium text-teal">
+        {secondary.label}
+      </button>
     </div>
   );
 }

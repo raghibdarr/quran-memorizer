@@ -28,6 +28,7 @@ import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
+import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
 import { PHASE_LABELS } from '@/components/ui/phase-indicator';
@@ -77,6 +78,13 @@ export default function HomePage() {
   });
   // Natural (unstuck) position of the browse controls — search focus docks to it
   const controlsAnchorRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  // What they said they came for (onboarding) — shapes the lead card when there's no plan
+  const [intent] = useState(getIntent);
+  const chooseSurah = () => {
+    setTab('surahs');
+    setTimeout(() => searchInputRef.current?.focus(), 50);
+  };
 
   useEffect(() => { localStorage.setItem('home-sort', sort); }, [sort]);
   useEffect(() => { localStorage.setItem('home-view', view); }, [view]);
@@ -212,23 +220,6 @@ export default function HomePage() {
 
         <WelcomeBack />
         {plan && <DayCompleteMoment />}
-        {plan ? (
-          <TodaysPlanCard />
-        ) : (
-          <Link href="/plan/setup" className="block">
-            <Card variant="tactile" pressable className="bg-gold/10">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh Planner</p>
-                  <p className="mt-1 text-lg font-bold text-foreground">Set a memorization goal</p>
-                  <p className="mt-0.5 text-xs text-muted">Get a personalised daily plan with reviews and pacing.</p>
-                </div>
-                <span className="tactile-chip shrink-0 rounded-full bg-gold px-3.5 py-2 text-xs font-bold text-on-gold">Start →</span>
-              </div>
-            </Card>
-          </Link>
-        )}
-
         {/* Continue card — hidden when a plan is active (plan card takes over) */}
         {!plan && lastActivity ? (
           <Link href={normalizeAppUrl(lastActivity.url)} className="block">
@@ -256,6 +247,47 @@ export default function HomePage() {
             </Card>
           </Link>
         ) : null}
+
+        {plan ? (
+          <TodaysPlanCard />
+        ) : intent === 'listen' || intent === 'revise' ? (
+          <Card variant="tactile" className={intent === 'listen' ? 'bg-teal/5' : 'bg-gold/10'}>
+            <p className={cn('text-[11px] font-bold uppercase tracking-wider', intent === 'listen' ? 'text-teal' : 'text-gold-deep')}>
+              {intent === 'listen' ? 'Read and listen' : 'Keep what you know'}
+            </p>
+            <p className="mt-1 text-lg font-bold text-foreground">
+              {intent === 'listen' ? 'Pick a surah and tap Listen' : 'Pick a surah and tap Recite from memory'}
+            </p>
+            <p className="mt-0.5 text-xs text-muted">
+              {intent === 'listen'
+                ? 'The text follows the recitation. Tap any ayah to play from there.'
+                : 'Peek at an ayah or hear it when you stumble. Rating how it went is optional.'}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button onClick={chooseSurah} className="tactile-chip min-h-11 rounded-full bg-card px-4 text-xs font-bold text-foreground">
+                Choose a surah
+              </button>
+              {intent === 'revise' && (
+                <Link href="/plan/setup?goal=maintain" className="flex min-h-11 items-center rounded-full px-3 text-xs font-semibold text-gold-deep">
+                  Plan my revision →
+                </Link>
+              )}
+            </div>
+          </Card>
+        ) : (
+          <Link href="/plan/setup" className="block">
+            <Card variant="tactile" pressable className="bg-gold/10">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh Planner</p>
+                  <p className="mt-1 text-lg font-bold text-foreground">Set a memorization goal</p>
+                  <p className="mt-0.5 text-xs text-muted">Get a personalised daily plan with reviews and pacing.</p>
+                </div>
+                <span className="tactile-chip shrink-0 rounded-full bg-gold px-3.5 py-2 text-xs font-bold text-on-gold">Start →</span>
+              </div>
+            </Card>
+          </Link>
+        )}
 
         <div className="grid grid-cols-3 gap-3">
           <Card className="flex flex-col items-center justify-center py-3">
@@ -320,6 +352,7 @@ export default function HomePage() {
               {/* Search — on focus, dock the controls to their pinned position so
                   the input stays put while results grow/shrink underneath */}
               <input
+                ref={searchInputRef}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

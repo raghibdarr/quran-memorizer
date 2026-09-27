@@ -42,7 +42,11 @@ export default function PlanSetupPage() {
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
 
-  const [goalType, setGoalType] = useState<PlanGoalType>('juz');
+  // ?goal=maintain (onboarding's "keep what I know fresh"). The app renders client-only
+  // (Providers waits for mount), so reading the URL here can't mismatch a server render.
+  const [goalType, setGoalType] = useState<PlanGoalType>(() =>
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('goal') === 'maintain' ? 'maintain' : 'juz',
+  );
   const [selectedSurahIds, setSelectedSurahIds] = useState<number[]>([]);
   const [selectedJuzNumbers, setSelectedJuzNumbers] = useState<number[]>([30]);
   const [surahSearch, setSurahSearch] = useState('');
