@@ -88,3 +88,25 @@ revisit alongside #2); Essentials: 3 adhkar, audio on one item.
 ## Suggested sequencing
 §5 + §6 + §7 next (no decisions needed). §2–§4 become the revised M9 once the owner answers; §1 merges
 into M9's existing first-lesson work.
+
+## Status 2026-09-27 (owner: "implement them and point them out to me")
+
+Owner decisions: keep 6-4-4-6, but allow skipping a single step or ayah; implement §2-§4; humanize
+the copy (em dashes). All done and committed:
+- §1 Build: "Skip this step", "I know this ayah, skip it", "Skip chaining"; a "progress saved, good
+  place to stop" note with Stop for now at each new ayah; honest per-lesson time estimates
+  (`lesson-time.ts`) on surah/juz lists, the single-lesson card, the plan row and onboarding
+- §2 Onboarding: intent question → script + size with a real-ayah preview → hand-off (first surah
+  with times / plan setup / revision plan preset / Listen); Home lead card follows the intent;
+  Continue card above the planner pitch
+- §3 Recite (`/recite?s=N`, rating optional) and Listen (`/listen?s=N`, follow-along) from every surah
+  page; surah "Review" tab renamed "Practice"; Review empty state points to Recite
+- §4 "Start today · ~N min" run (reviews → revisions → new lesson, `today-run.ts`); review shows the
+  text after "I've recited it", one-tap "All good", "The rest were fine", pinned Submit/Next
+- §5 returner numbers: "N more later" during re-entry, easing-aware tomorrow forecast, re-date choice
+  on the plan page, "None this week" instead of "0 lessons/day"
+- Copy pass: 74 strings, no em-dash crutches
+
+Still open: Test phase rethink (owner question, proposal in chat), multi-part lesson "stop points"
+beyond Build, the smaller §7 items (L1 wrong-tap penalty, test-level resume, known-surah list order
+and range select).
