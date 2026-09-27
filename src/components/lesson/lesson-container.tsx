@@ -10,6 +10,7 @@ import PhaseIndicator from '@/components/ui/phase-indicator';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import CloseButton from '@/components/ui/close-button';
+import { useAppBack } from '@/hooks/use-app-back';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
 import TajweedLegend from '@/components/ui/tajweed-legend';
 import { RestartIcon } from '@/components/ui/icons';
@@ -71,6 +72,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   }, []);
 
   const backUrl = fromParam ? `/${fromParam}` : `/lesson/${surah.id}`;
+  const leave = useAppBack(backUrl);
 
   if (!lesson) return null;
 
@@ -122,6 +124,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         lessonId={lessonDef.lessonId}
         startAtReview={chunkStartAtReview}
         onComplete={() => { setChunkStartAtReview(false); goToPhase('test'); }}
+        onPause={leave}
       />
     ),
     test: (

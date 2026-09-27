@@ -14,6 +14,8 @@ import ProgressBar from '@/components/ui/progress-bar';
 import { ArrowRightIcon, BookIcon, CheckIcon, RefreshIcon, StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { lessonHref } from '@/lib/routes';
+import { formatLessonTime } from '@/lib/lesson-time';
+import { lessonWordCounts } from '@/lib/curriculum';
 
 export default function TodaysPlanCard() {
   const applyCatchUp = usePlanStore((s) => s.applyCatchUp);
@@ -281,6 +283,7 @@ export default function TodaysPlanCard() {
                     </p>
                     <p className="text-[11px] text-muted">
                       Ayahs {lesson.ayahStart}–{lesson.ayahEnd}
+                      {!done && <> · {formatLessonTime(lessonWordCounts(lesson))}</>}
                     </p>
                   </div>
                   <ArrowRightIcon size={14} className="shrink-0 text-muted" />

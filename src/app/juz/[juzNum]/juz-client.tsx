@@ -22,6 +22,8 @@ import type { Ayah } from '@/types/quran';
 import { lessonHref } from '@/lib/routes';
 import { PHASE_LABELS } from '@/components/ui/phase-indicator';
 import BackButton from '@/components/ui/back-button';
+import { formatLessonTime } from '@/lib/lesson-time';
+import { lessonWordCounts } from '@/lib/curriculum';
 
 type Tab = 'learn' | 'practice';
 
@@ -247,6 +249,7 @@ export default function JuzDetailPage() {
                               </p>
                               <p className="text-xs text-muted">
                                 Ayahs {lesson.ayahStart}&ndash;{lesson.ayahEnd}
+                                {!isComplete && <> · {formatLessonTime(lessonWordCounts(lesson))}</>}
                               </p>
                               {isActive && (
                                 <div className="mt-1.5">

@@ -24,6 +24,8 @@ interface ChunkPhaseProps {
   lessonId: string;
   startAtReview?: boolean;
   onComplete: () => void;
+  /** Leave the lesson for now (progress is saved) — offered at natural stopping points */
+  onPause?: () => void;
 }
 
 // === ABCD Progressive Chaining with 6-4-4-6 Pattern ===
@@ -95,7 +97,7 @@ const LEARN_STEPS: LearnStep[] = [
   'word-order',
 ];
 
-export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onComplete }: ChunkPhaseProps) {
+export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onComplete, onPause }: ChunkPhaseProps) {
   const { markChunkComplete, updateChunkIndex, updateChunkState } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[lessonId]);
   const { isPlaying: audioIsPlaying } = useAudio();
@@ -309,8 +311,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     completeCurrentAyah();
   };
 
-  // After completing an ayah (all parts), either chain or move to next
-  const completeCurrentAyah = () => {
+  // After completing an ayah (all parts), either chain or move to next.
+  // `lastUnit` is the ayah's final unit when skipping straight from an earlier part.
+  const completeCurrentAyah = (lastUnit = unitIndex) => {
     const newCompleted = new Set([...completedAyahs, ayahIndex]);
     setCompletedAyahs(newCompleted);
 
@@ -331,7 +334,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
 
     if (ayahIndex === 0 && ayahs.length > 1) {
       // First ayah — skip chaining, go straight to next
-      moveToNextAyah();
+      moveToNextAyah(lastUnit);
     } else if (ayahIndex < ayahs.length - 1) {
       // Chain all completed ayahs before moving to next
       setMainStage('chaining');
@@ -346,14 +349,34 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
     }
   };
 
-  const moveToNextAyah = () => {
+  const moveToNextAyah = (from = unitIndex) => {
     // Called once the current ayah's LAST unit is done → next unit = next ayah's first part
-    const next = unitIndex + 1;
+    const next = from + 1;
     setUnitIndex(next);
     updateChunkIndex(lessonId, next);
     setMainStage('learning');
     setLearnStep('listen-with-text');
     setRepCount(0);
+  };
+
+  // --- Skipping (owner, 2026-09-27): 6-4-4-6 stays the default, but a learner who
+  // already has a step or an ayah can move past just that, not the whole lesson ---
+
+  const skipStep = () => {
+    stopAutoPlay();
+    if (learnStep === 'word-order') completeCurrentUnit();
+    else advanceLearnStep();
+  };
+
+  const skipAyah = () => {
+    stopAutoPlay();
+    let lastUnit = unitIndex;
+    while (units[lastUnit + 1]?.ayahIdx === ayahIndex) lastUnit++;
+    if (lastUnit !== unitIndex) {
+      setUnitIndex(lastUnit);
+      updateChunkIndex(lessonId, lastUnit);
+    }
+    completeCurrentAyah(lastUnit);
   };
 
   // --- Memory recall for text-hidden steps ---
@@ -562,6 +585,11 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
             Reveal All
           </Button>
         )}
+        {!allRevealed && (
+          <button onClick={() => moveToNextAyah()} className="mx-auto block min-h-11 px-3 text-xs text-muted hover:text-foreground">
+            Skip chaining — next ayah →
+          </button>
+        )}
 
         {allRevealed && (
           <div className="space-y-3">
@@ -593,7 +621,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
               <Button onClick={resetChain} variant="secondary" className="flex-1">
                 Try Again
               </Button>
-              <Button onClick={moveToNextAyah} className="flex-1">
+              <Button onClick={() => moveToNextAyah()} className="flex-1">
                 Got It — Next Ayah
               </Button>
             </div>
@@ -880,6 +908,21 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         </button>
       </div>
 
+      {/* A natural stopping point: the start of each new ayah (progress is already saved) */}
+      {!practiceReturnStage && ayahIndex > 0 && unit.seg.index === 0 && completedAyahs.has(ayahIndex - 1)
+        && learnStep === 'listen-with-text' && repCount === 0 && (
+        <div className="flex items-center gap-3 rounded-xl bg-success/5 px-4 py-3">
+          <p className="flex-1 text-xs text-foreground">
+            <span className="font-semibold text-success">Ayah {ayahs[ayahIndex - 1].number} done ✓</span> Progress saved — a good place to stop if you need to.
+          </p>
+          {onPause && (
+            <button onClick={onPause} className="min-h-11 shrink-0 rounded-lg px-3 text-xs font-semibold text-teal hover:bg-teal/10">
+              Stop for now
+            </button>
+          )}
+        </div>
+      )}
+
       {/* Step strip — segments + the instruction as the single heading */}
       <div className="space-y-2.5">
         <div className="flex gap-1">
@@ -1137,7 +1180,16 @@ export default function ChunkPhase({ surah, ayahs, lessonId, startAtReview, onCo
         </div>
       )}
 
-      {/* Skip to Test — tucked at the bottom, out of the content's way */}
+      {/* Skip controls — just this step, just this ayah, or everything (tucked at the bottom) */}
+      <div className="flex flex-wrap justify-center gap-x-4 pt-2">
+        <button onClick={skipStep} className="min-h-11 px-2 text-xs text-muted transition-colors hover:text-foreground">
+          Skip this step
+        </button>
+        <button onClick={skipAyah} className="min-h-11 px-2 text-xs text-muted transition-colors hover:text-foreground">
+          I know this ayah — skip it
+        </button>
+      </div>
+
       {!practiceReturnStage && (
         <button
           onClick={() => { markChunkComplete(lessonId); onComplete(); }}

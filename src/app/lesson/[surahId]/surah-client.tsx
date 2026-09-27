@@ -24,6 +24,8 @@ import { Skeleton, SkeletonRows } from '@/components/ui/skeleton';
 import { useDeal } from '@/hooks/use-deal';
 import { PHASE_LABELS } from '@/components/ui/phase-indicator';
 import SegmentedControl from '@/components/ui/segmented-control';
+import { formatLessonTime } from '@/lib/lesson-time';
+import { lessonWordCounts } from '@/lib/curriculum';
 
 type Tab = 'learn' | 'practice';
 
@@ -219,7 +221,7 @@ export default function SurahDetailPage() {
                         <p className="mt-1 text-[11px] text-muted/70">
                           {isKnown
                             ? 'Optional — you already know this; it’s in your revision cycle'
-                            : '~20–40 min — stop anytime, progress saves'}
+                            : `${formatLessonTime(lessonWordCounts(lesson))} — stop anytime, progress saves`}
                         </p>
                       </>
                     )}
@@ -275,6 +277,7 @@ export default function SurahDetailPage() {
                           </p>
                           <p className="text-xs text-muted">
                             Ayahs {lesson.ayahStart}&ndash;{lesson.ayahEnd}
+                            {!isComplete && <> · {formatLessonTime(lessonWordCounts(lesson))}</>}
                           </p>
                           {isActive && (
                             <div className="mt-1.5">

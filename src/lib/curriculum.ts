@@ -156,3 +156,11 @@ export function getSurahOrder(surahId: number): number {
 export function isMvpSurah(surahId: number): boolean {
   return surahId >= 1 && surahId <= 114;
 }
+
+/** Real-word count of each ayah in a lesson (drives time estimates) */
+export function lessonWordCounts(lesson: Pick<LessonDef, 'surahId' | 'ayahStart' | 'ayahEnd'>): number[] {
+  const weights = AYAH_WEIGHTS[String(lesson.surahId)] ?? [];
+  const out: number[] = [];
+  for (let n = lesson.ayahStart; n <= lesson.ayahEnd; n++) out.push(weights[n - 1] ?? 8);
+  return out;
+}
