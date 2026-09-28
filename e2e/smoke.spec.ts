@@ -37,11 +37,15 @@ test.describe('smoke', () => {
     await page.getByRole('button', { name: /skip to build/i }).click()
     await expect(page.getByText(/listen & repeat aloud/i)).toBeVisible()
     await page.getByRole('button', { name: /skip to test/i }).click()
-    await expect(page.getByText(/level 1: fill in the missing word/i)).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Recite the whole lesson' })).toBeVisible()
 
     // Reload: the lesson must resume at the persisted phase (localStorage)
     await page.reload()
-    await expect(page.getByText(/level 1: fill in the missing word/i)).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Recite the whole lesson' })).toBeVisible()
+
+    // The Test: one recital; the one-tap path finishes the lesson
+    await page.getByRole('button', { name: /all good, i got every ayah/i }).click()
+    await expect(page.getByText(/lesson complete/i).first()).toBeVisible()
   })
 
   test('a due review opens a session via the plan deep-link', async ({ page }) => {

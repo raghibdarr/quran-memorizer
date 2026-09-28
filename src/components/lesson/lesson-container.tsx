@@ -34,7 +34,6 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   const lesson = useProgressStore((s) => s.lessons[lessonDef.lessonId]);
   const [transitioning, setTransitioning] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [chunkStartAtReview, setChunkStartAtReview] = useState(false);
   // Practice mode: overrides displayed phase without touching the store
   const [practicePhase, setPracticePhase] = useState<LessonPhase | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -122,8 +121,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         surah={surah}
         ayahs={ayahs}
         lessonId={lessonDef.lessonId}
-        startAtReview={chunkStartAtReview}
-        onComplete={() => { setChunkStartAtReview(false); goToPhase('test'); }}
+        onComplete={() => goToPhase('test')}
         onPause={leave}
       />
     ),
@@ -132,9 +130,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         surah={surah}
         ayahs={ayahs}
         lessonId={lessonDef.lessonId}
-        totalLessons={totalLessons}
         onComplete={() => goToPhase('complete')}
-        onRetry={() => { setChunkStartAtReview(true); goToPhase('chunk'); }}
       />
     ),
     complete: (
@@ -143,10 +139,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         ayahs={ayahs}
         lessonDef={lessonDef}
         totalLessons={totalLessons}
-        onPracticeAgain={() => {
-          setChunkStartAtReview(true);
-          setPracticePhase('chunk');
-        }}
+        onPracticeAgain={() => setPracticePhase('test')}
       />
     ),
   };

@@ -6,9 +6,9 @@
 //   Listen      3 plays of the whole passage
 //   Understand  a short look at every ayah
 //   Build       6-4-4-6: 20 recitations (+ the pause or self-check after each)
-//               + the word challenge, chaining after every ayah but the first,
-//               and one final chain of the whole passage
-//   Test        about two recitations of the passage plus rating
+//               + the word challenge, and chaining after every ayah but the
+//               first and last
+//   Test        one recital of the whole lesson, checking and rating each ayah
 //
 // Calibrated against a timed walkthrough of Al-Fatihah (≈35 min for an
 // average learner); the range covers faster and slower learners.
@@ -19,7 +19,8 @@ const UNDERSTAND_SEC_PER_AYAH = 15;
 const BUILD_OVERHEAD_SEC_PER_AYAH = 70; // pauses + self-checks across the 20 reps
 const WORD_CHALLENGE_SEC = (w: number) => 8 + 1.5 * w;
 const CHAIN_OVERHEAD_SEC = 15;
-const TEST_OVERHEAD_SEC = 60;
+const TEST_CHECK_SEC_PER_AYAH = 5; // reveal, compare, rate
+const TEST_OVERHEAD_SEC = 20;
 const RANGE = [0.85, 1.2] as const;
 
 export function estimateLessonSeconds(wordCounts: number[]): number {
@@ -35,13 +36,12 @@ export function estimateLessonSeconds(wordCounts: number[]): number {
     const isLast = i === audio.length - 1;
     if (!isFirst && !isLast) build += accumulated + CHAIN_OVERHEAD_SEC; // chain so far
   });
-  build += passage + CHAIN_OVERHEAD_SEC * 2; // final chain
 
   return (
     LISTEN_PLAYS * passage +
     UNDERSTAND_SEC_PER_AYAH * wordCounts.length +
     build +
-    2 * passage + TEST_OVERHEAD_SEC
+    passage + TEST_CHECK_SEC_PER_AYAH * wordCounts.length + TEST_OVERHEAD_SEC
   );
 }
 
