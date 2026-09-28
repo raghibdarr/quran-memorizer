@@ -35,9 +35,14 @@ export async function getJuzSegmentsForSurah(surahId: number): Promise<Array<{ j
  * above) where the Uthmani text has U+0670 (superscript alef) — e.g. صِرَٲطَ vs
  * صِرَٰطَ, ~1,560 times across the Quran. The Arabic font has no U+0672 glyph, so
  * it rendered as a broken box in the default script.
+ *
+ * Idghaam without ghunnah is marked over the silent noon AND the next word's first
+ * letter (مِن رَّبِّهِمْ); only the noon is silent, so the mark is trimmed to it.
  */
 export function normalizeTajweedText(html: string): string {
-  return html.replace(/ٲ/g, 'ٰ');
+  return html
+    .replace(/ٲ/g, 'ٰ')
+    .replace(/<tajweed class=idgham_wo_ghunnah>([^< ]*) ([^<]*)<\/tajweed>/g, '<tajweed class=idgham_wo_ghunnah>$1</tajweed> $2');
 }
 
 export async function getSurah(id: number): Promise<Surah> {

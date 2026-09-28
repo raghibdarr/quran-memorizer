@@ -224,9 +224,20 @@ body::after {
 .tajweed-text tajweed { font-family: inherit; }
 
 /* Silent / wasl letters — gray */
+/* Merged letters (idghaam without ghunnah, mutajanisayn, mutaqaribayn) aren't voiced either */
 .tajweed-text .ham_wasl,
 .tajweed-text .laam_shamsiyah,
-.tajweed-text .slnt { color: #AAAAAA; }
+.tajweed-text .slnt,
+.tajweed-text .idgham_wo_ghunnah,
+.tajweed-text .idgham_mutajanisayn,
+.tajweed-text .idgham_mutaqaribayn { color: #AAAAAA; }
+/* On the dark page #AAA sat too close to the white text to read as silent */
+.dark .tajweed-text .ham_wasl,
+.dark .tajweed-text .laam_shamsiyah,
+.dark .tajweed-text .slnt,
+.dark .tajweed-text .idgham_wo_ghunnah,
+.dark .tajweed-text .idgham_mutajanisayn,
+.dark .tajweed-text .idgham_mutaqaribayn { color: #7A7A7A; }
 
 /* Normal madd (2) — pink */
 .tajweed-text .madda_normal { color: #E07DB3; }
@@ -240,12 +251,13 @@ body::after {
 /* Necessary madd (6) — red */
 .tajweed-text .madda_necessary { color: #E74C3C; }
 
-/* Ghunna / Ikhfa / Idghaam / Iqlab — green */
+/* Ghunna / Ikhfa / Idghaam / Iqlab — green (shafawi = the meem versions) */
 .tajweed-text .ghunnah,
 .tajweed-text .ikhafa,
+.tajweed-text .ikhafa_shafawi,
 .tajweed-text .idgham_ghunnah,
-.tajweed-text .idgham_wo_ghunnah,
-.tajweed-text .iqlabb { color: #2ECC71; }
+.tajweed-text .idgham_shafawi,
+.tajweed-text .iqlab { color: #2ECC71; }
 
 /* Qalqala (echo) — cyan */
 .tajweed-text .qalaqah { color: #36D7E4; }

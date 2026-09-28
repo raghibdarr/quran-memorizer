@@ -6,6 +6,10 @@ describe('tajweed text normalization', () => {
     expect(normalizeTajweedText('صِّر<tajweed class=madda_normal>َٲ</tajweed>طَ')).toBe('صِّر<tajweed class=madda_normal>َٰ</tajweed>طَ');
   });
 
+  it('trims idghaam-without-ghunnah to the silent noon', () => {
+    expect(normalizeTajweedText('م<tajweed class=idgham_wo_ghunnah>ِن ر</tajweed>َّبِّهِمْ')).toBe('م<tajweed class=idgham_wo_ghunnah>ِن</tajweed> رَّبِّهِمْ');
+  });
+
   it('loaded surahs carry no U+0672 in tajweed text (Al-Fatihah 1:6)', async () => {
     const surah = await getSurah(1);
     const tajweed = surah.ayahs.map((a) => a.textUthmaniTajweed ?? '').join('');
