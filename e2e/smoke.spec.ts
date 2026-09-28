@@ -32,7 +32,7 @@ test.describe('smoke', () => {
     await page.getByRole('button', { name: /skip to memorize/i }).click()
     await expect(page.getByText(/listen & repeat aloud/i)).toBeVisible()
     await page.getByRole('button', { name: 'Skip…' }).click()
-    await page.getByRole('button', { name: /the rest of memorize/i }).click()
+    await page.getByRole('button', { name: /i know the whole lesson/i }).click()
     await expect(page.getByRole('heading', { name: 'Recite the whole lesson' })).toBeVisible()
 
     // Reload: the lesson must resume at the persisted phase (localStorage)

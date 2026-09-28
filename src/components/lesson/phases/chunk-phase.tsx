@@ -88,6 +88,15 @@ function seededShuffle<T>(items: T[], seedText: string): T[] {
   return out;
 }
 
+/** "Next up: …" in the Skip sheet */
+const NEXT_UP: Record<LearnStep, string> = {
+  'listen-with-text': 'listen with the text',
+  'recite-from-memory': 'recite it from memory',
+  'reinforce-with-text': 'listen again with the text',
+  'final-memory': 'final recall',
+  'word-order': 'arrange the words',
+};
+
 const LEARN_STEPS: LearnStep[] = [
   'listen-with-text',
   'recite-from-memory',
@@ -1028,30 +1037,37 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
         Skip…
       </button>
 
-      <BottomSheet open={showSkip} onClose={() => setShowSkip(false)} title="What would you like to skip?">
+      <BottomSheet open={showSkip} onClose={() => setShowSkip(false)} title="Skip ahead">
         {(() => {
           const nextStep = LEARN_STEPS[stepIndex + 1];
           const nextAyah = ayahs[ayahIndex + 1];
+          const nextUnit = units[unitIndex + 1];
+          // What skipping the word challenge leads to: the ayah's next part, chaining, the next ayah, or the Test
+          const afterWordChallenge =
+            nextUnit && nextUnit.ayahIdx === ayahIndex ? `part ${nextUnit.seg.index + 1}`
+            : !nextAyah ? 'the Test'
+            : ayahIndex === 0 ? `ayah ${nextAyah.number}`
+            : 'recite the ayahs so far together';
           const options = [
             {
               key: 'step',
-              title: learnStep === 'word-order' ? 'The word challenge' : 'Just this step',
-              detail: nextStep ? `Go to "${STEP_LABELS[nextStep]}" for ayah ${currentAyah.number}` : `Finish ayah ${currentAyah.number}`,
+              title: learnStep === 'word-order' ? 'Skip the word challenge' : 'Skip this step',
+              detail: `Next up: ${nextStep ? NEXT_UP[nextStep] : afterWordChallenge}`,
               run: skipStep,
             },
             ...(ayahs.length > 1
               ? [{
                   key: 'ayah',
-                  title: `Ayah ${currentAyah.number}, I already know it`,
-                  detail: nextAyah ? `Move on to ayah ${nextAyah.number}` : 'That was the last ayah: go to the Test',
+                  title: `I know ayah ${currentAyah.number}`,
+                  detail: nextAyah ? `Move on to ayah ${nextAyah.number}` : 'Go to the Test',
                   run: skipAyah,
                 }]
               : []),
             ...(!practiceReturnStage
               ? [{
                   key: 'all',
-                  title: 'The rest of Memorize',
-                  detail: 'I know this lesson already: go straight to the Test',
+                  title: 'I know the whole lesson',
+                  detail: 'Go straight to the Test',
                   run: () => { markChunkComplete(lessonId); onComplete(); },
                 }]
               : []),
