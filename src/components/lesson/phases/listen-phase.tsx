@@ -13,6 +13,7 @@ import { audioController } from '@/lib/audio';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { buildAyahWordData } from '@/lib/segments';
 import { wordAudioUrl } from '@/lib/word-audio';
+import { useSpokenWord } from '@/hooks/use-spoken-word';
 
 interface ListenPhaseProps {
   surah: Surah;
@@ -39,6 +40,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
   const [currentAyahIndex, setCurrentAyahIndex] = useState(-1);
   const [playingAll, setPlayingAll] = useState(false);
   const [selected, setSelected] = useState<{ ayahIdx: number; word: Word } | null>(null);
+  const spokenWord = useSpokenWord(surah.id, currentAyahIndex >= 0 ? ayahs[currentAyahIndex].number : null, isPlaying);
   const abortRef = useRef(false);
   const ayahRefs = useRef<(HTMLElement | null)[]>([]);
   const counterRef = useRef<HTMLDivElement>(null);
@@ -238,7 +240,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
                     aria-label={word.translation ? `${word.transliteration ?? ''} — ${word.translation}` : undefined}
                     className={cn(
                       'rounded-lg px-1 transition-colors',
-                      pick?.position === word.position ? 'bg-gold/20' : 'hover:bg-gold/10',
+                      pick?.position === word.position || (isActive && wi === spokenWord) ? 'bg-gold/25' : 'hover:bg-gold/10',
                     )}
                   >
                     {renderWord(i, wi, word.textUthmani)}

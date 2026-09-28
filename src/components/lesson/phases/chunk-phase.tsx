@@ -5,6 +5,7 @@ import type { Surah, Ayah } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { audioController } from '@/lib/audio';
 import { useAudio } from '@/hooks/use-audio';
+import { useSpokenWord } from '@/hooks/use-spoken-word';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
 import { segmentAyah } from '@/lib/segments';
@@ -227,6 +228,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     return () => { live = false; };
   }, [reciter, surah.id]);
   const timings = loadedTimings.key === timingsKey ? loadedTimings.data : null;
+  const spokenWord = useSpokenWord(surah.id, currentAyah?.number ?? null, audioIsPlaying);
 
   // Play the current unit: a waqf segment plays as a slice of the real recitation
   // when word timings cover it; otherwise (or for whole-ayah units) the full ayah.
@@ -811,7 +813,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
                 )}
               </div>
             ) : (
-              <AyahDisplay ayah={currentAyah} />
+              <AyahDisplay ayah={currentAyah} spokenWord={spokenWord} />
             )}
           </div>
 
@@ -933,7 +935,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
                       )}
                     </div>
                   ) : (
-                    <AyahDisplay ayah={currentAyah} />
+                    <AyahDisplay ayah={currentAyah} spokenWord={spokenWord} />
                   )}
                 </div>
                 <p className="text-center text-sm text-muted">Did you recite it correctly?</p>

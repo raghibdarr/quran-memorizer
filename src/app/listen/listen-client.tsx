@@ -11,6 +11,8 @@ import MediaControlsBar from '@/components/ui/media-controls-bar';
 import CloseButton from '@/components/ui/close-button';
 import SettingsPanel from '@/components/layout/settings-panel';
 import { SkeletonRows } from '@/components/ui/skeleton';
+import { useAudio } from '@/hooks/use-audio';
+import { useSpokenWord } from '@/hooks/use-spoken-word';
 import { cn } from '@/lib/cn';
 
 const GAP_BETWEEN_AYAHS_MS = 300;
@@ -26,6 +28,8 @@ export default function ListenClient() {
   const [surah, setSurah] = useState<Surah | null>(null);
   const [current, setCurrent] = useState(-1);
   const [playingAll, setPlayingAll] = useState(false);
+  const { isPlaying } = useAudio();
+  const spokenWord = useSpokenWord(surahId, surah && current >= 0 ? surah.ayahs[current].number : null, isPlaying);
   const abortRef = useRef(false);
   const ayahRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -101,7 +105,7 @@ export default function ListenClient() {
                   )}
                 >
                   <p className="mb-1 text-xs text-muted">Ayah {ayah.number}</p>
-                  <AyahDisplay ayah={ayah} />
+                  <AyahDisplay ayah={ayah} spokenWord={i === current ? spokenWord : -1} />
                 </div>
               ))}
             </div>

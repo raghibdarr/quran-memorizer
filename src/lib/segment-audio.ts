@@ -78,3 +78,18 @@ export function segmentRangeMs(
   if (start == null || end == null || end <= start) return null;
   return { startMs: Math.max(0, start - PAD_BEFORE_MS), endMs: end + PAD_AFTER_MS };
 }
+
+/**
+ * Which word (0-based over real words) is being recited at `ms` into the ayah's
+ * recording, or -1 before the first word. Between words it stays on the word just
+ * finished (the highlight shouldn't flicker off in a breath or elongation gap).
+ */
+export function wordAtTime(ayahTimings: [number, number, number][] | undefined, ms: number): number {
+  if (!ayahTimings?.length) return -1;
+  let current = -1;
+  for (const [word1, start] of ayahTimings) {
+    if (start <= ms) current = word1 - 1;
+    else break;
+  }
+  return current;
+}
