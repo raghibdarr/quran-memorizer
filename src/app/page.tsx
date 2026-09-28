@@ -263,18 +263,30 @@ export default function HomePage() {
                 ? 'The text follows the recitation. Tap any ayah to play from there.'
                 : 'Peek at an ayah or hear it when you stumble. Rating how it went is optional.'}
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button onClick={chooseSurah} className="tactile-chip min-h-11 rounded-full bg-card px-4 text-xs font-bold text-foreground">
-                Choose a surah
-              </button>
-              {intent === 'revise' && (
-                <Link href="/plan/setup?goal=maintain" className="flex min-h-11 items-center rounded-full px-3 text-xs font-semibold text-gold-deep">
-                  Plan my revision →
-                </Link>
-              )}
-            </div>
+            <button onClick={chooseSurah} className="tactile-chip mt-3 min-h-11 rounded-full bg-card px-4 text-xs font-bold text-foreground">
+              Choose a surah
+            </button>
           </Card>
-        ) : (
+        ) : null}
+
+        {/* The planner stays one tap away for everyone without a plan (owner: the lead card
+            above must not hide it) — full card for learners, a compact row otherwise */}
+        {!plan && (intent === 'listen' || intent === 'revise') && (
+          <Link
+            href={intent === 'revise' ? '/plan/setup?goal=maintain' : '/plan/setup'}
+            className="pressable flex min-h-12 items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/5 px-4 py-2.5"
+          >
+            <span className="text-sm">
+              <span className="font-semibold text-gold-deep">Hifdh Planner</span>
+              <span className="text-muted">
+                {intent === 'revise' ? ' · schedule your revision' : ' · set a daily memorization goal'}
+              </span>
+            </span>
+            <ArrowRightIcon size={14} className="shrink-0 text-gold-deep" />
+          </Link>
+        )}
+
+        {!plan && intent !== 'listen' && intent !== 'revise' && (
           <Link href="/plan/setup" className="block">
             <Card variant="tactile" pressable className="bg-gold/10">
               <div className="flex items-center justify-between gap-3">

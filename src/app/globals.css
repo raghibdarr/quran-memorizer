@@ -266,7 +266,7 @@ body::after {
    Types come from src/lib/nav.ts via the root template's <ViewTransition>.
    Push: the new screen slides in from the right over the old one, which recedes
    ~28% and dims (the "scrim"). Pop: the reverse — the top screen slides away to
-   the right, revealing the one beneath. Tab switch: a quick crossfade. */
+   the right, revealing the one beneath. Tab switch: instant (see below). */
 :root {
   --nav-ease: cubic-bezier(.32, .72, 0, 1);
   /* --nav-duration, parallax and dimming live in MOTION DIALS below */
@@ -276,8 +276,6 @@ body::after {
 
 @keyframes nav-in-from-right { from { transform: translateX(100%); } }
 @keyframes nav-out-to-right { to { transform: translateX(100%); } }
-@keyframes nav-fade-out { to { opacity: 0; } }
-@keyframes nav-fade-in { from { opacity: 0; } }
 
 ::view-transition-group(.nav-forward),
 ::view-transition-group(.nav-back),
@@ -314,9 +312,12 @@ html[data-nav-dir='swipe']::view-transition-new(.nav-auto) {
 html[data-nav-dir]::view-transition-old(.nav-auto),
 html[data-nav-dir]::view-transition-new(.nav-auto) { animation-duration: var(--nav-duration); }
 
-/* tab switch */
-::view-transition-old(.nav-tab) { animation: 120ms ease-out both nav-fade-out; }
-::view-transition-new(.nav-tab) { animation: 180ms ease-out 40ms both nav-fade-in; }
+/* tab switch: instant, as native tab bars are; the gliding pill (WAAPI on the live
+   bar) is the motion. A crossfade here also showed the bar as a transition
+   snapshot, which can't render backdrop blur, so the glass visibly "brightened"
+   when the transition ended (owner, 2026-09-28) */
+::view-transition-old(.nav-tab),
+::view-transition-new(.nav-tab) { animation: none; }
 
 /* The floating tab bar stays put while screens move; it slides away into
    full-screen flows and back out of them */

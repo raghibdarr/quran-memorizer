@@ -5,8 +5,10 @@ import BottomSheet from '@/components/ui/bottom-sheet';
 import { useSettingsStore } from '@/stores/settings-store';
 import { downloadBackup, importBackup } from '@/lib/backup';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
-import type { ArabicScriptStyle } from '@/types/quran';
-import { SettingsIcon } from '@/components/ui/icons';
+import type { ArabicScriptStyle, Ayah } from '@/types/quran';
+import { CheckIcon, ChevronDownIcon, SettingsIcon } from '@/components/ui/icons';
+import ArabicText from '@/components/ui/arabic-text';
+import { getSurah } from '@/lib/quran-data';
 import { RECITERS } from '@/lib/audio';
 import { cn } from '@/lib/cn';
 import { haptic, hapticsEnabled, setHapticsEnabled } from '@/lib/haptics';
@@ -14,6 +16,54 @@ import { isNative } from '@/lib/native';
 import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
 
 const pad = (n: number) => String(n).padStart(2, '0');
+
+function ReciterPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const current = RECITERS.find((r) => r.id === value) ?? RECITERS[0];
+  return (
+    <div className="mt-5">
+      <p className="text-xs font-medium text-muted">Reciter</p>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="pressable mt-1.5 flex min-h-11 w-full items-center justify-between gap-3 rounded-xl bg-foreground/5 px-3 text-left"
+      >
+        <span className="min-w-0">
+          <span className="block truncate text-sm font-medium text-foreground">{current.name}</span>
+          {current.hint && <span className="block truncate text-xs text-muted">{current.hint}</span>}
+        </span>
+        <ChevronDownIcon size={16} className={cn('shrink-0 text-muted transition-transform', open && 'rotate-180')} />
+      </button>
+      {open && (
+        <div role="radiogroup" aria-label="Reciter" className="mt-1.5 overflow-hidden rounded-xl border border-foreground/10">
+          {RECITERS.map((r) => {
+            const selected = r.id === value;
+            return (
+              <button
+                key={r.id}
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => { haptic.selection(); onChange(r.id); setOpen(false); }}
+                className={cn(
+                  'flex min-h-12 w-full items-center justify-between gap-3 border-b border-foreground/5 px-3 py-2 text-left last:border-b-0',
+                  selected ? 'bg-teal/5' : 'hover:bg-foreground/5',
+                )}
+              >
+                <span className="min-w-0">
+                  <span className={cn('block text-sm', selected ? 'font-semibold text-teal' : 'text-foreground')}>{r.name}</span>
+                  {r.hint && <span className="block text-xs text-muted">{r.hint}</span>}
+                </span>
+                {selected && <CheckIcon size={16} className="shrink-0 text-teal" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 /** Daily reminder (M8, native only): on/off + time. Permission is asked on the switch, never unprompted. */
 function ReminderSettings() {
@@ -113,6 +163,10 @@ export default function SettingsPanel() {
     setDailyGoalActivities,
   } = useSettingsStore();
   const [haptics, setHaptics] = useState(hapticsEnabled);
+  const [sample, setSample] = useState<Ayah | null>(null);
+  useEffect(() => {
+    if (open && !sample) getSurah(1).then((s) => setSample(s.ayahs[0]));
+  }, [open, sample]);
 
   // Initialize dark mode from localStorage or system preference
   useEffect(() => {
@@ -217,14 +271,10 @@ export default function SettingsPanel() {
                 </button>
                 {/* Live preview: the stepper changes something you can see */}
                 <div className="min-w-0 flex-1 overflow-hidden text-center">
-                  <p
-                    dir="rtl"
-                    className={cn('leading-loose text-foreground', arabicScript === 'indopak' ? 'arabic-text-indopak' : 'arabic-text')}
-                    style={{ fontSize: '1.125rem' }}
-                    aria-hidden
-                  >
-                    {arabicScript === 'indopak' ? 'بِسۡمِ اللّٰہِ الرَّحۡمٰنِ الرَّحِیۡمِ' : 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'}
-                  </p>
+                  {/* A real ayah through the same renderer as lessons, so tajweed colours show */}
+                  <div dir="rtl" aria-hidden className="text-foreground" style={{ fontSize: '1.125rem' }}>
+                    {sample ? <ArabicText ayah={sample} className="leading-loose" /> : <div className="h-9" />}
+                  </div>
                   <p className="text-[11px] text-muted">{Math.round(arabicFontSize * 100)}%</p>
                 </div>
                 <button
@@ -238,22 +288,8 @@ export default function SettingsPanel() {
               </div>
             </div>
 
-            {/* Reciter */}
-            <div className="mt-5">
-              <p className="text-xs font-medium text-muted">Reciter</p>
-              <select
-                value={reciter}
-                onChange={(e) => setReciter(e.target.value)}
-                className="mt-1.5 min-h-11 w-full rounded-xl bg-foreground/5 px-3 text-base font-medium text-foreground outline-none appearance-none cursor-pointer"
-                style={{ colorScheme: 'auto' }}
-              >
-                {RECITERS.map((r) => (
-                  <option key={r.id} value={r.id} className="bg-card text-foreground">
-                    {r.name}{r.hint ? ` · ${r.hint}` : ''}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Reciter: an in-sheet list, not the OS dropdown (which ignored the app's theme) */}
+            <ReciterPicker value={reciter} onChange={setReciter} />
 
             {/* Toggles */}
             <div className="mt-3 space-y-0.5">
