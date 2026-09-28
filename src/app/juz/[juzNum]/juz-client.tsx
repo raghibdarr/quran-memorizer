@@ -20,7 +20,7 @@ import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import type { Ayah } from '@/types/quran';
 import { lessonHref } from '@/lib/routes';
-import { PHASE_LABELS } from '@/components/ui/phase-indicator';
+import { PHASE_LABELS, phaseProgressPct } from '@/lib/phases';
 import BackButton from '@/components/ui/back-button';
 import { formatLessonTime } from '@/lib/lesson-time';
 import { lessonWordCounts } from '@/lib/curriculum';
@@ -221,7 +221,7 @@ export default function JuzDetailPage() {
                       const isComplete = progress?.completedAt != null;
                       const isActive = progress && !isComplete;
                       const phaseProgress = isActive
-                        ? ['listen', 'understand', 'chunk', 'test', 'complete'].indexOf(progress.currentPhase) * 25
+                        ? phaseProgressPct(progress.currentPhase)
                         : isComplete ? 100 : 0;
 
                       return (

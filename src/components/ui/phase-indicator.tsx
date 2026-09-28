@@ -3,23 +3,9 @@
 import { cn } from '@/lib/cn';
 import { CheckIcon } from '@/components/ui/icons';
 import type { LessonPhase } from '@/types/quran';
+import { LESSON_STEPS, PHASE_LABELS, visiblePhase } from '@/lib/phases';
 
-/** User-facing phase names — the stored keys ('chunk' …) never reach the screen */
-export const PHASE_LABELS: Record<LessonPhase, string> = {
-  listen: 'Listen',
-  understand: 'Understand',
-  chunk: 'Build',
-  test: 'Test',
-  complete: 'Done',
-};
-
-const PHASES: { key: LessonPhase; label: string }[] = [
-  { key: 'listen', label: 'Listen' },
-  { key: 'understand', label: 'Understand' },
-  { key: 'chunk', label: 'Build' },
-  { key: 'test', label: 'Test' },
-  { key: 'complete', label: 'Done' },
-];
+const PHASES: { key: LessonPhase; label: string }[] = LESSON_STEPS.map((key) => ({ key, label: PHASE_LABELS[key] }));
 
 interface PhaseIndicatorProps {
   currentPhase: LessonPhase;
@@ -27,7 +13,7 @@ interface PhaseIndicatorProps {
 }
 
 export default function PhaseIndicator({ currentPhase, onPhaseClick }: PhaseIndicatorProps) {
-  const currentIndex = PHASES.findIndex((p) => p.key === currentPhase);
+  const currentIndex = PHASES.findIndex((p) => p.key === visiblePhase(currentPhase));
 
   const prevPhase = currentIndex > 0 ? PHASES[currentIndex - 1] : null;
 

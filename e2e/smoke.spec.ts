@@ -21,20 +21,15 @@ test.describe('smoke', () => {
 
     // Cold load straight into Al-Ikhlas lesson 1 (avoids the home onboarding overlay)
     await page.goto('/learn?s=112&l=1')
-    await expect(page.getByText('Listen & Absorb')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Listen and understand' })).toBeVisible()
 
-    // → Understand
-    await page.getByRole('button', { name: /skip to understand/i }).click()
-    await expect(page.getByRole('heading', { name: 'Understand' })).toBeVisible()
+    // Listen and understand: the meaning is under each ayah; tapping a word shows what it means
+    await expect(page.getByText(/say, "he is allāh/i).first()).toBeVisible()
+    await page.locator('[dir=rtl] button').first().click()
+    await expect(page.locator('[data-word-meaning]')).toBeVisible()
 
-    // Word tiles work: tapping a word swaps the plaque prompt for the meaning
-    const prompt = page.getByText(/tap any word above/i)
-    await expect(prompt).toBeVisible()
-    await page.locator('button.tactile-chip .arabic-text, button.tactile-chip .tajweed-text').first().click()
-    await expect(prompt).toBeHidden()
-
-    // → Build → Test
-    await page.getByRole('button', { name: /skip to build/i }).click()
+    // → Memorize → Test
+    await page.getByRole('button', { name: /skip to memorize/i }).click()
     await expect(page.getByText(/listen & repeat aloud/i)).toBeVisible()
     await page.getByRole('button', { name: /skip to test/i }).click()
     await expect(page.getByRole('heading', { name: 'Recite the whole lesson' })).toBeVisible()

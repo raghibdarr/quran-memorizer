@@ -22,7 +22,7 @@ import { lessonHref, listenHref, reciteHref } from '@/lib/routes';
 import BackButton from '@/components/ui/back-button';
 import { Skeleton, SkeletonRows } from '@/components/ui/skeleton';
 import { useDeal } from '@/hooks/use-deal';
-import { PHASE_LABELS } from '@/components/ui/phase-indicator';
+import { PHASE_LABELS, phaseProgressPct } from '@/lib/phases';
 import SegmentedControl from '@/components/ui/segmented-control';
 import { formatLessonTime } from '@/lib/lesson-time';
 import { lessonWordCounts } from '@/lib/curriculum';
@@ -204,7 +204,7 @@ export default function SurahDetailPage() {
               const isComplete = progress?.completedAt != null;
               const isActive = progress && !isComplete;
               const phaseProgress = isActive
-                ? ['listen', 'understand', 'chunk', 'test', 'complete'].indexOf(progress.currentPhase) * 25
+                ? phaseProgressPct(progress.currentPhase)
                 : isComplete ? 100 : 0;
               return (
                 <Link href={lessonHref(surahId, 1)} className="block">
@@ -255,7 +255,7 @@ export default function SurahDetailPage() {
                 const isComplete = progress?.completedAt != null;
                 const isActive = progress && !isComplete;
                 const phaseProgress = isActive
-                  ? ['listen', 'understand', 'chunk', 'test', 'complete'].indexOf(progress.currentPhase) * 25
+                  ? phaseProgressPct(progress.currentPhase)
                   : isComplete ? 100 : 0;
 
                 return (

@@ -1,17 +1,18 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect } from 'react';
-import type { Surah, Ayah } from '@/types/quran';
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import type { Surah, Ayah, Word } from '@/types/quran';
 import { useAudio } from '@/hooks/use-audio';
 import { useProgressStore } from '@/stores/progress-store';
-import AyahDisplay from '@/components/ui/ayah-display';
+import { useSettingsStore } from '@/stores/settings-store';
 import BeadProgress from '@/components/ui/bead-progress';
 import Button from '@/components/ui/button';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
 import { cn } from '@/lib/cn';
 import { audioController } from '@/lib/audio';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
-import { useSettingsStore } from '@/stores/settings-store';
+import { buildAyahWordData } from '@/lib/segments';
+import { wordAudioUrl } from '@/lib/word-audio';
 
 interface ListenPhaseProps {
   surah: Surah;
@@ -22,17 +23,29 @@ interface ListenPhaseProps {
 
 const REQUIRED_LISTENS = 3;
 
+/**
+ * Listen and understand (owner, 2026-09-28): the old separate Understand step —
+ * paging a card deck to tap words, gated on visiting every card — merged into the
+ * three listens. The translation sits under every ayah while it's recited, and
+ * each word is a tile you can tap to hear it alone and see what it means.
+ */
 export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: ListenPhaseProps) {
   const { isPlaying } = useAudio();
-  const { incrementListenCount } = useProgressStore();
+  const { incrementListenCount, markUnderstandComplete } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[lessonId]);
   const playCount = lesson?.phaseData.listen.playCount ?? 0;
+  const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
+  const arabicScript = useSettingsStore((s) => s.arabicScript);
   const [currentAyahIndex, setCurrentAyahIndex] = useState(-1);
   const [playingAll, setPlayingAll] = useState(false);
+  const [selected, setSelected] = useState<{ ayahIdx: number; word: Word } | null>(null);
   const abortRef = useRef(false);
   const ayahRefs = useRef<(HTMLElement | null)[]>([]);
   const counterRef = useRef<HTMLDivElement>(null);
   const [counterPinned, setCounterPinned] = useState(false);
+
+  // Per-word Arabic in the chosen script (tajweed/indopak derived with count-checked fallbacks)
+  const ayahData = useMemo(() => ayahs.map((a) => buildAyahWordData(a)), [ayahs]);
 
   // Read reciter directly from store inside callbacks to avoid stale closures
   const getAudioUrl = (surahId: number, ayahNum: number) =>
@@ -58,10 +71,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
   // Autoscroll to current ayah
   useEffect(() => {
     if (currentAyahIndex >= 0 && ayahRefs.current[currentAyahIndex]) {
-      ayahRefs.current[currentAyahIndex]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
+      ayahRefs.current[currentAyahIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [currentAyahIndex]);
 
@@ -69,6 +79,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
     if (playingAll) return;
     abortRef.current = false;
     setPlayingAll(true);
+    setSelected(null);
 
     for (let i = 0; i < ayahs.length; i++) {
       if (abortRef.current) break;
@@ -81,10 +92,8 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
 
     setCurrentAyahIndex(-1);
     setPlayingAll(false);
-    if (!abortRef.current) {
-      incrementListenCount(lessonId);
-    }
-  }, [surah, incrementListenCount, playingAll]);
+    if (!abortRef.current) incrementListenCount(lessonId);
+  }, [surah, ayahs, incrementListenCount, playingAll, lessonId]);
 
   const stopPlayback = useCallback(() => {
     abortRef.current = true;
@@ -94,16 +103,13 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
   }, []);
 
   const restartPlayback = useCallback(() => {
-    abortRef.current = true;
-    audioController.stop();
-    setPlayingAll(false);
-    setCurrentAyahIndex(-1);
+    stopPlayback();
     // Small delay to let state settle before restarting
     setTimeout(() => { playAllAyahs(); }, 100);
-  }, [playAllAyahs]);
+  }, [playAllAyahs, stopPlayback]);
 
-  // Individual ayah play
-  const [individualPlays, setIndividualPlays] = useState(new Set<number>());
+  // Hearing every ayah one by one also counts as a listen
+  const [, setIndividualPlays] = useState(new Set<number>());
 
   const playSingleAyah = useCallback(async (index: number) => {
     if (playingAll) return;
@@ -120,15 +126,37 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
       }
       return next;
     });
-  }, [surah, ayahs, playingAll, incrementListenCount]);
+  }, [surah, ayahs, playingAll, incrementListenCount, lessonId]);
+
+  const tapWord = (ayahIdx: number, word: Word, wordIdx: number) => {
+    if (playingAll) return;
+    setSelected({ ayahIdx, word });
+    const url = wordAudioUrl(word, wordIdx);
+    if (url) audioController.play(url);
+  };
+
+  const finish = () => {
+    stopPlayback();
+    markUnderstandComplete(lessonId);
+    onComplete();
+  };
+
+  const renderWord = (ayahIdx: number, wi: number, fallback: string) => {
+    const { tajweedWords, indopakWords } = ayahData[ayahIdx];
+    if (arabicScript === 'tajweed' && tajweedWords) {
+      return <span className="arabic-text tajweed-text" dangerouslySetInnerHTML={{ __html: tajweedWords[wi] }} />;
+    }
+    if (arabicScript === 'indopak' && indopakWords) return <span className="arabic-text-indopak">{indopakWords[wi]}</span>;
+    return <span className="arabic-text">{fallback}</span>;
+  };
 
   return (
     <div className="space-y-4">
       {/* Header */}
       <div className="text-center">
-        <h3 className="text-xl font-bold text-foreground">Listen & Absorb</h3>
+        <h3 className="text-xl font-bold text-foreground">Listen and understand</h3>
         <p className="mt-1 text-sm text-muted">
-          Listen to the full recitation {REQUIRED_LISTENS} times. Focus on rhythm and pronunciation.
+          Listen to the lesson {REQUIRED_LISTENS} times while you read the meaning. Tap any word to hear it on its own and see what it means.
         </p>
       </div>
 
@@ -137,7 +165,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
         <div className="flex items-center justify-center gap-3 rounded-xl border border-foreground/10 bg-card p-3">
           <BeadProgress total={REQUIRED_LISTENS} filled={playCount} showCurrent />
           <span className="text-sm font-medium text-foreground">
-            {canContinue ? 'Ready to continue!' : `${playCount} / ${REQUIRED_LISTENS} listens`}
+            {canContinue ? 'Ready to memorize' : `${playCount} / ${REQUIRED_LISTENS} listens`}
           </span>
         </div>
       </div>
@@ -148,10 +176,10 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
           <div className="tactile-card mx-auto flex max-w-2xl items-center justify-center gap-3 rounded-xl bg-card px-4 py-2">
             <BeadProgress total={REQUIRED_LISTENS} filled={playCount} size="sm" />
             <span className="text-xs font-medium text-foreground">
-              {canContinue ? 'Ready!' : `${playCount} / ${REQUIRED_LISTENS} listens`}
+              {canContinue ? 'Ready' : `${playCount} / ${REQUIRED_LISTENS} listens`}
             </span>
             {canContinue && (
-              <button onClick={onComplete} className="hit-44 tactile-chip ml-2 rounded-lg bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal">
+              <button onClick={finish} className="hit-44 tactile-chip ml-2 rounded-lg bg-teal px-3 py-1.5 text-xs font-semibold text-on-teal">
                 Continue
               </button>
             )}
@@ -160,50 +188,77 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
       )}
 
       {canContinue && (
-        <Button onClick={onComplete} className="w-full">
-          Continue to Understand
+        <Button onClick={finish} className="w-full">
+          Continue to Memorize
         </Button>
       )}
 
-      {/* Ayah cards */}
+      {/* Ayah cards: tap a word to hear it; the play button plays the ayah */}
       <div className="space-y-3">
         {ayahs.map((ayah, i) => {
           const isActive = i === currentAyahIndex;
+          const { words } = ayahData[i];
+          const pick = selected?.ayahIdx === i ? selected.word : null;
           return (
-            <button
+            <div
               key={ayah.key}
               ref={(el) => { ayahRefs.current[i] = el; }}
-              onClick={() => playSingleAyah(i)}
-              disabled={playingAll}
               className={cn(
-                'tactile-raise-sm relative w-full rounded-xl border-[1.5px] p-4 text-left transition-all',
-                isActive
-                  ? 'border-teal/60 bg-teal/5'
-                  : 'border-ink bg-card hover:border-foreground/45',
-                playingAll && !isActive && 'opacity-40'
+                'tactile-raise-sm relative rounded-xl border-[1.5px] p-4 transition-all',
+                isActive ? 'border-teal/60 bg-teal/5' : 'border-ink bg-card',
+                playingAll && !isActive && 'opacity-40',
               )}
             >
-              {/* Play indicator */}
-              <div className={cn(
-                'absolute top-3 left-3 flex items-center justify-center',
-                isActive ? 'text-teal' : 'text-muted/40'
-              )}>
-                {isActive && isPlaying ? (
-                  // Animated visualizer bars
-                  <div className="flex items-end gap-[2px] h-4">
-                    <div className="w-[3px] bg-teal rounded-full animate-[bar1_0.8s_ease-in-out_infinite]" />
-                    <div className="w-[3px] bg-teal rounded-full animate-[bar2_0.8s_ease-in-out_infinite_0.2s]" />
-                    <div className="w-[3px] bg-teal rounded-full animate-[bar3_0.8s_ease-in-out_infinite_0.4s]" />
-                  </div>
-                ) : (
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M4 2l10 6-10 6V2z" />
-                  </svg>
-                )}
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => playSingleAyah(i)}
+                  disabled={playingAll}
+                  aria-label={`Play ayah ${ayah.number}`}
+                  className={cn('hit-44 flex items-center gap-1.5 text-xs', isActive ? 'text-teal' : 'text-muted')}
+                >
+                  {isActive && isPlaying ? (
+                    <span className="flex h-3.5 items-end gap-[2px]" aria-hidden>
+                      <span className="w-[3px] animate-[bar1_0.8s_ease-in-out_infinite] rounded-full bg-teal" />
+                      <span className="w-[3px] animate-[bar2_0.8s_ease-in-out_infinite_0.2s] rounded-full bg-teal" />
+                      <span className="w-[3px] animate-[bar3_0.8s_ease-in-out_infinite_0.4s] rounded-full bg-teal" />
+                    </span>
+                  ) : (
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden><path d="M4 2l10 6-10 6V2z" /></svg>
+                  )}
+                  Ayah {ayah.number}
+                </button>
               </div>
 
-              <AyahDisplay ayah={ayah} />
-            </button>
+              <div dir="rtl" className="mt-2 flex flex-wrap justify-center gap-x-1 gap-y-1 text-4xl leading-loose">
+                {words.map((word, wi) => (
+                  <button
+                    key={word.position}
+                    onClick={() => tapWord(i, word, wi)}
+                    disabled={playingAll}
+                    aria-label={word.translation ? `${word.transliteration ?? ''} — ${word.translation}` : undefined}
+                    className={cn(
+                      'rounded-lg px-1 transition-colors',
+                      pick?.position === word.position ? 'bg-gold/20' : 'hover:bg-gold/10',
+                    )}
+                  >
+                    {renderWord(i, wi, word.textUthmani)}
+                  </button>
+                ))}
+              </div>
+
+              {transliterationEnabled && ayah.transliteration && (
+                <p className="mt-1 text-center text-sm text-muted">{ayah.transliteration}</p>
+              )}
+              {/* The meaning is the point of this step, so it shows whatever the translation setting */}
+              {ayah.translation && <p className="mt-1 text-center text-sm italic text-muted">{ayah.translation}</p>}
+
+              {pick && (
+                <div data-word-meaning className="mt-3 animate-[phase-in_200ms_ease-out] rounded-xl bg-teal/5 px-3 py-2 text-center">
+                  {pick.transliteration && <span className="text-sm text-muted">{pick.transliteration} · </span>}
+                  <span className="text-sm font-semibold text-teal">{pick.translation ?? '—'}</span>
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
@@ -212,23 +267,20 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
         playingAll={playingAll}
         currentIdx={currentAyahIndex}
         total={ayahs.length}
-        idleLabel="Tap ayah or play"
+        idleLabel="Play the whole lesson"
         onPlayAll={playAllAyahs}
         onStop={stopPlayback}
         onRestart={restartPlayback}
       />
 
       {/* Bottom continue */}
-      <Button onClick={onComplete} disabled={!canContinue} className="w-full">
-        {canContinue ? 'Continue to Understand' : `Listen ${remaining} more time${remaining !== 1 ? 's' : ''}`}
+      <Button onClick={finish} disabled={!canContinue} className="w-full">
+        {canContinue ? 'Continue to Memorize' : `Listen ${remaining} more time${remaining !== 1 ? 's' : ''}`}
       </Button>
 
       {!canContinue && (
-        <button
-          onClick={onComplete}
-          className="mx-auto block text-xs text-muted hover:text-foreground transition-colors"
-        >
-          Already familiar? Skip to Understand →
+        <button onClick={finish} className="mx-auto block min-h-11 text-xs text-muted transition-colors hover:text-foreground">
+          Already familiar? Skip to Memorize →
         </button>
       )}
     </div>

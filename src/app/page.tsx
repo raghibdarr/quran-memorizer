@@ -31,7 +31,7 @@ import WelcomeBack from '@/components/welcome-back';
 import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
-import { PHASE_LABELS } from '@/components/ui/phase-indicator';
+import { PHASE_LABELS } from '@/lib/phases';
 import SegmentedControl from '@/components/ui/segmented-control';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';

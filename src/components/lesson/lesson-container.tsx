@@ -7,6 +7,7 @@ import type { Surah, Ayah, LessonDef, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import PhaseIndicator from '@/components/ui/phase-indicator';
+import { visiblePhase } from '@/lib/phases';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import CloseButton from '@/components/ui/close-button';
@@ -16,7 +17,6 @@ import TajweedLegend from '@/components/ui/tajweed-legend';
 import { RestartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import ListenPhase from './phases/listen-phase';
-import UnderstandPhase from './phases/understand-phase';
 import ChunkPhase from './phases/chunk-phase';
 import TestPhase from './phases/test-phase';
 import CompletePhase from './phases/complete-phase';
@@ -75,7 +75,8 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
   if (!lesson) return null;
 
-  const activePhase: LessonPhase = practicePhase ?? lesson.currentPhase;
+  // 'understand' was merged into Listen (2026-09-28): older saves resume there
+  const activePhase: LessonPhase = visiblePhase(practicePhase ?? lesson.currentPhase);
   const lessonTitle = totalLessons > 1
     ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber}`
     : surah.nameSimple;
@@ -105,17 +106,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
         surah={surah}
         ayahs={ayahs}
         lessonId={lessonDef.lessonId}
-        onComplete={() => goToPhase('understand')}
-      />
-    ),
-    understand: (
-      <UnderstandPhase
-        surah={surah}
-        ayahs={ayahs}
-        lessonId={lessonDef.lessonId}
         onComplete={() => goToPhase('chunk')}
       />
     ),
+    understand: null, // never active: visiblePhase maps it to listen
     chunk: (
       <ChunkPhase
         surah={surah}

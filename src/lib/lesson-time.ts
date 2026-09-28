@@ -4,8 +4,8 @@
 //
 //   audio a ≈ w × SEC_PER_WORD (recitation incl. elongation and the gap between files)
 //   Listen      3 plays of the whole passage
-//   Understand  a short look at every ayah
-//   Build       6-4-4-6: 20 recitations (+ the pause or self-check after each)
+//   (meanings are read during the listens, 2026-09-28)
+//   Memorize    6-4-4-6: 20 recitations (+ the pause or self-check after each)
 //               + the word challenge, and chaining after every ayah but the
 //               first and last
 //   Test        one recital of the whole lesson, checking and rating each ayah
@@ -15,7 +15,6 @@
 
 const SEC_PER_WORD = 1.5;
 const LISTEN_PLAYS = 3;
-const UNDERSTAND_SEC_PER_AYAH = 15;
 const BUILD_OVERHEAD_SEC_PER_AYAH = 70; // pauses + self-checks across the 20 reps
 const WORD_CHALLENGE_SEC = (w: number) => 8 + 1.5 * w;
 const CHAIN_OVERHEAD_SEC = 15;
@@ -39,7 +38,6 @@ export function estimateLessonSeconds(wordCounts: number[]): number {
 
   return (
     LISTEN_PLAYS * passage +
-    UNDERSTAND_SEC_PER_AYAH * wordCounts.length +
     build +
     passage + TEST_CHECK_SEC_PER_AYAH * wordCounts.length + TEST_OVERHEAD_SEC
   );
