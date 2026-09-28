@@ -145,6 +145,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     setShowExplainer(false);
   };
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [showSkip, setShowSkip] = useState(false);
   const [isPlayingOnce, setIsPlayingOnce] = useState(false);
   const [completedAyahs, setCompletedAyahs] = useState<Set<number>>(() => {
     // Mark ayahs before the saved unit's ayah as completed
@@ -1021,24 +1022,56 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
         </div>
       )}
 
-      {/* Skip controls — just this step, just this ayah, or everything (tucked at the bottom) */}
-      <div className="flex flex-wrap justify-center gap-x-4 pt-2">
-        <button onClick={skipStep} className="min-h-11 px-2 text-xs text-muted transition-colors hover:text-foreground">
-          Skip this step
-        </button>
-        <button onClick={skipAyah} className="min-h-11 px-2 text-xs text-muted transition-colors hover:text-foreground">
-          I know this ayah, skip it
-        </button>
-      </div>
+      {/* One "Skip…" that opens a sheet saying exactly what each skip does from here
+          (three bare links — step / ayah / everything — read as the same thing) */}
+      <button onClick={() => setShowSkip(true)} className="mx-auto flex min-h-11 items-center gap-1 px-3 text-sm text-muted transition-colors hover:text-foreground">
+        Skip…
+      </button>
 
-      {!practiceReturnStage && (
-        <button
-          onClick={() => { markChunkComplete(lessonId); onComplete(); }}
-          className="mx-auto block pt-2 text-xs text-muted transition-colors hover:text-foreground"
-        >
-          Already memorized? Skip to Test →
-        </button>
-      )}
+      <BottomSheet open={showSkip} onClose={() => setShowSkip(false)} title="What would you like to skip?">
+        {(() => {
+          const nextStep = LEARN_STEPS[stepIndex + 1];
+          const nextAyah = ayahs[ayahIndex + 1];
+          const options = [
+            {
+              key: 'step',
+              title: learnStep === 'word-order' ? 'The word challenge' : 'Just this step',
+              detail: nextStep ? `Go to "${STEP_LABELS[nextStep]}" for ayah ${currentAyah.number}` : `Finish ayah ${currentAyah.number}`,
+              run: skipStep,
+            },
+            ...(ayahs.length > 1
+              ? [{
+                  key: 'ayah',
+                  title: `Ayah ${currentAyah.number}, I already know it`,
+                  detail: nextAyah ? `Move on to ayah ${nextAyah.number}` : 'That was the last ayah: go to the Test',
+                  run: skipAyah,
+                }]
+              : []),
+            ...(!practiceReturnStage
+              ? [{
+                  key: 'all',
+                  title: 'The rest of Memorize',
+                  detail: 'I know this lesson already: go straight to the Test',
+                  run: () => { markChunkComplete(lessonId); onComplete(); },
+                }]
+              : []),
+          ];
+          return (
+            <div className="space-y-2 pb-2">
+              {options.map((o) => (
+                <button
+                  key={o.key}
+                  onClick={() => { setShowSkip(false); o.run(); }}
+                  className="tactile-chip w-full rounded-xl bg-card px-4 py-3 text-left"
+                >
+                  <span className="block text-sm font-semibold text-foreground">{o.title}</span>
+                  <span className="mt-0.5 block text-xs text-muted">{o.detail}</span>
+                </button>
+              ))}
+            </div>
+          );
+        })()}
+      </BottomSheet>
 
       {/* One-time explainer (a bottom sheet, M11c) */}
       <BottomSheet open={showExplainer} onClose={dismissExplainer} title="How memorizing works">
