@@ -16,8 +16,11 @@ describe('local date helpers', () => {
   })
 
   it('yesterdayIso is exactly one calendar day before todayIso', () => {
-    const today = new Date(todayIso() + 'T00:00:00')
-    const yesterday = new Date(yesterdayIso() + 'T00:00:00')
+    // Compare as UTC calendar dates: the day after a local DST change is 23h/25h
+    // long, so local midnights are not 24h apart (this failed in Pacific/Auckland
+    // on 2026-09-28, the day after its clocks went forward)
+    const today = new Date(todayIso() + 'T00:00:00Z')
+    const yesterday = new Date(yesterdayIso() + 'T00:00:00Z')
     expect(today.getTime() - yesterday.getTime()).toBe(86_400_000)
   })
 

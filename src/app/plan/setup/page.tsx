@@ -542,8 +542,10 @@ export default function PlanSetupPage() {
               })}
             </div>
             <button
-              onClick={() => { setKnownSurahIds([]); setKnownLessonIds([]); }}
-              className="mt-3 text-xs font-semibold text-muted hover:text-foreground"
+              type="button"
+              // Clears any ticks AND moves on: with nothing ticked it used to do nothing at all
+              onClick={() => { setKnownSurahIds([]); setKnownLessonIds([]); setStep(3); }}
+              className="mt-3 min-h-11 text-xs font-semibold text-teal hover:text-teal-light"
             >
               I&apos;m starting fresh →
             </button>
