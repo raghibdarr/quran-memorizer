@@ -10,6 +10,7 @@ const eslintConfig = defineConfig([
     // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
+    "public/workers/**", // esbuild output (scripts/build-workers.mjs)
     "build/**",
     "next-env.d.ts",
   ]),

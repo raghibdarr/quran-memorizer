@@ -30,6 +30,9 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://example.supabase.co' }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'ci-placeholder' }}
       - run: npx cap sync android
+      # Voice check (beta): the on-device model ships in the app only, never on the website.
+      # Quran-Lab NPL-1.2: the feature it powers stays free (no paywall, trial or ads).
+      - run: node scripts/stage-tilawa-assets.mjs android/app/src/main/assets/public
       - run: ./gradlew assembleDebug
         working-directory: android
       - uses: actions/upload-artifact@v4

@@ -9,6 +9,8 @@ import PracticeSession from '@/components/practice/practice-session';
 import CloseButton from '@/components/ui/close-button';
 import SettingsPanel from '@/components/layout/settings-panel';
 import { SkeletonRows } from '@/components/ui/skeleton';
+import VoiceRecite from '@/components/practice/voice-recite';
+import { voiceCheckAvailable } from '@/lib/voice-tracker';
 
 /**
  * Recite a whole surah from memory (persona tests: someone who already knows a
@@ -20,6 +22,8 @@ export default function ReciteClient() {
   const params = useSearchParams();
   const surahId = Number(params.get('s'));
   const [data, setData] = useState<{ surah: Surah; lessons: LessonDef[] } | null>(null);
+  const [voiceReady, setVoiceReady] = useState(false);
+  const [voice, setVoice] = useState(false);
   const close = useAppBack(Number.isFinite(surahId) && surahId > 0 ? `/lesson/${surahId}` : '/');
 
   useEffect(() => {
@@ -31,6 +35,11 @@ export default function ReciteClient() {
     return () => { live = false; };
   }, [surahId]);
 
+  // Voice check needs the on-device model, which only the app build ships
+  useEffect(() => {
+    voiceCheckAvailable().then(setVoiceReady);
+  }, []);
+
   return (
     <div className="min-h-dvh bg-cream">
       <div className="sticky top-[var(--safe-top)] z-20 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
@@ -41,7 +50,23 @@ export default function ReciteClient() {
         </div>
       </div>
       <main className="mx-auto max-w-2xl px-4 py-5">
-        {data ? (
+        {data && voice ? (
+          <VoiceRecite surahId={data.surah.id} ayahs={data.surah.ayahs} onExit={() => setVoice(false)} />
+        ) : data ? (
+          <>
+          {voiceReady && (
+            <button
+              type="button"
+              onClick={() => setVoice(true)}
+              className="tactile-btn mb-4 flex w-full items-center justify-between rounded-2xl bg-gold/10 px-4 py-3 text-left"
+            >
+              <span>
+                <span className="block text-sm font-semibold text-foreground">Check with your voice <span className="ml-1 rounded-full bg-gold/20 px-2 py-0.5 text-xs text-gold-deep">beta</span></span>
+                <span className="block text-xs text-muted">Recite out loud and see which words come through</span>
+              </span>
+              <span aria-hidden className="text-gold-deep">›</span>
+            </button>
+          )}
           <PracticeSession
             surahIds={[data.surah.id]}
             title={data.surah.nameSimple}
@@ -52,6 +77,7 @@ export default function ReciteClient() {
             ratingOptional
             onDone={close}
           />
+          </>
         ) : (
           <SkeletonRows count={5} />
         )}
