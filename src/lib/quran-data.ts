@@ -53,11 +53,19 @@ const STILL_BARE = new RegExp(`<tajweed class=[a-z_]+>(${SIGNS})</tajweed>`, 'g'
 
 export function normalizeTajweedText(html: string): string {
   return html
+    // 32:3 lost the start of a tag in the source, leaving a visible ">" in ٱفْتَرَىٰهُ
+    .replace('فْتَرَ>ٮٰ</tajweed>', 'فْتَرَ<tajweed class=madda_normal>ٮٰ</tajweed>')
     .replace(/ٲ/g, 'ٰ')
+    // The font draws ـٰ and ٰ alike, but the tatweel fuses with the letter before it
+    // into one shape, pulling that letter's colour onward (قَـٰتَلَ after a green ق)
+    .replace(/ـ(?=[ً-ٟۖ-ۭ]*ٰ)/g, '')
     .replace(/<tajweed class=idgham_wo_ghunnah>([^< ]*) ([^<]*)<\/tajweed>/g, '<tajweed class=idgham_wo_ghunnah>$1</tajweed> $2')
     // The font draws ـٰ and ٰ alike, but a tatweel inside the span drags the next letter into its colour
     .replace(BARE_MARK, (_m, letter: string, cls: string, signs: string) => `<tajweed class=${cls}>${(letter + signs).replace(/ـ/g, '')}</tajweed>`)
-    .replace(STILL_BARE, '$1');
+    .replace(STILL_BARE, '$1')
+    // A hamza's tatweel seat right after a coloured letter (خَطِيٓـَٔةً) fused with it and took
+    // its colour; a joiner keeps the word joined but gives the seat its own shape
+    .replace(/<\/tajweed>([ً-ٰٟۖ-ۭ]*)ـ/g, '</tajweed>$1‍ـ');
 }
 
 export async function getSurah(id: number): Promise<Surah> {
