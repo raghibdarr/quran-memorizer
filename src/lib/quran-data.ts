@@ -38,11 +38,26 @@ export async function getJuzSegmentsForSurah(surahId: number): Promise<Array<{ j
  *
  * Idghaam without ghunnah is marked over the silent noon AND the next word's first
  * letter (مِن رَّبِّهِمْ); only the noon is silent, so the mark is trimmed to it.
+ *
+ * Most madd marks wrap only a vowel sign (the dagger alif in ٱلْعَٰلَمِينَ), and a
+ * browser can't colour a sign apart from its letter: the colour vanished, or landed
+ * on the next letter (the ن of ٱلرَّحْمَٰنِ). Such a mark takes in the letter it sits
+ * on, so the whole letter carries the colour. Where that letter already has a colour
+ * of its own (the silent waw of ٱلصَّلَوٰةَ), the mark is left plain rather than risk
+ * painting the wrong letter.
  */
+const LETTER = '[\\u0621-\\u063A\\u0641-\\u064A\\u066E\\u066F\\u0671-\\u06D3]';
+const SIGNS = '[\\u200C\\u0640\\u064B-\\u065F\\u0670\\u06D6-\\u06ED]*';
+const BARE_MARK = new RegExp(`(${LETTER}${SIGNS})<tajweed class=([a-z_]+)>(${SIGNS})</tajweed>`, 'g');
+const STILL_BARE = new RegExp(`<tajweed class=[a-z_]+>(${SIGNS})</tajweed>`, 'g');
+
 export function normalizeTajweedText(html: string): string {
   return html
     .replace(/ٲ/g, 'ٰ')
-    .replace(/<tajweed class=idgham_wo_ghunnah>([^< ]*) ([^<]*)<\/tajweed>/g, '<tajweed class=idgham_wo_ghunnah>$1</tajweed> $2');
+    .replace(/<tajweed class=idgham_wo_ghunnah>([^< ]*) ([^<]*)<\/tajweed>/g, '<tajweed class=idgham_wo_ghunnah>$1</tajweed> $2')
+    // The font draws ـٰ and ٰ alike, but a tatweel inside the span drags the next letter into its colour
+    .replace(BARE_MARK, (_m, letter: string, cls: string, signs: string) => `<tajweed class=${cls}>${(letter + signs).replace(/ـ/g, '')}</tajweed>`)
+    .replace(STILL_BARE, '$1');
 }
 
 export async function getSurah(id: number): Promise<Surah> {
