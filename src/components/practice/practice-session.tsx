@@ -15,12 +15,13 @@ import { useSettingsStore } from '@/stores/settings-store';
 import { useStatsStore } from '@/stores/stats-store';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
-import ArabicText from '@/components/ui/arabic-text';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
 import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
 
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
+import { useSpokenWord } from '@/hooks/use-spoken-word';
+import AyahDisplay from '@/components/ui/ayah-display';
 type SessionStep = 'ayah-by-ayah' | 'full-passage' | 'results';
 
 interface PracticeSessionProps {
@@ -101,6 +102,13 @@ export default function PracticeSession({
   const recorder = useRecorder();
   const whisper = useWhisper();
   const audio = useAudio();
+  // the word being recited (the playing ayah may be from another surah in a mixed session)
+  const playingAyah = currentPlayingAyahIdx >= 0 ? ayahs[currentPlayingAyahIdx] : null;
+  const spokenWord = useSpokenWord(
+    playingAyah ? parseInt(playingAyah.key.split(':')[0], 10) : surahIds[0],
+    playingAyah ? playingAyah.number : null,
+    audio.isPlaying,
+  );
   const getAudioUrl = useReciterAudioUrl();
   const { reviewCard, cards: reviewCards, addLessonCard, lessonCards } = useReviewStore();
   const { startLesson, completeLesson } = useProgressStore();
@@ -341,7 +349,7 @@ export default function PracticeSession({
           </p>
           {revealed ? (
             <div>
-              <ArabicText ayah={currentAyah} className="text-center text-4xl leading-loose" />
+              <AyahDisplay ayah={currentAyah} showTranslation={false} showTransliteration={false} spokenWord={currentPlayingAyahIdx === currentIdx ? spokenWord : -1} />
               {transliterationEnabled && currentAyah.transliteration && (
                 <p className="mt-2 text-sm text-muted text-center">{currentAyah.transliteration}</p>
               )}
@@ -425,7 +433,7 @@ export default function PracticeSession({
             {/* Play audio + Retry */}
             <div className="flex gap-2">
               <button
-                onClick={() => playAyah(currentAyah)}
+                onClick={() => playAyah(currentAyah, currentIdx)}
                 className="flex-1 rounded-xl bg-foreground/5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
               >
                 <PlayIcon /> Play
@@ -538,7 +546,7 @@ export default function PracticeSession({
                 </div>
                 {isAyahRevealed ? (
                   <>
-                    <ArabicText ayah={ayah} className="text-center text-4xl leading-loose" />
+                    <AyahDisplay ayah={ayah} showTranslation={false} showTransliteration={false} spokenWord={isAyahPlaying ? spokenWord : -1} />
                     {transliterationEnabled && ayah.transliteration && (
                       <p className="text-sm text-muted text-center">{ayah.transliteration}</p>
                     )}

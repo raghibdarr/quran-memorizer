@@ -459,13 +459,17 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
   // Shared chain audio helpers
   const [chainPlaying, setChainPlaying] = useState(false);
   const [chainPlayingIdx, setChainPlayingIdx] = useState(-1);
+  const [chainPlayingAyah, setChainPlayingAyah] = useState<number | null>(null);
   const chainAbortRef = useRef(false);
+  const chainSpokenWord = useSpokenWord(surah.id, chainPlayingAyah, audioIsPlaying);
 
   const playChainAyah = async (ayah: Ayah, idx: number) => {
     if (chainPlaying) return;
     setChainPlayingIdx(idx);
+    setChainPlayingAyah(ayah.number);
     await audioController.playAndWait(getAudioUrl(surah.id, ayah.number));
     setChainPlayingIdx(-1);
+    setChainPlayingAyah(null);
   };
 
   const playChainAll = async (chainAyahs: Ayah[]) => {
@@ -546,7 +550,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
                         <HidePill hidden={false} onClick={() => toggleAyahReveal(i)} />
                       </div>
                     </div>
-                    <AyahDisplay ayah={ayah} />
+                    <AyahDisplay ayah={ayah} spokenWord={isAyahPlaying ? chainSpokenWord : -1} />
                   </div>
                 ) : (
                   <button

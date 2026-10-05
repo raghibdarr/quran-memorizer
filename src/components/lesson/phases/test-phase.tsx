@@ -15,6 +15,7 @@ import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { haptic } from '@/lib/haptics';
 
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
+import { useSpokenWord } from '@/hooks/use-spoken-word';
 interface TestPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -52,6 +53,8 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
   const [flagged, setFlagged] = useState<Record<string, Rating>>({});
   const [playingAll, setPlayingAll] = useState(false);
   const [playingIdx, setPlayingIdx] = useState(-1);
+  // the word being recited, for the card that's playing
+  const spokenWord = useSpokenWord(surah.id, playingIdx >= 0 ? ayahs[playingIdx]?.number ?? null : null, isPlaying);
   const abortRef = useRef(false);
 
   const first = ayahs[0].number;
@@ -173,7 +176,7 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
                       <HidePill hidden={false} onClick={() => toggle(ayah.key)} />
                     </div>
                   </div>
-                  <AyahDisplay ayah={ayah} />
+                  <AyahDisplay ayah={ayah} spokenWord={isCurrent ? spokenWord : -1} />
                   <div className="flex gap-1.5 pt-1">
                     {(['got-it', 'shaky', 'missed'] as Rating[]).map((r) => (
                       <button
