@@ -1,6 +1,7 @@
 // Imports QUL bulk-download "ayah recitation with segments" JSON files (from a free
 // qul.tarteel.ai account) into public/segments/{everyayahDir}/{surah}.json.
 // Usage: node scripts/import-segments.mjs "C:\path\to\downloaded\folder"
+// THEN run scripts/align-segments.mts: sources number some words differently from ours.
 //
 // Safety rails:
 // - Reciters are identified by the audio_url slug inside the file (filenames lie);

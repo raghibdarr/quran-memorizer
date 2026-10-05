@@ -13,6 +13,13 @@
         "mismatch": 0,
         "unchecked": 0,
         "sampled": 12
+      },
+      "alignedToOurWords": {
+        "exact": 5871,
+        "split": 364,
+        "proportional": 0,
+        "short": 1,
+        "at": "2026-10-05"
       }
     },
     "MaherAlMuaiqly128kbps": {
@@ -27,6 +34,13 @@
         "mismatch": 1,
         "unchecked": 0,
         "sampled": 12
+      },
+      "alignedToOurWords": {
+        "exact": 5873,
+        "split": 362,
+        "proportional": 0,
+        "short": 0,
+        "at": "2026-10-05"
       }
     },
     "Alafasy_128kbps": {
@@ -41,6 +55,13 @@
         "mismatch": 0,
         "unchecked": 0,
         "sampled": 12
+      },
+      "alignedToOurWords": {
+        "exact": 5872,
+        "split": 364,
+        "proportional": 0,
+        "short": 0,
+        "at": "2026-10-05"
       }
     },
     "Minshawy_Murattal_128kbps": {
@@ -55,6 +76,13 @@
         "mismatch": 0,
         "unchecked": 0,
         "sampled": 12
+      },
+      "alignedToOurWords": {
+        "exact": 5874,
+        "split": 362,
+        "proportional": 0,
+        "short": 0,
+        "at": "2026-10-05"
       }
     },
     "Yasser_Ad-Dussary_128kbps": {
@@ -69,6 +97,13 @@
         "mismatch": 0,
         "unchecked": 0,
         "sampled": 12
+      },
+      "alignedToOurWords": {
+        "exact": 5891,
+        "split": 345,
+        "proportional": 0,
+        "short": 0,
+        "at": "2026-10-05"
       }
     }
   },

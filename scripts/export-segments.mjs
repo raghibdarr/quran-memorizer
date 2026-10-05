@@ -7,6 +7,7 @@
 // with times relative to the per-ayah mp3 Takrar already plays (QUL's audio_url is
 // byte-identical to the everyayah file — sampled-verified below and recorded in the
 // manifest). Run: node scripts/export-segments.mjs
+// THEN run scripts/align-segments.mts: sources number some words differently from ours.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
