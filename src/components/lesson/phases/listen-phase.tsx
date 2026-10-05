@@ -15,6 +15,7 @@ import { buildAyahWordData } from '@/lib/segments';
 import { wordAudioUrl } from '@/lib/word-audio';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 
+import { PlayPill } from '@/components/ui/ayah-actions';
 interface ListenPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -214,23 +215,8 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
               )}
             >
               <div className="flex items-center justify-between">
-                <button
-                  onClick={() => playSingleAyah(i)}
-                  disabled={playingAll}
-                  aria-label={`Play ayah ${ayah.number}`}
-                  className={cn('hit-44 flex items-center gap-1.5 text-xs', isActive ? 'text-teal' : 'text-muted')}
-                >
-                  {isActive && isPlaying ? (
-                    <span className="flex h-3.5 items-end gap-[2px]" aria-hidden>
-                      <span className="w-[3px] animate-[bar1_0.8s_ease-in-out_infinite] rounded-full bg-teal" />
-                      <span className="w-[3px] animate-[bar2_0.8s_ease-in-out_infinite_0.2s] rounded-full bg-teal" />
-                      <span className="w-[3px] animate-[bar3_0.8s_ease-in-out_infinite_0.4s] rounded-full bg-teal" />
-                    </span>
-                  ) : (
-                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden><path d="M4 2l10 6-10 6V2z" /></svg>
-                  )}
-                  Ayah {ayah.number}
-                </button>
+                <span className={cn('text-xs', isActive ? 'text-teal' : 'text-muted')}>Ayah {ayah.number}</span>
+                <PlayPill playing={isActive && isPlaying} disabled={playingAll} onClick={() => playSingleAyah(i)} />
               </div>
 
               <div dir="rtl" className="mt-2 flex flex-wrap justify-center gap-x-1 gap-y-1 text-4xl leading-loose">

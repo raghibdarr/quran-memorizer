@@ -20,6 +20,7 @@ import MediaControlsBar from '@/components/ui/media-controls-bar';
 import RatingButtons from '@/components/ui/rating-buttons';
 import { cn } from '@/lib/cn';
 
+import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 type SessionStep = 'ayah-by-ayah' | 'full-passage' | 'results';
 
 interface PracticeSessionProps {
@@ -525,39 +526,14 @@ export default function PracticeSession({
               )}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    {/* Audio visualizer / play indicator */}
-                    <div className={cn('flex items-center justify-center', isAyahPlaying ? 'text-teal' : 'text-muted/40')}>
-                      {isAyahPlaying && audio.isPlaying ? (
-                        <div className="flex items-end gap-[2px] h-4">
-                          <div className="w-[3px] bg-teal rounded-full animate-[bar1_0.8s_ease-in-out_infinite]" />
-                          <div className="w-[3px] bg-teal rounded-full animate-[bar2_0.8s_ease-in-out_infinite_0.2s]" />
-                          <div className="w-[3px] bg-teal rounded-full animate-[bar3_0.8s_ease-in-out_infinite_0.4s]" />
-                        </div>
-                      ) : null}
-                    </div>
                     <p className="text-xs text-muted">
                       {activeFlaggedAyahs.includes(ayah.number) && <span className={cn('mr-1 inline-block h-2 w-2 rounded-full', getFlagDotColor(ayah.number))} />}
                       {ayahLabel(ayah)}
                     </p>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={() => playAyah(ayah, idx)}
-                      className="hit-44 rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
-                      title="Play ayah"
-                      aria-label="Play ayah"
-                    >
-                      <PlayIcon />
-                    </button>
-                    <button
-                      onClick={() => togglePassageAyah(ayah.key)}
-                      className="hit-44 rounded-full p-1.5 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
-                      title={isAyahRevealed ? 'Hide' : 'Reveal'}
-                      aria-label={isAyahRevealed ? 'Hide ayah text' : 'Reveal ayah text'}
-                      aria-pressed={isAyahRevealed}
-                    >
-                      {isAyahRevealed ? <EyeOffIcon /> : <EyeIcon />}
-                    </button>
+                  <div className="flex items-center gap-2">
+                    <PlayPill playing={isAyahPlaying && audio.isPlaying} onClick={() => playAyah(ayah, idx)} />
+                    <HidePill hidden={!isAyahRevealed} onClick={() => togglePassageAyah(ayah.key)} />
                   </div>
                 </div>
                 {isAyahRevealed ? (
@@ -736,24 +712,7 @@ function PlayIcon() {
 
 
 
-function EyeIcon() {
-  return (
-    <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
 
-function EyeOffIcon() {
-  return (
-    <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-      <line x1="1" y1="1" x2="23" y2="23" />
-    </svg>
-  );
-}
 
 function LoadingSpinner() {
   return (

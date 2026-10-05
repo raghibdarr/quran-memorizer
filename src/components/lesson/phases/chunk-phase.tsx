@@ -19,6 +19,7 @@ import MediaControlsBar from '@/components/ui/media-controls-bar';
 import { cn } from '@/lib/cn';
 import BottomSheet from '@/components/ui/bottom-sheet';
 
+import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 interface ChunkPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -538,36 +539,11 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
               >
                 {isRevealed ? (
                   <div>
-                    <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs text-muted">Ayah {ayah.number}</span>
                       <div className="flex items-center gap-2">
-                        {isAyahPlaying && audioIsPlaying ? (
-                          <div className="flex items-end gap-[2px] h-4">
-                            <div className="w-[3px] bg-teal rounded-full animate-[bar1_0.8s_ease-in-out_infinite]" />
-                            <div className="w-[3px] bg-teal rounded-full animate-[bar2_0.8s_ease-in-out_infinite_0.2s]" />
-                            <div className="w-[3px] bg-teal rounded-full animate-[bar3_0.8s_ease-in-out_infinite_0.4s]" />
-                          </div>
-                        ) : null}
-                        <span className="text-xs text-muted">Ayah {ayah.number}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          onClick={() => playChainAyah(ayah, i)}
-                          className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
-                        >
-                          <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-                        </button>
-                        <button
-                          onClick={() => toggleAyahReveal(i)}
-                          className="hit-44 rounded-full p-1.5 text-muted hover:text-foreground hover:bg-foreground/5"
-                          title="Hide"
-                          aria-label="Hide text"
-                        >
-                          <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-                            <line x1="1" y1="1" x2="23" y2="23" />
-                          </svg>
-                        </button>
+                        <PlayPill playing={isAyahPlaying && audioIsPlaying} onClick={() => playChainAyah(ayah, i)} />
+                        <HidePill hidden={false} onClick={() => toggleAyahReveal(i)} />
                       </div>
                     </div>
                     <AyahDisplay ayah={ayah} />
