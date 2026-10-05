@@ -141,8 +141,10 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
     >
       <header ref={setHeaderEl} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-2 pb-2.5 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-1.5 flex items-center justify-between">
-            <CloseButton fallback={backUrl} label="Close lesson" />
+          {/* Phones: the sides are too wide to balance, so space-between. Wider: equal side
+              columns put the title at true centre, over the steps. */}
+          <div className="mb-1.5 flex items-center justify-between sm:grid sm:grid-cols-[1fr_auto_1fr]">
+            <div className="sm:justify-self-start"><CloseButton fallback={backUrl} label="Close lesson" /></div>
             <div className="min-w-0 text-center">
               <h2 className="truncate text-sm font-semibold text-teal">{surah.nameSimple}</h2>
               {totalLessons > 1 && (
@@ -151,7 +153,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
                 </p>
               )}
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 sm:justify-self-end">
               <button
                 onClick={() => setShowResetConfirm(true)}
                 className="pressable flex h-11 w-11 items-center justify-center rounded-full text-muted hover:bg-foreground/5 hover:text-foreground"

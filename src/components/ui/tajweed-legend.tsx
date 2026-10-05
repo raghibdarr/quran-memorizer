@@ -34,25 +34,27 @@ export default function TajweedLegend({ children }: { children: React.ReactNode 
 
   return (
     <>
-      {/* equal side columns keep the steps centred */}
-      <div className="grid grid-cols-[2.75rem_1fr_2.75rem] items-center">
-        <span />
-        {children}
-        {tajweed && (
-          <button
-            onClick={() => setOpen(!open)}
-            aria-expanded={open}
-            aria-label={open ? 'Hide tajweed colours' : 'Show tajweed colours'}
-            className="pressable flex h-11 w-11 flex-col items-center justify-center gap-1 justify-self-end rounded-full hover:bg-foreground/5"
-          >
-            <span className="grid grid-cols-2 gap-0.5">
-              {TAJWEED_RULES.slice(1, 5).map((rule, i) => (
-                <span key={i} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: rule.color }} />
-              ))}
-            </span>
-            <span className="text-[9px] leading-none text-muted">{open ? '▴' : '▾'}</span>
-          </button>
-        )}
+      {/* the toggle hangs just after the last step, so the steps stay centred */}
+      <div className="flex justify-center">
+        <div className="relative">
+          {children}
+          {tajweed && (
+            <button
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-label={open ? 'Hide tajweed colours' : 'Show tajweed colours'}
+              // centred on the step circles (28px tall): the dots sit at the button's middle
+              className="pressable absolute -top-2 left-full ml-1 flex h-11 w-10 items-center justify-center rounded-full hover:bg-foreground/5"
+            >
+              <span className="grid grid-cols-2 gap-0.5">
+                {TAJWEED_RULES.slice(1, 5).map((rule, i) => (
+                  <span key={i} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: rule.color }} />
+                ))}
+              </span>
+              <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 text-[9px] leading-none text-muted">{open ? '▴' : '▾'}</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {tajweed && open && (
