@@ -18,7 +18,8 @@ export function useSpokenWord(surahId: number, ayahNumber: number | null, playin
   const [loaded, setLoaded] = useState<{ key: string; timings: SurahTimings | null }>({ key: '', timings: null });
   const key = `${reciter}/${surahId}`;
   const timings = loaded.key === key ? loaded.timings : null;
-  const [word, setWord] = useState(-1);
+  // keyed by ayah, so a new ayah never flashes the last word of the one before
+  const [word, setWord] = useState<{ ayah: number | null; w: number }>({ ayah: null, w: -1 });
 
   useEffect(() => {
     let live = true;
@@ -32,12 +33,12 @@ export function useSpokenWord(surahId: number, ayahNumber: number | null, playin
     let frame = 0;
     const tick = () => {
       const w = wordAtTime(ayahTimings, audioController.currentTime * 1000);
-      setWord((prev) => (prev === w ? prev : w));
+      setWord((prev) => (prev.ayah === ayahNumber && prev.w === w ? prev : { ayah: ayahNumber, w }));
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [playing, ayahNumber, timings]);
 
-  return playing && ayahNumber != null && timings ? word : -1;
+  return playing && ayahNumber != null && timings && word.ayah === ayahNumber ? word.w : -1;
 }

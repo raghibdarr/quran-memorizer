@@ -1,30 +1,14 @@
 import { getCachedAudio, cacheAudio } from './storage';
+import { isSurahAudio, surahAudioFallback } from './reciters';
+import { loadSurahAudio } from './segment-audio';
 
 type AudioState = 'idle' | 'playing' | 'paused' | 'loading';
 
-export interface ReciterOption {
-  id: string;          // everyayah directory id
-  name: string;        // display name
-  hint?: string;       // optional one-line hint
-}
-
-/** Reciters available on everyayah.com. Single source of truth — used by both the AudioController and the settings UI. */
-export const RECITERS: ReciterOption[] = [
-  { id: 'Alafasy_128kbps', name: 'Mishary Alafasy', hint: 'Default, clear and modern' },
-  { id: 'Husary_128kbps', name: 'Mahmoud Al-Hussary', hint: 'Slower, beginner-friendly' },
-  { id: 'Abdul_Basit_Murattal_192kbps', name: 'Abdul Basit (Murattal)', hint: 'Slow, ornate' },
-  { id: 'Minshawy_Murattal_128kbps', name: 'Al-Minshawy (Murattal)', hint: 'Classical' },
-  { id: 'Nasser_Alqatami_128kbps', name: 'Nasser Al-Qatami' },
-  { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Ad-Dussary' },
-  { id: 'Hudhaify_128kbps', name: 'Ali Al-Hudhaify' },
-  // 128kbps (exact everyayah dir name, no underscores): QUL's word timestamps align to
-  // this encode, not the old 64kbps directory — see segment-audio.ts
-  { id: 'MaherAlMuaiqly128kbps', name: 'Maher Al-Muaiqly' },
-  { id: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', name: 'Ahmed Al-Ajamy' },
-  { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel' },
-];
+export { RECITERS, type ReciterOption } from './reciters';
 
 const EVERYAYAH_HOST_PREFIX = 'everyayah.com/data/';
+/** Callers always address an ayah by its everyayah URL: …/data/<reciter>/SSSAAA.mp3 */
+const AYAH_FILE = /everyayah\.com\/data\/[^/]+\/(\d{3})(\d{3})\.mp3$/;
 
 /**
  * Swap the reciter segment in an everyayah URL. Non-everyayah URLs pass through.
@@ -47,15 +31,32 @@ class AudioController {
   private _state: AudioState = 'idle';
   private _speed: number = 1;
   private _reciter: string = 'Alafasy_128kbps';
-  /** Tears down the active playRange guard (timeupdate listener + safety timer) */
+  /** Tears down the active range guard (timeupdate listener + poll) */
   private rangeCleanup: (() => void) | null = null;
+  /** Where the ayah's clock starts inside the loaded file: non-zero only for surah audio */
+  private baseSec = 0;
+  /** The ayah's length when it's a slice of a surah file; null = the file's own duration */
+  private spanSec: number | null = null;
+  /** A range just ended: the pause it issues is an end, not a user pause */
+  private endingRange = false;
 
   setReciter(reciterId: string): void {
     this._reciter = reciterId;
   }
 
   private resolveUrl(url: string): string {
-    return transformReciterUrl(url, this._reciter);
+    // A surah-audio reciter's missing ayahs come from a per-ayah collection (the same voice where one exists)
+    return transformReciterUrl(url, isSurahAudio(this._reciter) ? surahAudioFallback(this._reciter) : this._reciter);
+  }
+
+  /** For surah-audio reciters: the surah file and the ayah's [startMs, endMs] inside it */
+  private async locate(url: string): Promise<{ src: string; startMs: number; endMs: number } | null> {
+    if (!isSurahAudio(this._reciter)) return null;
+    const m = AYAH_FILE.exec(url);
+    if (!m) return null;
+    const map = await loadSurahAudio(this._reciter, Number(m[1]));
+    const v = map?.verses[String(Number(m[2]))];
+    return map && v ? { src: map.src, startMs: v[0], endMs: v[1] } : null;
   }
 
   private getAudio(): HTMLAudioElement {
@@ -63,6 +64,7 @@ class AudioController {
       this.audio = new Audio();
       this.audio.addEventListener('play', () => { this._state = 'playing'; this.notify(); });
       this.audio.addEventListener('pause', () => {
+        if (this.endingRange) { this.endingRange = false; return; }
         if (!this.audio?.ended) this._state = 'paused';
         this.notify();
       });
@@ -109,12 +111,14 @@ class AudioController {
     return this._state === 'loading';
   }
 
+  /** Seconds into the current ayah (for surah audio, from the ayah's start, not the file's) */
   get currentTime(): number {
-    return this.audio?.currentTime ?? 0;
+    return Math.max(0, (this.audio?.currentTime ?? 0) - this.baseSec);
   }
 
+  /** The current ayah's length in seconds */
   get duration(): number {
-    return this.audio?.duration ?? 0;
+    return this.spanSec ?? this.audio?.duration ?? 0;
   }
 
   get activeUrl(): string | null {
@@ -127,7 +131,6 @@ class AudioController {
 
   async play(url: string): Promise<void> {
     const audio = this.getAudio();
-    const resolved = this.resolveUrl(url);
 
     // If same (caller) URL is already playing, ignore (prevent duplicates)
     if (this.currentUrl === url && this.isPlaying) return;
@@ -137,6 +140,11 @@ class AudioController {
       await audio.play();
       return;
     }
+
+    const span = await this.locate(url);
+    if (span) return this.playSpan(url, span.src, span.startMs, span.endMs, [span.startMs, span.endMs]);
+
+    const resolved = this.resolveUrl(url);
 
     // Stop current playback before starting new
     this.stop();
@@ -181,13 +189,92 @@ class AudioController {
       .catch(() => {});
   }
 
+  /** Seeking needs metadata (duration/seekability) first */
+  private waitForMetadata(audio: HTMLAudioElement): Promise<void> {
+    return new Promise<void>((resolve) => {
+      if (audio.readyState >= 1) return resolve();
+      const done = () => {
+        audio.removeEventListener('loadedmetadata', done);
+        audio.removeEventListener('error', done);
+        resolve();
+      };
+      audio.addEventListener('loadedmetadata', done);
+      audio.addEventListener('error', done);
+    });
+  }
+
+  /** Stop at endSec. timeupdate ticks only ~4x/sec, too coarse for a word boundary, so poll while playing. */
+  private guardEnd(audio: HTMLAudioElement, endSec: number): void {
+    const finish = () => {
+      this.rangeCleanup?.();
+      if (!audio.paused) { this.endingRange = true; audio.pause(); }
+      this._state = 'idle';
+      this.notify();
+      this.endedCallbacks.forEach((cb) => cb());
+      this.endedCallbacks.clear();
+    };
+    const check = () => {
+      if (audio.currentTime >= endSec - 0.04) finish();
+    };
+    const poll = setInterval(() => { if (!audio.paused) check(); }, 30);
+    audio.addEventListener('timeupdate', check);
+    this.rangeCleanup = () => {
+      audio.removeEventListener('timeupdate', check);
+      clearInterval(poll);
+      this.rangeCleanup = null;
+    };
+  }
+
   /**
-   * Play only [startMs, endMs] of a per-ayah file — segment audio sliced out of the
-   * recording via QUL word timestamps (see src/lib/segment-audio.ts). Resolves once
-   * playback starts; waitForEnd()/playRangeAndWait() resolve when the range finishes,
-   * so the drill helpers (playSequence/playRepeated) compose with ranges unchanged.
+   * Play [fromMs, toMs] of a whole-surah file as if it were the ayah's own recording:
+   * the clock (currentTime, duration, seek) runs from the ayah's start. The file stays
+   * loaded between calls, so repeating an ayah or moving to the next is a seek, not a
+   * reload. Surah files are never cached for offline: they run to 100+ MB.
+   */
+  private async playSpan(url: string, src: string, fromMs: number, toMs: number, verse: [number, number]): Promise<void> {
+    const audio = this.getAudio();
+    this.rangeCleanup?.();
+    if (!audio.paused) { this.endingRange = true; audio.pause(); }
+    this.currentUrl = url;
+    this._state = 'loading';
+    this.baseSec = verse[0] / 1000;
+    this.spanSec = (verse[1] - verse[0]) / 1000;
+    this.notify();
+
+    if (audio.src !== src) {
+      audio.src = src;
+      await this.waitForMetadata(audio);
+    }
+    audio.playbackRate = this._speed;
+    try {
+      audio.currentTime = fromMs / 1000;
+    } catch {
+      // unseekable: nothing sensible to play
+    }
+    this.guardEnd(audio, toMs / 1000);
+    try {
+      await audio.play();
+    } catch {
+      this.rangeCleanup?.();
+      this._state = 'idle';
+      this.notify();
+      this.endedCallbacks.forEach((cb) => cb());
+      this.endedCallbacks.clear();
+    }
+  }
+
+  /**
+   * Play only [startMs, endMs] of an ayah (ms from the ayah's start) — segment audio
+   * sliced out of the recording via word timestamps (see src/lib/segment-audio.ts).
+   * Resolves once playback starts; waitForEnd()/playRangeAndWait() resolve when the
+   * range finishes, so the drill helpers (playSequence/playRepeated) compose with ranges.
    */
   async playRange(url: string, startMs: number, endMs: number): Promise<void> {
+    const span = await this.locate(url);
+    if (span) {
+      return this.playSpan(url, span.src, span.startMs + startMs, Math.min(span.endMs, span.startMs + endMs), [span.startMs, span.endMs]);
+    }
+
     const audio = this.getAudio();
     const resolved = this.resolveUrl(url);
 
@@ -212,49 +299,22 @@ class AudioController {
     audio.src = src;
     audio.playbackRate = this._speed;
 
-    // Seeking needs metadata (duration/seekability) first
-    await new Promise<void>((resolve) => {
-      if (audio.readyState >= 1) return resolve();
-      const done = () => {
-        audio.removeEventListener('loadedmetadata', done);
-        audio.removeEventListener('error', done);
-        resolve();
-      };
-      audio.addEventListener('loadedmetadata', done);
-      audio.addEventListener('error', done);
-    });
+    await this.waitForMetadata(audio);
     try {
       audio.currentTime = Math.max(0, startMs / 1000);
     } catch {
       // unseekable — play from the top rather than not at all
     }
-
-    // Stop guard: timeupdate only ticks ~4x/sec, so back it up with a wall-clock
-    // timer scaled by playback rate.
-    const endSec = endMs / 1000;
-    const finish = () => {
-      this.rangeCleanup?.();
-      audio.pause();
-      this._state = 'idle';
-      this.notify();
-      this.endedCallbacks.forEach((cb) => cb());
-      this.endedCallbacks.clear();
-    };
-    const onTime = () => {
-      if (audio.currentTime >= endSec - 0.04) finish();
-    };
-    const timer = setTimeout(finish, Math.max(0, endMs - startMs) / this._speed + 800);
-    audio.addEventListener('timeupdate', onTime);
-    this.rangeCleanup = () => {
-      audio.removeEventListener('timeupdate', onTime);
-      clearTimeout(timer);
-      this.rangeCleanup = null;
-    };
+    this.guardEnd(audio, endMs / 1000);
 
     try {
       await audio.play();
     } catch {
-      finish();
+      this.rangeCleanup?.();
+      this._state = 'idle';
+      this.notify();
+      this.endedCallbacks.forEach((cb) => cb());
+      this.endedCallbacks.clear();
       return;
     }
 
@@ -302,6 +362,8 @@ class AudioController {
       this.audio.src = '';
     }
     this.currentUrl = null;
+    this.baseSec = 0;
+    this.spanSec = null;
     this._state = 'idle';
     this.notify();
   }
@@ -315,8 +377,8 @@ class AudioController {
   /** Seek the currently loaded audio to `time` seconds. No-op if nothing is loaded. */
   seek(time: number): void {
     if (!this.audio || !this.currentUrl) return;
-    const clamped = Math.max(0, Math.min(time, this.audio.duration || 0));
-    this.audio.currentTime = clamped;
+    const clamped = Math.max(0, Math.min(time, this.duration || 0));
+    this.audio.currentTime = this.baseSec + clamped;
     this.notify();
   }
 

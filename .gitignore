@@ -58,3 +58,4 @@ whisper-base-quran-onnx-quantized/
 # Tilawa model assets (downloaded into the Android build by CI; NPL-1.2)
 /public/models/
 /public/ort/
+/.qud-cache/

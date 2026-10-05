@@ -107,5 +107,215 @@
       }
     }
   },
-  "importedAt": "2026-07-08"
+  "importedAt": "2026-07-08",
+  "qud": {
+    "source": "https://github.com/QUD-Technologies/quranic-universal-audio (Qur'anic Universal Audio, CC BY 4.0)",
+    "release": "v3.2.0",
+    "reciters": {
+      "Husary_128kbps": {
+        "slug": "mahmoud_khalil_al_husary_qdc_128k",
+        "name": "Mahmoud Khalil Al-Husary",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 0,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "Nasser_Alqatami_128kbps": {
+        "slug": "nasser_al_qatami_mp3quran",
+        "name": "Nasser Al-Qatami",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 295,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1"
+      },
+      "Hudhaify_128kbps": {
+        "slug": "ali_al_huthaifi_mp3quran",
+        "name": "Ali Al-Huthaifi",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 0,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net": {
+        "slug": "ahmed_al_ajmi_qdc",
+        "name": "Ahmed Al-Ajmi",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 218,
+        "unrangedSurahs": 0,
+        "missingVerses": "26:21"
+      },
+      "qud-saad_al_ghamdi": {
+        "slug": "saad_al_ghamdi_tarteel",
+        "name": "Saad Al-Ghamdi",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 33,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1"
+      },
+      "qud-abu_bakr_al_shatri": {
+        "slug": "abu_bakr_al_shatri_tarteel",
+        "name": "Abu Bakr Al-Shatri",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 47,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "qud-saud_al_shuraim": {
+        "slug": "saud_al_shuraim_mp3quran",
+        "name": "Saud Al-Shuraim",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 26,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1"
+      },
+      "qud-abdullah_al_mattrod": {
+        "slug": "abdullah_al_mattrod_qdc",
+        "name": "Abdullah Al-Mattrod",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 27,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "qud-hani_al_rifai": {
+        "slug": "hani_al_rifai_qdc_128k",
+        "name": "Hani Al-Rifai",
+        "surahs": 114,
+        "exact": 6230,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 91,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1, 6:139"
+      },
+      "qud-mohammed_al_luhaidan": {
+        "slug": "mohammed_al_luhaidan_mp3quran",
+        "name": "Mohammed Al-Luhaidan",
+        "surahs": 114,
+        "exact": 6230,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 7,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1, 3:199"
+      },
+      "qud-bandar_baleela": {
+        "slug": "bandar_baleela_qdc",
+        "name": "Bandar Baleela",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 190,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1"
+      },
+      "qud-khalifa_al_tunaiji": {
+        "slug": "khalifa_al_tunaiji_tarteel",
+        "name": "Khalifa Al-Tunaiji",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 0,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "qud-mahmoud_ali_al_banna": {
+        "slug": "mahmoud_ali_al_banna_qdc",
+        "name": "Mahmoud Ali Al-Banna",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 2,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "qud-mustafa_ismail": {
+        "slug": "mustafa_ismail_mp3quran",
+        "name": "Mustafa Ismail",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 1,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "qud-abdulbasit_mujawwad": {
+        "slug": "abdulbasit_abdulsamad_mujawwad_tarteel",
+        "name": "Abdulbasit Abdulsamad",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 2,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "qud-husary_mujawwad": {
+        "slug": "mahmoud_khalil_al_husary_mujawwad_tarteel",
+        "name": "Mahmoud Khalil Al-Husary",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 0,
+        "unrangedSurahs": 0,
+        "missingVerses": "62:10"
+      },
+      "qud-abdur_rashid_sufi": {
+        "slug": "abdur_rashid_sufi_qdc",
+        "name": "Abdur-Rashid Sufi",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 1,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      }
+    }
+  }
 }

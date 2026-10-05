@@ -17,15 +17,29 @@ import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
+/** Arabic-name transliterations vary (Al-/Ar-/At-, Hudhaify/Huthaifi): match on letters only */
+const fold = (s: string) => s.toLowerCase().replace(/\b(al|ar|at|as|ad|ash|an)-/g, '').replace(/[^a-z]/g, '');
+
 function ReciterPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const current = RECITERS.find((r) => r.id === value) ?? RECITERS[0];
+  const shown = query.trim() ? RECITERS.filter((r) => fold(r.name).includes(fold(query))) : RECITERS;
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // Opening scrolls the chosen reciter into view inside the list
+  useEffect(() => {
+    if (!open) return;
+    listRef.current?.querySelector('[aria-checked="true"]')?.scrollIntoView({ block: 'nearest' });
+  }, [open]);
+
+  const close = () => { setOpen(false); setQuery(''); };
   return (
     <div className="mt-5">
       <p className="text-xs font-medium text-muted">Reciter</p>
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => (open ? close() : setOpen(true))}
         aria-expanded={open}
         className="pressable mt-1.5 flex min-h-11 w-full items-center justify-between gap-3 rounded-xl bg-foreground/5 px-3 text-left"
       >
@@ -36,8 +50,19 @@ function ReciterPicker({ value, onChange }: { value: string; onChange: (id: stri
         <ChevronDownIcon size={16} className={cn('shrink-0 text-muted transition-transform', open && 'rotate-180')} />
       </button>
       {open && (
-        <div role="radiogroup" aria-label="Reciter" className="mt-1.5 overflow-hidden rounded-xl border border-foreground/10">
-          {RECITERS.map((r) => {
+        <div className="mt-1.5 overflow-hidden rounded-xl border border-foreground/10">
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={`Search ${RECITERS.length} reciters`}
+            aria-label="Search reciters"
+            className="w-full border-b border-foreground/10 bg-transparent px-3 py-2.5 text-base text-foreground placeholder:text-muted focus:outline-none"
+          />
+          {/* about five rows tall; the rest scrolls */}
+          <div ref={listRef} role="radiogroup" aria-label="Reciter" className="max-h-64 overflow-y-auto overscroll-contain">
+          {shown.length === 0 && <p className="px-3 py-3 text-sm text-muted">No reciter matches “{query}”</p>}
+          {shown.map((r) => {
             const selected = r.id === value;
             return (
               <button
@@ -45,7 +70,7 @@ function ReciterPicker({ value, onChange }: { value: string; onChange: (id: stri
                 type="button"
                 role="radio"
                 aria-checked={selected}
-                onClick={() => { haptic.selection(); onChange(r.id); setOpen(false); }}
+                onClick={() => { haptic.selection(); onChange(r.id); close(); }}
                 className={cn(
                   'flex min-h-12 w-full items-center justify-between gap-3 border-b border-foreground/5 px-3 py-2 text-left last:border-b-0',
                   selected ? 'bg-teal/5' : 'hover:bg-foreground/5',
@@ -59,6 +84,7 @@ function ReciterPicker({ value, onChange }: { value: string; onChange: (id: stri
               </button>
             );
           })}
+          </div>
         </div>
       )}
     </div>
@@ -381,9 +407,10 @@ export default function SettingsPanel() {
               </p>
             </div>
 
-            {/* Data credits — quran-align is CC BY 4.0, so this attribution is a license requirement */}
+            {/* Data credits — quran-align and Qur'anic Universal Audio are CC BY 4.0, so this attribution is a license requirement */}
             <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
-              Recitations: EveryAyah.com · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0)
+              Recitations: EveryAyah.com, QuranicAudio, MP3Quran &amp; Tarteel · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0),
+              and Qur&apos;anic Universal Audio by QUD (CC BY 4.0)
             </p>
           </div>
       </BottomSheet>

@@ -1,0 +1,19 @@
+[
+  { "id": "Husary_128kbps", "slug": "mahmoud_khalil_al_husary_qdc_128k", "fallback": "Husary_128kbps" },
+  { "id": "Nasser_Alqatami_128kbps", "slug": "nasser_al_qatami_mp3quran", "fallback": "Nasser_Alqatami_128kbps" },
+  { "id": "Hudhaify_128kbps", "slug": "ali_al_huthaifi_mp3quran", "fallback": "Hudhaify_128kbps" },
+  { "id": "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net", "slug": "ahmed_al_ajmi_qdc", "fallback": "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net" },
+  { "id": "qud-saad_al_ghamdi", "slug": "saad_al_ghamdi_tarteel", "fallback": "Ghamadi_40kbps" },
+  { "id": "qud-abu_bakr_al_shatri", "slug": "abu_bakr_al_shatri_tarteel", "fallback": "Abu_Bakr_Ash-Shaatree_128kbps" },
+  { "id": "qud-saud_al_shuraim", "slug": "saud_al_shuraim_mp3quran", "fallback": "Saood_ash-Shuraym_128kbps" },
+  { "id": "qud-abdullah_al_mattrod", "slug": "abdullah_al_mattrod_qdc", "fallback": "Abdullah_Matroud_128kbps" },
+  { "id": "qud-hani_al_rifai", "slug": "hani_al_rifai_qdc_128k", "fallback": "Hani_Rifai_192kbps" },
+  { "id": "qud-mohammed_al_luhaidan", "slug": "mohammed_al_luhaidan_mp3quran", "fallback": "Alafasy_128kbps" },
+  { "id": "qud-bandar_baleela", "slug": "bandar_baleela_qdc", "fallback": "Alafasy_128kbps" },
+  { "id": "qud-khalifa_al_tunaiji", "slug": "khalifa_al_tunaiji_tarteel", "fallback": "khalefa_al_tunaiji_64kbps" },
+  { "id": "qud-mahmoud_ali_al_banna", "slug": "mahmoud_ali_al_banna_qdc", "fallback": "Mahmoud_Ali_Al_Banna_32kbps" },
+  { "id": "qud-mustafa_ismail", "slug": "mustafa_ismail_mp3quran", "fallback": "Mustafa_Ismail_48kbps" },
+  { "id": "qud-abdulbasit_mujawwad", "slug": "abdulbasit_abdulsamad_mujawwad_tarteel", "fallback": "Abdul_Basit_Mujawwad_128kbps" },
+  { "id": "qud-husary_mujawwad", "slug": "mahmoud_khalil_al_husary_mujawwad_tarteel", "fallback": "Husary_128kbps_Mujawwad" },
+  { "id": "qud-abdur_rashid_sufi", "slug": "abdur_rashid_sufi_qdc", "fallback": "Alafasy_128kbps" }
+]
