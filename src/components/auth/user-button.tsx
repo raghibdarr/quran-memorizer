@@ -44,7 +44,7 @@ export default function UserButton() {
       ) : (
         <button
           onClick={() => setShowModal(true)}
-          className="hit-44 rounded-lg bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal transition-colors hover:bg-teal/20"
+          className="hit-44 whitespace-nowrap rounded-lg bg-teal/10 px-3 py-1.5 text-xs font-semibold text-teal transition-colors hover:bg-teal/20"
         >
           Sign in
         </button>

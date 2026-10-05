@@ -1,7 +1,7 @@
 'use client';
 
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import type { Surah, Ayah, LessonDef, LessonPhase } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
@@ -36,7 +36,9 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   // Practice mode: overrides displayed phase without touching the store
   const [practicePhase, setPracticePhase] = useState<LessonPhase | null>(null);
-  const headerRef = useRef<HTMLElement>(null);
+  // A state ref, not useRef: the header isn't in the DOM on the first render (no lesson yet),
+  // so a mount-only effect never saw it and pinned bars fell back to a guessed height
+  const [headerEl, setHeaderEl] = useState<HTMLElement | null>(null);
 
   const { setLastActivity } = useStatsStore();
   const searchParams = useSearchParams();
@@ -59,16 +61,13 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
   // Track header height for sticky elements
   useEffect(() => {
-    if (!headerRef.current) return;
-    const observer = new ResizeObserver(([entry]) => {
-      document.documentElement.style.setProperty(
-        '--lesson-header-height',
-        `${entry.contentRect.height + 24}px`
-      );
+    if (!headerEl) return;
+    const observer = new ResizeObserver(() => {
+      document.documentElement.style.setProperty('--lesson-header-height', `${headerEl.offsetHeight}px`);
     });
-    observer.observe(headerRef.current);
+    observer.observe(headerEl);
     return () => observer.disconnect();
-  }, []);
+  }, [headerEl]);
 
   const backUrl = fromParam ? `/${fromParam}` : `/lesson/${surah.id}`;
   const leave = useAppBack(backUrl);
@@ -77,9 +76,6 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
 
   // 'understand' was merged into Listen (2026-09-28): older saves resume there
   const activePhase: LessonPhase = visiblePhase(practicePhase ?? lesson.currentPhase);
-  const lessonTitle = totalLessons > 1
-    ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber}`
-    : surah.nameSimple;
 
   const goToPhase = (phase: LessonPhase) => {
     setTransitioning(true);
@@ -143,11 +139,18 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
       className="flex min-h-dvh flex-col bg-cream"
       style={{ paddingBottom: 'var(--tabbar-clearance)' }}
     >
-      <header ref={headerRef} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 py-3 backdrop-blur-sm border-b border-foreground/5">
+      <header ref={setHeaderEl} className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-2 pb-2.5 backdrop-blur-sm border-b border-foreground/5">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-1.5 flex items-center justify-between">
             <CloseButton fallback={backUrl} label="Close lesson" />
-            <h2 className="text-sm font-semibold text-teal">{lessonTitle}</h2>
+            <div className="min-w-0 text-center">
+              <h2 className="truncate text-sm font-semibold text-teal">{surah.nameSimple}</h2>
+              {totalLessons > 1 && (
+                <p className="truncate text-[11px] leading-tight text-muted">
+                  Lesson {lessonDef.lessonNumber} · Ayahs {lessonDef.ayahStart}–{lessonDef.ayahEnd}
+                </p>
+              )}
+            </div>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowResetConfirm(true)}
@@ -161,13 +164,9 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
               <UserButton />
             </div>
           </div>
-          {totalLessons > 1 && (
-            <p className="mb-2 text-center text-xs text-muted">
-              Ayahs {lessonDef.ayahStart}–{lessonDef.ayahEnd}
-            </p>
-          )}
-          <PhaseIndicator currentPhase={activePhase} onPhaseClick={goToPhase} />
-          <TajweedLegend />
+          <TajweedLegend>
+            <PhaseIndicator currentPhase={activePhase} onPhaseClick={goToPhase} />
+          </TajweedLegend>
         </div>
       </header>
 
