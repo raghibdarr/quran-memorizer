@@ -50,6 +50,13 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
+        <Section title="Khatm circles">
+          <p>
+            If you start or join a khatm circle, the others in it see the name you choose for that circle and which juz you
+            claimed and read. They never see your email address. Leaving the circle removes you from it.
+          </p>
+        </Section>
+
         <Section title="Reminders and email">
           <p>
             In the phone apps, daily reminders are scheduled on your phone and nothing is sent to a server. On the web,

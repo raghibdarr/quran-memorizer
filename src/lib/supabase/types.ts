@@ -31,6 +31,30 @@ export type NotificationPrefsRow = {
   updated_at: string
 }
 
+// 005_circles.sql (roadmap #18 khatm circles)
+export type CircleRow = {
+  id: string
+  name: string
+  join_code: string
+  round: number
+  created_by: string
+  created_at: string
+}
+export type CircleMemberRow = {
+  circle_id: string
+  user_id: string
+  display_name: string
+  joined_at: string
+}
+export type CircleClaimRow = {
+  circle_id: string
+  round: number
+  juz: number
+  user_id: string
+  done: boolean
+  updated_at: string
+}
+
 export type Database = {
   public: {
     Tables: {
@@ -59,11 +83,33 @@ export type Database = {
         Update: Partial<NotificationPrefsRow>
         Relationships: []
       }
+      circles: {
+        Row: CircleRow
+        Insert: Pick<CircleRow, 'name' | 'join_code' | 'created_by'> & Partial<CircleRow>
+        Update: Partial<CircleRow>
+        Relationships: []
+      }
+      circle_members: {
+        Row: CircleMemberRow
+        Insert: Pick<CircleMemberRow, 'circle_id' | 'user_id' | 'display_name'> & Partial<CircleMemberRow>
+        Update: Partial<CircleMemberRow>
+        Relationships: []
+      }
+      circle_claims: {
+        Row: CircleClaimRow
+        Insert: Pick<CircleClaimRow, 'circle_id' | 'round' | 'juz' | 'user_id'> & Partial<CircleClaimRow>
+        Update: Partial<CircleClaimRow>
+        Relationships: []
+      }
     }
     Views: { [_ in never]: never }
     Functions: {
       // migration 004
       delete_my_account: { Args: Record<string, never>; Returns: undefined }
+      // migration 005
+      create_circle: { Args: { circle_name: string; my_name: string }; Returns: string }
+      join_circle: { Args: { code: string; my_name: string }; Returns: string }
+      is_circle_member: { Args: { c: string }; Returns: boolean }
     }
     Enums: { [_ in never]: never }
     CompositeTypes: { [_ in never]: never }

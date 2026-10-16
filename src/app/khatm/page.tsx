@@ -122,6 +122,10 @@ export default function KhatmPage() {
             </div>
           </>
         )}
+        <Link href="/circles" className="pressable flex min-h-12 items-center justify-between rounded-xl border border-teal/20 bg-teal/5 px-4 py-2.5 text-sm" data-circles-link>
+          <span><span className="font-semibold text-teal">Read together</span><span className="text-muted"> · khatm circles with family or your halaqah</span></span>
+          <span aria-hidden className="text-teal">›</span>
+        </Link>
       </main>
     </div>
   );
