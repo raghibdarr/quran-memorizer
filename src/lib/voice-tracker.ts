@@ -43,10 +43,24 @@ export type TrackerEvent =
   | { type: 'verse_match'; surah: number; ayah: number }
   | { type: string; [k: string]: unknown };
 
+/** A likely slip the engine flagged (correction mode). `word` is the engine's index within the ayah. */
+export interface VoiceIssue {
+  surah: number;
+  ayah: number;
+  word: number;
+  words?: number;
+  kind: 'possible_omission' | 'possible_substitution' | 'possible_vowel' | 'possible_repetition' | 'possible_skipped_ayah' | 'unclear_ayah';
+  source?: 'ayah_order' | 'similar_verse';
+}
+
+/** The ayahs on screen: the engine stays inside them and can't drift to a look-alike passage */
+export type VoicePassage = { surah: number; ayah: number; ayahEnd?: number };
+
 export interface VoiceTrackerHandlers {
   onLoading?: (progress: number) => void;
   onReady?: () => void;
   onEvent: (e: TrackerEvent) => void;
+  onIssue?: (issue: VoiceIssue) => void;
   onStopped?: () => void;
   onError?: (message: string) => void;
 }
@@ -57,22 +71,23 @@ export class VoiceTracker {
   private ctx: AudioContext | null = null;
   private node: ScriptProcessorNode | null = null;
 
-  constructor(private h: VoiceTrackerHandlers) {
+  constructor(private h: VoiceTrackerHandlers, private passage: VoicePassage | null = null) {
     this.worker = new Worker('/workers/tilawa-worker.js', { type: 'module' });
     this.worker.onmessage = (e) => {
       const m = e.data;
       if (m.type === 'loading') h.onLoading?.(m.progress);
       else if (m.type === 'ready') h.onReady?.();
       else if (m.type === 'event') h.onEvent(m.msg);
+      else if (m.type === 'issue') h.onIssue?.(m.issue);
       else if (m.type === 'stopped') h.onStopped?.();
       else if (m.type === 'error') h.onError?.(m.message);
     };
-    this.worker.postMessage({ type: 'init' });
+    this.worker.postMessage({ type: 'init', passage });
   }
 
   /** Open the microphone and stream audio to the engine (call from a user gesture) */
   async start() {
-    this.worker.postMessage({ type: 'reset' });
+    this.worker.postMessage({ type: 'reset', passage: this.passage });
     this.stream = await navigator.mediaDevices.getUserMedia({
       // Raw mic: in testing, the browser's noise suppression and auto-gain clipped long
       // vowels and dropped short words (Al-Ikhlas matched 1 of 3 ayahs with them on, 3 of 3 off)

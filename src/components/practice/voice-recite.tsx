@@ -6,10 +6,18 @@ import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 import { buildAyahWordData } from '@/lib/segments';
 import { useSettingsStore } from '@/stores/settings-store';
-import { VoiceTracker, mapWordIndex, type TrackerEvent } from '@/lib/voice-tracker';
+import { VoiceTracker, mapWordIndex, type TrackerEvent, type VoiceIssue } from '@/lib/voice-tracker';
 import Button from '@/components/ui/button';
 
 type Status = 'loading' | 'ready' | 'listening' | 'finishing' | 'done' | 'error';
+
+/** What the engine flagged in one ayah: words that may be wrong, or the whole ayah */
+interface AyahFlags {
+  words: number[];
+  ayah?: 'skipped' | 'unclear';
+}
+
+const WORD_KINDS = new Set(['possible_omission', 'possible_substitution', 'possible_vowel']);
 
 interface VoiceReciteProps {
   surahId: number;
@@ -29,6 +37,9 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   // ayah number → heard word indices (ours)
   const [heard, setHeard] = useState<Record<number, number[]>>({});
   const [current, setCurrent] = useState<number | null>(null);
+  const [flags, setFlags] = useState<Record<number, AyahFlags>>({});
+  // The engine's word count per ayah (4 of 6,236 ayahs split one word differently)
+  const engineTotals = useRef<Record<number, number>>({});
   const tracker = useRef<VoiceTracker | null>(null);
   const wordCounts = useMemo(
     () => Object.fromEntries(ayahs.map((a) => [a.number, a.words.filter((w) => w.charType === 'word').length])),
@@ -49,6 +60,7 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
       if (e.type !== 'word_progress') return;
       const m = e as Extract<TrackerEvent, { type: 'word_progress' }>;
       if (m.surah !== surahId || !(m.ayah in wordCounts)) return;
+      engineTotals.current[m.ayah] = m.total_words;
       const ours = m.matched_indices.map((i) => mapWordIndex(i, m.total_words, wordCounts[m.ayah]));
       setCurrent(m.ayah);
       setHeard((h) => {
@@ -56,16 +68,38 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
         return merged.length === (h[m.ayah]?.length ?? 0) ? h : { ...h, [m.ayah]: merged };
       });
     };
+    const onIssue = (issue: VoiceIssue) => {
+      if (issue.surah !== surahId || !(issue.ayah in wordCounts)) return;
+      // A skip is flagged because the next ayah was heard where this one belonged;
+      // that audio stays credited to the skipped ayah, so count the next one as heard
+      const next = issue.ayah + 1;
+      if (issue.kind === 'possible_skipped_ayah' && next in wordCounts) {
+        setHeard((h) => (h[next]?.length ? h : { ...h, [next]: Array.from({ length: wordCounts[next] }, (_, i) => i) }));
+      }
+      setFlags((f) => {
+        const prev = f[issue.ayah] ?? { words: [] };
+        if (issue.kind === 'possible_skipped_ayah' || issue.kind === 'unclear_ayah') {
+          return { ...f, [issue.ayah]: { ...prev, ayah: issue.kind === 'unclear_ayah' ? 'unclear' : 'skipped' } };
+        }
+        if (!WORD_KINDS.has(issue.kind)) return f;
+        const total = engineTotals.current[issue.ayah] ?? wordCounts[issue.ayah];
+        const w = mapWordIndex(issue.word, total, wordCounts[issue.ayah]);
+        return prev.words.includes(w) ? f : { ...f, [issue.ayah]: { ...prev, words: [...prev.words, w] } };
+      });
+    };
+    const first = ayahs[0]?.number ?? 1;
+    const last = ayahs[ayahs.length - 1]?.number ?? first;
     const t = new VoiceTracker({
       onLoading: (p) => setProgress(p),
       onReady: () => setStatus((s) => (s === 'loading' ? 'ready' : s)),
       onEvent,
+      onIssue,
       onStopped: () => { setStatus('done'); haptic.success(); },
       onError: (message) => { setError(message); setStatus('error'); },
-    });
+    }, { surah: surahId, ayah: first, ayahEnd: last });
     tracker.current = t;
     return () => t.dispose();
-  }, [surahId, wordCounts]);
+  }, [surahId, wordCounts, ayahs]);
 
   // Keep the ayah being recited in view
   useEffect(() => {
@@ -75,6 +109,7 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
 
   const start = async () => {
     setHeard({});
+    setFlags({});
     setCurrent(null);
     try {
       await tracker.current?.start();
@@ -90,8 +125,13 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
     void tracker.current?.stop();
   };
 
-  const recitedAyahs = ayahs.filter((a) => (heard[a.number]?.length ?? 0) > 0);
-  const missedWords = recitedAyahs.reduce((n, a) => n + wordCounts[a.number] - heard[a.number].length, 0);
+  // An ayah flagged as skipped keeps none of the words the engine credited to it
+  const heardIn = (n: number) => (flags[n]?.ayah === 'skipped' ? [] : heard[n] ?? []);
+  const recitedAyahs = ayahs.filter((a) => heardIn(a.number).length > 0);
+  const missedWords = recitedAyahs.reduce((n, a) => n + wordCounts[a.number] - heardIn(a.number).length, 0);
+  const skipped = ayahs.filter((a) => flags[a.number]?.ayah === 'skipped').map((a) => a.number);
+  const unclear = ayahs.filter((a) => flags[a.number]?.ayah === 'unclear').map((a) => a.number);
+  const flaggedWords = Object.values(flags).reduce((n, f) => n + f.words.length, 0);
   const listening = status === 'listening' || status === 'finishing';
 
   return (
@@ -101,7 +141,9 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
           <p className="font-semibold text-teal">
             Heard {recitedAyahs.length} of {ayahs.length} {ayahs.length === 1 ? 'ayah' : 'ayahs'}
           </p>
-          <p className="mt-1 text-sm text-muted">{summaryLine(ayahs.length - recitedAyahs.length, missedWords, recitedAyahs.length)}</p>
+          <p className="mt-1 text-sm text-muted" data-voice-flags={skipped.length + unclear.length + flaggedWords}>
+            {summaryLine({ unheardAyahs: ayahs.length - recitedAyahs.length - skipped.length, missedWords, recited: recitedAyahs.length, skipped, unclear, flaggedWords })}
+          </p>
         </div>
       ) : (
         <div className="rounded-2xl bg-gold/10 p-4 text-sm text-foreground">
@@ -119,9 +161,10 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
           <VoiceAyah
             key={a.number}
             ayah={a}
-            heard={heard[a.number] ?? []}
+            heard={heardIn(a.number)}
+            flags={flags[a.number]}
             revealAll={status === 'done'}
-            missed={status === 'done' && recitedAyahs.length > 0 && !heard[a.number]?.length}
+            missed={status === 'done' && recitedAyahs.length > 0 && !heardIn(a.number).length}
             active={listening && current === a.number}
           />
         ))}
@@ -150,16 +193,31 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   );
 }
 
-function summaryLine(unheardAyahs: number, missedWords: number, recited: number): string {
-  if (recited === 0) return 'Nothing came through. Try again a little closer to the phone.';
-  const parts: string[] = [];
-  if (unheardAyahs) parts.push(`${unheardAyahs} ${unheardAyahs === 1 ? 'ayah' : 'ayahs'}`);
-  if (missedWords) parts.push(`${missedWords} ${missedWords === 1 ? 'word' : 'words'}`);
-  if (!parts.length) return 'Everything came through.';
-  return `${parts.join(' and ')} didn't come through, marked below. It can mishear, so check them against the text.`;
+interface Summary {
+  unheardAyahs: number;
+  missedWords: number;
+  recited: number;
+  skipped: number[];
+  unclear: number[];
+  flaggedWords: number;
 }
 
-function VoiceAyah({ ayah, heard, revealAll, active, missed: missedAyah }: { ayah: Ayah; heard: number[]; revealAll: boolean; active: boolean; missed: boolean }) {
+const count = (n: number, one: string) => `${n} ${one}${n === 1 ? '' : 's'}`;
+const ayahList = (ns: number[]) => (ns.length === 1 ? `Ayah ${ns[0]}` : `Ayahs ${ns.slice(0, -1).join(', ')} and ${ns[ns.length - 1]}`);
+
+function summaryLine({ unheardAyahs, missedWords, recited, skipped, unclear, flaggedWords }: Summary): string {
+  if (recited === 0 && !skipped.length) return 'Nothing came through. Try again a little closer to the phone.';
+  const out: string[] = [];
+  if (skipped.length) out.push(`${ayahList(skipped)} may have been skipped.`);
+  const missing = [unheardAyahs > 0 && count(unheardAyahs, 'ayah'), missedWords > 0 && count(missedWords, 'word')].filter(Boolean);
+  if (missing.length) out.push(`${missing.join(' and ')} didn't come through, marked below.`);
+  if (flaggedWords) out.push(`${flaggedWords === 1 ? 'One word' : `${flaggedWords} words`} sounded different from the text, marked in gold.`);
+  if (unclear.length) out.push(`${ayahList(unclear)} ${unclear.length === 1 ? 'was' : 'were'} hard to follow.`);
+  if (!out.length) return 'Everything came through.';
+  return `${out.join(' ')} It can mishear, so check against the text.`;
+}
+
+function VoiceAyah({ ayah, heard, flags, revealAll, active, missed: missedAyah }: { ayah: Ayah; heard: number[]; flags?: AyahFlags; revealAll: boolean; active: boolean; missed: boolean }) {
   const arabicScript = useSettingsStore((s) => s.arabicScript);
   const { tajweedWords, indopakWords } = useMemo(() => buildAyahWordData(ayah), [ayah]);
   const words = ayah.words.filter((w) => w.charType === 'word');
@@ -172,12 +230,18 @@ function VoiceAyah({ ayah, heard, revealAll, active, missed: missedAyah }: { aya
       data-voice-missed={missedAyah || undefined}
       className={cn('rounded-2xl border p-3 transition-colors', active ? 'border-gold/60 bg-gold/5' : missedAyah ? 'border-red-400/40 bg-red-500/5' : 'border-foreground/5')}
     >
-      <div className="mb-1 text-xs text-muted">Ayah {ayah.number}{missedAyah && <span className="text-red-500"> · didn&apos;t come through</span>}</div>
+      <div className="mb-1 text-xs text-muted">
+        Ayah {ayah.number}
+        {missedAyah && !flags?.ayah && <span className="text-red-500"> · didn&apos;t come through</span>}
+        {flags?.ayah === 'skipped' && <span className="text-red-500" data-voice-ayah-flag="skipped"> · may have been skipped</span>}
+        {flags?.ayah === 'unclear' && <span className="text-gold-deep" data-voice-ayah-flag="unclear"> · hard to follow, check it</span>}
+      </div>
       <div dir="rtl" className={cn(base, 'flex flex-wrap justify-center gap-x-2 gap-y-1 text-3xl leading-loose')}>
         {words.map((word, wi) => {
           const isHeard = heard.includes(wi);
           const shown = isHeard || revealAll;
           const missed = revealAll && !isHeard && heard.length > 0;
+          const flagged = !!flags?.words.includes(wi);
           const content =
             arabicScript === 'tajweed' && tajweedWords ? (
               <span className="tajweed-text" dangerouslySetInnerHTML={{ __html: tajweedWords[wi] }} />
@@ -186,10 +250,12 @@ function VoiceAyah({ ayah, heard, revealAll, active, missed: missedAyah }: { aya
             <span
               key={word.position}
               data-heard={isHeard || undefined}
+              data-flagged={flagged || undefined}
               className={cn(
                 'rounded-lg px-1 transition-colors duration-200',
                 !shown && 'bg-foreground/10',
                 missed && 'bg-red-500/10 underline decoration-red-400 decoration-2 underline-offset-8',
+                flagged && !missed && 'bg-gold/15 underline decoration-gold decoration-wavy decoration-2 underline-offset-8',
               )}
             >
               <span className={cn('transition-opacity duration-200', !shown && 'opacity-0')}>{content}</span>
