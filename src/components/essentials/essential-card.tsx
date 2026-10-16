@@ -9,6 +9,7 @@ import ArabicText from '@/components/ui/arabic-text';
 import Card from '@/components/ui/card';
 import { cn } from '@/lib/cn';
 import type { EssentialItem, Ayah } from '@/types/quran';
+import TranslationText from '@/components/ui/translation-text';
 
 interface Props {
   item: EssentialItem;
@@ -123,7 +124,10 @@ export default function EssentialCard({ item }: Props) {
           <p className="text-center text-sm text-muted" dir="ltr">{item.transliteration}</p>
 
           {/* Translation */}
-          <p className="text-center text-sm italic text-muted">{item.translation}</p>
+          {/* A Quranic ayah shows the chosen translation as published; a hadith shows ours */}
+          {quranAyah
+            ? <TranslationText ayah={quranAyah} className="text-center text-sm italic text-muted" />
+            : <p className="text-center text-sm italic text-muted">{item.translation}</p>}
 
           {/* Source */}
           {item.source && (

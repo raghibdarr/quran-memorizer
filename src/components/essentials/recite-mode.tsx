@@ -10,6 +10,7 @@ import { useEssentialsStore } from '@/stores/essentials-store';
 import { useStatsStore } from '@/stores/stats-store';
 import ArabicText from '@/components/ui/arabic-text';
 import { cn } from '@/lib/cn';
+import TranslationText from '@/components/ui/translation-text';
 
 function fmtTime(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -202,7 +203,9 @@ export default function ReciteMode({ items, onClose }: Props) {
           <p className="mt-4 text-center text-sm text-muted" dir="ltr">{item.transliteration}</p>
 
           {/* Translation */}
-          <p className="mt-2 text-center text-sm italic text-muted">{item.translation}</p>
+          {quranAyah
+            ? <TranslationText ayah={quranAyah} className="mt-2 text-center text-sm italic text-muted" />
+            : <p className="mt-2 text-center text-sm italic text-muted">{item.translation}</p>}
 
           {/* Source */}
           {item.source && (
