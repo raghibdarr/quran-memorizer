@@ -524,6 +524,21 @@ mushaf strength map (#10); hifz listening controls (#11); khatm planner, Friday 
 yourself, peeks as weakness (#12); recite to find (#13); per-ayah voice credit + coming-up queue (#15);
 khatm circles (#18, migration 005); Android widget (#17); Android Auto library (#20).
 
+**Visual ideas (owner, 2026-10-16: "all great")**, our own code on our text, fonts and timings; every
+frame showing Quran text uses the verified text and mushaf fonts. Order:
+- **V1 Similar-verse morph.** In the similar-ayah warning and quiz, one twin animates into the other:
+  shared words stay still, only the differing words (mutashabihat.json `d`/`t`) move and turn gold.
+  565 ayahs (~9%) have a twin in our data.
+- **V2 Fading ink.** In the mushaf, each ayah's ink density follows its memory strength (page-strength);
+  slipping ayahs fade, a review darkens them again.
+- **V3 Gilded fore-edge.** The mushaf drawn edge-on, page edges gilded where memorised; doubles as the
+  progress view and a 10-second shareable recap (khatm, Ramadan, year) rendered on the device.
+- **V4 Tajweed in motion.** In the tap-a-letter explainer, show written vs recited (iqlab n→m, idgham
+  merge, ikhfa hum) timed to the reciter's word timings.
+- **V5 Pace line** during the voice check: your pace against the reciter's, faint guide line.
+- *Explore, owner unsure:* **V6 breath marks** (arcs over long ayahs at pause marks) and **V7 similar-verse
+  ring map** (30 juz as a ring, threads between learned twin pairs; may overlap V1).
+
 ## 4. Decision log
 
 **Made calls:**

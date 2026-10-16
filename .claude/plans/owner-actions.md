@@ -3,14 +3,10 @@
 Everything that doesn't need you is built. These need your accounts, your phone or your decision.
 
 ## Switch things on (Supabase / Netlify / GitHub)
-1. **Apply migrations** in the Supabase SQL editor, in order: `002_user_data_rev.sql` (if not yet),
-   `003_notifications.sql`, `004_delete_account.sql`, `005_circles.sql`. All five are tested
-   together in CI (`src/lib/supabase/migrations.test.ts`, PGlite).
+1. ~~Apply migrations~~ **Done 2026-10-16** (002–005 applied in the SQL editor, checked: rev column, circles, notifications, delete_my_account).
 2. **Web push + weekly email** (M8): VAPID keys, Netlify env vars, Resend with a verified domain,
    redeploy. Steps: `notifications-setup.md`.
-3. **Sign-in links in the apps** (Google, magic link, password reset): add `takrar://auth/callback`
-   to Supabase → Authentication → URL Configuration → Redirect URLs, then set the GitHub repo
-   variable `NATIVE_AUTH=on`.
+3. ~~Sign-in links in the apps~~ **Done 2026-10-16** (`takrar://auth/callback` added to Supabase redirect URLs; repo variable `NATIVE_AUTH=on`).
 4. **Contact address** for the privacy page: Netlify env `NEXT_PUBLIC_CONTACT_EMAIL` and the repo
    variable `CONTACT_EMAIL`.
 
