@@ -507,7 +507,8 @@ export default function SettingsPanel() {
             {/* Data credits — quran-align and Qur'anic Universal Audio are CC BY 4.0, so this attribution is a license requirement */}
             <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
               Recitations: EveryAyah.com, QuranicAudio, MP3Quran &amp; Tarteel · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0),
-              and Qur&apos;anic Universal Audio by QUD (CC BY 4.0)
+              and Qur&apos;anic Universal Audio by QUD (CC BY 4.0) · Search text and page data:{' '}
+              <a href="https://tanzil.net" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Tanzil Project</a> (CC BY 3.0)
             </p>
             <p className="mt-2 text-center text-[10px] text-muted/80">
               <Link href="/privacy" className="underline underline-offset-2">Privacy policy</Link>

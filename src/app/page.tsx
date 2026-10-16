@@ -29,6 +29,7 @@ import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
 import ContinueReading from '@/components/reader/continue-reading';
+import AyahSearch from '@/components/reader/ayah-search';
 import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -65,6 +66,7 @@ export default function HomePage() {
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
   const [search, setSearch] = useState('');
+  const [ayahMatches, setAyahMatches] = useState(0);
   const [sort, setSort] = useState<SortOption>(() => {
     if (typeof window !== 'undefined') return (localStorage.getItem('home-sort') as SortOption) ?? 'number-asc';
     return 'number-asc';
@@ -382,7 +384,8 @@ export default function HomePage() {
                   const y = anchor.getBoundingClientRect().top + window.scrollY;
                   if (window.scrollY < y) window.scrollTo({ top: y, behavior: 'smooth' });
                 }}
-                placeholder="Search by name or number..."
+                placeholder="Search surahs, ayahs, 2:255, page 50…"
+                aria-label="Search surahs and ayahs"
                 className="w-full rounded-xl border-[1.5px] border-foreground/15 bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-teal focus:outline-none"
               />
 
@@ -429,8 +432,12 @@ export default function HomePage() {
           /* min-height keeps the page from collapsing (and the scroll from jumping)
              as search results shrink while typing */
           <div className="min-h-[75dvh]">
-            {surahs.length === 0 && search.trim() && (
-              <p className="py-8 text-center text-sm text-muted">No surahs found</p>
+            {search.trim() && <AyahSearch query={search} surahs={allSurahs} onCount={setAyahMatches} />}
+            {surahs.length === 0 && search.trim() && !ayahMatches && (
+              <p className="py-8 text-center text-sm text-muted">Nothing found</p>
+            )}
+            {surahs.length > 0 && search.trim() && ayahMatches > 0 && (
+              <p className="mb-2 px-1 text-xs font-semibold text-muted">Surahs</p>
             )}
 
             {!browseLoaded ? (
