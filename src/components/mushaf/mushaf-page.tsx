@@ -2,6 +2,7 @@
 
 import { memo } from 'react';
 import { cn } from '@/lib/cn';
+import { firstLetters } from '@/lib/first-letters';
 import { MUSHAF_LINE_WIDTH, type LineSpec, type MushafPage as Page, type MushafWord } from '@/lib/mushaf';
 
 export type WordMark = 'playing' | 'spoken' | 'hidden' | 'hint' | 'flag' | null;
@@ -15,6 +16,8 @@ interface Props {
   /** Background tint per ayah (reading highlights), as a class name */
   ayahTint?: (surah: number, ayah: number) => string | null;
   onAyahTap?: (surah: number, ayah: number, el: HTMLElement) => void;
+  /** When set, a tap on a word goes here instead (recall mode: peek at it) */
+  onWordTap?: (w: MushafWord) => void;
 }
 
 function lineStyle(spec: LineSpec): React.CSSProperties {
@@ -36,7 +39,7 @@ function lineStyle(spec: LineSpec): React.CSSProperties {
  * stretched by the DigitalKhatt font's justification features and spaced as in the
  * print. Words are real text: selectable, readable by screen readers.
  */
-function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap }: Props) {
+function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordTap }: Props) {
   return (
     <div
       dir="rtl"
@@ -75,7 +78,11 @@ function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap }: Props
                   <span
                     data-ayah={w.ayah ? `${w.surah}:${w.ayah}` : undefined}
                     data-word={w.wordNo || undefined}
-                    onClick={w.ayah !== null && onAyahTap ? (e) => onAyahTap(w.surah, w.ayah!, e.currentTarget) : undefined}
+                    onClick={
+                      onWordTap && w.kind === 'word' ? () => onWordTap(w)
+                        : w.ayah !== null && onAyahTap ? (e) => onAyahTap(w.surah, w.ayah!, e.currentTarget)
+                          : undefined
+                    }
                     className={cn(
                       'mushaf-word rounded-[0.15em] transition-colors duration-150',
                       w.ayah !== null && onAyahTap && 'cursor-pointer',
@@ -84,7 +91,7 @@ function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap }: Props
                       mark === 'playing' && 'bg-teal/10',
                       mark === 'spoken' && 'bg-teal/25',
                       mark === 'flag' && 'bg-gold/25',
-                      mark === 'hint' && 'opacity-40',
+                      mark === 'hint' && 'relative text-transparent',
                       mark === 'hidden' && 'mushaf-word-hidden',
                     )}
                     style={{
@@ -93,6 +100,10 @@ function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap }: Props
                     }}
                   >
                     {w.text}
+                    {mark === 'hint' && (
+                      // The first letters, over the word's own (invisible) ink, so the line keeps its width
+                      <span aria-hidden className="absolute inset-y-0 right-0 text-foreground/55">{firstLetters(w.text.replace(/\u034F/g, ''))}</span>
+                    )}
                   </span>
                 </span>
               );

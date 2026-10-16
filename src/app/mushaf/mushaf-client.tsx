@@ -21,6 +21,8 @@ import SettingsPanel from '@/components/layout/settings-panel';
 import Link from '@/components/app-link';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/cn';
+import { RecallBar, usePageRecall, type RecallMode } from '@/components/mushaf/page-recall';
+import SegmentedControl from '@/components/ui/segmented-control';
 
 type Meta = QuranMeta & { counts: number[]; names: Map<number, string>; juzStartPages: number[] };
 let metaPromise: Promise<Meta> | null = null;
@@ -86,6 +88,11 @@ export default function MushafClient() {
   }, [pageNo, meta]);
 
   const ayahs = useMemo(() => (page && page.page === pageNo ? ayahsOnPage(page) : []), [page, pageNo]);
+  const recall = usePageRecall(page && page.page === pageNo ? page : null);
+  // The voice check stays inside the page's ayahs when they're all one surah's
+  const passage = ayahs.length && ayahs.every((a) => a.surah === ayahs[0].surah)
+    ? { surah: ayahs[0].surah, ayah: ayahs[0].ayah, ayahEnd: ayahs[ayahs.length - 1].ayah }
+    : null;
 
   // This page is where you are
   useEffect(() => {
@@ -183,13 +190,16 @@ export default function MushafClient() {
 
   const spoken = useSpokenWord(rec.surah ?? 0, rec.active ? rec.ayah : null, rec.playing, recitationClockMs);
 
+  const recallMark = recall.markFor;
   const markWord = useCallback((w: MushafWord): WordMark => {
+    const r = recallMark(w);
+    if (r) return r;
     if (rec.active && w.surah === rec.surah && w.ayah === rec.ayah) {
       return spoken >= 0 && w.wordNo === spoken + 1 ? 'spoken' : 'playing';
     }
     if (markSimilar && twinWords && w.ayah !== null && w.wordNo && twinWords.get(`${w.surah}:${w.ayah}`)?.has(w.wordNo - 1)) return 'flag';
     return null;
-  }, [rec.active, rec.surah, rec.ayah, spoken, markSimilar, twinWords]);
+  }, [rec.active, rec.surah, rec.ayah, spoken, markSimilar, twinWords, recallMark]);
 
   const ayahTint = useCallback((surah: number, ayah: number) => {
     const h = highlights[ayahKey(surah, ayah)];
@@ -264,6 +274,7 @@ export default function MushafClient() {
                 markWord={markWord}
                 ayahTint={ayahTint}
                 onAyahTap={(s, a) => void openAyah(s, a)}
+                onWordTap={recall.mode !== 'read' ? (w) => recall.peek([w]) : undefined}
               />
               <p className="mt-1 text-center text-xs tabular-nums text-muted">{pageNo}</p>
             </div>
@@ -307,6 +318,14 @@ export default function MushafClient() {
               {pageNo > 1 ? pageNo - 1 : ''} ›
             </button>
           </div>
+          <SegmentedControl
+            options={[{ value: 'read', label: 'Read' }, { value: 'hide', label: 'Recite: hidden' }, { value: 'hint', label: 'First letters' }]}
+            value={recall.mode}
+            onChange={(v) => { stopRecitation(); recall.setMode(v as RecallMode); }}
+          />
+          {recall.mode !== 'read' ? (
+            <RecallBar recall={recall} passage={passage} />
+          ) : (
           <MediaControlsBar
             className="static"
             transport={transport}
@@ -317,6 +336,7 @@ export default function MushafClient() {
             onPlayAll={() => first && void playFrom(first.surah, first.ayah)}
             onStop={() => stopRecitation()}
           />
+          )}
         </div>
       </div>
 
