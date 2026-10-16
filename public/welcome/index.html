@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Takrar: learn the Quran by heart</title>
+<meta name="description" content="Takrar is a free app for memorising the Quran: a small lesson each day, twenty recitations per ayah, and reviews that bring every ayah back before you forget it.">
+<meta name="theme-color" content="#1B4D5C">
+<link rel="icon" href="/icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+@font-face { font-family: "QMH New Madina"; src: url("img/madina-qmh.woff2") format("woff2"); font-display: swap; }
+
+:root {
+  --field: #1B4D5C;        /* the ground the board sits on (brand teal) */
+  --field-deep: #143E4A;
+  --paper: #FEFCF9;        /* the board (brand cream) */
+  --paper-2: #EFEBE4;      /* one tone step down */
+  --ink: #2C2C2A;
+  --ink-soft: #5E5A52;
+  --gold: #C8963E;         /* accent */
+  --gold-ink: #3F2A07;
+  --on-field: #FEFCF9;
+
+  --font: "Plus Jakarta Sans", system-ui, sans-serif;
+  --arabic: "QMH New Madina", "Amiri Quran", serif;
+
+  --step-small: 0.9375rem;
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --step-h3: clamp(1.75rem, 1.2rem + 1.2vw, 2.5rem);
+  --step-head: clamp(2.5rem, 1.4rem + 3.4vw, 4.25rem);
+  --step-display: clamp(2.75rem, 1rem + 5.2vw, 5rem);
+
+  --margin: clamp(1rem, 2.2vw, 2rem);
+  --gutter: clamp(1rem, 2vw, 2rem);
+  --section: clamp(6rem, 12vw, 12rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--field-deep); color: var(--ink); font-family: var(--font); font-size: var(--step-body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, figure, blockquote, ul, ol, dl, dd { margin: 0; }
+ul[class], ol[class] { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+:target { scroll-margin-top: 2rem; }
+::selection { background: var(--gold); color: var(--gold-ink); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+h1, h2, h3 { font-weight: 800; text-wrap: balance; letter-spacing: -0.03em; line-height: 1; }
+p { max-width: 62ch; text-wrap: pretty; }
+.nums { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ar { font-family: var(--arabic); direction: rtl; font-weight: 400; letter-spacing: 0; }
+
+/* ---------- the page (slides up off the footer) ---------- */
+main { position: relative; z-index: 1; background: var(--field); color: var(--on-field); }
+
+/* ---------- top row ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 28px var(--margin) 0; color: var(--on-field); }
+.mark { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: var(--step-body); letter-spacing: -0.02em; text-decoration: none; }
+.mark img { width: 34px; height: 34px; border-radius: 8px; background: none; }
+.top nav { display: flex; gap: clamp(1rem, 2.4vw, 2.25rem); font-size: var(--step-small); font-weight: 500; }
+.top nav a, .link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.25em; text-decoration-thickness: 0.08em; transition: text-decoration-color 180ms ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.4rem; font-weight: 700; font-size: var(--step-small); text-decoration: none; white-space: nowrap; border-radius: 0; transition: transform 140ms var(--ease-out), background-color 180ms ease, color 180ms ease; }
+.btn:active { transform: scale(0.97); }
+.btn-paper { background: var(--paper); color: var(--ink); }
+.btn-ink { background: var(--ink); color: var(--paper); }
+@media (hover: hover) and (pointer: fine) {
+  .top nav a:hover, .link:hover { text-decoration-color: currentColor; }
+  .btn-paper:hover { background: var(--gold); color: var(--gold-ink); }
+  .btn-ink:hover { background: var(--field); }
+}
+
+/* ---------- hero: the lawh ---------- */
+.hero { padding: 0 var(--margin); }
+.board-wrap { position: relative; width: min(100%, 44rem); margin: 118px auto 0; }
+/* the board's handle, as on the writing boards of West African Quran schools */
+.handle { width: 34%; height: 72px; margin: 0 auto; background: var(--paper); clip-path: polygon(0 34%, 10% 12%, 30% 0, 70% 0, 90% 12%, 100% 34%, 58% 46%, 58% 100%, 42% 100%, 42% 46%); }
+.board { position: relative; background: var(--paper); color: var(--ink); padding: clamp(28px, 5vw, 56px); padding-top: clamp(40px, 6vw, 64px); text-align: center; }
+/* scalloped corners, cut in the field colour */
+.board > .sc { position: absolute; width: 36px; height: 36px; border-radius: 50%; background: var(--field); }
+.sc.tl { top: -18px; left: -18px; } .sc.tr { top: -18px; right: -18px; }
+.board h1 { font-size: var(--step-display); line-height: 0.98; letter-spacing: -0.04em; }
+.board h1 .l1 { display: block; transform: translateX(-6%); }
+.board h1 .l2 { display: block; transform: translateX(10%); }
+.facts-line { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem 1.1rem; margin: 2rem auto 0; font-size: var(--step-small); font-weight: 500; }
+.facts-line .dia { width: 10px; height: 10px; background: var(--gold); transform: rotate(45deg); flex: none; }
+.board .lede { margin: 1.75rem auto 0; font-size: var(--step-lead); line-height: 1.4; max-width: 30ch; }
+.board .go { margin-top: 2rem; }
+
+/* the live board: one ayah, twenty recitations */
+.practice { margin-top: clamp(4rem, 9vw, 7rem); padding-top: clamp(2.5rem, 5vw, 3.5rem); background: var(--paper); position: relative; }
+.practice::before { content: ""; position: absolute; top: 0; left: 8%; right: 8%; height: 8px; background: var(--paper-2); }
+.practice h2 { font-size: var(--step-h3); }
+.practice .how { margin: 1rem auto 0; max-width: 46ch; }
+.slate { position: relative; margin: 2rem auto 0; padding: 2.25rem 1rem 1.75rem; background: var(--paper-2); }
+.slate .ayah { font-size: clamp(2.6rem, 1.4rem + 4.6vw, 4.4rem); line-height: 1.9; color: var(--ink); transition: opacity 700ms var(--ease-soft); min-height: 1.9em; }
+.slate .ayah .num { color: var(--gold); }
+.slate .meaning { margin: 0.5rem auto 0; font-size: var(--step-body); color: var(--ink); transition: opacity 700ms var(--ease-soft); max-width: 36ch; }
+.slate.washed .ayah, .slate.washed .meaning { opacity: 0.05; }
+.slate.washed.peek .ayah, .slate.washed.peek .meaning { opacity: 1; transition-duration: 160ms; }
+.reps { display: flex; justify-content: center; gap: 14px; margin-top: 1.5rem; flex-wrap: wrap; }
+.reps .grp { display: flex; gap: 5px; }
+.reps i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); opacity: 0.14; transition: opacity 200ms ease, transform 300ms var(--ease-out); }
+.reps .grp.memory i { border-radius: 2px; }
+.reps i.on { opacity: 1; transform: scale(1.15); }
+.status { margin-top: 1rem; font-weight: 700; min-height: 1.6em; }
+.controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 1rem; }
+.controls .btn { min-height: 3.5rem; padding: 0 1.75rem; }
+.btn-tone { background: var(--paper-2); color: var(--ink); }
+.peek-btn[hidden] { display: none; }
+.after { margin-top: 1.25rem; font-size: var(--step-small); color: var(--ink-soft); }
+.no-js-note { margin-top: 1rem; font-size: var(--step-small); color: var(--ink-soft); }
+.js .no-js-note { display: none; }
+html:not(.js) .controls, html:not(.js) .reps, html:not(.js) .status { display: none; }
+.board .credit { margin-top: 1.25rem; font-size: 0.875rem; color: var(--ink-soft); }
+
+/* ---------- intro: title, note, facts ---------- */
+.intro { margin-top: var(--section); padding: clamp(5rem, 9vw, 8.75rem) var(--margin) clamp(4rem, 8vw, 7.5rem); background: var(--paper); color: var(--ink); position: relative; }
+/* perforated top edge: a row of field-coloured holes */
+.intro::before { content: ""; position: absolute; top: 18px; left: var(--margin); right: var(--margin); border-top: 7px dotted var(--field); }
+.intro-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
+.intro h2 { grid-column: 1 / 7; font-size: var(--step-head); font-weight: 500; letter-spacing: -0.035em; }
+.intro .note { grid-column: 9 / 13; font-size: var(--step-body); }
+.facts { display: flex; justify-content: space-between; gap: var(--gutter); margin-top: clamp(4rem, 8vw, 7.5rem); }
+.facts dt { font-size: var(--step-h3); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
+.facts dd { margin-top: 0.4rem; font-size: var(--step-small); color: var(--ink-soft); max-width: 22ch; }
+.intro-photo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); margin-top: clamp(3rem, 6vw, 5rem); }
+.intro-photo figure { grid-column: 7 / 13; }
+.intro-photo .said { grid-column: 1 / 6; align-self: end; font-size: var(--step-lead); line-height: 1.4; max-width: 26ch; }
+figure img { width: 100%; }
+figcaption { margin-top: 0.6rem; font-size: 0.875rem; color: inherit; opacity: 0.8; }
+.ratio-43 { aspect-ratio: 4 / 3; object-fit: cover; }
+.crop { overflow: hidden; }
+
+/* ---------- how it works: a slip ---------- */
+.day { padding: var(--section) var(--margin); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+.day .side { grid-column: 1 / 6; }
+.day h2 { font-size: var(--step-head); }
+.day .side p { margin-top: 1.5rem; max-width: 32ch; }
+.day .side p + p { margin-top: 1rem; }
+.slip { grid-column: 7 / 12; background: var(--paper); color: var(--ink); padding: 2.25rem 2rem 4rem; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), 95% 100%, 90% calc(100% - 14px), 85% 100%, 80% calc(100% - 14px), 75% 100%, 70% calc(100% - 14px), 65% 100%, 60% calc(100% - 14px), 55% 100%, 50% calc(100% - 14px), 45% 100%, 40% calc(100% - 14px), 35% 100%, 30% calc(100% - 14px), 25% 100%, 20% calc(100% - 14px), 15% 100%, 10% calc(100% - 14px), 5% 100%, 0 calc(100% - 14px)); font-variant-numeric: tabular-nums; }
+.slip h3 { font-size: var(--step-body); letter-spacing: 0; font-weight: 800; margin-top: 28px; line-height: 1.3; }
+.slip h3:first-child { margin-top: 0; }
+.slip ul { margin-top: 0.6rem; padding: 0; list-style: none; }
+.slip li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.3rem 0; font-size: var(--step-small); }
+.slip li .what { flex: 0 1 auto; }
+.slip li .dots { flex: 1 1 2rem; min-width: 1.5rem; align-self: center; margin-top: 0.5em; border-bottom: 4px dotted var(--ink-soft); opacity: 0.5; }
+.slip li .t { flex: none; font-weight: 700; }
+.slip .total { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 44px; margin: 28px -2rem 0; padding: 0.5rem 2rem; background: var(--ink); color: var(--paper); font-weight: 700; font-size: var(--step-small); }
+
+/* ---------- features: stacking sheets ---------- */
+.inside { padding: 0 var(--margin) var(--section); }
+.inside > h2 { font-size: var(--step-head); margin-bottom: 48px; max-width: 16ch; }
+.sheet { position: sticky; top: calc(var(--k) * 72px); min-height: 74svh; border-radius: 28px 28px 0 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); padding: 0 0 0 clamp(1.25rem, 3vw, 2.5rem); overflow: hidden; }
+.sheet + .sheet { margin-top: 6vh; }
+.sheet .copy { grid-column: 1 / 6; display: flex; flex-direction: column; justify-content: space-between; padding: 18px 0 clamp(2rem, 4vw, 3rem); }
+.sheet h3 { font-size: var(--step-h3); line-height: 1.1; white-space: nowrap; }
+.sheet .copy p { font-size: var(--step-body); max-width: 40ch; margin-top: 2rem; }
+.sheet .pic { grid-column: 7 / 13; margin-top: 72px; position: relative; }
+.sheet .pic > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sheet .pic figcaption { position: absolute; left: 1rem; bottom: 0.75rem; opacity: 1; font-size: 0.875rem; background: rgba(20, 18, 14, 0.72); color: #fff; padding: 0.2rem 0.5rem; }
+.s1 { --k: 0; background: var(--paper-2); color: var(--ink); }
+.s2 { --k: 1; background: var(--gold); color: var(--gold-ink); }
+.s3x { --k: 2; background: var(--paper); color: var(--ink); }
+.s4x { --k: 3; background: var(--field-deep); color: var(--on-field); }
+
+/* product fragments (the app's own surfaces, so they keep its card radius) */
+.ui-stage { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; }
+.s1 .ui-stage { background: var(--field); }
+.s4x .ui-stage { background: #E6E1D8; }
+.ui-card { width: min(100%, 25rem); background: #fff; color: #2C2C2A; border-radius: 20px; padding: 1.25rem; font-size: 0.9375rem; line-height: 1.4; }
+.ui-card .ui-h { font-weight: 800; font-size: var(--step-body); letter-spacing: -0.01em; }
+.ui-card .ui-sub { color: #6F6F6A; margin-top: 0.15rem; }
+.ui-rows { margin-top: 1rem; display: grid; gap: 0.5rem; }
+.ui-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0.9rem; border-radius: 14px; background: #F6F3EC; }
+.ui-row b { font-weight: 700; }
+.ui-pill { font-size: 0.875rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; background: #1B4D5C; color: #FEFCF9; }
+.ui-pill.gold { background: #C8963E; color: #3F2A07; }
+.ui-pill.miss { background: #B5482E; color: #FFF5F2; }
+.ui-cta { margin-top: 1rem; display: block; text-align: center; padding: 0.8rem; border-radius: 14px; background: #1B4D5C; color: #FEFCF9; font-weight: 700; }
+.ui-verse { font-family: var(--arabic); direction: rtl; font-size: 1.625rem; line-height: 2; text-align: center; margin-top: 0.5rem; }
+.ui-verse .heard { color: #2D7A4F; }
+.ui-verse .flag { color: #B5482E; text-decoration: underline wavy #B5482E; text-underline-offset: 0.35em; text-decoration-thickness: 1px; }
+.ui-verse .todo { color: #2C2C2A; opacity: 0.35; }
+.ui-flag { margin-top: 0.75rem; padding: 0.7rem 0.9rem; border-radius: 14px; background: #FBEDE8; color: #7A2E1C; }
+
+/* ---------- showcase: square plate ---------- */
+.plate { display: grid; grid-template-columns: 1fr 1fr; min-height: 88svh; background: var(--paper-2); color: var(--ink); }
+.plate .left { display: grid; place-items: center; padding: 40px; }
+.plate .left figure { width: 100%; max-width: 40rem; }
+.plate .left img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+.plate .right { display: flex; flex-direction: column; justify-content: space-between; padding: 40px clamp(1.25rem, 4vw, 4rem) 40px clamp(1rem, 2vw, 2rem); gap: 3rem; }
+.tabs { display: flex; gap: 2rem; font-size: var(--step-body); font-weight: 700; }
+.tabs button { opacity: 0.4; min-height: 44px; transition: opacity 180ms ease; }
+.tabs button[aria-selected="true"] { opacity: 1; }
+@media (hover: hover) { .tabs button:hover { opacity: 0.8; } }
+.plate h2 { font-size: var(--step-h3); }
+.plate .desc { margin-top: 48px; max-width: 34ch; font-size: var(--step-body); min-height: 6.5em; }
+.cells { display: grid; grid-template-columns: 1fr 1fr; }
+.cells a { display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; min-height: 72px; font-weight: 700; text-decoration: none; transition: background-color 180ms ease, color 180ms ease; }
+.cells a:active { transform: scale(0.99); }
+.cells .c1 { background: var(--ink); color: var(--paper); }
+.cells .c2 { background: #E2DDD3; color: var(--ink); }
+@media (hover: hover) { .cells .c1:hover { background: var(--field); } .cells .c2:hover { background: var(--gold); color: var(--gold-ink); } }
+
+/* ---------- proof: the printed thanks ---------- */
+.thanks { overflow: hidden; padding-top: var(--section); }
+.thanks .card { width: min(56vw, 52rem); margin: 0 auto; background: var(--paper); color: var(--ink); padding: 56px 56px 150px; margin-bottom: -96px; text-align: center; transform: rotate(-1.5deg); }
+.thanks h2 { font-size: var(--step-h3); letter-spacing: -0.02em; }
+.thanks figure { margin: 2rem 0; }
+.thanks figure img { aspect-ratio: 16 / 9; object-fit: cover; }
+.thanks figcaption { text-align: left; }
+.thanks .names { font-size: var(--step-body); line-height: 1.7; max-width: none; }
+.thanks .names + .names { margin-top: 1.5rem; }
+.thanks .small { margin-top: 1.25rem; font-size: 0.9375rem; color: var(--ink-soft); }
+
+/* ---------- questions ---------- */
+.faq { background: var(--paper); color: var(--ink); padding: var(--section) var(--margin); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+.faq h2 { grid-column: 1 / 4; font-size: var(--step-h3); letter-spacing: -0.02em; }
+.faq .qa { grid-column: 5 / 13; columns: 2; column-gap: 56px; }
+.faq .qa p { break-inside: avoid; margin-bottom: 20px; font-size: var(--step-body); max-width: 40ch; }
+.faq .qa p b { font-weight: 700; }
+
+/* ---------- the action ---------- */
+.begin { display: block; position: relative; min-height: 60svh; background: var(--gold); color: var(--gold-ink); text-decoration: none; overflow: hidden; border-radius: 48px 48px 0 0; transition: background-color 120ms linear, color 120ms linear; }
+.begin .what { position: absolute; top: 2rem; left: var(--margin); font-size: var(--step-lead); font-weight: 500; max-width: 28ch; line-height: 1.35; }
+.begin svg { position: absolute; top: 2rem; right: var(--margin); width: 48px; height: 48px; transition: transform 240ms var(--ease-out); }
+.begin .word { position: absolute; left: var(--margin); right: var(--margin); bottom: 24px; font-size: clamp(5rem, 27vw, 27rem); font-weight: 800; letter-spacing: -0.06em; line-height: 0.74; }
+.begin:hover, .begin:focus-visible { background: var(--ink); color: var(--gold); }
+.begin:hover svg, .begin:focus-visible svg { transform: translate(6px, -6px); }
+.begin:focus-visible { outline-offset: -6px; }
+
+/* ---------- footer: revealed from under the page ---------- */
+.foot { position: sticky; bottom: 0; z-index: 0; min-height: 92svh; background: var(--field-deep); color: var(--on-field); padding: 40px var(--margin) 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; }
+.foot .row1 { display: flex; justify-content: space-between; gap: 2rem; font-size: 0.9375rem; }
+.foot .notes { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.foot .notes p { max-width: 26ch; }
+.foot .big { display: block; font-size: clamp(3.5rem, 1rem + 12.5vw, 13rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; text-decoration: none; margin-left: -0.04em; }
+.foot .big:hover { color: var(--gold); }
+.foot .meta { display: flex; justify-content: space-between; gap: 2rem; font-size: 0.875rem; margin-top: 1.5rem; }
+.foot .meta .credits { max-width: 60ch; text-align: center; }
+.foot .meta .credits a { text-decoration-thickness: 0.06em; }
+
+/* ---------- motion (content stays visible without script) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-rise] { opacity: 0; transform: translateY(22px); animation: rise 900ms var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 120ms); }
+  .js .handle[data-rise] { transform: translateY(-14px); }
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--i, 0) * 75ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+  .js .shutter[data-reveal] { opacity: 1; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 1100ms var(--ease-in-out); }
+  .js .shutter[data-reveal] img { transform: scale(1.12); transition: transform 1600ms var(--ease-soft); }
+  .js .shutter[data-reveal].is-in { clip-path: inset(0); }
+  .js .shutter[data-reveal].is-in img { transform: none; }
+  .drift { animation: drift 24s var(--ease-in-out) infinite alternate; }
+  .thanks .card { transition: transform 1200ms var(--ease-out); }
+  .js .thanks .card[data-reveal] { transform: rotate(-4deg) translateY(60px); opacity: 1; }
+  .js .thanks .card[data-reveal].is-in { transform: rotate(-1.5deg); }
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes drift { from { transform: scale(1.02) translateX(-1%); } to { transform: scale(1.08) translateX(1%); } }
+@media (prefers-reduced-motion: reduce) { .slate .ayah, .slate .meaning { transition: none; } }
+
+/* ---------- phone ---------- */
+@media (max-width: 47.99em) {
+  .top { padding-top: 20px; }
+  .top nav { display: none; }
+  .board-wrap { margin-top: 64px; width: calc(100% + 2 * var(--margin) - 24px); margin-left: calc(12px - var(--margin)); }
+  .board { padding-left: 20px; padding-right: 20px; }
+  .board h1 { font-size: 9.6vw; }
+  .board h1 .l1, .board h1 .l2 { transform: none; }
+  .facts-line { flex-direction: column; gap: 0.6rem; }
+  .facts-line .dia { width: 8px; height: 8px; }
+  .slate { margin-left: -12px; margin-right: -12px; }
+  .intro-row, .intro-photo { display: block; }
+  .intro h2 { font-size: 11vw; }
+  .intro .note { margin-top: 1.25rem; font-size: var(--step-small); }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; row-gap: 32px; }
+  .facts dt { font-size: 1.625rem; }
+  .intro-photo .said { margin-bottom: 2rem; }
+  .day { display: block; }
+  .slip { margin: 2.5rem calc(16px - var(--margin)) 0; padding: 1.75rem 1.25rem 3.5rem; }
+  .slip .total { margin-left: -1.25rem; margin-right: -1.25rem; padding: 0.5rem 1.25rem; }
+  .sheet { position: relative; top: auto; display: flex; flex-direction: column; min-height: 0; padding: 0 0 24px; border-radius: 22px 22px 0 0; }
+  .sheet + .sheet { margin-top: 16px; }
+  .sheet .copy { display: contents; }
+  .sheet h3 { order: 0; font-size: 1.375rem; white-space: normal; padding: 18px 20px 14px; }
+  .sheet .pic { order: 1; margin-top: 0; aspect-ratio: 4 / 3; }
+  .sheet .pic:has(.ui-stage) { aspect-ratio: auto; }
+  .sheet .ui-stage { position: relative; inset: auto; padding: 1.5rem 1rem; }
+  .sheet .copy p { order: 2; margin: 20px 20px 0; font-size: var(--step-body); }
+  .plate { grid-template-columns: 1fr; min-height: 0; }
+  .plate .left { padding: 16px; }
+  .plate .right { padding: 8px 16px 32px; gap: 2rem; }
+  .plate .tabs { font-size: var(--step-body); order: -1; }
+  .plate h2 { font-size: 1.75rem; }
+  .plate .desc { margin-top: 1.25rem; }
+  .cells { grid-template-columns: 1fr; }
+  .cells a { min-height: 60px; }
+  .thanks .card { width: 92%; padding: 28px 28px 120px; transform: rotate(-1deg); }
+  .thanks h2 { font-size: 1.375rem; }
+  .thanks .names { font-size: var(--step-body); }
+  .faq { display: block; padding-left: 20px; padding-right: 20px; }
+  .faq h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+  .faq .qa { columns: 1; }
+  .faq .qa p { margin-bottom: 18px; font-size: var(--step-small); }
+  .begin { min-height: 46svh; border-radius: 32px 32px 0 0; }
+  .begin .what { font-size: var(--step-body); max-width: 18ch; }
+  .begin svg { width: 32px; height: 32px; }
+  .begin .word { font-size: 29vw; }
+  .foot .row1 { flex-direction: column; }
+  .foot .notes { flex-direction: column; gap: 1rem; }
+  .foot .big { font-size: 17vw; }
+  .foot .meta { flex-direction: column; gap: 0.5rem; font-size: 0.875rem; }
+  .foot .meta .credits { text-align: left; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <a class="mark" href="#top" aria-label="Takrar, back to the top"><img src="/icons/icon-192.png" alt="" width="34" height="34">Takrar</a>
+    <nav aria-label="Sections">
+      <a href="#day">How it works</a>
+      <a href="#inside">What's inside</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <a class="btn btn-paper" href="/">Open the app</a>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="board-wrap">
+      <div class="handle" aria-hidden="true" data-rise style="--i:0"></div>
+      <div class="board">
+        <i class="sc tl" aria-hidden="true"></i><i class="sc tr" aria-hidden="true"></i>
+        <h1 data-rise style="--i:1"><span class="l1">Learn the Quran</span><span class="l2">by heart</span></h1>
+        <p class="lede" data-rise style="--i:2">A free app that teaches you a few ayahs a day, then brings each one back before you forget it.</p>
+        <div class="facts-line" data-rise style="--i:3">
+          <span>Free, with no ads</span><span class="dia" aria-hidden="true"></span>
+          <span>Works in your browser</span><span class="dia" aria-hidden="true"></span>
+          <span>Android and iPhone apps coming</span>
+        </div>
+        <div class="go" data-rise style="--i:4"><a class="btn btn-ink" href="/">Start your first lesson</a></div>
+
+        <div class="practice" id="try">
+          <h2 data-reveal>Try it on Surah al-Ikhlas</h2>
+          <p class="how" data-reveal style="--i:1">Recite the ayah aloud, then tap the button. Six times with the text, four from memory, four with the text again, six from memory: the way every ayah is learned in Takrar.</p>
+          <div class="slate" id="slate" data-reveal style="--i:2">
+            <p class="ayah ar" lang="ar" id="ayah">قُلْ هُوَ ٱللَّهُ ا͏ٔ͏َحَدٌ ۝١</p>
+            <p class="meaning" id="meaning">Say, “He is Allah, the One.</p>
+            <div class="reps" id="reps" aria-hidden="true"></div>
+            <p class="status" id="status" aria-live="polite"></p>
+            <div class="controls">
+              <button class="btn btn-ink" id="recited" type="button">I recited it</button>
+              <button class="btn btn-tone peek-btn" id="peek" type="button" hidden>Hold to peek</button>
+              <button class="btn btn-tone" id="next" type="button">Next ayah</button>
+            </div>
+            <p class="after" id="after">Takrar listens to the recitation with you and keeps the count. Here, you keep it.</p>
+            <p class="no-js-note">Turn on JavaScript to practise on this board.</p>
+          </div>
+          <p class="credit">Arabic text from the Tanzil Project in Amine Anane’s DigitalKhatt font. Translation by Talal Itani, ClearQuran.com.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro" aria-labelledby="intro-h">
+    <div class="intro-row">
+      <h2 id="intro-h" data-reveal>An old method, kept</h2>
+      <p class="note" data-reveal style="--i:1">Takrar follows the way the Quran has been memorised for centuries: a small new lesson, recited many times, then revised on a schedule so that nothing learned is lost.</p>
+    </div>
+    <dl class="facts">
+      <div data-reveal style="--i:0"><dt>Free</dt><dd>No ads, no subscription, nothing locked away</dd></div>
+      <div data-reveal style="--i:1"><dt>604 pages</dt><dd>The Madina mushaf, page for page, and the 15-line IndoPak</dd></div>
+      <div data-reveal style="--i:2"><dt>23 reciters</dt><dd>For most of them, each word lights up as it is recited</dd></div>
+      <div data-reveal style="--i:3"><dt>On your phone</dt><dd>The voice check runs on the device; your voice is never uploaded</dd></div>
+    </dl>
+    <div class="intro-photo">
+      <p class="said" data-reveal>Sabaq, sabqi and manzil: the new lesson, the recent ones, and everything older. Every hifz class has kept this rhythm.</p>
+      <figure>
+        <div class="crop" data-reveal><img class="ratio-43 drift" src="img/madrasa.jpg" width="1024" height="686" alt="The carved cedar and stucco courtyard of the Ben Youssef madrasa in Marrakech" decoding="async"></div>
+        <figcaption>The Ben Youssef madrasa, Marrakech. Photo: Karsten Wentink, CC BY-SA 2.0.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="day" id="day" aria-labelledby="day-h">
+    <div class="side">
+      <h2 id="day-h" data-reveal>A day of hifz</h2>
+      <p data-reveal style="--i:1">Takrar plans the traditional day for you and keeps the count. These times are an example; you choose how much time you have, and the plan fits around it.</p>
+      <p data-reveal style="--i:2">Miss a day and nothing falls apart: a streak freeze covers it, and the reviews wait for you in order of need.</p>
+    </div>
+    <div class="slip" data-reveal style="--i:1">
+      <h3>Morning: the new lesson</h3>
+      <ul>
+        <li><span class="what">Listen, with each word's meaning</span><span class="dots"></span><span class="t">5 min</span></li>
+        <li><span class="what">Memorise, six, four, four and six times</span><span class="dots"></span><span class="t">15 min</span></li>
+        <li><span class="what">Recite the whole lesson from memory</span><span class="dots"></span><span class="t">3 min</span></li>
+      </ul>
+      <h3>Afternoon: the recent lessons</h3>
+      <ul>
+        <li><span class="what">Review this week's ayahs (sabqi)</span><span class="dots"></span><span class="t">10 min</span></li>
+        <li><span class="what">Drill the ayahs you keep slipping on</span><span class="dots"></span><span class="t">5 min</span></li>
+      </ul>
+      <h3>Evening: everything older</h3>
+      <ul>
+        <li><span class="what">Revise part of your older juz (manzil)</span><span class="dots"></span><span class="t">15 min</span></li>
+      </ul>
+      <p class="total"><span>New ayahs held, old ones kept</span><span>53 min</span></p>
+    </div>
+  </section>
+
+  <section class="inside" id="inside" aria-labelledby="inside-h">
+    <h2 id="inside-h" data-reveal>What's inside</h2>
+
+    <article class="sheet s1">
+      <div class="copy">
+        <h3>Reviews that come back on time</h3>
+        <p data-reveal>Every ayah you learn gets its own schedule. Recite it cleanly and it returns less often; stumble and it comes back tomorrow. The ayahs you keep slipping on are gathered into a short drill.</p>
+      </div>
+      <figure class="pic">
+        <div class="ui-stage" data-ui>
+          <div class="ui-card" data-reveal style="--i:1">
+            <p class="ui-h">Today’s reviews</p>
+            <p class="ui-sub">About 25 minutes</p>
+            <div class="ui-rows">
+              <div class="ui-row"><span><b>Sabqi</b> · An-Naba 1–16</span><span class="ui-pill">12</span></div>
+              <div class="ui-row"><span><b>Manzil</b> · Juz 30, pages 589–592</span><span class="ui-pill gold">4 pages</span></div>
+              <div class="ui-row"><span><b>Weak spots</b> · ayahs you missed twice</span><span class="ui-pill miss">3</span></div>
+            </div>
+            <span class="ui-cta">Start reviewing</span>
+          </div>
+        </div>
+        <figcaption class="sr-only">Takrar’s review screen, with sample reviews</figcaption>
+      </figure>
+    </article>
+
+    <article class="sheet s2">
+      <div class="copy">
+        <h3>The mushaf, page for page</h3>
+        <p data-reveal>Read the Madina 1441H print or the 15-line IndoPak, with every ayah on the page you know it from. Hide the words and reveal them as you recite, to test yourself a whole page at a time.</p>
+      </div>
+      <figure class="pic">
+        <img src="img/folio-1180.jpg" width="1200" height="1711" alt="A gilded page of a Quran manuscript from about 1180, with an illuminated border" loading="lazy" decoding="async">
+        <figcaption>Folio from a Quran manuscript, c. 1180. The Met, CC0.</figcaption>
+      </figure>
+    </article>
+
+    <article class="sheet s3x">
+      <div class="copy">
+        <h3>Listen the whole way through</h3>
+        <p data-reveal>Play a surah, a page or a whole juz with the screen off. Slow it down, loop a passage, pause between ayahs to repeat, or download a surah for when you have no signal.</p>
+      </div>
+      <figure class="pic">
+        <img src="img/folio-kufic.jpg" width="1600" height="1113" alt="A page of an early Quran in brown kufic script with red vowel dots, 8th or 9th century" loading="lazy" decoding="async">
+        <figcaption>Folio from a Quran, 8th–9th century. Public domain.</figcaption>
+      </figure>
+    </article>
+
+    <article class="sheet s4x">
+      <div class="copy">
+        <h3>Recite, and it listens</h3>
+        <p data-reveal>Turn on the voice check and recite from memory. It follows you word by word and marks a skipped or changed word, without your recitation ever leaving the device.</p>
+      </div>
+      <figure class="pic">
+        <div class="ui-stage" data-ui>
+          <div class="ui-card" data-reveal style="--i:1">
+            <p class="ui-h">Voice check</p>
+            <p class="ui-sub">Al-Ikhlas · recite from memory</p>
+            <p class="ui-verse" lang="ar"><span class="heard">قُلْ</span> <span class="heard">هُوَ</span> <span class="flag">ٱللَّهُ</span> <span class="todo">ا͏ٔ͏َحَدٌ ۝١</span></p>
+            <p class="ui-flag">Ayah 1: “Allah” was missed. Recite the ayah again, or count it as a slip.</p>
+          </div>
+        </div>
+        <figcaption class="sr-only">Takrar’s voice check marking a missed word</figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <section class="plate" aria-labelledby="plate-h">
+    <div class="left">
+      <figure>
+        <div class="crop" data-reveal><img class="drift" src="img/lawh-sq.jpg" width="800" height="800" alt="A worn wooden Quran writing board covered in hand-written Arabic" decoding="async"></div>
+        <figcaption>Koranic writing board, mid to late 20th century. CC0, via Wikimedia Commons.</figcaption>
+      </figure>
+    </div>
+    <div class="right">
+      <div class="tabs" role="tablist" aria-label="The board's three steps">
+        <button role="tab" id="tab-write" aria-selected="true" aria-controls="plate-desc" type="button">Write</button>
+        <button role="tab" id="tab-recite" aria-selected="false" aria-controls="plate-desc" type="button" tabindex="-1">Recite</button>
+        <button role="tab" id="tab-wash" aria-selected="false" aria-controls="plate-desc" type="button" tabindex="-1">Wash</button>
+      </div>
+      <div>
+        <h2 id="plate-h" data-reveal>The board, kept</h2>
+        <p class="desc" id="plate-desc" role="tabpanel" aria-labelledby="tab-write" data-reveal style="--i:1">In Quran schools across Africa, a student writes the day’s lesson on a wooden board. In Takrar, the lesson is a few ayahs, heard with the meaning of every word.</p>
+      </div>
+      <div class="cells">
+        <a class="c1" href="/">Start a lesson <span aria-hidden="true">→</span></a>
+        <a class="c2" href="#day">See a day of hifz <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="thanks" aria-labelledby="thanks-h">
+    <div class="card" data-reveal>
+      <h2 id="thanks-h">With thanks to</h2>
+      <figure>
+        <img src="img/folio-9th.jpg" width="1400" height="1004" alt="A page of a Quran in large kufic letters on parchment, late 9th or early 10th century" loading="lazy" decoding="async">
+        <figcaption>Folio from a Quran manuscript, late 9th–early 10th century. The Met, CC0.</figcaption>
+      </figure>
+      <p class="names">The Tanzil Project&nbsp;· Amine Anane and DigitalKhatt&nbsp;· Tarek Eldeeb&nbsp;· Talal Itani&nbsp;· the Tilawa model&nbsp;· everyone who checks a Quran text so others can trust it</p>
+      <p class="names">Mishary Alafasy&nbsp;· Mahmoud al-Husary&nbsp;· Abdul Basit Abdus-Samad&nbsp;· Muhammad Siddiq al-Minshawi&nbsp;· Maher al-Muaiqly&nbsp;· Yasser ad-Dussary&nbsp;· Saad al-Ghamdi&nbsp;· Abu Bakr ash-Shatri&nbsp;· Saud ash-Shuraim&nbsp;· Ali al-Hudhaify&nbsp;· Nasser al-Qatami&nbsp;· Ahmed al-Ajamy&nbsp;· Abdullah al-Matrood&nbsp;· Hani ar-Rifai&nbsp;· Muhammad al-Luhaidan&nbsp;· Bandar Baleela&nbsp;· Khalifa at-Tunaiji&nbsp;· Mahmoud Ali al-Banna&nbsp;· Mustafa Ismail&nbsp;· Abdur-Rashid Sufi&nbsp;· Muhammad Jibreel</p>
+      <p class="small">The reciters whose recitations you can learn from in Takrar.</p>
+    </div>
+  </section>
+
+  <section class="faq" id="questions" aria-labelledby="faq-h">
+    <h2 id="faq-h" data-reveal>Questions</h2>
+    <div class="qa">
+      <p data-reveal><b>Is it really free?</b> Yes. There are no ads, no subscription and nothing locked behind a payment.</p>
+      <p data-reveal><b>Do I need an account?</b> No. Everything works and is saved on your device. Sign in only if you want your progress on more than one device.</p>
+      <p data-reveal><b>What does 6, 4, 4, 6 mean?</b> Each new ayah is recited twenty times in four rounds: six with the text, four from memory, four with the text again and six from memory. Then you put its words back in order.</p>
+      <p data-reveal><b>What are sabaq, sabqi and manzil?</b> The three parts of the traditional hifz day: the new lesson, the recent lessons, and everything older. Takrar schedules all three and puts your weakest ayahs first.</p>
+      <p data-reveal><b>Does the voice check upload my recitation?</b> No. The recognition model runs on your phone or in your browser, and your voice stays there.</p>
+      <p data-reveal><b>Which mushaf does it use?</b> The Madina 1441H print, page for page, and the 15-line IndoPak layout. You can switch between them and keep your place.</p>
+      <p data-reveal><b>Does it work offline?</b> Lessons and reviews keep working once they have loaded. Download a surah’s recitation to listen without a connection.</p>
+      <p data-reveal><b>Is it only in English?</b> For now the app, the meanings and the transliteration are in English. More languages are planned.</p>
+      <p data-reveal><b>Can my family read together?</b> Yes. A khatm circle lets a family or a class share out the thirty juz and mark each one read.</p>
+      <p data-reveal><b>What do you keep about me?</b> As little as possible. The <a class="link" href="/privacy">privacy page</a> lists exactly what is stored and where, and you can delete your account from the app.</p>
+    </div>
+  </section>
+
+  <a class="begin" href="/">
+    <span class="what">Opens Takrar in your browser. Your first lesson takes about fifteen minutes.</span>
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true"><path d="M12 36 36 12M16 12h20v20"/></svg>
+    <span class="word" aria-hidden="true">Begin</span>
+    <span class="sr-only">Begin your first lesson</span>
+  </a>
+</main>
+
+<footer class="foot">
+  <div class="row1">
+    <div class="notes">
+      <p><b>Takrar</b>, a free app for memorising the Quran.</p>
+      <p>Takrar means repetition: the oldest way to learn the Quran by heart.</p>
+    </div>
+    <a class="link" href="#top">Back to the top</a>
+  </div>
+  <div>
+    <a class="big" href="/">takrar.pro</a>
+    <div class="meta">
+      <span><a class="link" href="/privacy">Privacy</a> · <a class="link" href="/">Open the app</a></span>
+      <span class="credits">Pictures: manuscript folios and the writing board from The Met and Wikimedia Commons (CC0 and public domain); Ben Youssef madrasa by <a class="link" href="https://commons.wikimedia.org/wiki/File:Quran_school,_Marrakech,_Morocco_(2011).jpg">Karsten Wentink</a>, <a class="link" href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</span>
+      <span>2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveal once on entering the viewport; never leaves content hidden
+(() => {
+  const els = document.querySelectorAll('[data-reveal]');
+  if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('is-in')); return; }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+  els.forEach((e) => io.observe(e));
+  addEventListener('load', () => setTimeout(() => els.forEach((e) => {
+    const r = e.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) e.classList.add('is-in');
+  }), 2500));
+})();
+
+// The board: one ayah at a time, 6-4-4-6
+(() => {
+  const AYAHS = ["قُلْ هُوَ ٱللَّهُ ا͏ٔ͏َحَدٌ ۝١","ٱللَّهُ ٱلصَّمَدُ ۝٢","لَمْ يَلِدْ وَلَمْ يُولَدْ ۝٣","وَلَمْ يَكُن لَّهُۥ كُفُوًا ا͏ٔ͏َحَدُۢ ۝٤"];
+  const MEANINGS = ['Say, “He is Allah, the One.', 'Allah, the Absolute.', 'He begets not, nor was He begotten.', 'And there is none comparable to Him.”'];
+  const ROUNDS = [
+    { n: 6, text: true, say: 'Recite with the text' },
+    { n: 4, text: false, say: 'Now from memory' },
+    { n: 4, text: true, say: 'With the text again' },
+    { n: 6, text: false, say: 'From memory, to hold it' },
+  ];
+  const $ = (id) => document.getElementById(id);
+  const slate = $('slate'), ayah = $('ayah'), meaning = $('meaning'), reps = $('reps'), status = $('status'), after = $('after');
+  const recited = $('recited'), peek = $('peek'), next = $('next');
+  let a = 0, round = 0, count = 0;
+
+  reps.innerHTML = ROUNDS.map((r) => `<span class="grp${r.text ? '' : ' memory'}">${'<i></i>'.repeat(r.n)}</span>`).join('');
+  const dots = [...reps.querySelectorAll('i')];
+  const done = () => ROUNDS.slice(0, round).reduce((s, r) => s + r.n, 0) + count;
+
+  function render() {
+    ayah.textContent = AYAHS[a];
+    meaning.textContent = MEANINGS[a];
+    const finished = round >= ROUNDS.length;
+    const r = ROUNDS[Math.min(round, ROUNDS.length - 1)];
+    slate.classList.toggle('washed', !finished && !r.text);
+    peek.hidden = finished || r.text;
+    dots.forEach((d, i) => d.classList.toggle('on', i < done()));
+    if (finished) {
+      status.textContent = `Ayah ${a + 1} held.`;
+      after.textContent = a < AYAHS.length - 1
+        ? 'In the app, this ayah now joins your reviews and comes back before you forget it. Go on to the next one.'
+        : 'That is the whole surah. In the app you would now recite all four ayahs together from memory, then review them tomorrow.';
+      recited.textContent = a < AYAHS.length - 1 ? 'Next ayah' : 'Start again';
+      next.hidden = true;
+    } else {
+      status.textContent = `${r.say} · ${count + 1} of ${r.n}`;
+      recited.textContent = 'I recited it';
+      next.hidden = false;
+    }
+  }
+  function go(i) { a = i % AYAHS.length; round = 0; count = 0; slate.classList.remove('peek'); render(); }
+  recited.addEventListener('click', () => {
+    if (round >= ROUNDS.length) { go(a + 1); return; }
+    count++;
+    if (count >= ROUNDS[round].n) { round++; count = 0; }
+    render();
+  });
+  next.addEventListener('click', () => go(a + 1));
+  const show = (on) => slate.classList.toggle('peek', on);
+  peek.addEventListener('pointerdown', () => show(true));
+  ['pointerup', 'pointerleave', 'pointercancel', 'blur'].forEach((ev) => peek.addEventListener(ev, () => show(false)));
+  peek.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') show(true); });
+  peek.addEventListener('keyup', () => show(false));
+  render();
+})();
+
+// The plate's three steps
+(() => {
+  const TEXT = {
+    'tab-write': 'In Quran schools across Africa, a student writes the day’s lesson on a wooden board. In Takrar, the lesson is a few ayahs, heard with the meaning of every word.',
+    'tab-recite': 'The student recites the board until it can be said without looking. In Takrar that is twenty recitations an ayah, then the whole lesson from memory.',
+    'tab-wash': 'The board is washed clean for tomorrow. In Takrar the lesson moves into your reviews, and each ayah comes back just before you would forget it.',
+  };
+  const tabs = [...document.querySelectorAll('.tabs [role=tab]')];
+  const panel = document.getElementById('plate-desc');
+  const pick = (t) => {
+    tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; });
+    panel.textContent = TEXT[t.id];
+    panel.setAttribute('aria-labelledby', t.id);
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => pick(t));
+    t.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      const n = tabs[(i + d + tabs.length) % tabs.length]; pick(n); n.focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>
