@@ -9,7 +9,7 @@
     {
       "number": 1,
       "key": "18:1",
-      "textUthmani": " ٱلْحَمْدُ لِلَّهِ ٱلَّذِىٓ أَنزَلَ عَلَىٰ عَبْدِهِ ٱلْكِتَـٰبَ وَلَمْ يَجْعَل لَّهُۥ عِوَجَا ۜ",
+      "textUthmani": "ٱلْحَمْدُ لِلَّهِ ٱلَّذِىٓ أَنزَلَ عَلَىٰ عَبْدِهِ ٱلْكِتَـٰبَ وَلَمْ يَجْعَل لَّهُۥ عِوَجَا ۜ",
       "textUthmaniTajweed": "ٱلْحَمْدُ لِلَّهِ <tajweed class=ham_wasl>ٱ</tajweed>لَّذ<tajweed class=madda_obligatory>ِىٓ</tajweed> أَ<tajweed class=ikhafa>نز</tajweed>َلَ عَلَىٰ عَ<tajweed class=qalaqah>بْ</tajweed>دِهِ <tajweed class=ham_wasl>ٱ</tajweed>لْكِتَ<tajweed class=madda_normal>ـٰ</tajweed>بَ وَلَمْ يَ<tajweed class=qalaqah>جْ</tajweed>عَل لَّهُ<tajweed class=madda_normal>ۥ</tajweed> عِوَجَاۜ <span class=end>١</span>",
       "textIndopak": "اَ لۡحَمۡدُ لِلّٰهِ الَّذِىۡۤ اَنۡزَلَ عَلٰى عَبۡدِهِ الۡكِتٰبَ وَلَمۡ يَجۡعَلْ لَّهٗ عِوَجًا  ؕ‏",
       "words": [
@@ -95,7 +95,7 @@
         },
         {
           "position": 11,
-          "textUthmani": "عِوَجَاۜ",
+          "textUthmani": "عِوَجَا ۜ",
           "transliteration": "ʿiwajā",
           "translation": "any crookedness",
           "audioUrl": "https://audio.qurancdn.com/wbw/018_001_011.mp3",

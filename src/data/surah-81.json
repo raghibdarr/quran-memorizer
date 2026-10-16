@@ -9,7 +9,7 @@
     {
       "number": 1,
       "key": "81:1",
-      "textUthmani": " إِذَا ٱلشَّمْسُ كُوِّرَتْ",
+      "textUthmani": "إِذَا ٱلشَّمْسُ كُوِّرَتْ",
       "textUthmaniTajweed": "إِذَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>شَّمْسُ كُوِّرَتْ <span class=end>١</span>",
       "textIndopak": "اِذَا الشَّمۡسُ كُوِّرَتۡۙ‏",
       "words": [
@@ -23,7 +23,7 @@
         },
         {
           "position": 2,
-          "textUthmani": "ٱلشَّمْسُ",
+          "textUthmani": "ٱلشَّمْسُ",
           "transliteration": "l-shamsu",
           "translation": "the sun",
           "audioUrl": "https://audio.qurancdn.com/wbw/081_001_002.mp3",
@@ -31,7 +31,7 @@
         },
         {
           "position": 3,
-          "textUthmani": "كُوِّرَتْ",
+          "textUthmani": "كُوِّرَتْ",
           "transliteration": "kuwwirat",
           "translation": "is wrapped up",
           "audioUrl": "https://audio.qurancdn.com/wbw/081_001_003.mp3",
