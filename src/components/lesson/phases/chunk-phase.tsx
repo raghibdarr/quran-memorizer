@@ -13,6 +13,7 @@ import { loadSegmentTimings, segmentRangeMs, type SurahTimings } from '@/lib/seg
 import ArabicText from '@/components/ui/arabic-text';
 import AyahDisplay from '@/components/ui/ayah-display';
 import SegmentArabic from '@/components/ui/segment-arabic';
+import { LEARN_STEPS, STEP_REPS, afterAyah, lastUnitOfAyah, nextPos, type LearnStep, type MemorizePos } from '@/lib/memorize-plan';
 import BeadProgress from '@/components/ui/bead-progress';
 import Button from '@/components/ui/button';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
@@ -48,21 +49,8 @@ interface ChunkPhaseProps {
 
 type MainStage =
   | 'learning'     // Working on a single ayah (6-4-4-6)
+  | 'chain-parts'  // Joining a long ayah's parts learned so far (A+B, A+B+C…)
   | 'chaining';    // Reciting accumulated ayahs from memory
-
-type LearnStep =
-  | 'listen-with-text'      // 6x: listen + repeat, text visible
-  | 'recite-from-memory'    // 4x: text hidden, self-report each rep
-  | 'reinforce-with-text'   // 4x: text visible again, listen + repeat
-  | 'final-memory'          // 6x: text hidden, solidify
-  | 'word-order';           // arrange words
-
-const STEP_REPS: Record<Exclude<LearnStep, 'word-order'>, number> = {
-  'listen-with-text': 6,
-  'recite-from-memory': 4,
-  'reinforce-with-text': 4,
-  'final-memory': 6,
-};
 
 const STEP_LABELS: Record<LearnStep, string> = {
   'listen-with-text': 'Listen & repeat aloud with the text',
@@ -99,14 +87,6 @@ const NEXT_UP: Record<LearnStep, string> = {
   'word-order': 'arrange the words',
 };
 
-const LEARN_STEPS: LearnStep[] = [
-  'listen-with-text',
-  'recite-from-memory',
-  'reinforce-with-text',
-  'final-memory',
-  'word-order',
-];
-
 export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause }: ChunkPhaseProps) {
   const { markChunkComplete, updateChunkIndex, updateChunkState } = useProgressStore();
   const lesson = useProgressStore((s) => s.lessons[lessonId]);
@@ -130,7 +110,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     Math.min(savedIndex, units.length - 1)
   );
   const [mainStage, setMainStage] = useState<MainStage>(
-    savedChunk?.stage === 'chaining' ? 'chaining' : 'learning'
+    savedChunk?.stage === 'chaining' || savedChunk?.stage === 'chain-parts' ? savedChunk.stage : 'learning'
   );
   // Saved mid-way through the old final recital: that recital is the Test now
   const savedInFinalChain = savedChunk?.stage === 'final-chain';
@@ -172,7 +152,6 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
   const [currentSpeed, setCurrentSpeed] = useState(() => audioController.speed);
 
   // Chaining state
-  const [chainAyahIndex, setChainAyahIndex] = useState(0);
   const [chainRevealed, setChainRevealed] = useState(false);
   const [revealedAyahs, setRevealedAyahs] = useState<Set<number>>(new Set());
 
@@ -297,85 +276,75 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     setIsAutoPlaying(false);
   }, []);
 
-  // --- Step progression ---
+  // --- Step progression (the route itself: src/lib/memorize-plan.ts) ---
 
-  const advanceLearnStep = () => {
-    const idx = LEARN_STEPS.indexOf(learnStep);
-    if (idx < LEARN_STEPS.length - 1) {
-      const next = LEARN_STEPS[idx + 1];
-      setLearnStep(next);
-      setRepCount(0);
+  const currentPos = (): MemorizePos =>
+    mainStage === 'learning' ? { stage: 'learning', unit: unitIndex, step: learnStep } : { stage: mainStage, unit: unitIndex };
 
-      // Set up word ordering (scoped to the current unit)
-      if (next === 'word-order') {
-        const shuffled = unitWords
-          .map((w) => ({ position: w.position, text: w.textUthmani, transliteration: w.transliteration }))
-          .sort(() => Math.random() - 0.5);
-        setShuffledWords(shuffled);
-        setSelectedOrder([]);
-        setOrderResult(null);
-      }
-    }
-  };
-
-  // After completing a unit: next part of the same ayah, or hand over to ayah completion
-  const completeCurrentUnit = () => {
-    const nextUnit = units[unitIndex + 1];
-    if (nextUnit && nextUnit.ayahIdx === ayahIndex) {
-      setUnitIndex(unitIndex + 1);
-      updateChunkIndex(lessonId, unitIndex + 1);
-      setLearnStep('listen-with-text');
-      setRepCount(0);
-      return;
-    }
-    completeCurrentAyah();
-  };
-
-  // After completing an ayah (all parts), either chain or move to next.
-  // `lastUnit` is the ayah's final unit when skipping straight from an earlier part.
-  const completeCurrentAyah = (lastUnit = unitIndex) => {
-    const newCompleted = new Set([...completedAyahs, ayahIndex]);
-    setCompletedAyahs(newCompleted);
-
-    // If practicing a single ayah, return to where we came from
-    if (practiceReturnStage) {
-      const returnTo = practiceReturnStage;
-      setPracticeReturnStage(null);
-      // Restore the unit we were at before drilling
-      if (savedUnitIndex !== null) {
-        setUnitIndex(savedUnitIndex);
-        setSavedUnitIndex(null);
-      }
-      setMainStage(returnTo);
-      setChainRevealed(false);
-      setRevealedAyahs(new Set());
-      return;
-    }
-
-    if (ayahIndex === 0 && ayahs.length > 1) {
-      // First ayah — skip chaining, go straight to next
-      moveToNextAyah(lastUnit);
-    } else if (ayahIndex < ayahs.length - 1) {
-      // Chain all completed ayahs before moving to next
-      setMainStage('chaining');
-      setChainAyahIndex(0);
-      setChainRevealed(false);
-      setRevealedAyahs(new Set());
-    } else {
-      // Last ayah: Build is done. The whole-lesson recital is the Test
+  /** Move to a position, with each stage's setup */
+  const goTo = (to: MemorizePos) => {
+    if (to.stage === 'done') {
+      // Last ayah: Memorize is done. The whole-lesson recital is the Test
       markChunkComplete(lessonId);
       onComplete();
+      return;
+    }
+    if (to.unit !== unitIndex) {
+      setUnitIndex(to.unit);
+      updateChunkIndex(lessonId, to.unit);
+    }
+    setMainStage(to.stage);
+    setRepCount(0);
+    setChainRevealed(false);
+    setRevealedAyahs(new Set());
+    if (to.stage !== 'learning') return;
+    setLearnStep(to.step);
+    // Set up word ordering (scoped to the current unit)
+    if (to.step === 'word-order') {
+      const shuffled = unitWords
+        .map((w) => ({ position: w.position, text: w.textUthmani, transliteration: w.transliteration }))
+        .sort(() => Math.random() - 0.5);
+      setShuffledWords(shuffled);
+      setSelectedOrder([]);
+      setOrderResult(null);
     }
   };
 
-  const moveToNextAyah = (from = unitIndex) => {
-    // Called once the current ayah's LAST unit is done → next unit = next ayah's first part
-    const next = from + 1;
-    setUnitIndex(next);
-    updateChunkIndex(lessonId, next);
-    setMainStage('learning');
-    setLearnStep('listen-with-text');
-    setRepCount(0);
+  /** The current ayah is done. Returns true when that ends a drill started from the chain view (and goes back there). */
+  const finishAyah = (): boolean => {
+    setCompletedAyahs((prev) => new Set([...prev, ayahIndex]));
+    if (!practiceReturnStage) return false;
+    const returnTo = practiceReturnStage;
+    setPracticeReturnStage(null);
+    if (savedUnitIndex !== null) {
+      setUnitIndex(savedUnitIndex);
+      setSavedUnitIndex(null);
+    }
+    setMainStage(returnTo);
+    setChainRevealed(false);
+    setRevealedAyahs(new Set());
+    return true;
+  };
+
+  /** On to whatever comes next from here */
+  const advance = () => {
+    const from = currentPos();
+    const to = nextPos(units, ayahs.length, from);
+    const leavesAyah = to.stage === 'done' || to.stage === 'chaining' || units[to.unit].ayahIdx !== ayahIndex;
+    if (from.stage !== 'chaining' && leavesAyah && finishAyah()) return;
+    goTo(to);
+  };
+
+  /** What finishing the current unit leads to, in words (buttons and the Skip sheet) */
+  const afterThisUnit = (): { button: string; detail: string } => {
+    const to = nextPos(units, ayahs.length, { stage: 'learning', unit: unitIndex, step: 'word-order' });
+    if (to.stage === 'chain-parts') return { button: `Join parts 1–${unit.seg.index + 1}`, detail: `recite parts 1–${unit.seg.index + 1} together` };
+    if (to.stage === 'chaining') return { button: 'Chain & Continue', detail: 'recite the ayahs so far together' };
+    if (to.stage === 'done') return { button: 'Continue to Test', detail: 'the Test' };
+    const next = units[to.unit];
+    return next.ayahIdx === ayahIndex
+      ? { button: `Next Part (${next.seg.index + 1}/${next.seg.count})`, detail: `part ${next.seg.index + 1}` }
+      : { button: 'Learn Next Ayah', detail: `ayah ${ayahs[next.ayahIdx].number}` };
   };
 
   // --- Skipping (owner, 2026-09-27): 6-4-4-6 stays the default, but a learner who
@@ -383,19 +352,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
 
   const skipStep = () => {
     stopAutoPlay();
-    if (learnStep === 'word-order') completeCurrentUnit();
-    else advanceLearnStep();
+    advance();
   };
 
   const skipAyah = () => {
     stopAutoPlay();
-    let lastUnit = unitIndex;
-    while (units[lastUnit + 1]?.ayahIdx === ayahIndex) lastUnit++;
-    if (lastUnit !== unitIndex) {
-      setUnitIndex(lastUnit);
-      updateChunkIndex(lessonId, lastUnit);
-    }
-    completeCurrentAyah(lastUnit);
+    if (finishAyah()) return;
+    goTo(afterAyah(units, ayahs.length, lastUnitOfAyah(units, unitIndex)));
   };
 
   // --- Memory recall for text-hidden steps ---
@@ -495,6 +458,117 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     setChainPlayingIdx(-1);
   };
 
+  // ============================================================
+  // RENDER: JOINING A LONG AYAH'S PARTS (A+B, A+B+C, … the whole ayah)
+  // ============================================================
+
+  if (mainStage === 'chain-parts') {
+    const parts = units.filter((u) => u.ayahIdx === ayahIndex && u.seg.index <= unit.seg.index);
+    const allRevealed = chainRevealed || revealedAyahs.size >= parts.length;
+    const url = getAudioUrl(surah.id, currentAyah.number);
+    // A part plays as its slice of the recitation; without word timings, the whole ayah
+    const playSlice = async (wordStart: number, wordEnd: number) => {
+      const range = timings && segmentRangeMs(timings, currentAyah.number, { ...unit.seg, wordStart, wordEnd });
+      if (range) await audioController.playRangeAndWait(url, range.startMs, range.endMs);
+      else await audioController.playAndWait(url);
+    };
+    const playPart = async (i: number) => {
+      if (chainPlaying) return;
+      setChainPlayingIdx(i);
+      await playSlice(parts[i].seg.wordStart, parts[i].seg.wordEnd);
+      setChainPlayingIdx(-1);
+    };
+    const playJoined = async () => {
+      if (chainPlaying) return;
+      setChainPlaying(true);
+      setChainPlayingIdx(0);
+      await playSlice(parts[0].seg.wordStart, unit.seg.wordEnd);
+      setChainPlayingIdx(-1);
+      setChainPlaying(false);
+    };
+    const toggle = (i: number) =>
+      setRevealedAyahs((prev) => {
+        const next = new Set(prev);
+        if (next.has(i)) next.delete(i); else next.add(i);
+        return next;
+      });
+    const isWhole = unit.seg.index === unit.seg.count - 1;
+
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <h3 className="text-xl font-bold text-foreground">Join the parts</h3>
+          <p className="mt-1 text-sm text-muted">
+            {isWhole
+              ? `Recite the whole of ayah ${currentAyah.number} from memory, all ${parts.length} parts`
+              : `Recite parts 1–${parts.length} of ayah ${currentAyah.number} from memory, as one`}
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          {parts.map((p, i) => {
+            const isRevealed = revealedAyahs.has(i) || chainRevealed;
+            const isPlaying = chainPlayingIdx === i || (chainPlaying && chainPlayingIdx === 0);
+            return (
+              <div
+                key={p.seg.index}
+                className={cn(
+                  'w-full rounded-xl p-4 text-left transition-all',
+                  isPlaying && audioIsPlaying ? 'border border-teal/30 bg-teal/5' :
+                  isRevealed ? 'bg-success/5' :
+                  'border-2 border-dashed border-foreground/25 bg-card/50'
+                )}
+              >
+                {isRevealed ? (
+                  <div>
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-xs text-muted">Part {i + 1}</span>
+                      <div className="flex items-center gap-2">
+                        <PlayPill playing={chainPlayingIdx === i && !chainPlaying && audioIsPlaying} onClick={() => playPart(i)} />
+                        <HidePill hidden={false} onClick={() => toggle(i)} />
+                      </div>
+                    </div>
+                    <SegmentArabic ayah={currentAyah} seg={p.seg} className="text-center text-3xl leading-loose" />
+                  </div>
+                ) : (
+                  <button onClick={() => toggle(i)} className="w-full cursor-pointer">
+                    <p className="py-2 text-center text-sm text-muted">Part {i + 1} · tap to reveal</p>
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {allRevealed ? (
+          <div className="space-y-3">
+            <Button onClick={playJoined} variant="secondary" className="w-full" disabled={chainPlaying}>
+              {chainPlaying ? 'Playing…' : isWhole ? 'Hear the whole ayah' : `Hear parts 1–${parts.length} together`}
+            </Button>
+            <p className="text-center text-sm text-muted">Could you recite them together smoothly?</p>
+            <div className="flex gap-3">
+              <Button onClick={() => { setChainRevealed(false); setRevealedAyahs(new Set()); stopChainPlay(); }} variant="secondary" className="flex-1">
+                Try Again
+              </Button>
+              <Button onClick={() => { stopChainPlay(); advance(); }} className="flex-1">
+                Got it
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <Button onClick={() => { setChainRevealed(true); setRevealedAyahs(new Set(parts.map((_, i) => i))); }} variant="secondary" className="w-full">
+              Reveal All
+            </Button>
+            <button onClick={advance} className="mx-auto block min-h-11 px-3 text-xs text-muted hover:text-foreground">
+              Skip joining, keep going →
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
+
   if (mainStage === 'chaining') {
     const chainAyahs = ayahs.slice(0, ayahIndex + 1);
     const allRevealed = chainRevealed || revealedAyahs.size >= chainAyahs.length;
@@ -584,7 +658,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
           </Button>
         )}
         {!allRevealed && (
-          <button onClick={() => moveToNextAyah()} className="mx-auto block min-h-11 px-3 text-xs text-muted hover:text-foreground">
+          <button onClick={advance} className="mx-auto block min-h-11 px-3 text-xs text-muted hover:text-foreground">
             Skip chaining, go to the next ayah →
           </button>
         )}
@@ -619,7 +693,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
               <Button onClick={resetChain} variant="secondary" className="flex-1">
                 Try Again
               </Button>
-              <Button onClick={() => moveToNextAyah()} className="flex-1">
+              <Button onClick={advance} className="flex-1">
                 Got it, next ayah
               </Button>
             </div>
@@ -852,7 +926,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
           </div>
 
           {repCount >= currentStepReps && (
-            <Button onClick={advanceLearnStep} className="w-full">
+            <Button onClick={advance} className="w-full">
               Next Step
             </Button>
           )}
@@ -882,7 +956,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
                       : 'ready for the next step'}
                   </p>
                 </div>
-                <Button onClick={advanceLearnStep} className="w-full">
+                <Button onClick={advance} className="w-full">
                   {learnStep === 'final-memory' ? 'Word Challenge' : 'Next Step'}
                 </Button>
                 <button
@@ -996,14 +1070,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
           </div>
 
           {orderResult === 'correct' && (
-            <Button onClick={completeCurrentUnit} className="w-full">
-              {units[unitIndex + 1]?.ayahIdx === ayahIndex
-                ? `Next Part (${unit.seg.index + 2}/${unit.seg.count})`
-                : ayahIndex === 0 && ayahs.length > 1
-                ? 'Learn Next Ayah'
-                : ayahIndex < ayahs.length - 1
-                ? 'Chain & Continue'
-                : 'Continue to Test'}
+            <Button onClick={advance} className="w-full">
+              {afterThisUnit().button}
             </Button>
           )}
 
@@ -1023,13 +1091,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
         {(() => {
           const nextStep = LEARN_STEPS[stepIndex + 1];
           const nextAyah = ayahs[ayahIndex + 1];
-          const nextUnit = units[unitIndex + 1];
-          // What skipping the word challenge leads to: the ayah's next part, chaining, the next ayah, or the Test
-          const afterWordChallenge =
-            nextUnit && nextUnit.ayahIdx === ayahIndex ? `part ${nextUnit.seg.index + 1}`
-            : !nextAyah ? 'the Test'
-            : ayahIndex === 0 ? `ayah ${nextAyah.number}`
-            : 'recite the ayahs so far together';
+          const afterWordChallenge = afterThisUnit().detail;
           const options = [
             {
               key: 'step',
@@ -1095,7 +1157,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
               ))}
             </div>
             <p className="mt-5 text-sm text-muted leading-relaxed">
-              After each ayah, you&apos;ll chain them together to build full passages.
+              After each ayah, you&apos;ll chain them together to build full passages. A long ayah is
+              learned a part at a time, and each new part is joined to the ones before it.
             </p>
             <button
               onClick={dismissExplainer}

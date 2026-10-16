@@ -409,6 +409,8 @@ sync pitch still open.** What landed:
 ---
 
 ### M9 — Beginner first-session redesign + long-ayah pedagogy
+**STATUS 2026-10-16 — in progress.** Done: the Memorize route is a pure tested module (src/lib/memorize-plan.ts, golden walks for short, split and mixed lessons) and long ayahs now join their parts as learned (A, B, A+B, C, A+B+C … whole ayah; "Join the parts" screen, skippable). Earlier persona-test work already covered: skip affordances, onboarding reassurances, Listen+Understand merge. Remaining: part-level rating in Test for split ayahs, WordText settings parity, resume fixes, surah range-slicing, lighter first-lesson pattern.
+
 **Size:** 3 sessions
 
 **Goal:** Get persona A from install to a first felt success in ~20 minutes with no walls — reduced first-lesson pattern, readable tests, settings-respecting word renders, working resume, fast loads.

@@ -149,7 +149,7 @@ export default function LessonContainer({ surah, ayahs, lessonDef, totalLessons 
               <h2 className="truncate text-sm font-semibold text-teal">{surah.nameSimple}</h2>
               {totalLessons > 1 && (
                 <p className="truncate text-[11px] leading-tight text-muted">
-                  Lesson {lessonDef.lessonNumber} · Ayahs {lessonDef.ayahStart}–{lessonDef.ayahEnd}
+                  Lesson {lessonDef.lessonNumber} · {lessonDef.ayahStart === lessonDef.ayahEnd ? `Ayah ${lessonDef.ayahStart}` : `Ayahs ${lessonDef.ayahStart}–${lessonDef.ayahEnd}`}
                 </p>
               )}
             </div>

@@ -82,7 +82,7 @@ export interface LessonProgress {
     chunk: {
       currentChunkIndex: number;
       completed: boolean;
-      stage?: 'learning' | 'chaining' | 'final-chain';
+      stage?: 'learning' | 'chain-parts' | 'chaining' | 'final-chain';
       learnStep?: 'listen-with-text' | 'recite-from-memory' | 'reinforce-with-text' | 'final-memory' | 'word-order';
       repCount?: number;
     };

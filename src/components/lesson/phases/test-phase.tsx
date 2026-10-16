@@ -133,7 +133,7 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
       <div className="text-center">
         <h3 className="text-xl font-bold text-foreground">Recite the whole lesson</h3>
         <p className="mt-1 text-sm text-muted">
-          {isWholeSurah ? `Recite ${surah.nameSimple} from memory` : `Recite ayahs ${first}–${last} from memory`}, then tap each
+          {isWholeSurah ? `Recite ${surah.nameSimple} from memory` : first === last ? `Recite ayah ${first} from memory` : `Recite ayahs ${first}–${last} from memory`}, then tap each
           ayah to check it.
         </p>
       </div>
