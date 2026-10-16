@@ -1,4 +1,4 @@
-# Waiting on the owner (as of 2026-10-16)
+# Waiting on the owner (as of 2026-10-17)
 
 Everything that doesn't need you is built. These need your accounts, your phone or your decision.
 
@@ -11,14 +11,24 @@ Everything that doesn't need you is built. These need your accounts, your phone 
    variable `CONTACT_EMAIL`.
 
 ## Decisions
-5. **Quran.com content we bundle.** `scripts/fetch-quran-data.ts` pulls words, translations and
-   transliterations from api.quran.com at build time and ships them; Quran Foundation's developer
-   terms forbid build-time bundling (research memo: `Downloads/reports/Quran.com suite and Takrar.md`).
-   Options: (a) move to openly licensed sources (Tanzil text, QUL resources after checking each
-   licence), or (b) Quran Foundation's Content Sync API behind a server proxy, re-synced weekly.
-   The Sahih International translation also needs its publisher's consent either way.
-6. **KFGQPC fonts.** `public/fonts/kfgqpc-hafs.woff` (the app's Arabic font) needs the Complex's
-   written approval, or swap it for an OFL font (the DigitalKhatt fonts the mushaf view uses are OFL).
+5. ~~Quran.com content we bundle~~ **Done 2026-10-17** (open sources; `data-sources/README.md`,
+   Settings → Sources, `/licenses.txt`). Arabic text: Tanzil. Translations: Saheeh via QuranEnc and
+   The Clear Quran (choice in Settings). Tajweed: cpfair (CC BY 4.0). IndoPak: DigitalKhatt.
+   Transliteration: our own. Word audio: cut from the recitation. Reciters: nothing from Tarteel's
+   or Quran.com's CDNs; word timings from quran-align and QUD (both CC BY 4.0).
+   **Still yours:**
+   - **Send the word-by-word email** (`email-word-by-word-permission.md`). The word meanings are the
+     only Quran.com-sourced data left; if the Corpus team says no, we write our own.
+   - **Ask EveryAyah** (`email-everyayah-permission.md`): most recitations stream from it and it
+     publishes no terms.
+   - **Ghamdi, Husary (Mujawwad), Tunaiji** play without word highlighting now: their only open
+     timings fit Tarteel's copies. Highlighting can come back by measuring each surah's offset against
+     Tarteel's files once at build time (analysis only, nothing redistributed). Your call whether
+     that's acceptable; report: `Downloads/reports/Takrar reciter hosts.md`.
+   - **Maher Al-Muaiqly, Yasser Ad-Dussary** lost highlighting (their timings were QUL's own, no
+     licence shown). Ask Tarteel/QUL for permission, or leave them unhighlighted.
+6. ~~KFGQPC fonts~~ **Done 2026-10-17**: Amiri Quran (OFL) for Uthmani, DigitalKhatt IndoPak (OFL)
+   for IndoPak. It also fixed dotted circles KFGQPC drew for Tanzil's silent-letter sign.
 7. **More translations / tafsir** (roadmap #05, #07): which ones, then permission from each publisher.
 8. **Sign in with Apple** or hide Google on iOS (currently hidden: Apple 4.8).
 9. **Teacher / parent links** (roadmap #19): a policy for children's data first.
