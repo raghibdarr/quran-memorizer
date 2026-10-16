@@ -140,6 +140,10 @@ export interface UserSettings {
   listenPauseMs: number;
   /** Read & listen keeps playing to the end of this (roadmap #01) */
   listenUntil?: 'surah' | 'juz' | 'page' | 'quran';
+  /** Pause after each play as a multiple of its length (0 = use listenPauseMs) */
+  listenPauseFactor?: number;
+  /** Play a looped range this many times (0 = until stopped) */
+  listenRangeRepeat?: number;
   /** Read & listen shows each word's meaning under it */
   readerWordByWord?: boolean;
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day

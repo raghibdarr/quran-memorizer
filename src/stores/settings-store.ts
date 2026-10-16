@@ -11,7 +11,8 @@ interface SettingsState extends UserSettings {
   toggleTransliteration: () => void;
   toggleTranslation: () => void;
   setPlaybackSpeed: (speed: number) => void;
-  setListenRepeat: (times: number, pauseMs: number) => void;
+  setListenRepeat: (times: number, pauseMs: number, pauseFactor?: number) => void;
+  setListenRangeRepeat: (times: number) => void;
   setListenUntil: (until: NonNullable<UserSettings['listenUntil']>) => void;
   toggleReaderWordByWord: () => void;
   setDailyGoalActivities: (count: number) => void;
@@ -43,7 +44,8 @@ export const useSettingsStore = create<SettingsState>()(
       toggleTranslation: () =>
         set((s) => ({ translationEnabled: !s.translationEnabled })),
       setPlaybackSpeed: (speed) => set({ playbackSpeed: speed }),
-      setListenRepeat: (times, pauseMs) => set({ listenRepeat: times, listenPauseMs: pauseMs }),
+      setListenRepeat: (times, pauseMs, pauseFactor = 0) => set({ listenRepeat: times, listenPauseMs: pauseMs, listenPauseFactor: pauseFactor }),
+      setListenRangeRepeat: (listenRangeRepeat) => set({ listenRangeRepeat }),
       setListenUntil: (listenUntil) => set({ listenUntil }),
       toggleReaderWordByWord: () => set((s) => ({ readerWordByWord: !s.readerWordByWord })),
       setDailyGoalActivities: (count) => set({ dailyGoalActivities: count }),

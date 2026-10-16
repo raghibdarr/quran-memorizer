@@ -79,12 +79,13 @@ public class RecitationPlayerPlugin extends Plugin implements RecitationEngine.L
         final int start = call.getInt("startIndex", 0);
         final long startPos = call.getLong("startPositionMs", 0L);
         final long pause = call.getLong("pauseMs", 0L);
+        final float pauseTimes = call.getFloat("pauseFactor", 0f);
         final boolean loop = Boolean.TRUE.equals(call.getBoolean("loop", false));
         final float rate = call.getFloat("rate", 1f);
         final boolean autoplay = !Boolean.FALSE.equals(call.getBoolean("autoplay", true));
         getActivity().runOnUiThread(() -> {
             ensureService();
-            engine().setQueue(items, start, startPos, pause, loop, rate, autoplay);
+            engine().setQueue(items, start, startPos, pause, pauseTimes, loop, rate, autoplay);
             call.resolve();
         });
     }

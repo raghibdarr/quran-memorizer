@@ -167,12 +167,13 @@ export default function MushafClient() {
 
   const playFrom = useCallback(async (surah: number, ayah: number) => {
     const m = meta ?? await loadMeta();
-    const { listenRepeat, listenPauseMs, reciter, playbackSpeed, listenUntil } = useSettingsStore.getState();
+    const { listenRepeat, listenPauseMs, listenPauseFactor, reciter, playbackSpeed, listenUntil } = useSettingsStore.getState();
     // On the page view, "the surah" still means the surah; most people turn pages surah by surah
     await startRecitation({
       ayahs: rangeUntil({ surah, ayah }, listenUntil ?? 'surah', m.counts, m.juz, m.page),
       repeatEach: listenRepeat,
-      pauseMs: listenPauseMs,
+      pauseMs: listenPauseFactor ? 0 : listenPauseMs,
+      pauseFactor: listenPauseFactor ?? 0,
       loop: false,
       reciter,
       rate: playbackSpeed,

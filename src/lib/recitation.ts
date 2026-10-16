@@ -24,6 +24,8 @@ export interface PlaybackPlan {
   repeatEach: number;
   /** Silence after each play, ms */
   pauseMs: number;
+  /** …plus this multiple of the play's own length (time to say it back) */
+  pauseFactor?: number;
   /** Loop the whole list until stopped */
   loop: boolean;
   reciter: string;
@@ -46,7 +48,7 @@ export interface RecitationState {
 }
 
 interface NativePlugin {
-  setQueue(o: { items: unknown[]; startIndex: number; pauseMs: number; loop: boolean; rate: number; autoplay?: boolean }): Promise<void>;
+  setQueue(o: { items: unknown[]; startIndex: number; pauseMs: number; pauseFactor?: number; loop: boolean; rate: number; autoplay?: boolean }): Promise<void>;
   play(): Promise<void>;
   pause(): Promise<void>;
   stop(): Promise<void>;
@@ -153,7 +155,8 @@ async function runWeb(plan: PlaybackPlan, startIndex: number) {
       // Sleep at the ayah's end: pause here, so play carries on from the next one
       if (state.sleep.kind === 'item') { webPaused = true; set({ playing: false, sleep: { kind: 'off' } }); }
       const last = !plan.loop && i === plan.ayahs.length - 1 && r === times - 1;
-      if (!last) await wait(plan.pauseMs > 0 ? plan.pauseMs : r < times - 1 ? GAP_BETWEEN_REPEATS_MS : GAP_BETWEEN_AYAHS_MS);
+      const sayBack = (plan.pauseFactor ?? 0) * audioController.duration * 1000;
+      if (!last) await wait(plan.pauseMs > 0 || sayBack > 0 ? plan.pauseMs + sayBack : r < times - 1 ? GAP_BETWEEN_REPEATS_MS : GAP_BETWEEN_AYAHS_MS);
       while (webPaused && run === webRun) await wait(200);
     }
     if (run !== webRun) return;
@@ -208,7 +211,7 @@ export async function startRecitation(plan: PlaybackPlan, startIndex = 0): Promi
     surahAudio: audioIndex,
     fallbackReciter: surahAudioFallback(plan.reciter),
     repeatEach: plan.repeatEach,
-    merge: plan.repeatEach <= 1 && plan.pauseMs === 0,
+    merge: plan.repeatEach <= 1 && plan.pauseMs === 0 && !plan.pauseFactor,
     surahName: plan.surahName,
     localUrl: await localUrlResolver(plan.reciter),
   });
@@ -218,6 +221,7 @@ export async function startRecitation(plan: PlaybackPlan, startIndex = 0): Promi
     items: queue.map((q) => ({ url: q.url, startMs: q.startMs, endMs: q.endMs, title: q.title, subtitle: q.subtitle, tag: q.tag })),
     startIndex: 0,
     pauseMs: plan.pauseMs,
+    pauseFactor: plan.pauseFactor ?? 0,
     loop: plan.loop,
     rate: plan.rate,
   });

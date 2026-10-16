@@ -71,6 +71,8 @@ public final class RecitationEngine {
     private final List<Listener> listeners = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
     private long pauseMs = 0;
+    /** Extra pause as a multiple of the item just played (time to say it back) */
+    private float pauseFactor = 0f;
     private boolean loop = false;
     private float volume = 1f;
 
@@ -136,7 +138,9 @@ public final class RecitationEngine {
                         for (Listener l : listeners) l.onEnded("sleep");
                         return;
                     }
-                    handler.postDelayed(resumeAfterPause, pauseMs);
+                    long played = player.getDuration();
+                    long extra = played > 0 && played != C.TIME_UNSET ? (long) (played * pauseFactor) : 0;
+                    handler.postDelayed(resumeAfterPause, pauseMs + extra);
                 } else if (!playWhenReady) {
                     // Paused from the lock screen or headphones during a pause: stay paused
                     handler.removeCallbacks(resumeAfterPause);
@@ -153,18 +157,20 @@ public final class RecitationEngine {
     public void removeListener(Listener l) { listeners.remove(l); }
 
     /** Replace the queue and start at `startIndex`, `startPositionMs` into it */
-    public void setQueue(List<Item> next, int startIndex, long startPositionMs, long pauseBetweenMs, boolean loopQueue, float rate, boolean autoplay) {
+    public void setQueue(List<Item> next, int startIndex, long startPositionMs, long pauseBetweenMs, float pauseTimes, boolean loopQueue, float rate, boolean autoplay) {
         handler.removeCallbacks(resumeAfterPause);
         items = new ArrayList<>(next);
         pauseMs = Math.max(0, pauseBetweenMs);
+        pauseFactor = Math.max(0f, pauseTimes);
         loop = loopQueue;
         List<MediaItem> media = new ArrayList<>(items.size());
         for (int i = 0; i < items.size(); i++) media.add(toMediaItem(items.get(i), i));
         player.setMediaItems(media, Math.max(0, Math.min(startIndex, media.size() - 1)), Math.max(0, startPositionMs));
         // With a pause between items we stop at each end and resume ourselves;
         // otherwise ExoPlayer moves on gaplessly (and loops the queue itself)
-        player.setPauseAtEndOfMediaItems(pauseMs > 0);
-        player.setRepeatMode(pauseMs == 0 && loop ? Player.REPEAT_MODE_ALL : Player.REPEAT_MODE_OFF);
+        boolean pauses = pauseMs > 0 || pauseFactor > 0;
+        player.setPauseAtEndOfMediaItems(pauses);
+        player.setRepeatMode(!pauses && loop ? Player.REPEAT_MODE_ALL : Player.REPEAT_MODE_OFF);
         player.setPlaybackParameters(new PlaybackParameters(rate));
         restoreVolume();
         player.prepare();

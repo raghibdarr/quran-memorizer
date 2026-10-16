@@ -25,7 +25,15 @@ import AyahMenu, { HIGHLIGHT_CLASS } from '@/components/reader/ayah-menu';
 import { ayahKey, useReaderStore } from '@/stores/reader-store';
 
 const REPEATS = [1, 3, 5, 10];
-const PAUSES = [0, 2000, 5000, 10000];
+// Fixed pauses, or a multiple of the ayah just played ("x1": as long as the ayah)
+const PAUSES: { value: string; label: string }[] = [
+  { value: '0', label: 'None' },
+  { value: '2000', label: '2s' },
+  { value: '5000', label: '5s' },
+  { value: 'x1', label: '1× ayah' },
+  { value: 'x2', label: '2× ayah' },
+];
+const RANGE_REPEATS = [2, 3, 5, 0];
 const UNTIL: { value: PlayUntil; label: string }[] = [
   { value: 'surah', label: 'Surah' },
   { value: 'juz', label: 'Juz' },
@@ -57,12 +65,13 @@ function sleepLabel(sleep: ReturnType<typeof useRecitation>['sleep'], now: numbe
   return null;
 }
 
-/** "Each ayah 3× · 2s pause · loop 5–9", or "Repeat: off" */
-function repeatSummary(times: number, pauseMs: number, range: [number, number] | null): string {
+/** "Each ayah 3× · 2s pause · loop 5–9 ×3", or "Repeat: off" */
+function repeatSummary(times: number, pauseMs: number, range: [number, number] | null, pauseFactor = 0, rangeRepeat = 0): string {
   const parts: string[] = [];
   if (times > 1) parts.push(`Each ayah ${times}×`);
-  if (pauseMs > 0) parts.push(`${pauseMs / 1000}s pause`);
-  if (range) parts.push(`loop ${range[0]}–${range[1]}`);
+  if (pauseFactor > 0) parts.push(`pause ${pauseFactor}× ayah`);
+  else if (pauseMs > 0) parts.push(`${pauseMs / 1000}s pause`);
+  if (range) parts.push(`loop ${range[0]}–${range[1]}${rangeRepeat ? ` ×${rangeRepeat}` : ''}`);
   return parts.length ? parts.join(' · ') : 'Repeat: off';
 }
 
@@ -118,6 +127,9 @@ export default function ListenClient() {
   const [range, setRange] = useState<[number, number] | null>(null);
   const times = useSettingsStore((s) => s.listenRepeat);
   const pauseMs = useSettingsStore((s) => s.listenPauseMs);
+  const pauseFactor = useSettingsStore((s) => s.listenPauseFactor ?? 0);
+  const rangeRepeat = useSettingsStore((s) => s.listenRangeRepeat ?? 0);
+  const setListenRangeRepeat = useSettingsStore((s) => s.setListenRangeRepeat);
   const setListenRepeat = useSettingsStore((s) => s.setListenRepeat);
   // What's playing, as an index into this surah's ayahs
   const current = surah && rec.active && rec.surah === surah.id ? surah.ayahs.findIndex((a) => a.number === rec.ayah) : -1;
@@ -191,13 +203,15 @@ export default function ListenClient() {
   const playFrom = useCallback(async (start: number) => {
     if (!surah) return;
     // Settings are read once per run, so changing them mid-play applies next time
-    const { listenRepeat, listenPauseMs, reciter, playbackSpeed, listenUntil } = useSettingsStore.getState();
+    const { listenRepeat, listenPauseMs, listenPauseFactor, listenRangeRepeat, reciter, playbackSpeed, listenUntil } = useSettingsStore.getState();
     const meta = await loadMeta();
     let ayahs: AyahRef[];
     let startIndex = 0;
     if (range) {
       // Loop A–B within this surah
-      ayahs = surah.ayahs.slice(range[0], range[1] + 1).map((a) => ({ surah: surah.id, ayah: a.number }));
+      const once = surah.ayahs.slice(range[0], range[1] + 1).map((a) => ({ surah: surah.id, ayah: a.number }));
+      // A set number of passes over the range, or round and round until stopped
+      ayahs = listenRangeRepeat ? Array.from({ length: listenRangeRepeat }, () => once).flat() : once;
       startIndex = Math.min(Math.max(start, range[0]), range[1]) - range[0];
     } else {
       ayahs = rangeUntil({ surah: surah.id, ayah: surah.ayahs[start].number }, listenUntil ?? 'surah', meta.counts, meta.juz, meta.page);
@@ -205,8 +219,9 @@ export default function ListenClient() {
     await startRecitation({
       ayahs,
       repeatEach: listenRepeat,
-      pauseMs: listenPauseMs,
-      loop: !!range,
+      pauseMs: listenPauseFactor ? 0 : listenPauseMs,
+      pauseFactor: listenPauseFactor ?? 0,
+      loop: !!range && !listenRangeRepeat,
       reciter,
       rate: playbackSpeed,
       surahName: (id) => meta.names.get(id) ?? `Surah ${id}`,
@@ -346,13 +361,13 @@ export default function ListenClient() {
                 onClick={() => setShowRepeat(true)}
                 className={cn(
                   'pressable mx-auto flex min-h-11 items-center gap-2 rounded-full px-4 text-xs font-semibold',
-                  times > 1 || pauseMs > 0 || range ? 'bg-teal/10 text-teal' : 'bg-foreground/[0.06] text-foreground/80',
+                  times > 1 || pauseMs > 0 || pauseFactor > 0 || range ? 'bg-teal/10 text-teal' : 'bg-foreground/[0.06] text-foreground/80',
                 )}
               >
                 <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M17 1l4 4-4 4" /><path d="M3 11V9a4 4 0 0 1 4-4h14" /><path d="M7 23l-4-4 4-4" /><path d="M21 13v2a4 4 0 0 1-4 4H3" />
                 </svg>
-                {repeatSummary(times, pauseMs, range && [surah.ayahs[range[0]].number, surah.ayahs[range[1]].number])}
+                {repeatSummary(times, pauseMs, range && [surah.ayahs[range[0]].number, surah.ayahs[range[1]].number], pauseFactor, rangeRepeat)}
                 {!range && until !== 'surah' && <span> · to end of {until === 'quran' ? 'the Quran' : until}</span>}
                 {sleepLabel(rec.sleep, now) && <span> · {sleepLabel(rec.sleep, now)}</span>}
               </button>
@@ -376,15 +391,15 @@ export default function ListenClient() {
                   <SegmentedControl
                     options={REPEATS.map((n) => ({ value: String(n), label: `${n}×` }))}
                     value={String(times)}
-                    onChange={(v) => setListenRepeat(Number(v), pauseMs)}
+                    onChange={(v) => setListenRepeat(Number(v), pauseMs, pauseFactor)}
                   />
                 </div>
                 <div>
                   <p className="mb-2 text-xs font-medium text-muted">Pause after each, to say it back</p>
                   <SegmentedControl
-                    options={PAUSES.map((ms) => ({ value: String(ms), label: ms ? `${ms / 1000}s` : 'None' }))}
-                    value={String(pauseMs)}
-                    onChange={(v) => setListenRepeat(times, Number(v))}
+                    options={PAUSES}
+                    value={pauseFactor ? `x${pauseFactor}` : String(pauseMs)}
+                    onChange={(v) => (v.startsWith('x') ? setListenRepeat(times, 0, Number(v.slice(1))) : setListenRepeat(times, Number(v), 0))}
                   />
                 </div>
                 <div className="space-y-3">
@@ -401,6 +416,14 @@ export default function ListenClient() {
                     <div className="space-y-2 rounded-xl bg-foreground/[0.03] p-3">
                       <Stepper label="From ayah" value={range[0]} onChange={(v) => setRangeEnd(0, v)} />
                       <Stepper label="To ayah" value={range[1]} onChange={(v) => setRangeEnd(1, v)} />
+                      <div className="pt-1">
+                        <p className="mb-2 text-xs font-medium text-muted">Play the range</p>
+                        <SegmentedControl
+                          options={RANGE_REPEATS.map((n) => ({ value: String(n), label: n ? `${n}×` : 'Until stopped' }))}
+                          value={String(rangeRepeat)}
+                          onChange={(v) => setListenRangeRepeat(Number(v))}
+                        />
+                      </div>
                     </div>
                   )}
                 </div>

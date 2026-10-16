@@ -38,6 +38,8 @@ final class RecitationEngine {
     private var items: [Item] = []
     private(set) var index = 0
     private var pauseMs: Double = 0
+    /// Extra pause as a multiple of the item just played (time to say it back)
+    private var pauseFactor: Double = 0
     private var loop = false
     private var rate: Float = 1
     private var wantsPlay = false
@@ -69,10 +71,11 @@ final class RecitationEngine {
 
     // MARK: queue
 
-    func setQueue(_ next: [Item], startIndex: Int, startPositionMs: Double, pauseBetweenMs: Double, loopQueue: Bool, rate newRate: Float, autoplay: Bool) {
+    func setQueue(_ next: [Item], startIndex: Int, startPositionMs: Double, pauseBetweenMs: Double, pauseTimes: Double, loopQueue: Bool, rate newRate: Float, autoplay: Bool) {
         cancelSleep()
         items = next
         pauseMs = max(0, pauseBetweenMs)
+        pauseFactor = max(0, pauseTimes)
         loop = loopQueue
         rate = newRate
         resumeAtNext = false
@@ -122,7 +125,17 @@ final class RecitationEngine {
             onEnded?("sleep")
             return
         }
-        if pauseMs > 0 && (index + 1 < items.count || loop) { playSilence(ms: pauseMs) } else { advance() }
+        let gap = pauseMs + pauseFactor * playedMs()
+        if gap > 0 && (index + 1 < items.count || loop) { playSilence(ms: gap) } else { advance() }
+    }
+
+    /// How long the item that just ended played for (its clip, or the whole file)
+    private func playedMs() -> Double {
+        guard index < items.count else { return 0 }
+        let it = items[index]
+        if let end = it.endMs { return max(0, end - it.startMs) }
+        if let d = player.currentItem?.duration.seconds, d.isFinite { return d * 1000 }
+        return 0
     }
 
     private func advance() {
@@ -153,10 +166,12 @@ final class RecitationEngine {
     /// A silent WAV of the given length, written once to the caches folder
     private static func silenceFile(ms: Double) -> URL? {
         let dir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        let url = dir.appendingPathComponent("silence-\(Int(ms)).wav")
+        // Rounded to 100ms so the files get reused
+        let rounded = max(100, Int((ms / 100).rounded()) * 100)
+        let url = dir.appendingPathComponent("silence-\(rounded).wav")
         if FileManager.default.fileExists(atPath: url.path) { return url }
         let sampleRate: UInt32 = 8000
-        let samples = UInt32(Double(sampleRate) * ms / 1000)
+        let samples = UInt32(Double(sampleRate) * Double(rounded) / 1000)
         var data = Data()
         func put32(_ v: UInt32) { var x = v.littleEndian; data.append(Data(bytes: &x, count: 4)) }
         func put16(_ v: UInt16) { var x = v.littleEndian; data.append(Data(bytes: &x, count: 2)) }
@@ -386,11 +401,12 @@ public class RecitationPlayerPlugin: CAPPlugin, CAPBridgedPlugin {
         let start = call.getInt("startIndex") ?? 0
         let startPos = call.getDouble("startPositionMs") ?? 0
         let pause = call.getDouble("pauseMs") ?? 0
+        let pauseTimes = call.getDouble("pauseFactor") ?? 0
         let loop = call.getBool("loop") ?? false
         let rate = Float(call.getDouble("rate") ?? 1)
         let autoplay = call.getBool("autoplay") ?? true
         DispatchQueue.main.async {
-            self.engine.setQueue(items, startIndex: start, startPositionMs: startPos, pauseBetweenMs: pause, loopQueue: loop, rate: rate, autoplay: autoplay)
+            self.engine.setQueue(items, startIndex: start, startPositionMs: startPos, pauseBetweenMs: pause, pauseTimes: pauseTimes, loopQueue: loop, rate: rate, autoplay: autoplay)
             call.resolve()
         }
     }
