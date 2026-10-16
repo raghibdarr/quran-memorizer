@@ -1,0 +1,33 @@
+name: iOS simulator build
+
+# Compiles the iOS app (no signing, simulator SDK) so native Swift changes are
+# checked without a Mac. Runs manually, or on pushes to mobile/** branches that
+# touch native iOS code — never deploys anything.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['mobile/**']
+    paths: ['ios/**', 'package.json', 'package-lock.json', 'capacitor.config.ts', '.github/workflows/ios.yml']
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
+      - run: npx cap sync ios
+      - name: Build for the simulator
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tail -60
+          exit ${PIPESTATUS[0]}
