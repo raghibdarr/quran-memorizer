@@ -22,6 +22,7 @@ import { cn } from '@/lib/cn';
 import { isoFromMs } from '@/lib/dates';
 import { useAppBack } from '@/hooks/use-app-back';
 
+import { ayahRange } from '@/lib/ayah-range';
 type Step = 1 | 2 | 3 | 4;
 
 // Two letters: "S M T W T F S" left users guessing which S is Sunday (persona test)
@@ -522,7 +523,7 @@ export default function PlanSetupPage() {
                             >
                               <span className="text-xs font-medium text-muted">L{l.lessonNumber}</span>
                               <span className="flex-1 text-xs text-foreground">
-                                Ayahs {l.ayahStart}–{l.ayahEnd}
+                                {ayahRange(l.ayahStart, l.ayahEnd)}
                               </span>
                               <span
                                 className={cn(

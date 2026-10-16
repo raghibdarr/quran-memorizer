@@ -22,7 +22,7 @@ import { FlameIcon, CheckIcon, ArrowRightIcon } from '@/components/ui/icons';
 import InstallBanner from '@/components/ui/install-banner';
 import OnboardingOverlay from '@/components/ui/onboarding-overlay';
 import { cn } from '@/lib/cn';
-import { normalizeAppUrl } from '@/lib/routes';
+import { lessonHref, normalizeAppUrl } from '@/lib/routes';
 import { useReviewQueue } from '@/hooks/use-review-queue';
 import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
@@ -168,9 +168,11 @@ export default function HomePage() {
   }, [allSurahs]);
 
   // Find active lesson
-  const activeProgress = Object.values(progressLessons).find(
-    (l) => l.completedAt === null
-  );
+  // Fallback when there's no lastActivity (e.g. a fresh device before sync): the
+  // most recently started unfinished lesson, not whichever was saved first
+  const activeProgress = Object.values(progressLessons)
+    .filter((l) => l.completedAt === null)
+    .sort((a, b) => b.startedAt - a.startedAt)[0];
   const activeSurah = activeProgress
     ? allSurahs.find((s) => s.id === activeProgress.surahId)
     : null;
@@ -234,7 +236,7 @@ export default function HomePage() {
             </Card>
           </Link>
         ) : !plan && activeProgress && activeSurah ? (
-          <Link href={`/lesson/${activeSurah.id}`} className="block">
+          <Link href={lessonHref(activeSurah.id, Number(activeProgress.lessonId.split('-')[1]) || 1)} className="block">
             <Card variant="tactile" pressable className="p-6">
               <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Continue Learning</p>
               <div className="mt-1.5 flex items-center justify-between gap-3">

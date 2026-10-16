@@ -7,6 +7,7 @@ import Card from '@/components/ui/card';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
+import { ayahRange } from '@/lib/ayah-range';
 type SelectionMode = 'lesson' | 'range';
 export type PracticeFlowMode = 'ayah-by-ayah' | 'full-passage';
 
@@ -149,7 +150,7 @@ export default function PracticeSelection({
                 <div>
                   <p className="text-sm font-medium text-foreground">Lesson {lesson.lessonNumber}</p>
                   <p className="text-xs text-muted">
-                    Ayahs {lesson.ayahStart}–{lesson.ayahEnd}
+                    {ayahRange(lesson.ayahStart, lesson.ayahEnd)}
                     {isCompleted && <span className="ml-1 text-success">✓</span>}
                   </p>
                 </div>

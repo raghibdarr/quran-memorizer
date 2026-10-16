@@ -23,6 +23,7 @@ import UserButton from '@/components/auth/user-button';
 import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
+import { ayahRange } from '@/lib/ayah-range';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
@@ -388,7 +389,7 @@ function SurahHealthCard({
                   <p className="text-sm font-medium text-foreground">
                     Lesson {lessonHealth.lesson.lessonNumber}
                     <span className="ml-1.5 font-normal text-muted">
-                      Ayahs {lessonHealth.lesson.ayahStart}–{lessonHealth.lesson.ayahEnd}
+                      {ayahRange(lessonHealth.lesson.ayahStart, lessonHealth.lesson.ayahEnd)}
                     </span>
                   </p>
 

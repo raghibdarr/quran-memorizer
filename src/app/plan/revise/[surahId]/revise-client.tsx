@@ -14,6 +14,7 @@ import { StarIcon } from '@/components/ui/icons';
 import { useAppBack } from '@/hooks/use-app-back';
 import { inTodayRun, useContinueToday } from '@/hooks/use-today-run';
 
+import { ayahRange } from '@/lib/ayah-range';
 // Revision is a RECALL TEST, not a read-through (M4, audit m8/§4a-6): each ayah
 // starts hidden, the user recites from memory, reveals to check, and self-rates.
 // Ratings feed the same SM-2 ayah cards as practice — revision and review are
@@ -105,7 +106,7 @@ export default function RevisePage() {
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">Revision</p>
             <h1 className="text-xl font-bold text-teal">{surah.nameSimple}</h1>
             {isPartial && (
-              <p className="text-[11px] text-muted">Ayahs {scopeStart}–{scopeEnd} of {surah.versesCount}</p>
+              <p className="text-[11px] text-muted">{ayahRange(scopeStart, scopeEnd)} of {surah.versesCount}</p>
             )}
           </div>
           <span className="arabic-text text-2xl text-muted">{surah.nameArabic}</span>

@@ -25,6 +25,7 @@ import BackButton from '@/components/ui/back-button';
 import { formatLessonTime } from '@/lib/lesson-time';
 import { lessonWordCounts } from '@/lib/curriculum';
 
+import { ayahRange } from '@/lib/ayah-range';
 type Tab = 'learn' | 'practice';
 
 interface SurahSection {
@@ -248,7 +249,7 @@ export default function JuzDetailPage() {
                                 Lesson {lesson.lessonNumber}
                               </p>
                               <p className="text-xs text-muted">
-                                Ayahs {lesson.ayahStart}&ndash;{lesson.ayahEnd}
+                                {ayahRange(lesson.ayahStart, lesson.ayahEnd)}
                                 {!isComplete && <> · {formatLessonTime(lessonWordCounts(lesson))}</>}
                               </p>
                               {isActive && (
@@ -432,7 +433,7 @@ export default function JuzDetailPage() {
                                 <div>
                                   <p className="text-sm font-medium text-foreground">Lesson {lesson.lessonNumber}</p>
                                   <p className="text-xs text-muted">
-                                    Ayahs {lesson.ayahStart}&ndash;{lesson.ayahEnd}
+                                    {ayahRange(lesson.ayahStart, lesson.ayahEnd)}
                                     {isCompleted && <span className="ml-1 text-success">&#10003;</span>}
                                   </p>
                                 </div>

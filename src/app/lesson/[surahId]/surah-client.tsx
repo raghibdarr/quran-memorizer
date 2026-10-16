@@ -27,6 +27,7 @@ import SegmentedControl from '@/components/ui/segmented-control';
 import { formatLessonTime } from '@/lib/lesson-time';
 import { lessonWordCounts } from '@/lib/curriculum';
 
+import { ayahRange } from '@/lib/ayah-range';
 type Tab = 'learn' | 'practice';
 
 export default function SurahDetailPage() {
@@ -68,6 +69,28 @@ export default function SurahDetailPage() {
       setLessons(generateLessonsWithJuzBoundaries(surahId, s.versesCount, juzSegs));
     });
   }, [surahId]);
+
+  // Where the learner is in this surah: the lesson they most recently started and
+  // haven't finished, else the first unfinished one after any they've done
+  const resumeLessonId = (() => {
+    const inProgress = lessons
+      .map((l) => progressLessons[l.lessonId])
+      .filter((p) => p && p.completedAt == null)
+      .sort((a, b) => b!.startedAt - a!.startedAt)[0];
+    if (inProgress) return inProgress.lessonId;
+    if (!lessons.some((l) => progressLessons[l.lessonId]?.completedAt != null)) return null;
+    return lessons.find((l) => progressLessons[l.lessonId]?.completedAt == null)?.lessonId ?? null;
+  })();
+
+  // A long surah (Al-Baqarah has 165 lessons) opens scrolled to that lesson, once
+  const scrolledTo = useRef(false);
+  useEffect(() => {
+    if (scrolledTo.current || activeTab !== 'learn' || !resumeLessonId) return;
+    const el = document.querySelector(`[data-lesson="${resumeLessonId}"]`);
+    if (!el) return;
+    scrolledTo.current = true;
+    if (el.getBoundingClientRect().bottom > window.innerHeight - 120) el.scrollIntoView({ block: 'center' });
+  }, [resumeLessonId, activeTab, lessons]);
 
   // Keep the tab bar while loading: a screen with no tab bar makes the transition
   // slide it away and pop it back a moment later
@@ -259,7 +282,7 @@ export default function SurahDetailPage() {
                   : isComplete ? 100 : 0;
 
                 return (
-                  <div key={lesson.lessonId} className="deal-in" style={deal.row(idx)}>
+                  <div key={lesson.lessonId} data-lesson={lesson.lessonId} className="deal-in" style={deal.row(idx)}>
                     {(showJuzDivider || showFirstJuzLabel) && (
                       <div className="flex items-center gap-3 py-2">
                         <div className="h-px flex-1 bg-foreground/10" />
@@ -290,7 +313,7 @@ export default function SurahDetailPage() {
                             Lesson {lesson.lessonNumber}
                           </p>
                           <p className="text-xs text-muted">
-                            Ayahs {lesson.ayahStart}&ndash;{lesson.ayahEnd}
+                            {ayahRange(lesson.ayahStart, lesson.ayahEnd)}
                             {!isComplete && <> · {formatLessonTime(lessonWordCounts(lesson))}</>}
                           </p>
                           {isActive && (

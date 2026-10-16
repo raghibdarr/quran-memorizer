@@ -16,6 +16,7 @@ import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { useAppBack } from '@/hooks/use-app-back';
 
+import { ayahRange } from '@/lib/ayah-range';
 type Step = 1 | 2;
 
 export default function PlanEditPage() {
@@ -429,7 +430,7 @@ export default function PlanEditPage() {
                             >
                               <span className="text-xs font-medium text-muted">L{l.lessonNumber}</span>
                               <span className="flex-1 text-xs text-foreground">
-                                Ayahs {l.ayahStart}–{l.ayahEnd}
+                                {ayahRange(l.ayahStart, l.ayahEnd)}
                               </span>
                               <span
                                 className={cn(

@@ -18,6 +18,7 @@ import { RETENTION } from '@/lib/retention';
 import { haptic } from '@/lib/haptics';
 import { daysBetween, isoFromMs, startOfTodayMs, todayIso } from '@/lib/dates';
 
+import { ayahRange } from '@/lib/ayah-range';
 interface ReviewSessionProps {
   dueCards: LessonReviewCard[];
   /** Sabqi lessons being touched ahead of their SM-2 date (M5) — a pass must not advance them */
@@ -297,7 +298,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
           {lessonData.surah.nameSimple}
         </h3>
         <p className="text-sm text-muted">
-          Lesson {currentCard.lessonNumber} · Ayahs {currentCard.ayahStart}–{currentCard.ayahEnd}
+          Lesson {currentCard.lessonNumber} · {ayahRange(currentCard.ayahStart, currentCard.ayahEnd)}
         </p>
         <span className="arabic-text text-xl text-muted/60">{lessonData.surah.nameArabic}</span>
       </div>

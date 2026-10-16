@@ -18,6 +18,7 @@ import { formatTodayTime, nextTodayHref } from '@/lib/today-run';
 import { formatLessonTime } from '@/lib/lesson-time';
 import { lessonWordCounts } from '@/lib/curriculum';
 
+import { ayahRange } from '@/lib/ayah-range';
 export default function TodaysPlanCard() {
   const applyCatchUp = usePlanStore((s) => s.applyCatchUp);
   const updateDeadline = usePlanStore((s) => s.updateDeadline);
@@ -294,7 +295,7 @@ export default function TodaysPlanCard() {
                         : ''}
                     </p>
                     <p className="text-[11px] text-muted">
-                      Ayahs {lesson.ayahStart}–{lesson.ayahEnd}
+                      {ayahRange(lesson.ayahStart, lesson.ayahEnd)}
                       {!done && <> · {formatLessonTime(lessonWordCounts(lesson))}</>}
                     </p>
                   </div>
