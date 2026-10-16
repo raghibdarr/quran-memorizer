@@ -513,6 +513,17 @@ Owner decides how M11 interleaves with M2-M10.
 
 ---
 
+### Roadmap (competitive research, 2026-10-16) — after M0–M11
+Tracked live at https://claude.ai/artifact/MBGuUP9wEQv8n2a1u9Zcxz; what's waiting on the owner is in
+`owner-actions.md`. Built 2026-10-16: Tilawa 0.4 (correction mode); store compliance code (account
+deletion, privacy page, native sign-in links); reading marks (#03); offline search (#04); native
+recitation player Android + iOS with play-to and sleep timer (#01); offline downloads (#02); mushaf
+page view, Madina 1441H + IndoPak (#06); word by word in the reader (#05 part); share as image (#16);
+mushaf strength map (#10); hifz listening controls (#11); khatm planner, Friday Al-Kahf, hide stats
+(#14); similar-ayah practice + marks on the page (#09); page recall with voice reveal (#08); record
+yourself, peeks as weakness (#12); recite to find (#13); per-ayah voice credit + coming-up queue (#15);
+khatm circles (#18, migration 005); Android widget (#17); Android Auto library (#20).
+
 ## 4. Decision log
 
 **Made calls:**
