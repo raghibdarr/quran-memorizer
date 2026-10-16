@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import BottomSheet from '@/components/ui/bottom-sheet';
+import TajweedDemo from '@/components/tajweed-demo';
 
 /**
  * Tajweed explainer (M10): tap a coloured letter anywhere tajweed text is shown to
@@ -34,7 +35,7 @@ export const TAJWEED_RULE_INFO: Record<string, Rule> = {
 };
 
 export default function TajweedExplainer() {
-  const [rule, setRule] = useState<{ info: Rule; text: string } | null>(null);
+  const [rule, setRule] = useState<{ info: Rule; text: string; cls: string } | null>(null);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -42,7 +43,7 @@ export default function TajweedExplainer() {
       const mark = target?.closest?.('.tajweed-text tajweed[class]');
       if (!mark || mark.closest('button, a, [role="button"], [role="tab"]')) return;
       const info = TAJWEED_RULE_INFO[mark.getAttribute('class') ?? ''];
-      if (info) setRule({ info, text: mark.textContent ?? '' });
+      if (info) setRule({ info, text: mark.textContent ?? '', cls: mark.getAttribute('class') ?? '' });
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
@@ -57,6 +58,7 @@ export default function TajweedExplainer() {
             <span className="h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: rule.info.color }} aria-hidden />
           </div>
           <p className="text-sm leading-relaxed text-foreground">{rule.info.detail}</p>
+          <TajweedDemo key={rule.cls} rule={rule.cls} color={rule.info.color} />
         </div>
       )}
     </BottomSheet>
