@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import type { Surah, Ayah } from '@/types/quran';
 import { useProgressStore } from '@/stores/progress-store';
 import { useReviewStore } from '@/stores/review-store';
@@ -16,6 +16,8 @@ import { haptic } from '@/lib/haptics';
 
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
+import { segmentAyah } from '@/lib/segments';
+import SegmentArabic from '@/components/ui/segment-arabic';
 interface TestPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -64,12 +66,24 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
   const allRated = ratedCount === ayahs.length;
   const hasWeak = Object.values(ratings).some((r) => r !== 'got-it');
 
-  const toggle = (key: string) =>
+  const toggle = (key: string) => {
+    setPartsShown((prev) => ({ ...prev, [key]: 0 }));
     setRevealed((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key); else next.add(key);
       return next;
     });
+  };
+
+  // A long ayah is checked a part at a time, as it was learned; the last part opens the
+  // full ayah with its rating (one rating per ayah)
+  const parts = useMemo(() => Object.fromEntries(ayahs.map((a) => [a.key, segmentAyah(a)])), [ayahs]);
+  const [partsShown, setPartsShown] = useState<Record<string, number>>({});
+  const checkNext = (key: string) => {
+    const shown = (partsShown[key] ?? 0) + 1;
+    if (shown >= parts[key].length) toggle(key);
+    else setPartsShown((prev) => ({ ...prev, [key]: shown }));
+  };
 
   const playAyah = async (ayah: Ayah, i: number) => {
     if (playingAll) return;
@@ -139,7 +153,7 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
       </div>
 
       <button
-        onClick={() => setRevealed(revealed.size === ayahs.length ? new Set() : new Set(ayahs.map((a) => a.key)))}
+        onClick={() => { setPartsShown({}); setRevealed(revealed.size === ayahs.length ? new Set() : new Set(ayahs.map((a) => a.key))); }}
         className="pressable w-full rounded-xl bg-foreground/5 py-2.5 text-sm font-medium text-foreground hover:bg-foreground/10"
       >
         {revealed.size === ayahs.length ? 'Hide all' : 'Show all'}
@@ -192,10 +206,29 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
                     ))}
                   </div>
                 </div>
+              ) : (partsShown[ayah.key] ?? 0) > 0 ? (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs text-muted">
+                      {flagDot}
+                      Ayah {ayah.number} · part {partsShown[ayah.key]} of {parts[ayah.key].length}
+                    </p>
+                    <HidePill hidden={false} onClick={() => setPartsShown((prev) => ({ ...prev, [ayah.key]: 0 }))} />
+                  </div>
+                  {parts[ayah.key].slice(0, partsShown[ayah.key]).map((seg) => (
+                    <SegmentArabic key={seg.index} ayah={ayah} seg={seg} className="text-center text-3xl leading-loose" />
+                  ))}
+                  <button onClick={() => checkNext(ayah.key)} className="w-full rounded-lg border-2 border-dashed border-foreground/20 py-2 text-center text-sm text-muted">
+                    {partsShown[ayah.key] + 1 === parts[ayah.key].length ? 'Check the last part' : `Check part ${partsShown[ayah.key] + 1}`}
+                  </button>
+                </div>
               ) : (
-                <button onClick={() => toggle(ayah.key)} className="w-full py-2 text-center text-sm text-muted">
+                <button
+                  onClick={() => (parts[ayah.key].length > 1 ? checkNext(ayah.key) : toggle(ayah.key))}
+                  className="w-full py-2 text-center text-sm text-muted"
+                >
                   {flagDot}
-                  Ayah {ayah.number} · tap to check
+                  Ayah {ayah.number} · {parts[ayah.key].length > 1 ? `tap to check, a part at a time (${parts[ayah.key].length} parts)` : 'tap to check'}
                 </button>
               )}
             </div>
