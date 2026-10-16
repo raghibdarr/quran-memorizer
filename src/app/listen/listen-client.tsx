@@ -1,11 +1,13 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import type { Surah } from '@/types/quran';
-import { getAudioUrl, getSurah } from '@/lib/quran-data';
-import { audioController } from '@/lib/audio';
+import { getSurah, getSurahIndex } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
+import { recitationClockMs, setSleepTimer, startRecitation, stopRecitation } from '@/lib/recitation';
+import { rangeUntil, type AyahRef, type PlayUntil } from '@/lib/recitation-queue';
+import { useRecitation, useRecitationTransport } from '@/hooks/use-recitation';
 import AyahDisplay from '@/components/ui/ayah-display';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
 import CloseButton from '@/components/ui/close-button';
@@ -13,18 +15,43 @@ import SettingsPanel from '@/components/layout/settings-panel';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import SegmentedControl from '@/components/ui/segmented-control';
 import { SkeletonRows } from '@/components/ui/skeleton';
-import { useAudio } from '@/hooks/use-audio';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 import { cn } from '@/lib/cn';
 import AyahMenu, { HIGHLIGHT_CLASS } from '@/components/reader/ayah-menu';
 import { ayahKey, useReaderStore } from '@/stores/reader-store';
 
-const GAP_BETWEEN_AYAHS_MS = 300;
-/** Between repeats of the same ayah when no pause is set: enough to hear it as a repeat */
-const GAP_BETWEEN_REPEATS_MS = 600;
-
 const REPEATS = [1, 3, 5, 10];
 const PAUSES = [0, 2000, 5000, 10000];
+const UNTIL: { value: PlayUntil; label: string }[] = [
+  { value: 'surah', label: 'Surah' },
+  { value: 'juz', label: 'Juz' },
+  { value: 'page', label: 'Page' },
+  { value: 'quran', label: 'Quran' },
+];
+const SLEEP: { value: string; label: string }[] = [
+  { value: 'off', label: 'Off' },
+  { value: '15', label: '15m' },
+  { value: '30', label: '30m' },
+  { value: '60', label: '1h' },
+  { value: 'item', label: 'Ayah end' },
+];
+
+type Meta = { counts: number[]; juz: [number, number][]; page: [number, number][]; names: Map<number, string> };
+let metaPromise: Promise<Meta> | null = null;
+function loadMeta(): Promise<Meta> {
+  metaPromise ??= Promise.all([getSurahIndex(), import('@/data/quran-meta.json')]).then(([idx, m]) => {
+    const sorted = [...idx].sort((a, b) => a.id - b.id);
+    const meta = m.default as unknown as { juz: [number, number][]; page: [number, number][] };
+    return { counts: sorted.map((x) => x.versesCount), juz: meta.juz, page: meta.page, names: new Map(sorted.map((x) => [x.id, x.nameSimple])) };
+  });
+  return metaPromise;
+}
+
+function sleepLabel(sleep: ReturnType<typeof useRecitation>['sleep'], now: number): string | null {
+  if (sleep.kind === 'item') return 'Sleep at ayah end';
+  if (sleep.kind === 'timer') return `Sleep in ${Math.max(1, Math.ceil((sleep.endsAt - now) / 60000))}m`;
+  return null;
+}
 
 /** "Each ayah 3× · 2s pause · loop 5–9", or "Repeat: off" */
 function repeatSummary(times: number, pauseMs: number, range: [number, number] | null): string {
@@ -58,24 +85,34 @@ function Stepper({ label, value, onChange }: { label: string; value: number; onC
  *
  * Reading marks (roadmap #03): each ayah's ⋯ opens bookmark, highlight, note and
  * copy; the screen remembers where you were (`?a=` reopens there).
+ *
+ * Playback (roadmap #01) runs in src/lib/recitation.ts, outside this screen: it can
+ * keep going to the end of a juz, a page or the Quran (the screen follows it from
+ * surah to surah), with a sleep timer, and in the Android app natively, so it
+ * carries on with the screen off and shows lock-screen controls.
  */
 export default function ListenClient() {
   const params = useSearchParams();
   const surahId = Number(params.get('s'));
   const startAyah = Number(params.get('a')) || 0;
+  const router = useRouter();
   const [surah, setSurah] = useState<Surah | null>(null);
-  const [current, setCurrent] = useState(-1);
-  const [rep, setRep] = useState(0);
-  const [playingAll, setPlayingAll] = useState(false);
   const [showRepeat, setShowRepeat] = useState(false);
+  const rec = useRecitation();
+  const transport = useRecitationTransport();
+  const until = useSettingsStore((s) => s.listenUntil ?? 'surah');
+  const setListenUntil = useSettingsStore((s) => s.setListenUntil);
+  const [now, setNow] = useState(() => Date.now());
+  const [sleepChoice, setSleepChoice] = useState('off');
   // Loop range, as ayah indexes; per visit, not saved
   const [range, setRange] = useState<[number, number] | null>(null);
   const times = useSettingsStore((s) => s.listenRepeat);
   const pauseMs = useSettingsStore((s) => s.listenPauseMs);
   const setListenRepeat = useSettingsStore((s) => s.setListenRepeat);
-  const { isPlaying } = useAudio();
-  const spokenWord = useSpokenWord(surahId, surah && current >= 0 ? surah.ayahs[current].number : null, isPlaying);
-  const abortRef = useRef(false);
+  // What's playing, as an index into this surah's ayahs
+  const current = surah && rec.active && rec.surah === surah.id ? surah.ayahs.findIndex((a) => a.number === rec.ayah) : -1;
+  const playingAll = rec.active;
+  const spokenWord = useSpokenWord(surahId, current >= 0 && surah ? surah.ayahs[current].number : null, rec.playing, recitationClockMs);
   const ayahRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [menuIdx, setMenuIdx] = useState<number | null>(null);
   const bookmarks = useReaderStore((s) => s.bookmarks);
@@ -90,7 +127,20 @@ export default function ListenClient() {
     return () => { live = false; };
   }, [surahId]);
 
-  useEffect(() => () => { abortRef.current = true; audioController.stop(); }, []);
+  // Leaving the screen stops the recitation
+  useEffect(() => () => stopRecitation(), []);
+
+  // Playing on past the surah: follow it to the next one
+  useEffect(() => {
+    if (rec.active && rec.surah && rec.surah !== surahId) router.replace(`/listen?s=${rec.surah}&a=${rec.ayah ?? 1}`);
+  }, [rec.active, rec.surah, rec.ayah, surahId, router]);
+
+  // The sleep countdown
+  useEffect(() => {
+    if (rec.sleep.kind !== 'timer') return;
+    const id = setInterval(() => setNow(Date.now()), 15_000);
+    return () => clearInterval(id);
+  }, [rec.sleep.kind]);
 
   // Keep the ayah being recited in view, clear of the header and the player
   useEffect(() => {
@@ -125,44 +175,34 @@ export default function ListenClient() {
     return () => { io.disconnect(); clearTimeout(timer); };
   }, [surah, setLastRead]);
 
-  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
   const playFrom = useCallback(async (start: number) => {
     if (!surah) return;
-    abortRef.current = false;
-    setPlayingAll(true);
     // Settings are read once per run, so changing them mid-play applies next time
-    const { listenRepeat: n, listenPauseMs: pause, reciter } = useSettingsStore.getState();
-    const [lo, hi] = range ?? [0, surah.ayahs.length - 1];
-    let i = Math.min(Math.max(start, lo), hi);
-    while (!abortRef.current) {
-      for (let r = 0; r < n && !abortRef.current; r++) {
-        setCurrent(i);
-        setRep(r);
-        await audioController.playAndWait(getAudioUrl(surah.id, surah.ayahs[i].number, reciter));
-        if (abortRef.current) break;
-        const last = !range && i === hi && r === n - 1;
-        if (!last) await wait(pause > 0 ? pause : r < n - 1 ? GAP_BETWEEN_REPEATS_MS : GAP_BETWEEN_AYAHS_MS);
-      }
-      if (abortRef.current) break;
-      if (i < hi) i++;
-      else if (range) i = lo; // loop the range until stopped
-      else break;
+    const { listenRepeat, listenPauseMs, reciter, playbackSpeed, listenUntil } = useSettingsStore.getState();
+    const meta = await loadMeta();
+    let ayahs: AyahRef[];
+    let startIndex = 0;
+    if (range) {
+      // Loop A–B within this surah
+      ayahs = surah.ayahs.slice(range[0], range[1] + 1).map((a) => ({ surah: surah.id, ayah: a.number }));
+      startIndex = Math.min(Math.max(start, range[0]), range[1]) - range[0];
+    } else {
+      ayahs = rangeUntil({ surah: surah.id, ayah: surah.ayahs[start].number }, listenUntil ?? 'surah', meta.counts, meta.juz, meta.page);
     }
-    if (!abortRef.current) setCurrent(-1);
-    setPlayingAll(false);
+    await startRecitation({
+      ayahs,
+      repeatEach: listenRepeat,
+      pauseMs: listenPauseMs,
+      loop: !!range,
+      reciter,
+      rate: playbackSpeed,
+      surahName: (id) => meta.names.get(id) ?? `Surah ${id}`,
+    }, startIndex);
   }, [surah, range]);
 
-  const stop = useCallback(() => {
-    abortRef.current = true;
-    audioController.stop();
-    setPlayingAll(false);
-  }, []);
+  const stop = useCallback(() => stopRecitation(), []);
 
-  const playAyah = (i: number) => {
-    stop();
-    setTimeout(() => playFrom(i), 60);
-  };
+  const playAyah = (i: number) => { void playFrom(i); };
 
   const inRange = (i: number) => !range || (i >= range[0] && i <= range[1]);
   const total = surah?.ayahs.length ?? 0;
@@ -223,7 +263,7 @@ export default function ListenClient() {
                           <path d="M6 3h12v18l-6-4-6 4z" fill="currentColor" />
                         </svg>
                       )}
-                      {i === current && times > 1 && <span className="text-teal"> · {rep + 1} of {times}</span>}
+                      {i === current && times > 1 && <span className="text-teal"> · {rec.rep + 1} of {times}</span>}
                     </p>
                     <button
                       type="button"
@@ -270,9 +310,12 @@ export default function ListenClient() {
                   <path d="M17 1l4 4-4 4" /><path d="M3 11V9a4 4 0 0 1 4-4h14" /><path d="M7 23l-4-4 4-4" /><path d="M21 13v2a4 4 0 0 1-4 4H3" />
                 </svg>
                 {repeatSummary(times, pauseMs, range && [surah.ayahs[range[0]].number, surah.ayahs[range[1]].number])}
+                {!range && until !== 'surah' && <span> · to end of {until === 'quran' ? 'the Quran' : until}</span>}
+                {sleepLabel(rec.sleep, now) && <span> · {sleepLabel(rec.sleep, now)}</span>}
               </button>
               <MediaControlsBar
                 className="static"
+                transport={transport}
                 playingAll={playingAll}
                 currentIdx={current}
                 total={surah.ayahs.length}
@@ -283,7 +326,7 @@ export default function ListenClient() {
               />
             </div>
 
-            <BottomSheet open={showRepeat} onClose={() => setShowRepeat(false)} title="Repeat & loop" doneButton>
+            <BottomSheet open={showRepeat} onClose={() => setShowRepeat(false)} title="Playback" doneButton>
               <div className="space-y-5 pb-2">
                 <div>
                   <p className="mb-2 text-xs font-medium text-muted">Play each ayah</p>
@@ -318,7 +361,25 @@ export default function ListenClient() {
                     </div>
                   )}
                 </div>
-                <p className="text-xs text-muted">Changes apply the next time you press play.</p>
+                {!range && (
+                  <div>
+                    <p className="mb-2 text-xs font-medium text-muted">Keep playing to the end of the</p>
+                    <SegmentedControl options={UNTIL} value={until} onChange={(v) => setListenUntil(v as PlayUntil)} />
+                  </div>
+                )}
+                <div>
+                  <p className="mb-2 text-xs font-medium text-muted">Sleep timer{rec.sleep.kind === 'timer' ? ` · ${sleepLabel(rec.sleep, now)?.replace('Sleep in ', '')} left` : ''}</p>
+                  {rec.active ? (
+                    <SegmentedControl
+                      options={SLEEP}
+                      value={rec.sleep.kind === 'off' ? 'off' : sleepChoice}
+                      onChange={(v) => { setNow(Date.now()); setSleepChoice(v); setSleepTimer(v === 'off' ? null : v === 'item' ? 'item' : Number(v)); }}
+                    />
+                  ) : (
+                    <p className="text-xs text-muted">Start playing to set one.</p>
+                  )}
+                </div>
+                <p className="text-xs text-muted">Repeat, pause and play-to changes apply the next time you press play.</p>
               </div>
             </BottomSheet>
           </>

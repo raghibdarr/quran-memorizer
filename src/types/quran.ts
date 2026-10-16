@@ -138,6 +138,8 @@ export interface UserSettings {
   /** Listen screen: play each ayah this many times, pausing this long after each (time to repeat it) */
   listenRepeat: number;
   listenPauseMs: number;
+  /** Read & listen keeps playing to the end of this (roadmap #01) */
+  listenUntil?: 'surah' | 'juz' | 'page' | 'quran';
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 

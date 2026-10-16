@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { audioController } from '@/lib/audio';
 import { loadSegmentTimings, wordAtTime, type SurahTimings } from '@/lib/segment-audio';
 import { useSettingsStore } from '@/stores/settings-store';
@@ -13,7 +13,13 @@ import { useSettingsStore } from '@/stores/settings-store';
  * `ayahNumber` must be the ayah whose recording is playing; `playing` whether
  * it is audibly playing (not paused, not in a gap between repetitions).
  */
-export function useSpokenWord(surahId: number, ayahNumber: number | null, playing: boolean): number {
+export function useSpokenWord(
+  surahId: number,
+  ayahNumber: number | null,
+  playing: boolean,
+  /** ms into the ayah's recording; defaults to the HTML audio controller's clock */
+  clockMs: () => number = () => audioController.currentTime * 1000,
+): number {
   const reciter = useSettingsStore((s) => s.reciter);
   const [loaded, setLoaded] = useState<{ key: string; timings: SurahTimings | null }>({ key: '', timings: null });
   const key = `${reciter}/${surahId}`;
@@ -27,12 +33,16 @@ export function useSpokenWord(surahId: number, ayahNumber: number | null, playin
     return () => { live = false; };
   }, [reciter, surahId]);
 
+  // The clock can be a fresh closure each render; read the latest without re-subscribing
+  const clockRef = useRef(clockMs);
+  useEffect(() => { clockRef.current = clockMs; });
+
   useEffect(() => {
     if (!playing || ayahNumber == null || !timings) return;
     const ayahTimings = timings[String(ayahNumber)];
     let frame = 0;
     const tick = () => {
-      const w = wordAtTime(ayahTimings, audioController.currentTime * 1000);
+      const w = wordAtTime(ayahTimings, clockRef.current());
       setWord((prev) => (prev.ayah === ayahNumber && prev.w === w ? prev : { ayah: ayahNumber, w }));
       frame = requestAnimationFrame(tick);
     };

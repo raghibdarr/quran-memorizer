@@ -374,6 +374,11 @@ class AudioController {
     audio.playbackRate = rate;
   }
 
+  /** 0–1; the sleep timer fades out with it */
+  setVolume(volume: number): void {
+    this.getAudio().volume = Math.max(0, Math.min(1, volume));
+  }
+
   /** Seek the currently loaded audio to `time` seconds. No-op if nothing is loaded. */
   seek(time: number): void {
     if (!this.audio || !this.currentUrl) return;

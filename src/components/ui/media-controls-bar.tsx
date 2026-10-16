@@ -7,7 +7,21 @@ import { cn } from '@/lib/cn';
 
 const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5];
 
+/** What the bar drives; defaults to the shared HTML audio controller (useAudio) */
+export interface PlaybackTransport {
+  isPlaying: boolean;
+  isPaused: boolean;
+  currentTime: number;
+  duration: number;
+  pause: () => void;
+  resume: () => void;
+  seek: (time: number) => void;
+  setSpeed: (rate: number) => void;
+}
+
 interface MediaControlsBarProps {
+  /** Another player to drive (Read & listen's recitation session) */
+  transport?: PlaybackTransport;
   /** Whether a play-all sequence is currently active. */
   playingAll: boolean;
   /** Index of the currently-playing item (0-based), or -1 if none. */
@@ -42,8 +56,10 @@ export default function MediaControlsBar({
   onStop,
   onRestart,
   className,
+  transport,
 }: MediaControlsBarProps) {
-  const { isPlaying, isPaused, setSpeed, seek, currentTime, duration, pause, resume } = useAudio();
+  const audio = useAudio();
+  const { isPlaying, isPaused, setSpeed, seek, currentTime, duration, pause, resume } = transport ?? audio;
   const storedSpeed = useSettingsStore((s) => s.playbackSpeed);
   const setStoredSpeed = useSettingsStore((s) => s.setPlaybackSpeed);
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);

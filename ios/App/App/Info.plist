@@ -56,6 +56,10 @@
 	</array>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Takrar listens while you recite so it can check your recitation. Audio is processed on your device and never uploaded.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
