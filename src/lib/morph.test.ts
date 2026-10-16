@@ -4,10 +4,11 @@ import { describe, expect, it } from 'vitest';
 import { morphParts } from './morph';
 
 const twins = JSON.parse(readFileSync(join(process.cwd(), 'src', 'data', 'mutashabihat.json'), 'utf8')) as Record<string, { k: string; d: number[]; t: number[] }[]>;
+const surahs = new Map<number, { ayahs: { words: { charType: string }[] }[] }>();
 const wordCount = (key: string) => {
   const [s, a] = key.split(':').map(Number);
-  const surah = JSON.parse(readFileSync(join(process.cwd(), 'src', 'data', `surah-${s}.json`), 'utf8'));
-  return surah.ayahs[a - 1].words.filter((w: { charType: string }) => w.charType === 'word').length;
+  if (!surahs.has(s)) surahs.set(s, JSON.parse(readFileSync(join(process.cwd(), 'src', 'data', `surah-${s}.json`), 'utf8')));
+  return surahs.get(s)!.ayahs[a - 1].words.filter((w) => w.charType === 'word').length;
 };
 
 describe('morphParts', () => {
