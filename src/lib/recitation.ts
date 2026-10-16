@@ -14,7 +14,9 @@
 import { Capacitor, registerPlugin, type PluginListenerHandle } from '@capacitor/core';
 import { audioController } from './audio';
 import { getAudioUrl } from './quran-data';
-import { isSurahAudio, surahAudioFallback, RECITERS } from './reciters';
+import { surahAudioFallback, RECITERS } from './reciters';
+import { loadAudioIndex } from './audio-index';
+import { localUrlResolver } from './downloads';
 import { ayahAt, buildQueue, msIntoAyah, type AyahRef, type QueueItem, type SurahAudioIndex } from './recitation-queue';
 
 export interface PlaybackPlan {
@@ -27,8 +29,6 @@ export interface PlaybackPlan {
   reciter: string;
   rate: number;
   surahName: (surah: number) => string;
-  /** A downloaded copy of a file, if there is one (roadmap #02) */
-  localUrl?: (url: string) => string;
 }
 
 export type SleepMode = { kind: 'off' } | { kind: 'timer'; endsAt: number } | { kind: 'item' };
@@ -83,20 +83,6 @@ export function getRecitationState(): RecitationState { return state; }
 export function subscribeRecitation(fn: () => void): () => void {
   listeners.add(fn);
   return () => { listeners.delete(fn); };
-}
-
-// ---------- surah-audio index (QUD reciters) ----------
-
-const indexCache = new Map<string, Promise<SurahAudioIndex | null>>();
-export function loadAudioIndex(reciter: string): Promise<SurahAudioIndex | null> {
-  if (!isSurahAudio(reciter)) return Promise.resolve(null);
-  let p = indexCache.get(reciter);
-  if (!p) {
-    p = fetch(`/segments/${reciter}/audio-index.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-    p.then((v) => { if (!v) indexCache.delete(reciter); });
-    indexCache.set(reciter, p);
-  }
-  return p;
 }
 
 // ---------- native backend ----------
@@ -224,7 +210,7 @@ export async function startRecitation(plan: PlaybackPlan, startIndex = 0): Promi
     repeatEach: plan.repeatEach,
     merge: plan.repeatEach <= 1 && plan.pauseMs === 0,
     surahName: plan.surahName,
-    localUrl: plan.localUrl,
+    localUrl: await localUrlResolver(plan.reciter),
   });
   nativeRate = plan.rate;
   progress = { index: 0, positionMs: 0, durationMs: -1, at: Date.now() };

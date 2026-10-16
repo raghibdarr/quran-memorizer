@@ -8,6 +8,8 @@ import { useSettingsStore } from '@/stores/settings-store';
 import { recitationClockMs, setSleepTimer, startRecitation, stopRecitation } from '@/lib/recitation';
 import { rangeUntil, type AyahRef, type PlayUntil } from '@/lib/recitation-queue';
 import { useRecitation, useRecitationTransport } from '@/hooks/use-recitation';
+import { activeJob, downloadSurah, isDownloaded, subscribeDownloads } from '@/lib/downloads';
+import Link from '@/components/app-link';
 import AyahDisplay from '@/components/ui/ayah-display';
 import MediaControlsBar from '@/components/ui/media-controls-bar';
 import CloseButton from '@/components/ui/close-button';
@@ -104,6 +106,10 @@ export default function ListenClient() {
   const setListenUntil = useSettingsStore((s) => s.setListenUntil);
   const [now, setNow] = useState(() => Date.now());
   const [sleepChoice, setSleepChoice] = useState('off');
+  const reciter = useSettingsStore((s) => s.reciter);
+  const [, setDl] = useState(0);
+  useEffect(() => subscribeDownloads(() => setDl((n) => n + 1)), []);
+  const [dlError, setDlError] = useState(false);
   // Loop range, as ayah indexes; per visit, not saved
   const [range, setRange] = useState<[number, number] | null>(null);
   const times = useSettingsStore((s) => s.listenRepeat);
@@ -126,6 +132,9 @@ export default function ListenClient() {
     getSurah(surahId).then((s) => live && setSurah(s));
     return () => { live = false; };
   }, [surahId]);
+
+  // Load what Play needs now, while online, so it's cached for offline listening
+  useEffect(() => { void loadMeta(); }, []);
 
   // Leaving the screen stops the recitation
   useEffect(() => () => stopRecitation(), []);
@@ -378,6 +387,22 @@ export default function ListenClient() {
                   ) : (
                     <p className="text-xs text-muted">Start playing to set one.</p>
                   )}
+                </div>
+                <div className="flex min-h-11 items-center justify-between gap-3 rounded-xl bg-foreground/[0.03] px-3 py-2" data-surah-download>
+                  {isDownloaded(reciter, surah.id) ? (
+                    <span className="text-sm text-foreground">Downloaded: plays offline</span>
+                  ) : activeJob(reciter, surah.id) ? (
+                    <span className="text-sm text-muted">Downloading {activeJob(reciter, surah.id)!.done} of {activeJob(reciter, surah.id)!.total}…</span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => { setDlError(false); downloadSurah(reciter, surah.id, surah.ayahs.length).catch(() => setDlError(true)); }}
+                      className="text-sm font-semibold text-teal"
+                    >
+                      {dlError ? "Couldn't download. Try again" : 'Download this surah for offline'}
+                    </button>
+                  )}
+                  <Link href="/downloads" className="shrink-0 text-xs text-muted underline underline-offset-2">All downloads</Link>
                 </div>
                 <p className="text-xs text-muted">Repeat, pause and play-to changes apply the next time you press play.</p>
               </div>

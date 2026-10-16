@@ -3,6 +3,8 @@
 // per-hash ?_rsc entries it accumulated.
 const CACHE_STATIC = 'takrar-static-v2';
 const CACHE_PAGES = 'takrar-pages-v2';
+// Recitations downloaded for offline (src/lib/downloads.ts) — never cleared here
+const CACHE_AUDIO = 'takrar-audio-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -16,7 +18,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((k) => ![CACHE_STATIC, CACHE_PAGES].includes(k))
+          .filter((k) => ![CACHE_STATIC, CACHE_PAGES, CACHE_AUDIO].includes(k))
           .map((k) => caches.delete(k))
       )
     )
@@ -27,8 +29,11 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Only handle same-origin requests
-  if (url.origin !== self.location.origin) return;
+  // Downloaded recitations play from the cache, offline included
+  if (url.origin !== self.location.origin) {
+    if (/.mp3$/i.test(url.pathname)) event.respondWith(fromAudioCache(event.request));
+    return;
+  }
 
   // Static assets: cache-first (hashed filenames = immutable)
   if (
@@ -149,3 +154,30 @@ self.addEventListener('notificationclick', (event) => {
     })
   );
 });
+
+// A downloaded recitation, honouring the Range requests media elements make
+// (seeking, and slices of whole-surah files); anything not downloaded goes to the network
+async function fromAudioCache(request) {
+  const cache = await caches.open(CACHE_AUDIO);
+  const hit = await cache.match(request.url);
+  if (!hit) return fetch(request);
+  const range = request.headers.get('Range');
+  if (!range) return hit;
+  const blob = await hit.blob();
+  const m = /bytes=(d*)-(d*)/.exec(range);
+  const size = blob.size;
+  let start = m && m[1] ? Number(m[1]) : 0;
+  let end = m && m[2] ? Number(m[2]) : size - 1;
+  if (m && !m[1] && m[2]) { start = Math.max(0, size - Number(m[2])); end = size - 1; }
+  if (start >= size) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+  end = Math.min(end, size - 1);
+  return new Response(blob.slice(start, end + 1), {
+    status: 206,
+    headers: {
+      'Content-Type': hit.headers.get('Content-Type') || 'audio/mpeg',
+      'Content-Range': `bytes ${start}-${end}/${size}`,
+      'Content-Length': String(end - start + 1),
+      'Accept-Ranges': 'bytes',
+    },
+  });
+}

@@ -411,6 +411,10 @@ export default function SettingsPanel() {
 
             {/* Reciter: an in-sheet list, not the OS dropdown (which ignored the app's theme) */}
             <ReciterPicker value={reciter} onChange={setReciter} />
+            <Link href="/downloads" className="mt-1.5 flex min-h-11 items-center justify-between rounded-xl bg-foreground/5 px-3 text-sm font-medium text-foreground hover:bg-foreground/10" data-downloads-link>
+              Download recitations for offline
+              <span aria-hidden className="text-muted">›</span>
+            </Link>
 
             {/* Toggles */}
             <div className="mt-3 space-y-0.5">

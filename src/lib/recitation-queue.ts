@@ -42,8 +42,8 @@ export interface QueueOptions {
   /** Merge consecutive ayahs into one slice (only when nothing repeats or pauses) */
   merge: boolean;
   surahName: (surah: number) => string;
-  /** Swap in a downloaded copy of a file, if there is one */
-  localUrl?: (url: string) => string;
+  /** Swap in a downloaded copy of a file, if the surah is downloaded */
+  localUrl?: (url: string, surah: number) => string;
 }
 
 export function buildQueue(ayahs: AyahRef[], o: QueueOptions): QueueItem[] {
@@ -54,8 +54,8 @@ export function buildQueue(ayahs: AyahRef[], o: QueueOptions): QueueItem[] {
     const span = o.surahAudio?.verses[surah - 1]?.[ayah - 1] ?? null;
     const src = o.surahAudio?.src[surah - 1] ?? null;
     const base = span && src
-      ? { url: local(src), startMs: span[0], endMs: span[1] as number | null }
-      : { url: local(getAudioUrl(surah, ayah, o.surahAudio ? o.fallbackReciter : o.reciter)), startMs: 0, endMs: null };
+      ? { url: local(src, surah), startMs: span[0], endMs: span[1] as number | null }
+      : { url: local(getAudioUrl(surah, ayah, o.surahAudio ? o.fallbackReciter : o.reciter), surah), startMs: 0, endMs: null };
 
     const prev = out[out.length - 1];
     if (o.merge && times === 1 && prev && span && prev.url === base.url && prev.surah === surah
