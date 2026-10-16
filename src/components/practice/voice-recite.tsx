@@ -9,6 +9,9 @@ import { useSettingsStore } from '@/stores/settings-store';
 import { useReviewStore } from '@/stores/review-store';
 import { VoiceTracker, mapWordIndex, type TrackerEvent, type VoiceIssue } from '@/lib/voice-tracker';
 import Button from '@/components/ui/button';
+import { RECITERS, hasWordTimings } from '@/lib/reciters';
+import { loadSegmentTimings, type SurahTimings } from '@/lib/segment-audio';
+import { ayahDurationMs, paceRatio, paceSentence, reciterProgress } from '@/lib/pace';
 
 type Status = 'loading' | 'ready' | 'listening' | 'finishing' | 'done' | 'error';
 
@@ -42,6 +45,19 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   // The engine's word count per ayah (4 of 6,236 ayahs split one word differently)
   const engineTotals = useRef<Record<number, number>>({});
   const tracker = useRef<VoiceTracker | null>(null);
+  // Pace (V5): when the first and the latest words were heard, against the reciter's timings
+  const reciter = useSettingsStore((s) => s.reciter);
+  const pacedBy = hasWordTimings(reciter) ? reciter : 'Alafasy_128kbps';
+  const pacedByName = RECITERS.find((r) => r.id === pacedBy)?.name ?? 'the reciter';
+  const [timings, setTimings] = useState<SurahTimings | null>(null);
+  const firstHeardAt = useRef<number | null>(null);
+  const lastHeardAt = useRef<number | null>(null);
+  const [clock, setClock] = useState(0);
+  useEffect(() => {
+    let live = true;
+    loadSegmentTimings(pacedBy, surahId).then((t) => live && setTimings(t));
+    return () => { live = false; };
+  }, [pacedBy, surahId]);
   const wordCounts = useMemo(
     () => Object.fromEntries(ayahs.map((a) => [a.number, a.words.filter((w) => w.charType === 'word').length])),
     [ayahs],
@@ -102,6 +118,21 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
     return () => t.dispose();
   }, [surahId, wordCounts, ayahs]);
 
+  // Note when words are heard (the pace line and summary measure from these)
+  const heardCount = Object.values(heard).reduce((n, w) => n + w.length, 0);
+  useEffect(() => {
+    if (!heardCount) return;
+    const now = Date.now();
+    firstHeardAt.current ??= now;
+    lastHeardAt.current = now;
+  }, [heardCount]);
+  // While listening, move the reciter's marker along a few times a second
+  useEffect(() => {
+    if (status !== 'listening') return;
+    const id = setInterval(() => setClock(Date.now()), 250);
+    return () => clearInterval(id);
+  }, [status]);
+
   // Keep the ayah being recited in view
   useEffect(() => {
     if (current == null || status !== 'listening') return;
@@ -109,6 +140,8 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   }, [current, status]);
 
   const start = async () => {
+    firstHeardAt.current = null;
+    lastHeardAt.current = null;
     setHeard({});
     setFlags({});
     setCredited(null);
@@ -166,6 +199,16 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   };
   const listening = status === 'listening' || status === 'finishing';
 
+  // Pace: the reciter's time over the passage, and over just what you recited
+  const totalWords = ayahs.reduce((n, a) => n + wordCounts[a.number], 0);
+  const reciterTotalMs = timings ? ayahs.reduce((n, a) => n + (ayahDurationMs(timings[String(a.number)]) ?? 0), 0) : 0;
+  const reciterRecitedMs = timings
+    ? recitedAyahs.reduce((n, a) => n + (ayahDurationMs(timings[String(a.number)]) ?? 0) * (heardIn(a.number).length / wordCounts[a.number]), 0)
+    : 0;
+  const yourMs = firstHeardAt.current && lastHeardAt.current ? lastHeardAt.current - firstHeardAt.current : 0;
+  const pace = status === 'done' ? paceSentence(paceRatio(yourMs, reciterRecitedMs), pacedByName) : null;
+  const ghost = listening && firstHeardAt.current && reciterTotalMs ? reciterProgress(clock - firstHeardAt.current, reciterTotalMs) : null;
+
   return (
     <div className="space-y-4">
       {status === 'done' ? (
@@ -176,6 +219,7 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
           <p className="mt-1 text-sm text-muted" data-voice-flags={skipped.length + unclear.length + flaggedWords}>
             {summaryLine({ unheardAyahs: ayahs.length - recitedAyahs.length - skipped.length, missedWords, recited: recitedAyahs.length, skipped, unclear, flaggedWords })}
           </p>
+          {pace && <p className="mt-1 text-sm text-muted" data-voice-pace>{pace}</p>}
           {credit.length > 0 && (credited ? (
             <p className="mt-3 text-sm text-foreground" data-voice-credited>
               Saved: {credited.reviewed > 0 && `${credited.reviewed} reviewed`}{credited.reviewed > 0 && credited.added > 0 && ', '}{credited.added > 0 && `${credited.added} added to your reviews`}.
@@ -194,6 +238,14 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
           </p>
           {status === 'loading' && <p className="mt-2 text-xs text-muted">Getting ready… {progress}%</p>}
           {status === 'error' && <p className="mt-2 text-xs text-red-500">{error}</p>}
+        </div>
+      )}
+
+      {ghost !== null && (
+        // You (teal) against where the reciter would be by now (gold), through the passage
+        <div className="relative mx-1 h-2 rounded-full bg-foreground/[0.07]" role="img" aria-label="Your pace against the reciter's" data-pace-line>
+          <span className="absolute inset-y-0 left-0 rounded-full bg-teal/60 transition-[width] duration-300" style={{ width: `${(heardCount / Math.max(1, totalWords)) * 100}%` }} />
+          <span className="absolute -top-1 h-4 w-0.5 rounded-full bg-gold transition-[left] duration-300 ease-linear" style={{ left: `${ghost * 100}%` }} />
         </div>
       )}
 
