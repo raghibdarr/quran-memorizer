@@ -21,6 +21,7 @@ import BottomSheet from '@/components/ui/bottom-sheet';
 
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 import WordText from '@/components/ui/word-text';
+import SimilarAyahs from '@/components/ui/similar-ayahs';
 interface ChunkPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -871,6 +872,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
             ) : (
               <AyahDisplay ayah={currentAyah} spokenWord={spokenWord} />
             )}
+            {/* First text step only: the warning belongs before it's memorized, not on every rep */}
+            {learnStep === 'listen-with-text' && <SimilarAyahs ayah={currentAyah} className="mt-3" />}
           </div>
 
           {/* Rep beads */}

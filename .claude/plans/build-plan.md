@@ -441,6 +441,8 @@ sync pitch still open.** What landed:
 ---
 
 ### M10 — Recall drills pack: hide-words, audio repeat controls, mutashabihat v1, weak-ayat drill
+**STATUS 2026-10-16 — core done.** First-letter hints (Test, Recite, Review; tap a word to see it); Listen repeat each ayah 1/3/5/10x + pause to say it back + loop A–B (repeat/pause saved; one stored speed everywhere); /review/drill weakest-ayah session (getWeakAyahs: leeches, last-time misses, shaky, slips; ratings update schedules); mutashabihat v1 computed from our own text (scripts/build-mutashabihat.mjs, 464 pairs, "Similar to 7:19 · compare" in Listen and Memorize's first text step); QUD timings done earlier. Not done: historical weak-spot view, QUD Phonemizer tajweed explainer (stretch).
+
 **Size:** 2–3 sessions
 
 **Goal:** Ship the missing recall modalities that are table stakes in dedicated hifz apps: per-word hide/fade testing, granular audio repetition, similar-verse awareness, and ayah-level quick drills.
