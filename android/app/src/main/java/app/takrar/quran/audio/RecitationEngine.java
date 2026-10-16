@@ -177,6 +177,24 @@ public final class RecitationEngine {
         player.setPlayWhenReady(autoplay);
     }
 
+    /**
+     * A queue chosen outside the app (Android Auto): take it as ours, with no
+     * pauses or loop, and return the media items for the session to set and play.
+     */
+    public List<MediaItem> adopt(List<Item> next) {
+        handler.removeCallbacks(resumeAfterPause);
+        items = new ArrayList<>(next);
+        pauseMs = 0;
+        pauseFactor = 0f;
+        loop = false;
+        player.setPauseAtEndOfMediaItems(false);
+        player.setRepeatMode(Player.REPEAT_MODE_OFF);
+        restoreVolume();
+        List<MediaItem> media = new ArrayList<>(items.size());
+        for (int i = 0; i < items.size(); i++) media.add(toMediaItem(items.get(i), i));
+        return media;
+    }
+
     private MediaItem toMediaItem(Item item, int index) {
         MediaItem.ClippingConfiguration.Builder clip = new MediaItem.ClippingConfiguration.Builder()
             .setStartPositionMs(Math.max(0, item.startMs));

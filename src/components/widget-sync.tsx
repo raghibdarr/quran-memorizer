@@ -9,6 +9,11 @@ import { useReaderStore } from '@/stores/reader-store';
 import { upcoming } from '@/lib/upcoming';
 import { khatmStatus } from '@/lib/khatm';
 import { addDaysIso, todayIso } from '@/lib/dates';
+import { getSurahIndex } from '@/lib/quran-data';
+import { RECITERS, isSurahAudio, surahAudioFallback } from '@/lib/reciters';
+
+interface LibraryPlugin { setLibrary(data: { reciter: string; reciterName: string; fallback: string; surahAudio: boolean; names: string[]; counts: number[] }): Promise<void> }
+const Library = registerPlugin<LibraryPlugin>('RecitationPlayer');
 
 interface WidgetPlugin { update(data: { due: Record<string, number>; streak: number; khatm: string }): Promise<void> }
 const Widget = registerPlugin<WidgetPlugin>('TakrarWidget');
@@ -16,7 +21,8 @@ const Widget = registerPlugin<WidgetPlugin>('TakrarWidget');
 /**
  * Feeds the home-screen widget (roadmap #17): the next week's due reviews by
  * date (the widget picks today's itself), the live streak, and the khatm line.
- * Android app only; renders nothing.
+ * Also tells the native player what Android Auto can browse. Android app only;
+ * renders nothing.
  */
 export default function WidgetSync() {
   const lessonCards = useReviewStore((s) => s.lessonCards);
@@ -41,6 +47,23 @@ export default function WidgetSync() {
     }, 1500);
     return () => clearTimeout(t);
   }, [lessonCards, cards, streak, lastActiveDate, hideStats, khatm]);
+
+  // What Android Auto can browse: the current reciter's surahs (roadmap #20)
+  const reciter = useSettingsStore((s) => s.reciter);
+  useEffect(() => {
+    if (Capacitor.getPlatform() !== 'android' || !Capacitor.isPluginAvailable('RecitationPlayer')) return;
+    void getSurahIndex().then((idx) => {
+      const sorted = [...idx].sort((a, b) => a.id - b.id);
+      return Library.setLibrary({
+        reciter,
+        reciterName: RECITERS.find((r) => r.id === reciter)?.name ?? '',
+        fallback: surahAudioFallback(reciter),
+        surahAudio: isSurahAudio(reciter),
+        names: sorted.map((s) => s.nameSimple),
+        counts: sorted.map((s) => s.versesCount),
+      });
+    }).catch(() => {});
+  }, [reciter]);
 
   return null;
 }

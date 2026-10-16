@@ -125,6 +125,13 @@ public class RecitationPlayerPlugin extends Plugin implements RecitationEngine.L
         getActivity().runOnUiThread(() -> { engine().setSleepTimer(minutes, fade); call.resolve(); });
     }
 
+    /** What Android Auto can browse: the reciter and the surah names and lengths */
+    @PluginMethod
+    public void setLibrary(PluginCall call) {
+        RecitationLibrary.save(getContext(), call.getData());
+        call.resolve();
+    }
+
     @PluginMethod
     public void getState(PluginCall call) {
         getActivity().runOnUiThread(() -> {
