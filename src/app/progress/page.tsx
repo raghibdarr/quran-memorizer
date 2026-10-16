@@ -18,6 +18,7 @@ import UserButton from '@/components/auth/user-button';
 import CalendarHeatmap from '@/components/progress/calendar-heatmap';
 import TimelineChart from '@/components/progress/timeline-chart';
 import WeakSpots from '@/components/progress/weak-spots';
+import MushafMap from '@/components/progress/mushaf-map';
 import { cn } from '@/lib/cn';
 import { isoFromMs } from '@/lib/dates';
 
@@ -252,6 +253,7 @@ export default function ProgressPage() {
           )}
         </Card>
 
+        <MushafMap cards={ayahCards} />
         <WeakSpots cards={ayahCards} />
 
         {/* Tabs */}
