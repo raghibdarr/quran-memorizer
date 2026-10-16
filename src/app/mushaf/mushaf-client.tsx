@@ -20,6 +20,7 @@ import CloseButton from '@/components/ui/close-button';
 import SettingsPanel from '@/components/layout/settings-panel';
 import Link from '@/components/app-link';
 import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/cn';
 
 type Meta = QuranMeta & { counts: number[]; names: Map<number, string>; juzStartPages: number[] };
 let metaPromise: Promise<Meta> | null = null;
@@ -166,12 +167,29 @@ export default function MushafClient() {
     if (p !== pageNo) go(p);
   }, [meta, rec.active, rec.surah, rec.ayah, pageNo, go]);
 
+  // Words that differ from a near-twin ayah (mutashabihat), when that's switched on
+  const markSimilar = useSettingsStore((s) => !!s.mushafMarkSimilar);
+  const toggleMarkSimilar = useSettingsStore((s) => s.toggleMushafMarkSimilar);
+  const [twinWords, setTwinWords] = useState<Map<string, Set<number>> | null>(null);
+  useEffect(() => {
+    if (!markSimilar || twinWords) return;
+    import('@/data/mutashabihat.json').then((m) => {
+      const data = (m.default ?? m) as unknown as Record<string, { d: number[] }[]>;
+      const map = new Map<string, Set<number>>();
+      for (const [k, list] of Object.entries(data)) map.set(k, new Set(list.flatMap((t) => t.d)));
+      setTwinWords(map);
+    });
+  }, [markSimilar, twinWords]);
+
   const spoken = useSpokenWord(rec.surah ?? 0, rec.active ? rec.ayah : null, rec.playing, recitationClockMs);
 
   const markWord = useCallback((w: MushafWord): WordMark => {
-    if (!rec.active || w.surah !== rec.surah || w.ayah !== rec.ayah) return null;
-    return spoken >= 0 && w.wordNo === spoken + 1 ? 'spoken' : 'playing';
-  }, [rec.active, rec.surah, rec.ayah, spoken]);
+    if (rec.active && w.surah === rec.surah && w.ayah === rec.ayah) {
+      return spoken >= 0 && w.wordNo === spoken + 1 ? 'spoken' : 'playing';
+    }
+    if (markSimilar && twinWords && w.ayah !== null && w.wordNo && twinWords.get(`${w.surah}:${w.ayah}`)?.has(w.wordNo - 1)) return 'flag';
+    return null;
+  }, [rec.active, rec.surah, rec.ayah, spoken, markSimilar, twinWords]);
 
   const ayahTint = useCallback((surah: number, ayah: number) => {
     const h = highlights[ayahKey(surah, ayah)];
@@ -267,11 +285,18 @@ export default function MushafClient() {
             >
               ‹ {pageNo < MUSHAF_PAGES ? pageNo + 1 : ''}
             </button>
-            {khatmActive ? (
-              <p className="text-xs text-muted">Tap an ayah for bookmarks and notes</p>
-            ) : (
-              <Link href="/khatm" className="text-xs font-semibold text-teal underline-offset-2 hover:underline">Plan a khatm</Link>
-            )}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={toggleMarkSimilar}
+                aria-pressed={markSimilar}
+                className={cn('min-h-9 rounded-full px-3 text-xs font-semibold', markSimilar ? 'bg-gold/20 text-gold-deep' : 'bg-foreground/[0.06] text-foreground/80')}
+                data-mark-similar
+              >
+                Similar ayahs
+              </button>
+              {!khatmActive && <Link href="/khatm" className="text-xs font-semibold text-teal underline-offset-2 hover:underline">Plan a khatm</Link>}
+            </div>
             <button
               type="button"
               onClick={() => go(pageNo - 1)}

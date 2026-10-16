@@ -148,6 +148,8 @@ export interface UserSettings {
   readerWordByWord?: boolean;
   /** Hide streaks and counts (some prefer to keep their worship unscored) */
   hideStats?: boolean;
+  /** Mushaf page view marks words that differ from a near-twin ayah */
+  mushafMarkSimilar?: boolean;
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 
