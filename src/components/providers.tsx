@@ -8,6 +8,7 @@ import { SyncProvider } from '@/components/sync-provider';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
 import { useDayRollover } from '@/hooks/use-day-rollover';
 import { initNativeShell, isNative } from '@/lib/native';
+import { initNativeAuth } from '@/lib/native-auth';
 import { installPressHaptics } from '@/lib/haptics';
 import AppBadgeSync from '@/components/app-badge-sync';
 import ReminderSync from '@/components/reminder-sync';
@@ -53,9 +54,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     }
 
     const stopShell = initNativeShell();
+    const stopAuthLinks = initNativeAuth();
     const stopPressHaptics = installPressHaptics();
     return () => {
       stopShell();
+      stopAuthLinks();
       stopPressHaptics();
     };
   }, []);

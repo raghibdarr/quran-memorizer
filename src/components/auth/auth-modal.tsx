@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import BottomSheet from '@/components/ui/bottom-sheet'
-import { isNative } from '@/lib/native'
+import { googleAvailable, linkFlowsAvailable } from '@/lib/native-auth'
 import Button from '@/components/ui/button'
 
 type AuthView =
@@ -67,10 +67,11 @@ export default function AuthModal({
   onClearError,
 }: AuthModalProps) {
   const [view, setView] = useState<AuthView>(initialView)
-  // Inside the native apps, flows that bounce through an email link or an external
-  // OAuth page can't return to the app until deep links land (M11e) — and Google's
-  // OAuth is blocked in embedded WebViews outright. Email + password works everywhere.
-  const native = isNative()
+  // Flows that bounce through an email link or the system browser need the app's
+  // deep link set up (native-auth.ts); Google on iOS also waits for Sign in with
+  // Apple. Email + password works everywhere.
+  const links = linkFlowsAvailable()
+  const google = googleAvailable()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -202,8 +203,8 @@ export default function AuthModal({
               </div>
             )}
 
-            {/* Google OAuth — sign-in and sign-up only (web only for now) */}
-            {(view === 'sign-in' || view === 'sign-up') && !native && (
+            {/* Google OAuth — sign-in and sign-up only */}
+            {(view === 'sign-in' || view === 'sign-up') && google && (
               <>
                 <button
                   type="button"
@@ -256,8 +257,8 @@ export default function AuthModal({
               </div>
             )}
 
-            {/* Forgot password link (the reset email link can't reopen the native app yet) */}
-            {view === 'sign-in' && !native && (
+            {/* Forgot password link (needs the reset email to be able to reopen the app) */}
+            {view === 'sign-in' && links && (
               <button
                 type="button"
                 onClick={() => switchView('forgot-password')}
@@ -286,7 +287,7 @@ export default function AuthModal({
                       Sign up
                     </button>
                   </p>
-                  {!native && (
+                  {links && (
                     <p>
                       <button type="button" onClick={() => switchView('magic-link')} className="text-teal hover:underline">
                         Sign in with magic link

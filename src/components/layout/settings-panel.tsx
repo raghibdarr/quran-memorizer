@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { useSettingsStore } from '@/stores/settings-store';
 import { downloadBackup, importBackup } from '@/lib/backup';
+import EraseDevice from './erase-device';
+import Link from '@/components/app-link';
 import { rehydrateStores } from '@/lib/sync/rehydrate';
 import type { ArabicScriptStyle, Ayah } from '@/types/quran';
 import { CheckIcon, ChevronDownIcon, SettingsIcon } from '@/components/ui/icons';
@@ -499,12 +501,16 @@ export default function SettingsPanel() {
                 {backupMsg ?? 'Your progress is saved on this device. Export a backup, or sign in to sync it.'}
               </p>
               {backupMsg === 'Backup downloaded ✓' && <SyncPitch moment="backup" className="mt-3" />}
+              <EraseDevice />
             </div>
 
             {/* Data credits — quran-align and Qur'anic Universal Audio are CC BY 4.0, so this attribution is a license requirement */}
             <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
               Recitations: EveryAyah.com, QuranicAudio, MP3Quran &amp; Tarteel · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0),
               and Qur&apos;anic Universal Audio by QUD (CC BY 4.0)
+            </p>
+            <p className="mt-2 text-center text-[10px] text-muted/80">
+              <Link href="/privacy" className="underline underline-offset-2">Privacy policy</Link>
             </p>
           </div>
       </BottomSheet>

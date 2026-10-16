@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
+import { authRedirect, openAuthPage, PASSWORD_RECOVERY_EVENT } from '@/lib/native-auth'
+import { isNative } from '@/lib/native'
 
 interface AuthState {
   user: User | null
@@ -51,7 +53,14 @@ export function useAuth() {
       }))
     })
 
-    return () => subscription.unsubscribe()
+    // A reset link that reopened the app (native-auth.ts) asks for the new password
+    const onRecovery = () => setState(prev => ({ ...prev, isPasswordRecovery: true }))
+    window.addEventListener(PASSWORD_RECOVERY_EVENT, onRecovery)
+
+    return () => {
+      subscription.unsubscribe()
+      window.removeEventListener(PASSWORD_RECOVERY_EVENT, onRecovery)
+    }
   }, [supabase])
 
   const clearError = useCallback(() => {
@@ -64,7 +73,7 @@ export function useAuth() {
 
   const signUp = useCallback(async (email: string, password: string) => {
     setState(prev => ({ ...prev, error: null, loading: true }))
-    const { error } = await supabase.auth.signUp({ email, password })
+    const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: authRedirect() } })
     if (error) {
       setState(prev => ({ ...prev, error: formatAuthError(error), loading: false }))
       return false
@@ -86,14 +95,17 @@ export function useAuth() {
 
   const signInWithGoogle = useCallback(async () => {
     setState(prev => ({ ...prev, error: null }))
-    const { error } = await supabase.auth.signInWithOAuth({
+    // In the apps the provider page opens in the system browser and returns by deep link
+    const native = isNative()
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
+      options: { redirectTo: authRedirect(), skipBrowserRedirect: native },
     })
     if (error) {
       setState(prev => ({ ...prev, error: formatAuthError(error) }))
       return false
     }
+    if (native && data.url) await openAuthPage(data.url)
     return true
   }, [supabase])
 
@@ -101,7 +113,7 @@ export function useAuth() {
     setState(prev => ({ ...prev, error: null, loading: true }))
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: { emailRedirectTo: authRedirect() },
     })
     if (error) {
       setState(prev => ({ ...prev, error: formatAuthError(error), loading: false }))
@@ -114,7 +126,7 @@ export function useAuth() {
   const resetPassword = useCallback(async (email: string) => {
     setState(prev => ({ ...prev, error: null, loading: true }))
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/callback`,
+      redirectTo: authRedirect('recovery'),
     })
     if (error) {
       setState(prev => ({ ...prev, error: formatAuthError(error), loading: false }))
@@ -139,6 +151,14 @@ export function useAuth() {
     await supabase.auth.signOut()
   }, [supabase])
 
+  /** Deletes the account and everything synced to it (migration 004), then signs out */
+  const deleteAccount = useCallback(async () => {
+    const { error } = await supabase.rpc('delete_my_account')
+    if (error) return false
+    await supabase.auth.signOut({ scope: 'local' })
+    return true
+  }, [supabase])
+
   return {
     ...state,
     signUp,
@@ -148,6 +168,7 @@ export function useAuth() {
     resetPassword,
     updatePassword,
     signOut,
+    deleteAccount,
     clearError,
     clearPasswordRecovery,
   }

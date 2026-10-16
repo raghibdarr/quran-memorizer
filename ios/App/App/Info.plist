@@ -43,6 +43,17 @@
       </array>
     </dict>
 	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>auth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>takrar</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Takrar listens while you recite so it can check your recitation. Audio is processed on your device and never uploaded.</string>
 	<key>UILaunchStoryboardName</key>

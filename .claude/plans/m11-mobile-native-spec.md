@@ -234,22 +234,26 @@ waits for the owner's on-device dial tuning.
   as "dealt paper" or as wobble? is the stagger too slow on long lists?). After that, roll the
   accents out to Review, Progress, Essentials, juz/revise pages and the remaining toggles.
 
-## 5b. Store compliance checklist (added 2026-09-26 — none of these exist yet)
+## 5b. Store compliance checklist (added 2026-09-26; code items done 2026-10-16)
 
-- [ ] **In-app account deletion** — required by Apple 5.1.1(v) and Google Play. Plan: a
+- [x] **In-app account deletion** (2026-10-16: migration 004 `delete_my_account()`, "Delete account"
+      in the account sheet, plus "Erase everything on this device" in Settings. OWNER: apply 004.) — required by Apple 5.1.1(v) and Google Play. Plan: a
       `security definer` SQL function `delete_my_account()` (deletes `auth.users` where id = auth.uid();
       `user_data` cascades) + a confirm sheet in settings. Migration 003, owner applies.
-- [ ] **Privacy policy page** — both stores require a URL. Static `/privacy` route: local-first
+- [x] **Privacy policy page** (2026-10-16: `/privacy`, linked from Settings and the account sheet.
+      OWNER: set NEXT_PUBLIC_CONTACT_EMAIL on Netlify and the CONTACT_EMAIL repo variable.) — both stores require a URL. Static `/privacy` route: local-first
       storage, optional Supabase sync, mic audio processed on-device (Whisper), no ads/tracking.
-- [ ] **Native OAuth** — Google blocks sign-in inside embedded WebViews (`disallowed_useragent`).
+- [x] **Native OAuth** (2026-10-16: src/lib/native-auth.ts — Google via @capacitor/browser, magic link,
+      reset and sign-up emails return as takrar://auth/callback, PKCE in the apps. OWNER: add that URL to
+      Supabase redirect URLs, then set the repo variable NATIVE_AUTH=on.) — Google blocks sign-in inside embedded WebViews (`disallowed_useragent`).
       Use `@capacitor/browser` + a custom-scheme deep link back into the app + `exchangeCodeForSession`.
       Magic links need the same deep-link handling.
-- [ ] **Apple 4.8** — offering Google sign-in on iOS requires also offering Sign in with Apple.
+- [ ] **Apple 4.8** (default until decided: Google hidden on iOS; NEXT_PUBLIC_IOS_GOOGLE=on re-enables it) — offering Google sign-in on iOS requires also offering Sign in with Apple.
       Owner decision: add Apple sign-in (Supabase supports it; needs Apple Developer config) or hide
       Google on iOS and keep email/password + magic link.
 - [ ] Permission strings: `NSMicrophoneUsageDescription` (voice check) / Android `RECORD_AUDIO`;
       notification permission (M8).
-- [ ] Icons (adaptive Android, full iOS set), splash, status-bar styling, app name + bundle id
+- [x] Icons (adaptive Android, full iOS set), splash, status-bar styling, app name + bundle id
       (bundle id is permanent after first upload — owner confirms before M11e).
 - [ ] Store listings, screenshots, Play data-safety form, App Privacy labels, content rating.
 - [ ] OWNER: Apple Developer Program ($99/yr), Google Play Console ($25 once), signing keys.
