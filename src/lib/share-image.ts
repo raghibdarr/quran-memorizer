@@ -120,8 +120,14 @@ export async function renderAyahCard(input: CardInput): Promise<Blob> {
 }
 
 /** Share the card; returns how it went so the UI can say so */
-export async function shareAyahCard(input: CardInput, fileName: string): Promise<'shared' | 'downloaded' | 'cancelled'> {
-  const blob = await renderAyahCard(input);
+export async function shareAyahCard(input: CardInput, fileName: string): Promise<ShareOutcome> {
+  return shareImage(await renderAyahCard(input), fileName, input.reference);
+}
+
+export type ShareOutcome = 'shared' | 'downloaded' | 'cancelled';
+
+/** Hand an image to the system share sheet, or download it where there's none */
+export async function shareImage(blob: Blob, fileName: string, title: string): Promise<ShareOutcome> {
   if (Capacitor.isNativePlatform()) {
     const { Filesystem, Directory } = await import('@capacitor/filesystem');
     const { Share } = await import('@capacitor/share');
@@ -132,7 +138,7 @@ export async function shareAyahCard(input: CardInput, fileName: string): Promise
     });
     const { uri } = await Filesystem.writeFile({ path: fileName, data, directory: Directory.Cache });
     try {
-      await Share.share({ files: [uri], title: input.reference });
+      await Share.share({ files: [uri], title });
       return 'shared';
     } catch {
       return 'cancelled';
@@ -141,7 +147,7 @@ export async function shareAyahCard(input: CardInput, fileName: string): Promise
   const file = new File([blob], fileName, { type: 'image/png' });
   if (navigator.canShare?.({ files: [file] })) {
     try {
-      await navigator.share({ files: [file], title: input.reference });
+      await navigator.share({ files: [file], title });
       return 'shared';
     } catch {
       return 'cancelled';
@@ -153,4 +159,56 @@ export async function shareAyahCard(input: CardInput, fileName: string): Promise
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   return 'downloaded';
+}
+
+/** Gilded fore-edge (roadmap V3): the mushaf seen from its edge, each page gilded by how well it's held */
+export interface EdgeCardInput {
+  /** 604 entries, page 1 first: 0 = not learned, otherwise 0–1 how well held */
+  gilt: number[];
+  held: number;
+  strong: number;
+  since: string | null;
+  dark?: boolean;
+}
+
+export async function renderEdgeCard(input: EdgeCardInput): Promise<Blob> {
+  const latinFont = getComputedStyle(document.body).fontFamily || 'sans-serif';
+  await document.fonts.ready;
+  const canvas = document.createElement('canvas');
+  canvas.width = SIZE;
+  canvas.height = SIZE;
+  const ctx = canvas.getContext('2d')!;
+  const bg = input.dark ? '#0f1a1d' : '#fefcf9';
+  const ink = input.dark ? '#e9efe9' : '#1f2a2c';
+  const muted = input.dark ? '#9db0b5' : '#5f6b6d';
+  const page = input.dark ? '#2a3a3e' : '#e9e2d4';
+  const gold = '#c8963e';
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, SIZE, SIZE);
+
+  // The book, edge-on: 604 page edges, page 1 at the right as an Arabic mushaf opens
+  const x0 = PAD, w = SIZE - PAD * 2, top = 330, h = 300;
+  ctx.fillStyle = page;
+  ctx.fillRect(x0 - 8, top - 8, w + 16, h + 16);
+  const step = w / input.gilt.length;
+  input.gilt.forEach((g, i) => {
+    if (!g) return;
+    ctx.globalAlpha = 0.35 + 0.65 * g;
+    ctx.fillStyle = gold;
+    ctx.fillRect(x0 + w - (i + 1) * step, top, Math.max(1, step * 0.9), h);
+  });
+  ctx.globalAlpha = 1;
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = ink;
+  ctx.font = `700 64px ${latinFont}`;
+  ctx.fillText(`${input.held} of 604 pages`, SIZE / 2, 200);
+  ctx.fillStyle = muted;
+  ctx.font = `32px ${latinFont}`;
+  ctx.fillText(input.strong ? `held by heart, ${input.strong} of them strong` : 'held by heart', SIZE / 2, 254);
+  if (input.since) ctx.fillText(`since ${input.since}`, SIZE / 2, 740);
+  ctx.fillStyle = gold;
+  ctx.font = `600 30px ${latinFont}`;
+  ctx.fillText('Takrar', SIZE / 2, SIZE - 110);
+  return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('no image'))), 'image/png'));
 }
