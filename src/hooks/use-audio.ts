@@ -15,10 +15,15 @@ export function useAudio() {
     return unsubscribe;
   }, []);
 
-  // Keep the controller's reciter in sync with settings
+  // Keep the controller's reciter and speed in sync with settings (the stored speed
+  // used to apply only after it was changed in this session)
+  const speed = useSettingsStore((s) => s.playbackSpeed);
   useEffect(() => {
     audioController.setReciter(reciter);
   }, [reciter]);
+  useEffect(() => {
+    audioController.setSpeed(speed);
+  }, [speed]);
 
   const play = useCallback(async (url: string) => {
     await audioController.play(url);

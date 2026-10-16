@@ -149,7 +149,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     }
     return completed;
   });
-  const [currentSpeed, setCurrentSpeed] = useState(() => audioController.speed);
+  // One speed everywhere: the stored setting the player bar also uses
+  const currentSpeed = useSettingsStore((s) => s.playbackSpeed);
+  const setStoredSpeed = useSettingsStore((s) => s.setPlaybackSpeed);
 
   // Chaining state
   const [chainRevealed, setChainRevealed] = useState(false);
@@ -914,7 +916,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
             {[0.5, 0.75, 1, 1.25, 1.5].map((s) => (
               <button
                 key={s}
-                onClick={() => { setCurrentSpeed(s); audioController.setSpeed(s); }}
+                onClick={() => { setStoredSpeed(s); audioController.setSpeed(s); }}
                 className={cn(
                   'pressable rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors',
                   s === currentSpeed ? 'ink-border bg-teal text-on-teal' : 'text-muted hover:text-foreground'

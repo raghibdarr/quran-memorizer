@@ -134,6 +134,9 @@ export interface UserSettings {
   transliterationEnabled: boolean;
   translationEnabled: boolean;
   playbackSpeed: number;
+  /** Listen screen: play each ayah this many times, pausing this long after each (time to repeat it) */
+  listenRepeat: number;
+  listenPauseMs: number;
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 
