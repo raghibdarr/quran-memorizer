@@ -6,6 +6,8 @@ export interface ReciterOption {
   id: string;
   name: string;
   hint?: string;
+  /** Other spellings people search by (the names are transliterated many ways) */
+  aka?: string[];
 }
 
 /**
@@ -16,31 +18,31 @@ export interface ReciterOption {
  *   and played as a slice of the surah file (see audioController).
  */
 export const RECITERS: ReciterOption[] = [
-  { id: 'Alafasy_128kbps', name: 'Mishary Alafasy', hint: 'Default, clear and modern' },
-  { id: 'Husary_128kbps', name: 'Mahmoud Al-Husary', hint: 'Slower, beginner-friendly' },
-  { id: 'Abdul_Basit_Murattal_192kbps', name: 'Abdul Basit (Murattal)', hint: 'Slow, ornate' },
-  { id: 'Minshawy_Murattal_128kbps', name: 'Al-Minshawy (Murattal)', hint: 'Classical' },
+  { id: 'Alafasy_128kbps', name: 'Mishary Alafasy', hint: 'Default, clear and modern', aka: ['Afasy', 'Mishari', 'Alafasi'] },
+  { id: 'Husary_128kbps', name: 'Mahmoud Al-Husary', hint: 'Slower, beginner-friendly', aka: ['Husari', 'Hussary', 'Hosary'] },
+  { id: 'Abdul_Basit_Murattal_192kbps', name: 'Abdul Basit (Murattal)', hint: 'Slow, ornate', aka: ['Abdulbasit', 'Abdussamad', 'Abdul Samad'] },
+  { id: 'Minshawy_Murattal_128kbps', name: 'Al-Minshawy (Murattal)', hint: 'Classical', aka: ['Minshawi'] },
   // 128kbps (exact everyayah dir name, no underscores): QUL's word timestamps align to
   // this encode, not the old 64kbps directory
-  { id: 'MaherAlMuaiqly128kbps', name: 'Maher Al-Muaiqly' },
-  { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Ad-Dussary' },
-  { id: 'qud-saad_al_ghamdi', name: 'Saad Al-Ghamdi' },
-  { id: 'qud-abu_bakr_al_shatri', name: 'Abu Bakr Al-Shatri' },
-  { id: 'qud-saud_al_shuraim', name: 'Saud Al-Shuraim' },
-  { id: 'Hudhaify_128kbps', name: 'Ali Al-Hudhaify' },
-  { id: 'Nasser_Alqatami_128kbps', name: 'Nasser Al-Qatami' },
-  { id: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', name: 'Ahmed Al-Ajamy' },
-  { id: 'qud-abdullah_al_mattrod', name: 'Abdullah Al-Mattrod' },
-  { id: 'qud-hani_al_rifai', name: 'Hani Ar-Rifai' },
-  { id: 'qud-mohammed_al_luhaidan', name: 'Muhammad Al-Luhaidan' },
-  { id: 'qud-bandar_baleela', name: 'Bandar Baleela' },
-  { id: 'qud-khalifa_al_tunaiji', name: 'Khalifa At-Tunaiji' },
-  { id: 'qud-mahmoud_ali_al_banna', name: 'Mahmoud Ali Al-Banna' },
-  { id: 'qud-mustafa_ismail', name: 'Mustafa Ismail' },
-  { id: 'qud-abdur_rashid_sufi', name: 'Abdur-Rashid Sufi' },
-  { id: 'qud-abdulbasit_mujawwad', name: 'Abdul Basit (Mujawwad)', hint: 'Melodic and slow' },
-  { id: 'qud-husary_mujawwad', name: 'Al-Husary (Mujawwad)', hint: 'Melodic and slow' },
-  { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel', hint: 'No word-by-word highlighting' },
+  { id: 'MaherAlMuaiqly128kbps', name: 'Maher Al-Muaiqly', aka: ['Muaiqli', 'Mueaqly'] },
+  { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Ad-Dussary', aka: ['Dosari', 'Dossary', 'Dawsari'] },
+  { id: 'qud-saad_al_ghamdi', name: 'Saad Al-Ghamdi', aka: ['Ghamidi', 'Ghamadi'] },
+  { id: 'qud-abu_bakr_al_shatri', name: 'Abu Bakr Al-Shatri', aka: ['Shatree', 'Shaatree'] },
+  { id: 'qud-saud_al_shuraim', name: 'Saud Al-Shuraim', aka: ['Shuraym', 'Shureim'] },
+  { id: 'Hudhaify_128kbps', name: 'Ali Al-Hudhaify', aka: ['Huthaifi', 'Hudhaifi', 'Huzaifi'] },
+  { id: 'Nasser_Alqatami_128kbps', name: 'Nasser Al-Qatami', aka: ['Qatamy', 'Katami'] },
+  { id: 'Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net', name: 'Ahmed Al-Ajamy', aka: ['Ajmi', 'Ajami'] },
+  { id: 'qud-abdullah_al_mattrod', name: 'Abdullah Al-Mattrod', aka: ['Matrood', 'Matroud'] },
+  { id: 'qud-hani_al_rifai', name: 'Hani Ar-Rifai', aka: ['Rifaie', 'Refai'] },
+  { id: 'qud-mohammed_al_luhaidan', name: 'Muhammad Al-Luhaidan', aka: ['Lohaidan', 'Luhaydan', 'Mohammed'] },
+  { id: 'qud-bandar_baleela', name: 'Bandar Baleela', aka: ['Balila'] },
+  { id: 'qud-khalifa_al_tunaiji', name: 'Khalifa At-Tunaiji', aka: ['Tunaji', 'Tunaiji'] },
+  { id: 'qud-mahmoud_ali_al_banna', name: 'Mahmoud Ali Al-Banna', aka: ['Bana'] },
+  { id: 'qud-mustafa_ismail', name: 'Mustafa Ismail', aka: ['Mostafa', 'Ismaeel'] },
+  { id: 'qud-abdur_rashid_sufi', name: 'Abdur-Rashid Sufi', aka: ['Soufi', 'Abdulrashid'] },
+  { id: 'qud-abdulbasit_mujawwad', name: 'Abdul Basit (Mujawwad)', hint: 'Melodic and slow', aka: ['Abdulbasit', 'Abdussamad'] },
+  { id: 'qud-husary_mujawwad', name: 'Al-Husary (Mujawwad)', hint: 'Melodic and slow', aka: ['Husari', 'Hussary'] },
+  { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel', hint: 'No word-by-word highlighting', aka: ['Jibril', 'Mohammed'] },
 ];
 
 /** Reciters played as slices of whole-surah files → the everyayah directory that fills their missing ayahs */

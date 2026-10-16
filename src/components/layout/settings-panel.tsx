@@ -24,7 +24,8 @@ function ReciterPicker({ value, onChange }: { value: string; onChange: (id: stri
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const current = RECITERS.find((r) => r.id === value) ?? RECITERS[0];
-  const shown = query.trim() ? RECITERS.filter((r) => fold(r.name).includes(fold(query))) : RECITERS;
+  const q = fold(query);
+  const shown = q ? RECITERS.filter((r) => [r.name, ...(r.aka ?? [])].some((n) => fold(n).includes(q))) : RECITERS;
   const listRef = useRef<HTMLDivElement>(null);
 
   // Opening scrolls the chosen reciter into view inside the list
