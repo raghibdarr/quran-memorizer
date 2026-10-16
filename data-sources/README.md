@@ -11,3 +11,5 @@ in `scripts/` build `src/data/` from these; nothing here is edited by hand.
 | `clearquran/clearquran-allah-edition.txt` | The Clear Quran (Allah edition), Talal Itani, ClearQuran.com | CC BY-ND 4.0 with the author's extra permissions; credit "Translation by Talal Itani, ClearQuran.com" |
 
 Tanzil downloads need "I agree with the Terms of Use" ticked; the owner agreed on 2026-10-16.
+| `cpfair-tajweed/tajweed.hafs.uthmani-pause-sajdah.json` | Tajweed rules as character ranges, cpfair/quran-tajweed (github.com/cpfair/quran-tajweed) | CC BY 4.0; credit "Tajweed rules: cpfair/quran-tajweed" |
+| `cpfair-tajweed/quran-uthmani-2017.txt` | The Tanzil Uthmani text (April 2017) those ranges index into, as published with the data | Tanzil terms (CC BY 3.0, verbatim) |

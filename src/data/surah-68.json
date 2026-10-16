@@ -10,7 +10,7 @@
       "number": 1,
       "key": "68:1",
       "textUthmani": "نٓ ۚ وَٱلْقَلَمِ وَمَا يَسْطُرُونَ",
-      "textUthmaniTajweed": "<tajweed class=madda_necessary>نٓ</tajweed>‌ۚ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْقَلَمِ وَمَا يَسْطُر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١</span>",
+      "textUthmaniTajweed": "ن<tajweed class=madda_necessary>ٓ</tajweed>‌ۚ وَ<tajweed class=ham_wasl>ٱ</tajweed>لْقَلَمِ وَمَا يَسْطُرُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>١</span>",
       "textIndopak": "نٓ​ وَالۡقَلَمِ وَمَا يَسۡطُرُوۡنَۙ‏",
       "words": [
         {
@@ -61,7 +61,7 @@
       "number": 2,
       "key": "68:2",
       "textUthmani": "مَآ أَنتَ بِنِعْمَةِ رَبِّكَ بِمَجْنُونٍ",
-      "textUthmaniTajweed": "م<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>نت</tajweed>َ بِنِعْمَةِ رَبِّكَ بِمَ<tajweed class=qalaqah>جْ</tajweed>ن<tajweed class=madda_permissible>ُو</tajweed>نٍ <span class=end>٢</span>",
+      "textUthmaniTajweed": "مَ<tajweed class=madda_obligatory>آ</tajweed> أَ<tajweed class=ikhafa>نتَ</tajweed> بِنِعْمَةِ رَبِّكَ بِمَ<tajweed class=qalaqah>جْ</tajweed>نُ<tajweed class=madda_permissible>و</tajweed>نٍ <span class=end>٢</span>",
       "textIndopak": "مَاۤ اَنۡتَ بِـنِعۡمَةِ رَبِّكَ بِمَجۡنُوۡنٍ​ۚ‏",
       "words": [
         {
@@ -116,7 +116,7 @@
       "number": 3,
       "key": "68:3",
       "textUthmani": "وَإِنَّ لَكَ لَأَجْرًا غَيْرَ مَمْنُونٍ",
-      "textUthmaniTajweed": "وَإِ<tajweed class=ghunnah>نّ</tajweed>َ لَكَ لَأَ<tajweed class=qalaqah>جْ</tajweed>رًا غَيْرَ مَمْن<tajweed class=madda_permissible>ُو</tajweed>نٍ <span class=end>٣</span>",
+      "textUthmaniTajweed": "وَإِ<tajweed class=ghunnah>نَّ</tajweed> لَكَ لَأَ<tajweed class=qalaqah>جْ</tajweed>رًا غَيْرَ مَمْنُ<tajweed class=madda_permissible>و</tajweed>نٍ <span class=end>٣</span>",
       "textIndopak": "وَاِنَّ لَڪَ لَاَجۡرًا غَيۡرَ مَمۡنُوۡنٍ​ۚ‏",
       "words": [
         {
@@ -171,7 +171,7 @@
       "number": 4,
       "key": "68:4",
       "textUthmani": "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ",
-      "textUthmaniTajweed": "وَإِ<tajweed class=ghunnah>نّ</tajweed>َكَ لَعَلَىٰ خُلُقٍ عَظ<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>٤</span>",
+      "textUthmaniTajweed": "وَإِ<tajweed class=ghunnah>نَّ</tajweed>كَ لَعَلَىٰ خُلُقٍ عَظِ<tajweed class=madda_permissible>ي</tajweed>مٍ <span class=end>٤</span>",
       "textIndopak": "وَاِنَّكَ لَعَلٰى خُلُقٍ عَظِيۡمٍ‏",
       "words": [
         {
@@ -219,7 +219,7 @@
       "number": 5,
       "key": "68:5",
       "textUthmani": "فَسَتُبْصِرُ وَيُبْصِرُونَ",
-      "textUthmaniTajweed": "فَسَتُ<tajweed class=qalaqah>بْ</tajweed>صِرُ وَيُ<tajweed class=qalaqah>بْ</tajweed>صِر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٥</span>",
+      "textUthmaniTajweed": "فَسَتُ<tajweed class=qalaqah>بْ</tajweed>صِرُ وَيُ<tajweed class=qalaqah>بْ</tajweed>صِرُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٥</span>",
       "textIndopak": "فَسَتُبۡصِرُ وَيُبۡصِرُوۡنَۙ‏",
       "words": [
         {
@@ -253,7 +253,7 @@
       "number": 6,
       "key": "68:6",
       "textUthmani": "بِأَييِّكُمُ ٱلْمَفْتُونُ",
-      "textUthmaniTajweed": "بِأَييِّكُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْمَفْت<tajweed class=madda_permissible>ُو</tajweed>نُ <span class=end>٦</span>",
+      "textUthmaniTajweed": "بِأَييِّكُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْمَفْتُ<tajweed class=madda_permissible>و</tajweed>نُ <span class=end>٦</span>",
       "textIndopak": "بِاَيِّٮكُمُ الۡمَفۡتُوۡنُ‏",
       "words": [
         {
@@ -287,7 +287,7 @@
       "number": 7,
       "key": "68:7",
       "textUthmani": "إِنَّ رَبَّكَ هُوَ أَعْلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ",
-      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َ رَبَّكَ هُوَ أَعْلَمُ بِمَ<tajweed class=ikhafa>ن ض</tajweed>َلَّ عَ<tajweed class=ikhafa>ن س</tajweed>َبِيلِه<tajweed class=madda_normal>ِۦ</tajweed> وَهُوَ أَعْلَمُ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْمُهْتَد<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٧</span>",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نَّ</tajweed> رَبَّكَ هُوَ أَعْلَمُ بِمَ<tajweed class=ikhafa>ن ضَ</tajweed>لَّ عَ<tajweed class=ikhafa>ن سَ</tajweed>بِيلِهِ<tajweed class=madda_normal>ۦ</tajweed> وَهُوَ أَعْلَمُ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْمُهْتَدِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٧</span>",
       "textIndopak": "اِنَّ رَبَّكَ هُوَ اَعۡلَمُ بِمَنۡ ضَلَّ عَنۡ سَبِيۡلِهٖ وَهُوَ اَعۡلَمُ بِالۡمُهۡتَدِيۡنَ‏",
       "words": [
         {
@@ -384,7 +384,7 @@
       "number": 8,
       "key": "68:8",
       "textUthmani": "فَلَا تُطِعِ ٱلْمُكَذِّبِينَ",
-      "textUthmaniTajweed": "فَلَا تُطِعِ <tajweed class=ham_wasl>ٱ</tajweed>لْمُكَذِّب<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٨</span>",
+      "textUthmaniTajweed": "فَلَا تُطِعِ <tajweed class=ham_wasl>ٱ</tajweed>لْمُكَذِّبِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٨</span>",
       "textIndopak": "فَلَا تُطِعِ الۡمُكَذِّبِيۡنَ‏",
       "words": [
         {
@@ -425,7 +425,7 @@
       "number": 9,
       "key": "68:9",
       "textUthmani": "وَدُّوا۟ لَوْ تُدْهِنُ فَيُدْهِنُونَ",
-      "textUthmaniTajweed": "وَدُّو<tajweed class=slnt>اْ</tajweed> لَوْ تُ<tajweed class=qalaqah>دْ</tajweed>هِنُ فَيُ<tajweed class=qalaqah>دْ</tajweed>هِن<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٩</span>",
+      "textUthmaniTajweed": "وَدُّو<tajweed class=slnt>ا۟</tajweed> لَوْ تُ<tajweed class=qalaqah>دْ</tajweed>هِنُ فَيُ<tajweed class=qalaqah>دْ</tajweed>هِنُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٩</span>",
       "textIndopak": "وَدُّوۡا لَوۡ تُدۡهِنُ فَيُدۡهِنُوۡنَ‏",
       "words": [
         {
@@ -473,7 +473,7 @@
       "number": 10,
       "key": "68:10",
       "textUthmani": "وَلَا تُطِعْ كُلَّ حَلَّافٍ مَّهِينٍ",
-      "textUthmaniTajweed": "وَلَا تُطِعْ كُلَّ حَلَّا<tajweed class=idgham_ghunnah>فٍ م</tajweed>َّه<tajweed class=madda_permissible>ِي</tajweed>نٍ <span class=end>١٠</span>",
+      "textUthmaniTajweed": "وَلَا تُطِعْ كُلَّ حَلَّا<tajweed class=idgham_ghunnah>فٍ مَّ</tajweed>هِ<tajweed class=madda_permissible>ي</tajweed>نٍ <span class=end>١٠</span>",
       "textIndopak": "وَلَا تُطِعۡ كُلَّ حَلَّافٍ مَّهِيۡنٍۙ‏",
       "words": [
         {
@@ -528,7 +528,7 @@
       "number": 11,
       "key": "68:11",
       "textUthmani": "هَمَّازٍ مَّشَّآءٍۭ بِنَمِيمٍ",
-      "textUthmaniTajweed": "هَ<tajweed class=ghunnah>مّ</tajweed>َا<tajweed class=idgham_ghunnah>زٍ م</tajweed>َّشّ<tajweed class=madda_obligatory>َا</tajweed>ٓ<tajweed class=iqlab>ءِۭ ب</tajweed>ِنَم<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>١١</span>",
+      "textUthmaniTajweed": "هَ<tajweed class=ghunnah>مَّ</tajweed>ا<tajweed class=idgham_ghunnah>زٍ مَّ</tajweed>شَّ<tajweed class=madda_obligatory>آ</tajweed><tajweed class=iqlab>ءٍۭ بِ</tajweed>نَمِ<tajweed class=madda_permissible>ي</tajweed>مٍ <span class=end>١١</span>",
       "textIndopak": "هَمَّازٍ مَّشَّآءٍۢ بِنَمِيۡمٍۙ‏",
       "words": [
         {
@@ -569,7 +569,7 @@
       "number": 12,
       "key": "68:12",
       "textUthmani": "مَّنَّاعٍ لِّلْخَيْرِ مُعْتَدٍ أَثِيمٍ",
-      "textUthmaniTajweed": "مَّ<tajweed class=ghunnah>نّ</tajweed>َا<tajweed class=idgham_wo_ghunnah>عٍ ل</tajweed>ِّلْخَيْرِ مُعْتَدٍ أَث<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>١٢</span>",
+      "textUthmaniTajweed": "مَّ<tajweed class=ghunnah>نَّ</tajweed>ا<tajweed class=idgham_wo_ghunnah>عٍ لِّ</tajweed>لْخَيْرِ مُعْتَدٍ أَثِ<tajweed class=madda_permissible>ي</tajweed>مٍ <span class=end>١٢</span>",
       "textIndopak": "مَّنَّاعٍ لِّلۡخَيۡرِ مُعۡتَدٍ اَثِيۡمٍۙ‏",
       "words": [
         {
@@ -617,7 +617,7 @@
       "number": 13,
       "key": "68:13",
       "textUthmani": "عُتُلٍّۭ بَعْدَ ذَٰلِكَ زَنِيمٍ",
-      "textUthmaniTajweed": "عُتُل<tajweed class=iqlab>ِّۭ ب</tajweed>َعْدَ ذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ زَن<tajweed class=madda_permissible>ِي</tajweed>مٍ <span class=end>١٣</span>",
+      "textUthmaniTajweed": "عُتُ<tajweed class=iqlab>لٍّۭ بَ</tajweed>عْدَ ذَ<tajweed class=madda_normal>ٰ</tajweed>لِكَ زَنِ<tajweed class=madda_permissible>ي</tajweed>مٍ <span class=end>١٣</span>",
       "textIndopak": "عُتُلٍّ ۢ بَعۡدَ ذٰلِكَ زَنِيۡمٍۙ‏",
       "words": [
         {
@@ -668,7 +668,7 @@
       "number": 14,
       "key": "68:14",
       "textUthmani": "أَن كَانَ ذَا مَالٍ وَبَنِينَ",
-      "textUthmaniTajweed": "أَ<tajweed class=ikhafa>ن ك</tajweed>َانَ ذَا مَا<tajweed class=idgham_ghunnah>لٍ و</tajweed>َبَن<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٤</span>",
+      "textUthmaniTajweed": "أَ<tajweed class=ikhafa>ن كَ</tajweed>انَ ذَا مَا<tajweed class=idgham_ghunnah>لٍ وَ</tajweed>بَنِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>١٤</span>",
       "textIndopak": "اَنۡ كَانَ ذَا مَالٍ وَّبَنِيۡنَؕ‏",
       "words": [
         {
@@ -723,7 +723,7 @@
       "number": 15,
       "key": "68:15",
       "textUthmani": "إِذَا تُتْلَىٰ عَلَيْهِ ءَايَـٰتُنَا قَالَ أَسَـٰطِيرُ ٱلْأَوَّلِينَ",
-      "textUthmaniTajweed": "إِذَا تُتْلَىٰ عَلَيْهِ ءَايَ<tajweed class=madda_normal>ـٰ</tajweed>تُنَا قَالَ أَسَ<tajweed class=madda_normal>ـٰ</tajweed>طِيرُ <tajweed class=ham_wasl>ٱ</tajweed>لْأَوَّل<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٥</span>",
+      "textUthmaniTajweed": "إِذَا تُتْلَىٰ عَلَيْهِ ءَايَـ<tajweed class=madda_normal>ٰ</tajweed>تُنَا قَالَ أَسَـ<tajweed class=madda_normal>ٰ</tajweed>طِيرُ <tajweed class=ham_wasl>ٱ</tajweed>لْأَوَّلِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>١٥</span>",
       "textIndopak": "اِذَا تُتۡلٰى عَلَيۡهِ اٰيٰتُنَا قَالَ اَسَاطِيۡرُ الۡاَوَّلِيۡنَ‏",
       "words": [
         {
@@ -792,7 +792,7 @@
       "number": 16,
       "key": "68:16",
       "textUthmani": "سَنَسِمُهُۥ عَلَى ٱلْخُرْطُومِ",
-      "textUthmaniTajweed": "سَنَسِمُهُ<tajweed class=madda_normal>ۥ</tajweed> عَلَى <tajweed class=ham_wasl>ٱ</tajweed>لْخُرْط<tajweed class=madda_permissible>ُو</tajweed>مِ <span class=end>١٦</span>",
+      "textUthmaniTajweed": "سَنَسِمُهُ<tajweed class=madda_normal>ۥ</tajweed> عَلَى <tajweed class=ham_wasl>ٱ</tajweed>لْخُرْطُ<tajweed class=madda_permissible>و</tajweed>مِ <span class=end>١٦</span>",
       "textIndopak": "سَنَسِمُهٗ عَلَى الۡخُـرۡطُوۡمِ‏",
       "words": [
         {
@@ -836,7 +836,7 @@
       "number": 17,
       "key": "68:17",
       "textUthmani": "إِنَّا بَلَوْنَـٰهُمْ كَمَا بَلَوْنَآ أَصْحَـٰبَ ٱلْجَنَّةِ إِذْ أَقْسَمُوا۟ لَيَصْرِمُنَّهَا مُصْبِحِينَ",
-      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َا بَلَوْنَ<tajweed class=madda_normal>ـٰ</tajweed>هُمْ كَمَا بَلَوْن<tajweed class=madda_obligatory>َآ</tajweed> أَصْحَ<tajweed class=madda_normal>ـٰ</tajweed>بَ <tajweed class=ham_wasl>ٱ</tajweed>لْجَ<tajweed class=ghunnah>نّ</tajweed>َةِ إِذْ أَ<tajweed class=qalaqah>قْ</tajweed>سَمُو<tajweed class=slnt>اْ</tajweed> لَيَصْرِمُ<tajweed class=ghunnah>نّ</tajweed>َهَا مُصْبِح<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>١٧</span>",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نَّ</tajweed>ا بَلَوْنَـ<tajweed class=madda_normal>ٰ</tajweed>هُمْ كَمَا بَلَوْنَ<tajweed class=madda_obligatory>آ</tajweed> أَصْحَـ<tajweed class=madda_normal>ٰ</tajweed>بَ <tajweed class=ham_wasl>ٱ</tajweed>لْجَ<tajweed class=ghunnah>نَّ</tajweed>ةِ إِذْ أَ<tajweed class=qalaqah>قْ</tajweed>سَمُو<tajweed class=slnt>ا۟</tajweed> لَيَصْرِمُ<tajweed class=ghunnah>نَّ</tajweed>هَا مُصْبِحِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>١٧</span>",
       "textIndopak": "اِنَّا بَلَوۡنٰهُمۡ كَمَا بَلَوۡنَاۤ اَصۡحٰبَ الۡجَـنَّةِ​ ۚ اِذۡ اَقۡسَمُوۡا لَيَصۡرِمُنَّهَا مُصۡبِحِيۡنَۙ‏",
       "words": [
         {
@@ -926,7 +926,7 @@
       "number": 18,
       "key": "68:18",
       "textUthmani": "وَلَا يَسْتَثْنُونَ",
-      "textUthmaniTajweed": "وَلَا يَسْتَثْن<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١٨</span>",
+      "textUthmaniTajweed": "وَلَا يَسْتَثْنُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>١٨</span>",
       "textIndopak": "وَلَا يَسۡتَثۡنُوۡنَ‏",
       "words": [
         {
@@ -963,7 +963,7 @@
       "number": 19,
       "key": "68:19",
       "textUthmani": "فَطَافَ عَلَيْهَا طَآئِفٌ مِّن رَّبِّكَ وَهُمْ نَآئِمُونَ",
-      "textUthmaniTajweed": "فَطَافَ عَلَيْهَا ط<tajweed class=madda_obligatory>َا</tajweed>ٓئِ<tajweed class=idgham_ghunnah>فٌ م</tajweed>ّ<tajweed class=idgham_wo_ghunnah>ِن ر</tajweed>َّبِّكَ وَهُمْ ن<tajweed class=madda_obligatory>َا</tajweed>ٓئِم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١٩</span>",
+      "textUthmaniTajweed": "فَطَافَ عَلَيْهَا طَ<tajweed class=madda_obligatory>آ</tajweed>ئِ<tajweed class=idgham_ghunnah>فٌ مِّ</tajweed><tajweed class=idgham_wo_ghunnah>ن رَّ</tajweed>بِّكَ وَهُمْ نَ<tajweed class=madda_obligatory>آ</tajweed>ئِمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>١٩</span>",
       "textIndopak": "فَطَافَ عَلَيۡهَا طَآٮِٕفٌ مِّنۡ رَّبِّكَ وَهُمۡ نَآٮِٕمُوۡنَ‏",
       "words": [
         {
@@ -1032,7 +1032,7 @@
       "number": 20,
       "key": "68:20",
       "textUthmani": "فَأَصْبَحَتْ كَٱلصَّرِيمِ",
-      "textUthmaniTajweed": "فَأَصْبَحَتْ كَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّر<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٢٠</span>",
+      "textUthmaniTajweed": "فَأَصْبَحَتْ كَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّرِ<tajweed class=madda_permissible>ي</tajweed>مِ <span class=end>٢٠</span>",
       "textIndopak": "فَاَصۡبَحَتۡ كَالصَّرِيۡمِۙ‏",
       "words": [
         {
@@ -1066,7 +1066,7 @@
       "number": 21,
       "key": "68:21",
       "textUthmani": "فَتَنَادَوْا۟ مُصْبِحِينَ",
-      "textUthmaniTajweed": "فَتَنَادَوْ<tajweed class=slnt>اْ</tajweed> مُصْبِح<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢١</span>",
+      "textUthmaniTajweed": "فَتَنَادَوْ<tajweed class=slnt>ا۟</tajweed> مُصْبِحِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٢١</span>",
       "textIndopak": "فَتَـنَادَوۡا مُصۡبِحِيۡنَۙ‏",
       "words": [
         {
@@ -1100,7 +1100,7 @@
       "number": 22,
       "key": "68:22",
       "textUthmani": "أَنِ ٱغْدُوا۟ عَلَىٰ حَرْثِكُمْ إِن كُنتُمْ صَـٰرِمِينَ",
-      "textUthmaniTajweed": "أَنِ <tajweed class=ham_wasl>ٱ</tajweed>غْدُو<tajweed class=slnt>اْ</tajweed> عَلَىٰ حَرْثِكُمْ إِ<tajweed class=ikhafa>ن ك</tajweed>ُ<tajweed class=ikhafa>نت</tajweed>ُمْ صَ<tajweed class=madda_normal>ـٰ</tajweed>رِم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢٢</span>",
+      "textUthmaniTajweed": "أَنِ <tajweed class=ham_wasl>ٱ</tajweed>غْدُو<tajweed class=slnt>ا۟</tajweed> عَلَىٰ حَرْثِكُمْ إِ<tajweed class=ikhafa>ن كُ</tajweed><tajweed class=ikhafa>نتُ</tajweed>مْ صَـ<tajweed class=madda_normal>ٰ</tajweed>رِمِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٢٢</span>",
       "textIndopak": "اَنِ اغۡدُوۡا عَلٰى حَرۡثِكُمۡ اِنۡ كُنۡتُمۡ صٰرِمِيۡنَ‏",
       "words": [
         {
@@ -1169,7 +1169,7 @@
       "number": 23,
       "key": "68:23",
       "textUthmani": "فَٱنطَلَقُوا۟ وَهُمْ يَتَخَـٰفَتُونَ",
-      "textUthmaniTajweed": "فَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=ikhafa>نط</tajweed>َلَقُو<tajweed class=slnt>اْ</tajweed> وَهُمْ يَتَخَ<tajweed class=madda_normal>ـٰ</tajweed>فَت<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٣</span>",
+      "textUthmaniTajweed": "فَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=ikhafa>نطَ</tajweed>لَقُو<tajweed class=slnt>ا۟</tajweed> وَهُمْ يَتَخَـ<tajweed class=madda_normal>ٰ</tajweed>فَتُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٢٣</span>",
       "textIndopak": "فَانۡطَلَقُوۡا وَهُمۡ يَتَخَافَتُوۡنَۙ‏",
       "words": [
         {
@@ -1210,7 +1210,7 @@
       "number": 24,
       "key": "68:24",
       "textUthmani": "أَن لَّا يَدْخُلَنَّهَا ٱلْيَوْمَ عَلَيْكُم مِّسْكِينٌ",
-      "textUthmaniTajweed": "أ<tajweed class=idgham_wo_ghunnah>َن ل</tajweed>َّا يَ<tajweed class=qalaqah>دْ</tajweed>خُلَ<tajweed class=ghunnah>نّ</tajweed>َهَا <tajweed class=ham_wasl>ٱ</tajweed>لْيَوْمَ عَلَيْك<tajweed class=idgham_shafawi>ُم م</tajweed>ِّسْك<tajweed class=madda_permissible>ِي</tajweed>نٌ <span class=end>٢٤</span>",
+      "textUthmaniTajweed": "أَ<tajweed class=idgham_wo_ghunnah>ن لَّ</tajweed>ا يَ<tajweed class=qalaqah>دْ</tajweed>خُلَ<tajweed class=ghunnah>نَّ</tajweed>هَا <tajweed class=ham_wasl>ٱ</tajweed>لْيَوْمَ عَلَيْكُ<tajweed class=idgham_shafawi>م مِّ</tajweed>سْكِ<tajweed class=madda_permissible>ي</tajweed>نٌ <span class=end>٢٤</span>",
       "textIndopak": "اَنۡ لَّا يَدۡخُلَنَّهَا الۡيَوۡمَ عَلَيۡكُمۡ مِّسۡكِيۡنٌۙ‏",
       "words": [
         {
@@ -1272,7 +1272,7 @@
       "number": 25,
       "key": "68:25",
       "textUthmani": "وَغَدَوْا۟ عَلَىٰ حَرْدٍ قَـٰدِرِينَ",
-      "textUthmaniTajweed": "وَغَدَوْ<tajweed class=slnt>اْ</tajweed> عَلَىٰ حَرْ<tajweed class=ikhafa>دٍ ق</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>دِر<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢٥</span>",
+      "textUthmaniTajweed": "وَغَدَوْ<tajweed class=slnt>ا۟</tajweed> عَلَىٰ حَرْ<tajweed class=ikhafa>دٍ قَ</tajweed>ـ<tajweed class=madda_normal>ٰ</tajweed>دِرِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٢٥</span>",
       "textIndopak": "وَّغَدَوۡا عَلٰى حَرۡدٍ قٰدِرِيۡنَ‏",
       "words": [
         {
@@ -1323,7 +1323,7 @@
       "number": 26,
       "key": "68:26",
       "textUthmani": "فَلَمَّا رَأَوْهَا قَالُوٓا۟ إِنَّا لَضَآلُّونَ",
-      "textUthmaniTajweed": "فَلَ<tajweed class=ghunnah>مّ</tajweed>َا رَأَوْهَا قَال<tajweed class=madda_obligatory>ُوٓ</tajweed><tajweed class=slnt>اْ</tajweed> إِ<tajweed class=ghunnah>نّ</tajweed>َا لَض<tajweed class=madda_necessary>َا</tajweed>ٓلّ<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٦</span>",
+      "textUthmaniTajweed": "فَلَ<tajweed class=ghunnah>مَّ</tajweed>ا رَأَوْهَا قَالُ<tajweed class=madda_obligatory>وٓ</tajweed><tajweed class=slnt>ا۟</tajweed> إِ<tajweed class=ghunnah>نَّ</tajweed>ا لَضَ<tajweed class=madda_necessary>آ</tajweed>لُّ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٢٦</span>",
       "textIndopak": "فَلَمَّا رَاَوۡهَا قَالُوۡۤا اِنَّا لَـضَآلُّوۡنَۙ‏",
       "words": [
         {
@@ -1378,7 +1378,7 @@
       "number": 27,
       "key": "68:27",
       "textUthmani": "بَلْ نَحْنُ مَحْرُومُونَ",
-      "textUthmaniTajweed": "بَلْ نَحْنُ مَحْرُوم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٧</span>",
+      "textUthmaniTajweed": "بَلْ نَحْنُ مَحْرُومُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٢٧</span>",
       "textIndopak": "بَلۡ نَحۡنُ مَحۡرُوۡمُوۡنَ‏",
       "words": [
         {
@@ -1419,7 +1419,7 @@
       "number": 28,
       "key": "68:28",
       "textUthmani": "قَالَ أَوْسَطُهُمْ أَلَمْ أَقُل لَّكُمْ لَوْلَا تُسَبِّحُونَ",
-      "textUthmaniTajweed": "قَالَ أَوْسَطُهُمْ أَلَمْ أَقُل لَّكُمْ لَوْلَا تُسَبِّح<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢٨</span>",
+      "textUthmaniTajweed": "قَالَ أَوْسَطُهُمْ أَلَمْ أَقُل لَّكُمْ لَوْلَا تُسَبِّحُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٢٨</span>",
       "textIndopak": "قَالَ اَوۡسَطُهُمۡ اَلَمۡ اَقُلۡ لَّكُمۡ لَوۡلَا تُسَبِّحُوۡنَ‏",
       "words": [
         {
@@ -1491,7 +1491,7 @@
       "number": 29,
       "key": "68:29",
       "textUthmani": "قَالُوا۟ سُبْحَـٰنَ رَبِّنَآ إِنَّا كُنَّا ظَـٰلِمِينَ",
-      "textUthmaniTajweed": "قَالُو<tajweed class=slnt>اْ</tajweed> سُ<tajweed class=qalaqah>بْ</tajweed>حَ<tajweed class=madda_normal>ـٰ</tajweed>نَ رَبِّن<tajweed class=madda_obligatory>َآ</tajweed> إِ<tajweed class=ghunnah>نّ</tajweed>َا كُ<tajweed class=ghunnah>نّ</tajweed>َا ظَ<tajweed class=madda_normal>ـٰ</tajweed>لِم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢٩</span>",
+      "textUthmaniTajweed": "قَالُو<tajweed class=slnt>ا۟</tajweed> سُ<tajweed class=qalaqah>بْ</tajweed>حَـ<tajweed class=madda_normal>ٰ</tajweed>نَ رَبِّنَ<tajweed class=madda_obligatory>آ</tajweed> إِ<tajweed class=ghunnah>نَّ</tajweed>ا كُ<tajweed class=ghunnah>نَّ</tajweed>ا ظَـ<tajweed class=madda_normal>ٰ</tajweed>لِمِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٢٩</span>",
       "textIndopak": "قَالُوۡا سُبۡحٰنَ رَبِّنَاۤ اِنَّا كُنَّا ظٰلِمِيۡنَ‏",
       "words": [
         {
@@ -1553,7 +1553,7 @@
       "number": 30,
       "key": "68:30",
       "textUthmani": "فَأَقْبَلَ بَعْضُهُمْ عَلَىٰ بَعْضٍ يَتَلَـٰوَمُونَ",
-      "textUthmaniTajweed": "فَأَ<tajweed class=qalaqah>قْ</tajweed>بَلَ بَعْضُهُمْ عَلَىٰ بَعْ<tajweed class=idgham_ghunnah>ضٍ ي</tajweed>َتَلَ<tajweed class=madda_normal>ـٰ</tajweed>وَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٠</span>",
+      "textUthmaniTajweed": "فَأَ<tajweed class=qalaqah>قْ</tajweed>بَلَ بَعْضُهُمْ عَلَىٰ بَعْ<tajweed class=idgham_ghunnah>ضٍ يَ</tajweed>تَلَـ<tajweed class=madda_normal>ٰ</tajweed>وَمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٠</span>",
       "textIndopak": "فَاَقۡبَلَ بَعۡضُهُمۡ عَلٰى بَعۡضٍ يَّتَلَاوَمُوۡنَ‏",
       "words": [
         {
@@ -1608,7 +1608,7 @@
       "number": 31,
       "key": "68:31",
       "textUthmani": "قَالُوا۟ يَـٰوَيْلَنَآ إِنَّا كُنَّا طَـٰغِينَ",
-      "textUthmaniTajweed": "قَالُو<tajweed class=slnt>اْ</tajweed> يَ<tajweed class=madda_normal>ـٰ</tajweed>وَيْلَن<tajweed class=madda_obligatory>َآ</tajweed> إِ<tajweed class=ghunnah>نّ</tajweed>َا كُ<tajweed class=ghunnah>نّ</tajweed>َا طَ<tajweed class=madda_normal>ـٰ</tajweed>غ<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٣١</span>",
+      "textUthmaniTajweed": "قَالُو<tajweed class=slnt>ا۟</tajweed> يَـ<tajweed class=madda_normal>ٰ</tajweed>وَيْلَنَ<tajweed class=madda_obligatory>آ</tajweed> إِ<tajweed class=ghunnah>نَّ</tajweed>ا كُ<tajweed class=ghunnah>نَّ</tajweed>ا طَـ<tajweed class=madda_normal>ٰ</tajweed>غِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٣١</span>",
       "textIndopak": "قَالُوۡا يٰوَيۡلَنَاۤ اِنَّا كُنَّا طٰغِيۡنَ‏",
       "words": [
         {
@@ -1663,7 +1663,7 @@
       "number": 32,
       "key": "68:32",
       "textUthmani": "عَسَىٰ رَبُّنَآ أَن يُبْدِلَنَا خَيْرًا مِّنْهَآ إِنَّآ إِلَىٰ رَبِّنَا رَٰغِبُونَ",
-      "textUthmaniTajweed": "عَسَىٰ رَبُّن<tajweed class=madda_obligatory>َآ</tajweed> أ<tajweed class=idgham_ghunnah>َن ي</tajweed>ُ<tajweed class=qalaqah>بْ</tajweed>دِلَنَا خَيْ<tajweed class=idgham_ghunnah>رًا م</tajweed>ِّنْه<tajweed class=madda_obligatory>َآ</tajweed> إِ<tajweed class=ghunnah>نّ</tajweed><tajweed class=madda_obligatory>َآ</tajweed> إِلَىٰ رَبِّنَا ر<tajweed class=madda_normal>َٲ</tajweed>غِب<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٢</span>",
+      "textUthmaniTajweed": "عَسَىٰ رَبُّنَ<tajweed class=madda_obligatory>آ</tajweed> أَ<tajweed class=idgham_ghunnah>ن يُ</tajweed><tajweed class=qalaqah>بْ</tajweed>دِلَنَا خَيْ<tajweed class=idgham_ghunnah>رًا مِّ</tajweed>نْهَ<tajweed class=madda_obligatory>آ</tajweed> إِ<tajweed class=ghunnah>نَّ</tajweed><tajweed class=madda_obligatory>آ</tajweed> إِلَىٰ رَبِّنَا رَ<tajweed class=madda_normal>ٰ</tajweed>غِبُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٢</span>",
       "textIndopak": "عَسٰى رَبُّنَاۤ اَنۡ يُّبۡدِلَـنَا خَيۡرًا مِّنۡهَاۤ اِنَّاۤ اِلٰى رَبِّنَا رٰغِبُوۡنَ‏",
       "words": [
         {
@@ -1756,7 +1756,7 @@
       "number": 33,
       "key": "68:33",
       "textUthmani": "كَذَٰلِكَ ٱلْعَذَابُ ۖ وَلَعَذَابُ ٱلْـَٔاخِرَةِ أَكْبَرُ ۚ لَوْ كَانُوا۟ يَعْلَمُونَ",
-      "textUthmaniTajweed": "كَذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ <tajweed class=ham_wasl>ٱ</tajweed>لْعَذَابُ‌ۖ وَلَعَذَابُ <tajweed class=ham_wasl>ٱ</tajweed>لْأَخِرَةِ أَكْبَرُ‌ۚ لَوْ كَانُو<tajweed class=slnt>اْ</tajweed> يَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٣</span>",
+      "textUthmaniTajweed": "كَذَ<tajweed class=madda_normal>ٰ</tajweed>لِكَ <tajweed class=ham_wasl>ٱ</tajweed>لْعَذَابُ‌ۖ وَلَعَذَابُ <tajweed class=ham_wasl>ٱ</tajweed>لْـَٔاخِرَةِ أَكْبَرُ‌ۚ لَوْ كَانُو<tajweed class=slnt>ا۟</tajweed> يَعْلَمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٣</span>",
       "textIndopak": "كَذٰلِكَ الۡعَذَابُ​ؕ وَلَعَذَابُ الۡاٰخِرَةِ اَكۡبَرُ ​ۘ لَوۡ كَانُوۡا يَعۡلَمُوۡنَ‏ ﻿﻿",
       "words": [
         {
@@ -1832,7 +1832,7 @@
       "number": 34,
       "key": "68:34",
       "textUthmani": "إِنَّ لِلْمُتَّقِينَ عِندَ رَبِّهِمْ جَنَّـٰتِ ٱلنَّعِيمِ",
-      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َ لِلْمُتَّقِينَ عِ<tajweed class=ikhafa>ند</tajweed>َ رَبِّهِمْ جَ<tajweed class=ghunnah>نّ</tajweed>َ<tajweed class=madda_normal>ـٰ</tajweed>تِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نّ</tajweed>َع<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٣٤</span>",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نَّ</tajweed> لِلْمُتَّقِينَ عِ<tajweed class=ikhafa>ندَ</tajweed> رَبِّهِمْ جَ<tajweed class=ghunnah>نَّ</tajweed>ـ<tajweed class=madda_normal>ٰ</tajweed>تِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed><tajweed class=ghunnah>نَّ</tajweed>عِ<tajweed class=madda_permissible>ي</tajweed>مِ <span class=end>٣٤</span>",
       "textIndopak": "اِنَّ لِلۡمُتَّقِيۡنَ عِنۡدَ رَبِّهِمۡ جَنّٰتِ النَّعِيۡمِ‏",
       "words": [
         {
@@ -1894,7 +1894,7 @@
       "number": 35,
       "key": "68:35",
       "textUthmani": "أَفَنَجْعَلُ ٱلْمُسْلِمِينَ كَٱلْمُجْرِمِينَ",
-      "textUthmaniTajweed": "أَفَنَ<tajweed class=qalaqah>جْ</tajweed>عَلُ <tajweed class=ham_wasl>ٱ</tajweed>لْمُسْلِمِينَ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=qalaqah>جْ</tajweed>رِم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٣٥</span>",
+      "textUthmaniTajweed": "أَفَنَ<tajweed class=qalaqah>جْ</tajweed>عَلُ <tajweed class=ham_wasl>ٱ</tajweed>لْمُسْلِمِينَ كَ<tajweed class=ham_wasl>ٱ</tajweed>لْمُ<tajweed class=qalaqah>جْ</tajweed>رِمِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٣٥</span>",
       "textIndopak": "اَفَنَجۡعَلُ الۡمُسۡلِمِيۡنَ كَالۡمُجۡرِمِيۡنَؕ‏",
       "words": [
         {
@@ -1935,7 +1935,7 @@
       "number": 36,
       "key": "68:36",
       "textUthmani": "مَا لَكُمْ كَيْفَ تَحْكُمُونَ",
-      "textUthmaniTajweed": "مَا لَكُمْ كَيْفَ تَحْكُم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٦</span>",
+      "textUthmaniTajweed": "مَا لَكُمْ كَيْفَ تَحْكُمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٦</span>",
       "textIndopak": "مَا لَـكُمۡ كَيۡفَ تَحۡكُمُوۡنَ​ۚ‏",
       "words": [
         {
@@ -1983,7 +1983,7 @@
       "number": 37,
       "key": "68:37",
       "textUthmani": "أَمْ لَكُمْ كِتَـٰبٌ فِيهِ تَدْرُسُونَ",
-      "textUthmaniTajweed": "أَمْ لَكُمْ كِتَ<tajweed class=madda_normal>ـٰ</tajweed><tajweed class=ikhafa>بٌ ف</tajweed>ِيهِ تَ<tajweed class=qalaqah>دْ</tajweed>رُس<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٧</span>",
+      "textUthmaniTajweed": "أَمْ لَكُمْ كِتَـ<tajweed class=madda_normal>ٰ</tajweed><tajweed class=ikhafa>بٌ فِ</tajweed>يهِ تَ<tajweed class=qalaqah>دْ</tajweed>رُسُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٧</span>",
       "textIndopak": "اَمۡ لَـكُمۡ كِتٰبٌ فِيۡهِ تَدۡرُسُوۡنَۙ‏",
       "words": [
         {
@@ -2038,7 +2038,7 @@
       "number": 38,
       "key": "68:38",
       "textUthmani": "إِنَّ لَكُمْ فِيهِ لَمَا تَخَيَّرُونَ",
-      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نّ</tajweed>َ لَكُمْ فِيهِ لَمَا تَخَيَّر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٨</span>",
+      "textUthmaniTajweed": "إِ<tajweed class=ghunnah>نَّ</tajweed> لَكُمْ فِيهِ لَمَا تَخَيَّرُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٨</span>",
       "textIndopak": "اِنَّ لَـكُمۡ فِيۡهِ لَمَا تَخَيَّرُوۡنَ​ۚ‏",
       "words": [
         {
@@ -2093,7 +2093,7 @@
       "number": 39,
       "key": "68:39",
       "textUthmani": "أَمْ لَكُمْ أَيْمَـٰنٌ عَلَيْنَا بَـٰلِغَةٌ إِلَىٰ يَوْمِ ٱلْقِيَـٰمَةِ ۙ إِنَّ لَكُمْ لَمَا تَحْكُمُونَ",
-      "textUthmaniTajweed": "أَمْ لَكُمْ أَيْمَ<tajweed class=madda_normal>ـٰ</tajweed>نٌ عَلَيْنَا بَ<tajweed class=madda_normal>ـٰ</tajweed>لِغَةٌ إِلَىٰ يَوْمِ <tajweed class=ham_wasl>ٱ</tajweed>لْقِيَ<tajweed class=madda_normal>ـٰ</tajweed>مَةِ‌ۙ إِ<tajweed class=ghunnah>نّ</tajweed>َ لَكُمْ لَمَا تَحْكُم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٣٩</span>",
+      "textUthmaniTajweed": "أَمْ لَكُمْ أَيْمَـ<tajweed class=madda_normal>ٰ</tajweed>نٌ عَلَيْنَا بَـ<tajweed class=madda_normal>ٰ</tajweed>لِغَةٌ إِلَىٰ يَوْمِ <tajweed class=ham_wasl>ٱ</tajweed>لْقِيَـ<tajweed class=madda_normal>ٰ</tajweed>مَةِ‌ۙ إِ<tajweed class=ghunnah>نَّ</tajweed> لَكُمْ لَمَا تَحْكُمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٣٩</span>",
       "textIndopak": "اَمۡ لَـكُمۡ اَيۡمَانٌ عَلَيۡنَا بَالِغَةٌ اِلٰى يَوۡمِ الۡقِيٰمَةِ​ ۙ اِنَّ لَـكُمۡ لَمَا تَحۡكُمُوۡنَ​ۚ‏",
       "words": [
         {
@@ -2197,7 +2197,7 @@
       "number": 40,
       "key": "68:40",
       "textUthmani": "سَلْهُمْ أَيُّهُم بِذَٰلِكَ زَعِيمٌ",
-      "textUthmaniTajweed": "سَلْهُمْ أَيُّه<tajweed class=ikhafa_shafawi>ُم ب</tajweed>ِذ<tajweed class=madda_normal>َٲ</tajweed>لِكَ زَع<tajweed class=madda_permissible>ِي</tajweed>مٌ <span class=end>٤٠</span>",
+      "textUthmaniTajweed": "سَلْهُمْ أَيُّهُ<tajweed class=ikhafa_shafawi>م بِ</tajweed>ذَ<tajweed class=madda_normal>ٰ</tajweed>لِكَ زَعِ<tajweed class=madda_permissible>ي</tajweed>مٌ <span class=end>٤٠</span>",
       "textIndopak": "سَلۡهُمۡ اَيُّهُمۡ بِذٰلِكَ زَعِيۡمٌ ۛۚ‏",
       "words": [
         {
@@ -2245,7 +2245,7 @@
       "number": 41,
       "key": "68:41",
       "textUthmani": "أَمْ لَهُمْ شُرَكَآءُ فَلْيَأْتُوا۟ بِشُرَكَآئِهِمْ إِن كَانُوا۟ صَـٰدِقِينَ",
-      "textUthmaniTajweed": "أَمْ لَهُمْ شُرَك<tajweed class=madda_obligatory>َا</tajweed>ٓءُ فَلْيَأْتُو<tajweed class=slnt>اْ</tajweed> بِشُرَك<tajweed class=madda_obligatory>َا</tajweed>ٓئِهِمْ إِ<tajweed class=ikhafa>ن ك</tajweed>َانُو<tajweed class=slnt>اْ</tajweed> صَ<tajweed class=madda_normal>ـٰ</tajweed>دِق<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٤١</span>",
+      "textUthmaniTajweed": "أَمْ لَهُمْ شُرَكَ<tajweed class=madda_obligatory>آ</tajweed>ءُ فَلْيَأْتُو<tajweed class=slnt>ا۟</tajweed> بِشُرَكَ<tajweed class=madda_obligatory>آ</tajweed>ئِهِمْ إِ<tajweed class=ikhafa>ن كَ</tajweed>انُو<tajweed class=slnt>ا۟</tajweed> صَـ<tajweed class=madda_normal>ٰ</tajweed>دِقِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٤١</span>",
       "textIndopak": "اَمۡ لَهُمۡ شُرَكَآءُ ۛۚ فَلۡيَاۡتُوۡا بِشُرَكَآٮِٕهِمۡ اِنۡ كَانُوۡا صٰدِقِيۡنَ‏ ﻿﻿",
       "words": [
         {
@@ -2324,7 +2324,7 @@
       "number": 42,
       "key": "68:42",
       "textUthmani": "يَوْمَ يُكْشَفُ عَن سَاقٍ وَيُدْعَوْنَ إِلَى ٱلسُّجُودِ فَلَا يَسْتَطِيعُونَ",
-      "textUthmaniTajweed": "يَوْمَ يُكْشَفُ عَ<tajweed class=ikhafa>ن س</tajweed>َا<tajweed class=idgham_ghunnah>قٍ و</tajweed>َيُ<tajweed class=qalaqah>دْ</tajweed>عَوْنَ إِلَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سُّجُودِ فَلَا يَسْتَطِيع<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٢</span>",
+      "textUthmaniTajweed": "يَوْمَ يُكْشَفُ عَ<tajweed class=ikhafa>ن سَ</tajweed>ا<tajweed class=idgham_ghunnah>قٍ وَ</tajweed>يُ<tajweed class=qalaqah>دْ</tajweed>عَوْنَ إِلَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سُّجُودِ فَلَا يَسْتَطِيعُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٤٢</span>",
       "textIndopak": "يَوۡمَ يُكۡشَفُ عَنۡ سَاقٍ وَّيُدۡعَوۡنَ اِلَى السُّجُوۡدِ فَلَا يَسۡتَطِيۡعُوۡنَۙ‏ ﻿﻿",
       "words": [
         {
@@ -2410,7 +2410,7 @@
       "number": 43,
       "key": "68:43",
       "textUthmani": "خَـٰشِعَةً أَبْصَـٰرُهُمْ تَرْهَقُهُمْ ذِلَّةٌ ۖ وَقَدْ كَانُوا۟ يُدْعَوْنَ إِلَى ٱلسُّجُودِ وَهُمْ سَـٰلِمُونَ",
-      "textUthmaniTajweed": "خَ<tajweed class=madda_normal>ـٰ</tajweed>شِعَةً أَ<tajweed class=qalaqah>بْ</tajweed>صَ<tajweed class=madda_normal>ـٰ</tajweed>رُهُمْ تَرْهَقُهُمْ ذِلَّ<tajweed class=idgham_ghunnah>ةٌ‌ۖ و</tajweed>َقَ<tajweed class=qalaqah>دْ</tajweed> كَانُو<tajweed class=slnt>اْ</tajweed> يُ<tajweed class=qalaqah>دْ</tajweed>عَوْنَ إِلَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سُّجُودِ وَهُمْ سَ<tajweed class=madda_normal>ـٰ</tajweed>لِم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٣</span>",
+      "textUthmaniTajweed": "خَـ<tajweed class=madda_normal>ٰ</tajweed>شِعَةً أَ<tajweed class=qalaqah>بْ</tajweed>صَـ<tajweed class=madda_normal>ٰ</tajweed>رُهُمْ تَرْهَقُهُمْ ذِلَّ<tajweed class=idgham_ghunnah>ةٌ‌ۖ وَ</tajweed>قَ<tajweed class=qalaqah>دْ</tajweed> كَانُو<tajweed class=slnt>ا۟</tajweed> يُ<tajweed class=qalaqah>دْ</tajweed>عَوْنَ إِلَى <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>سُّجُودِ وَهُمْ سَـ<tajweed class=madda_normal>ٰ</tajweed>لِمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٤٣</span>",
       "textIndopak": "خَاشِعَةً اَبۡصَارُهُمۡ تَرۡهَقُهُمۡ ذِلَّةٌ ؕ وَقَدۡ كَانُوۡا يُدۡعَوۡنَ اِلَى السُّجُوۡدِ وَهُمۡ سٰلِمُوۡنَ‏",
       "words": [
         {
@@ -2510,7 +2510,7 @@
       "number": 44,
       "key": "68:44",
       "textUthmani": "فَذَرْنِى وَمَن يُكَذِّبُ بِهَـٰذَا ٱلْحَدِيثِ ۖ سَنَسْتَدْرِجُهُم مِّنْ حَيْثُ لَا يَعْلَمُونَ",
-      "textUthmaniTajweed": "فَذَرْنِى وَم<tajweed class=idgham_ghunnah>َن ي</tajweed>ُكَذِّبُ بِهَ<tajweed class=madda_normal>ـٰ</tajweed>ذَا <tajweed class=ham_wasl>ٱ</tajweed>لْحَدِيثِ‌ۖ سَنَسْتَ<tajweed class=qalaqah>دْ</tajweed>رِجُه<tajweed class=idgham_shafawi>ُم م</tajweed>ِّنْ حَيْثُ لَا يَعْلَم<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٤</span>",
+      "textUthmaniTajweed": "فَذَرْنِى وَمَ<tajweed class=idgham_ghunnah>ن يُ</tajweed>كَذِّبُ بِهَـ<tajweed class=madda_normal>ٰ</tajweed>ذَا <tajweed class=ham_wasl>ٱ</tajweed>لْحَدِيثِ‌ۖ سَنَسْتَ<tajweed class=qalaqah>دْ</tajweed>رِجُهُ<tajweed class=idgham_shafawi>م مِّ</tajweed>نْ حَيْثُ لَا يَعْلَمُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٤٤</span>",
       "textIndopak": "فَذَرۡنِىۡ وَمَنۡ يُّكَذِّبُ بِهٰذَا الۡحَـدِيۡثِ​ؕ سَنَسۡتَدۡرِجُهُمۡ مِّنۡ حَيۡثُ لَا يَعۡلَمُوۡنَۙ‏",
       "words": [
         {
@@ -2603,7 +2603,7 @@
       "number": 45,
       "key": "68:45",
       "textUthmani": "وَأُمْلِى لَهُمْ ۚ إِنَّ كَيْدِى مَتِينٌ",
-      "textUthmaniTajweed": "وَأُمْلِى لَهُمْ‌ۚ إِ<tajweed class=ghunnah>نّ</tajweed>َ كَيْدِى مَت<tajweed class=madda_permissible>ِي</tajweed>نٌ <span class=end>٤٥</span>",
+      "textUthmaniTajweed": "وَأُمْلِى لَهُمْ‌ۚ إِ<tajweed class=ghunnah>نَّ</tajweed> كَيْدِى مَتِ<tajweed class=madda_permissible>ي</tajweed>نٌ <span class=end>٤٥</span>",
       "textIndopak": "وَاُمۡلِىۡ لَهُمۡ​ؕ اِنَّ كَيۡدِىۡ مَتِيۡنٌ‏",
       "words": [
         {
@@ -2658,7 +2658,7 @@
       "number": 46,
       "key": "68:46",
       "textUthmani": "أَمْ تَسْـَٔلُهُمْ أَجْرًا فَهُم مِّن مَّغْرَمٍ مُّثْقَلُونَ",
-      "textUthmaniTajweed": "أَمْ تَسْــَٔلُهُمْ أَ<tajweed class=qalaqah>جْ</tajweed><tajweed class=ikhafa>رًا ف</tajweed>َه<tajweed class=idgham_shafawi>ُم م</tajweed>ّ<tajweed class=idgham_ghunnah>ِن م</tajweed>َّغْرَ<tajweed class=idgham_ghunnah>مٍ م</tajweed>ُّثْقَل<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٦</span>",
+      "textUthmaniTajweed": "أَمْ تَسْـَٔلُهُمْ أَ<tajweed class=qalaqah>جْ</tajweed><tajweed class=ikhafa>رًا فَ</tajweed>هُ<tajweed class=idgham_shafawi>م مِّ</tajweed><tajweed class=idgham_ghunnah>ن مَّ</tajweed>غْرَ<tajweed class=idgham_ghunnah>مٍ مُّ</tajweed>ثْقَلُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٤٦</span>",
       "textIndopak": "اَمۡ تَسۡـَٔـلُهُمۡ اَجۡرًا فَهُمۡ مِّنۡ مَّغۡرَمٍ مُّثۡقَلُوۡنَ​ۚ‏",
       "words": [
         {
@@ -2727,7 +2727,7 @@
       "number": 47,
       "key": "68:47",
       "textUthmani": "أَمْ عِندَهُمُ ٱلْغَيْبُ فَهُمْ يَكْتُبُونَ",
-      "textUthmaniTajweed": "أَمْ عِ<tajweed class=ikhafa>ند</tajweed>َهُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْغَيْبُ فَهُمْ يَكْتُب<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٤٧</span>",
+      "textUthmaniTajweed": "أَمْ عِ<tajweed class=ikhafa>ندَ</tajweed>هُمُ <tajweed class=ham_wasl>ٱ</tajweed>لْغَيْبُ فَهُمْ يَكْتُبُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٤٧</span>",
       "textIndopak": "اَمۡ عِنۡدَهُمُ الۡغَيۡبُ فَهُمۡ يَكۡتُبُوۡنَ‏",
       "words": [
         {
@@ -2782,7 +2782,7 @@
       "number": 48,
       "key": "68:48",
       "textUthmani": "فَٱصْبِرْ لِحُكْمِ رَبِّكَ وَلَا تَكُن كَصَاحِبِ ٱلْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظُومٌ",
-      "textUthmaniTajweed": "فَ<tajweed class=ham_wasl>ٱ</tajweed>صْبِرْ لِحُكْمِ رَبِّكَ وَلَا تَكُ<tajweed class=ikhafa>ن ك</tajweed>َصَاحِبِ <tajweed class=ham_wasl>ٱ</tajweed>لْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظ<tajweed class=madda_permissible>ُو</tajweed>مٌ <span class=end>٤٨</span>",
+      "textUthmaniTajweed": "فَ<tajweed class=ham_wasl>ٱ</tajweed>صْبِرْ لِحُكْمِ رَبِّكَ وَلَا تَكُ<tajweed class=ikhafa>ن كَ</tajweed>صَاحِبِ <tajweed class=ham_wasl>ٱ</tajweed>لْحُوتِ إِذْ نَادَىٰ وَهُوَ مَكْظُ<tajweed class=madda_permissible>و</tajweed>مٌ <span class=end>٤٨</span>",
       "textIndopak": "فَاصۡبِرۡ لِحُكۡمِ رَبِّكَ وَلَا تَكُنۡ كَصَاحِبِ الۡحُوۡتِ​ۘ اِذۡ نَادٰى وَهُوَ مَكۡظُوۡمٌؕ‏",
       "words": [
         {
@@ -2879,7 +2879,7 @@
       "number": 49,
       "key": "68:49",
       "textUthmani": "لَّوْلَآ أَن تَدَٰرَكَهُۥ نِعْمَةٌ مِّن رَّبِّهِۦ لَنُبِذَ بِٱلْعَرَآءِ وَهُوَ مَذْمُومٌ",
-      "textUthmaniTajweed": "لَّوْل<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>ن ت</tajweed>َد<tajweed class=madda_normal>َٲ</tajweed>رَكَهُ<tajweed class=madda_normal>ۥ</tajweed> نِعْمَ<tajweed class=idgham_ghunnah>ةٌ م</tajweed>ّ<tajweed class=idgham_wo_ghunnah>ِن ر</tajweed>َّبِّه<tajweed class=madda_normal>ِۦ</tajweed> لَنُبِذَ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْعَر<tajweed class=madda_obligatory>َا</tajweed>ٓءِ وَهُوَ مَذْم<tajweed class=madda_permissible>ُو</tajweed>مٌ <span class=end>٤٩</span>",
+      "textUthmaniTajweed": "لَّوْلَ<tajweed class=madda_obligatory>آ</tajweed> أَ<tajweed class=ikhafa>ن تَ</tajweed>دَ<tajweed class=madda_normal>ٰ</tajweed>رَكَهُ<tajweed class=madda_normal>ۥ</tajweed> نِعْمَ<tajweed class=idgham_ghunnah>ةٌ مِّ</tajweed><tajweed class=idgham_wo_ghunnah>ن رَّ</tajweed>بِّهِ<tajweed class=madda_normal>ۦ</tajweed> لَنُبِذَ بِ<tajweed class=ham_wasl>ٱ</tajweed>لْعَرَ<tajweed class=madda_obligatory>آ</tajweed>ءِ وَهُوَ مَذْمُ<tajweed class=madda_permissible>و</tajweed>مٌ <span class=end>٤٩</span>",
       "textIndopak": "لَوۡلَاۤ اَنۡ تَدٰرَكَهٗ نِعۡمَةٌ مِّنۡ رَّبِّهٖ لَنُبِذَ بِالۡعَرَآءِ وَهُوَ مَذۡمُوۡمٌ‏",
       "words": [
         {
@@ -2972,7 +2972,7 @@
       "number": 50,
       "key": "68:50",
       "textUthmani": "فَٱجْتَبَـٰهُ رَبُّهُۥ فَجَعَلَهُۥ مِنَ ٱلصَّـٰلِحِينَ",
-      "textUthmaniTajweed": "فَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=qalaqah>جْ</tajweed>تَبَ<tajweed class=madda_normal>ـٰ</tajweed>هُ رَبُّهُ<tajweed class=madda_normal>ۥ</tajweed> فَجَعَلَهُ<tajweed class=madda_normal>ۥ</tajweed> مِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّ<tajweed class=madda_normal>ـٰ</tajweed>لِح<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٥٠</span>",
+      "textUthmaniTajweed": "فَ<tajweed class=ham_wasl>ٱ</tajweed><tajweed class=qalaqah>جْ</tajweed>تَبَـ<tajweed class=madda_normal>ٰ</tajweed>هُ رَبُّهُ<tajweed class=madda_normal>ۥ</tajweed> فَجَعَلَهُ<tajweed class=madda_normal>ۥ</tajweed> مِنَ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صَّـ<tajweed class=madda_normal>ٰ</tajweed>لِحِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٥٠</span>",
       "textIndopak": "فَاجۡتَبٰهُ رَبُّهٗ فَجَعَلَهٗ مِنَ الصّٰلِحِيۡنَ‏",
       "words": [
         {
@@ -3027,7 +3027,7 @@
       "number": 51,
       "key": "68:51",
       "textUthmani": "وَإِن يَكَادُ ٱلَّذِينَ كَفَرُوا۟ لَيُزْلِقُونَكَ بِأَبْصَـٰرِهِمْ لَمَّا سَمِعُوا۟ ٱلذِّكْرَ وَيَقُولُونَ إِنَّهُۥ لَمَجْنُونٌ",
-      "textUthmaniTajweed": "وَإ<tajweed class=idgham_ghunnah>ِن ي</tajweed>َكَادُ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ كَفَرُو<tajweed class=slnt>اْ</tajweed> لَيُزْلِقُونَكَ بِأَ<tajweed class=qalaqah>بْ</tajweed>صَ<tajweed class=madda_normal>ـٰ</tajweed>رِهِمْ لَ<tajweed class=ghunnah>مّ</tajweed>َا سَمِعُو<tajweed class=slnt>اْ</tajweed> <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ذِّكْرَ وَيَقُولُونَ إِ<tajweed class=ghunnah>نّ</tajweed>َهُ<tajweed class=madda_normal>ۥ</tajweed> لَمَ<tajweed class=qalaqah>جْ</tajweed>ن<tajweed class=madda_permissible>ُو</tajweed>نٌ <span class=end>٥١</span>",
+      "textUthmaniTajweed": "وَإِ<tajweed class=idgham_ghunnah>ن يَ</tajweed>كَادُ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ كَفَرُو<tajweed class=slnt>ا۟</tajweed> لَيُزْلِقُونَكَ بِأَ<tajweed class=qalaqah>بْ</tajweed>صَـ<tajweed class=madda_normal>ٰ</tajweed>رِهِمْ لَ<tajweed class=ghunnah>مَّ</tajweed>ا سَمِعُو<tajweed class=slnt>ا۟</tajweed> <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ذِّكْرَ وَيَقُولُونَ إِ<tajweed class=ghunnah>نَّ</tajweed>هُ<tajweed class=madda_normal>ۥ</tajweed> لَمَ<tajweed class=qalaqah>جْ</tajweed>نُ<tajweed class=madda_permissible>و</tajweed>نٌ <span class=end>٥١</span>",
       "textIndopak": "وَاِنۡ يَّكَادُ الَّذِيۡنَ كَفَرُوۡا لَيُزۡلِقُوۡنَكَ بِاَبۡصَارِهِمۡ لَمَّا سَمِعُوا الذِّكۡرَ وَيَقُوۡلُوۡنَ اِنَّهٗ لَمَجۡنُوۡنٌ​ۘ‏",
       "words": [
         {
@@ -3131,7 +3131,7 @@
       "number": 52,
       "key": "68:52",
       "textUthmani": "وَمَا هُوَ إِلَّا ذِكْرٌ لِّلْعَـٰلَمِينَ",
-      "textUthmaniTajweed": "وَمَا هُوَ إِلَّا ذِكْ<tajweed class=idgham_wo_ghunnah>رٌ ل</tajweed>ِّلْعَ<tajweed class=madda_normal>ـٰ</tajweed>لَم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٥٢</span>",
+      "textUthmaniTajweed": "وَمَا هُوَ إِلَّا ذِكْ<tajweed class=idgham_wo_ghunnah>رٌ لِّ</tajweed>لْعَـ<tajweed class=madda_normal>ٰ</tajweed>لَمِ<tajweed class=madda_permissible>ي</tajweed>نَ <span class=end>٥٢</span>",
       "textIndopak": "وَمَا هُوَ اِلَّا ذِكۡرٌ لِّلۡعٰلَمِيۡنَ‏",
       "words": [
         {

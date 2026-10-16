@@ -10,7 +10,7 @@
       "number": 1,
       "key": "109:1",
       "textUthmani": "قُلْ يَـٰٓأَيُّهَا ٱلْكَـٰفِرُونَ",
-      "textUthmaniTajweed": "قُلْ يَ<tajweed class=madda_obligatory>ـٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed>لْكَ<tajweed class=madda_normal>ـٰ</tajweed>فِر<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>١</span>",
+      "textUthmaniTajweed": "قُلْ يَـ<tajweed class=madda_obligatory>ٰٓ</tajweed>أَيُّهَا <tajweed class=ham_wasl>ٱ</tajweed>لْكَـ<tajweed class=madda_normal>ٰ</tajweed>فِرُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>١</span>",
       "textIndopak": "قُلۡ يٰۤاَيُّهَا الۡكٰفِرُوۡنَۙ‏",
       "words": [
         {
@@ -51,7 +51,7 @@
       "number": 2,
       "key": "109:2",
       "textUthmani": "لَآ أَعْبُدُ مَا تَعْبُدُونَ",
-      "textUthmaniTajweed": "ل<tajweed class=madda_obligatory>َآ</tajweed> أَعْبُدُ مَا تَعْبُد<tajweed class=madda_permissible>ُو</tajweed>نَ <span class=end>٢</span>",
+      "textUthmaniTajweed": "لَ<tajweed class=madda_obligatory>آ</tajweed> أَعْبُدُ مَا تَعْبُدُ<tajweed class=madda_permissible>و</tajweed>نَ <span class=end>٢</span>",
       "textIndopak": "لَاۤ اَعۡبُدُ مَا تَعۡبُدُوۡنَۙ‏",
       "words": [
         {
@@ -99,7 +99,7 @@
       "number": 3,
       "key": "109:3",
       "textUthmani": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
-      "textUthmaniTajweed": "وَل<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>نت</tajweed>ُمْ عَ<tajweed class=madda_normal>ـٰ</tajweed>بِدُونَ م<tajweed class=madda_obligatory>َآ</tajweed> أَعْبُ<tajweed class=qalaqah>د</tajweed>ُ <span class=end>٣</span>",
+      "textUthmaniTajweed": "وَلَ<tajweed class=madda_obligatory>آ</tajweed> أَ<tajweed class=ikhafa>نتُ</tajweed>مْ عَـ<tajweed class=madda_normal>ٰ</tajweed>بِدُونَ مَ<tajweed class=madda_obligatory>آ</tajweed> أَعْبُ<tajweed class=qalaqah>دُ</tajweed> <span class=end>٣</span>",
       "textIndopak": "وَلَاۤ اَنۡـتُمۡ عٰبِدُوۡنَ مَاۤ اَعۡبُدُ​ ۚ‏",
       "words": [
         {
@@ -154,7 +154,7 @@
       "number": 4,
       "key": "109:4",
       "textUthmani": "وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمْ",
-      "textUthmaniTajweed": "وَل<tajweed class=madda_obligatory>َآ</tajweed> أَنَا۟ عَابِ<tajweed class=idgham_ghunnah>دٌ م</tajweed>َّا عَبَ<tajweed class=idgham_mutajanisayn>د</tajweed>تُّمْ <span class=end>٤</span>",
+      "textUthmaniTajweed": "وَلَ<tajweed class=madda_obligatory>آ</tajweed> أَنَا۠ عَابِ<tajweed class=idgham_ghunnah>دٌ مَّ</tajweed>ا عَبَ<tajweed class=idgham_mutajanisayn>د</tajweed>تُّمْ <span class=end>٤</span>",
       "textIndopak": "وَلَاۤ اَنَا عَابِدٌ مَّا عَبَدۡتُّمۡۙ‏",
       "words": [
         {
@@ -209,7 +209,7 @@
       "number": 5,
       "key": "109:5",
       "textUthmani": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
-      "textUthmaniTajweed": "وَل<tajweed class=madda_obligatory>َآ</tajweed> أَ<tajweed class=ikhafa>نت</tajweed>ُمْ عَ<tajweed class=madda_normal>ـٰ</tajweed>بِدُونَ م<tajweed class=madda_obligatory>َآ</tajweed> أَعْبُ<tajweed class=qalaqah>د</tajweed>ُ <span class=end>٥</span>",
+      "textUthmaniTajweed": "وَلَ<tajweed class=madda_obligatory>آ</tajweed> أَ<tajweed class=ikhafa>نتُ</tajweed>مْ عَـ<tajweed class=madda_normal>ٰ</tajweed>بِدُونَ مَ<tajweed class=madda_obligatory>آ</tajweed> أَعْبُ<tajweed class=qalaqah>دُ</tajweed> <span class=end>٥</span>",
       "textIndopak": "وَ لَاۤ اَنۡـتُمۡ عٰبِدُوۡنَ مَاۤ اَعۡبُدُ ؕ‏",
       "words": [
         {
@@ -264,7 +264,7 @@
       "number": 6,
       "key": "109:6",
       "textUthmani": "لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
-      "textUthmaniTajweed": "لَكُمْ دِينُكُمْ وَلِىَ د<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٦</span>",
+      "textUthmaniTajweed": "لَكُمْ دِينُكُمْ وَلِىَ دِ<tajweed class=madda_permissible>ي</tajweed>نِ <span class=end>٦</span>",
       "textIndopak": "لَـكُمۡ دِيۡنُكُمۡ وَلِىَ دِيۡنِ‏",
       "words": [
         {
