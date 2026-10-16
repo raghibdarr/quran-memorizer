@@ -12,7 +12,7 @@ import { cn } from '@/lib/cn';
 import { audioController } from '@/lib/audio';
 import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { buildAyahWordData } from '@/lib/segments';
-import { wordAudioUrl } from '@/lib/word-audio';
+import { playWordAudio } from '@/lib/word-audio';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 
 import { PlayPill } from '@/components/ui/ayah-actions';
@@ -138,8 +138,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
   const tapWord = (ayahIdx: number, word: Word, wordIdx: number) => {
     if (playingAll) return;
     setSelected({ ayahIdx, word });
-    const url = wordAudioUrl(word, wordIdx);
-    if (url) audioController.play(url);
+    void playWordAudio(surah.id, ayahs[ayahIdx].number, wordIdx, useSettingsStore.getState().reciter);
   };
 
   const finish = () => {

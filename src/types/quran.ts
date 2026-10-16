@@ -5,7 +5,8 @@ export interface Word {
   textUthmani: string;
   transliteration: string | null;
   translation: string | null;
-  audioUrl: string | null;
+  /** Retired: word audio is cut from the ayah recording (src/lib/word-audio.ts) */
+  audioUrl?: string | null;
   charType: 'word' | 'end';
 }
 

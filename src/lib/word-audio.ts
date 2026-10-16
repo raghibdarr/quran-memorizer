@@ -1,11 +1,23 @@
-import type { Word } from '@/types/quran';
+import { audioController } from './audio';
+import { getAudioUrl } from './quran-data';
+import { hasWordTimings } from './reciters';
+import { loadSegmentTimings, segmentRangeMs } from './segment-audio';
 
-// quran.com's word audio_url numbers files by word POSITION (it counts pause marks as
-// their own slots), but the CDN stores word audio CONSECUTIVELY — one file per real
-// word, 1..N. For an ayah with an internal pause mark the stored URL points one (or
-// more) files too far, playing the NEXT word (and the tail 404s). Renumber by the
-// word's consecutive index among real words to hit the correct file.
-export function wordAudioUrl(word: Word, index: number): string | null {
-  if (!word.audioUrl) return null;
-  return word.audioUrl.replace(/_\d+\.mp3$/, `_${String(index + 1).padStart(3, '0')}.mp3`);
+/** Word audio comes from this reciter when the chosen one has no word timings */
+const FALLBACK_RECITER = 'Alafasy_128kbps';
+
+/**
+ * Plays one word on its own, cut out of the reciter's recording of the ayah by its word
+ * timings. (It used to be a separate file per word on audio.qurancdn.com, which Quran
+ * Foundation's terms don't let us ship: licensing audit, 2026-10-16.) Resolves false when
+ * there's nothing to play: no timings for the word, or offline before they've loaded.
+ */
+export async function playWordAudio(surahId: number, ayahNumber: number, wordIndex: number, reciterId: string): Promise<boolean> {
+  const id = hasWordTimings(reciterId) ? reciterId : FALLBACK_RECITER;
+  const timings = await loadSegmentTimings(id, surahId);
+  if (!timings) return false;
+  const range = segmentRangeMs(timings, ayahNumber, { index: 0, count: 1, wordStart: wordIndex, wordEnd: wordIndex, endMark: null });
+  if (!range) return false;
+  await audioController.playRange(getAudioUrl(surahId, ayahNumber, id), range.startMs, range.endMs);
+  return true;
 }

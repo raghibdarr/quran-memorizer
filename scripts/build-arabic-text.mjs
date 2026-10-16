@@ -4,7 +4,8 @@
 //   word.textUthmani      quran-uthmani-small-tanween.xml split on spaces, with each pause
 //                         mark kept on the word before it and the rub el hizb sign on the
 //                         word after it (how the lessons show and time words)
-// The word positions are unchanged, so word timings, tajweed and progress still line up;
+// Each word's old audio.qurancdn.com link is dropped (word audio is cut from the ayah
+// recording instead). The word positions are unchanged, so word timings, tajweed and progress still line up;
 // --check compares against the current files instead of writing.
 // Tanzil Quran Text, CC BY 3.0, verbatim; credited in Settings with a link to tanzil.net.
 // Run: node scripts/build-arabic-text.mjs [--check]
@@ -63,6 +64,9 @@ for (let s = 1; s <= 114; s++) {
       w.textUthmani = ws[i];
       words++;
     });
+    // Word audio is cut from the ayah recording now (src/lib/word-audio.ts), not
+    // fetched from audio.qurancdn.com
+    for (const w of a.words) delete w.audioUrl;
   }
   if (!check) writeFileSync(file, JSON.stringify(surah, null, 2));
 }
