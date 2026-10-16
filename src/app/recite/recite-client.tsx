@@ -11,6 +11,7 @@ import SettingsPanel from '@/components/layout/settings-panel';
 import { SkeletonRows } from '@/components/ui/skeleton';
 import VoiceRecite from '@/components/practice/voice-recite';
 import { voiceCheckAvailable } from '@/lib/voice-tracker';
+import Recorder from '@/components/practice/recorder';
 
 /**
  * Recite a whole surah from memory (persona tests: someone who already knows a
@@ -67,6 +68,7 @@ export default function ReciteClient() {
               <span aria-hidden className="text-gold-deep">›</span>
             </button>
           )}
+          <Recorder scope={`surah:${data.surah.id}`} label={data.surah.nameSimple} className="mb-4" />
           <PracticeSession
             surahIds={[data.surah.id]}
             title={data.surah.nameSimple}

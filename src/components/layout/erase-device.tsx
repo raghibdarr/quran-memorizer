@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
+import { Capacitor } from '@capacitor/core';
 import { clearAudioCache } from '@/lib/storage';
 
 /**
@@ -13,6 +14,18 @@ export async function eraseThisDevice() {
   try { localStorage.clear(); } catch { /* storage blocked: nothing to clear */ }
   try { sessionStorage.clear(); } catch { /* same */ }
   await clearAudioCache().catch(() => {});
+  // Your own recordings (src/lib/recordings.ts)
+  await new Promise((resolve) => {
+    try {
+      const req = indexedDB.deleteDatabase('takrar-recordings');
+      req.onsuccess = req.onerror = req.onblocked = () => resolve(null);
+    } catch { resolve(null); }
+  });
+  // Downloaded recitations in the apps' own storage (src/lib/downloads.ts)
+  if (Capacitor.isNativePlatform()) {
+    const { Filesystem, Directory } = await import('@capacitor/filesystem');
+    await Filesystem.rmdir({ path: 'audio', directory: Directory.Data, recursive: true }).catch(() => {});
+  }
   if ('caches' in window) {
     const names = await caches.keys().catch(() => [] as string[]);
     await Promise.all(names.map((n) => caches.delete(n).catch(() => false)));

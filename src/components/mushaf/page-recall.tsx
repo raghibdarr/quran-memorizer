@@ -10,6 +10,7 @@ import Button from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 import type { WordMark } from './mushaf-page';
+import Recorder from '@/components/practice/recorder';
 
 export type RecallMode = 'read' | 'hide' | 'hint';
 
@@ -123,7 +124,7 @@ export function usePageRecall(page: MushafPage | null) {
 type Recall = ReturnType<typeof usePageRecall>;
 
 /** The recall toolbar under the page, and the end-of-page rating sheet */
-export function RecallBar({ recall, passage }: { recall: Recall; passage: { surah: number; ayah: number; ayahEnd: number } | null }) {
+export function RecallBar({ recall, passage, pageNo }: { recall: Recall; passage: { surah: number; ayah: number; ayahEnd: number } | null; pageNo: number }) {
   const [rating, setRating] = useState(false);
   const [saved, setSaved] = useState<number | null>(null);
   const cards = useReviewStore((s) => s.cards);
@@ -183,6 +184,7 @@ export function RecallBar({ recall, passage }: { recall: Recall; passage: { sura
         )}
         <button type="button" onClick={() => { stopVoice(); setSaved(null); setRating(true); }} className="pressable min-h-10 rounded-full bg-teal px-3 text-xs font-semibold text-on-teal">Done</button>
       </div>
+      <Recorder scope={`page:${pageNo}`} label={`Page ${pageNo}`} className="mt-2" />
       <BottomSheet open={rating} onClose={() => setRating(false)} title="How did this page go?" doneButton>
         <div className="space-y-3 pb-2">
           {saved !== null ? (

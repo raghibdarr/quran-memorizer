@@ -68,6 +68,10 @@ export default function PrivacyPage() {
             The voice check listens through your microphone only while you&apos;ve started it. The speech recognition runs
             entirely on your phone; no audio or transcript leaves the device, and nothing is recorded or kept.
           </p>
+          <p>
+            If you choose &quot;Record yourself&quot;, the recording is saved on this device only, so you can listen back. It is
+            never uploaded or synced; you can delete it any time, and Settings&apos; erase removes them all.
+          </p>
         </Section>
 
         <Section title="Recitations and hosting">

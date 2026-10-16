@@ -324,7 +324,7 @@ export default function MushafClient() {
             onChange={(v) => { stopRecitation(); recall.setMode(v as RecallMode); }}
           />
           {recall.mode !== 'read' ? (
-            <RecallBar recall={recall} passage={passage} />
+            <RecallBar recall={recall} passage={passage} pageNo={pageNo} />
           ) : (
           <MediaControlsBar
             className="static"
