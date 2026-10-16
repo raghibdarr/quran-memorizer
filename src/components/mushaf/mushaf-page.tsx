@@ -15,6 +15,8 @@ interface Props {
   markWord?: (w: MushafWord) => WordMark;
   /** Background tint per ayah (reading highlights), as a class name */
   ayahTint?: (surah: number, ayah: number) => string | null;
+  /** Ink from 0 to 1 per ayah (memory ink); null/absent = full ink */
+  ayahInk?: (surah: number, ayah: number) => number | null;
   onAyahTap?: (surah: number, ayah: number, el: HTMLElement) => void;
   /** When set, a tap on a word goes here instead (recall mode: peek at it) */
   onWordTap?: (w: MushafWord) => void;
@@ -42,7 +44,7 @@ function lineStyle(spec: LineSpec): React.CSSProperties {
  * stretched by the DigitalKhatt font's justification features and spaced as in the
  * print. Words are real text: selectable, readable by screen readers.
  */
-function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordTap, font = 'QMH New Madina', lineWidth = MUSHAF_LINE_WIDTH }: Props) {
+function MushafPageView({ page, fontSize, markWord, ayahTint, ayahInk, onAyahTap, onWordTap, font = 'QMH New Madina', lineWidth = MUSHAF_LINE_WIDTH }: Props) {
   return (
     <div
       dir="rtl"
@@ -68,6 +70,7 @@ function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordT
               n++;
               const mark = markWord?.(w) ?? null;
               const tint = w.ayah !== null ? ayahTint?.(w.surah, w.ayah) : null;
+              const ink = w.ayah !== null && w.kind === 'word' ? ayahInk?.(w.surah, w.ayah) ?? null : null;
               const condense = line.spec.c && w.kind !== 'marker' ? line.spec.c : null;
               return (
                 <span key={wi}>
@@ -87,7 +90,7 @@ function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordT
                           : undefined
                     }
                     className={cn(
-                      'mushaf-word rounded-[0.15em] transition-colors duration-150',
+                      'mushaf-word rounded-[0.15em] transition-[color,background-color,opacity] duration-500',
                       w.ayah !== null && onAyahTap && 'cursor-pointer',
                       w.kind === 'marker' && 'text-gold-deep',
                       tint,
@@ -99,6 +102,7 @@ function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordT
                     )}
                     style={{
                       fontFeatureSettings: w.features || undefined,
+                      ...(ink !== null && mark === null ? { opacity: ink } : null),
                       ...(condense ? { display: 'inline-block', transform: `scaleX(${condense})`, transformOrigin: wi === 0 ? 'right' : wi === line.words.length - 1 ? 'left' : 'center' } : null),
                     }}
                   >

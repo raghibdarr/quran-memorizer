@@ -18,6 +18,7 @@ interface SettingsState extends UserSettings {
   toggleReaderWordByWord: () => void;
   toggleHideStats: () => void;
   toggleMushafMarkSimilar: () => void;
+  toggleMushafMemoryInk: () => void;
   setMushafLayout: (layout: 'madina' | 'indopak') => void;
   setTranslationId: (id: 'saheeh' | 'clear') => void;
   setDailyGoalActivities: (count: number) => void;
@@ -55,6 +56,7 @@ export const useSettingsStore = create<SettingsState>()(
       toggleReaderWordByWord: () => set((s) => ({ readerWordByWord: !s.readerWordByWord })),
       toggleHideStats: () => set((s) => ({ hideStats: !s.hideStats })),
       toggleMushafMarkSimilar: () => set((s) => ({ mushafMarkSimilar: !s.mushafMarkSimilar })),
+      toggleMushafMemoryInk: () => set((s) => ({ mushafMemoryInk: !s.mushafMemoryInk })),
       setMushafLayout: (mushafLayout) => set({ mushafLayout }),
       setTranslationId: (translationId) => set({ translationId }),
       setDailyGoalActivities: (count) => set({ dailyGoalActivities: count }),

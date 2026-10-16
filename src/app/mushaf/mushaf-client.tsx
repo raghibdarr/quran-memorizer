@@ -23,6 +23,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/cn';
 import { RecallBar, usePageRecall, type RecallMode } from '@/components/mushaf/page-recall';
 import SegmentedControl from '@/components/ui/segmented-control';
+import { useReviewStore } from '@/stores/review-store';
+import { ayahInk, inkMap } from '@/lib/memory-ink';
 
 type Meta = QuranMeta & { counts: number[]; names: Map<number, string>; juzStartPages: number[] };
 let metaPromise: Promise<Meta> | null = null;
@@ -217,6 +219,13 @@ export default function MushafClient() {
     return null;
   }, [rec.active, rec.surah, rec.ayah, spoken, markSimilar, twinWords, recallMark]);
 
+  // Memory ink (V2): each ayah as darkly as it's held, from its review card
+  const memoryInk = useSettingsStore((s) => !!s.mushafMemoryInk);
+  const toggleMemoryInk = useSettingsStore((s) => s.toggleMushafMemoryInk);
+  const reviewCards = useReviewStore((s) => s.cards);
+  const inks = useMemo(() => (memoryInk ? inkMap(reviewCards) : null), [memoryInk, reviewCards]);
+  const ayahInkOf = useCallback((surah: number, ayah: number) => (inks ? inks.get(`${surah}:${ayah}`) ?? ayahInk(undefined) : null), [inks]);
+
   const ayahTint = useCallback((surah: number, ayah: number) => {
     const h = highlights[ayahKey(surah, ayah)];
     return h && !h.deleted ? HIGHLIGHT_CLASS[h.color] : null;
@@ -289,6 +298,7 @@ export default function MushafClient() {
                 fontSize={fontSize}
                 markWord={markWord}
                 ayahTint={ayahTint}
+                ayahInk={ayahInkOf}
                 onAyahTap={(s, a) => void openAyah(s, a)}
                 onWordTap={recall.mode !== 'read' ? (w) => recall.peek([w]) : undefined}
                 font={L.font}
@@ -323,6 +333,16 @@ export default function MushafClient() {
                 data-mark-similar
               >
                 Similar
+              </button>
+              <button
+                type="button"
+                onClick={toggleMemoryInk}
+                aria-pressed={memoryInk}
+                title="Print each ayah as darkly as you hold it"
+                className={cn('min-h-9 rounded-full px-3 text-xs font-semibold', memoryInk ? 'bg-teal/15 text-teal' : 'bg-foreground/[0.06] text-foreground/80')}
+                data-memory-ink
+              >
+                Ink
               </button>
               <button
                 type="button"

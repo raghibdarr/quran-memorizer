@@ -158,6 +158,8 @@ export interface UserSettings {
   mushafMarkSimilar?: boolean;
   /** Mushaf page view layout */
   mushafLayout?: 'madina' | 'indopak';
+  /** Mushaf: print each ayah as darkly as it's held (roadmap V2) */
+  mushafMemoryInk?: boolean;
   /** Which English translation shows (Saheeh by default) */
   translationId?: 'saheeh' | 'clear';
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
