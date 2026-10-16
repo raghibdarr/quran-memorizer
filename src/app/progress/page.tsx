@@ -17,6 +17,7 @@ import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import CalendarHeatmap from '@/components/progress/calendar-heatmap';
 import TimelineChart from '@/components/progress/timeline-chart';
+import WeakSpots from '@/components/progress/weak-spots';
 import { cn } from '@/lib/cn';
 import { isoFromMs } from '@/lib/dates';
 
@@ -250,6 +251,8 @@ export default function ProgressPage() {
             </div>
           )}
         </Card>
+
+        <WeakSpots cards={ayahCards} />
 
         {/* Tabs */}
         <div className="flex gap-1 rounded-xl bg-foreground/10 p-1">

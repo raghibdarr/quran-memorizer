@@ -66,15 +66,20 @@ interface Sm2Fields {
   lastQuality: number;
   failStreak?: number;
   lapses?: number;
+  misses?: number[];
 }
 
 /** Consecutive-failure and lapse bookkeeping (leech detection, M5) — algorithm-agnostic */
-function trackFailures<T extends Sm2Fields>(card: T, quality: number): Pick<T, 'failStreak' | 'lapses'> {
+/** How many failure dates a card keeps (the weak-spot history, M10) */
+export const MISS_LOG_SIZE = 10;
+
+function trackFailures<T extends Sm2Fields>(card: T, quality: number): Pick<T, 'failStreak' | 'lapses' | 'misses'> {
   const failed = quality < 3;
   return {
     failStreak: failed ? (card.failStreak ?? 0) + 1 : 0,
     lapses: (card.lapses ?? 0) + (failed ? 1 : 0),
-  } as Pick<T, 'failStreak' | 'lapses'>;
+    ...(failed || card.misses ? { misses: failed ? [...(card.misses ?? []), Date.now()].slice(-MISS_LOG_SIZE) : card.misses } : {}),
+  } as Pick<T, 'failStreak' | 'lapses' | 'misses'>;
 }
 
 function applySm2<T extends Sm2Fields>(card: T, quality: number): T {

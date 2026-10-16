@@ -105,6 +105,7 @@ export interface ReviewCard {
   lastQuality: number;      // 0-5
   failStreak?: number;      // Consecutive failed reviews (q<3) — leech signal (M5); absent = 0
   lapses?: number;          // Total failed reviews ever; absent = 0
+  misses?: number[];        // When those failures happened (ms), oldest first, last MISS_LOG_SIZE kept
 }
 
 // Lesson-level spaced repetition

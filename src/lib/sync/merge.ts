@@ -162,6 +162,17 @@ function mergeProgress(
  * whenever another copy had more reps. Seeded "known" cards carry lastReview 0,
  * so any real review beats them.
  */
+/** The kept copy carries the failure dates from both devices (weak-spot history) */
+function withBothMissLogs(
+  kept: Record<string, unknown>,
+  a: Record<string, unknown>,
+  b: Record<string, unknown>
+): Record<string, unknown> {
+  const all = [...((a.misses as number[]) ?? []), ...((b.misses as number[]) ?? [])]
+  if (all.length === 0) return kept
+  return { ...kept, misses: [...new Set(all)].sort((x, y) => x - y).slice(-10) }
+}
+
 function mergeReviews(
   local: Record<string, unknown>,
   cloud: Record<string, unknown>
@@ -183,7 +194,7 @@ function mergeReviews(
   for (const card of (local.cards ?? []) as Array<Record<string, unknown>>) {
     const key = `${card.surahId}:${card.ayahNumber}`
     const existing = cardMap.get(key)
-    cardMap.set(key, existing ? pickStronger(card, existing) : card)
+    cardMap.set(key, existing ? withBothMissLogs(pickStronger(card, existing), card, existing) : card)
   }
 
   const lessonCardMap = new Map<string, Record<string, unknown>>()

@@ -24,3 +24,24 @@ describe('the weakest-ayah drill', () => {
     expect(getWeakAyahs(many)).toHaveLength(8);
   });
 });
+
+describe('recurring weak spots', () => {
+  it('lists ayahs slipped twice or more, most slips first, then most recent', async () => {
+    const { getWeakSpots } = await import('./retention');
+    const spots = getWeakSpots([
+      card(1, { lapses: 1, misses: [5] }),
+      card(2, { lapses: 3, misses: [1, 2, 3] }),
+      card(3, { lapses: 2, misses: [8, 9] }),
+      card(4, { lapses: 2, misses: [1, 2] }),
+    ]);
+    expect(spots.map((c) => c.ayahNumber)).toEqual([2, 3, 4]);
+  });
+
+  it('records when a review fails, capped at the last ten', async () => {
+    const { processReview, MISS_LOG_SIZE } = await import('./spaced-repetition');
+    let c = card(1);
+    for (let i = 0; i < 12; i++) c = processReview(c, 1);
+    expect(c.misses).toHaveLength(MISS_LOG_SIZE);
+    expect(processReview(c, 5).misses).toEqual(c.misses); // a pass keeps the log
+  });
+});

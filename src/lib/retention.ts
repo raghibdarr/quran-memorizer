@@ -292,3 +292,17 @@ export function getWeakAyahs(cards: ReviewCard[], limit = DRILL_SIZE): ReviewCar
     .sort((a, b) => weakness(b) - weakness(a) || a.easeFactor - b.easeFactor || a.surahId - b.surahId || a.ayahNumber - b.ayahNumber)
     .slice(0, limit);
 }
+
+// ---------- Recurring weak spots (M10) ----------
+
+/**
+ * Ayahs that keep slipping over time (2+ failed reviews ever), most slips first,
+ * then the most recent slip: the long view next to getWeakAyahs' "right now".
+ */
+export function getWeakSpots(cards: ReviewCard[], limit = 20): ReviewCard[] {
+  const lastMiss = (c: ReviewCard) => c.misses?.[c.misses.length - 1] ?? c.lastReview;
+  return cards
+    .filter((c) => (c.lapses ?? 0) >= 2)
+    .sort((a, b) => (b.lapses ?? 0) - (a.lapses ?? 0) || lastMiss(b) - lastMiss(a))
+    .slice(0, limit);
+}
