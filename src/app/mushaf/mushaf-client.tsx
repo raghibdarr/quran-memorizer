@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { Ayah, SurahMeta } from '@/types/quran';
 import { getSurah, getSurahIndex } from '@/lib/quran-data';
-import { ayahsOnPage, buildPage, juzFilesForPage, loadJuzFile, MUSHAF_LINE_WIDTH, MUSHAF_PAGES, type MushafPage as Page, type MushafWord } from '@/lib/mushaf';
+import { ayahsOnPage, buildPage, juzFilesForPage, LAYOUTS, loadJuzFile, loadLayoutIndex, type LayoutIndex, type MushafLayout, type MushafPage as Page, type MushafWord } from '@/lib/mushaf';
 import { pageOf, type QuranMeta } from '@/lib/search';
 import { listenHref, mushafHref } from '@/lib/routes';
 import { rangeUntil } from '@/lib/recitation-queue';
@@ -40,15 +40,18 @@ function loadMeta(): Promise<Meta> {
   return metaPromise;
 }
 
-async function loadPage(page: number, meta: Meta): Promise<Page | null> {
-  const files = await Promise.all(juzFilesForPage(page, meta.juzStartPages).map(loadJuzFile));
+async function loadPage(page: number, layout: MushafLayout, index: LayoutIndex): Promise<Page | null> {
+  const files = await Promise.all(juzFilesForPage(page, index.juzStartPages, LAYOUTS[layout].pages).map((j) => loadJuzFile(j, layout)));
   return buildPage(page, files);
 }
+
+/** The page an ayah is on in a layout */
+const pageIn = (index: LayoutIndex, surah: number, ayah: number) => pageOf({ page: index.pageStarts, juz: [] }, surah, ayah);
 
 /** Staying this long on a page counts it as read for a khatm */
 const PAGE_READ_MS = 12_000;
 
-const juzOf = (meta: Meta, page: number) => meta.juzStartPages.filter((p) => p <= page).length;
+const juzOf = (index: LayoutIndex, page: number) => index.juzStartPages.filter((p) => p <= page).length;
 
 /**
  * The Madina mushaf, a page at a time (roadmap #06). Swipe or use the arrows to turn
@@ -61,6 +64,12 @@ export default function MushafClient() {
   const lastRead = useReaderStore((s) => s.lastRead);
   const requested = Number(params.get('p'));
   const [meta, setMeta] = useState<Meta | null>(null);
+  const layout = useSettingsStore((s) => s.mushafLayout ?? 'madina');
+  const setLayout = useSettingsStore((s) => s.setMushafLayout);
+  const L = LAYOUTS[layout];
+  const [index, setIndex] = useState<{ layout: MushafLayout; index: LayoutIndex } | null>(null);
+  const idx = index && index.layout === layout ? index.index : null;
+  useEffect(() => { loadLayoutIndex(layout).then((i) => setIndex({ layout, index: i })).catch(() => {}); }, [layout]);
   const [page, setPage] = useState<Page | null>(null);
   const [failedPage, setFailedPage] = useState<number | null>(null);
   const [width, setWidth] = useState(360);
@@ -72,20 +81,20 @@ export default function MushafClient() {
   const highlights = useReaderStore((s) => s.highlights);
   const setLastRead = useReaderStore((s) => s.setLastRead);
 
-  const pageNo = Number.isInteger(requested) && requested >= 1 && requested <= MUSHAF_PAGES
+  const pageNo = Number.isInteger(requested) && requested >= 1 && requested <= L.pages
     ? requested
-    : meta && lastRead ? pageOf(meta, lastRead.surah, lastRead.ayah) : 1;
+    : idx && lastRead ? pageIn(idx, lastRead.surah, lastRead.ayah) : 1;
 
   useEffect(() => { loadMeta().then(setMeta); }, []);
 
   useEffect(() => {
-    if (!meta) return;
+    if (!idx) return;
     let live = true;
-    loadPage(pageNo, meta).then((p) => { if (live) setPage(p); }).catch(() => { if (live) setFailedPage(pageNo); });
+    loadPage(pageNo, layout, idx).then((p) => { if (live) setPage(p); }).catch(() => { if (live) setFailedPage(pageNo); });
     // Warm the neighbours so turning is instant
-    for (const n of [pageNo - 1, pageNo + 1]) if (n >= 1 && n <= MUSHAF_PAGES) void loadPage(n, meta).catch(() => {});
+    for (const n of [pageNo - 1, pageNo + 1]) if (n >= 1 && n <= L.pages) void loadPage(n, layout, idx).catch(() => {});
     return () => { live = false; };
-  }, [pageNo, meta]);
+  }, [pageNo, layout, idx, L.pages]);
 
   const ayahs = useMemo(() => (page && page.page === pageNo ? ayahsOnPage(page) : []), [page, pageNo]);
   const recall = usePageRecall(page && page.page === pageNo ? page : null);
@@ -105,9 +114,16 @@ export default function MushafClient() {
   const pageRead = useReaderStore((s) => !!s.khatm && !s.khatm.endedAt && !!s.khatm.pagesRead[String(pageNo)]);
   useEffect(() => {
     if (!khatmActive || !ayahs.length) return;
-    const t = setTimeout(() => markPagesRead([pageNo]), PAGE_READ_MS);
+    const t = setTimeout(() => {
+      if (layout === 'madina') { markPagesRead([pageNo]); return; }
+      // Another layout: the khatm counts the Madina pages this page's ayahs cover
+      if (!meta || !ayahs.length) return;
+      const first = pageOf(meta, ayahs[0].surah, ayahs[0].ayah);
+      const last = pageOf(meta, ayahs[ayahs.length - 1].surah, ayahs[ayahs.length - 1].ayah);
+      markPagesRead(Array.from({ length: last - first + 1 }, (_, i) => first + i));
+    }, PAGE_READ_MS);
     return () => clearTimeout(t);
-  }, [khatmActive, ayahs.length, pageNo, markPagesRead]);
+  }, [khatmActive, ayahs, pageNo, markPagesRead, layout, meta]);
 
   // Fit the page to the screen: a line is MUSHAF_LINE_WIDTH em, a page 15 lines of 1.8em
   useEffect(() => {
@@ -135,12 +151,12 @@ export default function MushafClient() {
     window.addEventListener('resize', measure);
     return () => { ro?.disconnect(); window.removeEventListener('resize', measure); };
   }, []);
-  const fontSize = Math.max(14, Math.min(width / (MUSHAF_LINE_WIDTH + 0.6), room / (15 * 1.8)));
+  const fontSize = Math.max(14, Math.min(width / (L.lineWidth + 0.6), room / (15 * 1.8)));
 
   const go = useCallback((n: number) => {
-    if (n < 1 || n > MUSHAF_PAGES) return;
+    if (n < 1 || n > L.pages) return;
     router.replace(mushafHref(n));
-  }, [router]);
+  }, [router, L.pages]);
 
   // Arrow keys: left is the next page in a right-to-left book
   useEffect(() => {
@@ -169,10 +185,10 @@ export default function MushafClient() {
   // Leaving the screen stops the recitation; playing past the page turns it
   useEffect(() => () => stopRecitation(), []);
   useEffect(() => {
-    if (!meta || !rec.active || !rec.surah || !rec.ayah) return;
-    const p = pageOf(meta, rec.surah, rec.ayah);
+    if (!idx || !rec.active || !rec.surah || !rec.ayah) return;
+    const p = pageIn(idx, rec.surah, rec.ayah);
     if (p !== pageNo) go(p);
-  }, [meta, rec.active, rec.surah, rec.ayah, pageNo, go]);
+  }, [idx, rec.active, rec.surah, rec.ayah, pageNo, go]);
 
   // Words that differ from a near-twin ayah (mutashabihat), when that's switched on
   const markSimilar = useSettingsStore((s) => !!s.mushafMarkSimilar);
@@ -240,7 +256,7 @@ export default function MushafClient() {
           <div className="min-w-0 text-center">
             <p className="truncate text-sm font-semibold text-teal">{surahsHere || 'Mushaf'}</p>
             <p className="text-[11px] text-muted">
-              {meta ? `Juz ${juzOf(meta, pageNo)} · Page ${pageNo}` : `Page ${pageNo}`}
+              {idx ? `Juz ${juzOf(idx, pageNo)} · Page ${pageNo}` : `Page ${pageNo}`}{layout !== 'madina' && ` · ${L.label}`}
               {bookmarkedHere && <span className="text-gold-deep"> · bookmarked</span>}
               {pageRead && <span className="text-success"> · read ✓</span>}
             </p>
@@ -275,6 +291,8 @@ export default function MushafClient() {
                 ayahTint={ayahTint}
                 onAyahTap={(s, a) => void openAyah(s, a)}
                 onWordTap={recall.mode !== 'read' ? (w) => recall.peek([w]) : undefined}
+                font={L.font}
+                lineWidth={L.lineWidth}
               />
               <p className="mt-1 text-center text-xs tabular-nums text-muted">{pageNo}</p>
             </div>
@@ -290,11 +308,11 @@ export default function MushafClient() {
             <button
               type="button"
               onClick={() => go(pageNo + 1)}
-              disabled={pageNo >= MUSHAF_PAGES}
+              disabled={pageNo >= L.pages}
               className="pressable flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-semibold text-teal disabled:opacity-30"
               aria-label="Next page"
             >
-              ‹ {pageNo < MUSHAF_PAGES ? pageNo + 1 : ''}
+              ‹ {pageNo < L.pages ? pageNo + 1 : ''}
             </button>
             <div className="flex items-center gap-3">
               <button
@@ -304,7 +322,21 @@ export default function MushafClient() {
                 className={cn('min-h-9 rounded-full px-3 text-xs font-semibold', markSimilar ? 'bg-gold/20 text-gold-deep' : 'bg-foreground/[0.06] text-foreground/80')}
                 data-mark-similar
               >
-                Similar ayahs
+                Similar
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  const next: MushafLayout = layout === 'madina' ? 'indopak' : 'madina';
+                  const first = ayahs[0];
+                  setLayout(next);
+                  if (first) router.replace(mushafHref(pageIn(await loadLayoutIndex(next), first.surah, first.ayah)));
+                }}
+                className="min-h-9 rounded-full bg-foreground/[0.06] px-3 text-xs font-semibold text-foreground/80"
+                aria-label={`Switch to the ${layout === 'madina' ? 'IndoPak' : 'Madina'} mushaf`}
+                data-layout-switch
+              >
+                {layout === 'madina' ? 'IndoPak' : 'Madina'}
               </button>
               {!khatmActive && <Link href="/khatm" className="text-xs font-semibold text-teal underline-offset-2 hover:underline">Plan a khatm</Link>}
             </div>

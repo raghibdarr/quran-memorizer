@@ -11,6 +11,37 @@ export const MUSHAF_PAGES = 604;
 /** A line's full width in em at the base font size */
 export const MUSHAF_LINE_WIDTH = 15.4376;
 
+/** The two layouts (both from quran-madina-html; NOTICE.txt): the 1441H Madina print and 15-line IndoPak */
+export type MushafLayout = 'madina' | 'indopak';
+export const LAYOUTS: Record<MushafLayout, { dir: string; pages: number; lineWidth: number; font: string; label: string }> = {
+  madina: { dir: 'madina-1441h', pages: 604, lineWidth: 15.4376, font: 'QMH New Madina', label: 'Madina' },
+  indopak: { dir: 'indopak-15', pages: 610, lineWidth: 15.6282, font: 'QMH IndoPak', label: 'IndoPak' },
+};
+
+export interface LayoutIndex {
+  /** First ayah on each page (1-based page index into the array) */
+  pageStarts: [number, number][];
+  /** The page each juz starts on */
+  juzStartPages: number[];
+}
+
+/** Turn a manifest's [sura0, idx] into the first ayah it lands on (titles and basmalas count as ayah 1) */
+const ayahOf = (sura0: number, idx: number): [number, number] => [sura0 + 1, Math.max(1, idx - 1)];
+
+const indexCache = new Map<MushafLayout, Promise<LayoutIndex>>();
+export function loadLayoutIndex(layout: MushafLayout): Promise<LayoutIndex> {
+  let p = indexCache.get(layout);
+  if (!p) {
+    p = fetch(`/mushaf/${LAYOUTS[layout].dir}/manifest.json`).then((r) => r.json()).then((m: { pages: number[][]; juz: number[][] }) => ({
+      pageStarts: m.pages.map(([s0, idx]) => ayahOf(s0, idx)),
+      juzStartPages: m.juz.map((j) => j[2]),
+    }));
+    p.catch(() => indexCache.delete(layout));
+    indexCache.set(layout, p);
+  }
+  return p;
+}
+
 export interface LineSpec {
   k: 'sura' | 'bism' | 'text';
   w: number;
@@ -89,11 +120,11 @@ export function buildPage(page: number, files: JuzFile[]): MushafPage | null {
 }
 
 /** The juz files a page's rows live in: the juz it starts in, and the next when a juz begins mid-page */
-export function juzFilesForPage(page: number, juzStartPages: number[]): number[] {
+export function juzFilesForPage(page: number, juzStartPages: number[], pages = MUSHAF_PAGES): number[] {
   const out: number[] = [];
   for (let j = 0; j < juzStartPages.length; j++) {
     const first = juzStartPages[j];
-    const last = j + 1 < juzStartPages.length ? juzStartPages[j + 1] : MUSHAF_PAGES;
+    const last = j + 1 < juzStartPages.length ? juzStartPages[j + 1] : pages;
     if (page >= first && page <= last) out.push(j + 1);
   }
   return out;
@@ -111,16 +142,17 @@ export function ayahsOnPage(p: MushafPage): { surah: number; ayah: number }[] {
   return out;
 }
 
-const cache = new Map<number, Promise<JuzFile>>();
-export function loadJuzFile(j: number): Promise<JuzFile> {
-  let p = cache.get(j);
+const cache = new Map<string, Promise<JuzFile>>();
+export function loadJuzFile(j: number, layout: MushafLayout = 'madina'): Promise<JuzFile> {
+  const key = `${layout}/${j}`;
+  let p = cache.get(key);
   if (!p) {
-    p = fetch(`/mushaf/madina-1441h/juz-${String(j).padStart(2, '0')}.json`).then((r) => {
+    p = fetch(`/mushaf/${LAYOUTS[layout].dir}/juz-${String(j).padStart(2, '0')}.json`).then((r) => {
       if (!r.ok) throw new Error(`juz ${j}: HTTP ${r.status}`);
       return r.json() as Promise<JuzFile>;
     });
-    p.catch(() => cache.delete(j));
-    cache.set(j, p);
+    p.catch(() => cache.delete(key));
+    cache.set(key, p);
   }
   return p;
 }

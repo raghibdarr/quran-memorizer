@@ -495,6 +495,11 @@ html, body { overscroll-behavior-y: none; }
   src: url("/mushaf/madina-qmh.woff2") format("woff2");
   font-display: block;
 }
+@font-face {
+  font-family: "QMH IndoPak";
+  src: url("/mushaf/indopak-qmh.woff2") format("woff2");
+  font-display: block;
+}
 .mushaf-sura-title::before {
   content: "";
   position: absolute;

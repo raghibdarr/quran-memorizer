@@ -18,6 +18,9 @@ interface Props {
   onAyahTap?: (surah: number, ayah: number, el: HTMLElement) => void;
   /** When set, a tap on a word goes here instead (recall mode: peek at it) */
   onWordTap?: (w: MushafWord) => void;
+  /** The layout's font and line width (Madina by default) */
+  font?: string;
+  lineWidth?: number;
 }
 
 function lineStyle(spec: LineSpec): React.CSSProperties {
@@ -39,13 +42,13 @@ function lineStyle(spec: LineSpec): React.CSSProperties {
  * stretched by the DigitalKhatt font's justification features and spaced as in the
  * print. Words are real text: selectable, readable by screen readers.
  */
-function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordTap }: Props) {
+function MushafPageView({ page, fontSize, markWord, ayahTint, onAyahTap, onWordTap, font = 'QMH New Madina', lineWidth = MUSHAF_LINE_WIDTH }: Props) {
   return (
     <div
       dir="rtl"
       lang="ar"
       className="mushaf-page mx-auto select-text text-foreground"
-      style={{ fontFamily: '"QMH New Madina", var(--font-arabic), serif', fontSize, lineHeight: 1.8, width: `${MUSHAF_LINE_WIDTH + 0.4}em` }}
+      style={{ fontFamily: `"${font}", var(--font-arabic), serif`, fontSize, lineHeight: 1.8, width: `${lineWidth + 0.4}em` }}
       data-mushaf-page={page.page}
     >
       {page.lines.map((line, li) => {

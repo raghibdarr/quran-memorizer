@@ -17,6 +17,7 @@ interface SettingsState extends UserSettings {
   toggleReaderWordByWord: () => void;
   toggleHideStats: () => void;
   toggleMushafMarkSimilar: () => void;
+  setMushafLayout: (layout: 'madina' | 'indopak') => void;
   setDailyGoalActivities: (count: number) => void;
 }
 
@@ -52,6 +53,7 @@ export const useSettingsStore = create<SettingsState>()(
       toggleReaderWordByWord: () => set((s) => ({ readerWordByWord: !s.readerWordByWord })),
       toggleHideStats: () => set((s) => ({ hideStats: !s.hideStats })),
       toggleMushafMarkSimilar: () => set((s) => ({ mushafMarkSimilar: !s.mushafMarkSimilar })),
+      setMushafLayout: (mushafLayout) => set({ mushafLayout }),
       setDailyGoalActivities: (count) => set({ dailyGoalActivities: count }),
     }),
     {

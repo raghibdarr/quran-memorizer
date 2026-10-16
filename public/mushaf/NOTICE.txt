@@ -1,15 +1,16 @@
 Mushaf page view (roadmap #06) — third-party files in this folder, unmodified
 ============================================================================
 
-madina-1441h/*.json, sura_border_sym4.svg
+madina-1441h/*.json, indopak-15/*.json, sura_border_sym4.svg
   From quran-madina-html 2.0.0 by Tarek Eldeeb (https://github.com/tarekeldeeb/quran-madina-html),
   licensed under the "Waqf" General Public License 2.0 (https://github.com/ojuba-org/waqf/tree/master/2.0).
-  Line breaks follow the 1441H Madina print; the text is Tanzil's Uthmani text
+  Madina: line breaks follow the 1441H Madina print; the text is Tanzil's Uthmani text
   (Tanzil Project, https://tanzil.net, CC BY 3.0) with the print's pause marks.
+  IndoPak: DigitalKhatt's 15-line IndoPak layout and text.
   Takrar renders these files with its own code (src/lib/mushaf.ts); the files themselves are unchanged.
 
-madina-qmh.woff2
-  The DigitalKhatt New Madina font by Amine Anane, as packaged by quran-madina-html.
+madina-qmh.woff2, indopak-qmh.woff2
+  The DigitalKhatt New Madina and IndoPak fonts by Amine Anane, as packaged by quran-madina-html.
   Licensed under the SIL Open Font License 1.1, reproduced below.
 
 Copyright © 2020-2025 Amine Anane

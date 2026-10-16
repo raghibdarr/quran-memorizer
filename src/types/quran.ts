@@ -150,6 +150,8 @@ export interface UserSettings {
   hideStats?: boolean;
   /** Mushaf page view marks words that differ from a near-twin ayah */
   mushafMarkSimilar?: boolean;
+  /** Mushaf page view layout */
+  mushafLayout?: 'madina' | 'indopak';
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 
