@@ -6,6 +6,7 @@ import BottomSheet from '@/components/ui/bottom-sheet';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 import { shareAyahCard } from '@/lib/share-image';
+import { isNative } from '@/lib/native';
 import { HIGHLIGHT_COLORS, NOTE_MAX, ayahKey, useReaderStore, type HighlightColor } from '@/stores/reader-store';
 
 /** Tints for highlighted ayahs, shared by the reader and the bookmarks list */
@@ -147,6 +148,24 @@ export default function AyahMenu({
             className="w-full resize-y rounded-xl border border-foreground/15 bg-transparent px-3 py-2.5 text-base text-foreground placeholder:text-muted/60 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
           />
         </div>
+
+        {/* Tafsir, translations and reflections live on Quran.com: link to the ayah
+            there rather than copy any of it (its terms; research 2026-10-16) */}
+        <a
+          href={`https://quran.com/${surahId}:${ayah.number}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            if (!isNative()) return;
+            e.preventDefault();
+            void import('@capacitor/browser').then(({ Browser }) => Browser.open({ url: `https://quran.com/${surahId}:${ayah.number}` }));
+          }}
+          className="flex min-h-11 items-center justify-between rounded-xl bg-foreground/[0.04] px-3 text-sm text-foreground"
+          data-quran-com
+        >
+          <span>Tafsir and reflections on Quran.com</span>
+          <span aria-hidden className="text-muted">↗</span>
+        </a>
 
         {extra}
       </div>
