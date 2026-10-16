@@ -14,6 +14,8 @@ import { cn } from '@/lib/cn';
 import { haptic, hapticsEnabled, setHapticsEnabled } from '@/lib/haptics';
 import { isNative } from '@/lib/native';
 import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
+import { useAuth } from '@/hooks/use-auth';
+import { disablePushReminder, enablePushReminder, getEmailDigest, getPushReminder, pushAvailability, setEmailDigest, setPushReminderHour } from '@/lib/web-push';
 import SyncPitch from '@/components/auth/sync-pitch';
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -138,6 +140,95 @@ function ReminderSettings() {
           Notifications are turned off for Takrar. Allow them in your phone&apos;s settings, then try again.
         </p>
       )}
+    </div>
+  );
+}
+
+/**
+ * Reminders on the web (M8): a daily push in this browser at a chosen hour, and the
+ * opt-in weekly email for when you fall behind. Both are sent by the server from
+ * synced data, so they need an account. The phone apps use ReminderSettings instead.
+ */
+function WebReminderSettings() {
+  const auth = useAuth();
+  const [push, setPush] = useState<{ hour: number } | null>(null);
+  const [digest, setDigest] = useState(false);
+  const [note, setNote] = useState<string | null>(null);
+  const availability = pushAvailability();
+
+  useEffect(() => {
+    if (!auth.user) return;
+    getPushReminder().then(setPush).catch(() => {});
+    getEmailDigest().then(setDigest).catch(() => {});
+  }, [auth.user]);
+
+  if (auth.loading) return null;
+  if (!auth.user) {
+    return (
+      <p className="mt-5 text-xs leading-relaxed text-muted">
+        Sign in to get a daily reminder in this browser, and an email if you fall behind.
+      </p>
+    );
+  }
+
+  const togglePush = async () => {
+    setNote(null);
+    if (push) {
+      await disablePushReminder();
+      setPush(null);
+      return;
+    }
+    const result = await enablePushReminder(19);
+    if (result === 'ok') setPush({ hour: 19 });
+    else setNote(result === 'denied' ? 'Notifications are blocked for this site. Allow them in your browser settings, then try again.' : "Couldn't turn reminders on. Try again later.");
+  };
+
+  const toggleDigest = async () => {
+    setNote(null);
+    const ok = await setEmailDigest(!digest);
+    if (ok) setDigest(!digest);
+    else setNote("Couldn't save that. Try again later.");
+  };
+
+  return (
+    <div className="mt-5 space-y-1">
+      {availability === 'ok' && (
+        <>
+          <label className="flex min-h-11 cursor-pointer items-center justify-between">
+            <span>
+              <span className="block text-sm text-foreground">Daily reminder in this browser</span>
+              <span className="block text-xs text-muted">Only on days with reviews due</span>
+            </span>
+            <Toggle enabled={!!push} onToggle={togglePush} />
+          </label>
+          {push && (
+            <label className="flex min-h-11 items-center justify-between">
+              <span className="text-sm text-foreground">Time</span>
+              <select
+                value={push.hour}
+                onChange={async (e) => {
+                  const hour = Number(e.target.value);
+                  if (await setPushReminderHour(hour)) setPush({ hour });
+                }}
+                className="min-h-11 rounded-xl bg-foreground/5 px-3 text-base font-medium text-foreground"
+              >
+                {Array.from({ length: 19 }, (_, i) => i + 5).map((h) => <option key={h} value={h}>{`${pad(h)}:00`}</option>)}
+              </select>
+            </label>
+          )}
+        </>
+      )}
+      {availability === 'install-first' && (
+        <p className="text-xs text-muted">On iPhone, add Takrar to your Home Screen (Share, then Add to Home Screen) to get reminders.</p>
+      )}
+      <label className="flex min-h-11 cursor-pointer items-center justify-between">
+        <span>
+          <span className="block text-sm text-foreground">Weekly email if you fall behind</span>
+          <span className="block text-xs text-muted">Only after a week away with reviews waiting</span>
+        </span>
+        <Toggle enabled={digest} onToggle={toggleDigest} />
+      </label>
+      {note && <p className="text-xs text-muted">{note}</p>}
     </div>
   );
 }
@@ -351,7 +442,7 @@ export default function SettingsPanel() {
               )}
             </div>
 
-            {isNative() && <ReminderSettings />}
+            {isNative() ? <ReminderSettings /> : <WebReminderSettings />}
 
             {/* Daily Goal */}
             <div className="mt-5">

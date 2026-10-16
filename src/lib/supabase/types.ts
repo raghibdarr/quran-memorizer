@@ -12,6 +12,25 @@ export type UserDataRow = {
   rev: number
 }
 
+export type PushSubscriptionRow = {
+  endpoint: string
+  user_id: string
+  p256dh: string
+  auth: string
+  tz: string
+  reminder_hour: number
+  last_sent_on: string | null
+  created_at: string
+}
+
+export type NotificationPrefsRow = {
+  user_id: string
+  email_digest: boolean
+  tz: string
+  last_digest_at: string | null
+  updated_at: string
+}
+
 export type Database = {
   public: {
     Tables: {
@@ -25,6 +44,19 @@ export type Database = {
           rev?: number
         }
         Update: Partial<UserDataRow>
+        Relationships: []
+      }
+      // 003_notifications.sql (M8 web push + email digest)
+      push_subscriptions: {
+        Row: PushSubscriptionRow
+        Insert: Omit<PushSubscriptionRow, 'tz' | 'reminder_hour' | 'last_sent_on' | 'created_at'> & Partial<Pick<PushSubscriptionRow, 'tz' | 'reminder_hour' | 'last_sent_on'>>
+        Update: Partial<PushSubscriptionRow>
+        Relationships: []
+      }
+      notification_prefs: {
+        Row: NotificationPrefsRow
+        Insert: Pick<NotificationPrefsRow, 'user_id'> & Partial<Omit<NotificationPrefsRow, 'user_id'>>
+        Update: Partial<NotificationPrefsRow>
         Relationships: []
       }
     }

@@ -365,7 +365,9 @@ with streak explained, renegotiated deadline, no "-Nd", first session capped at 
 ### M8 — Reminders: web push, email digest, sync pitch
 **Size:** 2–3 sessions
 
-**STATUS 2026-09-26 — native local reminders ✅ (per §2a revision); web push, email digest and the
+**STATUS 2026-10-16 — all built.** Sync pitch (SyncPitch: lesson done / day done / backup saved; signed-out only; Not now = forever). Web push (src/lib/web-push.ts, sw.js push + notificationclick, netlify/functions/send-reminders.mts hourly, due-only, prunes 404/410) and opt-in weekly email digest via Resend (send-digest.mts Mondays 09:00 UTC, digest-unsubscribe.mts HMAC one-click), migration 003. OWNER TO SWITCH ON: .claude/plans/notifications-setup.md (apply 003, VAPID keys, Netlify env, Resend domain).
+
+**Earlier: STATUS 2026-09-26 — native local reminders ✅ (per §2a revision); web push, email digest and the
 sync pitch still open.** What landed:
 - `src/lib/reminders.ts` (pure, 7 tests): plans the next week of reminders at the user's time by
   running the app's own planner (computeTodaysPlan / buildReviewQueue) as of each day. Skips days with
@@ -441,7 +443,7 @@ sync pitch still open.** What landed:
 ---
 
 ### M10 — Recall drills pack: hide-words, audio repeat controls, mutashabihat v1, weak-ayat drill
-**STATUS 2026-10-16 — core done.** First-letter hints (Test, Recite, Review; tap a word to see it); Listen repeat each ayah 1/3/5/10x + pause to say it back + loop A–B (repeat/pause saved; one stored speed everywhere); /review/drill weakest-ayah session (getWeakAyahs: leeches, last-time misses, shaky, slips; ratings update schedules); mutashabihat v1 computed from our own text (scripts/build-mutashabihat.mjs, 464 pairs, "Similar to 7:19 · compare" in Listen and Memorize's first text step); QUD timings done earlier. Not done: historical weak-spot view, QUD Phonemizer tajweed explainer (stretch).
+**STATUS 2026-10-16 — core done.** First-letter hints (Test, Recite, Review; tap a word to see it); Listen repeat each ayah 1/3/5/10x + pause to say it back + loop A–B (repeat/pause saved; one stored speed everywhere); /review/drill weakest-ayah session (getWeakAyahs: leeches, last-time misses, shaky, slips; ratings update schedules); mutashabihat v1 computed from our own text (scripts/build-mutashabihat.mjs, 464 pairs, "Similar to 7:19 · compare" in Listen and Memorize's first text step); QUD timings done earlier. Also done: recurring weak spots on Progress (cards keep a 10-entry miss log; sync merges both devices' dates) and the tajweed explainer (tap a coloured letter; uses the existing tajweed markup, no Phonemizer needed).
 
 **Size:** 2–3 sessions
 
