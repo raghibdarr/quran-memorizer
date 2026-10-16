@@ -1,6 +1,7 @@
 package app.takrar.quran;
 
 import android.os.Bundle;
+import app.takrar.quran.audio.RecitationPlayerPlugin;
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
@@ -9,6 +10,7 @@ public class MainActivity extends BridgeActivity {
     public void onCreate(Bundle savedInstanceState) {
         // App-local plugins must be registered before the bridge starts
         registerPlugin(SystemHapticsPlugin.class);
+        registerPlugin(RecitationPlayerPlugin.class);
         super.onCreate(savedInstanceState);
     }
 }
