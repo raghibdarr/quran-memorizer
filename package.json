@@ -27,6 +27,7 @@
     "@capacitor/haptics": "^8.0.2",
     "@capacitor/ios": "^8.5.2",
     "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/share": "^8.0.3",
     "@capacitor/splash-screen": "^8.0.2",
     "@supabase/supabase-js": "^2.100.0",
     "@tilawa/core": "^0.4.0",

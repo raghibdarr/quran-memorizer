@@ -5,6 +5,7 @@ import type { Ayah } from '@/types/quran';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
+import { shareAyahCard } from '@/lib/share-image';
 import { HIGHLIGHT_COLORS, NOTE_MAX, ayahKey, useReaderStore, type HighlightColor } from '@/stores/reader-store';
 
 /** Tints for highlighted ayahs, shared by the reader and the bookmarks list */
@@ -59,11 +60,26 @@ export default function AyahMenu({
   const setNote = useReaderStore((s) => s.setNote);
   const [draft, setDraft] = useState(savedNote);
   const [copied, setCopied] = useState(false);
+  const [sharing, setSharing] = useState<'idle' | 'busy' | 'downloaded'>('idle');
 
   if (!ayah) return null;
 
   const saveNote = () => { if (draft !== savedNote) setNote(key, draft); };
-  const close = () => { saveNote(); setCopied(false); onClose(); };
+  const close = () => { saveNote(); setCopied(false); setSharing('idle'); onClose(); };
+  const share = async () => {
+    setSharing('busy');
+    try {
+      const how = await shareAyahCard({
+        arabic: ayah.textUthmani,
+        translation: ayah.translation.replace(/<sup[^>]*>.*?<\/sup>/g, '').replace(/<[^>]+>/g, ''),
+        reference: `${surahName} ${surahId}:${ayah.number}`,
+        dark: document.documentElement.classList.contains('dark'),
+      }, `takrar-${surahId}-${ayah.number}.png`);
+      setSharing(how === 'downloaded' ? 'downloaded' : 'idle');
+    } catch {
+      setSharing('idle');
+    }
+  };
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(ayahCopyText(surahName, surahId, ayah, true));
@@ -75,7 +91,7 @@ export default function AyahMenu({
   return (
     <BottomSheet open={open} onClose={close} title={`${surahName} ${surahId}:${ayah.number}`} doneButton>
       <div className="space-y-5 pb-2" data-ayah-menu={key}>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           {onPlay && (
             <ActionButton label="Play from here" onClick={() => { close(); onPlay(); }}>
               <path d="M8 5v14l11-7z" fill="currentColor" stroke="none" />
@@ -91,6 +107,9 @@ export default function AyahMenu({
           </ActionButton>
           <ActionButton label={copied ? 'Copied' : 'Copy'} onClick={copy}>
             <rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" />
+          </ActionButton>
+          <ActionButton label={sharing === 'busy' ? 'Making…' : sharing === 'downloaded' ? 'Saved' : 'Share'} onClick={() => void share()} data-share-ayah>
+            <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7" /><path d="M16 6l-4-4-4 4" /><line x1="12" y1="2" x2="12" y2="15" />
           </ActionButton>
         </div>
 
