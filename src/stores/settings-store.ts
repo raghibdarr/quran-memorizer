@@ -3,6 +3,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { UserSettings, ArabicScriptStyle } from '@/types/quran';
+import { RENAMED_RECITERS } from '@/lib/reciters';
 
 interface SettingsState extends UserSettings {
   setReciter: (reciter: string) => void;
@@ -60,7 +61,7 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: 'quran-settings',
-      version: 2,
+      version: 3,
       migrate: (persisted: any, version: number) => {
         if (version === 0) {
           delete persisted.dailyGoalMinutes;
@@ -69,6 +70,10 @@ export const useSettingsStore = create<SettingsState>()(
         if (version <= 1 && persisted.reciter === 'Maher_AlMuaiqly_64kbps') {
           // Maher moved to the 128kbps encode QUL's word timestamps align to
           persisted.reciter = 'MaherAlMuaiqly128kbps';
+        }
+        if (version <= 2 && RENAMED_RECITERS[persisted.reciter]) {
+          // Off Tarteel's CDN: the same reciters now play from EveryAyah
+          persisted.reciter = RENAMED_RECITERS[persisted.reciter];
         }
         return persisted;
       },

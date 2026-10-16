@@ -1,109 +1,118 @@
 {
-  "source": "https://qul.tarteel.ai (Tarteel QUL); original alignments: quran-align by Colin Fair (CC BY 4.0)",
+  "source": "quran-align by Colin Fair, CC BY 4.0 (https://github.com/cpfair/quran-align), for EveryAyah per-ayah reciters; Qur'anic Universal Audio by QUD, CC BY 4.0, for surah-audio reciters",
   "reciters": {
     "Abdul_Basit_Murattal_192kbps": {
-      "importedFrom": "ayah-recitation-abdul-basit-abdul-samad-murattal-hafs-950.json",
+      "importedFrom": "quran-align Abdul_Basit_Murattal_64kbps.json (release 2016-11-24)",
       "ayahsWithSegments": 6236,
-      "segmentRows": 77947,
-      "malformedRowsDropped": 0,
-      "ayahsMissingSegments": 0,
-      "ayahsWithWordOverflow": 3,
-      "audioIdentitySample": {
-        "match": 12,
-        "mismatch": 0,
-        "unchecked": 0,
-        "sampled": 12
-      },
+      "ayahsMissingSegments": [],
+      "segmentRows": 77386,
+      "multiWordSegmentsSplit": 14,
       "alignedToOurWords": {
-        "exact": 5871,
-        "split": 364,
-        "proportional": 0,
-        "short": 1,
-        "at": "2026-10-05"
-      }
-    },
-    "MaherAlMuaiqly128kbps": {
-      "importedFrom": "ayah-recitation-maher-al-mu-aiqly-murattal-hafs-948.json",
-      "ayahsWithSegments": 6236,
-      "segmentRows": 78356,
-      "malformedRowsDropped": 0,
-      "ayahsMissingSegments": 0,
-      "ayahsWithWordOverflow": 3,
-      "audioIdentitySample": {
-        "match": 11,
-        "mismatch": 1,
-        "unchecked": 0,
-        "sampled": 12
-      },
-      "alignedToOurWords": {
-        "exact": 5873,
-        "split": 362,
-        "proportional": 0,
-        "short": 0,
-        "at": "2026-10-05"
+        "exact": 6231,
+        "split": 1,
+        "proportional": 2,
+        "short": 2,
+        "at": "2026-10-16"
       }
     },
     "Alafasy_128kbps": {
-      "importedFrom": "ayah-recitation-mishari-rashid-al-afasy-murattal-hafs-953.json",
+      "importedFrom": "quran-align Alafasy_128kbps.json (release 2016-11-24)",
       "ayahsWithSegments": 6236,
-      "segmentRows": 77991,
-      "malformedRowsDropped": 0,
-      "ayahsMissingSegments": 0,
-      "ayahsWithWordOverflow": 3,
-      "audioIdentitySample": {
-        "match": 12,
-        "mismatch": 0,
-        "unchecked": 0,
-        "sampled": 12
-      },
+      "ayahsMissingSegments": [],
+      "segmentRows": 77424,
+      "multiWordSegmentsSplit": 23,
       "alignedToOurWords": {
-        "exact": 5872,
-        "split": 364,
-        "proportional": 0,
-        "short": 0,
-        "at": "2026-10-05"
+        "exact": 6232,
+        "split": 1,
+        "proportional": 2,
+        "short": 1,
+        "at": "2026-10-16"
       }
     },
     "Minshawy_Murattal_128kbps": {
-      "importedFrom": "ayah-recitation-muhammad-siddiq-al-minshawi-murattal-hafs-959.json",
+      "importedFrom": "quran-align Minshawy_Murattal_128kbps.json (release 2016-11-24)",
       "ayahsWithSegments": 6236,
-      "segmentRows": 77986,
-      "malformedRowsDropped": 0,
-      "ayahsMissingSegments": 0,
-      "ayahsWithWordOverflow": 3,
-      "audioIdentitySample": {
-        "match": 12,
-        "mismatch": 0,
-        "unchecked": 0,
-        "sampled": 12
-      },
+      "ayahsMissingSegments": [],
+      "segmentRows": 77415,
+      "multiWordSegmentsSplit": 19,
       "alignedToOurWords": {
-        "exact": 5874,
-        "split": 362,
-        "proportional": 0,
-        "short": 0,
-        "at": "2026-10-05"
+        "exact": 6229,
+        "split": 1,
+        "proportional": 3,
+        "short": 3,
+        "at": "2026-10-16"
       }
     },
-    "Yasser_Ad-Dussary_128kbps": {
-      "importedFrom": "ayah-recitation-yasser-al-dosari-murattal-hafs-961.json",
+    "Abu_Bakr_Ash-Shaatree_128kbps": {
+      "importedFrom": "quran-align Abu_Bakr_Ash-Shaatree_128kbps.json (release 2016-11-24)",
       "ayahsWithSegments": 6236,
-      "segmentRows": 78159,
-      "malformedRowsDropped": 0,
-      "ayahsMissingSegments": 0,
-      "ayahsWithWordOverflow": 2,
-      "audioIdentitySample": {
-        "match": 12,
-        "mismatch": 0,
-        "unchecked": 0,
-        "sampled": 12
-      },
+      "ayahsMissingSegments": [],
+      "segmentRows": 77427,
+      "multiWordSegmentsSplit": 20,
       "alignedToOurWords": {
-        "exact": 5891,
-        "split": 345,
-        "proportional": 0,
+        "exact": 6234,
+        "split": 1,
+        "proportional": 1,
         "short": 0,
-        "at": "2026-10-05"
+        "at": "2026-10-16"
+      }
+    },
+    "Abdul_Basit_Mujawwad_128kbps": {
+      "importedFrom": "quran-align Abdul_Basit_Mujawwad_128kbps.json (release 2016-11-24)",
+      "ayahsWithSegments": 6236,
+      "ayahsMissingSegments": [],
+      "segmentRows": 77309,
+      "multiWordSegmentsSplit": 686,
+      "alignedToOurWords": {
+        "exact": 6213,
+        "split": 1,
+        "proportional": 3,
+        "short": 19,
+        "at": "2026-10-16"
+      }
+    },
+    "Husary_Muallim_128kbps": {
+      "importedFrom": "quran-align Husary_Muallim_128kbps.json (release 2016-11-24)",
+      "ayahsWithSegments": 6236,
+      "ayahsMissingSegments": [],
+      "segmentRows": 77408,
+      "multiWordSegmentsSplit": 27,
+      "alignedToOurWords": {
+        "exact": 6227,
+        "split": 1,
+        "proportional": 4,
+        "short": 4,
+        "at": "2026-10-16"
+      }
+    },
+    "Minshawy_Mujawwad_192kbps": {
+      "importedFrom": "quran-align Minshawy_Mujawwad_192kbps.json (release 2016-11-24)",
+      "ayahsWithSegments": 6235,
+      "ayahsMissingSegments": [
+        "32:24"
+      ],
+      "segmentRows": 77318,
+      "multiWordSegmentsSplit": 657,
+      "alignedToOurWords": {
+        "exact": 6231,
+        "split": 1,
+        "proportional": 1,
+        "short": 2,
+        "at": "2026-10-16"
+      }
+    },
+    "Mohammad_al_Tablaway_128kbps": {
+      "importedFrom": "quran-align Mohammad_al_Tablaway_128kbps.json (release 2016-11-24)",
+      "ayahsWithSegments": 6236,
+      "ayahsMissingSegments": [],
+      "segmentRows": 77267,
+      "multiWordSegmentsSplit": 24,
+      "alignedToOurWords": {
+        "exact": 6217,
+        "split": 1,
+        "proportional": 2,
+        "short": 16,
+        "at": "2026-10-16"
       }
     }
   },
@@ -159,30 +168,6 @@
         "skipped": 218,
         "unrangedSurahs": 0,
         "missingVerses": "26:21"
-      },
-      "qud-saad_al_ghamdi": {
-        "slug": "saad_al_ghamdi_tarteel",
-        "name": "Saad Al-Ghamdi",
-        "surahs": 114,
-        "exact": 6231,
-        "split": 4,
-        "proportional": 0,
-        "short": 0,
-        "skipped": 33,
-        "unrangedSurahs": 0,
-        "missingVerses": "1:1"
-      },
-      "qud-abu_bakr_al_shatri": {
-        "slug": "abu_bakr_al_shatri_tarteel",
-        "name": "Abu Bakr Al-Shatri",
-        "surahs": 114,
-        "exact": 6232,
-        "split": 4,
-        "proportional": 0,
-        "short": 0,
-        "skipped": 47,
-        "unrangedSurahs": 0,
-        "missingVerses": null
       },
       "qud-saud_al_shuraim": {
         "slug": "saud_al_shuraim_mp3quran",
@@ -244,18 +229,6 @@
         "unrangedSurahs": 0,
         "missingVerses": "1:1"
       },
-      "qud-khalifa_al_tunaiji": {
-        "slug": "khalifa_al_tunaiji_tarteel",
-        "name": "Khalifa Al-Tunaiji",
-        "surahs": 114,
-        "exact": 6232,
-        "split": 4,
-        "proportional": 0,
-        "short": 0,
-        "skipped": 0,
-        "unrangedSurahs": 0,
-        "missingVerses": null
-      },
       "qud-mahmoud_ali_al_banna": {
         "slug": "mahmoud_ali_al_banna_qdc",
         "name": "Mahmoud Ali Al-Banna",
@@ -279,30 +252,6 @@
         "skipped": 1,
         "unrangedSurahs": 0,
         "missingVerses": null
-      },
-      "qud-abdulbasit_mujawwad": {
-        "slug": "abdulbasit_abdulsamad_mujawwad_tarteel",
-        "name": "Abdulbasit Abdulsamad",
-        "surahs": 114,
-        "exact": 6232,
-        "split": 4,
-        "proportional": 0,
-        "short": 0,
-        "skipped": 2,
-        "unrangedSurahs": 0,
-        "missingVerses": null
-      },
-      "qud-husary_mujawwad": {
-        "slug": "mahmoud_khalil_al_husary_mujawwad_tarteel",
-        "name": "Mahmoud Khalil Al-Husary",
-        "surahs": 114,
-        "exact": 6231,
-        "split": 4,
-        "proportional": 0,
-        "short": 0,
-        "skipped": 0,
-        "unrangedSurahs": 0,
-        "missingVerses": "62:10"
       },
       "qud-abdur_rashid_sufi": {
         "slug": "abdur_rashid_sufi_qdc",
