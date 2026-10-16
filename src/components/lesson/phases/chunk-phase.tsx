@@ -10,7 +10,6 @@ import { getAudioUrl as buildAudioUrl } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
 import { segmentAyah } from '@/lib/segments';
 import { loadSegmentTimings, segmentRangeMs, type SurahTimings } from '@/lib/segment-audio';
-import ArabicText from '@/components/ui/arabic-text';
 import AyahDisplay from '@/components/ui/ayah-display';
 import SegmentArabic from '@/components/ui/segment-arabic';
 import { LEARN_STEPS, STEP_REPS, afterAyah, lastUnitOfAyah, nextPos, type LearnStep, type MemorizePos } from '@/lib/memorize-plan';
@@ -21,6 +20,7 @@ import { cn } from '@/lib/cn';
 import BottomSheet from '@/components/ui/bottom-sheet';
 
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
+import WordText from '@/components/ui/word-text';
 interface ChunkPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -1028,7 +1028,6 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
               <span dir="ltr" className="text-sm text-muted py-2">Tap the words below in order</span>
             )}
             {selectedOrder.map((pos, i) => {
-              const word = unitWords.find((w) => w.position === pos);
               return (
                 <span
                   key={i}
@@ -1039,7 +1038,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
                     'border border-teal/30 bg-teal/10 text-teal'
                   )}
                 >
-                  {word?.textUthmani}
+                  <WordText ayah={currentAyah} index={actualWords.findIndex((w) => w.position === pos)} />
                 </span>
               );
             })}
@@ -1060,8 +1059,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
                       : 'tactile-chip bg-card hover:border-gold'
                   )}
                 >
-                  <span className="arabic-text text-xl">{word.text}</span>
-                  {word.transliteration && (
+                  <WordText ayah={currentAyah} index={actualWords.findIndex((w) => w.position === word.position)} className="text-xl" />
+                  {transliterationEnabled && word.transliteration && (
                     <span className="text-[10px] text-muted" dir="ltr">{word.transliteration}</span>
                   )}
                 </button>

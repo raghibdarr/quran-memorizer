@@ -409,7 +409,7 @@ sync pitch still open.** What landed:
 ---
 
 ### M9 — Beginner first-session redesign + long-ayah pedagogy
-**STATUS 2026-10-16 — in progress.** Done: the Memorize route is a pure tested module (src/lib/memorize-plan.ts, golden walks for short, split and mixed lessons) and long ayahs now join their parts as learned (A, B, A+B, C, A+B+C … whole ayah; "Join the parts" screen, skippable). Earlier persona-test work already covered: skip affordances, onboarding reassurances, Listen+Understand merge. Remaining: part-level rating in Test for split ayahs, WordText settings parity, resume fixes, surah range-slicing, lighter first-lesson pattern.
+**STATUS 2026-10-16 — in progress.** Done: the Memorize route is a pure tested module (src/lib/memorize-plan.ts, golden walks for short, split and mixed lessons) and long ayahs now join their parts as learned (A, B, A+B, C, A+B+C … whole ayah; "Join the parts" screen, skippable). Earlier persona-test work already covered: skip affordances, onboarding reassurances, Listen+Understand merge. Also done: resume (surah page opens at your lesson; home fallback = most recent lesson), WordText (word challenge + Listen tiles follow script and transliteration settings), single-ayah range copy. Measured surah range-slicing: only matters for a first web visit on slow 3G (Al-Baqarah lesson 18s vs 9s for a short surah; native bundles the data, the SW caches it) — deferred. Remaining: part-level rating in Test for split ayahs, lighter first-lesson pattern.
 
 **Size:** 3 sessions
 

@@ -16,6 +16,7 @@ import { wordAudioUrl } from '@/lib/word-audio';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 
 import { PlayPill } from '@/components/ui/ayah-actions';
+import WordText from '@/components/ui/word-text';
 interface ListenPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -37,7 +38,6 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
   const lesson = useProgressStore((s) => s.lessons[lessonId]);
   const playCount = lesson?.phaseData.listen.playCount ?? 0;
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
-  const arabicScript = useSettingsStore((s) => s.arabicScript);
   const [currentAyahIndex, setCurrentAyahIndex] = useState(-1);
   const [playingAll, setPlayingAll] = useState(false);
   const [selected, setSelected] = useState<{ ayahIdx: number; word: Word } | null>(null);
@@ -146,14 +146,6 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
     onComplete();
   };
 
-  const renderWord = (ayahIdx: number, wi: number, fallback: string) => {
-    const { tajweedWords, indopakWords } = ayahData[ayahIdx];
-    if (arabicScript === 'tajweed' && tajweedWords) {
-      return <span className="arabic-text tajweed-text" dangerouslySetInnerHTML={{ __html: tajweedWords[wi] }} />;
-    }
-    if (arabicScript === 'indopak' && indopakWords) return <span className="arabic-text-indopak">{indopakWords[wi]}</span>;
-    return <span className="arabic-text">{fallback}</span>;
-  };
 
   return (
     <div className="space-y-4">
@@ -231,7 +223,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
                       pick?.position === word.position || (isActive && wi === spokenWord) ? 'bg-gold/25' : 'hover:bg-gold/10',
                     )}
                   >
-                    {renderWord(i, wi, word.textUthmani)}
+                    <WordText ayah={ayah} index={wi} />
                   </button>
                 ))}
               </div>
