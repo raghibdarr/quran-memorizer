@@ -71,7 +71,8 @@ export class VoiceTracker {
   private ctx: AudioContext | null = null;
   private node: ScriptProcessorNode | null = null;
 
-  constructor(private h: VoiceTrackerHandlers, private passage: VoicePassage | null = null) {
+  /** `tracking`: follow along anywhere in the Quran, no slip flags (recite-to-find) */
+  constructor(private h: VoiceTrackerHandlers, private passage: VoicePassage | null = null, mode: 'correction' | 'tracking' = 'correction') {
     this.worker = new Worker('/workers/tilawa-worker.js', { type: 'module' });
     this.worker.onmessage = (e) => {
       const m = e.data;
@@ -82,7 +83,7 @@ export class VoiceTracker {
       else if (m.type === 'stopped') h.onStopped?.();
       else if (m.type === 'error') h.onError?.(m.message);
     };
-    this.worker.postMessage({ type: 'init', passage });
+    this.worker.postMessage({ type: 'init', passage, mode });
   }
 
   /** Open the microphone and stream audio to the engine (call from a user gesture) */

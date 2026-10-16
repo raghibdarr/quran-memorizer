@@ -11,7 +11,10 @@
 // ayah). Each flag pauses the engine until answered; we answer "review later" at
 // once so recitation never stops, and pass the flag on for the summary.
 //
-//   IN:  { type: 'init', passage? } | { type: 'audio', pcm: Float32Array (16 kHz mono) }
+// Tracking mode (`mode: 'tracking'` on init) just follows along and finds where you
+// are anywhere in the Quran: recite-to-find search uses it.
+//
+//   IN:  { type: 'init', passage?, mode? } | { type: 'audio', pcm: Float32Array (16 kHz mono) }
 //        | { type: 'stop' } | { type: 'reset', passage? }
 //   OUT: { type: 'loading', progress } | { type: 'ready' } | { type: 'event', msg }
 //        | { type: 'issue', issue } | { type: 'stopped' } | { type: 'error', message }
@@ -96,7 +99,7 @@ self.onmessage = (e: MessageEvent) => {
             corpus: () => fetch(CORPUS).then((r) => r.json()),
             onEvent,
           });
-          session.zipformer?.setMode('correction');
+          session.zipformer?.setMode(m.mode === 'tracking' ? 'tracking' : 'correction');
         }
         if (m.passage !== undefined) setPassage(m.passage);
         post({ type: 'ready' });

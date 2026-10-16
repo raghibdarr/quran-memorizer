@@ -32,6 +32,7 @@ import WelcomeBack from '@/components/welcome-back';
 import ContinueReading from '@/components/reader/continue-reading';
 import { KahfCard, KhatmRow, RamadanKhatmCard } from '@/components/reader/reading-cards';
 import AyahSearch from '@/components/reader/ayah-search';
+import VoiceSearch from '@/components/reader/voice-search';
 import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -379,6 +380,7 @@ export default function HomePage() {
             <>
               {/* Search — on focus, dock the controls to their pinned position so
                   the input stays put while results grow/shrink underneath */}
+              <div className="flex gap-2">
               <input
                 ref={searchInputRef}
                 type="text"
@@ -394,6 +396,8 @@ export default function HomePage() {
                 aria-label="Search surahs and ayahs"
                 className="w-full rounded-xl border-[1.5px] border-foreground/15 bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 focus:border-teal focus:outline-none"
               />
+              <VoiceSearch surahs={allSurahs} />
+              </div>
 
               {/* Sort & View Toggle */}
               <div className="flex items-center gap-2">
