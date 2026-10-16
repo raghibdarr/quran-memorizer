@@ -22,6 +22,7 @@ import { cn } from '@/lib/cn';
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 import AyahDisplay from '@/components/ui/ayah-display';
+import HintAyah from '@/components/ui/hint-ayah';
 type SessionStep = 'ayah-by-ayah' | 'full-passage' | 'results';
 
 interface PracticeSessionProps {
@@ -72,6 +73,9 @@ export default function PracticeSession({
   const [step, setStep] = useState<SessionStep>(initialStep);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  // First-letter hints (M10): which ayahs (by key) are showing them
+  const [hints, setHints] = useState<Set<string>>(new Set());
+  const toggleHint = (key: string) => setHints((prev) => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
   const [results, setResults] = useState<PracticeAyahResult[]>([]);
   const [transcribedText, setTranscribedText] = useState<string | null>(null);
   const [wordResults, setWordResults] = useState<Array<{ word: string; correct: boolean }> | null>(null);
@@ -390,12 +394,22 @@ export default function PracticeSession({
               )}
             </div>
           ) : (
-            <div className="py-8">
-              <p className="text-lg text-muted">Recite from memory...</p>
-              <p className="mt-1 text-xs text-muted">
-                Then reveal to check, or use the mic for voice recognition
-              </p>
-            </div>
+            hints.has(currentAyah.key) ? (
+              <div className="py-4">
+                <HintAyah key={currentAyah.key} ayah={currentAyah} />
+                <p className="mt-2 text-xs text-muted">First letters only. Tap a word to see it.</p>
+              </div>
+            ) : (
+              <div className="py-8">
+                <p className="text-lg text-muted">Recite from memory...</p>
+                <p className="mt-1 text-xs text-muted">
+                  Then reveal to check, or use the mic for voice recognition
+                </p>
+                <button onClick={() => toggleHint(currentAyah.key)} className="mt-3 min-h-11 rounded-full bg-foreground/[0.06] px-4 text-xs font-semibold text-foreground/80 hover:bg-foreground/10">
+                  Hint: first letters
+                </button>
+              </div>
+            )
           )}
         </Card>
 
@@ -563,9 +577,18 @@ export default function PracticeSession({
                     />
                   </>
                 ) : (
-                  <div className="py-4 text-center">
-                    <p className="text-sm text-muted">Hidden. Tap the eye to reveal.</p>
-                  </div>
+                  hints.has(ayah.key) ? (
+                    <div className="py-2">
+                      <HintAyah ayah={ayah} />
+                    </div>
+                  ) : (
+                    <div className="py-3 text-center">
+                      <p className="text-sm text-muted">Hidden. Tap Show to reveal.</p>
+                      <button onClick={() => toggleHint(ayah.key)} className="mt-2 min-h-11 rounded-full bg-foreground/[0.06] px-4 text-xs font-semibold text-foreground/80 hover:bg-foreground/10">
+                        Hint: first letters
+                      </button>
+                    </div>
+                  )
                 )}
               </Card>
               </div>

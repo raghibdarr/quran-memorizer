@@ -19,6 +19,7 @@ import { haptic } from '@/lib/haptics';
 import { daysBetween, isoFromMs, startOfTodayMs, todayIso } from '@/lib/dates';
 
 import { ayahRange } from '@/lib/ayah-range';
+import HintAyah from '@/components/ui/hint-ayah';
 interface ReviewSessionProps {
   dueCards: LessonReviewCard[];
   /** Sabqi lessons being touched ahead of their SM-2 date (M5) — a pass must not advance them */
@@ -60,6 +61,8 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
   // stopping early loses nothing.
   const [batchBreak, setBatchBreak] = useState(false);
   const [revealed, setRevealed] = useState(false);
+  // First-letter hint for the passage (M10)
+  const [hint, setHint] = useState(false);
   const [hiddenAyahs, setHiddenAyahs] = useState<Set<number>>(new Set());
   const [ayahRatings, setAyahRatings] = useState<Record<number, AyahRating>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -199,6 +202,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
     setBatchBreak(false);
     setCurrentIndex((i) => i + 1);
     setRevealed(false);
+    setHint(false);
     setAyahRatings({});
     setSubmitted(false);
     setCurrentAyahIndex(-1);
@@ -215,6 +219,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
     } else {
       setCurrentIndex((i) => i + 1);
       setRevealed(false);
+      setHint(false);
       setAyahRatings({});
       setSubmitted(false);
       setCurrentAyahIndex(-1);
@@ -322,6 +327,16 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
               <p className="mt-1 text-xs text-muted">
                 Try to recall the full passage, then rate how well you remembered each ayah
               </p>
+              {hint ? (
+                <div className="mt-4 space-y-3 text-start">
+                  {lessonData.ayahs.map((a) => <HintAyah key={a.key} ayah={a} className="text-2xl" />)}
+                  <p className="text-center text-xs text-muted">First letters only. Tap a word to see it.</p>
+                </div>
+              ) : (
+                <button onClick={() => setHint(true)} className="mt-4 min-h-11 rounded-full bg-foreground/[0.06] px-4 text-xs font-semibold text-foreground/80 hover:bg-foreground/10">
+                  Hint: first letters
+                </button>
+              )}
             </div>
           </div>
 

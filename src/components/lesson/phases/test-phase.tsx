@@ -18,6 +18,7 @@ import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 import { segmentAyah } from '@/lib/segments';
 import SegmentArabic from '@/components/ui/segment-arabic';
+import HintAyah from '@/components/ui/hint-ayah';
 interface TestPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -79,6 +80,8 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
   // full ayah with its rating (one rating per ayah)
   const parts = useMemo(() => Object.fromEntries(ayahs.map((a) => [a.key, segmentAyah(a)])), [ayahs]);
   const [partsShown, setPartsShown] = useState<Record<string, number>>({});
+  // First-letter hints (M10), per ayah key
+  const [hints, setHints] = useState<Set<string>>(new Set());
   const checkNext = (key: string) => {
     const shown = (partsShown[key] ?? 0) + 1;
     if (shown >= parts[key].length) toggle(key);
@@ -223,13 +226,24 @@ export default function TestPhase({ surah, ayahs, lessonId, onComplete }: TestPh
                   </button>
                 </div>
               ) : (
-                <button
-                  onClick={() => (parts[ayah.key].length > 1 ? checkNext(ayah.key) : toggle(ayah.key))}
-                  className="w-full py-2 text-center text-sm text-muted"
-                >
-                  {flagDot}
-                  Ayah {ayah.number} · {parts[ayah.key].length > 1 ? `tap to check, a part at a time (${parts[ayah.key].length} parts)` : 'tap to check'}
-                </button>
+                <div className="space-y-2">
+                  {hints.has(ayah.key) && <HintAyah ayah={ayah} />}
+                  <button
+                    onClick={() => (parts[ayah.key].length > 1 ? checkNext(ayah.key) : toggle(ayah.key))}
+                    className="w-full py-2 text-center text-sm text-muted"
+                  >
+                    {flagDot}
+                    Ayah {ayah.number} · {parts[ayah.key].length > 1 ? `tap to check, a part at a time (${parts[ayah.key].length} parts)` : 'tap to check'}
+                  </button>
+                  {!hints.has(ayah.key) && (
+                    <button
+                      onClick={() => setHints((prev) => new Set(prev).add(ayah.key))}
+                      className="mx-auto block min-h-11 rounded-full bg-foreground/[0.06] px-4 text-xs font-semibold text-foreground/80 hover:bg-foreground/10"
+                    >
+                      Hint: first letters
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           );
