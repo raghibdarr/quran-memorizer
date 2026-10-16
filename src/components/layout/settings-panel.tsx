@@ -512,7 +512,8 @@ export default function SettingsPanel() {
             <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
               Recitations: EveryAyah.com, QuranicAudio, MP3Quran &amp; Tarteel · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0),
               and Qur&apos;anic Universal Audio by QUD (CC BY 4.0) · Search text and page data:{' '}
-              <a href="https://tanzil.net" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Tanzil Project</a> (CC BY 3.0)
+              <a href="https://tanzil.net" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Tanzil Project</a> (CC BY 3.0) · Mushaf pages:{' '}
+              <a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">quran-madina-html</a> (Waqf GPL 2.0) with the DigitalKhatt font by Amine Anane (OFL)
             </p>
             <p className="mt-2 text-center text-[10px] text-muted/80">
               <Link href="/privacy" className="underline underline-offset-2">Privacy policy</Link>

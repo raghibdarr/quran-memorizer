@@ -14,7 +14,7 @@ export type HighlightColor = (typeof HIGHLIGHT_COLORS)[number];
 export interface Bookmark { at: number; deleted?: boolean }
 export interface Highlight { at: number; color: HighlightColor; deleted?: boolean }
 export interface Note { at: number; text: string; deleted?: boolean }
-export interface LastRead { surah: number; ayah: number; at: number }
+export interface LastRead { surah: number; ayah: number; at: number; /** How it was being read */ view?: 'ayah' | 'page' }
 
 export const ayahKey = (surah: number, ayah: number) => `${surah}:${ayah}`;
 export function parseAyahKey(key: string): { surah: number; ayah: number } | null {
@@ -34,7 +34,7 @@ interface ReaderState {
   bookmarks: Record<string, Bookmark>;
   highlights: Record<string, Highlight>;
   notes: Record<string, Note>;
-  setLastRead: (surah: number, ayah: number) => void;
+  setLastRead: (surah: number, ayah: number, view?: 'ayah' | 'page') => void;
   toggleBookmark: (key: string) => void;
   setHighlight: (key: string, color: HighlightColor | null) => void;
   setNote: (key: string, text: string) => void;
@@ -48,8 +48,8 @@ export const useReaderStore = create<ReaderState>()(
       highlights: {},
       notes: {},
 
-      setLastRead: (surah, ayah) =>
-        set((s) => (s.lastRead?.surah === surah && s.lastRead.ayah === ayah ? s : { lastRead: { surah, ayah, at: Date.now() } })),
+      setLastRead: (surah, ayah, view = 'ayah') =>
+        set((s) => (s.lastRead?.surah === surah && s.lastRead.ayah === ayah && (s.lastRead.view ?? 'ayah') === view ? s : { lastRead: { surah, ayah, at: Date.now(), view } })),
 
       toggleBookmark: (key) =>
         set((s) => {

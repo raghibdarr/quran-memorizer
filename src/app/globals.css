@@ -488,3 +488,24 @@ html, body { overscroll-behavior-y: none; }
     scroll-behavior: auto !important;
   }
 }
+
+/* ===== Mushaf page view (roadmap #06) — DigitalKhatt New Madina, OFL (public/mushaf/NOTICE.txt) ===== */
+@font-face {
+  font-family: "QMH New Madina";
+  src: url("/mushaf/madina-qmh.woff2") format("woff2");
+  font-display: block;
+}
+.mushaf-sura-title::before {
+  content: "";
+  position: absolute;
+  inset: 0.15em 0;
+  background-color: var(--color-gold);
+  opacity: 0.55;
+  -webkit-mask: url("/mushaf/sura_border_sym4.svg") center / 95% 100% no-repeat;
+  mask: url("/mushaf/sura_border_sym4.svg") center / 95% 100% no-repeat;
+}
+/* Recall on the page: the word keeps its place and width, its ink is hidden */
+.mushaf-word-hidden {
+  color: transparent;
+  background-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
+}

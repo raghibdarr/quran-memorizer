@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from '@/components/app-link';
 import type { SurahMeta } from '@/types/quran';
-import { listenHref } from '@/lib/routes';
+import { listenHref, mushafHref } from '@/lib/routes';
 import { parseJump, searchAyahs, isArabicQuery, type AyahHit, type QuranMeta, type SearchIndex } from '@/lib/search';
 import { ArrowRightIcon } from '@/components/ui/icons';
 
@@ -56,7 +56,7 @@ export default function AyahSearch({ query, surahs, onCount }: { query: string; 
   return (
     <section className="mb-4 space-y-2" aria-label="Ayahs" data-ayah-search>
       {jump && (
-        <Link href={`${listenHref(jump.surah)}&a=${jump.ayah}`} className="pressable flex min-h-14 items-center justify-between gap-3 rounded-xl bg-teal px-4 py-3 text-on-teal">
+        <Link href={jump.kind === 'page' ? mushafHref(jump.page) : `${listenHref(jump.surah)}&a=${jump.ayah}`} className="pressable flex min-h-14 items-center justify-between gap-3 rounded-xl bg-teal px-4 py-3 text-on-teal">
           <span className="text-sm font-semibold">
             {jump.kind === 'ayah' && `Go to ${names.get(jump.surah) ?? 'Surah'} ${jump.surah}:${jump.ayah}`}
             {jump.kind === 'page' && `Go to page ${jump.page} · ${names.get(jump.surah) ?? ''} ${jump.surah}:${jump.ayah}`}

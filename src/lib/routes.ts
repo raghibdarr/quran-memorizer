@@ -13,6 +13,8 @@ export function lessonHref(surahId: number, lessonNumber: number, from?: string 
 
 /** Recite a whole surah from memory (hidden text, peek per ayah, rating optional) */
 export const reciteHref = (surahId: number) => `/recite?s=${surahId}`;
+/** The Madina mushaf at a page (1–604) */
+export const mushafHref = (page: number) => `/mushaf?p=${page}`;
 /** Listen to a whole surah while the text follows along */
 export const listenHref = (surahId: number) => `/listen?s=${surahId}`;
 
@@ -47,7 +49,7 @@ const inRange = (v: string, max: number) => {
  * retries… an infinite reload loop. Only known routes are ever recovered.
  */
 export function isAppRoute(pathname: string): boolean {
-  if (['/', '/learn', '/recite', '/listen', '/review', '/review/session', '/review/drill', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback', '/privacy', '/bookmarks', '/downloads'].includes(pathname)) {
+  if (['/', '/learn', '/recite', '/listen', '/review', '/review/session', '/review/drill', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback', '/privacy', '/bookmarks', '/downloads', '/mushaf'].includes(pathname)) {
     return true;
   }
   let m: RegExpExecArray | null;

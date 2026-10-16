@@ -7,6 +7,8 @@ import { getSurah, getSurahIndex } from '@/lib/quran-data';
 import { useSettingsStore } from '@/stores/settings-store';
 import { recitationClockMs, setSleepTimer, startRecitation, stopRecitation } from '@/lib/recitation';
 import { rangeUntil, type AyahRef, type PlayUntil } from '@/lib/recitation-queue';
+import { pageOf } from '@/lib/search';
+import { mushafHref } from '@/lib/routes';
 import { useRecitation, useRecitationTransport } from '@/hooks/use-recitation';
 import { activeJob, downloadSurah, isDownloaded, subscribeDownloads } from '@/lib/downloads';
 import Link from '@/components/app-link';
@@ -229,7 +231,26 @@ export default function ListenClient() {
         <div className="mx-auto flex max-w-2xl items-center justify-between">
           <CloseButton fallback={`/lesson/${surahId}`} label="Close" />
           <span className="text-sm font-semibold text-teal">{surah ? surah.nameSimple : 'Read & listen'}</span>
-          <SettingsPanel />
+          <div className="flex items-center gap-1">
+            {surah && (
+              <button
+                type="button"
+                onClick={async () => {
+                  const meta = await loadMeta();
+                  const top = current >= 0 ? surah.ayahs[current].number : (useReaderStore.getState().lastRead?.surah === surah.id ? useReaderStore.getState().lastRead!.ayah : 1);
+                  router.push(mushafHref(pageOf({ page: meta.page, juz: meta.juz }, surah.id, top)));
+                }}
+                aria-label="Mushaf page view"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-muted hover:bg-foreground/5 hover:text-foreground"
+                data-page-view
+              >
+                <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M2 5c3-1.5 7-1.5 10 1 3-2.5 7-2.5 10-1v14c-3-1.5-7-1.5-10 1-3-2.5-7-2.5-10-1z" /><line x1="12" y1="6" x2="12" y2="20" />
+                </svg>
+              </button>
+            )}
+            <SettingsPanel />
+          </div>
         </div>
       </div>
 

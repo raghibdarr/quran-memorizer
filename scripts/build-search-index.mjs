@@ -4,7 +4,9 @@
 //   src/data/search-index.json  Tanzil "Simple Clean" text, one VERBATIM line per ayah
 //                               (Tanzil's terms forbid changing it; search normalises
 //                               at run time, src/lib/search.ts), plus our translation
-//   src/data/quran-meta.json    page / juz / hizb-quarter / sajda starts (Tanzil metadata)
+//   src/data/quran-meta.json    juz / hizb-quarter / sajda starts (Tanzil metadata), and page
+//                               starts of the 1441H Madina print the page view shows
+//                               (public/mushaf, quran-madina-html; Tanzil's pages follow 1405H)
 //
 // Both are Tanzil Project, CC BY 3.0: credited in Settings with a link to tanzil.net.
 //
@@ -65,9 +67,28 @@ const ctx = { QuranData: {} };
 vm.runInNewContext(metaSrc.replace(/^var QuranData = \{\};/m, ''), ctx);
 const Q = ctx.QuranData;
 const pairs = (list) => list.filter((x) => Array.isArray(x) && x.length >= 2).map(([s, a]) => [s, a]);
+// Page starts from the mushaf data, so search, play-to-page and the page view agree
+function mushafPageStarts() {
+  const starts = [];
+  for (let j = 1; j <= 30; j++) {
+    const file = JSON.parse(fs.readFileSync(`public/mushaf/madina-1441h/juz-${String(j).padStart(2, '0')}.json`, 'utf8'));
+    for (const [sura0, idx, start, runs] of file.d) {
+      if (idx < 2) continue;
+      let p = start;
+      let prev = null;
+      for (const run of runs) {
+        if (prev !== null && run.l < prev) p++;
+        prev = run.l;
+        if (!starts[p - 1]) starts[p - 1] = [sura0 + 1, idx - 1];
+      }
+    }
+  }
+  return starts;
+}
+
 const meta = {
-  source: 'Tanzil Quran Metadata (ver 1.0), tanzil.net, CC BY 3.0',
-  page: pairs(Q.Page).slice(0, 604), // start of each Madani page
+  source: 'Tanzil Quran Metadata (ver 1.0), tanzil.net, CC BY 3.0; page starts: 1441H Madina print (quran-madina-html, Waqf GPL 2.0)',
+  page: mushafPageStarts(), // start of each 1441H Madina page
   juz: pairs(Q.Juz).slice(0, 30),
   hizbQuarter: pairs(Q.HizbQaurter).slice(0, 240),
   sajda: pairs(Q.Sajda),
