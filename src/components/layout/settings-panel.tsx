@@ -14,6 +14,7 @@ import { cn } from '@/lib/cn';
 import { haptic, hapticsEnabled, setHapticsEnabled } from '@/lib/haptics';
 import { isNative } from '@/lib/native';
 import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
+import SyncPitch from '@/components/auth/sync-pitch';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -406,6 +407,7 @@ export default function SettingsPanel() {
               <p className="mt-1.5 text-[10px] leading-snug text-muted/80">
                 {backupMsg ?? 'Your progress is saved on this device. Export a backup, or sign in to sync it.'}
               </p>
+              {backupMsg === 'Backup downloaded ✓' && <SyncPitch moment="backup" className="mt-3" />}
             </div>
 
             {/* Data credits — quran-align and Qur'anic Universal Audio are CC BY 4.0, so this attribution is a license requirement */}

@@ -15,7 +15,8 @@ import { lessonHref } from '@/lib/routes';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import { DayCompleteSummary, ReminderOffer } from '@/components/plan/day-complete';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
-import { haptic } from '@/lib/haptics';
+import { haptic } from '@/lib/haptics';
+import SyncPitch from '@/components/auth/sync-pitch';
 
 interface CompletePhaseProps {
   surah: Surah;
@@ -139,6 +140,8 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           </p>
         </div>
       )}
+
+      <SyncPitch moment="lesson" className="w-full" />
 
       <div className="flex w-full flex-col gap-3">
         {hasNextLesson && (

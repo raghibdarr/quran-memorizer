@@ -15,6 +15,7 @@ import { CheckIcon, FlameIcon } from '@/components/ui/icons';
 import { haptic } from '@/lib/haptics';
 import { isNative } from '@/lib/native';
 import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
+import SyncPitch from '@/components/auth/sync-pitch';
 
 const timeLabel = (hour: number, minute: number) =>
   new Date(2000, 0, 1, hour, minute).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
@@ -145,6 +146,7 @@ export default function DayCompleteMoment() {
           <DayCompleteSummary />
         </div>
         <ReminderOffer />
+        <SyncPitch moment="day" className="mt-4" />
         <Button className="mt-5 w-full" onClick={acknowledge}>
           Alhamdulillah
         </Button>
