@@ -272,3 +272,23 @@ export function getLeeches(cards: ReviewCard[]): ReviewCard[] {
     .filter((c) => (c.failStreak ?? 0) >= RETENTION.LEECH_THRESHOLD)
     .sort((a, b) => (b.failStreak ?? 0) - (a.failStreak ?? 0) || a.surahId - b.surahId || a.ayahNumber - b.ayahNumber);
 }
+
+// ---------- Weakest-ayah drill (M10) ----------
+
+/** About five minutes of one-at-a-time recall */
+export const DRILL_SIZE = 8;
+
+/**
+ * The ayahs most worth drilling, worst first: leeches (missed several reviews in a
+ * row), then ayahs missed or shaky last time, then the ones that have slipped most
+ * often. Only ayahs that have actually been rated count: a seeded "known" ayah with
+ * no review yet says nothing about weakness.
+ */
+export function getWeakAyahs(cards: ReviewCard[], limit = DRILL_SIZE): ReviewCard[] {
+  const weakness = (c: ReviewCard) =>
+    (c.failStreak ?? 0) * 100 + (c.lastQuality < 3 ? 40 : c.lastQuality === 3 ? 20 : 0) + (c.lapses ?? 0) * 5;
+  return cards
+    .filter((c) => c.lastReview > 0 && weakness(c) > 0)
+    .sort((a, b) => weakness(b) - weakness(a) || a.easeFactor - b.easeFactor || a.surahId - b.surahId || a.ayahNumber - b.ayahNumber)
+    .slice(0, limit);
+}

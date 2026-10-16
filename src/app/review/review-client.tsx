@@ -10,7 +10,7 @@ import { usePlanStore } from '@/stores/plan-store';
 import { getSurahIndex, getJuzSegmentsForSurah, getSurah } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
 import { computeSurahHealth } from '@/lib/review-helpers';
-import { getLeeches, RETENTION, type Stream } from '@/lib/retention';
+import { getLeeches, getWeakAyahs, RETENTION, type Stream } from '@/lib/retention';
 import { useReviewQueue } from '@/hooks/use-review-queue';
 import type { SurahMeta, LessonDef } from '@/types/quran';
 import type { SurahHealth } from '@/lib/review-helpers';
@@ -99,6 +99,7 @@ export default function ReviewPage() {
   const dueCards = useMemo(() => [...queue.sabqi, ...queue.manzil], [queue]);
   const dueCount = dueCards.length;
   const leeches = useMemo(() => getLeeches(cards), [cards]);
+  const weakCount = useMemo(() => getWeakAyahs(cards).length, [cards]);
 
   // Sessions are their own screen (M11b) — pushed, so back closes them
   const openSession = (query = '') =>
@@ -216,6 +217,19 @@ export default function ReviewPage() {
       </header>
 
       <main className="mx-auto max-w-2xl px-4 space-y-4">
+        {/* No leeches, but some ayahs went shaky or missed lately: the drill still helps */}
+        {leeches.length === 0 && weakCount > 0 && (
+          <Link href="/review/drill" className="block">
+            <Card pressable className="flex items-center justify-between gap-3">
+              <span>
+                <span className="block text-sm font-bold text-foreground">Drill your weakest ayahs</span>
+                <span className="mt-0.5 block text-xs text-muted">{weakCount} {weakCount === 1 ? 'ayah' : 'ayahs'} you found shaky or missed lately · about 5 min</span>
+              </span>
+              <span aria-hidden className="text-teal">›</span>
+            </Card>
+          </Link>
+        )}
+
         {/* Leeches (M5): ayahs failed several reviews in a row need isolated drilling,
             not more of the same spaced review */}
         {leeches.length > 0 && (
@@ -224,6 +238,9 @@ export default function ReviewPage() {
             <p className="mt-0.5 text-xs text-muted">
               Missed {RETENTION.LEECH_THRESHOLD}+ reviews in a row. Practice these on their own before the next review.
             </p>
+            <Link href="/review/drill" className="tactile-btn mt-3 flex min-h-11 items-center justify-center rounded-xl bg-teal text-sm font-semibold text-on-teal">
+              Drill these now · about 5 min
+            </Link>
             <div className="mt-2 space-y-1">
               {leeches.slice(0, 8).map((c) => {
                 const surah = surahMap.get(c.surahId);
