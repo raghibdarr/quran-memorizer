@@ -224,6 +224,17 @@ describe('merge properties (fast-check)', () => {
     expect(merged.bookmarks['2:255'].deleted).toBe(true)
   })
 
+  it('reader: one khatm on two devices unions its pages; a newer khatm replaces an older one', () => {
+    const base = { lastRead: null, bookmarks: {}, highlights: {}, notes: {} }
+    const k = (id: string, startedAt: number, pages: Record<string, number>, endedAt?: number) => ({ id, startedAt, days: 30, pagesRead: pages, ...(endedAt ? { endedAt } : {}) })
+    const same = mergeStore('quran-reader', { ...base, khatm: k('a', 1, { '1': 5, '2': 6 }) }, { ...base, khatm: k('a', 1, { '2': 4, '3': 7 }, 9) }, true) as { khatm: { pagesRead: Record<string, number>; endedAt?: number } }
+    expect(same.khatm.pagesRead).toEqual({ '1': 5, '2': 4, '3': 7 })
+    expect(same.khatm.endedAt).toBe(9)
+    const newer = mergeStore('quran-reader', { ...base, khatm: k('a', 1, { '1': 5 }) }, { ...base, khatm: k('b', 2, {}) }, true) as { khatm: { id: string } }
+    expect(newer.khatm.id).toBe('b')
+    expect((mergeStore('quran-reader', base, { ...base, khatm: k('a', 1, {}) }, true) as { khatm: { id: string } }).khatm.id).toBe('a')
+  })
+
   it('practice: idempotent; sessions are a duplicate-free union', () => {
     fc.assert(fc.property(practiceArb, practiceArb, (a, b) => {
       expect(mergeStore('quran-practice', a, a, true)).toEqual(a)

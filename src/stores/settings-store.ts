@@ -15,6 +15,7 @@ interface SettingsState extends UserSettings {
   setListenRangeRepeat: (times: number) => void;
   setListenUntil: (until: NonNullable<UserSettings['listenUntil']>) => void;
   toggleReaderWordByWord: () => void;
+  toggleHideStats: () => void;
   setDailyGoalActivities: (count: number) => void;
 }
 
@@ -48,6 +49,7 @@ export const useSettingsStore = create<SettingsState>()(
       setListenRangeRepeat: (listenRangeRepeat) => set({ listenRangeRepeat }),
       setListenUntil: (listenUntil) => set({ listenUntil }),
       toggleReaderWordByWord: () => set((s) => ({ readerWordByWord: !s.readerWordByWord })),
+      toggleHideStats: () => set((s) => ({ hideStats: !s.hideStats })),
       setDailyGoalActivities: (count) => set({ dailyGoalActivities: count }),
     }),
     {

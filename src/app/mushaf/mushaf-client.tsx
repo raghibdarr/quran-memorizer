@@ -42,6 +42,9 @@ async function loadPage(page: number, meta: Meta): Promise<Page | null> {
   return buildPage(page, files);
 }
 
+/** Staying this long on a page counts it as read for a khatm */
+const PAGE_READ_MS = 12_000;
+
 const juzOf = (meta: Meta, page: number) => meta.juzStartPages.filter((p) => p <= page).length;
 
 /**
@@ -87,6 +90,16 @@ export default function MushafClient() {
   useEffect(() => {
     if (ayahs.length) setLastRead(ayahs[0].surah, ayahs[0].ayah, 'page');
   }, [ayahs, setLastRead]);
+
+  // A khatm counts a page as read once you've stayed on it a little while
+  const khatmActive = useReaderStore((s) => !!s.khatm && !s.khatm.endedAt);
+  const markPagesRead = useReaderStore((s) => s.markPagesRead);
+  const pageRead = useReaderStore((s) => !!s.khatm && !s.khatm.endedAt && !!s.khatm.pagesRead[String(pageNo)]);
+  useEffect(() => {
+    if (!khatmActive || !ayahs.length) return;
+    const t = setTimeout(() => markPagesRead([pageNo]), PAGE_READ_MS);
+    return () => clearTimeout(t);
+  }, [khatmActive, ayahs.length, pageNo, markPagesRead]);
 
   // Fit the page to the screen: a line is MUSHAF_LINE_WIDTH em, a page 15 lines of 1.8em
   useEffect(() => {
@@ -201,6 +214,7 @@ export default function MushafClient() {
             <p className="text-[11px] text-muted">
               {meta ? `Juz ${juzOf(meta, pageNo)} · Page ${pageNo}` : `Page ${pageNo}`}
               {bookmarkedHere && <span className="text-gold-deep"> · bookmarked</span>}
+              {pageRead && <span className="text-success"> · read ✓</span>}
             </p>
           </div>
           <div className="flex items-center gap-1">

@@ -7,6 +7,7 @@ import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useReviewStore } from '@/stores/review-store';
 import { usePlanStore } from '@/stores/plan-store';
+import { useSettingsStore } from '@/stores/settings-store';
 import { computeGoalAyahProgress } from '@/lib/plan';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
 import { generateLessonsWithJuzBoundaries } from '@/lib/curriculum';
@@ -33,6 +34,7 @@ export default function ProgressPage() {
   const lessonCards = useReviewStore((s) => s.lessonCards);
   const ayahCards = useReviewStore((s) => s.cards);
   const plan = usePlanStore((s) => s.plan);
+  const hideStats = useSettingsStore((s) => !!s.hideStats);
 
   useEffect(() => {
     getSurahIndex().then((data) => setSurahs([...data].sort((a, b) => a.id - b.id)));
@@ -216,8 +218,8 @@ export default function ProgressPage() {
           </div>
         </Card>
 
-        {/* Stats grid */}
-        <div className="grid grid-cols-3 gap-3">
+        {/* Stats grid (hidden by the "Hide streaks and counts" setting) */}
+        {!hideStats && <div className="grid grid-cols-3 gap-3">
           <Card className="text-center">
             <p className="text-2xl font-bold text-gold">{stats.currentStreak}</p>
             <p className="text-xs text-muted">Day Streak</p>
@@ -233,7 +235,7 @@ export default function ProgressPage() {
             <p className="text-2xl font-bold text-foreground">{thisWeekCount}</p>
             <p className="text-xs text-muted">This Week</p>
           </Card>
-        </div>
+        </div>}
 
         {/* Summary */}
         <Card className="flex items-center justify-between">

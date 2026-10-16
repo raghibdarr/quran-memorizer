@@ -6,6 +6,7 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useProgressStore } from '@/stores/progress-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { usePlanStore } from '@/stores/plan-store';
+import { useSettingsStore } from '@/stores/settings-store';
 import TodaysPlanCard from '@/components/plan/todays-plan';
 import PlanCelebration from '@/components/plan/plan-celebration';
 import { getSurahIndex, getJuzIndex } from '@/lib/quran-data';
@@ -29,6 +30,7 @@ import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
 import ContinueReading from '@/components/reader/continue-reading';
+import { KahfCard, KhatmRow } from '@/components/reader/reading-cards';
 import AyahSearch from '@/components/reader/ayah-search';
 import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
@@ -67,6 +69,7 @@ export default function HomePage() {
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
   const [search, setSearch] = useState('');
   const [ayahMatches, setAyahMatches] = useState(0);
+  const hideStats = useSettingsStore((s) => !!s.hideStats);
   const [sort, setSort] = useState<SortOption>(() => {
     if (typeof window !== 'undefined') return (localStorage.getItem('home-sort') as SortOption) ?? 'number-asc';
     return 'number-asc';
@@ -206,7 +209,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {stats.currentStreak > 0 && (
+              {stats.currentStreak > 0 && !hideStats && (
                 <div className="flex items-center gap-1.5 rounded-full border-[1.5px] border-gold/40 bg-gold/10 px-3 py-1.5">
                   <FlameIcon size={16} className="text-gold-deep" />
                   <span className="text-sm font-bold text-gold-deep">{stats.currentStreak}</span>
@@ -253,6 +256,8 @@ export default function HomePage() {
           </Link>
         ) : null}
 
+        <KahfCard />
+        <KhatmRow />
         <ContinueReading surahs={allSurahs} />
 
         {plan ? (

@@ -146,6 +146,8 @@ export interface UserSettings {
   listenRangeRepeat?: number;
   /** Read & listen shows each word's meaning under it */
   readerWordByWord?: boolean;
+  /** Hide streaks and counts (some prefer to keep their worship unscored) */
+  hideStats?: boolean;
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 

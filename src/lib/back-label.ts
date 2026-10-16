@@ -14,6 +14,7 @@ export async function backLabelFor(
   if (path === '/progress') return 'Progress';
   if (path === '/bookmarks') return 'Bookmarks';
   if (path === '/downloads') return 'Downloads';
+  if (path === '/khatm') return 'Khatm';
   if (path === '/plan' || path.startsWith('/plan/')) return 'Plan';
   const juz = path.match(/^\/juz\/(\d+)$/);
   if (juz) return `Juz ${juz[1]}`;

@@ -420,7 +420,22 @@ function mergeReader(
     bookmarks: mergeMarks(local.bookmarks, cloud.bookmarks),
     highlights: mergeMarks(local.highlights, cloud.highlights),
     notes: mergeMarks(local.notes, cloud.notes),
+    khatm: mergeKhatm(local.khatm, cloud.khatm),
   }
+}
+
+/** The khatm started last wins; the same khatm on two devices unions its pages read */
+function mergeKhatm(a: unknown, b: unknown): unknown {
+  type K = { id: string; startedAt: number; endedAt?: number; pagesRead?: Record<string, number> }
+  const l = a as K | null | undefined
+  const c = b as K | null | undefined
+  if (!l) return c ?? null
+  if (!c) return l
+  if (l.id !== c.id) return l.startedAt >= c.startedAt ? l : c
+  const pagesRead: Record<string, number> = { ...(c.pagesRead ?? {}) }
+  for (const [p, at] of Object.entries(l.pagesRead ?? {})) pagesRead[p] = Math.min(at, pagesRead[p] ?? at)
+  const endedAt = l.endedAt ?? c.endedAt
+  return { ...l, pagesRead, ...(endedAt ? { endedAt } : {}) }
 }
 
 /** Flags: union of string keys; a set flag is never unset by an absent one; local wins on conflict. */

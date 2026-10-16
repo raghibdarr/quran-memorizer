@@ -75,6 +75,7 @@ const FIXTURES: Record<SyncRowName, Record<string, unknown>> = {
     bookmarks: { '2:255': { at: 1780000000000 }, '36:1': { at: 1780050000000, deleted: true } },
     highlights: { '67:2': { at: 1780000000000, color: 'teal' } },
     notes: { '2:255': { at: 1780000000000, text: 'Ayat al-Kursi: before sleep' } },
+    khatm: { id: 'k1', startedAt: 1780000000000, days: 30, kind: 'ramadan', pagesRead: { '1': 1780000100000, '2': 1780000200000 } },
   },
   'quran-flags': {
     'onboarding-complete': 'true', 'chunk-explainer-seen': 'true', 'home-tab': 'surahs',

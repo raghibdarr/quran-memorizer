@@ -282,6 +282,8 @@ export default function SettingsPanel() {
     toggleTranslation,
     dailyGoalActivities,
     setDailyGoalActivities,
+    hideStats,
+    toggleHideStats,
   } = useSettingsStore();
   const [haptics, setHaptics] = useState(hapticsEnabled);
   const [sample, setSample] = useState<Ayah | null>(null);
@@ -431,6 +433,11 @@ export default function SettingsPanel() {
               <label className="flex min-h-11 cursor-pointer items-center justify-between">
                 <span className="text-sm text-foreground">Translation</span>
                 <Toggle enabled={translationEnabled} onToggle={toggleTranslation} />
+              </label>
+
+              <label className="flex min-h-11 cursor-pointer items-center justify-between">
+                <span className="text-sm text-foreground">Hide streaks and counts</span>
+                <Toggle enabled={!!hideStats} onToggle={toggleHideStats} />
               </label>
 
               {isNative() && (

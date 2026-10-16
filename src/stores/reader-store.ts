@@ -16,6 +16,18 @@ export interface Highlight { at: number; color: HighlightColor; deleted?: boolea
 export interface Note { at: number; text: string; deleted?: boolean }
 export interface LastRead { surah: number; ayah: number; at: number; /** How it was being read */ view?: 'ayah' | 'page' }
 
+/** A khatm: read the whole mushaf in `days` days (roadmap #14). Pages read are kept by page number. */
+export interface Khatm {
+  id: string;
+  startedAt: number;
+  days: number;
+  /** "ramadan" etc., for the label only */
+  kind?: string;
+  pagesRead: Record<string, number>;
+  /** Set when finished or abandoned (kept so other devices learn it ended) */
+  endedAt?: number;
+}
+
 export const ayahKey = (surah: number, ayah: number) => `${surah}:${ayah}`;
 export function parseAyahKey(key: string): { surah: number; ayah: number } | null {
   const m = /^(\d{1,3}):(\d{1,3})$/.exec(key);
@@ -34,6 +46,10 @@ interface ReaderState {
   bookmarks: Record<string, Bookmark>;
   highlights: Record<string, Highlight>;
   notes: Record<string, Note>;
+  khatm: Khatm | null;
+  startKhatm: (days: number, kind?: string) => void;
+  endKhatm: () => void;
+  markPagesRead: (pages: number[]) => void;
   setLastRead: (surah: number, ayah: number, view?: 'ayah' | 'page') => void;
   toggleBookmark: (key: string) => void;
   setHighlight: (key: string, color: HighlightColor | null) => void;
@@ -47,6 +63,20 @@ export const useReaderStore = create<ReaderState>()(
       bookmarks: {},
       highlights: {},
       notes: {},
+      khatm: null,
+
+      startKhatm: (days, kind) =>
+        set({ khatm: { id: Math.random().toString(36).slice(2, 10), startedAt: Date.now(), days, kind, pagesRead: {} } }),
+      endKhatm: () => set((s) => (s.khatm ? { khatm: { ...s.khatm, endedAt: Date.now() } } : s)),
+      markPagesRead: (pages) =>
+        set((s) => {
+          if (!s.khatm || s.khatm.endedAt) return s;
+          const fresh = pages.filter((p) => !s.khatm!.pagesRead[String(p)]);
+          if (!fresh.length) return s;
+          const pagesRead = { ...s.khatm.pagesRead };
+          for (const p of fresh) pagesRead[String(p)] = Date.now();
+          return { khatm: { ...s.khatm, pagesRead } };
+        }),
 
       setLastRead: (surah, ayah, view = 'ayah') =>
         set((s) => (s.lastRead?.surah === surah && s.lastRead.ayah === ayah && (s.lastRead.view ?? 'ayah') === view ? s : { lastRead: { surah, ayah, at: Date.now(), view } })),
