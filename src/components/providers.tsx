@@ -12,6 +12,7 @@ import { initNativeAuth } from '@/lib/native-auth';
 import { installPressHaptics } from '@/lib/haptics';
 import AppBadgeSync from '@/components/app-badge-sync';
 import ReminderSync from '@/components/reminder-sync';
+import WidgetSync from '@/components/widget-sync';
 import EdgeSwipeBack from '@/components/edge-swipe-back';
 import TajweedExplainer from '@/components/tajweed-explainer';
 import { useNavHistoryTracking } from '@/hooks/use-app-back';
@@ -144,6 +145,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <SyncProvider>
       <AppBadgeSync />
       <ReminderSync />
+      <WidgetSync />
       <EdgeSwipeBack />
       <TajweedExplainer />
       {children}

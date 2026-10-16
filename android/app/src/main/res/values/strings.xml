@@ -5,4 +5,6 @@
     <string name="package_name">app.takrar.quran</string>
     <string name="custom_url_scheme">app.takrar.quran</string>
     <string name="recitation_service_description">Keeps a recitation playing when the screen is off.</string>
+    <string name="widget_description">Today's reviews, your streak and your khatm pages</string>
+    <string name="widget_open">Open Takrar</string>
 </resources>
