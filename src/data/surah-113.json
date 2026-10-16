@@ -23,7 +23,7 @@
         {
           "position": 2,
           "textUthmani": "أَعُوذُ",
-          "transliteration": "aʿūdhu",
+          "transliteration": "a'oodhu",
           "translation": "I seek refuge",
           "charType": "word"
         },
@@ -37,7 +37,7 @@
         {
           "position": 4,
           "textUthmani": "ٱلْفَلَقِ",
-          "transliteration": "l-falaqi",
+          "transliteration": "al-falaqi",
           "translation": "(of) the dawn",
           "charType": "word"
         },
@@ -50,7 +50,7 @@
         }
       ],
       "translation": "Say, \"I seek refuge in the Lord of daybreak",
-      "transliteration": "Qul a'oothu bi-rabbil falaq",
+      "transliteration": "Qul a'oodhu birabbil-falaq",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113001.mp3",
       "translationClear": "Say, “I take refuge with the Lord of Daybreak."
     },
@@ -78,7 +78,7 @@
         {
           "position": 3,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "(of) what",
           "charType": "word"
         },
@@ -126,14 +126,14 @@
         {
           "position": 3,
           "textUthmani": "غَاسِقٍ",
-          "transliteration": "ghāsiqin",
+          "transliteration": "ghaasiqin",
           "translation": "(of) darkness",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "when",
           "charType": "word"
         },
@@ -153,7 +153,7 @@
         }
       ],
       "translation": "And from the evil of darkness when it settles",
-      "transliteration": "Wa-min sharri ghaasiqin ithaa waqab",
+      "transliteration": "Wamin sharri ghaasiqin idhaa waqab",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113003.mp3",
       "translationClear": "And from the evil of the darkness as it gathers."
     },
@@ -181,21 +181,21 @@
         {
           "position": 3,
           "textUthmani": "ٱلنَّفَّـٰثَـٰتِ",
-          "transliteration": "l-nafāthāti",
+          "transliteration": "an-naffaathaati",
           "translation": "(of) the blowers",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "in",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱلْعُقَدِ",
-          "transliteration": "l-ʿuqadi",
+          "transliteration": "al-'uqadi",
           "translation": "the knots",
           "charType": "word"
         },
@@ -208,7 +208,7 @@
         }
       ],
       "translation": "And from the evil of the blowers in knots[2014]",
-      "transliteration": "Wa-min sharrin naffaa-saati fil 'uqad",
+      "transliteration": "Wamin sharrin-naffaathaati fil-'uqad",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113004.mp3",
       "footnotes": {
         "2014": "i.e., those who practice magic."
@@ -239,21 +239,21 @@
         {
           "position": 3,
           "textUthmani": "حَاسِدٍ",
-          "transliteration": "ḥāsidin",
+          "transliteration": "haasidin",
           "translation": "(of) an envier",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "when",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "حَسَدَ",
-          "transliteration": "ḥasada",
+          "transliteration": "hasada",
           "translation": "he envies",
           "charType": "word"
         },
@@ -266,7 +266,7 @@
         }
       ],
       "translation": "And from the evil of an envier when he envies.\"",
-      "transliteration": "Wa-min sharri haasidin ithaa hasad",
+      "transliteration": "Wamin sharri haasidin idhaa hasad",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113005.mp3",
       "translationClear": "And from the evil of an envious when he envies.”"
     }

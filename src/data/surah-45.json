@@ -16,7 +16,7 @@
         {
           "position": 1,
           "textUthmani": "حمٓ",
-          "transliteration": "hha-meem",
+          "transliteration": "Haa-Meem",
           "translation": "Ha Meem",
           "charType": "word"
         },
@@ -29,7 +29,7 @@
         }
       ],
       "translation": "Ḥā, Meem.[1468]",
-      "transliteration": "Haa-Meeem",
+      "transliteration": "Haa-Meem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045001.mp3",
       "footnotes": {
         "1468": "See footnote to 2:1."
@@ -46,14 +46,14 @@
         {
           "position": 1,
           "textUthmani": "تَنزِيلُ",
-          "transliteration": "tanzīlu",
+          "transliteration": "tanzeelu",
           "translation": "(The) revelation",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلْكِتَـٰبِ",
-          "transliteration": "l-kitābi",
+          "transliteration": "al-kitaabi",
           "translation": "(of) the Book",
           "charType": "word"
         },
@@ -67,21 +67,21 @@
         {
           "position": 4,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱلْعَزِيزِ",
-          "transliteration": "l-ʿazīzi",
+          "transliteration": "al-'azeezi",
           "translation": "the All-Mighty",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "ٱلْحَكِيمِ",
-          "transliteration": "l-ḥakīmi",
+          "transliteration": "al-hakeemi",
           "translation": "the All-Wise",
           "charType": "word"
         },
@@ -94,7 +94,7 @@
         }
       ],
       "translation": "The revelation of the Book is from Allāh, the Exalted in Might, the Wise.",
-      "transliteration": "Tanzeelul Kitaabi minal laahil 'Azeezil Hakeem",
+      "transliteration": "Tanzeelul-kitaabi minallaahil-'azeezil-hakeem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045002.mp3",
       "translationClear": "The revelation of the Book is from Allah, the Exalted in Might, the Wise."
     },
@@ -115,35 +115,35 @@
         {
           "position": 2,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "in",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱلسَّمَـٰوَٰتِ",
-          "transliteration": "l-samāwāti",
+          "transliteration": "as-samaawaati",
           "translation": "the heavens",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "وَٱلْأَرْضِ",
-          "transliteration": "wal-arḍi",
+          "transliteration": "wal-ardi",
           "translation": "and the earth",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "لَـَٔايَـٰتٍۢ",
-          "transliteration": "laāyātin",
+          "transliteration": "la'aayaatin",
           "translation": "surely (are) Signs",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "لِّلْمُؤْمِنِينَ",
-          "transliteration": "lil'mu'minīna",
+          "transliteration": "lilmu'mineena",
           "translation": "for the believers",
           "charType": "word"
         },
@@ -156,7 +156,7 @@
         }
       ],
       "translation": "Indeed, within the heavens and earth are signs for the believers.",
-      "transliteration": "Innaa fis samaawaati wal-ardi la-Aayaatil lilmu'mineen",
+      "transliteration": "Inna fis-samaawaati wal-ardi la'aayaatil lilmu'mineen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045003.mp3",
       "translationClear": "In the heavens and the earth are proofs for the believers."
     },
@@ -170,7 +170,7 @@
         {
           "position": 1,
           "textUthmani": "وَفِى",
-          "transliteration": "wafī",
+          "transliteration": "wafee",
           "translation": "And in",
           "charType": "word"
         },
@@ -184,14 +184,14 @@
         {
           "position": 3,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and what",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "يَبُثُّ",
-          "transliteration": "yabuthu",
+          "transliteration": "yabuththu",
           "translation": "He disperses",
           "charType": "word"
         },
@@ -205,14 +205,14 @@
         {
           "position": 6,
           "textUthmani": "دَآبَّةٍ",
-          "transliteration": "dābbatin",
+          "transliteration": "daabbatin",
           "translation": "(the) moving creatures",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "ءَايَـٰتٌۭ",
-          "transliteration": "āyātun",
+          "transliteration": "aayaatun",
           "translation": "(are) Signs",
           "charType": "word"
         },
@@ -226,7 +226,7 @@
         {
           "position": 9,
           "textUthmani": "يُوقِنُونَ",
-          "transliteration": "yūqinūna",
+          "transliteration": "yooqinoona",
           "translation": "who are certain",
           "charType": "word"
         },
@@ -239,7 +239,7 @@
         }
       ],
       "translation": "And in the creation of yourselves and what He disperses of moving creatures are signs for people who are certain [in faith].",
-      "transliteration": "Wa-fee khalaqikum Wa-maa yabussu min daaabbatin Aayaatul liqawmien yooqinoon",
+      "transliteration": "Wafee khalqikum wamaa yabuththu min daabbatin aayaatul liqawmin yooqinoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045004.mp3",
       "translationClear": "And in your own creation, and in the creatures He scattered, are signs for people of firm faith."
     },
@@ -253,7 +253,7 @@
         {
           "position": 1,
           "textUthmani": "وَٱخْتِلَـٰفِ",
-          "transliteration": "wa-ikh'tilāfi",
+          "transliteration": "wakhtilaafi",
           "translation": "And (in the) alternation",
           "charType": "word"
         },
@@ -267,14 +267,14 @@
         {
           "position": 3,
           "textUthmani": "وَٱلنَّهَارِ",
-          "transliteration": "wal-nahāri",
+          "transliteration": "wan-nahaari",
           "translation": "and the day",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "وَمَآ",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and what",
           "charType": "word"
         },
@@ -288,7 +288,7 @@
         {
           "position": 6,
           "textUthmani": "ٱللَّهُ",
-          "transliteration": "l-lahu",
+          "transliteration": "allaahu",
           "translation": "Allah sends down",
           "charType": "word"
         },
@@ -302,7 +302,7 @@
         {
           "position": 8,
           "textUthmani": "ٱلسَّمَآءِ",
-          "transliteration": "l-samāi",
+          "transliteration": "as-samaa'i",
           "translation": "the sky",
           "charType": "word"
         },
@@ -316,14 +316,14 @@
         {
           "position": 10,
           "textUthmani": "رِّزْقٍۢ",
-          "transliteration": "riz'qin",
+          "transliteration": "rizqin",
           "translation": "(the) provision",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "فَأَحْيَا",
-          "transliteration": "fa-aḥyā",
+          "transliteration": "fa'ahyaa",
           "translation": "and gives life",
           "charType": "word"
         },
@@ -337,42 +337,42 @@
         {
           "position": 13,
           "textUthmani": "ٱلْأَرْضَ",
-          "transliteration": "l-arḍa",
+          "transliteration": "al-arda",
           "translation": "(to) the earth",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "بَعْدَ",
-          "transliteration": "baʿda",
+          "transliteration": "ba'da",
           "translation": "after",
           "charType": "word"
         },
         {
           "position": 15,
           "textUthmani": "مَوْتِهَا",
-          "transliteration": "mawtihā",
+          "transliteration": "mawtihaa",
           "translation": "its death",
           "charType": "word"
         },
         {
           "position": 16,
           "textUthmani": "وَتَصْرِيفِ",
-          "transliteration": "wataṣrīfi",
+          "transliteration": "watasreefi",
           "translation": "and (in) directing",
           "charType": "word"
         },
         {
           "position": 17,
           "textUthmani": "ٱلرِّيَـٰحِ",
-          "transliteration": "l-riyāḥi",
+          "transliteration": "ar-riyaahi",
           "translation": "(the) winds",
           "charType": "word"
         },
         {
           "position": 18,
           "textUthmani": "ءَايَـٰتٌۭ",
-          "transliteration": "āyātun",
+          "transliteration": "aayaatun",
           "translation": "(are) Signs",
           "charType": "word"
         },
@@ -386,7 +386,7 @@
         {
           "position": 20,
           "textUthmani": "يَعْقِلُونَ",
-          "transliteration": "yaʿqilūna",
+          "transliteration": "ya'qiloona",
           "translation": "who reason",
           "charType": "word"
         },
@@ -399,7 +399,7 @@
         }
       ],
       "translation": "And [in] the alternation of night and day and [in] what Allāh sends down from the sky of provision [i.e., rain] and gives life thereby to the earth after its lifelessness and [in His] directing of the winds are signs for a people who reason.",
-      "transliteration": "Wakhtilaafil laili wannahaari Wa-maaa anzalal laahu minas samaaa'i mir rizqin fa-ahyaa bihil arda ba'da mawtihaa Wa-tasreefir riyaahi Aayaatul liqawminy ya'qiloon",
+      "transliteration": "Wakhtilaafil-layli wan-nahaari wamaa anzalallaahu minas-samaa'i mir rizqin fa'ahyaa bihil-arda ba'da mawtihaa watasreefir-riyaahi aayaatul liqawmin ya'qiloon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045005.mp3",
       "translationClear": "And in the alternation of night and day, and in the sustenance Allah sends down from the sky, with which He revives the earth after its death, and in the circulation of the winds, are marvels for people who reason."
     },
@@ -413,84 +413,84 @@
         {
           "position": 1,
           "textUthmani": "تِلْكَ",
-          "transliteration": "til'ka",
+          "transliteration": "tilka",
           "translation": "These",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ءَايَـٰتُ",
-          "transliteration": "āyātu",
+          "transliteration": "aayaatu",
           "translation": "(are the) Verses",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "نَتْلُوهَا",
-          "transliteration": "natlūhā",
+          "transliteration": "natloohaa",
           "translation": "We recite them",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "عَلَيْكَ",
-          "transliteration": "ʿalayka",
+          "transliteration": "'alayka",
           "translation": "to you",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "بِٱلْحَقِّ ۖ",
-          "transliteration": "bil-ḥaqi",
+          "transliteration": "bil-haqqi",
           "translation": "in truth",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "فَبِأَىِّ",
-          "transliteration": "fabi-ayyi",
+          "transliteration": "fabi'ayyi",
           "translation": "Then in what",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "حَدِيثٍۭ",
-          "transliteration": "ḥadīthin",
+          "transliteration": "hadeethin",
           "translation": "statement",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "بَعْدَ",
-          "transliteration": "baʿda",
+          "transliteration": "ba'da",
           "translation": "after",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "وَءَايَـٰتِهِۦ",
-          "transliteration": "waāyātihi",
+          "transliteration": "wa'aayaatihee",
           "translation": "and His Verses",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "يُؤْمِنُونَ",
-          "transliteration": "yu'minūna",
+          "transliteration": "yu'minoona",
           "translation": "will they believe",
           "charType": "word"
         },
@@ -503,7 +503,7 @@
         }
       ],
       "translation": "These are the verses of Allāh which We recite to you in truth. Then in what statement after Allāh and His verses will they believe?",
-      "transliteration": "Tilka Aayatul laahi natloohaa 'alaika bil-haqq, fabiayyi hadeesim ba'dal laahi Wa-Aayaatihee yu'minoon",
+      "transliteration": "Tilka aayaatullaahi natloohaa 'alayka bil-haqqi fabi'ayyi hadeethim ba'dallaahi wa'aayaatihee yu'minoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045006.mp3",
       "translationClear": "These are Allah’s Verses which We recite to you in truth. In which message, after Allah and His revelations, will they believe?"
     },
@@ -531,14 +531,14 @@
         {
           "position": 3,
           "textUthmani": "أَفَّاكٍ",
-          "transliteration": "affākin",
+          "transliteration": "affaakin",
           "translation": "liar",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "أَثِيمٍۢ",
-          "transliteration": "athīmin",
+          "transliteration": "atheemin",
           "translation": "sinful",
           "charType": "word"
         },
@@ -551,7 +551,7 @@
         }
       ],
       "translation": "Woe to every sinful liar",
-      "transliteration": "Wailul likulli affaakin aseem",
+      "transliteration": "Waylul likulli affaakin atheem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045007.mp3",
       "translationClear": "Woe to every sinful liar."
     },
@@ -565,35 +565,35 @@
         {
           "position": 1,
           "textUthmani": "يَسْمَعُ",
-          "transliteration": "yasmaʿu",
+          "transliteration": "yasma'u",
           "translation": "Who hears",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ءَايَـٰتِ",
-          "transliteration": "āyāti",
+          "transliteration": "aayaati",
           "translation": "(the) Verses",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "تُتْلَىٰ",
-          "transliteration": "tut'lā",
+          "transliteration": "tutlaa",
           "translation": "recited",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "عَلَيْهِ",
-          "transliteration": "ʿalayhi",
+          "transliteration": "'alayhi",
           "translation": "to him",
           "charType": "word"
         },
@@ -607,21 +607,21 @@
         {
           "position": 7,
           "textUthmani": "يُصِرُّ",
-          "transliteration": "yuṣirru",
+          "transliteration": "yusirru",
           "translation": "persists",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "مُسْتَكْبِرًۭا",
-          "transliteration": "mus'takbiran",
+          "transliteration": "mustakbiran",
           "translation": "arrogantly",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "كَأَن",
-          "transliteration": "ka-an",
+          "transliteration": "ka'an",
           "translation": "as if",
           "charType": "word"
         },
@@ -635,28 +635,28 @@
         {
           "position": 11,
           "textUthmani": "يَسْمَعْهَا ۖ",
-          "transliteration": "yasmaʿhā",
+          "transliteration": "yasma'haa",
           "translation": "he heard them",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "فَبَشِّرْهُ",
-          "transliteration": "fabashir'hu",
+          "transliteration": "fabashshirhu",
           "translation": "So give him tidings",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "بِعَذَابٍ",
-          "transliteration": "biʿadhābin",
+          "transliteration": "bi'adhaabin",
           "translation": "(of) a punishment",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "أَلِيمٍۢ",
-          "transliteration": "alīmin",
+          "transliteration": "aleemin",
           "translation": "painful",
           "charType": "word"
         },
@@ -669,7 +669,7 @@
         }
       ],
       "translation": "Who hears the verses of Allāh recited to him, then persists arrogantly as if he had not heard them. So give him tidings of a painful punishment.",
-      "transliteration": "Yasma'u Aayaatil laahi tutlaa 'alaihi summa yusirru mustakbiran ka-al lam yasma'haa fabashshirhu bi'athaabin aleem",
+      "transliteration": "Yasma'u aayaatillaahi tutlaa 'alayhi thumma yusirru mustakbiran ka'al lam yasma'haa fabashshirhu bi'adhaabin aleem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045008.mp3",
       "translationClear": "Who hears Allah’s revelations being recited to him, yet he persists arrogantly, as though he did not hear them. Announce to him a painful punishment."
     },
@@ -683,14 +683,14 @@
         {
           "position": 1,
           "textUthmani": "وَإِذَا",
-          "transliteration": "wa-idhā",
+          "transliteration": "wa'idhaa",
           "translation": "And when",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "عَلِمَ",
-          "transliteration": "ʿalima",
+          "transliteration": "'alima",
           "translation": "he knows",
           "charType": "word"
         },
@@ -704,21 +704,21 @@
         {
           "position": 4,
           "textUthmani": "ءَايَـٰتِنَا",
-          "transliteration": "āyātinā",
+          "transliteration": "aayaatinaa",
           "translation": "Our Verses",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "شَيْـًٔا",
-          "transliteration": "shayan",
+          "transliteration": "shay'an",
           "translation": "anything",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "ٱتَّخَذَهَا",
-          "transliteration": "ittakhadhahā",
+          "transliteration": "ittakhadhahaa",
           "translation": "he takes them",
           "charType": "word"
         },
@@ -732,7 +732,7 @@
         {
           "position": 8,
           "textUthmani": "أُو۟لَـٰٓئِكَ",
-          "transliteration": "ulāika",
+          "transliteration": "ulaa'ika",
           "translation": "Those ",
           "charType": "word"
         },
@@ -746,14 +746,14 @@
         {
           "position": 10,
           "textUthmani": "عَذَابٌۭ",
-          "transliteration": "ʿadhābun",
+          "transliteration": "'adhaabun",
           "translation": "(is) a punishment",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "مُّهِينٌۭ",
-          "transliteration": "muhīnun",
+          "transliteration": "muheenun",
           "translation": "humiliating",
           "charType": "word"
         },
@@ -766,7 +766,7 @@
         }
       ],
       "translation": "And when he knows anything of Our verses, he takes them in ridicule. Those will have a humiliating punishment.",
-      "transliteration": "Wa-ithaa 'alima min Aayaatinaa shai'-'anit takhathahaa huzuwaa; ulaaa'ika lahum 'athaabum muheen",
+      "transliteration": "Wa'idhaa 'alima min aayaatinaa shay'anittakhadhahaa huzuwan ulaa'ika lahum 'adhaabum muheen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045009.mp3",
       "translationClear": "And when he learns something of Our revelations, he takes them in mockery. For such there is a shameful punishment."
     },
@@ -787,7 +787,7 @@
         {
           "position": 2,
           "textUthmani": "وَرَآئِهِمْ",
-          "transliteration": "warāihim",
+          "transliteration": "waraa'ihim",
           "translation": "Before them",
           "charType": "word"
         },
@@ -801,63 +801,63 @@
         {
           "position": 4,
           "textUthmani": "وَلَا",
-          "transliteration": "walā",
+          "transliteration": "walaa",
           "translation": "and not",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "يُغْنِى",
-          "transliteration": "yugh'nī",
+          "transliteration": "yughnee",
           "translation": "will avail",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "عَنْهُم",
-          "transliteration": "ʿanhum",
+          "transliteration": "'anhum",
           "translation": "them",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "مَّا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "what",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "كَسَبُوا۟",
-          "transliteration": "kasabū",
+          "transliteration": "kasaboo",
           "translation": "they had earned",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "شَيْـًۭٔا",
-          "transliteration": "shayan",
+          "transliteration": "shay'an",
           "translation": "anything",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "وَلَا",
-          "transliteration": "walā",
+          "transliteration": "walaa",
           "translation": "and not",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "what",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "ٱتَّخَذُوا۟",
-          "transliteration": "ittakhadhū",
+          "transliteration": "ittakhadhoo",
           "translation": "they had taken",
           "charType": "word"
         },
@@ -871,21 +871,21 @@
         {
           "position": 14,
           "textUthmani": "دُونِ",
-          "transliteration": "dūni",
+          "transliteration": "dooni",
           "translation": "besides",
           "charType": "word"
         },
         {
           "position": 15,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 16,
           "textUthmani": "أَوْلِيَآءَ ۖ",
-          "transliteration": "awliyāa",
+          "transliteration": "awliyaa'a",
           "translation": "(as) protectors",
           "charType": "word"
         },
@@ -899,14 +899,14 @@
         {
           "position": 18,
           "textUthmani": "عَذَابٌ",
-          "transliteration": "ʿadhābun",
+          "transliteration": "'adhaabun",
           "translation": "(is) a punishment",
           "charType": "word"
         },
         {
           "position": 19,
           "textUthmani": "عَظِيمٌ",
-          "transliteration": "ʿaẓīmun",
+          "transliteration": "'azeemun",
           "translation": "great",
           "charType": "word"
         },
@@ -919,7 +919,7 @@
         }
       ],
       "translation": "Before them[1469] is Hell, and what they had earned will not avail them at all nor what they had taken besides Allāh as allies. And they will have a great punishment.",
-      "transliteration": "Minw waraaa'ihim Jahannamu Wa-laa yughnee 'anhum maa kasaboo shai'anw Wa-laa mat takhathoo min doonil laahi awliyaaa; Wa-lahum 'athaabun 'azeem",
+      "transliteration": "Min waraa'ihim jahannamu walaa yughnee 'anhum maa kasaboo shay'an walaa mattakhadhoo min doonillaahi awliyaa'a walahum 'adhaabun 'azeem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045010.mp3",
       "footnotes": {
         "1469": "See footnote to 14:16."
@@ -936,7 +936,7 @@
         {
           "position": 1,
           "textUthmani": "هَـٰذَا",
-          "transliteration": "hādhā",
+          "transliteration": "haadhaa",
           "translation": "This",
           "charType": "word"
         },
@@ -950,21 +950,21 @@
         {
           "position": 3,
           "textUthmani": "وَٱلَّذِينَ",
-          "transliteration": "wa-alladhīna",
+          "transliteration": "wal-ladheena",
           "translation": "And those who",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "كَفَرُوا۟",
-          "transliteration": "kafarū",
+          "transliteration": "kafaroo",
           "translation": "disbelieve",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "بِـَٔايَـٰتِ",
-          "transliteration": "biāyāti",
+          "transliteration": "bi'aayaati",
           "translation": "in (the) Verses",
           "charType": "word"
         },
@@ -985,7 +985,7 @@
         {
           "position": 8,
           "textUthmani": "عَذَابٌۭ",
-          "transliteration": "ʿadhābun",
+          "transliteration": "'adhaabun",
           "translation": "(is) a punishment",
           "charType": "word"
         },
@@ -999,14 +999,14 @@
         {
           "position": 10,
           "textUthmani": "رِّجْزٍ",
-          "transliteration": "rij'zin",
+          "transliteration": "rijzin",
           "translation": "filth",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "أَلِيمٌ",
-          "transliteration": "alīmun",
+          "transliteration": "aleemun",
           "translation": "painful",
           "charType": "word"
         },
@@ -1019,7 +1019,7 @@
         }
       ],
       "translation": "This [Qur’ān] is guidance. And those who have disbelieved in the verses of their Lord will have a painful punishment of foul nature.",
-      "transliteration": "Haathaa hudaa; wal-latheena kafaroo bi-aayaati Rabbihim lahum 'athaabum mir rijzin 'aleem",
+      "transliteration": "Haadhaa hudan wal-ladheena kafaroo bi'aayaati rabbihim lahum 'adhaabum mir rijzin aleem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045011.mp3",
       "translationClear": "This is guidance. Those who blaspheme their Lord’s revelations will have a punishment of agonizing pain."
     },
@@ -1033,21 +1033,21 @@
         {
           "position": 1,
           "textUthmani": "۞ ٱللَّهُ",
-          "transliteration": "al-lahu",
+          "transliteration": "allaahu",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلَّذِى",
-          "transliteration": "alladhī",
+          "transliteration": "al-ladhee",
           "translation": "(is) the One Who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "سَخَّرَ",
-          "transliteration": "sakhara",
+          "transliteration": "sakhkhara",
           "translation": "subjected",
           "charType": "word"
         },
@@ -1061,7 +1061,7 @@
         {
           "position": 5,
           "textUthmani": "ٱلْبَحْرَ",
-          "transliteration": "l-baḥra",
+          "transliteration": "al-bahra",
           "translation": "the sea",
           "charType": "word"
         },
@@ -1075,28 +1075,28 @@
         {
           "position": 7,
           "textUthmani": "ٱلْفُلْكُ",
-          "transliteration": "l-ful'ku",
+          "transliteration": "al-fulku",
           "translation": "the ships",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "فِيهِ",
-          "transliteration": "fīhi",
+          "transliteration": "feehi",
           "translation": "therein",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "بِأَمْرِهِۦ",
-          "transliteration": "bi-amrihi",
+          "transliteration": "bi'amrihee",
           "translation": "by His Command",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "وَلِتَبْتَغُوا۟",
-          "transliteration": "walitabtaghū",
+          "transliteration": "walitabtaghoo",
           "translation": "and that you may seek",
           "charType": "word"
         },
@@ -1110,21 +1110,21 @@
         {
           "position": 12,
           "textUthmani": "فَضْلِهِۦ",
-          "transliteration": "faḍlihi",
+          "transliteration": "fadlihee",
           "translation": "His Bounty",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "وَلَعَلَّكُمْ",
-          "transliteration": "walaʿallakum",
+          "transliteration": "wala'allakum",
           "translation": "and that you may",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "تَشْكُرُونَ",
-          "transliteration": "tashkurūna",
+          "transliteration": "tashkuroona",
           "translation": "give thanks",
           "charType": "word"
         },
@@ -1137,7 +1137,7 @@
         }
       ],
       "translation": "It is Allāh who subjected to you the sea so that ships may sail upon it by His command and that you may seek of His bounty; and perhaps you will be grateful.",
-      "transliteration": "Allaahul lathee sahkhara lakumul bahra litajriyal fulku feehi bi-amrihee Wa-litabtaghoo min fadlihee Wa-la'allakum tashkuroon",
+      "transliteration": "Allaahul-ladhee sakhkhara lakumul-bahra litajriyal-fulku feehi bi'amrihee walitabtaghoo min fadlihee wala'allakum tashkuroon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045012.mp3",
       "translationClear": "It is Allah who placed the sea at your service, so that ships may run through it by His command, and that you may seek of His bounty, and that you may give thanks."
     },
@@ -1151,7 +1151,7 @@
         {
           "position": 1,
           "textUthmani": "وَسَخَّرَ",
-          "transliteration": "wasakhara",
+          "transliteration": "wasakhkhara",
           "translation": "And He has subjected",
           "charType": "word"
         },
@@ -1165,56 +1165,56 @@
         {
           "position": 3,
           "textUthmani": "مَّا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "whatever",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "(is) in",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱلسَّمَـٰوَٰتِ",
-          "transliteration": "l-samāwāti",
+          "transliteration": "as-samaawaati",
           "translation": "the heavens",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and whatever",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "(is) in",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "ٱلْأَرْضِ",
-          "transliteration": "l-arḍi",
+          "transliteration": "al-ardi",
           "translation": "the earth ",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "جَمِيعًۭا",
-          "transliteration": "jamīʿan",
+          "transliteration": "jamee'an",
           "translation": "all",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "مِّنْهُ ۚ",
-          "transliteration": "min'hu",
+          "transliteration": "minhu",
           "translation": "from Him",
           "charType": "word"
         },
@@ -1228,21 +1228,21 @@
         {
           "position": 12,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "in",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "ذَٰلِكَ",
-          "transliteration": "dhālika",
+          "transliteration": "dhaalika",
           "translation": "that",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "لَـَٔايَـٰتٍۢ",
-          "transliteration": "laāyātin",
+          "transliteration": "la'aayaatin",
           "translation": "surely are Signs",
           "charType": "word"
         },
@@ -1256,7 +1256,7 @@
         {
           "position": 16,
           "textUthmani": "يَتَفَكَّرُونَ",
-          "transliteration": "yatafakkarūna",
+          "transliteration": "yatafakkaroona",
           "translation": "who give thought",
           "charType": "word"
         },
@@ -1269,7 +1269,7 @@
         }
       ],
       "translation": "And He has subjected to you whatever is in the heavens and whatever is on the earth - all from Him. Indeed in that are signs for a people who give thought.",
-      "transliteration": "Wa-sakhkhara lakum maa fis samaawaati Wa-maa fil ardi jamee'am minhu; inna fee thaalika la-Aayaatil liqawmien yatafakkaroon",
+      "transliteration": "Wasakhkhara lakum maa fis-samaawaati wamaa fil-ardi jamee'am minhu inna fee dhaalika la'aayaatil liqawmin yatafakkaroon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045013.mp3",
       "translationClear": "And He placed at your service whatever is in the heavens and whatever is on earth—all is from Him. In that are signs for a people who think."
     },
@@ -1290,56 +1290,56 @@
         {
           "position": 2,
           "textUthmani": "لِّلَّذِينَ",
-          "transliteration": "lilladhīna",
+          "transliteration": "lilladheena",
           "translation": "to those who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ءَامَنُوا۟",
-          "transliteration": "āmanū",
+          "transliteration": "aamanoo",
           "translation": "believe",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "يَغْفِرُوا۟",
-          "transliteration": "yaghfirū",
+          "transliteration": "yaghfiroo",
           "translation": "(to) forgive",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "لِلَّذِينَ",
-          "transliteration": "lilladhīna",
+          "transliteration": "lilladheena",
           "translation": "those who",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "(do) not",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "يَرْجُونَ",
-          "transliteration": "yarjūna",
+          "transliteration": "yarjoona",
           "translation": "hope",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "أَيَّامَ",
-          "transliteration": "ayyāma",
+          "transliteration": "ayyaama",
           "translation": "(for the) days",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
@@ -1360,21 +1360,21 @@
         {
           "position": 12,
           "textUthmani": "بِمَا",
-          "transliteration": "bimā",
+          "transliteration": "bimaa",
           "translation": "for what",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "كَانُوا۟",
-          "transliteration": "kānū",
+          "transliteration": "kaanoo",
           "translation": "they used to",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "يَكْسِبُونَ",
-          "transliteration": "yaksibūna",
+          "transliteration": "yaksiboona",
           "translation": "earn",
           "charType": "word"
         },
@@ -1387,7 +1387,7 @@
         }
       ],
       "translation": "Say, [O Muḥammad], to those who have believed that they [should] forgive those who expect not the days of Allāh [i.e., of His retribution] so that He may recompense a people[1470] for what they used to earn.",
-      "transliteration": "Qul lillatheena aamanoo yaghfiroo lillatheena laa yarjoona ayyaamal laahi liyajziya qawmam bimaa kaanoo yaksiboon",
+      "transliteration": "Qul lilladheena aamanoo yaghfiroo lilladheena laa yarjoona ayyaamallaahi liyajziya qawmam bimaa kaanoo yaksiboon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045014.mp3",
       "footnotes": {
         "1470": "In the Hereafter, where those who forgive will be rewarded and those who earned evil will be punished. This was at the outset of daʿwah (invitation to Allāh) before permission for jihād."
@@ -1411,21 +1411,21 @@
         {
           "position": 2,
           "textUthmani": "عَمِلَ",
-          "transliteration": "ʿamila",
+          "transliteration": "'amila",
           "translation": "does",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "صَـٰلِحًۭا",
-          "transliteration": "ṣāliḥan",
+          "transliteration": "saalihan",
           "translation": "a righteous deed",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "فَلِنَفْسِهِۦ ۖ",
-          "transliteration": "falinafsihi",
+          "transliteration": "falinafsihee",
           "translation": "then it is for his soul",
           "charType": "word"
         },
@@ -1439,14 +1439,14 @@
         {
           "position": 6,
           "textUthmani": "أَسَآءَ",
-          "transliteration": "asāa",
+          "transliteration": "asaa'a",
           "translation": "does evil",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "فَعَلَيْهَا ۖ",
-          "transliteration": "faʿalayhā",
+          "transliteration": "fa'alayhaa",
           "translation": "then it (is) against it",
           "charType": "word"
         },
@@ -1460,7 +1460,7 @@
         {
           "position": 9,
           "textUthmani": "إِلَىٰ",
-          "transliteration": "ilā",
+          "transliteration": "ilaa",
           "translation": "to",
           "charType": "word"
         },
@@ -1474,7 +1474,7 @@
         {
           "position": 11,
           "textUthmani": "تُرْجَعُونَ",
-          "transliteration": "tur'jaʿūna",
+          "transliteration": "turja'oona",
           "translation": "you will be returned",
           "charType": "word"
         },
@@ -1487,7 +1487,7 @@
         }
       ],
       "translation": "Whoever does a good deed - it is for himself; and whoever does evil - it is against it [i.e., the self or soul]. Then to your Lord you will be returned.",
-      "transliteration": "Maa 'amila saalihan falinafsihee Wa-man asaaa'a fa'alaihaa summa ilaa Rabbikum turja'oon",
+      "transliteration": "Man 'amila saalihan falinafsihee waman asaa'a fa'alayhaa thumma ilaa rabbikum turja'oon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045015.mp3",
       "translationClear": "Whoever does a good deed, it is for his soul; and whoever commits evil, it is against it; then to your Lord you will be returned."
     },
@@ -1508,49 +1508,49 @@
         {
           "position": 2,
           "textUthmani": "ءَاتَيْنَا",
-          "transliteration": "ātaynā",
+          "transliteration": "aataynaa",
           "translation": "We gave",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "بَنِىٓ",
-          "transliteration": "banī",
+          "transliteration": "banee",
           "translation": "(the) Children of Israel",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "إِسْرَٰٓءِيلَ",
-          "transliteration": "is'rāīla",
+          "transliteration": "israa'eela",
           "translation": "(the) Children of Israel",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱلْكِتَـٰبَ",
-          "transliteration": "l-kitāba",
+          "transliteration": "al-kitaaba",
           "translation": "the Book",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "وَٱلْحُكْمَ",
-          "transliteration": "wal-ḥuk'ma",
+          "transliteration": "wal-hukma",
           "translation": "and the wisdom",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "وَٱلنُّبُوَّةَ",
-          "transliteration": "wal-nubuwata",
+          "transliteration": "wan-nubuwwata",
           "translation": "and the Prophethood",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "وَرَزَقْنَـٰهُم",
-          "transliteration": "warazaqnāhum",
+          "transliteration": "warazaqnaahum",
           "translation": "and We provided them",
           "charType": "word"
         },
@@ -1564,28 +1564,28 @@
         {
           "position": 10,
           "textUthmani": "ٱلطَّيِّبَـٰتِ",
-          "transliteration": "l-ṭayibāti",
+          "transliteration": "at-tayyibaati",
           "translation": "the good things",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "وَفَضَّلْنَـٰهُمْ",
-          "transliteration": "wafaḍḍalnāhum",
+          "transliteration": "wafaddalnaahum",
           "translation": "and We preferred them",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "عَلَى",
-          "transliteration": "ʿalā",
+          "transliteration": "'alaa",
           "translation": "over",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "ٱلْعَـٰلَمِينَ",
-          "transliteration": "l-ʿālamīna",
+          "transliteration": "al-'aalameena",
           "translation": "the worlds",
           "charType": "word"
         },
@@ -1598,7 +1598,7 @@
         }
       ],
       "translation": "And We did certainly give the Children of Israel the Scripture and judgement[1471] and prophethood, and We provided them with good things and preferred them over the worlds.",
-      "transliteration": "Wa-laqad aatainaa Baneee Israaa'eelal Kitaaba walhukma wan Nubuwwata Wa-razaqnaahum minat taiyibaati Wa-faddalnaahum;alal 'aalameen",
+      "transliteration": "Walaqad aataynaa banee israa'eelal-kitaaba wal-hukma wan-nubuwwata warazaqnaahum minat-tayyibaati wafaddalnaahum 'alal-'aalameen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045016.mp3",
       "footnotes": {
         "1471": "Understanding of the law."
@@ -1615,14 +1615,14 @@
         {
           "position": 1,
           "textUthmani": "وَءَاتَيْنَـٰهُم",
-          "transliteration": "waātaynāhum",
+          "transliteration": "wa'aataynaahum",
           "translation": "And We gave them",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "بَيِّنَـٰتٍۢ",
-          "transliteration": "bayyinātin",
+          "transliteration": "bayyinaatin",
           "translation": "clear proofs",
           "charType": "word"
         },
@@ -1636,28 +1636,28 @@
         {
           "position": 4,
           "textUthmani": "ٱلْأَمْرِ ۖ",
-          "transliteration": "l-amri",
+          "transliteration": "al-amri",
           "translation": "the matter",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "فَمَا",
-          "transliteration": "famā",
+          "transliteration": "famaa",
           "translation": "And not",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "ٱخْتَلَفُوٓا۟",
-          "transliteration": "ikh'talafū",
+          "transliteration": "ikhtalafoo",
           "translation": "they differed",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "إِلَّا",
-          "transliteration": "illā",
+          "transliteration": "illaa",
           "translation": "except",
           "charType": "word"
         },
@@ -1671,28 +1671,28 @@
         {
           "position": 9,
           "textUthmani": "بَعْدِ",
-          "transliteration": "baʿdi",
+          "transliteration": "ba'di",
           "translation": "after",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "[what]",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "جَآءَهُمُ",
-          "transliteration": "jāahumu",
+          "transliteration": "jaa'ahumu",
           "translation": "came to them",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "ٱلْعِلْمُ",
-          "transliteration": "l-ʿil'mu",
+          "transliteration": "al-'ilmu",
           "translation": "the knowledge",
           "charType": "word"
         },
@@ -1727,7 +1727,7 @@
         {
           "position": 17,
           "textUthmani": "يَقْضِى",
-          "transliteration": "yaqḍī",
+          "transliteration": "yaqdee",
           "translation": "will judge",
           "charType": "word"
         },
@@ -1748,35 +1748,35 @@
         {
           "position": 20,
           "textUthmani": "ٱلْقِيَـٰمَةِ",
-          "transliteration": "l-qiyāmati",
+          "transliteration": "al-qiyaamati",
           "translation": "(of) the Resurrection",
           "charType": "word"
         },
         {
           "position": 21,
           "textUthmani": "فِيمَا",
-          "transliteration": "fīmā",
+          "transliteration": "feemaa",
           "translation": "about what",
           "charType": "word"
         },
         {
           "position": 22,
           "textUthmani": "كَانُوا۟",
-          "transliteration": "kānū",
+          "transliteration": "kaanoo",
           "translation": "they used to",
           "charType": "word"
         },
         {
           "position": 23,
           "textUthmani": "فِيهِ",
-          "transliteration": "fīhi",
+          "transliteration": "feehi",
           "translation": "therein",
           "charType": "word"
         },
         {
           "position": 24,
           "textUthmani": "يَخْتَلِفُونَ",
-          "transliteration": "yakhtalifūna",
+          "transliteration": "yakhtalifoona",
           "translation": "differ",
           "charType": "word"
         },
@@ -1789,7 +1789,7 @@
         }
       ],
       "translation": "And We gave them clear proofs of the matter [of religion]. And they did not differ except after knowledge had come to them - out of jealous animosity between themselves. Indeed, your Lord will judge between them on the Day of Resurrection concerning that over which they used to differ.",
-      "transliteration": "Wa-aatainaahum baiyinaatim minal amri famakh talafooo illaa mim ba'di maa jaaa'ahumul 'ilmu baghyam bainahum; inna Rabbaka yaqdee bainahum Yawmal Qiyaamati feemaa kaanoo feehi yakhtalifoon",
+      "transliteration": "Wa'aataynaahum bayyinaatim minal-amri famakhtalafoo illaa mim ba'di maa jaa'ahumul-'ilmu baghyam baynahum inna rabbaka yaqdee baynahum yawmal-qiyaamati feemaa kaanoo feehi yakhtalifoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045017.mp3",
       "translationClear": "And We gave them precise rulings. They fell into dispute only after knowledge came to them, out of mutual rivalry. Your Lord will judge between them on the Day of Resurrection regarding the things they differed about."
     },
@@ -1810,21 +1810,21 @@
         {
           "position": 2,
           "textUthmani": "جَعَلْنَـٰكَ",
-          "transliteration": "jaʿalnāka",
+          "transliteration": "ja'alnaaka",
           "translation": "We put you",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "عَلَىٰ",
-          "transliteration": "ʿalā",
+          "transliteration": "'alaa",
           "translation": "on",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "شَرِيعَةٍۢ",
-          "transliteration": "sharīʿatin",
+          "transliteration": "sharee'atin",
           "translation": "an ordained way",
           "charType": "word"
         },
@@ -1838,56 +1838,56 @@
         {
           "position": 6,
           "textUthmani": "ٱلْأَمْرِ",
-          "transliteration": "l-amri",
+          "transliteration": "al-amri",
           "translation": "the matter",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "فَٱتَّبِعْهَا",
-          "transliteration": "fa-ittabiʿ'hā",
+          "transliteration": "fattabi'haa",
           "translation": "so follow it",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "وَلَا",
-          "transliteration": "walā",
+          "transliteration": "walaa",
           "translation": "and (do) not",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "تَتَّبِعْ",
-          "transliteration": "tattabiʿ",
+          "transliteration": "tattabi'",
           "translation": "follow",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "أَهْوَآءَ",
-          "transliteration": "ahwāa",
+          "transliteration": "ahwaa'a",
           "translation": "(the) desires",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "ٱلَّذِينَ",
-          "transliteration": "alladhīna",
+          "transliteration": "al-ladheena",
           "translation": "(of) those who",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "(do) not",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "يَعْلَمُونَ",
-          "transliteration": "yaʿlamūna",
+          "transliteration": "ya'lamoona",
           "translation": "know",
           "charType": "word"
         },
@@ -1900,7 +1900,7 @@
         }
       ],
       "translation": "Then We put you, [O Muḥammad], on an ordained way concerning the matter [of religion]; so follow it and do not follow the inclinations of those who do not know.",
-      "transliteration": "Summa ja'alnaaka 'alaa sharee'atim minal amri fattabi'haa Wa-laa tattabi' ahwaaa' al-latheena laa ya'lamoon",
+      "transliteration": "Thumma ja'alnaaka 'alaa sharee'atim minal-amri fattabi'haa walaa tattabi' ahwaa'al-ladheena laa ya'lamoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045018.mp3",
       "translationClear": "Then We set you upon a pathway of faith, so follow it, and do not follow the inclinations of those who do not know."
     },
@@ -1928,14 +1928,14 @@
         {
           "position": 3,
           "textUthmani": "يُغْنُوا۟",
-          "transliteration": "yugh'nū",
+          "transliteration": "yughnoo",
           "translation": "will avail",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "عَنكَ",
-          "transliteration": "ʿanka",
+          "transliteration": "'anka",
           "translation": "you",
           "charType": "word"
         },
@@ -1949,56 +1949,56 @@
         {
           "position": 6,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "شَيْـًۭٔا ۚ",
-          "transliteration": "shayan",
+          "transliteration": "shay'an",
           "translation": "(in) anything",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "وَإِنَّ",
-          "transliteration": "wa-inna",
+          "transliteration": "wa'inna",
           "translation": "And indeed",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "ٱلظَّـٰلِمِينَ",
-          "transliteration": "l-ẓālimīna",
+          "transliteration": "az-zaalimeena",
           "translation": "the wrongdoers",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "بَعْضُهُمْ",
-          "transliteration": "baʿḍuhum",
+          "transliteration": "ba'duhum",
           "translation": "some of them",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "أَوْلِيَآءُ",
-          "transliteration": "awliyāu",
+          "transliteration": "awliyaa'u",
           "translation": "(are) allies",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "بَعْضٍۢ ۖ",
-          "transliteration": "baʿḍin",
+          "transliteration": "ba'din",
           "translation": "(of) others",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "وَٱللَّهُ",
-          "transliteration": "wal-lahu",
+          "transliteration": "wallaahu",
           "translation": "and Allah",
           "charType": "word"
         },
@@ -2012,7 +2012,7 @@
         {
           "position": 15,
           "textUthmani": "ٱلْمُتَّقِينَ",
-          "transliteration": "l-mutaqīna",
+          "transliteration": "al-muttaqeena",
           "translation": "(of) the righteous",
           "charType": "word"
         },
@@ -2025,7 +2025,7 @@
         }
       ],
       "translation": "Indeed, they will never avail you against Allāh at all. And indeed, the wrongdoers are allies of one another; but Allāh is the protector of the righteous.",
-      "transliteration": "Innahum laien yughnoo 'anka minal laahi shai'aa; Wa-innaz zaalimeena ba'duhum awliyaaa'u ba'dinw wallaahu waliyyul muttaqeen",
+      "transliteration": "Innahum lan yughnoo 'anka minallaahi shay'an wa'innaz-zaalimeena ba'duhum awliyaa'u ba'din wallaahu waliyyul-muttaqeen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045019.mp3",
       "translationClear": "They will not help you against Allah in any way. The wrongdoers are allies of one another, while Allah is the Protector of the righteous."
     },
@@ -2039,21 +2039,21 @@
         {
           "position": 1,
           "textUthmani": "هَـٰذَا",
-          "transliteration": "hādhā",
+          "transliteration": "haadhaa",
           "translation": "This",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "بَصَـٰٓئِرُ",
-          "transliteration": "baṣāiru",
+          "transliteration": "basaa'iru",
           "translation": "(is) enlightenment",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "لِلنَّاسِ",
-          "transliteration": "lilnnāsi",
+          "transliteration": "linnaasi",
           "translation": "for mankind",
           "charType": "word"
         },
@@ -2067,7 +2067,7 @@
         {
           "position": 5,
           "textUthmani": "وَرَحْمَةٌۭ",
-          "transliteration": "waraḥmatun",
+          "transliteration": "warahmatun",
           "translation": "and mercy",
           "charType": "word"
         },
@@ -2081,7 +2081,7 @@
         {
           "position": 7,
           "textUthmani": "يُوقِنُونَ",
-          "transliteration": "yūqinūna",
+          "transliteration": "yooqinoona",
           "translation": "who are certain",
           "charType": "word"
         },
@@ -2094,7 +2094,7 @@
         }
       ],
       "translation": "This [Qur’ān] is enlightenment for mankind and guidance and mercy for a people who are certain [in faith].",
-      "transliteration": "Haathaa basaaa'iru linnaasi Wa-hudanw Wa-rahmatul liqawmien yooqinoon",
+      "transliteration": "Haadhaa basaa'iru linnaasi wahudan warahmatul liqawmin yooqinoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045020.mp3",
       "translationClear": "This is an illumination for mankind, and guidance, and mercy for people who believe with certainty."
     },
@@ -2115,28 +2115,28 @@
         {
           "position": 2,
           "textUthmani": "حَسِبَ",
-          "transliteration": "ḥasiba",
+          "transliteration": "hasiba",
           "translation": "think",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱلَّذِينَ",
-          "transliteration": "alladhīna",
+          "transliteration": "al-ladheena",
           "translation": "those who",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "ٱجْتَرَحُوا۟",
-          "transliteration": "ij'taraḥū",
+          "transliteration": "ijtarahoo",
           "translation": "commit",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱلسَّيِّـَٔاتِ",
-          "transliteration": "l-sayiāti",
+          "transliteration": "as-sayyi'aati",
           "translation": "evil deeds",
           "charType": "word"
         },
@@ -2150,77 +2150,77 @@
         {
           "position": 7,
           "textUthmani": "نَّجْعَلَهُمْ",
-          "transliteration": "najʿalahum",
+          "transliteration": "naj'alahum",
           "translation": "We will make them",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "كَٱلَّذِينَ",
-          "transliteration": "ka-alladhīna",
+          "transliteration": "kal-ladheena",
           "translation": "like those who",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "ءَامَنُوا۟",
-          "transliteration": "āmanū",
+          "transliteration": "aamanoo",
           "translation": "believed",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "وَعَمِلُوا۟",
-          "transliteration": "waʿamilū",
+          "transliteration": "wa'amiloo",
           "translation": "and did",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "ٱلصَّـٰلِحَـٰتِ",
-          "transliteration": "l-ṣāliḥāti",
+          "transliteration": "as-saalihaati",
           "translation": "righteous deeds",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "سَوَآءًۭ",
-          "transliteration": "sawāan",
+          "transliteration": "sawaa'an",
           "translation": "equal",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "مَّحْيَاهُمْ",
-          "transliteration": "maḥyāhum",
+          "transliteration": "mahyaahum",
           "translation": "(in) their life",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "وَمَمَاتُهُمْ ۚ",
-          "transliteration": "wamamātuhum",
+          "transliteration": "wamamaatuhum",
           "translation": "and their death",
           "charType": "word"
         },
         {
           "position": 15,
           "textUthmani": "سَآءَ",
-          "transliteration": "sāa",
+          "transliteration": "saa'a",
           "translation": "Evil is",
           "charType": "word"
         },
         {
           "position": 16,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "what",
           "charType": "word"
         },
         {
           "position": 17,
           "textUthmani": "يَحْكُمُونَ",
-          "transliteration": "yaḥkumūna",
+          "transliteration": "yahkumoona",
           "translation": "they judge",
           "charType": "word"
         },
@@ -2233,7 +2233,7 @@
         }
       ],
       "translation": "Or do those who commit evils think We will make them like those who have believed and done righteous deeds - [make them] equal in their life and their death?[1472] Evil is that which they judge [i.e., assume].",
-      "transliteration": "Am hasibal latheenaj tarahus saiyyiaati an naj'alahum kallatheena aamanoo Wa-'amilu saalihaati sawaaa'am mahyaahum Wa-mamaatuhum; saaa'a maa yahkumoon",
+      "transliteration": "Am hasibal-ladheenajtarahus-sayyi'aati an naj'alahum kal-ladheena aamanoo wa'amilus-saalihaati sawaa'am mahyaahum wamamaatuhum saa'a maa yahkumoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045021.mp3",
       "footnotes": {
         "1472": "Another meaning is \"...[the evildoers being] equal in their life and their death,\" i.e., unresponsive to guidance."
@@ -2257,35 +2257,35 @@
         {
           "position": 2,
           "textUthmani": "ٱللَّهُ",
-          "transliteration": "l-lahu",
+          "transliteration": "allaahu",
           "translation": "And Allah created",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱلسَّمَـٰوَٰتِ",
-          "transliteration": "l-samāwāti",
+          "transliteration": "as-samaawaati",
           "translation": "the heavens",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "وَٱلْأَرْضَ",
-          "transliteration": "wal-arḍa",
+          "transliteration": "wal-arda",
           "translation": "and the earth",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "بِٱلْحَقِّ",
-          "transliteration": "bil-ḥaqi",
+          "transliteration": "bil-haqqi",
           "translation": "in truth",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "وَلِتُجْزَىٰ",
-          "transliteration": "walituj'zā",
+          "transliteration": "walitujzaa",
           "translation": "and that may be recompensed",
           "charType": "word"
         },
@@ -2306,7 +2306,7 @@
         {
           "position": 9,
           "textUthmani": "بِمَا",
-          "transliteration": "bimā",
+          "transliteration": "bimaa",
           "translation": "for what",
           "charType": "word"
         },
@@ -2327,14 +2327,14 @@
         {
           "position": 12,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "will not be wronged",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "يُظْلَمُونَ",
-          "transliteration": "yuẓ'lamūna",
+          "transliteration": "yuzlamoona",
           "translation": "will not be wronged",
           "charType": "word"
         },
@@ -2347,7 +2347,7 @@
         }
       ],
       "translation": "And Allāh created the heavens and earth in truth and so that every soul may be recompensed for what it has earned, and they will not be wronged.",
-      "transliteration": "Wa-khalaqal laahus samaawaati wal-arda bilhaqqi Wa-litujzaa kullu nafsim bimaa kasabat Wa-hum laa yuzlamoon",
+      "transliteration": "Wakhalaqallaahus-samaawaati wal-arda bil-haqqi walitujzaa kullu nafsim bimaa kasabat wahum laa yuzlamoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045022.mp3",
       "translationClear": "Allah created the heavens and the earth with justice, so that every soul will be repaid for what it has earned. And they will not be wronged."
     },
@@ -2361,7 +2361,7 @@
         {
           "position": 1,
           "textUthmani": "أَفَرَءَيْتَ",
-          "transliteration": "afara-ayta",
+          "transliteration": "afara'ayta",
           "translation": "Have you seen",
           "charType": "word"
         },
@@ -2382,42 +2382,42 @@
         {
           "position": 4,
           "textUthmani": "إِلَـٰهَهُۥ",
-          "transliteration": "ilāhahu",
+          "transliteration": "ilaahahoo",
           "translation": "(as) his god",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "هَوَىٰهُ",
-          "transliteration": "hawāhu",
+          "transliteration": "hawaahu",
           "translation": "his desire",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "وَأَضَلَّهُ",
-          "transliteration": "wa-aḍallahu",
+          "transliteration": "wa'adallahu",
           "translation": "and Allah lets him go astray",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "ٱللَّهُ",
-          "transliteration": "l-lahu",
+          "transliteration": "allaahu",
           "translation": "and Allah lets him go astray",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "عَلَىٰ",
-          "transliteration": "ʿalā",
+          "transliteration": "'alaa",
           "translation": "knowingly",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "عِلْمٍۢ",
-          "transliteration": "ʿil'min",
+          "transliteration": "'ilmin",
           "translation": "knowingly",
           "charType": "word"
         },
@@ -2431,49 +2431,49 @@
         {
           "position": 11,
           "textUthmani": "عَلَىٰ",
-          "transliteration": "ʿalā",
+          "transliteration": "'alaa",
           "translation": "upon",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "سَمْعِهِۦ",
-          "transliteration": "samʿihi",
+          "transliteration": "sam'ihee",
           "translation": "his hearing",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "وَقَلْبِهِۦ",
-          "transliteration": "waqalbihi",
+          "transliteration": "waqalbihee",
           "translation": "and his heart",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "وَجَعَلَ",
-          "transliteration": "wajaʿala",
+          "transliteration": "waja'ala",
           "translation": "and puts",
           "charType": "word"
         },
         {
           "position": 15,
           "textUthmani": "عَلَىٰ",
-          "transliteration": "ʿalā",
+          "transliteration": "'alaa",
           "translation": "over",
           "charType": "word"
         },
         {
           "position": 16,
           "textUthmani": "بَصَرِهِۦ",
-          "transliteration": "baṣarihi",
+          "transliteration": "basarihee",
           "translation": "his vision",
           "charType": "word"
         },
         {
           "position": 17,
           "textUthmani": "غِشَـٰوَةًۭ",
-          "transliteration": "ghishāwatan",
+          "transliteration": "ghishaawatan",
           "translation": "a veil",
           "charType": "word"
         },
@@ -2487,7 +2487,7 @@
         {
           "position": 19,
           "textUthmani": "يَهْدِيهِ",
-          "transliteration": "yahdīhi",
+          "transliteration": "yahdeehi",
           "translation": "will guide him",
           "charType": "word"
         },
@@ -2501,28 +2501,28 @@
         {
           "position": 21,
           "textUthmani": "بَعْدِ",
-          "transliteration": "baʿdi",
+          "transliteration": "ba'di",
           "translation": "after",
           "charType": "word"
         },
         {
           "position": 22,
           "textUthmani": "ٱللَّهِ ۚ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 23,
           "textUthmani": "أَفَلَا",
-          "transliteration": "afalā",
+          "transliteration": "afalaa",
           "translation": "Then will not",
           "charType": "word"
         },
         {
           "position": 24,
           "textUthmani": "تَذَكَّرُونَ",
-          "transliteration": "tadhakkarūna",
+          "transliteration": "tadhakkaroona",
           "translation": "you receive admonition",
           "charType": "word"
         },
@@ -2535,7 +2535,7 @@
         }
       ],
       "translation": "Have you seen he who has taken as his god his [own] desire, and Allāh has sent him astray due to knowledge[1473] and has set a seal upon his hearing and his heart and put over his vision a veil? So who will guide him after Allāh? Then will you not be reminded?",
-      "transliteration": "Afara'ayta manit takhatha ilaahahoo hawaahu Wa-adal-lahul laahu 'alaa 'ilminw Wa-khatama 'alaa sam'ihee Wa-qalbihee Wa-ja'ala 'alaa basarihee ghishaawatan famaien yahdeehi mim ba'dil laah; afalaa tathakkaroon",
+      "transliteration": "Afara'ayta manittakhadha ilaahahoo hawaahu wa'adallahullaahu 'alaa 'ilmin wakhatama 'alaa sam'ihee waqalbihee waja'ala 'alaa basarihee ghishaawatan faman yahdeehi mim ba'dillaahi afalaa tadhakkaroon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045023.mp3",
       "footnotes": {
         "1473": "This can refer to Allāh's knowledge of that person and of his preference for his own inclinations or to that person's knowledge of the truth while he refuses it."
@@ -2552,14 +2552,14 @@
         {
           "position": 1,
           "textUthmani": "وَقَالُوا۟",
-          "transliteration": "waqālū",
+          "transliteration": "waqaaloo",
           "translation": "And they say",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "Not",
           "charType": "word"
         },
@@ -2573,70 +2573,70 @@
         {
           "position": 4,
           "textUthmani": "إِلَّا",
-          "transliteration": "illā",
+          "transliteration": "illaa",
           "translation": "(is) but",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "حَيَاتُنَا",
-          "transliteration": "ḥayātunā",
+          "transliteration": "hayaatunaa",
           "translation": "our life",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "ٱلدُّنْيَا",
-          "transliteration": "l-dun'yā",
+          "transliteration": "ad-dunyaa",
           "translation": "(of) the world",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "نَمُوتُ",
-          "transliteration": "namūtu",
+          "transliteration": "namootu",
           "translation": "we die",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "وَنَحْيَا",
-          "transliteration": "wanaḥyā",
+          "transliteration": "wanahyaa",
           "translation": "and we live",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and not",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "يُهْلِكُنَآ",
-          "transliteration": "yuh'likunā",
+          "transliteration": "yuhlikunaa",
           "translation": "destroys us",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "إِلَّا",
-          "transliteration": "illā",
+          "transliteration": "illaa",
           "translation": "except",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "ٱلدَّهْرُ ۚ",
-          "transliteration": "l-dahru",
+          "transliteration": "ad-dahru",
           "translation": "the time",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "And not",
           "charType": "word"
         },
@@ -2650,7 +2650,7 @@
         {
           "position": 15,
           "textUthmani": "بِذَٰلِكَ",
-          "transliteration": "bidhālika",
+          "transliteration": "bidhaalika",
           "translation": "of that",
           "charType": "word"
         },
@@ -2664,7 +2664,7 @@
         {
           "position": 17,
           "textUthmani": "عِلْمٍ ۖ",
-          "transliteration": "ʿil'min",
+          "transliteration": "'ilmin",
           "translation": "knowledge",
           "charType": "word"
         },
@@ -2685,14 +2685,14 @@
         {
           "position": 20,
           "textUthmani": "إِلَّا",
-          "transliteration": "illā",
+          "transliteration": "illaa",
           "translation": "(do) but",
           "charType": "word"
         },
         {
           "position": 21,
           "textUthmani": "يَظُنُّونَ",
-          "transliteration": "yaẓunnūna",
+          "transliteration": "yazunnoona",
           "translation": "guess",
           "charType": "word"
         },
@@ -2705,7 +2705,7 @@
         }
       ],
       "translation": "And they say, \"There is not but our worldly life; we die and live,[1474] and nothing destroys us except time.\" And they have of that no knowledge; they are only assuming.",
-      "transliteration": "Wa-qaaloo maa hiya illaa hayaatunad dunyaa namootu Wa-nahyaa Wa-maa yuhlikunaaa illad dahr; Wa-maa lahum bithaalika min 'ilmin in hum illaa yazunnoon",
+      "transliteration": "Waqaaloo maa hiya illaa hayaatunad-dunyaa namootu wanahyaa wamaa yuhlikunaa illad-dahru wamaa lahum bidhaalika min 'ilmin in hum illaa yazunnoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045024.mp3",
       "footnotes": {
         "1474": "i.e., some people die and others live, replacing them."
@@ -2722,63 +2722,63 @@
         {
           "position": 1,
           "textUthmani": "وَإِذَا",
-          "transliteration": "wa-idhā",
+          "transliteration": "wa'idhaa",
           "translation": "And when",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "تُتْلَىٰ",
-          "transliteration": "tut'lā",
+          "transliteration": "tutlaa",
           "translation": "are recited",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "عَلَيْهِمْ",
-          "transliteration": "ʿalayhim",
+          "transliteration": "'alayhim",
           "translation": "to them",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "ءَايَـٰتُنَا",
-          "transliteration": "āyātunā",
+          "transliteration": "aayaatunaa",
           "translation": "Our Verses",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "بَيِّنَـٰتٍۢ",
-          "transliteration": "bayyinātin",
+          "transliteration": "bayyinaatin",
           "translation": "clear",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "مَّا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "not",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "كَانَ",
-          "transliteration": "kāna",
+          "transliteration": "kaana",
           "translation": "is",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "حُجَّتَهُمْ",
-          "transliteration": "ḥujjatahum",
+          "transliteration": "hujjatahum",
           "translation": "their argument",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "إِلَّآ",
-          "transliteration": "illā",
+          "transliteration": "illaa",
           "translation": "except",
           "charType": "word"
         },
@@ -2792,21 +2792,21 @@
         {
           "position": 11,
           "textUthmani": "قَالُوا۟",
-          "transliteration": "qālū",
+          "transliteration": "qaaloo",
           "translation": "they say",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "ٱئْتُوا۟",
-          "transliteration": "i'tū",
+          "transliteration": "u'too",
           "translation": "Bring",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "بِـَٔابَآئِنَآ",
-          "transliteration": "biābāinā",
+          "transliteration": "bi'aabaa'inaa",
           "translation": "our forefathers",
           "charType": "word"
         },
@@ -2827,7 +2827,7 @@
         {
           "position": 16,
           "textUthmani": "صَـٰدِقِينَ",
-          "transliteration": "ṣādiqīna",
+          "transliteration": "saadiqeena",
           "translation": "truthful",
           "charType": "word"
         },
@@ -2840,7 +2840,7 @@
         }
       ],
       "translation": "And when Our verses are recited to them as clear evidences, their argument is only that they say, \"Bring [back] our forefathers, if you should be truthful.\"",
-      "transliteration": "Wa-ithaa tutlaa 'alaihim aayaatuna baiyinaatim maa kaana hujjatahum illaaa an qaalu'too bi aabaaa'inaaa in kuntum saadiqeen",
+      "transliteration": "Wa'idhaa tutlaa 'alayhim aayaatunaa bayyinaatim maa kaana hujjatahum illaa an qaalu'too bi'aabaa'inaa in kuntum saadiqeen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045025.mp3",
       "translationClear": "When Our clarifying Verses are recited to them, their only argument is to say, “Bring back our ancestors, if you are truthful.”"
     },
@@ -2861,14 +2861,14 @@
         {
           "position": 2,
           "textUthmani": "ٱللَّهُ",
-          "transliteration": "l-lahu",
+          "transliteration": "allaahu",
           "translation": "Allah",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "يُحْيِيكُمْ",
-          "transliteration": "yuḥ'yīkum",
+          "transliteration": "yuhyeekum",
           "translation": "gives you life",
           "charType": "word"
         },
@@ -2882,7 +2882,7 @@
         {
           "position": 5,
           "textUthmani": "يُمِيتُكُمْ",
-          "transliteration": "yumītukum",
+          "transliteration": "yumeetukum",
           "translation": "causes you to die",
           "charType": "word"
         },
@@ -2896,14 +2896,14 @@
         {
           "position": 7,
           "textUthmani": "يَجْمَعُكُمْ",
-          "transliteration": "yajmaʿukum",
+          "transliteration": "yajma'ukum",
           "translation": "He will gather you",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "إِلَىٰ",
-          "transliteration": "ilā",
+          "transliteration": "ilaa",
           "translation": "to",
           "charType": "word"
         },
@@ -2917,14 +2917,14 @@
         {
           "position": 10,
           "textUthmani": "ٱلْقِيَـٰمَةِ",
-          "transliteration": "l-qiyāmati",
+          "transliteration": "al-qiyaamati",
           "translation": "(of) the Resurrection",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "no",
           "charType": "word"
         },
@@ -2938,14 +2938,14 @@
         {
           "position": 13,
           "textUthmani": "فِيهِ",
-          "transliteration": "fīhi",
+          "transliteration": "feehi",
           "translation": "about it",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "وَلَـٰكِنَّ",
-          "transliteration": "walākinna",
+          "transliteration": "walaakinna",
           "translation": "But",
           "charType": "word"
         },
@@ -2959,21 +2959,21 @@
         {
           "position": 16,
           "textUthmani": "ٱلنَّاسِ",
-          "transliteration": "l-nāsi",
+          "transliteration": "an-naasi",
           "translation": "(of) the people",
           "charType": "word"
         },
         {
           "position": 17,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "(do) not",
           "charType": "word"
         },
         {
           "position": 18,
           "textUthmani": "يَعْلَمُونَ",
-          "transliteration": "yaʿlamūna",
+          "transliteration": "ya'lamoona",
           "translation": "know",
           "charType": "word"
         },
@@ -2986,7 +2986,7 @@
         }
       ],
       "translation": "Say, \"Allāh causes you to live, then causes you to die; then He will assemble you for the Day of Resurrection, about which there is no doubt, but most of the people do not know.\"",
-      "transliteration": "Qulil laahu yuhyeekum summa yumeetukum summa yajma'ukum ilaa Yawmil Qiyaamati laa raiba feehi Wa-laakinna aksaran naasi laa ya'lamoon",
+      "transliteration": "Qulillaahu yuhyeekum thumma yumeetukum thumma yajma'ukum ilaa yawmil-qiyaamati laa rayba feehi walaakinna aktharan-naasi laa ya'lamoon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045026.mp3",
       "translationClear": "Say, “Allah gives you life, then He makes you die; then He gathers you for the Day of Resurrection, about which there is no doubt. But most people do not know.”"
     },
@@ -3000,28 +3000,28 @@
         {
           "position": 1,
           "textUthmani": "وَلِلَّهِ",
-          "transliteration": "walillahi",
+          "transliteration": "walillaahi",
           "translation": "And for Allah",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "مُلْكُ",
-          "transliteration": "mul'ku",
+          "transliteration": "mulku",
           "translation": "(is the) dominion",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱلسَّمَـٰوَٰتِ",
-          "transliteration": "l-samāwāti",
+          "transliteration": "as-samaawaati",
           "translation": "(of) the heavens",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "وَٱلْأَرْضِ ۚ",
-          "transliteration": "wal-arḍi",
+          "transliteration": "wal-ardi",
           "translation": "and the earth",
           "charType": "word"
         },
@@ -3035,21 +3035,21 @@
         {
           "position": 6,
           "textUthmani": "تَقُومُ",
-          "transliteration": "taqūmu",
+          "transliteration": "taqoomu",
           "translation": "is established",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "ٱلسَّاعَةُ",
-          "transliteration": "l-sāʿatu",
+          "transliteration": "as-saa'atu",
           "translation": "the Hour",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "يَوْمَئِذٍۢ",
-          "transliteration": "yawma-idhin",
+          "transliteration": "yawma'idhin",
           "translation": "that Day",
           "charType": "word"
         },
@@ -3063,7 +3063,7 @@
         {
           "position": 10,
           "textUthmani": "ٱلْمُبْطِلُونَ",
-          "transliteration": "l-mub'ṭilūna",
+          "transliteration": "al-mubtiloona",
           "translation": "the falsifiers",
           "charType": "word"
         },
@@ -3076,7 +3076,7 @@
         }
       ],
       "translation": "And to Allāh belongs the dominion of the heavens and the earth. And the Day the Hour appears - that Day the falsifiers will lose.",
-      "transliteration": "Wa-lillaahi mulkus samaawaati wal-ard; Wa-Yawma taqoomus Saa'atu Yawma-'ithien yakhsarul mubtiloon",
+      "transliteration": "Walillaahi mulkus-samaawaati wal-ardi wayawma taqoomus-saa'atu yawma'idhin yakhsarul-mubtiloon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045027.mp3",
       "translationClear": "To Allah belongs the kingship of the heavens and the earth. On the Day when the Hour takes place, on that Day the falsifiers will lose."
     },
@@ -3090,7 +3090,7 @@
         {
           "position": 1,
           "textUthmani": "وَتَرَىٰ",
-          "transliteration": "watarā",
+          "transliteration": "wataraa",
           "translation": "And you will see",
           "charType": "word"
         },
@@ -3111,7 +3111,7 @@
         {
           "position": 4,
           "textUthmani": "جَاثِيَةًۭ ۚ",
-          "transliteration": "jāthiyatan",
+          "transliteration": "jaathiyatan",
           "translation": "kneeling",
           "charType": "word"
         },
@@ -3132,42 +3132,42 @@
         {
           "position": 7,
           "textUthmani": "تُدْعَىٰٓ",
-          "transliteration": "tud'ʿā",
+          "transliteration": "tud'aa",
           "translation": "will be called",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "إِلَىٰ",
-          "transliteration": "ilā",
+          "transliteration": "ilaa",
           "translation": "to",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "كِتَـٰبِهَا",
-          "transliteration": "kitābihā",
+          "transliteration": "kitaabihaa",
           "translation": "its record",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "ٱلْيَوْمَ",
-          "transliteration": "l-yawma",
+          "transliteration": "al-yawma",
           "translation": "Today",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "تُجْزَوْنَ",
-          "transliteration": "tuj'zawna",
+          "transliteration": "tujzawna",
           "translation": "you will be recompensed",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "(for) what",
           "charType": "word"
         },
@@ -3181,7 +3181,7 @@
         {
           "position": 14,
           "textUthmani": "تَعْمَلُونَ",
-          "transliteration": "taʿmalūna",
+          "transliteration": "ta'maloona",
           "translation": "do",
           "charType": "word"
         },
@@ -3194,7 +3194,7 @@
         }
       ],
       "translation": "And you will see every nation kneeling [from fear]. Every nation will be called to its record [and told], \"Today you will be recompensed for what you used to do.",
-      "transliteration": "Wa-taraa kulla ummatin jaasiyah; kullu ummatin tud'aaa ilaa kitaabihaa al-Yawma tujzawna maa kuntum ta'maloon",
+      "transliteration": "Wataraa kulla ummatin jaathiyatan kullu ummatin tud'aa ilaa kitaabihal-yawma tujzawna maa kuntum ta'maloon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045028.mp3",
       "translationClear": "You will see every community on its knees; every community will be called to its Book: “Today you are being repaid for what you used to do."
     },
@@ -3208,49 +3208,49 @@
         {
           "position": 1,
           "textUthmani": "هَـٰذَا",
-          "transliteration": "hādhā",
+          "transliteration": "haadhaa",
           "translation": "This",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "كِتَـٰبُنَا",
-          "transliteration": "kitābunā",
+          "transliteration": "kitaabunaa",
           "translation": "Our Record",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "يَنطِقُ",
-          "transliteration": "yanṭiqu",
+          "transliteration": "yantiqu",
           "translation": "speaks",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "عَلَيْكُم",
-          "transliteration": "ʿalaykum",
+          "transliteration": "'alaykum",
           "translation": "about you",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "بِٱلْحَقِّ ۚ",
-          "transliteration": "bil-ḥaqi",
+          "transliteration": "bil-haqqi",
           "translation": "in truth",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "إِنَّا",
-          "transliteration": "innā",
+          "transliteration": "innaa",
           "translation": "Indeed, We",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "كُنَّا",
-          "transliteration": "kunnā",
+          "transliteration": "kunnaa",
           "translation": "[We] used to",
           "charType": "word"
         },
@@ -3264,7 +3264,7 @@
         {
           "position": 9,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "what",
           "charType": "word"
         },
@@ -3278,7 +3278,7 @@
         {
           "position": 11,
           "textUthmani": "تَعْمَلُونَ",
-          "transliteration": "taʿmalūna",
+          "transliteration": "ta'maloona",
           "translation": "do",
           "charType": "word"
         },
@@ -3291,7 +3291,7 @@
         }
       ],
       "translation": "This, Our record, speaks about you in truth. Indeed, We were having transcribed[1475] whatever you used to do.\"",
-      "transliteration": "Haathaa kitaabunaa yantiqu 'alaikum bilhaqq; innaa kunnaa nastansikhu maa kuntum ta'maloon",
+      "transliteration": "Haadhaa kitaabunaa yantiqu 'alaykum bil-haqqi innaa kunnaa nastansikhu maa kuntum ta'maloon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045029.mp3",
       "footnotes": {
         "1475": "By recording angels."
@@ -3308,42 +3308,42 @@
         {
           "position": 1,
           "textUthmani": "فَأَمَّا",
-          "transliteration": "fa-ammā",
+          "transliteration": "fa'ammaa",
           "translation": "Then as for",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلَّذِينَ",
-          "transliteration": "alladhīna",
+          "transliteration": "al-ladheena",
           "translation": "those who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ءَامَنُوا۟",
-          "transliteration": "āmanū",
+          "transliteration": "aamanoo",
           "translation": "believed",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "وَعَمِلُوا۟",
-          "transliteration": "waʿamilū",
+          "transliteration": "wa'amiloo",
           "translation": "and did",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱلصَّـٰلِحَـٰتِ",
-          "transliteration": "l-ṣāliḥāti",
+          "transliteration": "as-saalihaati",
           "translation": "[the] righteous deeds",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "فَيُدْخِلُهُمْ",
-          "transliteration": "fayud'khiluhum",
+          "transliteration": "fayudkhiluhum",
           "translation": "will admit them",
           "charType": "word"
         },
@@ -3357,21 +3357,21 @@
         {
           "position": 8,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "in(to)",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "رَحْمَتِهِۦ ۚ",
-          "transliteration": "raḥmatihi",
+          "transliteration": "rahmatihee",
           "translation": "His mercy",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "ذَٰلِكَ",
-          "transliteration": "dhālika",
+          "transliteration": "dhaalika",
           "translation": "That",
           "charType": "word"
         },
@@ -3385,14 +3385,14 @@
         {
           "position": 12,
           "textUthmani": "ٱلْفَوْزُ",
-          "transliteration": "l-fawzu",
+          "transliteration": "al-fawzu",
           "translation": "(is) the success",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "ٱلْمُبِينُ",
-          "transliteration": "l-mubīnu",
+          "transliteration": "al-mubeenu",
           "translation": "clear",
           "charType": "word"
         },
@@ -3405,7 +3405,7 @@
         }
       ],
       "translation": "So as for those who believed and did righteous deeds, their Lord will admit them into His mercy. That is what is the clear attainment.",
-      "transliteration": "Fa-ammal latheena aamaanoo Wa-'amilus saalihaati fayudkhiluhum Rabbuhum fee rahmatih; thaalika huwal fawzul mubeen",
+      "transliteration": "Fa'ammal-ladheena aamanoo wa'amilus-saalihaati fayudkhiluhum rabbuhum fee rahmatihee dhaalika huwal-fawzul-mubeen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045030.mp3",
       "translationClear": "As for those who believed and did righteous deeds, their Lord will admit them into His mercy. That is the clear triumph."
     },
@@ -3419,21 +3419,21 @@
         {
           "position": 1,
           "textUthmani": "وَأَمَّا",
-          "transliteration": "wa-ammā",
+          "transliteration": "wa'ammaa",
           "translation": "But as for",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلَّذِينَ",
-          "transliteration": "alladhīna",
+          "transliteration": "al-ladheena",
           "translation": "those who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "كَفَرُوٓا۟",
-          "transliteration": "kafarū",
+          "transliteration": "kafaroo",
           "translation": "disbelieved",
           "charType": "word"
         },
@@ -3454,28 +3454,28 @@
         {
           "position": 6,
           "textUthmani": "ءَايَـٰتِى",
-          "transliteration": "āyātī",
+          "transliteration": "aayaatee",
           "translation": "My Verses",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "تُتْلَىٰ",
-          "transliteration": "tut'lā",
+          "transliteration": "tutlaa",
           "translation": "recited",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "عَلَيْكُمْ",
-          "transliteration": "ʿalaykum",
+          "transliteration": "'alaykum",
           "translation": "to you",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "فَٱسْتَكْبَرْتُمْ",
-          "transliteration": "fa-is'takbartum",
+          "transliteration": "fastakbartum",
           "translation": "but you were proud",
           "charType": "word"
         },
@@ -3496,7 +3496,7 @@
         {
           "position": 12,
           "textUthmani": "مُّجْرِمِينَ",
-          "transliteration": "muj'rimīna",
+          "transliteration": "mujrimeena",
           "translation": "criminals",
           "charType": "word"
         },
@@ -3509,7 +3509,7 @@
         }
       ],
       "translation": "But as for those who disbelieved, [it will be said], \"Were not Our verses recited to you, but you were arrogant and became a criminal people?",
-      "transliteration": "Wa-ammal latheena kafarooo afalam takun Aayaatee tutlaa 'alaikum fastakbartum Wa-kuntum qawmam mujrimeen",
+      "transliteration": "Wa'ammal-ladheena kafaroo afalam takun aayaatee tutlaa 'alaykum fastakbartum wakuntum qawmam mujrimeen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045031.mp3",
       "translationClear": "But as for those who disbelieved: “Were My revelations not recited to you? But you turned arrogant, and were guilty people.”"
     },
@@ -3523,14 +3523,14 @@
         {
           "position": 1,
           "textUthmani": "وَإِذَا",
-          "transliteration": "wa-idhā",
+          "transliteration": "wa'idhaa",
           "translation": "And when",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "قِيلَ",
-          "transliteration": "qīla",
+          "transliteration": "qeela",
           "translation": "it was said",
           "charType": "word"
         },
@@ -3544,35 +3544,35 @@
         {
           "position": 4,
           "textUthmani": "وَعْدَ",
-          "transliteration": "waʿda",
+          "transliteration": "wa'da",
           "translation": "(the) Promise",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "حَقٌّۭ",
-          "transliteration": "ḥaqqun",
+          "transliteration": "haqqun",
           "translation": "(is) true",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "وَٱلسَّاعَةُ",
-          "transliteration": "wal-sāʿatu",
+          "transliteration": "was-saa'atu",
           "translation": "and the Hour ",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "(there is) no",
           "charType": "word"
         },
@@ -3586,42 +3586,42 @@
         {
           "position": 10,
           "textUthmani": "فِيهَا",
-          "transliteration": "fīhā",
+          "transliteration": "feehaa",
           "translation": "about it",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "قُلْتُم",
-          "transliteration": "qul'tum",
+          "transliteration": "qultum",
           "translation": "you said",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "مَّا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "Not",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "نَدْرِى",
-          "transliteration": "nadrī",
+          "transliteration": "nadree",
           "translation": "we know",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "what",
           "charType": "word"
         },
         {
           "position": 15,
           "textUthmani": "ٱلسَّاعَةُ",
-          "transliteration": "l-sāʿatu",
+          "transliteration": "as-saa'atu",
           "translation": "the Hour (is)",
           "charType": "word"
         },
@@ -3635,42 +3635,42 @@
         {
           "position": 17,
           "textUthmani": "نَّظُنُّ",
-          "transliteration": "naẓunnu",
+          "transliteration": "nazunnu",
           "translation": "we think",
           "charType": "word"
         },
         {
           "position": 18,
           "textUthmani": "إِلَّا",
-          "transliteration": "illā",
+          "transliteration": "illaa",
           "translation": "except",
           "charType": "word"
         },
         {
           "position": 19,
           "textUthmani": "ظَنًّۭا",
-          "transliteration": "ẓannan",
+          "transliteration": "zannan",
           "translation": "an assumption",
           "charType": "word"
         },
         {
           "position": 20,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and not",
           "charType": "word"
         },
         {
           "position": 21,
           "textUthmani": "نَحْنُ",
-          "transliteration": "naḥnu",
+          "transliteration": "nahnu",
           "translation": "we",
           "charType": "word"
         },
         {
           "position": 22,
           "textUthmani": "بِمُسْتَيْقِنِينَ",
-          "transliteration": "bimus'tayqinīna",
+          "transliteration": "bimustayqineena",
           "translation": "(are) convinced",
           "charType": "word"
         },
@@ -3683,7 +3683,7 @@
         }
       ],
       "translation": "And when it was said, 'Indeed, the promise of Allāh is truth and the Hour [is coming] - no doubt about it,' you said, 'We know not what is the Hour. We assume only assumption, and we are not convinced.'\"",
-      "transliteration": "Wa-ithaa qeela inna wa'dallaahi haqqunw was Saa'atu laa raiba feehaa qultum maa nadree mas Saa'atu in nazunnu illaa zannanw Wa-maa nahnu bimustaiqineen",
+      "transliteration": "Wa'idhaa qeela inna wa'dallaahi haqqun was-saa'atu laa rayba feehaa qultum maa nadree mas-saa'atu in nazunnu illaa zannan wamaa nahnu bimustayqineen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045032.mp3",
       "translationClear": "And when it was said, “The promise of Allah is true, and of the Hour there is no doubt,” you said, “We do not know what the Hour is; we think it is only speculation; we are not convinced.”"
     },
@@ -3697,7 +3697,7 @@
         {
           "position": 1,
           "textUthmani": "وَبَدَا",
-          "transliteration": "wabadā",
+          "transliteration": "wabadaa",
           "translation": "And (will) appear",
           "charType": "word"
         },
@@ -3711,28 +3711,28 @@
         {
           "position": 3,
           "textUthmani": "سَيِّـَٔاتُ",
-          "transliteration": "sayyiātu",
+          "transliteration": "sayyi'aatu",
           "translation": "(the) evil",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "(of) what",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "عَمِلُوا۟",
-          "transliteration": "ʿamilū",
+          "transliteration": "'amiloo",
           "translation": "they did",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "وَحَاقَ",
-          "transliteration": "waḥāqa",
+          "transliteration": "wahaaqa",
           "translation": "and (will) envelop",
           "charType": "word"
         },
@@ -3746,28 +3746,28 @@
         {
           "position": 8,
           "textUthmani": "مَّا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "what",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "كَانُوا۟",
-          "transliteration": "kānū",
+          "transliteration": "kaanoo",
           "translation": "they used",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "بِهِۦ",
-          "transliteration": "bihi",
+          "transliteration": "bihee",
           "translation": "[at it]",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "يَسْتَهْزِءُونَ",
-          "transliteration": "yastahziūna",
+          "transliteration": "yastahzi'oona",
           "translation": "(to) mock",
           "charType": "word"
         },
@@ -3780,7 +3780,7 @@
         }
       ],
       "translation": "And the evil consequences of what they did will appear to them, and they will be enveloped by what they used to ridicule.",
-      "transliteration": "Wa-badaa lahum saiyyiaatu maa 'amiloo Wa-haaqa bihim maa kaanoo bihee yastahzi'oon",
+      "transliteration": "Wabadaa lahum sayyi'aatu maa 'amiloo wahaaqa bihim maa kaanoo bihee yastahzi'oon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045033.mp3",
       "translationClear": "The evils of what they did will become evident to them, and the very thing they ridiculed will haunt them."
     },
@@ -3794,42 +3794,42 @@
         {
           "position": 1,
           "textUthmani": "وَقِيلَ",
-          "transliteration": "waqīla",
+          "transliteration": "waqeela",
           "translation": "And it will be said",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلْيَوْمَ",
-          "transliteration": "l-yawma",
+          "transliteration": "al-yawma",
           "translation": "Today",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "نَنسَىٰكُمْ",
-          "transliteration": "nansākum",
+          "transliteration": "nansaakum",
           "translation": "We forget you",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "كَمَا",
-          "transliteration": "kamā",
+          "transliteration": "kamaa",
           "translation": "as",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "نَسِيتُمْ",
-          "transliteration": "nasītum",
+          "transliteration": "naseetum",
           "translation": "you forgot",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "لِقَآءَ",
-          "transliteration": "liqāa",
+          "transliteration": "liqaa'a",
           "translation": "(the) meeting",
           "charType": "word"
         },
@@ -3843,28 +3843,28 @@
         {
           "position": 8,
           "textUthmani": "هَـٰذَا",
-          "transliteration": "hādhā",
+          "transliteration": "haadhaa",
           "translation": "(of) this Day of yours",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "وَمَأْوَىٰكُمُ",
-          "transliteration": "wamawākumu",
+          "transliteration": "wama'waakumu",
           "translation": "and your abode",
           "charType": "word"
         },
         {
           "position": 10,
           "textUthmani": "ٱلنَّارُ",
-          "transliteration": "l-nāru",
+          "transliteration": "an-naaru",
           "translation": "(is) the Fire",
           "charType": "word"
         },
         {
           "position": 11,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and not",
           "charType": "word"
         },
@@ -3885,7 +3885,7 @@
         {
           "position": 14,
           "textUthmani": "نَّـٰصِرِينَ",
-          "transliteration": "nāṣirīna",
+          "transliteration": "naasireena",
           "translation": "helpers",
           "charType": "word"
         },
@@ -3898,7 +3898,7 @@
         }
       ],
       "translation": "And it will be said, \"Today We will forget you as you forgot the meeting of this Day of yours, and your refuge is the Fire, and for you there are no helpers.",
-      "transliteration": "Wa-qeelal yawma nansaakum kamaa naseetum liqaaa'a yawmikum haathaa Wa-maawaakumun Naaru Wa-maa lakum min naasireen",
+      "transliteration": "Waqeelal-yawma nansaakum kamaa naseetum liqaa'a yawmikum haadhaa wama'waakumun-naaru wamaa lakum min naasireen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045034.mp3",
       "translationClear": "And it will be said, “Today We forget you, as you forgot the encounter of this Day of yours. Your abode is the Fire, and there are no saviors for you."
     },
@@ -3912,14 +3912,14 @@
         {
           "position": 1,
           "textUthmani": "ذَٰلِكُم",
-          "transliteration": "dhālikum",
+          "transliteration": "dhaalikum",
           "translation": "That",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "بِأَنَّكُمُ",
-          "transliteration": "bi-annakumu",
+          "transliteration": "bi'annakumu",
           "translation": "(is) because you",
           "charType": "word"
         },
@@ -3933,14 +3933,14 @@
         {
           "position": 4,
           "textUthmani": "ءَايَـٰتِ",
-          "transliteration": "āyāti",
+          "transliteration": "aayaati",
           "translation": "(the) Verses",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
@@ -3961,14 +3961,14 @@
         {
           "position": 8,
           "textUthmani": "ٱلْحَيَوٰةُ",
-          "transliteration": "l-ḥayatu",
+          "transliteration": "al-hayaatu",
           "translation": "the life",
           "charType": "word"
         },
         {
           "position": 9,
           "textUthmani": "ٱلدُّنْيَا ۚ",
-          "transliteration": "l-dun'yā",
+          "transliteration": "ad-dunyaa",
           "translation": "(of) the world",
           "charType": "word"
         },
@@ -3982,28 +3982,28 @@
         {
           "position": 11,
           "textUthmani": "لَا",
-          "transliteration": "lā",
+          "transliteration": "laa",
           "translation": "not",
           "charType": "word"
         },
         {
           "position": 12,
           "textUthmani": "يُخْرَجُونَ",
-          "transliteration": "yukh'rajūna",
+          "transliteration": "yukhrajoona",
           "translation": "they will be brought forth",
           "charType": "word"
         },
         {
           "position": 13,
           "textUthmani": "مِنْهَا",
-          "transliteration": "min'hā",
+          "transliteration": "minhaa",
           "translation": "from it",
           "charType": "word"
         },
         {
           "position": 14,
           "textUthmani": "وَلَا",
-          "transliteration": "walā",
+          "transliteration": "walaa",
           "translation": "and not",
           "charType": "word"
         },
@@ -4017,7 +4017,7 @@
         {
           "position": 16,
           "textUthmani": "يُسْتَعْتَبُونَ",
-          "transliteration": "yus'taʿtabūna",
+          "transliteration": "yusta'taboona",
           "translation": "will be asked to appease",
           "charType": "word"
         },
@@ -4030,7 +4030,7 @@
         }
       ],
       "translation": "That is because you took the verses of Allāh in ridicule, and worldly life deluded you.\" So that Day they will not be removed from it, nor will they be asked to appease [Allāh].",
-      "transliteration": "Thaalikum bi-annakumut takhathtum aayaatil laahi huzuwanw Wa-gharratkumul hayaatud dunyaa; fal yawma laa yukhrajoona minhaa Wa-laahum yusta'taboon",
+      "transliteration": "Dhaalikum bi'annakumuttakhadhtum aayaatillaahi huzuwan wagharratkumul-hayaatud-dunyaa fal-yawma laa yukhrajoona minhaa walaa hum yusta'taboon",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045035.mp3",
       "translationClear": "That is because you took Allah’s revelations for a joke, and the worldly life lured you.” So today they will not be brought out of it, and they will not be allowed to repent."
     },
@@ -4044,14 +4044,14 @@
         {
           "position": 1,
           "textUthmani": "فَلِلَّهِ",
-          "transliteration": "falillahi",
+          "transliteration": "falillaahi",
           "translation": "Then for Allah",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلْحَمْدُ",
-          "transliteration": "l-ḥamdu",
+          "transliteration": "al-hamdu",
           "translation": "(is) all the praise",
           "charType": "word"
         },
@@ -4065,7 +4065,7 @@
         {
           "position": 4,
           "textUthmani": "ٱلسَّمَـٰوَٰتِ",
-          "transliteration": "l-samāwāti",
+          "transliteration": "as-samaawaati",
           "translation": "(of) the heavens",
           "charType": "word"
         },
@@ -4079,7 +4079,7 @@
         {
           "position": 6,
           "textUthmani": "ٱلْأَرْضِ",
-          "transliteration": "l-arḍi",
+          "transliteration": "al-ardi",
           "translation": "(of) the earth",
           "charType": "word"
         },
@@ -4093,7 +4093,7 @@
         {
           "position": 8,
           "textUthmani": "ٱلْعَـٰلَمِينَ",
-          "transliteration": "l-ʿālamīna",
+          "transliteration": "al-'aalameena",
           "translation": "(of) the worlds",
           "charType": "word"
         },
@@ -4106,7 +4106,7 @@
         }
       ],
       "translation": "Then, to Allāh belongs [all] praise - Lord of the heavens and Lord of the earth, Lord of the worlds.",
-      "transliteration": "Falillaahil hamdu Rabbis samaawaati Wa-Rabbil ardi Rabbil 'aalameen",
+      "transliteration": "Falillaahil-hamdu rabbis-samaawaati warabbil-ardi rabbil-'aalameen",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045036.mp3",
       "translationClear": "Praise belongs to Allah; Lord of the heavens, Lord of the earth, Lord of humanity."
     },
@@ -4127,28 +4127,28 @@
         {
           "position": 2,
           "textUthmani": "ٱلْكِبْرِيَآءُ",
-          "transliteration": "l-kib'riyāu",
+          "transliteration": "al-kibriyaa'u",
           "translation": "(is) the greatness",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "فِى",
-          "transliteration": "fī",
+          "transliteration": "fee",
           "translation": "in",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "ٱلسَّمَـٰوَٰتِ",
-          "transliteration": "l-samāwāti",
+          "transliteration": "as-samaawaati",
           "translation": "the heavens",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "وَٱلْأَرْضِ ۖ",
-          "transliteration": "wal-arḍi",
+          "transliteration": "wal-ardi",
           "translation": "and the earth",
           "charType": "word"
         },
@@ -4162,14 +4162,14 @@
         {
           "position": 7,
           "textUthmani": "ٱلْعَزِيزُ",
-          "transliteration": "l-ʿazīzu",
+          "transliteration": "al-'azeezu",
           "translation": "(is) the All-Mighty",
           "charType": "word"
         },
         {
           "position": 8,
           "textUthmani": "ٱلْحَكِيمُ",
-          "transliteration": "l-ḥakīmu",
+          "transliteration": "al-hakeemu",
           "translation": "the All-Wise",
           "charType": "word"
         },
@@ -4182,7 +4182,7 @@
         }
       ],
       "translation": "And to Him belongs [all] grandeur within the heavens and the earth, and He is the Exalted in Might, the Wise.",
-      "transliteration": "Wa-lahul kibriyaaa'u fis samaawaati wal-ardi Wa-Huwal 'Azeezul Hakeem",
+      "transliteration": "Walahul-kibriyaa'u fis-samaawaati wal-ardi wahuwal-'azeezul-hakeem",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/045037.mp3",
       "translationClear": "To Him belongs all supremacy in the heavens and the earth. He is the Majestic, the Wise."
     }

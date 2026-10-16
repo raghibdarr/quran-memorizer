@@ -16,28 +16,28 @@
         {
           "position": 1,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "When",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "زُلْزِلَتِ",
-          "transliteration": "zul'zilati",
+          "transliteration": "zulzilati",
           "translation": "is shaken",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱلْأَرْضُ",
-          "transliteration": "l-arḍu",
+          "transliteration": "al-ardu",
           "translation": "the earth",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "زِلْزَالَهَا",
-          "transliteration": "zil'zālahā",
+          "transliteration": "zilzaalahaa",
           "translation": "(with) its earthquake",
           "charType": "word"
         },
@@ -50,7 +50,7 @@
         }
       ],
       "translation": "When the earth is shaken with its [final] earthquake",
-      "transliteration": "Ithaa zul-zilatil ardu zil-zaalaha",
+      "transliteration": "Idhaa zulzilatil-ardu zilzaalahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099001.mp3",
       "translationClear": "When the earth is shaken with its quake."
     },
@@ -64,21 +64,21 @@
         {
           "position": 1,
           "textUthmani": "وَأَخْرَجَتِ",
-          "transliteration": "wa-akhrajati",
+          "transliteration": "wa'akhrajati",
           "translation": "And brings forth",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلْأَرْضُ",
-          "transliteration": "l-arḍu",
+          "transliteration": "al-ardu",
           "translation": "the earth",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "أَثْقَالَهَا",
-          "transliteration": "athqālahā",
+          "transliteration": "athqaalahaa",
           "translation": "its burdens",
           "charType": "word"
         },
@@ -91,7 +91,7 @@
         }
       ],
       "translation": "And the earth discharges its burdens[1962]",
-      "transliteration": "Wa-akh-rajatil ardu athqaalaha",
+      "transliteration": "Wa'akhrajatil-ardu athqaalahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099002.mp3",
       "footnotes": {
         "1962": "See verse 84:4."
@@ -108,28 +108,28 @@
         {
           "position": 1,
           "textUthmani": "وَقَالَ",
-          "transliteration": "waqāla",
+          "transliteration": "waqaala",
           "translation": "And says",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلْإِنسَـٰنُ",
-          "transliteration": "l-insānu",
+          "transliteration": "al-insaanu",
           "translation": "man",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "What",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "لَهَا",
-          "transliteration": "lahā",
+          "transliteration": "lahaa",
           "translation": "(is) with it",
           "charType": "word"
         },
@@ -142,7 +142,7 @@
         }
       ],
       "translation": "And man says,[1963] \"What is [wrong] with it?\" -",
-      "transliteration": "Wa-qaalal insaanu ma laha",
+      "transliteration": "Waqaalal-insaanu maa lahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099003.mp3",
       "footnotes": {
         "1963": "In terror and amazement."
@@ -159,21 +159,21 @@
         {
           "position": 1,
           "textUthmani": "يَوْمَئِذٍۢ",
-          "transliteration": "yawma-idhin",
+          "transliteration": "yawma'idhin",
           "translation": "That Day",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "تُحَدِّثُ",
-          "transliteration": "tuḥaddithu",
+          "transliteration": "tuhaddithu",
           "translation": "it will report",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "أَخْبَارَهَا",
-          "transliteration": "akhbārahā",
+          "transliteration": "akhbaarahaa",
           "translation": "its news",
           "charType": "word"
         },
@@ -186,7 +186,7 @@
         }
       ],
       "translation": "That Day, it will report its news",
-      "transliteration": "Yawmaa-ithin tuhad-dithu akhbaaraha",
+      "transliteration": "Yawma'idhin tuhaddithu akhbaarahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099004.mp3",
       "translationClear": "On that Day, it will tell its tales."
     },
@@ -200,7 +200,7 @@
         {
           "position": 1,
           "textUthmani": "بِأَنَّ",
-          "transliteration": "bi-anna",
+          "transliteration": "bi'anna",
           "translation": "Because",
           "charType": "word"
         },
@@ -214,14 +214,14 @@
         {
           "position": 3,
           "textUthmani": "أَوْحَىٰ",
-          "transliteration": "awḥā",
+          "transliteration": "awhaa",
           "translation": "inspired",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "لَهَا",
-          "transliteration": "lahā",
+          "transliteration": "lahaa",
           "translation": "[to] it",
           "charType": "word"
         },
@@ -234,7 +234,7 @@
         }
       ],
       "translation": "Because your Lord has inspired [i.e., commanded] it.",
-      "transliteration": "Bi-anna rabbaka awhaa laha",
+      "transliteration": "Bi'anna rabbaka awhaa lahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099005.mp3",
       "translationClear": "For your Lord will have inspired it."
     },
@@ -248,28 +248,28 @@
         {
           "position": 1,
           "textUthmani": "يَوْمَئِذٍۢ",
-          "transliteration": "yawma-idhin",
+          "transliteration": "yawma'idhin",
           "translation": "That Day",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "يَصْدُرُ",
-          "transliteration": "yaṣduru",
+          "transliteration": "yasduru",
           "translation": "will proceed",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "ٱلنَّاسُ",
-          "transliteration": "l-nāsu",
+          "transliteration": "an-naasu",
           "translation": "the mankind",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "أَشْتَاتًۭا",
-          "transliteration": "ashtātan",
+          "transliteration": "ashtaatan",
           "translation": "(in) scattered groups",
           "charType": "word"
         },
@@ -283,7 +283,7 @@
         {
           "position": 6,
           "textUthmani": "أَعْمَـٰلَهُمْ",
-          "transliteration": "aʿmālahum",
+          "transliteration": "a'maalahum",
           "translation": "their deeds",
           "charType": "word"
         },
@@ -296,7 +296,7 @@
         }
       ],
       "translation": "That Day, the people will depart[1964] separated [into categories] to be shown [the result of] their deeds.",
-      "transliteration": "Yawma-ithiny yas-durun naasu ash-tatal liyuraw a'maalahum",
+      "transliteration": "Yawma'idhin yasdurun-naasu ashtaatal liyuraw a'maalahum",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099006.mp3",
       "footnotes": {
         "1964": "From the place of Judgement to their final abode. Another interpretation is \"emerge separately\" (from the graves) ."
@@ -320,14 +320,14 @@
         {
           "position": 2,
           "textUthmani": "يَعْمَلْ",
-          "transliteration": "yaʿmal",
+          "transliteration": "ya'mal",
           "translation": "does",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "مِثْقَالَ",
-          "transliteration": "mith'qāla",
+          "transliteration": "mithqaala",
           "translation": "(equal to the) weight",
           "charType": "word"
         },
@@ -348,7 +348,7 @@
         {
           "position": 6,
           "textUthmani": "يَرَهُۥ",
-          "transliteration": "yarahu",
+          "transliteration": "yarahoo",
           "translation": "will see it",
           "charType": "word"
         },
@@ -361,7 +361,7 @@
         }
       ],
       "translation": "So whoever does an atom's weight[1965] of good will see it,",
-      "transliteration": "Famaiy ya'mal mithqala tharratin khai-raiy yarah",
+      "transliteration": "Faman ya'mal mithqaala dharratin khayran yarah",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099007.mp3",
       "footnotes": {
         "1965": "Or \"the weight of a small ant.\""
@@ -385,14 +385,14 @@
         {
           "position": 2,
           "textUthmani": "يَعْمَلْ",
-          "transliteration": "yaʿmal",
+          "transliteration": "ya'mal",
           "translation": "does",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "مِثْقَالَ",
-          "transliteration": "mith'qāla",
+          "transliteration": "mithqaala",
           "translation": "(equal to the) weight",
           "charType": "word"
         },
@@ -413,7 +413,7 @@
         {
           "position": 6,
           "textUthmani": "يَرَهُۥ",
-          "transliteration": "yarahu",
+          "transliteration": "yarahoo",
           "translation": "will see it",
           "charType": "word"
         },
@@ -426,7 +426,7 @@
         }
       ],
       "translation": "And whoever does an atom's weight of evil will see it.",
-      "transliteration": "Wa-maiy y'amal mithqala tharratin sharraiy yarah",
+      "transliteration": "Waman ya'mal mithqaala dharratin sharran yarah",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099008.mp3",
       "translationClear": "And whoever has done an atom’s weight of evil will see it."
     }

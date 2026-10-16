@@ -16,14 +16,14 @@
         {
           "position": 1,
           "textUthmani": "وَٱلشَّمْسِ",
-          "transliteration": "wal-shamsi",
+          "transliteration": "wash-shamsi",
           "translation": "By the sun",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "وَضُحَىٰهَا",
-          "transliteration": "waḍuḥāhā",
+          "transliteration": "waduhaahaa",
           "translation": "and its brightness",
           "charType": "word"
         },
@@ -36,7 +36,7 @@
         }
       ],
       "translation": "By the sun and its brightness",
-      "transliteration": "Wash-shamsi Wa-duhaa-haa",
+      "transliteration": "Wash-shamsi waduhaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091001.mp3",
       "translationClear": "By the sun and its radiance."
     },
@@ -57,14 +57,14 @@
         {
           "position": 2,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "when",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "تَلَىٰهَا",
-          "transliteration": "talāhā",
+          "transliteration": "talaahaa",
           "translation": "it follows it",
           "charType": "word"
         },
@@ -77,7 +77,7 @@
         }
       ],
       "translation": "And [by] the moon when it follows it",
-      "transliteration": "Wal-qamari ithaa talaa-haa",
+      "transliteration": "Wal-qamari idhaa talaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091002.mp3",
       "translationClear": "And the moon as it follows it."
     },
@@ -91,21 +91,21 @@
         {
           "position": 1,
           "textUthmani": "وَٱلنَّهَارِ",
-          "transliteration": "wal-nahāri",
+          "transliteration": "wan-nahaari",
           "translation": "And the day",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "when",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "جَلَّىٰهَا",
-          "transliteration": "jallāhā",
+          "transliteration": "jallaahaa",
           "translation": "it displays it",
           "charType": "word"
         },
@@ -118,7 +118,7 @@
         }
       ],
       "translation": "And [by] the day when it displays it[1931]",
-      "transliteration": "Wannahaari ithaa jallaa-haa",
+      "transliteration": "Wan-nahaari idhaa jallaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091003.mp3",
       "footnotes": {
         "1931": "The earth. Also interpreted as the sun. The same applies to the following verse."
@@ -135,21 +135,21 @@
         {
           "position": 1,
           "textUthmani": "وَٱلَّيْلِ",
-          "transliteration": "wa-al-layli",
+          "transliteration": "wal-layli",
           "translation": "And the night",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "when",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "يَغْشَىٰهَا",
-          "transliteration": "yaghshāhā",
+          "transliteration": "yaghshaahaa",
           "translation": "it covers it",
           "charType": "word"
         },
@@ -162,7 +162,7 @@
         }
       ],
       "translation": "And [by] the night when it covers [i.e., conceals] it",
-      "transliteration": "Wallaili ithaa yaghshaa-haa",
+      "transliteration": "Wal-layli idhaa yaghshaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091004.mp3",
       "translationClear": "And the night as it conceals it."
     },
@@ -176,21 +176,21 @@
         {
           "position": 1,
           "textUthmani": "وَٱلسَّمَآءِ",
-          "transliteration": "wal-samāi",
+          "transliteration": "was-samaa'i",
           "translation": "And the heaven",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and (He) Who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "بَنَىٰهَا",
-          "transliteration": "banāhā",
+          "transliteration": "banaahaa",
           "translation": "constructed it",
           "charType": "word"
         },
@@ -203,7 +203,7 @@
         }
       ],
       "translation": "And [by] the sky and He who constructed it",
-      "transliteration": "Wassamaaa'i Wa-maa banaahaa",
+      "transliteration": "Was-samaa'i wamaa banaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091005.mp3",
       "translationClear": "And the sky and He who built it."
     },
@@ -217,21 +217,21 @@
         {
           "position": 1,
           "textUthmani": "وَٱلْأَرْضِ",
-          "transliteration": "wal-arḍi",
+          "transliteration": "wal-ardi",
           "translation": "And the earth",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and by (He) Who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "طَحَىٰهَا",
-          "transliteration": "ṭaḥāhā",
+          "transliteration": "tahaahaa",
           "translation": "spread it",
           "charType": "word"
         },
@@ -244,7 +244,7 @@
         }
       ],
       "translation": "And [by] the earth and He who spread it",
-      "transliteration": "Wal-ardi Wa-maa tahaahaa",
+      "transliteration": "Wal-ardi wamaa tahaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091006.mp3",
       "translationClear": "And the earth and He who spread it."
     },
@@ -265,14 +265,14 @@
         {
           "position": 2,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and (He) Who",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "سَوَّىٰهَا",
-          "transliteration": "sawwāhā",
+          "transliteration": "sawwaahaa",
           "translation": "proportioned it",
           "charType": "word"
         },
@@ -285,7 +285,7 @@
         }
       ],
       "translation": "And [by] the soul and He who proportioned it[1932]",
-      "transliteration": "Wa-nafsinw Wa-maa sawwaahaa",
+      "transliteration": "Wanafsin wamaa sawwaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091007.mp3",
       "footnotes": {
         "1932": "i.e., balanced and refined it, creating in it sound tendencies and consciousness."
@@ -302,21 +302,21 @@
         {
           "position": 1,
           "textUthmani": "فَأَلْهَمَهَا",
-          "transliteration": "fa-alhamahā",
+          "transliteration": "fa'alhamahaa",
           "translation": "And He inspired it",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "فُجُورَهَا",
-          "transliteration": "fujūrahā",
+          "transliteration": "fujoorahaa",
           "translation": "(to distinguish) its wickedness",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "وَتَقْوَىٰهَا",
-          "transliteration": "wataqwāhā",
+          "transliteration": "wataqwaahaa",
           "translation": "and its righteousness",
           "charType": "word"
         },
@@ -329,7 +329,7 @@
         }
       ],
       "translation": "And inspired it [with discernment of] its wickedness and its righteousness,",
-      "transliteration": "Fa-alhamahaa fujoorahaa Wa-taqwaahaa",
+      "transliteration": "Fa'alhamahaa fujoorahaa wataqwaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091008.mp3",
       "translationClear": "And inspired it with its wickedness and its righteousness."
     },
@@ -350,7 +350,7 @@
         {
           "position": 2,
           "textUthmani": "أَفْلَحَ",
-          "transliteration": "aflaḥa",
+          "transliteration": "aflaha",
           "translation": "he succeeds",
           "charType": "word"
         },
@@ -364,7 +364,7 @@
         {
           "position": 4,
           "textUthmani": "زَكَّىٰهَا",
-          "transliteration": "zakkāhā",
+          "transliteration": "zakkaahaa",
           "translation": "purifies it",
           "charType": "word"
         },
@@ -398,7 +398,7 @@
         {
           "position": 2,
           "textUthmani": "خَابَ",
-          "transliteration": "khāba",
+          "transliteration": "khaaba",
           "translation": "he fails",
           "charType": "word"
         },
@@ -412,7 +412,7 @@
         {
           "position": 4,
           "textUthmani": "دَسَّىٰهَا",
-          "transliteration": "dassāhā",
+          "transliteration": "dassaahaa",
           "translation": "buries it",
           "charType": "word"
         },
@@ -425,7 +425,7 @@
         }
       ],
       "translation": "And he has failed who instills it [with corruption].",
-      "transliteration": "Wa-qad khaaba man dassaahaa",
+      "transliteration": "Waqad khaaba man dassaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091010.mp3",
       "translationClear": "Failing is he who corrupts it."
     },
@@ -439,21 +439,21 @@
         {
           "position": 1,
           "textUthmani": "كَذَّبَتْ",
-          "transliteration": "kadhabat",
+          "transliteration": "kadhdhabat",
           "translation": "Denied",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ثَمُودُ",
-          "transliteration": "thamūdu",
+          "transliteration": "thamoodu",
           "translation": "Thamud",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "بِطَغْوَىٰهَآ",
-          "transliteration": "biṭaghwāhā",
+          "transliteration": "bitaghwaahaa",
           "translation": "by their transgression",
           "charType": "word"
         },
@@ -466,7 +466,7 @@
         }
       ],
       "translation": "Thamūd denied [their prophet] by reason of their transgression,",
-      "transliteration": "Kaththabat Samoodu bi-taghwaahaaa",
+      "transliteration": "Kadhdhabat thamoodu bitaghwaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091011.mp3",
       "translationClear": "Thamood denied in its pride."
     },
@@ -487,14 +487,14 @@
         {
           "position": 2,
           "textUthmani": "ٱنۢبَعَثَ",
-          "transliteration": "inbaʿatha",
+          "transliteration": "imba'atha",
           "translation": "(was) sent forth",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "أَشْقَىٰهَا",
-          "transliteration": "ashqāhā",
+          "transliteration": "ashqaahaa",
           "translation": "(the) most wicked of them",
           "charType": "word"
         },
@@ -507,7 +507,7 @@
         }
       ],
       "translation": "When the most wretched of them was sent forth.[1933]",
-      "transliteration": "Ithim ba'asa ashqaahaa",
+      "transliteration": "Idhimba'atha ashqaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091012.mp3",
       "footnotes": {
         "1933": "To hamstring the she-camel which had been sent by Allāh as a sign to them."
@@ -524,7 +524,7 @@
         {
           "position": 1,
           "textUthmani": "فَقَالَ",
-          "transliteration": "faqāla",
+          "transliteration": "faqaala",
           "translation": "But said",
           "charType": "word"
         },
@@ -538,35 +538,35 @@
         {
           "position": 3,
           "textUthmani": "رَسُولُ",
-          "transliteration": "rasūlu",
+          "transliteration": "rasoolu",
           "translation": "(the) Messenger",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "نَاقَةَ",
-          "transliteration": "nāqata",
+          "transliteration": "naaqata",
           "translation": "(It is the) she-camel",
           "charType": "word"
         },
         {
           "position": 6,
           "textUthmani": "ٱللَّهِ",
-          "transliteration": "l-lahi",
+          "transliteration": "allaahi",
           "translation": "(of) Allah",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "وَسُقْيَـٰهَا",
-          "transliteration": "wasuq'yāhā",
+          "transliteration": "wasuqyaahaa",
           "translation": "and her drink",
           "charType": "word"
         },
@@ -579,7 +579,7 @@
         }
       ],
       "translation": "And the messenger of Allāh [i.e., Ṣāliḥ] said to them, \"[Do not harm] the she-camel of Allāh or [prevent her from] her drink.\"",
-      "transliteration": "Faqaala lahum Rasoolul laahi naaqatal laahi Wa-suqiyaahaa",
+      "transliteration": "Faqaala lahum rasoolullaahi naaqatallaahi wasuqyaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091013.mp3",
       "translationClear": "The messenger of Allah said to them, “This is the she-camel of Allah, so let her drink.”"
     },
@@ -593,14 +593,14 @@
         {
           "position": 1,
           "textUthmani": "فَكَذَّبُوهُ",
-          "transliteration": "fakadhabūhu",
+          "transliteration": "fakadhdhaboohu",
           "translation": "But they denied him",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "فَعَقَرُوهَا",
-          "transliteration": "faʿaqarūhā",
+          "transliteration": "fa'aqaroohaa",
           "translation": "and they hamstrung her",
           "charType": "word"
         },
@@ -614,7 +614,7 @@
         {
           "position": 4,
           "textUthmani": "عَلَيْهِمْ",
-          "transliteration": "ʿalayhim",
+          "transliteration": "'alayhim",
           "translation": "them",
           "charType": "word"
         },
@@ -628,14 +628,14 @@
         {
           "position": 6,
           "textUthmani": "بِذَنۢبِهِمْ",
-          "transliteration": "bidhanbihim",
+          "transliteration": "bidhambihim",
           "translation": "for their sin",
           "charType": "word"
         },
         {
           "position": 7,
           "textUthmani": "فَسَوَّىٰهَا",
-          "transliteration": "fasawwāhā",
+          "transliteration": "fasawwaahaa",
           "translation": "and leveled them",
           "charType": "word"
         },
@@ -648,7 +648,7 @@
         }
       ],
       "translation": "But they denied him and hamstrung[1934] her. So their Lord brought down upon them destruction for their sin and made it equal [upon all of them].",
-      "transliteration": "Fakaththaboohu fa'aqaroohaa fadamdama 'alaihim Rabbuhum bithambihim fasaw-waahaa",
+      "transliteration": "Fakadhdhaboohu fa'aqaroohaa fadamdama 'alayhim rabbuhum bidhambihim fasawwaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091014.mp3",
       "footnotes": {
         "1934": "And then killed."
@@ -665,21 +665,21 @@
         {
           "position": 1,
           "textUthmani": "وَلَا",
-          "transliteration": "walā",
+          "transliteration": "walaa",
           "translation": "And not",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "يَخَافُ",
-          "transliteration": "yakhāfu",
+          "transliteration": "yakhaafu",
           "translation": "He fears",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "عُقْبَـٰهَا",
-          "transliteration": "ʿuq'bāhā",
+          "transliteration": "'uqbaahaa",
           "translation": "its consequences",
           "charType": "word"
         },
@@ -692,7 +692,7 @@
         }
       ],
       "translation": "And He does not fear the consequence thereof.[1935]",
-      "transliteration": "Wa-laa yakhaafu 'uqbaahaa",
+      "transliteration": "Walaa yakhaafu 'uqbaahaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/091015.mp3",
       "footnotes": {
         "1935": "Allāh is not asked about what He does, but His servants will be asked. See 21:23."

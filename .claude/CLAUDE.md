@@ -34,7 +34,12 @@ planner (daily plan), essentials (duas/dhikr), progress stats, streaks.
   under web AND native-style routing (build first)
 - `npm run serve:web` / `serve:native` — serve `out/` like Netlify / like the Capacitor shells
 - `npx cap sync` — copy `out/` + plugins into the native projects (after every build)
-- `npx tsx scripts/fetch-quran-data.ts` — re-fetch Quran data
+- Quran data is built from the licensed files in `data-sources/` (see its README), never from
+  api.quran.com (its terms forbid bundling): `node scripts/build-arabic-text.mjs`,
+  `build-tajweed.mjs`, `build-indopak.mjs`, `build-translations.mjs`, then
+  `npx tsx scripts/build-transliteration.mts` and `node scripts/build-search-index.mjs`.
+  Each `.mjs` takes `--check` to compare without writing. Word-by-word English meanings are
+  still the old Quran.com glosses, pending the Quranic Arabic Corpus team's permission.
 - `node scripts/generate-ayah-weights.mjs` — regenerate per-ayah word counts (lesson packing)
 - `node scripts/import-segments.mjs <folder>` — import QUL word-timing downloads
 

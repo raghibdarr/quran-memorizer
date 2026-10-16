@@ -16,7 +16,7 @@
         {
           "position": 1,
           "textUthmani": "وَٱلضُّحَىٰ",
-          "transliteration": "wal-ḍuḥā",
+          "transliteration": "wad-duhaa",
           "translation": "By the morning brightness",
           "charType": "word"
         },
@@ -43,21 +43,21 @@
         {
           "position": 1,
           "textUthmani": "وَٱلَّيْلِ",
-          "transliteration": "wa-al-layli",
+          "transliteration": "wal-layli",
           "translation": "And the night",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "إِذَا",
-          "transliteration": "idhā",
+          "transliteration": "idhaa",
           "translation": "when",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "سَجَىٰ",
-          "transliteration": "sajā",
+          "transliteration": "sajaa",
           "translation": "it covers with darkness",
           "charType": "word"
         },
@@ -70,7 +70,7 @@
         }
       ],
       "translation": "And [by] the night when it covers with darkness,[1941]",
-      "transliteration": "Wal-laili itha sajaa",
+      "transliteration": "Wal-layli idhaa sajaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093002.mp3",
       "footnotes": {
         "1941": "And becomes still."
@@ -87,14 +87,14 @@
         {
           "position": 1,
           "textUthmani": "مَا",
-          "transliteration": "mā",
+          "transliteration": "maa",
           "translation": "Not",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "وَدَّعَكَ",
-          "transliteration": "waddaʿaka",
+          "transliteration": "wadda'aka",
           "translation": "has forsaken you",
           "charType": "word"
         },
@@ -108,14 +108,14 @@
         {
           "position": 4,
           "textUthmani": "وَمَا",
-          "transliteration": "wamā",
+          "transliteration": "wamaa",
           "translation": "and not",
           "charType": "word"
         },
         {
           "position": 5,
           "textUthmani": "قَلَىٰ",
-          "transliteration": "qalā",
+          "transliteration": "qalaa",
           "translation": "He is displeased",
           "charType": "word"
         },
@@ -128,7 +128,7 @@
         }
       ],
       "translation": "Your Lord has not taken leave of you, [O Muḥammad], nor has He detested [you].",
-      "transliteration": "Ma wad-da'aka rabbuka Wa-ma qalaa",
+      "transliteration": "Maa wadda'aka rabbuka wamaa qalaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093003.mp3",
       "translationClear": "Your Lord did not abandon you, nor did He forget."
     },
@@ -142,7 +142,7 @@
         {
           "position": 1,
           "textUthmani": "وَلَلْـَٔاخِرَةُ",
-          "transliteration": "walalākhiratu",
+          "transliteration": "walal'aakhiratu",
           "translation": "And surely the Hereafter",
           "charType": "word"
         },
@@ -170,7 +170,7 @@
         {
           "position": 5,
           "textUthmani": "ٱلْأُولَىٰ",
-          "transliteration": "l-ūlā",
+          "transliteration": "al-oolaa",
           "translation": "the first",
           "charType": "word"
         },
@@ -183,7 +183,7 @@
         }
       ],
       "translation": "And the Hereafter is better for you than the first [life].",
-      "transliteration": "Walal-aakhiratu khairul laka minal oola",
+      "transliteration": "Walal'aakhiratu khayrul laka minal-oolaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093004.mp3",
       "translationClear": "The Hereafter is better for you than the First."
     },
@@ -204,7 +204,7 @@
         {
           "position": 2,
           "textUthmani": "يُعْطِيكَ",
-          "transliteration": "yuʿ'ṭīka",
+          "transliteration": "yu'teeka",
           "translation": "will give you",
           "charType": "word"
         },
@@ -218,7 +218,7 @@
         {
           "position": 4,
           "textUthmani": "فَتَرْضَىٰٓ",
-          "transliteration": "fatarḍā",
+          "transliteration": "fatardaa",
           "translation": "then you will be satisfied",
           "charType": "word"
         },
@@ -231,7 +231,7 @@
         }
       ],
       "translation": "And your Lord is going to give you, and you will be satisfied.",
-      "transliteration": "Wa-la-sawfa y'uteeka rabbuka fatarda",
+      "transliteration": "Walasawfa yu'teeka rabbuka fatardaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093005.mp3",
       "translationClear": "And your Lord will give you, and you will be satisfied."
     },
@@ -252,21 +252,21 @@
         {
           "position": 2,
           "textUthmani": "يَجِدْكَ",
-          "transliteration": "yajid'ka",
+          "transliteration": "yajidka",
           "translation": "He find you",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "يَتِيمًۭا",
-          "transliteration": "yatīman",
+          "transliteration": "yateeman",
           "translation": "an orphan",
           "charType": "word"
         },
         {
           "position": 4,
           "textUthmani": "فَـَٔاوَىٰ",
-          "transliteration": "faāwā",
+          "transliteration": "fa'aawaa",
           "translation": "and give shelter",
           "charType": "word"
         },
@@ -279,7 +279,7 @@
         }
       ],
       "translation": "Did He not find you an orphan and give [you] refuge?",
-      "transliteration": "Alam ya-jidka yateeman fa-aawaa",
+      "transliteration": "Alam yajidka yateeman fa'aawaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093006.mp3",
       "translationClear": "Did He not find you orphaned, and sheltered you?"
     },
@@ -300,14 +300,14 @@
         {
           "position": 2,
           "textUthmani": "ضَآلًّۭا",
-          "transliteration": "ḍāllan",
+          "transliteration": "daallan",
           "translation": "lost",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "فَهَدَىٰ",
-          "transliteration": "fahadā",
+          "transliteration": "fahadaa",
           "translation": "so He guided",
           "charType": "word"
         },
@@ -320,7 +320,7 @@
         }
       ],
       "translation": "And He found you lost and guided [you],",
-      "transliteration": "Wa-Wa-jadaka daal-lan fahada",
+      "transliteration": "Wawajadaka daallan fahadaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093007.mp3",
       "translationClear": "And found you wandering, and guided you?"
     },
@@ -341,14 +341,14 @@
         {
           "position": 2,
           "textUthmani": "عَآئِلًۭا",
-          "transliteration": "ʿāilan",
+          "transliteration": "'aa'ilan",
           "translation": "in need",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "فَأَغْنَىٰ",
-          "transliteration": "fa-aghnā",
+          "transliteration": "fa'aghnaa",
           "translation": "so He made self-sufficient",
           "charType": "word"
         },
@@ -361,7 +361,7 @@
         }
       ],
       "translation": "And He found you poor and made [you] self-sufficient.",
-      "transliteration": "Wa-Wa-jadaka 'aa-ilan fa-aghnaa",
+      "transliteration": "Wawajadaka 'aa'ilan fa'aghnaa",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093008.mp3",
       "translationClear": "And found you in need, and enriched you?"
     },
@@ -375,21 +375,21 @@
         {
           "position": 1,
           "textUthmani": "فَأَمَّا",
-          "transliteration": "fa-ammā",
+          "transliteration": "fa'ammaa",
           "translation": "So as for",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلْيَتِيمَ",
-          "transliteration": "l-yatīma",
+          "transliteration": "al-yateema",
           "translation": "the orphan",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "فَلَا",
-          "transliteration": "falā",
+          "transliteration": "falaa",
           "translation": "then (do) not",
           "charType": "word"
         },
@@ -409,7 +409,7 @@
         }
       ],
       "translation": "So as for the orphan, do not oppress [him].",
-      "transliteration": "Fa-am-mal yateema fala taqhar",
+      "transliteration": "Fa'ammal-yateema falaa taqhar",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093009.mp3",
       "translationClear": "Therefore, do not mistreat the orphan."
     },
@@ -423,21 +423,21 @@
         {
           "position": 1,
           "textUthmani": "وَأَمَّا",
-          "transliteration": "wa-ammā",
+          "transliteration": "wa'ammaa",
           "translation": "And as for",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "ٱلسَّآئِلَ",
-          "transliteration": "l-sāila",
+          "transliteration": "as-saa'ila",
           "translation": "one who asks",
           "charType": "word"
         },
         {
           "position": 3,
           "textUthmani": "فَلَا",
-          "transliteration": "falā",
+          "transliteration": "falaa",
           "translation": "then (do) not",
           "charType": "word"
         },
@@ -457,7 +457,7 @@
         }
       ],
       "translation": "And as for the petitioner,[1942] do not repel [him].",
-      "transliteration": "Wa-am-mas saa-ila fala tanhar",
+      "transliteration": "Wa'ammas-saa'ila falaa tanhar",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093010.mp3",
       "footnotes": {
         "1942": "Anyone who seeks aid or knowledge."
@@ -474,14 +474,14 @@
         {
           "position": 1,
           "textUthmani": "وَأَمَّا",
-          "transliteration": "wa-ammā",
+          "transliteration": "wa'ammaa",
           "translation": "But as for",
           "charType": "word"
         },
         {
           "position": 2,
           "textUthmani": "بِنِعْمَةِ",
-          "transliteration": "biniʿ'mati",
+          "transliteration": "bini'mati",
           "translation": "(the) Favor",
           "charType": "word"
         },
@@ -495,7 +495,7 @@
         {
           "position": 4,
           "textUthmani": "فَحَدِّثْ",
-          "transliteration": "faḥaddith",
+          "transliteration": "fahaddith",
           "translation": "narrate",
           "charType": "word"
         },
@@ -508,7 +508,7 @@
         }
       ],
       "translation": "But as for the favor of your Lord, report [it].",
-      "transliteration": "Wa-amma bi-ni'mati rabbika fahad-dith",
+      "transliteration": "Wa'ammaa bini'mati rabbika fahaddith",
       "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093011.mp3",
       "translationClear": "But proclaim the blessings of your Lord."
     }
