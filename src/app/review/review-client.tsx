@@ -230,6 +230,8 @@ export default function ReviewPage() {
           </Link>
         )}
 
+        <SimilarPracticeEntry />
+
         {/* Leeches (M5): ayahs failed several reviews in a row need isolated drilling,
             not more of the same spaced review */}
         {leeches.length > 0 && (
@@ -440,5 +442,33 @@ function SurahHealthCard({
         </div>
       )}
     </div>
+  );
+}
+
+/** Similar-ayah practice (roadmap #09), offered once something memorised has a near-twin */
+function SimilarPracticeEntry() {
+  const cards = useReviewStore((s) => s.cards);
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!cards.length) return;
+    let live = true;
+    Promise.all([import('@/data/mutashabihat.json'), import('@/lib/similar-quiz')]).then(([m, q]) => {
+      if (!live) return;
+      const known = new Set(cards.map((c) => `${c.surahId}:${c.ayahNumber}`));
+      setCount(q.pickPairs((m.default ?? m) as unknown as import('@/lib/similar-quiz').TwinMap, (k) => known.has(k), 99, 1).length);
+    });
+    return () => { live = false; };
+  }, [cards]);
+  if (!count) return null;
+  return (
+    <Link href="/review/similar" className="block" data-similar-entry>
+      <Card pressable className="flex items-center justify-between gap-3">
+        <span>
+          <span className="block text-sm font-bold text-foreground">Tell similar ayahs apart</span>
+          <span className="mt-0.5 block text-xs text-muted">{count} {count === 1 ? 'pair' : 'pairs'} in what you&apos;ve memorised · pick the right wording</span>
+        </span>
+        <span aria-hidden className="text-teal">›</span>
+      </Card>
+    </Link>
   );
 }

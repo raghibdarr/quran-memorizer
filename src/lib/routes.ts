@@ -49,7 +49,7 @@ const inRange = (v: string, max: number) => {
  * retries… an infinite reload loop. Only known routes are ever recovered.
  */
 export function isAppRoute(pathname: string): boolean {
-  if (['/', '/learn', '/recite', '/listen', '/review', '/review/session', '/review/drill', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback', '/privacy', '/bookmarks', '/downloads', '/mushaf', '/khatm'].includes(pathname)) {
+  if (['/', '/learn', '/recite', '/listen', '/review', '/review/session', '/review/drill', '/review/similar', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback', '/privacy', '/bookmarks', '/downloads', '/mushaf', '/khatm'].includes(pathname)) {
     return true;
   }
   let m: RegExpExecArray | null;
