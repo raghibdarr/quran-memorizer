@@ -16,6 +16,7 @@ import type { SurahMeta, LessonDef } from '@/types/quran';
 import type { SurahHealth } from '@/lib/review-helpers';
 import { NAV_FORWARD } from '@/lib/nav';
 import Card from '@/components/ui/card';
+import ComingUp from '@/components/review/coming-up';
 import Button from '@/components/ui/button';
 import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
@@ -231,6 +232,7 @@ export default function ReviewPage() {
         )}
 
         <SimilarPracticeEntry />
+        <ComingUp />
 
         {/* Leeches (M5): ayahs failed several reviews in a row need isolated drilling,
             not more of the same spaced review */}

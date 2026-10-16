@@ -6,6 +6,7 @@ import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 import { buildAyahWordData } from '@/lib/segments';
 import { useSettingsStore } from '@/stores/settings-store';
+import { useReviewStore } from '@/stores/review-store';
 import { VoiceTracker, mapWordIndex, type TrackerEvent, type VoiceIssue } from '@/lib/voice-tracker';
 import Button from '@/components/ui/button';
 
@@ -110,6 +111,7 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   const start = async () => {
     setHeard({});
     setFlags({});
+    setCredited(null);
     setCurrent(null);
     try {
       await tracker.current?.start();
@@ -132,6 +134,36 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
   const skipped = ayahs.filter((a) => flags[a.number]?.ayah === 'skipped').map((a) => a.number);
   const unclear = ayahs.filter((a) => flags[a.number]?.ayah === 'unclear').map((a) => a.number);
   const flaggedWords = Object.values(flags).reduce((n, f) => n + f.words.length, 0);
+
+  // Credit per ayah (roadmap #15: partial credit, and a recitation-verified
+  // placement check): between the first and last ayah recited, each one is rated
+  // on its own — clean Good, flagged or missing words Shaky, skipped Missed
+  const cards = useReviewStore((s) => s.cards);
+  const addCard = useReviewStore((s) => s.addCard);
+  const reviewCard = useReviewStore((s) => s.reviewCard);
+  const [credited, setCredited] = useState<{ reviewed: number; added: number } | null>(null);
+  const span = ayahs.filter((a) => heardIn(a.number).length > 0 || skipped.includes(a.number));
+  const firstNo = span[0]?.number ?? 0;
+  const lastNo = span[span.length - 1]?.number ?? -1;
+  const credit = ayahs.filter((a) => a.number >= firstNo && a.number <= lastNo).map((a) => {
+    const f = flags[a.number];
+    const missing = wordCounts[a.number] - heardIn(a.number).length;
+    const quality = f?.ayah === 'skipped' || heardIn(a.number).length === 0 ? 1 : f?.words.length || f?.ayah === 'unclear' || missing > 0 ? 3 : 4;
+    return { ayah: a.number, quality };
+  });
+  const saveCredit = () => {
+    const have = new Set(cards.filter((c) => c.surahId === surahId).map((c) => c.ayahNumber));
+    let added = 0;
+    let reviewed = 0;
+    for (const c of credit) {
+      if (have.has(c.ayah)) reviewed++;
+      else if (c.quality === 1) continue; // a skipped ayah you hadn't memorised isn't one to start tracking
+      else { addCard(surahId, c.ayah); added++; }
+      reviewCard(surahId, c.ayah, c.quality);
+    }
+    setCredited({ reviewed, added });
+    haptic.success();
+  };
   const listening = status === 'listening' || status === 'finishing';
 
   return (
@@ -144,6 +176,15 @@ export default function VoiceRecite({ surahId, ayahs, onExit }: VoiceReciteProps
           <p className="mt-1 text-sm text-muted" data-voice-flags={skipped.length + unclear.length + flaggedWords}>
             {summaryLine({ unheardAyahs: ayahs.length - recitedAyahs.length - skipped.length, missedWords, recited: recitedAyahs.length, skipped, unclear, flaggedWords })}
           </p>
+          {credit.length > 0 && (credited ? (
+            <p className="mt-3 text-sm text-foreground" data-voice-credited>
+              Saved: {credited.reviewed > 0 && `${credited.reviewed} reviewed`}{credited.reviewed > 0 && credited.added > 0 && ', '}{credited.added > 0 && `${credited.added} added to your reviews`}.
+            </p>
+          ) : (
+            <button type="button" onClick={saveCredit} className="tactile-btn mt-3 min-h-11 w-full rounded-xl bg-teal text-sm font-semibold text-on-teal" data-voice-credit>
+              Count this as a review of {credit.length === 1 ? 'this ayah' : `these ${credit.length} ayahs`}
+            </button>
+          ))}
         </div>
       ) : (
         <div className="rounded-2xl bg-gold/10 p-4 text-sm text-foreground">
