@@ -13,6 +13,7 @@ export const STORE_NAMES = [
   'quran-practice',
   'quran-plan',
   'quran-essentials',
+  'quran-reader',
 ] as const
 
 export type StoreName = typeof STORE_NAMES[number]
@@ -47,6 +48,7 @@ export const STORE_SCHEMA_VERSIONS: Record<SyncRowName, number> = {
   'quran-practice': 1,
   'quran-plan': 1,
   'quran-essentials': 1,
+  'quran-reader': 1,
   'quran-flags': 1,
 }
 
@@ -393,6 +395,34 @@ function mergeEssentials(
   }
 }
 
+/** Per-key last-write-wins over `{at, deleted?}` entries (tombstones included) */
+function mergeMarks(a: unknown, b: unknown): Record<string, unknown> {
+  const left = (a && typeof a === 'object' ? a : {}) as Record<string, { at?: number }>
+  const right = (b && typeof b === 'object' ? b : {}) as Record<string, { at?: number }>
+  const out: Record<string, unknown> = { ...right }
+  for (const [k, v] of Object.entries(left)) {
+    const other = right[k]
+    // Ties go to the local copy, so a merge is stable when both sides agree
+    if (!other || (v?.at ?? 0) >= (other?.at ?? 0)) out[k] = v
+  }
+  return out
+}
+
+/** Reader marks: bookmarks/highlights/notes per ayah by recency; the latest last-read wins. */
+function mergeReader(
+  local: Record<string, unknown>,
+  cloud: Record<string, unknown>
+): Record<string, unknown> {
+  const l = local.lastRead as { at?: number } | null | undefined
+  const c = cloud.lastRead as { at?: number } | null | undefined
+  return {
+    lastRead: !c ? l ?? null : !l ? c : (l.at ?? 0) >= (c.at ?? 0) ? l : c,
+    bookmarks: mergeMarks(local.bookmarks, cloud.bookmarks),
+    highlights: mergeMarks(local.highlights, cloud.highlights),
+    notes: mergeMarks(local.notes, cloud.notes),
+  }
+}
+
 /** Flags: union of string keys; a set flag is never unset by an absent one; local wins on conflict. */
 function mergeFlags(
   local: Record<string, unknown>,
@@ -416,6 +446,7 @@ export function mergeStore(
     case 'quran-settings': return mergeSettings(local, cloud, cloudIsNewer)
     case 'quran-plan': return mergePlan(local, cloud, cloudIsNewer)
     case 'quran-essentials': return mergeEssentials(local, cloud)
+    case 'quran-reader': return mergeReader(local, cloud)
     case 'quran-flags': return mergeFlags(local, cloud)
   }
 }

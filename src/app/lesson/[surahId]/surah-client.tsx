@@ -194,7 +194,7 @@ export default function SurahDetailPage() {
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Link href={listenHref(surahId)} className="block">
               <span className="tactile-chip flex min-h-12 items-center justify-center gap-2 rounded-xl bg-card text-sm font-semibold text-foreground">
-                <PlayIcon size={14} /> Listen
+                <PlayIcon size={14} /> Read &amp; listen
               </span>
             </Link>
             <Link href={reciteHref(surahId)} className="block">

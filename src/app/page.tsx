@@ -28,6 +28,7 @@ import { useShellRouteRecovery } from '@/hooks/use-shell-route-recovery';
 import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
+import ContinueReading from '@/components/reader/continue-reading';
 import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -249,6 +250,8 @@ export default function HomePage() {
             </Card>
           </Link>
         ) : null}
+
+        <ContinueReading surahs={allSurahs} />
 
         {plan ? (
           <TodaysPlanCard />

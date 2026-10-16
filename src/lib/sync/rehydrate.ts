@@ -12,6 +12,7 @@ import { useSettingsStore } from '@/stores/settings-store'
 import { usePracticeStore } from '@/stores/practice-store'
 import { usePlanStore } from '@/stores/plan-store'
 import { useEssentialsStore } from '@/stores/essentials-store'
+import { useReaderStore } from '@/stores/reader-store'
 import type { StoreName } from './merge'
 
 const STORES: Record<StoreName, { persist: { rehydrate: () => unknown } }> = {
@@ -22,6 +23,7 @@ const STORES: Record<StoreName, { persist: { rehydrate: () => unknown } }> = {
   'quran-practice': usePracticeStore,
   'quran-plan': usePlanStore,
   'quran-essentials': useEssentialsStore,
+  'quran-reader': useReaderStore,
 }
 
 export async function rehydrateStores(names?: StoreName[]) {

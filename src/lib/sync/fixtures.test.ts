@@ -70,6 +70,12 @@ const FIXTURES: Record<SyncRowName, Record<string, unknown>> = {
   'quran-essentials': {
     memorized: { 'dua-morning-1': true }, favorites: { 'dhikr-1': true }, counters: { 'dhikr-1': 33 },
   },
+  'quran-reader': {
+    lastRead: { surah: 18, ayah: 10, at: 1780100000000 },
+    bookmarks: { '2:255': { at: 1780000000000 }, '36:1': { at: 1780050000000, deleted: true } },
+    highlights: { '67:2': { at: 1780000000000, color: 'teal' } },
+    notes: { '2:255': { at: 1780000000000, text: 'Ayat al-Kursi: before sleep' } },
+  },
   'quran-flags': {
     'onboarding-complete': 'true', 'chunk-explainer-seen': 'true', 'home-tab': 'surahs',
   },
@@ -94,6 +100,7 @@ describe('golden fixtures', () => {
       'quran-practice': 1,
       'quran-plan': 1,
       'quran-essentials': 1,
+      'quran-reader': 1,
       'quran-flags': 1,
     })
   })

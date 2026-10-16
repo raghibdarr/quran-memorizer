@@ -16,6 +16,8 @@ import { SkeletonRows } from '@/components/ui/skeleton';
 import { useAudio } from '@/hooks/use-audio';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 import { cn } from '@/lib/cn';
+import AyahMenu, { HIGHLIGHT_CLASS } from '@/components/reader/ayah-menu';
+import { ayahKey, useReaderStore } from '@/stores/reader-store';
 
 const GAP_BETWEEN_AYAHS_MS = 300;
 /** Between repeats of the same ayah when no pause is set: enough to hear it as a repeat */
@@ -47,16 +49,20 @@ function Stepper({ label, value, onChange }: { label: string; value: number; onC
 }
 
 /**
- * Listen to a whole surah with the text following along (persona tests: there
- * was no plain read-and-listen mode — listening meant a grading screen whose
+ * Read and listen to a whole surah with the text following along (persona tests:
+ * there was no plain read-and-listen mode — listening meant a grading screen whose
  * current ayah sat under the player). Tap any ayah to play from there.
  *
  * Repeat & loop (M10): play each ayah N times with a pause after each (time to
  * say it back), and loop a range of ayahs A–B until stopped.
+ *
+ * Reading marks (roadmap #03): each ayah's ⋯ opens bookmark, highlight, note and
+ * copy; the screen remembers where you were (`?a=` reopens there).
  */
 export default function ListenClient() {
   const params = useSearchParams();
   const surahId = Number(params.get('s'));
+  const startAyah = Number(params.get('a')) || 0;
   const [surah, setSurah] = useState<Surah | null>(null);
   const [current, setCurrent] = useState(-1);
   const [rep, setRep] = useState(0);
@@ -71,6 +77,11 @@ export default function ListenClient() {
   const spokenWord = useSpokenWord(surahId, surah && current >= 0 ? surah.ayahs[current].number : null, isPlaying);
   const abortRef = useRef(false);
   const ayahRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [menuIdx, setMenuIdx] = useState<number | null>(null);
+  const bookmarks = useReaderStore((s) => s.bookmarks);
+  const highlights = useReaderStore((s) => s.highlights);
+  const notes = useReaderStore((s) => s.notes);
+  const setLastRead = useReaderStore((s) => s.setLastRead);
 
   useEffect(() => {
     if (!Number.isFinite(surahId) || surahId < 1 || surahId > 114) return;
@@ -83,8 +94,36 @@ export default function ListenClient() {
 
   // Keep the ayah being recited in view, clear of the header and the player
   useEffect(() => {
-    if (current >= 0) ayahRefs.current[current]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, [current]);
+    if (current < 0 || !surah) return;
+    ayahRefs.current[current]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setLastRead(surah.id, surah.ayahs[current].number);
+  }, [current, surah, setLastRead]);
+
+  // Reopen where the link points (?a=), once the text is in
+  useEffect(() => {
+    if (!surah || startAyah < 2) return;
+    const i = surah.ayahs.findIndex((a) => a.number === startAyah);
+    if (i > 0) ayahRefs.current[i]?.scrollIntoView({ block: 'start' });
+  }, [surah, startAyah]);
+
+  // Remember the top-most ayah on screen as the last-read place (settles after a pause)
+  useEffect(() => {
+    if (!surah || typeof IntersectionObserver === 'undefined') return;
+    const visible = new Set<number>();
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const i = Number((e.target as HTMLElement).dataset.idx);
+        if (e.isIntersecting) visible.add(i); else visible.delete(i);
+      }
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (visible.size) setLastRead(surah.id, surah.ayahs[Math.min(...visible)].number);
+      }, 1200);
+    }, { rootMargin: '-96px 0px -55% 0px' });
+    ayahRefs.current.forEach((el) => el && io.observe(el));
+    return () => { io.disconnect(); clearTimeout(timer); };
+  }, [surah, setLastRead]);
 
   const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -140,7 +179,7 @@ export default function ListenClient() {
       <div className="sticky top-[var(--safe-top)] z-20 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between">
           <CloseButton fallback={`/lesson/${surahId}`} label="Close" />
-          <span className="text-sm font-semibold text-teal">{surah ? `Listen · ${surah.nameSimple}` : 'Listen'}</span>
+          <span className="text-sm font-semibold text-teal">{surah ? surah.nameSimple : 'Read & listen'}</span>
           <SettingsPanel />
         </div>
       </div>
@@ -150,12 +189,20 @@ export default function ListenClient() {
           <SkeletonRows count={6} />
         ) : (
           <>
-            <p className="mb-4 text-center text-sm text-muted">Tap any ayah to play from there.</p>
+            <p className="mb-4 text-center text-sm text-muted">Tap an ayah to play from there. Its ⋯ has bookmarks and notes.</p>
             <div className="space-y-3">
-              {surah.ayahs.map((ayah, i) => (
+              {surah.ayahs.map((ayah, i) => {
+                const key = ayahKey(surah.id, ayah.number);
+                const bookmarked = !!bookmarks[key] && !bookmarks[key].deleted;
+                const hl = highlights[key] && !highlights[key].deleted ? highlights[key].color : null;
+                const note = notes[key] && !notes[key].deleted ? notes[key].text : '';
+                return (
                 <div
                   key={ayah.key}
+                  data-idx={i}
+                  data-ayah={ayah.number}
                   ref={(el) => { ayahRefs.current[i] = el; }}
+                  style={{ scrollMarginTop: 'calc(var(--safe-top) + 72px)' }}
                   role="button"
                   tabIndex={0}
                   aria-label={`Play from ayah ${ayah.number}`}
@@ -164,18 +211,51 @@ export default function ListenClient() {
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playAyah(i); } }}
                   className={cn(
                     'cursor-pointer rounded-2xl border-[1.5px] p-4 transition-colors',
-                    i === current ? 'border-teal/60 bg-teal/5' : 'border-transparent bg-card hover:border-foreground/10',
+                    i === current ? 'border-teal/60 bg-teal/5' : cn('border-transparent hover:border-foreground/10', hl ? HIGHLIGHT_CLASS[hl] : 'bg-card'),
                     !inRange(i) && 'opacity-50',
                   )}
                 >
-                  <p className="mb-1 text-xs text-muted">
-                    Ayah {ayah.number}
-                    {i === current && times > 1 && <span className="text-teal"> · {rep + 1} of {times}</span>}
-                  </p>
+                  <div className="-mt-1 mb-1 flex items-center justify-between gap-2">
+                    <p className="flex items-center gap-1.5 text-xs text-muted">
+                      Ayah {ayah.number}
+                      {bookmarked && (
+                        <svg width={12} height={12} viewBox="0 0 24 24" className="text-gold" aria-label="Bookmarked" role="img">
+                          <path d="M6 3h12v18l-6-4-6 4z" fill="currentColor" />
+                        </svg>
+                      )}
+                      {i === current && times > 1 && <span className="text-teal"> · {rep + 1} of {times}</span>}
+                    </p>
+                    <button
+                      type="button"
+                      aria-label={`Bookmark, highlight or note ayah ${ayah.number}`}
+                      onClick={(e) => { e.stopPropagation(); setMenuIdx(i); }}
+                      onKeyDown={(e) => e.stopPropagation()}
+                      className="-mr-2 flex h-9 w-11 items-center justify-center rounded-full text-muted hover:bg-foreground/5 hover:text-foreground"
+                      data-ayah-more
+                    >
+                      <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor" aria-hidden><circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" /></svg>
+                    </button>
+                  </div>
                   <AyahDisplay ayah={ayah} spokenWord={i === current ? spokenWord : -1} />
+                  {note && (
+                    <p className="mt-3 line-clamp-3 whitespace-pre-line border-l-2 border-gold/50 pl-3 text-sm text-muted" data-ayah-note>
+                      {note}
+                    </p>
+                  )}
                 </div>
-              ))}
+                );
+              })}
             </div>
+
+            <AyahMenu
+              key={menuIdx ?? 'none'}
+              open={menuIdx !== null}
+              onClose={() => setMenuIdx(null)}
+              surahId={surah.id}
+              surahName={surah.nameSimple}
+              ayah={menuIdx !== null ? surah.ayahs[menuIdx] : null}
+              onPlay={() => menuIdx !== null && playAyah(menuIdx)}
+            />
 
             <div className="sticky bottom-0 z-10 -mx-4 mt-4 space-y-2 bg-cream/95 px-4 pt-2 backdrop-blur-sm" style={{ paddingBottom: 'var(--tabbar-clearance)' }}>
               <button

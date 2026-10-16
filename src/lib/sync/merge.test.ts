@@ -197,6 +197,33 @@ describe('merge properties (fast-check)', () => {
     }))
   })
 
+  it('reader: per-ayah last write wins, tombstones included; latest last-read wins', () => {
+    const markArb = fc.record({ at: fc.integer({ min: 1, max: 100 }), deleted: fc.option(fc.constant(true), { nil: undefined }) })
+      .map((m) => (m.deleted ? m : { at: m.at }))
+    const marksArb = fc.dictionary(fc.constantFrom('1:1', '2:255', '18:10', '67:2'), markArb)
+    const readerArb = fc.record({
+      lastRead: fc.option(fc.record({ surah: fc.integer({ min: 1, max: 114 }), ayah: fc.integer({ min: 1, max: 20 }), at: fc.integer({ min: 1, max: 100 }) }), { nil: null }),
+      bookmarks: marksArb,
+      highlights: fc.constant({}),
+      notes: fc.constant({}),
+    })
+    fc.assert(fc.property(readerArb, readerArb, (a, b) => {
+      const m = mergeStore('quran-reader', a, b, true) as typeof a
+      for (const k of new Set([...Object.keys(a.bookmarks), ...Object.keys(b.bookmarks)])) {
+        const want = Math.max(a.bookmarks[k]?.at ?? 0, b.bookmarks[k]?.at ?? 0)
+        expect(m.bookmarks[k].at).toBe(want)
+      }
+      expect(m.lastRead?.at ?? 0).toBe(Math.max(a.lastRead?.at ?? 0, b.lastRead?.at ?? 0))
+      // idempotent
+      expect(mergeStore('quran-reader', m, m, true)).toEqual(m)
+    }))
+    // A removal newer than the other device's bookmark stays removed
+    const merged = mergeStore('quran-reader',
+      { lastRead: null, bookmarks: { '2:255': { at: 5, deleted: true } }, highlights: {}, notes: {} },
+      { lastRead: null, bookmarks: { '2:255': { at: 3 } }, highlights: {}, notes: {} }, true) as { bookmarks: Record<string, { deleted?: boolean }> }
+    expect(merged.bookmarks['2:255'].deleted).toBe(true)
+  })
+
   it('practice: idempotent; sessions are a duplicate-free union', () => {
     fc.assert(fc.property(practiceArb, practiceArb, (a, b) => {
       expect(mergeStore('quran-practice', a, a, true)).toEqual(a)
