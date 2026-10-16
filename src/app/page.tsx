@@ -287,7 +287,7 @@ export default function HomePage() {
             above must not hide it) — full card for learners, a compact row otherwise */}
         {!plan && (intent === 'listen' || intent === 'revise') && (
           <Link
-            href={intent === 'revise' ? '/plan/setup?goal=maintain' : '/plan/setup'}
+            href={intent === 'revise' ? '/plan/setup?goal=maintain' : '/plans'}
             className="pressable flex min-h-12 items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/5 px-4 py-2.5"
           >
             <span className="text-sm">
@@ -301,13 +301,13 @@ export default function HomePage() {
         )}
 
         {!plan && intent !== 'listen' && intent !== 'revise' && (
-          <Link href="/plan/setup" className="block">
+          <Link href="/plans" className="block">
             <Card variant="tactile" pressable className="bg-gold/10">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh Planner</p>
                   <p className="mt-1 text-lg font-bold text-foreground">Set a memorization goal</p>
-                  <p className="mt-0.5 text-xs text-muted">Get a personalised daily plan with reviews and pacing.</p>
+                  <p className="mt-0.5 text-xs text-muted">Pick a ready-made plan or build your own, with reviews and pacing.</p>
                 </div>
                 <span className="tactile-chip shrink-0 rounded-full bg-gold px-3.5 py-2 text-xs font-bold text-on-gold">Start →</span>
               </div>

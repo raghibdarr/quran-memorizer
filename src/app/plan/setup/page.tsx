@@ -23,6 +23,7 @@ import { isoFromMs } from '@/lib/dates';
 import { useAppBack } from '@/hooks/use-app-back';
 
 import { ayahRange } from '@/lib/ayah-range';
+import { findPreset } from '@/lib/plan-presets';
 type Step = 1 | 2 | 3 | 4;
 
 // Two letters: "S M T W T F S" left users guessing which S is Sunday (persona test)
@@ -43,13 +44,16 @@ export default function PlanSetupPage() {
   const [allSurahs, setAllSurahs] = useState<SurahMeta[]>([]);
   const [juzIndex, setJuzIndex] = useState<JuzMeta[]>([]);
 
-  // ?goal=maintain (onboarding's "keep what I know fresh"). The app renders client-only
-  // (Providers waits for mount), so reading the URL here can't mismatch a server render.
+  // ?goal=maintain (onboarding's "keep what I know fresh") or ?preset=id (a ready-made plan
+  // from /plans). The app renders client-only (Providers waits for mount), so reading the
+  // URL here can't mismatch a server render.
+  const [params] = useState(() => (typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()));
+  const [preset] = useState(() => findPreset(params.get('preset')));
   const [goalType, setGoalType] = useState<PlanGoalType>(() =>
-    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('goal') === 'maintain' ? 'maintain' : 'juz',
+    preset ? preset.goalType : params.get('goal') === 'maintain' ? 'maintain' : 'juz',
   );
-  const [selectedSurahIds, setSelectedSurahIds] = useState<number[]>([]);
-  const [selectedJuzNumbers, setSelectedJuzNumbers] = useState<number[]>([30]);
+  const [selectedSurahIds, setSelectedSurahIds] = useState<number[]>(() => preset?.surahIds ?? []);
+  const [selectedJuzNumbers, setSelectedJuzNumbers] = useState<number[]>(() => preset?.juzNumbers ?? [30]);
   const [surahSearch, setSurahSearch] = useState('');
   const [rangeFrom, setRangeFrom] = useState('');
   const [rangeTo, setRangeTo] = useState('');
@@ -60,9 +64,9 @@ export default function PlanSetupPage() {
 
   const [useDeadline, setUseDeadline] = useState(false);
   const [deadline, setDeadline] = useState<string>(addDaysIso(todayIso(), 60));
-  const [lessonsPerDay, setLessonsPerDay] = useState(1);
+  const [lessonsPerDay, setLessonsPerDay] = useState(() => preset?.lessonsPerDay ?? 1);
   const [customPaceOpen, setCustomPaceOpen] = useState(false);
-  const [studyDays, setStudyDays] = useState<number[]>([0, 1, 2, 3, 4, 5, 6]);
+  const [studyDays, setStudyDays] = useState<number[]>(() => preset?.studyDays ?? [0, 1, 2, 3, 4, 5, 6]);
 
   useEffect(() => {
     getSurahIndex().then(setAllSurahs);
