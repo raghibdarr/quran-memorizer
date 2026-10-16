@@ -33,9 +33,9 @@ Everything that doesn't need you is built. These need your accounts, your phone 
 8. **Sign in with Apple** or hide Google on iOS (currently hidden: Apple 4.8).
 9. **Teacher / parent links** (roadmap #19): a policy for children's data first.
 10. **Warsh / Qaloon** (roadmap #21): text and layout licences, per-recording rights.
-11. **Learning plans and guides** (from the Quran.com research): the recommendation is our own
-    hifz plans on the review engine plus a few short original memorisation guides; the content
-    would be in your voice.
+11. ~~Learning plans and guides~~ **Done 2026-10-17**: /plans (seven ready-made plans that open the
+    planner filled in) and /blog (six original guides). Read them over: they speak for Takrar, and
+    you may want to change the wording or add your own.
 
 ## Accounts
 12. Apple Developer ($99/yr), Google Play Console ($25), signing keys, the permanent bundle id.
@@ -49,3 +49,5 @@ Everything that doesn't need you is built. These need your accounts, your phone 
     downloads playing offline.
 17. Home-screen widget; Android Auto in the Desktop Head Unit.
 18. Motion dials (M11 checkpoint B), then I roll the accents out app-wide.
+19. The new visual pieces (2026-10-17): the similar-verse morph, mushaf "Ink", the gilded edge on
+    Progress (and its Share), tajweed "Hear it" demos, and the voice check's pace line with a real mic.
