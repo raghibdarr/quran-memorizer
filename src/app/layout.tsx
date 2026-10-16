@@ -4,8 +4,11 @@ import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import "./globals.css";
 
-const kfgqpc = localFont({
-  src: "../../public/fonts/kfgqpc-hafs.woff",
+// Amiri Quran (OFL 1.1, public/fonts/AmiriQuran-OFL.txt): draws all of Tanzil's Uthmani
+// text, signs like the small rounded zero included. It replaced KFGQPC Uthmanic Hafs, whose
+// licence needs the King Fahd Complex's written approval (licensing audit, 2026-10-16).
+const amiriQuran = localFont({
+  src: "../../public/fonts/AmiriQuran.ttf",
   variable: "--font-arabic",
   display: "swap",
 });
@@ -54,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${kfgqpc.variable} ${nastaliq.variable} ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${amiriQuran.variable} ${nastaliq.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

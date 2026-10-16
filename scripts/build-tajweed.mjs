@@ -119,7 +119,8 @@ export function tajweedHtml(text, oldText, annotations, ayahNumber, joined = [])
   // markup splits into the same words as the word list; then the verse number
   html = html.replace(new RegExp(` (${PAUSE})`, 'g'), `${ZWNJ}$1`);
   const num = String(ayahNumber).replace(/\d/g, (d) => ARABIC_DIGITS[d]);
-  return `${html} <span class=end>${num}</span>`;
+  // The end-of-ayah sign before the number: Amiri Quran draws them as one ornament
+  return `${html} <span class=end>${String.fromCharCode(0x6dd)}${num}</span>`;
 }
 
 let total = 0, dropped = 0;
