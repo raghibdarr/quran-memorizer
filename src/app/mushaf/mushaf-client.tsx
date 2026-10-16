@@ -267,7 +267,11 @@ export default function MushafClient() {
             >
               ‹ {pageNo < MUSHAF_PAGES ? pageNo + 1 : ''}
             </button>
-            <p className="text-xs text-muted">Tap an ayah for bookmarks and notes</p>
+            {khatmActive ? (
+              <p className="text-xs text-muted">Tap an ayah for bookmarks and notes</p>
+            ) : (
+              <Link href="/khatm" className="text-xs font-semibold text-teal underline-offset-2 hover:underline">Plan a khatm</Link>
+            )}
             <button
               type="button"
               onClick={() => go(pageNo - 1)}

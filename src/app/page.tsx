@@ -30,7 +30,7 @@ import { useTodaysPlan } from '@/hooks/use-todays-plan';
 import DayCompleteMoment from '@/components/plan/day-complete';
 import WelcomeBack from '@/components/welcome-back';
 import ContinueReading from '@/components/reader/continue-reading';
-import { KahfCard, KhatmRow } from '@/components/reader/reading-cards';
+import { KahfCard, KhatmRow, RamadanKhatmCard } from '@/components/reader/reading-cards';
 import AyahSearch from '@/components/reader/ayah-search';
 import { getIntent } from '@/lib/intent';
 import { useDeal } from '@/hooks/use-deal';
@@ -258,6 +258,7 @@ export default function HomePage() {
 
         <KahfCard />
         <KhatmRow />
+        <RamadanKhatmCard />
         <ContinueReading surahs={allSurahs} />
 
         {plan ? (

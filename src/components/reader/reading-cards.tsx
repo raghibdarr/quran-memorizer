@@ -72,3 +72,31 @@ export function KahfCard() {
     </div>
   );
 }
+
+/** The Hijri month today (Umm al-Qura calendar), or null where the browser lacks it */
+export function hijriMonth(date = new Date()): number | null {
+  try {
+    const m = Number(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', { month: 'numeric' }).format(date));
+    return Number.isFinite(m) ? m : null;
+  } catch {
+    return null;
+  }
+}
+
+const isRamadan = () => hijriMonth() === 9;
+
+/** Home in Ramadan, with no khatm running: an invitation to plan one */
+export function RamadanKhatmCard() {
+  const ramadan = useSyncExternalStore(noSubscribe, isRamadan, () => false);
+  const khatm = useReaderStore((s) => s.khatm);
+  if (!ramadan || (khatm && !khatm.endedAt)) return null;
+  return (
+    <Link href="/khatm" className="pressable flex min-h-12 items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/10 px-4 py-2.5" data-ramadan-card>
+      <span className="min-w-0 truncate text-sm">
+        <span className="font-semibold text-gold-deep">Ramadan</span>
+        <span className="text-muted"> · plan a khatm of the whole Quran</span>
+      </span>
+      <ArrowRightIcon size={14} className="shrink-0 text-gold-deep" />
+    </Link>
+  );
+}
