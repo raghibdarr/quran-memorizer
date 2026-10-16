@@ -12,6 +12,7 @@ import { installPressHaptics } from '@/lib/haptics';
 import AppBadgeSync from '@/components/app-badge-sync';
 import ReminderSync from '@/components/reminder-sync';
 import EdgeSwipeBack from '@/components/edge-swipe-back';
+import TajweedExplainer from '@/components/tajweed-explainer';
 import { useNavHistoryTracking } from '@/hooks/use-app-back';
 import type { LessonReviewCard } from '@/types/quran';
 
@@ -141,6 +142,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <AppBadgeSync />
       <ReminderSync />
       <EdgeSwipeBack />
+      <TajweedExplainer />
       {children}
     </SyncProvider>
   );

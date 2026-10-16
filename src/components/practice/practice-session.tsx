@@ -506,7 +506,7 @@ export default function PracticeSession({
             {hasPriorResults
               ? `Now try reciting all ${ayahs.length} ayahs together`
               : ratingOptional
-                ? 'Recite from memory. Tap the eye to peek at an ayah or the play button to hear it. Rating is optional.'
+                ? 'Recite from memory. Tap Show to check an ayah, Play to hear it, or Hint for its first letters. Rating is optional.'
                 : `Recite all ${ayahs.length} ayahs, then reveal to check`}
           </p>
         </div>

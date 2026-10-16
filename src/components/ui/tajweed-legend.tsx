@@ -59,7 +59,7 @@ export default function TajweedLegend({ children }: { children: React.ReactNode 
 
       {tajweed && open && (
         <div className="mt-1.5 grid grid-cols-2 gap-x-4 gap-y-1 rounded-lg bg-card p-2.5 shadow-sm border border-foreground/5">
-          <p className="col-span-2 mb-0.5 text-[10px] font-semibold text-muted">Tajweed colours</p>
+          <p className="col-span-2 mb-0.5 text-[10px] font-semibold text-muted">Tajweed colours · tap a coloured letter in the text for its rule</p>
           {TAJWEED_RULES.map((rule, i) => (
             <div key={i} className="flex items-center gap-1.5">
               <div

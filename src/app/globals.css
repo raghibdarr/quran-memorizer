@@ -222,6 +222,9 @@ body::after {
 
 /* Tajweed color-coded rules — matched to quran.com */
 .tajweed-text tajweed { font-family: inherit; }
+/* tappable for the rule (TajweedExplainer), except inside controls */
+.tajweed-text tajweed[class] { cursor: help; }
+button .tajweed-text tajweed[class], a .tajweed-text tajweed[class] { cursor: inherit; }
 
 /* Silent / wasl letters — gray */
 /* Merged letters (idghaam without ghunnah, mutajanisayn, mutaqaribayn) aren't voiced either */
