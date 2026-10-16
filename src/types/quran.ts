@@ -140,6 +140,8 @@ export interface UserSettings {
   listenPauseMs: number;
   /** Read & listen keeps playing to the end of this (roadmap #01) */
   listenUntil?: 'surah' | 'juz' | 'page' | 'quran';
+  /** Read & listen shows each word's meaning under it */
+  readerWordByWord?: boolean;
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 

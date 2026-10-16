@@ -105,6 +105,8 @@ export default function ListenClient() {
   const rec = useRecitation();
   const transport = useRecitationTransport();
   const until = useSettingsStore((s) => s.listenUntil ?? 'surah');
+  const wordByWord = useSettingsStore((s) => !!s.readerWordByWord);
+  const toggleWordByWord = useSettingsStore((s) => s.toggleReaderWordByWord);
   const setListenUntil = useSettingsStore((s) => s.setListenUntil);
   const [now, setNow] = useState(() => Date.now());
   const [sleepChoice, setSleepChoice] = useState('off');
@@ -259,7 +261,18 @@ export default function ListenClient() {
           <SkeletonRows count={6} />
         ) : (
           <>
-            <p className="mb-4 text-center text-sm text-muted">Tap an ayah to play from there. Its ⋯ has bookmarks and notes.</p>
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+              <p className="text-center text-sm text-muted">Tap an ayah to play from there. Its ⋯ has bookmarks and notes.</p>
+              <button
+                type="button"
+                onClick={toggleWordByWord}
+                aria-pressed={wordByWord}
+                className={cn('pressable min-h-9 rounded-full px-3 text-xs font-semibold', wordByWord ? 'bg-teal text-on-teal' : 'bg-foreground/[0.06] text-foreground/80')}
+                data-wbw-toggle
+              >
+                Word by word
+              </button>
+            </div>
             <div className="space-y-3">
               {surah.ayahs.map((ayah, i) => {
                 const key = ayahKey(surah.id, ayah.number);
@@ -306,7 +319,7 @@ export default function ListenClient() {
                       <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor" aria-hidden><circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" /></svg>
                     </button>
                   </div>
-                  <AyahDisplay ayah={ayah} spokenWord={i === current ? spokenWord : -1} />
+                  <AyahDisplay ayah={ayah} spokenWord={i === current ? spokenWord : -1} wordMeanings={wordByWord} />
                   {note && (
                     <p className="mt-3 line-clamp-3 whitespace-pre-line border-l-2 border-gold/50 pl-3 text-sm text-muted" data-ayah-note>
                       {note}

@@ -16,6 +16,8 @@ interface AyahDisplayProps {
   /** Word being recited (0-based over real words; -1 = none). When set, the ayah is
    *  drawn word by word in the chosen script so that word can be highlighted. */
   spokenWord?: number;
+  /** Each word with its meaning underneath (Read & listen's word-by-word mode) */
+  wordMeanings?: boolean;
   className?: string;
 }
 
@@ -28,6 +30,7 @@ export default function AyahDisplay({
   showTransliteration,
   onWordClick,
   spokenWord,
+  wordMeanings = false,
   className,
 }: AyahDisplayProps) {
   const transliterationEnabled = useSettingsStore((s) => s.transliterationEnabled);
@@ -108,9 +111,30 @@ export default function AyahDisplay({
     );
   };
 
+  // Word by word: the ayah's words in the chosen script, each with its meaning below
+  const renderMeanings = () => {
+    const { tajweedWords, indopakWords } = buildAyahWordData(ayah);
+    return (
+      <div dir="rtl" className="flex flex-wrap justify-center gap-x-3 gap-y-3" data-word-meanings>
+        {actualWords.map((word, wi) => {
+          const active = spokenWord !== undefined && wi === spokenWord;
+          const arabic = arabicScript === 'tajweed' && tajweedWords
+            ? <span className="tajweed-text" dangerouslySetInnerHTML={{ __html: tajweedWords[wi] }} />
+            : arabicScript === 'indopak' && indopakWords ? indopakWords[wi] : word.textUthmani;
+          return (
+            <span key={word.position} className={cn('flex max-w-[9rem] flex-col items-center rounded-lg px-1 transition-colors duration-150', active && 'bg-gold/25')}>
+              <span className={cn(arabicScript === 'indopak' && indopakWords ? 'arabic-text-indopak' : 'arabic-text', 'text-3xl leading-[1.9]')}>{arabic}</span>
+              {word.translation && <span dir="ltr" className="text-center text-[11px] leading-tight text-muted">{word.translation}</span>}
+            </span>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <div className={cn('space-y-3', dimmed && 'opacity-30', className)}>
-      {spokenWord !== undefined ? renderSpoken() : hasWordInteraction ? renderWordByWord() : renderFullAyah()}
+      {wordMeanings ? renderMeanings() : spokenWord !== undefined ? renderSpoken() : hasWordInteraction ? renderWordByWord() : renderFullAyah()}
 
       {shouldShowTransliteration && (
         <p className="text-center text-sm text-muted">
