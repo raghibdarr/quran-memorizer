@@ -32,7 +32,8 @@
       ],
       "translation": "By the dawn",
       "transliteration": "Wal-Fajr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089001.mp3",
+      "translationClear": "By the daybreak."
     },
     {
       "number": 2,
@@ -66,9 +67,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And [by] ten nights",
+      "translation": "And [by] ten nights[1913]",
       "transliteration": "Wa-layaalin 'ashr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089002.mp3",
+      "footnotes": {
+        "1913": "Usually interpreted as the first ten nights of the month of Dhul-Ḥijjah."
+      },
+      "translationClear": "And ten nights."
     },
     {
       "number": 3,
@@ -104,7 +109,8 @@
       ],
       "translation": "And [by] the even [number] and the odd",
       "transliteration": "Wash-shaf'i wal-watr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089003.mp3",
+      "translationClear": "And the even and the odd."
     },
     {
       "number": 4,
@@ -148,7 +154,8 @@
       ],
       "translation": "And [by] the night when it passes,",
       "transliteration": "Wallaili ithaa yasr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089004.mp3",
+      "translationClear": "And the night as it recedes."
     },
     {
       "number": 5,
@@ -214,9 +221,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Is there [not] in [all] that an oath [sufficient] for one of perception?",
+      "translation": "Is there [not] in [all] that an oath [sufficient] for one of perception?[1914]",
       "transliteration": "Hal fee thaalika qasamul lithee hijr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089005.mp3",
+      "footnotes": {
+        "1914": "Based upon the following verses, what has been sworn to by Allāh is that He will certainly punish the disbelievers."
+      },
+      "translationClear": "Is there in this an oath for a rational person?"
     },
     {
       "number": 6,
@@ -284,7 +295,8 @@
       ],
       "translation": "Have you not considered how your Lord dealt with ʿAad -",
       "transliteration": "Alam tara kaifa fa'ala rabbuka bi'aad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089006.mp3",
+      "translationClear": "Have you not seen how your Lord dealt with Aad?"
     },
     {
       "number": 7,
@@ -326,9 +338,14 @@
           "charType": "end"
         }
       ],
-      "translation": "[With] Iram - who had lofty pillars,",
+      "translation": "[With] Iram[1915] - who had lofty pillars,[1916]",
       "transliteration": "Iramaa thaatil 'imaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089007.mp3",
+      "footnotes": {
+        "1915": "Another name for the first people of ʿAad, to whom Prophet Hūd was sent.",
+        "1916": "Supporting their tents or buildings."
+      },
+      "translationClear": "Erum of the pillars."
     },
     {
       "number": 8,
@@ -396,7 +413,8 @@
       ],
       "translation": "The likes of whom had never been created in the land?",
       "transliteration": "Allatee lam yukhlaq misluhaa fil bilaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089008.mp3",
+      "translationClear": "The like of which was never created in the land."
     },
     {
       "number": 9,
@@ -456,7 +474,8 @@
       ],
       "translation": "And [with] Thamūd, who carved out the rocks in the valley?",
       "transliteration": "Wa-samoodal latheena jaabus sakhra bil-waad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089009.mp3",
+      "translationClear": "And Thamood—those who carved the rocks in the valley."
     },
     {
       "number": 10,
@@ -498,9 +517,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And [with] Pharaoh, owner of the stakes?",
+      "translation": "And [with] Pharaoh, owner of the stakes?[1917]",
       "transliteration": "Wa-fir'awna thil awtaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089010.mp3",
+      "footnotes": {
+        "1917": "By which he tortured people."
+      },
+      "translationClear": "And Pharaoh of the Stakes."
     },
     {
       "number": 11,
@@ -552,7 +575,8 @@
       ],
       "translation": "[All of] whom oppressed within the lands",
       "transliteration": "Allatheena taghaw fil bilaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089011.mp3",
+      "translationClear": "Those who committed excesses in the lands."
     },
     {
       "number": 12,
@@ -596,7 +620,8 @@
       ],
       "translation": "And increased therein the corruption.",
       "transliteration": "Fa-aksaroo feehal fasaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089012.mp3",
+      "translationClear": "And spread much corruption therein."
     },
     {
       "number": 13,
@@ -656,7 +681,8 @@
       ],
       "translation": "So your Lord poured upon them a scourge of punishment.",
       "transliteration": "Fasabba 'alaihim Rabbuka sawta 'athaab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089013.mp3",
+      "translationClear": "So your Lord poured down upon them a scourge of punishment."
     },
     {
       "number": 14,
@@ -700,7 +726,8 @@
       ],
       "translation": "Indeed, your Lord is in observation.",
       "transliteration": "Inna Rabbaka labil-mirsaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089014.mp3",
+      "translationClear": "Your Lord is on the lookout."
     },
     {
       "number": 15,
@@ -806,9 +833,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And as for man, when his Lord tries him and [thus] is generous to him and favors him, he says, \"My Lord has honored me.\"",
+      "translation": "And as for man, when his Lord tries him and [thus] is generous to him and favors him, he says, \"My Lord has honored me.\"[1918]",
       "transliteration": "Fa-ammal insaanu ithaa mab talaahu Rabbuhoo fa-akramahoo Wa-na'-'amahoo fa-yaqoolu Rabbeee akraman",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089015.mp3",
+      "footnotes": {
+        "1918": "He is proud rather than grateful, attributing the favor to his own merit."
+      },
+      "translationClear": "As for man, whenever his Lord tests him, and honors him, and prospers him, he says, “My Lord has honored me.”"
     },
     {
       "number": 16,
@@ -908,7 +939,8 @@
       ],
       "translation": "But when He tries him and restricts his provision, he says, \"My Lord has humiliated me.\"",
       "transliteration": "Wa-ammaaa ithaa mab talaahu faqadara 'alaihi rizqahoo fa-yaqoolu Rabbeee ahaanan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089016.mp3",
+      "translationClear": "But whenever He tests him, and restricts his livelihood for him, he says, “My Lord has insulted me.”"
     },
     {
       "number": 17,
@@ -966,9 +998,13 @@
           "charType": "end"
         }
       ],
-      "translation": "No! But you do not honor the orphan",
+      "translation": "No![1919] But you do not honor the orphan",
       "transliteration": "Kalla bal laa tukrimooo-nal yateem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089017.mp3",
+      "footnotes": {
+        "1919": "It is not like you imagine. Rather, Allāh tries people through prosperity and hardship and rewards both gratitude and patience with honor in the Hereafter."
+      },
+      "translationClear": "Not at all. But you do not honor the orphan."
     },
     {
       "number": 18,
@@ -1028,7 +1064,8 @@
       ],
       "translation": "And you do not encourage one another to feed the poor.",
       "transliteration": "Wa-laa tahaaaddoona 'alaa ta'aamil miskeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089018.mp3",
+      "translationClear": "And you do not urge the feeding of the poor."
     },
     {
       "number": 19,
@@ -1078,9 +1115,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And you consume inheritance, devouring [it] altogether,",
+      "translation": "And you consume inheritance, devouring [it] altogether,[1920]",
       "transliteration": "Wa-taakuloonat turaasa aklal lammaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089019.mp3",
+      "footnotes": {
+        "1920": "Not caring whether it is lawful or unlawful."
+      },
+      "translationClear": "And you devour inheritance with all greed."
     },
     {
       "number": 20,
@@ -1132,7 +1173,8 @@
       ],
       "translation": "And you love wealth with immense love.",
       "transliteration": "Wa-tuhibboonal maala hubban jammaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089020.mp3",
+      "translationClear": "And you love wealth with immense love."
     },
     {
       "number": 21,
@@ -1200,7 +1242,8 @@
       ],
       "translation": "No! When the earth has been leveled - pounded and crushed",
       "transliteration": "Kallaaa ithaaa dukkatil ardu dakkan dakka",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089021.mp3",
+      "translationClear": "No—when the earth is leveled, pounded, and crushed."
     },
     {
       "number": 22,
@@ -1258,9 +1301,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And your Lord has come and the angels, rank upon rank,",
+      "translation": "And your Lord has come[1921] and the angels, rank upon rank,",
       "transliteration": "Wa-jaaa'a Rabbuka wal-malaku saffan saffaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089022.mp3",
+      "footnotes": {
+        "1921": "To pass judgement. See footnote to 2:19."
+      },
+      "translationClear": "And your Lord comes, with the angels, row after row."
     },
     {
       "number": 23,
@@ -1352,7 +1399,8 @@
       ],
       "translation": "And brought [within view], that Day, is Hell - that Day, man will remember, but how [i.e., what good] to him will be the remembrance?",
       "transliteration": "Wa-jeee'a yawma'ithim bi-jahannnam; Yawma-'ithiny yatathakkarul insaanu Wa-annaa lahuz thikraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089023.mp3",
+      "translationClear": "And on that Day, Hell is brought forward. On that Day, man will remember, but how will remembrance avail him?"
     },
     {
       "number": 24,
@@ -1402,9 +1450,13 @@
           "charType": "end"
         }
       ],
-      "translation": "He will say, \"Oh, I wish I had sent ahead [some good] for my life.\"",
+      "translation": "He will say, \"Oh, I wish I had sent ahead [some good] for my life.\"[1922]",
       "transliteration": "Yaqoolu yaa-laitanee qaddamtu lihayaatee",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089024.mp3",
+      "footnotes": {
+        "1922": "The everlasting life of the Hereafter."
+      },
+      "translationClear": "He will say, “If only I had forwarded for my life.”"
     },
     {
       "number": 25,
@@ -1464,7 +1516,8 @@
       ],
       "translation": "So on that Day, none will punish [as severely] as His punishment,",
       "transliteration": "Fa-Yawma-ithil laa yu'aththibu 'athaabahooo ahad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089025.mp3",
+      "translationClear": "On that Day, none will punish as He punishes."
     },
     {
       "number": 26,
@@ -1516,7 +1569,8 @@
       ],
       "translation": "And none will bind [as severely] as His binding [of the evildoers].",
       "transliteration": "Wa-laa yoosiqu wasaaqa-hooo ahad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089026.mp3",
+      "translationClear": "And none will shackle as He shackles."
     },
     {
       "number": 27,
@@ -1560,7 +1614,8 @@
       ],
       "translation": "[To the righteous it will be said], \"O reassured soul,",
       "transliteration": "Yaaa-ayyatuhan nafsul mutma-'innah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089027.mp3",
+      "translationClear": "But as for you, O tranquil soul."
     },
     {
       "number": 28,
@@ -1620,7 +1675,8 @@
       ],
       "translation": "Return to your Lord, well-pleased and pleasing [to Him],",
       "transliteration": "Irji'eee ilaa Rabbiki raadiyatam mardiyyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089028.mp3",
+      "translationClear": "Return to your Lord, pleased and accepted."
     },
     {
       "number": 29,
@@ -1664,7 +1720,8 @@
       ],
       "translation": "And enter among My [righteous] servants",
       "transliteration": "Fadkhulee fee 'ibaadee",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089029.mp3",
+      "translationClear": "Enter among My servants."
     },
     {
       "number": 30,
@@ -1700,7 +1757,8 @@
       ],
       "translation": "And enter My Paradise.\"",
       "transliteration": "Wadkhulee jannatee",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/089030.mp3",
+      "translationClear": "Enter My Paradise."
     }
   ]
 }

@@ -50,11 +50,12 @@ const translation = [];
 for (let s = 1; s <= 114; s++) {
   const data = JSON.parse(fs.readFileSync(`src/data/surah-${s}.json`, 'utf8'));
   if (data.ayahs.length !== counts[s - 1]) throw new Error(`surah ${s}: ${data.ayahs.length} ayahs vs Tanzil ${counts[s - 1]}`);
-  for (const a of data.ayahs) translation.push(String(a.translation ?? '').replace(/<sup[^>]*>.*?<\/sup>/g, '').replace(/<[^>]+>/g, '').trim());
+  // Saheeh International (QuranEnc) carries footnote markers like [2]
+  for (const a of data.ayahs) translation.push(String(a.translation ?? '').replace(/\[\d+\]/g, '').replace(/\s{2,}/g, ' ').trim());
 }
 
 fs.writeFileSync('src/data/search-index.json', JSON.stringify({
-  source: 'Tanzil Quran Text (Simple Clean, Version 1.1), tanzil.net. Verbatim; translation: Sahih International.',
+  source: 'Tanzil Quran Text (Simple Clean, Version 1.1), tanzil.net. Verbatim; translation: Saheeh International (QuranEnc.com).',
   notice,
   counts,
   arabic,

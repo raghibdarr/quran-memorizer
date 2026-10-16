@@ -56,7 +56,8 @@
       ],
       "translation": "Woe to every scorner and mocker",
       "transliteration": "Wailul likulli hu-mazatil lumazah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104001.mp3",
+      "translationClear": "Woe to every slanderer backbiter."
     },
     {
       "number": 2,
@@ -106,9 +107,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Who collects wealth and [continuously] counts it.",
+      "translation": "Who collects wealth and [continuously] counts it.[1987]",
       "transliteration": "Allathee jama'a maalanw Wa-'addadah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104002.mp3",
+      "footnotes": {
+        "1987": "Rather than spending in the way of Allāh."
+      },
+      "translationClear": "Who gathers wealth and counts it over."
     },
     {
       "number": 3,
@@ -160,7 +165,8 @@
       ],
       "translation": "He thinks that his wealth will make him immortal.",
       "transliteration": "Yahsabu anna maalahooo akhladah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104003.mp3",
+      "translationClear": "Thinking that his wealth has made him immortal."
     },
     {
       "number": 4,
@@ -210,9 +216,13 @@
           "charType": "end"
         }
       ],
-      "translation": "No! He will surely be thrown into the Crusher.",
+      "translation": "No! He will surely be thrown into the Crusher.[1988]",
       "transliteration": "Kallaa; layumbathanna fil hutamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104004.mp3",
+      "footnotes": {
+        "1988": "i.e., Hellfire, which crushes and destroys all that enters it."
+      },
+      "translationClear": "By no means. He will be thrown into the Crusher."
     },
     {
       "number": 5,
@@ -264,7 +274,8 @@
       ],
       "translation": "And what can make you know what is the Crusher?",
       "transliteration": "Wa-maa adraaka mal hutamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104005.mp3",
+      "translationClear": "And what will make you realize what the Crusher is?"
     },
     {
       "number": 6,
@@ -308,7 +319,8 @@
       ],
       "translation": "It is the fire of Allāh, [eternally] fueled,",
       "transliteration": "Naarul laahil mooqada",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104006.mp3",
+      "translationClear": "Allah’s kindled Fire."
     },
     {
       "number": 7,
@@ -358,9 +370,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Which mounts directed at the hearts.",
+      "translation": "Which mounts directed at the hearts.[1989]",
       "transliteration": "Allatee tattali'u 'alal af'idah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104007.mp3",
+      "footnotes": {
+        "1989": "Covering them and penetrating them."
+      },
+      "translationClear": "That laps to the hearts."
     },
     {
       "number": 8,
@@ -404,7 +420,8 @@
       ],
       "translation": "Indeed, it [i.e., Hellfire] will be closed down upon them",
       "transliteration": "Innahaa 'alaihim mu'sada",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104008.mp3",
+      "translationClear": "It closes in on them."
     },
     {
       "number": 9,
@@ -446,9 +463,13 @@
           "charType": "end"
         }
       ],
-      "translation": "In extended columns.",
+      "translation": "In extended columns.[1990]",
       "transliteration": "Fee 'amadim mumaddadah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/104009.mp3",
+      "footnotes": {
+        "1990": "Interpreted to be either columns of fire or columns of iron to which are chained the inmates of Hell."
+      },
+      "translationClear": "In extended columns."
     }
   ]
 }

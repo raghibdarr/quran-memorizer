@@ -72,7 +72,8 @@
       ],
       "translation": "The revelation of the Book [i.e., the Qur’ān] is from Allāh, the Exalted in Might, the Wise.",
       "transliteration": "Tanzeelul Kitaabi minal laahil 'Azeezil Hakeem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039001.mp3",
+      "translationClear": "The revelation of the Book is from Allah, the Mighty and Wise."
     },
     {
       "number": 2,
@@ -172,7 +173,8 @@
       ],
       "translation": "Indeed, We have sent down to you the Book, [O Muḥammad], in truth. So worship Allāh, [being] sincere to Him in religion.",
       "transliteration": "Innaaa anzalnaaa ilaikal Kitaaba bilhaqqi fa'budil laaha mukhlisal lahud deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039002.mp3",
+      "translationClear": "We sent down to you the Book with the truth, so serve Allah, devoting your religion to Him."
     },
     {
       "number": 3,
@@ -454,9 +456,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Unquestionably, for Allāh is the pure religion. And those who take protectors besides Him [say], \"We only worship them that they may bring us nearer to Allāh in position.\" Indeed, Allāh will judge between them concerning that over which they differ. Indeed, Allāh does not guide he who is a liar and [confirmed] disbeliever.",
+      "translation": "Unquestionably, for Allāh is the pure religion.[1339] And those who take protectors besides Him [say], \"We only worship them that they may bring us nearer to Allāh in position.\" Indeed, Allāh will judge between them concerning that over which they differ. Indeed, Allāh does not guide he who is a liar and [confirmed] disbeliever.",
       "transliteration": "Alaa lillaahid deenul khaalis; wallatheenat takhathoo min dooniheee awliyaaa'a maa na'buduhum illaa liyuqar-riboonaaa ilal laahi zulfaa; innal laaha yahkumu baina-hum fee maa hum feehi yakhtalifoon; innal laaha laa yahdee man huwa kaathibun kaffaar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039003.mp3",
+      "footnotes": {
+        "1339": "i.e., acceptable to Allāh is that none be associated with Him in worship and obedience."
+      },
+      "translationClear": "Is not to Allah that sincere faith is due? As for those who take guardians besides Him, “We only worship them that they may bring us nearer to Allah.” Allah will judge between them regarding their differences. Allah does not guide the lying blasphemer."
     },
     {
       "number": 4,
@@ -602,9 +608,13 @@
           "charType": "end"
         }
       ],
-      "translation": "If Allāh had intended to take a son, He could have chosen from what He creates whatever He willed. Exalted is He; He is Allāh, the One, the Prevailing.",
+      "translation": "If Allāh had intended to take a son, He could have chosen from what He creates whatever He willed. Exalted is He; He is Allāh, the One, the Prevailing.[1340]",
       "transliteration": "Law araadal laahu aien yattakhitha waladal lastafaa mimmaa yakhluqu maa yashaaa'; Subhaanahoo Huwal laahul Waahidul Qahhaar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039004.mp3",
+      "footnotes": {
+        "1340": "Refer to footnotes in 12:39."
+      },
+      "translationClear": "If Allah wanted to have a son, He could have selected from His creation at will. Glory be to Him. He is Allah, the One, the Prevailing."
     },
     {
       "number": 5,
@@ -806,9 +816,13 @@
           "charType": "end"
         }
       ],
-      "translation": "He created the heavens and earth in truth. He wraps the night over the day and wraps the day over the night and has subjected the sun and the moon, each running [its course] for a specified term. Unquestionably, He is the Exalted in Might, the Perpetual Forgiver.",
+      "translation": "He created the heavens and earth in truth. He wraps the night over the day and wraps the day over the night and has subjected the sun and the moon, each running [its course] for a specified term. Unquestionably, He is the Exalted in Might, the Perpetual Forgiver.[1341]",
       "transliteration": "Khalaqas samaawaati wal-arda bilhaqq; yukawwirul laila 'alan nahaari Wa-yukawwirun nahaara 'alaal laili Wa-sakhkharash shamsa walqamara kulluny yajree li-ajalim musammaa; alaa Huwal 'Azeezul Ghaffaar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039005.mp3",
+      "footnotes": {
+        "1341": "Refer to footnotes in 38:66."
+      },
+      "translationClear": "He created the heavens and the earth with reason. He wraps the night around the day, and He wraps the day around the night. And He regulates the sun and the moon, each running along a specific course. He is indeed the Almighty, the Forgiver."
     },
     {
       "number": 6,
@@ -1114,9 +1128,14 @@
           "charType": "end"
         }
       ],
-      "translation": "He created you from one soul. Then He made from it its mate, and He produced for you from the grazing livestock eight mates. He creates you in the wombs of your mothers, creation after creation, within three darknesses. That is Allāh, your Lord; to Him belongs dominion. There is no deity except Him, so how are you averted?",
+      "translation": "He created you from one soul. Then He made from it its mate, and He produced for you from the grazing livestock eight mates.[1342] He creates you in the wombs of your mothers, creation after creation, within three darknesses.[1343] That is Allāh, your Lord; to Him belongs dominion. There is no deity except Him, so how are you averted?",
       "transliteration": "Khalaqakum min nafsinw waahidatin summa ja'ala minhaa zawjahaa Wa-anzala lakum minal an'aami samaani-yata azwaaj; yakhlu-qukum fee butooni ummahaatikum khalqam mim ba'di khalqin fee zulumaatin salaas; thaalikumul laahu Rabbukum lahul mulk; laaa ilaaha illaa Huwa fa-annaa tusrafoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039006.mp3",
+      "footnotes": {
+        "1342": "See 6:143-144.",
+        "1343": "i.e., the belly, the womb, and the amniotic membrane."
+      },
+      "translationClear": "He created you from one person, then made from it its mate, and brought down livestock for you—eight kinds in pairs. He creates you in the wombs of your mothers, in successive formations, in a triple darkness. Such is Allah, your Lord. His is the kingdom. There is no god but He. So what made you deviate?"
     },
     {
       "number": 7,
@@ -1384,7 +1403,8 @@
       ],
       "translation": "If you disbelieve - indeed, Allāh is Free from need of you. And He does not approve for His servants disbelief. And if you are grateful, He approves [i.e., likes] it for you; and no bearer of burdens will bear the burden of another. Then to your Lord is your return, and He will inform you about what you used to do. Indeed, He is Knowing of that within the breasts.",
       "transliteration": "In takfuroo fa-innal laaha ghaniyyun 'ankum; Wa-laa yardaa li'ibaadihil kufra Wa-in tashkuroo yardahu lakum; Wa-laa taziru waaziratunw wizra ukhraa; summa ilaa Rabikum marji'ukum fa-yunabbi'ukum bimaa kuntum ta'maloon; innahoo 'aleemum bithaatis sudoor",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039007.mp3",
+      "translationClear": "If you disbelieve, Allah is Independent of you, yet He does not approve ingratitude on the part of His servants. And if you are thankful, He will approve that in you. No bearer of burden can bear the burden of another. Then to your Lord is your return; and He will inform you of what you used to do. He is aware of what the hearts contain."
     },
     {
       "number": 8,
@@ -1674,9 +1694,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And when adversity touches man, he calls upon his Lord, turning to Him [alone]; then when He bestows on him a favor from Himself, he forgets Him whom he called upon before, and he attributes to Allāh equals to mislead [people] from His way. Say, \"Enjoy your disbelief for a little; indeed, you are of the companions of the Fire.\"",
+      "translation": "And when adversity touches man, he calls upon his Lord, turning to Him [alone]; then when He bestows on him a favor from Himself, he forgets Him whom he called upon before,[1344] and he attributes to Allāh equals to mislead [people] from His way. Say, \"Enjoy your disbelief for a little; indeed, you are of the companions of the Fire.\"",
       "transliteration": "Wa-ithaa massal insaana durrun da'aa Rabbahoo muneeban ilaihi summa ithaa khawwalahoo ni'matam minhu nasiya maa kaana yad'ooo ilaihi min qablu Wa-ja'ala lillaahi andaadal liyudilla 'an sabeelih; qul tamatta' bikufrika qaleelan innaka min Ashaabin Naar;",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039008.mp3",
+      "footnotes": {
+        "1344": "Or \"that for which he called upon Him before.\""
+      },
+      "translationClear": "When some adversity touches the human being, he prays to his Lord, repenting to Him. But then, when He confers on him a grace of His, he forgets what he was praying for before, and he attributes rivals to Allah, in order to lead astray from His way. Say, “Enjoy your disbelief for a little while; you will be among the inmates of the Fire.”"
     },
     {
       "number": 9,
@@ -1888,7 +1912,8 @@
       ],
       "translation": "Is one who is devoutly obedient during periods of the night, prostrating and standing [in prayer], fearing the Hereafter and hoping for the mercy of his Lord, [like one who does not]? Say, \"Are those who know equal to those who do not know?\" Only they will remember [who are] people of understanding.",
       "transliteration": "Amman huwa qaanitun aanaaa'al laili saajidanw Wa-qaaa'imai yahtharul Aakhirata Wa-yarjoo rahmata Rabbih; qul hal yastawil latheena ya'lamoona wallatheena laa ya'lamoon; innamaa yatathakkaru ulul albaab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039009.mp3",
+      "translationClear": "Is he who worships devoutly during the watches of the night, prostrating himself and standing up, mindful of the Hereafter, and placing his hope in the mercy of his Lord? Say, “Are those who know and those who do not know equal?” Only those possessed of reason will remember."
     },
     {
       "number": 10,
@@ -2074,9 +2099,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Say, \"O My servants who have believed, fear your Lord. For those who do good in this world is good, and the earth of Allāh is spacious. Indeed, the patient will be given their reward without account [i.e., limit].\"",
+      "translation": "Say,[1345] \"O My servants who have believed, fear your Lord. For those who do good in this world is good, and the earth of Allāh is spacious. Indeed, the patient will be given their reward without account [i.e., limit].\"",
       "transliteration": "Qul yaa-'ibaadil latheena aamanut taqoo Rabbakum; lillatheena ahsanoo fee haathihid dunyaa hasanah; Wa-ardul laahi waasi'ah; innamaa yuwaffas saabiroona ajrahum bighayri hisab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039010.mp3",
+      "footnotes": {
+        "1345": "The Prophet (ﷺ) is instructed to say on behalf of Allāh (subḥānahu wa taʿālā) to His believing servants."
+      },
+      "translationClear": "Say, “O My devotees who have believed, keep your duty to your Lord. For those who do good in this world, is goodness. And Allah’s earth is vast. The steadfast will be paid their wages in full, without reckoning.”"
     },
     {
       "number": 11,
@@ -2168,7 +2197,8 @@
       ],
       "translation": "Say, [O Muḥammad], \"Indeed, I have been commanded to worship Allāh, [being] sincere to Him in religion.",
       "transliteration": "Qul inneee umirtu an a'budal laaha mukhlisal lahud deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039011.mp3",
+      "translationClear": "Say, “I was commanded to serve Allah, devoting my religion exclusively to Him."
     },
     {
       "number": 12,
@@ -2228,7 +2258,8 @@
       ],
       "translation": "And I have been commanded to be the first [among you] of the Muslims.\"",
       "transliteration": "Wa-umirtu li-an akoona awwalal muslimeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039012.mp3",
+      "translationClear": "And I was commanded to be the first of those who submit.”"
     },
     {
       "number": 13,
@@ -2320,7 +2351,8 @@
       ],
       "translation": "Say, \"Indeed I fear, if I should disobey my Lord, the punishment of a tremendous Day.\"",
       "transliteration": "Qul inneee akhaafu in 'asaitu Rabbee 'athaaba Yawmin 'azeem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039013.mp3",
+      "translationClear": "Say, “I fear, if I disobeyed my Lord, the punishment of a horrendous Day.”"
     },
     {
       "number": 14,
@@ -2388,7 +2420,8 @@
       ],
       "translation": "Say, \"Allāh [alone] do I worship, sincere to Him in my religion,",
       "transliteration": "Qulil laaha a'budu mukhlisal lahoo deenee",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039014.mp3",
+      "translationClear": "Say, “It is Allah I worship, sincere in my faith in Him.”"
     },
     {
       "number": 15,
@@ -2560,7 +2593,8 @@
       ],
       "translation": "So worship what you will besides Him.\" Say, \"Indeed, the losers are the ones who will lose themselves and their families on the Day of Resurrection. Unquestionably, that is the manifest loss.\"",
       "transliteration": "Fa'budoo maa shi'tum min doonih; qul innal khaasireenal latheena khasirooo anfusahum Wa-ahleehim yawmal qiyaamah; alaa thaalika huwal khusraanul mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039015.mp3",
+      "translationClear": "“But you can worship whatever you wish besides Him.” Say, “The losers are those who lose their souls and their people on the Day of Resurrection.” That is indeed the obvious loss."
     },
     {
       "number": 16,
@@ -2708,7 +2742,8 @@
       ],
       "translation": "They will have canopies [i.e., layers] of fire above them and below them, canopies. By that Allāh threatens [i.e., warns] His servants. O My servants, then fear Me.",
       "transliteration": "Lahum min fawqihim zulalum minan Naari Wa-min tahtihim zulal; thaalika yukhaw-wiful laahu bihee 'ibaadah; yaa-'ibaadi fattaqoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039016.mp3",
+      "translationClear": "They will have layers of Fire above them, and layers beneath them. That is how Allah strikes fear into His servants—“O My servants! Beware of Me!”"
     },
     {
       "number": 17,
@@ -2822,9 +2857,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But those who have avoided ṭāghūt, lest they worship it, and turned back to Allāh - for them are good tidings. So give good tidings to My servants",
+      "translation": "But those who have avoided ṭāghūt,[1346] lest they worship it, and turned back to Allāh - for them are good tidings. So give good tidings to My servants",
       "transliteration": "Wallatheenaj tanabut Taaghoota aien ya'budoohaa Wa-anaabooo ilal laahi lahumul bushraa; fabashshir 'ibaad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039017.mp3",
+      "footnotes": {
+        "1346": "i.e., Satan or any false object of worship."
+      },
+      "translationClear": "As for those who avoid the worship of idols, and devote themselves to Allah—theirs is the good news. So give good news to My servants."
     },
     {
       "number": 18,
@@ -2948,7 +2987,8 @@
       ],
       "translation": "Who listen to speech and follow the best of it. Those are the ones Allāh has guided, and those are people of understanding.",
       "transliteration": "Allatheena yastami'oonal qawla fayattabi'oona ahsanah; ulaaa'ikal latheena hadaahumul laahu Wa-ulaaa'ika hum ulul albaab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039018.mp3",
+      "translationClear": "Those who listen to the Word, and follow the best of it. These are they whom Allah has guided. These are they who possess intellect."
     },
     {
       "number": 19,
@@ -3048,7 +3088,8 @@
       ],
       "translation": "Then, is one who has deserved the decree of punishment [to be guided]? Then, can you save one who is in the Fire?",
       "transliteration": "Afaman haqqa 'alaihi kalimatul 'athaab; afa-anta tunqithu man fin Naar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039019.mp3",
+      "translationClear": "What about someone who has deserved the sentence of punishment? Is it you who can save those in the Fire?"
     },
     {
       "number": 20,
@@ -3226,9 +3267,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But those who have feared their Lord - for them are chambers, above them chambers built high, beneath which rivers flow. [This is] the promise of Allāh. Allāh does not fail in [His] promise.",
+      "translation": "But those who have feared their Lord - for them are chambers,[1347] above them chambers built high, beneath which rivers flow. [This is] the promise of Allāh. Allāh does not fail in [His] promise.",
       "transliteration": "Laakinil latheenat taqaw Rabbahum lahum ghurafum min fawqihaa ghurafum mabniyyatun tajree min tahtihal anhaar; wa'dal laah; laa yukhliful laahul mee'aad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039020.mp3",
+      "footnotes": {
+        "1347": "i.e., elevated rooms, dwellings or palaces."
+      },
+      "translationClear": "But those who fear their Lord will have mansions upon mansions, built high, with streams flowing beneath them. The promise of Allah; and Allah never breaks a promise."
     },
     {
       "number": 21,
@@ -3496,7 +3541,8 @@
       ],
       "translation": "Do you not see that Allāh sends down rain from the sky and makes it flow as springs [and rivers] in the earth; then He produces thereby crops of varying colors; then they dry and you see them turned yellow; then He makes them [scattered] debris. Indeed in that is a reminder for those of understanding.",
       "transliteration": "Alam tara annal laaha anzala minas samaaa'i maaa'an fasalakahoo yanaabee'a fil ardi summa yukhriju bihee zar'am mukhtalifan alwaanuhoo summa yaheeju fatarahu musfarran summa yaj'aluhoo hutaamaa; inna fee thaalika lathikraa li-ulil albaab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039021.mp3",
+      "translationClear": "Have you not considered how Allah sends down water from the sky, then He makes it flow into underground wells, then He produces with it plants of various colors, then they wither and you see them yellowing, then He turns them into debris? Surely in this is a reminder for those with understanding."
     },
     {
       "number": 22,
@@ -3676,7 +3722,8 @@
       ],
       "translation": "So is one whose breast Allāh has expanded to [accept] Islām and he is upon [i.e., guided by] a light from his Lord [like one whose heart rejects it]? Then woe to those whose hearts are hardened against the remembrance of Allāh. Those are in manifest error.",
       "transliteration": "Afaman sharahal laahu sadrahoo lil-Islaami fahuwa 'alaa noorim mir Rabbih; fa-wailul lilqaasiyati quloobuhum min thikril laah; ulaaa'ika fee dalaalim mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039022.mp3",
+      "translationClear": "What about someone whose heart Allah has opened to Islam, so that he follows a light from his Lord? Woe to those whose hearts are hardened against the mention of Allah. Those are in manifest error."
     },
     {
       "number": 23,
@@ -3968,7 +4015,8 @@
       ],
       "translation": "Allāh has sent down the best statement: a consistent Book wherein is reiteration. The skins shiver therefrom of those who fear their Lord; then their skins and their hearts relax at the remembrance [i.e., mention] of Allāh. That is the guidance of Allāh by which He guides whom He wills. And one whom Allāh sends astray - for him there is no guide.",
       "transliteration": "Allahu nazzala ahsanal hadeesi Kitaabam mutashaa-biham masaaniya taqsha'irru minhu juloodul latheena yakhshawna Rabbahum summa taleenu julooduhum Wa-quloo-buhum ilaa thikril laah; thaalika hudal laahi yahdee bihee maien yashaaa'; Wa-maien yudlilil laahu famaa lahoo min haad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039023.mp3",
+      "translationClear": "Allah has sent down the best of narrations: A Scripture consistent and paired. The skins of those who reverence their Lord shiver from it, then their skins and their hearts soften up to the remembrance of Allah. Such is Allah’s guidance; He guides with it whomever He wills. But whomever Allah leaves astray, for him there is no guide."
     },
     {
       "number": 24,
@@ -4090,9 +4138,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then is he who will shield with his face the worst of the punishment on the Day of Resurrection [like one secure from it]? And it will be said to the wrongdoers, \"Taste what you used to earn.\"",
+      "translation": "Then is he who will shield with his face[1348] the worst of the punishment on the Day of Resurrection [like one secure from it]? And it will be said to the wrongdoers, \"Taste what you used to earn.\"",
       "transliteration": "Afamaien yattaqee biwaj-hihee sooo'al 'athaabi Yawmal Qiyaamah; Wa-qeela lizzaali-meena thooqoo maa kuntum taksiboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039024.mp3",
+      "footnotes": {
+        "1348": "Rather than his hands, which will be chained to his neck."
+      },
+      "translationClear": "What about someone who covers his face against the terrible misery of the Day of Resurrection? To the evildoers it will be said, “Taste what you used to earn.”"
     },
     {
       "number": 25,
@@ -4192,7 +4244,8 @@
       ],
       "translation": "Those before them denied, and punishment came upon them from where they did not perceive.",
       "transliteration": "Kaththabal latheena min qablihim fa-ataahumul 'athaabu min haisu laa yash'uroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039025.mp3",
+      "translationClear": "Those before them also denied the truth, so the penalty came upon them from where they did not perceive."
     },
     {
       "number": 26,
@@ -4308,7 +4361,8 @@
       ],
       "translation": "So Allāh made them taste disgrace in worldly life. But the punishment of the Hereafter is greater, if they only knew.",
       "transliteration": "Fa-athaaqahumul laahul khizya fil hayaatid dunyaa Wa-la'athaabul Aakhirati akbar; law kaanoo ya'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039026.mp3",
+      "translationClear": "Allah made them taste disgrace in the present life, but the punishment of the Hereafter is worse, if they only knew."
     },
     {
       "number": 27,
@@ -4416,7 +4470,8 @@
       ],
       "translation": "And We have certainly presented for the people in this Qur’ān from every [kind of] example - that they might remember.",
       "transliteration": "Wa-laqad darabnaa linnaasi fee haathal Qur-aani min kulli masalil la'allahum yatathakkaroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039027.mp3",
+      "translationClear": "We have cited in this Quran for mankind every ideal, that they may take heed."
     },
     {
       "number": 28,
@@ -4490,9 +4545,14 @@
           "charType": "end"
         }
       ],
-      "translation": "[It is] an Arabic Qur’ān, without any deviance that they might become righteous.",
+      "translation": "[It is] an Arabic Qur’ān, without any deviance[1349] that they might become righteous.[1350]",
       "transliteration": "Qur-aanan 'Arabiyyan ghaira thee 'iwajil la'allahum yattaqoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039028.mp3",
+      "footnotes": {
+        "1349": "From the truth.",
+        "1350": "Through consciousness of Allāh."
+      },
+      "translationClear": "An Arabic Quran, without any defect, so they may become righteous."
     },
     {
       "number": 29,
@@ -4664,7 +4724,8 @@
       ],
       "translation": "Allāh presents an example: a man [i.e., slave] owned by quarreling partners and another belonging exclusively to one man - are they equal in comparison? Praise be to Allāh! But most of them do not know.",
       "transliteration": "Darabal laahu masalar rajulan feehi shurakaaa'u mutashaakisoona Wa-rajulan salamal lirajulin hal yastawi-yaani masalaa; alhamdu lillaah; bal aksaruhum laa ya'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039029.mp3",
+      "translationClear": "Allah cites the example of a man shared by partners at odds, and a man belonging exclusively to one man. Are they equal in status? Praise be to Allah, but most of them do not know."
     },
     {
       "number": 30,
@@ -4716,7 +4777,8 @@
       ],
       "translation": "Indeed, you are to die, and indeed, they are to die.",
       "transliteration": "Innaka maiyitunw Wa-inna-hum maiyitoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039030.mp3",
+      "translationClear": "You will die, and they will die."
     },
     {
       "number": 31,
@@ -4792,7 +4854,8 @@
       ],
       "translation": "Then indeed you, on the Day of Resurrection, before your Lord, will dispute.",
       "transliteration": "Summa innakum Yawmal Qiyaamati 'inda Rabbikum takhtasimoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039031.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039031.mp3",
+      "translationClear": "Then, on the Day of Resurrection, you will be quarreling before your Lord."
     },
     {
       "number": 32,
@@ -4932,7 +4995,8 @@
       ],
       "translation": "So who is more unjust than one who lies about Allāh and denies the truth when it has come to him? Is there not in Hell a residence for the disbelievers?",
       "transliteration": "Faman azlamu mimman kathaba 'alal laahi Wa-kaththaba bissidqi ith jaaa'ah; alaisa fee Jahannama maswal lilkaafireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039032.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039032.mp3",
+      "translationClear": "Who is more evil than he who lies about Allah, and denies the truth when it has come to him? Is there not in Hell room for the ungrateful?"
     },
     {
       "number": 33,
@@ -5016,7 +5080,8 @@
       ],
       "translation": "And the one who has brought the truth [i.e., the Prophet (ﷺ)] and [they who] believed in it - those are the righteous.",
       "transliteration": "Wallathee jaaa'a bissidqi Wa-saddaqa biheee ulaaa'ika humul muttaqoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039033.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039033.mp3",
+      "translationClear": "But he who promotes the truth, and testifies to it—these are the righteous."
     },
     {
       "number": 34,
@@ -5100,7 +5165,8 @@
       ],
       "translation": "They will have whatever they desire with their Lord. That is the reward of the doers of good -",
       "transliteration": "Lahum maa yashaaa'oona 'inda Rabbihim; thaalika jazaaa'ul muhsineen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039034.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039034.mp3",
+      "translationClear": "They will have whatever they please with their Lord. Such is the reward for the virtuous."
     },
     {
       "number": 35,
@@ -5216,7 +5282,8 @@
       ],
       "translation": "That Allāh may remove from them the worst of what they did and reward them their due for the best of what they used to do.",
       "transliteration": "Liyukaffiral laahu 'anhum aswa allathee 'amiloo Wa-yajziyahum ajrahum bi-ahsanil lathee kaano ya'maloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039035.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039035.mp3",
+      "translationClear": "Allah will acquit them of the worst of their deeds, and will reward them according to the best of what they used to do."
     },
     {
       "number": 36,
@@ -5356,7 +5423,8 @@
       ],
       "translation": "Is not Allāh sufficient for His Servant [i.e., Prophet Muḥammad (ﷺ)]? And [yet], they threaten you with those [they worship] other than Him. And whoever Allāh leaves astray - for him there is no guide.",
       "transliteration": "Alaisal laahu bikaafin 'abdahoo Wa-yukhawwi-foonaka billatheena min doonih; Wa-maien yudlilil laahu famaa lahoo min haad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039036.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039036.mp3",
+      "translationClear": "Is Allah not enough for His servant? And they frighten you with those besides Him. Whomever Allah sends astray, for him there is no guide."
     },
     {
       "number": 37,
@@ -5472,7 +5540,8 @@
       ],
       "translation": "And whoever Allāh guides - for him there is no misleader. Is not Allāh Exalted in Might and Owner of Retribution?",
       "transliteration": "Wa-maien yahdil laahu famaa lahoo min mudil; alai-sal laahu bi'azeezin thin tiqaam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039037.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039037.mp3",
+      "translationClear": "And whomever Allah guides, for him there is no misleader. Is Allah not Powerful and Vengeful?"
     },
     {
       "number": 38,
@@ -5778,9 +5847,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And if you asked them, \"Who created the heavens and the earth?\" they would surely say, \"Allāh.\" Say, \"Then have you considered what you invoke besides Allāh? If Allāh intended me harm, are they removers of His harm; or if He intended me mercy, are they withholders of His mercy?\" Say, \"Sufficient for me is Allāh; upon Him [alone] rely the [wise] reliers.\"",
+      "translation": "And if you asked them, \"Who created the heavens and the earth?\" they would surely say, \"Allāh.\" Say, \"Then have you considered[1351] what you invoke besides Allāh? If Allāh intended me harm, are they removers of His harm; or if He intended me mercy, are they withholders of His mercy?\" Say, \"Sufficient for me is Allāh; upon Him [alone] rely the [wise] reliers.\"",
       "transliteration": "Wa-la'in sa-altahum man khalaqas samaawaati wal-arda la-yaqoolunal laah; qul afara'aitum maa tad'oona min doonil laahi in araadaniyal laahu bidurrin hal hunna kaashi-faatu durriheee aw araadanee birahmatin hal hunna mumsikaatu rahmatih; qul hasbiyal laahu 'alaihi yatawakkalul mutawakkiloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039038.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039038.mp3",
+      "footnotes": {
+        "1351": "i.e., \"Tell me about...\""
+      },
+      "translationClear": "And if you asked them, “Who created the heavens and the earth?” they would say, “Allah.” Say, “Have you seen those you pray to instead of Allah? If Allah willed any harm for me, can they lift His harm? And if He willed a blessing for me, can they hold back His mercy?” Say, “Allah suffices for me. On Him the reliant rely.”"
     },
     {
       "number": 39,
@@ -5872,7 +5945,8 @@
       ],
       "translation": "Say, \"O my people, work according to your position, [for] indeed, I am working; and you are going to know",
       "transliteration": "Qul yaa qawmi'maloo 'alaa makaanatikum innee 'aamilun fasawfa ta'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039039.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039039.mp3",
+      "translationClear": "Say, “O my people, work according to your ability; and so will I. Then you will know."
     },
     {
       "number": 40,
@@ -5956,7 +6030,8 @@
       ],
       "translation": "To whom will come a torment disgracing him and on whom will descend an enduring punishment.\"",
       "transliteration": "Maien yaateehi 'athaabunien yukhzeehi Wa-yahillu 'alaihi 'athaabum muqeem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039040.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039040.mp3",
+      "translationClear": "Who will receive a humiliating punishment, and on whom will fall a lasting torment.”"
     },
     {
       "number": 41,
@@ -6120,7 +6195,8 @@
       ],
       "translation": "Indeed, We sent down to you the Book for the people in truth. So whoever is guided - it is for [the benefit of] his soul; and whoever goes astray only goes astray to its detriment. And you are not a manager [i.e., authority] over them.",
       "transliteration": "Innaa anzalnaa 'alaikal Kitaaba linnaasi bilhaqq; famanih tadaa falinafsihee Wa-man dalla fa-innamaa yadillu 'alaihaa Wa-maaa anta 'alaihim biwakeel",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039041.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039041.mp3",
+      "translationClear": "We sent down upon you the Book for mankind in truth. He who follows guidance does so for the good of his soul. And he who strays in error does so to its detriment. You are not their overseer."
     },
     {
       "number": 42,
@@ -6348,7 +6424,8 @@
       ],
       "translation": "Allāh takes the souls at the time of their death, and those that do not die [He takes] during their sleep. Then He keeps those for which He has decreed death and releases the others for a specified term. Indeed in that are signs for a people who give thought.",
       "transliteration": "Allaahu yatawaffal anfusa heena mawtihaa wallatee lam tamut fee manaamihaa fa-yumsikul latee qadaa 'alaihal mawta Wa-yursilul ukhraaa ilaaa ajalim musammaa; inna fee thaalika la-Aayaatil liqawmaien yatafakkarroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039042.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039042.mp3",
+      "translationClear": "Allah takes the souls at the time of their death, and those that have not died during their sleep. He retains those for which He has decreed death, and He releases the others until a predetermined time. In that are signs for people who reflect."
     },
     {
       "number": 43,
@@ -6480,7 +6557,8 @@
       ],
       "translation": "Or have they taken other than Allāh as intercessors? Say, \"Even though they do not possess [power over] anything, nor do they reason?\"",
       "transliteration": "Amit takhathoo min doonil laahi shufa'aaa'; qul awalaw kaanoo laa yamlikoona shai'aw Wa-laa ya'qiloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039043.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039043.mp3",
+      "translationClear": "Or have they chosen intercessors other than Allah? Say, “Even though they have no power over anything, and are devoid of reason?”"
     },
     {
       "number": 44,
@@ -6588,7 +6666,8 @@
       ],
       "translation": "Say, \"To Allāh belongs [the right to allow] intercession entirely. To Him belongs the dominion of the heavens and the earth. Then to Him you will be returned.\"",
       "transliteration": "Qul lillaahish shafaa'atu jamee'aa; lahoo mulkus samaawaati wal-ardi summa ilaihi turja'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039044.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039044.mp3",
+      "translationClear": "Say, “All intercession is up to Allah. To Him belongs the kingdom of the heavens and the earth. Then to Him you will be returned.”"
     },
     {
       "number": 45,
@@ -6752,7 +6831,8 @@
       ],
       "translation": "And when Allāh is mentioned alone, the hearts of those who do not believe in the Hereafter shrink with aversion, but when those [worshipped] other than Him are mentioned, immediately they rejoice.",
       "transliteration": "Wa-ithaa thukiral laahu wahdahush ma-azzat quloobul latheena laa yu'minoona bil-Aakhirati Wa-ithaa thukiral latheena min dooniheee ithaa hum yastabshiroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039045.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039045.mp3",
+      "translationClear": "When Allah alone is mentioned, the hearts of those who do not believe in the Hereafter shrink with resentment. But when those other than Him are mentioned, they become filled with joy."
     },
     {
       "number": 46,
@@ -6908,7 +6988,8 @@
       ],
       "translation": "Say, \"O Allāh, Creator of the heavens and the earth, Knower of the unseen and the witnessed, You will judge between your servants concerning that over which they used to differ.\"",
       "transliteration": "Qulil laahumma faatiras samaawaati wal-ardi 'Aalimal Ghaibi washshahaadati Anta tahkumu baina 'ibaadika fee maa kaanoo feehee yakhtalifoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039046.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039046.mp3",
+      "translationClear": "Say, “Our God, Initiator of the heavens and the earth, Knower of all secrets and declarations. You will judge between Your servants regarding what they had differed about.”"
     },
     {
       "number": 47,
@@ -7126,9 +7207,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And if those who did wrong had all that is in the earth entirely and the like of it with it, they would [attempt to] ransom themselves thereby from the worst of the punishment on the Day of Resurrection. And there will appear to them from Allāh that which they had not taken into account.",
+      "translation": "And if those who did wrong had all that is in the earth entirely and the like of it with it, they would [attempt to] ransom themselves thereby from the worst of the punishment on the Day of Resurrection. And there will appear to them from Allāh that which they had not taken into account.[1352]",
       "transliteration": "Wa-law anna lillatheena zalamoo maa fil ardi jamee'anw Wa-mislahoo ma'ahoo laftadaw bihee min sooo'il athaabi Yawmal Qiyaamah; Wa-badaa lahum minal laahi maa lam yakkoonoo yahtasiboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039047.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039047.mp3",
+      "footnotes": {
+        "1352": "Of His anger and punishment."
+      },
+      "translationClear": "If those who did wrong owned everything on earth, and the like of it with it, they would redeem themselves with it from the terrible suffering on the Day of Resurrection. But there will appear to them from Allah what they never anticipated."
     },
     {
       "number": 48,
@@ -7236,7 +7321,8 @@
       ],
       "translation": "And there will appear to them the evils they had earned, and they will be enveloped by what they used to ridicule.",
       "transliteration": "Wa-badaa lahum saiyiaatu maa kasaboo Wa-haaqa bihim maa kaanoo bihee yastahzi'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039048.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039048.mp3",
+      "translationClear": "There will appear to them the evils of their deeds, and they will be surrounded by what they used to ridicule."
     },
     {
       "number": 49,
@@ -7432,7 +7518,8 @@
       ],
       "translation": "And when adversity touches man, he calls upon Us; then when We bestow on him a favor from Us, he says, \"I have only been given it because of [my] knowledge.\" Rather, it is a trial, but most of them do not know.",
       "transliteration": "Fa-ithaa massal insaana durrun da'aanaa summa ithaa khawwalnaahu ni'matam minna qaala innamaaa ootee-tuhoo 'alaa 'ilm; bal hiya fitna-tunw Wa-laakinna aksarahum laa ya'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039049.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039049.mp3",
+      "translationClear": "When adversity touches the human being, he calls on Us. But then, when We favor him with a blessing from Us, he says, “I have attained this by virtue of my knowledge.” However, it is a test, but most of them do not know."
     },
     {
       "number": 50,
@@ -7540,7 +7627,8 @@
       ],
       "translation": "Those before them had already said it, but they were not availed by what they used to earn.",
       "transliteration": "Qad qaalahal latheena min qablihim famaaa aghnaa 'anhum maa kaanoo yaksiboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039050.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039050.mp3",
+      "translationClear": "Those before them said it, but what they had earned did not avail them."
     },
     {
       "number": 51,
@@ -7678,9 +7766,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And the evil consequences of what they earned struck them. And those who have wronged of these [people] will be struck [i.e., afflicted] by the evil consequences of what they earned; and they will not cause failure.",
+      "translation": "And the evil consequences of what they earned struck them. And those who have wronged of these [people] will be struck [i.e., afflicted] by the evil consequences of what they earned; and they will not cause failure.[1353]",
       "transliteration": "Fa-asaabahum saiyyi-aatu maa kasaboo; wallatheena zalamoo min haaa'ulaaa'i sa-yuseebuhum saiyyi-aatu maa kasaboo Wa-maa hum bimu'jizeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039051.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039051.mp3",
+      "footnotes": {
+        "1353": "i.e., prevent Allāh from what He wills or escape from the punishment."
+      },
+      "translationClear": "The evils of their deeds caught up with them. And the wrongdoers among these will also be afflicted by the evils of what they earned, and they cannot prevent it."
     },
     {
       "number": 52,
@@ -7820,7 +7912,8 @@
       ],
       "translation": "Do they not know that Allāh extends provision for whom He wills and restricts [it]? Indeed in that are signs for a people who believe.",
       "transliteration": "Awalam ya'lamooo annal laaha yabsutur rizqa limai yashaaa'u Wa-yaqdir; inna fee thaalika la-Aayaatil liqawmien yu'minoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039052.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039052.mp3",
+      "translationClear": "Do they not know that Allah extends the provision to whomever He wills, and constricts it? In that are signs for people who believe."
     },
     {
       "number": 53,
@@ -7998,9 +8091,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\"",
+      "translation": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allāh. Indeed, Allāh forgives all sins.[1354] Indeed, it is He who is the Forgiving, the Merciful.\"",
       "transliteration": "Qul yaa'ibaadiyal latheena asrafoo 'alaaa anfusihim laa taqnatoo mir rahmatil laah; innal laaha yaghfiruz thunooba jamee'aa; innahoo Huwal Ghafoorur Raheem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039053.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039053.mp3",
+      "footnotes": {
+        "1354": "For those who repent and correct themselves."
+      },
+      "translationClear": "Say, “O My servants who have transgressed against themselves: do not despair of Allah’s mercy, for Allah forgives all sins. He is indeed the Forgiver, the Clement.”"
     },
     {
       "number": 54,
@@ -8124,7 +8221,8 @@
       ],
       "translation": "And return [in repentance] to your Lord and submit to Him before the punishment comes upon you; then you will not be helped.",
       "transliteration": "Wa-aneebooo ilaa Rabbikum Wa-aslimoo lahoo min qabli ai yaatiyakumul 'athaabu summa laa tunsaroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039054.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039054.mp3",
+      "translationClear": "And turn to your Lord, and submit to Him, before the retribution comes upon you. Then you will not be helped."
     },
     {
       "number": 55,
@@ -8272,7 +8370,8 @@
       ],
       "translation": "And follow the best of what was revealed to you from your Lord [i.e., the Qur’ān] before the punishment comes upon you suddenly while you do not perceive,",
       "transliteration": "Wattabi'ooo ahsana maaa unzila ilaikum mir Rabbikum min qabli aien yaatiyakumal 'athaabu baghtatanw Wa-antum laa tash'uroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039055.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039055.mp3",
+      "translationClear": "And follow the best of what was revealed to you from your Lord, before the punishment comes upon you suddenly, while you are unaware."
     },
     {
       "number": 56,
@@ -8402,9 +8501,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Lest a soul should say, \"Oh, [how great is] my regret over what I neglected in regard to Allāh and that I was among the mockers.\"",
+      "translation": "Lest a soul should say,[1355] \"Oh, [how great is] my regret over what I neglected in regard to Allāh and that I was among the mockers.\"",
       "transliteration": "An taqoola nafsuien yaahasrataa 'alaa maa farrattu fee jambil laahi Wa-in kuntu laminas saakhireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039056.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039056.mp3",
+      "footnotes": {
+        "1355": "On the Day of Resurrection."
+      },
+      "translationClear": "So that a soul may not say, “How sorry I am, for having neglected my duty to Allah, and for having been of the scoffers.”"
     },
     {
       "number": 57,
@@ -8496,7 +8599,8 @@
       ],
       "translation": "Or [lest] it say, \"If only Allāh had guided me, I would have been among the righteous.\"",
       "transliteration": "Aw taqoola law annal laaha hadaanee lakuntu minal muttaqeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039057.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039057.mp3",
+      "translationClear": "Or say, “Had Allah guided me, I would have been of the pious.”"
     },
     {
       "number": 58,
@@ -8610,9 +8714,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Or [lest] it say when it sees the punishment, \"If only I had another turn so I could be among the doers of good.\"",
+      "translation": "Or [lest] it say when it sees the punishment, \"If only I had another turn[1356] so I could be among the doers of good.\"",
       "transliteration": "Aw taqoola heena taral 'athaaba law anna lee karratan fa-akoona minal muhsineen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039058.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039058.mp3",
+      "footnotes": {
+        "1356": "At worldly life."
+      },
+      "translationClear": "Or say, when it sees the penalty, “If only I had another chance, I would be of the virtuous.”"
     },
     {
       "number": 59,
@@ -8712,7 +8820,8 @@
       ],
       "translation": "But yes, there had come to you My verses, but you denied them and were arrogant, and you were among the disbelievers.",
       "transliteration": "Balaa qad jaaa'atka aayaatee fa-kaththabta bihaa Wa-stakbarta Wa-kunta minal kaafireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039059.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039059.mp3",
+      "translationClear": "Yes indeed! My Verses did come to you, but you called them lies, turned arrogant, and were of the faithless."
     },
     {
       "number": 60,
@@ -8844,7 +8953,8 @@
       ],
       "translation": "And on the Day of Resurrection you will see those who lied about Allāh [with] their faces blackened. Is there not in Hell a residence for the arrogant?",
       "transliteration": "Wa-Yawmal Qiyaamati taral latheena kathaboo 'alal laahi wujoohuhum muswaddah; alaisa fee Jahannama maswal lilmutakabbireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039060.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039060.mp3",
+      "translationClear": "On the Day of Resurrection, you will see those who told lies about Allah with their faces blackened. Is there not a place in Hell for the arrogant?"
     },
     {
       "number": 61,
@@ -8950,9 +9060,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And Allāh will save those who feared Him by their attainment; no evil will touch them, nor will they grieve.",
+      "translation": "And Allāh will save those who feared Him by their attainment;[1357] no evil will touch them, nor will they grieve.",
       "transliteration": "Wa-yunajjil laahul lathee-nat taqaw bimafaazatihim laa yamassuhumus sooo'u Wa-laa hum yahzanoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039061.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039061.mp3",
+      "footnotes": {
+        "1357": "i.e., their success in the trials of worldly life and attainment of Paradise."
+      },
+      "translationClear": "And Allah will save those who maintained righteousness to their place of salvation. No harm will touch them, nor will they grieve."
     },
     {
       "number": 62,
@@ -9044,7 +9158,8 @@
       ],
       "translation": "Allāh is the Creator of all things, and He is, over all things, Disposer of affairs.",
       "transliteration": "Allaahu khaaliqu kulli shai'inw Wa-Huwa 'alaa kulli shai'inw Wakeel",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039062.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039062.mp3",
+      "translationClear": "Allah is the Creator of all things, and He is in charge of all things."
     },
     {
       "number": 63,
@@ -9152,7 +9267,8 @@
       ],
       "translation": "To Him belong the keys of the heavens and the earth. And they who disbelieve in the verses of Allāh - it is those who are the losers.",
       "transliteration": "Lahoo maqaaleedus sa-maawaati wal-ard; wallatheena kafaroo bi-ayaatil laahi ulaaa'ika humul khaasiroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039063.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039063.mp3",
+      "translationClear": "To Him belong the reins of the heavens and the earth. But those who blaspheme against the revelations of Allah—it is they who are the losers."
     },
     {
       "number": 64,
@@ -9228,7 +9344,8 @@
       ],
       "translation": "Say, [O Muḥammad], \"Is it other than Allāh that you order me to worship, O ignorant ones?\"",
       "transliteration": "Qul afaghairal laahi taamurooonneee a'budu ayyuhal jaahiloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039064.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039064.mp3",
+      "translationClear": "Say, “Is it other than Allah you instruct me to worship, you ignorant ones?”"
     },
     {
       "number": 65,
@@ -9360,7 +9477,8 @@
       ],
       "translation": "And it was already revealed to you and to those before you that if you should associate [anything] with Allāh, your work would surely become worthless, and you would surely be among the losers.",
       "transliteration": "Wa-laqad oohiya ilaika Wa-ilal latheena min qablika la-in ashrakta la-yahbatanna 'amalu-ka Wa-latakoonanna minal khaasireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039065.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039065.mp3",
+      "translationClear": "It was revealed to you, and to those before you, that if you idolize, your works will be in vain, and you will be of the losers."
     },
     {
       "number": 66,
@@ -9428,7 +9546,8 @@
       ],
       "translation": "Rather, worship [only] Allāh and be among the grateful.",
       "transliteration": "Balil laahha fa'bud Wa-kum minash shaakireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039066.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039066.mp3",
+      "translationClear": "Rather, worship Allah, and be of the appreciative."
     },
     {
       "number": 67,
@@ -9582,9 +9701,15 @@
           "charType": "end"
         }
       ],
-      "translation": "They have not appraised Allāh with true appraisal, while the earth entirely will be [within] His grip on the Day of Resurrection, and the heavens will be folded in His right hand. Exalted is He and high above what they associate with Him.",
+      "translation": "They have not appraised Allāh with true appraisal,[1358] while the earth entirely will be [within] His grip[1359] on the Day of Resurrection, and the heavens will be folded in His right hand.[1360] Exalted is He and high above what they associate with Him.",
       "transliteration": "Wa-maa qadarul laaha haqqa qadrihee wal-ardu jamee-'an qabdatuhoo Yawmal Qiyaamati wassamaawaatu matwiyyaatum biyameenih; Subhaanahoo Wa-Ta'aalaa 'amma yushrikoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039067.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039067.mp3",
+      "footnotes": {
+        "1358": "i.e., appreciation of His attributes.",
+        "1359": "Literally, \"no more than a handful of His.\"",
+        "1360": "See footnote to 2:19."
+      },
+      "translationClear": "They have not esteemed Allah as He ought to be esteemed. The entire earth will be in His grip on the Day of Resurrection, and the heavens will be folded in His right. Immaculate is He, and Transcendent He is beyond the associations they make."
     },
     {
       "number": 68,
@@ -9780,7 +9905,8 @@
       ],
       "translation": "And the Horn will be blown, and whoever is in the heavens and whoever is on the earth will fall dead except whom Allāh wills. Then it will be blown again, and at once they will be standing, looking on.",
       "transliteration": "Wa-nufikha fis Soori fasa'iqa man fis samaawaati Wa-man fil ardi illaa man shaa'al lahu summa nufikha feehi ukhraa fa-ithaa hum qiyaamuny yanzuroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039068.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039068.mp3",
+      "translationClear": "And the Trumpet will be sounded, whereupon everyone in the heavens and the earth will be stunned, except whomever Allah wills. Then it will be sounded another time, whereupon they will rise up, looking on."
     },
     {
       "number": 69,
@@ -9920,7 +10046,8 @@
       ],
       "translation": "And the earth will shine with the light of its Lord, and the record [of deeds] will be placed, and the prophets and the witnesses will be brought, and it will be judged between them in truth, and they will not be wronged.",
       "transliteration": "Wa-ashraqatil ardu binoori Rabbihaa Wa-wudi'al Kitaabu Wa-jeee'a bin-nabiyyeena wash-shuhadaaa'i Wa-qudiya bainahum bilhaqqi Wa-hum laa yuzlamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039069.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039069.mp3",
+      "translationClear": "And the earth will shine with the Light of its Lord; and the Book will be put in place; and the prophets and the witnesses will be brought in; and judgment will be passed among them equitably, and they will not be wronged."
     },
     {
       "number": 70,
@@ -10010,9 +10137,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And every soul will be fully compensated [for] what it did; and He is most knowing of what they do.",
+      "translation": "And every soul will be fully compensated [for] what it did; and He is most knowing[1361] of what they do.",
       "transliteration": "Wa-wuffiyat kullu nafsim maa 'amilat Wa-Huwa a'lamu bimaa yaf'aloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039070.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039070.mp3",
+      "footnotes": {
+        "1361": "With no need for any record or witnesses, which are but means to establish proof to the soul itself in addition to its own knowledge of what it has done."
+      },
+      "translationClear": "And every soul will be fully compensated for what it had done. He is well aware of what they do."
     },
     {
       "number": 71,
@@ -10304,7 +10435,8 @@
       ],
       "translation": "And those who disbelieved will be driven to Hell in groups until, when they reach it, its gates are opened and its keepers will say, \"Did there not come to you messengers from yourselves, reciting to you the verses of your Lord and warning you of the meeting of this Day of yours?\" They will say, \"Yes, but the word [i.e., decree] of punishment has come into effect upon the disbelievers.\"",
       "transliteration": "Wa-seeqal latheena kafaroo ilaa jahannama zumaraa hattaaa ithaa jaaa'oohaa futihat abwaabuhaa Wa-qaala lahum khazanatuhaaa alam ya'tikum Rusulun minkum yatloona 'alaikum Aayaati Rabbikum Wa-yunthiroonakum liqaaa'a Yawmikum haathaa; qaaloo balaa Wa-laakin haqqat kalimatul 'athaabi 'alal kaafireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039071.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039071.mp3",
+      "translationClear": "Those who disbelieved will be driven to Hell in throngs. Until, when they have reached it, and its gates are opened, its keepers will say to them, “Did not messengers from among you come to you, reciting to you the revelations of your Lord, and warning you of the meeting of this Day of yours?” They will say, “Yes, but the verdict of punishment is justified against the disbelievers.”"
     },
     {
       "number": 72,
@@ -10396,7 +10528,8 @@
       ],
       "translation": "[To them] it will be said, \"Enter the gates of Hell to abide eternally therein, and wretched is the residence of the arrogant.\"",
       "transliteration": "Qeelad khuloo abwaaba jahannama khaalideena feeha fabi'sa maswal mutakabbireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039072.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039072.mp3",
+      "translationClear": "It will be said, “Enter the gates of Hell, to abide therein eternally.” How wretched is the destination of the arrogant."
     },
     {
       "number": 73,
@@ -10574,9 +10707,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But those who feared their Lord will be driven to Paradise in groups until, when they reach it while its gates have been opened and its keepers say, \"Peace be upon you; you have become pure; so enter it to abide eternally therein,\" [they will enter].",
+      "translation": "But those who feared their Lord will be driven to Paradise in groups until, when they reach it while its gates have been opened and its keepers say, \"Peace be upon you; you have become pure; so enter it to abide eternally therein,\" [they will enter].[1362]",
       "transliteration": "Wa-seeqal latheenat taqaw Rabbahum ilal Jannati zumaraa hattaaa ithaa jaaa'oohaa Wa-futihat abwaabuhaa Wa-qaala lahum khazanatuhaa salaamun 'alaikum tibtum fadkhuloohaa khaalideen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039073.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039073.mp3",
+      "footnotes": {
+        "1362": "In such honor and joy that is beyond description - thus, the omission of this conclusion in the Arabic text."
+      },
+      "translationClear": "And those who feared their Lord will be led to Paradise in throngs. Until, when they have reached it, and its gates are opened, its keepers will say to them, “Peace be upon you, you have been good, so enter it, to abide therein eternally.”"
     },
     {
       "number": 74,
@@ -10724,7 +10861,8 @@
       ],
       "translation": "And they will say, \"Praise to Allāh, who has fulfilled for us His promise and made us inherit the earth [so] we may settle in Paradise wherever we will. And excellent is the reward of [righteous] workers.\"",
       "transliteration": "Wa-qaalull hamdulillaahil lazee sadaqanaa wa'dahoo Wa-awrasanal arda natabaw wa-u minal jannati haisu nashaaa'u fani'ma ajrul 'aamileen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039074.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039074.mp3",
+      "translationClear": "And they will say, “Praise be to Allah, who has fulfilled His promise to us, and made us inherit the land, enjoying Paradise as we please.” How excellent is the reward of the workers."
     },
     {
       "number": 75,
@@ -10880,7 +11018,8 @@
       ],
       "translation": "And you will see the angels surrounding the Throne, exalting [Allāh] with praise of their Lord. And it will be judged between them in truth, and it will be said, \"[All] praise to Allāh, Lord of the worlds.\"",
       "transliteration": "Wa-taral malaaa'ikata haaaffeena min hawlil 'Arshi yusabbihoona bihamdi Rabbihim Wa-qudiya bainahum bilhaqqi Wa-qeelal hamdu lillaahi Rabbil 'aalameen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039075.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039075.mp3",
+      "translationClear": "And you will see the angels hovering around the Throne, glorifying their Lord with praise. And it will be judged between them equitably, and it will be said, “Praise be to Allah, Lord of the Worlds.”"
     }
   ]
 }

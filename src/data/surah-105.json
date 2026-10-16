@@ -78,9 +78,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Have you not considered, [O Muḥammad], how your Lord dealt with the companions of the elephant?",
+      "translation": "Have you not considered, [O Muḥammad], how your Lord dealt with the companions of the elephant?[1992]",
       "transliteration": "Alam tara kaifa fa'ala rabbuka bi-ashaabil feel",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105001.mp3",
+      "footnotes": {
+        "1992": "i.e., the army under the command of Abrahah al-Ashram which was accompanied by a huge elephant and came with the intention of destroying the Kaʿbah at Makkah."
+      },
+      "translationClear": "Have you not considered how your Lord dealt with the People of the Elephant?"
     },
     {
       "number": 2,
@@ -138,9 +142,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Did He not make their plan into misguidance?",
+      "translation": "Did He not make their plan into misguidance?[1993]",
       "transliteration": "Alam yaj'al kaidahum fee tadleel",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105002.mp3",
+      "footnotes": {
+        "1993": "Causing them to perish."
+      },
+      "translationClear": "Did He not make their plan go wrong?"
     },
     {
       "number": 3,
@@ -192,7 +200,8 @@
       ],
       "translation": "And He sent against them birds in flocks,",
       "transliteration": "Wa-arsala 'alaihim tairan abaabeel",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105003.mp3",
+      "translationClear": "He sent against them swarms of birds."
     },
     {
       "number": 4,
@@ -244,7 +253,8 @@
       ],
       "translation": "Striking them with stones of hard clay,",
       "transliteration": "Tarmeehim bihijaaratim min sijjeel",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105004.mp3",
+      "translationClear": "Throwing at them rocks of baked clay."
     },
     {
       "number": 5,
@@ -286,9 +296,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And He made them like eaten straw.",
+      "translation": "And He made them like eaten straw.[1994]",
       "transliteration": "Faja-'alahum ka'asfim m'akool",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/105005.mp3",
+      "footnotes": {
+        "1994": "i.e., husks which have been chewed by cattle. This event took place in the year of the Prophet's birth."
+      },
+      "translationClear": "Leaving them like chewed-up leaves."
     }
   ]
 }

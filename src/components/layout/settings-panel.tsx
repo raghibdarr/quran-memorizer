@@ -19,6 +19,8 @@ import { turnOnReminders, useReminderStore } from '@/stores/reminder-store';
 import { useAuth } from '@/hooks/use-auth';
 import { disablePushReminder, enablePushReminder, getEmailDigest, getPushReminder, pushAvailability, setEmailDigest, setPushReminderHour } from '@/lib/web-push';
 import SyncPitch from '@/components/auth/sync-pitch';
+import { TRANSLATIONS } from '@/components/ui/translation-text';
+import translationSources from '@/data/translation-sources.json';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -284,6 +286,8 @@ export default function SettingsPanel() {
     setDailyGoalActivities,
     hideStats,
     toggleHideStats,
+    translationId,
+    setTranslationId,
   } = useSettingsStore();
   const [haptics, setHaptics] = useState(hapticsEnabled);
   const [sample, setSample] = useState<Ayah | null>(null);
@@ -435,6 +439,23 @@ export default function SettingsPanel() {
                 <Toggle enabled={translationEnabled} onToggle={toggleTranslation} />
               </label>
 
+              {translationEnabled && (
+                <div className="-mt-1 flex gap-2 pb-1" role="group" aria-label="English translation">
+                  {(['saheeh', 'clear'] as const).map((id) => (
+                    <button
+                      key={id}
+                      type="button"
+                      aria-pressed={(translationId ?? 'saheeh') === id}
+                      onClick={() => setTranslationId(id)}
+                      className={cn('min-h-11 flex-1 rounded-xl px-3 text-xs font-semibold', (translationId ?? 'saheeh') === id ? 'bg-teal text-on-teal' : 'bg-foreground/[0.05] text-foreground/80')}
+                      data-translation-choice={id}
+                    >
+                      {TRANSLATIONS[id].name}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               <label className="flex min-h-11 cursor-pointer items-center justify-between">
                 <span className="text-sm text-foreground">Hide streaks and counts</span>
                 <Toggle enabled={!!hideStats} onToggle={toggleHideStats} />
@@ -518,7 +539,9 @@ export default function SettingsPanel() {
             {/* Data credits — quran-align and Qur'anic Universal Audio are CC BY 4.0, so this attribution is a license requirement */}
             <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
               Recitations: EveryAyah.com, QuranicAudio, MP3Quran &amp; Tarteel · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0),
-              and Qur&apos;anic Universal Audio by QUD (CC BY 4.0) · Search text and page data:{' '}
+              and Qur&apos;anic Universal Audio by QUD (CC BY 4.0) · Translations: Saheeh International via{' '}
+              <a href="https://quranenc.com/en/browse/english_saheeh" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">QuranEnc.com</a> ({translationSources.saheeh.version.match(/(([^)]+))/)?.[1]}); The Clear Quran, translation by Talal Itani,{' '}
+              <a href="https://clearquran.com" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">ClearQuran.com</a> (CC BY-ND 4.0) · Search text and page data:{' '}
               <a href="https://tanzil.net" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Tanzil Project</a> (CC BY 3.0) · Mushaf pages:{' '}
               <a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">quran-madina-html</a> (Waqf GPL 2.0) with the DigitalKhatt font by Amine Anane (OFL)
             </p>

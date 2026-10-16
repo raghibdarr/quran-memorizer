@@ -12,6 +12,8 @@ const PAD = 96;
 interface CardInput {
   arabic: string;
   translation: string;
+  /** Shown in the card credit line */
+  translationName?: string;
   reference: string; // "Al-Kahf 18:10"
   dark?: boolean;
 }
@@ -112,7 +114,7 @@ export async function renderAyahCard(input: CardInput): Promise<Blob> {
   ctx.fillText(input.reference, SIZE / 2, SIZE - 120);
   ctx.fillStyle = muted;
   ctx.font = `24px ${latinFont}`;
-  ctx.fillText(input.translation ? 'Translation: Sahih International · Takrar' : 'Takrar', SIZE / 2, SIZE - 78);
+  ctx.fillText(input.translation ? `Translation: ${input.translationName ?? 'Saheeh International'} · Takrar` : 'Takrar', SIZE / 2, SIZE - 78);
 
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('no image'))), 'image/png'));
 }

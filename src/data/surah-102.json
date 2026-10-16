@@ -40,7 +40,8 @@
       ],
       "translation": "Competition in [worldly] increase diverts you",
       "transliteration": "Al-haaku mut-takathur",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102001.mp3",
+      "translationClear": "Abundance distracts you."
     },
     {
       "number": 2,
@@ -82,9 +83,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Until you visit the graveyards.",
+      "translation": "Until you visit the graveyards.[1980]",
       "transliteration": "Hatta zurtumul maqaabir",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102002.mp3",
+      "footnotes": {
+        "1980": "i.e., remain in them temporarily, meaning until the Day of Resurrection."
+      },
+      "translationClear": "Until you visit the graveyards."
     },
     {
       "number": 3,
@@ -128,7 +133,8 @@
       ],
       "translation": "No! You are going to know.",
       "transliteration": "Kalla sawfa ta'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102003.mp3",
+      "translationClear": "Indeed, you will know."
     },
     {
       "number": 4,
@@ -180,7 +186,8 @@
       ],
       "translation": "Then, no! You are going to know.",
       "transliteration": "Thumma kalla sawfa ta'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102004.mp3",
+      "translationClear": "Certainly, you will know."
     },
     {
       "number": 5,
@@ -238,9 +245,13 @@
           "charType": "end"
         }
       ],
-      "translation": "No! If you only knew with knowledge of certainty...",
+      "translation": "No! If you only knew with knowledge of certainty...[1981]",
       "transliteration": "Kalla law ta'lamoona 'ilmal yaqeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102005.mp3",
+      "footnotes": {
+        "1981": "The conclusion of this verse is estimated to be \"...you would not have been distracted from preparing for the Hereafter.\""
+      },
+      "translationClear": "If you knew with knowledge of certainty."
     },
     {
       "number": 6,
@@ -276,7 +287,8 @@
       ],
       "translation": "You will surely see the Hellfire.",
       "transliteration": "Latara-wun-nal jaheem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102006.mp3",
+      "translationClear": "You would see the Inferno."
     },
     {
       "number": 7,
@@ -326,9 +338,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then you will surely see it with the eye of certainty.",
+      "translation": "Then you will surely see it with the eye of certainty.[1982]",
       "transliteration": "Thumma latara-wunnaha 'ainal yaqeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102007.mp3",
+      "footnotes": {
+        "1982": "i.e., with actual eyesight."
+      },
+      "translationClear": "Then you will see it with the eye of certainty."
     },
     {
       "number": 8,
@@ -386,9 +402,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then you will surely be asked that Day about pleasure.",
+      "translation": "Then you will surely be asked that Day about pleasure.[1983]",
       "transliteration": "Thumma latus-alunna yauma-ithin 'anin na'eem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/102008.mp3",
+      "footnotes": {
+        "1983": "i.e., the comforts of worldly life and whether you were grateful to Allāh for His blessings."
+      },
+      "translationClear": "Then, on that Day, you will be questioned about the bliss."
     }
   ]
 }

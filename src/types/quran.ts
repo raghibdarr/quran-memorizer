@@ -16,7 +16,12 @@ export interface Ayah {
   textUthmaniTajweed?: string; // HTML with <tajweed> tags for color-coded rules
   textIndopak?: string;        // IndoPak/Nastaliq script
   words: Word[];
+  /** Saheeh International (QuranEnc), verbatim, with footnote markers like [2] */
   translation: string;
+  /** Saheeh's notes, by marker number */
+  footnotes?: Record<string, string>;
+  /** The Clear Quran (Talal Itani) */
+  translationClear?: string;
   transliteration?: string;    // Ayah-level transliteration (waqf-style from quran411)
   audioUrl: string;            // everyayah.com URL
 }
@@ -152,6 +157,8 @@ export interface UserSettings {
   mushafMarkSimilar?: boolean;
   /** Mushaf page view layout */
   mushafLayout?: 'madina' | 'indopak';
+  /** Which English translation shows (Saheeh by default) */
+  translationId?: 'saheeh' | 'clear';
   dailyGoalActivities: number;  // number of activities (lessons/reviews) per day
 }
 

@@ -54,9 +54,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Say, \"He is Allāh, [who is] One,",
+      "translation": "Say, \"He is Allāh, [who is] One,[2011]",
       "transliteration": "Qul huwal laahu ahad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112001.mp3",
+      "footnotes": {
+        "2011": "Alone, without another, indivisible with absolute and permanent unity and distinct from all else. The one and only true deity, unique in His essence, attributes and deeds."
+      },
+      "translationClear": "Say, “He is Allah, the One."
     },
     {
       "number": 2,
@@ -90,9 +94,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Allāh, the Eternal Refuge.",
+      "translation": "Allāh, the Eternal Refuge.[2012]",
       "transliteration": "Allah-hus samad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112002.mp3",
+      "footnotes": {
+        "2012": "He who is absolute, perfect, complete, essential, self-sufficient and sufficient to meet the needs of all creation; the one eternally and constantly required and sought, depended upon by all existence and to whom all matters will ultimately return."
+      },
+      "translationClear": "Allah, the Absolute."
     },
     {
       "number": 3,
@@ -144,7 +152,8 @@
       ],
       "translation": "He neither begets nor is born,",
       "transliteration": "Lam yalid Wa-lam yoolad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112003.mp3",
+      "translationClear": "He begets not, nor was He begotten."
     },
     {
       "number": 4,
@@ -204,7 +213,8 @@
       ],
       "translation": "Nor is there to Him any equivalent.\"",
       "transliteration": "Wa-lam yakul lahoo kufuwan ahad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/112004.mp3",
+      "translationClear": "And there is none comparable to Him.”"
     }
   ]
 }

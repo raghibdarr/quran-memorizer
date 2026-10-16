@@ -4,6 +4,7 @@ import { cn } from '@/lib/cn';
 import type { Ayah, Word } from '@/types/quran';
 import { useSettingsStore } from '@/stores/settings-store';
 import { buildAyahWordData } from '@/lib/segments';
+import TranslationText from '@/components/ui/translation-text';
 
 interface AyahDisplayProps {
   ayah: Ayah;
@@ -143,9 +144,7 @@ export default function AyahDisplay({
       )}
 
       {shouldShowTranslation && ayah.translation && (
-        <p className="text-center text-sm italic text-muted">
-          {ayah.translation}
-        </p>
+        <TranslationText ayah={ayah} className="text-center text-sm italic text-muted" />
       )}
     </div>
   );

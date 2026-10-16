@@ -56,7 +56,8 @@
       ],
       "translation": "I swear by the Day of Resurrection",
       "transliteration": "Laaa uqsimu bi-yawmil qiyaamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075001.mp3",
+      "translationClear": "I swear by the Day of Resurrection."
     },
     {
       "number": 2,
@@ -106,9 +107,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And I swear by the reproaching soul [to the certainty of resurrection].",
+      "translation": "And I swear by the reproaching soul[1800] [to the certainty of resurrection].",
       "transliteration": "Wa-laaa uqsimu bin-nafsil lawwaamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075002.mp3",
+      "footnotes": {
+        "1800": "i.e., that of the believer, which blames him when he falls into sin or error."
+      },
+      "translationClear": "And I swear by the blaming soul."
     },
     {
       "number": 3,
@@ -168,7 +173,8 @@
       ],
       "translation": "Does man think that We will not assemble his bones?",
       "transliteration": "Ayahsabul insaanu al-lan najm'a 'izaamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075003.mp3",
+      "translationClear": "Does man think that We will not reassemble his bones?"
     },
     {
       "number": 4,
@@ -236,7 +242,8 @@
       ],
       "translation": "Yes. [We are] Able [even] to proportion his fingertips.",
       "transliteration": "Balaa qaadireena 'alaaa an nusawwiya banaanah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075004.mp3",
+      "translationClear": "Yes indeed; We are Able to reconstruct his fingertips."
     },
     {
       "number": 5,
@@ -294,9 +301,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But man desires to continue in sin.",
+      "translation": "But man desires to continue in sin.[1801]",
       "transliteration": "Bal yureedul insaanu liyafjura amaamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075005.mp3",
+      "footnotes": {
+        "1801": "Literally, \"to sin ahead of him.\" This refers to the disbeliever, who denies the Day of Account."
+      },
+      "translationClear": "But man wants to deny what is ahead of him."
     },
     {
       "number": 6,
@@ -348,7 +359,8 @@
       ],
       "translation": "He asks, \"When is the Day of Resurrection?\"",
       "transliteration": "Yas'alu ayyyaana yawmul qiyaamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075006.mp3",
+      "translationClear": "He asks, “When is the Day of Resurrection?”"
     },
     {
       "number": 7,
@@ -390,9 +402,10 @@
           "charType": "end"
         }
       ],
-      "translation": "So when vision is dazzled.",
+      "translation": "So when vision is dazzled",
       "transliteration": "Fa-ithaa bariqal basar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075007.mp3",
+      "translationClear": "When vision is dazzled."
     },
     {
       "number": 8,
@@ -426,9 +439,10 @@
           "charType": "end"
         }
       ],
-      "translation": "And the moon darkens.",
+      "translation": "And the moon darkens",
       "transliteration": "Wa-khasafal qamar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075008.mp3",
+      "translationClear": "And the moon is eclipsed."
     },
     {
       "number": 9,
@@ -472,7 +486,8 @@
       ],
       "translation": "And the sun and the moon are joined,",
       "transliteration": "Wa-jumi'ash shamusu wal-qamar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075009.mp3",
+      "translationClear": "And the sun and the moon are joined together."
     },
     {
       "number": 10,
@@ -532,7 +547,8 @@
       ],
       "translation": "Man will say on that Day, \"Where is the [place of] escape?\"",
       "transliteration": "Yaqoolul insaanu yaw-ma-'ithin aynal mafarr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075010.mp3",
+      "translationClear": "On that Day, man will say, “Where is the escape?”"
     },
     {
       "number": 11,
@@ -576,7 +592,8 @@
       ],
       "translation": "No! There is no refuge.",
       "transliteration": "Kallaa laa wazar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075011.mp3",
+      "translationClear": "No indeed! There is no refuge."
     },
     {
       "number": 12,
@@ -628,7 +645,8 @@
       ],
       "translation": "To your Lord, that Day, is the [place of] permanence.",
       "transliteration": "ilaa rabbika yawma-'ithinil mustaqarr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075012.mp3",
+      "translationClear": "To your Lord on that Day is the settlement."
     },
     {
       "number": 13,
@@ -694,9 +712,14 @@
           "charType": "end"
         }
       ],
-      "translation": "Man will be informed that Day of what he sent ahead and kept back.",
+      "translation": "Man will be informed that Day of what he sent ahead[1802] and kept back.[1803]",
       "transliteration": "Yunabba-'ul insaanu yawma-'ithim bimaa qaddama Wa-akhkhar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075013.mp3",
+      "footnotes": {
+        "1802": "i.e., his deeds, which await him in the Hereafter.",
+        "1803": "i.e., that which he did not do or which he delayed."
+      },
+      "translationClear": "On that Day man will be informed of everything he put forward, and everything he left behind."
     },
     {
       "number": 14,
@@ -754,9 +777,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Rather, man, against himself, will be a witness,",
+      "translation": "Rather, man, against himself, will be a witness,[1804]",
       "transliteration": "Balil insaanu 'alaa nafsihee baseerah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075014.mp3",
+      "footnotes": {
+        "1804": "As described in 36:65 and 41:20-23."
+      },
+      "translationClear": "And man will be evidence against himself."
     },
     {
       "number": 15,
@@ -800,7 +827,8 @@
       ],
       "translation": "Even if he presents his excuses.",
       "transliteration": "Wa-law alqaa ma'aatheerah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075015.mp3",
+      "translationClear": "Even as he presents his excuses."
     },
     {
       "number": 16,
@@ -868,7 +896,8 @@
       ],
       "translation": "Move not your tongue with it, [O Muḥammad], to hasten with it [i.e., recitation of the Qur’ān].",
       "transliteration": "Laa tuharrik bihee lisaa-naka lita'jala bih",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075016.mp3",
+      "translationClear": "Do not wag your tongue with it, to hurry on with it."
     },
     {
       "number": 17,
@@ -920,7 +949,8 @@
       ],
       "translation": "Indeed, upon Us is its collection [in your heart] and [to make possible] its recitation.",
       "transliteration": "Inna 'alainaa jam'ahoo Wa-qur-aanah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075017.mp3",
+      "translationClear": "Upon Us is its collection and its recitation."
     },
     {
       "number": 18,
@@ -972,7 +1002,8 @@
       ],
       "translation": "So when We have recited it [through Gabriel], then follow its recitation.",
       "transliteration": "Fa-ithaa qaraanaahu fattabi' qur-aanah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075018.mp3",
+      "translationClear": "Then, when We have recited it, follow its recitation."
     },
     {
       "number": 19,
@@ -1024,7 +1055,8 @@
       ],
       "translation": "Then upon Us is its clarification [to you].",
       "transliteration": "Summa inna 'alainaa bayaanah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075019.mp3",
+      "translationClear": "Then upon Us is its explanation."
     },
     {
       "number": 20,
@@ -1076,7 +1108,8 @@
       ],
       "translation": "No! But you [i.e., mankind] love the immediate",
       "transliteration": "Kallaa bal tuhibboonal 'aajilah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075020.mp3",
+      "translationClear": "Alas, you love the fleeting life."
     },
     {
       "number": 21,
@@ -1112,7 +1145,8 @@
       ],
       "translation": "And leave [i.e., neglect] the Hereafter.",
       "transliteration": "Wa-tatharoonal Aakhirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075021.mp3",
+      "translationClear": "And you disregard the Hereafter."
     },
     {
       "number": 22,
@@ -1156,7 +1190,8 @@
       ],
       "translation": "[Some] faces, that Day, will be radiant,",
       "transliteration": "Wujoohuny yawma-'ithin naadirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075022.mp3",
+      "translationClear": "Faces on that Day will be radiant."
     },
     {
       "number": 23,
@@ -1198,9 +1233,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Looking at their Lord.",
+      "translation": "Looking at their Lord.[1805]",
       "transliteration": "Ilaa rabbihaa naazirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075023.mp3",
+      "footnotes": {
+        "1805": "The people of Paradise will actually see their Creator in the Hereafter."
+      },
+      "translationClear": "Looking towards their Lord."
     },
     {
       "number": 24,
@@ -1244,7 +1283,8 @@
       ],
       "translation": "And [some] faces, that Day, will be contorted,",
       "transliteration": "Wa-wujoohuny yawma-'ithim baasirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075024.mp3",
+      "translationClear": "And faces on that Day will be gloomy."
     },
     {
       "number": 25,
@@ -1304,7 +1344,8 @@
       ],
       "translation": "Expecting that there will be done to them [something] backbreaking.",
       "transliteration": "Tazunnu any yuf'ala bihaa faaqirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075025.mp3",
+      "translationClear": "Realizing that a back-breaker has befallen them."
     },
     {
       "number": 26,
@@ -1354,9 +1395,13 @@
           "charType": "end"
         }
       ],
-      "translation": "No! When it [i.e., the soul] has reached the collar bones",
+      "translation": "No! When it [i.e., the soul] has reached the collar bones[1806]",
       "transliteration": "Kallaaa ithaa balaghatit taraaqee",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075026.mp3",
+      "footnotes": {
+        "1806": "At the time it is about to leave the body when one is on the verge of death."
+      },
+      "translationClear": "Indeed, when it has reached the breast-bones."
     },
     {
       "number": 27,
@@ -1400,7 +1445,8 @@
       ],
       "translation": "And it is said, \"Who will cure [him]?\"",
       "transliteration": "Wa-qeela man raaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075027.mp3",
+      "translationClear": "And it is said, “Who is the healer?”"
     },
     {
       "number": 28,
@@ -1444,7 +1490,8 @@
       ],
       "translation": "And he [i.e., the dying one] is certain that it is the [time of] separation",
       "transliteration": "Wa-zanna annahul firaaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075028.mp3",
+      "translationClear": "And he realizes that it is the parting."
     },
     {
       "number": 29,
@@ -1486,9 +1533,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And the leg is wound about the leg,",
+      "translation": "And the leg is wound about the leg,[1807]",
       "transliteration": "Waltaffatis saaqu bissaaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075029.mp3",
+      "footnotes": {
+        "1807": "From the difficulties the person faces at death or his sudden awareness of the realities of both this world and the Hereafter. It may also refer to his shrouding after death."
+      },
+      "translationClear": "And leg is entwined with leg."
     },
     {
       "number": 30,
@@ -1538,9 +1589,13 @@
           "charType": "end"
         }
       ],
-      "translation": "To your Lord, that Day, will be the procession.",
+      "translation": "To your Lord, that Day, will be the procession.[1808]",
       "transliteration": "Ilaa rabbika yawma'ithinil masaaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075030.mp3",
+      "footnotes": {
+        "1808": "Literally, \"driving\" or \"herding\" or \"the place to which one is driven.\""
+      },
+      "translationClear": "To your Lord on that Day is the drive."
     },
     {
       "number": 31,
@@ -1592,7 +1647,8 @@
       ],
       "translation": "And he [i.e., the disbeliever] had not believed, nor had he prayed.",
       "transliteration": "Falaa saddaqa Wa-laa sallaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075031.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075031.mp3",
+      "translationClear": "He neither believed nor prayed."
     },
     {
       "number": 32,
@@ -1636,7 +1692,8 @@
       ],
       "translation": "But [instead], he denied and turned away.",
       "transliteration": "Wa-laakin kaththaba Wa-tawalla",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075032.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075032.mp3",
+      "translationClear": "But he denied and turned away."
     },
     {
       "number": 33,
@@ -1696,7 +1753,8 @@
       ],
       "translation": "And then he went to his people, swaggering [in pride].",
       "transliteration": "Summa thahaba ilaaa ahlihee yatamatta",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075033.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075033.mp3",
+      "translationClear": "Then he went to his family, full of pride."
     },
     {
       "number": 34,
@@ -1740,7 +1798,8 @@
       ],
       "translation": "Woe to you, and woe!",
       "transliteration": "Awlaa laka fa-awlaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075034.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075034.mp3",
+      "translationClear": "Woe to you; and woe."
     },
     {
       "number": 35,
@@ -1792,7 +1851,8 @@
       ],
       "translation": "Then woe to you, and woe!",
       "transliteration": "Summa awlaa laka fa-awla",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075035.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075035.mp3",
+      "translationClear": "Then again: woe to you; and woe."
     },
     {
       "number": 36,
@@ -1850,9 +1910,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Does man think that he will be left neglected?",
+      "translation": "Does man think that he will be left neglected?[1809]",
       "transliteration": "Ayahsabul insaanu ai yutraka sudaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075036.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075036.mp3",
+      "footnotes": {
+        "1809": "i.e., to no end, without responsibility, or without being returned to the Creator for judgement."
+      },
+      "translationClear": "Does man think that he will be left without purpose?"
     },
     {
       "number": 37,
@@ -1920,7 +1984,8 @@
       ],
       "translation": "Had he not been a sperm from semen emitted?",
       "transliteration": "Alam yaku nutfatam mim maniyyiny yumnaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075037.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075037.mp3",
+      "translationClear": "Was he not a drop of ejaculated semen?"
     },
     {
       "number": 38,
@@ -1980,7 +2045,8 @@
       ],
       "translation": "Then he was a clinging clot, and [Allāh] created [his form] and proportioned [him]",
       "transliteration": "Summa kaana 'alaqatan fakhalaqa fasawwaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075038.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075038.mp3",
+      "translationClear": "Then he became a clot. And He created and proportioned?"
     },
     {
       "number": 39,
@@ -2040,7 +2106,8 @@
       ],
       "translation": "And made of him two mates, the male and the female.",
       "transliteration": "Faja'ala minhuz zawjayniz thakara wal-unsaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075039.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075039.mp3",
+      "translationClear": "And made of him the two sexes, the male and the female?"
     },
     {
       "number": 40,
@@ -2116,7 +2183,8 @@
       ],
       "translation": "Is not that [Creator] Able to give life to the dead?",
       "transliteration": "Alaisa thaalika biqaadirin 'alaaa any yuhyiyal mawtaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075040.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/075040.mp3",
+      "translationClear": "Is He not Able to revive the dead?"
     }
   ]
 }

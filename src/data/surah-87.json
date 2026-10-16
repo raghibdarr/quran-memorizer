@@ -56,7 +56,8 @@
       ],
       "translation": "Exalt the name of your Lord, the Most High,",
       "transliteration": "Sabbihis ma Rabbikal A'laa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087001.mp3",
+      "translationClear": "Praise the name of your Lord, the Most High."
     },
     {
       "number": 2,
@@ -100,7 +101,8 @@
       ],
       "translation": "Who created and proportioned",
       "transliteration": "Allathee khalaqa fasawwaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087002.mp3",
+      "translationClear": "He who creates and regulates."
     },
     {
       "number": 3,
@@ -144,7 +146,8 @@
       ],
       "translation": "And who destined and [then] guided",
       "transliteration": "Wallathee qaddara fahadaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087003.mp3",
+      "translationClear": "He who measures and guides."
     },
     {
       "number": 4,
@@ -188,7 +191,8 @@
       ],
       "translation": "And who brings out the pasture",
       "transliteration": "Wallatheee akhrajal mar'aa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087004.mp3",
+      "translationClear": "He who produces the pasture."
     },
     {
       "number": 5,
@@ -232,7 +236,8 @@
       ],
       "translation": "And [then] makes it black stubble.",
       "transliteration": "Faja'alahoo ghusaaa'an ahwaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087005.mp3",
+      "translationClear": "And then turns it into light debris."
     },
     {
       "number": 6,
@@ -276,7 +281,8 @@
       ],
       "translation": "We will make you recite, [O Muḥammad], and you will not forget,",
       "transliteration": "Sanuqri'uka falaa tansaaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087006.mp3",
+      "translationClear": "We will make you read, so do not forget."
     },
     {
       "number": 7,
@@ -368,7 +374,8 @@
       ],
       "translation": "Except what Allāh should will. Indeed, He knows what is declared and what is hidden.",
       "transliteration": "Illaa maa shaaa'al laah; innahoo ya'lamul jahra Wa-maa yakhfaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087007.mp3",
+      "translationClear": "Except what Allah wills. He knows what is declared, and what is hidden."
     },
     {
       "number": 8,
@@ -402,9 +409,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And We will ease you toward ease.",
+      "translation": "And We will ease you toward ease.[1907]",
       "transliteration": "Wa-nu-yassiruka lilyusraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087008.mp3",
+      "footnotes": {
+        "1907": "To the path of Allāh's religion, which is easy and natural, or toward Paradise, by giving opportunities for righteous deeds."
+      },
+      "translationClear": "We will ease you into the Easy Way."
     },
     {
       "number": 9,
@@ -454,9 +465,13 @@
           "charType": "end"
         }
       ],
-      "translation": "So remind, if the reminder should benefit;",
+      "translation": "So remind, if the reminder should benefit;[1908]",
       "transliteration": "Fathakkir in nafa'atiz thikraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087009.mp3",
+      "footnotes": {
+        "1908": "i.e., wherever it will be heard and understood."
+      },
+      "translationClear": "So remind, if reminding helps."
     },
     {
       "number": 10,
@@ -500,7 +515,8 @@
       ],
       "translation": "He who fears [Allāh] will be reminded.",
       "transliteration": "Sa-yaththakkaru mai yakhshaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087010.mp3",
+      "translationClear": "The reverent will remember."
     },
     {
       "number": 11,
@@ -534,9 +550,10 @@
           "charType": "end"
         }
       ],
-      "translation": "But the wretched one will avoid it",
+      "translation": "But the wretched one will avoid it –",
       "transliteration": "Wa-yatajannabuhal ashqaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087011.mp3",
+      "translationClear": "But the wretched will avoid it."
     },
     {
       "number": 12,
@@ -588,7 +605,8 @@
       ],
       "translation": "[He] who will [enter and] burn in the greatest Fire,",
       "transliteration": "Allathee yaslan Naaral kubraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087012.mp3",
+      "translationClear": "He who will enter the Gigantic Fire."
     },
     {
       "number": 13,
@@ -656,7 +674,8 @@
       ],
       "translation": "Neither dying therein nor living.",
       "transliteration": "Summa laa yamootu feehaa Wa-laa yahyaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087013.mp3",
+      "translationClear": "Where he will neither die, nor live."
     },
     {
       "number": 14,
@@ -708,7 +727,8 @@
       ],
       "translation": "He has certainly succeeded who purifies himself",
       "transliteration": "Qad aflaha man tazakkaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087014.mp3",
+      "translationClear": "Successful is he who purifies himself."
     },
     {
       "number": 15,
@@ -760,7 +780,8 @@
       ],
       "translation": "And mentions the name of his Lord and prays.",
       "transliteration": "Wa-thakaras ma Rabbihee fasallaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087015.mp3",
+      "translationClear": "And mentions the name of his Lord, and prays."
     },
     {
       "number": 16,
@@ -812,7 +833,8 @@
       ],
       "translation": "But you prefer the worldly life,",
       "transliteration": "Bal tu'siroonal hayaatad dunyaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087016.mp3",
+      "translationClear": "But you prefer the present life."
     },
     {
       "number": 17,
@@ -856,7 +878,8 @@
       ],
       "translation": "While the Hereafter is better and more enduring.",
       "transliteration": "Wal-Aakhiratu khairunw Wa-abqaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087017.mp3",
+      "translationClear": "Though the Hereafter is better, and more lasting."
     },
     {
       "number": 18,
@@ -916,7 +939,8 @@
       ],
       "translation": "Indeed, this is in the former scriptures,",
       "transliteration": "Inna haathaa lafis suhu-fil oolaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087018.mp3",
+      "translationClear": "This is in the former scriptures."
     },
     {
       "number": 19,
@@ -960,7 +984,8 @@
       ],
       "translation": "The scriptures of Abraham and Moses.",
       "transliteration": "Suhufi Ibraaheema Wa-Moosaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/087019.mp3",
+      "translationClear": "The scriptures of Abraham and Moses."
     }
   ]
 }

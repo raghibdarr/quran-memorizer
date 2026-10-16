@@ -48,7 +48,8 @@
       ],
       "translation": "Indeed, We have granted you, [O Muḥammad], al-Kawthar.",
       "transliteration": "Innaaa a'tainaa-kal kauthar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108001.mp3",
+      "translationClear": "We have given you plenty."
     },
     {
       "number": 2,
@@ -92,7 +93,8 @@
       ],
       "translation": "So pray to your Lord and offer sacrifice [to Him alone].",
       "transliteration": "Fasalli li-rabbika wanhar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108002.mp3",
+      "translationClear": "So pray to your Lord and sacrifice."
     },
     {
       "number": 3,
@@ -142,9 +144,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Indeed, your enemy is the one cut off.",
+      "translation": "Indeed, your enemy is the one cut off.[2002]",
       "transliteration": "Inna shaani'aka huwal abtar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/108003.mp3",
+      "footnotes": {
+        "2002": "From all good in this world and the Hereafter."
+      },
+      "translationClear": "He who hates you is the loser."
     }
   ]
 }

@@ -62,9 +62,13 @@
           "charType": "end"
         }
       ],
-      "translation": "When the victory of Allāh has come and the conquest,",
+      "translation": "When the victory of Allāh has come and the conquest,[2005]",
       "transliteration": "Itha jaaa'a nasrul laahi walfath",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/110001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/110001.mp3",
+      "footnotes": {
+        "2005": "The conquest of Makkah."
+      },
+      "translationClear": "When there comes Allah’s victory, and conquest."
     },
     {
       "number": 2,
@@ -140,7 +144,8 @@
       ],
       "translation": "And you see the people entering into the religion of Allāh in multitudes,",
       "transliteration": "Wa-ra-aitan naasa yadkhuloona fee deenil laahi afwajaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/110002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/110002.mp3",
+      "translationClear": "And you see the people entering Allah’s religion in multitudes."
     },
     {
       "number": 3,
@@ -214,9 +219,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then exalt [Him] with praise of your Lord and ask forgiveness of Him. Indeed, He is ever Accepting of Repentance.",
+      "translation": "Then exalt [Him] with praise of your Lord and ask forgiveness of Him. Indeed, He is ever Accepting of Repentance.[2006]",
       "transliteration": "Fasabbih bihamdi rabbika wastaghfirh, innahoo kaana tawwaaba",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/110003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/110003.mp3",
+      "footnotes": {
+        "2006": "Refer to footnote of 2:37."
+      },
+      "translationClear": "Then celebrate the praise of your Lord, and seek His forgiveness. He is the Accepter of Repentance."
     }
   ]
 }

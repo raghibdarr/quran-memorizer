@@ -48,7 +48,8 @@
       ],
       "translation": "By the sky containing great stars",
       "transliteration": "Wassamaaa'i thaatil burooj",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085001.mp3",
+      "translationClear": "By the sky with the constellations."
     },
     {
       "number": 2,
@@ -84,7 +85,8 @@
       ],
       "translation": "And [by] the promised Day",
       "transliteration": "Wal-yawmil maw'ood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085002.mp3",
+      "translationClear": "And by the Promised Day."
     },
     {
       "number": 3,
@@ -120,7 +122,8 @@
       ],
       "translation": "And [by] the witness and what is witnessed,",
       "transliteration": "Wa-shaahidinw Wa-mashhood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085003.mp3",
+      "translationClear": "And by the witness and the witnessed."
     },
     {
       "number": 4,
@@ -162,9 +165,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Destroyed [i.e., cursed] were the companions of the trench",
+      "translation": "Destroyed [i.e., cursed] were the companions of the trench[1895]",
       "transliteration": "Qutila as-haabul ukhdood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085004.mp3",
+      "footnotes": {
+        "1895": "Or \"May they be destroyed\" or \"cursed.\" The \"companions of the trench\" (or ditch) were agents of a tyrannical king who refused to allow his people to believe in Allāh. Their evil deed in obedience to their ruler earned for them the curse of Allāh (subḥānahu wa taʿālā) ."
+      },
+      "translationClear": "Destroyed were the People of the Trench."
     },
     {
       "number": 5,
@@ -208,7 +215,8 @@
       ],
       "translation": "[Containing] the fire full of fuel,",
       "transliteration": "Annaari thaatil waqood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085005.mp3",
+      "translationClear": "The fire supplied with fuel."
     },
     {
       "number": 6,
@@ -260,7 +268,8 @@
       ],
       "translation": "When they were sitting near it.",
       "transliteration": "Ith hum 'alaihaa qu'ood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085006.mp3",
+      "translationClear": "While they sat around it."
     },
     {
       "number": 7,
@@ -326,9 +335,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And they, to what they were doing against the believers, were witnesses.",
+      "translation": "And they, to what they were doing against the believers, were witnesses. [1896]",
       "transliteration": "Wa-hum 'alaa maa yaf'aloona bilmu-'mineena shuhood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085007.mp3",
+      "footnotes": {
+        "1896": "After casting the believers into a trench filled with fire, they sat at its edge, watching them burn to death. This event occurred before the time of Prophet Muḥammad (ﷺ) ."
+      },
+      "translationClear": "And were witnessing what they did to the believers."
     },
     {
       "number": 8,
@@ -420,7 +433,8 @@
       ],
       "translation": "And they resented them not except because they believed in Allāh, the Exalted in Might, the Praiseworthy,",
       "transliteration": "Wa-maa naqamoo minhum illaaa ai yu'minoo billaahil 'azeezil Hameed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085008.mp3",
+      "translationClear": "They begrudged them only because they believed in Allah the Almighty, the Praiseworthy."
     },
     {
       "number": 9,
@@ -518,9 +532,13 @@
           "charType": "end"
         }
       ],
-      "translation": "To whom belongs the dominion of the heavens and the earth. And Allāh, over all things, is Witness.",
+      "translation": "To whom belongs the dominion of the heavens and the earth. And Allāh, over all things, is Witness.[1897]",
       "transliteration": "Allathee lahoo mulkus samaawaati wal-ard; wallaahu 'alaa kulli shai-'in Shaheed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085009.mp3",
+      "footnotes": {
+        "1897": "See footnote to 4:79."
+      },
+      "translationClear": "To whom belongs the sovereignty of the heavens and the earth. Allah is Witness over everything."
     },
     {
       "number": 10,
@@ -650,9 +668,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Indeed, those who have tortured the believing men and believing women and then have not repented will have the punishment of Hell, and they will have the punishment of the Burning Fire.",
+      "translation": "Indeed, those who have tortured[1898] the believing men and believing women and then have not repented will have the punishment of Hell, and they will have the punishment of the Burning Fire.",
       "transliteration": "Innal latheena fatanul mu'mineena wal-mu'minaati summa lam yatooboo falahum 'athaabu Jahannama Wa-lahum 'athaabul hareeq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085010.mp3",
+      "footnotes": {
+        "1898": "Or, in this instance, the literal meaning of \"burned\" is also appropriate."
+      },
+      "translationClear": "Those who tempt the believers, men and women, then do not repent; for them is the punishment of Hell; for them is the punishment of Burning."
     },
     {
       "number": 11,
@@ -784,7 +806,8 @@
       ],
       "translation": "Indeed, those who have believed and done righteous deeds will have gardens beneath which rivers flow. That is the great attainment.",
       "transliteration": "Innal latheena aamanoo Wa-'amilus saalihaati lahum Jannaatun tajree min tahtihal anhaar; thaalikal fawzul kabeer",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085011.mp3",
+      "translationClear": "Those who believe and do righteous deeds will have Gardens beneath which rivers flow. That is the great triumph."
     },
     {
       "number": 12,
@@ -836,7 +859,8 @@
       ],
       "translation": "Indeed, the assault [i.e., vengeance] of your Lord is severe.",
       "transliteration": "Inna batsha Rabbika lashadeed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085012.mp3",
+      "translationClear": "The onslaught of your Lord is severe."
     },
     {
       "number": 13,
@@ -888,7 +912,8 @@
       ],
       "translation": "Indeed, it is He who originates [creation] and repeats.",
       "transliteration": "Innahoo Huwa yubdi'u Wa-yu'eed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085013.mp3",
+      "translationClear": "It is He who begins and repeats."
     },
     {
       "number": 14,
@@ -932,7 +957,8 @@
       ],
       "translation": "And He is the Forgiving, the Affectionate,",
       "transliteration": "Wa-Huwal Ghafoorul Wadood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085014.mp3",
+      "translationClear": "And He is the Forgiving, the Loving."
     },
     {
       "number": 15,
@@ -976,7 +1002,8 @@
       ],
       "translation": "Honorable Owner of the Throne,",
       "transliteration": "Thul 'Arshil Majeed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085015.mp3",
+      "translationClear": "Possessor of the Glorious Throne."
     },
     {
       "number": 16,
@@ -1020,7 +1047,8 @@
       ],
       "translation": "Effecter of what He intends.",
       "transliteration": "Fa'-'aalul limaa yureed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085016.mp3",
+      "translationClear": "Doer of whatever He wills."
     },
     {
       "number": 17,
@@ -1072,7 +1100,8 @@
       ],
       "translation": "Has there reached you the story of the soldiers -",
       "transliteration": "Hal ataaka hadeesul junood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085017.mp3",
+      "translationClear": "Has there come to you the story of the legions?"
     },
     {
       "number": 18,
@@ -1108,7 +1137,8 @@
       ],
       "translation": "[Those of] Pharaoh and Thamūd?",
       "transliteration": "Fir'awna Wa-Samood",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085018.mp3",
+      "translationClear": "Of Pharaoh and Thamood?"
     },
     {
       "number": 19,
@@ -1168,7 +1198,8 @@
       ],
       "translation": "But they who disbelieve are in [persistent] denial,",
       "transliteration": "Balil latheena kafaroo fee taktheeb",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085019.mp3",
+      "translationClear": "In fact, those who disbelieve are in denial."
     },
     {
       "number": 20,
@@ -1218,9 +1249,13 @@
           "charType": "end"
         }
       ],
-      "translation": "While Allāh encompasses them from behind.",
+      "translation": "While Allāh encompasses them from behind.[1899]",
       "transliteration": "Wallaahu minw waraaa'ihim muheet",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085020.mp3",
+      "footnotes": {
+        "1899": "See footnote to 2:19"
+      },
+      "translationClear": "And Allah encloses them from beyond."
     },
     {
       "number": 21,
@@ -1272,7 +1307,8 @@
       ],
       "translation": "But this is an honored Qur’ān",
       "transliteration": "Bal huwa Quraanum Majeed",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085021.mp3",
+      "translationClear": "In fact, it is a Glorious Quran."
     },
     {
       "number": 22,
@@ -1316,7 +1352,8 @@
       ],
       "translation": "[Inscribed] in a Preserved Slate.",
       "transliteration": "Fee Lawhim Mahfooz",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/085022.mp3",
+      "translationClear": "In a Preserved Tablet."
     }
   ]
 }

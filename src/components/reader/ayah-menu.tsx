@@ -8,6 +8,7 @@ import { haptic } from '@/lib/haptics';
 import { shareAyahCard } from '@/lib/share-image';
 import { isNative } from '@/lib/native';
 import { HIGHLIGHT_COLORS, NOTE_MAX, ayahKey, useReaderStore, type HighlightColor } from '@/stores/reader-store';
+import { TRANSLATIONS, plainTranslation, translationOf, useTranslationId, type TranslationId } from '@/components/ui/translation-text';
 
 /** Tints for highlighted ayahs, shared by the reader and the bookmarks list */
 export const HIGHLIGHT_CLASS: Record<HighlightColor, string> = {
@@ -23,10 +24,10 @@ const SWATCH: Record<HighlightColor, string> = {
   sky: 'bg-sky-400',
 };
 
-export function ayahCopyText(surahName: string, surahId: number, ayah: Ayah, withTranslation: boolean): string {
+export function ayahCopyText(surahName: string, surahId: number, ayah: Ayah, withTranslation: boolean, translationId: TranslationId = 'saheeh'): string {
   const ref = `${surahName} ${surahId}:${ayah.number}`;
   return withTranslation && ayah.translation
-    ? `${ayah.textUthmani}\n\n${ayah.translation.replace(/<[^>]+>/g, '')} (Sahih International)\n\n${ref}`
+    ? `${ayah.textUthmani}\n\n${plainTranslation(translationOf(ayah, translationId))} (${TRANSLATIONS[translationId].name})\n\n${ref}`
     : `${ayah.textUthmani}\n\n${ref}`;
 }
 
@@ -59,6 +60,7 @@ export default function AyahMenu({
   const toggleBookmark = useReaderStore((s) => s.toggleBookmark);
   const setHighlight = useReaderStore((s) => s.setHighlight);
   const setNote = useReaderStore((s) => s.setNote);
+  const translationId = useTranslationId();
   const [draft, setDraft] = useState(savedNote);
   const [copied, setCopied] = useState(false);
   const [sharing, setSharing] = useState<'idle' | 'busy' | 'downloaded'>('idle');
@@ -72,7 +74,8 @@ export default function AyahMenu({
     try {
       const how = await shareAyahCard({
         arabic: ayah.textUthmani,
-        translation: ayah.translation.replace(/<sup[^>]*>.*?<\/sup>/g, '').replace(/<[^>]+>/g, ''),
+        translation: plainTranslation(translationOf(ayah, translationId)),
+        translationName: TRANSLATIONS[translationId].name,
         reference: `${surahName} ${surahId}:${ayah.number}`,
         dark: document.documentElement.classList.contains('dark'),
       }, `takrar-${surahId}-${ayah.number}.png`);
@@ -83,7 +86,7 @@ export default function AyahMenu({
   };
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(ayahCopyText(surahName, surahId, ayah, true));
+      await navigator.clipboard.writeText(ayahCopyText(surahName, surahId, ayah, true, translationId));
       setCopied(true);
       haptic.success();
     } catch { /* clipboard blocked: nothing to do */ }

@@ -1,0 +1,15 @@
+{
+  "saheeh": {
+    "name": "Saheeh International",
+    "source": "QuranEnc.com",
+    "url": "https://quranenc.com/en/browse/english_saheeh",
+    "version": "2025-06-24 16:37:27 (v1.1.2-csv.1)"
+  },
+  "clear": {
+    "name": "The Clear Quran",
+    "translator": "Talal Itani",
+    "url": "https://clearquran.com",
+    "license": "CC BY-ND 4.0",
+    "updated": "October 9, 2026"
+  }
+}

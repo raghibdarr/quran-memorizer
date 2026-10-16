@@ -32,7 +32,8 @@
       ],
       "translation": "The Striking Calamity -",
       "transliteration": "Al-qaari'ah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101001.mp3",
+      "translationClear": "The Shocker."
     },
     {
       "number": 2,
@@ -68,7 +69,8 @@
       ],
       "translation": "What is the Striking Calamity?",
       "transliteration": "Mal qaariah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101002.mp3",
+      "translationClear": "What is the Shocker?"
     },
     {
       "number": 3,
@@ -120,7 +122,8 @@
       ],
       "translation": "And what can make you know what is the Striking Calamity?",
       "transliteration": "Wa-maa adraaka mal qaari'ah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101003.mp3",
+      "translationClear": "What will explain to you what the Shocker is?"
     },
     {
       "number": 4,
@@ -178,9 +181,13 @@
           "charType": "end"
         }
       ],
-      "translation": "It is the Day when people will be like moths, dispersed,",
+      "translation": "It is the Day when people will be like moths, dispersed,[1975]",
       "transliteration": "Yauma ya-koonun naasu kal-farashil mabthooth",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101004.mp3",
+      "footnotes": {
+        "1975": "The people will be as such after having been expelled from their graves."
+      },
+      "translationClear": "The Day when the people will be like scattered moths."
     },
     {
       "number": 5,
@@ -230,9 +237,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And the mountains will be like wool, fluffed up.",
+      "translation": "And the mountains will be like wool, fluffed up.[1976]",
       "transliteration": "Wa-ta-koonul jibalu kal-'ihnil manfoosh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101005.mp3",
+      "footnotes": {
+        "1976": "i.e., beginning to disintegrate."
+      },
+      "translationClear": "And the mountains will be like tufted wool."
     },
     {
       "number": 6,
@@ -284,7 +295,8 @@
       ],
       "translation": "Then as for one whose scales are heavy [with good deeds],",
       "transliteration": "Fa-amma man thaqulat mawa-zeenuh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101006.mp3",
+      "translationClear": "As for him whose scales are heavy."
     },
     {
       "number": 7,
@@ -336,7 +348,8 @@
       ],
       "translation": "He will be in a pleasant life.",
       "transliteration": "Fahuwa fee 'ishatir raadiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101007.mp3",
+      "translationClear": "He will be in a pleasant life."
     },
     {
       "number": 8,
@@ -388,7 +401,8 @@
       ],
       "translation": "But as for one whose scales are light,",
       "transliteration": "Wa-amma man khaffat mawa-zeenuh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101008.mp3",
+      "translationClear": "But as for him whose scales are light."
     },
     {
       "number": 9,
@@ -422,9 +436,14 @@
           "charType": "end"
         }
       ],
-      "translation": "His refuge will be an abyss.",
+      "translation": "His refuge[1977] will be an abyss.[1978]",
       "transliteration": "Fa-ummuhu haawiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101009.mp3",
+      "footnotes": {
+        "1977": "Literally, \"mother\" (a man's original refuge) , which will envelop him as in an embrace.",
+        "1978": "i.e., the pit of Hellfire."
+      },
+      "translationClear": "His home is the Abyss."
     },
     {
       "number": 10,
@@ -476,7 +495,8 @@
       ],
       "translation": "And what can make you know what that is?",
       "transliteration": "Wa-maa adraaka maa hiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101010.mp3",
+      "translationClear": "Do you know what it is?"
     },
     {
       "number": 11,
@@ -512,7 +532,8 @@
       ],
       "translation": "It is a Fire, intensely hot.",
       "transliteration": "Naarun hamiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/101011.mp3",
+      "translationClear": "A Raging Fire."
     }
   ]
 }

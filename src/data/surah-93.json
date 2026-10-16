@@ -32,7 +32,8 @@
       ],
       "translation": "By the morning brightness",
       "transliteration": "Wad-duhaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093001.mp3",
+      "translationClear": "By the morning light."
     },
     {
       "number": 2,
@@ -74,9 +75,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And [by] the night when it covers with darkness,",
+      "translation": "And [by] the night when it covers with darkness,[1941]",
       "transliteration": "Wal-laili itha sajaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093002.mp3",
+      "footnotes": {
+        "1941": "And becomes still."
+      },
+      "translationClear": "And the night as it settles."
     },
     {
       "number": 3,
@@ -136,7 +141,8 @@
       ],
       "translation": "Your Lord has not taken leave of you, [O Muḥammad], nor has He detested [you].",
       "transliteration": "Ma wad-da'aka rabbuka Wa-ma qalaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093003.mp3",
+      "translationClear": "Your Lord did not abandon you, nor did He forget."
     },
     {
       "number": 4,
@@ -196,7 +202,8 @@
       ],
       "translation": "And the Hereafter is better for you than the first [life].",
       "transliteration": "Walal-aakhiratu khairul laka minal oola",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093004.mp3",
+      "translationClear": "The Hereafter is better for you than the First."
     },
     {
       "number": 5,
@@ -248,7 +255,8 @@
       ],
       "translation": "And your Lord is going to give you, and you will be satisfied.",
       "transliteration": "Wa-la-sawfa y'uteeka rabbuka fatarda",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093005.mp3",
+      "translationClear": "And your Lord will give you, and you will be satisfied."
     },
     {
       "number": 6,
@@ -300,7 +308,8 @@
       ],
       "translation": "Did He not find you an orphan and give [you] refuge?",
       "transliteration": "Alam ya-jidka yateeman fa-aawaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093006.mp3",
+      "translationClear": "Did He not find you orphaned, and sheltered you?"
     },
     {
       "number": 7,
@@ -344,7 +353,8 @@
       ],
       "translation": "And He found you lost and guided [you],",
       "transliteration": "Wa-Wa-jadaka daal-lan fahada",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093007.mp3",
+      "translationClear": "And found you wandering, and guided you?"
     },
     {
       "number": 8,
@@ -388,7 +398,8 @@
       ],
       "translation": "And He found you poor and made [you] self-sufficient.",
       "transliteration": "Wa-Wa-jadaka 'aa-ilan fa-aghnaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093008.mp3",
+      "translationClear": "And found you in need, and enriched you?"
     },
     {
       "number": 9,
@@ -440,7 +451,8 @@
       ],
       "translation": "So as for the orphan, do not oppress [him].",
       "transliteration": "Fa-am-mal yateema fala taqhar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093009.mp3",
+      "translationClear": "Therefore, do not mistreat the orphan."
     },
     {
       "number": 10,
@@ -490,9 +502,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And as for the petitioner, do not repel [him].",
+      "translation": "And as for the petitioner,[1942] do not repel [him].",
       "transliteration": "Wa-am-mas saa-ila fala tanhar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093010.mp3",
+      "footnotes": {
+        "1942": "Anyone who seeks aid or knowledge."
+      },
+      "translationClear": "Nor rebuff the seeker."
     },
     {
       "number": 11,
@@ -544,7 +560,8 @@
       ],
       "translation": "But as for the favor of your Lord, report [it].",
       "transliteration": "Wa-amma bi-ni'mati rabbika fahad-dith",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/093011.mp3",
+      "translationClear": "But proclaim the blessings of your Lord."
     }
   ]
 }

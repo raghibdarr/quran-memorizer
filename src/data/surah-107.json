@@ -56,7 +56,8 @@
       ],
       "translation": "Have you seen the one who denies the Recompense?",
       "transliteration": "Ara-'aytal lathee yukaththibu biddeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107001.mp3",
+      "translationClear": "Have you considered him who denies the religion?"
     },
     {
       "number": 2,
@@ -108,7 +109,8 @@
       ],
       "translation": "For that is the one who drives away the orphan",
       "transliteration": "Fathaalikal lathee yadu'ul yateem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107002.mp3",
+      "translationClear": "It is he who mistreats the orphan."
     },
     {
       "number": 3,
@@ -168,7 +170,8 @@
       ],
       "translation": "And does not encourage the feeding of the poor.",
       "transliteration": "Wa-la yahuddu 'alaa ta'aamil miskeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107003.mp3",
+      "translationClear": "And does not encourage the feeding of the poor."
     },
     {
       "number": 4,
@@ -204,7 +207,8 @@
       ],
       "translation": "So woe to those who pray",
       "transliteration": "Fa-wailul lil-musalleen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107004.mp3",
+      "translationClear": "So woe to those who pray."
     },
     {
       "number": 5,
@@ -262,9 +266,13 @@
           "charType": "end"
         }
       ],
-      "translation": "[But] who are heedless of their prayer -",
+      "translation": "[But] who are heedless of their prayer[2000] -",
       "transliteration": "Allatheena hum 'an salaatihim saahoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107005.mp3",
+      "footnotes": {
+        "2000": "i.e., the hypocrites who are unconcerned if they miss prayers when no one sees them."
+      },
+      "translationClear": "Those who are heedless of their prayers."
     },
     {
       "number": 6,
@@ -308,7 +316,8 @@
       ],
       "translation": "Those who make show [of their deeds]",
       "transliteration": "Allatheena hum yuraaa'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107006.mp3",
+      "translationClear": "Those who put on the appearance."
     },
     {
       "number": 7,
@@ -344,7 +353,8 @@
       ],
       "translation": "And withhold [simple] assistance.",
       "transliteration": "Wa-yamna'oonal maa'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/107007.mp3",
+      "translationClear": "And withhold the assistance."
     }
   ]
 }

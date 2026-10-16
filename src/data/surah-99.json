@@ -56,7 +56,8 @@
       ],
       "translation": "When the earth is shaken with its [final] earthquake",
       "transliteration": "Ithaa zul-zilatil ardu zil-zaalaha",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099001.mp3",
+      "translationClear": "When the earth is shaken with its quake."
     },
     {
       "number": 2,
@@ -98,9 +99,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And the earth discharges its burdens",
+      "translation": "And the earth discharges its burdens[1962]",
       "transliteration": "Wa-akh-rajatil ardu athqaalaha",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099002.mp3",
+      "footnotes": {
+        "1962": "See verse 84:4."
+      },
+      "translationClear": "And the earth brings out its loads."
     },
     {
       "number": 3,
@@ -150,9 +155,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And man says, \"What is [wrong] with it?\" -",
+      "translation": "And man says,[1963] \"What is [wrong] with it?\" -",
       "transliteration": "Wa-qaalal insaanu ma laha",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099003.mp3",
+      "footnotes": {
+        "1963": "In terror and amazement."
+      },
+      "translationClear": "And man says, “What is the matter with it?”"
     },
     {
       "number": 4,
@@ -196,7 +205,8 @@
       ],
       "translation": "That Day, it will report its news",
       "transliteration": "Yawmaa-ithin tuhad-dithu akhbaaraha",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099004.mp3",
+      "translationClear": "On that Day, it will tell its tales."
     },
     {
       "number": 5,
@@ -248,7 +258,8 @@
       ],
       "translation": "Because your Lord has inspired [i.e., commanded] it.",
       "transliteration": "Bi-anna rabbaka awhaa laha",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099005.mp3",
+      "translationClear": "For your Lord will have inspired it."
     },
     {
       "number": 6,
@@ -314,9 +325,13 @@
           "charType": "end"
         }
       ],
-      "translation": "That Day, the people will depart separated [into categories] to be shown [the result of] their deeds.",
+      "translation": "That Day, the people will depart[1964] separated [into categories] to be shown [the result of] their deeds.",
       "transliteration": "Yawma-ithiny yas-durun naasu ash-tatal liyuraw a'maalahum",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099006.mp3",
+      "footnotes": {
+        "1964": "From the place of Judgement to their final abode. Another interpretation is \"emerge separately\" (from the graves) ."
+      },
+      "translationClear": "On that Day, the people will emerge in droves, to be shown their works."
     },
     {
       "number": 7,
@@ -382,9 +397,13 @@
           "charType": "end"
         }
       ],
-      "translation": "So whoever does an atom's weight of good will see it,",
+      "translation": "So whoever does an atom's weight[1965] of good will see it,",
       "transliteration": "Famaiy ya'mal mithqala tharratin khai-raiy yarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099007.mp3",
+      "footnotes": {
+        "1965": "Or \"the weight of a small ant.\""
+      },
+      "translationClear": "Whoever has done an atom’s weight of good will see it."
     },
     {
       "number": 8,
@@ -452,7 +471,8 @@
       ],
       "translation": "And whoever does an atom's weight of evil will see it.",
       "transliteration": "Wa-maiy y'amal mithqala tharratin sharraiy yarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/099008.mp3",
+      "translationClear": "And whoever has done an atom’s weight of evil will see it."
     }
   ]
 }

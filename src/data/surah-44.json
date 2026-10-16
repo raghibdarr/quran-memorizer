@@ -30,9 +30,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Ḥā, Meem.",
+      "translation": "Ḥā, Meem.[1458]",
       "transliteration": "Haa-Meeem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044001.mp3",
+      "footnotes": {
+        "1458": "See footnote to 2:1."
+      },
+      "translationClear": "Ha, Meem."
     },
     {
       "number": 2,
@@ -68,7 +72,8 @@
       ],
       "translation": "By the clear Book,",
       "transliteration": "Wal-Kitaabil Mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044002.mp3",
+      "translationClear": "By the Enlightening Scripture."
     },
     {
       "number": 3,
@@ -150,9 +155,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Indeed, We sent it down during a blessed night. Indeed, We were to warn [mankind].",
+      "translation": "Indeed, We sent it down during a blessed night.[1459] Indeed, We were to warn [mankind].",
       "transliteration": "Innaaa anzalnaahu fee lailatim mubaarakah; innaa kunnaa munthireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044003.mp3",
+      "footnotes": {
+        "1459": "The Night of Decree (Qadr). See Sūrah al-Qadr."
+      },
+      "translationClear": "We have revealed it on a Blessed Night—We have warned."
     },
     {
       "number": 4,
@@ -210,9 +219,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Therein [i.e., on that night] is made distinct every precise matter -",
+      "translation": "Therein [i.e., on that night] is made distinct[1460] every precise matter -",
       "transliteration": "Feehaa yufraqu kullu amrin hakeem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044004.mp3",
+      "footnotes": {
+        "1460": "Or \"is separated\" or \"apportioned,\" from what is inscribed in the Preserved Slate. The angels record and descend with whatever Allāh has decreed for the coming year."
+      },
+      "translationClear": "In it is distinguished every wise command."
     },
     {
       "number": 5,
@@ -280,7 +293,8 @@
       ],
       "translation": "[Every] matter [proceeding] from Us. Indeed, We were to send [a messenger]",
       "transliteration": "Amram min 'indinaaa; innaa kunnaa mursileen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044005.mp3",
+      "translationClear": "A decree from Us. We have been sending messages."
     },
     {
       "number": 6,
@@ -356,7 +370,8 @@
       ],
       "translation": "As mercy from your Lord. Indeed, He is the Hearing, the Knowing,",
       "transliteration": "Rahmatam mir rabbik; innahoo Huwas Samee'ul 'Aleem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044006.mp3",
+      "translationClear": "As mercy from your Lord. He is the Hearer, the Knower."
     },
     {
       "number": 7,
@@ -440,7 +455,8 @@
       ],
       "translation": "Lord of the heavens and the earth and that between them, if you would be certain.",
       "transliteration": "Rabbis samaawaati wal-ardi Wa-maa bainahumaa; in kuntum mooqineen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044007.mp3",
+      "translationClear": "Lord of the heavens and the earth and what is between them, if you know for sure."
     },
     {
       "number": 8,
@@ -540,7 +556,8 @@
       ],
       "translation": "There is no deity except Him; He gives life and causes death. [He is] your Lord and the Lord of your first forefathers.",
       "transliteration": "Laaa ilaaha illaa Huwa yuhyee Wa-yumeetu Rabbukum Wa-Rabbu aabaaa'ikumul awwaleen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044008.mp3",
+      "translationClear": "There is no god but He. He gives life and causes death—your Lord and Lord of your ancestors of old."
     },
     {
       "number": 9,
@@ -600,7 +617,8 @@
       ],
       "translation": "But they are in doubt, amusing themselves.",
       "transliteration": "Bal hum fee shakkien yal'aboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044009.mp3",
+      "translationClear": "Yet they play around in doubt."
     },
     {
       "number": 10,
@@ -668,7 +686,8 @@
       ],
       "translation": "Then watch for the Day when the sky will bring a visible smoke",
       "transliteration": "Fartaqib Yawma ta'tis samaaa'u bi-dukhaanin mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044010.mp3",
+      "translationClear": "So watch out for the Day when the sky produces a visible smoke."
     },
     {
       "number": 11,
@@ -728,7 +747,8 @@
       ],
       "translation": "Covering the people; this is a painful torment.",
       "transliteration": "Yaghshan naasa haathaa 'athaabun aleem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044011.mp3",
+      "translationClear": "Enveloping mankind; this is a painful punishment."
     },
     {
       "number": 12,
@@ -796,7 +816,8 @@
       ],
       "translation": "[They will say], \"Our Lord, remove from us the torment; indeed, we are believers.\"",
       "transliteration": "Rabbanak shif 'annal 'athaaba innaa mu'minoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044012.mp3",
+      "translationClear": "“Our Lord, lift the torment from us, we are believers.”"
     },
     {
       "number": 13,
@@ -872,7 +893,8 @@
       ],
       "translation": "How will there be for them a reminder [at that time]? And there had come to them a clear Messenger.",
       "transliteration": "Annaa lahumuz thikraa Wa-qad jaaa'ahum Rasoolum mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044013.mp3",
+      "translationClear": "But how can they be reminded? An enlightening messenger has already come to them."
     },
     {
       "number": 14,
@@ -940,7 +962,8 @@
       ],
       "translation": "Then they turned away from him and said, \"[He was] taught [and is] a madman.\"",
       "transliteration": "Summaa tawallaw 'anhu Wa-qaaloo mu'allamum majnoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044014.mp3",
+      "translationClear": "But they turned away from him, and said, “Educated, but crazy!”"
     },
     {
       "number": 15,
@@ -1008,7 +1031,8 @@
       ],
       "translation": "Indeed, We will remove the torment for a little. Indeed, you [disbelievers] will return [to disbelief].",
       "transliteration": "Innaa kaashiful 'athaabi qaleelaa; innakum 'aaa'idoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044015.mp3",
+      "translationClear": "We will ease the punishment a little, but you will revert."
     },
     {
       "number": 16,
@@ -1076,7 +1100,8 @@
       ],
       "translation": "The Day We will strike with the greatest assault, indeed, We will take retribution.",
       "transliteration": "Yawma nabtishul batsha-tal kubraa innaa muntaqimoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044016.mp3",
+      "translationClear": "The Day when We launch the Great Assault—We will avenge."
     },
     {
       "number": 17,
@@ -1160,7 +1185,8 @@
       ],
       "translation": "And We had already tried before them the people of Pharaoh, and there came to them a noble messenger [i.e., Moses],",
       "transliteration": "Wa-laqad fatannaa qablahum qawma Fir'awna Wa-jaaa'ahum Rasoolun kareem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044017.mp3",
+      "translationClear": "Before them We tested the people of Pharaoh; a noble messenger came to them."
     },
     {
       "number": 18,
@@ -1250,9 +1276,13 @@
           "charType": "end"
         }
       ],
-      "translation": "[Saying], \"Render to me the servants of Allāh. Indeed, I am to you a trustworthy messenger,\"",
+      "translation": "[Saying], \"Render to me the servants of Allāh.[1461] Indeed, I am to you a trustworthy messenger,\"",
       "transliteration": "An addooo ilaiya 'ibaadal laahi innee lakum Rasoolun ameen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044018.mp3",
+      "footnotes": {
+        "1461": "i.e., the Children of Israel."
+      },
+      "translationClear": "Saying, “Hand over Allah’s servants to me. I am an honest messenger to you.”"
     },
     {
       "number": 19,
@@ -1344,7 +1374,8 @@
       ],
       "translation": "And [saying], \"Be not haughty with Allāh. Indeed, I have come to you with clear evidence.",
       "transliteration": "Wa-al laa ta'loo 'alal laahi innee aateekum bisultaanim mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044019.mp3",
+      "translationClear": "And, “Do not exalt yourselves above Allah. I come to you with clear authority."
     },
     {
       "number": 20,
@@ -1410,9 +1441,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And indeed, I have sought refuge in my Lord and your Lord, lest you stone me.",
+      "translation": "And indeed, I have sought refuge in my Lord and your Lord, lest you stone me.[1462]",
       "transliteration": "Wa-innee 'uthtu bi-Rabbee Wa-rabbikum an tarjumoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044020.mp3",
+      "footnotes": {
+        "1462": "To death. Or \"lest you assault me [with your tongues or harm me otherwise].\""
+      },
+      "translationClear": "I have taken refuge in my Lord and your Lord, lest you stone me."
     },
     {
       "number": 21,
@@ -1472,7 +1507,8 @@
       ],
       "translation": "But if you do not believe me, then leave me alone.\"",
       "transliteration": "Wa-il lam tu'minoo lee fa'taziloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044021.mp3",
+      "translationClear": "But if you do not believe in me, keep away from me.”"
     },
     {
       "number": 22,
@@ -1540,7 +1576,8 @@
       ],
       "translation": "And [finally] he called to his Lord that these were a criminal people.",
       "transliteration": "Fada'aa rabbahooo anna haaa'ulaaa'i qawmum mujrimoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044022.mp3",
+      "translationClear": "He appealed to his Lord: “These are a sinful people.”"
     },
     {
       "number": 23,
@@ -1600,7 +1637,8 @@
       ],
       "translation": "[Allāh said], \"Then set out with My servants by night. Indeed, you are to be pursued.",
       "transliteration": "Fa-asri bi'ibaadee lailan innakum muttaba'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044023.mp3",
+      "translationClear": "“Set out with My servants by night—you will be followed."
     },
     {
       "number": 24,
@@ -1666,9 +1704,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And leave the sea in stillness. Indeed, they are an army to be drowned.\"",
+      "translation": "And leave the sea in stillness.[1463] Indeed, they are an army to be drowned.\"",
       "transliteration": "Watrukil bahra rahwan innahum jundum mughraqoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044024.mp3",
+      "footnotes": {
+        "1463": "After it has parted, in order that the soldiers of Pharaoh would follow the Children of Israel and be drowned."
+      },
+      "translationClear": "And cross the sea quickly; they are an army to be drowned.”"
     },
     {
       "number": 25,
@@ -1728,7 +1770,8 @@
       ],
       "translation": "How much they left behind of gardens and springs",
       "transliteration": "Kam tarakoo min jannaatinw Wa-'uyoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044025.mp3",
+      "translationClear": "How many gardens and fountains did they leave behind?"
     },
     {
       "number": 26,
@@ -1772,7 +1815,8 @@
       ],
       "translation": "And crops and noble sites",
       "transliteration": "Wa-zuroo'inw Wa-maqaa-min kareem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044026.mp3",
+      "translationClear": "And plantations, and splendid buildings."
     },
     {
       "number": 27,
@@ -1824,7 +1868,8 @@
       ],
       "translation": "And comfort wherein they were amused.",
       "transliteration": "Wa-na'matin kaanoo feehaa faakiheen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044027.mp3",
+      "translationClear": "And comforts they used to enjoy."
     },
     {
       "number": 28,
@@ -1876,7 +1921,8 @@
       ],
       "translation": "Thus. And We caused to inherit it another people.",
       "transliteration": "Kathaalika Wa-awrasnaahaa qawman aakhareen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044028.mp3",
+      "translationClear": "So it was; and We passed it on to another people."
     },
     {
       "number": 29,
@@ -1960,7 +2006,8 @@
       ],
       "translation": "And the heaven and earth wept not for them, nor were they reprieved.",
       "transliteration": "Famaa bakat 'alaihimus samaaa'u wal-ardu Wa-maa kaanoo munzareen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044029.mp3",
+      "translationClear": "Neither heaven nor earth wept over them, nor were they reprieved."
     },
     {
       "number": 30,
@@ -2036,7 +2083,8 @@
       ],
       "translation": "And We certainly saved the Children of Israel from the humiliating torment -",
       "transliteration": "Wa-laqad najjainaa Baneee Israaa'eela minal 'athaabil muheen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044030.mp3",
+      "translationClear": "And We delivered the Children of Israel from the humiliating persecution."
     },
     {
       "number": 31,
@@ -2112,7 +2160,8 @@
       ],
       "translation": "From Pharaoh. Indeed, he was a haughty one among the transgressors.",
       "transliteration": "Min Fir'awn; innahoo kaana 'aaliyam minal musrifeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044031.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044031.mp3",
+      "translationClear": "From Pharaoh. He was a transgressing tyrant."
     },
     {
       "number": 32,
@@ -2180,7 +2229,8 @@
       ],
       "translation": "And We certainly chose them by knowledge over [all] the worlds.",
       "transliteration": "Wa-laqadikh tarnaahum 'alaa 'ilmin 'alal 'aalameen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044032.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044032.mp3",
+      "translationClear": "And We chose them knowingly over all other people."
     },
     {
       "number": 33,
@@ -2256,7 +2306,8 @@
       ],
       "translation": "And We gave them of signs that in which there was a clear trial.",
       "transliteration": "Wa-aatainaahum minal aayaati maa feehi balaaa'um mubeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044033.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044033.mp3",
+      "translationClear": "And We gave them many signs, in which was an obvious test."
     },
     {
       "number": 34,
@@ -2300,7 +2351,8 @@
       ],
       "translation": "Indeed, these [disbelievers] are saying,",
       "transliteration": "Inna haaa'ulaaa'i la-yaqooloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044034.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044034.mp3",
+      "translationClear": "These people say."
     },
     {
       "number": 35,
@@ -2384,7 +2436,8 @@
       ],
       "translation": "\"There is not but our first death, and we will not be resurrected.",
       "transliteration": "In hiya illaa mawtatunal oolaa Wa-maa nahnu bimun-shareen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044035.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044035.mp3",
+      "translationClear": "“There is nothing but our first death, and we will not be resurrected."
     },
     {
       "number": 36,
@@ -2444,7 +2497,8 @@
       ],
       "translation": "Then bring [back] our forefathers, if you should be truthful.\"",
       "transliteration": "Fa'too bi-aabaaa'inaaa in kuntum saadiqeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044036.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044036.mp3",
+      "translationClear": "Bring back our ancestors, if you are truthful.”"
     },
     {
       "number": 37,
@@ -2558,9 +2612,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Are they better or the people of Tubbaʿ and those before them? We destroyed them, [for] indeed, they were criminals.",
+      "translation": "Are they better or the people of Tubbaʿ[1464] and those before them? We destroyed them, [for] indeed, they were criminals.",
       "transliteration": "Ahum khayrun am qawmu Tubba'inw wallatheena min qablihim; ahlaknaahum innahum kaanoo mujrimeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044037.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044037.mp3",
+      "footnotes": {
+        "1464": "The tribe of Saba’."
+      },
+      "translationClear": "Are they better, or the people of Tubba and those before them? We annihilated them. They were evildoers."
     },
     {
       "number": 38,
@@ -2636,7 +2694,8 @@
       ],
       "translation": "And We did not create the heavens and earth and that between them in play.",
       "transliteration": "Wa-maa khalaqnas samaawaati wal-arda Wa-maa baina-humaa laa'ibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044038.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044038.mp3",
+      "translationClear": "We did not create the heavens and the earth and what is between them to play."
     },
     {
       "number": 39,
@@ -2720,7 +2779,8 @@
       ],
       "translation": "We did not create them except in truth, but most of them do not know.",
       "transliteration": "Maa khalaqnaahumaaa illaa bilhaqqi Wa-laakinna aksarahum laa ya'lamoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044039.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044039.mp3",
+      "translationClear": "We created them only for a specific purpose, but most of them do not know."
     },
     {
       "number": 40,
@@ -2780,7 +2840,8 @@
       ],
       "translation": "Indeed, the Day of Judgement is the appointed time for them all -",
       "transliteration": "Inna yawmal fasli meeqaatuhum ajma'een",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044040.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044040.mp3",
+      "translationClear": "The Day of Sorting Out is the appointed time for them all."
     },
     {
       "number": 41,
@@ -2878,9 +2939,13 @@
           "charType": "end"
         }
       ],
-      "translation": "The Day when no relation will avail a relation at all, nor will they be helped -",
+      "translation": "The Day when no relation[1465] will avail a relation at all, nor will they be helped -",
       "transliteration": "Yawma laa yughnee mawlan 'am mawlan shai'anw Wa-laa hum yunsaroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044041.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044041.mp3",
+      "footnotes": {
+        "1465": "i.e., patron, protector or close associate."
+      },
+      "translationClear": "The Day when no friend will avail a friend in any way, and they will not be helped."
     },
     {
       "number": 42,
@@ -2964,7 +3029,8 @@
       ],
       "translation": "Except those [believers] on whom Allāh has mercy. Indeed, He is the Exalted in Might, the Merciful.",
       "transliteration": "Illaa mar rahimal laah' innahoo huwal 'azeezur raheem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044042.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044042.mp3",
+      "translationClear": "Except for him upon whom Allah has mercy. He is the Mighty, the Merciful."
     },
     {
       "number": 43,
@@ -3008,7 +3074,8 @@
       ],
       "translation": "Indeed, the tree of zaqqūm",
       "transliteration": "Inna shajarataz zaqqoom",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044043.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044043.mp3",
+      "translationClear": "The Tree of Bitterness."
     },
     {
       "number": 44,
@@ -3044,7 +3111,8 @@
       ],
       "translation": "Is food for the sinful.",
       "transliteration": "Ta'aamul aseem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044044.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044044.mp3",
+      "translationClear": "The food of the sinner."
     },
     {
       "number": 45,
@@ -3096,7 +3164,8 @@
       ],
       "translation": "Like murky oil, it boils within bellies",
       "transliteration": "Kalmuhli yaghlee fil butoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044045.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044045.mp3",
+      "translationClear": "Like molten lead; boiling inside the bellies."
     },
     {
       "number": 46,
@@ -3132,7 +3201,8 @@
       ],
       "translation": "Like the boiling of scalding water.",
       "transliteration": "Kaghalyil hameem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044046.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044046.mp3",
+      "translationClear": "Like the boiling of seething water."
     },
     {
       "number": 47,
@@ -3192,7 +3262,8 @@
       ],
       "translation": "[It will be commanded], \"Seize him and drag him into the midst of the Hellfire,",
       "transliteration": "Khuthoohu fa'tiloohu ilaa sawaaa'il Jaheem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044047.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044047.mp3",
+      "translationClear": "Seize him and drag him into the midst of Hell!"
     },
     {
       "number": 48,
@@ -3268,7 +3339,8 @@
       ],
       "translation": "Then pour over his head from the torment of scalding water.\"",
       "transliteration": "Summa subboo fawqa ra'sihee min 'athaabil hameem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044048.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044048.mp3",
+      "translationClear": "Then pour over his head the suffering of the Inferno!"
     },
     {
       "number": 49,
@@ -3326,9 +3398,13 @@
           "charType": "end"
         }
       ],
-      "translation": "[It will be said], \"Taste! Indeed, you are the honored, the noble!",
+      "translation": "[It will be said], \"Taste! Indeed, you are the honored, the noble![1466]",
       "transliteration": "Thuq innaka antal 'azeezul kareem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044049.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044049.mp3",
+      "footnotes": {
+        "1466": "As he had claimed upon the earth. He is taunted with these words in Hell as a reminder and additional torment."
+      },
+      "translationClear": "Taste! You who were powerful and noble."
     },
     {
       "number": 50,
@@ -3396,7 +3472,8 @@
       ],
       "translation": "Indeed, this is what you used to dispute.\"",
       "transliteration": "Inna haathaa maa kuntum bihee tamtaroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044050.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044050.mp3",
+      "translationClear": "This is what you used to doubt."
     },
     {
       "number": 51,
@@ -3456,7 +3533,8 @@
       ],
       "translation": "Indeed, the righteous will be in a secure place:",
       "transliteration": "Innal muttaqeena fee maqaamin ameen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044051.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044051.mp3",
+      "translationClear": "As for the righteous, they will be in a secure place."
     },
     {
       "number": 52,
@@ -3500,7 +3578,8 @@
       ],
       "translation": "Within gardens and springs,",
       "transliteration": "Fee jannaatinw Wa-'uyoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044052.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044052.mp3",
+      "translationClear": "Amidst gardens and springs."
     },
     {
       "number": 53,
@@ -3560,7 +3639,8 @@
       ],
       "translation": "Wearing [garments of] fine silk and brocade, facing each other.",
       "transliteration": "Yalbasoona min sundusinw Wa-istabraqim mutaqaabileen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044053.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044053.mp3",
+      "translationClear": "Dressed in silk and brocade, facing one another."
     },
     {
       "number": 54,
@@ -3612,7 +3692,8 @@
       ],
       "translation": "Thus. And We will marry them to fair women with large, [beautiful] eyes.",
       "transliteration": "Kathaalika Wa-zawwajnaahum bihoorin 'een",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044054.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044054.mp3",
+      "translationClear": "So it is, and We will wed them to lovely companions."
     },
     {
       "number": 55,
@@ -3672,7 +3753,8 @@
       ],
       "translation": "They will call therein for every [kind of] fruit - safe and secure.",
       "transliteration": "Yad'oona feehaa bikulli faakihatin aamineen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044055.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044055.mp3",
+      "translationClear": "They will call therein for every kind of fruit, in peace and security."
     },
     {
       "number": 56,
@@ -3772,7 +3854,8 @@
       ],
       "translation": "They will not taste death therein except the first death, and He will have protected them from the punishment of Hellfire",
       "transliteration": "Laa yathooqoona feehal mawtaa illal mawtatal oolaa Wa-waqaahum 'athaabal jaheem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044056.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044056.mp3",
+      "translationClear": "Therein they will not taste death, beyond the first death; and He will protect them from the torment of Hell."
     },
     {
       "number": 57,
@@ -3848,7 +3931,8 @@
       ],
       "translation": "As bounty from your Lord. That is what is the great attainment.",
       "transliteration": "Fadlam mir rabbik; thaalika huwal fawzul 'azeem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044057.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044057.mp3",
+      "translationClear": "A favor from your Lord. That is the supreme salvation."
     },
     {
       "number": 58,
@@ -3908,7 +3992,8 @@
       ],
       "translation": "And indeed, We have eased it [i.e., the Qur’ān] in your tongue that they might be reminded.",
       "transliteration": "Fa-innamaa yassarnaahu bilisaanika la'allahum yatathakkaroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044058.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044058.mp3",
+      "translationClear": "We made it easy in your language, so that they may remember."
     },
     {
       "number": 59,
@@ -3952,7 +4037,8 @@
       ],
       "translation": "So watch, [O Muḥammad]; indeed, they are watching [for your end].",
       "transliteration": "Fartaqib innahum murta-qiboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044059.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/044059.mp3",
+      "translationClear": "So wait and watch. They too are waiting and watching."
     }
   ]
 }

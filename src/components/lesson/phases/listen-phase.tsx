@@ -18,6 +18,7 @@ import { useSpokenWord } from '@/hooks/use-spoken-word';
 import { PlayPill } from '@/components/ui/ayah-actions';
 import WordText from '@/components/ui/word-text';
 import SimilarAyahs from '@/components/ui/similar-ayahs';
+import TranslationText from '@/components/ui/translation-text';
 interface ListenPhaseProps {
   surah: Surah;
   ayahs: Ayah[];
@@ -233,7 +234,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
                 <p className="mt-1 text-center text-sm text-muted">{ayah.transliteration}</p>
               )}
               {/* The meaning is the point of this step, so it shows whatever the translation setting */}
-              {ayah.translation && <p className="mt-1 text-center text-sm italic text-muted">{ayah.translation}</p>}
+              {ayah.translation && <TranslationText ayah={ayah} className="mt-1 text-center text-sm italic text-muted" />}
               <SimilarAyahs ayah={ayah} className="mt-2" />
 
               {pick && (

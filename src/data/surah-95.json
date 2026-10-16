@@ -38,9 +38,13 @@
           "charType": "end"
         }
       ],
-      "translation": "By the fig and the olive",
+      "translation": "By the fig and the olive[1947]",
       "transliteration": "Wat-teeni waz-zaitoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095001.mp3",
+      "footnotes": {
+        "1947": "Referring to the places known for their production, i.e., Damascus and Jerusalem, respectively. It could also refer to the fig and olive trees or to the fruits themselves."
+      },
+      "translationClear": "By the fig and the olive."
     },
     {
       "number": 2,
@@ -76,7 +80,8 @@
       ],
       "translation": "And [by] Mount Sinai",
       "transliteration": "Wa-toori sineen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095002.mp3",
+      "translationClear": "And Mount Sinai."
     },
     {
       "number": 3,
@@ -120,7 +125,8 @@
       ],
       "translation": "And [by] this secure city [i.e., Makkah],",
       "transliteration": "Wa-haathal balad-il ameen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095003.mp3",
+      "translationClear": "And this safe land."
     },
     {
       "number": 4,
@@ -186,9 +192,13 @@
           "charType": "end"
         }
       ],
-      "translation": "We have certainly created man in the best of stature;",
+      "translation": "We have certainly created man in the best of stature;[1948]",
       "transliteration": "Laqad khalaqnal insaana fee ahsani taqweem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095004.mp3",
+      "footnotes": {
+        "1948": "i.e., upright, symmetrical, and balanced in form and nature."
+      },
+      "translationClear": "We created man in the best design."
     },
     {
       "number": 5,
@@ -238,9 +248,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then We return him to the lowest of the low,",
+      "translation": "Then We return him to the lowest of the low,[1949]",
       "transliteration": "Thumma ra-dad-naahu asfala saafileen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095005.mp3",
+      "footnotes": {
+        "1949": "This can refer to the depths of Hell, to decrepit old age or to immorality."
+      },
+      "translationClear": "Then reduced him to the lowest of the low."
     },
     {
       "number": 6,
@@ -332,7 +346,8 @@
       ],
       "translation": "Except for those who believe and do righteous deeds, for they will have a reward uninterrupted.",
       "transliteration": "Ill-lal latheena aamanoo Wa-'amilus saalihaati; falahum ajrun ghairu mamnoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095006.mp3",
+      "translationClear": "Except those who believe and do righteous deeds; for them is a reward without end."
     },
     {
       "number": 7,
@@ -382,9 +397,13 @@
           "charType": "end"
         }
       ],
-      "translation": "So what yet causes you to deny the Recompense?",
+      "translation": "So what yet causes you to deny the Recompense?[1950]",
       "transliteration": "Fama yu-kath-thibuka b'adu bid-deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095007.mp3",
+      "footnotes": {
+        "1950": "More literally, \"What makes you lie concerning it?\""
+      },
+      "translationClear": "So why do you still reject the religion?"
     },
     {
       "number": 8,
@@ -436,7 +455,8 @@
       ],
       "translation": "Is not Allāh the most just of judges?",
       "transliteration": "Alai-sal laahu bi-ahkamil haakimeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/095008.mp3",
+      "translationClear": "Is Allah not the Wisest of the wise?"
     }
   ]
 }

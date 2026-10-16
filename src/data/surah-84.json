@@ -48,7 +48,8 @@
       ],
       "translation": "When the sky has split [open]",
       "transliteration": "Ithas samaaa'un shaqqat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084001.mp3",
+      "translationClear": "When the sky is ruptured."
     },
     {
       "number": 2,
@@ -90,9 +91,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And has listened [i.e., responded] to its Lord and was obligated [to do so]",
+      "translation": "And has listened [i.e., responded][1888] to its Lord and was obligated [to do so]",
       "transliteration": "Wa-athinat li-Rabbihaa Wa-huqqat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084002.mp3",
+      "footnotes": {
+        "1888": "It will have heard Allāh's command and will have inclined immediately to compliance and willing obedience."
+      },
+      "translationClear": "And hearkens to its Lord, as it must."
     },
     {
       "number": 3,
@@ -134,9 +139,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And when the earth has been extended",
+      "translation": "And when the earth has been extended[1889]",
       "transliteration": "Wa-ithal ardu muddat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084003.mp3",
+      "footnotes": {
+        "1889": "i.e., stretched flat and spread out."
+      },
+      "translationClear": "And when the earth is leveled out."
     },
     {
       "number": 4,
@@ -186,9 +195,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And has cast out that within it and relinquished [it].",
+      "translation": "And has cast out that within it[1890] and relinquished [it]",
       "transliteration": "Wa-alqat maa feehaa Wa-takhallat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084004.mp3",
+      "footnotes": {
+        "1890": "Of the dead and all else buried therein."
+      },
+      "translationClear": "And casts out what is in it, and becomes empty."
     },
     {
       "number": 5,
@@ -230,9 +243,10 @@
           "charType": "end"
         }
       ],
-      "translation": "And has listened [i.e., responded] to its Lord and was obligated [to do so] -",
+      "translation": "And has listened [i.e., responded] to its Lord and was obligated [to do so] –",
       "transliteration": "Wa-athinat li-Rabbihaa Wa-huqqat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084005.mp3",
+      "translationClear": "And hearkens to its Lord, as it must."
     },
     {
       "number": 6,
@@ -314,9 +328,14 @@
           "charType": "end"
         }
       ],
-      "translation": "O mankind, indeed you are laboring toward your Lord with [great] exertion and will meet it.",
+      "translation": "O mankind, indeed you are laboring toward your Lord with [great] exertion[1891] and will meet it.[1892]",
       "transliteration": "Yaaa-ayyuhal insaanu innaka kaadihun ilaa Rabbika kad-han famulaaqeeh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084006.mp3",
+      "footnotes": {
+        "1891": "i.e., striving throughout your life until you meet your Lord, hastening toward death.",
+        "1892": "i.e., you will find all that you intended and accomplished awaiting you in the Hereafter. Another meaning is \"And will meet Him [i.e., your Lord]\" and be recompensed in full by Him."
+      },
+      "translationClear": "O man! You are laboring towards your Lord, and you will meet Him."
     },
     {
       "number": 7,
@@ -376,7 +395,8 @@
       ],
       "translation": "Then as for he who is given his record in his right hand,",
       "transliteration": "Fa-ammaa man ootiya kitaabahoo biyameenih",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084007.mp3",
+      "translationClear": "As for him who is given his book in his right hand."
     },
     {
       "number": 8,
@@ -428,7 +448,8 @@
       ],
       "translation": "He will be judged with an easy account",
       "transliteration": "Fasawfa yuhaasabu hi-saabai yaseeraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084008.mp3",
+      "translationClear": "He will have an easy settlement."
     },
     {
       "number": 9,
@@ -480,7 +501,8 @@
       ],
       "translation": "And return to his people in happiness.",
       "transliteration": "Wa-yanqalibu ilaaa ahlihee masrooraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084009.mp3",
+      "translationClear": "And will return to his family delighted."
     },
     {
       "number": 10,
@@ -548,7 +570,8 @@
       ],
       "translation": "But as for he who is given his record behind his back,",
       "transliteration": "Wa-ammaa man ootiya kitaabahoo waraaa'a zahrih",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084010.mp3",
+      "translationClear": "But as for him who is given his book behind his back."
     },
     {
       "number": 11,
@@ -592,7 +615,8 @@
       ],
       "translation": "He will cry out for destruction",
       "transliteration": "Fasawfa yad'oo subooraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084011.mp3",
+      "translationClear": "He will call for death."
     },
     {
       "number": 12,
@@ -628,7 +652,8 @@
       ],
       "translation": "And [enter to] burn in a Blaze.",
       "transliteration": "Wa-yaslaa sa'eeraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084012.mp3",
+      "translationClear": "And will enter the Blaze."
     },
     {
       "number": 13,
@@ -688,7 +713,8 @@
       ],
       "translation": "Indeed, he had [once] been among his people in happiness;",
       "transliteration": "Innahoo kaana feee ahlihee masrooraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084013.mp3",
+      "translationClear": "He used to be happy among his family."
     },
     {
       "number": 14,
@@ -748,7 +774,8 @@
       ],
       "translation": "Indeed, he had thought he would never return [to Allāh].",
       "transliteration": "Innahoo zanna al lai yahoor",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084014.mp3",
+      "translationClear": "He thought he would never return."
     },
     {
       "number": 15,
@@ -816,7 +843,8 @@
       ],
       "translation": "But yes! Indeed, his Lord was ever, of him, Seeing.",
       "transliteration": "Balaaa inna Rabbahoo kaana bihee baseeraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084015.mp3",
+      "translationClear": "In fact, his Lord was watching him."
     },
     {
       "number": 16,
@@ -860,7 +888,8 @@
       ],
       "translation": "So I swear by the twilight glow",
       "transliteration": "Falaaa uqsimu bishshafaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084016.mp3",
+      "translationClear": "I swear by the twilight."
     },
     {
       "number": 17,
@@ -904,7 +933,8 @@
       ],
       "translation": "And [by] the night and what it envelops",
       "transliteration": "Wallaili Wa-maa wasaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084017.mp3",
+      "translationClear": "And by the night, and what it covers."
     },
     {
       "number": 18,
@@ -948,7 +978,8 @@
       ],
       "translation": "And [by] the moon when it becomes full",
       "transliteration": "Walqamari ithat tasaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084018.mp3",
+      "translationClear": "And by the moon, as it grows full."
     },
     {
       "number": 19,
@@ -998,9 +1029,13 @@
           "charType": "end"
         }
       ],
-      "translation": "[That] you will surely embark upon [i.e., experience] state after state.",
+      "translation": "[That] you will surely embark upon [i.e., experience] state after state.[1893]",
       "transliteration": "Latarkabunna tabaqan 'an tabaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084019.mp3",
+      "footnotes": {
+        "1893": "i.e., various stages, both in this life and in the Hereafter."
+      },
+      "translationClear": "You will mount stage by stage."
     },
     {
       "number": 20,
@@ -1052,7 +1087,8 @@
       ],
       "translation": "So what is [the matter] with them [that] they do not believe,",
       "transliteration": "Famaa lahum laa yu'minoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084020.mp3",
+      "translationClear": "What is the matter with them that they do not believe?"
     },
     {
       "number": 21,
@@ -1120,7 +1156,8 @@
       ],
       "translation": "And when the Qur’ān is recited to them, they do not prostrate [to Allāh]?",
       "transliteration": "Wa-ithaa quri'a 'alaihimul Quraanu laa yasjudoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084021.mp3",
+      "translationClear": "And when the Quran is read to them, they do not bow down?"
     },
     {
       "number": 22,
@@ -1172,7 +1209,8 @@
       ],
       "translation": "But those who have disbelieved deny,",
       "transliteration": "Balil latheena kafaroo yukaththiboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084022.mp3",
+      "translationClear": "In fact, those who disbelieve are in denial."
     },
     {
       "number": 23,
@@ -1224,7 +1262,8 @@
       ],
       "translation": "And Allāh is most knowing of what they keep within themselves.",
       "transliteration": "Wallaahu a'lamu bimaa yoo'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084023.mp3",
+      "translationClear": "But Allah knows what they hide inside."
     },
     {
       "number": 24,
@@ -1268,7 +1307,8 @@
       ],
       "translation": "So give them tidings of a painful punishment,",
       "transliteration": "Fabashshirhum bi'athaabin aleem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084024.mp3",
+      "translationClear": "So inform them of a painful punishment."
     },
     {
       "number": 25,
@@ -1360,7 +1400,8 @@
       ],
       "translation": "Except for those who believe and do righteous deeds. For them is a reward uninterrupted.",
       "transliteration": "Illal latheena aamanoo Wa-'amilus saalihaati lahum ajrun ghairu mamnoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/084025.mp3",
+      "translationClear": "Except those who believe and do good deeds; they will have an undiminished reward."
     }
   ]
 }

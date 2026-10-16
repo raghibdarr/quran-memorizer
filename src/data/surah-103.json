@@ -30,9 +30,13 @@
           "charType": "end"
         }
       ],
-      "translation": "By time,",
+      "translation": "By time,[1985]",
       "transliteration": "Wal-'asr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103001.mp3",
+      "footnotes": {
+        "1985": "An oath in which Allāh swears by time throughout the ages."
+      },
+      "translationClear": "By Time."
     },
     {
       "number": 2,
@@ -84,7 +88,8 @@
       ],
       "translation": "Indeed, mankind is in loss,",
       "transliteration": "Innal insaana lafee khusr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103002.mp3",
+      "translationClear": "The human being is in loss."
     },
     {
       "number": 3,
@@ -176,7 +181,8 @@
       ],
       "translation": "Except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience.",
       "transliteration": "Illal latheena aamanoo Wa-'amilus saalihaati Wa-tawaasaw bilhaqq; Wa-tawaasaw bissabr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/103003.mp3",
+      "translationClear": "Except those who believe, and do good works, and encourage truth, and recommend patience."
     }
   ]
 }

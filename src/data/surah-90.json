@@ -54,9 +54,10 @@
           "charType": "end"
         }
       ],
-      "translation": "I swear by this city [i.e., Makkah]",
+      "translation": "I swear by this city [i.e., Makkah] –",
       "transliteration": "Laaa uqsimu bihaathal balad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090001.mp3",
+      "translationClear": "I swear by this land."
     },
     {
       "number": 2,
@@ -106,9 +107,10 @@
           "charType": "end"
         }
       ],
-      "translation": "And you, [O Muḥammad], are free of restriction in this city",
+      "translation": "And you, [O Muḥammad], are free of restriction in this city –",
       "transliteration": "Wa-anta hillum bihaathal balad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090002.mp3",
+      "translationClear": "And you are a resident of this land."
     },
     {
       "number": 3,
@@ -150,9 +152,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And [by] the father and that which was born [of him],",
+      "translation": "And [by] the father[1924] and that which was born [of him],",
       "transliteration": "Wa-waalidinw Wa-maa walad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090003.mp3",
+      "footnotes": {
+        "1924": "Said to be Adam (upon him be peace) ."
+      },
+      "translationClear": "And by a father and what he fathered."
     },
     {
       "number": 4,
@@ -212,7 +218,8 @@
       ],
       "translation": "We have certainly created man into hardship.",
       "transliteration": "Laqad khalaqnal insaana fee kabad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090004.mp3",
+      "translationClear": "We created man in distress."
     },
     {
       "number": 5,
@@ -280,7 +287,8 @@
       ],
       "translation": "Does he think that never will anyone overcome him?",
       "transliteration": "Ayahsabu al lai yaqdira 'alaihi ahad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090005.mp3",
+      "translationClear": "Does he think that no one has power over him?"
     },
     {
       "number": 6,
@@ -332,7 +340,8 @@
       ],
       "translation": "He says, \"I have spent wealth in abundance.\"",
       "transliteration": "Yaqoolu ahlaktu maalal lubadaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090006.mp3",
+      "translationClear": "He says, “I have used up so much money.”"
     },
     {
       "number": 7,
@@ -392,7 +401,8 @@
       ],
       "translation": "Does he think that no one has seen him?",
       "transliteration": "Ayahsabu al lam yarahooo ahad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090007.mp3",
+      "translationClear": "Does he think that no one sees him?"
     },
     {
       "number": 8,
@@ -444,7 +454,8 @@
       ],
       "translation": "Have We not made for him two eyes?",
       "transliteration": "Alam naj'al lahoo 'aynayn",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090008.mp3",
+      "translationClear": "Did We not give him two eyes?"
     },
     {
       "number": 9,
@@ -480,7 +491,8 @@
       ],
       "translation": "And a tongue and two lips?",
       "transliteration": "Wa-lisaananw Wa-shafatayn",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090009.mp3",
+      "translationClear": "And a tongue, and two lips?"
     },
     {
       "number": 10,
@@ -514,9 +526,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And have shown him the two ways?",
+      "translation": "And have shown him the two ways?[1925]",
       "transliteration": "Wa-hadaynaahun najdayn",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090010.mp3",
+      "footnotes": {
+        "1925": "Of good and evil."
+      },
+      "translationClear": "And We showed him the two ways?"
     },
     {
       "number": 11,
@@ -558,9 +574,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But he has not broken through the difficult pass.",
+      "translation": "But he has not broken through the difficult pass.[1926]",
       "transliteration": "Falaq tahamal 'aqabah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090011.mp3",
+      "footnotes": {
+        "1926": "i.e., the steep incline or obstacle. In other words, he has not spent in the cause of Allāh but only boasts of spending in front of others."
+      },
+      "translationClear": "But he did not brave the ascent."
     },
     {
       "number": 12,
@@ -612,7 +632,8 @@
       ],
       "translation": "And what can make you know what is [breaking through] the difficult pass?",
       "transliteration": "Wa-maaa adraaka mal 'aqabah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090012.mp3",
+      "translationClear": "And what will explain to you what the ascent is?"
     },
     {
       "number": 13,
@@ -648,7 +669,8 @@
       ],
       "translation": "It is the freeing of a slave",
       "transliteration": "Fakku raqabah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090013.mp3",
+      "translationClear": "The freeing of a slave."
     },
     {
       "number": 14,
@@ -716,7 +738,8 @@
       ],
       "translation": "Or feeding on a day of severe hunger",
       "transliteration": "Aw it'aamun fee yawmin thee masghabah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090014.mp3",
+      "translationClear": "Or the feeding on a day of hunger."
     },
     {
       "number": 15,
@@ -760,7 +783,8 @@
       ],
       "translation": "An orphan of near relationship",
       "transliteration": "Yateeman thaa maqrabah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090015.mp3",
+      "translationClear": "An orphan near of kin."
     },
     {
       "number": 16,
@@ -812,7 +836,8 @@
       ],
       "translation": "Or a needy person in misery",
       "transliteration": "Aw miskeenan thaa matrabah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090016.mp3",
+      "translationClear": "Or a destitute in the dust."
     },
     {
       "number": 17,
@@ -904,7 +929,8 @@
       ],
       "translation": "And then being among those who believed and advised one another to patience and advised one another to compassion.",
       "transliteration": "Summa kaana minal latheena aamanoo Wa-tawaasaw bissabri Wa-tawaasaw bilmarhamah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090017.mp3",
+      "translationClear": "Then he becomes of those who believe, and advise one another to patience, and advise one another to kindness."
     },
     {
       "number": 18,
@@ -946,9 +972,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Those are the companions of the right.",
+      "translation": "Those are the companions of the right.[1927]",
       "transliteration": "Ulaaa'ika As-haabul maimanah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090018.mp3",
+      "footnotes": {
+        "1927": "Or \"the companions of good fortune,\" i.e., those who receive their records in their right hands and proceed to Paradise."
+      },
+      "translationClear": "These are the people of happiness."
     },
     {
       "number": 19,
@@ -1014,9 +1044,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But they who disbelieved in Our signs - those are the companions of the left.",
+      "translation": "But they who disbelieved in Our signs - those are the companions of the left.[1928]",
       "transliteration": "Wallatheena kafaroo bi-aayaatinaa hum as-haabul Mash'amah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090019.mp3",
+      "footnotes": {
+        "1928": "Or \"the companions of ill fortune,\" i.e., those who receive their records in their left hands and proceed to Hell."
+      },
+      "translationClear": "But as for those who defy Our revelations—these are the people of misery."
     },
     {
       "number": 20,
@@ -1058,9 +1092,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Over them will be fire closed in.",
+      "translation": "Over them will be fire closed in.[1929]",
       "transliteration": "Alaihim naarum mu'sadah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/090020.mp3",
+      "footnotes": {
+        "1929": "The cover over Hell will be sealed and locked, containing its fire and its inhabitants."
+      },
+      "translationClear": "Upon them is a padlocked Fire."
     }
   ]
 }

@@ -38,9 +38,13 @@
           "charType": "end"
         }
       ],
-      "translation": "For the accustomed security of the Quraysh -",
+      "translation": "For the accustomed security of the Quraysh[1996] -",
       "transliteration": "Li-eelaafi quraish",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106001.mp3",
+      "footnotes": {
+        "1996": "i.e., the honor and reputation Allāh had given them as guardians of the Holy Kaʿbah, which allowed them to travel without fear of being harmed."
+      },
+      "translationClear": "For the security of Quraish."
     },
     {
       "number": 2,
@@ -90,9 +94,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Their accustomed security [in] the caravan of winter and summer -",
+      "translation": "Their accustomed security [in] the caravan of winter and summer[1997] -",
       "transliteration": "Eelaafihim rihlatash shitaaa'i wassaif",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106002.mp3",
+      "footnotes": {
+        "1997": "i.e., the trading caravans that traveled south in winter and north in summer."
+      },
+      "translationClear": "Their security during winter and summer journeys."
     },
     {
       "number": 3,
@@ -142,9 +150,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Let them worship the Lord of this House,",
+      "translation": "Let them worship the Lord of this House,[1998]",
       "transliteration": "Faly'abudoo rabba haathal bait",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106003.mp3",
+      "footnotes": {
+        "1998": "i.e., the Kaʿbah."
+      },
+      "translationClear": "Let them worship the Lord of this House."
     },
     {
       "number": 4,
@@ -220,7 +232,8 @@
       ],
       "translation": "Who has fed them, [saving them] from hunger and made them safe, [saving them] from fear.",
       "transliteration": "Allatheee at'amahum min joo'inw wa-aamanahum min khawf",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/106004.mp3",
+      "translationClear": "Who has fed them against hunger, and has secured them against fear."
     }
   ]
 }

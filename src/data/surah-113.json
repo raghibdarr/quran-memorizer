@@ -56,7 +56,8 @@
       ],
       "translation": "Say, \"I seek refuge in the Lord of daybreak",
       "transliteration": "Qul a'oothu bi-rabbil falaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113001.mp3",
+      "translationClear": "Say, “I take refuge with the Lord of Daybreak."
     },
     {
       "number": 2,
@@ -108,7 +109,8 @@
       ],
       "translation": "From the evil of that which He created",
       "transliteration": "Min sharri maa khalaq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113002.mp3",
+      "translationClear": "From the evil of what He created."
     },
     {
       "number": 3,
@@ -168,7 +170,8 @@
       ],
       "translation": "And from the evil of darkness when it settles",
       "transliteration": "Wa-min sharri ghaasiqin ithaa waqab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113003.mp3",
+      "translationClear": "And from the evil of the darkness as it gathers."
     },
     {
       "number": 4,
@@ -226,9 +229,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And from the evil of the blowers in knots",
+      "translation": "And from the evil of the blowers in knots[2014]",
       "transliteration": "Wa-min sharrin naffaa-saati fil 'uqad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113004.mp3",
+      "footnotes": {
+        "2014": "i.e., those who practice magic."
+      },
+      "translationClear": "And from the evil of those who practice sorcery."
     },
     {
       "number": 5,
@@ -288,7 +295,8 @@
       ],
       "translation": "And from the evil of an envier when he envies.\"",
       "transliteration": "Wa-min sharri haasidin ithaa hasad",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/113005.mp3",
+      "translationClear": "And from the evil of an envious when he envies.”"
     }
   ]
 }

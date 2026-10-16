@@ -40,7 +40,8 @@
       ],
       "translation": "He [i.e., the Prophet (ﷺ) ] frowned and turned away",
       "transliteration": "Abasa Wa-tawallaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080001.mp3",
+      "translationClear": "He frowned and turned away."
     },
     {
       "number": 2,
@@ -82,9 +83,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Because there came to him the blind man, [interrupting].",
+      "translation": "Because there came to him the blind man,[1853] [interrupting].",
       "transliteration": "An jaa-ahul 'a-maa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080002.mp3",
+      "footnotes": {
+        "1853": "ʿAbdullāh, the son of Umm Maktūm."
+      },
+      "translationClear": "When the blind man approached him."
     },
     {
       "number": 3,
@@ -134,9 +139,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But what would make you perceive, [O Muḥammad], that perhaps he might be purified",
+      "translation": "But what would make you perceive, [O Muḥammad], that perhaps he might be purified[1854]",
       "transliteration": "Wa-maa yudreeka la'allahu yaz-zakkaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080003.mp3",
+      "footnotes": {
+        "1854": "As a result of what he learns from you."
+      },
+      "translationClear": "But how do you know? Perhaps he was seeking to purify himself."
     },
     {
       "number": 4,
@@ -188,7 +197,8 @@
       ],
       "translation": "Or be reminded and the remembrance would benefit him?",
       "transliteration": "Au yath-thak-karu fatanfa-'ahuz thikraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080004.mp3",
+      "translationClear": "Or be reminded, and the message would benefit him."
     },
     {
       "number": 5,
@@ -230,9 +240,13 @@
           "charType": "end"
         }
       ],
-      "translation": "As for he who thinks himself without need,",
+      "translation": "As for he who thinks himself without need,[1855]",
       "transliteration": "Amma manis taghnaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080005.mp3",
+      "footnotes": {
+        "1855": "i.e., without need of faith or need of Allāh (subḥānahu wa taʿālā) . Here it is in reference to a certain influential member of the Quraysh whom the Prophet (ﷺ) had hoped to bring to Islām."
+      },
+      "translationClear": "But as for him who was indifferent."
     },
     {
       "number": 6,
@@ -276,7 +290,8 @@
       ],
       "translation": "To him you give attention.",
       "transliteration": "Fa-anta lahu tasaddaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080006.mp3",
+      "translationClear": "You gave him your attention."
     },
     {
       "number": 7,
@@ -326,9 +341,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And not upon you [is any blame] if he will not be purified.",
+      "translation": "And not upon you [is any blame] if he will not be purified.[1856]",
       "transliteration": "Wa-ma 'alaika allaa yaz-zakka",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080007.mp3",
+      "footnotes": {
+        "1856": "The Prophet (ﷺ) was responsible only for conveying the message, not for ultimate guidance."
+      },
+      "translationClear": "Though you are not liable if he does not purify himself."
     },
     {
       "number": 8,
@@ -380,7 +399,8 @@
       ],
       "translation": "But as for he who came to you striving [for knowledge]",
       "transliteration": "Wa-amma man jaa-aka yas'a",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080008.mp3",
+      "translationClear": "But as for him who came to you seeking."
     },
     {
       "number": 9,
@@ -416,7 +436,8 @@
       ],
       "translation": "While he fears [Allāh],",
       "transliteration": "Wahuwa yakhshaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080009.mp3",
+      "translationClear": "In awe."
     },
     {
       "number": 10,
@@ -460,7 +481,8 @@
       ],
       "translation": "From him you are distracted.",
       "transliteration": "Fa-anta 'anhu talah-haa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080010.mp3",
+      "translationClear": "To him you were inattentive."
     },
     {
       "number": 11,
@@ -504,7 +526,8 @@
       ],
       "translation": "No! Indeed, they [i.e., these verses] are a reminder;",
       "transliteration": "Kalla innaha tathkirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080011.mp3",
+      "translationClear": "Do not. This is a lesson."
     },
     {
       "number": 12,
@@ -546,9 +569,13 @@
           "charType": "end"
         }
       ],
-      "translation": "So whoever wills may remember it.",
+      "translation": "So whoever wills may remember it.[1857]",
       "transliteration": "Faman shaa-a thakarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080012.mp3",
+      "footnotes": {
+        "1857": "The revelation. Or \"Him,\" i.e., Allāh (subḥānahu wa taʿālā) ."
+      },
+      "translationClear": "Whoever wills, shall remember it."
     },
     {
       "number": 13,
@@ -592,7 +619,8 @@
       ],
       "translation": "[It is recorded] in honored sheets,",
       "transliteration": "Fi suhufim mukar-rama",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080013.mp3",
+      "translationClear": "On honorable pages."
     },
     {
       "number": 14,
@@ -628,7 +656,8 @@
       ],
       "translation": "Exalted and purified,",
       "transliteration": "Marfoo'atim mutah-hara",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080014.mp3",
+      "translationClear": "Exalted and purified."
     },
     {
       "number": 15,
@@ -664,7 +693,8 @@
       ],
       "translation": "[Carried] by the hands of messenger-angels,",
       "transliteration": "Bi'aidee safara",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080015.mp3",
+      "translationClear": "By the hands of scribes."
     },
     {
       "number": 16,
@@ -700,7 +730,8 @@
       ],
       "translation": "Noble and dutiful.",
       "transliteration": "Kiraamim bararah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080016.mp3",
+      "translationClear": "Noble and devoted."
     },
     {
       "number": 17,
@@ -750,9 +781,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Destroyed [i.e., cursed] is man; how disbelieving is he.",
+      "translation": "Destroyed [i.e., cursed] is man;[1858] how disbelieving is he.",
       "transliteration": "Qutilal insanu maa akfarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080017.mp3",
+      "footnotes": {
+        "1858": "i.e., those who deny Allāh's message."
+      },
+      "translationClear": "Perish man! How thankless he is!"
     },
     {
       "number": 18,
@@ -804,7 +839,8 @@
       ],
       "translation": "From what thing [i.e., substance] did He create him?",
       "transliteration": "Min aiyyi shai-in Khalaqa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080018.mp3",
+      "translationClear": "From what did He create him?"
     },
     {
       "number": 19,
@@ -854,9 +890,13 @@
           "charType": "end"
         }
       ],
-      "translation": "From a sperm-drop He created him and destined for him;",
+      "translation": "From a sperm-drop He created him and destined for him;[1859]",
       "transliteration": "Min nutfatin khalaqahoo faqaddarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080019.mp3",
+      "footnotes": {
+        "1859": "His proportions, provisions, life span, etc."
+      },
+      "translationClear": "From a sperm drop He created him, and enabled him."
     },
     {
       "number": 20,
@@ -898,9 +938,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then He eased the way for him;",
+      "translation": "Then He eased the way for him;[1860]",
       "transliteration": "Thummas sabeela yas-sarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080020.mp3",
+      "footnotes": {
+        "1860": "Into this world (i.e., his birth) . It may also refer to life itself, which has been made easier by Allāh's guidance."
+      },
+      "translationClear": "Then He eased the way for him."
     },
     {
       "number": 21,
@@ -942,9 +986,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then He causes his death and provides a grave for him.",
+      "translation": "Then He causes his death and provides a grave for him.[1861]",
       "transliteration": "Thumma amatahu fa-aqbarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080021.mp3",
+      "footnotes": {
+        "1861": "To conceal his decaying body."
+      },
+      "translationClear": "Then He puts him to death, and buries him."
     },
     {
       "number": 22,
@@ -996,7 +1044,8 @@
       ],
       "translation": "Then when He wills, He will resurrect him.",
       "transliteration": "Thumma itha shaa-a ansharah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080022.mp3",
+      "translationClear": "Then, when He wills, He will resurrect him."
     },
     {
       "number": 23,
@@ -1056,7 +1105,8 @@
       ],
       "translation": "No! He [i.e., man] has not yet accomplished what He commanded him.",
       "transliteration": "Kalla lamma yaqdi maa amarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080023.mp3",
+      "translationClear": "But no, he did not fulfill what He has commanded him."
     },
     {
       "number": 24,
@@ -1108,7 +1158,8 @@
       ],
       "translation": "Then let mankind look at his food -",
       "transliteration": "Falyanzuril insanu ilaa ta-amih",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080024.mp3",
+      "translationClear": "Let man consider his food."
     },
     {
       "number": 25,
@@ -1160,7 +1211,8 @@
       ],
       "translation": "How We poured down water in torrents,",
       "transliteration": "Anna sabab nalmaa-a sabba",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080025.mp3",
+      "translationClear": "We pour down water in abundance."
     },
     {
       "number": 26,
@@ -1212,7 +1264,8 @@
       ],
       "translation": "Then We broke open the earth, splitting [it with sprouts],",
       "transliteration": "Thumma sha-qaqnal arda shaqqa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080026.mp3",
+      "translationClear": "Then crack the soil open."
     },
     {
       "number": 27,
@@ -1256,7 +1309,8 @@
       ],
       "translation": "And caused to grow within it grain",
       "transliteration": "Fa-ambatna feeha habba",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080027.mp3",
+      "translationClear": "And grow in it grains."
     },
     {
       "number": 28,
@@ -1292,7 +1346,8 @@
       ],
       "translation": "And grapes and herbage",
       "transliteration": "Wa-'inabaw wa-qadba",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080028.mp3",
+      "translationClear": "And grapes and herbs."
     },
     {
       "number": 29,
@@ -1328,7 +1383,8 @@
       ],
       "translation": "And olive and palm trees",
       "transliteration": "Wa-zaitoonaw wanakh-la'",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080029.mp3",
+      "translationClear": "And olives and dates."
     },
     {
       "number": 30,
@@ -1364,7 +1420,8 @@
       ],
       "translation": "And gardens of dense shrubbery",
       "transliteration": "Wa-hadaa-iqa ghulba",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080030.mp3",
+      "translationClear": "And luscious gardens."
     },
     {
       "number": 31,
@@ -1400,7 +1457,8 @@
       ],
       "translation": "And fruit and grass -",
       "transliteration": "Wa-faki-hataw wa-abba",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080031.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080031.mp3",
+      "translationClear": "And fruits and vegetables."
     },
     {
       "number": 32,
@@ -1444,7 +1502,8 @@
       ],
       "translation": "[As] enjoyment [i.e., provision] for you and your grazing livestock.",
       "transliteration": "Mata'al lakum Wa-li-an'amikum",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080032.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080032.mp3",
+      "translationClear": "Enjoyment for you, and for your livestock."
     },
     {
       "number": 33,
@@ -1486,9 +1545,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But when there comes the Deafening Blast",
+      "translation": "But when there comes the Deafening Blast[1862]",
       "transliteration": "Faitha jaa-atis saakhah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080033.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080033.mp3",
+      "footnotes": {
+        "1862": "The piercing blast of the Horn which signals resurrection. Aṣ-Ṣākhkhah is also a name for the Day of Resurrection."
+      },
+      "translationClear": "But when the Deafening Noise comes to pass."
     },
     {
       "number": 34,
@@ -1548,7 +1611,8 @@
       ],
       "translation": "On the Day a man will flee from his brother",
       "transliteration": "Yauma yafir-rul mar-u min akheeh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080034.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080034.mp3",
+      "translationClear": "The Day when a person will flee from his brother."
     },
     {
       "number": 35,
@@ -1584,7 +1648,8 @@
       ],
       "translation": "And his mother and his father",
       "transliteration": "Wa-ummihee Wa-abeeh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080035.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080035.mp3",
+      "translationClear": "And his mother and his father."
     },
     {
       "number": 36,
@@ -1620,7 +1685,8 @@
       ],
       "translation": "And his wife and his children,",
       "transliteration": "Wa-sahi-batihee Wa-baneeh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080036.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080036.mp3",
+      "translationClear": "And his consort and his children."
     },
     {
       "number": 37,
@@ -1686,9 +1752,13 @@
           "charType": "end"
         }
       ],
-      "translation": "For every man, that Day, will be a matter adequate for him.",
+      "translation": "For every man, that Day, will be a matter adequate for him.[1863]",
       "transliteration": "Likul limri-im minhum yawmaa-ithin shaa-nuy yughneeh",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080037.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080037.mp3",
+      "footnotes": {
+        "1863": "i.e., to occupy him. He will be concerned only with himself, thus forgetting all others."
+      },
+      "translationClear": "Every one of them, on that Day, will have enough to preoccupy him."
     },
     {
       "number": 38,
@@ -1732,7 +1802,8 @@
       ],
       "translation": "[Some] faces, that Day, will be bright -",
       "transliteration": "Wujoo-huny yauma-ithim musfira",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080038.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080038.mp3",
+      "translationClear": "Faces on that Day will be radiant."
     },
     {
       "number": 39,
@@ -1768,7 +1839,8 @@
       ],
       "translation": "Laughing, rejoicing at good news.",
       "transliteration": "Dahi-katum mustab-shirah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080039.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080039.mp3",
+      "translationClear": "Laughing and rejoicing."
     },
     {
       "number": 40,
@@ -1820,7 +1892,8 @@
       ],
       "translation": "And [other] faces, that Day, will have upon them dust.",
       "transliteration": "Wa-wujoohuy yauma-ithin 'alaiha ghabara",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080040.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080040.mp3",
+      "translationClear": "And faces on that Day will be covered with misery."
     },
     {
       "number": 41,
@@ -1856,7 +1929,8 @@
       ],
       "translation": "Blackness will cover them.",
       "transliteration": "Tarhaquha qatarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080041.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080041.mp3",
+      "translationClear": "Overwhelmed by remorse."
     },
     {
       "number": 42,
@@ -1908,7 +1982,8 @@
       ],
       "translation": "Those are the disbelievers, the wicked ones.",
       "transliteration": "Ulaa-ika humul kafa-ratul fajarah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080042.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/080042.mp3",
+      "translationClear": "These are the faithless, the vicious."
     }
   ]
 }

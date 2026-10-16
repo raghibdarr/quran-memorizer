@@ -38,9 +38,10 @@
           "charType": "end"
         }
       ],
-      "translation": "By the sky and the night comer",
+      "translation": "By the sky and the knocker",
       "transliteration": "Wassamaaa'i wattaariq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086001.mp3",
+      "translationClear": "By the sky and at-Tariq."
     },
     {
       "number": 2,
@@ -90,9 +91,10 @@
           "charType": "end"
         }
       ],
-      "translation": "And what can make you know what is the night comer?",
+      "translation": "And what can make you know what is the knocker?",
       "transliteration": "Wa-maaa adraaka mat taariq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086002.mp3",
+      "translationClear": "But what will let you know what at-Tariq is?"
     },
     {
       "number": 3,
@@ -126,9 +128,13 @@
           "charType": "end"
         }
       ],
-      "translation": "It is the piercing star",
+      "translation": "It is the piercing star[1901].",
       "transliteration": "Annajmus saaqib",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086003.mp3",
+      "footnotes": {
+        "1901": "Whose light pierces through the darkness."
+      },
+      "translationClear": "The Piercing Star."
     },
     {
       "number": 4,
@@ -196,7 +202,8 @@
       ],
       "translation": "There is no soul but that it has over it a protector.",
       "transliteration": "In kullu nafsil lammaa 'alaihaa haafiz",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086004.mp3",
+      "translationClear": "There is no soul without a protector over it."
     },
     {
       "number": 5,
@@ -248,7 +255,8 @@
       ],
       "translation": "So let man observe from what he was created.",
       "transliteration": "Fal-yanzuril insaanu mimma khuliq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086005.mp3",
+      "translationClear": "Let man consider what he was created from."
     },
     {
       "number": 6,
@@ -300,7 +308,8 @@
       ],
       "translation": "He was created from a fluid, ejected,",
       "transliteration": "Khuliqa mim maaa'in daafiq",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086006.mp3",
+      "translationClear": "He was created from gushing liquid."
     },
     {
       "number": 7,
@@ -360,7 +369,8 @@
       ],
       "translation": "Emerging from between the backbone and the ribs.",
       "transliteration": "Yakhruju mim bainis sulbi wat-taraaa'ib",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086007.mp3",
+      "translationClear": "Issuing from between the backbone and the breastbones."
     },
     {
       "number": 8,
@@ -412,7 +422,8 @@
       ],
       "translation": "Indeed, He [i.e., Allāh], to return him [to life], is Able.",
       "transliteration": "Innahoo 'alaa raj'ihee laqaadir",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086008.mp3",
+      "translationClear": "He is certainly Able to return him."
     },
     {
       "number": 9,
@@ -454,9 +465,13 @@
           "charType": "end"
         }
       ],
-      "translation": "The Day when secrets will be put on trial,",
+      "translation": "The Day when secrets will be put on trial,[1902]",
       "transliteration": "Yawma tublas saraaa'ir",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086009.mp3",
+      "footnotes": {
+        "1902": "i.e., exposed, examined and judged."
+      },
+      "translationClear": "On the Day when the secrets are disclosed."
     },
     {
       "number": 10,
@@ -524,7 +539,8 @@
       ],
       "translation": "Then he [i.e., man] will have no power or any helper.",
       "transliteration": "Famaa lahoo min quwwatinw Wa-laa naasir",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086010.mp3",
+      "translationClear": "He will have no strength, and no supporter."
     },
     {
       "number": 11,
@@ -566,9 +582,13 @@
           "charType": "end"
         }
       ],
-      "translation": "By the sky which sends back",
+      "translation": "By the sky which sends back[1903]",
       "transliteration": "Wassamaaa'i thaatir raj'",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086011.mp3",
+      "footnotes": {
+        "1903": "Rain, heat, sound waves, etc."
+      },
+      "translationClear": "By the sky that returns."
     },
     {
       "number": 12,
@@ -610,9 +630,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And [by] the earth which splits,",
+      "translation": "And [by] the earth which splits,[1904]",
       "transliteration": "Wal-ardi thaatis sad'",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086012.mp3",
+      "footnotes": {
+        "1904": "With plant growth or from geological rifts."
+      },
+      "translationClear": "And the earth that cracks open."
     },
     {
       "number": 13,
@@ -656,7 +680,8 @@
       ],
       "translation": "Indeed, it [i.e., the Qur’ān] is a decisive statement,",
       "transliteration": "Innahoo laqawlun fasl",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086013.mp3",
+      "translationClear": "It is a Decisive Word."
     },
     {
       "number": 14,
@@ -700,7 +725,8 @@
       ],
       "translation": "And it is not amusement.",
       "transliteration": "Wa-maa huwa bil-hazl",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086014.mp3",
+      "translationClear": "It is no joke."
     },
     {
       "number": 15,
@@ -744,7 +770,8 @@
       ],
       "translation": "Indeed, they are planning a plan,",
       "transliteration": "Innahum yakeedoona kaidaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086015.mp3",
+      "translationClear": "They plot and scheme."
     },
     {
       "number": 16,
@@ -780,7 +807,8 @@
       ],
       "translation": "But I am planning a plan.",
       "transliteration": "Wa-akeedu kaidaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086016.mp3",
+      "translationClear": "But I plot and scheme."
     },
     {
       "number": 17,
@@ -830,9 +858,13 @@
           "charType": "end"
         }
       ],
-      "translation": "So allow time for the disbelievers. Leave them awhile.",
+      "translation": "So allow time for the disbelievers. Leave them awhile.[1905]",
       "transliteration": "Famahhilil kaafireena amhilhum ruwaidaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/086017.mp3",
+      "footnotes": {
+        "1905": "i.e., Do not be in haste for revenge, for you will see what will become of them."
+      },
+      "translationClear": "Therefore, give the blasphemers respite, a brief respite."
     }
   ]
 }

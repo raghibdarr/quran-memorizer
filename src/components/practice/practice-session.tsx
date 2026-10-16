@@ -23,6 +23,7 @@ import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 import { useSpokenWord } from '@/hooks/use-spoken-word';
 import AyahDisplay from '@/components/ui/ayah-display';
 import HintAyah from '@/components/ui/hint-ayah';
+import TranslationText from '@/components/ui/translation-text';
 type SessionStep = 'ayah-by-ayah' | 'full-passage' | 'results';
 
 interface PracticeSessionProps {
@@ -358,7 +359,7 @@ export default function PracticeSession({
                 <p className="mt-2 text-sm text-muted text-center">{currentAyah.transliteration}</p>
               )}
               {translationEnabled && currentAyah.translation && (
-                <p className="mt-1 text-center text-sm italic text-muted">{currentAyah.translation}</p>
+                <TranslationText ayah={currentAyah} className="mt-1 text-center text-sm italic text-muted" />
               )}
               {/* Voice recognition results */}
               {transcribedText != null && (
@@ -565,7 +566,7 @@ export default function PracticeSession({
                       <p className="text-sm text-muted text-center">{ayah.transliteration}</p>
                     )}
                     {translationEnabled && ayah.translation && (
-                      <p className="text-center text-sm italic text-muted">{ayah.translation}</p>
+                      <TranslationText ayah={ayah} className="text-center text-sm italic text-muted" />
                     )}
                     {/* Per-ayah rating */}
                     <RatingButtons

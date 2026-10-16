@@ -40,7 +40,8 @@
       ],
       "translation": "By those [winds] sent forth in gusts",
       "transliteration": "Wal-mursalaati 'urfaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077001.mp3",
+      "translationClear": "By those unleashed in succession."
     },
     {
       "number": 2,
@@ -76,7 +77,8 @@
       ],
       "translation": "And the winds that blow violently",
       "transliteration": "Fal'aasifaati 'asfaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077002.mp3",
+      "translationClear": "Storming turbulently."
     },
     {
       "number": 3,
@@ -112,7 +114,8 @@
       ],
       "translation": "And [by] the winds that spread [clouds]",
       "transliteration": "Wannaashiraati nashraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077003.mp3",
+      "translationClear": "Scattering far and wide."
     },
     {
       "number": 4,
@@ -146,9 +149,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And those [angels] who bring criterion",
+      "translation": "And those [angels] who bring criterion[1816]",
       "transliteration": "Falfaariqaati farqaa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077004.mp3",
+      "footnotes": {
+        "1816": "To Allāh's human messengers."
+      },
+      "translationClear": "Separating decisively."
     },
     {
       "number": 5,
@@ -182,9 +189,10 @@
           "charType": "end"
         }
       ],
-      "translation": "And those [angels] who deliver a message.",
+      "translation": "And those [angels] who deliver a message",
       "transliteration": "Falmulqiyaati thikra",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077005.mp3",
+      "translationClear": "Delivering a message."
     },
     {
       "number": 6,
@@ -228,7 +236,8 @@
       ],
       "translation": "As justification or warning,",
       "transliteration": "Uthran aw nuthraa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077006.mp3",
+      "translationClear": "Excusing or warning."
     },
     {
       "number": 7,
@@ -272,7 +281,8 @@
       ],
       "translation": "Indeed, what you are promised is to occur.",
       "transliteration": "Innamaa too'adoona lawaaqi'",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077007.mp3",
+      "translationClear": "Surely what you are promised will happen."
     },
     {
       "number": 8,
@@ -316,7 +326,8 @@
       ],
       "translation": "So when the stars are obliterated",
       "transliteration": "Fa-itham nujoomu tumisat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077008.mp3",
+      "translationClear": "When the stars are obliterated."
     },
     {
       "number": 9,
@@ -360,7 +371,8 @@
       ],
       "translation": "And when the heaven is opened",
       "transliteration": "Wa-ithas samaaa'u furijat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077009.mp3",
+      "translationClear": "And the sky is fractured."
     },
     {
       "number": 10,
@@ -404,7 +416,8 @@
       ],
       "translation": "And when the mountains are blown away",
       "transliteration": "Wa-ithal jibaalu nusifat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077010.mp3",
+      "translationClear": "And the mountains are blown away."
     },
     {
       "number": 11,
@@ -446,9 +459,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And when the messengers' time has come...",
+      "translation": "And when the messengers' time has come...[1817]",
       "transliteration": "Wa-ithar Rusulu uqqitat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077011.mp3",
+      "footnotes": {
+        "1817": "i.e., when they are gathered to witness concerning their nations. The sentence's conclusion is understood to be \"...the promised judgement will then take place.\""
+      },
+      "translationClear": "And the messengers are alerted."
     },
     {
       "number": 12,
@@ -490,9 +507,13 @@
           "charType": "end"
         }
       ],
-      "translation": "For what Day was it postponed?",
+      "translation": "For what Day was it postponed?[1818]",
       "transliteration": "Li-ayyi yawmin ujjilat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077012.mp3",
+      "footnotes": {
+        "1818": "\"It\" may refer to either the aforementioned occurrences collectively or to the testimony of the messengers."
+      },
+      "translationClear": "Until which day is it deferred?"
     },
     {
       "number": 13,
@@ -528,7 +549,8 @@
       ],
       "translation": "For the Day of Judgement.",
       "transliteration": "Li-yawmil Fasl",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077013.mp3",
+      "translationClear": "Until the Day of Decision."
     },
     {
       "number": 14,
@@ -588,7 +610,8 @@
       ],
       "translation": "And what can make you know what is the Day of Judgement?",
       "transliteration": "Wa-maaa adraaka maa yawmul fasl",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077014.mp3",
+      "translationClear": "And what will teach you what the Day of Decision is?"
     },
     {
       "number": 15,
@@ -630,9 +653,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Woe, that Day, to the deniers.",
+      "translation": "Woe,[1819] that Day, to the deniers.",
       "transliteration": "Wailuny yawma-'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077015.mp3",
+      "footnotes": {
+        "1819": "i.e., death and destruction."
+      },
+      "translationClear": "Woe on that Day to the liars."
     },
     {
       "number": 16,
@@ -676,7 +703,8 @@
       ],
       "translation": "Did We not destroy the former peoples?",
       "transliteration": "Alam nuhlikil awwaleen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077016.mp3",
+      "translationClear": "Did We not destroy the ancients?"
     },
     {
       "number": 17,
@@ -720,7 +748,8 @@
       ],
       "translation": "Then We will follow them with the later ones.",
       "transliteration": "Summa nutbi'uhumul aakhireen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077017.mp3",
+      "translationClear": "Then succeeded them with the others?"
     },
     {
       "number": 18,
@@ -764,7 +793,8 @@
       ],
       "translation": "Thus do We deal with the criminals.",
       "transliteration": "Kaththalika naf'alu bilmujrimeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077018.mp3",
+      "translationClear": "This is how We deal with the guilty."
     },
     {
       "number": 19,
@@ -808,7 +838,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailunw yawma-'ithil lil-mukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077019.mp3",
+      "translationClear": "Woe on that Day to the rejecters."
     },
     {
       "number": 20,
@@ -868,7 +899,8 @@
       ],
       "translation": "Did We not create you from a liquid disdained?",
       "transliteration": "Alam nakhlukkum mim maaa'im maheen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077020.mp3",
+      "translationClear": "Did We not create you from an insignificant fluid?"
     },
     {
       "number": 21,
@@ -920,7 +952,8 @@
       ],
       "translation": "And We placed it in a firm lodging [i.e., the womb]",
       "transliteration": "Faja'alnaahu fee qaraarim makeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077021.mp3",
+      "translationClear": "Then lodged it in a secure place?"
     },
     {
       "number": 22,
@@ -964,7 +997,8 @@
       ],
       "translation": "For a known extent.",
       "transliteration": "Illaa qadrim ma'loom",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077022.mp3",
+      "translationClear": "For a known term?"
     },
     {
       "number": 23,
@@ -1008,7 +1042,8 @@
       ],
       "translation": "And We determined [it], and excellent [are We] to determine.",
       "transliteration": "Faqadarnaa fani'mal qaadiroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077023.mp3",
+      "translationClear": "We measured precisely. We are the best to measure."
     },
     {
       "number": 24,
@@ -1052,7 +1087,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailuny yawma-'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077024.mp3",
+      "translationClear": "Woe on that Day to the falsifiers."
     },
     {
       "number": 25,
@@ -1104,7 +1140,8 @@
       ],
       "translation": "Have We not made the earth a container",
       "transliteration": "Alam naj'alil arda kifaataa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077025.mp3",
+      "translationClear": "Did We not make the earth a homestead?"
     },
     {
       "number": 26,
@@ -1140,7 +1177,8 @@
       ],
       "translation": "Of the living and the dead?",
       "transliteration": "Ahyaaa'anw Wa-amwaataa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077026.mp3",
+      "translationClear": "For the living and the dead?"
     },
     {
       "number": 27,
@@ -1216,7 +1254,8 @@
       ],
       "translation": "And We placed therein lofty, firmly set mountains and have given you to drink sweet water.",
       "transliteration": "Wa-ja'alnaa feehaa rawaasiya shaamikhaatinw Wa-asqainaakum maaa'an furaataa",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077027.mp3",
+      "translationClear": "And set on it lofty mountains, and give you pure water to drink?"
     },
     {
       "number": 28,
@@ -1260,7 +1299,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailuny yawma-'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077028.mp3",
+      "translationClear": "Woe on that Day to the deniers."
     },
     {
       "number": 29,
@@ -1328,7 +1368,8 @@
       ],
       "translation": "[They will be told], \"Proceed to that which you used to deny.",
       "transliteration": "Intaliqooo ilaa maa kuntum bihee tukaththiboon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077029.mp3",
+      "translationClear": "“Proceed to what you used to deny.”"
     },
     {
       "number": 30,
@@ -1394,9 +1435,10 @@
           "charType": "end"
         }
       ],
-      "translation": "Proceed to a shadow [of smoke] having three columns.",
+      "translation": "Proceed to a shadow [of smoke] having three columns",
       "transliteration": "Intaliqooo ilaa zillin thee salaasi shu'ab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077030.mp3",
+      "translationClear": "“Proceed to a shadow of three different masses.”"
     },
     {
       "number": 31,
@@ -1464,7 +1506,8 @@
       ],
       "translation": "[But having] no cool shade and availing not against the flame.\"",
       "transliteration": "Laa zaleelinw Wa-laa yughnee minal lahab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077031.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077031.mp3",
+      "translationClear": "Offering no shade, and unavailing against the flames."
     },
     {
       "number": 32,
@@ -1516,7 +1559,8 @@
       ],
       "translation": "Indeed, it throws sparks [as huge] as a fortress,",
       "transliteration": "Innahaa tarmee bishararin kalqasr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077032.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077032.mp3",
+      "translationClear": "It shoots sparks as castles."
     },
     {
       "number": 33,
@@ -1560,7 +1604,8 @@
       ],
       "translation": "As if they were yellowish [black] camels.",
       "transliteration": "Ka-annahoo jimaalatun sufr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077033.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077033.mp3",
+      "translationClear": "As if they were yellow camels."
     },
     {
       "number": 34,
@@ -1604,7 +1649,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailuny yawma-'ithil lilmukathibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077034.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077034.mp3",
+      "translationClear": "Woe on that Day to the liars."
     },
     {
       "number": 35,
@@ -1656,7 +1702,8 @@
       ],
       "translation": "This is a Day they will not speak,",
       "transliteration": "Haathaa yawmu laa yantiqoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077035.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077035.mp3",
+      "translationClear": "This is a Day when they will not speak."
     },
     {
       "number": 36,
@@ -1708,7 +1755,8 @@
       ],
       "translation": "Nor will it be permitted for them to make an excuse.",
       "transliteration": "Wa-laa yu'thanu lahum fa-ya'tathiroon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077036.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077036.mp3",
+      "translationClear": "And they will not be allowed to apologize."
     },
     {
       "number": 37,
@@ -1752,7 +1800,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailunw yawma-'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077037.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077037.mp3",
+      "translationClear": "Woe on that Day to the rejecters."
     },
     {
       "number": 38,
@@ -1812,7 +1861,8 @@
       ],
       "translation": "This is the Day of Judgement; We will have assembled you and the former peoples.",
       "transliteration": "Haatha yawmul fasli jama-'naakum wal-awwaleen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077038.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077038.mp3",
+      "translationClear": "This is the Day of Separation; We have gathered you, together with the ancients."
     },
     {
       "number": 39,
@@ -1872,7 +1922,8 @@
       ],
       "translation": "So if you have a plan, then plan against Me.",
       "transliteration": "Fa-in kaana lakum kaidun fakeedoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077039.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077039.mp3",
+      "translationClear": "So if you have a strategy, use it against Me."
     },
     {
       "number": 40,
@@ -1916,7 +1967,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailuny yawma'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077040.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077040.mp3",
+      "translationClear": "Woe on that Day to the falsifiers."
     },
     {
       "number": 41,
@@ -1976,7 +2028,8 @@
       ],
       "translation": "Indeed, the righteous will be among shades and springs",
       "transliteration": "Innal muttaqeena fee zilaalinw Wa-'uyoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077041.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077041.mp3",
+      "translationClear": "The righteous will be amidst shades and fountains."
     },
     {
       "number": 42,
@@ -2020,7 +2073,8 @@
       ],
       "translation": "And fruits from whatever they desire,",
       "transliteration": "Wa-fawaakiha mimmaa yashtahoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077042.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077042.mp3",
+      "translationClear": "And fruits as they desire."
     },
     {
       "number": 43,
@@ -2088,7 +2142,8 @@
       ],
       "translation": "[Being told], \"Eat and drink in satisfaction for what you used to do.\"",
       "transliteration": "Kuloo washraboo haneee-'am bimaa kuntum ta'maloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077043.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077043.mp3",
+      "translationClear": "“Eat and drink pleasantly, for what you used to do.”"
     },
     {
       "number": 44,
@@ -2140,7 +2195,8 @@
       ],
       "translation": "Indeed, We thus reward the doers of good.",
       "transliteration": "Innaa kathaalika najzil muhsineen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077044.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077044.mp3",
+      "translationClear": "This is how We reward the doers of good."
     },
     {
       "number": 45,
@@ -2184,7 +2240,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailuny yawma-'ithil lilmuthkaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077045.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077045.mp3",
+      "translationClear": "Woe on that Day to the deniers."
     },
     {
       "number": 46,
@@ -2244,7 +2301,8 @@
       ],
       "translation": "[O disbelievers], eat and enjoy yourselves a little; indeed, you are criminals.",
       "transliteration": "Kuloo Wa-tamatta'oo qaleelan innakum mujrimoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077046.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077046.mp3",
+      "translationClear": "“Eat and enjoy yourselves a little; you are indeed criminals.”"
     },
     {
       "number": 47,
@@ -2288,7 +2346,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailunny yawma-'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077047.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077047.mp3",
+      "translationClear": "Woe on that Day to the liars."
     },
     {
       "number": 48,
@@ -2356,7 +2415,8 @@
       ],
       "translation": "And when it is said to them, \"Bow [in prayer],\" they do not bow.",
       "transliteration": "Wa-ithaa qeela lahumur ka'oo laa yarka'oon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077048.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077048.mp3",
+      "translationClear": "And when it is said to them, “Kneel,” they do not kneel."
     },
     {
       "number": 49,
@@ -2400,7 +2460,8 @@
       ],
       "translation": "Woe, that Day, to the deniers.",
       "transliteration": "Wailunny yawma-'ithil lilmukaththibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077049.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077049.mp3",
+      "translationClear": "Woe on that Day to the rejecters."
     },
     {
       "number": 50,
@@ -2452,7 +2513,8 @@
       ],
       "translation": "Then in what statement after it [i.e., the Qur’ān] will they believe?",
       "transliteration": "Fabi-ayyi hadeesim ba'dahoo yu'minoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077050.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/077050.mp3",
+      "translationClear": "In what message, beyond this, will they believe?"
     }
   ]
 }

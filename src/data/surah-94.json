@@ -54,9 +54,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Did We not expand for you, [O Muḥammad], your breast?",
+      "translation": "Did We not expand for you, [O Muḥammad], your breast?[1944]",
       "transliteration": "Alam nashrah laka sadrak",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094001.mp3",
+      "footnotes": {
+        "1944": "i.e., enlighten, assure and gladden your heart with guidance."
+      },
+      "translationClear": "Did We not soothe your heart?"
     },
     {
       "number": 2,
@@ -98,9 +102,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And We removed from you your burden",
+      "translation": "And We removed from you your burden[1945]",
       "transliteration": "Wa-Wa-d'ana 'anka wizrak",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094002.mp3",
+      "footnotes": {
+        "1945": "By forgiving any errors which you may have committed previously or might commit consequently. \"Burden\" can also refer to the anxiety experienced by the Prophet (ﷺ) at the beginning of his mission."
+      },
+      "translationClear": "And lift from you your burden."
     },
     {
       "number": 3,
@@ -144,7 +152,8 @@
       ],
       "translation": "Which had weighed upon your back",
       "transliteration": "Allathee anqada zahrak",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094003.mp3",
+      "translationClear": "Which weighed down your back?"
     },
     {
       "number": 4,
@@ -188,7 +197,8 @@
       ],
       "translation": "And raised high for you your repute.",
       "transliteration": "Wa-raf-'ana laka thikrak",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094004.mp3",
+      "translationClear": "And raised for you your reputation?"
     },
     {
       "number": 5,
@@ -240,7 +250,8 @@
       ],
       "translation": "For indeed, with hardship [will be] ease [i.e., relief].",
       "transliteration": "Fa-inna ma'al usri yusra",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094005.mp3",
+      "translationClear": "With hardship comes ease."
     },
     {
       "number": 6,
@@ -292,7 +303,8 @@
       ],
       "translation": "Indeed, with hardship [will be] ease.",
       "transliteration": "Inna ma'al 'usri yusra",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094006.mp3",
+      "translationClear": "With hardship comes ease."
     },
     {
       "number": 7,
@@ -336,7 +348,8 @@
       ],
       "translation": "So when you have finished [your duties], then stand up [for worship].",
       "transliteration": "Fa-itha faragh-ta fansab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094007.mp3",
+      "translationClear": "When your work is done, turn to devotion."
     },
     {
       "number": 8,
@@ -380,7 +393,8 @@
       ],
       "translation": "And to your Lord direct [your] longing.",
       "transliteration": "Wa-ilaa rabbika far-ghab",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/094008.mp3",
+      "translationClear": "And to your Lord turn for everything."
     }
   ]
 }

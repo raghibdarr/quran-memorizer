@@ -56,7 +56,8 @@
       ],
       "translation": "Say, \"I seek refuge in the Lord of mankind,",
       "transliteration": "Qul a'oothu birabbin naas",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114001.mp3",
+      "translationClear": "Say, “I seek refuge in the Lord of mankind."
     },
     {
       "number": 2,
@@ -92,7 +93,8 @@
       ],
       "translation": "The Sovereign of mankind,",
       "transliteration": "Malikin naas",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114002.mp3",
+      "translationClear": "The King of mankind."
     },
     {
       "number": 3,
@@ -128,7 +130,8 @@
       ],
       "translation": "The God of mankind,",
       "transliteration": "Ilaahin naas",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114003.mp3",
+      "translationClear": "The God of mankind."
     },
     {
       "number": 4,
@@ -178,9 +181,13 @@
           "charType": "end"
         }
       ],
-      "translation": "From the evil of the retreating whisperer -",
+      "translation": "From the evil of the retreating whisperer[2016] -",
       "transliteration": "Min sharril waswaasil khannaas",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114004.mp3",
+      "footnotes": {
+        "2016": "i.e., a devil who makes evil suggestions to man but disappears when one remembers Allāh."
+      },
+      "translationClear": "From the evil of the sneaky whisperer."
     },
     {
       "number": 5,
@@ -240,7 +247,8 @@
       ],
       "translation": "Who whispers [evil] into the breasts of mankind -",
       "transliteration": "Allathee yuwaswisu fee sudoorin naas",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114005.mp3",
+      "translationClear": "Who whispers into the hearts of people."
     },
     {
       "number": 6,
@@ -282,9 +290,13 @@
           "charType": "end"
         }
       ],
-      "translation": "From among the jinn and mankind\".",
+      "translation": "From among the jinn and mankind.\"[2017]",
       "transliteration": "Minal jinnati wannaas",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/114006.mp3",
+      "footnotes": {
+        "2017": "Evil prompters may be from men as well as from jinn."
+      },
+      "translationClear": "From among jinn and among people.”"
     }
   ]
 }

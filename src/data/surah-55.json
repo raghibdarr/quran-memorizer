@@ -32,7 +32,8 @@
       ],
       "translation": "The Most Merciful",
       "transliteration": "Ar-Rahmaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055001.mp3",
+      "translationClear": "The Compassionate."
     },
     {
       "number": 2,
@@ -68,7 +69,8 @@
       ],
       "translation": "Taught the Qur’ān,",
       "transliteration": "Allamal Quran",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055002.mp3",
+      "translationClear": "Has taught the Quran."
     },
     {
       "number": 3,
@@ -104,7 +106,8 @@
       ],
       "translation": "Created man,",
       "transliteration": "Khalaqal insaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055003.mp3",
+      "translationClear": "He created man."
     },
     {
       "number": 4,
@@ -140,7 +143,8 @@
       ],
       "translation": "[And] taught him eloquence.",
       "transliteration": "Allamahul bayaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055004.mp3",
+      "translationClear": "And taught him clear expression."
     },
     {
       "number": 5,
@@ -184,7 +188,8 @@
       ],
       "translation": "The sun and the moon [move] by precise calculation,",
       "transliteration": "Ashshamsu walqamaru bihusbaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055005.mp3",
+      "translationClear": "The sun and the moon move according to plan."
     },
     {
       "number": 6,
@@ -226,9 +231,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And the stars and trees prostrate.",
+      "translation": "And the stars and trees prostrate.[1593]",
       "transliteration": "Wannajmu washshajaru yasjudan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055006.mp3",
+      "footnotes": {
+        "1593": "They submit obediently to the laws of Allāh. See 22:18. An additional meaning of \"najm\" is vegetation of a kind without a trunk, stalk or stem."
+      },
+      "translationClear": "And the stars and the trees prostrate themselves."
     },
     {
       "number": 7,
@@ -280,7 +289,8 @@
       ],
       "translation": "And the heaven He raised and imposed the balance",
       "transliteration": "Wassamaaa'a rafa'ahaa Wa-wada'al Meezan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055007.mp3",
+      "translationClear": "And the sky, He raised; and He set up the balance."
     },
     {
       "number": 8,
@@ -332,7 +342,8 @@
       ],
       "translation": "That you not transgress within the balance.",
       "transliteration": "Allaa tatghaw fil meezaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055008.mp3",
+      "translationClear": "So do not transgress in the balance."
     },
     {
       "number": 9,
@@ -400,7 +411,8 @@
       ],
       "translation": "And establish weight in justice and do not make deficient the balance.",
       "transliteration": "Wa-aqeemul wazna bilqisti Wa-laa tukhsirul meezaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055009.mp3",
+      "translationClear": "But maintain the weights with justice, and do not violate the balance."
     },
     {
       "number": 10,
@@ -444,7 +456,8 @@
       ],
       "translation": "And the earth He laid [out] for the creatures.",
       "transliteration": "Wal-arda wada'ahaa lilanaam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055010.mp3",
+      "translationClear": "And the earth; He set up for the creatures."
     },
     {
       "number": 11,
@@ -504,7 +517,8 @@
       ],
       "translation": "Therein is fruit and palm trees having sheaths [of dates]",
       "transliteration": "Feehaa faakihatunw wan-nakhlu thaatul akmaam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055011.mp3",
+      "translationClear": "In it are fruits, and palms in clusters."
     },
     {
       "number": 12,
@@ -556,7 +570,8 @@
       ],
       "translation": "And grain having husks and scented plants.",
       "transliteration": "Walhabbu thul 'asfi war-Raihaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055012.mp3",
+      "translationClear": "And grains in the blades, and fragrant plants."
     },
     {
       "number": 13,
@@ -606,9 +621,13 @@
           "charType": "end"
         }
       ],
-      "translation": "So which of the favors of your Lord would you deny?",
+      "translation": "So which of the favors of your Lord would you deny?[1594]",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055013.mp3",
+      "footnotes": {
+        "1594": "Literally, \"you two,\" addressing the species of mankind and jinn."
+      },
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 14,
@@ -668,7 +687,8 @@
       ],
       "translation": "He created man from clay like [that of] pottery.",
       "transliteration": "Khalaqal insaana min salsaalin kalfakhkhaar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055014.mp3",
+      "translationClear": "He created man from hard clay, like bricks."
     },
     {
       "number": 15,
@@ -736,7 +756,8 @@
       ],
       "translation": "And He created the jinn from a smokeless flame of fire.",
       "transliteration": "Wa-khalaqal jaaan mim maarijim min naar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055015.mp3",
+      "translationClear": "And created the jinn from a fusion of fire."
     },
     {
       "number": 16,
@@ -788,7 +809,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055016.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 17,
@@ -838,9 +860,13 @@
           "charType": "end"
         }
       ],
-      "translation": "[He is] Lord of the two sunrises and Lord of the two sunsets.",
+      "translation": "[He is] Lord of the two sunrises and Lord of the two sunsets.[1595]",
       "transliteration": "Rabbul mashriqayni Wa-Rabbul maghribayn",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055017.mp3",
+      "footnotes": {
+        "1595": "i.e., the points of sunrise in the east and sunset in the west in both summer and winter."
+      },
+      "translationClear": "Lord of the two Easts and Lord of the two Wests."
     },
     {
       "number": 18,
@@ -892,7 +918,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055018.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 19,
@@ -934,9 +961,13 @@
           "charType": "end"
         }
       ],
-      "translation": "He released the two seas, meeting [one another];",
+      "translation": "He released the two seas,[1596] meeting [one another];",
       "transliteration": "Marajal bahrayni yalta-qiyaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055019.mp3",
+      "footnotes": {
+        "1596": "Two bodies of water or two sea waters of distinct characteristics."
+      },
+      "translationClear": "He merged the two seas, converging together."
     },
     {
       "number": 20,
@@ -988,7 +1019,8 @@
       ],
       "translation": "Between them is a barrier so neither of them transgresses.",
       "transliteration": "Bainahumaa barzakhul laa yabghiyaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055020.mp3",
+      "translationClear": "Between them is a barrier, which they do not overrun."
     },
     {
       "number": 21,
@@ -1040,7 +1072,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055021.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 22,
@@ -1092,7 +1125,8 @@
       ],
       "translation": "From both of them emerge pearl and coral.",
       "transliteration": "Yakhruju minhumal lu-'lu-u wal-marjaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055022.mp3",
+      "translationClear": "From them emerge pearls and coral."
     },
     {
       "number": 23,
@@ -1144,7 +1178,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055023.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 24,
@@ -1212,7 +1247,8 @@
       ],
       "translation": "And to Him belong the ships [with sails] elevated in the sea like mountains.",
       "transliteration": "Wa-lahul jawaaril mun-sha'aatu fil bahri kal-a'laam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055024.mp3",
+      "translationClear": "His are the ships, raised above the sea like landmarks."
     },
     {
       "number": 25,
@@ -1264,7 +1300,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055025.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 26,
@@ -1316,7 +1353,8 @@
       ],
       "translation": "Everyone upon it [i.e., the earth] will perish,",
       "transliteration": "Kullu man 'alaihaa faan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055026.mp3",
+      "translationClear": "Everyone upon it is perishing."
     },
     {
       "number": 27,
@@ -1382,9 +1420,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And there will remain the Face of your Lord, Owner of Majesty and Honor.",
+      "translation": "And there will remain the Face[1597] of your Lord, Owner of Majesty and Honor.",
       "transliteration": "Wa-yabqaa wajhu rabbika thul jalaali wal-ikraam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055027.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055027.mp3",
+      "footnotes": {
+        "1597": "See footnote to 2:19."
+      },
+      "translationClear": "But will remain the Presence of your Lord, Full of Majesty and Splendor."
     },
     {
       "number": 28,
@@ -1436,7 +1478,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055028.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055028.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 29,
@@ -1534,9 +1577,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Whoever is within the heavens and earth asks Him; every day He is in [i.e., bringing about] a matter.",
+      "translation": "Whoever is within the heavens and earth asks Him; every day He is in [i.e., bringing about] a matter.[1598]",
       "transliteration": "Yas'aluhoo man fis samaawaati walard; kulla yawmin huwa fee shaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055029.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055029.mp3",
+      "footnotes": {
+        "1598": "For each of His creatures."
+      },
+      "translationClear": "Everyone in the heavens and the earth asks Him. Every day He is managing."
     },
     {
       "number": 30,
@@ -1588,7 +1635,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055030.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055030.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 31,
@@ -1638,9 +1686,13 @@
           "charType": "end"
         }
       ],
-      "translation": "We will attend to you, O prominent beings.",
+      "translation": "We will attend to you, O prominent beings.[1599]",
       "transliteration": "Sanafrughu lakum ayyuhas saqalaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055031.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055031.mp3",
+      "footnotes": {
+        "1599": "Specifically two: mankind and jinn."
+      },
+      "translationClear": "We will attend to you, O prominent two."
     },
     {
       "number": 32,
@@ -1692,7 +1744,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055032.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055032.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 33,
@@ -1840,7 +1893,8 @@
       ],
       "translation": "O company of jinn and mankind, if you are able to pass beyond the regions of the heavens and the earth, then pass. You will not pass except by authority [from Allāh].",
       "transliteration": "Yaa-ma'sharal jinni wal-insi inis tata'tum an tanfuthoo min aqtaaris samaawaati wal-ardi fanfuthoo; laa tanfuthoona illaa bisultaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055033.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055033.mp3",
+      "translationClear": "O society of jinn and humans! If you can pass through the bounds of the heavens and the earth, go ahead and pass. But you will not pass except with authorization."
     },
     {
       "number": 34,
@@ -1892,7 +1946,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055034.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055034.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 35,
@@ -1974,9 +2029,13 @@
           "charType": "end"
         }
       ],
-      "translation": "There will be sent upon you a flame of fire and smoke, and you will not defend yourselves.",
+      "translation": "There will be sent upon you a flame of fire and smoke,[1600] and you will not defend yourselves.",
       "transliteration": "Yursalu 'alaikumaa shuwaazum min naarinw-wa nuhaasun falaa tantasiraan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055035.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055035.mp3",
+      "footnotes": {
+        "1600": "Another possible meaning is liquefied brass or copper."
+      },
+      "translationClear": "You will be bombarded with flares of fire and brass, and you will not succeed."
     },
     {
       "number": 36,
@@ -2028,7 +2087,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055036.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055036.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 37,
@@ -2094,9 +2154,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And when the heaven is split open and becomes rose-colored like oil -",
+      "translation": "And when the heaven is split open and becomes rose-colored like oil[1601] -",
       "transliteration": "Fa-ithan shaqqatis samaaa'u fakaanat wardatan kaddihaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055037.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055037.mp3",
+      "footnotes": {
+        "1601": "Or \"like a tanned skin.\""
+      },
+      "translationClear": "When the sky splits apart, and becomes rose, like paint."
     },
     {
       "number": 38,
@@ -2148,7 +2212,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055038.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055038.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 39,
@@ -2230,9 +2295,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Then on that Day none will be asked about his sin among men or jinn.",
+      "translation": "Then on that Day none will be asked about his sin among men or jinn.[1602]",
       "transliteration": "Fa-yawma'ithil laa yus'alu 'an thambiheee insunw Wa-laa jaann",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055039.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055039.mp3",
+      "footnotes": {
+        "1602": "Once they have been condemned to the Fire."
+      },
+      "translationClear": "On that Day, no human and no jinn will be asked about his sins."
     },
     {
       "number": 40,
@@ -2284,7 +2353,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055040.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055040.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 41,
@@ -2352,7 +2422,8 @@
       ],
       "translation": "The criminals will be known by their marks, and they will be seized by the forelocks and the feet.",
       "transliteration": "Yu'raful mujrimoona biseemaahum fa'yu'khathu binna-waasi wal-aqdaam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055041.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055041.mp3",
+      "translationClear": "The guilty will be recognized by their marks; they will be taken by the forelocks and the feet."
     },
     {
       "number": 42,
@@ -2404,7 +2475,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055042.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055042.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 43,
@@ -2472,7 +2544,8 @@
       ],
       "translation": "This is Hell, which the criminals deny.",
       "transliteration": "Haathihee jahannamul latee yukaththibu bihal mujrimoon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055043.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055043.mp3",
+      "translationClear": "This is Hell that the guilty denied."
     },
     {
       "number": 44,
@@ -2532,7 +2605,8 @@
       ],
       "translation": "They will circulate between it and scalding water, heated [to the utmost degree].",
       "transliteration": "Yatoofoona bainahaa Wa-baina hameemim aan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055044.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055044.mp3",
+      "translationClear": "They circulate between it and between a seething bath."
     },
     {
       "number": 45,
@@ -2584,7 +2658,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055045.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055045.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 46,
@@ -2642,9 +2717,13 @@
           "charType": "end"
         }
       ],
-      "translation": "But for he who has feared the position of his Lord are two gardens -",
+      "translation": "But for he who has feared the position of his Lord[1603] are two gardens -",
       "transliteration": "Wa-liman khaafa maqaama rabbihee jannataan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055046.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055046.mp3",
+      "footnotes": {
+        "1603": "An alternative meaning is \"the standing [for account] before his Lord.\""
+      },
+      "translationClear": "But for him who feared the standing of his Lord are two gardens."
     },
     {
       "number": 47,
@@ -2696,7 +2775,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055047.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055047.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 48,
@@ -2732,7 +2812,8 @@
       ],
       "translation": "Having [spreading] branches.",
       "transliteration": "Thawaataaa afnaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055048.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055048.mp3",
+      "translationClear": "Full of varieties."
     },
     {
       "number": 49,
@@ -2784,7 +2865,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055049.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055049.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 50,
@@ -2828,7 +2910,8 @@
       ],
       "translation": "In both of them are two springs, flowing.",
       "transliteration": "Feehimaa 'aynaani tajriyaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055050.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055050.mp3",
+      "translationClear": "In them are two flowing springs."
     },
     {
       "number": 51,
@@ -2880,7 +2963,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055051.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055051.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 52,
@@ -2940,7 +3024,8 @@
       ],
       "translation": "In both of them are of every fruit, two kinds.",
       "transliteration": "Feehimaa min kulli faakihatin zawjaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055052.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055052.mp3",
+      "translationClear": "In them are fruits of every kind, in pairs."
     },
     {
       "number": 53,
@@ -2992,7 +3077,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055053.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055053.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 54,
@@ -3084,7 +3170,8 @@
       ],
       "translation": "[They are] reclining on beds whose linings are of silk brocade, and the fruit of the two gardens is hanging low.",
       "transliteration": "Muttaki'eena 'alaa furushim bataaa'inuhaa min istabraq; wajanal jannataini daan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055054.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055054.mp3",
+      "translationClear": "Reclining on furnishings lined with brocade, and the fruits of the two gardens are near at hand."
     },
     {
       "number": 55,
@@ -3136,7 +3223,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055055.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055055.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 56,
@@ -3226,9 +3314,14 @@
           "charType": "end"
         }
       ],
-      "translation": "In them are women limiting [their] glances, untouched before them by man or jinnī -",
+      "translation": "In them are women limiting [their] glances,[1604] untouched[1605] before them by man or jinnī -",
       "transliteration": "Feehinna qaasiratut tarfi lam yatmishunna insun qablahum Wa-laa jaaann",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055056.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055056.mp3",
+      "footnotes": {
+        "1604": "To their own mates, i.e., being chaste and modest.",
+        "1605": "Literally, they have not been caused to bleed by loss of virginity."
+      },
+      "translationClear": "In them are maidens restraining their glances, untouched before by any man or jinn."
     },
     {
       "number": 57,
@@ -3280,7 +3373,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055057.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055057.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 58,
@@ -3322,9 +3416,13 @@
           "charType": "end"
         }
       ],
-      "translation": "As if they were rubies and coral.",
+      "translation": "As if they were rubies and coral.[1606]",
       "transliteration": "Ka-annahunnal yaaqootu wal-marjaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055058.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055058.mp3",
+      "footnotes": {
+        "1606": "In purity, color and beauty."
+      },
+      "translationClear": "As though they were rubies and corals."
     },
     {
       "number": 59,
@@ -3376,7 +3474,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055059.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055059.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 60,
@@ -3436,7 +3535,8 @@
       ],
       "translation": "Is the reward for good [anything] but good?",
       "transliteration": "Hal jazaaa'ul ihsaani illal ihsaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055060.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055060.mp3",
+      "translationClear": "Is the reward of goodness anything but goodness?"
     },
     {
       "number": 61,
@@ -3488,7 +3588,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055061.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055061.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 62,
@@ -3532,7 +3633,8 @@
       ],
       "translation": "And below them both [in excellence] are two [other] gardens -",
       "transliteration": "Wa-min doonihimaa jannataan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055062.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055062.mp3",
+      "translationClear": "And beneath them are two gardens."
     },
     {
       "number": 63,
@@ -3584,7 +3686,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055063.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055063.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 64,
@@ -3612,7 +3715,8 @@
       ],
       "translation": "Dark green [in color].",
       "transliteration": "Mudhaaammataan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055064.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055064.mp3",
+      "translationClear": "Deep green."
     },
     {
       "number": 65,
@@ -3664,7 +3768,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055065.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055065.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 66,
@@ -3708,7 +3813,8 @@
       ],
       "translation": "In both of them are two springs, spouting.",
       "transliteration": "Feehimaa 'aynaani nad-daakhataan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055066.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055066.mp3",
+      "translationClear": "In them are two gushing springs."
     },
     {
       "number": 67,
@@ -3760,7 +3866,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055067.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055067.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 68,
@@ -3812,7 +3919,8 @@
       ],
       "translation": "In both of them are fruit and palm trees and pomegranates.",
       "transliteration": "Feehimaa faakihatunw Wa-nakhlunw Wa-rummaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055068.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055068.mp3",
+      "translationClear": "In them are fruits, and date-palms, and pomegranates."
     },
     {
       "number": 69,
@@ -3864,7 +3972,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055069.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055069.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 70,
@@ -3908,7 +4017,8 @@
       ],
       "translation": "In them are good and beautiful women -",
       "transliteration": "Feehinna khairaatun hisaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055070.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055070.mp3",
+      "translationClear": "In them are good and beautiful ones."
     },
     {
       "number": 71,
@@ -3960,7 +4070,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055071.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055071.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 72,
@@ -4012,7 +4123,8 @@
       ],
       "translation": "Fair ones reserved in pavilions -",
       "transliteration": "Hoorum maqsooraatun fil khiyaam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055072.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055072.mp3",
+      "translationClear": "Companions, secluded in the tents."
     },
     {
       "number": 73,
@@ -4064,7 +4176,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055073.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055073.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 74,
@@ -4132,7 +4245,8 @@
       ],
       "translation": "Untouched before them by man or jinnī -",
       "transliteration": "Lam yatmis-hunna insun qablahum Wa-laa jaaann",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055074.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055074.mp3",
+      "translationClear": "Whom no human has touched before, nor jinn."
     },
     {
       "number": 75,
@@ -4184,7 +4298,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny? -",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055075.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055075.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 76,
@@ -4252,7 +4367,8 @@
       ],
       "translation": "Reclining on green cushions and beautiful fine carpets.",
       "transliteration": "Muttaki'eena 'alaa rafrafin khudrinw Wa-'abqariyyin hisaan",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055076.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055076.mp3",
+      "translationClear": "Reclining on green cushions, and exquisite carpets."
     },
     {
       "number": 77,
@@ -4304,7 +4420,8 @@
       ],
       "translation": "So which of the favors of your Lord would you deny?",
       "transliteration": "Fabi-ayyi aalaaa'i Rabbikumaa tukaththibaan.",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055077.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055077.mp3",
+      "translationClear": "So which of your Lord’s marvels will you deny?"
     },
     {
       "number": 78,
@@ -4372,7 +4489,8 @@
       ],
       "translation": "Blessed is the name of your Lord, Owner of Majesty and Honor.",
       "transliteration": "Tabaarak asmu Rabbika Thil Jalaali wal-Ikraam",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055078.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/055078.mp3",
+      "translationClear": "Blessed be the name of your Lord, Full of Majesty and Splendor."
     }
   ]
 }

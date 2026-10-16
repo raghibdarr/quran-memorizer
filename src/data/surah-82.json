@@ -48,7 +48,8 @@
       ],
       "translation": "When the sky breaks apart",
       "transliteration": "Ithas samaaa'un fatarat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082001.mp3",
+      "translationClear": "When the sky breaks apart."
     },
     {
       "number": 2,
@@ -92,7 +93,8 @@
       ],
       "translation": "And when the stars fall, scattering,",
       "transliteration": "Wa-ithal kawaakibun tasarat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082002.mp3",
+      "translationClear": "When the planets are scattered."
     },
     {
       "number": 3,
@@ -136,7 +138,8 @@
       ],
       "translation": "And when the seas are erupted",
       "transliteration": "Wa-ithal bihaaru fujjirat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082003.mp3",
+      "translationClear": "When the oceans are exploded."
     },
     {
       "number": 4,
@@ -180,7 +183,8 @@
       ],
       "translation": "And when the [contents of] graves are scattered [i.e., exposed],",
       "transliteration": "Wa-ithal qubooru bu'sirat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082004.mp3",
+      "translationClear": "When the tombs are strewn around."
     },
     {
       "number": 5,
@@ -240,7 +244,8 @@
       ],
       "translation": "A soul will [then] know what it has put forth and kept back.",
       "transliteration": "Alimat nafsum maa qaddamat Wa-akhkharat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082005.mp3",
+      "translationClear": "Each soul will know what it has advanced, and what it has deferred."
     },
     {
       "number": 6,
@@ -308,7 +313,8 @@
       ],
       "translation": "O mankind, what has deceived you concerning your Lord, the Generous,",
       "transliteration": "Yaaa-ayyuhal insaaanu maa gharraka bi-Rabbikal kareem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082006.mp3",
+      "translationClear": "O man! What deluded you concerning your Lord, the Most Generous?"
     },
     {
       "number": 7,
@@ -360,7 +366,8 @@
       ],
       "translation": "Who created you, proportioned you, and balanced you?",
       "transliteration": "Allathee khalaqaka fasaw-waaka fa'adalak",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082007.mp3",
+      "translationClear": "He who created you, and formed you, and proportioned you?"
     },
     {
       "number": 8,
@@ -428,7 +435,8 @@
       ],
       "translation": "In whatever form He willed has He assembled you.",
       "transliteration": "Feee ayye sooratim maa shaaa'a rakkabak",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082008.mp3",
+      "translationClear": "In whatever shape He willed, He assembled you."
     },
     {
       "number": 9,
@@ -480,7 +488,8 @@
       ],
       "translation": "No! But you deny the Recompense.",
       "transliteration": "Kalla bal tukaththiboona bid-deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082009.mp3",
+      "translationClear": "But you reject the religion."
     },
     {
       "number": 10,
@@ -522,9 +531,13 @@
           "charType": "end"
         }
       ],
-      "translation": "And indeed, [appointed] over you are keepers,",
+      "translation": "And indeed, [appointed] over you are keepers,[1876]",
       "transliteration": "Wa-inna 'alaikum lahaa-fizeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082010.mp3",
+      "footnotes": {
+        "1876": "Angels who preserve the deeds of men in records."
+      },
+      "translationClear": "Though over you are watchers."
     },
     {
       "number": 11,
@@ -560,7 +573,8 @@
       ],
       "translation": "Noble and recording;",
       "transliteration": "Kiraaman kaatibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082011.mp3",
+      "translationClear": "Honest recorders."
     },
     {
       "number": 12,
@@ -604,7 +618,8 @@
       ],
       "translation": "They know whatever you do.",
       "transliteration": "Ya'lamoona ma taf'aloon",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082012.mp3",
+      "translationClear": "They know everything you do."
     },
     {
       "number": 13,
@@ -656,7 +671,8 @@
       ],
       "translation": "Indeed, the righteous will be in pleasure,",
       "transliteration": "Innal abraara lafee na'eem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082013.mp3",
+      "translationClear": "The virtuous will be in bliss."
     },
     {
       "number": 14,
@@ -708,7 +724,8 @@
       ],
       "translation": "And indeed, the wicked will be in Hellfire.",
       "transliteration": "Wa-innal fujjaara lafee jaheem",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082014.mp3",
+      "translationClear": "While the wicked will be in Hell."
     },
     {
       "number": 15,
@@ -752,7 +769,8 @@
       ],
       "translation": "They will [enter to] burn therein on the Day of Recompense,",
       "transliteration": "Yaslawnahaa Yawmad Deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082015.mp3",
+      "translationClear": "They will enter it on the Day of Justice."
     },
     {
       "number": 16,
@@ -804,7 +822,8 @@
       ],
       "translation": "And never therefrom will they be absent.",
       "transliteration": "Wa-maa hum 'anhaa bighaaa-'ibeen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082016.mp3",
+      "translationClear": "And they will not be absent from it."
     },
     {
       "number": 17,
@@ -864,7 +883,8 @@
       ],
       "translation": "And what can make you know what is the Day of Recompense?",
       "transliteration": "Wa-maaa adraaka maa Yawmud Deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082017.mp3",
+      "translationClear": "But what will convey to you what the Day of Justice is?"
     },
     {
       "number": 18,
@@ -932,7 +952,8 @@
       ],
       "translation": "Then, what can make you know what is the Day of Recompense?",
       "transliteration": "Summa maaa adraaka maa Yawmud Deen",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082018.mp3",
+      "translationClear": "Then again, what will convey to you what the Day of Justice is?"
     },
     {
       "number": 19,
@@ -1024,7 +1045,8 @@
       ],
       "translation": "It is the Day when a soul will not possess for another soul [power to do] a thing; and the command, that Day, is [entirely] with Allāh.",
       "transliteration": "Yawma laa tamliku nafsul linafsin shai'anw walamru yawma'ithil lillaah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/082019.mp3",
+      "translationClear": "The Day when no soul will avail another soul anything; and the decision on that Day is Allah’s."
     }
   ]
 }

@@ -64,7 +64,8 @@
       ],
       "translation": "Indeed, We sent it [i.e., the Qur’ān] down during the Night of Decree.",
       "transliteration": "Innaa anzalnaahu fee lailatil qadr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097001.mp3",
+      "translationClear": "We sent it down on the Night of Decree."
     },
     {
       "number": 2,
@@ -124,7 +125,8 @@
       ],
       "translation": "And what can make you know what is the Night of Decree?",
       "transliteration": "Wa-maa adraaka ma lailatul qadr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097002.mp3",
+      "translationClear": "But what will convey to you what the Night of Decree is?"
     },
     {
       "number": 3,
@@ -192,7 +194,8 @@
       ],
       "translation": "The Night of Decree is better than a thousand months.",
       "transliteration": "Lailatul qadri khairum min alfee shahr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097003.mp3",
+      "translationClear": "The Night of Decree is better than a thousand months."
     },
     {
       "number": 4,
@@ -282,9 +285,13 @@
           "charType": "end"
         }
       ],
-      "translation": "The angels and the Spirit [i.e., Gabriel] descend therein by permission of their Lord for every matter.",
+      "translation": "The angels and the Spirit [i.e., Gabriel] descend therein by permission of their Lord for every matter.[1955]",
       "transliteration": "Tanaz-zalul malaa-ikatu war-roohu feeha bi-ithni rab-bihim min kulli amr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097004.mp3",
+      "footnotes": {
+        "1955": "Bringing the exact measures apportioned for everything by Allāh in the course of the coming year."
+      },
+      "translationClear": "In it descend the angels and the Spirit, by the leave of their Lord, with every command."
     },
     {
       "number": 5,
@@ -342,9 +349,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Peace it is until the emergence of dawn.",
+      "translation": "Peace it is[1956] until the emergence of dawn.",
       "transliteration": "Salaamun hiya hattaa mat-la'il fajr",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/097005.mp3",
+      "footnotes": {
+        "1956": "Upon the believers."
+      },
+      "translationClear": "Peace it is; until the rise of dawn."
     }
   ]
 }

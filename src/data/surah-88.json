@@ -56,7 +56,8 @@
       ],
       "translation": "Has there reached you the report of the Overwhelming [event]?",
       "transliteration": "Hal ataaka hadeesul ghaashiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088001.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088001.mp3",
+      "translationClear": "Has there come to you the news of the Overwhelming?"
     },
     {
       "number": 2,
@@ -100,7 +101,8 @@
       ],
       "translation": "[Some] faces, that Day, will be humbled,",
       "transliteration": "Wujoohuny yawma-'ithin khaashi'ah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088002.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088002.mp3",
+      "translationClear": "Faces on that Day will be shamed."
     },
     {
       "number": 3,
@@ -134,9 +136,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Working [hard] and exhausted.",
+      "translation": "Working [hard] and exhausted.[1910]",
       "transliteration": "Aamilatun naasibah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088003.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088003.mp3",
+      "footnotes": {
+        "1910": "Another accepted meaning is \"They were working hard and exhausted,\" i.e., doing deeds during worldly life which did not benefit them since they were not accompanied by faith or done for the acceptance of Allāh (subḥānahu wa taʿālā) ."
+      },
+      "translationClear": "Laboring and exhausted."
     },
     {
       "number": 4,
@@ -180,7 +186,8 @@
       ],
       "translation": "They will [enter to] burn in an intensely hot Fire.",
       "transliteration": "Taslaa naaran haamiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088004.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088004.mp3",
+      "translationClear": "Roasting in a scorching Fire."
     },
     {
       "number": 5,
@@ -232,7 +239,8 @@
       ],
       "translation": "They will be given drink from a boiling spring.",
       "transliteration": "Tusqaa min 'aynin aaniyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088005.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088005.mp3",
+      "translationClear": "Given to drink from a flaming spring."
     },
     {
       "number": 6,
@@ -300,7 +308,8 @@
       ],
       "translation": "For them there will be no food except from a poisonous, thorny plant",
       "transliteration": "Laisa lahum ta'aamun illaa min daree'",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088006.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088006.mp3",
+      "translationClear": "They will have no food except thorns."
     },
     {
       "number": 7,
@@ -368,7 +377,8 @@
       ],
       "translation": "Which neither nourishes nor avails against hunger.",
       "transliteration": "Laa yusminu Wa-laa yughnee min joo'",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088007.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088007.mp3",
+      "translationClear": "That neither nourishes, nor satisfies hunger."
     },
     {
       "number": 8,
@@ -412,7 +422,8 @@
       ],
       "translation": "[Other] faces, that Day, will show pleasure.",
       "transliteration": "Wujoohuny yawma-'ithin naa'imah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088008.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088008.mp3",
+      "translationClear": "Faces on that Day will be joyful."
     },
     {
       "number": 9,
@@ -448,7 +459,8 @@
       ],
       "translation": "With their effort [they are] satisfied",
       "transliteration": "Lisa'yihaa raadiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088009.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088009.mp3",
+      "translationClear": "Satisfied with their endeavor."
     },
     {
       "number": 10,
@@ -492,7 +504,8 @@
       ],
       "translation": "In an elevated garden,",
       "transliteration": "Fee jannatin 'aaliyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088010.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088010.mp3",
+      "translationClear": "In a lofty Garden."
     },
     {
       "number": 11,
@@ -542,9 +555,13 @@
           "charType": "end"
         }
       ],
-      "translation": "Wherein they will hear no unsuitable speech.",
+      "translation": "Wherein they will hear no unsuitable speech.[1911]",
       "transliteration": "Laa tasma'u feehaa laaghiyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088011.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088011.mp3",
+      "footnotes": {
+        "1911": "i.e., any insult, falsehood, immorality, idle or vain talk, etc."
+      },
+      "translationClear": "In it you will hear no nonsense."
     },
     {
       "number": 12,
@@ -588,7 +605,8 @@
       ],
       "translation": "Within it is a flowing spring.",
       "transliteration": "Feehaa 'aynun jaariyah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088012.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088012.mp3",
+      "translationClear": "In it is a flowing spring."
     },
     {
       "number": 13,
@@ -632,7 +650,8 @@
       ],
       "translation": "Within it are couches raised high",
       "transliteration": "Feehaa sururum marfoo'ah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088013.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088013.mp3",
+      "translationClear": "In it are raised beds."
     },
     {
       "number": 14,
@@ -668,7 +687,8 @@
       ],
       "translation": "And cups put in place",
       "transliteration": "Wa-akwaabum mawzoo'ah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088014.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088014.mp3",
+      "translationClear": "And cups set in place."
     },
     {
       "number": 15,
@@ -704,7 +724,8 @@
       ],
       "translation": "And cushions lined up",
       "transliteration": "Wa-namaariqu masfoofah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088015.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088015.mp3",
+      "translationClear": "And cushions set in rows."
     },
     {
       "number": 16,
@@ -740,7 +761,8 @@
       ],
       "translation": "And carpets spread around.",
       "transliteration": "Wa-zaraabiyyu mabsoosah",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088016.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088016.mp3",
+      "translationClear": "And carpets spread around."
     },
     {
       "number": 17,
@@ -808,7 +830,8 @@
       ],
       "translation": "Then do they not look at the camels - how they are created?",
       "transliteration": "Afalaa yanzuroona ilal ibili kaifa khuliqat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088017.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088017.mp3",
+      "translationClear": "Do they not look at the camels—how they are created?"
     },
     {
       "number": 18,
@@ -860,7 +883,8 @@
       ],
       "translation": "And at the sky - how it is raised?",
       "transliteration": "Wa-ilas samaaa'i kaifa rufi'at",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088018.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088018.mp3",
+      "translationClear": "And at the sky—how it is raised?"
     },
     {
       "number": 19,
@@ -912,7 +936,8 @@
       ],
       "translation": "And at the mountains - how they are erected?",
       "transliteration": "Wa-ilal jibaali kaifa nusibat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088019.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088019.mp3",
+      "translationClear": "And at the mountains—how they are installed?"
     },
     {
       "number": 20,
@@ -964,7 +989,8 @@
       ],
       "translation": "And at the earth - how it is spread out?",
       "transliteration": "Wa-ilal ardi kaifa sutihat",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088020.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088020.mp3",
+      "translationClear": "And at the earth—how it is spread out?"
     },
     {
       "number": 21,
@@ -1016,7 +1042,8 @@
       ],
       "translation": "So remind, [O Muḥammad]; you are only a reminder.",
       "transliteration": "Fathakkir innama anta Muthakkir",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088021.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088021.mp3",
+      "translationClear": "So remind. You are only a reminder."
     },
     {
       "number": 22,
@@ -1060,7 +1087,8 @@
       ],
       "translation": "You are not over them a controller.",
       "transliteration": "Lasta 'alaihim bimusaitir",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088022.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088022.mp3",
+      "translationClear": "You have no control over them."
     },
     {
       "number": 23,
@@ -1110,9 +1138,10 @@
           "charType": "end"
         }
       ],
-      "translation": "However, he who turns away and disbelieves",
+      "translation": "However, he who turns away and disbelieves –",
       "transliteration": "Illaa man tawallaa Wa-kafar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088023.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088023.mp3",
+      "translationClear": "But whoever turns away and disbelieves."
     },
     {
       "number": 24,
@@ -1164,7 +1193,8 @@
       ],
       "translation": "Then Allāh will punish him with the greatest punishment.",
       "transliteration": "Fa-yu'aththibuhul laahul 'athaabal akbar",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088024.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088024.mp3",
+      "translationClear": "Allah will punish him with the greatest punishment."
     },
     {
       "number": 25,
@@ -1208,7 +1238,8 @@
       ],
       "translation": "Indeed, to Us is their return.",
       "transliteration": "Innaa ilainaaa iyaabahum",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088025.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088025.mp3",
+      "translationClear": "To Us is their return."
     },
     {
       "number": 26,
@@ -1260,7 +1291,8 @@
       ],
       "translation": "Then indeed, upon Us is their account.",
       "transliteration": "Summa inna 'alainaa hisaabahum",
-      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088026.mp3"
+      "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/088026.mp3",
+      "translationClear": "Then upon Us rests their reckoning."
     }
   ]
 }
