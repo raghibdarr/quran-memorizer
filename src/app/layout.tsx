@@ -13,12 +13,6 @@ const amiriQuran = localFont({
   display: "swap",
 });
 
-const nastaliq = localFont({
-  src: "../../public/fonts/indopak-nastaleeq.woff2",
-  variable: "--font-indopak",
-  display: "swap",
-});
-
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -57,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${amiriQuran.variable} ${nastaliq.variable} ${jakarta.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${amiriQuran.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

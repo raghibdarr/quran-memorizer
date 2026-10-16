@@ -13,3 +13,4 @@ in `scripts/` build `src/data/` from these; nothing here is edited by hand.
 Tanzil downloads need "I agree with the Terms of Use" ticked; the owner agreed on 2026-10-16.
 | `cpfair-tajweed/tajweed.hafs.uthmani-pause-sajdah.json` | Tajweed rules as character ranges, cpfair/quran-tajweed (github.com/cpfair/quran-tajweed) | CC BY 4.0; credit "Tajweed rules: cpfair/quran-tajweed" |
 | `cpfair-tajweed/quran-uthmani-2017.txt` | The Tanzil Uthmani text (April 2017) those ranges index into, as published with the data | Tanzil terms (CC BY 3.0, verbatim) |
+| `digitalkhatt/quran_text_indopak_15.ts` | DigitalKhatt's IndoPak text, 15-line pages (github.com/DigitalKhatt/digitalkhatt.org) | MIT (`digitalkhatt/LICENSE`); drawn in DigitalKhatt's IndoPak font, OFL 1.1 |

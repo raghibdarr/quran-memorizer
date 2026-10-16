@@ -149,10 +149,18 @@ describe('buildAyahWordData script alignment', () => {
     }
   });
 
-  it('2:10 (fused IndoPak words) falls back rather than accepting shifted alignment', () => {
-    // Its textIndopak fuses two words into one token, so any accepted per-word array
-    // would be positionally shifted — the count check must reject it.
-    expect(buildAyahWordData(getAyah(2, 10)).indopakWords).toBeNull();
+  it('fused IndoPak words fall back rather than accepting shifted alignment', () => {
+    // Two words run together would shift every later word: the count check must reject it
+    const ayah = getAyah(2, 10);
+    const fused = ayah.textIndopak!.replace(' ', '');
+    expect(buildAyahWordData({ ...ayah, textIndopak: fused }).indopakWords).toBeNull();
+    // DigitalKhatt's text (scripts/build-indopak.mjs) splits like the word list
+    expect(buildAyahWordData(ayah).indopakWords).toHaveLength(realWords(ayah).length);
+  });
+
+  it('a no-break space keeps two printed IndoPak words as one (بَعْدَ مَا in 2:181)', () => {
+    const ayah = getAyah(2, 181);
+    expect(buildAyahWordData(ayah).indopakWords).toHaveLength(realWords(ayah).length);
   });
 });
 

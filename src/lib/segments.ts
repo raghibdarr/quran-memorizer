@@ -175,7 +175,8 @@ export function buildAyahWordData(ayah: Ayah): AyahWordData {
   }
   let indopakWords: string[] | null = null;
   if (ayah.textIndopak) {
-    const parts = ayah.textIndopak.trim().split(/\s+/).filter(isWordToken);
+    // Spaces only: a no-break space holds two printed words the lessons count as one
+    const parts = ayah.textIndopak.trim().split(/ +/).filter(isWordToken);
     if (parts.length === words.length) indopakWords = parts;
   }
   return { words, tajweedWords, indopakWords };

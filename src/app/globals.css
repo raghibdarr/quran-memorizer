@@ -207,8 +207,9 @@ body::after {
   zoom: var(--arabic-font-scale, 1);
 }
 
+/* DigitalKhatt IndoPak (OFL), the mushaf view's IndoPak face (@font-face "QMH IndoPak" below) */
 .arabic-text-indopak {
-  font-family: var(--font-indopak), 'Jameel Noori Nastaleeq', serif;
+  font-family: "QMH IndoPak", serif;
   direction: rtl;
   text-align: right;
   line-height: 2.8;
