@@ -246,6 +246,11 @@ const SCRIPT_OPTIONS: { value: ArabicScriptStyle; label: string }[] = [
   { value: 'indopak', label: 'IndoPak' },
 ];
 
+/** A link out to a source's own site */
+function Ext({ href, children }: { href: string; children: React.ReactNode }) {
+  return <a href={href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{children}</a>;
+}
+
 function Toggle({ enabled, onToggle }: { enabled: boolean; onToggle: () => void }) {
   return (
     <button
@@ -536,16 +541,24 @@ export default function SettingsPanel() {
               <EraseDevice />
             </div>
 
-            {/* Data credits — quran-align and Qur'anic Universal Audio are CC BY 4.0, so this attribution is a license requirement */}
-            <p className="mt-4 border-t border-foreground/10 pt-3 text-center text-[10px] leading-relaxed text-muted/80">
-              Recitations: EveryAyah.com, QuranicAudio, MP3Quran &amp; Tarteel · Word timings: QUL (Tarteel) &amp; quran-align (CC BY 4.0),
-              and Qur&apos;anic Universal Audio by QUD (CC BY 4.0) · Translations: Saheeh International via{' '}
-              <a href="https://quranenc.com/en/browse/english_saheeh" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">QuranEnc.com</a> ({translationSources.saheeh.version.match(/(([^)]+))/)?.[1]}); The Clear Quran, translation by Talal Itani,{' '}
-              <a href="https://clearquran.com" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">ClearQuran.com</a> (CC BY-ND 4.0) · Search text and page data:{' '}
-              <a href="https://tanzil.net" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Tanzil Project</a> (CC BY 3.0) · Mushaf pages:{' '}
-              <a href="https://github.com/tarekeldeeb/quran-madina-html" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">quran-madina-html</a> (Waqf GPL 2.0) with the DigitalKhatt font by Amine Anane (OFL)
-            </p>
-            <p className="mt-2 text-center text-[10px] text-muted/80">
+            {/* Sources: several licences (Tanzil, CC BY 4.0, QuranEnc) require this credit;
+                public/licenses.txt holds every notice in full (scripts/build-licenses.mjs) */}
+            <div className="mt-4 border-t border-foreground/10 pt-3 text-[11px] leading-relaxed text-muted" data-sources>
+              <p className="mb-1 font-semibold text-foreground/80">Sources</p>
+              <ul className="space-y-0.5">
+                <li>Quran text: <Ext href="https://tanzil.net">Tanzil Project</Ext> (CC BY 3.0, unchanged)</li>
+                <li>Saheeh International, from <Ext href={translationSources.saheeh.url}>QuranEnc.com</Ext> ({translationSources.saheeh.version.match(/\(([^)]+)\)/)?.[1]})</li>
+                <li>The Clear Quran: translation by Talal Itani, <Ext href="https://clearquran.com">ClearQuran.com</Ext> (CC BY-ND 4.0)</li>
+                <li>Tajweed colours: <Ext href="https://github.com/cpfair/quran-tajweed">cpfair/quran-tajweed</Ext> (CC BY 4.0)</li>
+                <li>Arabic font: <Ext href="https://github.com/aliftype/amiri">Amiri Quran</Ext> (OFL) · IndoPak text and font, mushaf font: <Ext href="https://github.com/DigitalKhatt">DigitalKhatt</Ext> by Amine Anane (MIT, OFL)</li>
+                <li>Mushaf pages: <Ext href="https://github.com/tarekeldeeb/quran-madina-html">quran-madina-html</Ext> (Waqf GPL 2.0)</li>
+                <li>Recitations: EveryAyah.com, MP3Quran.net, QuranicAudio.com · Word timings: <Ext href="https://github.com/cpfair/quran-align">quran-align</Ext> and Qur&apos;anic Universal Audio (CC BY 4.0)</li>
+                <li>Word meanings: <Ext href="https://corpus.quran.com">Quranic Arabic Corpus</Ext> · Voice check: <Ext href="https://github.com/yazinsai/tilawa">Tilawa</Ext> (NPL 1.2) · Transliteration: Takrar</li>
+              </ul>
+            </div>
+            <p className="mt-2 text-center text-[11px] text-muted">
+              <a href="/licenses.txt" target="_blank" rel="noopener" className="underline underline-offset-2">Notices and licences</a>
+              {' · '}
               <Link href="/privacy" className="underline underline-offset-2">Privacy policy</Link>
             </p>
           </div>

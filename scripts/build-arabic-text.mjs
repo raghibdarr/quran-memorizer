@@ -52,6 +52,10 @@ let diffs = 0, words = 0;
 for (let s = 1; s <= 114; s++) {
   const file = join(root, 'src', 'data', `surah-${s}.json`);
   const surah = JSON.parse(readFileSync(file, 'utf8'));
+  // Tanzil asks for its notice in every file derived from its text: the full block is in
+  // public/licenses.txt (scripts/build-licenses.mjs), with every other source's
+  surah.notice = 'Quran text: Tanzil Quran Text (Uthmani 1.1), Copyright (C) 2007-2026 Tanzil Project, CC BY 3.0, verbatim; https://tanzil.net. '
+    + 'Full notices for this and the translations, tajweed, IndoPak and transliteration data: /licenses.txt';
   for (const a of surah.ayahs) {
     const text = ayahText.get(a.key);
     if (a.textUthmani.trim() !== text && diffs++ < 5) console.log(`ayah ${a.key} differs`);
