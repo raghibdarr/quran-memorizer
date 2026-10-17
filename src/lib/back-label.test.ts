@@ -11,7 +11,7 @@ describe('backLabelFor', () => {
     ['/review', 'Review'],
     ['/review/', 'Review'],
     ['/review/session?stream=sabqi', 'Review'],
-    ['/essentials', 'Essentials'],
+    ['/essentials', 'Learn'],
     ['/progress', 'Progress'],
     ['/plan/edit', 'Plan'],
     ['/juz/30', 'Juz 30'],

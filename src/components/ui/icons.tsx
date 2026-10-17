@@ -57,6 +57,16 @@ export function StarIcon({ size = 16, className = '' }: IconProps) {
   );
 }
 
+/** A mortarboard: the Learn tab (plans, guides, essentials) */
+export function LearnIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3z" />
+      <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon({ size = 16, className = '' }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>

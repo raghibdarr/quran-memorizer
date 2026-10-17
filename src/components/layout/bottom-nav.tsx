@@ -4,21 +4,23 @@ import Link from '@/components/app-link';
 import { useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useReviewQueue } from '@/hooks/use-review-queue';
-import { HomeIcon, BookIcon, StarIcon, BarChartIcon } from '@/components/ui/icons';
+import { HomeIcon, BookIcon, LearnIcon, BarChartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home', Icon: HomeIcon },
   { href: '/review', label: 'Review', Icon: BookIcon },
-  { href: '/essentials', label: 'Essentials', Icon: StarIcon },
+  // Learn: plans, guides and the essentials (duas, dhikr, key ayahs); the page keeps
+  // /essentials since /learn is the lesson player
+  { href: '/essentials', label: 'Learn', Icon: LearnIcon, also: ['/plans', '/blog'] },
   { href: '/progress', label: 'Progress', Icon: BarChartIcon },
 ];
 
 /** Tab that owns a path: sections own their sub-pages; everything else (surah,
  *  lesson, juz, plan screens) lives under Home */
 function activeIndex(pathname: string): number {
-  const i = NAV_ITEMS.findIndex((item) => item.href !== '/' && pathname.startsWith(item.href));
+  const i = NAV_ITEMS.findIndex((item) => item.href !== '/' && [item.href, ...(('also' in item && item.also) || [])].some((h) => pathname.startsWith(h)));
   return i === -1 ? 0 : i;
 }
 

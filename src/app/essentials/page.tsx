@@ -12,8 +12,43 @@ import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import EssentialCard from '@/components/essentials/essential-card';
+import { usePlanStore } from '@/stores/plan-store';
+import { PLAN_PRESETS } from '@/lib/plan-presets';
+import { GUIDES } from '@/content/guides';
 
+/** A section heading with a "see all" link */
+function SectionHead({ title, href, more }: { title: string; href?: string; more?: string }) {
+  return (
+    <div className="flex items-baseline justify-between px-1 pt-3">
+      <h2 className="text-base font-bold text-foreground">{title}</h2>
+      {href && <Link href={href} className="text-sm font-semibold text-teal">{more ?? 'See all'}</Link>}
+    </div>
+  );
+}
+
+/** A tappable row: title and one line of detail */
+function Row({ href, title, detail }: { href: string; title: string; detail: string }) {
+  return (
+    <Link href={href} className="block">
+      <Card pressable className="flex items-center justify-between gap-3 py-3">
+        <span className="min-w-0">
+          <span className="block text-sm font-semibold text-foreground">{title}</span>
+          <span className="mt-0.5 block truncate text-xs text-muted">{detail}</span>
+        </span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </Card>
+    </Link>
+  );
+}
+
+/**
+ * The Learn tab: memorisation plans, the guides, and the essentials (duas, dhikr and key
+ * ayahs). It keeps the /essentials address (/learn is the lesson player).
+ */
 export default function EssentialsPage() {
+  const plan = usePlanStore((s) => s.plan);
   const [collections, setCollections] = useState<EssentialCollection[]>([]);
   const [search, setSearch] = useState('');
   const memorized = useEssentialsStore((s) => s.memorized);
@@ -54,25 +89,38 @@ export default function EssentialsPage() {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Essentials</h1>
-              <p className="text-sm text-muted">Duas, dhikr & key ayahs</p>
+              <h1 className="text-2xl font-bold text-foreground">Learn</h1>
+              <p className="text-sm text-muted">Plans, guides, duas and dhikr</p>
             </div>
             <div className="flex items-center gap-2">
               <SettingsPanel />
               <UserButton />
             </div>
           </div>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search all essentials..."
-            className="mt-3 w-full rounded-xl border border-foreground/10 bg-card px-4 py-2 text-sm text-foreground placeholder:text-muted/60 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
-          />
         </div>
       </header>
 
       <main className="mx-auto max-w-2xl space-y-3 px-4 pt-3">
+        {/* Plans: your own, or the ready-made ones to start from */}
+        <SectionHead title="Memorisation plans" href="/plans" more={plan ? 'Ready-made plans' : 'All plans'} />
+        {plan ? (
+          <Row href="/plan" title="Your plan" detail="Today's lessons, reviews and pace" />
+        ) : (
+          PLAN_PRESETS.slice(0, 3).map((p) => <Row key={p.id} href={`/plan/setup?preset=${p.id}`} title={p.title} detail={p.summary} />)
+        )}
+
+        <SectionHead title="Guides" href="/blog" more="All guides" />
+        {GUIDES.slice(0, 3).map((g) => <Row key={g.slug} href={`/blog/${g.slug}`} title={g.title} detail={`${g.minutes} min read · ${g.summary}`} />)}
+
+        <SectionHead title="Duas, dhikr and key ayahs" />
+        {/* Search sits with what it searches */}
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search duas, dhikr and key ayahs…"
+          className="w-full rounded-xl border border-foreground/10 bg-card px-4 py-2 text-sm text-foreground placeholder:text-muted/60 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
+        />
         {search.trim() ? (
           searchResults.length === 0 ? (
             <p className="py-12 text-center text-sm text-muted">No matches across collections.</p>

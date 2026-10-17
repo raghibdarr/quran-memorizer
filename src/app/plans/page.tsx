@@ -28,7 +28,7 @@ export default function PlansPage() {
     <div className="min-h-dvh bg-cream">
       <div className="sticky top-[var(--safe-top)] z-20 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between">
-          <BackButton fallback="/" />
+          <BackButton fallback="/essentials" />
           <span className="text-sm font-semibold text-teal">Memorisation plans</span>
           <span className="w-11" />
         </div>

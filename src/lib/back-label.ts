@@ -10,7 +10,7 @@ export async function backLabelFor(
   const path = url.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
   if (path === '/') return 'Home';
   if (path === '/review' || path.startsWith('/review/')) return 'Review';
-  if (path === '/essentials') return 'Essentials';
+  if (path === '/essentials') return 'Learn';
   if (path === '/progress') return 'Progress';
   if (path === '/bookmarks') return 'Bookmarks';
   if (path === '/downloads') return 'Downloads';
