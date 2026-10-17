@@ -143,7 +143,10 @@
         "short": 0,
         "skipped": 295,
         "unrangedSurahs": 0,
-        "missingVerses": "1:1"
+        "missingVerses": "1:1",
+        "estimated": [
+          "1:1"
+        ]
       },
       "Hudhaify_128kbps": {
         "slug": "ali_al_huthaifi_mp3quran",
@@ -203,7 +206,10 @@
         "short": 0,
         "skipped": 91,
         "unrangedSurahs": 0,
-        "missingVerses": "1:1, 6:139"
+        "missingVerses": "1:1, 6:139",
+        "estimated": [
+          "1:1"
+        ]
       },
       "qud-mohammed_al_luhaidan": {
         "slug": "mohammed_al_luhaidan_mp3quran",
@@ -264,6 +270,35 @@
         "skipped": 1,
         "unrangedSurahs": 0,
         "missingVerses": null
+      },
+      "MaherAlMuaiqly128kbps": {
+        "slug": "maher_al_muaiqly_qdc",
+        "name": "Maher Al-Muaiqly",
+        "surahs": 114,
+        "exact": 6232,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 0,
+        "unrangedSurahs": 0,
+        "missingVerses": null
+      },
+      "Yasser_Ad-Dussary_128kbps": {
+        "slug": "yasser_al_dosari_archive",
+        "name": "Yasser Al-Dosari",
+        "surahs": 114,
+        "exact": 6231,
+        "split": 4,
+        "proportional": 0,
+        "short": 0,
+        "skipped": 168,
+        "unrangedSurahs": 0,
+        "missingVerses": "1:1",
+        "audio": "https://server11.mp3quran.net/yasser/{sss}.mp3",
+        "shiftMs": 25,
+        "estimated": [
+          "1:1"
+        ]
       }
     }
   }

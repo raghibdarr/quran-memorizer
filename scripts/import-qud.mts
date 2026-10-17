@@ -8,6 +8,14 @@
 // The audio controller plays an ayah as that slice of the surah file (src/lib/audio.ts).
 // Word numbers go through the same alignment as QUL's (src/lib/align-timings.ts).
 //
+// An entry may also name `audio`, the same recording on another host ({sss} = 3-digit
+// surah), with `shiftMs`, how much later that copy runs (measured by cross-correlating the
+// two encodes; constant, no drift). QUD skips some reciters' 1:1; `opening` fills it as
+// everything before 1:2, with the words split by letter count across that speech span
+// [startMs, endMs] in the hosted file. Set it only where the opening has been checked to be
+// the basmala alone (it matched the reciter's own EveryAyah 1:1 recording), with the span
+// measured by silence detection.
+//
 // Run: node --experimental-strip-types scripts/import-qud.mts [--cache <dir>] [--release v3.2.0]
 import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -22,7 +30,7 @@ const cache = arg('--cache') ?? join(root, '.qud-cache');
 const BASE = `https://github.com/QUD-Technologies/quranic-universal-audio/releases/download/${release}`;
 mkdirSync(cache, { recursive: true });
 
-const reciters: { id: string; slug: string; fallback: string }[] = JSON.parse(readFileSync(join(root, 'src', 'data', 'qud-reciters.json'), 'utf8'));
+const reciters: { id: string; slug: string; fallback: string; audio?: string; shiftMs?: number; opening?: [number, number] }[] = JSON.parse(readFileSync(join(root, 'src', 'data', 'qud-reciters.json'), 'utf8'));
 
 const ourWords = new Map<string, string[]>();
 for (let s = 1; s <= 114; s++) {
@@ -87,6 +95,7 @@ for (const r of reciters) {
   const count: Record<AlignMethod | 'skipped', number> = { exact: 0, split: 0, proportional: 0, short: 0, skipped: 0 };
   // A reciter may repeat an ayah; QUD marks one occurrence canonical, and that's the one we keep
   const seen = new Set<string>();
+  const shift = r.shiftMs ?? 0;
   for (const [ref, start, end, canonical, , ws] of words.rows as [string, number, number, boolean, number, Row[]][]) {
     const m = /^(\d+):(\d+)$/.exec(ref);
     const ours = m && ourWords.get(ref);
@@ -97,9 +106,23 @@ for (const r of reciters) {
     const out = alignAyah(ours, rel);
     count[out.method]++;
     let file = bySurah.get(s);
-    if (!file) { file = { _audio: { src: chapterUrls[String(s)], verses: {} } }; bySurah.set(s, file); }
+    if (!file) { file = { _audio: { src: r.audio ? r.audio.replace('{sss}', String(s).padStart(3, '0')) : chapterUrls[String(s)], verses: {} } }; bySurah.set(s, file); }
     file[a] = out.rows;
-    (file._audio as { verses: Record<string, [number, number]> }).verses[a] = [start, end];
+    (file._audio as { verses: Record<string, [number, number]> }).verses[a] = [start + shift, end + shift];
+  }
+
+  // A skipped 1:1, where `opening` vouches for it: the basmala before 1:2
+  const estimated: string[] = [];
+  const fatiha = bySurah.get(1);
+  const fv = fatiha && (fatiha._audio as { verses: Record<string, [number, number]> }).verses;
+  if (r.opening && fv && !fv['1'] && fv['2']) {
+    const [from, to] = r.opening;
+    const letters = ourWords.get('1:1')!.map((w) => (w.match(/[ء-يٱ]/g) ?? []).length || 1);
+    const total = letters.reduce((x, y) => x + y, 0);
+    let at = from;
+    fatiha['1'] = letters.map((n, i) => { const row: Row = [i + 1, Math.round(at), Math.round(at + ((to - from) * n) / total)]; at += ((to - from) * n) / total; return row; });
+    fv['1'] = [0, fv['2'][0]];
+    estimated.push('1:1');
   }
 
   // Resolve every surah's final URL (and check range support) a few at a time
@@ -118,7 +141,7 @@ for (const r of reciters) {
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
   for (const [s, file] of bySurah) writeFileSync(join(outDir, `${s}.json`), JSON.stringify(file));
-  manifest.qud.reciters[r.id] = { slug: r.slug, name: rec.name_en, surahs: bySurah.size, ...count, unrangedSurahs: unranged, missingVerses: rec.coverage?.missing_verses ?? null };
-  console.log(`${r.id} <- ${r.slug}: ${bySurah.size} surahs ${JSON.stringify(count)} unranged=${unranged} missing=${rec.coverage?.missing_verses ?? '-'}`);
+  manifest.qud.reciters[r.id] = { slug: r.slug, name: rec.name_en, surahs: bySurah.size, ...count, unrangedSurahs: unranged, missingVerses: rec.coverage?.missing_verses ?? null, ...(r.audio && { audio: r.audio, shiftMs: shift }), ...(estimated.length && { estimated }) };
+  console.log(`${r.id} <- ${r.slug}: ${bySurah.size} surahs ${JSON.stringify(count)} unranged=${unranged} missing=${rec.coverage?.missing_verses ?? '-'}${estimated.length ? ` estimated=${estimated.join(',')}` : ''}`);
 }
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
