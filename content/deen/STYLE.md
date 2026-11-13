@@ -56,6 +56,10 @@ translator and the back-checker (spec 5.4, stages E and F).
   witnesses first.
 - Gradings are attributed: `{ grade, by, in, quote }`, shown as "Hasan: al-Tirmidhi, in the
   Jami' after the hadith". A verdict that cannot be located is deleted, never softened.
+- Inclusion: an item ships only if it is in al-Bukhari or Muslim, or at least one located
+  verdict grades it sahih or hasan (the build checks this). Where authorities differ, record
+  both. A narration every located authority finds weak stays out, and is listed on `/sources`.
+- A variant wording (`variants`) carries its own citation, like the item.
 
 ## Fiqh (course)
 

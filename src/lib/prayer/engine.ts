@@ -43,7 +43,8 @@ export function isoInTz(ms: number, tz: string): string {
 /** The high-latitude rule actually used ('auto' resolved for the place) */
 export function effectiveHighLatRule(place: Pick<Place, 'lat' | 'lng'>, rule: HighLatRule): Exclude<HighLatRule, 'auto'> {
   if (rule !== 'auto') return rule;
-  return HighLatitudeRule.recommended(new Coordinates(place.lat, place.lng));
+  // adhan only looks north of 48°: the far south (Ushuaia, Punta Arenas) needs the same care
+  return HighLatitudeRule.recommended(new Coordinates(Math.abs(place.lat), place.lng));
 }
 
 function paramsFor(place: Pick<Place, 'lat' | 'lng'>, settings: PrayerCalcSettings): CalculationParameters {
@@ -73,17 +74,42 @@ const valid = (d: Date | undefined): number | null => {
  * offsets are applied last, after adhan's own method adjustments and rounding.
  */
 export function computeDay(place: Where, iso: string, settings: PrayerCalcSettings): DayTimes {
-  const [y, m, d] = iso.split('-').map(Number);
-  // adhan reads the date's local calendar fields; noon keeps them right even where
-  // a DST change skips midnight
-  const date = new Date(y, m - 1, d, 12);
-  const times = new PrayerTimes(new Coordinates(place.lat, place.lng), date, paramsFor(place, settings));
+  const coords = new Coordinates(place.lat, place.lng);
+  const params = paramsFor(place, settings);
+  const timesFor = (dayIso: string) => {
+    const [y, m, d] = dayIso.split('-').map(Number);
+    // adhan reads the date's local calendar fields; noon keeps them right even where
+    // a DST change skips midnight
+    return new PrayerTimes(coords, new Date(y, m - 1, d, 12), params);
+  };
+  let times = timesFor(iso);
+  // adhan works from the UTC date, so where the civil date runs a day ahead of
+  // (or behind) the sun's (Tonga, Samoa, Kiritimati: UTC+13/+14 at western
+  // longitudes) it answers with the neighbouring day. Dhuhr always exists: if it
+  // lands on another local day, ask for the day that lands on this one.
+  const dhuhr = valid(times.dhuhr);
+  if (dhuhr !== null) {
+    const got = safeIsoInTz(dhuhr, place.tz);
+    if (got && got !== iso) {
+      const shift = Math.round((Date.parse(`${iso}T00:00:00Z`) - Date.parse(`${got}T00:00:00Z`)) / 86_400_000);
+      if (Math.abs(shift) === 1) times = timesFor(addDaysIso(iso, shift));
+    }
+  }
   const out = {} as DayTimes;
   for (const name of TIME_NAMES) {
     const t = valid(times[name]);
     out[name] = t === null ? null : t + (settings.offsets?.[name] ?? 0) * MIN;
   }
   return out;
+}
+
+/** isoInTz, or null for a zone name the platform doesn't know */
+function safeIsoInTz(ms: number, tz: string): string | null {
+  try {
+    return isoInTz(ms, tz);
+  } catch {
+    return null;
+  }
 }
 
 export interface PrayerRow {

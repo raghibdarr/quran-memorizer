@@ -93,10 +93,32 @@ describe('guardrails, each with a failing fixture', () => {
     expect(codes(run((it) => { it[0].citations[0].numbering = 'abd-al-baqi' }))).toContain('G2')
   })
 
+  it('G2: a variant wording is cited like the item itself', () => {
+    const variant = (citations: Item[]) => run((it) => { it[0].variants = [{ label: 'Another wording', arabic: 'نص آخر للاختبار', citations }]; it[0].rev = 2 })
+    expect(variant([{ collection: 'fixture-sahih', number: '3', numbering: 'fixture-numbering' }]).errors).toEqual([])
+    expect(codes(variant([]))).toContain('G2')
+    expect(codes(variant([{ collection: 'made-up', number: '3', numbering: 'fixture-numbering' }]))).toContain('G2')
+    expect(codes(variant([{ collection: 'fixture-sahih', number: '', numbering: 'fixture-numbering' }]))).toContain('G2')
+  })
+
   it('G3: outside the two Sahihs an attributed grading is required', () => {
     expect(codes(run((it) => { it[2].gradings = [] }))).toContain('G3')
     expect(codes(run((it) => { it[2].gradings[0].by = 'someone-unknown' }))).toContain('G3')
     expect(codes(run((it) => { it[2].gradings[0].in = '' }))).toContain('G3')
+  })
+
+  it('G3: outside the two Sahihs, an item with no sahih or hasan verdict cannot ship (inclusion rule)', () => {
+    expect(codes(run((it) => { it[2].gradings[0].grade = 'daif' }))).toContain('G3')
+    expect(codes(run((it) => { it[2].gradings[0].grade = 'mursal' }))).toContain('G3')
+    // Where authorities differ both are shown: one sound verdict is enough
+    const both = run((it) => { it[2].gradings.push({ grade: 'daif', by: 'fixture-scholar', in: 'Another fixture work' }); it[2].rev = 2 })
+    expect(both.errors).toEqual([])
+    // A weak narration can sit in the folder as a draft; it is just never emitted
+    const draft = run((it, lock) => { it[2].gradings[0].grade = 'daif'; it[2].review.status = 'draft'; delete lock.ids['03'] })
+    expect(draft.errors).toEqual([])
+    expect(draft.emitted.map((i: Item) => i.id)).toEqual(['01', '02'])
+    // In a Sahih collection no grading is needed, and a weak verdict beside it does not block
+    expect(codes(run((it) => { it[0].gradings = [{ grade: 'daif', by: 'fixture-scholar', in: 'Fixture work' }]; it[0].rev = 2 }))).not.toContain('G3')
   })
 
   it('G4: two witnesses, one not from Sunnah.com, hashes that match or a variant note', () => {
@@ -128,10 +150,22 @@ describe('guardrails, each with a failing fixture', () => {
     expect(codes(runName({ surahId: 112, ayah: 3 }))).toContain('G6')
   })
 
+  it('G6: a derived Name cites its ayah and a hadith Name says which hadith', () => {
+    const runEv = (evidence: Item) => deen.validateDeck({ deck: '_fixture', kind: 'names', lock: { ids: {} }, items: [{ file: 'n1', data: {
+      id: 'n1', rev: 1, order: 1, arabic: 'الأحد', transliteration: 'al-Ahad', meaning: 'The One', evidence, review: { status: 'source-checked' },
+    } }] }, ctx)
+    expect(codes(runEv({ kind: 'quran-derived' }))).toContain('G6')
+    expect(codes(runEv({ kind: 'quran-derived', quran: [{ surahId: 112, ayah: 1 }] }))).not.toContain('G6')
+    expect(codes(runEv({ kind: 'hadith' }))).toContain('G6')
+    expect(codes(runEv({ kind: 'hadith', hadith: 'fixture:01' }))).not.toContain('G6')
+    expect(runEv({ kind: 'list-only' }).errors).toEqual([])
+  })
+
   it('G7: Arabic is NFC, Arabic only, no tatweel', () => {
     expect(codes(run((it) => { it[0].arabic = 'هذا نص تجريبي Test' }))).toContain('G7')
     expect(codes(run((it) => { it[0].arabic = 'هـذا نص تجريبي للاختبار فقط' }))).toContain('G7')
     expect(codes(run((it) => { it[0].arabic = 'هذا نص 12 للاختبار' }))).toContain('G7')
+    expect(codes(run((it) => { it[0].arabic = 'هذا نص ١٢ للاختبار' }))).toContain('G7')
     expect(codes(run((it) => { it[0].arabic = 'هذا نص'.normalize('NFD') + 'آ' }))).toContain('G7')
   })
 
@@ -182,6 +216,13 @@ describe('guardrails, each with a failing fixture', () => {
     expect(codes(lesson((l) => { l.claims[1].evidence = [{ consensus: { work: 'al-ijma' } }] }))).toContain('G10')
   })
 
+  it('G10: a school position is sourced wherever it appears, not only under "differs"', () => {
+    const withPosition = (p: Item) => lesson((l) => { l.claims[1].positions = [p] })
+    expect(withPosition({ school: 'maliki', text: 'A detail.', source: { work: 'al-risala', location: 'Fixture chapter' } }).errors).toEqual([])
+    expect(codes(withPosition({ school: 'maliki', text: 'A detail.' }))).toContain('G10')
+    expect(codes(withPosition({ school: 'zahiri', text: 'A detail.', source: { work: 'al-risala', location: 'Fixture chapter' } }))).toContain('G10')
+  })
+
   it('G11: the intro is at most 60 words and makes no rulings', () => {
     expect(codes(lesson((l) => { l.intro = 'word '.repeat(61).trim() }))).toContain('G11')
     expect(codes(lesson((l) => { l.intro = 'Wudu is obligatory before the prayer.' }))).toContain('G11')
@@ -194,6 +235,21 @@ describe('guardrails, each with a failing fixture', () => {
     expect(codes(lesson((l) => { l.claims[0].text = 'The scholars agree on this.' }))).toContain('G12')
     // With a consensus citation, saying so is fine
     expect(codes(lesson((l) => { l.claims[1].text = 'The scholars agree on this.' }))).not.toContain('G12')
+  })
+
+  it('G12: the same phrasing in other words, and in the intro, title and check questions', () => {
+    for (const text of ['This is the more correct view.', 'The stronger opinion is the first.', 'The scholars have agreed on this.', 'All the scholars hold this.', 'This is held unanimously.', 'There is no disagreement on this.']) {
+      expect(codes(lesson((l) => { l.claims[0].text = text })), text).toContain('G12')
+    }
+    expect(codes(lesson((l) => { l.intro = 'The scholars agree on what follows.' }))).toContain('G12')
+    expect(codes(lesson((l) => { l.title = 'The correct opinion on wiping' }))).toContain('G12')
+    expect(codes(lesson((l) => { l.check[0].q = 'Which is the strongest view?' }))).toContain('G12')
+    expect(codes(lesson((l) => { l.check[0].options = ['The correct opinion', 'B'] }))).toContain('G12')
+    // A question about an agreed claim may say so; one about a differing claim may not
+    expect(codes(lesson((l) => { l.check[0] = { q: 'What do the scholars agree on?', options: ['A', 'B'], answer: 0, claim: 'c2' } }))).not.toContain('G12')
+    expect(codes(lesson((l) => { l.check[0].q = 'What do the scholars agree on?' }))).toContain('G12')
+    // Plain descriptive wording is untouched
+    expect(lesson((l) => { l.claims[0].text = 'The schools put this differently, and each has its evidence.' }).errors).toEqual([])
   })
 
   it('G13: two glossary files may not define a term differently', () => {
@@ -217,6 +273,8 @@ describe('guardrails, each with a failing fixture', () => {
     expect(bumped.lock.ids['01'].rev).toBe(2)
     expect(codes(run((it) => { it[0].review.status = 'draft' }))).toContain('G14')
     expect(codes(run((it, lock) => { it[0].review.status = 'draft'; lock.ids['01'].withdrawn = 'Fixture withdrawal' }))).not.toContain('G14')
+    // A rev only rises
+    expect(codes(run((it, lock) => { lock.ids['01'].rev = 3 }))).toContain('G14')
     // Review-only changes need no rev bump
     expect(codes(run((it) => { it[0].review.log = ['another pass'] }))).not.toContain('G14')
   })

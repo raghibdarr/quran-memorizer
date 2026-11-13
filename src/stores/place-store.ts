@@ -19,13 +19,24 @@ interface PlaceState {
   clearPlace: () => void;
 }
 
+/** A zone name this device can format in: every prayer time is shown through it, and Intl throws on an unknown one */
+function isTimeZone(tz: string): boolean {
+  if (!tz) return false;
+  try {
+    new Intl.DateTimeFormat('en-GB', { timeZone: tz });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /** Validates and rounds a place; null when it can't be used */
 export function sanitizePlace(raw: unknown): Place | null {
   const p = raw as Partial<Place> | null;
   if (!p || typeof p !== 'object') return null;
   if (typeof p.lat !== 'number' || typeof p.lng !== 'number' || !Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return null;
   if (Math.abs(p.lat) > 90 || Math.abs(p.lng) > 180) return null;
-  if (typeof p.tz !== 'string' || !p.tz) return null;
+  if (typeof p.tz !== 'string' || !isTimeZone(p.tz)) return null;
   return {
     lat: roundCoord(p.lat),
     lng: roundCoord(p.lng),

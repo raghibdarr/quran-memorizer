@@ -168,6 +168,61 @@ describe('daylight saving days', () => {
   }
 })
 
+describe('the requested local day, wherever the date line is', () => {
+  // adhan works from the UTC date. Where the civil date runs ahead of the sun's
+  // (UTC+13/+14 at western longitudes) it used to answer with the next day.
+  const PLACES = {
+    tongatapu: { lat: -21.13, lng: -175.2, tz: 'Pacific/Tongatapu' },
+    apia: { lat: -13.83, lng: -171.77, tz: 'Pacific/Apia' },
+    kiritimati: { lat: 1.87, lng: -157.4, tz: 'Pacific/Kiritimati' },
+    suva: { lat: -18.14, lng: 178.44, tz: 'Pacific/Fiji' },
+    gisborne: { lat: -38.66, lng: 178.02, tz: 'Pacific/Auckland' },
+    auckland: { lat: -36.85, lng: 174.76, tz: 'Pacific/Auckland' },
+    honolulu: { lat: 21.3, lng: -157.86, tz: 'Pacific/Honolulu' },
+    pagoPago: { lat: -14.28, lng: -170.7, tz: 'Pacific/Pago_Pago' },
+    anchorage: { lat: 61.22, lng: -149.9, tz: 'America/Anchorage' },
+    urumqi: { lat: 43.83, lng: 87.62, tz: 'Asia/Shanghai' },
+    ...CITIES,
+  }
+  for (const [name, place] of Object.entries(PLACES)) {
+    it(`${name}: Dhuhr, Asr and Maghrib fall on the day asked for, all year`, () => {
+      const s = settings('MuslimWorldLeague')
+      let prevDhuhr: number | null = null
+      for (let i = 0; i < 366; i += 3) {
+        const iso = new Date(Date.UTC(2026, 0, 1 + i)).toISOString().slice(0, 10)
+        const d = computeDay(place, iso, s)
+        for (const n of ['dhuhr', 'asr', 'maghrib'] as const) expect(isoInTz(d[n]!, place.tz), `${iso} ${n}`).toBe(iso)
+        expect(isoInTz(d.fajr!, place.tz), `${iso} fajr`).toBe(iso)
+        // Three days on, Dhuhr is three days later (give or take the sun and one DST hour)
+        if (prevDhuhr !== null) expect(Math.abs(d.dhuhr! - prevDhuhr - 3 * 864e5)).toBeLessThanOrEqual(61 * 60_000)
+        prevDhuhr = d.dhuhr!
+      }
+    })
+  }
+
+  it('Tonga: the next prayer and the rows belong to today', () => {
+    const tonga = PLACES.tongatapu
+    const s = settings('MuslimWorldLeague')
+    const day = computeDay(tonga, '2026-05-14', s)
+    expect(formatTime(day.dhuhr!, tonga.tz)).toMatch(/^12:3\d$/)
+    expect(nextPrayer(tonga, s, day.dhuhr! - 60_000)).toEqual({ prayer: 'dhuhr', at: day.dhuhr, iso: '2026-05-14' })
+    expect(currentPrayer(tonga, s, day.asr! + 60_000)).toMatchObject({ prayer: 'asr', iso: '2026-05-14' })
+    expect(currentWindow(tonga, s, day.fajr! + 60_000)).toBe('morning')
+  })
+
+  it('the far south gets the same high-latitude care as the far north', () => {
+    expect(effectiveHighLatRule({ lat: -54.8, lng: -68.3 }, 'auto')).toBe('seventhofthenight')
+    expect(effectiveHighLatRule({ lat: -33.87, lng: 151.21 }, 'auto')).toBe('middleofthenight')
+    const d = computeDay({ lat: -54.8, lng: -68.3, tz: 'America/Argentina/Ushuaia' }, '2026-12-21', settings('MuslimWorldLeague'))
+    for (const n of TIME_NAMES) expect(Number.isFinite(d[n])).toBe(true)
+  })
+
+  it('an unknown zone name does not throw in computeDay', () => {
+    const d = computeDay({ lat: 51.51, lng: -0.13, tz: 'Not/AZone' }, '2026-03-15', settings('MuslimWorldLeague'))
+    expect(d.dhuhr).toBe(computeDay(CITIES.london, '2026-03-15', settings('MuslimWorldLeague')).dhuhr)
+  })
+})
+
 describe('nextPrayer, currentPrayer, currentWindow, prayerRows', () => {
   const london = CITIES.london
   const s = settings('MuslimWorldLeague')

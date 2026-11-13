@@ -18,6 +18,9 @@ describe('place store', () => {
     expect(sanitizePlace({ lat: 91, lng: 0, tz: 'UTC' })).toBeNull()
     expect(sanitizePlace({ lat: 10, lng: 10 })).toBeNull() // no zone, no times
     expect(sanitizePlace({ lat: NaN, lng: 0, tz: 'UTC' })).toBeNull()
+    // A zone the device can't format in would throw on every screen that shows a time
+    expect(sanitizePlace({ lat: 10, lng: 10, tz: 'Not/AZone' })).toBeNull()
+    expect(sanitizePlace({ lat: 10, lng: 10, tz: 'Pacific/Tongatapu' })?.tz).toBe('Pacific/Tongatapu')
     expect(migratePlace({ place: { lat: 1.234, lng: 2.345, tz: 'UTC', label: 'x' } }, 0).place).toMatchObject({ lat: 1.23, lng: 2.35, source: 'city' })
     expect(migratePlace(undefined, 0)).toEqual({ place: null })
     expect(PLACE_STORE_KEY).toBe('takrar-place')

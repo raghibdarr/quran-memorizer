@@ -228,6 +228,7 @@ export function checkArabic(text, where, field) {
   if (text.normalize('NFC') !== text) out.push(err('is not Unicode NFC'));
   if (text.includes('ـ')) out.push(err('contains tatweel (U+0640)'));
   if (/[A-Za-z]/.test(text)) out.push(err('contains Latin letters'));
+  if (/[0-9٠-٩۰-۹]/.test(text)) out.push(err('contains digits (write numbers as words, or leave verse numbers out)'));
   if (!ARABIC_ALLOWED.test(text)) {
     const bad = [...text].find((c) => !ARABIC_ALLOWED.test(c));
     out.push(err(`contains a character outside the allowed Arabic set (U+${bad.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')})`));
@@ -237,9 +238,9 @@ export function checkArabic(text, where, field) {
 
 const RULING_WORDS = /\b(obligatory|compulsory|mandatory|must|forbidden|prohibited|unlawful|lawful|permissible|impermissible|permitted|not allowed|invalid|invalidates|required|recommended|disliked|sinful|haram|halal|makruh|mustahabb|wajib|fard)\b|\[\[(fard|wajib|haram|halal|makruh|mustahabb)\]\]/i;
 const BANNED = [
-  /\bthe (correct|strongest|right|soundest|preferred|true) (opinion|view|position)\b/i,
+  /\b(the )?(more |most )?(correct|strongest|stronger|right|soundest|sounder|preferred|true|rajih) (opinion|view|position)\b/i,
 ];
-const SCHOLARS_AGREE = /\b(the )?scholars (all )?(agree|are agreed)\b/i;
+const SCHOLARS_AGREE = /\b((the )?scholars (all |have |have all |unanimously )?(agree|agreed|are agreed|are unanimous|concur)|all (of )?(the )?scholars|by consensus|unanimously|there is (a |no )?(consensus|disagreement|difference of opinion))\b/i;
 
 /** Every free-text field of an item, with a label, for G8/G12 scans */
 function textFields(kind, item) {
@@ -346,6 +347,26 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
         const inSahih = cites.some((c) => reg.collections.get(c?.collection)?.sahih === true)
           || (item.gradings ?? []).some((g) => SAHIH_GRADES.has(g?.grade));
         if (!inSahih && !(item.gradings ?? []).length) E('G3', id, 'not in al-Bukhari or Muslim: needs a grading with `by` and `in`');
+        // Inclusion rule (spec 5.1): outside the two Sahihs, at least one located verdict
+        // must be sahih or hasan. A narration every located authority finds weak is not
+        // in a deck (it goes on /sources under "not included, and why").
+        else if (!inSahih && ships && !(item.gradings ?? []).some((g) => g?.grade === 'sahih' || g?.grade === 'hasan')) {
+          E('G3', id, 'not in al-Bukhari or Muslim and no located verdict of sahih or hasan: it cannot ship (spec 5.1 inclusion rule)');
+        }
+
+        // G2 again: a variant wording is cited like the item itself
+        for (const [vi, v] of (Array.isArray(item.variants) ? item.variants : []).entries()) {
+          const vc = Array.isArray(v?.citations) ? v.citations : [];
+          if (!vc.length) E('G2', id, `variants[${vi}] needs at least one citation`);
+          for (const [i, c] of vc.entries()) {
+            if (!reg.collections.has(c?.collection)) E('G2', id, `variants[${vi}].citations[${i}]: unknown collection "${c?.collection}"`);
+            if (!nonEmpty(c?.number)) E('G2', id, `variants[${vi}].citations[${i}]: number is required`);
+            if (!reg.numberings.has(c?.numbering)) E('G2', id, `variants[${vi}].citations[${i}]: unknown numbering "${c?.numbering}"`);
+            else if (reg.collections.has(c.collection) && !(reg.numberings.get(c.numbering).for ?? []).includes(c.collection)) {
+              E('G2', id, `variants[${vi}].citations[${i}]: numbering "${c.numbering}" is not a scheme for "${c.collection}"`);
+            }
+          }
+        }
 
         // G4: two witnesses, not all Sunnah.com-derived, skeleton hashes match (or a variant note)
         const wit = item.provenance?.witnesses;
@@ -407,6 +428,9 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
       else {
         (ev.quran ?? []).forEach((r, i) => errors.push(...checkQuranRef(r, quran, where, `evidence.quran[${i}]`)));
         if (ev.form !== undefined) errors.push(...checkArabic(ev.form, where, 'evidence.form'));
+        // A Name's evidence is never bare: derived-from-the-Quran cites the ayah, a hadith Name says which
+        if (ev.kind === 'quran-derived' && !(ev.quran ?? []).length) E('G6', id, 'a quran-derived Name must cite the ayah it is derived from');
+        if (ev.kind === 'hadith' && !nonEmpty(ev.hadith)) E('G6', id, 'a hadith Name must say which hadith (evidence.hadith)');
         // G6: a Name taken from the Quran appears in the ayah cited for it
         if (ev.kind === 'quran-name') {
           const refs = ev.quran ?? [];
@@ -449,15 +473,17 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
           else E('G10', id, `${label}.evidence[${j}] must be quran, item or consensus`);
         }
         // G10: differences have two sourced positions; agreement has evidence
+        // A school's position is sourced wherever it appears, not only under "differs"
+        const pos = Array.isArray(c.positions) ? c.positions : [];
+        for (const [j, p] of pos.entries()) {
+          if (!SCHOOLS.has(p?.school)) E('G10', id, `${label}.positions[${j}]: unknown school "${p?.school}"`);
+          if (!nonEmpty(p?.text)) E('G10', id, `${label}.positions[${j}] needs text`);
+          if (!hasSource(p?.source)) E('G10', id, `${label}.positions[${j}] needs source { work, location }`);
+          errors.push(...checkArabic(p?.quote, where, `${label}.positions[${j}].quote`));
+        }
+        if (new Set(pos.map((p) => p?.school)).size !== pos.length) E('G10', id, `${label}: one position per school`);
         if (c.kind === 'differs') {
-          const pos = c.positions ?? [];
           if (pos.length < 2) E('G10', id, `${label}: a "differs" claim needs at least two positions`);
-          for (const [j, p] of pos.entries()) {
-            if (!SCHOOLS.has(p?.school)) E('G10', id, `${label}.positions[${j}]: unknown school "${p?.school}"`);
-            if (!hasSource(p?.source)) E('G10', id, `${label}.positions[${j}] needs source { work, location }`);
-            errors.push(...checkArabic(p?.quote, where, `${label}.positions[${j}].quote`));
-          }
-          if (new Set(pos.map((p) => p?.school)).size !== pos.length) E('G10', id, `${label}: one position per school`);
         } else if (c.kind === 'agreed') {
           if (!ev.length) E('G10', id, `${label}: an "agreed" claim needs consensus, Quran or hadith evidence`);
         } else if (!['definition', 'how-to'].includes(c.kind)) E('SHAPE', id, `${label}: unknown kind "${c.kind}"`);
@@ -466,7 +492,7 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
         for (const [f, text] of [['text', c.text], ...(c.positions ?? []).map((p, j) => [`positions[${j}]`, p?.text]), ...(c.cards ?? []).flatMap((k, j) => [[`cards[${j}].front`, k?.front], [`cards[${j}].back`, k?.back]])]) {
           if (typeof text !== 'string') continue;
           for (const re of BANNED) if (re.test(text)) E('G12', id, `${label}.${f}: banned phrasing "${text.match(re)[0]}"`);
-          if (SCHOLARS_AGREE.test(text) && !hasConsensus) E('G12', id, `${label}.${f}: "scholars agree" needs a consensus citation`);
+          if (SCHOLARS_AGREE.test(text) && !hasConsensus) E('G12', id, `${label}.${f}: "${text.match(SCHOLARS_AGREE)[0]}" needs a consensus citation`);
         }
         for (const [j, k] of (c.cards ?? []).entries()) {
           if (!nonEmpty(k?.id) || !nonEmpty(k?.front) || !nonEmpty(k?.back)) E('SHAPE', id, `${label}.cards[${j}] needs id, front and back`);
@@ -476,7 +502,20 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
       for (const [i, q] of (item.check ?? []).entries()) {
         if (!Array.isArray(q?.options) || !Number.isInteger(q?.answer) || q.answer < 0 || q.answer >= q.options.length) E('SHAPE', id, `check[${i}]: answer must index an option`);
         if (!claimIds.has(q?.claim)) E('SHAPE', id, `check[${i}]: claim "${q?.claim}" is not in this lesson`);
-        for (const re of BANNED) if (re.test(q?.q ?? '')) E('G12', id, `check[${i}]: banned phrasing`);
+        // G12 on the question and its options; "scholars agree" leans on the claim it tests
+        const tested = claims.find((c) => c?.id === q?.claim);
+        const testedHasConsensus = (Array.isArray(tested?.evidence) ? tested.evidence : []).some((e) => e?.consensus);
+        for (const text of [q?.q, ...(Array.isArray(q?.options) ? q.options : [])]) {
+          if (typeof text !== 'string') continue;
+          for (const re of BANNED) if (re.test(text)) E('G12', id, `check[${i}]: banned phrasing "${text.match(re)[0]}"`);
+          if (SCHOLARS_AGREE.test(text) && !testedHasConsensus) E('G12', id, `check[${i}]: "${text.match(SCHOLARS_AGREE)[0]}" needs a consensus citation on the claim it tests`);
+        }
+      }
+      // G12 on the lesson's own words: a title or intro has no evidence to lean on
+      for (const [f, text] of [['title', item.title], ['intro', item.intro]]) {
+        if (typeof text !== 'string') continue;
+        for (const re of BANNED) if (re.test(text)) E('G12', id, `${f}: banned phrasing "${text.match(re)[0]}"`);
+        if (SCHOLARS_AGREE.test(text)) E('G12', id, `${f}: "${text.match(SCHOLARS_AGREE)[0]}" belongs in a claim with a consensus citation`);
       }
     }
 
@@ -509,6 +548,7 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
       E('G14', lid, 'was shipped and is now below source-checked; set "withdrawn": "<reason>" on its lock entry and add an ERRATA.md line');
     }
     const h = itemHash(item);
+    if (item.rev < entry.rev) { E('G14', lid, `rev went down (${entry.rev} to ${item.rev}): a rev only rises`); continue; }
     if (h !== entry.hash) {
       if (!(item.rev > entry.rev)) E('G14', lid, `content changed since rev ${entry.rev}: raise rev`);
       else nextLock.ids[lid] = { ...entry, rev: item.rev, hash: h };
