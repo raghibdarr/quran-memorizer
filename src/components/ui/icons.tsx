@@ -57,14 +57,15 @@ export function StarIcon({ size = 16, className = '' }: IconProps) {
   );
 }
 
-/** A dome with its finial over an arched door: the Prayer tab */
+/** A mosque: onion dome and finial over a hall with an arched door. The Prayer tab */
 export function PrayerIcon({ size = 16, className = '' }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <path d="M12 2.5v2.5" />
-      <path d="M5 21v-7.5a7 7 0 0 1 14 0V21" />
-      <path d="M3 21h18" />
-      <path d="M10 21v-3.5a2 2 0 0 1 4 0V21" />
+      <path d="M2.5 21h19" />
+      <path d="M5 21v-7M19 21v-7M5 14h14" />
+      <path d="M7 14c0-3.2 2.4-4.6 5-7 2.6 2.4 5 3.8 5 7" />
+      <path d="M12 7V4" />
+      <path d="M10.5 21v-3a1.5 1.5 0 0 1 3 0v3" />
     </svg>
   );
 }

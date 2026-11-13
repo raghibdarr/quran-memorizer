@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // Builds and checks the deen content (all-in-one spec 5.2 and 5.5).
 //
 //   node scripts/build-deen.mjs                 validate every deck and emit what passes
