@@ -1,0 +1,4 @@
+=== Prayer-alert chime
+The chime played by prayer alerts in the Android app is Takrar's own work: two soft tones
+synthesised from sine waves by scripts/build-chime.mjs. It uses no recording or third-party
+sound. Details: data-sources/chime/SOURCE.md.

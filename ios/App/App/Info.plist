@@ -54,6 +54,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used once to work out prayer times on your phone. Your location is never sent anywhere.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Takrar listens while you recite so it can check your recitation. Audio is processed on your device and never uploaded.</string>
 	<key>UIBackgroundModes</key>

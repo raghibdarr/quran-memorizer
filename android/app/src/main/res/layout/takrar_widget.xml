@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Takrar home-screen widget (roadmap #17): today's reviews, the streak, the khatm -->
+<!-- Takrar home-screen widget (roadmap #17): today's reviews, the streak, the khatm.
+     With a place set, "Next: Asr 3:42 pm" takes the title's row (all-in-one spec 3.4). -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
@@ -17,6 +18,18 @@
         android:textColor="@color/widget_teal"
         android:textSize="12sp"
         android:textStyle="bold" />
+
+    <!-- Shown instead of the title when the app has sent prayer times -->
+    <TextView
+        android:id="@+id/widget_prayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/widget_teal"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/widget_main"

@@ -13,6 +13,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(SystemHapticsPlugin.class);
         registerPlugin(RecitationPlayerPlugin.class);
         registerPlugin(TakrarWidgetPlugin.class);
+        registerPlugin(AdhanHealthPlugin.class);
         super.onCreate(savedInstanceState);
     }
 }
