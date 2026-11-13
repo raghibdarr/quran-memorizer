@@ -413,9 +413,12 @@ def _vocab_ids(em_vocab: dict, toks: list) -> list:
 
 
 def align_ayah(logp: np.ndarray, env: np.ndarray, surah: int, ayah: int, vocab: dict, blank: int,
-               p: Params = Params(), frame_ms: float = 40.0) -> AyahResult:
-    """logp: (T, V) frame log-posteriors; env: envelope_db(wav) (one value per 10 ms)."""
-    txt = ayah_text(surah, ayah)
+               p: Params = Params(), frame_ms: float = 40.0, txt: AyahText = None,
+               lead_candidates=None) -> AyahResult:
+    """logp: (T, V) frame log-posteriors; env: envelope_db(wav) (one value per 10 ms).
+    txt overrides the ayah's own text (several ayahs in one file, or part of an ayah);
+    lead_candidates overrides which lead-ins are tried, e.g. ["basmala", "istiaatha+basmala"]."""
+    txt = txt or ayah_text(surah, ayah)
     dur_ms = int(len(env) * 10 + 20)
     candidates = [("", "")]
     if p.lead_ins and ayah == 1:
@@ -424,6 +427,10 @@ def align_ayah(logp: np.ndarray, env: np.ndarray, surah: int, ayah: int, vocab: 
             candidates = [("", ""), ("istiaatha", ist)]
         else:
             candidates = [("", ""), ("basmala", bas), ("istiaatha", ist), ("istiaatha+basmala", ist + bas)]
+    if lead_candidates is not None:
+        ist, bas = lead_in_phonemes("istiaatha"), lead_in_phonemes("basmala")
+        table = {"": "", "basmala": bas, "istiaatha": ist, "istiaatha+basmala": ist + bas}
+        candidates = [(k, table[k]) for k in lead_candidates]
     best = None
     for name, pre in candidates:
         toks, o2t, run = collapse(pre + txt.phonemes)
@@ -536,3 +543,22 @@ def sanity_flags(r: AyahResult) -> list:
     if any(e - s < 60 for _, s, e in r.rows):
         flags.append("very-short-word")
     return flags
+
+
+def concat_text(ayahs: list) -> AyahText:
+    """Text of several consecutive ayahs recited in one file (each ends with a stop)."""
+    phon, ws, mg = "", [], []
+    for s, a in ayahs:
+        t = ayah_text(s, a)
+        ws += [len(phon) + w for w in t.word_starts]
+        mg += [False] + list(t.merged[1:])
+        phon += t.phonemes
+    return AyahText(phon, ws, len(ws), mg)
+
+
+def slice_text(t: AyahText, w0: int, w1: int) -> AyahText:
+    """Words w0..w1-1 (0-based) of a text, for a file that holds part of an ayah."""
+    a = t.word_starts[w0]
+    b = t.word_starts[w1] if w1 < t.n_words else len(t.phonemes)
+    return AyahText(t.phonemes[a:b], [w - a for w in t.word_starts[w0:w1]], w1 - w0,
+                    [False] + list(t.merged[w0 + 1:w1]))

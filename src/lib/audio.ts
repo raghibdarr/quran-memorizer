@@ -1,6 +1,7 @@
 import { getCachedAudio, cacheAudio } from './storage';
 import { isSurahAudio, surahAudioFallback } from './reciters';
 import { loadSurahAudio } from './segment-audio';
+import { loadAudioFixes } from './audio-fixes';
 
 type AudioState = 'idle' | 'playing' | 'paused' | 'loading';
 
@@ -49,11 +50,14 @@ class AudioController {
     return transformReciterUrl(url, isSurahAudio(this._reciter) ? surahAudioFallback(this._reciter) : this._reciter);
   }
 
-  /** For surah-audio reciters: the surah file and the ayah's [startMs, endMs] inside it */
+  /** For surah-audio reciters, and misfiled per-ayah ayahs: the file and the ayah's [startMs, endMs] inside it */
   private async locate(url: string): Promise<{ src: string; startMs: number; endMs: number } | null> {
-    if (!isSurahAudio(this._reciter)) return null;
     const m = AYAH_FILE.exec(url);
     if (!m) return null;
+    if (!isSurahAudio(this._reciter)) {
+      const fix = (await loadAudioFixes(this._reciter))?.[`${Number(m[1])}:${Number(m[2])}`];
+      return fix ? { src: fix[0], startMs: fix[1], endMs: fix[2] } : null;
+    }
     const map = await loadSurahAudio(this._reciter, Number(m[1]));
     const v = map?.verses[String(Number(m[2]))];
     return map && v ? { src: map.src, startMs: v[0], endMs: v[1] } : null;

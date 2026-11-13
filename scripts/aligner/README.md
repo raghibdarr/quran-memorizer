@@ -174,3 +174,20 @@ it against every ayah of the surah. That is why the correlation import skipped t
 It also means the 20 ayahs of 14:1-50 that *did* pass the 0.9 correlation and are in
 `public/segments/khalefa_al_tunaiji_64kbps/14.json` today (14:2, 7, 14, 15, 16, 20, 26, 28,
 29, 30, 33, 35, 40, 41, 43, 46, 47, 48, 49, 50) carry timings for audio that is a different ayah.
+
+## khalefa file check and remap, 2026-11-13
+
+`check_audio.py decode|report <reciterDir>` free-decodes every per-ayah file and compares it
+with its own ayah and the neighbours +/-2 (single ayahs and runs of up to three).
+`remap_khalefa.py` then stages the fix for `khalefa_al_tunaiji_64kbps`. Result over all 6,236 files:
+
+* 6,177 files start and end with their own ayah (longer decodes are mid-ayah restarts).
+* Surah 13: `013001..013005` hold ayahs 2..6 (`013006` is correct too). Ayah 1 is in no file.
+* Surah 14: `014001..014050` hold ayahs 2..51 (`014051` is correct too). Ayah 1 is in no file.
+* Surah 34: `034047` holds ayahs 47 and 48 (47 ends at 15.08 s of 22.8 s); `034048` holds 49;
+  `034049` holds 50 without its last three words; `034050` holds only those three words.
+
+Staged in `<TAKRAR_ALIGNER_HOME>/out/khalefa_al_tunaiji_64kbps/`: `_remap.json` (55 ayahs to
+another file, 3 missing), `13.json`/`14.json`/`34.json` (timings relative to the remapped file;
+34:48 starts 15.09 s into `034047`), `_missing.json` (13:1, 14:1, 34:50 located in mp3quran.net's
+whole-surah files of the same reciter, plus 34:50's two EveryAyah pieces), `_report.json`.

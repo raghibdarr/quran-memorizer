@@ -16,6 +16,7 @@ import { audioController } from './audio';
 import { getAudioUrl } from './quran-data';
 import { surahAudioFallback, RECITERS } from './reciters';
 import { loadAudioIndex } from './audio-index';
+import { loadAudioFixes } from './audio-fixes';
 import { localUrlResolver } from './downloads';
 import { ayahAt, buildQueue, msIntoAyah, type AyahRef, type QueueItem, type SurahAudioIndex } from './recitation-queue';
 
@@ -210,6 +211,7 @@ export async function startRecitation(plan: PlaybackPlan, startIndex = 0): Promi
     reciterName,
     surahAudio: audioIndex,
     fallbackReciter: surahAudioFallback(plan.reciter),
+    fixes: await loadAudioFixes(plan.reciter),
     repeatEach: plan.repeatEach,
     merge: plan.repeatEach <= 1 && plan.pauseMs === 0 && !plan.pauseFactor,
     surahName: plan.surahName,
