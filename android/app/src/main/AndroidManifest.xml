@@ -85,7 +85,23 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
-    <!-- Reminders are a daily nudge: inexact delivery is fine, and Google Play restricts
-         exact alarms to alarm/calendar apps. Drop the permission local-notifications adds. -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" tools:node="remove" />
+    <!-- Exact alarms (all-in-one spec 6 and 12.1): prayer alerts should arrive at the prayer
+         time, so SCHEDULE_EXACT_ALARM (added by local-notifications) is now kept. This reverses
+         the earlier decision to strip it for the daily hifz nudge. OWNER DECISION: confirm it
+         against Google Play's exact-alarm policy at submission. It is user-revocable: when it
+         isn't granted, alerts fall back to inexact delivery and the alerts health check sends
+         the user to the system setting (AdhanHealthPlugin.openExactAlarmSettings).
+         USE_EXACT_ALARM is deliberately not declared (Play reserves it for alarm and calendar apps). -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
+    <!-- Prayer times: one coarse location fix (about a city's size) when the user taps
+         "Use my location". Never fine location, never in the background. The rounded result
+         stays on the device. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Belt and braces: if a plugin update ever merges fine location in, strip it -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:node="remove" />
+    <!-- Location is optional: devices without it can install the app and pick a city -->
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
 </manifest>
