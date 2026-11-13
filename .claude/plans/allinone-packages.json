@@ -1,0 +1,575 @@
+{
+ "specPath": "C:\\Users\\raghi\\quran-memorizer\\.claude\\plans\\allinone-spec.md",
+ "summary": "Scores: D1 experience 7.5, D2 engineering 8.5, D3 content 8.0. The merged spec takes D1's IA and flows (fifth Prayer tab, flat query-param routes, permission at point of use, stub-and-slot pattern, calm rules), D2's engineering seams (isAppRoute and five-point sync registration, notification ID registry with the iOS 64 budget, hash-skipped rescheduling, single native writer compile-checked on a mobile/ branch, licence fragments, bundle check, ids lock) and D3's content pipeline (one file per item, two-witness collation, attributed gradings, positions as data, staged fresh-agent checks, 15 build-enforced guardrails). Key conflict resolutions: the prayer engine and Hijri conversion are fully implemented in foundations so most packages build in wave 1; D2's bundled hadith-api Arabic is rejected in favour of D3's witness collation, with a skeleton-hash check added; place, prayer settings, worship logs and zakat are device-only (place also excluded from backup), only the learning store syncs; emitted content is per deck so nothing emitted is shared; course ships Purification and Fasting now, Prayer unit deferred. Plan: 1 foundations package, 10 wave-1 packages, 6 wave-2 packages, 2 wave-3 packages (content audit, integration). Verified in the repo: working tree is clean on main, REMINDER_ID_BASE is 7100, the manifest strips SCHEDULE_EXACT_ALARM, applySm2 is private, android.yml runs on mobile/** pushes. Flags for the owner: the exact-alarm manifest change reverses an earlier decision; android-native needs a push to a mobile/** branch for its compile check; content agents need web access for witnesses and will ship fewer items than authored if witnesses are unreachable; all religious content ships labelled as not yet scholar-reviewed.",
+ "packages": [
+  {
+   "id": "foundations",
+   "title": "Foundations: dependencies, stores, engine, nav, routes, slots, content plumbing",
+   "wave": 0,
+   "dependsOn": [],
+   "kind": "code",
+   "ownsPaths": [
+    "package.json",
+    "package-lock.json",
+    "src/stores/place-store.ts",
+    "src/stores/prayer-store.ts",
+    "src/stores/worship-store.ts",
+    "src/stores/deen-store.ts",
+    "src/stores/zakat-store.ts",
+    "src/lib/prayer/engine.ts",
+    "src/lib/prayer/methods.ts",
+    "src/lib/prayer/regions.ts",
+    "src/lib/prayer/tools.ts",
+    "src/lib/prayer/widget-payload.ts",
+    "src/lib/hijri/convert.ts",
+    "src/lib/location.ts",
+    "src/lib/notify/**",
+    "src/lib/native-plugins.ts",
+    "src/lib/deen/**",
+    "src/types/deen.ts",
+    "src/content/deen/**",
+    "content/deen/STYLE.md",
+    "content/deen/ERRATA.md",
+    "content/deen/*.json",
+    "content/deen/glossary/core.json",
+    "content/deen/_fixture/**",
+    "scripts/build-deen.mjs",
+    "scripts/check-bundle.mjs",
+    "scripts/build-licenses.mjs",
+    "data-sources/README.md",
+    "data-sources/licenses.d/10-foundations.txt",
+    "src/components/ui/stub-page.tsx",
+    "src/components/ui/icons.tsx",
+    "src/components/layout/bottom-nav.tsx",
+    "src/components/layout/settings-panel.tsx",
+    "src/components/providers.tsx",
+    "src/lib/routes.ts",
+    "src/lib/sync/**",
+    "src/lib/backup.ts",
+    "src/lib/spaced-repetition.ts",
+    "src/app/page.tsx",
+    "src/app/essentials/page.tsx",
+    "src/app/review/**",
+    "stub page.tsx for every new route",
+    "stub slot components (spec 3.4)",
+    "public/sw.js",
+    ".github/workflows/ci.yml",
+    "e2e/smoke.spec.ts",
+    "e2e/routes.spec.ts"
+   ],
+   "touchesShared": [
+    "all shared files listed in spec section 3.8 (this is the only package allowed to edit them)"
+   ],
+   "brief": "Repo: C:\\Users\\raghi\\quran-memorizer (Next.js 16 static export + Capacitor 8, Zustand persisted stores, Supabase sync, vitest, Playwright). Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md fully; implement section 3 exactly (names, paths, props and store shapes there are contracts other agents code against). You are the only package that edits shared files.\n\nBuild:\n1. Dependencies: add adhan ^4.4 and @capacitor/geolocation ^8; run npx cap sync and commit generated plugin lists. Do NOT touch AndroidManifest.xml, Info.plist, widget-sync.tsx or anything else under android/ or ios/ by hand (android-native owns those).\n2. Stores (spec 3.2): place, prayer, worship, deen, zakat, each with version + migrate and typed actions. Register quran-deen in all five sync places (STORE_NAMES, STORE_SCHEMA_VERSIONS, mergeStore in src/lib/sync/merge.ts, STORES in rehydrate.ts, backup.ts) and fixtures.test.ts; merge = later lastReview per card, earliest lessonsDone, newer-side settings; fast-check property tests. Backup includes takrar-prayer, takrar-worship, takrar-zakat and excludes takrar-place. Tests: STORE_NAMES has no takrar-* store; backup output has no lat/lng.\n3. Libs (spec 3.3), complete with tests: prayer engine over adhan (computeDay, nextPrayer, currentWindow, qiblaBearing, formatTime in the place's tz), methods, regions table, tools tile list, widget-payload, hijri convert (Intl islamic-umalqura feature test + own tabular fallback), location (coarse one-shot, rounding), notify registry + applyRange (spec 3.6), native-plugins typed interfaces, export reviewSm2 from spaced-repetition.ts without changing existing behaviour, types/deen.ts (spec 5.3), lib/deen (load, queue, cards, normalize-arabic, glossary, flags with SHOW_UNREVIEWED_FIQH), deck registry with stub deck modules exporting {ready:false}.\n4. Content plumbing: content/deen skeleton (STYLE.md per spec 5.2, ERRATA.md, reviewers.json = [], collections/scholars/works JSON seeded with the collections, numbering schemes, scholars and primers named in spec 5.1), glossary/core.json (about 40 terms, own definitions), a 3-item fixture deck, scripts/build-deen.mjs (--deck, --check, merges registry-additions.json sidecars, emits src/data/deen/<deck>.json and src/data/deen/glossary/<pkg>.json) implementing all 15 guardrails of spec 5.5, and content-integrity.test.ts wrapping the check. Unit-test each guardrail with a failing fixture.\n5. Navigation: fifth tab Prayer with PrayerIcon and the also lists (spec 2.1); stub page for every route in spec 2.2 using a new StubPage component; all routes added to isAppRoute with routes.test.ts cases; one settings row linking to /prayer/settings.\n6. Slots (spec 3.4): create the eight stub components returning null with the exact export names and props, and mount them: HomePrayerStrip in src/app/page.tsx, PrayerSync in providers.tsx, DeenReviewSection in the review client, LearnRows at the top of /essentials. The four /prayer slots are only created (prayer-times mounts them).\n7. Licensing: build-licenses.mjs appends data-sources/licenses.d/*.txt in name order; add 10-foundations.txt (adhan MIT, @capacitor/geolocation MIT); README section pointing at licenses.d and per-folder SOURCE.md. Do not regenerate public/licenses.txt content beyond what the script produces for your fragment.\n8. sw.js /data/* stale-while-revalidate cache takrar-data-v1 kept across activations; ci.yml TZ matrix extended to src/lib/prayer src/lib/hijri src/lib/worship plus a build-deen --check step; scripts/check-bundle.mjs (spec 3.3).\n\nAcceptance: npx tsc --noEmit, npm run test:run, npm run build, both Playwright configs green; engine golden tests (8 cities x 4 methods within 1 minute of adhan reference values), ordering property test for |lat|<48, no NaN to 66 with auto rule, DST days for London and New York; five-tab nav animates at 375px; every new route cold-loads its stub under web and native static serving (e2e/routes.spec.ts); smoke updated for five tabs; app otherwise looks unchanged (Home identical when no place is set; adhan not in Home's first-load chunks per check-bundle). Do not push. Report anything in the spec that proved wrong in the repo."
+  },
+  {
+   "id": "prayer-times",
+   "title": "Prayer times: hub, setup, settings, explainer, Home strip, cities data",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/app/prayer/page.tsx",
+    "src/app/prayer/setup/**",
+    "src/app/prayer/settings/**",
+    "src/app/prayer/why/**",
+    "src/components/prayer/*.tsx",
+    "src/components/prayer/times/**",
+    "src/components/home/prayer-strip.tsx",
+    "scripts/build-cities.mjs",
+    "public/data/cities.json",
+    "data-sources/geonames/**",
+    "data-sources/licenses.d/20-geonames.txt",
+    "src/lib/prayer/cities.ts",
+    "src/lib/prayer/cities.test.ts",
+    "e2e/prayer-times.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs: src/app/prayer/page.tsx, setup, settings, why pages and src/components/home/prayer-strip.tsx",
+    "renders (does not edit) slot components in src/components/prayer/slots/"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 2, 3.2-3.4, 4, 7, 9). Foundations already provides the engine (src/lib/prayer/engine.ts, methods.ts, regions.ts, tools.ts), stores (place-store, prayer-store), location.ts and hijri/convert.ts. Do not edit them or any file in spec 3.8; write needs to HANDOFF.md.\n\nBuild:\n- /prayer: before setup, one setup card. After: HijriLine slot, next-prayer hero with live countdown (rolls to tomorrow's Fajr after Isha), six rows (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha) each rendering <RowTracker iso prayer startMs endMs/> (not on Sunrise), at most one contextual chip (RamadanBanner first, else AdhkarNow with window from currentWindow and afterPrayer), then tool tiles from tools.ts (only ready ones, plus those whose route exists). If a time is null (high latitude) say so plainly, never show a wrong time. Timezone mismatch line: 'Update location?'.\n- /prayer/setup: 3 steps per spec 2.7. 'Use my location' calls getCoarseLocation only on tap; 'Choose a city' is equally prominent and needs no permission. Method and Asr pre-chosen from regions.ts with the reason sentence. Step 3 asks about alerts and links to /prayer/alerts (do not schedule notifications yourself).\n- /prayer/settings: place, method (incl. custom angles), Asr position, high-latitude rule, per-prayer offsets, Hijri day offset, Home strip toggle, links to /prayer/alerts, /prayer/match, /prayer/why. Changes update times live.\n- /prayer/why: plain-language explainer of why times differ (Fajr/Isha angles per method with the issuing body named, the two Asr positions: shadow length one = Shafi'i, Maliki, Hanbali; two = Hanafi; high-latitude rules; mosque adjustments). No ruling picks a winner.\n- Home strip: 'Asr 15:12 · in 1 h 4 min' (in Ramadan 'Iftar ...'), renders null until a place exists, dynamic-imports the engine, respects homeStrip toggle.\n- Cities: scripts/build-cities.mjs trims GeoNames cities15000 (CC BY 4.0) to name, country, lat, lng, tz as columnar JSON in public/data/cities.json (target under 350 KB gzip); SOURCE.md with URL, date, sha256; licence fragment. src/lib/prayer/cities.ts: lazy fetch, search, nearest-city reverse label. Loaded only on the search screen and after a GPS fix.\n\nAcceptance: setup completes with and without location; no permission prompt before a button tap; Playwright (seed Makkah via localStorage, fixed clock): five prayer rows and next-prayer highlight, offline reload renders, context.setGeolocation path works, and a request listener proves no URL or body contains coordinates; cities search unit tests; tsc, vitest, build, check-bundle green; 375px, dark theme and reduced motion look right. Calm copy, sentence case, tactile treatment only on the hero. Do not push."
+  },
+  {
+   "id": "match-mosque",
+   "title": "Match my mosque wizard",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/lib/prayer/match.ts",
+    "src/lib/prayer/match.test.ts",
+    "src/app/prayer/match/**",
+    "src/components/prayer/match/**",
+    "e2e/match-mosque.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stub src/app/prayer/match/page.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 2.7, 3.2, 3.3, 6, 7, 9). Use the foundations engine (computeDay), methods.ts, regions.ts, place-store and prayer-store; do not edit them or any file in spec 3.8 (HANDOFF.md for needs).\n\nBuild src/lib/prayer/match.ts (pure): input = place, 2 to 5 prayer START times (the copy must say start times, not jama'ah/iqamah) for one or two dates. Enumerate method x Asr position x high-latitude rule; residual per prayer = entered minus computed (minutes); score = sum over prayers of |residual - round(median residual for that prayer across dates)| plus a small penalty per non-zero offset, with the regional default winning ties. If the best preset leaves Fajr or Isha more than 3 minutes off, solve custom Fajr/Isha angles by bisection. Output: method, Asr position, high-lat rule, per-prayer offsets, optional custom angles, a confidence line ('two dates a month apart will confirm this').\n\nBuild the wizard at /prayer/match: enter times (time inputs, date picker, optional second date), result screen with a before/after table against the entered times, plain statement that this is a fit and not the mosque's own data, one Apply button that writes to prayer-store (saving the previous settings in prayer-store.previous), and Undo that restores them. If no place is set, send the user to /prayer/setup.\n\nAcceptance: fast-check property test: synthesise times from any method + Asr + offsets in [-10,10] on two dates 30 days apart; the wizard reproduces the resulting times within 1 minute for all five prayers on a third date; single-date input gives zero residual on that date; constant iqamah-style offsets handled. Playwright: seed a place, enter times, Apply, Undo. tsc, vitest, build green. Do not push."
+  },
+  {
+   "id": "prayer-alerts",
+   "title": "Prayer alerts: planner, scheduler sync, health check",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/lib/prayer/schedule.ts",
+    "src/lib/prayer/schedule.test.ts",
+    "src/lib/prayer/notifications.ts",
+    "src/lib/prayer/notifications.test.ts",
+    "src/components/prayer-sync.tsx",
+    "src/app/prayer/alerts/**",
+    "src/components/prayer/alerts/**",
+    "e2e/prayer-alerts.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs src/components/prayer-sync.tsx and src/app/prayer/alerts/page.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 3.3, 3.6, 6, 7, 9, 12). Study the existing src/lib/reminders.ts, src/lib/reminder-notifications.ts and src/components/reminder-sync.tsx for house patterns (@capacitor/local-notifications 8 is installed; onReminderTap routes extra.url). Use foundations' engine, stores, src/lib/notify/registry.ts and apply.ts, and src/lib/native-plugins.ts (AdhanHealth may be unavailable: guard with available()). JS only: do not touch android/ or ios/ or any file in spec 3.8.\n\nBuild:\n- schedule.ts (pure): planPrayerAlerts({now, place, settings, platform}) emits notifications chronologically within the registry ranges: IDs 20000 + dayIndex*20 + slot, stable for the same (day, slot); Android horizon 30 days, iOS as many days as fit in 48 slots (pre-alerts count); the last scheduled instant also carries tail ID 21000 'Open Takrar to keep prayer alerts coming'. Per-prayer mode off | silent | default | chime and preAlertMin from prayer-store.alerts; offsets already applied by the engine. Body text like 'Dhuhr · 12:41'; extra.url '/prayer'.\n- notifications.ts: OS glue. Create Android channels once: prayer-default-v1, prayer-chime-v1 (sound 'takrar_chime.wav', provided by the android-native package), prayer-silent-v1. 'chime' is hidden on iOS. Uses applyRange so repeated opens do not churn alarms. Uses checkExactNotificationSetting/changeExactNotificationSetting.\n- prayer-sync.tsx: reschedules on mount, foreground return, settings or place change and day rollover; debounced; does nothing on web or without a place; dynamic-imports the engine.\n- /prayer/alerts: per-prayer mode pickers and optional pre-alert; health check rows with pass/fix state: notification permission, exact alarms (Android: when not granted say 'may arrive several minutes late' with a button to the system setting), battery optimisation (via AdhanHealth when available), 'Send a test alert in 10 seconds', pending count and last scheduled date. On web show: 'Prayer alerts need the app. Times work here.' Permission is requested only when the user turns alerts on.\n\nAcceptance: planner unit tests: never exceeds the per-platform budget, IDs unique and stable, tail present at the last instant, DST and midnight-crossing Isha correct, changing one prayer's mode changes only its entries. Glue tested with a mocked LocalNotifications: cancel-in-range touches no ID outside 20000-21000; existing reminder IDs (7100+) untouched. Playwright: web shows the honest message. tsc, vitest, build green. In your final report list device-only risks as unverified (OEM battery killers, exact-alarm grant flow, channel sound, iOS delivery after the window runs out). Do not push."
+  },
+  {
+   "id": "android-native",
+   "title": "Android native: permissions, chime, health plugin, widget next-prayer",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "android/**",
+    "ios/App/App/Info.plist",
+    "src/components/widget-sync.tsx",
+    "scripts/build-chime.mjs",
+    "data-sources/licenses.d/25-chime.txt",
+    "data-sources/chime/**"
+   ],
+   "touchesShared": [
+    "src/components/widget-sync.tsx (single writer by spec 3.4; adds the prayers payload via prayerWidgetPayload())"
+   ],
+   "brief": "Read .claude/CLAUDE.md, .claude/plans/m11-mobile-native-spec.md and .claude/plans/allinone-spec.md (sections 3.3, 3.4, 6, 7, 9, 12). You are the single writer for android/, ios/App/App/Info.plist and src/components/widget-sync.tsx. There is no local Android SDK and no Mac: correctness is checked by the GitHub Actions workflow .github/workflows/android.yml (assembleDebug on pushes to mobile/** branches). Do not push yourself; in your final report ask the orchestrator to push your branch as mobile/allinone-native and wait for a green run before merging. Keep every change small and isolated.\n\nBuild:\n1. AndroidManifest.xml: remove the tools:node=\"remove\" line so SCHEDULE_EXACT_ALARM is declared (do NOT add USE_EXACT_ALARM); add ACCESS_COARSE_LOCATION only (no fine location; if the geolocation plugin's manifest merges FINE, strip it with tools:node=\"remove\"). Leave a comment explaining the exact-alarm reversal is an owner decision flagged in the spec.\n2. scripts/build-chime.mjs: deterministic synthesis of a short (about 2 s) two-tone WAV from sine waves with a soft envelope, our own work; write android/app/src/main/res/raw/takrar_chime.wav and commit it; SOURCE.md and licence fragment stating it is generated by the script.\n3. AdhanHealthPlugin.java (about 60 lines) in app/takrar/quran: isIgnoringBatteryOptimizations, openBatterySettings (opens the system list; do not request the restricted direct-exemption permission), openExactAlarmSettings. Register in MainActivity the same way SystemHapticsPlugin is. Method names must match src/lib/native-plugins.ts.\n4. Widget: TakrarWidgetPlugin.update accepts an optional prayers array [{name, at(epoch ms)}] stored in the existing SharedPreferences; TakrarWidgetProvider renders 'Next: Asr 3:42 pm' above the existing due/streak line by picking the next entry at render time (hide the line when none), and sets one inexact alarm for the next prayer instant to refresh itself in addition to the existing periodic update. Update the layout XML. Old payloads without prayers must keep working.\n5. widget-sync.tsx: add prayers from prayerWidgetPayload() (src/lib/prayer/widget-payload.ts, dynamic import, null when no place) to the update call; keep existing behaviour.\n6. Info.plist: add NSLocationWhenInUseUsageDescription ('Used once to work out prayer times on your phone. Your location is never sent anywhere.'). No Swift changes.\n\nAcceptance: tsc, vitest, npm run build green locally; Java reviewed carefully for compile errors (imports, API levels, PendingIntent flags); the Actions assembleDebug run is green before merge. Final report must list as unverified on device: alarm delivery, chime playback, widget self-refresh, battery settings deep link on OEM skins."
+  },
+  {
+   "id": "qibla",
+   "title": "Qibla compass with no-sensor fallback",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/lib/qibla/**",
+    "src/app/qibla/**",
+    "src/components/qibla/**",
+    "data-sources/wmm/**",
+    "data-sources/licenses.d/30-wmm.txt",
+    "e2e/qibla.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stub src/app/qibla/page.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 2, 3.3, 4, 7, 9). Use engine.qiblaBearing(place) and place-store from foundations; do not edit files in spec 3.8 (HANDOFF.md for needs). No map tiles, no network calls.\n\nBuild:\n- src/lib/qibla/sun.ts: our own solar azimuth maths (date, lat, lng → azimuth), tested within 1 degree against published values.\n- src/lib/qibla/compass.ts: heading source abstraction. iOS: webkitCompassHeading after DeviceOrientationEvent.requestPermission() called from a tap. Android/WebView: deviceorientationabsolute (alpha → heading). Smoothing (circular low-pass) and a variance measure that triggers the calibration hint.\n- src/lib/qibla/declination.ts (optional): our own World Magnetic Model evaluation over NOAA's public-domain coefficient file pinned in data-sources/wmm with SOURCE.md, tested within 1 degree of NOAA test values, used to correct Android magnetic heading to true north. If you cannot pin and test it in this session, skip it, label the Android heading 'magnetic' in the UI, and say so in your report.\n- /qibla: if no place, link to /prayer/setup. Compass dial with the qibla marker, bearing in degrees, an 'aligned' state with a single haptic (existing haptics lib), figure-8 calibration hint when variance is high, accuracy caveat line. Fallback when sensors are missing or denied (also the web default): bearing in degrees from north, a north-up diagram, and the sun aid: 'The sun is now N° to the left/right of the qibla' (hidden when the sun is below the horizon). Motion permission is asked only on tap.\n\nAcceptance: bearing tests for 10 cities within 0.5 degrees of published values; sun azimuth tests; compass smoothing unit tests (wrap-around at 359/0); Playwright asserts the fallback renders with no sensor and works after offline reload; tsc, vitest, build green; 375px, dark theme, reduced motion. Report sensor availability inside WebViews as a device-only risk. Do not push."
+  },
+  {
+   "id": "hijri-ramadan",
+   "title": "Hijri calendar, events and Ramadan mode",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code+content",
+   "ownsPaths": [
+    "src/lib/hijri/events.ts",
+    "src/lib/hijri/events.test.ts",
+    "src/lib/hijri/calendar.ts",
+    "src/lib/hijri/calendar.test.ts",
+    "src/data/hijri-events.json",
+    "src/app/calendar/**",
+    "src/components/calendar/**",
+    "src/lib/worship/ramadan.ts",
+    "src/lib/worship/ramadan.test.ts",
+    "src/app/ramadan/**",
+    "src/components/ramadan/**",
+    "src/components/prayer/slots/hijri-line.tsx",
+    "src/components/prayer/slots/ramadan-banner.tsx",
+    "e2e/hijri-ramadan.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs: /calendar and /ramadan pages, slots hijri-line.tsx and ramadan-banner.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 2, 3.2-3.4, 5.1, 6, 7, 9, 12). Use foundations' src/lib/hijri/convert.ts (do not edit), the prayer engine, prayer-store (hijriOffset, ramadanMode, imsakMin), worship-store (fasts, madeUp, pauses) and the existing src/lib/khatm.ts and /khatm route. Do not edit files in spec 3.8.\n\nCalendar:\n- /calendar: Hijri month grid with Gregorian dates, today marked, month navigation, every date labelled 'expected', the hijriOffset (-2..+2) applied everywhere, and a short explainer of the positions on moon sighting (local sighting, global sighting, calculation) with no winner picked.\n- src/data/hijri-events.json + events.ts: our own list limited to occasions with a cited act of worship: Ramadan, the last ten nights, Eid al-Fitr, six of Shawwal, first ten of Dhul-Hijjah, Arafah, Eid al-Adha and the days of tashriq, Tasu'a and Ashura, the white days (13-15), Mondays and Thursdays. Each event has a one-line plain description and a citation lead field; do NOT state hadith numbers you have not confirmed in two sources: if unconfirmed, leave the citation empty and show only the description. Observances whose religious status is disputed are not listed.\n- HijriLine slot ({now}): one line with today's expected Hijri date, tapping opens /calendar.\n\nRamadan:\n- ramadan.ts: suhoor end (Fajr minus optional imsakMin, labelled as a precaution) and iftar (Maghrib) from the engine; season detection (auto when the offset-adjusted month is 9, or manual on/off); fasting log arithmetic: owed count that carries after Ramadan, made-up marks, exempt and paused days excluded.\n- /ramadan: countdown to suhoor end or iftar, fasting log (fasted / not fasted (owed) / exempt, pause with no reason asked), make-up list, link into the existing /khatm with the Ramadan preset, usable outside Ramadan for voluntary fasts. Fidya and kaffara are not computed. No negative wording.\n- RamadanBanner slot: appears from 7 days before the expected start through the month; returns null otherwise.\n\nAcceptance: events and calendar-grid unit tests incl. offset shifts and Intl-missing fallback, run under the TZ matrix; owed-count arithmetic tests; a word-list copy test for no negative wording; Playwright: month view renders, fasting log mark-and-reload, offline reload of /calendar; tsc, vitest, build green. Do not push."
+  },
+  {
+   "id": "worship-tracking",
+   "title": "Tasbih counter and prayer tracker",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/lib/worship/log.ts",
+    "src/lib/worship/log.test.ts",
+    "src/lib/worship/streak.ts",
+    "src/lib/worship/streak.test.ts",
+    "src/app/tasbih/**",
+    "src/app/prayer/tracker/**",
+    "src/components/worship/**",
+    "src/components/prayer/slots/row-tracker.tsx",
+    "e2e/worship-tracking.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs: /tasbih and /prayer/tracker pages, slot row-tracker.tsx",
+    "reads/writes existing essentials-store counters through its existing actions only"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 2, 3.2, 3.4, 7, 9). Use worship-store (prayers, madeUp, pauses, tasbihTotals), the prayer engine, the existing src/stores/essentials-store.ts counters (through existing actions; do not edit the store or any file in spec 3.8) and src/lib/haptics.ts.\n\nTasbih:\n- src/components/worship/counter.tsx: export Counter({count, target, onCount, onUndo, label}) — a reusable full-area tap target with a haptic per count and a stronger single haptic at the target. The adhkar package will import this, so keep the props exactly.\n- /tasbih: free counter and presets (33, 34, 99, 100, custom); ?d=<id> binds to an Essentials dhikr (title, Arabic and target from src/lib/essentials-data.ts; unknown ids fall back to the free counter); undo; reset with confirm; counts persist in essentials-store counters, lifetime totals in worship-store.tasbihTotals. No streak pressure. Note 'screen stays awake' is device-only and not attempted.\n\nTracker:\n- log.ts / streak.ts (pure): mark status, infer on-time (marked before the next prayer starts) vs late, pause spans exclude days from every count and never break or extend a run, make-up (qada) count from missed entries minus made-up marks. If the log passes 2 years, a compact() function folds old months into counts (specified, tested, not wired).\n- RowTracker slot ({iso, prayer, startMs, endMs}): a tick on each prayer row; tap on a passed prayer = prayed; long-press opens On time / Late / Missed / Clear; future prayers are inert.\n- /prayer/tracker: month of dots, week summary, 'Pause tracking' (no reason asked), make-up list with 'made one up' action. Display is dots and a list, never a broken-streak message; no red; no notifications.\n\nAcceptance: fast-check property tests (pauses never break or extend a run; clearing restores prior state), on-time inference tests across midnight (Isha) under the TZ matrix; a word-list copy test for no negative wording; Playwright: mark a prayer from /prayer row slot fixture and from the tracker, reload, state persists; tasbih count persists and offline reload works; tsc, vitest, build green; 375px, dark theme, reduced motion. Do not push."
+  },
+  {
+   "id": "zakat",
+   "title": "Zakat calculator with nisab positions and hawl reminder",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code+content",
+   "ownsPaths": [
+    "src/lib/zakat/**",
+    "src/data/zakat-notes.json",
+    "src/app/zakat/**",
+    "src/components/zakat/**",
+    "e2e/zakat.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stub src/app/zakat/page.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 3.2, 3.6, 5.1, 6, 7, 9). Use zakat-store (device-only, never synced), src/lib/hijri/convert.ts, and src/lib/notify (hawl reminder ID 22100 via applyRange; native only, guarded). Do not edit files in spec 3.8. No network calls: prices are user-entered and remembered locally (no openly licensed price feed exists).\n\nBuild:\n- src/lib/zakat/calc.ts (pure): assets (cash, gold by weight, silver by weight, trade goods, receivables), deductible debts, nisab by chosen basis, 2.5% on a lunar year, below-nisab result, basis switch.\n- /zakat: form; both nisab bases side by side: gold 85 g (with the 87.48 g reckoning noted) and silver 595 g (with 612.36 g noted), each figure attributed to who states it; the user enters price per gram and chooses the basis (which basis to use for cash is shown as a difference, not decided for them); worn-jewellery toggle and debt deduction each explain the Hanafi and majority positions as a difference; hawl start date with the next lunar anniversary shown as 'expected' and an optional local reminder. Scope line: cash, gold, silver, trade goods, receivables; livestock, crops and business edge cases named as out of scope with 'ask a scholar you trust'.\n- src/data/zakat-notes.json: the explainer statements as structured notes {text, kind: agreed|differs, positions?, sourceLead}. Grounding rule: do not state hadith numbers or primer page references you have not confirmed in two sources; where unconfirmed, attribute by school only and mark the note status 'draft' (shown with the 'Not yet reviewed by a scholar' line). No ruling invented; never output 'you must pay' phrasing without the chosen basis shown.\n\nAcceptance: calculation unit tests (below nisab, basis switch, debt deduction, jewellery toggle, rounding); hawl anniversary test with Hijri conversion; test that nothing from takrar-zakat appears in sync or network; Playwright: fill, result, reload persists; tsc, vitest, build green. Do not push."
+  },
+  {
+   "id": "mosques",
+   "title": "Mosque finder from OpenStreetMap country packs",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code+content",
+   "ownsPaths": [
+    "scripts/build-mosques.mjs",
+    "public/data/mosques/**",
+    "data-sources/osm-mosques/**",
+    "data-sources/licenses.d/40-osm.txt",
+    "src/lib/mosques/**",
+    "src/app/mosques/**",
+    "src/components/mosques/**",
+    "e2e/mosques.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stub src/app/mosques/page.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 3.7, 4, 6, 7, 9, 12). Use place-store (countryCode, rounded lat/lng) from foundations. Do not edit files in spec 3.8 (the tile's ready flag in src/lib/prayer/tools.ts is flipped by integration: say in HANDOFF.md whether it should be on). No map tiles, and the app never sends coordinates anywhere.\n\nBuild:\n- scripts/build-mosques.mjs: build-time-only pipeline that queries OpenStreetMap for amenity=place_of_worship + religion=muslim per country (Overpass, rate-limited and polite with a generic User-Agent containing no personal details, or a downloaded extract), keeps name, lat, lng (and name:ar/name:en when present), and writes compact public/data/mosques/<CC>.json plus an index.json with counts and byte sizes. Never called from the app.\n- Budget: all packs under 8 MB total. If the full set does not fit or cannot be fetched in this session, ship the script, the screen and a sample set of countries that did build (UK, US, and any others that succeeded), and state clearly in your report and HANDOFF.md that the tile should stay ready:false or which countries are covered.\n- src/lib/mosques: load a country pack (fetch /data/mosques/<CC>.json; bundled in native, cached by the service worker on web), haversine distance, bearing, sort and limit.\n- /mosques: needs a place (else link to /prayer/setup); confirm line 'This loads the mosque list for <country>. Your position is not sent.' with the size; list sorted by distance with distance and compass bearing; 'Open in Maps' via a geo: link (user-initiated); a 'no pack for this country yet' empty state; visible 'Data © OpenStreetMap contributors (ODbL)' line. No iqamah times.\n- Licensing: data-sources/osm-mosques/SOURCE.md (query, date, counts, sha256 per file), licence fragment with ODbL attribution and a note that the derived files and script are public in the repo.\n\nAcceptance: distance/bearing unit tests; pack-format test over every committed pack; Playwright: seeded place lists nearest mosques from a pack, and a request listener proves the only request is the country file with no coordinates; tsc, vitest, build green; out/ size delta reported. Do not push."
+  },
+  {
+   "id": "deen-engine",
+   "title": "Deen learning engine: session player, memorise flow, trust components, glossary, sources",
+   "wave": 1,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/app/review/deen/**",
+    "src/app/glossary/**",
+    "src/app/sources/**",
+    "src/components/deen/**",
+    "src/components/review/deen-section.tsx",
+    "src/components/essentials/learn-rows.tsx",
+    "src/hooks/use-deen-queue.ts",
+    "e2e/deen-engine.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs: /review/deen, /glossary, /sources pages, slots deen-section.tsx and learn-rows.tsx"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 2.4, 2.5, 2.7, 3.2-3.4, 5 in full, 7, 9). Foundations provides types (src/types/deen.ts), src/lib/deen (load, queue, cards, normalize-arabic, glossary, flags), deen-store, the deck registry (src/content/deen/registry.ts, decks may be {ready:false}) and a 3-item fixture deck for tests. Study the existing review session (src/components/review/review-session.tsx), RatingButtons, bottom-sheet, first-letters.ts and the lesson player for house patterns. Do not edit files in spec 3.8 (HANDOFF.md for needs). Content packages in the next wave import your components, so the exports below are contracts.\n\nBuild in src/components/deen/:\n- citation-line.tsx CitationLine({citation}) — 'Sahih Muslim 2723 (Abd al-Baqi numbering) · narrated by ...' with an optional external 'view on Sunnah.com' link opened via @capacitor/browser when a url is derivable; grading-line.tsx GradingLine({grading}) — names the scholar and work, tap shows the Arabic quote; positions-table.tsx PositionsTable({positions, school}) — user's school first, never hiding the others; term.tsx Term({id, children}) plus a renderer for [[term-id]] markup in English strings (RichText({text})) — tap opens a bottom sheet with definition, Arabic and 'Learn this term' (adds a glossary card); review-badge.tsx ReviewBadge({review}) — 'Source-checked. Not yet reviewed by a scholar.' or 'Reviewed by <name>, <date>' resolving content/deen/reviewers.json, tap opens /sources#method; report-problem.tsx ReportProblem({itemId, rev}) per spec 5.6.\n- memorise-flow.tsx MemoriseFlow({item, depth, onDone}) — Read (Arabic, translation, citation, grading, notes) → Build (segment by segment using item.segments with hide-words/first-letters, then chained; items with quran refs render from the surah files) → Recall and self-rate → creates the facet cards (spec 5.7) in deen-store. 'Know the meaning' depth skips Build and adds only the meaning card.\n- item-state helpers: useItemState(deck, itemId) → new | learning | due | strong, for list screens.\n- Session player at /review/deen (?deck= optional): recall, meaning, narrator/usage, name (both directions), fact and term cards; reveal then RatingButtons; reviewSm2 via the store; caps from buildDeenQueue (20 reviews, newPerDay); a card whose item rev rose shows 'text corrected on <date>' once. Completing a session records activity but never gates 'day complete'; the bottom-nav badge stays Quran-only.\n- DeenReviewSection slot: 'Hadith, duas and Names' with per-deck due counts and Start; renders nothing when no deen cards exist. LearnRows slot: registry-driven rows (Hadith, Adhkar and duas, Names of Allah, Foundations course) with progress, hiding decks that are not ready; renders nothing when none are ready.\n- /glossary: searchable list of all terms. /sources: method in plain words, scope statement (four Sunni schools and the primer for each), what 'source-checked' means and does not mean, reviewers list with the empty state from spec 5.6, not-included list (reads optional per-deck SELECTION data if present), errata (content/deen/ERRATA.md rendered), link to /licenses.txt.\n\nAcceptance: queue hook unit tests (caps, overdue ordering, new-item pacing, day truncation); Playwright with the fixture deck: memorise an item, cards appear in the Review section, rate, card disappears, reappears when page.clock advances; term sheet opens in place; /sources and /glossary render offline; tsc, vitest, build green; 375px, dark theme, reduced motion. Do not push."
+  },
+  {
+   "id": "hadith-nawawi40",
+   "title": "Hadith track: al-Nawawi's Forty (content and screens)",
+   "wave": 2,
+   "dependsOn": [
+    "deen-engine"
+   ],
+   "kind": "code+content",
+   "ownsPaths": [
+    "content/deen/nawawi40/**",
+    "content/deen/glossary/nawawi40.json",
+    "src/content/deen/decks/nawawi40.ts",
+    "src/data/deen/nawawi40.json",
+    "src/data/deen/glossary/nawawi40.json",
+    "src/app/hadith/**",
+    "src/components/hadith/**",
+    "data-sources/hadith-arabic/SOURCE.md",
+    "data-sources/licenses.d/50-hadith.txt",
+    "e2e/hadith.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs src/content/deen/decks/nawawi40.ts and /hadith pages; new collections/scholars via content/deen/nawawi40/registry-additions.json only"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (section 5 in full, plus 1, 2.2, 7, 9, 12) and content/deen/STYLE.md. Use the deen-engine components (src/components/deen: CitationLine, GradingLine, ReviewBadge, ReportProblem, RichText/Term, MemoriseFlow, useItemState) and foundations' build script; do not edit them or any file in spec 3.8.\n\nContent: al-Nawawi's Forty (42 narrations), one JSON file per hadith in content/deen/nawawi40/items/NN.json following TextItem, through pipeline stages A-J of spec 5.4. Hard rules: the Arabic is collated against two independent witnesses, at least one not Sunnah.com-derived (use web fetch on archive.org scans, dorar.net, shamela.ws, islamweb; hadith-api and sunnah.com pages for comparison only; nothing is bulk-downloaded or bundled); record {name, ref, skeletonSha256} per witness; vocalisation is ours and checked against a vocalised witness; authored segments end at sentence ends, long hadith (e.g. 2, 19, 24, 29) must have them. English is our own translation from the Arabic only: never open Darussalam, Muhsin Khan, Khattab, Sunnah.com English or any published translation of the Forty. Each item has citations with collection, number and named numbering scheme confirmed in two witnesses, matching al-Nawawi's own closing attribution line; gradings as {grade, by, in, quote}: 'in-sahih' for al-Bukhari/Muslim, otherwise the named scholar's located verdict (al-Nawawi, al-Tirmidhi); disputed entries show al-Nawawi's verdict and the located dissent (e.g. Ibn Rajab). Never copy a hadith number from memory or from the spec into data unverified. Notes: at most three per item, each an attributed paraphrase with work and location. Use fresh sub-agents (or a clearly separate pass that sees only Arabic + English) for stages C, F, G, H and log findings in review.log. Items that cannot be fully verified stay status 'draft' and are not emitted. Work in batches: 1-15 first, then the rest; ship whatever passes.\nAlso: SELECTION.md, ids.lock.json, glossary/nawawi40.json for terms used, data-sources/hadith-arabic/SOURCE.md and the licence fragment ('classical works in the public domain; transcribed, vocalised and translated by Takrar; collated against the witnesses listed per item'). Run node scripts/build-deen.mjs --deck nawawi40 and commit the emitted files; set the deck module ready:true.\n\nScreens: /hadith list with per-hadith state (new / learning / due / strong) and progress; /hadith/view?id= with Arabic, translation, CitationLine, GradingLine(s), notes, ReviewBadge, ReportProblem, 'Start memorising' (MemoriseFlow) and 'Just learn the meaning'.\n\nAcceptance: build-deen --check green for the deck; at least hadith 1-15 source-checked (report the exact count shipped and why others are draft); Playwright: open hadith 1, memorise, cards appear in /review/deen; tsc, vitest, build green. Do not push."
+  },
+  {
+   "id": "adhkar-duas",
+   "title": "Adhkar and duas decks, Pray it now, Essentials audit",
+   "wave": 2,
+   "dependsOn": [
+    "deen-engine",
+    "worship-tracking"
+   ],
+   "kind": "code+content",
+   "ownsPaths": [
+    "content/deen/adhkar/**",
+    "content/deen/glossary/adhkar.json",
+    "src/content/deen/decks/adhkar-morning-evening.ts",
+    "src/content/deen/decks/adhkar-after-prayer.ts",
+    "src/content/deen/decks/adhkar-sleep-waking.ts",
+    "src/content/deen/decks/duas-daily.ts",
+    "src/content/deen/decks/salah-words.ts",
+    "src/data/deen/adhkar-*.json",
+    "src/data/deen/duas-daily.json",
+    "src/data/deen/salah-words.json",
+    "src/data/deen/glossary/adhkar.json",
+    "src/app/adhkar/**",
+    "src/components/adhkar/**",
+    "src/components/prayer/slots/adhkar-now.tsx",
+    "src/data/essentials.json",
+    "src/lib/essentials-data.ts",
+    "src/components/essentials/essential-card.tsx",
+    "src/lib/deen-migrate-essentials.ts",
+    "src/lib/deen-migrate-essentials.test.ts",
+    "data-sources/licenses.d/55-adhkar.txt",
+    "e2e/adhkar.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs: five deck modules, /adhkar pages, slot adhkar-now.tsx",
+    "only package allowed to edit src/data/essentials.json; existing ids preserved"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (section 5 in full, plus 1, 2.7, 3.4, 3.6, 6, 7, 9, 12) and content/deen/STYLE.md. Use deen-engine components (src/components/deen), worship-tracking's Counter (src/components/worship/counter.tsx), the prayer engine's currentWindow, and foundations' build script; do not edit them or any file in spec 3.8.\n\nContent (one file per item under content/deen/adhkar/<deck>/items/, TextItem schema, pipeline stages A-J of spec 5.4): our own selection from primary hadith and Quran for decks adhkar-morning-evening (about 16), adhkar-after-prayer (about 7), adhkar-sleep-waking (about 6), duas-daily (about 15: eating, leaving and entering home, mosque, travel, distress, istikhara, iftar), salah-words (the existing 8 salah duas re-sourced). Never follow Qahtani's Hisn al-Muslim order, contents list or English. Quranic items (Ayat al-Kursi, the three Quls, end of al-Baqarah) store only QuranRef. Each non-Quran item: Arabic collated against two witnesses with skeleton hashes (at least one not Sunnah.com-derived), our vocalisation checked against a vocalised witness, our own translation from the Arabic only, citation with number and named numbering confirmed in two witnesses, grading with by/in/quote, usage {when, repeat, evidence} where the repeat count has its own evidence. Inclusion rule per spec 5.1; narrations with disputed chains are left out and listed in SELECTION.md 'not included, and why'. Iftar: 'Dhahaba al-zama'' is the default; 'Allahumma laka sumtu' is shown under it as a variant with its mursal status attributed. Any hadith number you remember is a lead, not data. Unverifiable items stay draft and are not emitted. Use fresh sub-agents for stages C, F, G, H.\n\nEssentials audit: every existing item in src/data/essentials.json is either upgraded with a full numbered citation and grading (ids unchanged) or removed with a line in SELECTION.md; /essentials/[collectionId] keeps working for key-ayahs and tasbih. src/lib/deen-migrate-essentials.ts: memorized[itemId] flags for surviving ids become seeded deen cards (conservative values like createSeededCard), run once, unit-tested; counters and favorites untouched.\n\nScreens: /adhkar index (decks with progress), /adhkar/view?d= list with CitationLine, GradingLine, ReviewBadge and a Memorise action (MemoriseFlow), /adhkar/now?set=morning|evening|after-prayer|sleep — Pray it now: steps through the set with Counter for repeats and haptics, ends with a quiet completion line, does not rate cards, no streak. AdhkarNow slot ({window, afterPrayer}): a chip on /prayer linking to the right set; null when nothing is relevant. Optional morning/evening repeating notifications (IDs 22000/22001 via src/lib/notify), off by default, native only.\n\nAcceptance: build-deen --check green for all five decks (report counts shipped vs draft); no shipped item has a bare-name source; migration unit test; Playwright: Pray it now completes for a set; memorise an item and see it in /review/deen; tsc, vitest, build green. Do not push."
+  },
+  {
+   "id": "names99",
+   "title": "Names of Allah deck and screen",
+   "wave": 2,
+   "dependsOn": [
+    "deen-engine"
+   ],
+   "kind": "code+content",
+   "ownsPaths": [
+    "content/deen/names99/**",
+    "content/deen/glossary/names99.json",
+    "src/content/deen/decks/names99.ts",
+    "src/data/deen/names99.json",
+    "src/data/deen/glossary/names99.json",
+    "src/app/names/**",
+    "src/components/names/**",
+    "data-sources/licenses.d/60-names.txt",
+    "e2e/names.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs src/content/deen/decks/names99.ts and /names page"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (section 5 in full, plus 1, 6, 7, 9) and content/deen/STYLE.md. Use deen-engine components (src/components/deen) and foundations' build script; do not edit them or any file in spec 3.8.\n\nContent: 99 NameItem files in content/deen/names99/items/001.json … 099.json in the order of the enumeration narrated through al-Tirmidhi (the order people memorise). Each: Arabic, transliteration (house scheme), a meaning of at most 12 words, an explanation of at most 40 words restricted to the linguistic meaning and what the cited ayat say (no speculative theology; where it leans on a classical work such as al-Ghazali's al-Maqsad al-Asna or al-Sa'di's tafsir, attribute it in explanationSource), and evidence.kind: quran-name (appears as a name; ayah refs — the build check requires the cited ayah's text to contain the Name's normalised skeleton, so verify against src/data/surah-*.json, do not guess), quran-derived (attribute or verb form; refs and the form), hadith, or list-only (found only in the enumerated list; shown with that label, not hidden). A fresh checker pass re-verifies every Quran reference and meaning against the Arabic. Items that fail stay draft.\nIntro card (deck metadata) states honestly: the sound hadith in al-Bukhari and Muslim says Allah has ninety-nine names and does not list them; the familiar list comes through al-Tirmidhi's narration, which he calls gharib and which many hadith scholars (e.g. Ibn Hajar, Ibn Kathir) hold to be a narrator's addition; the deck teaches it as the widely known enumeration. Confirm each of these citations in two sources before writing a number; otherwise cite by collection and book without a number.\nRun node scripts/build-deen.mjs --deck names99, commit emitted files, set ready:true, add ids.lock.json, glossary file and licence fragment (own work; Quran references to the Tanzil text).\n\nScreen: /names — intro card, grid/list of Names with state, tap opens a sheet with Arabic, transliteration, meaning, explanation, evidence label, Quran reference that opens the reader at the ayah, ReviewBadge, ReportProblem; 'Start learning' introduces 5 Names per day by default; cards in both directions (ar-en, en-ar) per depth setting.\n\nAcceptance: 99 items, build-deen --check green including guardrail 6; list-only Names labelled; Playwright: start learning, 5 Names introduced, cards appear in /review/deen; tsc, vitest, build green. Do not push."
+  },
+  {
+   "id": "course-ui",
+   "title": "Foundations course: lesson list and micro-lesson player",
+   "wave": 2,
+   "dependsOn": [
+    "deen-engine"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "src/app/course/**",
+    "src/components/course/**",
+    "src/lib/course/**",
+    "e2e/course.spec.ts"
+   ],
+   "touchesShared": [
+    "replaces foundations stubs /course and /course/lesson pages"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (sections 1, 2.2, 3.2, 5.3, 5.5-5.7, 7, 9). Use deen-engine components (src/components/deen: PositionsTable, CitationLine, RichText/Term, ReviewBadge, ReportProblem), deen-store (lessonsDone, school, cards) and the deck registry entries course-purification and course-fasting, whose content is being written in parallel by other packages: build and test against your own fixture lessons under src/lib/course/__fixtures__ that follow the Lesson/Claim types exactly, and load real units through the registry (hidden while {ready:false}). Do not edit files in spec 3.8.\n\nBuild:\n- /course: units from the registry with a continue card and per-lesson done marks; self-paced, any lesson opens in any order; a status banner from data ('Source-checked. Not yet reviewed by a scholar.' or the reviewer's name); the whole route shows a neutral 'coming soon' state when SHOW_UNREVIEWED_FIQH (src/lib/deen/flags.ts) is false.\n- /course/lesson?l=<lessonId>: intro (short, no rulings) → claims one at a time: text with tappable terms, evidence chips (Quran ref opens the reader; corpus hadith item opens its citation; consensus shows work and location), PositionsTable when kind is 'differs' with each school's primer citation and tap-for-Arabic-quote → 2 to 4 multiple-choice check questions (they do not grade cards) → 'Add N cards to review' creating the claim's authored cards in deen-store with ids <deck>:<lessonId>:<cardId>; with a school chosen, that school's position card is added and the others appear on the back as 'also held'. Footer on every lesson: 'For your own situation, ask a scholar you trust.'\n- School setting: asked once on first lesson open, skippable ('Show me all four'); stored in deen-store.school; only orders the display.\n- src/lib/course: pure helpers (lesson progress, which cards to add for a school choice) with tests.\n\nAcceptance: unit tests for card selection per school and progress; Playwright with the fixture unit: open a lesson, step through claims, positions table shows four rows, add cards, they appear in /review/deen, lesson marked done after reload; tsc, vitest, build green; 375px, dark theme, reduced motion. Do not push."
+  },
+  {
+   "id": "course-purification",
+   "title": "Course content: Unit Purification",
+   "wave": 2,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "content",
+   "ownsPaths": [
+    "content/deen/course/purification/**",
+    "content/deen/glossary/course-purification.json",
+    "src/content/deen/decks/course-purification.ts",
+    "src/data/deen/course-purification.json",
+    "src/data/deen/glossary/course-purification.json",
+    "data-sources/licenses.d/65-course-purification.txt"
+   ],
+   "touchesShared": [
+    "replaces foundations stub src/content/deen/decks/course-purification.ts; new works/scholars via registry-additions.json sidecar only"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (section 5 in full, plus 1, 9, 12) and content/deen/STYLE.md. Content only: you write lesson JSON (Lesson/Claim types in src/types/deen.ts) validated by node scripts/build-deen.mjs --deck course-purification; the UI is built by another package. Do not edit files in spec 3.8.\n\nWrite Unit Purification as about 9 micro-lessons (about 2 minutes each, at most 6 claims) in content/deen/course/purification/lessons/: why purity and the kinds of water; wudu step by step; the obligatory acts of wudu (schools differ on intention, order, continuity, rubbing, how much of the head); what breaks wudu (agreed items, then the differences: touching the opposite sex, touching the private part, bleeding, sleep); ghusl; tayammum; wiping over leather socks; removing impurity; recap. Plus unit.json and ids.lock.json.\n\nGrounding rules (hard): every claim has evidence: a Quran ref (verify the ayah in src/data/surah-*.json), a hadith given as a full Citation you have confirmed in two witnesses (if the hadith is not already a corpus item, add it as a TextItem under content/deen/course/purification/evidence/ following the same witness rules, or cite Quran/consensus instead), or a consensus citation by work and chapter (Ibn al-Mundhir's al-Ijma', Ibn Hazm's Maratib al-Ijma', or Ibn Rushd reporting agreement). Claims of kind 'differs' carry positions for the schools from the fixed primers — Hanafi: Mukhtasar al-Quduri; Maliki: al-Risala of Ibn Abi Zayd; Shafi'i: Matn Abi Shuja'; Hanbali: 'Umdat al-Fiqh — cited by work and chapter (kitab/bab) with the Arabic phrase relied on stored in quote, located in an online copy of the primer (web fetch), and each difference cross-located in Ibn Rushd's Bidayat al-Mujtahid. No tarjih: never 'the correct opinion', 'the strongest view', or 'scholars agree' without a consensus citation. No ruling without a source; a claim you cannot source is cut, not softened. Lesson intro at most 60 words with no ruling vocabulary. Each claim has 1-2 authored recall cards; each lesson 2-4 check questions tied to a claim. Arabic terms in English are written [[term-id]] and defined in content/deen/glossary/course-purification.json (own definitions). A fresh checker pass (separate sub-agent that did not draft) re-locates every primer quote and evidence citation and logs findings in review.log; lessons that fail stay draft and are not emitted.\n\nFinish: run the build for the deck, commit emitted files, set the deck module ready:true only if at least 5 lessons are source-checked, add the licence fragment (own work; primers and classical works are public domain, cited not reproduced). Acceptance: build-deen --check green (guardrails 10-15), vitest and tsc green; report lesson counts shipped vs draft and list every primer citation you could not confirm. Do not push."
+  },
+  {
+   "id": "course-fasting",
+   "title": "Course content: Unit Fasting",
+   "wave": 2,
+   "dependsOn": [
+    "foundations"
+   ],
+   "kind": "content",
+   "ownsPaths": [
+    "content/deen/course/fasting/**",
+    "content/deen/glossary/course-fasting.json",
+    "src/content/deen/decks/course-fasting.ts",
+    "src/data/deen/course-fasting.json",
+    "src/data/deen/glossary/course-fasting.json",
+    "data-sources/licenses.d/66-course-fasting.txt"
+   ],
+   "touchesShared": [
+    "replaces foundations stub src/content/deen/decks/course-fasting.ts; new works/scholars via registry-additions.json sidecar only"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (section 5 in full, plus 1, 6, 9, 12) and content/deen/STYLE.md. Content only: you write lesson JSON (Lesson/Claim types in src/types/deen.ts) validated by node scripts/build-deen.mjs --deck course-fasting; the UI is built by another package. Do not edit files in spec 3.8. This unit is time-sensitive: Ramadan 1448 is expected about 8 February 2027.\n\nWrite Unit Fasting as about 7 micro-lessons (at most 6 claims each) in content/deen/course/fasting/lessons/: who must fast; intention (positions differ on timing and renewal); what breaks the fast (agreed items, then the differences); exemptions (travel, illness, pregnancy and nursing, menstruation, old age); making up fasts, fidya and kaffara (explained as positions, never computed for the user); recommended acts including the iftar dua note ('Dhahaba al-zama'' as the default, 'Allahumma laka sumtu' shown with its mursal status attributed); recap. Plus unit.json and ids.lock.json.\n\nGrounding rules (hard): every claim has evidence: a Quran ref (verify in src/data/surah-*.json; e.g. the fasting ayat of al-Baqarah), a hadith given as a full Citation confirmed in two witnesses (add it as a TextItem under content/deen/course/fasting/evidence/ following the witness rules of spec 5.1, or cite Quran/consensus instead), or a consensus citation by work and chapter. Claims of kind 'differs' carry positions from the fixed primers — Hanafi: Mukhtasar al-Quduri; Maliki: al-Risala of Ibn Abi Zayd; Shafi'i: Matn Abi Shuja'; Hanbali: 'Umdat al-Fiqh — cited by work and chapter with the Arabic phrase stored in quote, located in an online copy (web fetch), and each difference cross-located in Bidayat al-Mujtahid. No tarjih; banned phrasing per guardrail 12; no ruling without a source; an unsourceable claim is cut. Any hadith number you remember is a lead, not data. Intro at most 60 words, no ruling vocabulary. 1-2 authored recall cards per claim; 2-4 check questions per lesson. Terms as [[term-id]] defined in content/deen/glossary/course-fasting.json. A fresh checker sub-agent re-locates every primer quote and citation and logs in review.log; failing lessons stay draft. Contemporary questions (injections, inhalers and similar) are out of scope: say 'ask a scholar you trust'.\n\nFinish: run the build for the deck, commit emitted files, set ready:true only if at least 4 lessons are source-checked, add the licence fragment. Acceptance: build-deen --check green, vitest and tsc green; report lessons shipped vs draft and every citation you could not confirm. Do not push."
+  },
+  {
+   "id": "content-audit",
+   "title": "Fresh content audit of all shipped religious items",
+   "wave": 3,
+   "dependsOn": [
+    "hadith-nawawi40",
+    "adhkar-duas",
+    "names99",
+    "course-purification",
+    "course-fasting",
+    "hijri-ramadan",
+    "zakat"
+   ],
+   "kind": "content",
+   "ownsPaths": [
+    "content/deen/AUDIT-2026-11.md",
+    "review.log entries and fixes inside audited item files under content/deen/**",
+    "src/data/deen/**(re-emitted)",
+    "content/deen/ERRATA.md"
+   ],
+   "touchesShared": [
+    "edits item files owned by wave-2 content packages after they have merged (serial, no parallel writer)",
+    "re-runs scripts/build-deen.mjs to re-emit decks"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md (section 5 in full, 12). You are a fresh verifier: you did not write any of this content and must not trust its review.log. Runs after all content packages are merged, with no other writer on content/deen.\n\nAudit every emitted item in content/deen (nawawi40, the five adhkar/dua decks, names99, course units) plus the religious statements in src/data/hijri-events.json and src/data/zakat-notes.json:\n- 100% of items: re-fetch each non-Quran Arabic text from two witnesses (at least one not Sunnah.com-derived), normalise with src/lib/deen/normalize-arabic.ts and compare the skeleton to the shipped text and recorded hashes; re-confirm every citation number and numbering scheme; re-locate every grading verdict and quote; re-check every Quran reference against src/data/surah-*.json.\n- At least 30% of items (and every course claim of kind 'differs'): blind back-translation check of our English against the Arabic (omissions, additions, tense/number errors, loaded terms); for fiqh positions, re-locate the primer quote and the Bidayat al-Mujtahid cross-reference.\n- Check tashkeel on i'rab-sensitive words against a vocalised witness for a sample of at least 20 items.\nFix what you can prove (raise rev, add a review.log line; record any change to already-emitted text in content/deen/ERRATA.md). Anything you cannot confirm drops to status 'draft' and leaves the bundle; unconfirmed citations in hijri-events.json and zakat-notes.json are emptied or marked draft via a HANDOFF.md note if those files need structural change. Re-run node scripts/build-deen.mjs for each deck and commit the emitted files; ids.lock.json must still hold.\n\nWrite content/deen/AUDIT-2026-11.md with counts per deck (checked, passed, fixed, dropped) and a list of every open doubt for a future scholar reviewer. Acceptance: build-deen --check, vitest, tsc, build green; the audit file exists with real counts; no item ships that you could not confirm. Do not push."
+  },
+  {
+   "id": "integration",
+   "title": "Integration: regenerate generated files, full gate, ready flags",
+   "wave": 3,
+   "dependsOn": [
+    "prayer-times",
+    "match-mosque",
+    "prayer-alerts",
+    "android-native",
+    "qibla",
+    "hijri-ramadan",
+    "worship-tracking",
+    "zakat",
+    "mosques",
+    "deen-engine",
+    "hadith-nawawi40",
+    "adhkar-duas",
+    "names99",
+    "course-ui",
+    "course-purification",
+    "course-fasting",
+    "content-audit"
+   ],
+   "kind": "code",
+   "ownsPaths": [
+    "public/licenses.txt",
+    "src/data/search-index.json",
+    "src/lib/prayer/tools.ts",
+    "e2e/allinone-integration.spec.ts",
+    "HANDOFF.md requests from every package",
+    ".claude/plans/allinone-spec.md (status notes only)"
+   ],
+   "touchesShared": [
+    "any spec 3.8 file, serially, only to apply HANDOFF.md requests",
+    "Capacitor-generated files via npx cap sync"
+   ],
+   "brief": "Read .claude/CLAUDE.md and .claude/plans/allinone-spec.md in full. You run last, alone, on the integration branch after every package has merged. You are the one agent besides foundations allowed to edit shared files (spec 3.8), and only to apply HANDOFF.md requests and wire-up fixes.\n\nDo:\n1. Collect every package's HANDOFF.md; apply each request or record why not.\n2. Regenerate: node scripts/build-licenses.mjs (check every data-sources/licenses.d fragment and SOURCE.md is present for: adhan, geolocation, GeoNames, chime, WMM if used, OSM, hadith Arabic, adhkar, names, course units), node scripts/build-deen.mjs for all decks then --check, the search index if its inputs changed, npx cap sync. Confirm data-sources/README.md points at everything shipped.\n3. Set ready flags in src/lib/prayer/tools.ts and confirm deck registry modules: anything that did not land or failed its gate stays hidden (stub route remains but no tile or row links to it).\n4. Run the full gate: npx tsc --noEmit, npm run test:run, the TZ matrix commands from ci.yml, npm run build, node scripts/check-bundle.mjs (Home first-load JS growth under 6 KB gzip; adhan absent from Home chunks; out/ growth under 12 MB — report the numbers), both Playwright configs incl. e2e/routes.spec.ts.\n5. Write e2e/allinone-integration.spec.ts: /prayer with a seeded place and all slots filled (Hijri line, tracker ticks, at most one contextual chip), Home strip, Learn hub rows, Review section, and a whole-app request listener across these flows proving no URL or body ever contains the seeded coordinates; privacy tests still prove takrar-place is absent from sync and backup.\n6. Budget test: with prayer alerts plus existing reminders plus adhkar and hawl reminders enabled, the planned iOS pending set is at most 64.\n7. Check 375px, dark theme and reduced motion on every new screen; run a copy pass for calm, plain wording (no streak shaming, no red, sentence case).\n\nDo not push main (it auto-deploys). Finish with a report for the orchestrator and owner: what shipped, what is hidden and why, bundle numbers, the android-native compile status (needs a green GitHub Actions run on a mobile/** branch), and the owner device-test checklist (alert delivery and exact-alarm grant, chime playback, compass, widget refresh, battery settings link, iOS location prompt text)."
+  }
+ ],
+ "deferred": [
+  {
+   "item": "Adhan voice recording and user-chosen notification sound file",
+   "reason": "No cleared recording; a user file needs native channel work that cannot be device-tested. System sound, silent and a self-made chime ship; the mode field is forward-compatible."
+  },
+  {
+   "item": "iOS custom chime, iOS widget, Live Activities, watch",
+   "reason": "Needs Xcode project and App Group changes on the owner's Apple account; no Mac to compile-check."
+  },
+  {
+   "item": "Mosque-published times (Mawaqit) and iqamah times",
+   "reason": "Needs a written agreement."
+  },
+  {
+   "item": "Sunnah.com API or a large hadith browser",
+   "reason": "Needs written terms; a curated, witness-collated corpus with link-outs ships instead."
+  },
+  {
+   "item": "QUD v5 riwayat",
+   "reason": "Needs written clarification on redistribution."
+  },
+  {
+   "item": "Live gold and silver prices for zakat",
+   "reason": "No openly licensed feed found; prices are user-entered."
+  },
+  {
+   "item": "Map tiles, map-line or AR qibla, map view for mosques",
+   "reason": "Tile requests would send location off device; bearing, sun aid and an external maps link ship instead."
+  },
+  {
+   "item": "Web prayer alerts",
+   "reason": "A push server would need the user's times, hence location; alerts are native only."
+  },
+  {
+   "item": "Named scholar review (status scholar-reviewed)",
+   "reason": "Owner must recruit a reviewer; data model, badge and reviewers list are ready so it is a data change later."
+  },
+  {
+   "item": "Course unit on prayer, creed track, further hadith collections, other languages",
+   "reason": "Largest and highest-risk fiqh content; should follow the first content audit and a named reviewer."
+  },
+  {
+   "item": "Opt-in cloud sync for prayer settings, prayer log and fasting log",
+   "reason": "Privacy decision for the owner; device-only plus the backup file is the safe default."
+  },
+  {
+   "item": "Audio for hadith and non-Quranic adhkar",
+   "reason": "No cleared recordings; TTS mispronunciation risk."
+  },
+  {
+   "item": "Kids profile, family circles, teacher or parent links",
+   "reason": "Needs a minors' data policy from the owner."
+  },
+  {
+   "item": "Delivery guarantees for prayer alerts, compass accuracy, widget refresh timing",
+   "reason": "Device-only; planner, health check and code ship, but nothing is claimed as verified until the owner's on-device pass."
+  },
+  {
+   "item": "Pushing main and the mobile/** compile-check branch",
+   "reason": "Main auto-deploys and the Android compile check needs a push to GitHub; left to the orchestrator and owner after the full gate."
+  }
+ ]
+}
