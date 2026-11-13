@@ -492,10 +492,13 @@ export default function SettingsPanel() {
             {isNative() ? <ReminderSettings /> : <WebReminderSettings />}
 
             {/* Prayer has its own settings screen; this is its one row here (all-in-one spec 2.6) */}
-            <Link href="/prayer/settings" className="mt-3 flex min-h-11 items-center justify-between rounded-xl bg-foreground/5 px-3 text-sm font-medium text-foreground hover:bg-foreground/10" data-prayer-settings-link>
-              Prayer times and alerts
-              <span aria-hidden className="text-muted">›</span>
-            </Link>
+            <div className="mt-5">
+              <p className="text-xs font-medium text-muted">Prayer</p>
+              <Link href="/prayer/settings" className="mt-1.5 flex min-h-11 items-center justify-between rounded-xl bg-foreground/5 px-3 text-sm font-medium text-foreground hover:bg-foreground/10" data-prayer-settings-link>
+                Prayer times and alerts
+                <span aria-hidden className="text-muted">›</span>
+              </Link>
+            </div>
 
             {/* Daily Goal */}
             <div className="mt-5">

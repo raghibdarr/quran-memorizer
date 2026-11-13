@@ -1,5 +1,7 @@
 /** The all-in-one sections' own screens (detail screens like /hadith/view stay "Back") */
 const ALL_IN_ONE_LABELS: Record<string, string> = {
+  '/prayer/settings': 'Prayer settings',
+  '/prayer/tracker': 'Prayer log',
   '/qibla': 'Qibla',
   '/tasbih': 'Tasbih',
   '/calendar': 'Calendar',
@@ -28,7 +30,7 @@ export async function backLabelFor(
   if (path === '/review' || path.startsWith('/review/')) return 'Review';
   if (path === '/essentials') return 'Learn';
   if (path === '/progress') return 'Progress';
-  if (path === '/prayer' || path.startsWith('/prayer/')) return 'Prayer';
+  if (path === '/prayer') return 'Prayer';
   const section = ALL_IN_ONE_LABELS[path];
   if (section) return section;
   if (path === '/bookmarks') return 'Bookmarks';

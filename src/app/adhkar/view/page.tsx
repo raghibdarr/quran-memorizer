@@ -5,5 +5,5 @@ export const metadata: Metadata = { title: 'Adhkar and duas · Takrar' };
 
 // Stub (foundations, all-in-one spec 2.2): the adhkar-duas package replaces this page.
 export default function Page() {
-  return <StubPage title="Adhkar and duas" back="/adhkar" />;
+  return <StubPage title="Adhkar and duas" back="/adhkar" note="A set of adhkar to read, count and learn. Coming soon." />;
 }

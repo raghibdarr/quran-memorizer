@@ -5,5 +5,5 @@ export const metadata: Metadata = { title: 'Hadith · Takrar' };
 
 // Stub (foundations, all-in-one spec 2.2): the hadith-nawawi40 package replaces this page.
 export default function Page() {
-  return <StubPage title="Hadith" back="/hadith" />;
+  return <StubPage title="Hadith" back="/hadith" note="One hadith with its Arabic, a translation and its source. Coming soon." />;
 }

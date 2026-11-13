@@ -5,5 +5,5 @@ export const metadata: Metadata = { title: 'Glossary · Takrar' };
 
 // Stub (foundations, all-in-one spec 2.2): the deen-engine package replaces this page.
 export default function Page() {
-  return <StubPage title="Glossary" back="/essentials" />;
+  return <StubPage title="Glossary" back="/essentials" note="Plain meanings for the Arabic terms used in Takrar. Coming soon." />;
 }

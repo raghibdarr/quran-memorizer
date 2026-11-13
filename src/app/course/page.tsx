@@ -5,5 +5,5 @@ export const metadata: Metadata = { title: 'Foundations course · Takrar' };
 
 // Stub (foundations, all-in-one spec 2.2): the course-ui package replaces this page.
 export default function Page() {
-  return <StubPage title="Foundations course" back="/essentials" />;
+  return <StubPage title="Foundations course" back="/essentials" note="Short lessons on purification and fasting, with their sources. Coming soon." />;
 }
