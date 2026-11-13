@@ -1,0 +1,150 @@
+{
+  "about": "The zakat screen's explainer statements (all-in-one spec 5.1, 6). Every note is a draft: the school positions are attributed by school only, and sourceLead names where a checker should look, not a confirmed citation. No hadith number or primer page is stated until confirmed in two sources.",
+  "notes": [
+    {
+      "id": "rate",
+      "kind": "agreed",
+      "text": "Zakat on cash, gold, silver and goods for sale is one fortieth (2.5%) of their value, once a full lunar year has passed with your wealth at or above nisab.",
+      "sourceLead": "Reports of consensus on the one-fortieth rate, e.g. Ibn al-Mundhir, al-Ijma', chapter on zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "nisab-metals",
+      "kind": "agreed",
+      "text": "Nisab, the least wealth on which zakat is due, is twenty mithqal (dinars) of gold or two hundred dirhams of silver.",
+      "sourceLead": "Hadith of Abu Sa'id al-Khudri on five awaq of silver, in al-Bukhari and Muslim, Book of Zakat; for gold, the hadith of Ali in Abu Dawud, Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "nisab-grams",
+      "kind": "differs",
+      "text": "Turning dinars and dirhams into grams depends on how much a dinar and a dirham are reckoned to weigh, so two sets of figures are in common use.",
+      "positions": [
+        {
+          "by": "A dinar of 4.25 g and a dirham of 2.975 g",
+          "text": "85 g of gold and 595 g of silver. The figures many zakat bodies use today."
+        },
+        {
+          "by": "7.5 tola of gold and 52.5 tola of silver",
+          "text": "87.48 g of gold and 612.36 g of silver, with a tola of 11.664 g. The figures many Hanafi scholars in South Asia use."
+        }
+      ],
+      "sourceLead": "Yusuf al-Qaradawi, Fiqh al-Zakah, chapter on the nisab of money (for the weight of the dinar and dirham in grams); Hanafi fatwa answers on islamqa.org giving the nisab in tola",
+      "status": "draft"
+    },
+    {
+      "id": "basis",
+      "kind": "differs",
+      "text": "Cash and goods for sale have no nisab of their own, so they are measured against gold or silver. Scholars today differ on which to use, and the two can be far apart.",
+      "positions": [
+        {
+          "by": "Silver",
+          "text": "Many Hanafi scholars and many zakat bodies use silver. It is the lower threshold, so more people pay and more reaches those in need."
+        },
+        {
+          "by": "Gold",
+          "text": "Others use gold, holding that its value has stayed closer to what nisab was worth when it was set."
+        }
+      ],
+      "sourceLead": "Contemporary fatwa bodies and zakat organisations; Yusuf al-Qaradawi, Fiqh al-Zakah, chapter on the nisab of paper money",
+      "status": "draft"
+    },
+    {
+      "id": "combining",
+      "kind": "differs",
+      "text": "This calculator adds all your assets together by value and compares the total with one nisab.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": ["hanafi"],
+          "text": "Gold, silver, cash and goods for sale are added together to reach nisab."
+        },
+        {
+          "by": "Shafi'i",
+          "school": ["shafii"],
+          "text": "Gold and silver are not added together; each needs its own nisab."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat, section on gold and silver; Matn Abi Shuja', Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "worn-jewellery",
+      "kind": "differs",
+      "text": "Gold and silver kept as savings, coins or bars count in every school. Jewellery that is worn is where they differ.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": ["hanafi"],
+          "text": "Zakat is due on gold and silver jewellery, whether it is worn or not."
+        },
+        {
+          "by": "Maliki, Shafi'i, Hanbali",
+          "school": ["maliki", "shafii", "hanbali"],
+          "text": "No zakat is due on jewellery kept for permitted wear. Jewellery kept as savings counts."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat; al-Risala of Ibn Abi Zayd, chapter on zakat of gold and silver; Matn Abi Shuja', Book of Zakat; 'Umdat al-Fiqh, Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "debts",
+      "kind": "differs",
+      "text": "Debts you owe are where the schools differ on what to take off before comparing with nisab.",
+      "positions": [
+        {
+          "by": "Hanafi, Maliki, Hanbali",
+          "school": ["hanafi", "maliki", "hanbali"],
+          "text": "Debts you owe are taken off your wealth first. If what is left is below nisab, no zakat is due."
+        },
+        {
+          "by": "Shafi'i",
+          "school": ["shafii"],
+          "text": "In the school's relied-upon view, debts are not taken off. Zakat is due on the wealth you hold."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat; al-Risala of Ibn Abi Zayd, chapter on zakat; Matn Abi Shuja' and its commentaries, Book of Zakat; 'Umdat al-Fiqh, Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "trade-goods",
+      "kind": "agreed",
+      "text": "Goods you hold to sell are counted at their market value on the day your zakat year completes.",
+      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, on zakat of trade goods; the four primers, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "receivables",
+      "kind": "differs",
+      "text": "Money owed to you that you expect to be repaid is counted. The schools differ on when its zakat is paid: each year, or once it is repaid. For your own situation, ask a scholar you trust.",
+      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, on zakat of debts owed to a person",
+      "status": "draft"
+    },
+    {
+      "id": "hawl",
+      "kind": "agreed",
+      "text": "The zakat year is a lunar year, counted from the day your wealth first reached nisab.",
+      "sourceLead": "Hadith on no zakat until a year passes, in the Sunan of Abu Dawud and Ibn Majah, Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    },
+    {
+      "id": "hawl-dip",
+      "kind": "differs",
+      "text": "If your wealth drops below nisab during the year, the schools differ on whether the year starts again.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": ["hanafi"],
+          "text": "What counts is having nisab at the start and the end of the year. A dip in between does not restart it."
+        },
+        {
+          "by": "Shafi'i, Hanbali",
+          "school": ["shafii", "hanbali"],
+          "text": "Nisab is needed through the whole year. If wealth falls below it, the year starts again when nisab is reached."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat; Matn Abi Shuja', Book of Zakat; 'Umdat al-Fiqh, Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "draft"
+    }
+  ]
+}
