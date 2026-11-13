@@ -111,6 +111,29 @@ describe('widget v2', () => {
     // Self-refresh is inexact and non-waking: no exact-alarm or wakeup call in the widget
     expect(provider).not.toMatch(/setExact|setAlarmClock|RTC_WAKEUP/);
   });
+
+  it('reads the keys the app writes, and old payloads still draw', () => {
+    const provider = read(...javaDir, 'widget', 'TakrarWidgetProvider.java');
+    const plugin = read(...javaDir, 'widget', 'TakrarWidgetPlugin.java');
+    const sent = widgetData({ due: {}, streak: 1, khatm: 'x' }, { prayers: [{ name: 'Asr', at: 1 }] }, 'Europe/London');
+    for (const key of Object.keys(sent)) expect(provider).toContain(`"${key}"`);
+    for (const key of Object.keys(sent.prayers![0])) {
+      expect(provider).toContain(`"${key}"`);
+      expect(plugin).toContain(`"${key}"`);
+    }
+    // No prayers array: the line is hidden and the title comes back
+    expect(provider).toContain('if (prayers == null) return null');
+    expect(provider).toContain('R.id.widget_title, prayerLine.isEmpty() ? View.VISIBLE : View.GONE');
+  });
+
+  it('refreshes itself after the next prayer within a bounded window, and stops with the last widget', () => {
+    const provider = read(...javaDir, 'widget', 'TakrarWidgetProvider.java');
+    expect(provider).toContain('am.setWindow(AlarmManager.RTC, ');
+    expect(provider.slice(provider.indexOf('void onDisabled'))).toContain('scheduleRefresh(context, null)');
+    // The alarm targets this app's own receiver and can't be altered by others
+    expect(provider).toContain('new Intent(context, TakrarWidgetProvider.class).setAction(ACTION_REFRESH)');
+    expect(provider).toContain('getBroadcast(context, 2, intent, PendingIntent.FLAG_IMMUTABLE');
+  });
 });
 
 describe('iOS Info.plist', () => {

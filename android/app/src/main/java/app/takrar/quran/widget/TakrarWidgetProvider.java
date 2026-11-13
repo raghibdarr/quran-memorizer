@@ -36,6 +36,8 @@ public class TakrarWidgetProvider extends AppWidgetProvider {
     static final String PREFS = "takrar_widget";
     static final String KEY = "data";
     static final String ACTION_REFRESH = "app.takrar.quran.widget.REFRESH";
+    /** How late the refresh after a prayer may run; still inexact, so no permission is needed */
+    static final long REFRESH_WINDOW_MS = 10 * 60_000L;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -159,7 +161,8 @@ public class TakrarWidgetProvider extends AppWidgetProvider {
             Intent intent = new Intent(context, TakrarWidgetProvider.class).setAction(ACTION_REFRESH);
             PendingIntent pi = PendingIntent.getBroadcast(context, 2, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
             if (next == null) am.cancel(pi);
-            else am.set(AlarmManager.RTC, next.optLong("at") + 1000, pi);
+            // A window, not set(): plain set() may slide by 75% of the wait (hours, overnight)
+            else am.setWindow(AlarmManager.RTC, next.optLong("at") + 1000, REFRESH_WINDOW_MS, pi);
         } catch (Exception ignored) {
             // The periodic update still keeps the widget roughly right
         }
