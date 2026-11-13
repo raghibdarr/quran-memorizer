@@ -27,7 +27,7 @@ export const RECITERS: ReciterOption[] = [
   { id: 'Husary_Muallim_128kbps', name: 'Al-Husary (Teaching)', hint: 'Slow and clear, made for learners', aka: ['Husari', 'Hussary', 'Muallim', "Mu'allim"] },
   { id: 'MaherAlMuaiqly128kbps', name: 'Maher Al-Muaiqly', aka: ['Muaiqli', 'Mueaqly'] },
   { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Ad-Dussary', aka: ['Dosari', 'Dossary', 'Dawsari'] },
-  { id: 'Ghamadi_40kbps', name: 'Saad Al-Ghamdi', hint: 'No word-by-word highlighting', aka: ['Ghamidi', 'Ghamadi'] },
+  { id: 'Ghamadi_40kbps', name: 'Saad Al-Ghamdi', aka: ['Ghamidi', 'Ghamadi'] },
   { id: 'Abu_Bakr_Ash-Shaatree_128kbps', name: 'Abu Bakr Al-Shatri', aka: ['Shatree', 'Shaatree'] },
   { id: 'qud-saud_al_shuraim', name: 'Saud Al-Shuraim', aka: ['Shuraym', 'Shureim'] },
   { id: 'Hudhaify_128kbps', name: 'Ali Al-Hudhaify', aka: ['Huthaifi', 'Hudhaifi', 'Huzaifi'] },
@@ -37,21 +37,21 @@ export const RECITERS: ReciterOption[] = [
   { id: 'qud-hani_al_rifai', name: 'Hani Ar-Rifai', aka: ['Rifaie', 'Refai'] },
   { id: 'qud-mohammed_al_luhaidan', name: 'Muhammad Al-Luhaidan', aka: ['Lohaidan', 'Luhaydan', 'Mohammed'] },
   { id: 'qud-bandar_baleela', name: 'Bandar Baleela', aka: ['Balila'] },
-  { id: 'khalefa_al_tunaiji_64kbps', name: 'Khalifa At-Tunaiji', hint: 'No word-by-word highlighting', aka: ['Tunaji', 'Tunaiji'] },
+  { id: 'khalefa_al_tunaiji_64kbps', name: 'Khalifa At-Tunaiji', aka: ['Tunaji', 'Tunaiji'] },
   { id: 'Mohammad_al_Tablaway_128kbps', name: 'Muhammad At-Tablawi', aka: ['Tablawy', 'Tablaway'] },
   { id: 'qud-mahmoud_ali_al_banna', name: 'Mahmoud Ali Al-Banna', aka: ['Bana'] },
   { id: 'qud-mustafa_ismail', name: 'Mustafa Ismail', aka: ['Mostafa', 'Ismaeel'] },
   { id: 'qud-abdur_rashid_sufi', name: 'Abdur-Rashid Sufi', aka: ['Soufi', 'Abdulrashid'] },
   { id: 'Abdul_Basit_Mujawwad_128kbps', name: 'Abdul Basit (Mujawwad)', hint: 'Melodic and slow', aka: ['Abdulbasit', 'Abdussamad'] },
   { id: 'Minshawy_Mujawwad_192kbps', name: 'Al-Minshawy (Mujawwad)', hint: 'Melodic and slow', aka: ['Minshawi'] },
-  { id: 'Husary_128kbps_Mujawwad', name: 'Al-Husary (Mujawwad)', hint: 'Melodic and slow, no word-by-word highlighting', aka: ['Husari', 'Hussary'] },
-  { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel', hint: 'No word-by-word highlighting', aka: ['Jibril', 'Mohammed'] },
+  { id: 'Husary_128kbps_Mujawwad', name: 'Al-Husary (Mujawwad)', hint: 'Melodic and slow', aka: ['Husari', 'Hussary'] },
+  { id: 'Muhammad_Jibreel_128kbps', name: 'Muhammad Jibreel', aka: ['Jibril', 'Mohammed'] },
 ];
 
 /** Reciters played as slices of whole-surah files → the everyayah directory that fills their missing ayahs */
 const SURAH_AUDIO = new Map<string, string>(qudReciters.map((r) => [r.id, r.fallback]));
 
-/** everyayah reciters with quran-align word timings in public/segments */
+/** everyayah reciters with word timings in public/segments (quran-align, or QUD mapped onto these files) */
 const AYAH_TIMED = new Set([
   'Alafasy_128kbps',
   'Abdul_Basit_Murattal_192kbps',
@@ -61,6 +61,10 @@ const AYAH_TIMED = new Set([
   'Husary_Muallim_128kbps',
   'Minshawy_Mujawwad_192kbps',
   'Mohammad_al_Tablaway_128kbps',
+  // QUD v3.2.0 timings mapped from Tarteel's copies (scripts/import-tarteel-matched.mjs)
+  'Ghamadi_40kbps',
+  'Husary_128kbps_Mujawwad',
+  'khalefa_al_tunaiji_64kbps',
 ]);
 
 /** Reciters whose ids changed when their audio moved off Tarteel's CDN (2026-10-16) */

@@ -39,9 +39,17 @@ Its ranges were carried onto Tanzil's current text by scripts/build-tajweed.mjs.
 ${rule('Word timings: quran-align')}Word-precise timings for EveryAyah recordings by Colin Fair, https://github.com/cpfair/quran-align
 (release 2016-11-24), licensed under the Creative Commons Attribution 4.0 International License
 (https://creativecommons.org/licenses/by/4.0/). Renumbered to Takrar's word list.
-${rule("Word and ayah timings: Qur'anic Universal Audio (QUD)")}Timestamps by Qur'anic Universal Audio, https://github.com/QUD-Technologies/quranic-universal-audio,
-licensed under the Creative Commons Attribution 4.0 International License. The recordings remain
-the property of their reciters and are streamed from MP3Quran.net and QuranicAudio.com.
+${rule("Word and ayah timings: Qur'anic Universal Audio (QUD)")}QUD Technologies - Qur'anic Universal Audio (https://qud.dev),
+https://github.com/QUD-Technologies/quranic-universal-audio.
+- Release v3.2.0 (2026-09-26), licensed under the Creative Commons Attribution 4.0 International
+  License (https://creativecommons.org/licenses/by/4.0/): every surah-audio reciter except Muhammad
+  Jibreel, and, mapped onto EveryAyah's per-ayah files of the same recordings, Saad Al-Ghamdi,
+  Al-Husary (Mujawwad) and Khalifa At-Tunaiji. Renumbered to Takrar's word list.
+- Release v5.0.0 (2026-11-13), licensed under the QUA Dataset License 1.0
+  (https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v5.0.0): Muhammad Jibreel.
+  Under that licence every feature it powers stays free, with no ads during recitation.
+The recordings remain the property of their reciters and are streamed from EveryAyah.com,
+MP3Quran.net and QuranicAudio.com.
 ${rule('Recitations')}Per-ayah recordings stream from EveryAyah.com; surah recordings from MP3Quran.net and
 QuranicAudio.com. Takrar doesn't host them; a surah you download is saved on your device only.
 ${rule('IndoPak text: DigitalKhatt')}The IndoPak Quran text in src/data comes from DigitalKhatt's 15-line IndoPak text

@@ -17,16 +17,20 @@ Everything that doesn't need you is built. These need your accounts, your phone 
    Transliteration: our own. Word audio: cut from the recitation. Reciters: nothing from Tarteel's
    or Quran.com's CDNs; word timings from quran-align and QUD (both CC BY 4.0).
    **Still yours:**
+   - **On hold (owner, 2026-11-13): no emails for now.** Both drafts stay here for later.
    - **Send the word-by-word email** (`email-word-by-word-permission.md`). The word meanings are the
      only Quran.com-sourced data left; if the Corpus team says no, we write our own.
    - **Ask EveryAyah** (`email-everyayah-permission.md`): most recitations stream from it and it
      publishes no terms.
-   - **Ghamdi, Husary (Mujawwad), Tunaiji** play without word highlighting now: their only open
+   - ~~Ghamdi, Husary (Mujawwad), Tunaiji, Jibreel~~ **Done 2026-11-13**: Ghamdi/Husary/Tunaiji from
+     QUD v3.2.0 (CC BY) mapped onto EveryAyah's files by matching against Tarteel's copies (analysis
+     only); Jibreel from QUD v5.0.0 under the QUA Dataset License (owner OK'd). Old note:
+     **Ghamdi, Husary (Mujawwad), Tunaiji** played without word highlighting: their only open
      timings fit Tarteel's copies. Highlighting can come back by measuring each surah's offset against
      Tarteel's files once at build time (analysis only, nothing redistributed). Your call whether
      that's acceptable; report: `Downloads/reports/Takrar reciter hosts.md`.
-   - **Maher Al-Muaiqly, Yasser Ad-Dussary** lost highlighting (their timings were QUL's own, no
-     licence shown). Ask Tarteel/QUL for permission, or leave them unhighlighted.
+   - ~~Maher Al-Muaiqly, Yasser Ad-Dussary~~ **Done 2026-10-17**: highlighting back from QUD
+     (Maher on QuranicAudio's files; Yasser on mp3quran's, shifted 25 ms).
 6. ~~KFGQPC fonts~~ **Done 2026-10-17**: Amiri Quran (OFL) for Uthmani, DigitalKhatt IndoPak (OFL)
    for IndoPak. It also fixed dotted circles KFGQPC drew for Tanzil's silent-letter sign.
 7. **More translations / tafsir** (roadmap #05, #07): which ones, then permission from each publisher.

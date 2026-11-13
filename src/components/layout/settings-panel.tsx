@@ -552,7 +552,7 @@ export default function SettingsPanel() {
                 <li>Tajweed colours: <Ext href="https://github.com/cpfair/quran-tajweed">cpfair/quran-tajweed</Ext> (CC BY 4.0)</li>
                 <li>Arabic font: <Ext href="https://github.com/aliftype/amiri">Amiri Quran</Ext> (OFL) · IndoPak text and font, mushaf font: <Ext href="https://github.com/DigitalKhatt">DigitalKhatt</Ext> by Amine Anane (MIT, OFL)</li>
                 <li>Mushaf pages: <Ext href="https://github.com/tarekeldeeb/quran-madina-html">quran-madina-html</Ext> (Waqf GPL 2.0)</li>
-                <li>Recitations: EveryAyah.com, MP3Quran.net, QuranicAudio.com · Word timings: <Ext href="https://github.com/cpfair/quran-align">quran-align</Ext> and Qur&apos;anic Universal Audio (CC BY 4.0)</li>
+                <li>Recitations: EveryAyah.com, MP3Quran.net, QuranicAudio.com · Word timings: <Ext href="https://github.com/cpfair/quran-align">quran-align</Ext> and <Ext href="https://qud.dev">QUD Technologies - Qur&apos;anic Universal Audio</Ext> (CC BY 4.0; QUA Dataset License 1.0 for Muhammad Jibreel)</li>
                 <li>Word meanings: <Ext href="https://corpus.quran.com">Quranic Arabic Corpus</Ext> · Voice check: <Ext href="https://github.com/yazinsai/tilawa">Tilawa</Ext> (NPL 1.2) · Transliteration: Takrar</li>
               </ul>
             </div>

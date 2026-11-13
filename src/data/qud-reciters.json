@@ -12,5 +12,6 @@
   { "id": "qud-mustafa_ismail", "slug": "mustafa_ismail_mp3quran", "fallback": "Mustafa_Ismail_48kbps" },
   { "id": "qud-abdur_rashid_sufi", "slug": "abdur_rashid_sufi_qdc", "fallback": "Alafasy_128kbps" },
   { "id": "MaherAlMuaiqly128kbps", "slug": "maher_al_muaiqly_qdc", "fallback": "MaherAlMuaiqly128kbps" },
-  { "id": "Yasser_Ad-Dussary_128kbps", "slug": "yasser_al_dosari_archive", "fallback": "Yasser_Ad-Dussary_128kbps", "audio": "https://server11.mp3quran.net/yasser/{sss}.mp3", "shiftMs": 25, "opening": [270,3140] }
+  { "id": "Yasser_Ad-Dussary_128kbps", "slug": "yasser_al_dosari_archive", "fallback": "Yasser_Ad-Dussary_128kbps", "audio": "https://server11.mp3quran.net/yasser/{sss}.mp3", "shiftMs": 25, "opening": [270,3140] },
+  { "id": "Muhammad_Jibreel_128kbps", "slug": "mohammed_jibreel_qdc", "fallback": "Muhammad_Jibreel_128kbps", "release": "v5.0.0" }
 ]

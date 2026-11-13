@@ -16,7 +16,15 @@
 // the basmala alone (it matched the reciter's own EveryAyah 1:1 recording), with the span
 // measured by silence detection.
 //
-// Run: node --experimental-strip-types scripts/import-qud.mts [--cache <dir>] [--release v3.2.0]
+// Releases and licences: up to v4.0.0 QUD was CC BY 4.0; v5.0.0 (2026-11-13) moved to the QUA
+// Dataset License 1.0 (free app, nothing gated, no ads interrupting recitation, no public
+// redistribution, credit "QUD Technologies - Qur'anic Universal Audio (https://qud.dev)").
+// QUD has since deleted the CC BY releases, so entries without `release` (v3.2.0) can no
+// longer be re-imported: their output in public/segments is the record. An entry with
+// `release: "v5.0.0"` is QUA-licensed; keep that data away from any timing-model training or
+// evaluation (the licence binds models evaluated on it).
+//
+// Run: node --experimental-strip-types scripts/import-qud.mts [--cache <dir>] [--only <id>]
 import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,12 +33,11 @@ import { alignAyah, type Row, type AlignMethod } from '../src/lib/align-timings.
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const arg = (name: string) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : null; };
-const release = arg('--release') ?? 'v3.2.0';
+const only = arg('--only');
 const cache = arg('--cache') ?? join(root, '.qud-cache');
-const BASE = `https://github.com/QUD-Technologies/quranic-universal-audio/releases/download/${release}`;
-mkdirSync(cache, { recursive: true });
+const LICENCES: Record<string, string> = { 'v3.2.0': 'CC BY 4.0', 'v5.0.0': 'QUA Dataset License 1.0 (https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v5.0.0)' };
 
-const reciters: { id: string; slug: string; fallback: string; audio?: string; shiftMs?: number; opening?: [number, number] }[] = JSON.parse(readFileSync(join(root, 'src', 'data', 'qud-reciters.json'), 'utf8'));
+const reciters: { id: string; slug: string; fallback: string; audio?: string; shiftMs?: number; opening?: [number, number]; release?: string }[] = JSON.parse(readFileSync(join(root, 'src', 'data', 'qud-reciters.json'), 'utf8'));
 
 const ourWords = new Map<string, string[]>();
 for (let s = 1; s <= 114; s++) {
@@ -79,11 +86,20 @@ async function finalUrl(url: string): Promise<{ url: string; ranged: boolean }> 
 
 const manifestPath = join(root, 'public', 'segments', 'manifest.json');
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-manifest.qud = { source: 'https://github.com/QUD-Technologies/quranic-universal-audio (Qur\'anic Universal Audio, CC BY 4.0)', release, reciters: {} };
+manifest.qud ??= { reciters: {} };
+manifest.qud.source = "https://github.com/QUD-Technologies/quranic-universal-audio (Qur'anic Universal Audio, QUD Technologies, https://qud.dev)";
+for (const v of Object.values(manifest.qud.reciters as Record<string, { release?: string; licence?: string }>)) {
+  v.release ??= manifest.qud.release ?? 'v3.2.0';
+  v.licence ??= LICENCES[v.release!];
+}
+delete manifest.qud.release; // recorded per reciter now
 
 for (const r of reciters) {
-  const zip = join(cache, `${r.slug}.zip`);
-  await download(`${BASE}/${r.slug}.zip`, zip);
+  if (only && r.id !== only) continue;
+  const release = r.release ?? 'v3.2.0';
+  mkdirSync(join(cache, release), { recursive: true });
+  const zip = join(cache, release, `${r.slug}.zip`);
+  await download(`https://github.com/QUD-Technologies/quranic-universal-audio/releases/download/${release}/${r.slug}.zip`, zip);
   const files = unzip(readFileSync(zip));
   const catalog = JSON.parse(files.get('catalog.json')!.toString('utf8'));
   const rec = Array.isArray(catalog) ? catalog[0] : catalog.recitations?.[0] ?? catalog;
@@ -141,7 +157,7 @@ for (const r of reciters) {
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
   for (const [s, file] of bySurah) writeFileSync(join(outDir, `${s}.json`), JSON.stringify(file));
-  manifest.qud.reciters[r.id] = { slug: r.slug, name: rec.name_en, surahs: bySurah.size, ...count, unrangedSurahs: unranged, missingVerses: rec.coverage?.missing_verses ?? null, ...(r.audio && { audio: r.audio, shiftMs: shift }), ...(estimated.length && { estimated }) };
+  manifest.qud.reciters[r.id] = { slug: r.slug, release, licence: LICENCES[release], name: rec.name_en, surahs: bySurah.size, ...count, unrangedSurahs: unranged, missingVerses: rec.coverage?.missing_verses ?? null, ...(r.audio && { audio: r.audio, shiftMs: shift }), ...(estimated.length && { estimated }) };
   console.log(`${r.id} <- ${r.slug}: ${bySurah.size} surahs ${JSON.stringify(count)} unranged=${unranged} missing=${rec.coverage?.missing_verses ?? '-'}${estimated.length ? ` estimated=${estimated.join(',')}` : ''}`);
 }
 writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
