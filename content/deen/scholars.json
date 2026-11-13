@@ -1,0 +1,23 @@
+{
+  "_about": "Scholars a grading or a position may be attributed to (all-in-one spec 5.1). Ids are what items cite in `by`. Packages add through registry-additions.json.",
+  "scholars": [
+    { "id": "al-bukhari", "name": "al-Bukhari" },
+    { "id": "muslim", "name": "Muslim ibn al-Hajjaj" },
+    { "id": "abu-dawud", "name": "Abu Dawud al-Sijistani" },
+    { "id": "al-tirmidhi", "name": "al-Tirmidhi" },
+    { "id": "al-nasai", "name": "al-Nasa'i" },
+    { "id": "ibn-majah", "name": "Ibn Majah" },
+    { "id": "al-nawawi", "name": "al-Nawawi" },
+    { "id": "ibn-hajar", "name": "Ibn Hajar al-Asqalani" },
+    { "id": "al-hakim", "name": "al-Hakim al-Naysaburi" },
+    { "id": "al-dhahabi", "name": "al-Dhahabi" },
+    { "id": "al-daraqutni", "name": "al-Daraqutni" },
+    { "id": "ibn-al-mundhir", "name": "Ibn al-Mundhir" },
+    { "id": "ibn-hazm", "name": "Ibn Hazm" },
+    { "id": "ibn-rushd", "name": "Ibn Rushd (the grandson)" },
+    { "id": "al-quduri", "name": "al-Quduri" },
+    { "id": "ibn-abi-zayd", "name": "Ibn Abi Zayd al-Qayrawani" },
+    { "id": "abu-shuja", "name": "Abu Shuja' al-Asfahani" },
+    { "id": "ibn-qudamah", "name": "Ibn Qudamah al-Maqdisi" }
+  ]
+}

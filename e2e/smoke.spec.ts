@@ -172,6 +172,25 @@ test.describe('smoke', () => {
   })
 })
 
+test('five tabs: Prayer sits between Review and Learn, and the pill follows it (all-in-one)', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 })
+  await page.addInitScript(() => localStorage.setItem('onboarding-complete', 'true'))
+  await page.goto('/')
+  const nav = page.getByRole('navigation', { name: 'Main' })
+  await expect(nav.getByRole('link')).toHaveText(['Home', 'Review', 'Prayer', 'Learn', 'Progress'])
+  // Every tab fits at 375px: no label is clipped
+  for (const link of await nav.getByRole('link').all()) {
+    const box = (await link.boundingBox())!
+    expect(box.width).toBeGreaterThan(56)
+  }
+  await nav.getByRole('link', { name: 'Prayer' }).click()
+  await expect(page).toHaveURL(/\/prayer$/)
+  await expect(nav.getByRole('link', { name: 'Prayer' })).toHaveAttribute('aria-current', 'page')
+  // A Prayer tool keeps the Prayer tab lit
+  await page.goto('/qibla')
+  await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Prayer' })).toHaveAttribute('aria-current', 'page')
+})
+
 test('native shell: a deep link to a page the export lacks lands on Home — no reload loop', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'native', 'Capacitor-style root-index fallback only')
   await page.addInitScript(() => localStorage.setItem('onboarding-complete', 'true'))

@@ -13,6 +13,12 @@ describe('backLabelFor', () => {
     ['/review/session?stream=sabqi', 'Review'],
     ['/essentials', 'Learn'],
     ['/progress', 'Progress'],
+    ['/prayer', 'Prayer'],
+    ['/prayer/', 'Prayer'],
+    ['/prayer/settings', 'Prayer settings'],
+    ['/prayer/tracker?month=2026-11', 'Prayer log'],
+    ['/qibla', 'Qibla'],
+    ['/hadith', 'Hadith'],
     ['/plan/edit', 'Plan'],
     ['/juz/30', 'Juz 30'],
     ['/lesson/67', 'Al-Mulk'],
@@ -24,6 +30,10 @@ describe('backLabelFor', () => {
   it('falls back to "Back" when the destination has no certain short name', async () => {
     expect(await backLabelFor('/lesson/999', lookup)).toBe('Back');
     expect(await backLabelFor('/essentials/duas', lookup)).toBe('Back');
+    expect(await backLabelFor('/hadith/view?id=01', lookup)).toBe('Back');
+    // Only the hub is "Prayer"; its other screens aren't named for the hub
+    expect(await backLabelFor('/prayer/setup', lookup)).toBe('Back');
+    expect(await backLabelFor('/prayer/why', lookup)).toBe('Back');
     expect(await backLabelFor('/learn?surah=1&lesson=1', lookup)).toBe('Back');
   });
 });

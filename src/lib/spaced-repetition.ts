@@ -56,8 +56,9 @@ export function createLessonReviewCard(lessonDef: LessonDef, surahId: number, du
 }
 
 // The one SM-2 core shared by ayah- and lesson-level cards (deduped in M2 —
-// the two copies had already started to drift risk).
-interface Sm2Fields {
+// the two copies had already started to drift risk). Deen cards (hadith, duas,
+// Names, course) use the same core through reviewSm2.
+export interface Sm2Fields {
   easeFactor: number;
   interval: number;
   repetitions: number;
@@ -113,6 +114,15 @@ function applySm2<T extends Sm2Fields>(card: T, quality: number): T {
   updated.nextReview = addLocalDays(Date.now(), updated.interval);
 
   return updated;
+}
+
+/**
+ * The SM-2 step for any card shape carrying the SM-2 fields (deen cards use it;
+ * ayah and lesson cards go through the wrappers below). Same algorithm, same
+ * failure bookkeeping, same local-midnight due dates.
+ */
+export function reviewSm2<T extends Sm2Fields>(card: T, quality: number): T {
+  return applySm2(card, quality);
 }
 
 export function processReview(card: ReviewCard, quality: number): ReviewCard {

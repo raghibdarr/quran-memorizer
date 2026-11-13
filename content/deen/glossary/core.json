@@ -1,0 +1,499 @@
+[
+  {
+    "id": "salah",
+    "arabic": "صلاة",
+    "translit": "salah",
+    "short": "The prayer: the five daily prayers, and other prayers, performed in set positions.",
+    "seeAlso": [
+      "wudu",
+      "rakah",
+      "qiblah"
+    ]
+  },
+  {
+    "id": "wudu",
+    "arabic": "وضوء",
+    "translit": "wudu",
+    "short": "Washing set parts of the body to be ready for prayer.",
+    "seeAlso": [
+      "ghusl",
+      "tayammum",
+      "taharah"
+    ]
+  },
+  {
+    "id": "ghusl",
+    "arabic": "غسل",
+    "translit": "ghusl",
+    "short": "A wash of the whole body that restores purity after certain states.",
+    "seeAlso": [
+      "wudu",
+      "taharah"
+    ]
+  },
+  {
+    "id": "tayammum",
+    "arabic": "تيمم",
+    "translit": "tayammum",
+    "short": "Purifying with clean earth when water can’t be used.",
+    "seeAlso": [
+      "wudu",
+      "ghusl"
+    ]
+  },
+  {
+    "id": "taharah",
+    "arabic": "طهارة",
+    "translit": "taharah",
+    "short": "Purity: the state needed for prayer, and the ways of reaching it.",
+    "seeAlso": [
+      "wudu",
+      "ghusl",
+      "tayammum"
+    ]
+  },
+  {
+    "id": "qiblah",
+    "arabic": "قبلة",
+    "translit": "qiblah",
+    "short": "The direction of the Kaaba in Makkah, which Muslims face in prayer.",
+    "seeAlso": [
+      "kaaba",
+      "salah"
+    ]
+  },
+  {
+    "id": "kaaba",
+    "arabic": "الكعبة",
+    "translit": "Kaaba",
+    "short": "The House in Makkah that Muslims face in prayer.",
+    "seeAlso": [
+      "qiblah"
+    ]
+  },
+  {
+    "id": "adhan",
+    "arabic": "أذان",
+    "translit": "adhan",
+    "short": "The call to prayer.",
+    "seeAlso": [
+      "iqamah"
+    ]
+  },
+  {
+    "id": "iqamah",
+    "arabic": "إقامة",
+    "translit": "iqamah",
+    "short": "The second call, said just before the prayer begins.",
+    "seeAlso": [
+      "adhan"
+    ]
+  },
+  {
+    "id": "rakah",
+    "arabic": "ركعة",
+    "translit": "rak’ah",
+    "short": "One cycle of the prayer: standing, bowing and two prostrations.",
+    "seeAlso": [
+      "ruku",
+      "sujud"
+    ]
+  },
+  {
+    "id": "ruku",
+    "arabic": "ركوع",
+    "translit": "ruku’",
+    "short": "Bowing in prayer, hands on the knees.",
+    "seeAlso": [
+      "rakah",
+      "sujud"
+    ]
+  },
+  {
+    "id": "sujud",
+    "arabic": "سجود",
+    "translit": "sujud",
+    "short": "Prostration: forehead, nose, hands, knees and toes on the ground.",
+    "seeAlso": [
+      "rakah",
+      "ruku"
+    ]
+  },
+  {
+    "id": "tashahhud",
+    "arabic": "تشهد",
+    "translit": "tashahhud",
+    "short": "The words of witness said while sitting in the prayer.",
+    "seeAlso": [
+      "salah"
+    ]
+  },
+  {
+    "id": "jumuah",
+    "arabic": "الجمعة",
+    "translit": "jumu’ah",
+    "short": "Friday, and the congregational prayer held at midday on it.",
+    "seeAlso": [
+      "khutbah"
+    ]
+  },
+  {
+    "id": "khutbah",
+    "arabic": "خطبة",
+    "translit": "khutbah",
+    "short": "A sermon, as given before the Friday prayer.",
+    "seeAlso": [
+      "jumuah"
+    ]
+  },
+  {
+    "id": "dhikr",
+    "arabic": "ذكر",
+    "translit": "dhikr",
+    "short": "Remembering Allah, especially by repeating set words of praise.",
+    "seeAlso": [
+      "tasbih",
+      "dua"
+    ]
+  },
+  {
+    "id": "dua",
+    "arabic": "دعاء",
+    "translit": "du’a",
+    "short": "Asking Allah, in any words, for anything.",
+    "seeAlso": [
+      "dhikr"
+    ]
+  },
+  {
+    "id": "tasbih",
+    "arabic": "تسبيح",
+    "translit": "tasbih",
+    "short": "Saying subhan Allah, “glory be to Allah”. Also used for counting dhikr.",
+    "seeAlso": [
+      "tahmid",
+      "takbir"
+    ]
+  },
+  {
+    "id": "tahmid",
+    "arabic": "تحميد",
+    "translit": "tahmid",
+    "short": "Saying al-hamdu lillah, “praise be to Allah”.",
+    "seeAlso": [
+      "tasbih"
+    ]
+  },
+  {
+    "id": "takbir",
+    "arabic": "تكبير",
+    "translit": "takbir",
+    "short": "Saying Allahu akbar, “Allah is greatest”.",
+    "seeAlso": [
+      "tasbih"
+    ]
+  },
+  {
+    "id": "tahlil",
+    "arabic": "تهليل",
+    "translit": "tahlil",
+    "short": "Saying la ilaha illa Allah, “there is no god but Allah”.",
+    "seeAlso": [
+      "dhikr"
+    ]
+  },
+  {
+    "id": "istighfar",
+    "arabic": "استغفار",
+    "translit": "istighfar",
+    "short": "Asking Allah for forgiveness.",
+    "seeAlso": [
+      "dua"
+    ]
+  },
+  {
+    "id": "sunnah",
+    "arabic": "سنة",
+    "translit": "sunnah",
+    "short": "The Prophet’s way: what he ﷺ said, did and approved.",
+    "seeAlso": [
+      "hadith"
+    ]
+  },
+  {
+    "id": "hadith",
+    "arabic": "حديث",
+    "translit": "hadith",
+    "short": "A report of what the Prophet ﷺ said, did or approved.",
+    "seeAlso": [
+      "isnad",
+      "matn",
+      "sunnah"
+    ]
+  },
+  {
+    "id": "isnad",
+    "arabic": "إسناد",
+    "translit": "isnad",
+    "short": "The chain of narrators through whom a hadith reached us.",
+    "seeAlso": [
+      "matn",
+      "hadith"
+    ]
+  },
+  {
+    "id": "matn",
+    "arabic": "متن",
+    "translit": "matn",
+    "short": "The wording of a hadith, after its chain.",
+    "seeAlso": [
+      "isnad"
+    ]
+  },
+  {
+    "id": "sahih",
+    "arabic": "صحيح",
+    "translit": "sahih",
+    "short": "Sound: the grading for a hadith whose chain and wording meet the strictest conditions.",
+    "seeAlso": [
+      "hasan",
+      "daif"
+    ]
+  },
+  {
+    "id": "hasan",
+    "arabic": "حسن",
+    "translit": "hasan",
+    "short": "Good: a grading just below sahih. Such a hadith is still accepted as evidence.",
+    "seeAlso": [
+      "sahih",
+      "daif"
+    ]
+  },
+  {
+    "id": "daif",
+    "arabic": "ضعيف",
+    "translit": "da’if",
+    "short": "Weak: the grading for a hadith that falls short of the conditions for acceptance.",
+    "seeAlso": [
+      "sahih",
+      "hasan"
+    ]
+  },
+  {
+    "id": "mawquf",
+    "arabic": "موقوف",
+    "translit": "mawquf",
+    "short": "A report that stops at a Companion and is not traced back to the Prophet ﷺ.",
+    "seeAlso": [
+      "sahabi"
+    ]
+  },
+  {
+    "id": "mursal",
+    "arabic": "مرسل",
+    "translit": "mursal",
+    "short": "A report in which a Successor quotes the Prophet ﷺ without naming the Companion in between.",
+    "seeAlso": [
+      "tabii",
+      "sahabi"
+    ]
+  },
+  {
+    "id": "sahabi",
+    "arabic": "صحابي",
+    "translit": "sahabi",
+    "short": "A Companion: someone who met the Prophet ﷺ as a believer and died a Muslim.",
+    "seeAlso": [
+      "tabii"
+    ]
+  },
+  {
+    "id": "tabii",
+    "arabic": "تابعي",
+    "translit": "tabi’i",
+    "short": "A Successor: a Muslim of the generation that met the Companions.",
+    "seeAlso": [
+      "sahabi"
+    ]
+  },
+  {
+    "id": "fiqh",
+    "arabic": "فقه",
+    "translit": "fiqh",
+    "short": "Islamic law as scholars understand it from its sources.",
+    "seeAlso": [
+      "madhhab"
+    ]
+  },
+  {
+    "id": "madhhab",
+    "arabic": "مذهب",
+    "translit": "madhhab",
+    "short": "A school of law. Here: the Hanafi, Maliki, Shafi’i and Hanbali schools.",
+    "seeAlso": [
+      "fiqh"
+    ]
+  },
+  {
+    "id": "ijma",
+    "arabic": "إجماع",
+    "translit": "ijma’",
+    "short": "Consensus: the agreement of the scholars on a ruling.",
+    "seeAlso": [
+      "fiqh"
+    ]
+  },
+  {
+    "id": "fard",
+    "arabic": "فرض",
+    "translit": "fard",
+    "short": "Obligatory: an act that must be done.",
+    "seeAlso": [
+      "wajib",
+      "mustahabb"
+    ]
+  },
+  {
+    "id": "wajib",
+    "arabic": "واجب",
+    "translit": "wajib",
+    "short": "Obligatory. In the Hanafi school, a level just below fard.",
+    "seeAlso": [
+      "fard"
+    ]
+  },
+  {
+    "id": "mustahabb",
+    "arabic": "مستحب",
+    "translit": "mustahabb",
+    "short": "Recommended: rewarded if done, no blame if left.",
+    "seeAlso": [
+      "fard",
+      "makruh"
+    ]
+  },
+  {
+    "id": "makruh",
+    "arabic": "مكروه",
+    "translit": "makruh",
+    "short": "Disliked: better left undone.",
+    "seeAlso": [
+      "haram",
+      "mustahabb"
+    ]
+  },
+  {
+    "id": "haram",
+    "arabic": "حرام",
+    "translit": "haram",
+    "short": "Forbidden.",
+    "seeAlso": [
+      "halal",
+      "makruh"
+    ]
+  },
+  {
+    "id": "halal",
+    "arabic": "حلال",
+    "translit": "halal",
+    "short": "Permitted.",
+    "seeAlso": [
+      "haram"
+    ]
+  },
+  {
+    "id": "niyyah",
+    "arabic": "نية",
+    "translit": "niyyah",
+    "short": "Intention: the purpose in the heart behind an act."
+  },
+  {
+    "id": "zakat",
+    "arabic": "زكاة",
+    "translit": "zakat",
+    "short": "The yearly due on wealth above a set minimum, given to those entitled to receive it.",
+    "seeAlso": [
+      "nisab",
+      "hawl"
+    ]
+  },
+  {
+    "id": "nisab",
+    "arabic": "نصاب",
+    "translit": "nisab",
+    "short": "The minimum amount of wealth on which zakat falls due.",
+    "seeAlso": [
+      "zakat",
+      "hawl"
+    ]
+  },
+  {
+    "id": "hawl",
+    "arabic": "حول",
+    "translit": "hawl",
+    "short": "A full lunar year of holding wealth at or above the nisab.",
+    "seeAlso": [
+      "zakat",
+      "nisab"
+    ]
+  },
+  {
+    "id": "sawm",
+    "arabic": "صوم",
+    "translit": "sawm",
+    "short": "Fasting: no food, drink or intercourse from dawn until sunset.",
+    "seeAlso": [
+      "suhur",
+      "iftar"
+    ]
+  },
+  {
+    "id": "suhur",
+    "arabic": "سحور",
+    "translit": "suhur",
+    "short": "The meal before dawn on a fasting day.",
+    "seeAlso": [
+      "sawm",
+      "iftar"
+    ]
+  },
+  {
+    "id": "iftar",
+    "arabic": "إفطار",
+    "translit": "iftar",
+    "short": "Breaking the fast at sunset.",
+    "seeAlso": [
+      "sawm",
+      "suhur"
+    ]
+  },
+  {
+    "id": "qada",
+    "arabic": "قضاء",
+    "translit": "qada’",
+    "short": "Making up a prayer or fast later.",
+    "seeAlso": [
+      "sawm",
+      "salah"
+    ]
+  },
+  {
+    "id": "hajj",
+    "arabic": "حج",
+    "translit": "hajj",
+    "short": "The pilgrimage to Makkah, made in the month of Dhu al-Hijjah.",
+    "seeAlso": [
+      "umrah"
+    ]
+  },
+  {
+    "id": "umrah",
+    "arabic": "عمرة",
+    "translit": "umrah",
+    "short": "The lesser pilgrimage, which can be made at any time of year.",
+    "seeAlso": [
+      "hajj"
+    ]
+  }
+]

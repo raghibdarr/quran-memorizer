@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyBackupToSnapshot, validateBackup, type TakrarBackup } from './backup'
+import { applyBackupToSnapshot, applyDeviceBackup, collectDeviceStores, DEVICE_BACKUP_STORES, validateBackup, type TakrarBackup } from './backup'
 
 function makeBackup(stores: TakrarBackup['stores']): TakrarBackup {
   return { format: 'takrar-backup', version: 1, exportedAt: '2026-01-01T00:00:00.000Z', stores, flags: {} }
@@ -102,5 +102,52 @@ describe('backup versioning (review finding)', () => {
   it('normalizes old-format stores on import (stats gain freeze fields)', () => {
     const backup: TakrarBackup = { ...base, stores: { 'quran-stats': { currentStreak: 4 } } }
     expect(applyBackupToSnapshot(backup, {})['quran-stats']).toMatchObject({ currentStreak: 4, streakFreezes: 0, frozenDates: {} })
+  })
+})
+
+describe('device-only stores in the backup (all-in-one spec 3.2)', () => {
+  const persisted: Record<string, Record<string, unknown>> = {
+    'takrar-place': { place: { lat: 51.51, lng: -0.13, label: 'London', countryCode: 'GB', tz: 'Europe/London', source: 'gps' } },
+    'takrar-prayer': { method: 'MoonsightingCommittee', madhab: 'hanafi', highLatRule: 'auto', offsets: { fajr: 2 }, hijriOffset: -1, setupDone: true,
+      // a stray coordinate must not ride along, whatever put it there
+      lat: 51.51, lng: -0.13 },
+    'takrar-worship': { prayers: { '2026-07-10': { fajr: { s: 'ontime', at: 100 } } }, fasts: {}, madeUp: { prayers: 2, fasts: 0 }, pauses: [], tasbihTotals: { 'dhikr-1': 99 } },
+    'takrar-zakat': { inputs: { cash: 1200 }, options: {}, nisabBasis: 'silver', pricePerGram: { gold: null, silver: 0.7 }, currency: 'GBP', hawlStartIso: '2026-01-01' },
+  }
+  const read = (k: string) => persisted[k] ?? null
+
+  it('carries prayer, worship and zakat; never the place; no lat/lng anywhere in the file', () => {
+    const part = collectDeviceStores(read)
+    expect(Object.keys(part.device).sort()).toEqual(['takrar-prayer', 'takrar-worship', 'takrar-zakat'])
+    expect(DEVICE_BACKUP_STORES as readonly string[]).not.toContain('takrar-place')
+    const json = JSON.stringify({ format: 'takrar-backup', version: 1, stores: {}, flags: {}, ...part })
+    expect(json).not.toMatch(/"lat"|"lng"|51\.51/)
+    expect(part.device['takrar-prayer']).toMatchObject({ method: 'MoonsightingCommittee', madhab: 'hanafi', hijriOffset: -1 })
+  })
+
+  it('restores settings from the backup and merges the worship log without losing local days', () => {
+    const backup = { ...makeBackup({}), ...collectDeviceStores(read) }
+    const local = {
+      'takrar-prayer': { method: 'Karachi' },
+      'takrar-worship': { prayers: { '2026-07-11': { isha: { s: 'late', at: 300 } }, '2026-07-10': { fajr: { s: 'late', at: 500 } } }, madeUp: { prayers: 1, fasts: 3 }, tasbihTotals: { 'dhikr-1': 5 } },
+    }
+    const out = applyDeviceBackup(backup, local)
+    expect(out['takrar-prayer']).toMatchObject({ method: 'MoonsightingCommittee' })
+    const w = out['takrar-worship'] as { prayers: Record<string, Record<string, { s: string }>>; madeUp: { prayers: number; fasts: number }; tasbihTotals: Record<string, number> }
+    expect(w.prayers['2026-07-11'].isha.s).toBe('late') // logged since the backup: kept
+    expect(w.prayers['2026-07-10'].fajr.s).toBe('late') // the newer mark wins
+    expect(w.madeUp).toEqual({ prayers: 2, fasts: 3 })
+    expect(w.tasbihTotals['dhikr-1']).toBe(99)
+    expect(out['takrar-zakat']).toMatchObject({ currency: 'GBP', hawlStartIso: '2026-01-01' })
+  })
+
+  it('refuses a device store from a newer build', () => {
+    const backup = { ...makeBackup({}), device: { 'takrar-zakat': { currency: 'X' } }, deviceVersions: { 'takrar-zakat': 99 } }
+    expect(applyDeviceBackup(backup, {})).toEqual({})
+  })
+
+  it('quran-deen (synced) is in the store list, restored like the others', () => {
+    const deen = { cards: {}, lessonsDone: { 'w-01': 5 }, depth: {}, school: null, newPerDay: 5, introduced: {} }
+    expect(applyBackupToSnapshot(makeBackup({ 'quran-deen': deen }), {})['quran-deen']).toEqual(deen)
   })
 })

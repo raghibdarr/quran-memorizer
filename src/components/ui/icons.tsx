@@ -57,6 +57,115 @@ export function StarIcon({ size = 16, className = '' }: IconProps) {
   );
 }
 
+/**
+ * A mosque: onion dome and finial over a hall. The Prayer tab. Kept to a few
+ * strokes so it weighs the same as its neighbours at the nav's 21px (a door
+ * filled in at that size).
+ */
+export function PrayerIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M4 21h16" />
+      <path d="M6 21v-7M18 21v-7M6 14h12" />
+      <path d="M8 14c0-3 2-4.4 4-6.5 2 2.1 4 3.5 4 6.5" />
+      <path d="M12 7.5V4.5" />
+    </svg>
+  );
+}
+
+// The Prayer hub's tools (all-in-one spec 3.3), on the same 24 grid and 2px stroke
+
+const strokeProps = {
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 2,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+} as const;
+
+/** A compass with its needle: Qibla */
+export function CompassIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m15.5 8.5-2 5-5 2 2-5 5-2z" />
+    </svg>
+  );
+}
+
+/** A loop of beads with its tassel: Tasbih */
+export function BeadsIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <circle cx="12" cy="9.5" r="6" />
+      <circle cx="12" cy="3.5" r="1.4" fill="currentColor" />
+      <circle cx="6" cy="9.5" r="1.4" fill="currentColor" />
+      <circle cx="18" cy="9.5" r="1.4" fill="currentColor" />
+      <path d="M12 15.5V21" />
+    </svg>
+  );
+}
+
+/** A tick in a circle: the prayer log */
+export function CheckCircleIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12.5 2.8 2.8L16 9.5" />
+    </svg>
+  );
+}
+
+/** A calendar page: the Hijri calendar */
+export function CalendarIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M8 3v4M16 3v4M3.5 10h17" />
+    </svg>
+  );
+}
+
+/** A crescent: Ramadan */
+export function MoonIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <path d="M20.5 13.5A8.5 8.5 0 1 1 10.5 3.5a6.5 6.5 0 0 0 10 10z" />
+    </svg>
+  );
+}
+
+/** A stack of coins: Zakat */
+export function CoinsIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <ellipse cx="12" cy="6" rx="7" ry="2.5" />
+      <path d="M5 6v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6" />
+      <path d="M5 12v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6" />
+    </svg>
+  );
+}
+
+/** A map pin: Mosques nearby */
+export function MapPinIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <path d="M19 10c0 5-7 11.5-7 11.5S5 15 5 10a7 7 0 0 1 14 0z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
+
+/** A clock face: a screen that's coming soon */
+export function ClockIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...strokeProps} className={className} aria-hidden>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  );
+}
+
 /** A mortarboard: the Learn tab (plans, guides, essentials) */
 export function LearnIcon({ size = 16, className = '' }: IconProps) {
   return (

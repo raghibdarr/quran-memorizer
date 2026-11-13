@@ -2,7 +2,8 @@
 // the notice each licence asks to travel with it (Tanzil's copyright block, the MIT and OFL
 // texts, QuranEnc's header). Settings links to it; the data files point to it.
 // Run after changing data-sources/ or a bundled font: node scripts/build-licenses.mjs
-import { readFileSync, writeFileSync } from 'fs';
+// Packages add their notices as data-sources/licenses.d/NN-<package>.txt fragments.
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -68,5 +69,16 @@ ${rule('Voice check: Tilawa')}The on-device recitation model and phoneme corpus 
 (https://github.com/yazinsai/tilawa), under the Non-Profit License 1.2, shipped with the model
 as models/tilawa/NPL-1.2.txt.
 `;
-writeFileSync(join(root, 'public', 'licenses.txt'), text);
-console.log(`public/licenses.txt: ${text.length.toLocaleString()} characters`);
+// Each package's own notices: data-sources/licenses.d/*.txt, appended in file-name order
+// (NN-<package>.txt). A line "=== <title>" opens a section with that title.
+const fragmentsDir = join(root, 'data-sources', 'licenses.d');
+const fragments = existsSync(fragmentsDir)
+  ? readdirSync(fragmentsDir)
+      .filter((f) => f.endsWith('.txt'))
+      .sort()
+      .map((f) => read('data-sources', 'licenses.d', f).trim().replace(/^=== (.+)\n/gm, (_, title) => rule(title)))
+  : [];
+const out = fragments.length ? `${text}${fragments.join('\n')}\n` : text;
+
+writeFileSync(join(root, 'public', 'licenses.txt'), out);
+console.log(`public/licenses.txt: ${out.length.toLocaleString()} characters (${fragments.length} fragment file${fragments.length === 1 ? '' : 's'})`);

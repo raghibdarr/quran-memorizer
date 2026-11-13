@@ -1,0 +1,28 @@
+{
+  "_about": "Works that positions, notes and consensus claims cite, and the witness sources Arabic is collated against (all-in-one spec 5.1). Packages add through registry-additions.json.",
+  "works": [
+    { "id": "mukhtasar-al-quduri", "title": "Mukhtasar al-Quduri", "author": "al-quduri", "kind": "primer", "school": "hanafi" },
+    { "id": "al-risala", "title": "al-Risala", "author": "ibn-abi-zayd", "kind": "primer", "school": "maliki" },
+    { "id": "matn-abi-shuja", "title": "Matn Abi Shuja' (al-Ghaya wa al-Taqrib)", "author": "abu-shuja", "kind": "primer", "school": "shafii" },
+    { "id": "umdat-al-fiqh", "title": "'Umdat al-Fiqh", "author": "ibn-qudamah", "kind": "primer", "school": "hanbali" },
+    { "id": "bidayat-al-mujtahid", "title": "Bidayat al-Mujtahid", "author": "ibn-rushd", "kind": "comparative" },
+    { "id": "al-ijma", "title": "al-Ijma'", "author": "ibn-al-mundhir", "kind": "consensus" },
+    { "id": "maratib-al-ijma", "title": "Maratib al-Ijma'", "author": "ibn-hazm", "kind": "consensus" },
+    { "id": "jami-al-tirmidhi", "title": "al-Jami' (Sunan al-Tirmidhi)", "author": "al-tirmidhi", "kind": "hadith" },
+    { "id": "fath-al-bari", "title": "Fath al-Bari", "author": "ibn-hajar", "kind": "commentary" },
+    { "id": "al-mustadrak", "title": "al-Mustadrak 'ala al-Sahihayn", "author": "al-hakim", "kind": "hadith" },
+    { "id": "talkhis-al-mustadrak", "title": "Talkhis al-Mustadrak", "author": "al-dhahabi", "kind": "commentary" },
+    { "id": "sunan-al-daraqutni", "title": "Sunan al-Daraqutni", "author": "al-daraqutni", "kind": "hadith" },
+    { "id": "al-arbain-al-nawawiyya", "title": "al-Arba'in al-Nawawiyya", "author": "al-nawawi", "kind": "hadith" },
+    { "id": "sharh-sahih-muslim", "title": "al-Minhaj sharh Sahih Muslim", "author": "al-nawawi", "kind": "commentary" },
+    { "id": "al-adhkar", "title": "al-Adhkar", "author": "al-nawawi", "kind": "hadith" }
+  ],
+  "witnessSources": [
+    { "id": "archive-org", "name": "Scan of a public-domain print on archive.org", "sunnahComDerived": false },
+    { "id": "dorar", "name": "dorar.net", "sunnahComDerived": false },
+    { "id": "shamela", "name": "al-Maktaba al-Shamila (shamela.ws)", "sunnahComDerived": false },
+    { "id": "islamweb", "name": "islamweb.net hadith library", "sunnahComDerived": false },
+    { "id": "hadith-api", "name": "fawazahmed0/hadith-api (comparison only)", "sunnahComDerived": true },
+    { "id": "sunnah-com", "name": "sunnah.com page view (comparison only)", "sunnahComDerived": true }
+  ]
+}

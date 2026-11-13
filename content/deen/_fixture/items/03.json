@@ -1,0 +1,25 @@
+{
+  "id": "03",
+  "deck": "_fixture",
+  "rev": 1,
+  "title": "Fixture: a graded item",
+  "cue": "The second test text",
+  "arabic": "نَصٌّ ثَانٍ لِلِاخْتِبَارِ وَلَيْسَ حَدِيثًا",
+  "translation": "A second text for testing. It is not a [[hadith]].",
+  "citations": [
+    { "collection": "fixture-sunan", "number": "2", "numbering": "fixture-numbering" }
+  ],
+  "gradings": [
+    { "grade": "hasan", "by": "fixture-scholar", "in": "Fixture work, after the text" }
+  ],
+  "provenance": {
+    "witnesses": [
+      { "name": "fixture-print", "ref": "Fixture print, p. 2", "skeletonSha256": "f7eeda99d9c8e55136fbff31de4700f9a837261541398d1d599c3ad9234ef70c" },
+      { "name": "fixture-derived", "ref": "Fixture page 2", "skeletonSha256": "f7eeda99d9c8e55136fbff31de4700f9a837261541398d1d599c3ad9234ef70c" }
+    ]
+  },
+  "notes": [
+    { "text": "A fixture note, paraphrasing the fixture work.", "source": { "work": "fixture-work", "location": "p. 2" } }
+  ],
+  "review": { "status": "source-checked" }
+}

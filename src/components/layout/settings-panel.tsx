@@ -3,10 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { useSettingsStore } from '@/stores/settings-store';
-import { downloadBackup, importBackup } from '@/lib/backup';
 import EraseDevice from './erase-device';
 import Link from '@/components/app-link';
-import { rehydrateStores } from '@/lib/sync/rehydrate';
+import { rehydrateDeviceStores, rehydrateStores } from '@/lib/sync/rehydrate';
 import type { ArabicScriptStyle, Ayah } from '@/types/quran';
 import { CheckIcon, ChevronDownIcon, SettingsIcon } from '@/components/ui/icons';
 import ArabicText from '@/components/ui/arabic-text';
@@ -325,16 +324,25 @@ export default function SettingsPanel() {
   // Backup export/import (see src/lib/backup.ts — merge-based restore, never overwrite)
   const importFileRef = useRef<HTMLInputElement>(null);
   const [backupMsg, setBackupMsg] = useState<string | null>(null);
+  // The backup code (and the stores it reads) loads when the sheet opens, not with
+  // every screen: Export still runs synchronously inside the tap, which some
+  // browsers require for a download
+  const backupRef = useRef<typeof import('@/lib/backup') | null>(null);
+  useEffect(() => {
+    if (open && !backupRef.current) import('@/lib/backup').then((m) => { backupRef.current = m; }).catch(() => {});
+  }, [open]);
   const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file) return;
     try {
       const parsed = JSON.parse(await file.text());
+      const { importBackup } = backupRef.current ?? (await import('@/lib/backup'));
       const restored = importBackup(parsed);
       setBackupMsg(`Restored ${restored} data set${restored === 1 ? '' : 's'}`);
       // Rehydrate in place — a reload inside the native shell lands on the root page
       await rehydrateStores();
+      await rehydrateDeviceStores();
       // Restored flags that live outside the stores take effect now, not next launch
       const dark = localStorage.getItem('quran-dark-mode');
       if (dark !== null) document.documentElement.classList.toggle('dark', dark === 'true');
@@ -483,6 +491,15 @@ export default function SettingsPanel() {
 
             {isNative() ? <ReminderSettings /> : <WebReminderSettings />}
 
+            {/* Prayer has its own settings screen; this is its one row here (all-in-one spec 2.6) */}
+            <div className="mt-5">
+              <p className="text-xs font-medium text-muted">Prayer</p>
+              <Link href="/prayer/settings" className="mt-1.5 flex min-h-11 items-center justify-between rounded-xl bg-foreground/5 px-3 text-sm font-medium text-foreground hover:bg-foreground/10" data-prayer-settings-link>
+                Prayer times and alerts
+                <span aria-hidden className="text-muted">›</span>
+              </Link>
+            </div>
+
             {/* Daily Goal */}
             <div className="mt-5">
               <p className="text-xs font-medium text-muted">Daily Goal</p>
@@ -513,7 +530,9 @@ export default function SettingsPanel() {
               <div className="mt-1.5 flex gap-1.5">
                 <button
                   onClick={() => {
-                    try { downloadBackup(); setBackupMsg('Backup downloaded ✓'); }
+                    const backup = backupRef.current;
+                    if (!backup) { setBackupMsg('Getting the backup ready. Tap again in a moment.'); return; }
+                    try { backup.downloadBackup(); setBackupMsg('Backup downloaded ✓'); }
                     catch { setBackupMsg('Export failed. Please try again.'); }
                   }}
                   className="min-h-11 flex-1 rounded-xl bg-foreground/5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"

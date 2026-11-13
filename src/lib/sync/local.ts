@@ -33,6 +33,27 @@ export function setLocalData(storeName: StoreName, data: unknown) {
   }
 }
 
+/** Any zustand-persisted key's STATE (device-only stores included); null if absent */
+export function getPersistedState(key: string): Record<string, unknown> | null {
+  try {
+    const raw = localStorage.getItem(key)
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    return (parsed?.state ?? null) as Record<string, unknown> | null
+  } catch {
+    return null
+  }
+}
+
+/** Write a persisted key's state under the store's own version (device-only stores) */
+export function setPersistedState(key: string, data: unknown, version: number) {
+  try {
+    localStorage.setItem(key, JSON.stringify({ state: data, version }))
+  } catch {
+    // ignore
+  }
+}
+
 /** The synced flags pseudo-store, gathered from individual localStorage keys. */
 export function getLocalFlags(): Record<string, unknown> {
   const flags: Record<string, string> = {}

@@ -15,6 +15,7 @@ import EssentialCard from '@/components/essentials/essential-card';
 import { usePlanStore } from '@/stores/plan-store';
 import { PLAN_PRESETS } from '@/lib/plan-presets';
 import { GUIDES } from '@/content/guides';
+import { LearnRows } from '@/components/essentials/learn-rows';
 
 /** A section heading with a "see all" link */
 function SectionHead({ title, href, more }: { title: string; href?: string; more?: string }) {
@@ -101,6 +102,9 @@ export default function EssentialsPage() {
       </header>
 
       <main className="mx-auto max-w-2xl space-y-3 px-4 pt-3">
+        {/* All-in-one slot: Hadith, Adhkar and duas, Names, course (deen-engine; hidden until a deck ships) */}
+        <LearnRows />
+
         {/* Plans: your own, or the ready-made ones to start from */}
         <SectionHead title="Memorisation plans" href="/plans" more={plan ? 'Ready-made plans' : 'All plans'} />
         {plan ? (
