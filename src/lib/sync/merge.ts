@@ -14,6 +14,9 @@ export const STORE_NAMES = [
   'quran-plan',
   'quran-essentials',
   'quran-reader',
+  // All-in-one: hadith, adhkar, Names and course learning state. The device-only
+  // takrar-* stores (place, prayer, worship, zakat) are deliberately NOT here.
+  'quran-deen',
 ] as const
 
 export type StoreName = typeof STORE_NAMES[number]
@@ -49,6 +52,7 @@ export const STORE_SCHEMA_VERSIONS: Record<SyncRowName, number> = {
   'quran-plan': 1,
   'quran-essentials': 1,
   'quran-reader': 1,
+  'quran-deen': 1,
   'quran-flags': 1,
 }
 
@@ -438,6 +442,61 @@ function mergeKhatm(a: unknown, b: unknown): unknown {
   return { ...l, pagesRead, ...(endedAt ? { endedAt } : {}) }
 }
 
+/**
+ * Deen learning state. Cards: per card id the later lastReview wins (as lesson
+ * cards), ties broken by more repetitions and then a fixed order so the merge is
+ * commutative; failure dates from both sides are kept. lessonsDone: union, the
+ * earliest finish wins. introduced: per-day max. Settings (school, newPerDay)
+ * come from the newer side; depth is per deck, the newer side winning a clash.
+ */
+function mergeDeen(
+  local: Record<string, unknown>,
+  cloud: Record<string, unknown>,
+  cloudIsNewer: boolean
+): Record<string, unknown> {
+  type Card = Record<string, unknown>
+  const order = (a: Card, b: Card): number => {
+    const la = (a.lastReview as number) ?? 0
+    const lb = (b.lastReview as number) ?? 0
+    if (la !== lb) return la - lb
+    const ra = (a.repetitions as number) ?? 0
+    const rb = (b.repetitions as number) ?? 0
+    if (ra !== rb) return ra - rb
+    const ja = JSON.stringify(a)
+    const jb = JSON.stringify(b)
+    return ja === jb ? 0 : ja > jb ? 1 : -1
+  }
+  const localCards = (local.cards ?? {}) as Record<string, Card>
+  const cloudCards = (cloud.cards ?? {}) as Record<string, Card>
+  const cards: Record<string, Card> = { ...cloudCards }
+  for (const [id, card] of Object.entries(localCards)) {
+    const other = cloudCards[id]
+    if (!other) { cards[id] = card; continue }
+    cards[id] = withBothMissLogs(order(card, other) >= 0 ? card : other, card, other)
+  }
+
+  const lessonsDone: Record<string, number> = { ...((cloud.lessonsDone ?? {}) as Record<string, number>) }
+  for (const [id, ts] of Object.entries((local.lessonsDone ?? {}) as Record<string, number>)) {
+    lessonsDone[id] = id in lessonsDone ? Math.min(lessonsDone[id], ts) : ts
+  }
+
+  const introduced: Record<string, number> = { ...((cloud.introduced ?? {}) as Record<string, number>) }
+  for (const [iso, n] of Object.entries((local.introduced ?? {}) as Record<string, number>)) {
+    introduced[iso] = Math.max(introduced[iso] ?? 0, n)
+  }
+
+  const newer = cloudIsNewer ? cloud : local
+  const older = cloudIsNewer ? local : cloud
+  return {
+    cards,
+    lessonsDone,
+    depth: { ...((older.depth ?? {}) as Record<string, unknown>), ...((newer.depth ?? {}) as Record<string, unknown>) },
+    school: newer.school ?? null,
+    newPerDay: newer.newPerDay ?? older.newPerDay ?? 5,
+    introduced,
+  }
+}
+
 /** Flags: union of string keys; a set flag is never unset by an absent one; local wins on conflict. */
 function mergeFlags(
   local: Record<string, unknown>,
@@ -462,6 +521,7 @@ export function mergeStore(
     case 'quran-plan': return mergePlan(local, cloud, cloudIsNewer)
     case 'quran-essentials': return mergeEssentials(local, cloud)
     case 'quran-reader': return mergeReader(local, cloud)
+    case 'quran-deen': return mergeDeen(local, cloud, cloudIsNewer)
     case 'quran-flags': return mergeFlags(local, cloud)
   }
 }

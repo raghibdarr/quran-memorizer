@@ -25,6 +25,7 @@ import { StarIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 
 import { ayahRange } from '@/lib/ayah-range';
+import { DeenReviewSection } from '@/components/review/deen-section';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
@@ -136,6 +137,10 @@ export default function ReviewPage() {
         <Link href="/" className="mt-6 rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
           {isHafiz ? 'Revise what I know' : 'Find a surah'}
         </Link>
+        {/* All-in-one slot: deen reviews still show with no Quran reviews yet (deen-engine) */}
+        <div className="mt-8 w-full max-w-2xl empty:hidden">
+          <DeenReviewSection />
+        </div>
         <BottomNav />
       </div>
     );
@@ -287,6 +292,9 @@ export default function ReviewPage() {
             />
           );
         })}
+
+        {/* All-in-one slot, under the Quran streams: hadith, duas and Names (deen-engine) */}
+        <DeenReviewSection />
       </main>
 
       <BottomNav />

@@ -38,6 +38,7 @@ import { useDeal } from '@/hooks/use-deal';
 import { Skeleton } from '@/components/ui/skeleton';
 import { PHASE_LABELS } from '@/lib/phases';
 import SegmentedControl from '@/components/ui/segmented-control';
+import { HomePrayerStrip } from '@/components/home/prayer-strip';
 
 type SortOption = 'number-asc' | 'number-desc' | 'length-asc' | 'length-desc';
 type ViewMode = 'grid' | 'list';
@@ -221,6 +222,8 @@ export default function HomePage() {
               <UserButton />
             </div>
           </div>
+          {/* All-in-one slot: next prayer, once a place is set (prayer-times) */}
+          <HomePrayerStrip />
         </div>
       </header>
 

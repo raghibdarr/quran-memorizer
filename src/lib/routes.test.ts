@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isAppRoute, lessonHref, normalizeAppUrl, safeFromPath } from './routes'
+import { ALL_IN_ONE_ROUTES, isAppRoute, lessonHref, normalizeAppUrl, safeFromPath } from './routes'
 
 describe('lesson routes', () => {
   it('builds the single-page lesson URL', () => {
@@ -34,6 +34,18 @@ describe('native-shell routing guards (review findings)', () => {
     for (const bad of ['/lesson/0', '/lesson/115', '/juz/31', '/plan/revise/999', '/nope', '/lesson/112/1', '/lesson/abc']) {
       expect(isAppRoute(bad), bad).toBe(false)
     }
+  })
+
+  it('every all-in-one route is a known page (cold loads in the native shells recover to it)', () => {
+    expect(ALL_IN_ONE_ROUTES).toHaveLength(24)
+    for (const r of ALL_IN_ONE_ROUTES) expect(isAppRoute(r), r).toBe(true)
+    for (const bad of ['/prayer/nope', '/hadith/01', '/adhkar/view/x', '/qibla/x', '/prayers']) expect(isAppRoute(bad), bad).toBe(false)
+    expect(normalizeAppUrl('/prayer/')).toBe('/prayer')
+    expect(safeFromPath('prayer/settings')).toBe('prayer/settings')
+  })
+
+  it('the Learn tab pages recover too (plans, guides)', () => {
+    for (const ok of ['/plans', '/blog', '/blog/how-to-memorise']) expect(isAppRoute(ok), ok).toBe(true)
   })
 
   it('safeFromPath refuses off-site and unknown back links', () => {

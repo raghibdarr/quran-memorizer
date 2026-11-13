@@ -4,16 +4,18 @@ import Link from '@/components/app-link';
 import { useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useReviewQueue } from '@/hooks/use-review-queue';
-import { HomeIcon, BookIcon, LearnIcon, BarChartIcon } from '@/components/ui/icons';
+import { HomeIcon, BookIcon, LearnIcon, BarChartIcon, PrayerIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home', Icon: HomeIcon },
   { href: '/review', label: 'Review', Icon: BookIcon },
+  // Prayer: times, qibla and the worship tools (all-in-one spec 2.1)
+  { href: '/prayer', label: 'Prayer', Icon: PrayerIcon, also: ['/qibla', '/tasbih', '/calendar', '/ramadan', '/zakat', '/mosques'] },
   // Learn: plans, guides and the essentials (duas, dhikr, key ayahs); the page keeps
   // /essentials since /learn is the lesson player
-  { href: '/essentials', label: 'Learn', Icon: LearnIcon, also: ['/plans', '/blog'] },
+  { href: '/essentials', label: 'Learn', Icon: LearnIcon, also: ['/plans', '/blog', '/hadith', '/adhkar', '/names', '/course', '/glossary', '/sources'] },
   { href: '/progress', label: 'Progress', Icon: BarChartIcon },
 ];
 

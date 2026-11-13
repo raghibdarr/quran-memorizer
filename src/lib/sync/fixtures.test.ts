@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { mergeStore, STORE_SCHEMA_VERSIONS, type SyncRowName } from './merge'
+import { mergeStore, STORE_NAMES, STORE_SCHEMA_VERSIONS, type SyncRowName } from './merge'
 import { migrateProgress } from '@/stores/progress-store'
+import { DEEN_STORE_VERSION, sanitizeDeenData } from '@/stores/deen-store'
 
 // Golden persisted-state fixtures: realistic current-shape snapshots per store.
 // Two jobs: (1) pin that every merge is idempotent on REAL shapes (not just the
@@ -77,6 +78,18 @@ const FIXTURES: Record<SyncRowName, Record<string, unknown>> = {
     notes: { '2:255': { at: 1780000000000, text: 'Ayat al-Kursi: before sleep' } },
     khatm: { id: 'k1', startedAt: 1780000000000, days: 30, kind: 'ramadan', pagesRead: { '1': 1780000100000, '2': 1780000200000 } },
   },
+  'quran-deen': {
+    cards: {
+      'nawawi40:01:recall': { deck: 'nawawi40', itemRev: 1, addedAt: 1780000000000, easeFactor: 2.5, interval: 3, repetitions: 2, nextReview: 1780300000000, lastReview: 1780100000000, lastQuality: 4 },
+      'names99:042:ar-en': { deck: 'names99', itemRev: 2, addedAt: 1780000000000, easeFactor: 2.2, interval: 1, repetitions: 0, nextReview: 1780200000000, lastReview: 1780100000000, lastQuality: 2, failStreak: 1, lapses: 1, misses: [1780100000000] },
+      'course-purification:wudu-02:c1': { deck: 'course-purification', itemRev: 1, addedAt: 1780000000000, easeFactor: 2.5, interval: 0, repetitions: 0, nextReview: 1780000000000, lastReview: 0, lastQuality: 0, suspended: true },
+    },
+    lessonsDone: { 'wudu-01': 1780000000000 },
+    depth: { nawawi40: 'meaning', 'adhkar-morning-evening': 'arabic' },
+    school: 'shafii',
+    newPerDay: 5,
+    introduced: { '2026-07-10': 3, '2026-07-11': 5 },
+  },
   'quran-flags': {
     'onboarding-complete': 'true', 'chunk-explainer-seen': 'true', 'home-tab': 'surahs',
   },
@@ -102,8 +115,22 @@ describe('golden fixtures', () => {
       'quran-plan': 1,
       'quran-essentials': 1,
       'quran-reader': 1,
+      'quran-deen': 1,
       'quran-flags': 1,
     })
+  })
+
+  it('quran-deen is synced at its store version; the device-only stores never are', () => {
+    expect(STORE_SCHEMA_VERSIONS['quran-deen']).toBe(DEEN_STORE_VERSION)
+    expect(STORE_NAMES).toContain('quran-deen')
+    for (const name of STORE_NAMES) expect(name.startsWith('takrar-'), name).toBe(false)
+    for (const local of ['takrar-place', 'takrar-prayer', 'takrar-worship', 'takrar-zakat']) {
+      expect(STORE_NAMES as readonly string[]).not.toContain(local)
+    }
+  })
+
+  it('the quran-deen fixture is already in sanitized shape (migrate is a no-op on it)', () => {
+    expect(sanitizeDeenData(FIXTURES['quran-deen'])).toEqual(FIXTURES['quran-deen'])
   })
 })
 

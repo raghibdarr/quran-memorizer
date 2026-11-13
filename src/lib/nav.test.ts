@@ -3,7 +3,10 @@ import { isFullScreenFlow, navTransitionTypes, routeDepth, NAV_BACK, NAV_FORWARD
 
 describe('navigation grammar', () => {
   it('assigns depths: tab roots, section details, flows', () => {
-    expect(['/', '/review', '/essentials', '/progress'].map(routeDepth)).toEqual([0, 0, 0, 0])
+    expect(['/', '/review', '/prayer', '/essentials', '/progress'].map(routeDepth)).toEqual([0, 0, 0, 0, 0])
+    expect(['/prayer/settings', '/qibla', '/hadith/view?id=01', '/adhkar', '/glossary'].map(routeDepth)).toEqual([1, 1, 1, 1, 1])
+    expect(['/prayer/setup', '/prayer/match', '/review/deen?deck=names99', '/course/lesson?l=wudu-01', '/adhkar/now?set=morning'].map(routeDepth))
+      .toEqual([2, 2, 2, 2, 2])
     expect(['/lesson/112', '/juz/30', '/plan', '/essentials/tasbih'].map(routeDepth)).toEqual([1, 1, 1, 1])
     expect(['/recite?s=67', '/listen?s=67'].map(routeDepth)).toEqual([2, 2])
     expect(['/learn?s=1&l=1', '/plan/revise/78', '/plan/setup', '/plan/edit', '/review/session?stream=sabqi'].map(routeDepth))
@@ -16,6 +19,8 @@ describe('navigation grammar', () => {
     expect(navTransitionTypes('/learn?s=112&l=1', '/lesson/112')).toEqual([NAV_BACK])
     expect(navTransitionTypes('/plan/revise/78', '/')).toEqual([NAV_BACK])
     expect(navTransitionTypes('/', '/progress')).toEqual([NAV_TAB])
+    expect(navTransitionTypes('/review', '/prayer')).toEqual([NAV_TAB])
+    expect(navTransitionTypes('/prayer', '/qibla')).toEqual([NAV_FORWARD])
     expect(navTransitionTypes('/review', '/review/session?stream=sabqi')).toEqual([NAV_FORWARD])
   })
 

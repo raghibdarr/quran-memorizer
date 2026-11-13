@@ -1,0 +1,22 @@
+{
+  "id": "01",
+  "deck": "_fixture",
+  "rev": 1,
+  "title": "Fixture: a sound item",
+  "cue": "The first test text",
+  "arabic": "هَذَا نَصٌّ تَجْرِيبِيٌّ لِلِاخْتِبَارِ فَقَطْ",
+  "segments": [17, 43],
+  "translation": "This is a test text, for testing only, with [[dhikr]] marked.",
+  "citations": [
+    { "collection": "fixture-sahih", "number": "1", "numbering": "fixture-numbering", "narrator": "A fixture narrator" }
+  ],
+  "gradings": [],
+  "provenance": {
+    "witnesses": [
+      { "name": "fixture-print", "ref": "Fixture print, p. 1", "skeletonSha256": "f0e561035ddb87a74e3e6171076a0c1754e0a300dd7ff9bb54b0bd36e96937f1" },
+      { "name": "fixture-derived", "ref": "Fixture page 1", "skeletonSha256": "f0e561035ddb87a74e3e6171076a0c1754e0a300dd7ff9bb54b0bd36e96937f1" }
+    ]
+  },
+  "usage": { "when": ["Whenever a test runs"] },
+  "review": { "status": "source-checked", "log": ["fixture: no review needed"] }
+}

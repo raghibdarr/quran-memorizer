@@ -1,0 +1,19 @@
+{
+  "collections": [
+    { "id": "fixture-sahih", "name": "Fixture collection (sound)", "arabic": "مجموعة تجريبية", "author": "fixture-scholar", "sahih": true, "numberings": ["fixture-numbering"] },
+    { "id": "fixture-sunan", "name": "Fixture collection (graded)", "arabic": "سنن تجريبية", "author": "fixture-scholar", "sahih": false, "numberings": ["fixture-numbering"] }
+  ],
+  "numberings": [
+    { "id": "fixture-numbering", "name": "Fixture numbering", "for": ["fixture-sahih", "fixture-sunan"] }
+  ],
+  "scholars": [
+    { "id": "fixture-scholar", "name": "Fixture scholar" }
+  ],
+  "works": [
+    { "id": "fixture-work", "title": "Fixture work", "author": "fixture-scholar", "kind": "hadith" }
+  ],
+  "witnessSources": [
+    { "id": "fixture-print", "name": "Fixture print scan", "sunnahComDerived": false },
+    { "id": "fixture-derived", "name": "Fixture Sunnah.com-derived source", "sunnahComDerived": true }
+  ]
+}

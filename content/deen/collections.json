@@ -1,0 +1,20 @@
+{
+  "_about": "Hadith collections and their numbering schemes (all-in-one spec 5.1). A citation names both. A package adds a collection or numbering through its own registry-additions.json sidecar, never by editing this file.",
+  "collections": [
+    { "id": "bukhari", "name": "Sahih al-Bukhari", "arabic": "صحيح البخاري", "author": "al-bukhari", "sahih": true, "numberings": ["fath-al-bari"], "sunnahComSlug": "bukhari" },
+    { "id": "muslim", "name": "Sahih Muslim", "arabic": "صحيح مسلم", "author": "muslim", "sahih": true, "numberings": ["abd-al-baqi"], "sunnahComSlug": "muslim" },
+    { "id": "abu-dawud", "name": "Sunan Abi Dawud", "arabic": "سنن أبي داود", "author": "abu-dawud", "sahih": false, "numberings": ["muhyi-al-din-abd-al-hamid"], "sunnahComSlug": "abudawud" },
+    { "id": "tirmidhi", "name": "Jami' al-Tirmidhi", "arabic": "جامع الترمذي", "author": "al-tirmidhi", "sahih": false, "numberings": ["ahmad-shakir"], "sunnahComSlug": "tirmidhi" },
+    { "id": "nasai", "name": "Sunan al-Nasa'i", "arabic": "سنن النسائي", "author": "al-nasai", "sahih": false, "numberings": ["abu-ghudda"], "sunnahComSlug": "nasai" },
+    { "id": "ibn-majah", "name": "Sunan Ibn Majah", "arabic": "سنن ابن ماجه", "author": "ibn-majah", "sahih": false, "numberings": ["abd-al-baqi"], "sunnahComSlug": "ibnmajah" },
+    { "id": "nawawi40", "name": "al-Arba'in al-Nawawiyya (the Forty Hadith of al-Nawawi)", "arabic": "الأربعون النووية", "author": "al-nawawi", "sahih": false, "numberings": ["nawawi-order"], "sunnahComSlug": "nawawi40" }
+  ],
+  "numberings": [
+    { "id": "fath-al-bari", "name": "Fath al-Bari numbering", "for": ["bukhari"] },
+    { "id": "abd-al-baqi", "name": "Muhammad Fu'ad Abd al-Baqi's numbering", "for": ["muslim", "ibn-majah"] },
+    { "id": "muhyi-al-din-abd-al-hamid", "name": "Muhyi al-Din Abd al-Hamid's numbering", "for": ["abu-dawud"] },
+    { "id": "ahmad-shakir", "name": "Ahmad Shakir's numbering", "for": ["tirmidhi"] },
+    { "id": "abu-ghudda", "name": "Abd al-Fattah Abu Ghudda's numbering", "for": ["nasai"] },
+    { "id": "nawawi-order", "name": "al-Nawawi's own order", "for": ["nawawi40"] }
+  ]
+}

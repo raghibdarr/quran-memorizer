@@ -21,8 +21,10 @@ jobs:
         run: |
           for tz in UTC America/New_York Pacific/Auckland Asia/Karachi; do
             echo "--- TZ=$tz"
-            TZ=$tz npx vitest run src/lib/dates.test.ts src/lib/streak.test.ts src/stores/migrations.test.ts
+            TZ=$tz npx vitest run src/lib/dates.test.ts src/lib/streak.test.ts src/stores/migrations.test.ts src/lib/prayer src/lib/hijri src/lib/worship
           done
+      # Religious content gate (all-in-one spec 5.5): vitest runs it too, so Netlify's gate covers it
+      - run: node scripts/build-deen.mjs --check
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
         env:
@@ -34,4 +36,5 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
+      - run: node scripts/check-bundle.mjs
       - run: npm run test:e2e:static

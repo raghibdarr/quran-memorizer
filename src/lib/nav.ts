@@ -2,14 +2,14 @@
 //
 // Every screen has a DEPTH in the app's hierarchy. Moving deeper is a push
 // (slide in from the right), moving shallower is a pop (slide back), and moving
-// between the four tab roots is a tab switch (crossfade) — the same grammar as
+// between the five tab roots is a tab switch (crossfade) — the same grammar as
 // a native stack navigator.
 
 export const NAV_FORWARD = 'nav-forward';
 export const NAV_BACK = 'nav-back';
 export const NAV_TAB = 'nav-tab';
 
-const TAB_ROOTS = new Set(['/', '/review', '/essentials', '/progress']);
+const TAB_ROOTS = new Set(['/', '/review', '/prayer', '/essentials', '/progress']);
 
 function pathOf(href: string): string {
   const q = href.search(/[?#]/);
@@ -22,6 +22,8 @@ export function routeDepth(href: string): number {
   const path = pathOf(href);
   if (TAB_ROOTS.has(path)) return 0;
   if (/^\/(learn|recite|listen|mushaf|review\/(?:session|drill|similar)|plan\/(revise\/\d+|setup|edit))$/.test(path)) return 2;
+  // All-in-one flows: prayer setup and the match wizard, the deen session, a course lesson, Pray it now
+  if (/^\/(prayer\/(?:setup|match)|review\/deen|course\/lesson|adhkar\/now)$/.test(path)) return 2;
   return 1;
 }
 

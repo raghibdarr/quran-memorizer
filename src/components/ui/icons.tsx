@@ -57,6 +57,18 @@ export function StarIcon({ size = 16, className = '' }: IconProps) {
   );
 }
 
+/** A dome with its finial over an arched door: the Prayer tab */
+export function PrayerIcon({ size = 16, className = '' }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M12 2.5v2.5" />
+      <path d="M5 21v-7.5a7 7 0 0 1 14 0V21" />
+      <path d="M3 21h18" />
+      <path d="M10 21v-3.5a2 2 0 0 1 4 0V21" />
+    </svg>
+  );
+}
+
 /** A mortarboard: the Learn tab (plans, guides, essentials) */
 export function LearnIcon({ size = 16, className = '' }: IconProps) {
   return (

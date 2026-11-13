@@ -6,7 +6,7 @@ import { useSettingsStore } from '@/stores/settings-store';
 import { downloadBackup, importBackup } from '@/lib/backup';
 import EraseDevice from './erase-device';
 import Link from '@/components/app-link';
-import { rehydrateStores } from '@/lib/sync/rehydrate';
+import { rehydrateDeviceStores, rehydrateStores } from '@/lib/sync/rehydrate';
 import type { ArabicScriptStyle, Ayah } from '@/types/quran';
 import { CheckIcon, ChevronDownIcon, SettingsIcon } from '@/components/ui/icons';
 import ArabicText from '@/components/ui/arabic-text';
@@ -335,6 +335,7 @@ export default function SettingsPanel() {
       setBackupMsg(`Restored ${restored} data set${restored === 1 ? '' : 's'}`);
       // Rehydrate in place — a reload inside the native shell lands on the root page
       await rehydrateStores();
+      await rehydrateDeviceStores();
       // Restored flags that live outside the stores take effect now, not next launch
       const dark = localStorage.getItem('quran-dark-mode');
       if (dark !== null) document.documentElement.classList.toggle('dark', dark === 'true');
@@ -482,6 +483,12 @@ export default function SettingsPanel() {
             </div>
 
             {isNative() ? <ReminderSettings /> : <WebReminderSettings />}
+
+            {/* Prayer has its own settings screen; this is its one row here (all-in-one spec 2.6) */}
+            <Link href="/prayer/settings" className="mt-3 flex min-h-11 items-center justify-between rounded-xl bg-foreground/5 px-3 text-sm font-medium text-foreground hover:bg-foreground/10" data-prayer-settings-link>
+              Prayer times and alerts
+              <span aria-hidden className="text-muted">›</span>
+            </Link>
 
             {/* Daily Goal */}
             <div className="mt-5">

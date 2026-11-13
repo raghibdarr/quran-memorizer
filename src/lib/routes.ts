@@ -37,6 +37,24 @@ export function normalizeAppUrl(url: string): string {
   return q === -1 ? trimmed : `${trimmed}${url.slice(q)}`;
 }
 
+/**
+ * Every all-in-one screen (spec 2.2). All are flat static pages; detail screens
+ * take query params (/hadith/view?id=), so no route depends on content existing.
+ */
+export const ALL_IN_ONE_ROUTES = [
+  '/prayer', '/prayer/setup', '/prayer/settings', '/prayer/why', '/prayer/match', '/prayer/alerts', '/prayer/tracker',
+  '/tasbih', '/qibla', '/calendar', '/ramadan', '/zakat', '/mosques',
+  '/review/deen', '/glossary', '/sources',
+  '/hadith', '/hadith/view', '/adhkar', '/adhkar/view', '/adhkar/now', '/names', '/course', '/course/lesson',
+] as const;
+
+const STATIC_ROUTES = new Set<string>([
+  '/', '/learn', '/recite', '/listen', '/review', '/review/session', '/review/drill', '/review/similar', '/progress',
+  '/essentials', '/plan', '/plan/setup', '/plan/edit', '/plans', '/blog', '/auth/callback', '/privacy', '/bookmarks',
+  '/downloads', '/mushaf', '/khatm', '/circles',
+  ...ALL_IN_ONE_ROUTES,
+]);
+
 const inRange = (v: string, max: number) => {
   const n = Number(v);
   return Number.isInteger(n) && n >= 1 && n <= max;
@@ -49,14 +67,12 @@ const inRange = (v: string, max: number) => {
  * retries… an infinite reload loop. Only known routes are ever recovered.
  */
 export function isAppRoute(pathname: string): boolean {
-  if (['/', '/learn', '/recite', '/listen', '/review', '/review/session', '/review/drill', '/review/similar', '/progress', '/essentials', '/plan', '/plan/setup', '/plan/edit', '/auth/callback', '/privacy', '/bookmarks', '/downloads', '/mushaf', '/khatm', '/circles'].includes(pathname)) {
-    return true;
-  }
+  if (STATIC_ROUTES.has(pathname)) return true;
   let m: RegExpExecArray | null;
   if ((m = /^\/lesson\/(\d+)$/.exec(pathname))) return inRange(m[1], 114);
   if ((m = /^\/plan\/revise\/(\d+)$/.exec(pathname))) return inRange(m[1], 114);
   if ((m = /^\/juz\/(\d+)$/.exec(pathname))) return inRange(m[1], 30);
-  return /^\/essentials\/[a-z0-9-]+$/.test(pathname);
+  return /^\/(essentials|blog)\/[a-z0-9-]+$/.test(pathname);
 }
 
 /**

@@ -1,0 +1,11 @@
+{
+  "id": "02",
+  "deck": "_fixture",
+  "rev": 1,
+  "title": "Fixture: a Quran item",
+  "cue": "Refers to ayahs, stores no text",
+  "quran": { "surahId": 112, "ayah": 1, "ayahEnd": 4 },
+  "citations": [],
+  "gradings": [],
+  "review": { "status": "source-checked" }
+}

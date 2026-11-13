@@ -5,6 +5,9 @@ const CACHE_STATIC = 'takrar-static-v2';
 const CACHE_PAGES = 'takrar-pages-v2';
 // Recitations downloaded for offline (src/lib/downloads.ts) — never cleared here
 const CACHE_AUDIO = 'takrar-audio-v1';
+// On-demand data (all-in-one spec 3.7): /data/cities.json, /data/mosques/<CC>.json.
+// Kept across activations like the audio cache, so a city search works offline
+const CACHE_DATA = 'takrar-data-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -18,7 +21,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((k) => ![CACHE_STATIC, CACHE_PAGES, CACHE_AUDIO].includes(k))
+          .filter((k) => ![CACHE_STATIC, CACHE_PAGES, CACHE_AUDIO, CACHE_DATA].includes(k))
           .map((k) => caches.delete(k))
       )
     )
@@ -43,6 +46,12 @@ self.addEventListener('fetch', (event) => {
     url.pathname.startsWith('/logos/')
   ) {
     event.respondWith(cacheFirst(event.request, CACHE_STATIC));
+    return;
+  }
+
+  // Data files: stale-while-revalidate into their own long-lived cache
+  if (url.pathname.startsWith('/data/')) {
+    event.respondWith(staleWhileRevalidate(event.request, CACHE_DATA));
     return;
   }
 
