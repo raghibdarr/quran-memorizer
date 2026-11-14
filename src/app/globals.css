@@ -15,6 +15,7 @@
   --c-card: #ffffff;
   --c-card-raised: #FFFDF8;
   --c-ink: #36332C;
+  --c-kaaba: #1d1b18; /* the Kaaba's cover: near-black in both themes */
   --c-on-teal: #FEFCF9;
   --c-on-gold: #3F2A07;
   --c-on-success: #F2FBF5;
@@ -65,6 +66,7 @@
   --color-card: var(--c-card);
   --color-card-raised: var(--c-card-raised);
   --color-ink: var(--c-ink);
+  --color-kaaba: var(--c-kaaba);
   --color-on-teal: var(--c-on-teal);
   --color-on-gold: var(--c-on-gold);
   --color-on-success: var(--c-on-success);

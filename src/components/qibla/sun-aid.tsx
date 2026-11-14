@@ -47,9 +47,9 @@ export default function SunAid({ lat, lng, bearing }: { lat: number; lng: number
   if (!text) return null;
   return (
     <div data-sun-aid>
-      <Card className="flex gap-3 p-4">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gold/15 text-gold-deep">
-          <SunIcon />
+      <Card className="flex items-start gap-3 p-4">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/15 text-gold-deep">
+          <SunIcon size={20} />
         </span>
         <div className="min-w-0 text-sm leading-relaxed">
           <p className="font-medium text-foreground">{text.line}</p>

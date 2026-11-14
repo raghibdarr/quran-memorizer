@@ -21,10 +21,12 @@ import {
 import { declinationAt } from '@/lib/qibla/declination';
 import { nearKaaba, toTrueHeading, turnToQibla } from '@/lib/qibla/heading';
 import { haptic } from '@/lib/haptics';
+import { cn } from '@/lib/cn';
 import { isNative } from '@/lib/native';
 import QiblaDial from './qibla-dial';
 import SunAid from './sun-aid';
 import CalibrationHint from './calibration-hint';
+import { useReducedMotion } from './use-reduced-motion';
 
 type Mode = 'diagram' | 'starting' | 'live';
 type Notice = 'denied' | 'no-data' | null;
@@ -211,6 +213,50 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
   const turn = liveNow ? turnToQibla(live.heading, bearing) : 0;
   const rounded = Math.round(bearing) % 360;
   const canUseCompass = support !== 'none' && !weakField;
+  const point = compassPoint(bearing);
+  const direction = point.charAt(0).toUpperCase() + point.slice(1);
+
+  // Once the compass comes alive, bring the dial into view: on a small phone the
+  // button that started it can sit below the dial, which is then off the top
+  const dialRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const isLive = !!liveNow;
+  useEffect(() => {
+    if (!isLive) return;
+    const el = dialRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top < 64 || r.bottom > window.innerHeight) {
+      el.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+  }, [isLive, reduceMotion]);
+
+  // One button whose job changes, so keyboard and screen-reader focus stay on it
+  const showButton = mode !== 'diagram' || canUseCompass;
+  const button =
+    mode === 'live'
+      ? { label: 'Show the diagram instead', onClick: () => showDiagram() }
+      : mode === 'starting'
+        ? { label: 'Starting the compass…', onClick: undefined }
+        : notice
+          ? { label: 'Try the compass again', onClick: startFromTap }
+          : { label: 'Use my phone’s compass', onClick: startFromTap };
+
+  // At most one footnote per state; the accuracy caveat only while the compass runs
+  const footnote =
+    support === 'none' ? (
+      <p data-qibla-notice="no-sensor">This device has no compass. Find north, then turn to the bearing above, or use the sun.</p>
+    ) : weakField ? (
+      <p data-qibla-notice="weak-field">
+        You’re close to the magnetic pole, where phone compasses wander. Use the bearing or the sun instead.
+      </p>
+    ) : liveNow ? (
+      <p>
+        {live.reference === 'magnetic' &&
+          'This compass reads magnetic north, which can differ from true north by a few degrees where you are. '}
+        Phone compasses can be off by a few degrees, more near metal, magnets or electronics.
+      </p>
+    ) : null;
 
   return (
     <>
@@ -221,99 +267,109 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
         </Link>
       </p>
 
-      <Card className="px-4 pt-5 pb-5">
-        <div className="mx-auto w-full max-w-[17.5rem]">
-          <QiblaDial bearing={bearing} heading={liveNow ? live.heading : null} aligned={!!liveNow && live.aligned} />
+      {closeToKaaba && (
+        <div data-qibla-notice="near-kaaba">
+          <Card className="p-4 text-sm leading-relaxed text-foreground">
+            You’re in or near Makkah. This close, a saved place is too rough to give a direction, so follow the mosques
+            around you.
+          </Card>
         </div>
+      )}
 
-        <div className="mt-4 text-center" data-qibla-readout={liveNow ? 'live' : 'diagram'}>
-          {liveNow ? (
-            <>
-              <p className="text-2xl font-bold tabular-nums text-foreground">
-                {live.aligned ? 'Facing the qibla' : `Turn ${Math.round(Math.abs(turn))}° ${turn > 0 ? 'right' : 'left'}`}
-              </p>
-              <p className="mt-1 text-sm text-muted">
-                Qibla {rounded}° · you face {Math.round(live.heading) % 360}°
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="text-5xl font-bold tabular-nums text-foreground" data-qibla-bearing>
-                {rounded}°
-              </p>
-              <p className="mt-1 text-sm text-muted">
-                clockwise from true north, {compassPoint(bearing)}
-              </p>
-            </>
+      <div ref={dialRef} className="scroll-mt-[calc(var(--safe-top)+4.5rem)]">
+        <Card className="px-4 pt-5 pb-5">
+          <div className="mx-auto w-full max-w-[15rem] min-[360px]:max-w-[19rem] sm:max-w-[22rem]">
+            <QiblaDial bearing={bearing} heading={liveNow ? live.heading : null} aligned={!!liveNow && live.aligned} />
+          </div>
+
+          <div className="mt-5 text-center" data-qibla-readout={liveNow ? 'live' : 'diagram'}>
+            {liveNow ? (
+              <>
+                <p className="text-2xl font-bold tabular-nums text-foreground">
+                  {live.aligned ? 'Facing the qibla' : `Turn ${Math.round(Math.abs(turn))}° ${turn > 0 ? 'right' : 'left'}`}
+                </p>
+                <p className="mt-1 text-sm text-muted">
+                  Qibla {rounded}° · you face {Math.round(live.heading) % 360}°
+                </p>
+              </>
+            ) : (
+              <>
+                <p
+                  className={cn('font-bold leading-tight text-foreground', closeToKaaba ? 'text-xl' : 'text-3xl')}
+                  data-qibla-direction
+                >
+                  {direction}
+                </p>
+                <p className={cn('mt-1 text-muted', closeToKaaba ? 'text-sm' : 'text-base')}>
+                  <span className="font-semibold tabular-nums text-foreground" data-qibla-bearing>
+                    {rounded}°
+                  </span>{' '}
+                  from north
+                </p>
+                {canUseCompass && !closeToKaaba && !notice && mode === 'diagram' && (
+                  <p className="mx-auto mt-3 max-w-[18rem] text-balance text-sm text-muted">
+                    Hold your phone flat, start the compass and turn until the Kaaba is at the top.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+
+          {notice && (
+            <div
+              role="status"
+              className="mt-4 rounded-xl bg-gold/10 px-4 py-3 text-center text-sm leading-relaxed text-foreground"
+              data-qibla-notice={notice}
+            >
+              {notice === 'denied'
+                ? 'Motion access is off, so the compass can’t run. You can allow it in your phone’s Settings, or use the bearing and the sun.'
+                : 'No compass reading came through on this device. The bearing and the sun still work.'}
+            </div>
           )}
-        </div>
-      </Card>
 
-      {/* Screen readers hear the moment of alignment, not every degree on the way */}
+          {/* The one action: start or stop the compass */}
+          {showButton && (
+            <button
+              type="button"
+              onClick={button.onClick}
+              aria-disabled={mode === 'starting' || undefined}
+              aria-busy={mode === 'starting' || undefined}
+              className={cn(
+                'mt-4 w-full rounded-xl px-6 py-3 font-semibold',
+                mode === 'live'
+                  ? 'border-[1.5px] border-transparent text-muted hover:bg-foreground/5 hover:text-foreground'
+                  : 'tactile-btn bg-teal text-on-teal hover:bg-teal-light',
+                mode === 'starting' && 'cursor-default opacity-60 hover:bg-teal',
+              )}
+              data-qibla-action={mode}
+            >
+              {button.label}
+            </button>
+          )}
+        </Card>
+      </div>
+
+      {/* Screen readers hear which way to turn when that changes, not every degree on the way */}
       <p className="sr-only" role="status" data-qibla-status>
-        {liveNow ? (live.aligned ? 'Facing the qibla' : 'Not facing the qibla') : ''}
+        {liveNow ? turnGuidance(live.aligned, turn) : ''}
       </p>
 
       {liveNow && live.calibrate && <CalibrationHint />}
 
       <SunAid lat={lat} lng={lng} bearing={bearing} />
 
-      {/* The one action: start or stop the compass */}
-      {mode === 'diagram' && canUseCompass && (
-        <button
-          type="button"
-          onClick={startFromTap}
-          className="tactile-btn w-full rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal hover:bg-teal-light"
-        >
-          Use my phone’s compass
-        </button>
+      {footnote && (
+        <div className="px-1 text-center text-xs leading-relaxed text-muted" data-qibla-notes>
+          {footnote}
+        </div>
       )}
-      {mode === 'starting' && (
-        <button type="button" disabled className="w-full rounded-xl bg-teal/60 px-6 py-3 font-semibold text-on-teal">
-          Starting the compass…
-        </button>
-      )}
-      {mode === 'live' && (
-        <button
-          type="button"
-          onClick={() => showDiagram()}
-          className="w-full rounded-xl px-6 py-3 text-sm font-semibold text-muted hover:bg-foreground/5 hover:text-foreground"
-        >
-          Show the diagram instead
-        </button>
-      )}
-
-      <div className="space-y-2 px-1 text-center text-xs leading-relaxed text-muted" data-qibla-notes>
-        {notice === 'denied' && (
-          <p data-qibla-notice="denied">
-            Motion access is off, so the compass can’t run. You can allow it in Settings, or use the bearing and the sun.
-          </p>
-        )}
-        {notice === 'no-data' && (
-          <p data-qibla-notice="no-data">No compass reading came through on this device. The bearing and the sun still work.</p>
-        )}
-        {support === 'none' && (
-          <p data-qibla-notice="no-sensor">This device has no compass. Find north, then turn to the bearing above, or use the sun.</p>
-        )}
-        {weakField && (
-          <p data-qibla-notice="weak-field">
-            You’re close to the magnetic pole, where phone compasses wander. Use the bearing or the sun instead.
-          </p>
-        )}
-        {liveNow && live.reference === 'magnetic' && (
-          <p>This compass reads magnetic north, which can differ from true north by a few degrees where you are.</p>
-        )}
-        {closeToKaaba && (
-          <p data-qibla-notice="near-kaaba">
-            You’re in or near Makkah. This close, the direction depends on exactly where you stand, so the bearing
-            from a saved place can be well off. Follow the direction of the mosques around you.
-          </p>
-        )}
-        <p>
-          Phone compasses can be off by a few degrees, more near metal, magnets or electronics.
-          {!closeToKaaba && ' The bearing itself is exact for your place.'}
-        </p>
-      </div>
     </>
   );
+}
+
+/** Coarse spoken guidance: changes only when the instruction itself changes */
+function turnGuidance(aligned: boolean, turn: number): string {
+  if (aligned) return 'Facing the qibla';
+  const side = turn > 0 ? 'right' : 'left';
+  return Math.abs(turn) > 20 ? `Turn ${side}` : `Nearly there, a little ${side}`;
 }

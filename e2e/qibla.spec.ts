@@ -43,7 +43,9 @@ test.describe('qibla', () => {
     await page.goto('/qibla')
 
     await expect(page.locator('[data-qibla-bearing]')).toHaveText(`${QIBLA_LONDON}°`)
-    await expect(page.getByText('clockwise from true north, east-southeast')).toBeVisible()
+    await expect(page.locator('[data-qibla-direction]')).toHaveText('East-southeast')
+    // The compass caveat belongs to the live compass, not to a device without one
+    await expect(page.locator('[data-qibla]')).not.toContainText('Phone compasses can be off')
     await expect(page.locator('[data-qibla-dial="diagram"]')).toBeVisible()
     await expect(page.locator('[data-qibla-notice="no-sensor"]')).toBeVisible()
     await expect(page.getByRole('button', { name: /compass/i })).toHaveCount(0)
@@ -70,7 +72,8 @@ test.describe('qibla', () => {
     await seed(page, { ...LONDON, lat: 21.3891, lng: 39.8579, label: 'Makkah', countryCode: 'SA', tz: 'Asia/Riyadh' })
     await page.goto('/qibla')
     await expect(page.locator('[data-qibla-notice="near-kaaba"]')).toBeVisible()
-    await expect(page.locator('[data-qibla-notes]')).not.toContainText('exact for your place')
+    await expect(page.locator('[data-qibla-notice="near-kaaba"]')).toContainText('too rough to give a direction')
+    await expect(page.locator('[data-qibla]')).not.toContainText('exact')
   })
 
   test('away from Makkah there is no such note', async ({ page }) => {
@@ -78,7 +81,6 @@ test.describe('qibla', () => {
     await page.goto('/qibla')
     await expect(page.locator('[data-qibla-bearing]')).toHaveText(`${QIBLA_LONDON}°`)
     await expect(page.locator('[data-qibla-notice="near-kaaba"]')).toHaveCount(0)
-    await expect(page.locator('[data-qibla-notes]')).toContainText('exact for your place')
   })
 
   test('dark theme and reduced motion render the same fallback', async ({ page }) => {
@@ -119,14 +121,19 @@ test.describe('qibla', () => {
     await expect(page.locator('[data-qibla-dial="live"]')).toBeVisible()
     await expect(page.locator('[data-qibla-readout="live"]')).toContainText(/Turn 11[5-9]° right/)
     // Screen readers get one status, not a live region that speaks every degree
-    await expect(page.locator('[data-qibla-status]')).toHaveText('Not facing the qibla')
+    await expect(page.locator('[data-qibla-status]')).toHaveText('Turn right')
     await expect(page.locator('[data-qibla-readout] [aria-live]')).toHaveCount(0)
     // Magnetic heading 119: London's declination is about +1°, so this is within the aligned margin
     await send(360 - 119)
     await expect(page.locator('[data-qibla-readout="live"]')).toContainText('Facing the qibla')
     await expect(page.locator('[data-qibla-status]')).toHaveText('Facing the qibla')
-    await page.getByRole('button', { name: 'Show the diagram instead' }).click()
+    // One button throughout, so focus stays on it as its job changes
+    const action = page.locator('[data-qibla-action]')
+    await expect(action).toHaveCount(1)
+    await expect(action).toHaveText('Show the diagram instead')
+    await action.click()
     await expect(page.locator('[data-qibla-dial="diagram"]')).toBeVisible()
+    await expect(action).toBeFocused()
     await context.close()
   })
 
@@ -137,6 +144,8 @@ test.describe('qibla', () => {
     await page.goto('/qibla')
     await page.getByRole('button', { name: 'Use my phone’s compass' }).click()
     await expect(page.locator('[data-qibla-notice="no-data"]')).toBeVisible({ timeout: 6000 })
+    await expect(page.locator('[data-qibla-notice="no-data"]')).toHaveAttribute('role', 'status')
+    await expect(page.getByRole('button', { name: 'Try the compass again' })).toBeVisible()
     await expect(page.locator('[data-qibla-bearing]')).toHaveText(`${QIBLA_LONDON}°`)
     await context.close()
   })

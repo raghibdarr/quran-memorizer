@@ -11,24 +11,20 @@ export default function CalibrationHint() {
   const reduce = useReducedMotion();
   return (
     <div data-calibration-hint>
-      <Card className="flex items-center gap-3 p-4">
-        <svg width={56} height={32} viewBox="0 0 56 32" fill="none" className="shrink-0 text-teal" aria-hidden>
-          <path
-            d={FIGURE_8}
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeDasharray="4 4"
-          />
-          {/* A dot tracing the 8; with reduced motion it rests at the crossing */}
-          {reduce ? (
-            <circle cx={28} cy={16} r={3.5} className="fill-gold" />
-          ) : (
-            <circle r={3.5} className="fill-gold">
-              <animateMotion dur="3s" repeatCount="indefinite" path={FIGURE_8} />
-            </circle>
-          )}
-        </svg>
+      <Card className="flex items-start gap-3 p-4">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/10 text-teal">
+          <svg width={28} height={16} viewBox="0 0 56 32" fill="none" aria-hidden>
+            <path d={FIGURE_8} stroke="currentColor" strokeWidth={3} strokeLinecap="round" className="opacity-40" />
+            {/* A dot tracing the 8; with reduced motion it rests at the crossing */}
+            {reduce ? (
+              <circle cx={28} cy={16} r={5} className="fill-gold" />
+            ) : (
+              <circle r={5} className="fill-gold">
+                <animateMotion dur="3s" repeatCount="indefinite" path={FIGURE_8} />
+              </circle>
+            )}
+          </svg>
+        </span>
         <div className="min-w-0 text-sm leading-relaxed" role="status">
           <p className="font-medium text-foreground">The compass is unsteady</p>
           <p className="text-muted">Wave your phone in a figure 8 a few times, away from metal and magnets.</p>
