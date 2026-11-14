@@ -145,7 +145,7 @@ export function EvidenceList({ evidence, claimKind }: { evidence: ClaimEvidence[
               <button
                 type="button"
                 aria-expanded={isOpen}
-                aria-controls={`evidence-panel-${i}`}
+                aria-controls={isOpen ? `evidence-panel-${i}` : undefined}
                 onClick={() => setOpen(isOpen ? null : i)}
                 data-evidence-chip={evidenceKind(e)}
                 className={cn(

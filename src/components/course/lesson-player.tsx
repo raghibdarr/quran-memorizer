@@ -230,7 +230,8 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
           <RichText text={lesson.intro} />
         </p>
         <p className="text-sm text-muted">
-          {lesson.claims.length} {lesson.claims.length === 1 ? 'point' : 'points'}, then {lesson.check.length} quick questions.
+          {lesson.claims.length} {lesson.claims.length === 1 ? 'point' : 'points'}
+          {lesson.check.length > 0 && `, then ${lesson.check.length} quick ${lesson.check.length === 1 ? 'question' : 'questions'}`}.
         </p>
         <ReviewBadge review={lesson.review} />
       </div>
@@ -294,13 +295,15 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
               <li key={i}>
                 <button
                   type="button"
-                  disabled={answered}
+                  // aria-disabled, not disabled: the picked answer keeps keyboard focus
+                  aria-disabled={answered || undefined}
                   aria-pressed={chosen === i}
                   onClick={() => answer(current.index, i)}
                   data-option={i}
                   data-correct={right ? '' : undefined}
                   className={cn(
                     'flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border px-4 py-2.5 text-left text-[15px] transition-colors',
+                    answered && 'cursor-default',
                     !answered && 'border-foreground/15 bg-card text-foreground hover:bg-foreground/[0.04]',
                     right && 'border-teal bg-teal/10 font-semibold text-foreground',
                     wrongPick && 'border-gold/60 bg-gold/10 text-foreground',
@@ -387,7 +390,7 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
   return (
     <>
       <Header title={unit.title} progress={progress} />
-      <main className="mx-auto flex min-h-[calc(100dvh-4rem)] max-w-2xl flex-col px-4 pt-6" data-lesson={lesson.id}>
+      <main className="mx-auto flex min-h-[calc(100dvh-4rem)] max-w-2xl flex-col px-4 pt-6 pb-[calc(env(safe-area-inset-bottom)+1rem)]" data-lesson={lesson.id}>
         <div key={finished ? 'done' : step} className="flex-1 animate-[phase-in_250ms_ease-out]">
           {body}
         </div>

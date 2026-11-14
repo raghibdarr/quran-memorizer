@@ -93,6 +93,11 @@ test.describe('foundations course', () => {
     await expect(page.getByRole('button', { name: 'Pick an answer' })).toBeDisabled()
     await page.locator('[data-option="0"]').click()
     await expect(page.locator('[data-check-feedback]')).toContainText('Not quite. It’s “Right one”.')
+    // The picked answer keeps focus (keyboard users aren't dropped to the top), and a second pick changes nothing
+    await expect(page.locator('[data-option="0"]')).toBeFocused()
+    await page.locator('[data-option="1"]').click({ force: true })
+    await expect(page.locator('[data-option="0"]')).toHaveAttribute('aria-pressed', 'true')
+    await expect(page.locator('[data-option="1"]')).toHaveAttribute('aria-pressed', 'false')
     await next(page)
     await page.locator('[data-option="0"]').click()
     await expect(page.locator('[data-check-feedback]')).toContainText('That’s right.')
