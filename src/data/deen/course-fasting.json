@@ -1,7 +1,7 @@
 {
  "deck": "course-fasting",
  "kind": "course",
- "hash": "789a01dc93b4daf5",
+ "hash": "82fa14885c136cf8",
  "items": [
   {
    "unit": "fasting",
@@ -327,7 +327,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 2,
+   "rev": 3,
    "id": "fasting-02-intention",
    "order": 2,
    "title": "The intention",
@@ -393,12 +393,12 @@
      "positions": [
       {
        "school": "hanafi",
-       "text": "A fast tied to a set time, such as Ramadan, is valid with an intention made at night. If he has not intended by morning, an intention made between then and midday is enough.",
+       "text": "One kind of obligatory fast is tied to a set time, such as the fast of Ramadan and a vow for a named day: it is valid with an intention made at night. If he has not intended by morning, an intention made between then and midday is enough.",
        "source": {
         "work": "mukhtasar-al-quduri",
         "location": "Kitab al-Sawm"
        },
-       "quote": "فيجوز صومه بنية من الليل فإن لم ينو حتى أصبح أجزأته النية ما بينه وبين الزوال"
+       "quote": "منه ما يتعلق بزمان بعينه كصوم رمضان والنذر المعين فيجوز صومه بنية من الليل فإن لم ينو حتى أصبح أجزأته النية ما بينه وبين الزوال"
       },
       {
        "school": "maliki",
@@ -470,7 +470,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 2,
+   "rev": 3,
    "id": "fasting-03-what-breaks-the-fast",
    "order": 3,
    "title": "What breaks the fast",
@@ -621,12 +621,12 @@
       },
       {
        "school": "shafii",
-       "text": "Among the ten things that break the fast: what deliberately reaches the inside of the body or the head.",
+       "text": "Ten things break the fast, the first being what deliberately reaches the inside of the body or the head.",
        "source": {
         "work": "matn-abi-shuja",
         "location": "Kitab al-Sawm"
        },
-       "quote": "ما وصل عمدا إلى الجوف أو الرأس"
+       "quote": "والذي يفطر به الصائم عشرة أشياء: ما وصل عمدا إلى الجوف أو الرأس"
       },
       {
        "school": "hanbali",
@@ -1407,7 +1407,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-06-recommended-acts",
    "order": 6,
    "title": "Keeping the fast well",
@@ -1480,12 +1480,12 @@
       },
       {
        "school": "shafii",
-       "text": "Leaving foul speech is among the three things recommended in fasting.",
+       "text": "Three things are recommended in fasting: hastening to break the fast, delaying [[suhur]], and leaving foul speech.",
        "source": {
         "work": "matn-abi-shuja",
         "location": "Kitab al-Sawm"
        },
-       "quote": "وترك الهجر من الكلام"
+       "quote": "ويستحب في الصوم ثلاثة أشياء تعجيل الفطر وتأخير السحور وترك الهجر من الكلام"
       }
      ],
      "cards": [

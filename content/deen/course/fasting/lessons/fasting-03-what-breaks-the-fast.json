@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 2,
+  "rev": 3,
   "id": "fasting-03-what-breaks-the-fast",
   "order": 3,
   "title": "What breaks the fast",
@@ -151,12 +151,12 @@
         },
         {
           "school": "shafii",
-          "text": "Among the ten things that break the fast: what deliberately reaches the inside of the body or the head.",
+          "text": "Ten things break the fast, the first being what deliberately reaches the inside of the body or the head.",
           "source": {
             "work": "matn-abi-shuja",
             "location": "Kitab al-Sawm"
           },
-          "quote": "ما وصل عمدا إلى الجوف أو الرأس"
+          "quote": "والذي يفطر به الصائم عشرة أشياء: ما وصل عمدا إلى الجوف أو الرأس"
         },
         {
           "school": "hanbali",
@@ -280,7 +280,8 @@
       "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
       "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
-      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar."
+      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar.",
+      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). The Shafi’i quote under forgetting now includes the words its English opens with; rev raised to 3. Not reviewed by a scholar."
     ]
   }
 }

@@ -38,6 +38,10 @@ The copy of 'Umdat al-Fiqh has `العاجر` for `العاجز`; the quote star
 | `forgetful-eater` | al-Bukhari 1933, Fath al-Bari numbering | dorar.net hadith encyclopedia (Sahih al-Bukhari, 1933) | hadith-api `ara-bukhari` 1933 | in the Sahih |
 | `fasting-is-a-shield` | al-Bukhari 1894, Fath al-Bari numbering | dorar.net hadith encyclopedia (Sahih al-Bukhari, 1894) | hadith-api `ara-bukhari` 1894 | in the Sahih |
 
+A third witness was added for the two al-Bukhari items on 2026-11-14: the Shamela copy of the
+Sultaniyya print, shamela.ws/book/1681/3024 (no. 1894) and /3084 (no. 1933). The dorar.net
+pages could not be downloaded again that day; see `review.log` section 8.
+
 Check the evidence items with `node content/deen/course/fasting/check-evidence.mjs`.
 
 ## Left out, and why

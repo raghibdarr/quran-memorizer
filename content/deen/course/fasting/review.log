@@ -167,3 +167,57 @@ Findings, and what was changed (lessons 1, 2 and 3 raised to rev 2):
 
 Left as they are, for the scholar reviewer: the remaining OPEN notes in section 4 and the
 doubts in section 6. Nothing here is scholar-reviewed.
+
+## 8. Independent verifier pass (2026-11-14, an agent that wrote none of the unit)
+
+Every source page was downloaded once more and read with a script written for this pass:
+shamela.ws books 124336, 985, 11373, 11370, 11315 (the four primers, whole fasting chapters
+read by eye as well), 21739 (/291 to /321), 12445 (/40, /48, /49), 1726 (/3158, /3159),
+9771 (/2240), 1681 (/3024, /3084); hadith-api ara-bukhari 1894 and 1933, ara-abudawud 2357
+and 2358; the OpenITI text of al-Adhkar (no. 986).
+
+Checked, and found sound:
+
+- Primer quotes: 58 of 58 located. The same four run across a page break and were read on
+  both pages. Where the two copies of al-Quduri differ, each quote follows a copy that has
+  the sentence whole, as SOURCES.md says.
+- Each English position read against its Arabic, sentence by sentence. Nothing added and
+  nothing softened in meaning. Two renderings are shorter than the Arabic and are left so:
+  `في أحد السبيلين` (Hanafi) and `في الفرج` (Shafi'i, Hanbali) under kaffarah are given as
+  "intercourse". The Arabic is shown beside them.
+- Consensus citations: Bidayat al-Mujtahid 2:45-46, 2:46, 2:51, 2:52, 2:56, 2:69, 2:71 and
+  al-Ijma' nos. 68, 123 to 127, 129 read in place. No. 68 does sit in Kitab al-Salah in this
+  edition. Every claim of kind "agreed" rests on a phrase of agreement that is on the page,
+  or on the ayah cited.
+- Differences: every "differs" claim is cross-located in Bidayat al-Mujtahid (2:46-47, 2:56,
+  2:58, 2:61, 2:62-63, 2:65, 2:67). Where Ibn Rushd names the imams, his attribution agrees
+  with the primer quoted. No position is ranked above another anywhere in the unit.
+- Hadith: al-Bukhari 1894 and 1933 and Abu Dawud 2357 and 2358 carry the wording stored,
+  under those numbers, in every witness read. Stored skeleton hashes equal the hashes of the
+  shipped Arabic. Vocalisation read against the vocalised prints. Translations read against
+  the Arabic: faithful.
+- Gradings: al-Daraqutni's `تفرد به الحسين بن واقد وإسناده حسن` follows no. 2279 in his
+  Sunan, and the lesson reports it as his verdict on the chain. Al-Nawawi's `هكذا رواه مرسلا`
+  follows the second wording at al-Adhkar no. 986. The second wording is shown only as a
+  variant with that status, which is the stance the spec sets for it (section 6, iftar dua).
+- Quran references 2:183, 2:184, 2:185, 2:187, 58:3-4 and 97:1-3 say what the claims take
+  from them.
+
+Changed:
+
+1. intention-timing / hanafi (lesson 2, rev 3). The English opened with "A fast tied to a set
+   time, such as Ramadan", words that are in al-Quduri just before the quote but were not in
+   the quote. The quote now starts at `منه ما يتعلق بزمان بعينه كصوم رمضان والنذر المعين`
+   and the English follows it, vow included.
+2. forgetting / shafii (lesson 3, rev 3) and guarding-the-tongue / shafii (lesson 6, rev 2).
+   Each English line named the list the phrase belongs to ("the ten things", "the three
+   things") while the quote held only the phrase. Each quote now carries the opening words of
+   its sentence.
+3. Evidence items fasting-is-a-shield and forgetful-eater (rev 2). dorar.net refused this
+   pass's download, so its witness could not be read again. Both hadith were collated instead
+   against the Shamela copy of the Sultaniyya print of Sahih al-Bukhari
+   (shamela.ws/book/1681/3024 and /3084): identical skeletons. That copy is recorded as a
+   third witness, so each item keeps a witness outside Sunnah.com that was read in this pass.
+
+Nothing was removed. The OPEN notes in section 4 and the doubts in section 6 stand for a
+scholar reviewer. Nothing here is scholar-reviewed.

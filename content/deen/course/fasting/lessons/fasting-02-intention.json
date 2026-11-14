@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 2,
+  "rev": 3,
   "id": "fasting-02-intention",
   "order": 2,
   "title": "The intention",
@@ -66,12 +66,12 @@
       "positions": [
         {
           "school": "hanafi",
-          "text": "A fast tied to a set time, such as Ramadan, is valid with an intention made at night. If he has not intended by morning, an intention made between then and midday is enough.",
+          "text": "One kind of obligatory fast is tied to a set time, such as the fast of Ramadan and a vow for a named day: it is valid with an intention made at night. If he has not intended by morning, an intention made between then and midday is enough.",
           "source": {
             "work": "mukhtasar-al-quduri",
             "location": "Kitab al-Sawm"
           },
-          "quote": "فيجوز صومه بنية من الليل فإن لم ينو حتى أصبح أجزأته النية ما بينه وبين الزوال"
+          "quote": "منه ما يتعلق بزمان بعينه كصوم رمضان والنذر المعين فيجوز صومه بنية من الليل فإن لم ينو حتى أصبح أجزأته النية ما بينه وبين الزوال"
         },
         {
           "school": "maliki",
@@ -143,7 +143,8 @@
       "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
       "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
-      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar."
+      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar.",
+      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). The Hanafi quote on the time of the intention now includes the clause its English opens with; rev raised to 3. Not reviewed by a scholar."
     ]
   }
 }

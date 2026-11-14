@@ -1,7 +1,7 @@
 {
   "id": "forgetful-eater",
   "deck": "course-fasting-evidence",
-  "rev": 1,
+  "rev": 2,
   "title": "The one who eats forgetfully",
   "cue": "What the Prophet ﷺ said about a fasting person who forgets and eats",
   "arabic": "إِذَا نَسِيَ فَأَكَلَ وَشَرِبَ فَلْيُتِمَّ صَوْمَهُ فَإِنَّمَا أَطْعَمَهُ اللَّهُ وَسَقَاهُ",
@@ -27,6 +27,11 @@
         "name": "hadith-api",
         "ref": "ara-bukhari, hadith 1933",
         "skeletonSha256": "806f7b6d6e5b37283e84b0cb4242cae6a4f6984a2fe75efb12a599a55a9fddc2"
+      },
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya edition, no. 1933 (shamela.ws/book/1681/3084)",
+        "skeletonSha256": "806f7b6d6e5b37283e84b0cb4242cae6a4f6984a2fe75efb12a599a55a9fddc2"
       }
     ],
     "note": "The Arabic stored is the Prophet’s ﷺ words; the chain of narrators is left out."
@@ -40,7 +45,8 @@
       "2026-11-13 E/F our own translation from the Arabic; re-read against the Arabic for omissions and additions",
       "2026-11-13 G citation number confirmed in both witnesses",
       "2026-11-13 H in Sahih al-Bukhari: no separate grading needed",
-      "2026-11-13 status source-checked. Stages were run by one agent with a mechanical collation, not by separate agents. Not reviewed by a scholar."
+      "2026-11-13 status source-checked. Stages were run by one agent with a mechanical collation, not by separate agents. Not reviewed by a scholar.",
+      "2026-11-14 independent verifier pass: collated again against hadith-api and against a third witness, the Shamela copy of the Sultaniyya print (no. 1933); skeleton identical for the words kept, vocalisation read against it; rev raised to 2. The dorar.net page could not be downloaded again in this pass. Not reviewed by a scholar."
     ]
   }
 }
