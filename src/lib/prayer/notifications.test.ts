@@ -239,6 +239,27 @@ describe('syncPrayerAlerts (Android)', () => {
     expect(readAlertMeta()).toMatchObject({ count: plan.alerts.length, lastAt: summary.lastAt })
   })
 
+  it('a replan that lands while a test alert is waiting does not swallow it', async () => {
+    expect(await sendTestAlert('default', undefined, NOW)).toBe(true)
+    const plan = planFor()
+    await syncPrayerAlerts(plan, undefined, NOW + 1500)
+    expect(os.state.cancelled).toContain(20019)
+    expect(pendingIds()).toContain(20019)
+    expect((await pendingPrayerAlerts()).count).toBe(plan.alerts.length)
+    // Once it has rung, a later replan does not bring it back
+    os.state.pending.delete(20019)
+    await syncPrayerAlerts(planFor(alertsAll('silent')), undefined, NOW + 60_000)
+    expect(pendingIds()).not.toContain(20019)
+  })
+
+  it('turning every prayer off clears the alerts even when the memo could not be stored', async () => {
+    expect(await clearPrayerAlerts()).toBe(false) // the once-per-run look, nothing there
+    await syncPrayerAlerts(planFor())
+    localStorage.removeItem(ALERT_META_KEY) // as if the write had failed
+    expect(await clearPrayerAlerts()).toBe(true)
+    expect(pendingIds()).toEqual([])
+  })
+
   it('reads permission and exact-alarm state; the exact setting opens on request only', async () => {
     expect(await alertPermission()).toBe('granted')
     os.state.display = 'prompt'

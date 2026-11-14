@@ -137,6 +137,9 @@ function dayAlerts(input: PlanInput, iso: string): PlannedAlert[] {
     const alert = settings.alerts[prayer];
     const at = times[prayer];
     if (!alert || alert.mode === 'off' || at === null) continue;
+    // Near the polar circles the sun's geometry can put a time days away from
+    // its own day (Asr at 78°N in late February). Better no alert than a wrong one
+    if (Math.abs(Date.parse(isoInTz(at, place.tz)) - Date.parse(iso)) > DAY_MS) continue;
     const mode = modeFor(alert.mode, platform) as AudibleMode;
     const label = TIME_LABELS[prayer];
     const time = formatTime(at, place.tz, { hour12: input.hour12 });

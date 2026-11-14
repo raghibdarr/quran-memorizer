@@ -246,6 +246,10 @@ export async function pendingPrayerAlerts(deps: PrayerNotifyDeps = defaultDeps()
 
 // ---------- applying a plan ----------
 
+let orphansChecked = false;
+/** A test alert still waiting to ring (a replan that lands first must not swallow it) */
+let pendingTest: LocalNotificationSchema | null = null;
+
 /** Device-only memo of the last plan handed to the OS (no times of day, no place) */
 export const ALERT_META_KEY = 'takrar-prayer-alerts-meta';
 
@@ -297,11 +301,22 @@ export async function syncPrayerAlerts(plan: AlertPlan, deps: PrayerNotifyDeps =
     writeAlertMeta(deps, plan.alerts.length
       ? { count: plan.alerts.length, lastAt: plan.alerts[plan.alerts.length - 1].at, appliedAt: now }
       : null);
+    // If the memo can't be stored, a later "all off" must still find these alerts
+    if (plan.alerts.length) orphansChecked = false;
+    // The test alert lives in the prayer range, so the apply just cancelled it: put it back
+    if (pendingTest && atMs(pendingTest)! > now) {
+      try {
+        await deps.schedule({ notifications: [pendingTest] });
+      } catch {
+        // the test alert is a courtesy; the plan is what matters
+      }
+    } else {
+      pendingTest = null;
+    }
   }
   return { alerts, tail };
 }
 
-let orphansChecked = false;
 /** For tests: look for left-behind alerts again */
 export function resetOrphanCheck() {
   orphansChecked = false;
@@ -345,15 +360,13 @@ export async function sendTestAlert(mode: AlertMode, deps: PrayerNotifyDeps = de
     await ensurePrayerChannels(deps);
     const exact = (await exactAlarmState(deps)) === 'granted';
     const sound = mode === 'off' ? 'default' : mode;
-    await deps.schedule({
-      notifications: [
-        toSchema(
-          { id: TEST_ALERT_ID, at: now + 10_000, title: 'Test alert', body: 'This is how prayer alerts will look and sound.', url: '/prayer/alerts' },
-          sound,
-          { platform: deps.platform, exact },
-        ),
-      ],
-    });
+    const test = toSchema(
+      { id: TEST_ALERT_ID, at: now + 10_000, title: 'Test alert', body: 'This is how prayer alerts will look and sound.', url: '/prayer/alerts' },
+      sound,
+      { platform: deps.platform, exact },
+    );
+    await deps.schedule({ notifications: [test] });
+    pendingTest = test;
     return true;
   } catch {
     return false;

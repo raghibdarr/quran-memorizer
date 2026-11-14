@@ -28,3 +28,15 @@ Local builds in this worktree: Turbopack refuses the `node_modules` junction, so
    a slow phone, `applyRange` (foundations) could diff by id instead of replacing the range.
 5. **Delivered alerts pile up in the tray** (each has its own id; a heads-up stays beside its prayer). Possible
    follow-up: `removeDeliveredNotifications` for older prayer ids on app open.
+
+## Second review pass
+
+6. **Engine oddities near the polar circles (`src/lib/prayer/engine.ts`, foundations, not owned here).** With
+   `highLatRule: 'auto'` at Longyearbyen (78.22, 15.65): on 2027-02-18 `computeDay` returns Asr on 22 Feb
+   (four days away); on 2026-10-20 and 2026-11-01 Asr comes out before Dhuhr; through the polar night
+   (Jan to mid Feb) Asr comes out after Maghrib. The planner now leaves out any time more than a day from its
+   own day (no alert rather than a wrong one), but the out-of-order Asr still reaches the times screen and the
+   alerts. Suggested fix in the engine: return null for Asr when it is not between Dhuhr and Maghrib.
+7. **The test alert shares the prayer range** (id 20019), so a replan used to cancel it. The glue now puts a
+   still-waiting test alert back after a replan. On iOS with every other range full it is briefly a 65th
+   pending notification; the furthest one is dropped by iOS until the next replan (unverified on device).

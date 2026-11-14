@@ -100,4 +100,17 @@ test.describe('prayer alerts', () => {
     expect(sample.body).toMatch(/^(Fajr|Dhuhr|Asr|Maghrib|Isha) · \d\d:\d\d$/)
     await expect(page.locator('[data-health="pending"]')).toContainText(/alerts, up to/, { timeout: 10_000 })
   })
+
+  test('app: a test alert sent just after turning alerts on is not swallowed by the sync', async ({ page }) => {
+    await seed(page)
+    await mockAndroid(page, { display: 'prompt', exact: 'granted' })
+    await page.goto('/prayer/alerts')
+    await page.getByRole('button', { name: 'Notify me for every prayer' }).click()
+    await page.getByRole('button', { name: 'Send a test alert in 10 seconds' }).click()
+    await expect(page.getByText(/On its way/)).toBeVisible()
+    const pending = () => page.evaluate(() => [...(window as unknown as { __os: { pending: Map<number, unknown> } }).__os.pending.keys()])
+    // The sync lands about 1.5 s later and replaces the whole prayer range
+    await expect.poll(async () => (await pending()).length, { timeout: 10_000 }).toBeGreaterThan(100)
+    expect(await pending()).toContain(20019)
+  })
 })

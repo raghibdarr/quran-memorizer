@@ -286,6 +286,19 @@ describe('planPrayerAlerts', () => {
     )
   })
 
+  it('leaves out a time the engine puts days away from its own day (78°N, late February)', () => {
+    const svalbard: Place = { lat: 78.22, lng: 15.65, label: 'Longyearbyen', countryCode: 'SJ', tz: 'Arctic/Longyearbyen', source: 'city' }
+    // The seed that found it: 20 Jan 2027, whose 30 days reach 18 Feb, where Asr comes out on the 22nd
+    const now = 1800399600000
+    const p = plan('android', allAlerts('default'), svalbard, now)
+    expectWellFormed(p, 'android', now)
+    for (const a of p.alerts) {
+      expect(Math.abs(Date.parse(isoInTz(a.at, svalbard.tz)) - Date.parse(a.iso))).toBeLessThanOrEqual(86_400_000)
+    }
+    expect(p.alerts.some((a) => a.iso === '2027-02-18' && a.prayer === 'dhuhr')).toBe(true)
+    expect(p.alerts.some((a) => a.iso === '2027-02-18' && a.prayer === 'asr')).toBe(false)
+  })
+
   it('a traveller far from the device clock is planned by the place, not the device', () => {
     // 09:00 UTC on the 13th is already 23:00 on the 13th in Kiritimati (UTC+14) and 23:00 on the 12th in Honolulu
     const kiritimati: Place = { lat: 1.87, lng: -157.43, label: 'Kiritimati', countryCode: 'KI', tz: 'Pacific/Kiritimati', source: 'city' }
