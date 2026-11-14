@@ -248,7 +248,8 @@ describe('matchMosque: recovery', () => {
     const r = matchMosque(london, [day])!
     for (const n of Object.values(r.calc.offsets)) expect(Math.abs(n)).toBeLessThanOrEqual(60)
     expect(r.maxOff).toBeGreaterThan(2)
-    expect(r.confidence).toMatch(/still a few minutes out/)
+    expect(r.poorFit).toBe(true)
+    expect(r.confidence).toMatch(/^No method follows this timetable closely: Dhuhr is still \d+ minutes out\./)
   })
 })
 
@@ -258,6 +259,19 @@ describe('confidenceLine', () => {
     expect(confidenceLine([d('2026-03-01')], 0)).toMatch(/second date about a month away/)
     expect(confidenceLine([d('2026-03-01'), d('2026-03-05')], 0)).toMatch(/two dates a month apart will confirm/i)
     expect(confidenceLine([d('2026-03-01'), d('2026-04-01')], 1)).toMatch(/fits both dates/)
+  })
+
+  it('names the prayers still out and how far', () => {
+    expect(confidenceLine([d('2026-03-01')], 4, { prayers: ['fajr'], minutes: 4 })).toBe(
+      'Fajr is still 4 minutes out. Your mosque may set it by hand, so check it against its timetable.',
+    )
+    expect(confidenceLine([d('2026-03-01')], 3, { prayers: ['fajr', 'isha'], minutes: 3 })).toMatch(
+      /^Fajr and Isha are still up to 3 minutes out\. Your mosque may set those by hand/,
+    )
+    expect(confidenceLine([d('2026-03-01')], 16, { prayers: ['fajr', 'asr', 'isha'], minutes: 16 })).toBe(
+      'No method follows this timetable closely: Fajr, Asr and Isha are still up to 16 minutes out. Check the times you typed, or keep your current settings.',
+    )
+    expect(confidenceLine([d('2026-03-01')], 60, { prayers: ['isha'], minutes: null })).toMatch(/Isha is still well out/)
   })
 })
 

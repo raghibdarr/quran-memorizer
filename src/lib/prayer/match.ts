@@ -14,6 +14,7 @@ import { methodInfo, NAMED_METHODS } from './methods';
 import { regionDefault } from './regions';
 import {
   PRAYER_NAMES,
+  TIME_LABELS,
   type AsrMadhab,
   type CustomAngles,
   type HighLatRule,
@@ -60,6 +61,8 @@ export interface MatchResult {
   confidence: string;
   /** Set when the times look like jama'ah times rather than start times */
   lateHint: boolean;
+  /** Set when some time is still more than POOR_FIT_MIN out: no method follows this timetable well */
+  poorFit: boolean;
 }
 
 /** Offsets are clamped to the prayer store's limit (prayer-store MAX_OFFSET_MIN) */
@@ -81,6 +84,8 @@ const CUSTOM_TRIGGER_MIN = 3;
 const CUSTOM_MIN_GAIN = 2;
 /** ...or if the best preset needs a Fajr or Isha offset bigger than this */
 const LARGE_TWILIGHT_OFFSET = 10;
+/** A fitted time still further out than this is called a poor fit */
+export const POOR_FIT_MIN = 5;
 /** Offsets this large on Dhuhr, Asr or Maghrib suggest jama'ah times */
 const LATE_HINT_MIN = 15;
 
@@ -390,18 +395,61 @@ export function matchMosque(place: Where, days: MatchDay[]): MatchResult | null 
   const o = chosen.calc.offsets;
   const lateHint = [o.dhuhr, o.asr, o.maghrib].some((n) => n >= LATE_HINT_MIN);
 
+  // The prayers still out after the fit, in prayer order, for the confidence line
+  const out = PRAYER_NAMES.filter((p) => cells.some((c) => c.prayer === p && (c.diff === null || Math.abs(c.diff) > 2)));
+  const knownMax = Math.max(0, ...cells.map((c) => (c.diff === null ? 0 : Math.abs(c.diff))));
+  const missing = cells.some((c) => c.diff === null);
+
   const calc: PrayerCalcSettings = { ...chosen.calc, offsets: { ...chosen.calc.offsets } };
-  return { calc, cells, totalOff, maxOff, customAngles: usedCustom, confidence: confidenceLine(days, maxOff), lateHint };
+  return {
+    calc,
+    cells,
+    totalOff,
+    maxOff,
+    customAngles: usedCustom,
+    confidence: confidenceLine(days, maxOff, { prayers: out, minutes: missing ? null : knownMax }),
+    lateHint,
+    poorFit: maxOff > POOR_FIT_MIN,
+  };
 }
 
 function daysApart(a: string, b: string): number {
   return Math.abs(Math.round((Date.parse(`${a}T00:00:00Z`) - Date.parse(`${b}T00:00:00Z`)) / 86_400_000));
 }
 
-/** One plain line on how much to trust the fit */
-export function confidenceLine(days: MatchDay[], maxOff: number): string {
+/** "Fajr", "Fajr and Asr", "Fajr, Asr and Isha" */
+function listNames(prayers: PrayerName[]): string {
+  const names = prayers.map((p) => TIME_LABELS[p]);
+  return names.length < 2 ? (names[0] ?? '') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+}
+
+/**
+ * One plain line on how much to trust the fit. `out` names the prayers still
+ * more than 2 minutes out and the largest gap (null when some prayer has no
+ * calculated time that day), so the line can say how far.
+ */
+export function confidenceLine(
+  days: MatchDay[],
+  maxOff: number,
+  out?: { prayers: PrayerName[]; minutes: number | null },
+): string {
   if (maxOff > 2) {
-    return 'Some times are still a few minutes out. Your mosque may set those by hand, so check them against its timetable.';
+    const one = out?.prayers.length === 1;
+    const who = out?.prayers.length ? listNames(out.prayers) : 'Some times';
+    const verb = one ? 'is' : 'are';
+    const n = out?.minutes;
+    const howFar =
+      n === null || n === undefined
+        ? maxOff > POOR_FIT_MIN
+          ? 'well out'
+          : 'a few minutes out'
+        : one
+          ? `${n} ${n === 1 ? 'minute' : 'minutes'} out`
+          : `up to ${n} minutes out`;
+    if (maxOff > POOR_FIT_MIN) {
+      return `No method follows this timetable closely: ${who} ${verb} still ${howFar}. Check the times you typed, or keep your current settings.`;
+    }
+    return `${who} ${verb} still ${howFar}. Your mosque may set ${one ? 'it' : 'those'} by hand, so check ${one ? 'it' : 'them'} against its timetable.`;
   }
   if (days.length < 2) {
     return 'This fits the date you entered. Times from a second date about a month away will confirm it.';
