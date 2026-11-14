@@ -1,0 +1,13 @@
+=== Mosque lists: OpenStreetMap
+Data © OpenStreetMap contributors (https://www.openstreetmap.org/copyright), available under the
+Open Database License (ODbL) 1.0: https://opendatacommons.org/licenses/odbl/1-0/
+
+The mosque lists in the app (data/mosques/<country>.json) are a Derivative Database made from
+OpenStreetMap features tagged amenity=place_of_worship and religion=muslim: each mosque's map
+position, rounded, and its name. They are offered under the same licence. The files, and the
+script that builds them (scripts/build-mosques.mjs), are public in the app's source repository,
+so anyone can get, rebuild and reuse them. The app loads one country's list when you ask for it,
+sorts it by distance on your device, and never sends your position anywhere.
+
+Country assignment at build time used Natural Earth 1:10m admin-0 countries (public domain,
+https://www.naturalearthdata.com); the boundaries themselves are not included in the app.

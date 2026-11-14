@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import MosqueFinder from '@/components/mosques/mosque-finder';
 
 export const metadata: Metadata = { title: 'Mosques · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the mosques package replaces this page.
+// Mosques near the user's place, from OpenStreetMap country packs (all-in-one spec 2.2, 4)
 export default function Page() {
-  return <StubPage title="Mosques" back="/prayer" note="Mosques near you, from open map data. Coming soon." />;
+  return <MosqueFinder />;
 }
