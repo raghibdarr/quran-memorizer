@@ -1,0 +1,152 @@
+Unit Purification: checker log
+==============================
+
+2026-11-14  Checker pass (stage G of spec 5.4), by an agent that did not draft the lessons
+and saw none of the drafting reasoning. Scope: every primer quote, every consensus citation,
+every Bidayat al-Mujtahid cross-location, every Quran ref, and the English of each claim,
+position, card and check question read against the Arabic it rests on.
+
+Mechanical
+----------
+- tools/verify-citations.mjs re-fetched all 73 recorded pages afresh: 160 of 160 quotes found
+  on the page recorded for them (skeleton match, same normalisation as the build). Every
+  position and consensus location in the lessons has a record; every difference has a
+  Bidayat al-Mujtahid record; every Quran ref resolves.
+- Quran refs read for sense: 5:6 (wudu, janabah, tayammum, "touched women"), 4:43
+  (tayammum), 2:222 (menstruation), 25:48 and 8:11 (water that purifies), 74:4 (garments).
+
+Position text that says more than its stored quote: re-located on the same page
+-------------------------------------------------------------------------------
+- water-01/c6 Hanafi: "other water that an impurity falls into is not used" and the flowing
+  water sentence: found in al-Quduri (the first at the end of the page before the quote; the
+  online copy has the typo "اوضوء" for "الوضوء" there). Confirmed.
+- water-01/c6 Shafi'i: "about five hundred Baghdad ratls": found ("خمسمائة رطل بغدادي تقريبا").
+- wudu-02/c2 Hanbali: the full sequence (intention, bismillah, hands, mouth and nose, face,
+  arms with elbows, head with ears, feet with ankles): found in order in 'Umdat al-Fiqh.
+- wudu-03/c4 Hanafi: order falls under "ويستحب للمتوضئ" in al-Quduri. Confirmed.
+- wudu-03/c5 Shafi'i: al-muwalat is the last item of Abu Shuja's sunan list. Confirmed.
+- ghusl-05/c4 Hanafi and Hanbali: stepping aside and washing the feet last: found in both.
+- ghusl-05/c1: the early dissent about a woman's wet dream: Ibn Rushd names al-Nakha'i. Found.
+- tayammum-06/c3 Maliki (to the elbows), Hanbali (more strikes or wiping further also
+  count); tayammum-06/c4 Hanafi (Abu Yusuf: soil and sand only); tayammum-06/c6 Maliki
+  (other views recorded): all found.
+- khuff-07/c2 Hanbali (three days and nights for the traveller); khuff-07/c4 Hanafi (Abu
+  Yusuf and Muhammad: "ثخينين لا يشفان الماء"); khuff-07/c5 Hanafi ("وينقض المسح ما ينقض
+  الوضوء"): all found.
+- najasa-08/c6 Hanafi ("وما ليس له عين مرئية"): found.
+
+Positions worded as "not among the acts/causes the primer lists"
+----------------------------------------------------------------
+These state a fact about an enumerated list in the primer, not a ruling we infer. Each list
+was read in full and the absent item searched for on the page(s):
+- wudu-03/c5 Hanafi (continuity): al-Quduri's fard, sunan and mustahabb lists do not mention
+  al-muwalat. Ibn Rushd, same mas'ala: "وذهب الشافعي وأبو حنيفة إلى أن الموالاة ليست من واجبات
+  الوضوء". Consistent.
+- wudu-04/c4 and c5 Hanafi (touching a woman, touching the private part): al-Quduri's list of
+  what breaks wudu (which runs onto the next page: fainting, madness, laughing aloud in the
+  prayer) has neither. Ibn Rushd on touching the penis: "ومنهم من لم ير فيه وضوءا أصلا وهو أبو
+  حنيفة وأصحابه". Consistent.
+- wudu-04/c6 Maliki and Shafi'i (bleeding): neither al-Risala's chapter nor Abu Shuja's six
+  causes names blood from elsewhere in the body. Ibn Rushd attributes "the two passages"
+  as the test to al-Shafi'i and his companions. Consistent for the Shafi'i entry; the Maliki
+  entry rests on the primer's own list.
+
+Findings fixed
+--------------
+1. water-01/c4: "every kind of natural water": "natural" is not in Ibn Rushd's sentence
+   ("جميع أنواع المياه"). Removed from the claim and its card.
+2. khuff-07/c1: Ibn Rushd says the condition is agreed "إلا خلافا شاذا". The claim now says
+   that he notes one isolated dissent.
+3. khuff-07/c2 Maliki: "No time limit" was our inference from "ما لم ينزعهما". Reworded to
+   what the primer says, adding that it names no time limit (position text and school card).
+4. wudu-04/c6 Hanafi: "spreads beyond its place" was loose for "فتجاوز إلى موضع يلحقه حكم
+   التطهير". Now "reaches a part that purification applies to" (position text and card).
+
+Findings answered, no change
+----------------------------
+- najasa-08/c5 Maliki: the quote is about water changed by something pure, not about vinegar
+  by name. The position text says only what the primer says; the claim is carried by the
+  Hanafi and Hanbali positions and Ibn Rushd's statement of the difference. Kept.
+- wudu-04/c1: "wady, a thick white fluid that can follow urine" is a lexical gloss; the same
+  description is in al-Risala's chapter ("ماء أبيض خاثر يخرج بإثر البول"). Kept.
+- tayammum-06/c3 Shafi'i: the online copy of Matn Abi Shuja' drops "ومسح الوجه" from the four
+  obligatory acts of tayammum (a copy error). Our position cites only "ومسح اليدين مع
+  المرفقين", which is there. Kept.
+- Claims of kind "differs" with fewer than four positions (wudu-03/c4, c5; ghusl-05/c6;
+  khuff-07/c3, c4; najasa-08/c6): the missing primers either do not address the point in a
+  quotable phrase or address it only by implication. Left out rather than inferred.
+
+Primer citations that could not be confirmed
+--------------------------------------------
+None. Every shipped primer quote was located. Limits of this check: one online copy per
+work (shamela.ws) was read, not a second independent print; and locating a phrase is not a
+scholar's reading of it. The lessons carry "Source-checked. Not yet reviewed by a scholar."
+
+Result: 9 of 9 lessons source-checked; 0 left as draft.
+
+2026-11-14  Fresh review of the package (a reviewer that did not build it)
+--------------------------------------------------------------------------
+- tools/verify-citations.mjs re-run: 160 of 160 quotes found on their recorded pages.
+- Every consensus and cross-location quote was read against the claim it supports.
+Findings fixed (all nine lessons raised to rev 2):
+1. ghusl-05/c1: Ibn Rushd's agreed cause is "خروج المني على وجه الصحة". The claim dropped
+   "على وجه الصحة" and so reported agreement on more than he does (emission through
+   illness is differed on). Claim and card now say "in the ordinary, healthy way".
+2. ghusl-05/c5 Maliki: "as the water is poured" was loose for "بإثر صب الماء". Now
+   "straight after pouring the water" (position text and school card).
+3. Check questions: the right option was the first one in all 28 questions. The options
+   are reordered so the answer falls evenly across positions; no wording changed.
+Noted, no change:
+- The brief lists rubbing among the differences on the obligatory acts of wudu. Ibn Rushd
+  treats rubbing as a difference under ghusl, not as a mas'ala of wudu, so it is carried by
+  ghusl-05/c5 and wudu-03 has no rubbing claim. Left out rather than cross-located loosely.
+- No hadith is cited as evidence; every claim rests on a Quran ref or a consensus citation.
+
+2026-11-14  Independent content verification (a verifier that wrote none of the package)
+----------------------------------------------------------------------------------------
+Method: all 73 recorded pages fetched afresh and read, not only searched. The four primers'
+chapters (al-Quduri, al-Risala, Abu Shuja', 'Umdat al-Fiqh) and the cited entries of
+Ibn al-Mundhir and Ibn Hazm were read in full; every Bidayat al-Mujtahid quote was read
+with the sentences around it, looking for qualifiers the English had dropped. Each claim,
+position, card and check question was then read against that Arabic.
+- tools/verify-citations.mjs: all quotes found on their recorded pages, before and after
+  the changes below. build-deen.mjs --check: 9 of 9 shipped.
+- The unit ships no hadith item, dhikr or grading. The one hadith wording in it is the
+  Maymunah narration inside the Hanbali primer's own text (ghusl-05/c4), given as the
+  primer gives it.
+Findings fixed (wudu-04, ghusl-05, khuff-07, najasa-08, recap-09 raised to rev 3):
+1. wudu-04/c1: Ibn Rushd's agreement on urine, stool, wind, madhy and wady is "إذا كان
+   خروجها على وجه الصحة". The claim dropped the condition and so reported agreement on more
+   than he does (he goes on to record the difference about what leaves through illness).
+   Claim and card now say "in the ordinary, healthy way". Same slip as ghusl-05/c1 earlier.
+2. recap-09/c4: "What comes out of the two passages" was wider than the agreed list (Ibn
+   Rushd records a difference about other things that come out, and about illness). Now
+   names urine, stool and wind in the ordinary, healthy way.
+3. najasa-08/c3: "the dead body of a land animal" for "ميتة الحيوان" read as if slaughtered
+   meat were included. Now "carrion ... that died without being slaughtered". Ibn Rushd's
+   "بأي سبب اتفق أن تذهب حياته" on the pig, which the English had left out, is restored
+   ("however it died"). Claim and card.
+4. khuff-07/c5: the claim and card said the primers "add" taking the socks off and the end
+   of the time to what ends a wudu made with wiping. Al-Quduri and Abu Shuja' say these end
+   the wiping, and al-Quduri then has him wash his feet without repeating the rest; only
+   'Umdat al-Fiqh says the purification is void. Ibn Rushd records this as a difference in
+   the same mas'ala ("واختلفوا هل نزع الخف ناقض لهذه الطهارة أم لا"). Claim and card now say
+   the wiping ends and that the effect on the wudu is differed on; the Hanafi position
+   carries al-Quduri's next sentence (quote extended; the online copy has the typos "عيه"
+   and "بقيه" in the words after the stored quote); the cross-location is recorded.
+5. ghusl-05/c4 Hanbali: the position paraphrased the primer's Maymunah narration without
+   saying whose washing she described, and skipped "ثم ضرب بيده على الحائط والأرض". Now
+   names the Prophet ﷺ and keeps that step.
+Read and left as they are:
+- wudu-04/c4 Shafi'i: "a woman who is not close kin" for "المرأة الأجنبية". Literal enough;
+  the primer does not define the term further.
+- tayammum-06/c5: "with water" is not in Ibn al-Mundhir's sentence but follows from "ثم وجد
+  الماء"; the card has it without.
+- wudu-03/c4, c5 and khuff-07/c4: Ibn Rushd gives Malik's view on each, but al-Risala's
+  chapters read here do not state it in a quotable phrase, so no Maliki position is shown
+  (positions come from the primer only). The claim text names the difference either way.
+- 'Umdat al-Fiqh, ghusl: the online copy reads "وتسن التسمية ويدلك بدنه بيديه" and drops
+  "تعميم" before "بدنه بالغسل". Our reading (rubbing recommended; washing the whole body
+  obligatory) is what the sentence says with or without the slips.
+Limits unchanged: one online copy per work, and a located phrase is not a scholar's reading.
+Nothing removed; no item could not be verified.

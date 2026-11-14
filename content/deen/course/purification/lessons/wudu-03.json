@@ -1,0 +1,392 @@
+{
+  "id": "wudu-03",
+  "unit": "purification",
+  "order": 3,
+  "rev": 2,
+  "title": "What the wash for prayer rests on",
+  "intro": "Some parts of [[wudu]] are its core and others complete it. The schools share the core named in the Quran and differ on a few points around it. This lesson sets each school’s primer side by side.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "The scholars agree that washing the face, washing the arms and wiping the head are obligatory parts of [[wudu]], and that the feet are among its parts.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 4 (Dar al-Hadith ed., vol. 1, p. 17)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 5 (Dar al-Hadith ed., vol. 1, p. 18)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 6 (Dar al-Hadith ed., vol. 1, p. 19)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 10 (Dar al-Hadith ed., vol. 1, p. 21)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "Which parts of [[wudu]] does Ibn Rushd report agreement on?",
+          "back": "Washing the face, washing the arms, wiping the head, and the feet as one of its parts."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "Intention ([[niyyah]]) is a condition in acts of worship by agreement. The schools differ on whether [[wudu]] is valid without it.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 1 (Dar al-Hadith ed., vol. 1, p. 15)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Recommended in [[wudu]]; obligatory in [[tayammum]].",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "والنية فرض في التيمم مستحبة في الوضوء"
+        },
+        {
+          "school": "maliki",
+          "text": "The acts of [[wudu]] are to be done for Allah’s sake, in answer to His command; the primer words this as a duty.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab sifat al-wudu’ wa masnunihi wa mafrudihi"
+          },
+          "quote": "ويجب عليه أن يعمل عمل الوضوء احتسابا لله تعالى لما أمره به"
+        },
+        {
+          "school": "shafii",
+          "text": "Obligatory: the first of the six obligatory acts, made when washing the face.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+          },
+          "quote": "وفروض الوضوء ستة أشياء: النية عند غسل الوجه"
+        },
+        {
+          "school": "hanbali",
+          "text": "[[wudu]] is not valid unless it is intended.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Wudu’"
+          },
+          "quote": "لا يصح الوضوء ولا غيره من العبادات إلا أن ينويه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "What is agreed about intention, and what do the schools differ on?",
+          "back": "Agreed: intention is a condition in acts of worship. They differ on whether [[wudu]] is valid without it."
+        },
+        {
+          "id": "c2-hanafi",
+          "front": "Hanafi primer (al-Quduri): what is the place of intention in [[wudu]]?",
+          "back": "Recommended in [[wudu]]; obligatory in [[tayammum]].",
+          "school": "hanafi"
+        },
+        {
+          "id": "c2-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): what is the place of intention in [[wudu]]?",
+          "back": "The acts of [[wudu]] are to be done for Allah’s sake, in answer to His command; the primer words this as a duty.",
+          "school": "maliki"
+        },
+        {
+          "id": "c2-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): what is the place of intention in [[wudu]]?",
+          "back": "Obligatory: the first of the six obligatory acts, made when washing the face.",
+          "school": "shafii"
+        },
+        {
+          "id": "c2-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): what is the place of intention in [[wudu]]?",
+          "back": "[[wudu]] is not valid unless it is intended.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "Wiping the head is an obligatory part of [[wudu]] by agreement. The schools differ on how much of the head is wiped.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 6 (Dar al-Hadith ed., vol. 1, p. 19)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "The amount of the forelock.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara"
+          },
+          "quote": "والمفروض في مسح الرأس مقدار الناصية"
+        },
+        {
+          "school": "maliki",
+          "text": "The whole head: however he wipes is enough, so long as he covers the head.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab sifat al-wudu’ wa masnunihi wa mafrudihi"
+          },
+          "quote": "وكيفما مسح أجزأه إذا أوعب رأسه"
+        },
+        {
+          "school": "shafii",
+          "text": "Part of the head.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+          },
+          "quote": "ومسح بعض الرأس"
+        },
+        {
+          "school": "hanbali",
+          "text": "The whole head.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Wudu’"
+          },
+          "quote": "ومسح الرأس كله"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "What do the schools differ on about wiping the head in [[wudu]]?",
+          "back": "How much of it is wiped. That wiping the head is obligatory is agreed."
+        },
+        {
+          "id": "c3-hanafi",
+          "front": "Hanafi primer (al-Quduri): how much of the head is wiped in [[wudu]]?",
+          "back": "The amount of the forelock.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c3-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): how much of the head is wiped in [[wudu]]?",
+          "back": "The whole head: however he wipes is enough, so long as he covers the head.",
+          "school": "maliki"
+        },
+        {
+          "id": "c3-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): how much of the head is wiped in [[wudu]]?",
+          "back": "Part of the head.",
+          "school": "shafii"
+        },
+        {
+          "id": "c3-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): how much of the head is wiped in [[wudu]]?",
+          "back": "The whole head.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "The ayah names the parts of [[wudu]] in an order. The schools differ on whether keeping that order is obligatory.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Recommended: he keeps the order, beginning with what Allah mentioned first.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara"
+          },
+          "quote": "ويرتب الوضوء فيبدأ بما بدأ الله تعالى بذكره"
+        },
+        {
+          "school": "shafii",
+          "text": "Obligatory: order is the sixth of the obligatory acts.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+          },
+          "quote": "والترتيب على ما ذكرناه"
+        },
+        {
+          "school": "hanbali",
+          "text": "Obligatory: the order of [[wudu]] as described.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Wudu’"
+          },
+          "quote": "وترتيب الوضوء على ما ذكرنا"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "Is keeping the order of the ayah in [[wudu]] obligatory?",
+          "back": "The schools differ. The primers shown here count it either recommended or obligatory."
+        },
+        {
+          "id": "c4-hanafi",
+          "front": "Hanafi primer (al-Quduri): is keeping the order of [[wudu]] obligatory?",
+          "back": "Recommended: he keeps the order, beginning with what Allah mentioned first.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c4-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): is keeping the order of [[wudu]] obligatory?",
+          "back": "Obligatory: order is the sixth of the obligatory acts.",
+          "school": "shafii"
+        },
+        {
+          "id": "c4-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): is keeping the order of [[wudu]] obligatory?",
+          "back": "Obligatory: the order of [[wudu]] as described.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "The schools differ on whether the parts of [[wudu]] are to be washed one straight after another, without a long gap.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Not among the acts al-Quduri lists as the obligation of purification: washing the three parts and wiping the head.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara"
+          },
+          "quote": "غسل الأعضاء الثلاثة ومسح الرأس"
+        },
+        {
+          "school": "shafii",
+          "text": "Recommended: the last of the ten recommended acts.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+          },
+          "quote": "والطهارة ثلاثا ثلاثا والموالاة"
+        },
+        {
+          "school": "hanbali",
+          "text": "Obligatory: washing a part is not delayed until the one before it has dried.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Wudu’"
+          },
+          "quote": "وأن لا يؤخر غسل عضو حتى ينشف ما قبله"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "Do the parts of [[wudu]] have to follow one another without a long gap?",
+          "back": "The schools differ: the primers shown here range from recommended to obligatory."
+        },
+        {
+          "id": "c5-hanafi",
+          "front": "Hanafi primer (al-Quduri): do the parts of [[wudu]] have to follow one another without a gap?",
+          "back": "Not among the acts al-Quduri lists as the obligation of purification: washing the three parts and wiping the head.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c5-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): do the parts of [[wudu]] have to follow one another without a gap?",
+          "back": "Recommended: the last of the ten recommended acts.",
+          "school": "shafii"
+        },
+        {
+          "id": "c5-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): do the parts of [[wudu]] have to follow one another without a gap?",
+          "back": "Obligatory: washing a part is not delayed until the one before it has dried.",
+          "school": "hanbali"
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which of these does Ibn Rushd report as an agreed obligatory part of [[wudu]]?",
+      "options": [
+        "Wiping the head",
+        "Wiping the neck",
+        "Washing three times"
+      ],
+      "answer": 0,
+      "claim": "c1"
+    },
+    {
+      "q": "On intention in [[wudu]], the four primers…",
+      "options": [
+        "All count it recommended",
+        "Differ: one counts it recommended, the others make it a duty",
+        "Do not mention it"
+      ],
+      "answer": 1,
+      "claim": "c2"
+    },
+    {
+      "q": "What do the schools differ on about wiping the head?",
+      "options": [
+        "Whether the head is part of [[wudu]] at all",
+        "Whether water is used",
+        "How much of the head is wiped"
+      ],
+      "answer": 2,
+      "claim": "c3"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+    ]
+  }
+}

@@ -1,0 +1,386 @@
+{
+  "id": "tayammum-06",
+  "unit": "purification",
+  "order": 6,
+  "rev": 2,
+  "title": "When there is no water",
+  "intro": "Water is not always within reach, and sometimes using it would harm. For those times the Quran gives clean earth in its place. This lesson covers who it is for, how it is done, and what ends it.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "When water cannot be found, the Quran says to turn to clean earth and wipe the face and the hands with it. This is [[tayammum]], and it stands in for [[wudu]].",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        },
+        {
+          "quran": {
+            "surahId": 4,
+            "ayah": 43
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tayammum, Bab 1 (Dar al-Hadith ed., vol. 1, p. 70)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "What does the Quran say to do when water cannot be found?",
+          "back": "Turn to clean earth and wipe the face and the hands with it: [[tayammum]], which stands in for [[wudu]]."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "[[tayammum]] is for the sick person and the traveller who have no water. For a sick person who is harmed by water and has none, it stands in for both [[wudu]] and [[ghusl]].",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tayammum, Bab 2 (Dar al-Hadith ed., vol. 1, p. 72)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "maratib-al-ijma",
+            "location": "Kitab al-Tahara (p. 18)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "Who is [[tayammum]] for, by agreement?",
+          "back": "The sick person and the traveller who have no water."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "The ayah says to wipe the face and the hands. The schools differ on how many times the earth is struck and how far up the arms the wiping goes.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Two strikes: he wipes his face with one and his arms up to the elbows with the other.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "والتيمم ضربتان: يمسح بإحداهما وجهه وبالأخرى يديه إلى المرفقين"
+        },
+        {
+          "school": "maliki",
+          "text": "He strikes the earth and wipes his whole face, then strikes again and wipes each hand and forearm up to the elbow.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
+          },
+          "quote": "ثم يمسح بهما وجهه كله مسحا ثم يضرب بيديه الأرض فيمسح يمناه بيسراه"
+        },
+        {
+          "school": "shafii",
+          "text": "The hands are wiped up to and including the elbows.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: tayammum"
+          },
+          "quote": "ومسح اليدين مع المرفقين"
+        },
+        {
+          "school": "hanbali",
+          "text": "One strike on clean earth, then he wipes his face and his hands. More strikes, or wiping further, also count.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "أن يضرب بيديه على الصعيد الطيب ضربة واحدة فيمسح بهما وجهه وكفيه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "What do the schools differ on in how [[tayammum]] is done?",
+          "back": "How many times the earth is struck, and how far up the arms the wiping goes."
+        },
+        {
+          "id": "c3-hanafi",
+          "front": "Hanafi primer (al-Quduri): how is [[tayammum]] done?",
+          "back": "Two strikes: he wipes his face with one and his arms up to the elbows with the other.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c3-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): how is [[tayammum]] done?",
+          "back": "He strikes the earth and wipes his whole face, then strikes again and wipes each hand and forearm up to the elbow.",
+          "school": "maliki"
+        },
+        {
+          "id": "c3-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): how is [[tayammum]] done?",
+          "back": "The hands are wiped up to and including the elbows.",
+          "school": "shafii"
+        },
+        {
+          "id": "c3-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): how is [[tayammum]] done?",
+          "back": "One strike on clean earth, then he wipes his face and his hands. More strikes, or wiping further, also count.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "Dusty soil is used for [[tayammum]] by agreement. The schools differ on other things from the ground, such as sand and stone.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 18 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tayammum, Bab 5 (Dar al-Hadith ed., vol. 1, p. 77)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Abu Hanifah and Muhammad: anything of the earth’s kind, such as soil, sand and stone. Abu Yusuf: soil and sand only.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "ويجوز التيمم عند أبي حنيفة ومحمد بكل ما كان من جنس الأرض كالتراب والرمل والحجر"
+        },
+        {
+          "school": "maliki",
+          "text": "Clean earth: whatever is on the surface of the ground, such as soil, sand, stones or salt flat.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
+          },
+          "quote": "والتيمم بالصعيد الطاهر وهو ما ظهر على وجه الأرض منها من تراب أو رمل أو حجارة أو سبخة"
+        },
+        {
+          "school": "shafii",
+          "text": "Pure soil that has dust; if gypsum or sand is mixed in, it does not count.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: tayammum"
+          },
+          "quote": "والتراب الطاهر له غبار فإن خالطه جص أو رمل لم يجز"
+        },
+        {
+          "school": "hanbali",
+          "text": "Only pure soil that has dust.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "فلا يتيمم إلا بتراب طاهر له غبار"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "What is used for [[tayammum]] by agreement, and what do the schools differ on?",
+          "back": "Agreed: dusty soil. They differ on other things from the ground, such as sand and stone."
+        },
+        {
+          "id": "c4-hanafi",
+          "front": "Hanafi primer (al-Quduri): what is [[tayammum]] made with?",
+          "back": "Abu Hanifah and Muhammad: anything of the earth’s kind, such as soil, sand and stone. Abu Yusuf: soil and sand only.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c4-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): what is [[tayammum]] made with?",
+          "back": "Clean earth: whatever is on the surface of the ground, such as soil, sand, stones or salt flat.",
+          "school": "maliki"
+        },
+        {
+          "id": "c4-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): what is [[tayammum]] made with?",
+          "back": "Pure soil that has dust; if gypsum or sand is mixed in, it does not count.",
+          "school": "shafii"
+        },
+        {
+          "id": "c4-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): what is [[tayammum]] made with?",
+          "back": "Only pure soil that has dust.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "Whatever breaks [[wudu]] breaks [[tayammum]]. Someone who made [[tayammum]] and then finds water before starting the prayer purifies again, with water, and then prays.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tayammum, Bab 6 (Dar al-Hadith ed., vol. 1, p. 78)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 21 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "You made [[tayammum]], then found water before starting the prayer. What now?",
+          "back": "The [[tayammum]] is broken: purify again and then pray. Whatever breaks [[wudu]] breaks [[tayammum]] too."
+        }
+      ]
+    },
+    {
+      "id": "c6",
+      "text": "The schools differ on how many obligatory prayers one [[tayammum]] covers.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "With one [[tayammum]] he prays as many obligatory and voluntary prayers as he wishes.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "ويصلي بتيممه ما شاء من الفرائض والنوافل"
+        },
+        {
+          "school": "maliki",
+          "text": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
+          },
+          "quote": "ولا يصلي صلاتين بتيمم واحد من هؤلاء إلا مريض لا يقدر على مس الماء لضرر بجسمه مقيم"
+        },
+        {
+          "school": "shafii",
+          "text": "A [[tayammum]] for each obligatory prayer; with one he prays as many voluntary prayers as he wishes.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: tayammum"
+          },
+          "quote": "ويتيمم لكل فريضة ويصلي بتيمم واحد ما شاء من النوافل"
+        },
+        {
+          "school": "hanbali",
+          "text": "A [[tayammum]] made for an obligatory prayer covers it and any other obligatory and voluntary prayers, until that prayer’s time ends.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Tayammum"
+          },
+          "quote": "وإن تيمم لفريضة فله فعلها وفعل ما شاء من الفرائض والنوافل حتى يخرج وقتها"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c6a",
+          "front": "Does one [[tayammum]] cover more than one obligatory prayer?",
+          "back": "The schools differ: from one obligatory prayer each, to as many as he wishes."
+        },
+        {
+          "id": "c6-hanafi",
+          "front": "Hanafi primer (al-Quduri): how many obligatory prayers does one [[tayammum]] cover?",
+          "back": "With one [[tayammum]] he prays as many obligatory and voluntary prayers as he wishes.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c6-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): how many obligatory prayers does one [[tayammum]] cover?",
+          "back": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
+          "school": "maliki"
+        },
+        {
+          "id": "c6-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): how many obligatory prayers does one [[tayammum]] cover?",
+          "back": "A [[tayammum]] for each obligatory prayer; with one he prays as many voluntary prayers as he wishes.",
+          "school": "shafii"
+        },
+        {
+          "id": "c6-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): how many obligatory prayers does one [[tayammum]] cover?",
+          "back": "A [[tayammum]] made for an obligatory prayer covers it and any other obligatory and voluntary prayers, until that prayer’s time ends.",
+          "school": "hanbali"
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which parts does the Quran say to wipe in [[tayammum]]?",
+      "options": [
+        "The face and the hands",
+        "The head and the feet",
+        "The face and the feet"
+      ],
+      "answer": 0,
+      "claim": "c1"
+    },
+    {
+      "q": "What is used for [[tayammum]] by agreement?",
+      "options": [
+        "Any clean cloth",
+        "Dusty soil",
+        "Fresh leaves"
+      ],
+      "answer": 1,
+      "claim": "c4"
+    },
+    {
+      "q": "You made [[tayammum]] and then found water before starting to pray. What now?",
+      "options": [
+        "Pray with the [[tayammum]]",
+        "Wait for the next prayer",
+        "Purify again, then pray"
+      ],
+      "answer": 2,
+      "claim": "c5"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+    ]
+  }
+}

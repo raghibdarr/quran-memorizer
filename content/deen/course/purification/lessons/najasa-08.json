@@ -1,0 +1,277 @@
+{
+  "id": "najasa-08",
+  "unit": "purification",
+  "order": 8,
+  "rev": 3,
+  "title": "Removing impurity",
+  "intro": "Purity also concerns what gets on the body, the clothes and the ground. This lesson covers what the scholars count as impure, where it matters for the prayer, and how it is cleaned away.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "Removing impurity is commanded in the sacred law. The scholars differ on whether that command is an obligation or a recommendation.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 1 (Dar al-Hadith ed., vol. 1, p. 81)"
+          }
+        },
+        {
+          "quran": {
+            "surahId": 74,
+            "ayah": 4
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "What is agreed about removing impurity, and what is differed on?",
+          "back": "Agreed: the sacred law commands it. Differed on: whether the command is an obligation or a recommendation."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "Impurity is removed from three places: the body, the clothes, and the place of prayer.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 3 (Dar al-Hadith ed., vol. 1, p. 89)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "From which three places is impurity removed?",
+          "back": "The body, the clothes, and the place of prayer."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "Four things are impure by agreement: carrion, meaning a land animal with blood that died without being slaughtered; the flesh of the pig, however it died; blood that flows in quantity from a land animal; and human urine and stool.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 2 (Dar al-Hadith ed., vol. 1, p. 83)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 25 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "Name the four things Ibn Rushd reports as impure by agreement.",
+          "back": "Carrion (a land animal with blood that died without being slaughtered); the flesh of the pig, however it died; blood that flows in quantity from a land animal; human urine and stool."
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "Pure, purifying water removes impurity from all three places. Stones are also agreed to remove it from the two passages after relieving oneself ([[istinja]]).",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 4 (Dar al-Hadith ed., vol. 1, p. 90)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "What removes impurity by agreement?",
+          "back": "Pure, purifying water, from the body, clothes and place of prayer; and stones, from the two passages after relieving oneself."
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "Water removes impurity by agreement. The schools differ on whether other pure liquids, such as vinegar, also remove it.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 4 (Dar al-Hadith ed., vol. 1, p. 90)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Impurity is cleaned with water and with any pure liquid that can remove it, such as vinegar and rose water.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Anjas"
+          },
+          "quote": "ويجوز تطهير النجاسة بالماء وبكل مائع طاهر يمكن إزالتها به كالخل وماء الورد"
+        },
+        {
+          "school": "maliki",
+          "text": "Water changed by something pure dissolved in it is pure but does not purify, whether for [[wudu]], [[ghusl]] or removing impurity.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab taharat al-ma’ wa al-thawb wa al-buq‘a"
+          },
+          "quote": "فذلك الماء طاهر غير مطهر في وضوء أو طهر أو زوال نجاسة"
+        },
+        {
+          "school": "hanbali",
+          "text": "Water purifies from ritual states and from impurities; purity is not reached with any other liquid.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab ahkam al-miyah"
+          },
+          "quote": "خلق الماء طهورا يطهر من الأحداث والنجاسات فلا تحصل الطهارة بمائع غيره"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "Can a pure liquid other than water, such as vinegar, remove impurity?",
+          "back": "The schools differ. That water removes it is agreed."
+        },
+        {
+          "id": "c5-hanafi",
+          "front": "Hanafi primer (al-Quduri): can a liquid other than water remove impurity?",
+          "back": "Impurity is cleaned with water and with any pure liquid that can remove it, such as vinegar and rose water.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c5-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): can a liquid other than water remove impurity?",
+          "back": "Water changed by something pure dissolved in it is pure but does not purify, whether for [[wudu]], [[ghusl]] or removing impurity.",
+          "school": "maliki"
+        },
+        {
+          "id": "c5-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): can a liquid other than water remove impurity?",
+          "back": "Water purifies from ritual states and from impurities; purity is not reached with any other liquid.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c6",
+      "text": "Washing removes every kind of impurity by agreement. The schools differ on whether a set number of washes is needed.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 5 (Dar al-Hadith ed., vol. 1, p. 91)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Impurity that cannot be seen is washed until the one washing thinks it most likely that it is clean.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Anjas"
+          },
+          "quote": "فطهارتها أن يغسل حتى يغلب على ظن الغاسل أنه قد طهر"
+        },
+        {
+          "school": "shafii",
+          "text": "A vessel licked by a dog or a pig is washed seven times, one of them with earth. Other impurities are washed once, thoroughly, and three times is better.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: impurities"
+          },
+          "quote": "ويغسل الإناء من ولوغ الكلب والخنزير سبع مرات إحداهن بالتراب ويغسل من سائر النجاسات مرة تأتي عليه والثلاث أفضل"
+        },
+        {
+          "school": "hanbali",
+          "text": "The impurity of a dog or a pig is washed seven times, one of them with earth. For other impurities, three washes that clean it.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab ahkam al-miyah"
+          },
+          "quote": "وتغسل نجاسة الكلب والخنزير سبعا إحداهن بالتراب ويجزئ في سائر النجاسات ثلاث منقية"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c6a",
+          "front": "Is there a set number of washes for removing impurity?",
+          "back": "The schools differ. That washing removes every kind of impurity is agreed."
+        },
+        {
+          "id": "c6-hanafi",
+          "front": "Hanafi primer (al-Quduri): how many washes remove an impurity?",
+          "back": "Impurity that cannot be seen is washed until the one washing thinks it most likely that it is clean.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c6-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): how many washes remove an impurity?",
+          "back": "A vessel licked by a dog or a pig is washed seven times, one of them with earth. Other impurities are washed once, thoroughly, and three times is better.",
+          "school": "shafii"
+        },
+        {
+          "id": "c6-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): how many washes remove an impurity?",
+          "back": "The impurity of a dog or a pig is washed seven times, one of them with earth. For other impurities, three washes that clean it.",
+          "school": "hanbali"
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "From which places is impurity removed for the prayer?",
+      "options": [
+        "Body, clothes and place of prayer",
+        "Body only",
+        "Clothes and shoes only"
+      ],
+      "answer": 0,
+      "claim": "c2"
+    },
+    {
+      "q": "Which of these is impure by agreement?",
+      "options": [
+        "Rain water",
+        "Human urine",
+        "Dry soil"
+      ],
+      "answer": 1,
+      "claim": "c3"
+    },
+    {
+      "q": "On vinegar and other pure liquids removing impurity, the primers…",
+      "options": [
+        "All accept them",
+        "All reject them",
+        "Differ"
+      ],
+      "answer": 2,
+      "claim": "c5"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log",
+      "2026-11-14 independent verifier (wrote none of it): primer, consensus and Bidayat al-Mujtahid pages re-read in full against the English; fixes in review.log"
+    ]
+  }
+}

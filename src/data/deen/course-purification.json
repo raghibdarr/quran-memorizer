@@ -1,0 +1,2827 @@
+{
+ "deck": "course-purification",
+ "kind": "course",
+ "hash": "446068b6e09e64b7",
+ "items": [
+  {
+   "id": "ghusl-05",
+   "unit": "purification",
+   "order": 5,
+   "rev": 3,
+   "title": "The full-body wash",
+   "intro": "Some states call for more than [[wudu]]: a wash of the whole body, called [[ghusl]]. This lesson covers when it is due, how the primers describe it, and two points where they differ.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "[[ghusl]] is due after semen is emitted in the ordinary, healthy way, awake or asleep, by a man or a woman, and when menstruation ends. Ibn Rushd notes one early dissent about a woman’s wet dream.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Ghusl, Bab 2 (Dar al-Hadith ed., vol. 1, p. 52)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Ghusl, Bab 2 (Dar al-Hadith ed., vol. 1, p. 53)"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 222
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "Which two causes of [[ghusl]] does Ibn Rushd report agreement on?",
+       "back": "The emission of semen in the ordinary, healthy way, awake or asleep, by a man or a woman; and the end of menstruation."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "A woman makes [[ghusl]] when the bleeding after childbirth ends.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 31 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 37)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "What does a woman do when the bleeding after childbirth ends?",
+       "back": "She makes [[ghusl]]. Ibn al-Mundhir reports agreement on this."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "The state after intercourse or the emission of semen is called [[janabah]], and the Quran says: “If you are in [[janabah]], purify yourselves.” All four primers list intercourse as a cause of [[ghusl]] whether or not semen is emitted.",
+     "kind": "definition",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Intercourse without emission is listed among the causes of [[ghusl]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والتقاء الختانين من غير إنزال"
+      },
+      {
+       "school": "maliki",
+       "text": "Intercourse calls for [[ghusl]] even if he does not emit.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab ma yajibu minhu al-wudu’ wa al-ghusl"
+       },
+       "quote": "أو بمغيب الحشفة في الفرج وإن لم ينزل"
+      },
+      {
+       "school": "shafii",
+       "text": "Intercourse and the emission of semen are listed as separate causes of [[ghusl]].",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: what makes ghusl due"
+       },
+       "quote": "وهي التقاء الختانين وإنزال المني"
+      },
+      {
+       "school": "hanbali",
+       "text": "The causes are the emission of semen, and intercourse.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah"
+       },
+       "quote": "خروج المني وهو الماء الدافق والتقاء الختانين"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "What is [[janabah]]?",
+       "back": "The state after intercourse or the emission of semen. The Quran (5:6) says to purify yourselves from it, and all four primers list intercourse as a cause of [[ghusl]] even without emission."
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "A full [[ghusl]], as the Hanafi and Hanbali primers describe it: wash the hands and the private parts, make [[wudu]] as for the prayer, pour water over the head and the rest of the body, then step aside and wash the feet. Ibn Rushd reports agreement that the description from ‘A’ishah and Maymunah is the fullest form.",
+     "kind": "how-to",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Ghusl, Bab 1 (Dar al-Hadith ed., vol. 1, p. 51)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "maratib-al-ijma",
+        "location": "Kitab al-Tahara (p. 19)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "He begins with his hands and private parts, removes any impurity on his body, makes [[wudu]] as for the prayer except the feet, then pours water over his head and the rest of his body three times.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "ثم يتوضأ وضوءه للصلاة إلا رجليه ثم يفيض الماء على رأسه وسائر جسده ثلاثا"
+      },
+      {
+       "school": "hanbali",
+       "text": "He does as Maymunah described the Prophet ﷺ washing: he washed his hands, then his private parts, struck his hand on the wall and the ground, made [[wudu]] as for the prayer, poured water over his body, then stepped aside and washed his feet.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah"
+       },
+       "quote": "ثم توضأ وضوءه للصلاة ثم أفاض الماء على بدنه ثم تنحى فغسل رجليه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "In a full [[ghusl]], what comes before pouring water over the head and body?",
+       "back": "Washing the hands and the private parts, then making [[wudu]] as for the prayer."
+      },
+      {
+       "id": "c4b",
+       "front": "In the full [[ghusl]] the primers describe, when are the feet washed?",
+       "back": "Last, after stepping aside from where the water was poured."
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Getting water to all of the skin and the head is obligatory in [[ghusl]] by agreement. The schools differ on whether the body also has to be rubbed with the hand.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "maratib-al-ijma",
+        "location": "Kitab al-Tahara (p. 19)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Rubbing is not listed: the obligation is rinsing the mouth and nose and washing the rest of the body.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "وفرض الغسل: المضمضة والاستنشاق وغسل سائر البدن"
+      },
+      {
+       "school": "maliki",
+       "text": "He rubs with his hands straight after pouring the water, until it has covered his body.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-ghusl"
+       },
+       "quote": "ويتدلك بيديه بإثر صب الماء حتى يعم جسده"
+      },
+      {
+       "school": "shafii",
+       "text": "Recommended: passing the hand over the body is one of the five recommended acts.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of ghusl"
+       },
+       "quote": "وإمرار اليد على الجسد"
+      },
+      {
+       "school": "hanbali",
+       "text": "Recommended, along with saying “bismillah”.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah"
+       },
+       "quote": "وتسن التسمية ويدلك بدنه بيديه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "What is agreed about water in [[ghusl]], and what do the schools differ on?",
+       "back": "Agreed: water reaches all of the skin and the head. They differ on whether the body is also rubbed with the hand."
+      },
+      {
+       "id": "c5-hanafi",
+       "front": "Hanafi primer (al-Quduri): is the body rubbed with the hand in [[ghusl]]?",
+       "back": "Rubbing is not listed: the obligation is rinsing the mouth and nose and washing the rest of the body.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c5-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): is the body rubbed with the hand in [[ghusl]]?",
+       "back": "He rubs with his hands straight after pouring the water, until it has covered his body.",
+       "school": "maliki"
+      },
+      {
+       "id": "c5-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): is the body rubbed with the hand in [[ghusl]]?",
+       "back": "Recommended: passing the hand over the body is one of the five recommended acts.",
+       "school": "shafii"
+      },
+      {
+       "id": "c5-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): is the body rubbed with the hand in [[ghusl]]?",
+       "back": "Recommended, along with saying “bismillah”.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "text": "The schools differ on whether rinsing the mouth and the nose is an obligatory part of [[ghusl]].",
+     "kind": "differs",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Obligatory: the obligation of [[ghusl]] is rinsing the mouth and nose and washing the rest of the body.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "وفرض الغسل: المضمضة والاستنشاق وغسل سائر البدن"
+      },
+      {
+       "school": "shafii",
+       "text": "Not among the three obligatory acts: intention, removing any impurity on the body, and getting water to all of the hair and skin.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of ghusl"
+       },
+       "quote": "وفرائض الغسل ثلاثة أشياء: النية وإزالة النجاسة إن كانت على بدنه وإيصال الماء إلى جميع الشعر والبشرة"
+      },
+      {
+       "school": "hanbali",
+       "text": "Obligatory, together with intention and washing the body.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah"
+       },
+       "quote": "بالغسل مع المضمضة والاستنشاق"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c6a",
+       "front": "Is rinsing the mouth and nose an obligatory part of [[ghusl]]?",
+       "back": "The schools differ: some primers list it among the obligations and others do not."
+      },
+      {
+       "id": "c6-hanafi",
+       "front": "Hanafi primer (al-Quduri): is rinsing the mouth and nose obligatory in [[ghusl]]?",
+       "back": "Obligatory: the obligation of [[ghusl]] is rinsing the mouth and nose and washing the rest of the body.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c6-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): is rinsing the mouth and nose obligatory in [[ghusl]]?",
+       "back": "Not among the three obligatory acts: intention, removing any impurity on the body, and getting water to all of the hair and skin.",
+       "school": "shafii"
+      },
+      {
+       "id": "c6-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): is rinsing the mouth and nose obligatory in [[ghusl]]?",
+       "back": "Obligatory, together with intention and washing the body.",
+       "school": "hanbali"
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these calls for [[ghusl]] by agreement?",
+     "options": [
+      "The end of menstruation",
+      "Passing wind",
+      "A short nap"
+     ],
+     "answer": 0,
+     "claim": "c1"
+    },
+    {
+     "q": "In a full [[ghusl]], what comes before pouring water over the head?",
+     "options": [
+      "Washing the feet",
+      "[[wudu]] as for the prayer",
+      "Drying the hands"
+     ],
+     "answer": 1,
+     "claim": "c4"
+    },
+    {
+     "q": "On rubbing the body with the hand in [[ghusl]], the primers…",
+     "options": [
+      "All make it an obligation",
+      "Do not mention it",
+      "Differ"
+     ],
+     "answer": 2,
+     "claim": "c5"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "khuff-07",
+   "unit": "purification",
+   "order": 7,
+   "rev": 3,
+   "title": "Wiping over leather socks",
+   "intro": "Taking footwear off for every [[wudu]] can be hard, on a journey or in the cold. The primers of all four schools have a chapter on wiping over leather socks in place of washing the feet. This lesson covers when that applies and where they differ.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "Someone who completes their purification, then puts on leather socks ([[khuff]]), then breaks [[wudu]], may wipe over the socks in place of washing the feet. The feet being pure by [[wudu]] when the socks go on is the agreed condition; Ibn Rushd notes one isolated dissent.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 15 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 6 (Dar al-Hadith ed., vol. 1, p. 28)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "What is the agreed condition for wiping over leather socks?",
+       "back": "That they were put on with the feet already pure by a complete [[wudu]]."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "The schools differ on whether wiping over leather socks has a time limit.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 15 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "A day and a night for a resident, three days and nights for a traveller, counted from when [[wudu]] is first broken.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+       },
+       "quote": "فإن كان مقيما مسح يوما وليلة وإن كان مسافرا مسح ثلاثة أيام ولياليها وابتداؤها عقيب الحدث"
+      },
+      {
+       "school": "maliki",
+       "text": "At home or travelling, for as long as he does not take them off; the primer names no time limit.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-mash ‘ala al-khuffayn"
+       },
+       "quote": "وله أن يمسح على الخفين في الحضر والسفر ما لم ينزعهما"
+      },
+      {
+       "school": "shafii",
+       "text": "A day and a night for a resident, three days and nights for a traveller, counted from when he breaks [[wudu]] after putting them on.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: wiping over the khuffayn"
+       },
+       "quote": "ويمسح المقيم يوما وليلة والمسافر ثلاثة أيام بلياليهن وابتداء المدة من حين يحدث بعد لبس الخفين"
+      },
+      {
+       "school": "hanbali",
+       "text": "A day and a night for a resident, three days and nights for a traveller.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-mash ‘ala al-khuffayn"
+       },
+       "quote": "في الطهارة الصغرى يوما وليلة للمقيم"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "Is there a time limit on wiping over leather socks?",
+       "back": "The schools differ: a day and a night for a resident and three for a traveller, or no limit while they stay on."
+      },
+      {
+       "id": "c2-hanafi",
+       "front": "Hanafi primer (al-Quduri): how long may leather socks be wiped over?",
+       "back": "A day and a night for a resident, three days and nights for a traveller, counted from when [[wudu]] is first broken.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c2-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): how long may leather socks be wiped over?",
+       "back": "At home or travelling, for as long as he does not take them off; the primer names no time limit.",
+       "school": "maliki"
+      },
+      {
+       "id": "c2-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): how long may leather socks be wiped over?",
+       "back": "A day and a night for a resident, three days and nights for a traveller, counted from when he breaks [[wudu]] after putting them on.",
+       "school": "shafii"
+      },
+      {
+       "id": "c2-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): how long may leather socks be wiped over?",
+       "back": "A day and a night for a resident, three days and nights for a traveller.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "The schools differ on which part of the sock is wiped.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 15 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "The tops, in lines drawn with the fingers from the toes towards the shin.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+       },
+       "quote": "والمسح على الخفين على ظاهرهما خطوطا بالأصابع يبدأ من رؤوس أصابع الرجل إلى الساق"
+      },
+      {
+       "school": "maliki",
+       "text": "Top and bottom: the right hand over the top from the toes and the left underneath, drawn to the ankles.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-mash ‘ala al-khuffayn"
+       },
+       "quote": "أن يجعل يده اليمنى من فوق الخف من طرف الأصابع ويده اليسرى من تحت ذلك ثم يذهب بيده إلى حد الكعبين"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "Which part of a leather sock is wiped?",
+       "back": "The schools differ: the primers shown here give the tops only, or the top and the bottom."
+      },
+      {
+       "id": "c3-hanafi",
+       "front": "Hanafi primer (al-Quduri): which part of the leather sock is wiped?",
+       "back": "The tops, in lines drawn with the fingers from the toes towards the shin.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c3-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): which part of the leather sock is wiped?",
+       "back": "Top and bottom: the right hand over the top from the toes and the left underneath, drawn to the ankles.",
+       "school": "maliki"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "Wiping over leather socks is agreed among those who hold wiping. The schools differ on wiping over socks that are not leather.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 3 (Dar al-Hadith ed., vol. 1, p. 26)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Abu Hanifah: not over socks unless they are soled or covered with leather. Abu Yusuf and Muhammad: over socks that are thick and do not let water through.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+       },
+       "quote": "ولا يجوز المسح على الجوربين عند أبي حنيفة رحمه الله إلا أن يكونا منعلين أو مجلدين"
+      },
+      {
+       "school": "hanbali",
+       "text": "Over leather socks and what is like them: thick socks that stay up on the feet.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-mash ‘ala al-khuffayn"
+       },
+       "quote": "يجوز المسح على الخفين وما أشبههما من الجوارب الصفيقة التي تثبت في القدمين"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "May ordinary thick socks be wiped over like leather socks?",
+       "back": "The schools differ, and views differ inside the Hanafi primer itself."
+      },
+      {
+       "id": "c4-hanafi",
+       "front": "Hanafi primer (al-Quduri): may socks that are not leather be wiped over?",
+       "back": "Abu Hanifah: not over socks unless they are soled or covered with leather. Abu Yusuf and Muhammad: over socks that are thick and do not let water through.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c4-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): may socks that are not leather be wiped over?",
+       "back": "Over leather socks and what is like them: thick socks that stay up on the feet.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Whatever breaks [[wudu]] breaks a [[wudu]] made with wiping over the socks. The primers add that taking the socks off and, where a time limit is held, its end bring the wiping to an end. Ibn Rushd records a difference on whether taking them off breaks the [[wudu]] itself.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 29)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "What breaks [[wudu]] breaks the wiping; so do taking the sock off and the end of the time. When the time ends he takes them off, washes his feet and prays, without repeating the rest of the [[wudu]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+       },
+       "quote": "وينقضه أيضا نزع الخف ومضي المدة فإذا مضت المدة نزع خفيه وغسل رجليه وصلى"
+      },
+      {
+       "school": "maliki",
+       "text": "He wipes for as long as he does not take them off.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-mash ‘ala al-khuffayn"
+       },
+       "quote": "ما لم ينزعهما"
+      },
+      {
+       "school": "shafii",
+       "text": "Three things end the wiping: taking them off, the end of the time, and whatever makes [[ghusl]] due.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: wiping over the khuffayn"
+       },
+       "quote": "ويبطل المسح بثلاثة أشياء: بخلعهما وانقضاء المدة وما يوجب الغسل"
+      },
+      {
+       "school": "hanbali",
+       "text": "When the time ends, or he takes them off before it does, his purification is void.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-mash ‘ala al-khuffayn"
+       },
+       "quote": "ومتى مسح ثم انقضت المدة أو خلع قبلها بطلت طهارته"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "What ends a [[wudu]] made with wiping over leather socks?",
+       "back": "Whatever breaks [[wudu]], by agreement. The primers add that taking the socks off and, where a time limit is held, its end bring the wiping to an end; whether that breaks the [[wudu]] itself is differed on."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "When do the socks have to go on for wiping over them to apply?",
+     "options": [
+      "After a complete [[wudu]]",
+      "At any time",
+      "Only on a journey"
+     ],
+     "answer": 0,
+     "claim": "c1"
+    },
+    {
+     "q": "On a time limit for wiping, the four primers…",
+     "options": [
+      "All give one day and night",
+      "Differ: three give a limit, one gives none",
+      "All give no limit"
+     ],
+     "answer": 1,
+     "claim": "c2"
+    },
+    {
+     "q": "On thick socks that are not leather, the primers…",
+     "options": [
+      "All include them",
+      "All exclude them",
+      "Differ"
+     ],
+     "answer": 2,
+     "claim": "c4"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "najasa-08",
+   "unit": "purification",
+   "order": 8,
+   "rev": 3,
+   "title": "Removing impurity",
+   "intro": "Purity also concerns what gets on the body, the clothes and the ground. This lesson covers what the scholars count as impure, where it matters for the prayer, and how it is cleaned away.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "Removing impurity is commanded in the sacred law. The scholars differ on whether that command is an obligation or a recommendation.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 1 (Dar al-Hadith ed., vol. 1, p. 81)"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 74,
+        "ayah": 4
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "What is agreed about removing impurity, and what is differed on?",
+       "back": "Agreed: the sacred law commands it. Differed on: whether the command is an obligation or a recommendation."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "Impurity is removed from three places: the body, the clothes, and the place of prayer.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 3 (Dar al-Hadith ed., vol. 1, p. 89)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "From which three places is impurity removed?",
+       "back": "The body, the clothes, and the place of prayer."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "Four things are impure by agreement: carrion, meaning a land animal with blood that died without being slaughtered; the flesh of the pig, however it died; blood that flows in quantity from a land animal; and human urine and stool.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 2 (Dar al-Hadith ed., vol. 1, p. 83)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 25 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "Name the four things Ibn Rushd reports as impure by agreement.",
+       "back": "Carrion (a land animal with blood that died without being slaughtered); the flesh of the pig, however it died; blood that flows in quantity from a land animal; human urine and stool."
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "Pure, purifying water removes impurity from all three places. Stones are also agreed to remove it from the two passages after relieving oneself ([[istinja]]).",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 4 (Dar al-Hadith ed., vol. 1, p. 90)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "What removes impurity by agreement?",
+       "back": "Pure, purifying water, from the body, clothes and place of prayer; and stones, from the two passages after relieving oneself."
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Water removes impurity by agreement. The schools differ on whether other pure liquids, such as vinegar, also remove it.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 4 (Dar al-Hadith ed., vol. 1, p. 90)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Impurity is cleaned with water and with any pure liquid that can remove it, such as vinegar and rose water.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Anjas"
+       },
+       "quote": "ويجوز تطهير النجاسة بالماء وبكل مائع طاهر يمكن إزالتها به كالخل وماء الورد"
+      },
+      {
+       "school": "maliki",
+       "text": "Water changed by something pure dissolved in it is pure but does not purify, whether for [[wudu]], [[ghusl]] or removing impurity.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab taharat al-ma’ wa al-thawb wa al-buq‘a"
+       },
+       "quote": "فذلك الماء طاهر غير مطهر في وضوء أو طهر أو زوال نجاسة"
+      },
+      {
+       "school": "hanbali",
+       "text": "Water purifies from ritual states and from impurities; purity is not reached with any other liquid.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab ahkam al-miyah"
+       },
+       "quote": "خلق الماء طهورا يطهر من الأحداث والنجاسات فلا تحصل الطهارة بمائع غيره"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "Can a pure liquid other than water, such as vinegar, remove impurity?",
+       "back": "The schools differ. That water removes it is agreed."
+      },
+      {
+       "id": "c5-hanafi",
+       "front": "Hanafi primer (al-Quduri): can a liquid other than water remove impurity?",
+       "back": "Impurity is cleaned with water and with any pure liquid that can remove it, such as vinegar and rose water.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c5-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): can a liquid other than water remove impurity?",
+       "back": "Water changed by something pure dissolved in it is pure but does not purify, whether for [[wudu]], [[ghusl]] or removing impurity.",
+       "school": "maliki"
+      },
+      {
+       "id": "c5-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): can a liquid other than water remove impurity?",
+       "back": "Water purifies from ritual states and from impurities; purity is not reached with any other liquid.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "text": "Washing removes every kind of impurity by agreement. The schools differ on whether a set number of washes is needed.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 5 (Dar al-Hadith ed., vol. 1, p. 91)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Impurity that cannot be seen is washed until the one washing thinks it most likely that it is clean.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Anjas"
+       },
+       "quote": "فطهارتها أن يغسل حتى يغلب على ظن الغاسل أنه قد طهر"
+      },
+      {
+       "school": "shafii",
+       "text": "A vessel licked by a dog or a pig is washed seven times, one of them with earth. Other impurities are washed once, thoroughly, and three times is better.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: impurities"
+       },
+       "quote": "ويغسل الإناء من ولوغ الكلب والخنزير سبع مرات إحداهن بالتراب ويغسل من سائر النجاسات مرة تأتي عليه والثلاث أفضل"
+      },
+      {
+       "school": "hanbali",
+       "text": "The impurity of a dog or a pig is washed seven times, one of them with earth. For other impurities, three washes that clean it.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab ahkam al-miyah"
+       },
+       "quote": "وتغسل نجاسة الكلب والخنزير سبعا إحداهن بالتراب ويجزئ في سائر النجاسات ثلاث منقية"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c6a",
+       "front": "Is there a set number of washes for removing impurity?",
+       "back": "The schools differ. That washing removes every kind of impurity is agreed."
+      },
+      {
+       "id": "c6-hanafi",
+       "front": "Hanafi primer (al-Quduri): how many washes remove an impurity?",
+       "back": "Impurity that cannot be seen is washed until the one washing thinks it most likely that it is clean.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c6-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): how many washes remove an impurity?",
+       "back": "A vessel licked by a dog or a pig is washed seven times, one of them with earth. Other impurities are washed once, thoroughly, and three times is better.",
+       "school": "shafii"
+      },
+      {
+       "id": "c6-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): how many washes remove an impurity?",
+       "back": "The impurity of a dog or a pig is washed seven times, one of them with earth. For other impurities, three washes that clean it.",
+       "school": "hanbali"
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "From which places is impurity removed for the prayer?",
+     "options": [
+      "Body, clothes and place of prayer",
+      "Body only",
+      "Clothes and shoes only"
+     ],
+     "answer": 0,
+     "claim": "c2"
+    },
+    {
+     "q": "Which of these is impure by agreement?",
+     "options": [
+      "Rain water",
+      "Human urine",
+      "Dry soil"
+     ],
+     "answer": 1,
+     "claim": "c3"
+    },
+    {
+     "q": "On vinegar and other pure liquids removing impurity, the primers…",
+     "options": [
+      "All accept them",
+      "All reject them",
+      "Differ"
+     ],
+     "answer": 2,
+     "claim": "c5"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "recap-09",
+   "unit": "purification",
+   "order": 9,
+   "rev": 3,
+   "title": "Purification: the whole picture",
+   "intro": "Eight lessons on one page. This recap gathers the points the schools share, so the map of purification is clear. Where their primers differ, the earlier lessons show each position with its source.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "Purity is a condition of the prayer, and it has two sides: purity from a ritual state, and purity from physical impurity.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 5 (Dar al-Hadith ed., vol. 1, p. 47)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "Before praying, which two kinds of purity does a person look to?",
+       "back": "Purity from a ritual state (by [[wudu]], [[ghusl]] or [[tayammum]]), and purity from physical impurity on the body, clothes and place of prayer."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "Each ritual state has its purification: [[wudu]] before the prayer, [[ghusl]] after [[janabah]] and when menstruation ends, and [[tayammum]] in their place when there is no water.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 222
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "Match each to its purification: after using the toilet; after [[janabah]]; no water to be found.",
+       "back": "[[wudu]]; [[ghusl]]; [[tayammum]]."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "The agreed core of [[wudu]] is in one ayah: the face, the arms, the head and the feet. One thorough wash of each washed part fulfils what is due.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 19)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "Where in the Quran is the core of [[wudu]] found, and which parts does it name?",
+       "back": "Quran 5:6: the face, the arms to the elbows, the head, and the feet to the ankles."
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "Urine, stool and wind leaving the body in the ordinary, healthy way, and losing one’s mind, break [[wudu]] by agreement; whatever breaks [[wudu]] also breaks [[tayammum]].",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 4 (what breaks wudu) (Dar al-Hadith ed., vol. 1, p. 40)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 2 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 33)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tayammum, Bab 6 (Dar al-Hadith ed., vol. 1, p. 78)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "You made [[tayammum]] and then passed wind. Is the [[tayammum]] still standing?",
+       "back": "No. Wind breaks [[wudu]] by agreement, and whatever breaks [[wudu]] breaks [[tayammum]]."
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Impurity is removed from the body, the clothes and the place of prayer, and pure water removes it.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 3 (Dar al-Hadith ed., vol. 1, p. 89)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Najas, Bab 4 (Dar al-Hadith ed., vol. 1, p. 90)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "A drop of urine lands on your sleeve before the prayer. What removes it, by agreement?",
+       "back": "Washing it with pure water. Clothes are one of the three places impurity is removed from."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which purification stands in when there is no water?",
+     "options": [
+      "[[tayammum]]",
+      "[[ghusl]]",
+      "Wiping over leather socks"
+     ],
+     "answer": 0,
+     "claim": "c2"
+    },
+    {
+     "q": "Which ayah names the core parts of [[wudu]]?",
+     "options": [
+      "Quran 2:222",
+      "Quran 5:6",
+      "Quran 74:4"
+     ],
+     "answer": 1,
+     "claim": "c3"
+    },
+    {
+     "q": "Whatever breaks [[wudu]] also breaks…",
+     "options": [
+      "The fast",
+      "Nothing else",
+      "[[tayammum]]"
+     ],
+     "answer": 2,
+     "claim": "c4"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "tayammum-06",
+   "unit": "purification",
+   "order": 6,
+   "rev": 2,
+   "title": "When there is no water",
+   "intro": "Water is not always within reach, and sometimes using it would harm. For those times the Quran gives clean earth in its place. This lesson covers who it is for, how it is done, and what ends it.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "When water cannot be found, the Quran says to turn to clean earth and wipe the face and the hands with it. This is [[tayammum]], and it stands in for [[wudu]].",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      },
+      {
+       "quran": {
+        "surahId": 4,
+        "ayah": 43
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tayammum, Bab 1 (Dar al-Hadith ed., vol. 1, p. 70)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "What does the Quran say to do when water cannot be found?",
+       "back": "Turn to clean earth and wipe the face and the hands with it: [[tayammum]], which stands in for [[wudu]]."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "[[tayammum]] is for the sick person and the traveller who have no water. For a sick person who is harmed by water and has none, it stands in for both [[wudu]] and [[ghusl]].",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tayammum, Bab 2 (Dar al-Hadith ed., vol. 1, p. 72)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "maratib-al-ijma",
+        "location": "Kitab al-Tahara (p. 18)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "Who is [[tayammum]] for, by agreement?",
+       "back": "The sick person and the traveller who have no water."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "The ayah says to wipe the face and the hands. The schools differ on how many times the earth is struck and how far up the arms the wiping goes.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Two strikes: he wipes his face with one and his arms up to the elbows with the other.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "والتيمم ضربتان: يمسح بإحداهما وجهه وبالأخرى يديه إلى المرفقين"
+      },
+      {
+       "school": "maliki",
+       "text": "He strikes the earth and wipes his whole face, then strikes again and wipes each hand and forearm up to the elbow.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
+       },
+       "quote": "ثم يمسح بهما وجهه كله مسحا ثم يضرب بيديه الأرض فيمسح يمناه بيسراه"
+      },
+      {
+       "school": "shafii",
+       "text": "The hands are wiped up to and including the elbows.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: tayammum"
+       },
+       "quote": "ومسح اليدين مع المرفقين"
+      },
+      {
+       "school": "hanbali",
+       "text": "One strike on clean earth, then he wipes his face and his hands. More strikes, or wiping further, also count.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "أن يضرب بيديه على الصعيد الطيب ضربة واحدة فيمسح بهما وجهه وكفيه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "What do the schools differ on in how [[tayammum]] is done?",
+       "back": "How many times the earth is struck, and how far up the arms the wiping goes."
+      },
+      {
+       "id": "c3-hanafi",
+       "front": "Hanafi primer (al-Quduri): how is [[tayammum]] done?",
+       "back": "Two strikes: he wipes his face with one and his arms up to the elbows with the other.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c3-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): how is [[tayammum]] done?",
+       "back": "He strikes the earth and wipes his whole face, then strikes again and wipes each hand and forearm up to the elbow.",
+       "school": "maliki"
+      },
+      {
+       "id": "c3-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): how is [[tayammum]] done?",
+       "back": "The hands are wiped up to and including the elbows.",
+       "school": "shafii"
+      },
+      {
+       "id": "c3-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): how is [[tayammum]] done?",
+       "back": "One strike on clean earth, then he wipes his face and his hands. More strikes, or wiping further, also count.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "Dusty soil is used for [[tayammum]] by agreement. The schools differ on other things from the ground, such as sand and stone.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 18 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tayammum, Bab 5 (Dar al-Hadith ed., vol. 1, p. 77)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Abu Hanifah and Muhammad: anything of the earth’s kind, such as soil, sand and stone. Abu Yusuf: soil and sand only.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "ويجوز التيمم عند أبي حنيفة ومحمد بكل ما كان من جنس الأرض كالتراب والرمل والحجر"
+      },
+      {
+       "school": "maliki",
+       "text": "Clean earth: whatever is on the surface of the ground, such as soil, sand, stones or salt flat.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
+       },
+       "quote": "والتيمم بالصعيد الطاهر وهو ما ظهر على وجه الأرض منها من تراب أو رمل أو حجارة أو سبخة"
+      },
+      {
+       "school": "shafii",
+       "text": "Pure soil that has dust; if gypsum or sand is mixed in, it does not count.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: tayammum"
+       },
+       "quote": "والتراب الطاهر له غبار فإن خالطه جص أو رمل لم يجز"
+      },
+      {
+       "school": "hanbali",
+       "text": "Only pure soil that has dust.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "فلا يتيمم إلا بتراب طاهر له غبار"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "What is used for [[tayammum]] by agreement, and what do the schools differ on?",
+       "back": "Agreed: dusty soil. They differ on other things from the ground, such as sand and stone."
+      },
+      {
+       "id": "c4-hanafi",
+       "front": "Hanafi primer (al-Quduri): what is [[tayammum]] made with?",
+       "back": "Abu Hanifah and Muhammad: anything of the earth’s kind, such as soil, sand and stone. Abu Yusuf: soil and sand only.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c4-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): what is [[tayammum]] made with?",
+       "back": "Clean earth: whatever is on the surface of the ground, such as soil, sand, stones or salt flat.",
+       "school": "maliki"
+      },
+      {
+       "id": "c4-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): what is [[tayammum]] made with?",
+       "back": "Pure soil that has dust; if gypsum or sand is mixed in, it does not count.",
+       "school": "shafii"
+      },
+      {
+       "id": "c4-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): what is [[tayammum]] made with?",
+       "back": "Only pure soil that has dust.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Whatever breaks [[wudu]] breaks [[tayammum]]. Someone who made [[tayammum]] and then finds water before starting the prayer purifies again, with water, and then prays.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tayammum, Bab 6 (Dar al-Hadith ed., vol. 1, p. 78)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 21 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "You made [[tayammum]], then found water before starting the prayer. What now?",
+       "back": "The [[tayammum]] is broken: purify again and then pray. Whatever breaks [[wudu]] breaks [[tayammum]] too."
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "text": "The schools differ on how many obligatory prayers one [[tayammum]] covers.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "With one [[tayammum]] he prays as many obligatory and voluntary prayers as he wishes.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "ويصلي بتيممه ما شاء من الفرائض والنوافل"
+      },
+      {
+       "school": "maliki",
+       "text": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
+       },
+       "quote": "ولا يصلي صلاتين بتيمم واحد من هؤلاء إلا مريض لا يقدر على مس الماء لضرر بجسمه مقيم"
+      },
+      {
+       "school": "shafii",
+       "text": "A [[tayammum]] for each obligatory prayer; with one he prays as many voluntary prayers as he wishes.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: tayammum"
+       },
+       "quote": "ويتيمم لكل فريضة ويصلي بتيمم واحد ما شاء من النوافل"
+      },
+      {
+       "school": "hanbali",
+       "text": "A [[tayammum]] made for an obligatory prayer covers it and any other obligatory and voluntary prayers, until that prayer’s time ends.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "وإن تيمم لفريضة فله فعلها وفعل ما شاء من الفرائض والنوافل حتى يخرج وقتها"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c6a",
+       "front": "Does one [[tayammum]] cover more than one obligatory prayer?",
+       "back": "The schools differ: from one obligatory prayer each, to as many as he wishes."
+      },
+      {
+       "id": "c6-hanafi",
+       "front": "Hanafi primer (al-Quduri): how many obligatory prayers does one [[tayammum]] cover?",
+       "back": "With one [[tayammum]] he prays as many obligatory and voluntary prayers as he wishes.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c6-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): how many obligatory prayers does one [[tayammum]] cover?",
+       "back": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
+       "school": "maliki"
+      },
+      {
+       "id": "c6-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): how many obligatory prayers does one [[tayammum]] cover?",
+       "back": "A [[tayammum]] for each obligatory prayer; with one he prays as many voluntary prayers as he wishes.",
+       "school": "shafii"
+      },
+      {
+       "id": "c6-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): how many obligatory prayers does one [[tayammum]] cover?",
+       "back": "A [[tayammum]] made for an obligatory prayer covers it and any other obligatory and voluntary prayers, until that prayer’s time ends.",
+       "school": "hanbali"
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which parts does the Quran say to wipe in [[tayammum]]?",
+     "options": [
+      "The face and the hands",
+      "The head and the feet",
+      "The face and the feet"
+     ],
+     "answer": 0,
+     "claim": "c1"
+    },
+    {
+     "q": "What is used for [[tayammum]] by agreement?",
+     "options": [
+      "Any clean cloth",
+      "Dusty soil",
+      "Fresh leaves"
+     ],
+     "answer": 1,
+     "claim": "c4"
+    },
+    {
+     "q": "You made [[tayammum]] and then found water before starting to pray. What now?",
+     "options": [
+      "Pray with the [[tayammum]]",
+      "Wait for the next prayer",
+      "Purify again, then pray"
+     ],
+     "answer": 2,
+     "claim": "c5"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "water-01",
+   "unit": "purification",
+   "order": 1,
+   "rev": 2,
+   "title": "Purity and water",
+   "intro": "Before standing to pray, a Muslim gets ready, and the Quran ties that readiness to water. This lesson sets out the two kinds of purity the scholars speak of, the three ways of reaching it, and which water does the job.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "Purity in the sacred law is of two kinds: purity from a ritual state ([[hadath]]), and purity from physical impurity ([[najasah]]).",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "What are the two kinds of purity in the sacred law?",
+       "back": "Purity from a ritual state ([[hadath]]), and purity from physical impurity ([[najasah]])."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "Purity from a ritual state is reached in three ways: [[wudu]], [[ghusl]], and [[tayammum]], which stands in for them.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "Name the three ways of becoming pure from a ritual state.",
+       "back": "[[wudu]], [[ghusl]], and [[tayammum]], which stands in for the other two."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "Purity is a condition of the prayer.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 5 (Dar al-Hadith ed., vol. 1, p. 47)"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "How does purity relate to the prayer?",
+       "back": "It is a condition of the prayer. Ibn Rushd reports that Muslims are agreed on this."
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "Every kind of water is pure in itself and purifies other things. Ibn Rushd notes one early, isolated disagreement about seawater.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 3 (on water) (Dar al-Hadith ed., vol. 1, p. 29)"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 25,
+        "ayah": 48
+       }
+      },
+      {
+       "quran": {
+        "surahId": 8,
+        "ayah": 11
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "Which kinds of water are pure in themselves and purifying?",
+       "back": "Every kind. Ibn Rushd reports agreement, apart from an early, isolated disagreement about seawater."
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Water whose taste, colour or smell has been changed by an impurity is impure, whether it is a little or a lot, and is not used for purification.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 11 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 3 (on water) (Dar al-Hadith ed., vol. 1, p. 30)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "Which three qualities of water show that an impurity has spoiled it?",
+       "back": "Its taste, colour or smell. If an impurity changes any of them the water is impure, whether a little or a lot."
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "text": "A very large body of water that an impurity has not changed stays as it was and is used for purification. The schools differ about a smaller amount that an impurity falls into without changing it.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 12 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "A pool so large that moving one side does not move the other is used from the far side when an impurity falls in at one side, and flowing water is used while no trace of the impurity shows. Other water that an impurity falls into is not used.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والغدير العظيم الذي لا يتحرك أحد طرفيه بتحريك الطرف الآخر إذا وقعت نجاسة في أحد جانبيه جاز الوضوء من الجانب الآخر"
+      },
+      {
+       "school": "maliki",
+       "text": "A small amount of water becomes impure from a small amount of impurity, even if it is not changed.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab taharat al-ma’ wa al-thawb wa al-buq‘a"
+       },
+       "quote": "وقليل الماء ينجسه قليل النجاسة وإن لم تغيره"
+      },
+      {
+       "school": "shafii",
+       "text": "Less than two large jars (about five hundred Baghdad ratls) becomes impure when an impurity enters it; two jars or more only if it changes.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the kinds of water"
+       },
+       "quote": "وماء نجس وهو الذي حلت فيه نجاسة وهو دون القلتين أو كان قلتين فتغير"
+      },
+      {
+       "school": "hanbali",
+       "text": "Water that reaches two large jars, or is flowing, becomes impure only if its colour, taste or smell changes. Less than that becomes impure when an impurity mixes with it.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab ahkam al-miyah"
+       },
+       "quote": "فإذا بلغ الماء قلتين أو كان جاريا لم ينجسه شيء إلا ما غير لونه أو طعمه أو ريحه وما عدا ذلك ينجس بمخالطة النجاسة"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c6a",
+       "front": "An impurity falls into a small amount of water and nothing about the water changes. Is the water still used?",
+       "back": "The schools differ. What is agreed: a very large body of unchanged water stays pure, and changed water is impure."
+      },
+      {
+       "id": "c6-hanafi",
+       "front": "Hanafi primer (al-Quduri): when does water become impure if an impurity falls in without changing it?",
+       "back": "A pool so large that moving one side does not move the other is used from the far side when an impurity falls in at one side, and flowing water is used while no trace of the impurity shows. Other water that an impurity falls into is not used.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c6-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): when does water become impure if an impurity falls in without changing it?",
+       "back": "A small amount of water becomes impure from a small amount of impurity, even if it is not changed.",
+       "school": "maliki"
+      },
+      {
+       "id": "c6-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): when does water become impure if an impurity falls in without changing it?",
+       "back": "Less than two large jars (about five hundred Baghdad ratls) becomes impure when an impurity enters it; two jars or more only if it changes.",
+       "school": "shafii"
+      },
+      {
+       "id": "c6-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): when does water become impure if an impurity falls in without changing it?",
+       "back": "Water that reaches two large jars, or is flowing, becomes impure only if its colour, taste or smell changes. Less than that becomes impure when an impurity mixes with it.",
+       "school": "hanbali"
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is a way of becoming pure from a ritual state?",
+     "options": [
+      "[[tayammum]]",
+      "Fasting",
+      "Giving charity"
+     ],
+     "answer": 0,
+     "claim": "c2"
+    },
+    {
+     "q": "Water has taken on the smell of an impurity. What is its state?",
+     "options": [
+      "Pure if there is a lot of it",
+      "Impure, whether a little or a lot",
+      "Pure, as long as its colour is clear"
+     ],
+     "answer": 1,
+     "claim": "c5"
+    },
+    {
+     "q": "The two kinds of purity the sacred law speaks of are purity from…",
+     "options": [
+      "Hunger, and thirst",
+      "Travel, and illness",
+      "A ritual state, and physical impurity"
+     ],
+     "answer": 2,
+     "claim": "c1"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "wudu-02",
+   "unit": "purification",
+   "order": 2,
+   "rev": 2,
+   "title": "Washing for prayer, step by step",
+   "intro": "One ayah of the Quran names the parts that are washed and wiped before the prayer. This lesson walks through a complete [[wudu]] from start to finish, as the primers describe it.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "The ayah of [[wudu]] names four acts: washing the face, washing the arms to the elbows, wiping the head, and the feet to the ankles. All four primers describe the feet as washed.",
+     "kind": "how-to",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Washing the three parts and wiping the head; the elbows and the ankles are included in the washing.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "غسل الأعضاء الثلاثة ومسح الرأس والمرفقان والكعبان يدخلان في الغسل"
+      },
+      {
+       "school": "maliki",
+       "text": "Then he washes his feet, pouring water with the right hand and rubbing with the left.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab sifat al-wudu’ wa masnunihi wa mafrudihi"
+       },
+       "quote": "ثم يغسل رجليه يصب الماء بيده اليمنى على رجله اليمنى ويعركها بيده اليسرى"
+      },
+      {
+       "school": "shafii",
+       "text": "Washing the feet up to the ankles is one of the six obligatory acts.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+       },
+       "quote": "وغسل الرجلين إلى الكعبين"
+      },
+      {
+       "school": "hanbali",
+       "text": "Then he washes his feet to the ankles three times, including the ankles in the washing.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Wudu’"
+       },
+       "quote": "ثم يغسل رجليه إلى الكعبين ثلاثا ويدخلهما في الغسل"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "Which four acts does the ayah of [[wudu]] (Quran 5:6) name?",
+       "back": "Washing the face, washing the arms to the elbows, wiping the head, and the feet to the ankles, which all four primers describe as washed."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "A complete [[wudu]], as Ibn Qudamah describes it in the Hanbali primer: intend it and say “bismillah”; wash the hands three times; rinse the mouth and the nose three times; wash the whole face three times; wash the arms up to and including the elbows three times; wipe the head, with the ears; wash the feet up to and including the ankles three times.",
+     "kind": "how-to",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      },
+      {
+       "consensus": {
+        "work": "maratib-al-ijma",
+        "location": "Kitab al-Tahara (p. 18)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "maratib-al-ijma",
+        "location": "Kitab al-Tahara (p. 19)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanbali",
+       "text": "He says “bismillah”, washes his hands three times, then rinses his mouth and nose three times, then washes his face three times, then his arms to the elbows three times, then wipes his head with the ears, then washes his feet to the ankles three times.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Wudu’"
+       },
+       "quote": "ثم يقول بسم الله ويغسل كفيه ثلاثا ثم يتمضمض ويستنشق ثلاثا"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "Put a complete [[wudu]] in order, from the hands to the feet.",
+       "back": "Hands; mouth and nose; face; arms with the elbows; head with the ears; feet with the ankles."
+      },
+      {
+       "id": "c2b",
+       "front": "In a complete [[wudu]], what comes between washing the hands and washing the face?",
+       "back": "Rinsing the mouth and the nose."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "Washing each washed part once, thoroughly, fulfils what is due. A second and a third wash are recommended.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 19)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "How many washes of each part does [[wudu]] need, and how many are recommended?",
+       "back": "One thorough wash fulfils what is due. A second and a third are recommended."
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "Someone who washes the left before the right does not repeat anything.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 14 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "You washed your left arm before your right. Do you repeat anything?",
+       "back": "No. Ibn al-Mundhir reports agreement that nothing is repeated."
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Purification with water before the time of a prayer comes in is complete; it does not wait for the time.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 19 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "Does [[wudu]] made before a prayer’s time comes in count for that prayer?",
+       "back": "Yes. Purification with water before the time is complete."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the ayah of [[wudu]], which part is wiped?",
+     "options": [
+      "The head",
+      "The face",
+      "The arms"
+     ],
+     "answer": 0,
+     "claim": "c1"
+    },
+    {
+     "q": "You washed each part once, thoroughly. What is the state of your [[wudu]]?",
+     "options": [
+      "Incomplete until each part is washed three times",
+      "Complete: the second and third washes are recommended extras",
+      "Complete, but for one prayer only"
+     ],
+     "answer": 1,
+     "claim": "c3"
+    },
+    {
+     "q": "Someone washed the left foot before the right. What now?",
+     "options": [
+      "Both feet are washed again",
+      "The whole [[wudu]] starts again",
+      "Nothing is repeated"
+     ],
+     "answer": 2,
+     "claim": "c4"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "wudu-03",
+   "unit": "purification",
+   "order": 3,
+   "rev": 2,
+   "title": "What the wash for prayer rests on",
+   "intro": "Some parts of [[wudu]] are its core and others complete it. The schools share the core named in the Quran and differ on a few points around it. This lesson sets each school’s primer side by side.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "The scholars agree that washing the face, washing the arms and wiping the head are obligatory parts of [[wudu]], and that the feet are among its parts.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 4 (Dar al-Hadith ed., vol. 1, p. 17)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 5 (Dar al-Hadith ed., vol. 1, p. 18)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 6 (Dar al-Hadith ed., vol. 1, p. 19)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 10 (Dar al-Hadith ed., vol. 1, p. 21)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "Which parts of [[wudu]] does Ibn Rushd report agreement on?",
+       "back": "Washing the face, washing the arms, wiping the head, and the feet as one of its parts."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "Intention ([[niyyah]]) is a condition in acts of worship by agreement. The schools differ on whether [[wudu]] is valid without it.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 1 (Dar al-Hadith ed., vol. 1, p. 15)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Recommended in [[wudu]]; obligatory in [[tayammum]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara, Bab al-Tayammum"
+       },
+       "quote": "والنية فرض في التيمم مستحبة في الوضوء"
+      },
+      {
+       "school": "maliki",
+       "text": "The acts of [[wudu]] are to be done for Allah’s sake, in answer to His command; the primer words this as a duty.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab sifat al-wudu’ wa masnunihi wa mafrudihi"
+       },
+       "quote": "ويجب عليه أن يعمل عمل الوضوء احتسابا لله تعالى لما أمره به"
+      },
+      {
+       "school": "shafii",
+       "text": "Obligatory: the first of the six obligatory acts, made when washing the face.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+       },
+       "quote": "وفروض الوضوء ستة أشياء: النية عند غسل الوجه"
+      },
+      {
+       "school": "hanbali",
+       "text": "[[wudu]] is not valid unless it is intended.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Wudu’"
+       },
+       "quote": "لا يصح الوضوء ولا غيره من العبادات إلا أن ينويه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "What is agreed about intention, and what do the schools differ on?",
+       "back": "Agreed: intention is a condition in acts of worship. They differ on whether [[wudu]] is valid without it."
+      },
+      {
+       "id": "c2-hanafi",
+       "front": "Hanafi primer (al-Quduri): what is the place of intention in [[wudu]]?",
+       "back": "Recommended in [[wudu]]; obligatory in [[tayammum]].",
+       "school": "hanafi"
+      },
+      {
+       "id": "c2-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): what is the place of intention in [[wudu]]?",
+       "back": "The acts of [[wudu]] are to be done for Allah’s sake, in answer to His command; the primer words this as a duty.",
+       "school": "maliki"
+      },
+      {
+       "id": "c2-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): what is the place of intention in [[wudu]]?",
+       "back": "Obligatory: the first of the six obligatory acts, made when washing the face.",
+       "school": "shafii"
+      },
+      {
+       "id": "c2-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): what is the place of intention in [[wudu]]?",
+       "back": "[[wudu]] is not valid unless it is intended.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "Wiping the head is an obligatory part of [[wudu]] by agreement. The schools differ on how much of the head is wiped.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 2, mas’ala 6 (Dar al-Hadith ed., vol. 1, p. 19)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "The amount of the forelock.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والمفروض في مسح الرأس مقدار الناصية"
+      },
+      {
+       "school": "maliki",
+       "text": "The whole head: however he wipes is enough, so long as he covers the head.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab sifat al-wudu’ wa masnunihi wa mafrudihi"
+       },
+       "quote": "وكيفما مسح أجزأه إذا أوعب رأسه"
+      },
+      {
+       "school": "shafii",
+       "text": "Part of the head.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+       },
+       "quote": "ومسح بعض الرأس"
+      },
+      {
+       "school": "hanbali",
+       "text": "The whole head.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Wudu’"
+       },
+       "quote": "ومسح الرأس كله"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "What do the schools differ on about wiping the head in [[wudu]]?",
+       "back": "How much of it is wiped. That wiping the head is obligatory is agreed."
+      },
+      {
+       "id": "c3-hanafi",
+       "front": "Hanafi primer (al-Quduri): how much of the head is wiped in [[wudu]]?",
+       "back": "The amount of the forelock.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c3-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): how much of the head is wiped in [[wudu]]?",
+       "back": "The whole head: however he wipes is enough, so long as he covers the head.",
+       "school": "maliki"
+      },
+      {
+       "id": "c3-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): how much of the head is wiped in [[wudu]]?",
+       "back": "Part of the head.",
+       "school": "shafii"
+      },
+      {
+       "id": "c3-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): how much of the head is wiped in [[wudu]]?",
+       "back": "The whole head.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "The ayah names the parts of [[wudu]] in an order. The schools differ on whether keeping that order is obligatory.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Recommended: he keeps the order, beginning with what Allah mentioned first.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "ويرتب الوضوء فيبدأ بما بدأ الله تعالى بذكره"
+      },
+      {
+       "school": "shafii",
+       "text": "Obligatory: order is the sixth of the obligatory acts.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+       },
+       "quote": "والترتيب على ما ذكرناه"
+      },
+      {
+       "school": "hanbali",
+       "text": "Obligatory: the order of [[wudu]] as described.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Wudu’"
+       },
+       "quote": "وترتيب الوضوء على ما ذكرنا"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "Is keeping the order of the ayah in [[wudu]] obligatory?",
+       "back": "The schools differ. The primers shown here count it either recommended or obligatory."
+      },
+      {
+       "id": "c4-hanafi",
+       "front": "Hanafi primer (al-Quduri): is keeping the order of [[wudu]] obligatory?",
+       "back": "Recommended: he keeps the order, beginning with what Allah mentioned first.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c4-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): is keeping the order of [[wudu]] obligatory?",
+       "back": "Obligatory: order is the sixth of the obligatory acts.",
+       "school": "shafii"
+      },
+      {
+       "id": "c4-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): is keeping the order of [[wudu]] obligatory?",
+       "back": "Obligatory: the order of [[wudu]] as described.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "The schools differ on whether the parts of [[wudu]] are to be washed one straight after another, without a long gap.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Not among the acts al-Quduri lists as the obligation of purification: washing the three parts and wiping the head.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "غسل الأعضاء الثلاثة ومسح الرأس"
+      },
+      {
+       "school": "shafii",
+       "text": "Recommended: the last of the ten recommended acts.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+       },
+       "quote": "والطهارة ثلاثا ثلاثا والموالاة"
+      },
+      {
+       "school": "hanbali",
+       "text": "Obligatory: washing a part is not delayed until the one before it has dried.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab al-Wudu’"
+       },
+       "quote": "وأن لا يؤخر غسل عضو حتى ينشف ما قبله"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "Do the parts of [[wudu]] have to follow one another without a long gap?",
+       "back": "The schools differ: the primers shown here range from recommended to obligatory."
+      },
+      {
+       "id": "c5-hanafi",
+       "front": "Hanafi primer (al-Quduri): do the parts of [[wudu]] have to follow one another without a gap?",
+       "back": "Not among the acts al-Quduri lists as the obligation of purification: washing the three parts and wiping the head.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c5-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): do the parts of [[wudu]] have to follow one another without a gap?",
+       "back": "Recommended: the last of the ten recommended acts.",
+       "school": "shafii"
+      },
+      {
+       "id": "c5-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): do the parts of [[wudu]] have to follow one another without a gap?",
+       "back": "Obligatory: washing a part is not delayed until the one before it has dried.",
+       "school": "hanbali"
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these does Ibn Rushd report as an agreed obligatory part of [[wudu]]?",
+     "options": [
+      "Wiping the head",
+      "Wiping the neck",
+      "Washing three times"
+     ],
+     "answer": 0,
+     "claim": "c1"
+    },
+    {
+     "q": "On intention in [[wudu]], the four primers…",
+     "options": [
+      "All count it recommended",
+      "Differ: one counts it recommended, the others make it a duty",
+      "Do not mention it"
+     ],
+     "answer": 1,
+     "claim": "c2"
+    },
+    {
+     "q": "What do the schools differ on about wiping the head?",
+     "options": [
+      "Whether the head is part of [[wudu]] at all",
+      "Whether water is used",
+      "How much of the head is wiped"
+     ],
+     "answer": 2,
+     "claim": "c3"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "wudu-04",
+   "unit": "purification",
+   "order": 4,
+   "rev": 3,
+   "title": "What breaks the wash for prayer",
+   "intro": "[[wudu]] lasts until something ends it. Some causes are shared by every school. On sleep, touch and bleeding the schools read the evidence differently, and each primer gives its own list.",
+   "claims": [
+    {
+     "id": "c1",
+     "text": "Urine, stool, wind, [[madhy]] and wady (a thick white fluid that can follow urine) break [[wudu]] when they leave the body in the ordinary, healthy way.",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 4 (what breaks wudu) (Dar al-Hadith ed., vol. 1, p. 40)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 2 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 33)"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c1a",
+       "front": "Which things that leave the body break [[wudu]] by agreement?",
+       "back": "Urine, stool, wind, [[madhy]], and wady (a thick white fluid that can follow urine), when they leave the body in the ordinary, healthy way."
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "text": "Losing one’s mind, whether by fainting, intoxication or madness, breaks [[wudu]].",
+     "kind": "agreed",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 2 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 33)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "maratib-al-ijma",
+        "location": "Kitab al-Tahara (p. 20)"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "c2a",
+       "front": "Someone faints and comes round. What is the state of their [[wudu]]?",
+       "back": "Broken. Losing one’s mind, by fainting, intoxication or madness, breaks [[wudu]] by agreement."
+      }
+     ]
+    },
+    {
+     "id": "c3",
+     "text": "Losing one’s mind breaks [[wudu]] by agreement. The schools differ on which kinds of sleep count.",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Wudu’, no. 2 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 33)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Sleep lying down, reclining, or leaning on something he would fall without.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والنوم مضطجعا أو متكئا أو مستندا إلى شيء لو أزيل عنه لسقط"
+      },
+      {
+       "school": "maliki",
+       "text": "Heavy sleep.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab ma yajibu minhu al-wudu’ wa al-ghusl"
+       },
+       "quote": "ويجب الوضوء من زوال العقل بنوم مستثقل"
+      },
+      {
+       "school": "shafii",
+       "text": "Sleep in any posture other than sitting firmly.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: what breaks wudu"
+       },
+       "quote": "والنوم على غير هيئة المتمكن"
+      },
+      {
+       "school": "hanbali",
+       "text": "All sleep, except light sleep while sitting or standing.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab nawaqid al-wudu’"
+       },
+       "quote": "وزوال العقل إلا النوم اليسير جالسا أو قائما"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c3a",
+       "front": "Does sleep break [[wudu]]?",
+       "back": "The schools differ on which sleep does. Each primer draws the line by posture or by how deep the sleep is."
+      },
+      {
+       "id": "c3-hanafi",
+       "front": "Hanafi primer (al-Quduri): which sleep breaks [[wudu]]?",
+       "back": "Sleep lying down, reclining, or leaning on something he would fall without.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c3-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): which sleep breaks [[wudu]]?",
+       "back": "Heavy sleep.",
+       "school": "maliki"
+      },
+      {
+       "id": "c3-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): which sleep breaks [[wudu]]?",
+       "back": "Sleep in any posture other than sitting firmly.",
+       "school": "shafii"
+      },
+      {
+       "id": "c3-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): which sleep breaks [[wudu]]?",
+       "back": "All sleep, except light sleep while sitting or standing.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "text": "The ayah of [[wudu]] mentions “or you have touched women”. The schools differ on whether skin contact between a man and a woman breaks [[wudu]].",
+     "kind": "differs",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 5,
+        "ayah": 6
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Not among the causes al-Quduri lists as breaking [[wudu]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والمعاني الناقضة للوضوء: كل ما خرج من السبيلين"
+      },
+      {
+       "school": "maliki",
+       "text": "Touching for pleasure, skin contact for pleasure and kissing for pleasure call for [[wudu]].",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab ma yajibu minhu al-wudu’ wa al-ghusl"
+       },
+       "quote": "ويجب الوضوء من الملامسة للذة والمباشرة بالجسد للذة والقبلة للذة"
+      },
+      {
+       "school": "shafii",
+       "text": "A man touching a woman who is not close kin, with nothing in between, breaks it.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: what breaks wudu"
+       },
+       "quote": "ولمس الرجل المرأة الأجنبية من غير حائل"
+      },
+      {
+       "school": "hanbali",
+       "text": "Touching a woman with desire breaks it.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab nawaqid al-wudu’"
+       },
+       "quote": "ولمس امرأة بشهوة"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c4a",
+       "front": "Does skin contact between a man and a woman break [[wudu]]?",
+       "back": "The schools differ. The difference turns on the words “or you have touched women” in the ayah."
+      },
+      {
+       "id": "c4-hanafi",
+       "front": "Hanafi primer (al-Quduri): does touching a woman break a man’s [[wudu]]?",
+       "back": "Not among the causes al-Quduri lists as breaking [[wudu]].",
+       "school": "hanafi"
+      },
+      {
+       "id": "c4-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): does touching a woman break a man’s [[wudu]]?",
+       "back": "Touching for pleasure, skin contact for pleasure and kissing for pleasure call for [[wudu]].",
+       "school": "maliki"
+      },
+      {
+       "id": "c4-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): does touching a woman break a man’s [[wudu]]?",
+       "back": "A man touching a woman who is not close kin, with nothing in between, breaks it.",
+       "school": "shafii"
+      },
+      {
+       "id": "c4-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): does touching a woman break a man’s [[wudu]]?",
+       "back": "Touching a woman with desire breaks it.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c5",
+     "text": "Beyond the agreed causes, the schools differ on whether touching the private part breaks [[wudu]].",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 4 (what breaks wudu) (Dar al-Hadith ed., vol. 1, p. 40)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Not among the causes al-Quduri lists as breaking [[wudu]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والمعاني الناقضة للوضوء: كل ما خرج من السبيلين"
+      },
+      {
+       "school": "maliki",
+       "text": "Touching the penis calls for [[wudu]]; the primer records a difference about a woman touching her private part.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab ma yajibu minhu al-wudu’ wa al-ghusl"
+       },
+       "quote": "ومن مس الذكر واختلف في مس المرأة فرجها في إيجاب الوضوء بذلك"
+      },
+      {
+       "school": "shafii",
+       "text": "Touching a human private part with the palm breaks it.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: what breaks wudu"
+       },
+       "quote": "ومس فرج الآدمي بباطن الكف"
+      },
+      {
+       "school": "hanbali",
+       "text": "Touching the penis with the hand breaks it.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab nawaqid al-wudu’"
+       },
+       "quote": "ولمس الذكر بيده"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c5a",
+       "front": "Does touching the private part break [[wudu]]?",
+       "back": "The schools differ. It is not one of the agreed causes."
+      },
+      {
+       "id": "c5-hanafi",
+       "front": "Hanafi primer (al-Quduri): does touching the private part break [[wudu]]?",
+       "back": "Not among the causes al-Quduri lists as breaking [[wudu]].",
+       "school": "hanafi"
+      },
+      {
+       "id": "c5-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): does touching the private part break [[wudu]]?",
+       "back": "Touching the penis calls for [[wudu]]; the primer records a difference about a woman touching her private part.",
+       "school": "maliki"
+      },
+      {
+       "id": "c5-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): does touching the private part break [[wudu]]?",
+       "back": "Touching a human private part with the palm breaks it.",
+       "school": "shafii"
+      },
+      {
+       "id": "c5-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): does touching the private part break [[wudu]]?",
+       "back": "Touching the penis with the hand breaks it.",
+       "school": "hanbali"
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "text": "Beyond the agreed causes, the schools differ on whether blood, or other impurity that leaves the body from somewhere other than the two passages, breaks [[wudu]].",
+     "kind": "differs",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Wudu’, Bab 4 (what breaks wudu) (Dar al-Hadith ed., vol. 1, p. 40)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Blood, pus or fluid from a wound breaks it when it leaves the body and reaches a part that purification applies to; so does a mouthful of vomit.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Tahara"
+       },
+       "quote": "والدم والقيح والصديد إذا خرج من البدن فتجاوز إلى موضع يلحقه حكم التطهير والقيء إذا كان ملء الفم"
+      },
+      {
+       "school": "maliki",
+       "text": "Not among the causes al-Risala lists: it names what comes out of the two passages.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab ma yajibu minhu al-wudu’ wa al-ghusl"
+       },
+       "quote": "الوضوء يجب لما يخرج من أحد المخرجين من بول أو غائط أو ريح"
+      },
+      {
+       "school": "shafii",
+       "text": "Not among the six causes Abu Shuja’ lists; the first is what comes out of the two passages.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Tahara, fasl: what breaks wudu"
+       },
+       "quote": "والذي ينقض الوضوء ستة أشياء: ما خرج من السبيلين"
+      },
+      {
+       "school": "hanbali",
+       "text": "Impurity that leaves the body from elsewhere breaks it when it is a lot.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Tahara, Bab nawaqid al-wudu’"
+       },
+       "quote": "والخارج النجس من غيرهما إذا فحش"
+      }
+     ],
+     "cards": [
+      {
+       "id": "c6a",
+       "front": "Does bleeding from a cut break [[wudu]]?",
+       "back": "The schools differ. It is not one of the agreed causes."
+      },
+      {
+       "id": "c6-hanafi",
+       "front": "Hanafi primer (al-Quduri): does bleeding break [[wudu]]?",
+       "back": "Blood, pus or fluid from a wound breaks it when it leaves the body and reaches a part that purification applies to; so does a mouthful of vomit.",
+       "school": "hanafi"
+      },
+      {
+       "id": "c6-maliki",
+       "front": "Maliki primer (Ibn Abi Zayd): does bleeding break [[wudu]]?",
+       "back": "Not among the causes al-Risala lists: it names what comes out of the two passages.",
+       "school": "maliki"
+      },
+      {
+       "id": "c6-shafii",
+       "front": "Shafi’i primer (Abu Shuja’): does bleeding break [[wudu]]?",
+       "back": "Not among the six causes Abu Shuja’ lists; the first is what comes out of the two passages.",
+       "school": "shafii"
+      },
+      {
+       "id": "c6-hanbali",
+       "front": "Hanbali primer (Ibn Qudamah): does bleeding break [[wudu]]?",
+       "back": "Impurity that leaves the body from elsewhere breaks it when it is a lot.",
+       "school": "hanbali"
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these breaks [[wudu]] by agreement?",
+     "options": [
+      "Passing wind",
+      "Eating bread",
+      "Walking barefoot"
+     ],
+     "answer": 0,
+     "claim": "c1"
+    },
+    {
+     "q": "Someone fainted and came round. Their [[wudu]] is…",
+     "options": [
+      "Intact",
+      "Broken",
+      "Intact if they were sitting"
+     ],
+     "answer": 1,
+     "claim": "c2"
+    },
+    {
+     "q": "On sleep, the four primers…",
+     "options": [
+      "Say no sleep breaks [[wudu]]",
+      "Say only sleep at night breaks it",
+      "Differ on which sleep breaks [[wudu]]"
+     ],
+     "answer": 2,
+     "claim": "c3"
+    },
+    {
+     "q": "A nosebleed: does it break [[wudu]]?",
+     "options": [
+      "The schools differ",
+      "Yes, in every primer",
+      "No, in every primer"
+     ],
+     "answer": 0,
+     "claim": "c6"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  }
+ ]
+}
