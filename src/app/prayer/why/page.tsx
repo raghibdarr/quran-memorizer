@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import WhyTimesDiffer from '@/components/prayer/times/why-content';
 
 export const metadata: Metadata = { title: 'Why times differ · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the prayer-times package replaces this page.
+// A plain explainer of why prayer times differ (spec 2.2). Shows the positions; picks none.
 export default function Page() {
-  return <StubPage title="Why times differ" back="/prayer/settings" note="Why prayer times differ between apps and mosques. Coming soon." />;
+  return <WhyTimesDiffer />;
 }
