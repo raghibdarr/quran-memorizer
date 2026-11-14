@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from '@/components/app-link';
 import BottomNav from '@/components/layout/bottom-nav';
 import Card from '@/components/ui/card';
+import { ChevronDownIcon } from '@/components/ui/icons';
 import { addDaysIso } from '@/lib/dates';
 import { haptic } from '@/lib/haptics';
 import { isPaused, makeUpOwed, missedEntries, openPause, rangeTally, resumeFor } from '@/lib/worship/log';
@@ -12,7 +13,7 @@ import { usePlaceStore } from '@/stores/place-store';
 import { calcSettingsOf, usePrayerStore } from '@/stores/prayer-store';
 import { useWorshipStore } from '@/stores/worship-store';
 import { PRAYER_NAMES, TIME_LABELS, type PrayerName } from '@/types/prayer';
-import { TRACKER_COPY } from './copy';
+import { MARK_LABELS, TRACKER_COPY } from './copy';
 import { dayLabel, isoInZone, longDayLabel } from './dates';
 import DayDots from './day-dots';
 import DaySheet from './day-sheet';
@@ -88,6 +89,13 @@ export default function TrackerClient() {
   const missed = missedEntries(prayers, pauses);
   const owed = makeUpOwed(prayers, pauses, madeUp);
   const showMakeUp = missed.length > 0 || madeUp > 0;
+  // The made-up count is a number, not a list, so it comes off the oldest
+  // first: what is listed is what is still to make up (newest first)
+  const toMakeUp = missed.slice(0, owed);
+  const rowsPaused = isPaused(rowsIso, pauses);
+  const pauseAhead = paused !== undefined && paused.from > today;
+  // Taught until the first mark; after that the rows speak for themselves
+  const firstVisit = Object.keys(prayers).length === 0;
 
   // In the day sheet, as on the rows, a prayer can't be logged before its time:
   // the prayer day on screen keeps its not-yet-begun prayers back, and a day
@@ -100,6 +108,13 @@ export default function TrackerClient() {
         : dayIso === rowsIso
           ? rows.filter((r) => r.startMs !== null && now < r.startMs).map((r) => r.prayer)
           : [];
+
+  // Pausing today would take today's marks out of the counts under the user's
+  // feet, so with today already logged the pause starts tomorrow
+  const pause = () => {
+    const todayLogged = Object.keys(prayers[today] ?? {}).length > 0;
+    startPause(todayLogged ? addDaysIso(today, 1) : today);
+  };
 
   const resume = () => {
     if (!paused) return;
@@ -116,8 +131,10 @@ export default function TrackerClient() {
         {paused && (
           <Card className="flex items-center justify-between gap-3 p-4">
             <div data-paused-since={paused.from}>
-              <p className="text-sm font-semibold text-foreground">{TRACKER_COPY.pausedSince(longDayLabel(paused.from))}</p>
-              <p className="mt-0.5 text-xs text-muted">{TRACKER_COPY.pausedHint}</p>
+              <p className="text-sm font-semibold text-foreground">
+                {pauseAhead ? TRACKER_COPY.pausedFrom(longDayLabel(paused.from)) : TRACKER_COPY.pausedSince(longDayLabel(paused.from))}
+              </p>
+              <p className="mt-0.5 text-xs text-muted">{pauseAhead ? TRACKER_COPY.pausedFromHint : TRACKER_COPY.pausedHint}</p>
             </div>
             <button
               type="button"
@@ -125,7 +142,7 @@ export default function TrackerClient() {
                 haptic.selection();
                 resume();
               }}
-              className="tactile-chip min-h-11 shrink-0 rounded-full bg-teal px-4 text-sm font-semibold text-on-teal"
+              className="pressable min-h-11 shrink-0 rounded-full bg-teal px-4 text-sm font-semibold text-on-teal"
             >
               {TRACKER_COPY.resume}
             </button>
@@ -137,20 +154,34 @@ export default function TrackerClient() {
             <h2 className="text-base font-bold text-foreground">{rowsIso === today ? TRACKER_COPY.todayHeading : dayLabel(rowsIso)}</h2>
             {rowsIso !== today || !place ? null : <span className="text-xs text-muted">{dayLabel(today)}</span>}
           </div>
-          <p className="mt-0.5 text-xs text-muted">{TRACKER_COPY.todayHint}</p>
+          {(rowsPaused || firstVisit) && (
+            <p className="mt-0.5 text-xs text-muted" data-today-hint>
+              {rowsPaused ? TRACKER_COPY.dayPaused : TRACKER_COPY.todayHint}
+            </p>
+          )}
           {rows ? (
             <ul className="mt-2 divide-y divide-foreground/5" data-today={rowsIso}>
-              {rows.map((r) => (
-                <li key={r.prayer} className="flex items-center justify-between gap-3 py-1">
-                  <span className="flex items-baseline gap-3">
-                    <span className="w-16 text-sm font-semibold text-foreground">{TIME_LABELS[r.prayer]}</span>
-                    {engine && place && r.startMs !== null && (
-                      <span className="text-sm text-muted tabular-nums">{engine.formatTime(r.startMs, place.tz)}</span>
-                    )}
-                  </span>
-                  <TrackerTick iso={rowsIso} prayer={r.prayer} startMs={r.startMs} endMs={r.endMs} />
-                </li>
-              ))}
+              {rows.map((r) => {
+                const waiting = r.startMs !== null && now < r.startMs && !prayers[rowsIso]?.[r.prayer];
+                return (
+                  <li key={r.prayer} className="flex items-center justify-between gap-3 py-1">
+                    <span className="flex items-baseline gap-3">
+                      <span className="w-16 text-sm font-semibold text-foreground">{TIME_LABELS[r.prayer]}</span>
+                      {engine && place && r.startMs !== null && (
+                        <span className="text-sm text-muted tabular-nums">{engine.formatTime(r.startMs, place.tz)}</span>
+                      )}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      {waiting && (
+                        <span className="text-xs text-muted" aria-hidden data-not-yet-row={r.prayer}>
+                          {TRACKER_COPY.notYet}
+                        </span>
+                      )}
+                      <TrackerTick iso={rowsIso} prayer={r.prayer} startMs={r.startMs} endMs={r.endMs} />
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           ) : (
             <div className="mt-2 h-[13.75rem]" aria-hidden />
@@ -180,7 +211,9 @@ export default function TrackerClient() {
                   <span className={iso === today ? 'text-[11px] font-bold text-teal' : 'text-[11px] text-muted'}>
                     {dayLabel(iso).slice(0, 2)}
                   </span>
-                  <DayDots day={prayers[iso]} paused={isPaused(iso, pauses)} />
+                  <span className="flex h-2 items-center">
+                    <DayDots day={prayers[iso]} paused={isPaused(iso, pauses)} size="md" />
+                  </span>
                 </li>
               );
             })}
@@ -199,14 +232,14 @@ export default function TrackerClient() {
               setDayIso(iso);
               setDayOpen(true);
             }}
+            hint={<p className="text-center text-xs text-muted">{TRACKER_COPY.monthHint}</p>}
           />
-          <div className="mt-3 flex items-center justify-between gap-2 text-[11px] text-muted">
-            <span>{TRACKER_COPY.monthHint}</span>
-            <span className="flex items-center gap-3" aria-hidden>
-              <Legend className="bg-teal" label={TRACKER_COPY.legendOnTime} />
-              <Legend className="bg-gold" label={TRACKER_COPY.legendLate} />
-            </span>
-          </div>
+          <ul className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] text-muted" data-legend>
+            <Legend mark={<span className="block h-1.5 w-1.5 rounded-full bg-teal" />} label={TRACKER_COPY.legendOnTime} />
+            <Legend mark={<span className="block h-1.5 w-1.5 rounded-full bg-gold" />} label={TRACKER_COPY.legendLate} />
+            <Legend mark={<span className="block h-1.5 w-1.5 rounded-full border border-muted" />} label={MARK_LABELS.missed} />
+            <Legend mark={<span className="block h-[1.5px] w-3 rounded-full bg-foreground/25" />} label={TRACKER_COPY.legendPaused} />
+          </ul>
         </Card>
 
         {showMakeUp && (
@@ -241,16 +274,20 @@ export default function TrackerClient() {
                 )}
               </span>
             </div>
-            {missed.length > 0 && (
-              <details className="mt-2 text-xs text-muted">
-                <summary className="flex min-h-11 cursor-pointer items-center">{TRACKER_COPY.fromDays}</summary>
-                <ul className="space-y-1 pb-1">
-                  {missed.slice(0, MAX_LISTED).map((m) => (
+            {toMakeUp.length > 0 && (
+              <details className="group -mb-2 mt-1 text-xs text-muted">
+                <summary className="-ml-1 inline-flex min-h-11 cursor-pointer list-none items-center gap-1 rounded-lg px-1 font-semibold [&::-webkit-details-marker]:hidden">
+                  {TRACKER_COPY.whichPrayers(toMakeUp.length)}
+                  <ChevronDownIcon size={14} className="transition-transform duration-150 group-open:rotate-180 motion-reduce:transition-none" />
+                </summary>
+                <ul className="space-y-1.5 border-t border-foreground/5 pb-3 pt-2" data-to-make-up>
+                  {toMakeUp.slice(0, MAX_LISTED).map((m) => (
                     <li key={`${m.iso}:${m.prayer}`} className="tabular-nums">
                       {TIME_LABELS[m.prayer]} · {dayLabel(m.iso)}
                     </li>
                   ))}
-                  {missed.length > MAX_LISTED && <li>+{missed.length - MAX_LISTED}</li>}
+                  {toMakeUp.length > MAX_LISTED && <li>+{toMakeUp.length - MAX_LISTED}</li>}
+                  {madeUp > 0 && <li className="pt-1">{TRACKER_COPY.oldestFirst}</li>}
                 </ul>
               </details>
             )}
@@ -264,7 +301,7 @@ export default function TrackerClient() {
               type="button"
               onClick={() => {
                 haptic.selection();
-                startPause(today);
+                pause();
               }}
               data-pause
               className="pressable min-h-11 shrink-0 rounded-full border border-foreground/15 bg-card px-4 text-sm font-semibold text-foreground"
@@ -281,11 +318,13 @@ export default function TrackerClient() {
   );
 }
 
-function Legend({ className, label }: { className: string; label: string }) {
+function Legend({ mark, label }: { mark: React.ReactNode; label: string }) {
   return (
-    <span className="flex items-center gap-1">
-      <span className={`inline-block h-[5px] w-[5px] rounded-full ${className}`} />
+    <li className="flex items-center gap-1.5">
+      <span className="flex h-1.5 items-center" aria-hidden>
+        {mark}
+      </span>
       {label}
-    </span>
+    </li>
   );
 }

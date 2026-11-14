@@ -110,6 +110,26 @@ test.describe('prayer log', () => {
     expect(stored.madeUp.prayers).toBe(1)
   })
 
+  test('the make-up list shrinks with the count, oldest first', async ({ page }) => {
+    await page.clock.install({ time: new Date('2026-03-10T20:00:00Z') })
+    await seed(page, { place: false })
+    await page.goto('/prayer/tracker')
+    await page.locator('[data-day="2026-03-08"]').click()
+    const day = page.locator('[data-day-sheet="2026-03-08"]')
+    await day.locator('[data-choice="fajr:missed"]').click()
+    await day.locator('[data-choice="isha:missed"]').click()
+    await page.getByRole('button', { name: 'Done' }).click()
+
+    await page.getByText('Which prayers (2)').click()
+    await expect(page.locator('[data-to-make-up] li')).toHaveCount(2)
+    await page.getByRole('button', { name: 'Made one up' }).click()
+    await expect(page.locator('[data-owed]')).toHaveAttribute('data-owed', '1')
+    await expect(page.getByText('Which prayers (1)')).toBeVisible()
+    // Fajr was the older of the two, so Isha is what is left
+    await expect(page.locator('[data-to-make-up]')).toContainText('Isha')
+    await expect(page.locator('[data-to-make-up]')).not.toContainText('Fajr')
+  })
+
   test('the day sheet holds back prayers whose time has not begun', async ({ page }) => {
     // 13:00 in London: Fajr and Dhuhr have begun; Asr, Maghrib and Isha have not
     await page.clock.install({ time: new Date('2026-03-10T13:00:00Z') })
@@ -183,6 +203,21 @@ test.describe('prayer log', () => {
     const pauses = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-worship') ?? '{}').state.pauses)
     expect(pauses).toEqual([])
   })
+
+  test("pausing with today already logged starts tomorrow, so today's marks still count", async ({ page }) => {
+    await page.clock.install({ time: new Date('2026-03-10T20:00:00Z') })
+    await seed(page)
+    await page.goto('/prayer/tracker')
+    await tick(page, '2026-03-10', 'isha').click()
+    await expect(page.locator('[data-week]')).toHaveAttribute('data-week', '1:1')
+    await page.locator('[data-pause]').click()
+    await expect(page.locator('[data-paused-since="2026-03-11"]')).toBeVisible()
+    await expect(page.locator('[data-week]')).toHaveAttribute('data-week', '1:1')
+    // Resuming before the pause has begun leaves nothing behind
+    await page.getByRole('button', { name: 'Resume' }).click()
+    const pauses = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-worship') ?? '{}').state.pauses)
+    expect(pauses).toEqual([])
+  })
 })
 
 test.describe('tasbih', () => {
@@ -195,12 +230,12 @@ test.describe('tasbih', () => {
     await expect(counter(page)).toHaveAttribute('data-count', '3')
     await page.getByRole('button', { name: 'Undo' }).click()
     await expect(counter(page)).toHaveAttribute('data-count', '2')
-    await page.getByRole('radio', { name: '33' }).click()
+    await page.getByRole('button', { name: '33', exact: true }).click()
     await expect(counter(page)).toHaveAccessibleName('2 of 33')
 
     await page.reload()
     await expect(counter(page)).toHaveAttribute('data-count', '2')
-    await expect(page.getByRole('radio', { name: '33' })).toHaveAttribute('aria-checked', 'true')
+    await expect(page.getByRole('button', { name: '33', exact: true })).toHaveAttribute('aria-pressed', 'true')
     const counts = await page.evaluate(() => JSON.parse(localStorage.getItem('quran-essentials') ?? '{}').state.counters)
     expect(counts['tasbih-free']).toBe(2)
     const totals = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-worship') ?? '{}').state.tasbihTotals)
@@ -228,7 +263,7 @@ test.describe('tasbih', () => {
 
     await page.goto('/tasbih?d=not-a-dhikr')
     await expect(page.locator('[data-bound]')).toHaveCount(0)
-    await expect(page.getByRole('radiogroup')).toBeVisible()
+    await expect(page.getByRole('group', { name: 'Count to' })).toBeVisible()
   })
 
   test('works offline after a visit (static web build)', async ({ page, context, baseURL }) => {

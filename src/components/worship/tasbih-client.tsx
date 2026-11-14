@@ -98,24 +98,33 @@ export default function TasbihClient() {
         {bound ? (
           <section className="text-center" aria-label={bound.title} data-bound={bound.id}>
             <h2 className="text-base font-semibold text-foreground">{bound.title}</h2>
+            {/* No leading override: .arabic-text's own line height keeps the marks clear */}
             <p
-              className={cn(arabicScript === 'indopak' ? 'arabic-text-indopak' : 'arabic-text', 'mt-1 !text-center text-2xl leading-loose text-foreground')}
+              className={cn(arabicScript === 'indopak' ? 'arabic-text-indopak' : 'arabic-text', 'mt-2 !text-center text-[1.75rem] text-foreground sm:text-3xl')}
               dir="rtl"
               lang="ar"
             >
               {bound.arabic}
             </p>
-            <p className="text-xs text-muted" dir="ltr">
+            <p className="mx-auto mt-2 max-w-prose text-xs leading-relaxed text-muted" dir="ltr">
               {bound.transliteration}
             </p>
-            <Link href="/tasbih" className="mt-2 inline-flex min-h-11 items-center px-2 text-xs font-semibold text-teal">
+            {/* The meaning, as the Essentials card shows it */}
+            {bound.translation && (
+              <p className="mx-auto mt-2 max-w-prose text-sm italic leading-relaxed text-muted" data-bound-meaning>
+                {bound.translation}
+              </p>
+            )}
+            {bound.source && <p className="mt-1 text-[11px] text-muted">{TASBIH_COPY.source(bound.source)}</p>}
+            <Link href="/tasbih" className="mt-1 inline-flex min-h-11 items-center px-2 text-xs font-semibold text-teal">
               {TASBIH_COPY.free}
             </Link>
           </section>
         ) : (
           <section aria-label={TASBIH_COPY.targetHeading} className={cn(waitingForBinding && 'invisible')}>
             <p className="mb-2 text-xs font-semibold text-muted">{TASBIH_COPY.targetHeading}</p>
-            <div className="grid grid-cols-6 gap-1.5" role="radiogroup" aria-label={TASBIH_COPY.targetHeading}>
+            {/* Plain toggle buttons: each one sets the target at once, and Other opens a form */}
+            <div className="grid grid-cols-6 gap-1.5" role="group" aria-label={TASBIH_COPY.targetHeading} data-targets>
               <TargetChip selected={freeTarget === 0} onClick={() => chooseTarget(0)}>
                 {TASBIH_COPY.noTarget}
               </TargetChip>
@@ -126,6 +135,8 @@ export default function TasbihClient() {
               ))}
               <TargetChip
                 selected={freeTarget > 0 && !isPreset}
+                expanded={customOpen}
+                controls="tasbih-custom-form"
                 onClick={() => {
                   setCustomValue(freeTarget > 0 && !isPreset ? String(freeTarget) : '');
                   setCustomOpen((o) => !o);
@@ -135,7 +146,7 @@ export default function TasbihClient() {
               </TargetChip>
             </div>
             {customOpen && (
-              <form onSubmit={applyCustom} className="mt-3 flex items-center gap-2">
+              <form id="tasbih-custom-form" onSubmit={applyCustom} className="mt-3 flex items-center gap-2">
                 <label className="sr-only" htmlFor="tasbih-custom">
                   {TASBIH_COPY.customLabel}
                 </label>
@@ -159,25 +170,30 @@ export default function TasbihClient() {
           </section>
         )}
 
-        <div className={cn('flex min-h-[18rem] flex-1 flex-col', waitingForBinding && 'invisible')}>
-          <Counter
-            count={count}
-            target={target}
-            label={bound?.title}
-            // While a ?d= binding loads, a tap must not land on the free counter
-            onCount={() => !waitingForBinding && countOnce(id)}
-            onUndo={() => !waitingForBinding && undoOnce(id)}
-          />
-        </div>
+        {/* The counter and its two footer lines share one column: same left edge, same right edge */}
+        <div className={cn('flex flex-1 flex-col', waitingForBinding && 'invisible')}>
+          <div className="flex min-h-[18rem] flex-1 flex-col">
+            <Counter
+              count={count}
+              target={target}
+              label={bound?.title}
+              // While a ?d= binding loads, a tap must not land on the free counter
+              onCount={() => !waitingForBinding && countOnce(id)}
+              onUndo={() => !waitingForBinding && undoOnce(id)}
+            />
+          </div>
 
-        <div className="-mt-3 flex items-center justify-between gap-3 text-sm">
-          <span className="text-xs text-muted tabular-nums" data-lifetime={lifetime}>
-            {lifetime > 0 ? TASBIH_COPY.lifetime(lifetime.toLocaleString()) : ''}
-          </span>
-          {count > 0 && (
-            <button type="button" onClick={() => setConfirmReset(true)} className="-mr-2 min-h-11 px-2 font-semibold text-muted hover:text-foreground">
-              {TASBIH_COPY.reset}
-            </button>
+          {(lifetime > 0 || count > 0) && (
+            <div className="flex min-h-11 items-center justify-between gap-3 text-sm">
+              <span className="text-xs text-muted tabular-nums" data-lifetime={lifetime}>
+                {lifetime > 0 ? TASBIH_COPY.lifetime(lifetime.toLocaleString()) : ''}
+              </span>
+              {count > 0 && (
+                <button type="button" onClick={() => setConfirmReset(true)} className="-mr-2 min-h-11 px-2 font-semibold text-muted hover:text-foreground">
+                  {TASBIH_COPY.reset}
+                </button>
+              )}
+            </div>
           )}
         </div>
 
@@ -220,12 +236,26 @@ export default function TasbihClient() {
   );
 }
 
-function TargetChip({ selected, onClick, children }: { selected: boolean; onClick: () => void; children: React.ReactNode }) {
+function TargetChip({
+  selected,
+  expanded,
+  controls,
+  onClick,
+  children,
+}: {
+  selected: boolean;
+  /** For Other: whether its form is open */
+  expanded?: boolean;
+  controls?: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"
-      role="radio"
-      aria-checked={selected}
+      aria-pressed={selected}
+      aria-expanded={expanded}
+      aria-controls={expanded ? controls : undefined}
       onClick={onClick}
       className={cn(
         'pressable min-h-11 min-w-0 truncate rounded-full px-1 text-sm font-semibold tabular-nums',

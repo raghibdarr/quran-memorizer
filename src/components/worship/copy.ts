@@ -14,7 +14,7 @@ export const MARK_LABELS: Record<PrayerMark, string> = {
 export const TRACKER_COPY = {
   title: 'Prayer log',
   todayHeading: 'Today',
-  todayHint: "Tap a prayer once you've prayed it. Hold it for more choices.",
+  todayHint: "Tap when you've prayed. Tap again to change it.",
   noPlaceHint: 'Set your place on the Prayer screen to see times here.',
   setPlace: 'Set your place',
   clear: 'Clear',
@@ -35,10 +35,12 @@ export const TRACKER_COPY = {
   legendLate: 'Late',
   legendPaused: 'Paused',
   dayLogged: (n: number) => (n === 0 ? 'nothing logged' : `${n} of 5 logged`),
-  dayPaused: 'Tracking was paused on this day, so it stays out of every count.',
+  dayPaused: 'Paused. Anything you tick still saves, but stays out of the counts.',
   pauseHint: 'For travel, illness, or any stretch you would rather not log. No reason needed.',
   pauseAction: 'Pause tracking',
   pausedSince: (date: string) => `Paused since ${date}`,
+  pausedFrom: (date: string) => `Paused from ${date}`,
+  pausedFromHint: "Today's prayers still count. Days from then on stay out of every count.",
   pausedHint: 'Days while paused stay out of every count.',
   resume: 'Resume',
   makeUpHeading: 'Make-up prayers (qada)',
@@ -47,12 +49,13 @@ export const TRACKER_COPY = {
   makeUpDone: 'All made up.',
   madeOneUp: 'Made one up',
   undo: 'Undo',
-  fromDays: 'Marked on',
+  whichPrayers: (n: number) => `Which prayers (${n})`,
+  oldestFirst: 'Each one you make up comes off the oldest first.',
 } as const;
 
 export const TASBIH_COPY = {
   title: 'Tasbih',
-  free: 'Free count',
+  free: 'Switch to free count',
   targetHeading: 'Count to',
   noTarget: 'None',
   custom: 'Other',
@@ -67,5 +70,6 @@ export const TASBIH_COPY = {
   resetConfirm: 'Start again',
   lifetime: (n: string) => `${n} in all`,
   fromEssentials: 'Dhikr from Essentials',
+  source: (s: string) => `Source: ${s}`,
   countOf: (count: number, target?: number) => (target ? `${count} of ${target}` : `${count}`),
 } as const;

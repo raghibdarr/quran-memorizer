@@ -51,17 +51,20 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
           // The tactile-print look, spelled out: the .tactile-btn class would add the
           // app-wide press haptic on top of the one each count fires here
           'relative flex min-h-56 w-full flex-1 select-none flex-col items-center justify-center overflow-hidden rounded-3xl',
-          'border-[1.5px] border-[var(--c-ink)] shadow-[3px_3px_0_var(--shadow-btn-color)]',
+          'border-[1.5px] shadow-[3px_3px_0_var(--shadow-btn-color)]',
           'transition-[transform,box-shadow,background-color,color] duration-150 motion-reduce:transition-none',
           'active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_var(--shadow-btn-color)]',
           'touch-manipulation [-webkit-tap-highlight-color:transparent]',
-          reached ? 'bg-teal text-on-teal' : 'bg-card text-foreground',
+          'outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solid focus-visible:outline-teal',
+          // Reaching the target tints the surface and lets the full ring speak; a
+          // solid fill this size would be the loudest thing in the app
+          reached ? 'border-teal bg-teal/10 text-teal' : 'border-[var(--c-ink)] bg-card text-foreground',
         )}
       >
         {/* Progress towards the target as a quiet ring */}
         {goal > 0 && (
           <svg viewBox="0 0 120 120" className="pointer-events-none absolute h-[min(72%,15rem)] w-auto opacity-90" aria-hidden>
-            <circle cx="60" cy="60" r="54" fill="none" strokeWidth="3" className={reached ? 'stroke-on-teal/25' : 'stroke-foreground/10'} />
+            <circle cx="60" cy="60" r="54" fill="none" strokeWidth="3" className={reached ? 'stroke-teal/20' : 'stroke-foreground/10'} />
             <circle
               cx="60"
               cy="60"
@@ -72,15 +75,16 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
               pathLength={1}
               strokeDasharray={`${progress} 1`}
               transform="rotate(-90 60 60)"
-              className={cn('transition-[stroke-dasharray] duration-200 motion-reduce:transition-none', reached ? 'stroke-on-teal' : 'stroke-teal')}
+              className={cn('transition-[stroke-dasharray] duration-200 motion-reduce:transition-none', 'stroke-teal')}
             />
           </svg>
         )}
-        <span className="relative text-6xl font-bold tabular-nums" aria-hidden>
+        {/* Proportional digits: the tabular 1 has a slab foot that reads as another face at this size */}
+        <span className={cn('relative font-bold leading-none tracking-tight', goal > 0 ? 'text-6xl' : 'text-7xl')} aria-hidden>
           {count}
         </span>
         {goal > 0 && (
-          <span className={cn('relative mt-1 text-sm tabular-nums', reached ? 'text-on-teal/80' : 'text-muted')} aria-hidden>
+          <span className={cn('relative mt-2 text-sm tabular-nums', reached ? 'text-teal/80' : 'text-muted')} aria-hidden>
             of {goal}
           </span>
         )}
@@ -90,7 +94,7 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
         {reached && count === goal ? TASBIH_COPY.reachedTarget : ''}
       </span>
 
-      <div className="flex min-h-11 items-center justify-between gap-3 px-1 text-sm">
+      <div className="flex min-h-11 items-center justify-between gap-3 text-sm">
         <span className="text-xs text-muted">{reached ? TASBIH_COPY.reachedTarget : TASBIH_COPY.tapHint}</span>
         {onUndo && count > 0 && (
           <button type="button" onClick={onUndo} className="-mr-2 min-h-11 shrink-0 px-2 font-semibold text-teal">

@@ -125,7 +125,7 @@ export default function TrackerTick({ iso, prayer, startMs, endMs }: TrackerTick
             mark === 'late' && 'bg-gold text-on-gold',
             mark === 'missed' && 'border-[1.5px] border-muted/60',
             !mark && !future && 'border-[1.5px] border-foreground/30',
-            !mark && future && 'border-[1.5px] border-dashed border-foreground/15',
+            !mark && future && 'border-[1.5px] border-dashed border-foreground/30',
           )}
         >
           {(mark === 'ontime' || mark === 'late') && <CheckIcon size={14} />}

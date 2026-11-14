@@ -45,32 +45,37 @@ export default function DaySheet({
                       {TRACKER_COPY.notYet}
                     </span>
                   ) : (
-                  <span className="flex gap-1.5" role="group" aria-label={TIME_LABELS[p]}>
-                    {CHOICES.map((s) => {
-                      const on = current === s;
-                      return (
-                        <button
-                          key={s}
-                          type="button"
-                          aria-pressed={on}
-                          data-choice={`${p}:${s}`}
-                          onClick={() => {
-                            haptic.selection();
-                            changeMark(iso, p, on ? null : s);
-                          }}
-                          className={cn(
-                            'pressable min-h-11 rounded-full px-3 text-xs font-semibold',
-                            on && s === 'ontime' && 'bg-teal text-on-teal',
-                            on && s === 'late' && 'bg-gold text-on-gold',
-                            on && s === 'missed' && 'bg-foreground/15 text-foreground',
-                            !on && 'bg-foreground/5 text-muted',
-                          )}
-                        >
-                          {MARK_LABELS[s]}
-                        </button>
-                      );
-                    })}
-                  </span>
+                    // One segmented control a row: a calm outline, the chosen part filled
+                    <span
+                      className="inline-flex min-h-11 items-center rounded-full border border-foreground/10 bg-card p-0.5"
+                      role="group"
+                      aria-label={TIME_LABELS[p]}
+                    >
+                      {CHOICES.map((s) => {
+                        const on = current === s;
+                        return (
+                          <button
+                            key={s}
+                            type="button"
+                            aria-pressed={on}
+                            data-choice={`${p}:${s}`}
+                            onClick={() => {
+                              haptic.selection();
+                              changeMark(iso, p, on ? null : s);
+                            }}
+                            className={cn(
+                              'pressable min-h-10 rounded-full px-3 text-xs font-semibold',
+                              on && s === 'ontime' && 'bg-teal text-on-teal',
+                              on && s === 'late' && 'bg-gold text-on-gold',
+                              on && s === 'missed' && 'bg-foreground/15 text-foreground',
+                              !on && 'text-foreground/80 hover:bg-foreground/5',
+                            )}
+                          >
+                            {MARK_LABELS[s]}
+                          </button>
+                        );
+                      })}
+                    </span>
                   )}
                 </li>
               );

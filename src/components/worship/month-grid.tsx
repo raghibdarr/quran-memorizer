@@ -18,6 +18,7 @@ export default function MonthGrid({
   pauses,
   onMonth,
   onDay,
+  hint,
 }: {
   /** YYYY-MM */
   month: string;
@@ -26,6 +27,8 @@ export default function MonthGrid({
   pauses: readonly Pause[];
   onMonth: (month: string) => void;
   onDay: (iso: string) => void;
+  /** A line between the month name and the days, read before the grid is used */
+  hint?: React.ReactNode;
 }) {
   const n = daysInMonth(month);
   const lead = mondayColumn(`${month}-01`);
@@ -59,6 +62,8 @@ export default function MonthGrid({
         </button>
       </div>
 
+      {hint}
+
       <div className="mt-2 grid grid-cols-7 gap-y-1 text-center" role="group" aria-label={monthLabel(month)}>
         {WEEKDAYS.map((d, i) => (
           <span key={i} className="pb-1 text-[11px] font-semibold text-muted" aria-hidden>
@@ -90,7 +95,9 @@ export default function MonthGrid({
               )}
             >
               <span className={cn('text-xs tabular-nums', iso === today ? 'font-bold text-teal' : 'text-foreground')}>{i + 1}</span>
-              {future ? <span className="h-[5px]" aria-hidden /> : <DayDots day={log[iso]} paused={paused} className="h-[5px]" />}
+              <span className="flex h-[5px] items-center" aria-hidden>
+                {!future && <DayDots day={log[iso]} paused={paused} />}
+              </span>
             </button>
           );
         })}
