@@ -1,0 +1,89 @@
+{
+  "id": "09",
+  "deck": "nawawi40",
+  "rev": 1,
+  "title": "Do what you can of what is commanded",
+  "cue": "What to do with what is forbidden and what is commanded, and what destroyed those before",
+  "arabic": "عَنْ أَبِي هُرَيْرَةَ عَبْدِ الرَّحْمَنِ بْنِ صَخْرٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «مَا نَهَيْتُكُمْ عَنْهُ فَاجْتَنِبُوهُ، وَمَا أَمَرْتُكُمْ بِهِ فَأْتُوا مِنْهُ مَا اسْتَطَعْتُمْ، فَإِنَّمَا أَهْلَكَ الَّذِينَ مِنْ قَبْلِكُمْ كَثْرَةُ مَسَائِلِهِمْ وَاخْتِلَافُهُمْ عَلَى أَنْبِيَائِهِمْ».",
+  "segments": [
+    217,
+    327
+  ],
+  "translation": "It is narrated from Abu Hurayrah Abd al-Rahman ibn Sakhr, may Allah be pleased with him, who said: I heard the Messenger of Allah ﷺ say: “What I have forbidden you, avoid it; and what I have commanded you, do of it what you are able. For what destroyed those before you was only their many questions and their disagreeing with their prophets.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "7288",
+      "numbering": "fath-al-bari",
+      "narrator": "Abu Hurayrah"
+    },
+    {
+      "collection": "muslim",
+      "number": "1337",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "9",
+      "numbering": "nawawi-order",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 7288"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 1337"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 9, p. 56: https://shamela.ws/book/11244/46",
+        "skeletonSha256": "38d9244e691f1d6f6b2c4a65833ba2a10ce54acdeaaa977050c24f3e8b259a74"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 9, p. 271: https://shamela.ws/book/8889/267",
+        "skeletonSha256": "7f3ef73a4e0d61a94e8cb9b919baaf283c8a7d74399e759ed09962263035c264"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 9 (comparison only)",
+        "skeletonSha256": "865cde9bfdbe9cf1ffc95e1904ef87930fe99aa044f49e7b774060cdcb57be57"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. hadith-api agrees with ours. Ibn Daqiq's print joins ما نهيتكم into one word (the same reading); al-Haytami's print reads فافعلوا for فأتوا. Ours follows two of the three."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id gives its wording in Muslim, where it follows a sermon: the Prophet ﷺ said Allah had made the [[hajj]] binding, a man asked three times whether that meant every year, and he answered that had he said yes, it would have become binding and they would not have been able to do it.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 9, p. 56 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): hadith-api identical; Ibn Daqiq a word-join only; al-Haytami one difference (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): al-Haytami vowels أهلِك (a misprint); kept أهلَكَ; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

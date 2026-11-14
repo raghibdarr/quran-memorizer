@@ -1,0 +1,85 @@
+{
+  "id": "13",
+  "deck": "nawawi40",
+  "rev": 1,
+  "title": "Love for your brother what you love for yourself",
+  "cue": "None of you believes until…",
+  "arabic": "عَنْ أَبِي حَمْزَةَ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللَّهُ عَنْهُ خَادِمِ رَسُولِ اللَّهِ ﷺ عَنِ النَّبِيِّ ﷺ قَالَ: «لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ».",
+  "translation": "It is narrated from Abu Hamzah Anas ibn Malik, may Allah be pleased with him, the servant of the Messenger of Allah ﷺ, that the Prophet ﷺ said: “None of you believes until he loves for his brother what he loves for himself.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "13",
+      "numbering": "fath-al-bari",
+      "narrator": "Anas ibn Malik"
+    },
+    {
+      "collection": "muslim",
+      "number": "45",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "13",
+      "numbering": "nawawi-order",
+      "narrator": "Anas ibn Malik"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 13"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 45"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 13, p. 63: https://shamela.ws/book/11244/53",
+        "skeletonSha256": "5b65127eb0441531895a725180c55c6743bee1cce6ab88d4536930d55f1d1f0e"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 13, p. 304: https://shamela.ws/book/8889/300",
+        "skeletonSha256": "1522ad1366f984f1a1e9e58b143076247a0c29cf20a6177038e726f233ed6bc5"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 13 (comparison only)",
+        "skeletonSha256": "5b65127eb0441531895a725180c55c6743bee1cce6ab88d4536930d55f1d1f0e"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads أن رسول الله ﷺ for عن النبي ﷺ; ours follows the other two."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id notes that al-Bukhari's wording is \"for his brother\" without doubt, while Muslim's has \"for his brother, or his neighbour\", the narrator unsure which; and that scholars read \"none of you believes\" as complete faith, not faith at its root.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 13, p. 63 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): Ibn Daqiq and hadith-api identical; al-Haytami one difference (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): no conflicts; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

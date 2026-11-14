@@ -1,0 +1,213 @@
+# al-Nawawi's Forty: review log
+
+Stages C, F, G and H were meant for fresh agents. None could be started in this run, so one
+agent ran every stage in separate passes: C, D and G mechanically (tools/collate.mjs and the
+footnote checks below, re-runnable), F as a second read of each English sentence against its
+Arabic only. The content-audit package re-checks all of it with a fresh verifier. Nothing here
+is scholar-reviewed.
+
+## C and D: collation and vowels, 2026-11-14
+
+`node content/deen/nawawi40/tools/collate.mjs --vowels` (identical = same skeleton hash as ours)
+
+```
+
+# 01 Actions are by intentions
+  ibn-daqiq-sharh: identical 8c0d3cea1e5f
+  haytami-fath-al-mubin: identical 8c0d3cea1e5f
+     vowels: agree
+  hadith-api: identical 8c0d3cea1e5f
+     vowels: agree
+
+# 02 Jibril's questions
+  ibn-daqiq-sharh: identical 5358bd799d5f
+     vowels: agree
+  haytami-fath-al-mubin: 5 difference(s) ca0f73d0f149
+     ours «جلوس» · witness «»
+     ours «» · witness «قال»
+     ours «المسيول» · witness «المسوول»
+     ours «اماراتها» · witness «امارتها»
+     ours «فلبثت» · witness «فلبث»
+     vowels: agree
+  hadith-api: identical 5358bd799d5f
+     vowels: agree
+
+# 03 Islam is built on five
+  ibn-daqiq-sharh: identical 0d2c7501b071
+     vowels: agree
+  haytami-fath-al-mubin: 1 difference(s) 34bd36438c27
+     ours «رسول الله» · witness «عبده ورسوله»
+     vowels: agree
+  hadith-api: identical 0d2c7501b071
+     vowels: agree
+
+# 04 Creation in the womb, and the written decree
+  ibn-daqiq-sharh: 1 difference(s) 3d1a46761acd
+     ours «فوالله» · witness «فو الله»
+     vowels: agree
+  haytami-fath-al-mubin: 3 difference(s) c92a0a9ff713
+     ours «نطفة» · witness «»
+     ours «اليه» · witness «»
+     ours «فوالله الذي» · witness «فوالذي»
+     vowels: agree
+  hadith-api: 1 difference(s) e440b9cfed2a
+     ours «او» · witness «ام»
+     vowels: 2 word(s) differ
+       وَشَقِيٌّ ≠ وَشَقِيٍّ
+       سَعِيدٌ. ≠ سَعِيدٍ؛
+
+# 05 Whatever is newly introduced is rejected
+  ibn-daqiq-sharh: identical 89232a328987
+  haytami-fath-al-mubin: identical 89232a328987
+     vowels: agree
+  hadith-api: identical 89232a328987
+     vowels: agree
+
+# 06 The lawful, the unlawful and what is unclear
+  ibn-daqiq-sharh: identical c03a422d0e24
+     vowels: agree
+  haytami-fath-al-mubin: 1 difference(s) 8558eff204d7
+     ours «امور» · witness «»
+     vowels: 1 word(s) differ
+       بَيِّنٌ، ≠ بَيَّنٌ،
+  hadith-api: identical c03a422d0e24
+     vowels: agree
+
+# 07 The religion is sincere counsel
+  ibn-daqiq-sharh: identical 60ad3d1619ac
+  haytami-fath-al-mubin: identical 60ad3d1619ac
+     vowels: agree
+  hadith-api: identical 60ad3d1619ac
+     vowels: agree
+
+# 08 The protection of blood and wealth
+  ibn-daqiq-sharh: identical d6029633e51c
+     vowels: agree
+  haytami-fath-al-mubin: 2 difference(s) d6e1e8d0816f
+     ours «رسول الله» · witness «النبي»
+     ours «تعالي» · witness «»
+     vowels: 1 word(s) differ
+       اللَّهِ ≠ اللَّهُ
+  hadith-api: identical d6029633e51c
+     vowels: agree
+
+# 09 Do what you can of what is commanded
+  ibn-daqiq-sharh: 1 difference(s) 38d9244e691f
+     ours «ما نهيتكم» · witness «مانهيتكم»
+  haytami-fath-al-mubin: 1 difference(s) 7f3ef73a4e0d
+     ours «فاتوا» · witness «فافعلوا»
+     vowels: 1 word(s) differ
+       أَهْلَكَ ≠ أَهْلِكَ
+  hadith-api: identical 865cde9bfdbe
+     vowels: agree
+
+# 10 Allah accepts only what is good
+  ibn-daqiq-sharh: 2 difference(s) 0ccf9a32a44f
+     ours «واعملوا صالحا وقال» · witness «فقال»
+     ours «ومشربه حرام» · witness «»
+     vowels: agree
+  haytami-fath-al-mubin: 3 difference(s) a34a9546432e
+     ours «يا ايها» · witness «ياايها»
+     ours «يا ايها» · witness «ياايها»
+     ours «له» · witness «لذلك»
+     vowels: agree
+  hadith-api: 1 difference(s) e6db7d0869ff
+     ours «تعالي» · witness «»
+     vowels: agree
+
+# 11 Leave what makes you doubt
+  ibn-daqiq-sharh: identical cd20bafc421b
+  haytami-fath-al-mubin: 2 difference(s) f6c19a8e2abe
+     ours «» · witness «رضي الله عنهما»
+     ours «رضي الله عنهما» · witness «»
+     vowels: 1 word(s) differ
+       اللَّهِ ≠ اللَّهَ
+  hadith-api: identical cd20bafc421b
+     vowels: 2 word(s) differ
+       يَرِيبُكَ ≠ يُرِيبُك
+       يَرِيبُكَ». ≠ يُرِيبُك
+
+# 12 Leaving what does not concern you
+  ibn-daqiq-sharh: identical f192d4af310a
+  haytami-fath-al-mubin: 2 difference(s) 55a66048ae54
+     ours «قال قال» · witness «ان»
+     ours «» · witness «قال»
+     vowels: 1 word(s) differ
+       رَسُولُ ≠ رَسُولَ
+  hadith-api: identical f192d4af310a
+     vowels: agree
+
+# 13 Love for your brother what you love for yourself
+  ibn-daqiq-sharh: identical 5b65127eb044
+  haytami-fath-al-mubin: 1 difference(s) 1522ad1366f9
+     ours «عن النبي» · witness «ان رسول الله»
+     vowels: agree
+  hadith-api: identical 5b65127eb044
+     vowels: agree
+
+# 14 The sanctity of a Muslim's life
+  ibn-daqiq-sharh: identical dcb7edc3987d
+  haytami-fath-al-mubin: identical dcb7edc3987d
+     vowels: agree
+  hadith-api: 2 difference(s) 4fd8fa72028c
+     ours «» · witness «يشهد ان لا اله»
+     ours «» · witness «الله واني رسول الله الا»
+     vowels: agree
+
+# 15 Speak good or keep silent
+  ibn-daqiq-sharh: identical 6be7cb4d2e8b
+     vowels: agree
+  haytami-fath-al-mubin: 1 difference(s) 0978cd5cb92e
+     ours «ان» · witness «عن»
+     vowels: 2 word(s) differ
+       رَسُولَ ≠ رَسُولِ
+       وَالْيَوْمِ ≠ وَالْيَوْمَ
+  hadith-api: identical 6be7cb4d2e8b
+     vowels: agree
+```
+
+## F: English against the Arabic (separate pass), 2026-11-14
+
+Batch 1 (1 to 15). Findings, each fixed:
+
+- 02: "may Allah be pleased with him, also" read awkwardly and misplaced أيضا; now "It is also narrated from Umar".
+- 04: "commanded to write four things" dropped بأربع كلمات ("with four words"); now "commanded with four words: to write …".
+- 06: "grazing his flock": "his flock" is not in the Arabic; now in square brackets.
+- Checked and kept: 01 "whoever's emigration was" (كانت past, kept as past); 04 كتاب rendered "what was written", not "the Book", since it is the decree written for him; 10 the two ayahs translated plainly inside quotation marks, no commentary; 11 ريحانته kept literal ("his sweet basil"); 14 الثيب الزاني rendered "the married person who commits adultery" (الثيب covers man and woman).
+
+## G: citation numbers in two witnesses, 2026-11-14
+
+W2 = al-Haytami, al-Fath al-Mubin (Dar al-Minhaj) takhrij footnotes; W4 = Ibn Rajab, Jami'
+al-'Ulum (al-Arna'ut and Bajis) takhrij footnotes; api = the hadith-api text at that number
+(comparison only): how many entries carry the number and the best share of our matn's words.
+
+```
+01 bukhari 1 W2: yes W4: yes  api: 1 entry, best overlap 86%
+01 muslim 1907 W2: yes W4: yes  api: 2 entries, best overlap 81%
+02 muslim 8 W2: yes W4: yes  api: 5 entries, best overlap 99%
+03 bukhari 8 W2: yes W4: yes  api: 1 entry, best overlap 89%
+03 muslim 16 W2: yes W4: yes  api: 4 entries, best overlap 100%
+04 bukhari 3208 W2: yes W4: yes  api: 1 entry, best overlap 67%
+04 muslim 2643 W2: yes W4: yes  api: 2 entries, best overlap 92%
+05 bukhari 2697 W2: yes W4: yes  api: 1 entry, best overlap 83%
+05 muslim 1718 W2: yes W4: yes  api: 2 entries, best overlap 100%
+05 muslim 1718 W2: yes W4: yes  api: (variant)
+06 bukhari 52 W2: yes W4: yes  api: 1 entry, best overlap 81%
+06 muslim 1599 W2: yes W4: yes  api: 4 entries, best overlap 95%
+07 muslim 55 W2: yes W4: yes  api: 3 entries, best overlap 100%
+08 bukhari 25 W2: yes W4: yes  api: 1 entry, best overlap 96%
+08 muslim 22 W2: yes W4: yes  api: 1 entry, best overlap 85%
+09 bukhari 7288 W2: yes W4: yes  api: 1 entry, best overlap 59%
+09 muslim 1337 W2: yes W4: yes  api: 4 entries, best overlap 94%
+10 muslim 1015 W2: yes W4: yes  api: 1 entry, best overlap 98%
+11 tirmidhi 2518 W2: yes W4: yes  api: 1 entry, best overlap 100%
+11 nasai 8/327 W2: yes W4: yes  api: (not checked here)
+12 tirmidhi 2317 W2: yes W4: yes  api: 1 entry, best overlap 100%
+12 ibn-majah 3976 W2: yes W4: yes  api: 1 entry, best overlap 100%
+13 bukhari 13 W2: yes W4: yes  api: 1 entry, best overlap 100%
+13 muslim 45 W2: yes W4: yes  api: 2 entries, best overlap 100%
+14 bukhari 6878 W2: yes W4: yes  api: 1 entry, best overlap 57%
+14 muslim 1676 W2: yes W4: yes  api: 4 entries, best overlap 93%
+15 bukhari 6018 W2: yes W4: yes  api: 1 entry, best overlap 100%
+15 muslim 47 W2: yes W4: yes  api: 3 entries, best overlap 100%
+```

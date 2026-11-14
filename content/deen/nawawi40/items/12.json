@@ -1,0 +1,87 @@
+{
+  "id": "12",
+  "deck": "nawawi40",
+  "rev": 1,
+  "title": "Leaving what does not concern you",
+  "cue": "Part of the excellence of a person's Islam",
+  "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ».",
+  "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “Part of the excellence of a person’s Islam is his leaving what does not concern him.”",
+  "citations": [
+    {
+      "collection": "tirmidhi",
+      "number": "2317",
+      "numbering": "ahmad-shakir",
+      "narrator": "Abu Hurayrah"
+    },
+    {
+      "collection": "ibn-majah",
+      "number": "3976",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "12",
+      "numbering": "nawawi-order",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "hasan",
+      "by": "al-nawawi",
+      "in": "al-Arba'in al-Nawawiyya, after hadith 12",
+      "quote": "حَدِيثٌ حَسَنٌ"
+    },
+    {
+      "grade": "mursal",
+      "by": "ibn-rajab",
+      "in": "Jami' al-'Ulum wa al-Hikam, on hadith 12, reporting most of the imams, Ahmad and Ibn Ma'in among them",
+      "quote": "وَأَمَّا أَكْثَرُ الْأَئِمَّةِ فَقَالُوا: لَيْسَ هُوَ بِمَحْفُوظٍ بِهَذَا الْإِسْنَادِ، وَإِنَّمَا هُوَ مَحْفُوظٌ عَنِ الزُّهْرِيِّ عَنْ عَلِيِّ بْنِ حُسَيْنٍ عَنِ النَّبِيِّ ﷺ مُرْسَلًا"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 12, p. 62: https://shamela.ws/book/11244/52",
+        "skeletonSha256": "f192d4af310a2213aefd68804fed40f1bf5571aa380759eb2b6e9e4889084dfe"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 12, p. 299: https://shamela.ws/book/8889/295",
+        "skeletonSha256": "55a66048ae5432de6476ba226e8dbe8b1afba68da2c377ea988e6736c24c5efe"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 12 (comparison only)",
+        "skeletonSha256": "f192d4af310a2213aefd68804fed40f1bf5571aa380759eb2b6e9e4889084dfe"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads أن رسول الله ﷺ قال; ours follows the other two."
+  },
+  "notes": [
+    {
+      "text": "Ibn Rajab reports that al-Tirmidhi called this chain gharib, that al-Nawawi graded it [[hasan]] because its narrators are trustworthy, and that most of the imams, Ahmad and Yahya ibn Ma'in among them, held it is preserved only as a [[mursal]] report from Ali ibn al-Husayn.",
+      "source": {
+        "work": "Ibn Rajab, Jami' al-'Ulum wa al-Hikam",
+        "location": "on hadith 12, vol. 1, p. 287 (Mu'assasat al-Risala, 7th printing, 1997)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): Ibn Daqiq and hadith-api identical; al-Haytami one difference (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): no conflicts beyond al-Haytami's different wording; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: not in the two Sahihs. al-Nawawi's verdict \"حديث حسن\" is in his attribution line (Ibn Daqiq and al-Haytami). Dissent located in Ibn Rajab, Jami' al-'Ulum on hadith 12 (vol. 1 p. 287): most imams, Ahmad and Ibn Ma'in among them, hold it mursal from Ali ibn al-Husayn; al-Tirmidhi's own word after no. 2317 is \"gharib\" (hadith-api ara-tirmidhi), which is not a grade on our scale and is given in a note",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

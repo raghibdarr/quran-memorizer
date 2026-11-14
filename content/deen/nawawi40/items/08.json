@@ -1,0 +1,89 @@
+{
+  "id": "08",
+  "deck": "nawawi40",
+  "rev": 1,
+  "title": "The protection of blood and wealth",
+  "cue": "What protects a person's blood and wealth",
+  "arabic": "عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: «أُمِرْتُ أَنْ أُقَاتِلَ النَّاسَ حَتَّى يَشْهَدُوا أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَيُقِيمُوا الصَّلَاةَ، وَيُؤْتُوا الزَّكَاةَ. فَإِذَا فَعَلُوا ذَلِكَ عَصَمُوا مِنِّي دِمَاءَهُمْ وَأَمْوَالَهُمْ إِلَّا بِحَقِّ الْإِسْلَامِ، وَحِسَابُهُمْ عَلَى اللَّهِ تَعَالَى».",
+  "segments": [
+    239,
+    375
+  ],
+  "translation": "It is narrated from Ibn Umar, may Allah be pleased with them both, that the Messenger of Allah ﷺ said: “I have been commanded to fight the people until they bear witness that there is no god but Allah and that Muhammad is the Messenger of Allah, establish the prayer and give the [[zakat]]. If they do that, they have protected their blood and their wealth from me, except by the right of Islam, and their reckoning is with Allah the Exalted.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "25",
+      "numbering": "fath-al-bari",
+      "narrator": "Abd Allah ibn Umar"
+    },
+    {
+      "collection": "muslim",
+      "number": "22",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "8",
+      "numbering": "nawawi-order",
+      "narrator": "Abd Allah ibn Umar"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 25"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 22"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 8, p. 53: https://shamela.ws/book/11244/43",
+        "skeletonSha256": "d6029633e51c096776088812a0892503be933836f6830757e6aee3cb22a19ff6"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 8, p. 259: https://shamela.ws/book/8889/255",
+        "skeletonSha256": "d6e1e8d0816fe3ad34fa0f7a1bfc01c7d1a20ffce8201b37a1cf84917ffbdbbd"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 8 (comparison only)",
+        "skeletonSha256": "d6029633e51c096776088812a0892503be933836f6830757e6aee3cb22a19ff6"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads أن النبي and lacks تعالى at the end; ours follows the other two."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id notes that Anas narrates it with \"until they bear witness … and face our [[qiblah]], eat what we slaughter and pray our prayer\".",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 8, p. 53 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): Ibn Daqiq and hadith-api identical; al-Haytami two differences (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): no conflicts beyond al-Haytami's different wording; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

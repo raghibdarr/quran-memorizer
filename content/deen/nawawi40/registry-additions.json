@@ -1,0 +1,161 @@
+{
+  "_about": "Registry entries the Forty needs beyond the shared files (spec 5.2): merged by scripts/build-deen.mjs. Witness sources are the prints the Arabic was collated against; collections and scholars are those al-Nawawi's attribution lines and the located gradings name.",
+  "collections": [
+    {
+      "id": "ahmad",
+      "name": "Musnad Ahmad",
+      "arabic": "مسند أحمد",
+      "author": "ahmad",
+      "sahih": false,
+      "numberings": [
+        "risala-musnad"
+      ]
+    },
+    {
+      "id": "darimi",
+      "name": "Sunan al-Darimi",
+      "arabic": "سنن الدارمي",
+      "author": "al-darimi",
+      "sahih": false,
+      "numberings": [
+        "darimi-asad"
+      ]
+    },
+    {
+      "id": "daraqutni",
+      "name": "Sunan al-Daraqutni",
+      "arabic": "سنن الدارقطني",
+      "author": "al-daraqutni",
+      "sahih": false,
+      "numberings": [
+        "daraqutni-risala"
+      ]
+    },
+    {
+      "id": "bayhaqi-kubra",
+      "name": "al-Sunan al-Kubra of al-Bayhaqi",
+      "arabic": "السنن الكبرى للبيهقي",
+      "author": "al-bayhaqi",
+      "sahih": false,
+      "numberings": [
+        "bayhaqi-kubra-volume-page"
+      ]
+    },
+    {
+      "id": "muwatta",
+      "name": "al-Muwatta' of Malik",
+      "arabic": "موطأ مالك",
+      "author": "malik",
+      "sahih": false,
+      "numberings": [
+        "muwatta-abd-al-baqi"
+      ]
+    }
+  ],
+  "numberings": [
+    {
+      "id": "risala-musnad",
+      "name": "the Mu'assasat al-Risala edition's numbering",
+      "for": [
+        "ahmad"
+      ]
+    },
+    {
+      "id": "darimi-asad",
+      "name": "Husayn Salim Asad's numbering",
+      "for": [
+        "darimi"
+      ]
+    },
+    {
+      "id": "daraqutni-risala",
+      "name": "the Mu'assasat al-Risala edition's numbering",
+      "for": [
+        "daraqutni"
+      ]
+    },
+    {
+      "id": "bayhaqi-kubra-volume-page",
+      "name": "volume and page of the Hyderabad print",
+      "for": [
+        "bayhaqi-kubra"
+      ]
+    },
+    {
+      "id": "muwatta-abd-al-baqi",
+      "name": "Muhammad Fu'ad Abd al-Baqi's numbering",
+      "for": [
+        "muwatta"
+      ]
+    },
+    {
+      "id": "mujtaba-volume-page",
+      "name": "volume and page of the printed al-Mujtaba, as Ibn Rajab's and al-Haytami's editors cite it",
+      "for": [
+        "nasai"
+      ]
+    }
+  ],
+  "scholars": [
+    {
+      "id": "ibn-rajab",
+      "name": "Ibn Rajab al-Hanbali"
+    },
+    {
+      "id": "ibn-daqiq-al-id",
+      "name": "Ibn Daqiq al-'Id"
+    },
+    {
+      "id": "al-haytami",
+      "name": "Ibn Hajar al-Haytami"
+    },
+    {
+      "id": "ahmad",
+      "name": "Ahmad ibn Hanbal"
+    },
+    {
+      "id": "al-darimi",
+      "name": "al-Darimi"
+    },
+    {
+      "id": "al-bayhaqi",
+      "name": "al-Bayhaqi"
+    },
+    {
+      "id": "malik",
+      "name": "Malik ibn Anas"
+    }
+  ],
+  "works": [
+    {
+      "id": "jami-al-ulum-wa-al-hikam",
+      "title": "Jami' al-'Ulum wa al-Hikam",
+      "author": "ibn-rajab",
+      "kind": "commentary"
+    },
+    {
+      "id": "sharh-al-arbain-ibn-daqiq",
+      "title": "Sharh al-Arba'in al-Nawawiyya",
+      "author": "ibn-daqiq-al-id",
+      "kind": "commentary"
+    },
+    {
+      "id": "al-fath-al-mubin",
+      "title": "al-Fath al-Mubin bi-Sharh al-Arba'in",
+      "author": "al-haytami",
+      "kind": "commentary"
+    }
+  ],
+  "witnessSources": [
+    {
+      "id": "ibn-daqiq-sharh",
+      "name": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya (Mu'assasat al-Rayyan, 6th printing, 1424/2003), read on shamela.ws",
+      "sunnahComDerived": false
+    },
+    {
+      "id": "haytami-fath-al-mubin",
+      "name": "Ibn Hajar al-Haytami, al-Fath al-Mubin bi-Sharh al-Arba'in (Dar al-Minhaj, 1st printing, 1428/2008), read on shamela.ws",
+      "sunnahComDerived": false
+    }
+  ]
+}

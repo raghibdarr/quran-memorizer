@@ -1,0 +1,85 @@
+{
+  "id": "14",
+  "deck": "nawawi40",
+  "rev": 1,
+  "title": "The sanctity of a Muslim's life",
+  "cue": "The three cases in which a Muslim's blood is not protected",
+  "arabic": "عَنِ ابْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «لَا يَحِلُّ دَمُ امْرِئٍ مُسْلِمٍ إِلَّا بِإِحْدَى ثَلَاثٍ: الثَّيِّبُ الزَّانِي، وَالنَّفْسُ بِالنَّفْسِ، وَالتَّارِكُ لِدِينِهِ الْمُفَارِقُ لِلْجَمَاعَةِ».",
+  "translation": "It is narrated from Ibn Mas’ud, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “The blood of a Muslim person is not lawful except in one of three cases: the married person who commits adultery, a life for a life, and the one who leaves his religion and parts from the community.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6878",
+      "numbering": "fath-al-bari",
+      "narrator": "Abd Allah ibn Mas'ud"
+    },
+    {
+      "collection": "muslim",
+      "number": "1676",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "14",
+      "numbering": "nawawi-order",
+      "narrator": "Abd Allah ibn Mas'ud"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6878"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 1676"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 14, p. 65: https://shamela.ws/book/11244/55",
+        "skeletonSha256": "dcb7edc3987d90df90380b74eb275ef0ef930ee6a87004e7455af17a69580ed1"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 14, p. 310: https://shamela.ws/book/8889/306",
+        "skeletonSha256": "dcb7edc3987d90df90380b74eb275ef0ef930ee6a87004e7455af17a69580ed1"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 14 (comparison only)",
+        "skeletonSha256": "4fd8fa72028c6028efcd009bd516921d416c93a3bcba38559a5d1bce3402ba77"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and al-Haytami agree with ours. hadith-api inserts, in square brackets, يشهد أن لا إله إلا الله وأني رسول الله from another narration; the printed witnesses do not have it here."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id notes that some narrations both Sahihs agree on read \"a Muslim person who bears witness that there is no god but Allah and that I am the Messenger of Allah\", which explains the word \"Muslim\".",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 14, p. 65 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): Ibn Daqiq and al-Haytami identical; hadith-api a bracketed insertion (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): no conflicts; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

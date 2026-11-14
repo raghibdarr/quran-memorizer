@@ -1,0 +1,1129 @@
+{
+ "deck": "nawawi40",
+ "kind": "hadith",
+ "hash": "77730c2ab08634d3",
+ "items": [
+  {
+   "id": "01",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Actions are by intentions",
+   "cue": "What the Prophet ﷺ said about intentions and emigration",
+   "arabic": "عَنْ أَمِيرِ الْمُؤْمِنِينَ أَبِي حَفْصٍ عُمَرَ بْنِ الْخَطَّابِ رَضِيَ اللَّهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى. فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوِ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ».",
+   "segments": [
+    205,
+    297,
+    413
+   ],
+   "translation": "It is narrated from the Commander of the Believers, Abu Hafs Umar ibn al-Khattab, may Allah be pleased with him, who said: I heard the Messenger of Allah ﷺ say: “Actions are only by intentions, and every person will have only what he intended. So whoever’s emigration was to Allah and His Messenger, his emigration is to Allah and His Messenger. And whoever’s emigration was for something of this world he would gain, or a woman he would marry, his emigration is to what he emigrated for.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "1",
+     "numbering": "fath-al-bari",
+     "narrator": "Umar ibn al-Khattab"
+    },
+    {
+     "collection": "muslim",
+     "number": "1907",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "1",
+     "numbering": "nawawi-order",
+     "narrator": "Umar ibn al-Khattab"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 1"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1907"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 1, p. 24: https://shamela.ws/book/11244/14",
+      "skeletonSha256": "8c0d3cea1e5faa053044428d8ea5d30a799760a498ba4be5be7b437dc14f8075"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 1, p. 119: https://shamela.ws/book/8889/115",
+      "skeletonSha256": "8c0d3cea1e5faa053044428d8ea5d30a799760a498ba4be5be7b437dc14f8075"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 1 (comparison only)",
+      "skeletonSha256": "8c0d3cea1e5faa053044428d8ea5d30a799760a498ba4be5be7b437dc14f8075"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. All three witnesses agree with ours."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id relays, through al-Bayhaqi, that al-Shafi'i and Ahmad said this [[hadith]] takes in a third of knowledge: a person acts with the heart, the tongue and the limbs, and intention is the heart's share.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 1, p. 24 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "02",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Jibril's questions",
+   "cue": "Jibril asks the Prophet ﷺ about Islam, faith, excellence and the Hour",
+   "arabic": "عَنْ عُمَرَ رَضِيَ اللَّهُ عَنْهُ أَيْضًا قَالَ: بَيْنَمَا نَحْنُ جُلُوسٌ عِنْدَ رَسُولِ اللَّهِ ﷺ ذَاتَ يَوْمٍ، إِذْ طَلَعَ عَلَيْنَا رَجُلٌ شَدِيدُ بَيَاضِ الثِّيَابِ، شَدِيدُ سَوَادِ الشَّعْرِ، لَا يُرَى عَلَيْهِ أَثَرُ السَّفَرِ، وَلَا يَعْرِفُهُ مِنَّا أَحَدٌ، حَتَّى جَلَسَ إِلَى النَّبِيِّ ﷺ، فَأَسْنَدَ رُكْبَتَيْهِ إِلَى رُكْبَتَيْهِ، وَوَضَعَ كَفَّيْهِ عَلَى فَخِذَيْهِ، وَقَالَ: يَا مُحَمَّدُ، أَخْبِرْنِي عَنِ الْإِسْلَامِ. فَقَالَ رَسُولُ اللَّهِ ﷺ: «الْإِسْلَامُ أَنْ تَشْهَدَ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَتُقِيمَ الصَّلَاةَ، وَتُؤْتِيَ الزَّكَاةَ، وَتَصُومَ رَمَضَانَ، وَتَحُجَّ الْبَيْتَ إِنِ اسْتَطَعْتَ إِلَيْهِ سَبِيلًا». قَالَ: صَدَقْتَ. فَعَجِبْنَا لَهُ يَسْأَلُهُ وَيُصَدِّقُهُ. قَالَ: فَأَخْبِرْنِي عَنِ الْإِيمَانِ. قَالَ: «أَنْ تُؤْمِنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْآخِرِ، وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ». قَالَ: صَدَقْتَ. قَالَ: فَأَخْبِرْنِي عَنِ الْإِحْسَانِ. قَالَ: «أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ». قَالَ: فَأَخْبِرْنِي عَنِ السَّاعَةِ. قَالَ: «مَا الْمَسْئُولُ عَنْهَا بِأَعْلَمَ مِنَ السَّائِلِ». قَالَ: فَأَخْبِرْنِي عَنْ أَمَارَاتِهَا. قَالَ: «أَنْ تَلِدَ الْأَمَةُ رَبَّتَهَا، وَأَنْ تَرَى الْحُفَاةَ الْعُرَاةَ الْعَالَةَ رِعَاءَ الشَّاءِ يَتَطَاوَلُونَ فِي الْبُنْيَانِ». ثُمَّ انْطَلَقَ، فَلَبِثْتُ مَلِيًّا، ثُمَّ قَالَ: «يَا عُمَرُ، أَتَدْرِي مَنِ السَّائِلُ؟». قُلْتُ: اللَّهُ وَرَسُولُهُ أَعْلَمُ. قَالَ: «فَإِنَّهُ جِبْرِيلُ أَتَاكُمْ يُعَلِّمُكُمْ دِينَكُمْ».",
+   "segments": [
+    265,
+    435,
+    740,
+    932,
+    1068,
+    1168,
+    1348,
+    1543
+   ],
+   "translation": "It is also narrated from Umar, may Allah be pleased with him, who said: One day, while we were sitting with the Messenger of Allah ﷺ, a man came upon us whose clothes were intensely white and whose hair was intensely black. No trace of travel could be seen on him, and none of us knew him. He sat down by the Prophet ﷺ, rested his knees against his knees, placed his palms on his thighs, and said: “Muhammad, tell me about Islam.” The Messenger of Allah ﷺ said: “Islam is that you bear witness that there is no god but Allah and that Muhammad is the Messenger of Allah, that you establish the prayer, give the [[zakat]], fast Ramadan, and make pilgrimage to the House if you are able to find a way there.” He said: “You have spoken truly.” We were amazed at him: he asks him, then confirms what he says. He said: “Then tell me about faith.” He said: “That you believe in Allah, His angels, His books, His messengers and the Last Day, and that you believe in the decree, its good and its bad.” He said: “You have spoken truly.” He said: “Then tell me about [[ihsan]].” He said: “That you worship Allah as though you see Him; and if you do not see Him, He sees you.” He said: “Then tell me about the Hour.” He said: “The one asked about it knows no more of it than the one asking.” He said: “Then tell me about its signs.” He said: “That the slave woman gives birth to her mistress, and that you see the barefoot, the unclothed, the destitute, the shepherds of sheep, competing in raising tall buildings.” Then he went away, and I stayed a long while. Then he said: “Umar, do you know who the questioner was?” I said: “Allah and His Messenger know best.” He said: “That was Jibril. He came to you to teach you your religion.”",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "8",
+     "numbering": "abd-al-baqi",
+     "narrator": "Umar ibn al-Khattab"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "2",
+     "numbering": "nawawi-order",
+     "narrator": "Umar ibn al-Khattab"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 8"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 2, p. 28: https://shamela.ws/book/11244/18",
+      "skeletonSha256": "5358bd799d5f8381f875eb324183add11f9311a0d1b480cc1d7e1cd3c94f51d1"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 2, p. 139: https://shamela.ws/book/8889/135",
+      "skeletonSha256": "ca0f73d0f1497c8a8dfd100d9c179d4d424971088a692e228fe52d3d05881faa"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 2 (comparison only)",
+      "skeletonSha256": "5358bd799d5f8381f875eb324183add11f9311a0d1b480cc1d7e1cd3c94f51d1"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print lacks جلوس, adds قال before فعجبنا, writes المسؤول for المسئول, and reads أمارتها and فلبث; ours follows the other two at each point."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id calls this a great [[hadith]] that takes in every outward and inward duty, and says the knowledge of the law all goes back to it, so that it is like a mother of the [[sunnah]], as al-Fatihah is called the mother of the Quran.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 2, p. 29 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "03",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Islam is built on five",
+   "cue": "The five things Islam is built on",
+   "arabic": "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ عُمَرَ بْنِ الْخَطَّابِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَحَجِّ الْبَيْتِ، وَصَوْمِ رَمَضَانَ».",
+   "translation": "It is narrated from Abu Abd al-Rahman Abd Allah ibn Umar ibn al-Khattab, may Allah be pleased with them both, who said: I heard the Messenger of Allah ﷺ say: “Islam is built on five: bearing witness that there is no god but Allah and that Muhammad is the Messenger of Allah, establishing the prayer, giving the [[zakat]], pilgrimage to the House, and fasting Ramadan.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "8",
+     "numbering": "fath-al-bari",
+     "narrator": "Abd Allah ibn Umar"
+    },
+    {
+     "collection": "muslim",
+     "number": "16",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "3",
+     "numbering": "nawawi-order",
+     "narrator": "Abd Allah ibn Umar"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 8"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 16"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 3, p. 35: https://shamela.ws/book/11244/25",
+      "skeletonSha256": "0d2c7501b0714b2697f4bd1100999d939b0e1e05641a61a83aae788589d60a2d"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 3, p. 188: https://shamela.ws/book/8889/184",
+      "skeletonSha256": "34bd36438c2707ca5641ee601005174890660309353230e5561fab7617f0cfa6"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 3 (comparison only)",
+      "skeletonSha256": "0d2c7501b0714b2697f4bd1100999d939b0e1e05641a61a83aae788589d60a2d"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads عبده ورسوله for رسول الله; ours follows the other two."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id quotes Abu al-Abbas al-Qurtubi: these five are the foundation the religion is built on; striving in Allah's path is not listed with them because these five are a standing duty on each person, while that is a communal duty that can lapse at times.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 3, p. 35 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "04",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Creation in the womb, and the written decree",
+   "cue": "The stages of creation in the womb, and the four things written",
+   "arabic": "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: حَدَّثَنَا رَسُولُ اللَّهِ ﷺ وَهُوَ الصَّادِقُ الْمَصْدُوقُ: «إِنَّ أَحَدَكُمْ يُجْمَعُ خَلْقُهُ فِي بَطْنِ أُمِّهِ أَرْبَعِينَ يَوْمًا نُطْفَةً، ثُمَّ يَكُونُ عَلَقَةً مِثْلَ ذَلِكَ، ثُمَّ يَكُونُ مُضْغَةً مِثْلَ ذَلِكَ، ثُمَّ يُرْسَلُ إِلَيْهِ الْمَلَكُ فَيَنْفُخُ فِيهِ الرُّوحَ، وَيُؤْمَرُ بِأَرْبَعِ كَلِمَاتٍ: بِكَتْبِ رِزْقِهِ، وَأَجَلِهِ، وَعَمَلِهِ، وَشَقِيٌّ أَوْ سَعِيدٌ. فَوَاللَّهِ الَّذِي لَا إِلَهَ غَيْرُهُ، إِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إِلَّا ذِرَاعٌ، فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ فَيَدْخُلُهَا، وَإِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إِلَّا ذِرَاعٌ، فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ فَيَدْخُلُهَا».",
+   "segments": [
+    310,
+    471,
+    705,
+    901
+   ],
+   "translation": "It is narrated from Abu Abd al-Rahman Abd Allah ibn Mas’ud, may Allah be pleased with him, who said: The Messenger of Allah ﷺ, the truthful one, whose truth is confirmed, told us: “The creation of each of you is gathered in his mother’s womb for forty days as a drop, then he is a clinging clot for the same, then a lump of flesh for the same. Then the angel is sent to him and breathes the soul into him, and he is commanded with four words: to write his provision, his term, his deeds, and whether he is wretched or happy. By Allah, besides whom there is no god, one of you does the deeds of the people of Paradise until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of the Fire and enters it. And one of you does the deeds of the people of the Fire until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of Paradise and enters it.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "3208",
+     "numbering": "fath-al-bari",
+     "narrator": "Abd Allah ibn Mas'ud"
+    },
+    {
+     "collection": "muslim",
+     "number": "2643",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "4",
+     "numbering": "nawawi-order",
+     "narrator": "Abd Allah ibn Mas'ud"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 3208"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2643"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 4, p. 37: https://shamela.ws/book/11244/27",
+      "skeletonSha256": "3d1a46761acdb35763d50ad89725c2f354deff29c4d12ce5aa1ed3fe10035206"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 4, p. 197: https://shamela.ws/book/8889/193",
+      "skeletonSha256": "c92a0a9ff71365b8ae65a17d4153609c42ba7085017cafd02e041eec8efa924b"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 4 (comparison only)",
+      "skeletonSha256": "e440b9cfed2a9a496bac20d8dfe3d27d18f41961f54bc659017180cf302de5a8"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq writes فو الله as two words (the same reading). al-Haytami's print lacks نطفة and إليه and reads فوالذي; hadith-api reads أم for أو. Ours follows two of the three at each point. hadith-api vowels شقيٍّ and سعيدٍ in the genitive; we vowel them in the nominative, as a clause of their own, with al-Haytami's print leaving them bare."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id explains “the truthful one, whose truth is confirmed”: truthful in what he says, and confirmed in the revelation that comes to him.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 4, p. 37 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "05",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Whatever is newly introduced is rejected",
+   "cue": "What becomes of something added to the religion that is not of it",
+   "arabic": "عَنْ أُمِّ الْمُؤْمِنِينَ أُمِّ عَبْدِ اللَّهِ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا قَالَتْ: قَالَ رَسُولُ اللَّهِ ﷺ: «مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ».",
+   "translation": "It is narrated from the Mother of the Believers, Umm Abd Allah Aishah, may Allah be pleased with her, who said: The Messenger of Allah ﷺ said: “Whoever introduces into this matter of ours something that is not of it, it is rejected.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "2697",
+     "numbering": "fath-al-bari",
+     "narrator": "Aishah"
+    },
+    {
+     "collection": "muslim",
+     "number": "1718",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "5",
+     "numbering": "nawawi-order",
+     "narrator": "Aishah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 2697"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1718"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 5, p. 41: https://shamela.ws/book/11244/31",
+      "skeletonSha256": "89232a328987ac63aec6158a531b18d14f2b0d6ebb09209d3a987e44b5695115"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 5, p. 220: https://shamela.ws/book/8889/216",
+      "skeletonSha256": "89232a328987ac63aec6158a531b18d14f2b0d6ebb09209d3a987e44b5695115"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 5 (comparison only)",
+      "skeletonSha256": "89232a328987ac63aec6158a531b18d14f2b0d6ebb09209d3a987e44b5695115"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. All three witnesses agree with ours. The variant is the wording al-Nawawi gives as \"in a narration of Muslim\"."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id calls this [[hadith]] a great rule of the religion and one of the Prophet's ﷺ concise, comprehensive sayings: it plainly rejects every innovation and invented practice.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 5, p. 41 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "variants": [
+    {
+     "label": "In a narration of Muslim: “Whoever does a deed that is not in keeping with our matter, it is rejected.”",
+     "arabic": "مَنْ عَمِلَ عَمَلًا لَيْسَ عَلَيْهِ أَمْرُنَا فَهُوَ رَدٌّ",
+     "citations": [
+      {
+       "collection": "muslim",
+       "number": "1718",
+       "numbering": "abd-al-baqi"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "06",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "The lawful, the unlawful and what is unclear",
+   "cue": "The lawful, the unlawful, the doubtful matters between them, and the heart",
+   "arabic": "عَنْ أَبِي عَبْدِ اللَّهِ النُّعْمَانِ بْنِ بَشِيرٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «إِنَّ الْحَلَالَ بَيِّنٌ، وَإِنَّ الْحَرَامَ بَيِّنٌ، وَبَيْنَهُمَا أُمُورٌ مُشْتَبِهَاتٌ لَا يَعْلَمُهُنَّ كَثِيرٌ مِنَ النَّاسِ. فَمَنِ اتَّقَى الشُّبُهَاتِ فَقَدِ اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ، وَمَنْ وَقَعَ فِي الشُّبُهَاتِ وَقَعَ فِي الْحَرَامِ، كَالرَّاعِي يَرْعَى حَوْلَ الْحِمَى يُوشِكُ أَنْ يَرْتَعَ فِيهِ. أَلَا وَإِنَّ لِكُلِّ مَلِكٍ حِمًى، أَلَا وَإِنَّ حِمَى اللَّهِ مَحَارِمُهُ. أَلَا وَإِنَّ فِي الْجَسَدِ مُضْغَةً إِذَا صَلَحَتْ صَلَحَ الْجَسَدُ كُلُّهُ، وَإِذَا فَسَدَتْ فَسَدَ الْجَسَدُ كُلُّهُ، أَلَا وَهِيَ الْقَلْبُ».",
+   "segments": [
+    251,
+    439,
+    516,
+    662
+   ],
+   "translation": "It is narrated from Abu Abd Allah al-Nu’man ibn Bashir, may Allah be pleased with them both, who said: I heard the Messenger of Allah ﷺ say: “What is lawful is clear and what is unlawful is clear, and between them are unclear matters that many people do not know. Whoever guards against the unclear matters has kept his religion and his honour free of blame, and whoever falls into the unclear matters falls into the unlawful, like a shepherd grazing [his flock] around a protected pasture, who is soon to graze in it. Indeed, every king has a protected pasture. Indeed, the protected pasture of Allah is what He has made unlawful. Indeed, in the body there is a lump of flesh: if it is sound, the whole body is sound, and if it is corrupt, the whole body is corrupt. Indeed, it is the heart.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "52",
+     "numbering": "fath-al-bari",
+     "narrator": "al-Nu'man ibn Bashir"
+    },
+    {
+     "collection": "muslim",
+     "number": "1599",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "6",
+     "numbering": "nawawi-order",
+     "narrator": "al-Nu'man ibn Bashir"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 52"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1599"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 6, p. 43: https://shamela.ws/book/11244/33",
+      "skeletonSha256": "c03a422d0e2403de04a0c09dc740b2889e0cdfc3976adec436c17014b1cb9929"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 6, p. 231: https://shamela.ws/book/8889/227",
+      "skeletonSha256": "8558eff204d7c63a3d3b49044498f16e36170803ccba1e9ff14ccfdb354655c6"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 6 (comparison only)",
+      "skeletonSha256": "c03a422d0e2403de04a0c09dc740b2889e0cdfc3976adec436c17014b1cb9929"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print lacks أمور; ours follows the other two."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id reports that Abu Dawud al-Sijistani said Islam turns on four [[hadith]]s, and named this one among them.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 6, p. 43 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "07",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "The religion is sincere counsel",
+   "cue": "The religion is sincere counsel: to whom?",
+   "arabic": "عَنْ أَبِي رُقَيَّةَ تَمِيمِ بْنِ أَوْسٍ الدَّارِيِّ رَضِيَ اللَّهُ عَنْهُ أَنَّ النَّبِيَّ ﷺ قَالَ: «الدِّينُ النَّصِيحَةُ». قُلْنَا: لِمَنْ؟ قَالَ: «لِلَّهِ، وَلِكِتَابِهِ، وَلِرَسُولِهِ، وَلِأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ».",
+   "translation": "It is narrated from Abu Ruqayyah Tamim ibn Aws al-Dari, may Allah be pleased with him, that the Prophet ﷺ said: “The religion is sincere counsel.” We said: “To whom?” He said: “To Allah, to His Book, to His Messenger, to the leaders of the Muslims and to their common people.”",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "55",
+     "numbering": "abd-al-baqi",
+     "narrator": "Tamim al-Dari"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "7",
+     "numbering": "nawawi-order",
+     "narrator": "Tamim al-Dari"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 55"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 7, p. 50: https://shamela.ws/book/11244/40",
+      "skeletonSha256": "60ad3d1619acdf2de59ade85355104ae1f9faa124b56ee16199e2c4a07e67dfe"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 7, p. 253: https://shamela.ws/book/8889/249",
+      "skeletonSha256": "60ad3d1619acdf2de59ade85355104ae1f9faa124b56ee16199e2c4a07e67dfe"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 7 (comparison only)",
+      "skeletonSha256": "60ad3d1619acdf2de59ade85355104ae1f9faa124b56ee16199e2c4a07e67dfe"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. All three witnesses agree with ours."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id says Tamim al-Dari narrated no [[hadith]] but this one, and that \"sincere counsel\" is a word that gathers in wanting every good for the one counselled; no other single Arabic word says all of it.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 7, p. 50 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "08",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "The protection of blood and wealth",
+   "cue": "What protects a person's blood and wealth",
+   "arabic": "عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: «أُمِرْتُ أَنْ أُقَاتِلَ النَّاسَ حَتَّى يَشْهَدُوا أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَيُقِيمُوا الصَّلَاةَ، وَيُؤْتُوا الزَّكَاةَ. فَإِذَا فَعَلُوا ذَلِكَ عَصَمُوا مِنِّي دِمَاءَهُمْ وَأَمْوَالَهُمْ إِلَّا بِحَقِّ الْإِسْلَامِ، وَحِسَابُهُمْ عَلَى اللَّهِ تَعَالَى».",
+   "segments": [
+    239,
+    375
+   ],
+   "translation": "It is narrated from Ibn Umar, may Allah be pleased with them both, that the Messenger of Allah ﷺ said: “I have been commanded to fight the people until they bear witness that there is no god but Allah and that Muhammad is the Messenger of Allah, establish the prayer and give the [[zakat]]. If they do that, they have protected their blood and their wealth from me, except by the right of Islam, and their reckoning is with Allah the Exalted.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "25",
+     "numbering": "fath-al-bari",
+     "narrator": "Abd Allah ibn Umar"
+    },
+    {
+     "collection": "muslim",
+     "number": "22",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "8",
+     "numbering": "nawawi-order",
+     "narrator": "Abd Allah ibn Umar"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 25"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 22"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 8, p. 53: https://shamela.ws/book/11244/43",
+      "skeletonSha256": "d6029633e51c096776088812a0892503be933836f6830757e6aee3cb22a19ff6"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 8, p. 259: https://shamela.ws/book/8889/255",
+      "skeletonSha256": "d6e1e8d0816fe3ad34fa0f7a1bfc01c7d1a20ffce8201b37a1cf84917ffbdbbd"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 8 (comparison only)",
+      "skeletonSha256": "d6029633e51c096776088812a0892503be933836f6830757e6aee3cb22a19ff6"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads أن النبي and lacks تعالى at the end; ours follows the other two."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id notes that Anas narrates it with \"until they bear witness … and face our [[qiblah]], eat what we slaughter and pray our prayer\".",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 8, p. 53 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "09",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Do what you can of what is commanded",
+   "cue": "What to do with what is forbidden and what is commanded, and what destroyed those before",
+   "arabic": "عَنْ أَبِي هُرَيْرَةَ عَبْدِ الرَّحْمَنِ بْنِ صَخْرٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «مَا نَهَيْتُكُمْ عَنْهُ فَاجْتَنِبُوهُ، وَمَا أَمَرْتُكُمْ بِهِ فَأْتُوا مِنْهُ مَا اسْتَطَعْتُمْ، فَإِنَّمَا أَهْلَكَ الَّذِينَ مِنْ قَبْلِكُمْ كَثْرَةُ مَسَائِلِهِمْ وَاخْتِلَافُهُمْ عَلَى أَنْبِيَائِهِمْ».",
+   "segments": [
+    217,
+    327
+   ],
+   "translation": "It is narrated from Abu Hurayrah Abd al-Rahman ibn Sakhr, may Allah be pleased with him, who said: I heard the Messenger of Allah ﷺ say: “What I have forbidden you, avoid it; and what I have commanded you, do of it what you are able. For what destroyed those before you was only their many questions and their disagreeing with their prophets.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "7288",
+     "numbering": "fath-al-bari",
+     "narrator": "Abu Hurayrah"
+    },
+    {
+     "collection": "muslim",
+     "number": "1337",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "9",
+     "numbering": "nawawi-order",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 7288"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1337"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 9, p. 56: https://shamela.ws/book/11244/46",
+      "skeletonSha256": "38d9244e691f1d6f6b2c4a65833ba2a10ce54acdeaaa977050c24f3e8b259a74"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 9, p. 271: https://shamela.ws/book/8889/267",
+      "skeletonSha256": "7f3ef73a4e0d61a94e8cb9b919baaf283c8a7d74399e759ed09962263035c264"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 9 (comparison only)",
+      "skeletonSha256": "865cde9bfdbe9cf1ffc95e1904ef87930fe99aa044f49e7b774060cdcb57be57"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. hadith-api agrees with ours. Ibn Daqiq's print joins ما نهيتكم into one word (the same reading); al-Haytami's print reads فافعلوا for فأتوا. Ours follows two of the three."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id gives its wording in Muslim, where it follows a sermon: the Prophet ﷺ said Allah had made the [[hajj]] binding, a man asked three times whether that meant every year, and he answered that had he said yes, it would have become binding and they would not have been able to do it.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 9, p. 56 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "10",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Allah accepts only what is good",
+   "cue": "Allah is good and accepts only what is good; the traveller whose prayer is not answered",
+   "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «إِنَّ اللَّهَ تَعَالَى طَيِّبٌ لَا يَقْبَلُ إِلَّا طَيِّبًا، وَإِنَّ اللَّهَ أَمَرَ الْمُؤْمِنِينَ بِمَا أَمَرَ بِهِ الْمُرْسَلِينَ، فَقَالَ تَعَالَى: ﴿يَا أَيُّهَا الرُّسُلُ كُلُوا مِنَ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا﴾، وَقَالَ تَعَالَى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِنْ طَيِّبَاتِ مَا رَزَقْنَاكُمْ﴾». ثُمَّ ذَكَرَ الرَّجُلَ يُطِيلُ السَّفَرَ أَشْعَثَ أَغْبَرَ، يَمُدُّ يَدَيْهِ إِلَى السَّمَاءِ: يَا رَبِّ، يَا رَبِّ، وَمَطْعَمُهُ حَرَامٌ، وَمَشْرَبُهُ حَرَامٌ، وَمَلْبَسُهُ حَرَامٌ، وَغُذِيَ بِالْحَرَامِ، فَأَنَّى يُسْتَجَابُ لَهُ؟",
+   "segments": [
+    209,
+    394,
+    511,
+    627
+   ],
+   "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “Allah the Exalted is good and accepts only what is good. Allah has commanded the believers with what He commanded the messengers. He the Exalted said: ‘O messengers, eat of the good things and do righteous deeds.’ And He the Exalted said: ‘O you who believe, eat of the good things We have provided for you.’” Then he mentioned a man on a long journey, dishevelled and dusty, who stretches his hands to the sky: “My Lord, my Lord!”, while his food is unlawful, his drink is unlawful, his clothing is unlawful, and he has been nourished on the unlawful. So how could he be answered?",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "1015",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Hurayrah"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "10",
+     "numbering": "nawawi-order",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1015"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 10, p. 59: https://shamela.ws/book/11244/49",
+      "skeletonSha256": "0ccf9a32a44fa4ddf4f06e46f6bf94cf2c7cd127c20cf1803196c36a754be28e"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 10, p. 284: https://shamela.ws/book/8889/280",
+      "skeletonSha256": "a34a9546432e9d5fb2eccdbcaf9a2f69ec4ac96381f4ea2b3338f49e062bbdaf"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 10 (comparison only)",
+      "skeletonSha256": "e6db7d0869ffe40255617450da986bd0f337b89953681b7fb4b6c61600a2bf6f"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq's print lacks واعملوا صالحا and ومشربه حرام and reads فقال for the second وقال; al-Haytami's print joins يا أيها as in the Quran's spelling and ends لذلك; hadith-api lacks تعالى after إن الله. Ours follows two of the three at each point. The two ayahs quoted are al-Mu'minun 23:51 and al-Baqarah 2:172."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id counts this among the [[hadith]]s the rules of Islam rest on: it urges spending from what is lawful, and teaches that whoever wants his [[dua]] answered should take the most care that his food, drink and clothing are lawful.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 10, p. 59 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "11",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Leave what makes you doubt",
+   "cue": "Leave what makes you doubt for what does not",
+   "arabic": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ ﷺ وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ ﷺ: «دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ».",
+   "translation": "It is narrated from Abu Muhammad al-Hasan ibn Ali ibn Abi Talib, grandson of the Messenger of Allah ﷺ and his sweet basil, may Allah be pleased with them both, who said: I memorised from the Messenger of Allah ﷺ: “Leave what makes you doubt for what does not make you doubt.”",
+   "citations": [
+    {
+     "collection": "tirmidhi",
+     "number": "2518",
+     "numbering": "ahmad-shakir",
+     "narrator": "al-Hasan ibn Ali"
+    },
+    {
+     "collection": "nasai",
+     "number": "8/327",
+     "numbering": "mujtaba-volume-page"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "11",
+     "numbering": "nawawi-order",
+     "narrator": "al-Hasan ibn Ali"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "al-Jami', after hadith 2518 (quoted by al-Nawawi in the Forty)",
+     "quote": "حَدِيثٌ حَسَنٌ صَحِيحٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 11, p. 61: https://shamela.ws/book/11244/51",
+      "skeletonSha256": "cd20bafc421bb6e081cfc0671abdd859122aa51a38f683e129ceffe0c71ba941"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 11, p. 293: https://shamela.ws/book/8889/289",
+      "skeletonSha256": "f6c19a8e2abed58376d72eaa29d2dd712acd71f9783ee5fcbb512d7de998a297"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 11 (comparison only)",
+      "skeletonSha256": "cd20bafc421bb6e081cfc0671abdd859122aa51a38f683e129ceffe0c71ba941"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print puts رضي الله عنهما before سبط; ours follows the other two. We vowel يَرِيبُك with fath on the ya, which Ibn Daqiq calls the more eloquent and better known reading; hadith-api has يُرِيبُك."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id explains: leave what you are unsure of and turn to what you are not unsure of; he links it to [[hadith]] 6 on the unclear matters.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 11, p. 61 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "12",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Leaving what does not concern you",
+   "cue": "Part of the excellence of a person's Islam",
+   "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ».",
+   "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “Part of the excellence of a person’s Islam is his leaving what does not concern him.”",
+   "citations": [
+    {
+     "collection": "tirmidhi",
+     "number": "2317",
+     "numbering": "ahmad-shakir",
+     "narrator": "Abu Hurayrah"
+    },
+    {
+     "collection": "ibn-majah",
+     "number": "3976",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "12",
+     "numbering": "nawawi-order",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "hasan",
+     "by": "al-nawawi",
+     "in": "al-Arba'in al-Nawawiyya, after hadith 12",
+     "quote": "حَدِيثٌ حَسَنٌ"
+    },
+    {
+     "grade": "mursal",
+     "by": "ibn-rajab",
+     "in": "Jami' al-'Ulum wa al-Hikam, on hadith 12, reporting most of the imams, Ahmad and Ibn Ma'in among them",
+     "quote": "وَأَمَّا أَكْثَرُ الْأَئِمَّةِ فَقَالُوا: لَيْسَ هُوَ بِمَحْفُوظٍ بِهَذَا الْإِسْنَادِ، وَإِنَّمَا هُوَ مَحْفُوظٌ عَنِ الزُّهْرِيِّ عَنْ عَلِيِّ بْنِ حُسَيْنٍ عَنِ النَّبِيِّ ﷺ مُرْسَلًا"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 12, p. 62: https://shamela.ws/book/11244/52",
+      "skeletonSha256": "f192d4af310a2213aefd68804fed40f1bf5571aa380759eb2b6e9e4889084dfe"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 12, p. 299: https://shamela.ws/book/8889/295",
+      "skeletonSha256": "55a66048ae5432de6476ba226e8dbe8b1afba68da2c377ea988e6736c24c5efe"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 12 (comparison only)",
+      "skeletonSha256": "f192d4af310a2213aefd68804fed40f1bf5571aa380759eb2b6e9e4889084dfe"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads أن رسول الله ﷺ قال; ours follows the other two."
+   },
+   "notes": [
+    {
+     "text": "Ibn Rajab reports that al-Tirmidhi called this chain gharib, that al-Nawawi graded it [[hasan]] because its narrators are trustworthy, and that most of the imams, Ahmad and Yahya ibn Ma'in among them, held it is preserved only as a [[mursal]] report from Ali ibn al-Husayn.",
+     "source": {
+      "work": "Ibn Rajab, Jami' al-'Ulum wa al-Hikam",
+      "location": "on hadith 12, vol. 1, p. 287 (Mu'assasat al-Risala, 7th printing, 1997)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "13",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Love for your brother what you love for yourself",
+   "cue": "None of you believes until…",
+   "arabic": "عَنْ أَبِي حَمْزَةَ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللَّهُ عَنْهُ خَادِمِ رَسُولِ اللَّهِ ﷺ عَنِ النَّبِيِّ ﷺ قَالَ: «لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ».",
+   "translation": "It is narrated from Abu Hamzah Anas ibn Malik, may Allah be pleased with him, the servant of the Messenger of Allah ﷺ, that the Prophet ﷺ said: “None of you believes until he loves for his brother what he loves for himself.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "13",
+     "numbering": "fath-al-bari",
+     "narrator": "Anas ibn Malik"
+    },
+    {
+     "collection": "muslim",
+     "number": "45",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "13",
+     "numbering": "nawawi-order",
+     "narrator": "Anas ibn Malik"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 13"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 45"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 13, p. 63: https://shamela.ws/book/11244/53",
+      "skeletonSha256": "5b65127eb0441531895a725180c55c6743bee1cce6ab88d4536930d55f1d1f0e"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 13, p. 304: https://shamela.ws/book/8889/300",
+      "skeletonSha256": "1522ad1366f984f1a1e9e58b143076247a0c29cf20a6177038e726f233ed6bc5"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 13 (comparison only)",
+      "skeletonSha256": "5b65127eb0441531895a725180c55c6743bee1cce6ab88d4536930d55f1d1f0e"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads أن رسول الله ﷺ for عن النبي ﷺ; ours follows the other two."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id notes that al-Bukhari's wording is \"for his brother\" without doubt, while Muslim's has \"for his brother, or his neighbour\", the narrator unsure which; and that scholars read \"none of you believes\" as complete faith, not faith at its root.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 13, p. 63 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "14",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "The sanctity of a Muslim's life",
+   "cue": "The three cases in which a Muslim's blood is not protected",
+   "arabic": "عَنِ ابْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «لَا يَحِلُّ دَمُ امْرِئٍ مُسْلِمٍ إِلَّا بِإِحْدَى ثَلَاثٍ: الثَّيِّبُ الزَّانِي، وَالنَّفْسُ بِالنَّفْسِ، وَالتَّارِكُ لِدِينِهِ الْمُفَارِقُ لِلْجَمَاعَةِ».",
+   "translation": "It is narrated from Ibn Mas’ud, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “The blood of a Muslim person is not lawful except in one of three cases: the married person who commits adultery, a life for a life, and the one who leaves his religion and parts from the community.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6878",
+     "numbering": "fath-al-bari",
+     "narrator": "Abd Allah ibn Mas'ud"
+    },
+    {
+     "collection": "muslim",
+     "number": "1676",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "14",
+     "numbering": "nawawi-order",
+     "narrator": "Abd Allah ibn Mas'ud"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6878"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1676"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 14, p. 65: https://shamela.ws/book/11244/55",
+      "skeletonSha256": "dcb7edc3987d90df90380b74eb275ef0ef930ee6a87004e7455af17a69580ed1"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 14, p. 310: https://shamela.ws/book/8889/306",
+      "skeletonSha256": "dcb7edc3987d90df90380b74eb275ef0ef930ee6a87004e7455af17a69580ed1"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 14 (comparison only)",
+      "skeletonSha256": "4fd8fa72028c6028efcd009bd516921d416c93a3bcba38559a5d1bce3402ba77"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and al-Haytami agree with ours. hadith-api inserts, in square brackets, يشهد أن لا إله إلا الله وأني رسول الله from another narration; the printed witnesses do not have it here."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id notes that some narrations both Sahihs agree on read \"a Muslim person who bears witness that there is no god but Allah and that I am the Messenger of Allah\", which explains the word \"Muslim\".",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 14, p. 65 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  },
+  {
+   "id": "15",
+   "deck": "nawawi40",
+   "rev": 1,
+   "title": "Speak good or keep silent",
+   "cue": "Three things for whoever believes in Allah and the Last Day",
+   "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: «مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ ضَيْفَهُ».",
+   "segments": [
+    162,
+    237,
+    314
+   ],
+   "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, that the Messenger of Allah ﷺ said: “Whoever believes in Allah and the Last Day, let him say what is good or keep silent. Whoever believes in Allah and the Last Day, let him honour his neighbour. Whoever believes in Allah and the Last Day, let him honour his guest.”",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6018",
+     "numbering": "fath-al-bari",
+     "narrator": "Abu Hurayrah"
+    },
+    {
+     "collection": "muslim",
+     "number": "47",
+     "numbering": "abd-al-baqi"
+    },
+    {
+     "collection": "nawawi40",
+     "number": "15",
+     "numbering": "nawawi-order",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6018"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 47"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "ibn-daqiq-sharh",
+      "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 15, p. 67: https://shamela.ws/book/11244/57",
+      "skeletonSha256": "6be7cb4d2e8b75902b1a4335368d1e50ba7d844c178a43429cc6fe93fda8f7f9"
+     },
+     {
+      "name": "haytami-fath-al-mubin",
+      "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 15, p. 317: https://shamela.ws/book/8889/313",
+      "skeletonSha256": "0978cd5cb92eda8983aaef30140fc6f43d20ad7a4428506819de5ccd02ce1d29"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 15 (comparison only)",
+      "skeletonSha256": "6be7cb4d2e8b75902b1a4335368d1e50ba7d844c178a43429cc6fe93fda8f7f9"
+     }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print reads عن رسول الله; ours follows the other two."
+   },
+   "notes": [
+    {
+     "text": "Ibn Daqiq al-'Id explains \"whoever believes in Allah and the Last Day\" as complete faith, the kind that saves from Allah's punishment and brings His good pleasure.",
+     "source": {
+      "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+      "location": "on hadith 15, p. 67 (Mu'assasat al-Rayyan, 2003)"
+     }
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-14"
+   }
+  }
+ ]
+}
