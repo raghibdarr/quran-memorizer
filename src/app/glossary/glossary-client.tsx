@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import BackButton from '@/components/ui/back-button';
 import BottomNav from '@/components/layout/bottom-nav';
-import { ChevronDownIcon } from '@/components/ui/icons';
+import { ChevronDownIcon, XIcon } from '@/components/ui/icons';
 import { sortedTerms } from '@/lib/deen/glossary';
 import { cn } from '@/lib/cn';
 import { TermDetails, useGlossary } from '@/components/deen/term';
@@ -18,6 +18,7 @@ export default function GlossaryScreen() {
   const terms = useGlossary();
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const list = useMemo(() => (terms ? sortedTerms(terms) : []), [terms]);
   const shown = useMemo(() => list.filter((t) => matchesTerm(t, query)), [list, query]);
 
@@ -50,14 +51,30 @@ export default function GlossaryScreen() {
         <p className="text-sm leading-relaxed text-muted">
           Arabic terms used in Takrar, in plain words. Tap one to read more, or to add it to your reviews.
         </p>
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search terms, in English or Arabic"
-          aria-label="Search terms"
-          className="w-full rounded-xl border border-foreground/15 bg-card px-4 py-3 text-base text-foreground placeholder:text-muted/60 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
-        />
+        <div className="relative">
+          <input
+            ref={inputRef}
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search terms, in English or Arabic"
+            aria-label="Search terms"
+            className="w-full rounded-xl border border-foreground/15 bg-card py-3 pl-4 pr-12 text-base text-foreground placeholder:text-muted/60 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20 [&::-webkit-search-cancel-button]:appearance-none"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => {
+                setQuery('');
+                inputRef.current?.focus();
+              }}
+              aria-label="Clear search"
+              className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-muted hover:bg-foreground/[0.06] hover:text-foreground"
+            >
+              <XIcon size={16} />
+            </button>
+          )}
+        </div>
 
         {!terms ? (
           <p className="py-10 text-center text-sm text-muted">Loading…</p>
@@ -96,7 +113,11 @@ export default function GlossaryScreen() {
             })}
           </ul>
         )}
-        <p className="text-center text-xs text-muted">{list.length} terms</p>
+        {terms && shown.length > 0 && (
+          <p className="text-center text-xs tabular-nums text-muted" aria-live="polite">
+            {query.trim() ? `${shown.length} of ${list.length} terms` : `${list.length} terms`}
+          </p>
+        )}
       </main>
 
       <BottomNav />

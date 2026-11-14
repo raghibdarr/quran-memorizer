@@ -20,12 +20,26 @@ export function openExternal(url: string, e?: { preventDefault: () => void }) {
 export function CitationLine({ citation, className, link = true }: { citation: Citation; className?: string; link?: boolean }) {
   const url = link ? sunnahComUrl(citation) : null;
   return (
-    <div className={cn('text-xs leading-relaxed text-muted', className)} data-citation>
-      <p>
-        <span className="font-semibold text-foreground">{citationText(citation)}</span>
-        {citation.book && <span>, {citation.book}</span>}
-        {citation.narrator && <span> · narrated by {citation.narrator}</span>}
-      </p>
+    <div className={cn('text-[13px] leading-relaxed text-muted', className)} data-citation>
+      <div className="flex items-baseline justify-between gap-3">
+        <p className="min-w-0">
+          <span className="font-semibold text-foreground">{citationText(citation)}</span>
+          {citation.book && <span>, {citation.book}</span>}
+          {citation.narrator && <span> · narrated by {citation.narrator}</span>}
+        </p>
+        {url && (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => openExternal(url, e)}
+            className="-my-2 inline-flex min-h-9 shrink-0 items-center gap-1 whitespace-nowrap font-semibold text-teal"
+            aria-label={`View ${collectionName(citation.collection)} ${citation.number} on Sunnah.com`}
+          >
+            Sunnah.com <span aria-hidden>↗</span>
+          </a>
+        )}
+      </div>
       {citation.altNumbers && citation.altNumbers.length > 0 && (
         <p>
           Also numbered{' '}
@@ -36,18 +50,6 @@ export function CitationLine({ citation, className, link = true }: { citation: C
             </span>
           ))}
         </p>
-      )}
-      {url && (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => openExternal(url, e)}
-          className="mt-1 inline-flex min-h-9 items-center gap-1 font-semibold text-teal"
-          aria-label={`View ${collectionName(citation.collection)} ${citation.number} on Sunnah.com`}
-        >
-          View on Sunnah.com <span aria-hidden>↗</span>
-        </a>
       )}
     </div>
   );

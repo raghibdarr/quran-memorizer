@@ -30,6 +30,39 @@ export function splitSegments(arabic: string, ends?: number[]): string[] {
 /** Arabic words (whitespace-separated) */
 export const arabicWords = (text: string) => text.split(/\s+/).filter(Boolean);
 
+/** A word after which a reader naturally pauses: Arabic or Latin punctuation, or a Quranic pause mark */
+const PAUSE = /[،؛.:!?۔ۖۗۘۙۚۛۜ]$/;
+
+/**
+ * Parts to learn a text by when none were authored: a short text stays whole;
+ * a longer one is cut into even runs of about `size` words, ending a run early
+ * at a pause when one falls near the cut. Never leaves a tail under 3 words.
+ */
+export function autoChunks(text: string, size = 8): string[] {
+  const words = arabicWords(text);
+  if (words.length <= size + 2) return words.length ? [words.join(' ')] : [];
+  const target = Math.ceil(words.length / Math.ceil(words.length / size));
+  const out: string[] = [];
+  let cur: string[] = [];
+  words.forEach((w, i) => {
+    cur.push(w);
+    const left = words.length - i - 1;
+    if (left === 0) return;
+    const atPause = PAUSE.test(w) && cur.length >= Math.max(3, target - 2);
+    if (left >= 3 && (atPause || cur.length >= target)) {
+      out.push(cur.join(' '));
+      cur = [];
+    }
+  });
+  if (cur.length) out.push(cur.join(' '));
+  return out;
+}
+
+/** The Build parts of a text: its authored segments, else automatic ones */
+export function learnParts(arabic: string, ends?: number[]): string[] {
+  return ends?.length ? splitSegments(arabic, ends) : autoChunks(arabic);
+}
+
 export const GRADE_LABEL: Record<Grading['grade'], string> = {
   sahih: 'Sahih',
   hasan: 'Hasan',

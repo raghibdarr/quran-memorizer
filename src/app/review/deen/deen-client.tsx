@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'next/navigation';
 import type { DeckDepth, TextItem } from '@/types/deen';
 import { useDeenStore } from '@/stores/deen-store';
 import { useDeenQueue } from '@/hooks/use-deen-queue';
 import { useAppBack } from '@/hooks/use-app-back';
 import CloseButton from '@/components/ui/close-button';
+import Button from '@/components/ui/button';
+import { BookIcon, StarIcon } from '@/components/ui/icons';
 import { SessionPlayer, whenLabel } from '@/components/deen/session-player';
 import { MemoriseFlow } from '@/components/deen/memorise-flow';
 import { DepthChoice, resolveDepth } from '@/components/deen/depth-choice';
@@ -19,6 +21,24 @@ function Header({ title, fallback, label }: { title: string; fallback: string; l
         <CloseButton fallback={fallback} label={label} className="justify-self-start" />
         <h1 className="truncate text-center text-sm font-semibold text-teal">{title}</h1>
         <span aria-hidden />
+      </div>
+    </div>
+  );
+}
+
+/** A calm, centred message with its icon, for empty and unavailable screens */
+function Message({ icon, title, children, onBack, data }: { icon: ReactNode; title: string; children?: ReactNode; onBack: () => void; data?: string }) {
+  return (
+    <div className="flex min-h-[calc(100dvh-9rem)] flex-col items-center justify-center text-center" data-deen-session={data}>
+      <div className="w-full max-w-sm space-y-5">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal/10 text-teal">{icon}</div>
+        <div>
+          <h2 className="text-lg font-bold text-foreground">{title}</h2>
+          {children && <p className="mt-1.5 text-sm text-muted">{children}</p>}
+        </div>
+        <Button variant="ghost" onClick={onBack}>
+          Back
+        </Button>
       </div>
     </div>
   );
@@ -66,12 +86,7 @@ function LearnScreen({ learn, depthParam }: { learn: string; depthParam: DeckDep
         {!state.loaded ? (
           <Spinner />
         ) : !state.item || !state.info ? (
-          <div className="py-16 text-center">
-            <p className="text-sm font-semibold text-foreground">This text isn&apos;t available</p>
-            <button onClick={exit} className="mt-4 min-h-11 text-sm font-semibold text-teal">
-              Back
-            </button>
-          </div>
+          <Message icon={<BookIcon size={24} />} title="This text isn't available" onBack={exit} />
         ) : !depth ? (
           <DepthChoice
             title={state.info.title}
@@ -107,19 +122,13 @@ function SessionScreen({ deck, errata }: { deck: string | null; errata: string }
         ) : frozen.length > 0 ? (
           <SessionPlayer cardIds={frozen} errata={errata} onExit={exit} />
         ) : (
-          <div className="py-16 text-center" data-deen-session="empty">
-            <p className="text-sm font-semibold text-foreground">Nothing to review here right now</p>
-            <p className="mt-1 text-sm text-muted">
-              {queue.dueTotal > 0
-                ? 'That is today’s reviews done. The rest wait for tomorrow.'
-                : queue.nextDue
-                  ? `The next card comes back ${whenLabel(queue.nextDue)}.`
-                  : 'Cards you learn come back here.'}
-            </p>
-            <button onClick={exit} className="mt-4 min-h-11 text-sm font-semibold text-teal">
-              Back
-            </button>
-          </div>
+          <Message icon={<StarIcon size={24} />} title="Nothing to review here right now" onBack={exit} data="empty">
+            {queue.dueTotal > 0
+              ? 'That is today’s reviews done. The rest wait for tomorrow.'
+              : queue.nextDue
+                ? `The next card comes back ${whenLabel(queue.nextDue)}.`
+                : 'Cards you learn come back here.'}
+          </Message>
         )}
       </main>
     </div>

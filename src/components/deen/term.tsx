@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from '@/components/app-link';
 import BottomSheet from '@/components/ui/bottom-sheet';
 import { loadGlossary, splitTerms } from '@/lib/deen/glossary';
@@ -86,6 +86,40 @@ export function TermDetails({ term, terms, onSelect, hideHeading }: { term: Glos
   );
 }
 
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+
+/**
+ * Keeps Tab and Shift+Tab inside the dialog this renders in, so the dimmed
+ * page behind an aria-modal sheet can't take focus. (The shared BottomSheet
+ * doesn't trap focus yet: HANDOFF item 6.)
+ */
+function FocusTrap() {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const dialog = ref.current?.closest<HTMLElement>('[role="dialog"]');
+    if (!dialog) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const items = [...dialog.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const at = document.activeElement;
+      const inside = at instanceof Node && dialog.contains(at);
+      if (e.shiftKey && (!inside || at === first || at === dialog)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (!inside || at === last)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+  return <span ref={ref} hidden />;
+}
+
 /** A bottom sheet for one term (and any it links to) */
 export function TermSheet({ id, open, onClose }: { id: string; open: boolean; onClose: () => void }) {
   const terms = useGlossary();
@@ -98,6 +132,7 @@ export function TermSheet({ id, open, onClose }: { id: string; open: boolean; on
   const term = terms?.get(shown);
   return (
     <BottomSheet open={open} onClose={onClose} title={term ? `${term.translit}: meaning` : 'Term'} titleHidden>
+      {open && <FocusTrap />}
       {!terms ? (
         <p className="py-6 text-center text-sm text-muted">Loading…</p>
       ) : term ? (
@@ -131,7 +166,8 @@ export function Term({ id, children, className }: { id: string; children?: React
           setOpen(true);
         }}
         className={cn(
-          'inline cursor-pointer rounded-sm p-0 align-baseline font-[inherit] text-[length:inherit] italic text-inherit',
+          // pe: the italic's last glyph leans past its box; keep it (and the underline) inside, clear of the next word
+          'inline cursor-pointer whitespace-nowrap rounded-sm p-0 pe-[0.12em] align-baseline font-[inherit] text-[length:inherit] italic text-inherit',
           'underline decoration-gold decoration-dotted decoration-[1.5px] underline-offset-[3px] hover:bg-gold/10',
           className,
         )}

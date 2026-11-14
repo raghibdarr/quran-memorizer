@@ -76,10 +76,10 @@ test.describe('deen engine', () => {
     for (let unit = 0; unit < 3; unit++) {
       await expect(page.locator(`[data-memorise-step="build"][data-unit="${unit}"]`)).toBeVisible()
       if (unit < 2) {
-        for (let r = 0; r < 3; r++) await page.getByRole('button', { name: /read it once/i }).click()
+        for (let r = 0; r < 3; r++) await page.getByRole('button', { name: 'I’ve read it aloud' }).click()
       }
       await expect(page.locator('[data-cue-text]')).toBeVisible()
-      await page.getByRole('button', { name: 'Hide it all' }).click()
+      await page.getByRole('button', { name: 'Try it from memory' }).click()
       await page.getByRole('button', { name: /i’ve said it, show me/i }).click()
       await page.getByRole('button', { name: /^yes/i }).click()
     }
@@ -160,7 +160,7 @@ test.describe('deen engine', () => {
     await page.goto('/essentials')
     const row = page.locator('[data-learn-row="hadith"]')
     await expect(row).toBeVisible()
-    await expect(row).toContainText('3 texts')
+    await expect(row).toContainText('0/3')
   })
 
   test('/glossary searches and opens a term; /sources shows the method', async ({ page }) => {

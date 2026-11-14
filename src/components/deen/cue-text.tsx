@@ -7,24 +7,39 @@ import { arabicWords } from './text';
 
 /**
  * Arabic shown as first-letter cues (hide-words recall, as in the Quran
- * lessons): each word shows its opening letter; tap a word to see it whole.
+ * lessons): each word shows its opening letter; tap a word to see it whole,
+ * tap again to hide it. An opened word keeps the same box, so the line keeps
+ * its rhythm.
  */
 export function CueText({ text, className }: { text: string; className?: string }) {
   const [shown, setShown] = useState<Set<number>>(new Set());
   const words = arabicWords(text);
+  const toggle = (i: number) =>
+    setShown((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
   return (
-    <div dir="rtl" lang="ar" className={cn('flex flex-wrap justify-center gap-x-3 gap-y-2 text-3xl leading-loose', className)} data-cue-text>
+    <div dir="rtl" lang="ar" className={cn('flex flex-wrap justify-center gap-x-2 gap-y-3 text-2xl leading-none', className)} data-cue-text>
       {words.map((w, i) => {
         const open = shown.has(i);
         return (
           <button
             key={i}
             type="button"
-            onClick={() => setShown((prev) => new Set(prev).add(i))}
-            aria-label={open ? undefined : `Show word ${i + 1}`}
-            className={cn('rounded-lg px-1.5 transition-colors', open ? '' : 'bg-foreground/[0.05] hover:bg-foreground/10')}
+            onClick={() => toggle(i)}
+            aria-pressed={open}
+            aria-label={open ? undefined : `Word ${i + 1}, hidden`}
+            className={cn(
+              'inline-flex min-h-11 min-w-10 items-center justify-center rounded-lg px-2 py-1.5 transition-colors motion-reduce:transition-none',
+              open ? 'bg-teal/10 text-foreground' : 'bg-foreground/[0.06] text-foreground/70 hover:bg-foreground/10 dark:bg-foreground/10 dark:hover:bg-foreground/15',
+            )}
           >
-            <span className={cn('arabic-text', !open && 'text-muted')}>{open ? w : firstLetters(w)}</span>
+            <span className="arabic-text" style={{ lineHeight: 1.4 }}>
+              {open ? w : firstLetters(w)}
+            </span>
           </button>
         );
       })}

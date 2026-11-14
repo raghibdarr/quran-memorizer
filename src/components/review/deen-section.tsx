@@ -30,18 +30,18 @@ export function DeenReviewSection() {
       <h2 id="deen-review-title" className="px-1 pt-2 text-base font-bold text-foreground">
         Hadith, duas and Names
       </h2>
-      <Card className="space-y-3">
+      <Card variant="tactile" className="space-y-3">
         {total > 0 ? (
           <>
-            <ul className="space-y-1.5">
+            <ul className="-my-1 divide-y divide-foreground/10">
               {rows.map((r) => (
-                <li key={r.id} className="flex items-center justify-between gap-3 text-sm" data-deck-row={r.id}>
-                  <Link href={sessionHref(r.id)} className="min-w-0 truncate font-semibold text-foreground hover:text-teal">
-                    {deckTitleOf(r.id)}
+                <li key={r.id} data-deck-row={r.id}>
+                  <Link href={sessionHref(r.id)} className="flex min-h-11 items-center justify-between gap-3 text-sm hover:text-teal">
+                    <span className="min-w-0 truncate font-semibold text-foreground">{deckTitleOf(r.id)}</span>
+                    <span className="shrink-0 text-xs tabular-nums text-muted">
+                      {[r.due > 0 && `${r.due} due`, r.fresh > 0 && `${r.fresh} new`].filter(Boolean).join(' · ')}
+                    </span>
                   </Link>
-                  <span className="shrink-0 text-xs text-muted">
-                    {[r.due > 0 && `${r.due} due`, r.fresh > 0 && `${r.fresh} new`].filter(Boolean).join(' · ')}
-                  </span>
                 </li>
               ))}
             </ul>
@@ -50,7 +50,7 @@ export function DeenReviewSection() {
             )}
             <Link
               href={sessionHref()}
-              className="tactile-btn flex min-h-11 items-center justify-center rounded-xl bg-teal text-sm font-semibold text-on-teal"
+              className="tactile-btn flex min-h-11 w-full items-center justify-center rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal hover:bg-teal-light sm:w-auto sm:px-8"
               data-deen-start
             >
               Start · {total} {total === 1 ? 'card' : 'cards'}

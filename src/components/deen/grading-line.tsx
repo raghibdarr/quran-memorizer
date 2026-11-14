@@ -19,7 +19,7 @@ export function GradingLine({ grading, className }: { grading: Grading; classNam
   const label = GRADE_LABEL[grading.grade];
   const who = `${scholarName(grading.by)}, in ${workTitle(grading.in)}`;
   return (
-    <div className={cn('text-xs leading-relaxed text-muted', className)} data-grading={grading.grade}>
+    <div className={cn('text-[13px] leading-relaxed text-muted', className)} data-grading={grading.grade}>
       <p>
         <span className="font-semibold text-foreground">{termId ? <Term id={termId}>{label}</Term> : label}</span>
         {': '}
@@ -28,7 +28,7 @@ export function GradingLine({ grading, className }: { grading: Grading; classNam
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
-            className="inline text-left text-muted underline decoration-foreground/20 underline-offset-2 hover:text-foreground"
+            className="inline text-left text-muted hover:text-foreground"
           >
             {who}
             <ChevronDownIcon size={12} className={cn('ml-0.5 inline align-[-1px] transition-transform', open && 'rotate-180')} />

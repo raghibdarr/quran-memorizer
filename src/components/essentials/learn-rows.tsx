@@ -73,28 +73,34 @@ export function LearnRows() {
   return (
     <section aria-labelledby="learn-rows-title" className="space-y-2" data-learn-rows>
       <h2 id="learn-rows-title" className="px-1 pt-3 text-base font-bold text-foreground">
-        Hadith, duas and more
+        Hadith, Names and more
       </h2>
       {rows.map((row) => {
         const { started, total } = groupProgress(row, cardIds, lessonsDone);
         const unit = row.group === 'course' ? 'lessons' : row.group === 'names' ? 'Names' : 'texts';
         return (
           <Link key={row.group} href={GROUP_ROUTE[row.group]} className="block" data-learn-row={row.group}>
-            <Card pressable className="space-y-2 py-3">
-              <div className="flex items-center justify-between gap-3">
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-foreground">{GROUP_TITLES[row.group]}</span>
-                  <span className="mt-0.5 block truncate text-xs text-muted">{GROUP_BLURB[row.group]}</span>
+            <Card pressable>
+              <div className="flex items-start justify-between gap-3">
+                <span className="min-w-0 flex-1">
+                  <span className="block text-base font-semibold text-foreground">{GROUP_TITLES[row.group]}</span>
+                  <span className="mt-0.5 block text-xs text-muted">{GROUP_BLURB[row.group]}</span>
                 </span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </div>
               {total > 0 && (
-                <div className="flex items-center gap-3">
+                <div className="mt-3 flex items-center gap-3">
                   <ProgressBar value={(started / total) * 100} className="flex-1" />
-                  <span className="shrink-0 text-[11px] text-muted">
-                    {started === 0 ? `${total} ${unit}` : `${started} of ${total} started`}
+                  {/* Same count format as the collections further down the tab */}
+                  <span className="shrink-0 text-[11px] tabular-nums text-muted">
+                    <span aria-hidden>
+                      {started}/{total}
+                    </span>
+                    <span className="sr-only">
+                      {started} of {total} {unit} started
+                    </span>
                   </span>
                 </div>
               )}
