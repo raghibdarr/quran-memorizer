@@ -1,0 +1,46 @@
+{
+  "id": "fasting-is-a-shield",
+  "deck": "course-fasting-evidence",
+  "rev": 1,
+  "title": "Fasting is a shield",
+  "cue": "What a fasting person says when insulted",
+  "arabic": "الصِّيَامُ جُنَّةٌ فَلَا يَرْفُثْ وَلَا يَجْهَلْ وَإِنِ امْرُؤٌ قَاتَلَهُ أَوْ شَاتَمَهُ فَلْيَقُلْ إِنِّي صَائِمٌ مَرَّتَيْنِ",
+  "translation": "Fasting is a shield, so let him not speak indecently or act ignorantly. If a man fights him or insults him, let him say: “I am fasting,” twice.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "1894",
+      "numbering": "fath-al-bari",
+      "book": "Kitab al-Sawm",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "dorar",
+        "ref": "dorar.net hadith encyclopedia: Sahih al-Bukhari, no. 1894, narrator Abu Hurayrah",
+        "skeletonSha256": "914a81c9eaede4eb752e410feb01307f2a3999dad9440b3e725ff73debffaaf6"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "ara-bukhari, hadith 1894",
+        "skeletonSha256": "914a81c9eaede4eb752e410feb01307f2a3999dad9440b3e725ff73debffaaf6"
+      }
+    ],
+    "note": "The Arabic stored is the first part of the hadith, up to “twice”. The hadith continues with the fasting person’s breath and reward; that part is not quoted here. The chain of narrators is left out."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 B/C Arabic taken from witness 1 and collated against witness 2 by normalised skeleton: identical for the words kept",
+      "2026-11-13 D vocalisation checked against the vocalised witness texts",
+      "2026-11-13 E/F our own translation from the Arabic; re-read against the Arabic for omissions and additions",
+      "2026-11-13 G citation number confirmed in both witnesses",
+      "2026-11-13 H in Sahih al-Bukhari: no separate grading needed",
+      "2026-11-13 status source-checked. Stages were run by one agent with a mechanical collation, not by separate agents. Not reviewed by a scholar."
+    ]
+  }
+}

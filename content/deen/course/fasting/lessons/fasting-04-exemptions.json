@@ -1,0 +1,390 @@
+{
+  "unit": "fasting",
+  "rev": 1,
+  "id": "fasting-04-exemptions",
+  "order": 4,
+  "title": "Who may leave the fast",
+  "intro": "Some people are excused from fasting on the day itself: the sick, travellers, women who are pregnant or nursing, women during their period, and the very old. This lesson takes each in turn, with what the Quran says and what the primers of the schools add.",
+  "claims": [
+    {
+      "id": "sick-and-traveller",
+      "kind": "agreed",
+      "text": "Someone who is ill or travelling may leave the fast, and fasts the same number of days later.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        },
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 185
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Whoever is ill in Ramadan and fears that fasting will make the illness worse breaks the fast and makes it up.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ومن كان مريضا في رمضان فخاف إن صام ازداد مرضه أفطر وقضى"
+        },
+        {
+          "school": "shafii",
+          "text": "The sick person, and the traveller on a long journey, break the fast and make it up.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والمريض والمسافر سفرا طويلا يفطران ويقضيان"
+        }
+      ],
+      "cards": [
+        {
+          "id": "sick-and-traveller-1",
+          "front": "What does the Quran say for someone who is ill or on a journey in Ramadan?",
+          "back": "They fast the same number of days later (al-Baqarah 184 and 185)."
+        }
+      ]
+    },
+    {
+      "id": "traveller-which-is-better",
+      "kind": "differs",
+      "text": "For a traveller who could fast without harm, the schools differ on which is better: to fast, or to break the fast and make it up.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "If he is a traveller whom fasting does not harm, fasting is better for him; if he breaks the fast and makes it up, that is allowed.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وإن كان مسافرا لا يستضر بالصوم فصومه أفضل وإن أفطر وقضى جاز"
+        },
+        {
+          "school": "maliki",
+          "text": "Whoever travels a distance at which the prayer is shortened may break the fast, even with no hardship, and owes the make-up day; fasting is dearer to us.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ومن سافر سفرا تقصر فيه الصلاة فله أن يفطر وإن لم تنله ضرورة وعليه القضاء والصوم أحب إلينا"
+        },
+        {
+          "school": "hanbali",
+          "text": "The sick person whom fasting harms, and the traveller who may shorten the prayer: breaking the fast is better for them and they owe the make-up day; if they fast, it counts.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+          },
+          "quote": "المريض الذي يتضرر به والمسافر الذي له القصر فالفطر لهما أفضل وعليهما القضاء وإن صاما أجزأهما"
+        }
+      ],
+      "cards": [
+        {
+          "id": "traveller-which-is-better-1",
+          "front": "A traveller could fast without harm. Which is better, according to the primers?",
+          "back": "Hanafi and Maliki: fasting. Hanbali: breaking the fast. All three: either one is valid."
+        },
+        {
+          "id": "traveller-which-is-better-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: fasting does a traveller no harm. Which is better for him?",
+          "back": "Fasting; breaking the fast and making it up is allowed."
+        },
+        {
+          "id": "traveller-which-is-better-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: a traveller may break the fast. Which does the primer prefer?",
+          "back": "Fasting."
+        },
+        {
+          "id": "traveller-which-is-better-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: which is better for a traveller who may shorten the prayer?",
+          "back": "Breaking the fast; if he fasts, it counts."
+        }
+      ]
+    },
+    {
+      "id": "menstruation",
+      "kind": "agreed",
+      "text": "A woman does not fast during her period, and makes up those days of Ramadan afterwards. Ibn al-Mundhir reports agreement that the make-up is due.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Salah, no. 68"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, opening: on whom the fast is obligatory"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "When a woman’s period begins, she breaks the fast and makes it up.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وإذا حاضت المرأة أفطرت وقضت"
+        },
+        {
+          "school": "hanbali",
+          "text": "A woman in her period or in the bleeding after childbirth breaks the fast and makes it up; if she fasts, it does not count.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+          },
+          "quote": "الحائض والنفساء تفطران وتقضيان وإن صامتا لم يجزئهما"
+        }
+      ],
+      "cards": [
+        {
+          "id": "menstruation-1",
+          "front": "A woman’s period comes during Ramadan. What about those days?",
+          "back": "She does not fast them, and makes them up afterwards."
+        }
+      ]
+    },
+    {
+      "id": "pregnant-nursing",
+      "kind": "differs",
+      "text": "A woman who is pregnant or nursing and fears harm may leave the fast. The schools differ on what she owes afterwards.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "A pregnant or nursing woman who fears for her child breaks the fast and makes it up, and owes no [[fidyah]].",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والحامل والمرضع إذا خافتا على ولديهما أفطرتا وقضتا ولا فدية عليهما"
+        },
+        {
+          "school": "maliki",
+          "text": "A pregnant woman who fears for what is in her womb breaks the fast and does not feed, though it has also been said that she feeds. A nursing woman who fears for her child, and finds no one to hire for him or he accepts no one else, may break the fast, and she feeds.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "وإذا خافت الحامل على ما في بطنها أفطرت ولم تطعم وقد قيل تطعم وللمرضع إن خافت على ولدها ولم تجد من تستأجر له أو لم يقبل غيرها أن تفطر وتطعم"
+        },
+        {
+          "school": "shafii",
+          "text": "If they fear for themselves, they break the fast and owe the make-up day. If they fear for their children, they break the fast and owe the make-up day and an expiation of a [[mudd]] for each day.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والحامل والمرضع إن خافتا على أنفسهما أفطرتا وعليهما القضاء وإن خافتا على أولادهما أفطرتا وعليهما القضاء والكفارة عن كل يوم مد"
+        },
+        {
+          "school": "hanbali",
+          "text": "If they fear for themselves, they break the fast and make it up. If they fear for their children, they break the fast, make it up, and feed a poor person for each day.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+          },
+          "quote": "الحامل والمرضع إذا خافتا على أنفسهما أفطرتا وقضتا وإن خافتا على ولديهما أفطرتا وقضتا وأطعمتا عن كل يوم مسكينا"
+        }
+      ],
+      "cards": [
+        {
+          "id": "pregnant-nursing-1",
+          "front": "A pregnant or nursing woman leaves the fast out of fear for her child. What do the four primers say she owes?",
+          "back": "Hanafi: the make-up days only. Shafi’i and Hanbali: the make-up days and feeding for each day. Maliki: the pregnant woman does not feed (it is also said she does); the nursing woman feeds."
+        },
+        {
+          "id": "pregnant-nursing-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: a pregnant or nursing woman fears for her child and breaks the fast. What does she owe?",
+          "back": "The make-up days, and no [[fidyah]]."
+        },
+        {
+          "id": "pregnant-nursing-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: how do the pregnant woman and the nursing woman differ in feeding?",
+          "back": "The pregnant woman does not feed (it is also said she does); the nursing woman feeds."
+        },
+        {
+          "id": "pregnant-nursing-shafii",
+          "school": "shafii",
+          "front": "Shafi’i primer: a pregnant or nursing woman fears for her child, not herself. What does she owe?",
+          "back": "The make-up days and an expiation of a [[mudd]] for each day."
+        },
+        {
+          "id": "pregnant-nursing-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: a pregnant or nursing woman fears for her child. What does she owe?",
+          "back": "The make-up days, and feeding a poor person for each day."
+        }
+      ]
+    },
+    {
+      "id": "elderly",
+      "kind": "differs",
+      "text": "An old man or woman who cannot fast may leave the fast: Ibn al-Mundhir reports agreement on this. The schools differ on feeding a poor person for each day.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Siyam wa al-I’tikaf, no. 129"
+          }
+        },
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "The very old man who is unable to fast breaks the fast and feeds a poor person for each day, as is fed in expiations.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والشيخ الفاني الذي لا يقدر على الصيام يفطر ويطعم لكل يوم مسكينا كما يطعم في الكفارات"
+        },
+        {
+          "school": "maliki",
+          "text": "It is recommended for the old man, when he breaks the fast, to feed.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ويستحب للشيخ الكبير إذا أفطر أن يطعم"
+        },
+        {
+          "school": "shafii",
+          "text": "The old man who becomes unable to fast breaks the fast and feeds a [[mudd]] for each day.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والشيخ إذا عجز عن الصوم يفطر ويطعم عن كل يوم مدا"
+        },
+        {
+          "school": "hanbali",
+          "text": "One unable to fast through old age, or an illness with no hope of recovery, feeds a poor person for each day.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+          },
+          "quote": "عن الصيام لكبر أو مرض لا يرجى برؤه فإنه يطعم عن كل يوم مسكينا"
+        }
+      ],
+      "cards": [
+        {
+          "id": "elderly-1",
+          "front": "An old person cannot fast. What is agreed, and where do the primers differ?",
+          "back": "Agreed: they may leave the fast. Hanafi, Shafi’i and Hanbali primers: they feed a poor person for each day. Maliki primer: feeding is recommended."
+        },
+        {
+          "id": "elderly-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: what does the very old man who cannot fast do?",
+          "back": "He breaks the fast and feeds a poor person for each day."
+        },
+        {
+          "id": "elderly-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: the old man breaks the fast. What is said about feeding?",
+          "back": "It is recommended."
+        },
+        {
+          "id": "elderly-shafii",
+          "school": "shafii",
+          "front": "Shafi’i primer: what does the old man who cannot fast do?",
+          "back": "He breaks the fast and feeds a [[mudd]] for each day."
+        },
+        {
+          "id": "elderly-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: what does someone unable to fast through old age do?",
+          "back": "He feeds a poor person for each day."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "According to the Quran, someone who is ill or travelling in Ramadan:",
+      "options": [
+        "fasts the same number of days later",
+        "owes nothing at all",
+        "fasts double the days later"
+      ],
+      "answer": 0,
+      "claim": "sick-and-traveller"
+    },
+    {
+      "q": "A woman’s period comes during Ramadan. Those days are:",
+      "options": [
+        "fasted as usual",
+        "left, and made up afterwards",
+        "left, with nothing to make up"
+      ],
+      "answer": 1,
+      "claim": "menstruation"
+    },
+    {
+      "q": "On what a pregnant or nursing woman owes after leaving the fast, the four primers:",
+      "options": [
+        "all say the make-up days only",
+        "all say feeding only",
+        "give different answers"
+      ],
+      "answer": 2,
+      "claim": "pregnant-nursing"
+    },
+    {
+      "q": "That a very old person who cannot fast may leave the fast is:",
+      "options": [
+        "reported as agreed",
+        "held by one school only",
+        "not mentioned in the primers"
+      ],
+      "answer": 0,
+      "claim": "elderly"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+    ]
+  }
+}

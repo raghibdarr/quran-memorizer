@@ -1,0 +1,1763 @@
+{
+ "deck": "course-fasting",
+ "kind": "course",
+ "hash": "93883076c909a27e",
+ "items": [
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-01-who-must-fast",
+   "order": 1,
+   "title": "Who must fast",
+   "intro": "This lesson covers what the fast of Ramadan is, who it falls on, and how the month begins. Each point is tied to the Quran, to a reported agreement, or to one short primer from each of the four schools.",
+   "claims": [
+    {
+     "id": "ramadan-obligation",
+     "kind": "agreed",
+     "text": "Fasting the month of Ramadan is an obligation. Ibn Rushd grounds it in the Quran, the [[sunnah]] and agreement, and says no dissent has come down from any of the imams.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 183
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 185
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, opening: the kinds of obligatory fast"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "ramadan-obligation-1",
+       "front": "Which two ayahs of al-Baqarah establish the fast of Ramadan?",
+       "back": "Al-Baqarah 183 and 185."
+      },
+      {
+       "id": "ramadan-obligation-2",
+       "front": "What does Ibn Rushd report about the obligation to fast Ramadan?",
+       "back": "That it rests on the Quran, the [[sunnah]] and agreement, with no dissent passed down from any of the imams."
+      }
+     ]
+    },
+    {
+     "id": "who-it-falls-on",
+     "kind": "agreed",
+     "text": "The fast falls, with no choice in the matter, on a person who is adult, sane, resident and healthy and, for a woman, not menstruating. Ibn Rushd reports no disagreement on this.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 185
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, opening: on whom the fast is obligatory"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "A child who comes of age, or a person who accepts Islam, during Ramadan holds back for the rest of that day and fasts the days after it, without making up the days before.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وإذا بلغ الصبي أو أسلم الكافر في رمضان أمسكا بقية يومهما وصاما ما بعده ولم يقضيا ما مضى"
+      },
+      {
+       "school": "maliki",
+       "text": "Children do not have to fast until a boy has his first emission and a girl her first period.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ولا صيام على الصبيان حتى يحتلم الغلام وتحيض الجارية"
+      },
+      {
+       "school": "shafii",
+       "text": "Four things make the fast obligatory: Islam, adulthood, sanity and being able to fast.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وشرائط وجوب الصيام أربعة أشياء الإسلام والبلوغ والعقل والقدرة على الصوم"
+      },
+      {
+       "school": "hanbali",
+       "text": "Fasting Ramadan is obligatory on every Muslim who is adult, sane and able to fast. A child is told to fast once able to bear it.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam"
+       },
+       "quote": "يجب صيام رمضان على كل مسلم بالغ عاقل قادر على الصوم ويؤمر به الصبي إذا أطاقه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "who-it-falls-on-1",
+       "front": "On whom does the fast of Ramadan fall with no choice?",
+       "back": "An adult, sane, resident, healthy person; for a woman, when she is not menstruating."
+      },
+      {
+       "id": "who-it-falls-on-2",
+       "front": "From when does a child have to fast?",
+       "back": "From puberty. The Hanbali primer adds that a child is told to fast once able to bear it."
+      }
+     ]
+    },
+    {
+     "id": "what-the-fast-is",
+     "kind": "definition",
+     "text": "The [[sawm]] is holding back from food, drink and intercourse from dawn until sunset. Ibn Rushd reports agreement that a fasting person holds back from these three, and that the day ends when the sun sets.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 187
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, the first pillar (the time) and the second pillar (holding back)"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "The time of the fast is from the rising of the second dawn until the sun sets.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ووقت الصوم من طلوع الفجر الثاني إلى غروب الشمس"
+      }
+     ],
+     "cards": [
+      {
+       "id": "what-the-fast-is-1",
+       "front": "What three things does a fasting person hold back from?",
+       "back": "Food, drink and intercourse."
+      },
+      {
+       "id": "what-the-fast-is-2",
+       "front": "When does the fasting day begin and end?",
+       "back": "It begins at dawn and ends at sunset (al-Baqarah 187)."
+      }
+     ]
+    },
+    {
+     "id": "start-of-month",
+     "kind": "agreed",
+     "text": "Ramadan begins when its new crescent is sighted, and a lunar month is twenty-nine or thirty days. Ibn Rushd reports agreement on both points.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 185
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, the first pillar: the time"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "People should look for the crescent on the twenty-ninth of Sha’ban; if they see it, they fast.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وينبغي للناس أن يلتمسوا الهلال في اليوم التاسع والعشرين من شعبان فإن رأوه صاموا"
+      },
+      {
+       "school": "maliki",
+       "text": "The fast begins on sighting the crescent and ends on sighting it, whether the month was thirty days or twenty-nine.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "يصام لرؤية الهلال ويفطر لرؤيته كان ثلاثين يوما أو تسعة وعشرين يوما"
+      }
+     ],
+     "cards": [
+      {
+       "id": "start-of-month-1",
+       "front": "How is the start of Ramadan fixed, and how long is a lunar month?",
+       "back": "By sighting the new crescent. A lunar month is 29 or 30 days."
+      }
+     ]
+    },
+    {
+     "id": "clouded-crescent",
+     "kind": "differs",
+     "text": "When cloud hides the crescent on the night after the twenty-ninth of Sha’ban, the schools differ about the following day, often called the day of doubt.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 185
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "If it is hidden from them, they complete thirty days of Sha’ban and then fast.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وإن غم عليهم أكملوا عدة شعبان ثلاثين يوما ثم صاموا"
+      },
+      {
+       "school": "maliki",
+       "text": "If the crescent is hidden, thirty days are counted from the start of the month before, and then the fast begins.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "فإن غم الهلال فيعد ثلاثين يوما من غرة الشهر الذي قبله ثم يصام"
+      },
+      {
+       "school": "shafii",
+       "text": "Fasting the day of doubt is disliked, unless it falls on a day he habitually fasts or he joins it to fasting before it.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ويكره صوم يوم الشك إلا أن يوافق عادة له أو يصله بما قبله"
+      },
+      {
+       "school": "hanbali",
+       "text": "The fast becomes obligatory through one of three things: Sha’ban being complete, the crescent of Ramadan being sighted, or cloud or dust blocking the view on the night of the thirtieth.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam"
+       },
+       "quote": "ويجب بأحد ثلاثة أشياء: كمال شعبان ورؤية هلال رمضان ووجود غيم أو قتر ليلة الثلاثين يحول دونه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "clouded-crescent-1",
+       "front": "Cloud hides the crescent on the thirtieth night of Sha’ban. What do the four primers say about the next day?",
+       "back": "Hanafi and Maliki: complete thirty days of Sha’ban first. Shafi’i: fasting the day of doubt is disliked, with exceptions. Hanbali: the fast is due."
+      },
+      {
+       "id": "clouded-crescent-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: the crescent is hidden by cloud on the thirtieth night of Sha’ban. What then?",
+       "back": "Complete thirty days of Sha’ban, then fast."
+      },
+      {
+       "id": "clouded-crescent-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: the crescent is hidden by cloud on the thirtieth night of Sha’ban. What then?",
+       "back": "Count thirty days from the start of Sha’ban, then fast."
+      },
+      {
+       "id": "clouded-crescent-shafii",
+       "school": "shafii",
+       "front": "Shafi’i primer: what is said about fasting the day of doubt?",
+       "back": "It is disliked, unless it falls on a day he habitually fasts or continues a fast begun before it."
+      },
+      {
+       "id": "clouded-crescent-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: cloud or dust blocks the view on the thirtieth night of Sha’ban. What then?",
+       "back": "The fast is due the next day: it is one of the three things that make it obligatory."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these people does the fast of Ramadan fall on, with no choice?",
+     "options": [
+      "A healthy adult of sound mind who is at home",
+      "A young child",
+      "A woman during her period"
+     ],
+     "answer": 0,
+     "claim": "who-it-falls-on"
+    },
+    {
+     "q": "How is the start of Ramadan fixed?",
+     "options": [
+      "By the first Friday after Sha’ban",
+      "By sighting the new crescent",
+      "By the longest night of the year"
+     ],
+     "answer": 1,
+     "claim": "start-of-month"
+    },
+    {
+     "q": "On a clouded thirtieth night of Sha’ban, the four primers:",
+     "options": [
+      "all say to fast the next day",
+      "all say the next day is a day of Sha’ban",
+      "do not all say the same thing"
+     ],
+     "answer": 2,
+     "claim": "clouded-crescent"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-02-intention",
+   "order": 2,
+   "title": "The intention",
+   "intro": "A fast is more than going without food. This lesson covers the intention behind it: the part that is agreed, and where the primers of the schools place it differently.",
+   "claims": [
+    {
+     "id": "intention-needed",
+     "kind": "agreed",
+     "text": "A fast is kept with an intention. Ibn al-Mundhir reports agreement that someone who intends the fast on each night of Ramadan, and then fasts, has a complete fast.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Siyam wa al-I’tikaf, no. 123"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Fasting is holding back from eating, drinking and intercourse by day, together with the intention.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والصوم هو الإمساك عن الأكل والشرب والجماع نهارا مع النية"
+      },
+      {
+       "school": "shafii",
+       "text": "The obligatory parts of the fast are four: the intention, and holding back from eating and drinking, from intercourse, and from deliberate vomiting.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وفرائض الصوم أربعة أشياء النية والإمساك عن الأكل والشرب والجماع وتعمد القيء"
+      }
+     ],
+     "cards": [
+      {
+       "id": "intention-needed-1",
+       "front": "Besides holding back from food, drink and intercourse, what does a fast need?",
+       "back": "An intention ([[niyyah]])."
+      },
+      {
+       "id": "intention-needed-2",
+       "front": "Which way of making the intention for Ramadan does Ibn al-Mundhir report as agreed to be enough?",
+       "back": "Intending the fast on each night of the month."
+      }
+     ]
+    },
+    {
+     "id": "intention-timing",
+     "kind": "differs",
+     "text": "Intending each night is enough by agreement. The primers differ on whether a later intention counts for a Ramadan fast, and on whether one intention can cover the month. The Shafi’i and Hanbali primers used here do not give a time.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Siyam wa al-I’tikaf, no. 123"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "A fast tied to a set time, such as Ramadan, is valid with an intention made at night. If he has not intended by morning, an intention made between then and midday is enough.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "فيجوز صومه بنية من الليل فإن لم ينو حتى أصبح أجزأته النية ما بينه وبين الزوال"
+      },
+      {
+       "school": "maliki",
+       "text": "He makes the intention at night at the start of the month, and does not have to make it at night for the rest of it.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ويبيت الصيام في أوله وليس عليه البيات في بقيته"
+      }
+     ],
+     "cards": [
+      {
+       "id": "intention-timing-1",
+       "front": "Where do the Hanafi and Maliki primers differ on the intention for Ramadan?",
+       "back": "Hanafi: an intention made before midday is still enough. Maliki: it is made at night, once at the start of the month, and need not be repeated each night."
+      },
+      {
+       "id": "intention-timing-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: no intention was made by morning in Ramadan. Until when can it still be made?",
+       "back": "Until midday."
+      },
+      {
+       "id": "intention-timing-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: when is the intention for Ramadan made, and how often?",
+       "back": "At night, at the start of the month; it need not be made again each night."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which way of making the intention is reported as agreed to be enough?",
+     "options": [
+      "Intending the fast each night of Ramadan",
+      "Intending at sunset when the fast ends",
+      "Intending once in a lifetime"
+     ],
+     "answer": 0,
+     "claim": "intention-needed"
+    },
+    {
+     "q": "In the Hanafi primer, an intention for a Ramadan fast can still be made:",
+     "options": [
+      "only before dawn",
+      "until midday",
+      "at any time before sunset"
+     ],
+     "answer": 1,
+     "claim": "intention-timing"
+    },
+    {
+     "q": "In the Maliki primer, the intention at night is made:",
+     "options": [
+      "at the start of the month, without having to repeat it nightly",
+      "every night without exception",
+      "only on the last ten nights"
+     ],
+     "answer": 0,
+     "claim": "intention-timing"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-03-what-breaks-the-fast",
+   "order": 3,
+   "title": "What breaks the fast",
+   "intro": "Some acts end a fast and some leave it whole. This lesson starts with what is agreed, then shows a place where the four primers part ways. Modern questions such as injections and inhalers are outside this unit: for those, ask a scholar you trust.",
+   "claims": [
+    {
+     "id": "food-drink-intercourse",
+     "kind": "agreed",
+     "text": "Eating, drinking or having intercourse on purpose during the fasting day breaks the fast. Ibn Rushd reports agreement that a fasting person holds back from all three.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 187
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, the second pillar: holding back"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "food-drink-intercourse-1",
+       "front": "Which three things, done on purpose, break a fast by agreement?",
+       "back": "Eating, drinking and intercourse."
+      }
+     ]
+    },
+    {
+     "id": "vomiting",
+     "kind": "agreed",
+     "text": "Vomiting that overcomes a person leaves the fast whole. Making oneself vomit on purpose breaks it. Ibn al-Mundhir reports agreement on both. Ibn Rushd gives them as the position of the great majority and names an early dissenter on each.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Siyam wa al-I’tikaf, nos. 125 and 126"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "If vomit overcomes him, his fast is not broken. If he deliberately brings up a mouthful, he owes a make-up day.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وإن ذرعه القيء لم يفطر وإن استقاء عامدا ملء فيه فعليه القضاء"
+      },
+      {
+       "school": "maliki",
+       "text": "Whoever is overcome by vomit in Ramadan owes no make-up day. If he brings it on and vomits, he owes one.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ومن ذرعه القيء في رمضان فلا قضاء عليه وإن استقاء فقاء فعليه القضاء"
+      },
+      {
+       "school": "shafii",
+       "text": "Ten things break the fast, among them: what deliberately reaches the inside of the body or the head, an enema by either passage, and deliberate vomiting.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والذي يفطر به الصائم عشرة أشياء: ما وصل عمدا إلى الجوف أو الرأس والحقنة في أحد السبيلين والقيء عمدا"
+      },
+      {
+       "school": "hanbali",
+       "text": "If he has a wet dream, or vomit overcomes him, his fast is not spoiled.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ma yufsid al-sawm"
+       },
+       "quote": "أو احتلم أو ذرعه القيء لم يفسد صومه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "vomiting-1",
+       "front": "Does vomiting break the fast?",
+       "back": "Not when it overcomes you. Making yourself vomit on purpose breaks it."
+      }
+     ]
+    },
+    {
+     "id": "what-does-not-break",
+     "kind": "agreed",
+     "text": "A wet dream during the day does not spoil the fast, and nothing is owed for what is swallowed with saliva from between the teeth when it cannot be helped.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, end of the third pillar (the intention)"
+       }
+      },
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Siyam wa al-I’tikaf, no. 127"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "what-does-not-break-1",
+       "front": "Does a wet dream during the day spoil the fast?",
+       "back": "No. Ibn Rushd cites agreement on this."
+      },
+      {
+       "id": "what-does-not-break-2",
+       "front": "A trace of food between the teeth is swallowed with saliva and could not be helped. Is anything owed?",
+       "back": "No. Ibn al-Mundhir reports agreement on this."
+      }
+     ]
+    },
+    {
+     "id": "forgetting",
+     "kind": "differs",
+     "text": "The schools differ about someone who eats or drinks having forgotten that they are fasting.",
+     "evidence": [
+      {
+       "item": "course-fasting-evidence:forgetful-eater"
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "If a fasting person eats, drinks or has intercourse forgetfully, the fast is not broken.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "فإن أكل الصائم أو شرب أو جامع ناسيا لم يفطر"
+      },
+      {
+       "school": "maliki",
+       "text": "Whoever breaks the fast in the daytime of Ramadan forgetfully owes the make-up day and nothing more.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ومن أفطر في نهار رمضان ناسيا فعليه القضاء فقط"
+      },
+      {
+       "school": "shafii",
+       "text": "Among the ten things that break the fast: what deliberately reaches the inside of the body or the head.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ما وصل عمدا إلى الجوف أو الرأس"
+      },
+      {
+       "school": "hanbali",
+       "text": "If he does it forgetfully or under compulsion, his fast is not spoiled.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ma yufsid al-sawm"
+       },
+       "quote": "وإن فعله ناسيا أو مكرها لم يفسد صومه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "forgetting-1",
+       "front": "Someone eats, having forgotten they are fasting. What do the four primers say?",
+       "back": "Hanafi and Hanbali: the fast is whole. Shafi’i: only what reaches the inside deliberately breaks it. Maliki: the day is made up, and nothing more."
+      },
+      {
+       "id": "forgetting-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: a fasting person eats or drinks forgetfully. Is the fast broken?",
+       "back": "No."
+      },
+      {
+       "id": "forgetting-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: someone breaks the fast in Ramadan forgetfully. What is owed?",
+       "back": "The make-up day only."
+      },
+      {
+       "id": "forgetting-shafii",
+       "school": "shafii",
+       "front": "Shafi’i primer: what condition is attached to food or drink breaking the fast?",
+       "back": "That it reaches the inside of the body deliberately."
+      },
+      {
+       "id": "forgetting-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: a fasting person eats forgetfully or under compulsion. Is the fast spoiled?",
+       "back": "No."
+      }
+     ]
+    },
+    {
+     "id": "mistaken-time",
+     "kind": "how-to",
+     "text": "The Hanafi and Hanbali primers say that someone who eats believing it is still night, or that the sun has set, and then finds out otherwise, makes that day up.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 187
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Whoever eats before dawn thinking it has not yet risen, or breaks the fast believing the sun has set, and then it turns out that dawn had risen or the sun had not set, makes up that day and owes no expiation.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ومن تسحر وهو يظن أن الفجر لم يطلع أو أفطر وهو يرى أن الشمس قد غربت ثم تبين أن الفجر كان قد طلع أو أن الشمس لم تغرب قضى ذلك اليوم ولا كفارة عليه"
+      },
+      {
+       "school": "hanbali",
+       "text": "Whoever eats thinking it is night, and it turns out to be day, owes the make-up day.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ma yufsid al-sawm"
+       },
+       "quote": "ومن أكل يظنه ليلا فبان نهارا فعليه القضاء"
+      }
+     ],
+     "cards": [
+      {
+       "id": "mistaken-time-1",
+       "front": "Someone eats thinking it is still night, then learns dawn had already come. What do the Hanafi and Hanbali primers say?",
+       "back": "The day is made up. The Hanafi primer adds that no expiation is owed."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these breaks the fast by agreement?",
+     "options": [
+      "A wet dream during the day",
+      "Drinking water on purpose",
+      "Vomit that overcomes you"
+     ],
+     "answer": 1,
+     "claim": "food-drink-intercourse"
+    },
+    {
+     "q": "Making yourself vomit on purpose:",
+     "options": [
+      "breaks the fast",
+      "leaves the fast whole",
+      "matters only at night"
+     ],
+     "answer": 0,
+     "claim": "vomiting"
+    },
+    {
+     "q": "Someone eats, having forgotten they are fasting. The four primers:",
+     "options": [
+      "all say the fast is whole",
+      "all say a make-up day is owed",
+      "do not all say the same thing"
+     ],
+     "answer": 2,
+     "claim": "forgetting"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-04-exemptions",
+   "order": 4,
+   "title": "Who may leave the fast",
+   "intro": "Some people are excused from fasting on the day itself: the sick, travellers, women who are pregnant or nursing, women during their period, and the very old. This lesson takes each in turn, with what the Quran says and what the primers of the schools add.",
+   "claims": [
+    {
+     "id": "sick-and-traveller",
+     "kind": "agreed",
+     "text": "Someone who is ill or travelling may leave the fast, and fasts the same number of days later.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 185
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Whoever is ill in Ramadan and fears that fasting will make the illness worse breaks the fast and makes it up.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ومن كان مريضا في رمضان فخاف إن صام ازداد مرضه أفطر وقضى"
+      },
+      {
+       "school": "shafii",
+       "text": "The sick person, and the traveller on a long journey, break the fast and make it up.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والمريض والمسافر سفرا طويلا يفطران ويقضيان"
+      }
+     ],
+     "cards": [
+      {
+       "id": "sick-and-traveller-1",
+       "front": "What does the Quran say for someone who is ill or on a journey in Ramadan?",
+       "back": "They fast the same number of days later (al-Baqarah 184 and 185)."
+      }
+     ]
+    },
+    {
+     "id": "traveller-which-is-better",
+     "kind": "differs",
+     "text": "For a traveller who could fast without harm, the schools differ on which is better: to fast, or to break the fast and make it up.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "If he is a traveller whom fasting does not harm, fasting is better for him; if he breaks the fast and makes it up, that is allowed.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وإن كان مسافرا لا يستضر بالصوم فصومه أفضل وإن أفطر وقضى جاز"
+      },
+      {
+       "school": "maliki",
+       "text": "Whoever travels a distance at which the prayer is shortened may break the fast, even with no hardship, and owes the make-up day; fasting is dearer to us.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ومن سافر سفرا تقصر فيه الصلاة فله أن يفطر وإن لم تنله ضرورة وعليه القضاء والصوم أحب إلينا"
+      },
+      {
+       "school": "hanbali",
+       "text": "The sick person whom fasting harms, and the traveller who may shorten the prayer: breaking the fast is better for them and they owe the make-up day; if they fast, it counts.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+       },
+       "quote": "المريض الذي يتضرر به والمسافر الذي له القصر فالفطر لهما أفضل وعليهما القضاء وإن صاما أجزأهما"
+      }
+     ],
+     "cards": [
+      {
+       "id": "traveller-which-is-better-1",
+       "front": "A traveller could fast without harm. Which is better, according to the primers?",
+       "back": "Hanafi and Maliki: fasting. Hanbali: breaking the fast. All three: either one is valid."
+      },
+      {
+       "id": "traveller-which-is-better-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: fasting does a traveller no harm. Which is better for him?",
+       "back": "Fasting; breaking the fast and making it up is allowed."
+      },
+      {
+       "id": "traveller-which-is-better-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: a traveller may break the fast. Which does the primer prefer?",
+       "back": "Fasting."
+      },
+      {
+       "id": "traveller-which-is-better-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: which is better for a traveller who may shorten the prayer?",
+       "back": "Breaking the fast; if he fasts, it counts."
+      }
+     ]
+    },
+    {
+     "id": "menstruation",
+     "kind": "agreed",
+     "text": "A woman does not fast during her period, and makes up those days of Ramadan afterwards. Ibn al-Mundhir reports agreement that the make-up is due.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Salah, no. 68"
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, opening: on whom the fast is obligatory"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "When a woman’s period begins, she breaks the fast and makes it up.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وإذا حاضت المرأة أفطرت وقضت"
+      },
+      {
+       "school": "hanbali",
+       "text": "A woman in her period or in the bleeding after childbirth breaks the fast and makes it up; if she fasts, it does not count.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+       },
+       "quote": "الحائض والنفساء تفطران وتقضيان وإن صامتا لم يجزئهما"
+      }
+     ],
+     "cards": [
+      {
+       "id": "menstruation-1",
+       "front": "A woman’s period comes during Ramadan. What about those days?",
+       "back": "She does not fast them, and makes them up afterwards."
+      }
+     ]
+    },
+    {
+     "id": "pregnant-nursing",
+     "kind": "differs",
+     "text": "A woman who is pregnant or nursing and fears harm may leave the fast. The schools differ on what she owes afterwards.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "A pregnant or nursing woman who fears for her child breaks the fast and makes it up, and owes no [[fidyah]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والحامل والمرضع إذا خافتا على ولديهما أفطرتا وقضتا ولا فدية عليهما"
+      },
+      {
+       "school": "maliki",
+       "text": "A pregnant woman who fears for what is in her womb breaks the fast and does not feed, though it has also been said that she feeds. A nursing woman who fears for her child, and finds no one to hire for him or he accepts no one else, may break the fast, and she feeds.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "وإذا خافت الحامل على ما في بطنها أفطرت ولم تطعم وقد قيل تطعم وللمرضع إن خافت على ولدها ولم تجد من تستأجر له أو لم يقبل غيرها أن تفطر وتطعم"
+      },
+      {
+       "school": "shafii",
+       "text": "If they fear for themselves, they break the fast and owe the make-up day. If they fear for their children, they break the fast and owe the make-up day and an expiation of a [[mudd]] for each day.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والحامل والمرضع إن خافتا على أنفسهما أفطرتا وعليهما القضاء وإن خافتا على أولادهما أفطرتا وعليهما القضاء والكفارة عن كل يوم مد"
+      },
+      {
+       "school": "hanbali",
+       "text": "If they fear for themselves, they break the fast and make it up. If they fear for their children, they break the fast, make it up, and feed a poor person for each day.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+       },
+       "quote": "الحامل والمرضع إذا خافتا على أنفسهما أفطرتا وقضتا وإن خافتا على ولديهما أفطرتا وقضتا وأطعمتا عن كل يوم مسكينا"
+      }
+     ],
+     "cards": [
+      {
+       "id": "pregnant-nursing-1",
+       "front": "A pregnant or nursing woman leaves the fast out of fear for her child. What do the four primers say she owes?",
+       "back": "Hanafi: the make-up days only. Shafi’i and Hanbali: the make-up days and feeding for each day. Maliki: the pregnant woman does not feed (it is also said she does); the nursing woman feeds."
+      },
+      {
+       "id": "pregnant-nursing-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: a pregnant or nursing woman fears for her child and breaks the fast. What does she owe?",
+       "back": "The make-up days, and no [[fidyah]]."
+      },
+      {
+       "id": "pregnant-nursing-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: how do the pregnant woman and the nursing woman differ in feeding?",
+       "back": "The pregnant woman does not feed (it is also said she does); the nursing woman feeds."
+      },
+      {
+       "id": "pregnant-nursing-shafii",
+       "school": "shafii",
+       "front": "Shafi’i primer: a pregnant or nursing woman fears for her child, not herself. What does she owe?",
+       "back": "The make-up days and an expiation of a [[mudd]] for each day."
+      },
+      {
+       "id": "pregnant-nursing-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: a pregnant or nursing woman fears for her child. What does she owe?",
+       "back": "The make-up days, and feeding a poor person for each day."
+      }
+     ]
+    },
+    {
+     "id": "elderly",
+     "kind": "differs",
+     "text": "An old man or woman who cannot fast may leave the fast: Ibn al-Mundhir reports agreement on this. The schools differ on feeding a poor person for each day.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Siyam wa al-I’tikaf, no. 129"
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "The very old man who is unable to fast breaks the fast and feeds a poor person for each day, as is fed in expiations.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والشيخ الفاني الذي لا يقدر على الصيام يفطر ويطعم لكل يوم مسكينا كما يطعم في الكفارات"
+      },
+      {
+       "school": "maliki",
+       "text": "It is recommended for the old man, when he breaks the fast, to feed.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ويستحب للشيخ الكبير إذا أفطر أن يطعم"
+      },
+      {
+       "school": "shafii",
+       "text": "The old man who becomes unable to fast breaks the fast and feeds a [[mudd]] for each day.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "والشيخ إذا عجز عن الصوم يفطر ويطعم عن كل يوم مدا"
+      },
+      {
+       "school": "hanbali",
+       "text": "One unable to fast through old age, or an illness with no hope of recovery, feeds a poor person for each day.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+       },
+       "quote": "عن الصيام لكبر أو مرض لا يرجى برؤه فإنه يطعم عن كل يوم مسكينا"
+      }
+     ],
+     "cards": [
+      {
+       "id": "elderly-1",
+       "front": "An old person cannot fast. What is agreed, and where do the primers differ?",
+       "back": "Agreed: they may leave the fast. Hanafi, Shafi’i and Hanbali primers: they feed a poor person for each day. Maliki primer: feeding is recommended."
+      },
+      {
+       "id": "elderly-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: what does the very old man who cannot fast do?",
+       "back": "He breaks the fast and feeds a poor person for each day."
+      },
+      {
+       "id": "elderly-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: the old man breaks the fast. What is said about feeding?",
+       "back": "It is recommended."
+      },
+      {
+       "id": "elderly-shafii",
+       "school": "shafii",
+       "front": "Shafi’i primer: what does the old man who cannot fast do?",
+       "back": "He breaks the fast and feeds a [[mudd]] for each day."
+      },
+      {
+       "id": "elderly-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: what does someone unable to fast through old age do?",
+       "back": "He feeds a poor person for each day."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "According to the Quran, someone who is ill or travelling in Ramadan:",
+     "options": [
+      "fasts the same number of days later",
+      "owes nothing at all",
+      "fasts double the days later"
+     ],
+     "answer": 0,
+     "claim": "sick-and-traveller"
+    },
+    {
+     "q": "A woman’s period comes during Ramadan. Those days are:",
+     "options": [
+      "fasted as usual",
+      "left, and made up afterwards",
+      "left, with nothing to make up"
+     ],
+     "answer": 1,
+     "claim": "menstruation"
+    },
+    {
+     "q": "On what a pregnant or nursing woman owes after leaving the fast, the four primers:",
+     "options": [
+      "all say the make-up days only",
+      "all say feeding only",
+      "give different answers"
+     ],
+     "answer": 2,
+     "claim": "pregnant-nursing"
+    },
+    {
+     "q": "That a very old person who cannot fast may leave the fast is:",
+     "options": [
+      "reported as agreed",
+      "held by one school only",
+      "not mentioned in the primers"
+     ],
+     "answer": 0,
+     "claim": "elderly"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-05-making-up",
+   "order": 5,
+   "title": "Making up, feeding and expiation",
+   "intro": "A missed fast can lead to one of three things: making the day up, feeding a poor person, or a heavier expiation. This lesson sets out what each one is and where the schools differ. It does not work out your own case: for that, ask a scholar you trust.",
+   "claims": [
+    {
+     "id": "qada-definition",
+     "kind": "definition",
+     "text": "[[qada]] is fasting a day later in place of a missed day of Ramadan: the same number of days, at another time.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Make-up days of Ramadan may be fasted separately or one after another, as he wishes.",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وقضاء رمضان إن شاء فرقه وإن شاء تابعه"
+      }
+     ],
+     "cards": [
+      {
+       "id": "qada-definition-1",
+       "front": "What is [[qada]] of a fast?",
+       "back": "Fasting a day later in place of a missed day of Ramadan: the same number of days, at another time."
+      }
+     ]
+    },
+    {
+     "id": "fidyah-definition",
+     "kind": "definition",
+     "text": "[[fidyah]] is feeding a poor person for a day that was not fasted. The Maliki and Shafi’i primers put the amount at one [[mudd]] of food for each day.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "maliki",
+       "text": "The feeding in all of these is a [[mudd]] for each day he makes up.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "والإطعام في هذا كله مد عن كل يوم يقضيه"
+      },
+      {
+       "school": "shafii",
+       "text": "For each day a [[mudd]], which is one and a third Iraqi ratls.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "عن كل يوم مد وهو رطل وثلث بالعراقي"
+      }
+     ],
+     "cards": [
+      {
+       "id": "fidyah-definition-1",
+       "front": "What is [[fidyah]]?",
+       "back": "Feeding a poor person for a day that was not fasted."
+      }
+     ]
+    },
+    {
+     "id": "delayed-qada",
+     "kind": "differs",
+     "text": "The schools differ about someone who, with no excuse, puts off making up days until the next Ramadan arrives.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "If he delays it until another Ramadan begins, he fasts the second Ramadan, makes up the first after it, and owes no [[fidyah]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وإن أخره حتى دخل رمضان آخر صام رمضان الثاني وقضى الأول بعده ولا فدية عليه"
+      },
+      {
+       "school": "maliki",
+       "text": "Likewise, whoever neglects making up Ramadan until another Ramadan comes upon him feeds.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "وكذلك يطعم من فرط في قضاء رمضان حتى دخل عليه رمضان آخر"
+      },
+      {
+       "school": "hanbali",
+       "text": "Whoever delays the make-up for an excuse until another Ramadan reaches him owes only the make-up. If he was negligent, he feeds a poor person for each day as well as making it up.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+       },
+       "quote": "ومن أخر القضاء لعذر حتى أدرك رمضان آخر فليس عليه غير القضاء وإن فرط أطعم مع القضاء لكل يوم مسكينا"
+      }
+     ],
+     "cards": [
+      {
+       "id": "delayed-qada-1",
+       "front": "Make-up days are put off, with no excuse, until the next Ramadan. What do the primers say?",
+       "back": "Hanafi: the days are made up afterwards, with no [[fidyah]]. Maliki and Hanbali: he feeds as well."
+      },
+      {
+       "id": "delayed-qada-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: make-up days are delayed until the next Ramadan. Is [[fidyah]] owed?",
+       "back": "No. He fasts the new Ramadan, then makes up the old days."
+      },
+      {
+       "id": "delayed-qada-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: someone neglects making up Ramadan until the next one arrives. What is added?",
+       "back": "He feeds."
+      },
+      {
+       "id": "delayed-qada-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: make-up days are delayed until the next Ramadan. What decides whether feeding is owed?",
+       "back": "Whether there was an excuse. With an excuse: the make-up only. With neglect: the make-up and feeding a poor person for each day."
+      }
+     ]
+    },
+    {
+     "id": "kaffarah",
+     "kind": "differs",
+     "text": "The [[kaffarah]] for deliberately breaking a Ramadan fast is freeing a slave, fasting two months in a row, or feeding sixty poor people. All four primers apply it to deliberate intercourse. They differ on whether deliberate eating and drinking bring it too, and on whether its three forms come in a set order.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 58,
+        "ayah": 3,
+        "ayahEnd": 4
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanafi",
+       "text": "Whoever deliberately has intercourse, or eats or drinks what nourishes or is taken as medicine, owes the make-up day and an expiation like the expiation of [[zihar]].",
+       "source": {
+        "work": "mukhtasar-al-quduri",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ومن جامع عامدا في أحد السبيلين أو أكل أو شرب ما يتغذى به أو يتداوى به فعليه القضاء والكفارة مثل كفارة الظهار"
+      },
+      {
+       "school": "maliki",
+       "text": "Expiation falls only on one who breaks the fast deliberately, by eating, drinking or intercourse, along with the make-up day. The expiation is feeding sixty poor people, a [[mudd]] each by the measure of the Prophet ﷺ: that is dearer to us. He may instead expiate by freeing a slave or fasting two months in a row.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "وإنما الكفارة على من أفطر متعمدا بأكل أو شرب أو جماع مع القضاء والكفارة في ذلك إطعام ستين مسكينا لكل مسكين مد بمد النبي صلى الله عليه وسلم فذلك أحب إلينا وله أن يكفر بعتق رقبة أو صيام شهرين متتابعين"
+      },
+      {
+       "school": "shafii",
+       "text": "Whoever deliberately has intercourse in the daytime of Ramadan owes the make-up day and the expiation: freeing a believing slave; if he finds none, fasting two months in a row; if he is unable, feeding sixty poor people.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ومن وطئ في نهار رمضان عامدا في الفرج فعليه القضاء والكفارة وهي عتق رقبة مؤمنة فإن لم يجد فصيام شهرين متتابعين فإن لم يستطع فإطعام ستين مسكينا"
+      },
+      {
+       "school": "hanbali",
+       "text": "Everyone else who breaks the fast owes the make-up and nothing more, except one who breaks it by intercourse: he makes it up and frees a slave; if he finds none, he fasts two months in a row; if he is unable, he feeds sixty poor people.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+       },
+       "quote": "وعلى سائر من أفطر القضاء لا غير إلا من أفطر بجماع في الفرج فإنه يقضي ويعتق رقبة فإن لم يجد فصيام شهرين متتابعين فإن لم يستطع فإطعام ستين مسكينا"
+      }
+     ],
+     "cards": [
+      {
+       "id": "kaffarah-1",
+       "front": "What are the three forms of the [[kaffarah]] for deliberately breaking a Ramadan fast?",
+       "back": "Freeing a slave, fasting two months in a row, or feeding sixty poor people."
+      },
+      {
+       "id": "kaffarah-2",
+       "front": "Where do the four primers differ on the [[kaffarah]]?",
+       "back": "On what brings it (Shafi’i and Hanbali: intercourse; Hanafi and Maliki: deliberate eating and drinking too), and on order (Maliki: a choice, feeding preferred; the others: in sequence)."
+      },
+      {
+       "id": "kaffarah-hanafi",
+       "school": "hanafi",
+       "front": "Hanafi primer: what brings the [[kaffarah]], and what is it like?",
+       "back": "Deliberate intercourse, or deliberately eating or drinking food or medicine. It is like the expiation of [[zihar]]."
+      },
+      {
+       "id": "kaffarah-maliki",
+       "school": "maliki",
+       "front": "Maliki primer: what brings the [[kaffarah]], and which form is preferred?",
+       "back": "Deliberately breaking the fast by eating, drinking or intercourse. Feeding sixty poor people is preferred; freeing a slave or fasting two months may be done instead."
+      },
+      {
+       "id": "kaffarah-shafii",
+       "school": "shafii",
+       "front": "Shafi’i primer: what brings the [[kaffarah]], and in what order is it done?",
+       "back": "Deliberate intercourse in the daytime of Ramadan. Freeing a believing slave; if none, fasting two months in a row; if unable, feeding sixty poor people."
+      },
+      {
+       "id": "kaffarah-hanbali",
+       "school": "hanbali",
+       "front": "Hanbali primer: who owes more than the make-up day for breaking the fast?",
+       "back": "Only one who breaks it by intercourse: he frees a slave; if none, fasts two months in a row; if unable, feeds sixty poor people."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does making a fast up mean?",
+     "options": [
+      "Feeding a poor person for each missed day",
+      "Fasting a day later in place of a missed day",
+      "Fasting two months in a row"
+     ],
+     "answer": 1,
+     "claim": "qada-definition"
+    },
+    {
+     "q": "Which act brings the heavier expiation in all four primers?",
+     "options": [
+      "Deliberate intercourse during a Ramadan fast",
+      "Eating out of forgetfulness",
+      "Missing a fast through illness"
+     ],
+     "answer": 0,
+     "claim": "kaffarah"
+    },
+    {
+     "q": "Make-up days are put off until the next Ramadan with no excuse. The primers:",
+     "options": [
+      "all add feeding",
+      "all add nothing",
+      "differ on whether feeding is added"
+     ],
+     "answer": 2,
+     "claim": "delayed-qada"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-06-recommended-acts",
+   "order": 6,
+   "title": "Keeping the fast well",
+   "intro": "Beyond what makes a fast count, there is a way of keeping it well: when to eat, how to speak, what to say at sunset, and which nights to look for. This lesson gathers those habits with their sources.",
+   "claims": [
+    {
+     "id": "suhur-and-iftar-timing",
+     "kind": "agreed",
+     "text": "Eating [[suhur]], leaving it late, and breaking the fast promptly at sunset belong to the [[sunnah]] of fasting. Ibn Rushd and Ibn al-Mundhir report agreement.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, the sunnahs of fasting"
+       }
+      },
+      {
+       "consensus": {
+        "work": "al-ijma",
+        "location": "Kitab al-Siyam wa al-I’tikaf, no. 124"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "maliki",
+       "text": "It is from the [[sunnah]] to hasten breaking the fast and to delay [[suhur]].",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ومن السنة تعجيل الفطر وتأخير السحور"
+      },
+      {
+       "school": "shafii",
+       "text": "Three things are recommended in fasting: hastening to break the fast, delaying [[suhur]], and leaving foul speech.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ويستحب في الصوم ثلاثة أشياء تعجيل الفطر وتأخير السحور وترك الهجر من الكلام"
+      }
+     ],
+     "cards": [
+      {
+       "id": "suhur-and-iftar-timing-1",
+       "front": "What is the [[sunnah]] for the timing of [[suhur]] and of breaking the fast?",
+       "back": "Delay [[suhur]]; break the fast promptly at sunset."
+      }
+     ]
+    },
+    {
+     "id": "guarding-the-tongue",
+     "kind": "how-to",
+     "text": "A fasting person guards the tongue. The Prophet ﷺ said that fasting is a shield, and that one who is insulted while fasting answers: “I am fasting.”",
+     "evidence": [
+      {
+       "item": "course-fasting-evidence:fasting-is-a-shield"
+      }
+     ],
+     "positions": [
+      {
+       "school": "maliki",
+       "text": "A fasting person should guard his tongue and his limbs, and honour in the month of Ramadan what Allah, glorified is He, has honoured.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "وينبغي للصائم أن يحفظ لسانه وجوارحه ويعظم من شهر رمضان ما عظم الله سبحانه"
+      },
+      {
+       "school": "shafii",
+       "text": "Leaving foul speech is among the three things recommended in fasting.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "وترك الهجر من الكلام"
+      }
+     ],
+     "cards": [
+      {
+       "id": "guarding-the-tongue-1",
+       "front": "What does the Prophet ﷺ tell a fasting person to say when someone insults or fights them?",
+       "back": "“I am fasting.”"
+      },
+      {
+       "id": "guarding-the-tongue-2",
+       "front": "Complete the saying of the Prophet ﷺ: “Fasting is a …”",
+       "back": "Shield."
+      }
+     ]
+    },
+    {
+     "id": "iftar-dua",
+     "kind": "how-to",
+     "text": "On breaking the fast the Prophet ﷺ used to say: “The thirst has gone, the veins are moist, and the reward is assured, if Allah wills.” Another wording is also widely said: “O Allah, for You I have fasted, and on Your provision I break my fast.” Al-Daraqutni called the chain of the first report [[hasan]]. The second report is [[mursal]], as al-Nawawi notes.",
+     "evidence": [
+      {
+       "item": "course-fasting-evidence:iftar-dhahaba-al-zama"
+      }
+     ],
+     "cards": [
+      {
+       "id": "iftar-dua-1",
+       "front": "What did the Prophet ﷺ say on breaking the fast, in the report graded [[hasan]] by al-Daraqutni?",
+       "back": "“The thirst has gone, the veins are moist, and the reward is assured, if Allah wills.”"
+      },
+      {
+       "id": "iftar-dua-2",
+       "front": "What does al-Nawawi note about the report of “O Allah, for You I have fasted, and on Your provision I break my fast”?",
+       "back": "That it is [[mursal]]."
+      }
+     ]
+    },
+    {
+     "id": "laylat-al-qadr",
+     "kind": "agreed",
+     "text": "The Quran was sent down in Ramadan, on [[laylat-al-qadr]], a night better than a thousand months.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 97,
+        "ayah": 1,
+        "ayahEnd": 3
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 185
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "hanbali",
+       "text": "[[laylat-al-qadr]] falls in the odd nights of the last ten of Ramadan.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab siyam al-tatawwu’"
+       },
+       "quote": "وليلة القدر في الوتر من العشر الأواخر من رمضان"
+      }
+     ],
+     "cards": [
+      {
+       "id": "laylat-al-qadr-1",
+       "front": "What does Surah al-Qadr say about [[laylat-al-qadr]]?",
+       "back": "The Quran was sent down on it, and it is better than a thousand months."
+      }
+     ]
+    },
+    {
+     "id": "eid-days",
+     "kind": "agreed",
+     "text": "The day of Eid al-Fitr and the day of Eid al-Adha are not fasted. Ibn Rushd lists them as the days on which fasting is prohibited by agreement.",
+     "evidence": [
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam al-thani, the days on which fasting is prohibited"
+       }
+      }
+     ],
+     "positions": [
+      {
+       "school": "maliki",
+       "text": "It is not allowed to fast the day of Fitr or the day of sacrifice.",
+       "source": {
+        "work": "al-risala",
+        "location": "Bab fi al-Siyam"
+       },
+       "quote": "ولا يجوز صيام يوم الفطر ولا يوم النحر"
+      },
+      {
+       "school": "shafii",
+       "text": "Fasting is forbidden on five days: the two Eids and the three days of Tashriq.",
+       "source": {
+        "work": "matn-abi-shuja",
+        "location": "Kitab al-Sawm"
+       },
+       "quote": "ويحرم صيام خمسة أيام العيدان وأيام التشريق الثلاثة"
+      },
+      {
+       "school": "hanbali",
+       "text": "The Messenger of Allah ﷺ forbade fasting on two days: the day of Fitr and the day of Adha.",
+       "source": {
+        "work": "umdat-al-fiqh",
+        "location": "Kitab al-Siyam, bab siyam al-tatawwu’"
+       },
+       "quote": "ونهى رسول الله صلى الله عليه وسلم عن صوم يومين: يوم الفطر ويوم الأضحى"
+      }
+     ],
+     "cards": [
+      {
+       "id": "eid-days-1",
+       "front": "On which two days is fasting prohibited by agreement?",
+       "back": "The day of Eid al-Fitr and the day of Eid al-Adha."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which belongs to the prophetic way of fasting?",
+     "options": [
+      "Delaying the meal at sunset",
+      "Eating the pre-dawn meal late and breaking the fast promptly",
+      "Skipping the pre-dawn meal"
+     ],
+     "answer": 1,
+     "claim": "suhur-and-iftar-timing"
+    },
+    {
+     "q": "Someone insults a fasting person. What are they taught to answer?",
+     "options": [
+      "“I am fasting.”",
+      "The same insult back",
+      "Nothing can be said while fasting"
+     ],
+     "answer": 0,
+     "claim": "guarding-the-tongue"
+    },
+    {
+     "q": "What did al-Daraqutni say about the chain of the report “The thirst has gone, the veins are moist…”?",
+     "options": [
+      "That it is broken",
+      "That it is good",
+      "He did not comment on it"
+     ],
+     "answer": 1,
+     "claim": "iftar-dua"
+    },
+    {
+     "q": "On which days is fasting prohibited by agreement?",
+     "options": [
+      "Mondays and Thursdays",
+      "The two Eid days",
+      "The first day of every month"
+     ],
+     "answer": 1,
+     "claim": "eid-days"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "unit": "fasting",
+   "rev": 1,
+   "id": "fasting-07-recap",
+   "order": 7,
+   "title": "Recap: the fast at a glance",
+   "intro": "This lesson gathers the unit into a few lines: what is agreed, and what a missed fast can lead to. Nothing here is new. Where the schools differ, the earlier lessons show each position with its source.",
+   "claims": [
+    {
+     "id": "agreed-core",
+     "kind": "agreed",
+     "text": "The core of the fast: Ramadan is fasted by the adult, sane, resident, healthy person; the fast is holding back from food, drink and intercourse from dawn until sunset; and the sick and the traveller fast the same number of days later.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 183,
+        "ayahEnd": 185
+       }
+      },
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 187
+       }
+      },
+      {
+       "consensus": {
+        "work": "bidayat-al-mujtahid",
+        "location": "Kitab al-Siyam, opening, and the second pillar: holding back"
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "agreed-core-1",
+       "front": "In one line: what is the fast of Ramadan?",
+       "back": "Holding back from food, drink and intercourse from dawn until sunset, each day of the month."
+      },
+      {
+       "id": "agreed-core-2",
+       "front": "Which ayahs of al-Baqarah set out the fast of Ramadan?",
+       "back": "Al-Baqarah 183 to 187."
+      }
+     ]
+    },
+    {
+     "id": "three-outcomes",
+     "kind": "definition",
+     "text": "A missed or broken fast leads to one of three things: [[qada]] alone, [[fidyah]], or [[qada]] together with [[kaffarah]]. Which one applies depends on the cause, and for several causes the schools differ.",
+     "evidence": [
+      {
+       "quran": {
+        "surahId": 2,
+        "ayah": 184
+       }
+      },
+      {
+       "quran": {
+        "surahId": 58,
+        "ayah": 3,
+        "ayahEnd": 4
+       }
+      }
+     ],
+     "cards": [
+      {
+       "id": "three-outcomes-1",
+       "front": "What three things can a missed or broken fast lead to?",
+       "back": "[[qada]] (making the day up), [[fidyah]] (feeding a poor person), or [[qada]] with [[kaffarah]] (the heavier expiation)."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "The fasting day runs:",
+     "options": [
+      "from sunrise to sunset",
+      "from dawn to sunset",
+      "from midnight to midday"
+     ],
+     "answer": 1,
+     "claim": "agreed-core"
+    },
+    {
+     "q": "Which of these is NOT one of the three things a missed fast can lead to?",
+     "options": [
+      "Making the day up",
+      "Feeding a poor person",
+      "Paying a fine to the mosque"
+     ],
+     "answer": 2,
+     "claim": "three-outcomes"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  }
+ ]
+}

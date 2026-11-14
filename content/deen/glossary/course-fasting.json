@@ -1,0 +1,51 @@
+[
+  {
+    "id": "fidyah",
+    "arabic": "فدية",
+    "translit": "fidyah",
+    "short": "Feeding a poor person in place of a day of fasting.",
+    "seeAlso": [
+      "qada",
+      "kaffarah",
+      "mudd"
+    ]
+  },
+  {
+    "id": "kaffarah",
+    "arabic": "كفارة",
+    "translit": "kaffarah",
+    "short": "Expiation: a set act that makes amends for a serious breach, such as deliberately breaking a Ramadan fast.",
+    "seeAlso": [
+      "qada",
+      "fidyah",
+      "zihar"
+    ]
+  },
+  {
+    "id": "mudd",
+    "arabic": "مد",
+    "translit": "mudd",
+    "short": "A traditional measure of food by volume.",
+    "seeAlso": [
+      "fidyah"
+    ]
+  },
+  {
+    "id": "zihar",
+    "arabic": "ظهار",
+    "translit": "zihar",
+    "short": "A husband declaring his wife to be like his mother to him. The Quran sets an expiation for it in Surah al-Mujadilah.",
+    "seeAlso": [
+      "kaffarah"
+    ]
+  },
+  {
+    "id": "laylat-al-qadr",
+    "arabic": "ليلة القدر",
+    "translit": "Laylat al-Qadr",
+    "short": "The Night of Decree, in Ramadan, on which the Quran was sent down.",
+    "seeAlso": [
+      "sawm"
+    ]
+  }
+]

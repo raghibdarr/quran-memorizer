@@ -1,0 +1,327 @@
+{
+  "unit": "fasting",
+  "rev": 1,
+  "id": "fasting-01-who-must-fast",
+  "order": 1,
+  "title": "Who must fast",
+  "intro": "This lesson covers what the fast of Ramadan is, who it falls on, and how the month begins. Each point is tied to the Quran, to a reported agreement, or to one short primer from each of the four schools.",
+  "claims": [
+    {
+      "id": "ramadan-obligation",
+      "kind": "agreed",
+      "text": "Fasting the month of Ramadan is an obligation. Ibn Rushd grounds it in the Quran, the [[sunnah]] and agreement, and says no dissent has come down from any of the imams.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 183
+          }
+        },
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 185
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, opening: the kinds of obligatory fast"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "ramadan-obligation-1",
+          "front": "Which two ayahs of al-Baqarah establish the fast of Ramadan?",
+          "back": "Al-Baqarah 183 and 185."
+        },
+        {
+          "id": "ramadan-obligation-2",
+          "front": "What does Ibn Rushd report about the obligation to fast Ramadan?",
+          "back": "That it rests on the Quran, the [[sunnah]] and agreement, with no dissent passed down from any of the imams."
+        }
+      ]
+    },
+    {
+      "id": "who-it-falls-on",
+      "kind": "agreed",
+      "text": "The fast falls, with no choice in the matter, on a person who is adult, sane, resident and healthy and, for a woman, not menstruating. Ibn Rushd reports no disagreement on this.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 185
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, opening: on whom the fast is obligatory"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "A child who comes of age, or a person who accepts Islam, during Ramadan holds back for the rest of that day and fasts the days after it, without making up the days before.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وإذا بلغ الصبي أو أسلم الكافر في رمضان أمسكا بقية يومهما وصاما ما بعده ولم يقضيا ما مضى"
+        },
+        {
+          "school": "maliki",
+          "text": "Children do not have to fast until a boy has his first emission and a girl her first period.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ولا صيام على الصبيان حتى يحتلم الغلام وتحيض الجارية"
+        },
+        {
+          "school": "shafii",
+          "text": "Four things make the fast obligatory: Islam, adulthood, sanity and being able to fast.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وشرائط وجوب الصيام أربعة أشياء الإسلام والبلوغ والعقل والقدرة على الصوم"
+        },
+        {
+          "school": "hanbali",
+          "text": "Fasting Ramadan is obligatory on every Muslim who is adult, sane and able to fast. A child is told to fast once able to bear it.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam"
+          },
+          "quote": "يجب صيام رمضان على كل مسلم بالغ عاقل قادر على الصوم ويؤمر به الصبي إذا أطاقه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "who-it-falls-on-1",
+          "front": "On whom does the fast of Ramadan fall with no choice?",
+          "back": "An adult, sane, resident, healthy person; for a woman, when she is not menstruating."
+        },
+        {
+          "id": "who-it-falls-on-2",
+          "front": "From when does a child have to fast?",
+          "back": "From puberty. The Hanbali primer adds that a child is told to fast once able to bear it."
+        }
+      ]
+    },
+    {
+      "id": "what-the-fast-is",
+      "kind": "definition",
+      "text": "The [[sawm]] is holding back from food, drink and intercourse from dawn until sunset. Ibn Rushd reports agreement that a fasting person holds back from these three, and that the day ends when the sun sets.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 187
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, the first pillar (the time) and the second pillar (holding back)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "The time of the fast is from the rising of the second dawn until the sun sets.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ووقت الصوم من طلوع الفجر الثاني إلى غروب الشمس"
+        }
+      ],
+      "cards": [
+        {
+          "id": "what-the-fast-is-1",
+          "front": "What three things does a fasting person hold back from?",
+          "back": "Food, drink and intercourse."
+        },
+        {
+          "id": "what-the-fast-is-2",
+          "front": "When does the fasting day begin and end?",
+          "back": "It begins at dawn and ends at sunset (al-Baqarah 187)."
+        }
+      ]
+    },
+    {
+      "id": "start-of-month",
+      "kind": "agreed",
+      "text": "Ramadan begins when its new crescent is sighted, and a lunar month is twenty-nine or thirty days. Ibn Rushd reports agreement on both points.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 185
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, the first pillar: the time"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "People should look for the crescent on the twenty-ninth of Sha’ban; if they see it, they fast.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وينبغي للناس أن يلتمسوا الهلال في اليوم التاسع والعشرين من شعبان فإن رأوه صاموا"
+        },
+        {
+          "school": "maliki",
+          "text": "The fast begins on sighting the crescent and ends on sighting it, whether the month was thirty days or twenty-nine.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "يصام لرؤية الهلال ويفطر لرؤيته كان ثلاثين يوما أو تسعة وعشرين يوما"
+        }
+      ],
+      "cards": [
+        {
+          "id": "start-of-month-1",
+          "front": "How is the start of Ramadan fixed, and how long is a lunar month?",
+          "back": "By sighting the new crescent. A lunar month is 29 or 30 days."
+        }
+      ]
+    },
+    {
+      "id": "clouded-crescent",
+      "kind": "differs",
+      "text": "When cloud hides the crescent on the night after the twenty-ninth of Sha’ban, the schools differ about the following day, often called the day of doubt.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 185
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "If it is hidden from them, they complete thirty days of Sha’ban and then fast.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وإن غم عليهم أكملوا عدة شعبان ثلاثين يوما ثم صاموا"
+        },
+        {
+          "school": "maliki",
+          "text": "If the crescent is hidden, thirty days are counted from the start of the month before, and then the fast begins.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "فإن غم الهلال فيعد ثلاثين يوما من غرة الشهر الذي قبله ثم يصام"
+        },
+        {
+          "school": "shafii",
+          "text": "Fasting the day of doubt is disliked, unless it falls on a day he habitually fasts or he joins it to fasting before it.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ويكره صوم يوم الشك إلا أن يوافق عادة له أو يصله بما قبله"
+        },
+        {
+          "school": "hanbali",
+          "text": "The fast becomes obligatory through one of three things: Sha’ban being complete, the crescent of Ramadan being sighted, or cloud or dust blocking the view on the night of the thirtieth.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam"
+          },
+          "quote": "ويجب بأحد ثلاثة أشياء: كمال شعبان ورؤية هلال رمضان ووجود غيم أو قتر ليلة الثلاثين يحول دونه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "clouded-crescent-1",
+          "front": "Cloud hides the crescent on the thirtieth night of Sha’ban. What do the four primers say about the next day?",
+          "back": "Hanafi and Maliki: complete thirty days of Sha’ban first. Shafi’i: fasting the day of doubt is disliked, with exceptions. Hanbali: the fast is due."
+        },
+        {
+          "id": "clouded-crescent-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: the crescent is hidden by cloud on the thirtieth night of Sha’ban. What then?",
+          "back": "Complete thirty days of Sha’ban, then fast."
+        },
+        {
+          "id": "clouded-crescent-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: the crescent is hidden by cloud on the thirtieth night of Sha’ban. What then?",
+          "back": "Count thirty days from the start of Sha’ban, then fast."
+        },
+        {
+          "id": "clouded-crescent-shafii",
+          "school": "shafii",
+          "front": "Shafi’i primer: what is said about fasting the day of doubt?",
+          "back": "It is disliked, unless it falls on a day he habitually fasts or continues a fast begun before it."
+        },
+        {
+          "id": "clouded-crescent-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: cloud or dust blocks the view on the thirtieth night of Sha’ban. What then?",
+          "back": "The fast is due the next day: it is one of the three things that make it obligatory."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which of these people does the fast of Ramadan fall on, with no choice?",
+      "options": [
+        "A healthy adult of sound mind who is at home",
+        "A young child",
+        "A woman during her period"
+      ],
+      "answer": 0,
+      "claim": "who-it-falls-on"
+    },
+    {
+      "q": "How is the start of Ramadan fixed?",
+      "options": [
+        "By the first Friday after Sha’ban",
+        "By sighting the new crescent",
+        "By the longest night of the year"
+      ],
+      "answer": 1,
+      "claim": "start-of-month"
+    },
+    {
+      "q": "On a clouded thirtieth night of Sha’ban, the four primers:",
+      "options": [
+        "all say to fast the next day",
+        "all say the next day is a day of Sha’ban",
+        "do not all say the same thing"
+      ],
+      "answer": 2,
+      "claim": "clouded-crescent"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+    ]
+  }
+}

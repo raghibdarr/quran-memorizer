@@ -1,0 +1,148 @@
+{
+  "unit": "fasting",
+  "rev": 1,
+  "id": "fasting-02-intention",
+  "order": 2,
+  "title": "The intention",
+  "intro": "A fast is more than going without food. This lesson covers the intention behind it: the part that is agreed, and where the primers of the schools place it differently.",
+  "claims": [
+    {
+      "id": "intention-needed",
+      "kind": "agreed",
+      "text": "A fast is kept with an intention. Ibn al-Mundhir reports agreement that someone who intends the fast on each night of Ramadan, and then fasts, has a complete fast.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Siyam wa al-I’tikaf, no. 123"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Fasting is holding back from eating, drinking and intercourse by day, together with the intention.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والصوم هو الإمساك عن الأكل والشرب والجماع نهارا مع النية"
+        },
+        {
+          "school": "shafii",
+          "text": "The obligatory parts of the fast are four: the intention, and holding back from eating and drinking, from intercourse, and from deliberate vomiting.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وفرائض الصوم أربعة أشياء النية والإمساك عن الأكل والشرب والجماع وتعمد القيء"
+        }
+      ],
+      "cards": [
+        {
+          "id": "intention-needed-1",
+          "front": "Besides holding back from food, drink and intercourse, what does a fast need?",
+          "back": "An intention ([[niyyah]])."
+        },
+        {
+          "id": "intention-needed-2",
+          "front": "Which way of making the intention for Ramadan does Ibn al-Mundhir report as agreed to be enough?",
+          "back": "Intending the fast on each night of the month."
+        }
+      ]
+    },
+    {
+      "id": "intention-timing",
+      "kind": "differs",
+      "text": "Intending each night is enough by agreement. The primers differ on whether a later intention counts for a Ramadan fast, and on whether one intention can cover the month. The Shafi’i and Hanbali primers used here do not give a time.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Siyam wa al-I’tikaf, no. 123"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "A fast tied to a set time, such as Ramadan, is valid with an intention made at night. If he has not intended by morning, an intention made between then and midday is enough.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "فيجوز صومه بنية من الليل فإن لم ينو حتى أصبح أجزأته النية ما بينه وبين الزوال"
+        },
+        {
+          "school": "maliki",
+          "text": "He makes the intention at night at the start of the month, and does not have to make it at night for the rest of it.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ويبيت الصيام في أوله وليس عليه البيات في بقيته"
+        }
+      ],
+      "cards": [
+        {
+          "id": "intention-timing-1",
+          "front": "Where do the Hanafi and Maliki primers differ on the intention for Ramadan?",
+          "back": "Hanafi: an intention made before midday is still enough. Maliki: it is made at night, once at the start of the month, and need not be repeated each night."
+        },
+        {
+          "id": "intention-timing-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: no intention was made by morning in Ramadan. Until when can it still be made?",
+          "back": "Until midday."
+        },
+        {
+          "id": "intention-timing-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: when is the intention for Ramadan made, and how often?",
+          "back": "At night, at the start of the month; it need not be made again each night."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which way of making the intention is reported as agreed to be enough?",
+      "options": [
+        "Intending the fast each night of Ramadan",
+        "Intending at sunset when the fast ends",
+        "Intending once in a lifetime"
+      ],
+      "answer": 0,
+      "claim": "intention-needed"
+    },
+    {
+      "q": "In the Hanafi primer, an intention for a Ramadan fast can still be made:",
+      "options": [
+        "only before dawn",
+        "until midday",
+        "at any time before sunset"
+      ],
+      "answer": 1,
+      "claim": "intention-timing"
+    },
+    {
+      "q": "In the Maliki primer, the intention at night is made:",
+      "options": [
+        "at the start of the month, without having to repeat it nightly",
+        "every night without exception",
+        "only on the last ten nights"
+      ],
+      "answer": 0,
+      "claim": "intention-timing"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+    ]
+  }
+}

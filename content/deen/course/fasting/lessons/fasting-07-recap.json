@@ -1,0 +1,106 @@
+{
+  "unit": "fasting",
+  "rev": 1,
+  "id": "fasting-07-recap",
+  "order": 7,
+  "title": "Recap: the fast at a glance",
+  "intro": "This lesson gathers the unit into a few lines: what is agreed, and what a missed fast can lead to. Nothing here is new. Where the schools differ, the earlier lessons show each position with its source.",
+  "claims": [
+    {
+      "id": "agreed-core",
+      "kind": "agreed",
+      "text": "The core of the fast: Ramadan is fasted by the adult, sane, resident, healthy person; the fast is holding back from food, drink and intercourse from dawn until sunset; and the sick and the traveller fast the same number of days later.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 183,
+            "ayahEnd": 185
+          }
+        },
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 187
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, opening, and the second pillar: holding back"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "agreed-core-1",
+          "front": "In one line: what is the fast of Ramadan?",
+          "back": "Holding back from food, drink and intercourse from dawn until sunset, each day of the month."
+        },
+        {
+          "id": "agreed-core-2",
+          "front": "Which ayahs of al-Baqarah set out the fast of Ramadan?",
+          "back": "Al-Baqarah 183 to 187."
+        }
+      ]
+    },
+    {
+      "id": "three-outcomes",
+      "kind": "definition",
+      "text": "A missed or broken fast leads to one of three things: [[qada]] alone, [[fidyah]], or [[qada]] together with [[kaffarah]]. Which one applies depends on the cause, and for several causes the schools differ.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        },
+        {
+          "quran": {
+            "surahId": 58,
+            "ayah": 3,
+            "ayahEnd": 4
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "three-outcomes-1",
+          "front": "What three things can a missed or broken fast lead to?",
+          "back": "[[qada]] (making the day up), [[fidyah]] (feeding a poor person), or [[qada]] with [[kaffarah]] (the heavier expiation)."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "The fasting day runs:",
+      "options": [
+        "from sunrise to sunset",
+        "from dawn to sunset",
+        "from midnight to midday"
+      ],
+      "answer": 1,
+      "claim": "agreed-core"
+    },
+    {
+      "q": "Which of these is NOT one of the three things a missed fast can lead to?",
+      "options": [
+        "Making the day up",
+        "Feeding a poor person",
+        "Paying a fine to the mosque"
+      ],
+      "answer": 2,
+      "claim": "three-outcomes"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+    ]
+  }
+}

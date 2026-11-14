@@ -1,0 +1,277 @@
+{
+  "unit": "fasting",
+  "rev": 1,
+  "id": "fasting-05-making-up",
+  "order": 5,
+  "title": "Making up, feeding and expiation",
+  "intro": "A missed fast can lead to one of three things: making the day up, feeding a poor person, or a heavier expiation. This lesson sets out what each one is and where the schools differ. It does not work out your own case: for that, ask a scholar you trust.",
+  "claims": [
+    {
+      "id": "qada-definition",
+      "kind": "definition",
+      "text": "[[qada]] is fasting a day later in place of a missed day of Ramadan: the same number of days, at another time.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Make-up days of Ramadan may be fasted separately or one after another, as he wishes.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وقضاء رمضان إن شاء فرقه وإن شاء تابعه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "qada-definition-1",
+          "front": "What is [[qada]] of a fast?",
+          "back": "Fasting a day later in place of a missed day of Ramadan: the same number of days, at another time."
+        }
+      ]
+    },
+    {
+      "id": "fidyah-definition",
+      "kind": "definition",
+      "text": "[[fidyah]] is feeding a poor person for a day that was not fasted. The Maliki and Shafi’i primers put the amount at one [[mudd]] of food for each day.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "maliki",
+          "text": "The feeding in all of these is a [[mudd]] for each day he makes up.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "والإطعام في هذا كله مد عن كل يوم يقضيه"
+        },
+        {
+          "school": "shafii",
+          "text": "For each day a [[mudd]], which is one and a third Iraqi ratls.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "عن كل يوم مد وهو رطل وثلث بالعراقي"
+        }
+      ],
+      "cards": [
+        {
+          "id": "fidyah-definition-1",
+          "front": "What is [[fidyah]]?",
+          "back": "Feeding a poor person for a day that was not fasted."
+        }
+      ]
+    },
+    {
+      "id": "delayed-qada",
+      "kind": "differs",
+      "text": "The schools differ about someone who, with no excuse, puts off making up days until the next Ramadan arrives.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 184
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "If he delays it until another Ramadan begins, he fasts the second Ramadan, makes up the first after it, and owes no [[fidyah]].",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وإن أخره حتى دخل رمضان آخر صام رمضان الثاني وقضى الأول بعده ولا فدية عليه"
+        },
+        {
+          "school": "maliki",
+          "text": "Likewise, whoever neglects making up Ramadan until another Ramadan comes upon him feeds.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "وكذلك يطعم من فرط في قضاء رمضان حتى دخل عليه رمضان آخر"
+        },
+        {
+          "school": "hanbali",
+          "text": "Whoever delays the make-up for an excuse until another Ramadan reaches him owes only the make-up. If he was negligent, he feeds a poor person for each day as well as making it up.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+          },
+          "quote": "ومن أخر القضاء لعذر حتى أدرك رمضان آخر فليس عليه غير القضاء وإن فرط أطعم مع القضاء لكل يوم مسكينا"
+        }
+      ],
+      "cards": [
+        {
+          "id": "delayed-qada-1",
+          "front": "Make-up days are put off, with no excuse, until the next Ramadan. What do the primers say?",
+          "back": "Hanafi: the days are made up afterwards, with no [[fidyah]]. Maliki and Hanbali: he feeds as well."
+        },
+        {
+          "id": "delayed-qada-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: make-up days are delayed until the next Ramadan. Is [[fidyah]] owed?",
+          "back": "No. He fasts the new Ramadan, then makes up the old days."
+        },
+        {
+          "id": "delayed-qada-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: someone neglects making up Ramadan until the next one arrives. What is added?",
+          "back": "He feeds."
+        },
+        {
+          "id": "delayed-qada-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: make-up days are delayed until the next Ramadan. What decides whether feeding is owed?",
+          "back": "Whether there was an excuse. With an excuse: the make-up only. With neglect: the make-up and feeding a poor person for each day."
+        }
+      ]
+    },
+    {
+      "id": "kaffarah",
+      "kind": "differs",
+      "text": "The [[kaffarah]] for deliberately breaking a Ramadan fast is freeing a slave, fasting two months in a row, or feeding sixty poor people. All four primers apply it to deliberate intercourse. They differ on whether deliberate eating and drinking bring it too, and on whether its three forms come in a set order.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 58,
+            "ayah": 3,
+            "ayahEnd": 4
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Whoever deliberately has intercourse, or eats or drinks what nourishes or is taken as medicine, owes the make-up day and an expiation like the expiation of [[zihar]].",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ومن جامع عامدا في أحد السبيلين أو أكل أو شرب ما يتغذى به أو يتداوى به فعليه القضاء والكفارة مثل كفارة الظهار"
+        },
+        {
+          "school": "maliki",
+          "text": "Expiation falls only on one who breaks the fast deliberately, by eating, drinking or intercourse, along with the make-up day. The expiation is feeding sixty poor people, a [[mudd]] each by the measure of the Prophet ﷺ: that is dearer to us. He may instead expiate by freeing a slave or fasting two months in a row.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "وإنما الكفارة على من أفطر متعمدا بأكل أو شرب أو جماع مع القضاء والكفارة في ذلك إطعام ستين مسكينا لكل مسكين مد بمد النبي صلى الله عليه وسلم فذلك أحب إلينا وله أن يكفر بعتق رقبة أو صيام شهرين متتابعين"
+        },
+        {
+          "school": "shafii",
+          "text": "Whoever deliberately has intercourse in the daytime of Ramadan owes the make-up day and the expiation: freeing a believing slave; if he finds none, fasting two months in a row; if he is unable, feeding sixty poor people.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ومن وطئ في نهار رمضان عامدا في الفرج فعليه القضاء والكفارة وهي عتق رقبة مؤمنة فإن لم يجد فصيام شهرين متتابعين فإن لم يستطع فإطعام ستين مسكينا"
+        },
+        {
+          "school": "hanbali",
+          "text": "Everyone else who breaks the fast owes the make-up and nothing more, except one who breaks it by intercourse: he makes it up and frees a slave; if he finds none, he fasts two months in a row; if he is unable, he feeds sixty poor people.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
+          },
+          "quote": "وعلى سائر من أفطر القضاء لا غير إلا من أفطر بجماع في الفرج فإنه يقضي ويعتق رقبة فإن لم يجد فصيام شهرين متتابعين فإن لم يستطع فإطعام ستين مسكينا"
+        }
+      ],
+      "cards": [
+        {
+          "id": "kaffarah-1",
+          "front": "What are the three forms of the [[kaffarah]] for deliberately breaking a Ramadan fast?",
+          "back": "Freeing a slave, fasting two months in a row, or feeding sixty poor people."
+        },
+        {
+          "id": "kaffarah-2",
+          "front": "Where do the four primers differ on the [[kaffarah]]?",
+          "back": "On what brings it (Shafi’i and Hanbali: intercourse; Hanafi and Maliki: deliberate eating and drinking too), and on order (Maliki: a choice, feeding preferred; the others: in sequence)."
+        },
+        {
+          "id": "kaffarah-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: what brings the [[kaffarah]], and what is it like?",
+          "back": "Deliberate intercourse, or deliberately eating or drinking food or medicine. It is like the expiation of [[zihar]]."
+        },
+        {
+          "id": "kaffarah-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: what brings the [[kaffarah]], and which form is preferred?",
+          "back": "Deliberately breaking the fast by eating, drinking or intercourse. Feeding sixty poor people is preferred; freeing a slave or fasting two months may be done instead."
+        },
+        {
+          "id": "kaffarah-shafii",
+          "school": "shafii",
+          "front": "Shafi’i primer: what brings the [[kaffarah]], and in what order is it done?",
+          "back": "Deliberate intercourse in the daytime of Ramadan. Freeing a believing slave; if none, fasting two months in a row; if unable, feeding sixty poor people."
+        },
+        {
+          "id": "kaffarah-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: who owes more than the make-up day for breaking the fast?",
+          "back": "Only one who breaks it by intercourse: he frees a slave; if none, fasts two months in a row; if unable, feeds sixty poor people."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "What does making a fast up mean?",
+      "options": [
+        "Feeding a poor person for each missed day",
+        "Fasting a day later in place of a missed day",
+        "Fasting two months in a row"
+      ],
+      "answer": 1,
+      "claim": "qada-definition"
+    },
+    {
+      "q": "Which act brings the heavier expiation in all four primers?",
+      "options": [
+        "Deliberate intercourse during a Ramadan fast",
+        "Eating out of forgetfulness",
+        "Missing a fast through illness"
+      ],
+      "answer": 0,
+      "claim": "kaffarah"
+    },
+    {
+      "q": "Make-up days are put off until the next Ramadan with no excuse. The primers:",
+      "options": [
+        "all add feeding",
+        "all add nothing",
+        "differ on whether feeding is added"
+      ],
+      "answer": 2,
+      "claim": "delayed-qada"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+    ]
+  }
+}

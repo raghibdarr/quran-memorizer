@@ -1,0 +1,16 @@
+{
+  "id": "fasting",
+  "deck": "course-fasting",
+  "order": 2,
+  "title": "Fasting",
+  "blurb": "Ramadan: who fasts, what breaks the fast, who is excused, and how missed days are made up",
+  "lessons": [
+    "fasting-01-who-must-fast",
+    "fasting-02-intention",
+    "fasting-03-what-breaks-the-fast",
+    "fasting-04-exemptions",
+    "fasting-05-making-up",
+    "fasting-06-recommended-acts",
+    "fasting-07-recap"
+  ]
+}
