@@ -27,10 +27,11 @@ export function whenLabel(ts: number, today = todayIso()): string {
 }
 
 /** The line a card shows once when its item's text was corrected after the card was made */
-export function correctionNote(content: CardContent, cardRev: number, errata: string): string | null {
+export function correctionNote(content: CardContent, cardRev: number, errata: string, deckId?: string): string | null {
   if (content.kind === 'term' || content.rev <= cardRev) return null;
   const item = content.kind === 'course' ? content.lesson : content.item;
-  const deck = 'deck' in item && typeof item.deck === 'string' ? item.deck : null;
+  // Names and lessons carry no deck of their own: the card id names it
+  const deck = deckId || ('deck' in item && typeof item.deck === 'string' ? item.deck : null);
   const date = (deck && correctionDate(errata, deck, item.id)) || item.review.date;
   return date ? `Text corrected on ${formatIsoDate(date)}.` : 'Text corrected since you learned it.';
 }
@@ -43,7 +44,7 @@ function CardStage({ id, errata, onRated, onSkip }: { id: string; errata: string
   // The correction note compares against the rev the card had when it first
   // showed; the card is then brought up to the item's rev, so it shows once
   const [firstRev] = useState(() => useDeenStore.getState().cards[id]?.itemRev);
-  const note = content && firstRev !== undefined ? correctionNote(content, firstRev, errata) : null;
+  const note = content && firstRev !== undefined ? correctionNote(content, firstRev, errata, parseCardId(id)?.deck) : null;
   useEffect(() => {
     if (!content || !card || content.kind === 'term' || content.rev <= card.itemRev) return;
     const rev = content.rev;

@@ -45,7 +45,11 @@ function LearnScreen({ learn, depthParam }: { learn: string; depthParam: DeckDep
   useEffect(() => {
     let live = true;
     Promise.all([liveDeckInfo(deckId), getItem<TextItem>(deckId, itemId)]).then(([info, item]) => {
-      if (live) setState({ info, item: info ? item : null, loaded: true });
+      // Only texts (hadith, dhikr and duas) are learned here: Names and lessons have their own screens
+      const text = info && (info.kind === 'hadith' || info.kind === 'dhikr') ? item : null;
+      if (live) setState({ info, item: text, loaded: true });
+    }).catch(() => {
+      if (live) setState({ info: null, item: null, loaded: true });
     });
     return () => {
       live = false;
@@ -106,7 +110,11 @@ function SessionScreen({ deck, errata }: { deck: string | null; errata: string }
           <div className="py-16 text-center" data-deen-session="empty">
             <p className="text-sm font-semibold text-foreground">Nothing to review here right now</p>
             <p className="mt-1 text-sm text-muted">
-              {queue.nextDue ? `The next card comes back ${whenLabel(queue.nextDue)}.` : 'Cards you learn come back here.'}
+              {queue.dueTotal > 0
+                ? 'That is today’s reviews done. The rest wait for tomorrow.'
+                : queue.nextDue
+                  ? `The next card comes back ${whenLabel(queue.nextDue)}.`
+                  : 'Cards you learn come back here.'}
             </p>
             <button onClick={exit} className="mt-4 min-h-11 text-sm font-semibold text-teal">
               Back

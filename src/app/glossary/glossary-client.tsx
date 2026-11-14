@@ -24,7 +24,12 @@ export default function GlossaryScreen() {
   // /glossary#wudu: open that term once the list is in
   useEffect(() => {
     if (!terms) return;
-    const id = decodeURIComponent(window.location.hash.slice(1));
+    let id = window.location.hash.slice(1);
+    try {
+      id = decodeURIComponent(id);
+    } catch {
+      // A malformed hash is just not a term
+    }
     if (!id || !terms.has(id)) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reads the URL hash after load
     setOpen(id);

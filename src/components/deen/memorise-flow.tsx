@@ -70,11 +70,13 @@ function useQuranAyahs(item: TextItem): { ayahs: Ayah[] | null; surahName: strin
   useEffect(() => {
     if (!ref) return;
     let live = true;
-    getSurah(ref.surahId).then((s) => {
-      if (!live) return;
-      const end = ref.ayahEnd ?? ref.ayah;
-      setState({ ayahs: s.ayahs.filter((a) => a.number >= ref.ayah && a.number <= end), surahName: s.nameSimple });
-    });
+    getSurah(ref.surahId)
+      .then((s) => {
+        if (!live) return;
+        const end = ref.ayahEnd ?? ref.ayah;
+        setState({ ayahs: s.ayahs.filter((a) => a.number >= ref.ayah && a.number <= end), surahName: s.nameSimple });
+      })
+      .catch(() => live && setState({ ayahs: [], surahName: '' }));
     return () => {
       live = false;
     };
@@ -205,11 +207,15 @@ export function MemoriseFlow({
   const finish = (rating: Rating) => {
     const deck = item.deck;
     let ayahCount = 0;
-    if (item.quran && ayahs) {
+    // Ayahs join the Quran review only when the Arabic was memorised: "Know the
+    // meaning" must not put recitation cards in front of someone who never learned them
+    if (item.quran && ayahs && !meaningOnly) {
       for (const a of ayahs) addAyahCard(item.quran.surahId, a.number);
       ayahCount = ayahs.length;
     }
-    const fresh = cardsForMemorise(deck, deckKind, item, depth);
+    // Only cards that don't exist yet are added (and counted): learning an item again keeps its progress
+    const have = useDeenStore.getState().cards;
+    const fresh = Object.fromEntries(Object.entries(cardsForMemorise(deck, deckKind, item, depth)).filter(([id]) => !have[id]));
     addCards(fresh);
     recordActivity();
     haptic.success();
@@ -462,7 +468,9 @@ export function MemoriseFlow({
             ? `These ${result.ayahs === 1 ? 'ayah joins' : `${result.ayahs} ayahs join`} your Quran reviews.`
             : n > 0
               ? `${n} ${n === 1 ? 'card' : 'cards'} added. They come up in Review.`
-              : 'Already in your reviews.'}
+              : item.quran
+                ? 'Read. To add these ayahs to your Quran reviews, choose “Memorise the Arabic”.'
+                : 'Already in your reviews.'}
         </p>
         {result?.rating === 'missed' && <p className="mt-1 text-sm text-muted">It will come back soon, so it gets easier.</p>}
       </div>

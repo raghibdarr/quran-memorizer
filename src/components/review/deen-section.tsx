@@ -6,6 +6,7 @@ import { useDeenQueue } from '@/hooks/use-deen-queue';
 import { deckTitleOf } from '@/components/deen/deck-source';
 import { sessionHref } from '@/components/deen/links';
 import { whenLabel } from '@/components/deen/session-player';
+import { DEEN_REVIEW_CAP } from '@/lib/deen/queue';
 
 /**
  * Slot (all-in-one spec 2.5, 3.4) under the Quran streams on the Review tab:
@@ -45,7 +46,7 @@ export function DeenReviewSection() {
               ))}
             </ul>
             {q.dueTotal > q.due.length && (
-              <p className="text-xs text-muted">Up to {q.due.length} reviews a day. The rest wait for tomorrow.</p>
+              <p className="text-xs text-muted">Up to {DEEN_REVIEW_CAP} reviews a day. The rest wait for tomorrow.</p>
             )}
             <Link
               href={sessionHref()}
@@ -57,7 +58,8 @@ export function DeenReviewSection() {
           </>
         ) : (
           <p className="text-sm text-muted" data-deen-caught-up>
-            All done for today.{q.nextDue ? ` The next card comes back ${whenLabel(q.nextDue)}.` : ''}
+            All done for today.
+            {q.dueTotal > 0 ? ' The rest wait for tomorrow.' : q.nextDue ? ` The next card comes back ${whenLabel(q.nextDue)}.` : ''}
           </p>
         )}
       </Card>

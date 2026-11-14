@@ -90,8 +90,9 @@ export default function Page() {
               never retyped.
             </li>
             <li>
-              <strong className="font-semibold">Arabic of hadith and duas.</strong> Transcribed from classical works in the public domain,
-              then compared word for word against at least two independent copies, at least one of them not taken from Sunnah.com.
+              <strong className="font-semibold">Arabic of hadith and duas.</strong> Taken from a published copy, then compared letter by
+              letter with at least one more, independent copy. At least one of them does not come from Sunnah.com. Where copies differ, the
+              wording chosen and the reason are recorded.
             </li>
             <li>
               <strong className="font-semibold">English.</strong> Our own translation, made from the Arabic only. A separate check, which

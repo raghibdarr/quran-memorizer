@@ -6,7 +6,7 @@ import { newDeenCard, termCard } from '@/lib/deen/cards'
 import { reviewSm2 } from '@/lib/spaced-repetition'
 import type { DeenCard } from '@/stores/deen-store'
 import type { Position, TextItem } from '@/types/deen'
-import { deenToday } from './queue-logic'
+import { deenToday, reviewedToday } from './queue-logic'
 import { deckStatesOf, itemStateOf, stateOfCards, STRONG_INTERVAL_DAYS } from './item-state'
 import { correctionDate, formatIsoDate, gradingText, mailtoHref, reportMessage, splitSegments } from './text'
 import { citationText, humanizeId, numberingLabel, sunnahComUrl } from './registry-names'
@@ -94,6 +94,28 @@ describe('the deen queue (useDeenQueue logic)', () => {
     expect(deenToday(data(cards), DAY_END, ['nawawi40', 'names99'], 'names99').order).toEqual(['names99:001:ar-en'])
     // A deck that isn't live gives nothing, even when asked for by name
     expect(deenToday(data(cards), DAY_END, ['nawawi40'], 'adhkar-sleep-waking').order).toEqual([])
+  })
+
+  it('the 20-review cap is for the whole day, not each session', () => {
+    const cards: Record<string, DeenCard> = {}
+    for (let i = 0; i < 30; i++) cards[`nawawi40:${String(i).padStart(2, '0')}:meaning`] = reviewed('nawawi40', NOW - (40 - i) * 86400000)
+    const first = deenToday(data(cards), DAY_END, ['nawawi40'])
+    expect(first.due).toHaveLength(20)
+    // Rate the first session's 20, and one brand-new card on top (an introduction, not a review)
+    for (const id of first.due) cards[id] = reviewSm2({ ...cards[id] }, 5)
+    for (const id of first.due) cards[id].lastReview = NOW
+    cards['nawawi40:99:meaning'] = { ...reviewSm2(fresh('nawawi40', NOW), 5), lastReview: NOW }
+    const d = data(cards, { [TODAY]: 1 })
+    expect(reviewedToday(d, DAY_END)).toBe(20)
+    const second = deenToday(d, DAY_END, ['nawawi40'])
+    expect(second.due).toEqual([])
+    expect(second.dueTotal).toBe(10)
+    // Tomorrow the ten that waited come up
+    const tomorrow = endOfDayMs(addLocalDays(NOW, 1))
+    expect(deenToday(d, tomorrow, ['nawawi40']).due).toHaveLength(10)
+    // A narrowed session shares the same daily cap
+    cards['names99:001:ar-en'] = reviewed('names99', NOW - 86400000)
+    expect(deenToday(data(cards, { [TODAY]: 1 }), DAY_END, ['nawawi40', 'names99'], 'names99').due).toEqual([])
   })
 
   it('a rated card leaves today and comes back on its SM-2 date', () => {
@@ -221,6 +243,9 @@ describe('trust surfaces', () => {
     expect(correctionNote(content, 2, '')).toBeNull()
     expect(correctionNote(content, 1, '')).toBe('Text corrected since you learned it.')
     expect(correctionNote(content, 1, '- 2026-12-01 · _fixture:01 rev 2: fixed')).toBe('Text corrected on 1 December 2026.')
+    // Names and lessons have no deck field: the deck comes from the card id
+    const name = { kind: 'names' as const, facet: 'ar-en', rev: 2, item: { id: '001', rev: 2, review: { status: 'source-checked' as const } } as never }
+    expect(correctionNote(name, 1, '- 2026-12-02 · names99:001 rev 2: fixed', 'names99')).toBe('Text corrected on 2 December 2026.')
   })
 
   it('says when the next card comes back in calendar days', () => {

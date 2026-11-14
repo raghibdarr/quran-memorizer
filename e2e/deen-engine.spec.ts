@@ -133,6 +133,19 @@ test.describe('deen engine', () => {
     expect(await deenCards(page)).toEqual(['_fixture:03:meaning'])
   })
 
+  test('a learn link to a deck that is not a text deck shows a calm message, not a crash', async ({ page }) => {
+    await page.addInitScript((deck) => {
+      localStorage.setItem('onboarding-complete', 'true')
+      ;(window as unknown as { __TAKRAR_TEST_DECKS__: unknown }).__TAKRAR_TEST_DECKS__ = [
+        { info: { id: '_fixture', title: 'Fixture names', blurb: '', kind: 'names', group: 'names', route: '/names', defaultDepth: 'meaning' }, deck },
+      ]
+    }, fixtureDeck)
+    await page.goto('/review/deen?learn=_fixture:01')
+    await expect(page.getByText("This text isn't available")).toBeVisible()
+    await page.goto('/review/deen?learn=_fixture:nope')
+    await expect(page.getByText("This text isn't available")).toBeVisible()
+  })
+
   test('the Learn tab lists live decks only', async ({ page }) => {
     // Without the fixture every registry deck is still { ready: false }: no rows
     await page.addInitScript(() => localStorage.setItem('onboarding-complete', 'true'))
