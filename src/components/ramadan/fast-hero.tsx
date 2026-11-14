@@ -5,6 +5,7 @@ import Card from '@/components/ui/card';
 import { formatCivil } from '@/lib/hijri/calendar';
 import {
   formatClock,
+  fastTimesToShow,
   formatCountdown,
   momentLabel,
   nextFastMoment,
@@ -34,6 +35,7 @@ export default function FastHero({
   countdown: boolean;
 }) {
   const moment = times && countdown ? nextFastMoment(now, times.today, times.tomorrow) : null;
+  const shown = times ? fastTimesToShow(now, times.today, times.tomorrow) : null;
   const heading = season.inRamadan ? `${seasonLine(season)} · expected` : `Ramadan ${season.hijriYear}`;
 
   return (
@@ -57,7 +59,7 @@ export default function FastHero({
               Set your place
             </Link>
           </div>
-        ) : times ? (
+        ) : times && shown ? (
           <>
             {moment ? (
               <div className="mt-2" data-countdown={moment.kind}>
@@ -69,24 +71,32 @@ export default function FastHero({
             ) : countdown ? (
               <p className="mt-2 text-sm text-muted">Fajr or Maghrib can&apos;t be worked out for this place today.</p>
             ) : (
-              <p className="mt-3 text-sm text-muted">Today&apos;s times, for a voluntary fast:</p>
+              <p className="mt-3 text-sm text-muted">
+                {shown.day === 'tomorrow' ? 'Tomorrow’s times' : 'Today’s times'}
+                {season.inRamadan ? ':' : ', for a voluntary fast:'}
+              </p>
             )}
-            <dl className={`grid grid-cols-2 gap-3 ${moment ? 'mt-4 border-t border-foreground/10 pt-3' : 'mt-2'}`}>
+            {moment && shown.day === 'tomorrow' && (
+              <p className="mt-4 border-t border-foreground/10 pt-3 text-xs font-semibold text-muted" data-times-day="tomorrow">Tomorrow</p>
+            )}
+            <dl
+              className={`grid grid-cols-2 gap-3 ${moment ? (shown.day === 'tomorrow' ? 'mt-1' : 'mt-4 border-t border-foreground/10 pt-3') : 'mt-2'}`}
+            >
               <div>
                 <dt className="text-xs text-muted">Suhoor ends</dt>
                 <dd className="text-lg font-semibold tabular-nums text-foreground">
-                  {times.today.suhoorEnd !== null ? formatClock(times.today.suhoorEnd, times.tz) : '–'}
+                  {shown.times.suhoorEnd !== null ? formatClock(shown.times.suhoorEnd, times.tz) : '–'}
                 </dd>
                 <dd className="text-[11px] leading-snug text-muted">
-                  {imsakMin > 0 && times.today.fajr !== null
-                    ? `${imsakMin} min before Fajr (${formatClock(times.today.fajr, times.tz)}), as a precaution`
+                  {imsakMin > 0 && shown.times.fajr !== null
+                    ? `${imsakMin} min before Fajr (${formatClock(shown.times.fajr, times.tz)}), as a precaution`
                     : 'At Fajr'}
                 </dd>
               </div>
               <div>
                 <dt className="text-xs text-muted">Iftar</dt>
                 <dd className="text-lg font-semibold tabular-nums text-foreground">
-                  {times.today.iftar !== null ? formatClock(times.today.iftar, times.tz) : '–'}
+                  {shown.times.iftar !== null ? formatClock(shown.times.iftar, times.tz) : '–'}
                 </dd>
                 <dd className="text-[11px] leading-snug text-muted">At Maghrib</dd>
               </div>

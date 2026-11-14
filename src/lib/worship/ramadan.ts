@@ -49,6 +49,14 @@ export function nextFastMoment(now: number, today: FastTimes, tomorrow: FastTime
   return null;
 }
 
+/**
+ * Which day's suhoor and iftar to list under the countdown: today's until
+ * today's iftar has passed, then tomorrow's (the ones the countdown now runs to).
+ */
+export function fastTimesToShow(now: number, today: FastTimes, tomorrow: FastTimes): { day: 'today' | 'tomorrow'; times: FastTimes } {
+  return today.iftar !== null && now >= today.iftar ? { day: 'tomorrow', times: tomorrow } : { day: 'today', times: today };
+}
+
 // ---------- the season ----------
 
 export interface RamadanSpan {

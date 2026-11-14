@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import fc from 'fast-check'
 import { forceTabularForTests, toHijri } from './convert'
 import {
@@ -162,5 +162,35 @@ describe('without Intl islamic-umalqura (tabular fallback)', () => {
       }),
       { numRuns: 40 },
     )
+  })
+})
+
+describe('with no Intl at all', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('today falls back to the device calendar, and months come from the tabular calendar', () => {
+    const t = Date.UTC(2026, 10, 13, 12, 0)
+    const device = todayIso(t)
+    vi.stubGlobal('Intl', undefined)
+    forceTabularForTests(false) // re-run the feature test without Intl
+    expect(todayIso(t, 'Europe/London')).toBe(device)
+    const g = monthGrid({ year: 1448, month: 9 }, { offset: -1, today: '2027-02-09' })
+    expect(g.days[0].iso).toBe('2027-02-09')
+    expect(g.days[0].isToday).toBe(true)
+    expect(g.weeks.every((w) => w.length === 7)).toBe(true)
+  })
+})
+
+describe('today in the place zone on clock-change days', () => {
+  it('keeps the civil day either side of the change', () => {
+    // London springs forward at 01:00 UTC on 29 March 2026
+    expect(todayIso(Date.UTC(2026, 2, 28, 23, 59), 'Europe/London')).toBe('2026-03-28')
+    expect(todayIso(Date.UTC(2026, 2, 29, 0, 0), 'Europe/London')).toBe('2026-03-29')
+    expect(todayIso(Date.UTC(2026, 2, 29, 22, 59), 'Europe/London')).toBe('2026-03-29')
+    expect(todayIso(Date.UTC(2026, 2, 29, 23, 0), 'Europe/London')).toBe('2026-03-30')
+    // New York falls back on 1 November 2026: midnight is 04:00 UTC before, 05:00 UTC after
+    expect(todayIso(Date.UTC(2026, 10, 1, 3, 59), 'America/New_York')).toBe('2026-10-31')
+    expect(todayIso(Date.UTC(2026, 10, 2, 4, 59), 'America/New_York')).toBe('2026-11-01')
+    expect(todayIso(Date.UTC(2026, 10, 2, 5, 0), 'America/New_York')).toBe('2026-11-02')
   })
 })

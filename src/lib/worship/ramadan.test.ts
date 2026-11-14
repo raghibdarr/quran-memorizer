@@ -10,6 +10,7 @@ import {
   countFasts,
   fastOptionsFor,
   fastTimes,
+  fastTimesToShow,
   formatClock,
   formatCountdown,
   isPaused,
@@ -125,6 +126,72 @@ describe('season (Ramadan 1448 expected 8 February – 8 March 2027)', () => {
 })
 
 const fast = (s: FastMark): FastEntry => ({ s, at: 1 })
+
+describe('season, any day and offset (property)', () => {
+  const isoArb = fc
+    .integer({ min: Math.round(Date.UTC(1995, 0, 1) / 864e5), max: Math.round(Date.UTC(2055, 11, 31) / 864e5) })
+    .map((n) => new Date(n * 864e5).toISOString().slice(0, 10))
+
+  for (const tabular of [false, true]) {
+    it(`the season, the banner and the log span agree (${tabular ? 'tabular' : 'Intl'})`, () => {
+      forceTabularForTests(tabular)
+      fc.assert(
+        fc.property(isoArb, fc.integer({ min: -2, max: 2 }), (iso, offset) => {
+          const s = ramadanSeason(iso, offset, 'auto')
+          const inSpan = iso >= s.start && iso <= s.end
+          expect(s.inRamadan).toBe(inSpan)
+          expect(s.active).toBe(inSpan)
+          if (inSpan) {
+            expect(s.daysUntilStart).toBe(0)
+            expect(ramadanDays(s)[s.day! - 1].iso).toBe(iso)
+            expect(latestRamadan(iso, offset)).toEqual({ hijriYear: s.hijriYear, start: s.start, end: s.end, length: s.length })
+          } else {
+            // The season in view is always the next one, under a year away
+            expect(s.day).toBeNull()
+            expect(s.daysUntilStart).toBeGreaterThan(0)
+            expect(s.daysUntilStart).toBeLessThan(356)
+            expect(s.bannerVisible).toBe(s.daysUntilStart <= BANNER_LEAD_DAYS)
+            // and the log shows the one that last ended
+            const last = latestRamadan(iso, offset)
+            expect(last.end < iso).toBe(true)
+            expect(last.hijriYear).toBe(s.hijriYear - 1)
+          }
+          expect([29, 30]).toContain(s.length)
+          expect(ramadanSeason(iso, offset, 'off').bannerVisible).toBe(false)
+          expect(ramadanSeason(iso, offset, 'on').active).toBe(true)
+        }),
+        { numRuns: 150 },
+      )
+    })
+  }
+})
+
+describe('where the engine has no Fajr or Maghrib (high latitude)', () => {
+  it('counts to whichever time exists, and to nothing when neither does', () => {
+    const none = fastTimes({ fajr: null, maghrib: null }, 10)
+    expect(none).toEqual({ suhoorEnd: null, fajr: null, iftar: null })
+    expect(nextFastMoment(at(12), none, none)).toBeNull()
+    const noFajr = fastTimes({ fajr: null, maghrib: at(22) }, 10)
+    expect(nextFastMoment(at(1), noFajr, noFajr)).toEqual({ kind: 'iftar', at: at(22) })
+    const noMaghrib = fastTimes({ fajr: at(2), maghrib: null }, 10)
+    expect(nextFastMoment(at(12), noMaghrib, fastTimes({ fajr: at(26), maghrib: null }, 10))).toEqual({ kind: 'suhoor', at: at(26) - 10 * MIN })
+  })
+})
+
+describe('the times listed under the countdown', () => {
+  it("are today's until iftar, then tomorrow's, matching what the countdown runs to", () => {
+    const today = fastTimes({ fajr: at(5), maghrib: at(18) }, 10)
+    const tomorrow = fastTimes({ fajr: at(29) - 2 * MIN, maghrib: at(42) + MIN }, 10)
+    expect(fastTimesToShow(at(3), today, tomorrow)).toEqual({ day: 'today', times: today })
+    expect(fastTimesToShow(at(18) - 1, today, tomorrow)).toEqual({ day: 'today', times: today })
+    const after = fastTimesToShow(at(18), today, tomorrow)
+    expect(after).toEqual({ day: 'tomorrow', times: tomorrow })
+    expect(nextFastMoment(at(22), today, tomorrow)).toEqual({ kind: 'suhoor', at: after.times.suhoorEnd })
+    // no Maghrib today (high latitude): stay on today
+    const noMaghrib = fastTimes({ fajr: at(2), maghrib: null })
+    expect(fastTimesToShow(at(23), noMaghrib, tomorrow).day).toBe('today')
+  })
+})
 
 describe('pauses', () => {
   const pauses: Pause[] = [{ id: 'a', from: '2027-02-10', to: '2027-02-14' }, { id: 'b', from: '2027-03-01' }]

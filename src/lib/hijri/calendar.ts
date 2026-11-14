@@ -72,8 +72,11 @@ export function weekdayOf(iso: string): number {
 export function todayIso(now: number = Date.now(), tz?: string): string {
   if (tz) {
     try {
-      // en-CA formats as YYYY-MM-DD
-      return new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+      // Read the parts, not a locale's formatted string: some engines print en-CA dates with slashes
+      const parts = new Intl.DateTimeFormat('en-u-ca-gregory-nu-latn', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(now);
+      const get = (t: string) => parts.find((p) => p.type === t)?.value ?? '';
+      const iso = `${get('year').padStart(4, '0')}-${get('month').padStart(2, '0')}-${get('day').padStart(2, '0')}`;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso;
     } catch {
       // fall through to the device's calendar
     }

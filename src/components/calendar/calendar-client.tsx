@@ -132,7 +132,7 @@ export default function CalendarClient() {
         {monthEvents.length > 0 && (
           <section aria-labelledby="month-events">
             <h2 id="month-events" className="px-1 text-xs font-bold uppercase tracking-wider text-muted">
-              In {formatHijriMonth(view).replace(/ \d+$/, '')}
+              In {formatHijriMonth(view).replace(/ \d+$/, '')} · expected
             </h2>
             <ul className="mt-2 divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card px-5">
               {monthEvents.map((o) => (
@@ -143,7 +143,7 @@ export default function CalendarClient() {
         )}
 
         <section aria-labelledby="coming-up">
-          <h2 id="coming-up" className="px-1 text-xs font-bold uppercase tracking-wider text-muted">Coming up</h2>
+          <h2 id="coming-up" className="px-1 text-xs font-bold uppercase tracking-wider text-muted">Coming up · expected</h2>
           <ul className="mt-2 divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card px-5" data-coming-up>
             {upcoming.map((o) => (
               <li key={o.event.id} className="flex min-h-12 items-center justify-between gap-3 py-2.5">

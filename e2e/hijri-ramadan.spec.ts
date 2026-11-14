@@ -102,6 +102,14 @@ test.describe('Ramadan', () => {
     await expect(page.locator('[data-make-up-left]')).toHaveText('0')
   })
 
+  test("after iftar: counts to tomorrow's suhoor and lists tomorrow's times", async ({ page }) => {
+    await page.clock.install({ time: new Date('2027-02-20T22:00:00Z') })
+    await seed(page)
+    await page.goto('/ramadan')
+    await expect(page.locator('[data-countdown="suhoor"]')).toBeVisible()
+    await expect(page.locator('[data-fast-hero] [data-times-day="tomorrow"]')).toBeVisible()
+  })
+
   test('outside Ramadan: a voluntary fast, no countdown until marked', async ({ page }) => {
     await page.clock.install({ time: new Date('2026-11-13T12:00:00Z') })
     await seed(page)
