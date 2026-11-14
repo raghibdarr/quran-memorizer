@@ -115,7 +115,10 @@ function Wizard({ place }: { place: Place }) {
 
   const apply = () => {
     if (!fitted) return;
-    applyCalc(fitted.result.calc);
+    // The fit covers the five prayers only: a sunrise adjustment the user set stays theirs
+    const calc = fitted.result.calc;
+    const sunrise = usePrayerStore.getState().offsets.sunrise;
+    applyCalc({ ...calc, offsets: { ...calc.offsets, sunrise } });
     haptic.success();
     setApplied(true);
     setUndone(false);

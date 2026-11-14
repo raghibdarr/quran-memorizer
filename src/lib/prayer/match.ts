@@ -84,6 +84,11 @@ const LARGE_TWILIGHT_OFFSET = 10;
 /** Offsets this large on Dhuhr, Asr or Maghrib suggest jama'ah times */
 const LATE_HINT_MIN = 15;
 
+/** A Fajr typed at or after this (20:00) is read as the evening before (far north, summer) */
+const WRAP_FAJR_FROM = 20 * 60;
+/** A Maghrib or Isha typed before this (04:00) is read as after midnight */
+const WRAP_NIGHT_UNTIL = 4 * 60;
+
 const HIGH_LAT_RULES: readonly HighLatRule[] = ['auto', 'middleofthenight', 'seventhofthenight', 'twilightangle'];
 const ZERO_OFFSETS: PrayerOffsets = { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 };
 
@@ -156,15 +161,18 @@ export function checkMatchInput(days: MatchDay[]): string | null {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(d.iso)) return 'Pick a date.';
     const filled = PRAYER_NAMES.filter((p) => typeof d.times[p] === 'number');
     if (filled.length < 2) return 'Enter at least two start times for each date.';
-    // Fajr to Maghrib run in order through the day; Isha comes after Maghrib (or after midnight)
-    const day = PRAYER_NAMES.filter((p) => p !== 'isha' && typeof d.times[p] === 'number').map((p) => d.times[p]!);
-    for (let i = 1; i < day.length; i++) {
-      if (day[i] <= day[i - 1]) return 'Check the times: they should run Fajr, Dhuhr, Asr, Maghrib, Isha through the day.';
-    }
-    const isha = d.times.isha;
-    const maghrib = d.times.maghrib;
-    if (typeof isha === 'number' && typeof maghrib === 'number' && isha <= maghrib && isha > (d.times.fajr ?? 0)) {
-      return 'Check the times: Isha should come after Maghrib.';
+    // The times run in order through the day. Far north in summer the row wraps
+    // round midnight: Fajr can start late the evening before, and Maghrib or Isha
+    // can land in the small hours (Reykjavik's June sunset is just after 00:00).
+    // Unwrap those on to one line before comparing; Dhuhr and Asr never wrap.
+    const line = PRAYER_NAMES.filter((p) => typeof d.times[p] === 'number').map((p) => {
+      const t = d.times[p]!;
+      if (p === 'fajr' && t >= WRAP_FAJR_FROM) return t - 1440;
+      if ((p === 'maghrib' || p === 'isha') && t < WRAP_NIGHT_UNTIL) return t + 1440;
+      return t;
+    });
+    for (let i = 1; i < line.length; i++) {
+      if (line[i] <= line[i - 1]) return 'Check the times: they should run Fajr, Dhuhr, Asr, Maghrib, Isha through the day.';
     }
   }
   return null;

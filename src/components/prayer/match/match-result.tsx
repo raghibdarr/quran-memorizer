@@ -122,12 +122,11 @@ function TimeWithGap({ minutes, entered }: { minutes: number | null; entered: nu
   return (
     <span className="inline-flex items-baseline justify-end gap-1">
       {hm(minutes)}
-      <span
-        className={cn('w-7 text-left text-[11px] font-medium', gap === 0 ? 'text-transparent' : 'text-gold-deep')}
-        aria-label={gap === 0 ? 'matches' : `${Math.abs(gap)} minutes ${gap > 0 ? 'later' : 'earlier'}`}
-      >
+      <span aria-hidden className={cn('w-7 text-left text-[11px] font-medium', gap === 0 ? 'text-transparent' : 'text-gold-deep')}>
         {gap === 0 ? '·' : signed(gap)}
       </span>
+      {/* aria-label on a plain span is ignored by most screen readers: say it in text */}
+      <span className="sr-only">{gap === 0 ? ', matches' : `, ${Math.abs(gap)} ${Math.abs(gap) === 1 ? 'minute' : 'minutes'} ${gap > 0 ? 'later' : 'earlier'}`}</span>
     </span>
   );
 }

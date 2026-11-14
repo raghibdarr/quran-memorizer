@@ -85,8 +85,48 @@ describe('checkMatchInput', () => {
     expect(checkMatchInput([{ iso: '2026-03-15', times: { fajr: 800, dhuhr: 750 } }])).toMatch(/Check the times/)
     expect(checkMatchInput([{ iso: '2026-03-15', times: { maghrib: 1100, isha: 1050 } }])).toMatch(/Isha/)
   })
+  it('allows a far-north summer row that wraps round midnight', () => {
+    // Maghrib just after midnight, Isha later still, Fajr late the evening before
+    expect(checkMatchInput([{ iso: '2026-06-21', times: { dhuhr: 811, asr: 1090, maghrib: 3, isha: 55 } }])).toBeNull()
+    expect(checkMatchInput([{ iso: '2026-06-21', times: { fajr: 1434, dhuhr: 770, maghrib: 1178 } }])).toBeNull()
+    // Isha after midnight with no Fajr entered
+    expect(checkMatchInput([{ iso: '2026-06-21', times: { maghrib: 1281, isha: 30 } }])).toBeNull()
+    // ...but Dhuhr and Asr never wrap, and Isha still has to follow Maghrib
+    expect(checkMatchInput([{ iso: '2026-06-21', times: { dhuhr: 811, asr: 60 } }])).toMatch(/Check the times/)
+    expect(checkMatchInput([{ iso: '2026-06-21', times: { maghrib: 30, isha: 10 } }])).toMatch(/Check the times/)
+  })
   it('allows Isha after midnight', () => {
     expect(checkMatchInput([{ iso: '2026-06-21', times: { fajr: 160, maghrib: 1281, isha: 10 } }])).toBeNull()
+  })
+})
+
+describe('matchMosque: high latitude', () => {
+  const REYKJAVIK = { name: 'reykjavik', lat: 64.15, lng: -21.94, tz: 'Atlantic/Reykjavik', countryCode: 'IS' }
+  const STOCKHOLM = { name: 'stockholm', lat: 59.33, lng: 18.07, tz: 'Europe/Stockholm', countryCode: 'SE' }
+  const USHUAIA = { name: 'ushuaia', lat: -54.8, lng: -68.3, tz: 'America/Argentina/Ushuaia', countryCode: 'AR' }
+
+  it('fits a midsummer row whose Maghrib falls after midnight (Reykjavik)', () => {
+    const truth = calc('MuslimWorldLeague', { offsets: { ...ZERO, fajr: 2, isha: -3 } })
+    const row = timetable(REYKJAVIK, '2026-06-21', truth)
+    // The premise: sunset is past midnight on the place's clock
+    expect(row.times.maghrib!).toBeLessThan(60)
+    expect(checkMatchInput([row])).toBeNull()
+    const r = matchMosque(REYKJAVIK, [row])
+    expect(r).not.toBeNull()
+    expect(r!.maxOff).toBe(0)
+    for (const c of r!.cells) expect(Math.abs(c.diff!)).toBeLessThan(60)
+  })
+
+  it('recovers a chosen high-latitude rule across midsummer and the clock change', () => {
+    for (const [city, iso] of [[STOCKHOLM, '2026-06-01'], [STOCKHOLM, '2026-10-10'], [USHUAIA, '2026-12-01']] as const) {
+      for (const highLatRule of ['middleofthenight', 'seventhofthenight', 'twilightangle'] as const) {
+        const truth = calc('MuslimWorldLeague', { highLatRule, offsets: { ...ZERO, fajr: 2, isha: -3 } })
+        const d2 = addDaysIso(iso, 30)
+        const r = matchMosque(city, [timetable(city, iso, truth), timetable(city, d2, truth)])
+        expect(r, `${city.name} ${iso} ${highLatRule}`).not.toBeNull()
+        expect(r!.maxOff, `${city.name} ${iso} ${highLatRule}`).toBeLessThanOrEqual(1)
+      }
+    }
   })
 })
 
