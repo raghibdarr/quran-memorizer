@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "about": "Takrar's own list (own work). Only occasions tied to a cited act of worship; observances whose religious status is disputed are left out. Dates are worked out from the Hijri calendar and shown as expected. 'citation' is a hadith lead and stays empty until its collection and number are confirmed in two witnesses (spec 5.1); 'quran' is a Quran reference rendered from the bundled surah files.",
+  "events": [
+    {
+      "id": "ramadan",
+      "title": "Ramadan",
+      "when": { "month": 9, "from": 1, "to": 30 },
+      "description": "The month of fasting, from Fajr to Maghrib each day.",
+      "quran": { "surahId": 2, "ayah": 183, "ayahEnd": 185 },
+      "citation": ""
+    },
+    {
+      "id": "last-ten-nights",
+      "title": "The last ten nights",
+      "when": { "month": 9, "from": 21, "to": 30 },
+      "description": "The closing nights of Ramadan, when Laylat al-Qadr is sought. Each night begins at the Maghrib before its date.",
+      "quran": { "surahId": 97, "ayah": 1, "ayahEnd": 5 },
+      "citation": ""
+    },
+    {
+      "id": "eid-al-fitr",
+      "title": "Eid al-Fitr",
+      "when": { "month": 10, "from": 1 },
+      "description": "The Eid that closes Ramadan, with the Eid prayer in the morning.",
+      "citation": ""
+    },
+    {
+      "id": "six-shawwal",
+      "title": "Six days of Shawwal",
+      "when": { "month": 10, "from": 2, "to": 30 },
+      "description": "Six voluntary fasts in Shawwal, after Eid day. Recommended by al-Shafi'i and Ahmad; Malik and Abu Hanifa disliked them.",
+      "voluntaryFast": true,
+      "citation": ""
+    },
+    {
+      "id": "dhul-hijjah-ten",
+      "title": "First ten days of Dhul-Hijjah",
+      "when": { "month": 12, "from": 1, "to": 10 },
+      "description": "Days in which good deeds are especially encouraged, ending with Eid al-Adha.",
+      "citation": ""
+    },
+    {
+      "id": "arafah",
+      "title": "Day of Arafah",
+      "when": { "month": 12, "from": 9 },
+      "description": "The day pilgrims stand at Arafah. Those not on Hajj may keep a voluntary fast.",
+      "voluntaryFast": true,
+      "citation": ""
+    },
+    {
+      "id": "eid-al-adha",
+      "title": "Eid al-Adha",
+      "when": { "month": 12, "from": 10 },
+      "description": "The Eid of sacrifice, with the Eid prayer in the morning.",
+      "citation": ""
+    },
+    {
+      "id": "tashriq",
+      "title": "Days of tashriq",
+      "when": { "month": 12, "from": 11, "to": 13 },
+      "description": "The three days after Eid al-Adha, days of eating, drinking and remembering Allah.",
+      "citation": ""
+    },
+    {
+      "id": "tasua",
+      "title": "Tasu'a",
+      "when": { "month": 1, "from": 9 },
+      "description": "The ninth of Muharram, a voluntary fast kept together with Ashura.",
+      "voluntaryFast": true,
+      "citation": ""
+    },
+    {
+      "id": "ashura",
+      "title": "Ashura",
+      "when": { "month": 1, "from": 10 },
+      "description": "The tenth of Muharram, a voluntary fast.",
+      "voluntaryFast": true,
+      "citation": ""
+    },
+    {
+      "id": "white-days",
+      "title": "The white days",
+      "when": { "everyMonth": true, "from": 13, "to": 15 },
+      "description": "Voluntary fasts on the 13th, 14th and 15th of the Hijri month.",
+      "voluntaryFast": true,
+      "citation": ""
+    },
+    {
+      "id": "mon-thu",
+      "title": "Monday and Thursday",
+      "when": { "weekdays": [1, 4] },
+      "description": "Voluntary fasts kept each week.",
+      "voluntaryFast": true,
+      "citation": ""
+    }
+  ]
+}
