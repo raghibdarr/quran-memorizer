@@ -3,7 +3,6 @@
 import SegmentedControl from '@/components/ui/segmented-control';
 import { ChevronDownIcon } from '@/components/ui/icons';
 import { TIME_LABELS, type AlertMode, type PrayerAlert, type PrayerName } from '@/types/prayer';
-import type { AlertPlatform } from '@/lib/prayer/schedule';
 
 export const MODE_LABELS: Record<AlertMode, string> = {
   off: 'Off',
@@ -20,51 +19,55 @@ interface Props {
   time: string | null;
   alert: PrayerAlert;
   modes: AlertMode[];
-  platform: Exclude<AlertPlatform, 'web'>;
   onMode: (mode: AlertMode) => void;
   onPreAlert: (minutes: number) => void;
 }
 
-/** One prayer: its alert sound and an optional heads-up before it */
-export default function PrayerAlertRow({ prayer, time, alert, modes, platform, onMode, onPreAlert }: Props) {
+/** One prayer: its alert sound and an optional reminder before it */
+export default function PrayerAlertRow({ prayer, time, alert, modes, onMode, onPreAlert }: Props) {
   const label = TIME_LABELS[prayer];
   // A chime chosen on Android and restored on iPhone plays the system sound
   const shown: AlertMode = modes.includes(alert.mode) ? alert.mode : 'default';
+  const off = shown === 'off';
   const choices: number[] = PRE_ALERT_CHOICES.includes(alert.preAlertMin as (typeof PRE_ALERT_CHOICES)[number])
     ? [...PRE_ALERT_CHOICES]
     : [...PRE_ALERT_CHOICES, alert.preAlertMin].sort((a, b) => a - b);
 
   return (
-    <div className="px-4 py-3" data-alert-row={prayer}>
-      <div className="mb-2 flex items-baseline justify-between">
+    <div className="px-4 py-3.5 sm:grid sm:grid-cols-[1fr_20rem] sm:items-center sm:gap-x-6" data-alert-row={prayer} data-mode={shown}>
+      <div className="mb-2.5 flex items-baseline justify-between sm:mb-0 sm:flex-col sm:items-start sm:gap-0.5">
         <span className="text-base font-semibold text-foreground">{label}</span>
         {time && <span className="text-sm tabular-nums text-muted">today {time}</span>}
       </div>
       <div role="group" aria-label={`${label} alert`}>
-        <SegmentedControl options={modes.map((m) => ({ value: m, label: MODE_LABELS[m] }))} value={shown} onChange={onMode} />
+        <SegmentedControl
+          options={modes.map((m) => ({ value: m, label: MODE_LABELS[m] }))}
+          value={shown}
+          onChange={onMode}
+          // Teal means an alert is set: Off sits quietly so the list scans at a glance
+          className={off ? '[&_[aria-selected=true]]:text-foreground' : undefined}
+          chipClassName={off ? 'bg-card ring-1 ring-foreground/10' : undefined}
+        />
       </div>
       {alert.mode !== 'off' && (
-        <label className="mt-2 flex min-h-11 items-center justify-between gap-3">
-          <span className="text-sm text-foreground">Heads-up</span>
+        <label className="mt-1.5 flex min-h-11 items-center justify-between gap-3 sm:col-start-2">
+          <span className="text-sm text-muted">Remind me before</span>
           <span className="relative">
             <select
               value={alert.preAlertMin}
               onChange={(e) => onPreAlert(Number(e.target.value))}
-              className="min-h-11 appearance-none rounded-xl bg-foreground/5 py-2 pr-9 pl-3 text-sm font-medium text-foreground"
-              aria-label={`Heads-up before ${label}`}
+              className="min-h-11 appearance-none bg-transparent py-2 pr-7 pl-2 text-right text-sm font-medium text-teal [text-align-last:right]"
+              aria-label={`Remind me before ${label}`}
             >
               {choices.map((m) => (
                 <option key={m} value={m}>
-                  {m === 0 ? 'None' : `${m} min before`}
+                  {m === 0 ? 'No' : `${m} min`}
                 </option>
               ))}
             </select>
-            <ChevronDownIcon size={16} className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-muted" />
+            <ChevronDownIcon size={16} className="pointer-events-none absolute top-1/2 right-1 -translate-y-1/2 text-teal/70" />
           </span>
         </label>
-      )}
-      {platform === 'ios' && alert.mode === 'chime' && (
-        <p className="mt-1 text-xs text-muted">The chime is Android only; iPhone plays its notification sound.</p>
       )}
     </div>
   );

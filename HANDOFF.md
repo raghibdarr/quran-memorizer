@@ -40,3 +40,15 @@ Local builds in this worktree: Turbopack refuses the `node_modules` junction, so
 7. **The test alert shares the prayer range** (id 20019), so a replan used to cancel it. The glue now puts a
    still-waiting test alert back after a replan. On iOS with every other range full it is briefly a 65th
    pending notification; the furthest one is dropped by iOS until the next replan (unverified on device).
+
+## UX/UI pass
+
+8. **No button to Takrar's notification settings.** When notifications are off for Takrar the screen now says so
+   at the top on every visit (from the probed permission, not just a failed ask) and names where to go, but
+   there is no "Open settings" button: neither `@capacitor/local-notifications` nor the spec's `AdhanHealth`
+   contract can open the app's notification screen. Suggested for android-native: an
+   `AdhanHealth.openNotificationSettings()` (Android `Settings.ACTION_APP_NOTIFICATION_SETTINGS`; iOS
+   `UIApplication.openSettingsURLString`), then a button on the notice and the Notifications row.
+9. **Icons kept local.** The bell and the "needs attention" circle live in
+   `src/components/prayer/alerts/alert-icons.tsx`, since `src/components/ui/icons.tsx` is foundations-only.
+   Integration can move them into the shared set.

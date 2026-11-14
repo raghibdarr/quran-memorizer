@@ -1,9 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { CheckCircleIcon, ClockIcon } from '@/components/ui/icons';
 import { PRAYER_SYNCED_EVENT, requestPrayerResync } from '@/components/prayer-sync';
-import { cn } from '@/lib/cn';
 import {
   alertPermission,
   batteryUnrestricted,
@@ -18,6 +17,7 @@ import {
 } from '@/lib/prayer/notifications';
 import type { AlertPlatform } from '@/lib/prayer/schedule';
 import type { AlertMode } from '@/types/prayer';
+import { AlertCircleIcon } from './alert-icons';
 
 interface Health {
   permission: PermissionState;
@@ -29,7 +29,6 @@ interface Health {
 
 interface Props {
   platform: Exclude<AlertPlatform, 'web'>;
-  anyOn: boolean;
   /** The place's zone, for the "up to" date */
   tz: string;
   /** Changes when the screen wants a fresh look */
@@ -62,11 +61,13 @@ function upTo(ms: number, tz: string): string {
  * What stands between a prayer alert and the user, each with a pass or a fix:
  * notification permission, exact alarms and battery saving (Android), what is
  * set, and a test alert. Looks again on every return to the app, since most
- * fixes happen in the phone's settings.
+ * fixes happen in the phone's settings. Shown once at least one prayer is on.
  */
-export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, testMode }: Props) {
+export default function HealthCheck({ platform, tz, checkKey, onAllow, testMode }: Props) {
   const [health, setHealth] = useState<Health | null>(null);
-  const [test, setTest] = useState<'idle' | 'sent' | 'failed'>('idle');
+  const [test, setTest] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(resetTimer.current), []);
 
   const refresh = useCallback(() => {
     probe().then(setHealth).catch(() => {});
@@ -104,9 +105,14 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
   }, []);
 
   const sendTest = async () => {
-    if (health?.permission !== 'granted' && !(await onAllow())) return;
-    const ok = await sendTestAlert(testMode);
+    if (test === 'sending' || test === 'sent') return;
+    clearTimeout(resetTimer.current);
+    setTest('sending');
+    const ok = (health?.permission === 'granted' || (await onAllow())) && (await sendTestAlert(testMode));
     setTest(ok ? 'sent' : 'failed');
+    if (!ok) refresh();
+    // The answer shows on the button itself, held while the test is on its way
+    resetTimer.current = setTimeout(() => setTest('idle'), 10_000);
   };
 
   const h = health;
@@ -122,13 +128,13 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
           <>
             <Row
               id="permission"
-              ok={h.permission === 'granted'}
+              status={h.permission === 'granted' ? 'ok' : 'fix'}
               title="Notifications"
               detail={
                 h.permission === 'granted'
                   ? 'Allowed'
                   : h.permission === 'denied'
-                    ? 'Turned off for Takrar. Allow them in your phone’s settings.'
+                    ? 'Off for Takrar. Turn them on in your phone’s Settings, under Takrar.'
                     : 'Not allowed yet'
               }
               action={h.permission === 'prompt' ? { label: 'Allow', hint: 'Allow notifications', run: () => onAllow().then(refresh) } : undefined}
@@ -136,91 +142,91 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
             {platform === 'android' && (
               <Row
                 id="exact"
-                ok={h.exact === 'granted'}
+                status={h.exact === 'granted' ? 'ok' : 'fix'}
                 title="On-time delivery"
-                detail={h.exact === 'granted' ? 'Alerts arrive at the minute' : 'Alerts may arrive several minutes late'}
+                detail={
+                  h.exact === 'granted'
+                    ? 'Alerts arrive at the minute'
+                    : 'Alerts may arrive several minutes late. Turn on ‘Alarms & reminders’ for Takrar.'
+                }
                 action={h.exact === 'denied' ? { label: 'Open settings', hint: 'Open alarm settings', run: () => openExactAlarmSetting().then(() => undefined) } : undefined}
               />
             )}
             {platform === 'android' && h.battery !== null && (
               <Row
                 id="battery"
-                ok={h.battery}
+                status={h.battery ? 'ok' : 'fix'}
                 title="Battery saving"
-                detail={h.battery ? 'Takrar is not restricted' : 'Battery saving can delay or stop alerts'}
+                detail={h.battery ? 'Takrar is not restricted' : 'Battery saving can delay or stop alerts. Set Takrar to ‘Unrestricted’ or similar.'}
                 action={h.battery ? undefined : { label: 'Open settings', hint: 'Open battery settings', run: () => openBatterySettings().then(() => undefined) }}
               />
             )}
             <Row
               id="pending"
-              ok={!anyOn || h.pending.count > 0}
-              neutral={!anyOn}
+              status={h.pending.count > 0 ? 'ok' : h.permission === 'granted' ? 'wait' : 'fix'}
               title="Set on this phone"
               detail={
                 h.pending.count > 0 && h.pending.lastAt
                   ? `${h.pending.count} ${h.pending.count === 1 ? 'alert' : 'alerts'}, up to ${upTo(h.pending.lastAt, tz)}`
-                  : anyOn
-                    ? h.permission === 'granted'
-                      ? 'Setting them up…'
-                      : 'None yet: notifications aren’t allowed'
-                    : 'None: every prayer is off'
+                  : h.permission === 'granted'
+                    ? 'Setting them up…'
+                    : 'None yet: notifications aren’t allowed'
               }
             />
           </>
         )}
       </div>
-      {platform === 'ios' && anyOn && (
+      {platform === 'ios' && (
         <p className="mt-2 px-1 text-xs text-muted">iPhone holds a limited number of alerts at once. Opening Takrar tops them up.</p>
       )}
 
       <button
         type="button"
         onClick={sendTest}
-        className="pressable mt-3 flex min-h-11 w-full items-center justify-center rounded-xl bg-foreground/5 text-sm font-semibold text-foreground"
-        data-alerts-test
+        disabled={test === 'sending' || test === 'sent'}
+        className="tactile-btn mt-4 flex min-h-11 w-full items-center justify-center rounded-xl bg-teal/10 px-4 text-sm font-semibold text-teal"
+        data-alerts-test={test}
       >
-        Send a test alert in 10 seconds
+        {test === 'sent' ? 'Sent. Lock your phone to see it arrive.' : test === 'failed' ? 'Couldn’t send. Check notifications above.' : 'Send a test alert'}
       </button>
-      {test !== 'idle' && (
-        <p className="mt-2 px-1 text-center text-xs text-muted" role="status">
-          {test === 'sent'
-            ? h?.exact === 'denied'
-              ? 'On its way. Without on-time delivery it can take a few minutes.'
-              : 'On its way. Lock your phone to see it as it will arrive.'
-            : 'Couldn’t send a test alert. Check that notifications are allowed.'}
-        </p>
-      )}
+      <p className="mt-2 px-1 text-center text-xs text-muted">
+        {test === 'sent' && h?.exact === 'denied' ? 'Without on-time delivery it can take a few minutes.' : 'Arrives in 10 seconds'}
+      </p>
+      <span className="sr-only" role="status">
+        {test === 'sent' ? 'Test alert sent. Lock your phone to see it arrive.' : test === 'failed' ? 'Couldn’t send a test alert. Check notifications above.' : ''}
+      </span>
     </section>
   );
 }
 
 function Row({
   id,
-  ok,
-  neutral,
+  status,
   title,
   detail,
   action,
 }: {
   id: string;
-  ok: boolean;
-  neutral?: boolean;
+  /** ok: passes; fix: needs the user; wait: Takrar is still working on it */
+  status: 'ok' | 'fix' | 'wait';
   title: string;
   detail: string;
   /** `hint` is the button's name for screen readers (two rows say "Open settings") */
   action?: { label: string; hint?: string; run: () => Promise<unknown> };
 }) {
   return (
-    <div className="flex min-h-14 items-center gap-3 px-4 py-3" data-health={id} data-ok={ok ? 'true' : 'false'}>
-      {ok ? (
-        <CheckCircleIcon size={20} className={cn('shrink-0', neutral ? 'text-muted' : 'text-teal')} />
+    <div className="flex min-h-14 items-center gap-3 px-4 py-3" data-health={id} data-ok={status === 'ok' ? 'true' : 'false'} data-status={status}>
+      {status === 'ok' ? (
+        <CheckCircleIcon size={20} className="shrink-0 text-teal" />
+      ) : status === 'wait' ? (
+        <ClockIcon size={20} className="shrink-0 text-muted" />
       ) : (
-        <ClockIcon size={20} className="shrink-0 text-gold-deep" />
+        <AlertCircleIcon size={20} className="shrink-0 text-gold-deep" />
       )}
-      {!neutral && <span className="sr-only">{ok ? 'Fine: ' : 'Needs attention: '}</span>}
+      <span className="sr-only">{status === 'ok' ? 'Fine: ' : status === 'wait' ? 'In progress: ' : 'Needs attention: '}</span>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-medium text-foreground">{title}</p>
-        <p className="text-xs text-muted">{detail}</p>
+        <p className="text-xs leading-relaxed text-muted">{detail}</p>
       </div>
       {action && (
         <button

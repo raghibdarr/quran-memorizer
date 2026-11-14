@@ -6,17 +6,17 @@ import BackButton from '@/components/ui/back-button';
 import BottomNav from '@/components/layout/bottom-nav';
 import Button from '@/components/ui/button';
 import Card from '@/components/ui/card';
-import { ClockIcon } from '@/components/ui/icons';
 import { requestPrayerResync } from '@/components/prayer-sync';
 import { usePlaceStore } from '@/stores/place-store';
 import { calcSettingsOf, usePrayerStore } from '@/stores/prayer-store';
 import { nativePlatform } from '@/lib/native';
 import { computeDay, formatTime, isoInTz } from '@/lib/prayer/engine';
 import { modesFor, type AlertPlatform } from '@/lib/prayer/schedule';
-import { alertPermission, forcePrayerResync, requestAlertPermission } from '@/lib/prayer/notifications';
+import { alertPermission, forcePrayerResync, requestAlertPermission, type PermissionState } from '@/lib/prayer/notifications';
 import { PRAYER_NAMES, type AlertMode, type PrayerName } from '@/types/prayer';
 import PrayerAlertRow from './prayer-alert-row';
 import HealthCheck from './health-check';
+import { BellIcon } from './alert-icons';
 
 /**
  * /prayer/alerts (all-in-one spec 2.2, 6): per-prayer alert mode and heads-up,
@@ -47,15 +47,23 @@ export default function PrayerAlertsScreen() {
   );
 }
 
+function IconTile() {
+  return (
+    <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-teal/10 text-teal">
+      <BellIcon size={24} />
+    </span>
+  );
+}
+
 function WebNotice() {
   return (
     <Card className="px-5 py-8 text-center" data-alerts-web>
-      <ClockIcon size={28} className="mx-auto text-teal" />
-      <p className="mx-auto mt-3 max-w-[17rem] text-base font-semibold text-foreground">Prayer alerts need the app. Times work here.</p>
+      <IconTile />
+      <p className="mx-auto mt-4 max-w-[17rem] text-base font-semibold text-balance text-foreground">Prayer alerts need the app. Times work here.</p>
       <p className="mx-auto mt-2 max-w-[19rem] text-sm leading-relaxed text-muted">
         A browser can&apos;t be woken at prayer time without sending your times to a server, and your location stays on your device.
       </p>
-      <Link href="/prayer" className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-foreground/5 px-5 text-sm font-semibold text-foreground">
+      <Link href="/prayer" className="tactile-btn mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal/10 px-5 text-sm font-semibold text-teal">
         See today&apos;s times
       </Link>
     </Card>
@@ -67,6 +75,8 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
   const prayer = usePrayerStore();
   const { alerts, setAlert, setAllAlerts } = prayer;
   const [blocked, setBlocked] = useState(false);
+  // What the phone says now, so a later visit still shows that alerts can't arrive
+  const [permission, setPermission] = useState<PermissionState | null>(null);
   const [asking, setAsking] = useState(false);
   // Bumped when the health check should look again (after a grant or a settings change)
   const [checkKey, setCheckKey] = useState(0);
@@ -93,6 +103,27 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
     return () => clearTimeout(t);
   }, [alerts]);
 
+  // Look again on arrival, after a grant, and on every return from the phone's settings
+  useEffect(() => {
+    let live = true;
+    const look = () => {
+      if (document.hidden) return;
+      alertPermission()
+        .then((p) => {
+          if (!live) return;
+          setPermission(p);
+          if (p === 'granted') setBlocked(false);
+        })
+        .catch(() => {});
+    };
+    look();
+    document.addEventListener('visibilitychange', look);
+    return () => {
+      live = false;
+      document.removeEventListener('visibilitychange', look);
+    };
+  }, [checkKey]);
+
   /** Ask for notification permission when alerts are being turned on; true when allowed */
   const allow = async (): Promise<boolean> => {
     if ((await alertPermission()) === 'granted') return true;
@@ -100,6 +131,7 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
     const ok = await requestAlertPermission();
     setAsking(false);
     setBlocked(!ok);
+    alertPermission().then(setPermission).catch(() => {});
     if (ok) {
       forcePrayerResync();
       requestPrayerResync();
@@ -121,8 +153,8 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
   if (!place) {
     return (
       <Card className="px-5 py-8 text-center" data-alerts-no-place>
-        <ClockIcon size={28} className="mx-auto text-teal" />
-        <p className="mx-auto mt-3 max-w-[18rem] text-sm leading-relaxed text-muted">
+        <IconTile />
+        <p className="mx-auto mt-4 max-w-[18rem] text-balance text-sm leading-relaxed text-muted">
           Choose your place first, so alerts know when each prayer starts.
         </p>
         <Link href="/prayer/setup" className="tactile-btn mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal px-5 text-sm font-semibold text-on-teal">
@@ -133,6 +165,10 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
   }
 
   const modes = modesFor(platform);
+  const off = blocked || permission === 'denied';
+  // Alerts are on but the phone won't show them: say so first, on every visit
+  const notice: 'off' | 'ask' | null = off && (anyOn || blocked) ? 'off' : anyOn && permission === 'prompt' ? 'ask' : null;
+  const chimeOnIos = platform === 'ios' && PRAYER_NAMES.some((p) => alerts[p].mode === 'chime');
 
   return (
     <>
@@ -148,10 +184,30 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
         </Card>
       )}
 
-      {blocked && (
-        <p className="rounded-2xl bg-gold/10 px-4 py-3 text-sm text-gold-deep" role="status">
-          Notifications are turned off for Takrar. Allow them in your phone&apos;s settings, then try again.
-        </p>
+      {notice && (
+        <div className="rounded-2xl bg-gold/10 px-4 py-3" role="status" data-alerts-notice={notice}>
+          <p className="text-sm font-semibold text-gold-deep">
+            {notice === 'ask'
+              ? 'Notifications aren’t allowed yet, so no alerts will arrive.'
+              : anyOn
+                ? 'Notifications are off for Takrar, so no alerts will arrive.'
+                : 'Notifications are off for Takrar.'}
+          </p>
+          {notice === 'off' ? (
+            <p className="mt-0.5 text-sm text-gold-deep/90">
+              Turn them on in your phone&apos;s Settings, under Takrar, then {anyOn ? 'come back here' : 'try again'}.
+            </p>
+          ) : (
+            <button
+              type="button"
+              onClick={() => void allow()}
+              disabled={asking}
+              className="pressable mt-2 min-h-11 rounded-xl bg-gold/15 px-4 text-sm font-semibold text-gold-deep"
+            >
+              Allow notifications
+            </button>
+          )}
+        </div>
       )}
 
       <section aria-labelledby="alerts-each">
@@ -166,18 +222,24 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
               time={today?.[p] ?? null}
               alert={alerts[p]}
               modes={modes}
-              platform={platform}
               onMode={(m) => changeMode(p, m)}
               onPreAlert={(min) => setAlert(p, { preAlertMin: min })}
             />
           ))}
         </div>
-        {platform === 'android' && (
-          <p className="mt-2 px-1 text-xs text-muted">Sound uses your phone&apos;s notification sound. Chime is Takrar&apos;s own short tone.</p>
+        {platform === 'android' ? (
+          <p className="mt-2 px-1 text-xs leading-relaxed text-muted">
+            Sound uses your phone&apos;s notification sound. Chime is Takrar&apos;s own short tone. Silent shows the alert without a sound.
+          </p>
+        ) : (
+          <p className="mt-2 px-1 text-xs leading-relaxed text-muted">
+            Silent shows the alert without a sound.{chimeOnIos ? ' The chime is Android only, so iPhone plays its notification sound.' : ''}
+          </p>
         )}
       </section>
 
-      <HealthCheck platform={platform} anyOn={anyOn} tz={place.tz} checkKey={checkKey} onAllow={allow} testMode={firstOnMode(alerts)} />
+      {/* Nothing to check until a prayer is on: the intro card stays the one first step */}
+      {anyOn && <HealthCheck platform={platform} tz={place.tz} checkKey={checkKey} onAllow={allow} testMode={firstOnMode(alerts)} />}
     </>
   );
 }

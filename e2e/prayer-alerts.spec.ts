@@ -80,11 +80,13 @@ test.describe('prayer alerts', () => {
     await expect(page.getByText('Tell me when each prayer starts?')).toBeVisible()
     expect(await page.evaluate(() => (window as unknown as { __os: { requests: number } }).__os.requests)).toBe(0)
     await expect(page.locator('[data-alert-row]')).toHaveCount(5)
-    await expect(page.locator('[data-health="exact"]')).toContainText('may arrive several minutes late')
+    // Nothing to check until a prayer is on
+    await expect(page.locator('[data-alerts-health]')).toHaveCount(0)
 
     await page.getByRole('button', { name: 'Notify me for every prayer' }).click()
     await expect(page.getByText('Tell me when each prayer starts?')).toHaveCount(0)
     expect(await page.evaluate(() => (window as unknown as { __os: { requests: number } }).__os.requests)).toBe(1)
+    await expect(page.locator('[data-health="exact"]')).toContainText('may arrive several minutes late')
 
     // The sync plans 30 days, inexactly (no exact-alarm grant)
     await expect
@@ -106,8 +108,8 @@ test.describe('prayer alerts', () => {
     await mockAndroid(page, { display: 'prompt', exact: 'granted' })
     await page.goto('/prayer/alerts')
     await page.getByRole('button', { name: 'Notify me for every prayer' }).click()
-    await page.getByRole('button', { name: 'Send a test alert in 10 seconds' }).click()
-    await expect(page.getByText(/On its way/)).toBeVisible()
+    await page.getByRole('button', { name: 'Send a test alert' }).click()
+    await expect(page.getByRole('button', { name: /^Sent\./ })).toBeDisabled()
     const pending = () => page.evaluate(() => [...(window as unknown as { __os: { pending: Map<number, unknown> } }).__os.pending.keys()])
     // The sync lands about 1.5 s later and replaces the whole prayer range
     await expect.poll(async () => (await pending()).length, { timeout: 10_000 }).toBeGreaterThan(100)
