@@ -3,8 +3,8 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { OSM_ATTRIBUTION, PackError, loadPack, nearestMosques, packPath, toMosque, validatePack, type MosquePack } from './pack';
-import { mapsHref, mapsPlatform, pinLabel } from './links';
-import { MOSQUE_INDEX, packInfo } from './index-data';
+import { mapsHref, mapsPlatform, opensInNewTab, pinLabel } from './links';
+import { MOSQUE_INDEX, countryName, packInfo } from './index-data';
 
 const DIR = join(process.cwd(), 'public', 'data', 'mosques');
 const SOURCE_MD = join(process.cwd(), 'data-sources', 'osm-mosques', 'SOURCE.md');
@@ -127,6 +127,17 @@ describe('index-data', () => {
   });
 });
 
+describe('countryName', () => {
+  it('reads in a sentence, with "the" where English uses it', () => {
+    expect(countryName('GB')).toBe('the United Kingdom');
+    expect(countryName('us')).toBe('the United States');
+    expect(countryName('NL')).toBe('the Netherlands');
+    expect(countryName('DE')).toBe('Germany');
+    expect(countryName('CD')).toBe('the Democratic Republic of the Congo');
+    expect(countryName('BA')).toBe('Bosnia and Herzegovina');
+  });
+});
+
 describe('mapsHref', () => {
   const m = toMosque([51.5194, -0.0651, 'East London Mosque (ELM)', 'مسجد شرق لندن']);
   it('geo: URI with the mosque position and a label', () => {
@@ -134,6 +145,12 @@ describe('mapsHref', () => {
   });
   it("Apple Maps' own scheme on iOS", () => {
     expect(mapsHref(m, 'ios')).toBe('maps://?ll=51.5194,-0.0651&q=East%20London%20Mosque%20ELM');
+  });
+  it('openstreetmap.org on other desktop browsers, with the mosque position only', () => {
+    expect(mapsHref(m, 'web')).toBe('https://www.openstreetmap.org/?mlat=51.5194&mlon=-0.0651#map=18/51.5194/-0.0651');
+    expect(opensInNewTab('web')).toBe(true);
+    expect(opensInNewTab('android')).toBe(false);
+    expect(opensInNewTab('ios')).toBe(false);
   });
   it('labels an unnamed mosque', () => {
     expect(pinLabel(toMosque([1, 2]))).toBe('Mosque');
@@ -148,15 +165,16 @@ describe('mapsPlatform', () => {
     vi.stubGlobal('navigator', { userAgent: ua, maxTouchPoints: 0 });
     return mapsPlatform();
   };
-  it('Apple devices (iPhone, iPad, Mac) get the maps: scheme; everything else geo:', () => {
+  it('Apple devices (iPhone, iPad, Mac) get maps:, Android geo:, other desktops the web', () => {
     expect(on('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)')).toBe('ios');
     expect(on('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)')).toBe('ios');
-    expect(on('Mozilla/5.0 (Linux; Android 15; Pixel 9)')).toBe('other');
-    expect(on('Mozilla/5.0 (Windows NT 10.0; Win64; x64)')).toBe('other');
+    expect(on('Mozilla/5.0 (Linux; Android 15; Pixel 9)')).toBe('android');
+    expect(on('Mozilla/5.0 (Windows NT 10.0; Win64; x64)')).toBe('web');
+    expect(on('Mozilla/5.0 (X11; Linux x86_64)')).toBe('web');
   });
   it('trusts Capacitor over the user agent', () => {
     expect(on('Mozilla/5.0 (Linux; Android 15)', 'ios')).toBe('ios');
-    expect(on('Mozilla/5.0 (Macintosh)', 'android')).toBe('other');
+    expect(on('Mozilla/5.0 (Macintosh)', 'android')).toBe('android');
   });
 });
 

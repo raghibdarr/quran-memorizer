@@ -1,21 +1,24 @@
 'use client';
 
-import { useMemo, useState, useSyncExternalStore } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import Link from '@/components/app-link';
 import BackButton from '@/components/ui/back-button';
 import BottomNav from '@/components/layout/bottom-nav';
-import Card from '@/components/ui/card';
 import { SkeletonRows } from '@/components/ui/skeleton';
 import { MapPinIcon } from '@/components/ui/icons';
+import { cn } from '@/lib/cn';
 import { usePlaceStore } from '@/stores/place-store';
-import { compassName, compassPoint, formatDistance, spokenDistance } from '@/lib/mosques/geo';
+import { compassName, compassPoint, distanceLine } from '@/lib/mosques/geo';
 import { loadPack, nearestMosques, OSM_ATTRIBUTION, PackError, type MosquePack, type NearMosque } from '@/lib/mosques/pack';
 import { countryName, formatBytes, packInfo } from '@/lib/mosques/index-data';
-import { mapsHref, mapsPlatform } from '@/lib/mosques/links';
+import { mapsHref, mapsPlatform, opensInNewTab, type MapsPlatform } from '@/lib/mosques/links';
+import { fitsAppArabicFace, isArabicScript } from '@/lib/mosques/script';
 import type { Place } from '@/types/prayer';
 
 const PAGE = 20;
 const MAX_SHOWN = 100;
+/** Lists smaller than this load as soon as the screen opens; bigger ones (Türkiye, Iran, Bangladesh) ask first */
+const AUTO_LOAD_BYTES = 500_000;
 
 // Kept for this app session: once a country's list is loaded, coming back to the
 // screen shows it straight away. Nothing about it is stored on the device.
@@ -27,13 +30,20 @@ function useOnDevice(): boolean {
   return useSyncExternalStore(noop, () => true, () => false);
 }
 
+/** In the native apps every list is inside the app bundle, so loading one costs nothing */
+function isNativeApp(): boolean {
+  if (typeof window === 'undefined') return false;
+  const cap = (window as unknown as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor;
+  return !!cap?.isNativePlatform?.();
+}
+
 type LoadState = { status: 'idle' } | { status: 'loading' } | { status: 'error'; kind: PackError['kind'] };
 
 /**
  * Mosques near the user's place (all-in-one spec 2.2, 4): one country's list from
- * OpenStreetMap, sorted on the device by straight-line distance. The list loads
- * only when asked, the request names the country and nothing else, and no map
- * tiles are drawn (a tile request would give the position away).
+ * OpenStreetMap, sorted on the device by straight-line distance. The request names
+ * the country and nothing else; small lists load when the screen opens, big ones
+ * only when asked. No map tiles are drawn (a tile request would give the place away).
  */
 export default function MosqueFinder() {
   const onDevice = useOnDevice();
@@ -49,7 +59,7 @@ export default function MosqueFinder() {
         </div>
       </div>
 
-      <main className="mx-auto max-w-2xl space-y-3 px-4 pt-5">
+      <main className="mx-auto max-w-2xl space-y-4 px-4 pt-5">
         {!onDevice ? <SkeletonRows count={3} /> : !place ? <NeedPlace /> : <ForPlace key={place.countryCode} place={place} />}
       </main>
 
@@ -58,24 +68,37 @@ export default function MosqueFinder() {
   );
 }
 
-function NeedPlace() {
+const primaryBtn =
+  'tactile-btn mt-5 flex min-h-12 w-full items-center justify-center rounded-xl bg-teal text-sm font-semibold text-on-teal disabled:opacity-60';
+const quietBtn =
+  'mt-5 flex min-h-12 w-full items-center justify-center rounded-xl border border-foreground/10 text-sm font-semibold text-teal transition-colors hover:bg-foreground/[0.03] active:bg-foreground/5';
+
+/** The one card layout every non-list state of the screen uses */
+function StateCard({ title, children, action, ...data }: { title: string; children: ReactNode; action?: ReactNode } & Record<`data-${string}`, boolean>) {
   return (
-    <Card className="px-5 py-7 text-center" >
+    <div className="rounded-2xl border border-foreground/10 bg-card px-5 py-7 text-center" {...data}>
       <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-teal/10 text-teal">
         <MapPinIcon size={20} />
       </span>
-      <p className="mt-3 font-semibold text-foreground">Set your place first</p>
-      <p className="mx-auto mt-1 max-w-[18rem] text-sm leading-relaxed text-muted">
-        Mosques are listed by distance from the place you choose for prayer times. It stays on your phone.
-      </p>
-      <Link
-        href="/prayer/setup"
-        className="tactile-btn mt-5 inline-flex min-h-12 items-center justify-center rounded-xl bg-teal px-6 text-sm font-semibold text-on-teal"
-        data-mosques-setup
-      >
-        Set your place
-      </Link>
-    </Card>
+      <p className="mt-3 font-semibold text-balance text-foreground">{title}</p>
+      <div className="mx-auto mt-1 max-w-[18rem] text-sm leading-relaxed text-balance text-muted">{children}</div>
+      {action}
+    </div>
+  );
+}
+
+function NeedPlace() {
+  return (
+    <StateCard
+      title="Set your place first"
+      action={
+        <Link href="/prayer/setup" className={primaryBtn} data-mosques-setup>
+          Set your place
+        </Link>
+      }
+    >
+      Mosques are listed by distance from the place you choose for prayer times. Your location stays on your phone.
+    </StateCard>
   );
 }
 
@@ -83,71 +106,112 @@ function ForPlace({ place }: { place: Place }) {
   const cc = place.countryCode;
   const info = packInfo(cc);
   const country = countryName(cc);
+  const auto = !!info && (info.bytes < AUTO_LOAD_BYTES || isNativeApp());
   const [pack, setPack] = useState<MosquePack | null>(() => loaded.get(cc) ?? null);
-  const [state, setState] = useState<LoadState>({ status: 'idle' });
+  const [state, setState] = useState<LoadState>(() => (auto && !loaded.has(cc) ? { status: 'loading' } : { status: 'idle' }));
+  const started = useRef(false);
 
-  if (!info) return <NoPack country={cc ? country : ''} />;
+  const fetchPack = () =>
+    loadPack(cc).then(
+      (p) => {
+        loaded.set(cc, p);
+        setPack(p);
+        setState({ status: 'idle' });
+      },
+      (err) => setState({ status: 'error', kind: err instanceof PackError ? err.kind : 'network' }),
+    );
 
-  const load = async () => {
-    setState({ status: 'loading' });
-    try {
-      const p = await loadPack(cc);
-      loaded.set(cc, p);
-      setPack(p);
-      setState({ status: 'idle' });
-    } catch (err) {
-      setState({ status: 'error', kind: err instanceof PackError ? err.kind : 'network' });
-    }
-  };
+  // A small list loads as the screen opens (once, even under StrictMode's double effect)
+  useEffect(() => {
+    if (state.status !== 'loading' || started.current) return;
+    started.current = true;
+    void fetchPack();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once for the initial auto load
+  }, []);
 
+  if (!cc) return <NoCountry />;
+  if (!info) return <NoPack country={country} />;
   if (pack) return <MosqueList pack={pack} place={place} country={country} />;
   if (state.status === 'error' && state.kind === 'missing') return <NoPack country={country} />;
 
+  const load = () => {
+    setState({ status: 'loading' });
+    void fetchPack();
+  };
+
+  const near = place.label || country;
+
+  // A small list loading on its own: just the shape of the list to come
+  if (auto && state.status === 'loading') {
+    return (
+      <div className="space-y-3" data-mosques-loading>
+        <p className="px-1 text-[11px] font-bold uppercase tracking-wider text-teal">Nearest to {near}</p>
+        <SkeletonRows count={4} />
+      </div>
+    );
+  }
+
   return (
     <>
-      <Card className="px-5 py-6" data-mosques-confirm>
-        <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Mosques near {place.label || country}</p>
-        <p className="mt-2 text-sm leading-relaxed text-foreground">
-          This loads the mosque list for {country}. Your position is not sent.
-        </p>
-        <p className="mt-1 text-xs text-muted">
-          {info.count.toLocaleString('en')} mosques, {formatBytes(info.bytes)}. The nearest are worked out on your phone.
-        </p>
-        {state.status === 'error' && (
-          <p className="mt-3 text-sm text-foreground" role="alert">
+      <StateCard
+        title={`Mosques near ${near}`}
+        data-mosques-confirm
+        action={
+          <button type="button" onClick={load} disabled={state.status === 'loading'} className={primaryBtn} data-mosques-load>
+            {state.status === 'loading' ? 'Loading…' : state.status === 'error' ? 'Try again' : 'Show mosques'}
+          </button>
+        }
+      >
+        {state.status === 'error' ? (
+          <p role="alert">
             {state.kind === 'invalid'
               ? `The list for ${country} couldn't be read. Try again later.`
               : "Couldn't load the list. If you're offline, try again once you're connected."}
           </p>
+        ) : (
+          <p>
+            We&apos;ll download the list for {country} ({formatBytes(info.bytes)}) and find the nearest on your phone. Your location
+            isn&apos;t sent.
+          </p>
         )}
-        <button
-          type="button"
-          onClick={load}
-          disabled={state.status === 'loading'}
-          className="tactile-btn mt-5 flex min-h-12 w-full items-center justify-center rounded-xl bg-teal text-sm font-semibold text-on-teal disabled:opacity-60"
-          data-mosques-load
-        >
-          {state.status === 'loading' ? 'Loading…' : state.status === 'error' ? 'Try again' : 'Show mosques'}
-        </button>
-      </Card>
+      </StateCard>
       {state.status === 'loading' && <SkeletonRows count={4} />}
       <Attribution />
     </>
   );
 }
 
+/** A place with no country code (possible for a GPS place): the list may well exist */
+function NoCountry() {
+  return (
+    <StateCard
+      title="We couldn't tell which country you're in"
+      data-mosques-nocountry
+      action={
+        <Link href="/prayer/setup" className={primaryBtn} data-mosques-setup>
+          Choose a city
+        </Link>
+      }
+    >
+      Pick your city and we&apos;ll show mosques near it.
+    </StateCard>
+  );
+}
+
 function NoPack({ country }: { country: string }) {
   return (
     <>
-      <Card className="px-5 py-7 text-center" data-mosques-empty>
-        <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-teal/10 text-teal">
-          <MapPinIcon size={20} />
-        </span>
-        <p className="mt-3 font-semibold text-foreground">{country ? `No mosque list for ${country} yet` : 'No mosque list for this place yet'}</p>
-        <p className="mx-auto mt-1 max-w-[18rem] text-sm leading-relaxed text-muted">
-          Lists are built from OpenStreetMap one country at a time, and this one isn&apos;t in the app yet.
-        </p>
-      </Card>
+      <StateCard
+        title={`We don't have a mosque list for ${country} yet`}
+        data-mosques-empty
+        action={
+          <Link href="/prayer/settings" className={quietBtn} data-mosques-change>
+            Change place
+          </Link>
+        }
+      >
+        Lists come from OpenStreetMap, one country at a time. If your place is wrong, you can change it.
+      </StateCard>
       <Attribution />
     </>
   );
@@ -163,17 +227,15 @@ function MosqueList({ pack, place, country }: { pack: MosquePack; place: Place; 
     <>
       <div className="px-1">
         <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Nearest to {place.label || country}</p>
-        <p className="mt-0.5 text-xs text-muted">
-          Straight-line distance and direction from your place. Your place is kept to the nearest kilometre or so, so the closest ones are approximate.
-        </p>
+        <p className="mt-1 text-xs leading-relaxed text-muted">Straight-line distance. Tap a mosque to open it in Maps.</p>
       </div>
-      <Card className="p-0" >
+      <div className="overflow-hidden rounded-2xl border border-foreground/10 bg-card">
         <ul className="divide-y divide-foreground/10" data-mosques-list>
           {list.map((m, i) => (
-            <MosqueRow key={`${m.lat},${m.lng},${i}`} m={m} cc={place.countryCode} href={mapsHref(m, platform)} />
+            <MosqueRow key={`${m.lat},${m.lng},${i}`} m={m} cc={place.countryCode} platform={platform} />
           ))}
         </ul>
-      </Card>
+      </div>
       {shown < near.length && (
         <button
           type="button"
@@ -185,59 +247,114 @@ function MosqueList({ pack, place, country }: { pack: MosquePack; place: Place; 
         </button>
       )}
       <p className="px-1 text-xs leading-relaxed text-muted">
-        Names and places are mapped by volunteers and can be out of date. Only mosques in {country} are listed.
+        Your place is kept to about a kilometre, so the nearest ones are approximate. Names and places are mapped by volunteers and can
+        be out of date. Only mosques in {country} are listed.
       </p>
       <Attribution date={pack.date} />
     </>
   );
 }
 
-function MosqueRow({ m, cc, href }: { m: NearMosque; cc: string; href: string }) {
+/** A name line in Arabic script: the app's Arabic face when it has every letter, the device's otherwise */
+function arabicName(name: string, size: 'primary' | 'secondary') {
+  const brand = fitsAppArabicFace(name);
+  return cn(
+    'text-left [overflow-wrap:anywhere]',
+    brand ? 'font-[family-name:var(--font-arabic)]' : 'font-normal',
+    size === 'primary' ? 'text-lg leading-[1.6] text-foreground' : 'mt-0.5 text-[17px] leading-[1.5] text-muted',
+    !brand && size === 'primary' && 'text-[17px]',
+  );
+}
+
+function MosqueRow({ m, cc, platform }: { m: NearMosque; cc: string; platform: MapsPlatform }) {
+  const dist = distanceLine(m.distanceKm, cc);
   const point = compassPoint(m.bearing);
-  const distance = formatDistance(m.distanceKm, cc);
+  const name = m.name || m.nameEn;
   // The English name, if the map has one, under a name in another script
-  const sub = m.nameEn && m.nameEn !== m.name ? m.nameEn : '';
+  const sub = m.nameEn && m.nameEn !== name ? m.nameEn : '';
+  const newTab = opensInNewTab(platform);
   return (
-    <li className="flex items-center gap-3 px-4 py-3" data-mosque>
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-foreground [overflow-wrap:anywhere]" dir="auto">
-          {m.name || m.nameEn || <span className="font-normal text-muted">Unnamed mosque</span>}
-        </p>
-        {sub && <p className="text-xs text-muted [overflow-wrap:anywhere]" dir="auto">{sub}</p>}
-        {m.nameAr && (
-          <p className="arabic-text mt-0.5 text-base leading-snug text-foreground/80" dir="rtl" lang="ar">
-            {m.nameAr}
-          </p>
-        )}
-        <p className="mt-1 flex items-center gap-1.5 text-xs text-muted" data-mosque-distance>
-          <BearingArrow deg={m.bearing} />
-          <span aria-hidden>
-            {distance} · {point}
-          </span>
-          {/* aria-label on a plain paragraph is not announced reliably; real text is */}
-          <span className="sr-only">
-            {spokenDistance(distance)} {compassName(point)}
-          </span>
-        </p>
-      </div>
+    <li data-mosque>
       <a
-        href={href}
-        className="flex min-h-11 shrink-0 items-center rounded-xl border border-teal/30 px-3 text-xs font-semibold text-teal hover:bg-teal/5"
-        aria-label={`Open ${m.name || m.nameEn || 'this mosque'} in Maps`}
+        href={mapsHref(m, platform)}
+        {...(newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className="flex min-h-14 items-center gap-3 px-4 py-3 transition-colors hover:bg-foreground/[0.03] active:bg-foreground/5 focus-visible:bg-foreground/[0.03]"
         data-mosque-maps
       >
-        Open in Maps
+        <div className="min-w-0 flex-1">
+          {!name ? (
+            <p className="text-base leading-snug text-muted">Unnamed mosque</p>
+          ) : isArabicScript(name) ? (
+            <p className={arabicName(name, 'primary')} dir="rtl" lang="ar">
+              {name}
+            </p>
+          ) : (
+            <p className="text-base font-semibold leading-snug text-foreground [overflow-wrap:anywhere]" dir="auto">
+              {name}
+            </p>
+          )}
+          {sub && (
+            <p className="mt-0.5 text-left text-[13px] text-muted [overflow-wrap:anywhere]" dir="auto">
+              {sub}
+            </p>
+          )}
+          {m.nameAr && m.nameAr !== name && (
+            <p className={arabicName(m.nameAr, 'secondary')} dir="rtl" lang="ar">
+              {m.nameAr}
+            </p>
+          )}
+          <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium tabular-nums text-muted" data-mosque-distance>
+            {!dist.near && <BearingArrow deg={m.bearing} />}
+            <span aria-hidden>{dist.near ? dist.text : `${dist.text} · ${point}`}</span>
+            {/* Real text, not aria-label, so it is read with the name */}
+            <span className="sr-only">{dist.near ? dist.spoken : `${dist.spoken} ${compassName(point)}`}. Open in Maps</span>
+          </p>
+        </div>
+        <ExternalIcon />
       </a>
     </li>
   );
 }
 
-/** A small arrow pointing the way from the place (north is up, as on a map) */
+/** Leaves the app (a maps app or a new tab), so an arrow out of a box rather than a chevron; a plain arrow would read as a direction */
+function ExternalIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="shrink-0 text-muted"
+    >
+      <path d="M14 4h6v6M20 4l-8.5 8.5M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10" />
+    </svg>
+  );
+}
+
+/** The way from the place, north up as on a map: a stroked arrow in a fixed round marker */
 function BearingArrow({ deg }: { deg: number }) {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden className="shrink-0 text-teal" style={{ transform: `rotate(${Math.round(deg)}deg)` }}>
-      <path d="M12 3 L18 19 L12 15 L6 19 Z" fill="currentColor" />
-    </svg>
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/10" aria-hidden>
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.25}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="text-teal"
+        style={{ transform: `rotate(${Math.round(deg)}deg)`, transformOrigin: '50% 50%' }}
+      >
+        <path d="M12 20V4M6 10l6-6 6 6" />
+      </svg>
+    </span>
   );
 }
 

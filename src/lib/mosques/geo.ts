@@ -88,3 +88,28 @@ export function spokenDistance(formatted: string): string {
   if (unit === 'm') return `${n} metres`;
   return formatted;
 }
+
+export interface DistanceLine {
+  /** '1.4 km', or 'Under 1 km' when close */
+  text: string;
+  /** The same for screen readers: '1.4 kilometres', 'under 1 kilometre' */
+  spoken: string;
+  /**
+   * True under 1 km (1 mile where signs use miles). The place is rounded to
+   * about a kilometre, so closer than that neither the figure nor the
+   * direction means much, and the row shows neither.
+   */
+  near: boolean;
+}
+
+/** What a mosque row says about distance */
+export function distanceLine(km: number, countryCode = ''): DistanceLine {
+  const miles = usesMiles(countryCode);
+  if (miles ? km < KM_PER_MILE : km < 1) {
+    return miles
+      ? { text: 'Under 1 mi', spoken: 'under 1 mile', near: true }
+      : { text: 'Under 1 km', spoken: 'under 1 kilometre', near: true };
+  }
+  const text = formatDistance(km, countryCode);
+  return { text, spoken: spokenDistance(text), near: false };
+}

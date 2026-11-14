@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
-import { bearingDeg, compassName, compassPoint, formatDistance, haversineKm, spokenDistance, usesMiles } from './geo';
+import { bearingDeg, compassName, compassPoint, distanceLine, formatDistance, haversineKm, spokenDistance, usesMiles } from './geo';
 
 const LONDON = { lat: 51.5074, lng: -0.1278 };
 const PARIS = { lat: 48.8566, lng: 2.3522 };
@@ -112,5 +112,20 @@ describe('spokenDistance', () => {
     expect(spokenDistance('1.2 km')).toBe('1.2 kilometres');
     expect(spokenDistance('14 km')).toBe('14 kilometres');
     expect(spokenDistance(formatDistance(1, 'FR'))).toBe('1.0 kilometre');
+  });
+});
+
+describe('distanceLine', () => {
+  it('says "Under 1 km" (no figure) inside the rounding of the place', () => {
+    expect(distanceLine(0.05)).toEqual({ text: 'Under 1 km', spoken: 'under 1 kilometre', near: true });
+    expect(distanceLine(0.999, 'TR')).toMatchObject({ text: 'Under 1 km', near: true });
+    expect(distanceLine(1, 'TR')).toEqual({ text: '1.0 km', spoken: '1.0 kilometre', near: false });
+    expect(distanceLine(3.44, 'SA')).toEqual({ text: '3.4 km', spoken: '3.4 kilometres', near: false });
+  });
+  it('miles where signs use them, from 1 mile up', () => {
+    expect(distanceLine(0.9, 'GB')).toEqual({ text: 'Under 1 mi', spoken: 'under 1 mile', near: true });
+    expect(distanceLine(1.6, 'US')).toMatchObject({ text: 'Under 1 mi', near: true });
+    expect(distanceLine(1.609344, 'GB')).toEqual({ text: '1.0 mi', spoken: '1.0 mile', near: false });
+    expect(distanceLine(5, 'GB')).toMatchObject({ text: '3.1 mi', near: false });
   });
 });

@@ -13,14 +13,36 @@ export function packInfo(cc: string): { count: number; bytes: number } | null {
   return MOSQUE_INDEX.countries[cc.toUpperCase()] ?? null;
 }
 
-/** 'United Kingdom' for 'GB' (from the device's own Intl data); the code itself if Intl can't say */
+// Plainer names than Intl's short forms, for reading in a sentence
+const NAMES: Record<string, string> = {
+  BA: 'Bosnia and Herzegovina',
+  CD: 'the Democratic Republic of the Congo',
+  CG: 'the Republic of the Congo',
+  HK: 'Hong Kong',
+  LC: 'Saint Lucia',
+  MM: 'Myanmar',
+  PS: 'Palestine',
+  TT: 'Trinidad and Tobago',
+};
+
+// Names read with "the" in English ("the list for the United Kingdom")
+const WITH_THE = new Set(['AE', 'BS', 'CF', 'CK', 'DO', 'FK', 'FO', 'GB', 'GM', 'IM', 'KM', 'KY', 'MH', 'MV', 'NL', 'PH', 'SB', 'TC', 'US', 'VA', 'VG', 'VI']);
+
+/**
+ * The country as it reads mid-sentence: 'the United Kingdom' for 'GB', 'Türkiye'
+ * for 'TR' (from the device's own Intl data); the code itself if Intl can't say.
+ */
 export function countryName(cc: string): string {
   if (!cc) return 'your country';
+  const code = cc.toUpperCase();
+  if (NAMES[code]) return NAMES[code];
+  let name = code;
   try {
-    return new Intl.DisplayNames(['en'], { type: 'region' }).of(cc.toUpperCase()) ?? cc;
+    name = new Intl.DisplayNames(['en'], { type: 'region' }).of(code) ?? code;
   } catch {
-    return cc;
+    return code;
   }
+  return WITH_THE.has(code) ? `the ${name}` : name;
 }
 
 /** '60 KB', '1.2 MB' */
