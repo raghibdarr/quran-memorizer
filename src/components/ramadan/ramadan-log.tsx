@@ -12,8 +12,20 @@ import MarkChips from './mark-chips';
 const CELL: Record<FastMark, string> = {
   fasted: 'bg-teal text-on-teal',
   owed: 'bg-gold/20 text-foreground ring-1 ring-inset ring-gold',
-  exempt: 'bg-foreground/10 text-muted',
+  exempt: 'border border-dashed border-foreground/40 bg-transparent text-muted',
 };
+
+const SWATCH: Record<FastMark, string> = {
+  fasted: 'bg-teal',
+  owed: 'bg-gold/20 ring-1 ring-inset ring-gold',
+  exempt: 'border border-dashed border-foreground/50',
+};
+
+const LEGEND: { mark: FastMark; label: string }[] = [
+  { mark: 'fasted', label: 'fasted' },
+  { mark: 'owed', label: 'to make up' },
+  { mark: 'exempt', label: 'exempt' },
+];
 
 /**
  * One Ramadan's days as a grid: tap a day, then mark it. Days ahead of today
@@ -44,7 +56,7 @@ export default function RamadanLog({ span, today, collapsible = false }: { span:
             className="flex min-h-11 w-full items-center justify-between gap-2 px-1 text-left"
           >
             <span>
-              <span className="block text-sm font-semibold text-foreground">Log for Ramadan {span.hijriYear}</span>
+              <span className="block text-base font-semibold text-foreground">Log for Ramadan {span.hijriYear}</span>
               <span className="block text-xs text-muted">
                 {formatCivilShort(span.start)} – {formatCivilShort(span.end)} · expected
               </span>
@@ -53,8 +65,8 @@ export default function RamadanLog({ span, today, collapsible = false }: { span:
           </button>
         ) : (
           <div className="flex items-baseline justify-between gap-2 px-1">
-            <h2 className="text-sm font-semibold text-foreground">Ramadan {span.hijriYear}</h2>
-            <span className="text-xs text-muted">
+            <h2 className="shrink-0 text-base font-semibold whitespace-nowrap text-foreground">Ramadan {span.hijriYear}</h2>
+            <span className="text-right text-xs text-muted">
               {formatCivilShort(span.start)} – {formatCivilShort(span.end)} · expected
             </span>
           </div>
@@ -111,10 +123,15 @@ export default function RamadanLog({ span, today, collapsible = false }: { span:
               )}
             </div>
 
-            <p className="mt-3 px-1 text-xs text-muted" data-ramadan-counts>
-              {counts.fasted} fasted
-              {counts.owed > 0 && ` · ${counts.owed} to make up`}
-              {counts.exempt > 0 && ` · ${counts.exempt} exempt`}
+            <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 px-1 text-[11px] text-muted" data-ramadan-counts>
+              {LEGEND.map(({ mark, label }) => (
+                <span key={mark} className="flex items-center gap-1.5" data-count={mark}>
+                  <span aria-hidden className={cn('h-2.5 w-2.5 shrink-0 rounded-[3px]', SWATCH[mark])} />
+                  <span className="tabular-nums">
+                    {counts[mark]} {label}
+                  </span>
+                </span>
+              ))}
             </p>
           </>
         )}

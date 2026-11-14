@@ -219,15 +219,19 @@ export function formatCountdown(at: number, now: number): string {
 
 export const FAST_MARK_LABELS: Record<FastMark, string> = {
   fasted: 'Fasted',
-  owed: 'Not fasted',
+  owed: 'To make up',
   exempt: 'Exempt',
 };
 
+/** What each mark does, shown under the chips (a title attribute never shows on touch) */
 export const FAST_MARK_HINTS: Record<FastMark, string> = {
-  fasted: 'Counted as a fast kept',
-  owed: 'Added to the fasts to make up',
-  exempt: 'Left out of every count',
+  fasted: 'Fasted: counted as a fast kept.',
+  owed: 'To make up: added to your list of fasts to make up later.',
+  exempt: 'Exempt: a day with nothing to make up, so it’s left out of every count.',
 };
+
+/** The hint before a day is marked */
+export const FAST_MARK_HINT_NONE = '“To make up” adds the day to your list to fast later. “Exempt” leaves it out of every count.';
 
 /** "Suhoor ends", "Iftar" */
 export function momentLabel(kind: FastMoment['kind']): string {

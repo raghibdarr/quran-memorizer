@@ -93,7 +93,8 @@ test.describe('Ramadan', () => {
     await expect(page.locator('[data-ramadan-log] [data-day="2027-02-10"]')).toHaveAttribute('data-mark', 'owed')
     await expect(page.locator('[data-ramadan-log] [data-day="2027-02-11"]')).toHaveAttribute('data-mark', 'fasted')
     await expect(page.locator('[data-make-up-left]')).toHaveText('1')
-    await expect(page.locator('[data-ramadan-counts]')).toContainText('1 fasted · 1 to make up')
+    await expect(page.locator('[data-ramadan-counts] [data-count="fasted"]')).toHaveText('1 fasted')
+    await expect(page.locator('[data-ramadan-counts] [data-count="owed"]')).toHaveText('1 to make up')
 
     // A make-up fast ticks it off, and carries after reload too
     await page.locator('[data-made-up]').click()

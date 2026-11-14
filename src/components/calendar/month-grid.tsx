@@ -1,31 +1,24 @@
 'use client';
 
-import { useMemo } from 'react';
 import { HIJRI_MONTHS } from '@/lib/hijri/convert';
-import { weekdayHeaders, type GridDay, type MonthGrid as Grid } from '@/lib/hijri/calendar';
-import { eventsOnHijri, isWeekly } from '@/lib/hijri/events';
+import { weekdayHeaders, type MonthGrid as Grid } from '@/lib/hijri/calendar';
+import type { DayMarks } from '@/lib/hijri/grid-marks';
 import { cn } from '@/lib/cn';
 
 const SHORT_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-/** A day's dot: gold for an occasion, teal for a voluntary fast (weekly fasts get none) */
-function dotOf(d: GridDay): 'occasion' | 'fast' | null {
-  const events = eventsOnHijri(d.hijri, d.weekday).filter((e) => !isWeekly(e.when));
-  if (events.some((e) => !e.voluntaryFast)) return 'occasion';
-  return events.length ? 'fast' : null;
-}
-
-/** The Hijri month as a 7-column grid: Hijri day large, the civil day small under it */
+/** The Hijri month as a 7-column grid: Hijri day large, the civil day small under it, then the day's mark */
 export default function MonthGrid({
   grid,
+  marks,
   selected,
   onSelect,
 }: {
   grid: Grid;
+  marks: Map<string, DayMarks>;
   selected: string | null;
   onSelect: (iso: string) => void;
 }) {
-  const dots = useMemo(() => new Map(grid.days.map((d) => [d.iso, dotOf(d)])), [grid]);
   return (
     <div role="grid" aria-label={`${HIJRI_MONTHS[grid.month - 1]} ${grid.year}`} data-month-grid>
       <div role="row" className="grid grid-cols-7 gap-1 pb-1">
@@ -38,10 +31,10 @@ export default function MonthGrid({
       {grid.weeks.map((week, i) => (
         <div role="row" key={i} className="grid grid-cols-7 gap-1">
           {week.map((d, j) => {
-            if (!d) return <span key={`b${j}`} role="gridcell" aria-hidden className="min-h-12" />;
+            if (!d) return <span key={`b${j}`} role="gridcell" aria-hidden className="min-h-14" />;
             const [, gm, gd] = d.iso.split('-').map(Number);
             const isSel = d.iso === selected;
-            const dot = dots.get(d.iso);
+            const { dot, bar } = marks.get(d.iso) ?? { dot: null, bar: null };
             return (
               <button
                 key={d.iso}
@@ -52,8 +45,10 @@ export default function MonthGrid({
                 aria-label={`${d.hijri.day} ${HIJRI_MONTHS[d.hijri.month - 1]}, ${gd} ${SHORT_MONTHS[gm - 1]}${d.isToday ? ', today' : ''}`}
                 onClick={() => onSelect(d.iso)}
                 data-iso={d.iso}
+                data-dot={dot ?? undefined}
+                data-bar={bar?.kind}
                 className={cn(
-                  'pressable relative flex min-h-12 flex-col items-center justify-center rounded-xl py-1 leading-none transition-colors',
+                  'pressable relative flex min-h-14 flex-col items-center justify-center rounded-xl py-1 leading-none transition-colors',
                   isSel ? 'bg-teal text-on-teal' : d.isToday ? 'bg-teal/10 text-teal ring-2 ring-teal' : 'text-foreground hover:bg-foreground/5',
                 )}
               >
@@ -61,12 +56,21 @@ export default function MonthGrid({
                 <span className={cn('mt-0.5 text-[10px] tabular-nums', isSel ? 'text-on-teal/80' : 'text-muted')}>
                   {gd === 1 || d.hijri.day === 1 ? `${gd} ${SHORT_MONTHS[gm - 1]}` : gd}
                 </span>
-                {dot && (
+                <span
+                  aria-hidden
+                  className={cn(
+                    'mt-1 h-1.5 w-1.5 rounded-full',
+                    !dot ? 'invisible' : isSel ? 'bg-on-teal' : dot === 'occasion' ? 'bg-gold' : 'bg-teal',
+                  )}
+                />
+                {bar && (
                   <span
                     aria-hidden
                     className={cn(
-                      'absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full',
-                      isSel ? 'bg-on-teal' : dot === 'occasion' ? 'bg-gold' : 'bg-teal/60',
+                      'absolute bottom-1 h-0.5',
+                      bar.start ? 'left-2 rounded-l-full' : j === 0 ? 'left-0' : '-left-0.5',
+                      bar.end ? 'right-2 rounded-r-full' : j === 6 ? 'right-0' : '-right-0.5',
+                      isSel ? 'bg-on-teal/70' : bar.kind === 'occasion' ? 'bg-gold/60' : 'bg-teal/60',
                     )}
                   />
                 )}

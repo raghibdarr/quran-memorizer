@@ -83,7 +83,7 @@ export default function RamadanClient() {
         {pause && (
           <section data-paused>
             <Card className="py-4">
-              <p className="text-sm font-semibold text-foreground">The log is paused</p>
+              <p className="text-base font-semibold text-foreground">The log is paused</p>
               <p className="mt-0.5 text-sm text-muted">
                 Since {formatCivil(pause.from, { year: false })}. Days in a pause are left out of every count.
               </p>
@@ -101,7 +101,7 @@ export default function RamadanClient() {
         {!inSpan && !pause && (
           <section data-today-fast>
             <Card className="py-4">
-              <p className="text-sm font-semibold text-foreground">Today</p>
+              <p className="text-base font-semibold text-foreground">Today</p>
               <p className="text-xs text-muted">{formatCivil(today)}</p>
               <div className="mt-3">
                 <MarkChips
@@ -151,28 +151,28 @@ export default function RamadanClient() {
 
         <Card className="space-y-4 py-4">
           <div>
-            <p className="text-sm font-semibold text-foreground">Ramadan mode</p>
+            <p className="text-base font-semibold text-foreground">Ramadan mode</p>
             <SegmentedControl options={MODES} value={mode} onChange={setMode} className="mt-2" />
             <p className="mt-2 text-xs text-muted">{MODE_HINTS[mode]}</p>
           </div>
           <div className="flex items-center justify-between gap-3 border-t border-foreground/10 pt-4">
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-foreground">Suhoor ends before Fajr</p>
+              <p className="text-sm font-semibold text-balance text-foreground">Suhoor ends before Fajr</p>
               <p className="text-xs text-muted">A precaution. The fast itself begins at Fajr.</p>
             </div>
-            <div className="flex shrink-0 items-center gap-1" role="group" aria-label="Minutes before Fajr">
+            <div className="flex shrink-0 items-center gap-1.5" role="group" aria-label="Minutes before Fajr">
               <Step label="Fewer minutes" disabled={imsakMin <= 0} onClick={() => setImsakMin(imsakMin - 5)}>−</Step>
-              <span className="w-14 text-center text-sm font-semibold tabular-nums text-foreground" data-imsak>{imsakMin} min</span>
+              <span className="w-12 text-center text-sm font-semibold tabular-nums text-foreground" data-imsak>{imsakMin} min</span>
               <Step label="More minutes" disabled={imsakMin >= 30} onClick={() => setImsakMin(imsakMin + 5)}>+</Step>
             </div>
           </div>
           {!pause && (
-            <div className="flex items-center justify-between gap-3 border-t border-foreground/10 pt-4">
-              <p className="min-w-0 text-xs text-muted">Pausing leaves the days that follow out of your fasting and prayer counts.</p>
+            <div className="border-t border-foreground/10 pt-4">
+              <p className="text-xs text-muted">Pausing leaves the days that follow out of your fasting and prayer counts.</p>
               <button
                 type="button"
                 onClick={() => startPause(today)}
-                className="min-h-11 shrink-0 rounded-xl px-3 text-sm font-semibold text-muted hover:text-foreground"
+                className="pressable mt-2 min-h-11 rounded-xl border border-foreground/15 px-4 text-sm font-semibold text-foreground hover:bg-foreground/5"
               >
                 Pause the log
               </button>
@@ -198,7 +198,7 @@ function Step({ children, label, disabled, onClick }: { children: React.ReactNod
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className="pressable flex h-11 w-11 items-center justify-center rounded-full border border-foreground/15 text-lg font-semibold text-foreground disabled:opacity-35"
+      className="pressable relative flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-lg font-semibold text-foreground after:absolute after:-inset-1 after:content-[''] disabled:opacity-35"
     >
       {children}
     </button>

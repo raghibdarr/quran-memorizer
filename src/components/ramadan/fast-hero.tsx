@@ -36,17 +36,33 @@ export default function FastHero({
 }) {
   const moment = times && countdown ? nextFastMoment(now, times.today, times.tomorrow) : null;
   const shown = times ? fastTimesToShow(now, times.today, times.tomorrow) : null;
-  const heading = season.inRamadan ? `${seasonLine(season)} · expected` : `Ramadan ${season.hijriYear}`;
+  // Mode turned on by hand outside the expected month: say so, and point at the date adjustment
+  const forcedOn = season.active && !season.inRamadan;
+  const heading = season.inRamadan
+    ? `${seasonLine(season)} · expected`
+    : forcedOn
+      ? 'Ramadan mode is on'
+      : `Ramadan ${season.hijriYear}`;
 
   return (
     <section data-fast-hero>
       <Card variant="tactile" className="p-5">
         <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">{heading}</p>
-        {!season.inRamadan && (
-          <p className="mt-1 text-sm text-muted">
-            Expected to begin on {formatCivil(season.start)}
-            {season.daysUntilStart > 1 ? `, in ${season.daysUntilStart} days` : ''}.
+        {forcedOn ? (
+          <p className="mt-1 text-sm text-muted" data-forced-on>
+            The calendar expects Ramadan {season.hijriYear} on {formatCivil(season.start)}. If your local start differs,{' '}
+            <Link href="/calendar" className="font-semibold text-teal">
+              adjust the dates
+            </Link>
+            .
           </p>
+        ) : (
+          !season.inRamadan && (
+            <p className="mt-1 text-sm text-muted">
+              Expected to begin on {formatCivil(season.start)}
+              {season.daysUntilStart > 1 ? `, in ${season.daysUntilStart} days` : ''}.
+            </p>
+          )
         )}
 
         {!hasPlace ? (
@@ -62,11 +78,14 @@ export default function FastHero({
         ) : times && shown ? (
           <>
             {moment ? (
-              <div className="mt-2" data-countdown={moment.kind}>
-                <p className="text-3xl font-bold tabular-nums text-foreground">
-                  {momentLabel(moment.kind)} {formatClock(moment.at, times.tz)}
+              <div className="mt-3" data-countdown={moment.kind}>
+                <p className="text-sm font-semibold text-muted tabular-nums">
+                  {momentLabel(moment.kind)} at {formatClock(moment.at, times.tz)}
                 </p>
-                <p className="text-sm font-semibold text-teal tabular-nums">{formatCountdown(moment.at, now)}</p>
+                <p className="mt-1 text-4xl font-bold tracking-tight tabular-nums text-foreground">
+                  <span className="sr-only">{moment.at > now ? 'in ' : ''}</span>
+                  {countdownValue(moment.at, now)}
+                </p>
               </div>
             ) : countdown ? (
               <p className="mt-2 text-sm text-muted">Fajr or Maghrib can&apos;t be worked out for this place today.</p>
@@ -77,14 +96,14 @@ export default function FastHero({
               </p>
             )}
             {moment && shown.day === 'tomorrow' && (
-              <p className="mt-4 border-t border-foreground/10 pt-3 text-xs font-semibold text-muted" data-times-day="tomorrow">Tomorrow</p>
+              <p className="mt-3 border-t border-foreground/10 pt-3 text-xs font-semibold text-muted" data-times-day="tomorrow">Tomorrow</p>
             )}
             <dl
-              className={`grid grid-cols-2 gap-3 ${moment ? (shown.day === 'tomorrow' ? 'mt-1' : 'mt-4 border-t border-foreground/10 pt-3') : 'mt-2'}`}
+              className={`grid grid-cols-2 gap-3 ${moment ? (shown.day === 'tomorrow' ? 'mt-1' : 'mt-3 border-t border-foreground/10 pt-3') : 'mt-2'}`}
             >
               <div>
                 <dt className="text-xs text-muted">Suhoor ends</dt>
-                <dd className="text-lg font-semibold tabular-nums text-foreground">
+                <dd className="text-base font-semibold tabular-nums text-foreground">
                   {shown.times.suhoorEnd !== null ? formatClock(shown.times.suhoorEnd, times.tz) : '–'}
                 </dd>
                 <dd className="text-[11px] leading-snug text-muted">
@@ -95,7 +114,7 @@ export default function FastHero({
               </div>
               <div>
                 <dt className="text-xs text-muted">Iftar</dt>
-                <dd className="text-lg font-semibold tabular-nums text-foreground">
+                <dd className="text-base font-semibold tabular-nums text-foreground">
                   {shown.times.iftar !== null ? formatClock(shown.times.iftar, times.tz) : '–'}
                 </dd>
                 <dd className="text-[11px] leading-snug text-muted">At Maghrib</dd>
@@ -108,4 +127,10 @@ export default function FastHero({
       </Card>
     </section>
   );
+}
+
+/** "2 h 24 min" for the big countdown (the label above says what it counts to); "Now" at zero */
+function countdownValue(at: number, now: number): string {
+  const s = formatCountdown(at, now);
+  return s === 'now' ? 'Now' : s.replace(/^in /, '');
 }

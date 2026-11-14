@@ -9,7 +9,7 @@ import { useWorshipStore } from '@/stores/worship-store';
 import { cn } from '@/lib/cn';
 
 /**
- * Fasts to make up: every day marked "not fasted", across Ramadans, with the
+ * Fasts to make up: every day marked "to make up", across Ramadans, with the
  * make-up fasts done ticked off oldest first. The count carries on after
  * Ramadan; fidya and kaffara are not worked out.
  */
@@ -24,11 +24,11 @@ export default function MakeUp({ offset }: { offset: number }) {
     <section data-make-up>
       <Card className="py-4">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="text-sm font-semibold text-foreground">Fasts to make up</h2>
+          <h2 className="text-base font-semibold text-foreground">Fasts to make up</h2>
           <span className="text-2xl font-bold tabular-nums text-foreground" data-make-up-left>{list.left}</span>
         </div>
         {list.days.length === 0 ? (
-          <p className="mt-1 text-sm text-muted">Nothing to make up. Days you mark &ldquo;Not fasted&rdquo; are listed here.</p>
+          <p className="mt-1 text-sm text-muted">Nothing to make up. Days you mark &ldquo;To make up&rdquo; are listed here.</p>
         ) : (
           <>
             <p className="mt-1 text-sm text-muted">

@@ -16,6 +16,7 @@ import {
   type HijriMonthRef,
 } from '@/lib/hijri/calendar';
 import { daysUntil, eventsOn, occurrencesInMonth, upcomingOccasions } from '@/lib/hijri/events';
+import { gridMarks } from '@/lib/hijri/grid-marks';
 import { usePrayerStore } from '@/stores/prayer-store';
 import { cn } from '@/lib/cn';
 import ScreenHeader from './screen-header';
@@ -43,6 +44,8 @@ export default function CalendarClient() {
   const [selected, setSelected] = useState<string | null>(null);
 
   const grid = useMemo(() => monthGrid(view, { offset, today }), [view, offset, today]);
+  const marks = useMemo(() => gridMarks(grid), [grid]);
+  const hasBars = useMemo(() => [...marks.values()].some((m) => m.bar), [marks]);
   const monthEvents = useMemo(() => occurrencesInMonth(view, offset), [view, offset]);
   const upcoming = useMemo(() => upcomingOccasions(today, offset, 5), [today, offset]);
   const engine = useMemo(() => hijriEngine(), []);
@@ -91,12 +94,15 @@ export default function CalendarClient() {
             </button>
           </div>
 
-          <MonthGrid grid={grid} selected={sel} onSelect={setSelected} />
+          <MonthGrid grid={grid} marks={marks} selected={sel} onSelect={setSelected} />
 
           <div className="mt-3 flex min-h-8 items-center justify-between gap-2 px-1">
-            <span className="flex items-center gap-3 text-[11px] text-muted">
+            <span className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-muted">
               <span className="flex items-center gap-1"><span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold" />Occasion</span>
-              <span className="flex items-center gap-1"><span aria-hidden className="h-1.5 w-1.5 rounded-full bg-teal/60" />Voluntary fast</span>
+              <span className="flex items-center gap-1"><span aria-hidden className="h-1.5 w-1.5 rounded-full bg-teal" />Voluntary fast</span>
+              {hasBars && (
+                <span className="flex items-center gap-1"><span aria-hidden className="h-0.5 w-3 rounded-full bg-gold/60" />Several days</span>
+              )}
             </span>
             {!onToday && (
               <button
@@ -105,7 +111,7 @@ export default function CalendarClient() {
                   setView(todayMonth);
                   setSelected(null);
                 }}
-                className="min-h-8 rounded-full px-3 text-xs font-semibold text-teal hover:bg-teal/10"
+                className="min-h-8 shrink-0 rounded-full px-3 text-xs font-semibold whitespace-nowrap text-teal hover:bg-teal/10"
               >
                 Back to today
               </button>
@@ -114,24 +120,27 @@ export default function CalendarClient() {
         </Card>
 
         {sel && (sel !== today || selEvents.length > 0) && (
-          <Card className="py-4">
+          <Card className="py-3.5">
             <div data-selected-day={sel} aria-live="polite">
               <p className="text-sm font-semibold text-foreground">{formatCivil(sel)}</p>
               <p className="text-xs text-muted">{formatHijri(toHijri(sel, offset))} · expected</p>
+              {selEvents.length > 0 && (
+                <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5" aria-label="On this day">
+                  {selEvents.map((e) => (
+                    <li key={e.id} className="flex items-center gap-1.5 text-sm text-foreground" data-event={e.id}>
+                      <span aria-hidden className={cn('h-2 w-2 shrink-0 rounded-full', e.voluntaryFast ? 'bg-teal' : 'bg-gold')} />
+                      {e.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            {selEvents.length > 0 && (
-              <ul className="mt-1 divide-y divide-foreground/5">
-                {selEvents.map((e) => (
-                  <EventRow key={e.id} event={e} />
-                ))}
-              </ul>
-            )}
           </Card>
         )}
 
         {monthEvents.length > 0 && (
           <section aria-labelledby="month-events">
-            <h2 id="month-events" className="px-1 text-xs font-bold uppercase tracking-wider text-muted">
+            <h2 id="month-events" className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted">
               In {formatHijriMonth(view).replace(/ \d+$/, '')} · expected
             </h2>
             <ul className="mt-2 divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card px-5">
@@ -143,7 +152,7 @@ export default function CalendarClient() {
         )}
 
         <section aria-labelledby="coming-up">
-          <h2 id="coming-up" className="px-1 text-xs font-bold uppercase tracking-wider text-muted">Coming up · expected</h2>
+          <h2 id="coming-up" className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted">Coming up · expected</h2>
           <ul className="mt-2 divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card px-5" data-coming-up>
             {upcoming.map((o) => (
               <li key={o.event.id} className="flex min-h-12 items-center justify-between gap-3 py-2.5">
@@ -161,22 +170,28 @@ export default function CalendarClient() {
           </Link>
         </section>
 
-        <Card className="py-4">
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-foreground">Match your local announcement</p>
-              <p className="text-xs text-muted">
-                {offset === 0 ? 'Months start on the calculated day' : `Months start ${Math.abs(offset)} day${Math.abs(offset) === 1 ? '' : 's'} ${offset > 0 ? 'earlier' : 'later'} than calculated`}
-              </p>
-            </div>
-            <div className="flex shrink-0 items-center gap-1" role="group" aria-label="Hijri date adjustment">
-              <StepButton label="Start months a day later" disabled={offset <= -2} onClick={() => setHijriOffset(offset - 1)}>−</StepButton>
-              <span className="w-8 text-center text-sm font-semibold tabular-nums text-foreground" data-hijri-offset>
-                {offset > 0 ? `+${offset}` : offset}
-              </span>
-              <StepButton label="Start months a day earlier" disabled={offset >= 2} onClick={() => setHijriOffset(offset + 1)}>+</StepButton>
-            </div>
+        <Card className="py-4" data-hijri-adjust>
+          <h2 className="text-base font-semibold text-balance text-foreground">Match your local announcement</h2>
+          <p className="mt-0.5 text-sm text-muted">
+            If your community started the month a day before or after the calendar, move every date to match.
+          </p>
+          <div className="mt-3 flex items-center gap-2" role="group" aria-label="Hijri date adjustment">
+            <StepButton label="Start months a day later" disabled={offset <= -2} onClick={() => setHijriOffset(offset - 1)}>
+              A day later
+            </StepButton>
+            <span className="min-w-0 flex-1 text-center text-base font-semibold tabular-nums text-foreground" data-hijri-offset>
+              {offset > 0 ? `+${offset}` : offset}
+            </span>
+            <StepButton label="Start months a day earlier" disabled={offset >= 2} onClick={() => setHijriOffset(offset + 1)}>
+              A day earlier
+            </StepButton>
           </div>
+          <p className="mt-3 text-xs text-muted" aria-live="polite">
+            {offset === 0
+              ? 'Months start on the calculated day.'
+              : `Months start ${Math.abs(offset)} day${Math.abs(offset) === 1 ? '' : 's'} ${offset > 0 ? 'earlier' : 'later'} than calculated.`}{' '}
+            Today is <span className="font-semibold text-foreground">{formatHijri(toHijri(today, offset))}</span>.
+          </p>
         </Card>
 
         <SightingExplainer engine={engine} />
@@ -195,7 +210,7 @@ function StepButton({ children, label, disabled, onClick }: { children: React.Re
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        'pressable flex h-11 w-11 items-center justify-center rounded-full border border-foreground/15 text-lg font-semibold text-foreground',
+        'pressable flex min-h-11 items-center justify-center rounded-xl border border-foreground/15 px-3.5 text-sm font-semibold whitespace-nowrap text-foreground',
         'disabled:opacity-35',
       )}
     >

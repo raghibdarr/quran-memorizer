@@ -10,7 +10,7 @@ export default function EventRow({ event, when, className }: { event: HijriEvent
     <li className={cn('flex gap-3 py-3', className)} data-event={event.id}>
       <span
         aria-hidden
-        className={cn('mt-1.5 h-2 w-2 shrink-0 rounded-full', event.voluntaryFast ? 'bg-teal/60' : 'bg-gold')}
+        className={cn('mt-1.5 h-2 w-2 shrink-0 rounded-full', event.voluntaryFast ? 'bg-teal' : 'bg-gold')}
       />
       <span className="min-w-0 flex-1">
         <span className="flex flex-wrap items-baseline justify-between gap-x-3">
