@@ -13,14 +13,26 @@ export interface ZakatPosition {
   text: string;
 }
 
+/** Arabic located in a fetched source by the content check; the note's English states no more than this */
+export interface ZakatEvidence {
+  /** The work, by its usual name and author */
+  work: string;
+  /** Book and chapter; no page or number (editions differ) */
+  place: string;
+  /** The Arabic as found, unvocalised */
+  quote: string;
+}
+
 export interface ZakatNote {
   id: string;
   kind: 'agreed' | 'differs';
   text: string;
   positions?: ZakatPosition[];
-  /** Where a checker should look; a lead, not a confirmed citation */
+  /** Where a reader can check it: works and chapters, shown under the note */
   sourceLead: string;
-  /** 'draft' until checked against two sources; shown with the unreviewed line */
+  /** What the content check located for this note (spec 5.1: the Arabic phrase is stored) */
+  evidence?: ZakatEvidence[];
+  /** 'draft' until every statement is located in two sources; shown with the unreviewed line */
   status: 'draft' | 'source-checked' | 'scholar-reviewed';
 }
 

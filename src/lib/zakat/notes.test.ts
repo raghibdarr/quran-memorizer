@@ -33,6 +33,33 @@ describe('zakat notes (spec 5.1 grounding rules)', () => {
     }
   });
 
+  it('source-checked notes store the Arabic that was located, from two or more works', () => {
+    for (const n of ZAKAT_NOTES.filter((x) => x.status === 'source-checked')) {
+      expect(n.evidence?.length ?? 0, n.id).toBeGreaterThanOrEqual(2);
+      expect(new Set(n.evidence!.map((e) => e.work)).size, n.id).toBeGreaterThanOrEqual(2);
+    }
+    for (const n of ZAKAT_NOTES) {
+      for (const e of n.evidence ?? []) {
+        expect(e.work.length, n.id).toBeGreaterThan(5);
+        expect(e.place, n.id).not.toMatch(/\d/);
+        expect(e.quote, n.id).toMatch(/^[ء-ي\s،؛:.]+$/);
+      }
+    }
+  });
+
+  it('a school position is only stated where its own source was located', () => {
+    // Every school named in a source-checked difference has a located quote behind it
+    // (the Maliki view on a dip in the year could not be confirmed, so it is not shown)
+    const dip = zakatNote('hawl-dip');
+    expect(dip.positions!.flatMap((p) => p.school ?? [])).not.toContain('maliki');
+    expect(dip.text).toMatch(/Maliki position is not shown/);
+  });
+
+  it('the gold nisab is not presented as unanimous', () => {
+    expect(zakatNote('nisab-metals').text).toMatch(/In all four schools/);
+    expect(zakatNote('nisab-metals').text).toMatch(/set it differently/);
+  });
+
   it('positions: two or more, each with who holds it; schools are known', () => {
     for (const n of ZAKAT_NOTES) {
       if (n.kind === 'agreed') {
