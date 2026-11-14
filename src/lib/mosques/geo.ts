@@ -78,3 +78,13 @@ export function formatDistance(km: number, countryCode = ''): string {
   if (tenths < 100) return `${(tenths / 10).toFixed(1)} km`;
   return `${Math.round(km)} km`;
 }
+
+/** '0.4 miles', '350 metres', '1.2 kilometres': the same figure with the unit spelled out, for screen readers */
+export function spokenDistance(formatted: string): string {
+  const [n, unit] = formatted.split(' ');
+  const one = Number(n) === 1;
+  if (unit === 'mi') return `${n} ${one ? 'mile' : 'miles'}`;
+  if (unit === 'km') return `${n} ${one ? 'kilometre' : 'kilometres'}`;
+  if (unit === 'm') return `${n} metres`;
+  return formatted;
+}

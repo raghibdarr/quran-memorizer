@@ -8,7 +8,7 @@ import Card from '@/components/ui/card';
 import { SkeletonRows } from '@/components/ui/skeleton';
 import { MapPinIcon } from '@/components/ui/icons';
 import { usePlaceStore } from '@/stores/place-store';
-import { compassName, compassPoint, formatDistance } from '@/lib/mosques/geo';
+import { compassName, compassPoint, formatDistance, spokenDistance } from '@/lib/mosques/geo';
 import { loadPack, nearestMosques, OSM_ATTRIBUTION, PackError, type MosquePack, type NearMosque } from '@/lib/mosques/pack';
 import { countryName, formatBytes, packInfo } from '@/lib/mosques/index-data';
 import { mapsHref, mapsPlatform } from '@/lib/mosques/links';
@@ -163,7 +163,9 @@ function MosqueList({ pack, place, country }: { pack: MosquePack; place: Place; 
     <>
       <div className="px-1">
         <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Nearest to {place.label || country}</p>
-        <p className="mt-0.5 text-xs text-muted">Straight-line distance and direction from your place.</p>
+        <p className="mt-0.5 text-xs text-muted">
+          Straight-line distance and direction from your place. Your place is kept to the nearest kilometre or so, so the closest ones are approximate.
+        </p>
       </div>
       <Card className="p-0" >
         <ul className="divide-y divide-foreground/10" data-mosques-list>
@@ -198,26 +200,30 @@ function MosqueRow({ m, cc, href }: { m: NearMosque; cc: string; href: string })
   return (
     <li className="flex items-center gap-3 px-4 py-3" data-mosque>
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-foreground [overflow-wrap:anywhere]">
+        <p className="text-sm font-semibold text-foreground [overflow-wrap:anywhere]" dir="auto">
           {m.name || m.nameEn || <span className="font-normal text-muted">Unnamed mosque</span>}
         </p>
-        {sub && <p className="text-xs text-muted [overflow-wrap:anywhere]">{sub}</p>}
+        {sub && <p className="text-xs text-muted [overflow-wrap:anywhere]" dir="auto">{sub}</p>}
         {m.nameAr && (
           <p className="arabic-text mt-0.5 text-base leading-snug text-foreground/80" dir="rtl" lang="ar">
             {m.nameAr}
           </p>
         )}
-        <p className="mt-1 flex items-center gap-1.5 text-xs text-muted" aria-label={`${distance} ${compassName(point)}`} data-mosque-distance>
+        <p className="mt-1 flex items-center gap-1.5 text-xs text-muted" data-mosque-distance>
           <BearingArrow deg={m.bearing} />
           <span aria-hidden>
             {distance} · {point}
+          </span>
+          {/* aria-label on a plain paragraph is not announced reliably; real text is */}
+          <span className="sr-only">
+            {spokenDistance(distance)} {compassName(point)}
           </span>
         </p>
       </div>
       <a
         href={href}
         className="flex min-h-11 shrink-0 items-center rounded-xl border border-teal/30 px-3 text-xs font-semibold text-teal hover:bg-teal/5"
-        aria-label={`Open ${m.name || 'this mosque'} in Maps`}
+        aria-label={`Open ${m.name || m.nameEn || 'this mosque'} in Maps`}
         data-mosque-maps
       >
         Open in Maps

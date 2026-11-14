@@ -1,9 +1,9 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { OSM_ATTRIBUTION, PackError, loadPack, nearestMosques, packPath, toMosque, validatePack, type MosquePack } from './pack';
-import { mapsHref, pinLabel } from './links';
+import { mapsHref, mapsPlatform, pinLabel } from './links';
 import { MOSQUE_INDEX, packInfo } from './index-data';
 
 const DIR = join(process.cwd(), 'public', 'data', 'mosques');
@@ -138,5 +138,38 @@ describe('mapsHref', () => {
   it('labels an unnamed mosque', () => {
     expect(pinLabel(toMosque([1, 2]))).toBe('Mosque');
     expect(pinLabel({ name: 'Masjid', nameEn: 'Mosque of X' })).toBe('Mosque of X');
+  });
+});
+
+describe('mapsPlatform', () => {
+  afterEach(() => vi.unstubAllGlobals());
+  const on = (ua: string, capacitor?: string) => {
+    vi.stubGlobal('window', capacitor ? { Capacitor: { getPlatform: () => capacitor } } : {});
+    vi.stubGlobal('navigator', { userAgent: ua, maxTouchPoints: 0 });
+    return mapsPlatform();
+  };
+  it('Apple devices (iPhone, iPad, Mac) get the maps: scheme; everything else geo:', () => {
+    expect(on('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)')).toBe('ios');
+    expect(on('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)')).toBe('ios');
+    expect(on('Mozilla/5.0 (Linux; Android 15; Pixel 9)')).toBe('other');
+    expect(on('Mozilla/5.0 (Windows NT 10.0; Win64; x64)')).toBe('other');
+  });
+  it('trusts Capacitor over the user agent', () => {
+    expect(on('Mozilla/5.0 (Linux; Android 15)', 'ios')).toBe('ios');
+    expect(on('Mozilla/5.0 (Macintosh)', 'android')).toBe('other');
+  });
+});
+
+describe('nearestMosques on the largest committed pack', () => {
+  it('stays fast and sorted', () => {
+    const biggest = Object.entries(MOSQUE_INDEX.countries).sort((a, b) => b[1].count - a[1].count)[0][0];
+    const big = JSON.parse(readFileSync(join(DIR, `${biggest}.json`), 'utf8')) as MosquePack;
+    const t0 = performance.now();
+    const near = nearestMosques(big, { lat: big.m[0][0], lng: big.m[0][1] }, 100);
+    const ms = performance.now() - t0;
+    expect(near).toHaveLength(100);
+    expect(near[0].distanceKm).toBe(0);
+    for (let i = 1; i < near.length; i++) expect(near[i].distanceKm).toBeGreaterThanOrEqual(near[i - 1].distanceKm);
+    expect(ms).toBeLessThan(2000);
   });
 });

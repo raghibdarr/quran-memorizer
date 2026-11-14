@@ -55,7 +55,8 @@ test.describe('mosques', () => {
     const lines = (await rows.locator('[data-mosque-distance]').allInnerTexts()).map((t) => t.trim())
     expect(lines[0]).toMatch(/^\d+(\.\d)? mi · (N|NE|E|SE|S|SW|W|NW)$/)
     const href = await rows.first().locator('[data-mosque-maps]').getAttribute('href')
-    expect(href).toMatch(/^geo:-?\d+(\.\d+)?,-?\d+(\.\d+)?\?q=/)
+    // geo: everywhere except Apple hosts (a Mac running the suite reports a Mac user agent), which get maps:
+    expect(href).toMatch(/^(geo:-?\d+(\.\d+)?,-?\d+(\.\d+)?\?q=|maps:\/\/\?ll=-?\d+(\.\d+)?,-?\d+(\.\d+)?&q=)/)
     const values = lines.map((t) => Number(t.split(' ')[0]))
     for (let i = 1; i < values.length; i++) expect(values[i]).toBeGreaterThanOrEqual(values[i - 1])
 

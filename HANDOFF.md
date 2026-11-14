@@ -38,3 +38,15 @@ replacing the foundations stub `src/app/mosques/page.tsx`.
 7. **Local builds in this worktree:** Turbopack refuses the `node_modules` junction; use
    `npx next build --webpack && node scripts/flatten-segments.mjs` with placeholder
    `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+
+8. **Review notes (2026-11-14):**
+   - "Open in Maps" is a `geo:` link (Android, Linux desktops) or `maps://` (iPhone, iPad, Mac).
+     **Windows desktop browsers have no `geo:` handler, so the button does nothing there.** A web
+     fallback (an openstreetmap.org link to the mosque) would fix it but opens a site that draws
+     map tiles around the mosque, so it is left for the owner to decide.
+   - Indonesia is the largest list and is the one left out (item 1). Fitting it needs about 2.3 MB
+     saved or a bigger budget; a denser pack format (integer, delta-coded positions) gets roughly
+     2 MB, not quite enough on its own.
+   - The e2e "only request" check uses GB, whose nearest rows have no `name:ar`. A row with an
+     Arabic name makes the page fetch the app's own Arabic font files (same origin, no position);
+     keep that in mind if the test's country changes.

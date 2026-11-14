@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
-import { bearingDeg, compassName, compassPoint, formatDistance, haversineKm, usesMiles } from './geo';
+import { bearingDeg, compassName, compassPoint, formatDistance, haversineKm, spokenDistance, usesMiles } from './geo';
 
 const LONDON = { lat: 51.5074, lng: -0.1278 };
 const PARIS = { lat: 48.8566, lng: 2.3522 };
@@ -101,5 +101,16 @@ describe('formatDistance', () => {
     expect(formatDistance(0, 'GB')).toBe('0.1 mi');
     expect(formatDistance(1.609344, 'US')).toBe('1.0 mi');
     expect(formatDistance(20, 'GB')).toBe('12 mi');
+  });
+});
+
+describe('spokenDistance', () => {
+  it('spells the unit out for screen readers', () => {
+    expect(spokenDistance('0.4 mi')).toBe('0.4 miles');
+    expect(spokenDistance('1.0 mi')).toBe('1.0 mile');
+    expect(spokenDistance('350 m')).toBe('350 metres');
+    expect(spokenDistance('1.2 km')).toBe('1.2 kilometres');
+    expect(spokenDistance('14 km')).toBe('14 kilometres');
+    expect(spokenDistance(formatDistance(1, 'FR'))).toBe('1.0 kilometre');
   });
 });

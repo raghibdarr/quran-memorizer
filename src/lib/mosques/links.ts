@@ -6,6 +6,7 @@
 
 import type { Mosque } from './pack';
 
+/** 'ios' means any Apple device (iPhone, iPad, Mac): they share the maps: scheme */
 export type MapsPlatform = 'ios' | 'other';
 
 /** Best guess at the platform, from Capacitor when present, else the user agent */
@@ -16,8 +17,8 @@ export function mapsPlatform(): MapsPlatform {
   if (p === 'ios') return 'ios';
   if (p === 'android') return 'other';
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
-  // iPadOS reports a Mac user agent with touch
-  if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && typeof navigator !== 'undefined' && navigator.maxTouchPoints > 1)) return 'ios';
+  // iPadOS reports a Mac user agent; a real Mac has Apple Maps and no geo: handler either
+  if (/iPhone|iPad|iPod|Macintosh/.test(ua)) return 'ios';
   return 'other';
 }
 
