@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import QiblaClient from '@/components/qibla/qibla-client';
 
 export const metadata: Metadata = { title: 'Qibla · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the qibla package replaces this page.
+// The qibla (all-in-one spec 2.2): bearing from the saved place, a live compass
+// where the phone has one, and a north-up diagram with a sun aid where it doesn't.
 export default function Page() {
-  return <StubPage title="Qibla" back="/prayer" note="The direction of the Kaaba from where you are. Coming soon." />;
+  return <QiblaClient />;
 }
