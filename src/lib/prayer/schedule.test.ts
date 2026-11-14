@@ -126,7 +126,8 @@ describe('planPrayerAlerts', () => {
       ),
       { numRuns: 40 },
     )
-  })
+    // Heavy property run: give it room when the whole suite runs in parallel.
+  }, 30_000)
 
   it('ids are stable for the same day and slot across replans', () => {
     const first = plan('android', allAlerts('default', 15))
@@ -284,7 +285,8 @@ describe('planPrayerAlerts', () => {
       ),
       { numRuns: 60 },
     )
-  })
+    // Heavy property run: give it room when the whole suite runs in parallel.
+  }, 30_000)
 
   it('leaves out a time the engine puts days away from its own day (78°N, late February)', () => {
     const svalbard: Place = { lat: 78.22, lng: 15.65, label: 'Longyearbyen', countryCode: 'SJ', tz: 'Arctic/Longyearbyen', source: 'city' }

@@ -1,2 +1,6 @@
 # Licensed source texts are kept byte-for-byte (Tanzil: "changing it is not allowed")
 data-sources/** -text
+# Mosque packs: their sizes and sha256 are recorded in the pack index and SOURCE.md, so keep them byte-for-byte
+public/data/mosques/** -text
+# Node scripts start with a shebang and some are imported by tests; CRLF breaks the shebang line
+scripts/*.mjs text eol=lf
