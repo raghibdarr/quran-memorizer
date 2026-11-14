@@ -2,7 +2,7 @@
   "id": "wudu-04",
   "unit": "purification",
   "order": 4,
-  "rev": 1,
+  "rev": 2,
   "title": "What breaks the wash for prayer",
   "intro": "[[wudu]] lasts until something ends it. Some causes are shared by every school. On sleep, touch and bleeding the schools read the evidence differently, and each primer gives its own list.",
   "claims": [
@@ -407,21 +407,21 @@
     {
       "q": "Someone fainted and came round. Their [[wudu]] is…",
       "options": [
-        "Broken",
         "Intact",
+        "Broken",
         "Intact if they were sitting"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c2"
     },
     {
       "q": "On sleep, the four primers…",
       "options": [
-        "Differ on which sleep breaks [[wudu]]",
         "Say no sleep breaks [[wudu]]",
-        "Say only sleep at night breaks it"
+        "Say only sleep at night breaks it",
+        "Differ on which sleep breaks [[wudu]]"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c3"
     },
     {

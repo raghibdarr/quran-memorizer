@@ -2,7 +2,7 @@
   "id": "khuff-07",
   "unit": "purification",
   "order": 7,
-  "rev": 1,
+  "rev": 2,
   "title": "Wiping over leather socks",
   "intro": "Taking footwear off for every [[wudu]] can be hard, on a journey or in the cold. The primers of all four schools have a chapter on wiping over leather socks in place of washing the feet. This lesson covers when that applies and where they differ.",
   "claims": [
@@ -291,21 +291,21 @@
     {
       "q": "On a time limit for wiping, the four primers…",
       "options": [
-        "Differ: three give a limit, one gives none",
         "All give one day and night",
+        "Differ: three give a limit, one gives none",
         "All give no limit"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c2"
     },
     {
       "q": "On thick socks that are not leather, the primers…",
       "options": [
-        "Differ",
         "All include them",
-        "All exclude them"
+        "All exclude them",
+        "Differ"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c4"
     }
   ],

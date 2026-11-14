@@ -83,3 +83,21 @@ work (shamela.ws) was read, not a second independent print; and locating a phras
 scholar's reading of it. The lessons carry "Source-checked. Not yet reviewed by a scholar."
 
 Result: 9 of 9 lessons source-checked; 0 left as draft.
+
+2026-11-14  Fresh review of the package (a reviewer that did not build it)
+--------------------------------------------------------------------------
+- tools/verify-citations.mjs re-run: 160 of 160 quotes found on their recorded pages.
+- Every consensus and cross-location quote was read against the claim it supports.
+Findings fixed (all nine lessons raised to rev 2):
+1. ghusl-05/c1: Ibn Rushd's agreed cause is "خروج المني على وجه الصحة". The claim dropped
+   "على وجه الصحة" and so reported agreement on more than he does (emission through
+   illness is differed on). Claim and card now say "in the ordinary, healthy way".
+2. ghusl-05/c5 Maliki: "as the water is poured" was loose for "بإثر صب الماء". Now
+   "straight after pouring the water" (position text and school card).
+3. Check questions: the right option was the first one in all 28 questions. The options
+   are reordered so the answer falls evenly across positions; no wording changed.
+Noted, no change:
+- The brief lists rubbing among the differences on the obligatory acts of wudu. Ibn Rushd
+  treats rubbing as a difference under ghusl, not as a mas'ala of wudu, so it is carried by
+  ghusl-05/c5 and wudu-03 has no rubbing claim. Left out rather than cross-located loosely.
+- No hadith is cited as evidence; every claim rests on a Quran ref or a consensus citation.

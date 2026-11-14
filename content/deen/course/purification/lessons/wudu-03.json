@@ -2,7 +2,7 @@
   "id": "wudu-03",
   "unit": "purification",
   "order": 3,
-  "rev": 1,
+  "rev": 2,
   "title": "What the wash for prayer rests on",
   "intro": "Some parts of [[wudu]] are its core and others complete it. The schools share the core named in the Quran and differ on a few points around it. This lesson sets each school’s primer side by side.",
   "claims": [
@@ -363,21 +363,21 @@
     {
       "q": "On intention in [[wudu]], the four primers…",
       "options": [
-        "Differ: one counts it recommended, the others make it a duty",
         "All count it recommended",
+        "Differ: one counts it recommended, the others make it a duty",
         "Do not mention it"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c2"
     },
     {
       "q": "What do the schools differ on about wiping the head?",
       "options": [
-        "How much of the head is wiped",
         "Whether the head is part of [[wudu]] at all",
-        "Whether water is used"
+        "Whether water is used",
+        "How much of the head is wiped"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c3"
     }
   ],

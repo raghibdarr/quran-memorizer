@@ -2,7 +2,7 @@
   "id": "najasa-08",
   "unit": "purification",
   "order": 8,
-  "rev": 1,
+  "rev": 2,
   "title": "Removing impurity",
   "intro": "Purity also concerns what gets on the body, the clothes and the ground. This lesson covers what the scholars count as impure, where it matters for the prayer, and how it is cleaned away.",
   "claims": [
@@ -247,21 +247,21 @@
     {
       "q": "Which of these is impure by agreement?",
       "options": [
-        "Human urine",
         "Rain water",
+        "Human urine",
         "Dry soil"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c3"
     },
     {
       "q": "On vinegar and other pure liquids removing impurity, the primers…",
       "options": [
-        "Differ",
         "All accept them",
-        "All reject them"
+        "All reject them",
+        "Differ"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c5"
     }
   ],

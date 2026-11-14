@@ -2,7 +2,7 @@
   "id": "wudu-02",
   "unit": "purification",
   "order": 2,
-  "rev": 1,
+  "rev": 2,
   "title": "Washing for prayer, step by step",
   "intro": "One ayah of the Quran names the parts that are washed and wiped before the prayer. This lesson walks through a complete [[wudu]] from start to finish, as the primers describe it.",
   "claims": [
@@ -187,21 +187,21 @@
     {
       "q": "You washed each part once, thoroughly. What is the state of your [[wudu]]?",
       "options": [
-        "Complete: the second and third washes are recommended extras",
         "Incomplete until each part is washed three times",
+        "Complete: the second and third washes are recommended extras",
         "Complete, but for one prayer only"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c3"
     },
     {
       "q": "Someone washed the left foot before the right. What now?",
       "options": [
-        "Nothing is repeated",
         "Both feet are washed again",
-        "The whole [[wudu]] starts again"
+        "The whole [[wudu]] starts again",
+        "Nothing is repeated"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c4"
     }
   ],

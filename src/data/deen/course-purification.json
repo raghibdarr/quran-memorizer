@@ -1,19 +1,19 @@
 {
  "deck": "course-purification",
  "kind": "course",
- "hash": "c7e68cfd5164ace5",
+ "hash": "76ad2756c8d4d4e0",
  "items": [
   {
    "id": "ghusl-05",
    "unit": "purification",
    "order": 5,
-   "rev": 1,
+   "rev": 2,
    "title": "The full-body wash",
    "intro": "Some states call for more than [[wudu]]: a wash of the whole body, called [[ghusl]]. This lesson covers when it is due, how the primers describe it, and two points where they differ.",
    "claims": [
     {
      "id": "c1",
-     "text": "[[ghusl]] is due after semen is emitted, awake or asleep, by a man or a woman, and when menstruation ends. Ibn Rushd notes one early dissent about a woman’s wet dream.",
+     "text": "[[ghusl]] is due after semen is emitted in the ordinary, healthy way, awake or asleep, by a man or a woman, and when menstruation ends. Ibn Rushd notes one early dissent about a woman’s wet dream.",
      "kind": "agreed",
      "evidence": [
       {
@@ -45,7 +45,7 @@
       {
        "id": "c1a",
        "front": "Which two causes of [[ghusl]] does Ibn Rushd report agreement on?",
-       "back": "The emission of semen, awake or asleep, by a man or a woman; and the end of menstruation."
+       "back": "The emission of semen in the ordinary, healthy way, awake or asleep, by a man or a woman; and the end of menstruation."
       }
      ]
     },
@@ -202,7 +202,7 @@
       },
       {
        "school": "maliki",
-       "text": "He rubs with his hands as the water is poured, until it has covered his body.",
+       "text": "He rubs with his hands straight after pouring the water, until it has covered his body.",
        "source": {
         "work": "al-risala",
         "location": "Bab fi al-ghusl"
@@ -243,7 +243,7 @@
       {
        "id": "c5-maliki",
        "front": "Maliki primer (Ibn Abi Zayd): is the body rubbed with the hand in [[ghusl]]?",
-       "back": "He rubs with his hands as the water is poured, until it has covered his body.",
+       "back": "He rubs with his hands straight after pouring the water, until it has covered his body.",
        "school": "maliki"
       },
       {
@@ -342,21 +342,21 @@
     {
      "q": "In a full [[ghusl]], what comes before pouring water over the head?",
      "options": [
-      "[[wudu]] as for the prayer",
       "Washing the feet",
+      "[[wudu]] as for the prayer",
       "Drying the hands"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c4"
     },
     {
      "q": "On rubbing the body with the hand in [[ghusl]], the primers…",
      "options": [
-      "Differ",
       "All make it an obligation",
-      "Do not mention it"
+      "Do not mention it",
+      "Differ"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c5"
     }
    ],
@@ -369,7 +369,7 @@
    "id": "khuff-07",
    "unit": "purification",
    "order": 7,
-   "rev": 1,
+   "rev": 2,
    "title": "Wiping over leather socks",
    "intro": "Taking footwear off for every [[wudu]] can be hard, on a journey or in the cold. The primers of all four schools have a chapter on wiping over leather socks in place of washing the feet. This lesson covers when that applies and where they differ.",
    "claims": [
@@ -658,21 +658,21 @@
     {
      "q": "On a time limit for wiping, the four primers…",
      "options": [
-      "Differ: three give a limit, one gives none",
       "All give one day and night",
+      "Differ: three give a limit, one gives none",
       "All give no limit"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c2"
     },
     {
      "q": "On thick socks that are not leather, the primers…",
      "options": [
-      "Differ",
       "All include them",
-      "All exclude them"
+      "All exclude them",
+      "Differ"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c4"
     }
    ],
@@ -685,7 +685,7 @@
    "id": "najasa-08",
    "unit": "purification",
    "order": 8,
-   "rev": 1,
+   "rev": 2,
    "title": "Removing impurity",
    "intro": "Purity also concerns what gets on the body, the clothes and the ground. This lesson covers what the scholars count as impure, where it matters for the prayer, and how it is cleaned away.",
    "claims": [
@@ -930,21 +930,21 @@
     {
      "q": "Which of these is impure by agreement?",
      "options": [
-      "Human urine",
       "Rain water",
+      "Human urine",
       "Dry soil"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c3"
     },
     {
      "q": "On vinegar and other pure liquids removing impurity, the primers…",
      "options": [
-      "Differ",
       "All accept them",
-      "All reject them"
+      "All reject them",
+      "Differ"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c5"
     }
    ],
@@ -957,7 +957,7 @@
    "id": "recap-09",
    "unit": "purification",
    "order": 9,
-   "rev": 1,
+   "rev": 2,
    "title": "Purification: the whole picture",
    "intro": "Eight lessons on one page. This recap gathers the points the schools share, so the map of purification is clear. Where their primers differ, the earlier lessons show each position with its source.",
    "claims": [
@@ -1118,21 +1118,21 @@
     {
      "q": "Which ayah names the core parts of [[wudu]]?",
      "options": [
-      "Quran 5:6",
       "Quran 2:222",
+      "Quran 5:6",
       "Quran 74:4"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c3"
     },
     {
      "q": "Whatever breaks [[wudu]] also breaks…",
      "options": [
-      "[[tayammum]]",
       "The fast",
-      "Nothing else"
+      "Nothing else",
+      "[[tayammum]]"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c4"
     }
    ],
@@ -1145,7 +1145,7 @@
    "id": "tayammum-06",
    "unit": "purification",
    "order": 6,
-   "rev": 1,
+   "rev": 2,
    "title": "When there is no water",
    "intro": "Water is not always within reach, and sometimes using it would harm. For those times the Quran gives clean earth in its place. This lesson covers who it is for, how it is done, and what ends it.",
    "claims": [
@@ -1500,21 +1500,21 @@
     {
      "q": "What is used for [[tayammum]] by agreement?",
      "options": [
-      "Dusty soil",
       "Any clean cloth",
+      "Dusty soil",
       "Fresh leaves"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c4"
     },
     {
      "q": "You made [[tayammum]] and then found water before starting to pray. What now?",
      "options": [
-      "Purify again, then pray",
       "Pray with the [[tayammum]]",
-      "Wait for the next prayer"
+      "Wait for the next prayer",
+      "Purify again, then pray"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c5"
     }
    ],
@@ -1527,7 +1527,7 @@
    "id": "water-01",
    "unit": "purification",
    "order": 1,
-   "rev": 1,
+   "rev": 2,
    "title": "Purity and water",
    "intro": "Before standing to pray, a Muslim gets ready, and the Quran ties that readiness to water. This lesson sets out the two kinds of purity the scholars speak of, the three ways of reaching it, and which water does the job.",
    "claims": [
@@ -1758,21 +1758,21 @@
     {
      "q": "Water has taken on the smell of an impurity. What is its state?",
      "options": [
-      "Impure, whether a little or a lot",
       "Pure if there is a lot of it",
+      "Impure, whether a little or a lot",
       "Pure, as long as its colour is clear"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c5"
     },
     {
      "q": "The two kinds of purity the sacred law speaks of are purity from…",
      "options": [
-      "A ritual state, and physical impurity",
       "Hunger, and thirst",
-      "Travel, and illness"
+      "Travel, and illness",
+      "A ritual state, and physical impurity"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c1"
     }
    ],
@@ -1785,7 +1785,7 @@
    "id": "wudu-02",
    "unit": "purification",
    "order": 2,
-   "rev": 1,
+   "rev": 2,
    "title": "Washing for prayer, step by step",
    "intro": "One ayah of the Quran names the parts that are washed and wiped before the prayer. This lesson walks through a complete [[wudu]] from start to finish, as the primers describe it.",
    "claims": [
@@ -1970,21 +1970,21 @@
     {
      "q": "You washed each part once, thoroughly. What is the state of your [[wudu]]?",
      "options": [
-      "Complete: the second and third washes are recommended extras",
       "Incomplete until each part is washed three times",
+      "Complete: the second and third washes are recommended extras",
       "Complete, but for one prayer only"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c3"
     },
     {
      "q": "Someone washed the left foot before the right. What now?",
      "options": [
-      "Nothing is repeated",
       "Both feet are washed again",
-      "The whole [[wudu]] starts again"
+      "The whole [[wudu]] starts again",
+      "Nothing is repeated"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c4"
     }
    ],
@@ -1997,7 +1997,7 @@
    "id": "wudu-03",
    "unit": "purification",
    "order": 3,
-   "rev": 1,
+   "rev": 2,
    "title": "What the wash for prayer rests on",
    "intro": "Some parts of [[wudu]] are its core and others complete it. The schools share the core named in the Quran and differ on a few points around it. This lesson sets each school’s primer side by side.",
    "claims": [
@@ -2358,21 +2358,21 @@
     {
      "q": "On intention in [[wudu]], the four primers…",
      "options": [
-      "Differ: one counts it recommended, the others make it a duty",
       "All count it recommended",
+      "Differ: one counts it recommended, the others make it a duty",
       "Do not mention it"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c2"
     },
     {
      "q": "What do the schools differ on about wiping the head?",
      "options": [
-      "How much of the head is wiped",
       "Whether the head is part of [[wudu]] at all",
-      "Whether water is used"
+      "Whether water is used",
+      "How much of the head is wiped"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c3"
     }
    ],
@@ -2385,7 +2385,7 @@
    "id": "wudu-04",
    "unit": "purification",
    "order": 4,
-   "rev": 1,
+   "rev": 2,
    "title": "What breaks the wash for prayer",
    "intro": "[[wudu]] lasts until something ends it. Some causes are shared by every school. On sleep, touch and bleeding the schools read the evidence differently, and each primer gives its own list.",
    "claims": [
@@ -2790,21 +2790,21 @@
     {
      "q": "Someone fainted and came round. Their [[wudu]] is…",
      "options": [
-      "Broken",
       "Intact",
+      "Broken",
       "Intact if they were sitting"
      ],
-     "answer": 0,
+     "answer": 1,
      "claim": "c2"
     },
     {
      "q": "On sleep, the four primers…",
      "options": [
-      "Differ on which sleep breaks [[wudu]]",
       "Say no sleep breaks [[wudu]]",
-      "Say only sleep at night breaks it"
+      "Say only sleep at night breaks it",
+      "Differ on which sleep breaks [[wudu]]"
      ],
-     "answer": 0,
+     "answer": 2,
      "claim": "c3"
     },
     {

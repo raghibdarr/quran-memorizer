@@ -2,7 +2,7 @@
   "id": "tayammum-06",
   "unit": "purification",
   "order": 6,
-  "rev": 1,
+  "rev": 2,
   "title": "When there is no water",
   "intro": "Water is not always within reach, and sometimes using it would harm. For those times the Quran gives clean earth in its place. This lesson covers who it is for, how it is done, and what ends it.",
   "claims": [
@@ -357,21 +357,21 @@
     {
       "q": "What is used for [[tayammum]] by agreement?",
       "options": [
-        "Dusty soil",
         "Any clean cloth",
+        "Dusty soil",
         "Fresh leaves"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c4"
     },
     {
       "q": "You made [[tayammum]] and then found water before starting to pray. What now?",
       "options": [
-        "Purify again, then pray",
         "Pray with the [[tayammum]]",
-        "Wait for the next prayer"
+        "Wait for the next prayer",
+        "Purify again, then pray"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c5"
     }
   ],

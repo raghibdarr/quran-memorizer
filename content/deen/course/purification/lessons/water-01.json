@@ -2,7 +2,7 @@
   "id": "water-01",
   "unit": "purification",
   "order": 1,
-  "rev": 1,
+  "rev": 2,
   "title": "Purity and water",
   "intro": "Before standing to pray, a Muslim gets ready, and the Quran ties that readiness to water. This lesson sets out the two kinds of purity the scholars speak of, the three ways of reaching it, and which water does the job.",
   "claims": [
@@ -233,21 +233,21 @@
     {
       "q": "Water has taken on the smell of an impurity. What is its state?",
       "options": [
-        "Impure, whether a little or a lot",
         "Pure if there is a lot of it",
+        "Impure, whether a little or a lot",
         "Pure, as long as its colour is clear"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c5"
     },
     {
       "q": "The two kinds of purity the sacred law speaks of are purity from…",
       "options": [
-        "A ritual state, and physical impurity",
         "Hunger, and thirst",
-        "Travel, and illness"
+        "Travel, and illness",
+        "A ritual state, and physical impurity"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c1"
     }
   ],

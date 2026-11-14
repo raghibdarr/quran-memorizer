@@ -2,13 +2,13 @@
   "id": "ghusl-05",
   "unit": "purification",
   "order": 5,
-  "rev": 1,
+  "rev": 2,
   "title": "The full-body wash",
   "intro": "Some states call for more than [[wudu]]: a wash of the whole body, called [[ghusl]]. This lesson covers when it is due, how the primers describe it, and two points where they differ.",
   "claims": [
     {
       "id": "c1",
-      "text": "[[ghusl]] is due after semen is emitted, awake or asleep, by a man or a woman, and when menstruation ends. Ibn Rushd notes one early dissent about a woman’s wet dream.",
+      "text": "[[ghusl]] is due after semen is emitted in the ordinary, healthy way, awake or asleep, by a man or a woman, and when menstruation ends. Ibn Rushd notes one early dissent about a woman’s wet dream.",
       "kind": "agreed",
       "evidence": [
         {
@@ -40,7 +40,7 @@
         {
           "id": "c1a",
           "front": "Which two causes of [[ghusl]] does Ibn Rushd report agreement on?",
-          "back": "The emission of semen, awake or asleep, by a man or a woman; and the end of menstruation."
+          "back": "The emission of semen in the ordinary, healthy way, awake or asleep, by a man or a woman; and the end of menstruation."
         }
       ]
     },
@@ -197,7 +197,7 @@
         },
         {
           "school": "maliki",
-          "text": "He rubs with his hands as the water is poured, until it has covered his body.",
+          "text": "He rubs with his hands straight after pouring the water, until it has covered his body.",
           "source": {
             "work": "al-risala",
             "location": "Bab fi al-ghusl"
@@ -238,7 +238,7 @@
         {
           "id": "c5-maliki",
           "front": "Maliki primer (Ibn Abi Zayd): is the body rubbed with the hand in [[ghusl]]?",
-          "back": "He rubs with his hands as the water is poured, until it has covered his body.",
+          "back": "He rubs with his hands straight after pouring the water, until it has covered his body.",
           "school": "maliki"
         },
         {
@@ -337,21 +337,21 @@
     {
       "q": "In a full [[ghusl]], what comes before pouring water over the head?",
       "options": [
-        "[[wudu]] as for the prayer",
         "Washing the feet",
+        "[[wudu]] as for the prayer",
         "Drying the hands"
       ],
-      "answer": 0,
+      "answer": 1,
       "claim": "c4"
     },
     {
       "q": "On rubbing the body with the hand in [[ghusl]], the primers…",
       "options": [
-        "Differ",
         "All make it an obligation",
-        "Do not mention it"
+        "Do not mention it",
+        "Differ"
       ],
-      "answer": 0,
+      "answer": 2,
       "claim": "c5"
     }
   ],
