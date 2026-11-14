@@ -29,6 +29,7 @@ export default function QiblaDial({ bearing, heading, aligned = false, className
   const turn = live ? -heading : 0;
   const marker = polar(bearing, 117);
   const lineEnd = polar(bearing, 100);
+  const degrees = Math.round(bearing) % 360;
 
   return (
     <svg
@@ -37,8 +38,8 @@ export default function QiblaDial({ bearing, heading, aligned = false, className
       role="img"
       aria-label={
         live
-          ? `Compass. The qibla is ${Math.round(bearing)} degrees from north${aligned ? ', and you are facing it' : ''}.`
-          : `Diagram with north at the top. The qibla is ${Math.round(bearing)} degrees clockwise from north.`
+          ? `Compass. The qibla is ${degrees} degrees from north${aligned ? ', and you are facing it' : ''}.`
+          : `Diagram with north at the top. The qibla is ${degrees} degrees clockwise from north.`
       }
       data-qibla-dial={live ? 'live' : 'diagram'}
     >

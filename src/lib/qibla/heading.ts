@@ -24,3 +24,21 @@ export function toTrueHeading(raw: Pick<RawHeading, 'heading' | 'reference'>, de
 export function turnToQibla(heading: number, qiblaBearing: number): number {
   return angleDiff(heading, qiblaBearing);
 }
+
+/** The Kaaba (the coordinates adhan measures the qibla to) */
+const KAABA = { lat: 21.4225241, lng: 39.8261818 };
+/** Inside this distance a saved place (a city centre, or a coarse fix a few km out) can't give a direction */
+export const NEAR_KAABA_KM = 30;
+
+/** Great-circle distance to the Kaaba, km */
+export function distanceToKaabaKm(lat: number, lng: number): number {
+  const rad = Math.PI / 180;
+  const dLat = (KAABA.lat - lat) * rad;
+  const dLng = (KAABA.lng - lng) * rad;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat * rad) * Math.cos(KAABA.lat * rad) * Math.sin(dLng / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(a)));
+}
+
+export function nearKaaba(lat: number, lng: number): boolean {
+  return distanceToKaabaKm(lat, lng) < NEAR_KAABA_KM;
+}

@@ -55,3 +55,18 @@ describe('heading helpers', () => {
     expect(turnToQibla(10, 350)).toBe(-20)
   })
 })
+
+describe('near the Kaaba', () => {
+  it('flags Makkah, where a saved place is too rough for a direction, and nowhere else', async () => {
+    const { distanceToKaabaKm, nearKaaba } = await import('./heading');
+    expect(nearKaaba(21.4225, 39.8262)).toBe(true);
+    expect(nearKaaba(21.3891, 39.8579)).toBe(true); // Makkah city centre
+    expect(nearKaaba(21.5433, 39.1728)).toBe(false); // Jeddah, about 70 km
+    expect(distanceToKaabaKm(21.5433, 39.1728)).toBeGreaterThan(60);
+    expect(distanceToKaabaKm(21.5433, 39.1728)).toBeLessThan(80);
+    expect(distanceToKaabaKm(24.4672, 39.6111)).toBeGreaterThan(330); // Madinah
+    expect(distanceToKaabaKm(24.4672, 39.6111)).toBeLessThan(345);
+    expect(nearKaaba(51.51, -0.13)).toBe(false);
+    expect(nearKaaba(-21.4225, -140.1738)).toBe(false); // the antipode
+  });
+});

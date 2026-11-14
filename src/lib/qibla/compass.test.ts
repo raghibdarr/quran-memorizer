@@ -179,3 +179,16 @@ describe('sensor plumbing', () => {
     expect(readOrientationEvent(ev({ type: 'deviceorientation', alpha: 10, beta: 0, gamma: 0, absolute: false }), 0, 3)).toBeNull()
   })
 })
+
+describe('screen rotation', () => {
+  const ev = (o: Record<string, unknown>) => o as unknown as Parameters<typeof readOrientationEvent>[0];
+  it('in landscape the heading is where the user faces, not where the top edge points', () => {
+    // Top edge north, screen turned 90: the user looks east
+    expect(readOrientationEvent(ev({ type: 'deviceorientationabsolute', alpha: 0, beta: 0, gamma: 0, absolute: true }), 90, 0)?.heading).toBeCloseTo(90, 6);
+    expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: 300 }), 90, 0)?.heading).toBeCloseTo(30, 6);
+    expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: 10 }), 270, 0)?.heading).toBeCloseTo(280, 6);
+  });
+  it('an uncalibrated iOS reading (negative heading) carries no heading', () => {
+    expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: -1, alpha: 40, absolute: false }), 0, 0)).toBeNull();
+  });
+});

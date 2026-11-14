@@ -66,6 +66,21 @@ test.describe('qibla', () => {
     await expect(page.locator('[data-sun-aid]')).toHaveCount(0)
   })
 
+  test('in Makkah it says a saved place is too rough, and makes no exactness claim', async ({ page }) => {
+    await seed(page, { ...LONDON, lat: 21.3891, lng: 39.8579, label: 'Makkah', countryCode: 'SA', tz: 'Asia/Riyadh' })
+    await page.goto('/qibla')
+    await expect(page.locator('[data-qibla-notice="near-kaaba"]')).toBeVisible()
+    await expect(page.locator('[data-qibla-notes]')).not.toContainText('exact for your place')
+  })
+
+  test('away from Makkah there is no such note', async ({ page }) => {
+    await seed(page, LONDON)
+    await page.goto('/qibla')
+    await expect(page.locator('[data-qibla-bearing]')).toHaveText(`${QIBLA_LONDON}°`)
+    await expect(page.locator('[data-qibla-notice="near-kaaba"]')).toHaveCount(0)
+    await expect(page.locator('[data-qibla-notes]')).toContainText('exact for your place')
+  })
+
   test('dark theme and reduced motion render the same fallback', async ({ page }) => {
     await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' })
     await seed(page, LONDON)
@@ -103,9 +118,13 @@ test.describe('qibla', () => {
     await send(0)
     await expect(page.locator('[data-qibla-dial="live"]')).toBeVisible()
     await expect(page.locator('[data-qibla-readout="live"]')).toContainText(/Turn 11[5-9]° right/)
+    // Screen readers get one status, not a live region that speaks every degree
+    await expect(page.locator('[data-qibla-status]')).toHaveText('Not facing the qibla')
+    await expect(page.locator('[data-qibla-readout] [aria-live]')).toHaveCount(0)
     // Magnetic heading 119: London's declination is about +1°, so this is within the aligned margin
     await send(360 - 119)
-    await expect(page.getByText('Facing the qibla')).toBeVisible()
+    await expect(page.locator('[data-qibla-readout="live"]')).toContainText('Facing the qibla')
+    await expect(page.locator('[data-qibla-status]')).toHaveText('Facing the qibla')
     await page.getByRole('button', { name: 'Show the diagram instead' }).click()
     await expect(page.locator('[data-qibla-dial="diagram"]')).toBeVisible()
     await context.close()

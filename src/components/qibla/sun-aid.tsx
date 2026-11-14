@@ -21,7 +21,7 @@ export function sunAidText(aid: SunAidResult): { line: string; how?: string } | 
     case 'overhead':
       return { line: 'The sun is nearly overhead, so it can’t show a direction right now.' };
     case 'ahead':
-      return { line: 'The sun is now straight ahead of the qibla.', how: 'Face the sun and you are facing the qibla.' };
+      return { line: 'The sun is now in line with the qibla.', how: 'Face the sun and you are facing the qibla.' };
     case 'behind':
       return { line: 'The sun is now directly behind the qibla.', how: 'Stand with the sun at your back and you are facing the qibla.' };
     case 'side':

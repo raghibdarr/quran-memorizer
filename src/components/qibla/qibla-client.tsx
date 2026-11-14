@@ -19,7 +19,7 @@ import {
   type RawHeading,
 } from '@/lib/qibla/compass';
 import { declinationAt } from '@/lib/qibla/declination';
-import { toTrueHeading, turnToQibla } from '@/lib/qibla/heading';
+import { nearKaaba, toTrueHeading, turnToQibla } from '@/lib/qibla/heading';
 import { haptic } from '@/lib/haptics';
 import { isNative } from '@/lib/native';
 import QiblaDial from './qibla-dial';
@@ -93,6 +93,8 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
   const bearing = useMemo(() => qiblaBearing({ lat, lng }), [lat, lng]);
   const declination = useMemo(() => declinationAt(lat, lng, new Date()), [lat, lng]);
   const weakField = declination.ok && declination.weakField;
+  // In Makkah a saved place (a city centre, or a coarse fix) is too rough to give a direction
+  const closeToKaaba = useMemo(() => nearKaaba(lat, lng), [lat, lng]);
 
   // Screens render only after mount (Providers), so the browser is there to ask
   const [support] = useState<CompassSupport>(effectiveSupport);
@@ -106,6 +108,18 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
   const gateRef = useRef(new AlignGate());
   const latestRef = useRef<RawHeading | null>(null);
   const frameRef = useRef(0);
+  // Read through refs so a place update while the compass runs doesn't tear the sensor down
+  const targetRef = useRef({ bearing, declination });
+  const mountedRef = useRef(true);
+  useEffect(() => {
+    targetRef.current = { bearing, declination };
+  }, [bearing, declination]);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const stop = useCallback(() => {
     stopRef.current?.();
@@ -130,6 +144,7 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
     frameRef.current = 0;
     const raw = latestRef.current;
     if (!raw) return;
+    const { bearing, declination } = targetRef.current;
     const r = filterRef.current.push(raw.heading, raw.t);
     const t = toTrueHeading({ heading: r.heading, reference: raw.reference }, declination);
     const entered = gateRef.current.update(turnToQibla(t.heading, bearing));
@@ -151,7 +166,7 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
         : next,
     );
     setMode('live');
-  }, [bearing, declination]);
+  }, []);
 
   // Sensor subscription only (no state change of its own, so an effect can call it)
   const subscribe = useCallback(() => {
@@ -176,7 +191,9 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
   // Motion permission is asked only here, from the tap (iOS requires it)
   const startFromTap = useCallback(async () => {
     setMode('starting');
-    if ((await requestCompassPermission()) === 'denied') {
+    const answer = await requestCompassPermission();
+    if (!mountedRef.current) return; // left the screen while the prompt was up
+    if (answer === 'denied') {
       showDiagram('denied');
       return;
     }
@@ -212,7 +229,7 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
         <div className="mt-4 text-center" data-qibla-readout={liveNow ? 'live' : 'diagram'}>
           {liveNow ? (
             <>
-              <p className="text-2xl font-bold text-foreground" aria-live="polite">
+              <p className="text-2xl font-bold tabular-nums text-foreground">
                 {live.aligned ? 'Facing the qibla' : `Turn ${Math.round(Math.abs(turn))}° ${turn > 0 ? 'right' : 'left'}`}
               </p>
               <p className="mt-1 text-sm text-muted">
@@ -231,6 +248,11 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
           )}
         </div>
       </Card>
+
+      {/* Screen readers hear the moment of alignment, not every degree on the way */}
+      <p className="sr-only" role="status" data-qibla-status>
+        {liveNow ? (live.aligned ? 'Facing the qibla' : 'Not facing the qibla') : ''}
+      </p>
 
       {liveNow && live.calibrate && <CalibrationHint />}
 
@@ -281,9 +303,15 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
         {liveNow && live.reference === 'magnetic' && (
           <p>This compass reads magnetic north, which can differ from true north by a few degrees where you are.</p>
         )}
+        {closeToKaaba && (
+          <p data-qibla-notice="near-kaaba">
+            You’re in or near Makkah. This close, the direction depends on exactly where you stand, so the bearing
+            from a saved place can be well off. Follow the direction of the mosques around you.
+          </p>
+        )}
         <p>
-          Phone compasses can be off by a few degrees, more near metal, magnets or electronics. The bearing itself is
-          exact for your place.
+          Phone compasses can be off by a few degrees, more near metal, magnets or electronics.
+          {!closeToKaaba && ' The bearing itself is exact for your place.'}
         </p>
       </div>
     </>
