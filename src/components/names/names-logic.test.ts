@@ -9,7 +9,9 @@ import {
   batchSize,
   cardsForNames,
   depthChange,
+  learnStatus,
   nameFacets,
+  namesReadiness,
   namesStartedSince,
   nextNames,
   readerHref,
@@ -84,6 +86,45 @@ describe('starting Names', () => {
     expect(namesStartedSince(cards, DAY_START)).toBe(3)
     // Another deck's cards don't count
     expect(namesStartedSince({ 'nawawi40:01:recall': newDeenCard('nawawi40', 1, NOW) }, DAY_START)).toBe(0)
+  })
+})
+
+describe('what the reviews will show', () => {
+  const DAY_END = DAY_START + 86_399_999
+  const ISO = '2026-11-14'
+
+  it('has all five ready at the meaning depth', () => {
+    const cards = cardsForNames(items.slice(0, 5), 'meaning', NOW)
+    expect(namesReadiness({ cards, newPerDay: 5, introduced: {} }, DAY_END)).toEqual({ ready: 5, waiting: 0 })
+  })
+
+  it('holds the cards past the daily new-card number for a later day', () => {
+    const cards = cardsForNames(items.slice(0, 5), 'arabic', NOW)
+    expect(namesReadiness({ cards, newPerDay: 5, introduced: {} }, DAY_END)).toEqual({ ready: 5, waiting: 5 })
+    // Another deck's new cards already seen today leave no room
+    expect(namesReadiness({ cards, newPerDay: 5, introduced: { [ISO]: 5 } }, DAY_END)).toEqual({ ready: 0, waiting: 10 })
+  })
+
+  it('counts due reviews as ready, and leaves out paused cards and other decks', () => {
+    const cards: Record<string, DeenCard> = cardsForNames(items.slice(0, 2), 'arabic', DAY_START - 86_400_000)
+    cards['names99:001:ar-en'] = { ...cards['names99:001:ar-en'], lastReview: DAY_START - 80_000_000, repetitions: 1, interval: 1, nextReview: DAY_START }
+    cards['names99:001:en-ar'] = { ...cards['names99:001:en-ar'], suspended: true }
+    cards['nawawi40:01:recall'] = newDeenCard('nawawi40', 1, NOW)
+    expect(namesReadiness({ cards, newPerDay: 1, introduced: {} }, DAY_END)).toEqual({ ready: 2, waiting: 1 })
+    expect(namesReadiness({ cards: {}, newPerDay: 5, introduced: {} }, DAY_END)).toEqual({ ready: 0, waiting: 0 })
+  })
+
+  it('says only what the session will show', () => {
+    expect(learnStatus({ today: 5, ready: 5, waiting: 0 })).toBe('5 new Names today. They are waiting in your reviews.')
+    expect(learnStatus({ today: 1, ready: 1, waiting: 0 })).toBe('1 new Name today. It is waiting in your reviews.')
+    expect(learnStatus({ today: 5, ready: 5, waiting: 5 })).toBe('5 new Names today. 5 cards are ready now; the rest follow on the coming days.')
+    expect(learnStatus({ today: 5, ready: 0, waiting: 5 })).toBe('5 new Names today. Their cards come into your reviews on the coming days.')
+    expect(learnStatus({ today: 5, ready: 0, waiting: 0 })).toBe('5 new Names today. You have been through them. They come back in your reviews.')
+    expect(learnStatus({ today: 1, ready: 0, waiting: 0 })).toBe('1 new Name today. You have been through it. It comes back in your reviews.')
+    expect(learnStatus({ today: 0, ready: 0, waiting: 4 })).toBe('The cards come into your reviews on the coming days.')
+    expect(learnStatus({ today: 0, ready: 1, waiting: 0 })).toBe('1 card is ready in your reviews.')
+    expect(learnStatus({ today: 0, ready: 3, waiting: 2 })).toBe('3 cards are ready now; the rest follow on the coming days.')
+    for (const t of [0, 1, 5]) for (const r of [0, 1, 4]) for (const w of [0, 3]) expect(learnStatus({ today: t, ready: r, waiting: w })).not.toMatch(/missed|behind|overdue|late/i)
   })
 })
 

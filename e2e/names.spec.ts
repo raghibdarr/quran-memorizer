@@ -21,6 +21,7 @@ test.describe('names of Allah', () => {
     await expect(page.locator('[data-name-tile]')).toHaveCount(99)
     await expect(page.locator('[data-list-only]')).toHaveCount(8)
     await expect(page.locator('[data-name-tile="023"] [data-list-only]')).toBeVisible()
+    await expect(page.locator('[data-name-tile="023"]')).toHaveAccessibleName(/Found in the list only/)
 
     // The intro card says where the list comes from
     await page.getByRole('button', { name: /how this list came to us/i }).click()
@@ -50,9 +51,15 @@ test.describe('names of Allah', () => {
     await expect(page.locator('[data-name-tile="001"]')).not.toHaveAttribute('data-state', 'new')
     await expect(page.locator('[data-name-tile="006"]')).toHaveAttribute('data-state', 'new')
 
-    // Memorise the Arabic adds the other direction for the started Names
+    await expect(page.locator('[data-names-learn]')).toContainText('5 new Names today. They are waiting in your reviews.')
+
+    // Memorise the Arabic adds the other direction for the started Names; the
+    // daily new-card number holds half of the ten cards for a later day, and the
+    // screen says so instead of offering more
     await page.getByRole('tab', { name: 'Memorise the Arabic' }).click()
     await expect.poll(() => deenCards(page)).toHaveLength(10)
+    await expect(page.locator('[data-names-ready="5"][data-names-waiting="5"]')).toContainText('the rest follow on the coming days')
+    await expect(page.locator('[data-names-more]')).toHaveCount(0)
 
     // The cards show in the deen session, Names first in list order
     await page.locator('[data-names-review]').click()

@@ -1,7 +1,7 @@
 {
  "deck": "names99",
  "kind": "names",
- "hash": "bf99f49f6317656c",
+ "hash": "65cd108126ff52c9",
  "items": [
   {
    "id": "001",
@@ -1815,12 +1815,12 @@
   },
   {
    "id": "067",
-   "rev": 1,
+   "rev": 2,
    "order": 67,
    "arabic": "ٱلْوَاحِدُ",
    "transliteration": "Al-Waahid",
    "meaning": "The One",
-   "explanation": "From wahdah, oneness. Al-Ra'd 13:16 and Ibrahim 14:48 pair it with al-Qahhar: the One, the Subduer.",
+   "explanation": "From wahdah, oneness. Al-Ra'd 13:16 and al-Zumar 39:4 pair it with al-Qahhar: the One, the Subduer.",
    "evidence": {
     "kind": "quran-name",
     "quran": [

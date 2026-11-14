@@ -7,7 +7,9 @@
 // (the learner's daily new-card number, 5 unless they changed it).
 
 import { cardId, newDeenCard } from '@/lib/deen/cards';
-import type { DeenCard } from '@/stores/deen-store';
+import { isNewCard } from '@/lib/deen/queue';
+import { deenToday } from '@/components/deen/queue-logic';
+import type { DeenCard, DeenData } from '@/stores/deen-store';
 import type { DeckDepth, NameItem, QuranRef } from '@/types/deen';
 
 export const NAMES_DECK = 'names99';
@@ -45,6 +47,31 @@ export function namesStartedSince(cards: Record<string, DeenCard>, dayStart: num
   let n = 0;
   for (const t of first.values()) if (t >= dayStart) n++;
   return n;
+}
+
+/**
+ * What the review session would show of the Names right now. New cards share one
+ * daily number across every deck, so Names just started are not always all in
+ * today's session (ten cards at "Memorise the Arabic", or another deck's new
+ * cards already seen today). `ready` is the cards a session opens with;
+ * `waiting` is new cards held for a later day.
+ */
+export function namesReadiness(data: Pick<DeenData, 'cards' | 'newPerDay' | 'introduced'>, dayEnd: number): { ready: number; waiting: number } {
+  const q = deenToday(data, dayEnd, [NAMES_DECK], NAMES_DECK);
+  let fresh = 0;
+  for (const c of Object.values(data.cards)) if (c.deck === NAMES_DECK && !c.suspended && isNewCard(c)) fresh++;
+  return { ready: q.order.length, waiting: Math.max(0, fresh - q.fresh.length) };
+}
+
+/** The line under "Learn the Names" once something is in play: says only what the session will really show */
+export function learnStatus({ today, ready, waiting }: { today: number; ready: number; waiting: number }): string {
+  const lead = today > 0 ? `${today === 1 ? '1 new Name' : `${today} new Names`} today. ` : '';
+  const cards = `${ready} ${ready === 1 ? 'card is' : 'cards are'}`;
+  if (ready > 0 && waiting > 0) return `${lead}${cards} ready now; the rest follow on the coming days.`;
+  const one = today === 1;
+  if (ready > 0) return today > 0 ? `${lead}${one ? 'It is' : 'They are'} waiting in your reviews.` : `${cards} ready in your reviews.`;
+  if (waiting > 0) return `${lead}${today > 0 ? (one ? 'Its cards come' : 'Their cards come') : 'The cards come'} into your reviews on the coming days.`;
+  return `${lead}You have been through ${one ? 'it. It comes' : 'them. They come'} back in your reviews.`;
 }
 
 /** The next Names to learn, in list order, skipping any already started */

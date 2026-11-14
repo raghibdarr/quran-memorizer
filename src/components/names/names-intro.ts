@@ -12,7 +12,7 @@ import type { Citation } from '@/types/deen';
 export const INTRO_TITLE = 'How this list came to us';
 
 export const INTRO_PARAGRAPHS: string[] = [
-  "The Prophet ﷺ said that Allah has ninety-nine Names, one hundred less one, and whoever counts them (in Muslim's wording, memorises them) enters Paradise. Al-Bukhari and Muslim both record this, and neither lists the Names.",
+  "The Prophet ﷺ said that Allah has ninety-nine Names, one hundred less one, and whoever counts them (in another wording, memorises them) enters Paradise. Al-Bukhari and Muslim both record this, and neither lists the Names.",
   "The list most people know comes through one narration in al-Tirmidhi's Jami'. Al-Tirmidhi himself called it gharib: it reached him by a single route. Many hadith scholars, among them Ibn Hajar and Ibn Kathir, judged that the list was added by a narrator rather than said by the Prophet ﷺ.",
   'We teach it because it is the list people memorise, in its order. Each Name shows where it comes from: named in the Quran, taken from a word the Quran uses of Allah, named in a hadith, or found only in this list.',
 ];

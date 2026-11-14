@@ -9,7 +9,7 @@ import { ChevronDownIcon } from '@/components/ui/icons';
 import { CitationLine } from '@/components/deen/citation-line';
 import { getDeck } from '@/components/deen/deck-source';
 import { sessionHref } from '@/components/deen/links';
-import { useDeckStates, type ItemState } from '@/components/deen/item-state';
+import { ITEM_STATE_LABEL, useDeckStates, type ItemState } from '@/components/deen/item-state';
 import { DEPTH_LABEL } from '@/components/deen/depth-choice';
 import { useDeenStore } from '@/stores/deen-store';
 import { useDayClock } from '@/hooks/use-day-clock';
@@ -25,6 +25,8 @@ import {
   batchSize,
   cardsForNames,
   depthChange,
+  learnStatus,
+  namesReadiness,
   namesStartedSince,
   nextNames,
   sortNames,
@@ -59,6 +61,7 @@ function IntroCard() {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
+        aria-controls="names-intro-body"
         className="flex min-h-14 w-full items-center gap-3 px-4 py-3 text-left"
       >
         <span className="min-w-0 flex-1">
@@ -68,7 +71,7 @@ function IntroCard() {
         <ChevronDownIcon size={16} className={cn('shrink-0 text-muted transition-transform motion-reduce:transition-none', open && 'rotate-180')} />
       </button>
       {open && (
-        <div className="space-y-3 px-4 pb-4">
+        <div id="names-intro-body" className="space-y-3 px-4 pb-4">
           {INTRO_PARAGRAPHS.map((p) => (
             <p key={p.slice(0, 24)} className="text-sm leading-relaxed text-foreground">
               {p}
@@ -98,10 +101,13 @@ export default function NamesScreen() {
   const [items, setItems] = useState<NameItem[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [openId, setOpenId] = useState<string | null>(null);
+  // The sheet keeps its Name while it slides shut
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [surahNames, setSurahNames] = useState<Record<number, string>>();
   const cards = useDeenStore((s) => s.cards);
   const storedDepth = useDeenStore((s) => s.depth[NAMES_DECK]);
   const newPerDay = useDeenStore((s) => s.newPerDay);
+  const introduced = useDeenStore((s) => s.introduced);
   const addCards = useDeenStore((s) => s.addCards);
   const setDepth = useDeenStore((s) => s.setDepth);
   const setSuspended = useDeenStore((s) => s.setSuspended);
@@ -128,6 +134,7 @@ export default function NamesScreen() {
 
   const started = useMemo(() => startedNameIds(cards), [cards]);
   const today = useMemo(() => namesStartedSince(cards, startOfDayMs(dayEnd)), [cards, dayEnd]);
+  const { ready, waiting } = useMemo(() => namesReadiness({ cards, newPerDay, introduced }, dayEnd), [cards, newPerDay, introduced, dayEnd]);
   const size = batchSize(newPerDay);
   const next = useMemo(() => (items ? nextNames(items, cards, size) : []), [items, cards, size]);
   const startedCount = items ? items.filter((it) => started.has(it.id)).length : 0;
@@ -192,17 +199,22 @@ export default function NamesScreen() {
                     Review the Names
                   </Link>
                 </div>
-              ) : today > 0 ? (
+              ) : today > 0 || ready > 0 || waiting > 0 ? (
                 <div className="space-y-3">
-                  <p className="text-sm text-foreground" data-names-today={today}>
-                    {today === 1 ? '1 new Name' : `${today} new Names`} today. They are waiting in your reviews.
+                  <p className="text-sm text-foreground" data-names-today={today} data-names-ready={ready} data-names-waiting={waiting}>
+                    {learnStatus({ today, ready, waiting })}
                   </p>
-                  <Link href={sessionHref(NAMES_DECK)} className="tactile-btn flex min-h-12 w-full items-center justify-center rounded-xl bg-teal px-6 font-semibold text-on-teal hover:bg-teal-light" data-names-review>
-                    Review them now
-                  </Link>
-                  <button type="button" onClick={() => learn(next)} className="mx-auto block min-h-11 text-sm font-semibold text-muted hover:text-foreground">
-                    Add {next.length} more
-                  </button>
+                  {ready > 0 && (
+                    <Link href={sessionHref(NAMES_DECK)} className="tactile-btn flex min-h-12 w-full items-center justify-center rounded-xl bg-teal px-6 font-semibold text-on-teal hover:bg-teal-light" data-names-review>
+                      Review them now
+                    </Link>
+                  )}
+                  {/* More Names only once the ones in hand have a place in the reviews */}
+                  {waiting === 0 && (
+                    <button type="button" onClick={() => learn(next)} className="mx-auto block min-h-11 text-sm font-semibold text-muted hover:text-foreground" data-names-more>
+                      {today > 0 ? `Add ${next.length} more` : `Learn the next ${next.length}`}
+                    </button>
+                  )}
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -229,18 +241,21 @@ export default function NamesScreen() {
                   <li key={it.id}>
                     <button
                       type="button"
-                      onClick={() => setOpenId(it.id)}
+                      onClick={() => {
+                        setOpenId(it.id);
+                        setSheetOpen(true);
+                      }}
                       className="pressable relative flex h-full min-h-[6.5rem] w-full flex-col items-center justify-between gap-1 rounded-2xl border border-foreground/10 bg-card px-1.5 pb-2 pt-2.5 text-center hover:border-foreground/25"
                       data-name-tile={it.id}
                       data-state={state}
-                      aria-label={`${it.order}. ${it.transliteration}, ${it.meaning}. ${state === 'new' ? 'Not started' : state}`}
+                      aria-label={`${it.order}. ${it.transliteration}, ${it.meaning}. ${it.evidence.kind === 'list-only' ? 'Found in the list only. ' : ''}${ITEM_STATE_LABEL[state]}`}
                     >
                       <span className="absolute left-2 top-1.5 text-[10px] tabular-nums text-muted">{it.order}</span>
                       <span aria-hidden className={cn('absolute right-2 top-2 h-1.5 w-1.5 rounded-full', STATE_DOT[state], state === 'new' && 'border border-foreground/20')} />
                       <span className="arabic-text mt-1 text-[1.35rem] leading-snug text-teal" lang="ar" dir="rtl">
                         {it.arabic}
                       </span>
-                      <span className="w-full truncate text-[11px] font-semibold text-foreground">{it.transliteration}</span>
+                      <span className="line-clamp-2 w-full break-words text-[11px] font-semibold leading-tight text-foreground">{it.transliteration}</span>
                       {it.evidence.kind === 'list-only' && (
                         <span className="rounded-full bg-gold/15 px-1.5 text-[10px] font-semibold text-gold-deep" data-list-only>
                           List only
@@ -267,8 +282,8 @@ export default function NamesScreen() {
       <NameSheet
         item={openItem}
         state={openItem ? (states[openItem.id] ?? 'new') : 'new'}
-        open={!!openItem}
-        onClose={() => setOpenId(null)}
+        open={sheetOpen && !!openItem}
+        onClose={() => setSheetOpen(false)}
         onLearn={(it) => learn([it])}
         surahNames={surahNames}
       />
