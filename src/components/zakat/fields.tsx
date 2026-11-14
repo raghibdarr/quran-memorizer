@@ -35,7 +35,11 @@ export function AmountField({
       <label htmlFor={id} className="block text-sm font-medium text-foreground">
         {label}
       </label>
-      {hint && <p className="text-xs text-muted">{hint}</p>}
+      {hint && (
+        <p id={`${id}-hint`} className="text-xs text-muted">
+          {hint}
+        </p>
+      )}
       <div className="mt-1.5 flex items-center gap-2">
         <input
           id={id}
@@ -46,6 +50,7 @@ export function AmountField({
           placeholder="0"
           value={text}
           aria-invalid={invalid || undefined}
+          aria-describedby={[hint ? `${id}-hint` : '', invalid ? `${id}-error` : ''].filter(Boolean).join(' ') || undefined}
           onChange={(e) => {
             setText(e.target.value);
             const n = parseAmount(e.target.value);
@@ -57,9 +62,17 @@ export function AmountField({
             invalid ? 'border-gold-deep/60' : 'border-foreground/15',
           )}
         />
-        {unit && <span className="shrink-0 text-sm text-muted">{unit}</span>}
+        {unit && (
+          <span aria-hidden className="max-w-[40%] shrink-0 truncate text-sm text-muted">
+            {unit}
+          </span>
+        )}
       </div>
-      {invalid && <p className="mt-1 text-xs text-gold-deep">Numbers only, like 1250.50</p>}
+      {invalid && (
+        <p id={`${id}-error`} role="alert" className="mt-1 text-xs text-gold-deep">
+          Numbers only, like 1250.50
+        </p>
+      )}
     </div>
   );
 }
@@ -81,8 +94,21 @@ export function ChoiceChips<T extends string>({
   onChange: (v: T) => void;
   name: string;
 }) {
+  // Radio-group keys: arrows move to the next choice and pick it. Until a
+  // choice is made every option is a tab stop; afterwards only the chosen one.
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+    if (!step) return;
+    const radios = Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="radio"]'));
+    const at = radios.indexOf(document.activeElement as HTMLButtonElement);
+    if (at < 0) return;
+    e.preventDefault();
+    const next = (at + step + radios.length) % radios.length;
+    radios[next].focus();
+    onChange(options[next].value);
+  };
   return (
-    <div role="radiogroup" aria-label={label} className="mt-3 flex flex-wrap gap-2" data-choice={name}>
+    <div role="radiogroup" aria-label={label} className="mt-3 flex flex-wrap gap-2" data-choice={name} onKeyDown={onKeyDown}>
       {options.map((o) => {
         const on = o.value === value;
         return (
@@ -91,6 +117,7 @@ export function ChoiceChips<T extends string>({
             type="button"
             role="radio"
             aria-checked={on}
+            tabIndex={value === null || on ? 0 : -1}
             onClick={() => {
               if (!on) haptic.selection();
               onChange(o.value);

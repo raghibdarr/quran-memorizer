@@ -52,6 +52,50 @@ describe('nextHawlDate', () => {
     }
   });
 
+  it('an old start date gives the anniversary for this year, the same as walking year by year', () => {
+    for (const engine of [false, true]) {
+      forceTabularForTests(engine);
+      for (const [start, today] of [
+        ['1990-03-15', '2026-11-13'],
+        ['1600-01-01', '2026-11-13'], // more than 400 lunar years back
+        ['2026-11-13', '2026-11-13'], // started today: the first anniversary
+        ['2027-06-01', '2026-11-13'], // a start in the future still gives its first anniversary
+      ] as const) {
+        const n = nextHawlDate(start, today)!;
+        expect(n, start).not.toBeNull();
+        expect(n.iso >= today).toBe(true);
+        expect(n.years).toBeGreaterThanOrEqual(1);
+        const s = toHijri(start);
+        expect(n.hijri.year).toBe(s.year + n.years);
+        expect(n.hijri.month).toBe(s.month);
+        // The anniversary before it has passed (or it is the first)
+        if (n.years > 1) {
+          const days = (Date.parse(n.iso) - Date.parse(today)) / 86_400_000;
+          expect(days).toBeLessThan(356);
+        }
+      }
+    }
+  });
+
+  it('is the day itself on an anniversary, and the next one the day after', () => {
+    forceTabularForTests(true);
+    const first = nextHawlDate('2024-02-01', '2024-02-02')!;
+    expect(nextHawlDate('2024-02-01', first.iso)).toMatchObject({ iso: first.iso, years: 1 });
+    const second = nextHawlDate('2024-02-01', new Date(Date.parse(first.iso) + 86_400_000).toISOString().slice(0, 10))!;
+    expect(second.years).toBe(2);
+    expect(second.iso > first.iso).toBe(true);
+  });
+
+  it('never throws on dates the calendar cannot place', () => {
+    for (const start of ['0001-01-01', '0300-05-05', '9999-12-31']) {
+      expect(() => nextHawlDate(start, '2026-11-13')).not.toThrow();
+      expect(() => hijriLabel(start)).not.toThrow();
+    }
+    // Before the Hijri calendar begins: no anniversary, no label
+    expect(nextHawlDate('0300-05-05', '2026-11-13')).toBeNull();
+    expect(hijriLabel('0300-05-05')).toBe('');
+  });
+
   it('rejects malformed dates', () => {
     expect(nextHawlDate('10/01/2026', '2026-01-01')).toBeNull();
     expect(hijriLabel('nope')).toBe('');

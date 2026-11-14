@@ -108,9 +108,9 @@
     },
     {
       "id": "trade-goods",
-      "kind": "agreed",
-      "text": "Goods you hold to sell are counted at their market value on the day your zakat year completes.",
-      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, on zakat of trade goods; the four primers, Book of Zakat",
+      "kind": "differs",
+      "text": "Goods you hold to sell are counted at what they would sell for on the day your zakat year completes. The Maliki school treats a trader who holds goods for a long time, waiting for a price, differently from one who buys and sells all the time. For your own situation, ask a scholar you trust.",
+      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, on zakat of trade goods; al-Risala of Ibn Abi Zayd, chapter on zakat; the other primers, Book of Zakat",
       "status": "draft"
     },
     {

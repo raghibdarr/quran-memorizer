@@ -24,6 +24,34 @@ describe('zakat formatting', () => {
     expect(parseAmount('.')).toBeNaN();
   });
 
+  it('reads a comma the way it was typed, never dropping a decimal comma', () => {
+    // Decimal comma (many phone keyboards): must not become 100 times the amount
+    expect(parseAmount('12,5')).toBe(12.5);
+    expect(parseAmount('12,50')).toBe(12.5);
+    expect(parseAmount('0,8')).toBe(0.8);
+    expect(parseAmount(',75')).toBe(0.75);
+    expect(parseAmount('1.234,56')).toBe(1234.56);
+    expect(parseAmount('1 234,56')).toBe(1234.56);
+    // Thousands groups
+    expect(parseAmount('1,234')).toBe(1234);
+    expect(parseAmount('1,234,567')).toBe(1234567);
+    expect(parseAmount('12,345.6')).toBe(12345.6);
+    // Neither: say so instead of guessing
+    expect(parseAmount('1,23,4')).toBeNaN();
+    expect(parseAmount('1,2.3,4')).toBeNaN();
+    expect(parseAmount(',')).toBeNaN();
+  });
+
+  it('reads Arabic-Indic and Persian digits', () => {
+    expect(parseAmount('\u0661\u0662\u0663\u0664')).toBe(1234);
+    expect(parseAmount('\u0661\u0662\u066b\u0665')).toBe(12.5);
+    expect(parseAmount('\u06f1\u06f2\u06f3')).toBe(123);
+  });
+
+  it('never returns Infinity', () => {
+    expect(parseAmount('9'.repeat(400))).toBeNaN();
+  });
+
   it('formats a civil date without time-zone drift', () => {
     expect(formatCivilDate('2027-03-06')).toBe('Saturday 6 March 2027');
   });

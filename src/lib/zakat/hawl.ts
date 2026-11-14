@@ -37,17 +37,31 @@ function civilOf(year: number, month: number, day: number, offset: number): { is
  */
 export function nextHawlDate(startIso: string, todayIso: string, offset = 0): HawlAnniversary | null {
   if (!ISO.test(startIso) || !ISO.test(todayIso)) return null;
-  const start = toHijri(startIso, offset);
-  for (let years = 1; years < 400; years++) {
-    const { iso, hijri } = civilOf(start.year + years, start.month, start.day, offset);
-    if (iso >= todayIso) return { iso, hijri, years };
+  try {
+    const start = toHijri(startIso, offset);
+    if (start.year < 1) return null; // a date before the Hijri calendar: a typo, not a zakat year
+    // Start from this Hijri year (no walking through every year since the start);
+    // the anniversary is this year's or, when that has passed, next year's
+    const first = Math.max(1, toHijri(todayIso, offset).year - start.year);
+    for (let years = first; years <= first + 2; years++) {
+      const { iso, hijri } = civilOf(start.year + years, start.month, start.day, offset);
+      if (iso >= todayIso) return { iso, hijri, years };
+    }
+  } catch {
+    // A date the calendar can't place (far outside its range)
   }
   return null;
 }
 
 /** "3 Rajab 1448" for the start date, under the user's offset */
 export function hijriLabel(iso: string, offset = 0): string {
-  return ISO.test(iso) ? formatHijri(toHijri(iso, offset)) : '';
+  if (!ISO.test(iso)) return '';
+  try {
+    const h = toHijri(iso, offset);
+    return h.year < 1 ? '' : formatHijri(h);
+  } catch {
+    return '';
+  }
 }
 
 /**

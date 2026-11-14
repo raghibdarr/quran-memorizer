@@ -326,7 +326,9 @@ function ResultCard({ result, basis, money }: { result: ZakatResult; basis: Nisa
 
   const blocked = result.missing.length > 0;
   return (
-    <div className="tactile-card rounded-2xl bg-card p-5" data-testid="zakat-result" aria-live="polite">
+    <div className="tactile-card rounded-2xl bg-card p-5" data-testid="zakat-result">
+      {/* Only the outcome is announced as amounts change, not the whole breakdown */}
+      <div aria-live="polite" aria-atomic="true">
       {blocked ? (
         <div>
           <p className="text-base font-bold text-foreground">A little more first</p>
@@ -352,6 +354,7 @@ function ResultCard({ result, basis, money }: { result: ZakatResult; basis: Nisa
           </p>
         </>
       )}
+      </div>
 
       <dl className="mt-4 space-y-1.5 border-t border-foreground/10 pt-3 text-sm">
         {(
@@ -452,6 +455,7 @@ function HawlCard({
           <p className="text-xs text-muted">
             {native ? 'A notification at 9:00 on the expected day.' : 'Reminders need the app. The date is here whenever you come back.'}
           </p>
+          {native && reminderOn && !next && <p className="mt-1 text-xs text-muted">Add the date above and the reminder is set.</p>}
           {denied && <p className="mt-1 text-xs text-gold-deep">Notifications are off for Takrar. You can turn them on in your phone&apos;s settings.</p>}
         </div>
         {native && (

@@ -1,11 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/cn';
 import { zakatNote, type ZakatNoteId } from '@/lib/zakat/notes';
 
 /** The honest status line every explainer carries until a scholar reviews it (spec 1.8) */
-export function UnreviewedLine({ className }: { className?: string }) {
-  return <p className={cn('text-xs text-muted', className)}>Draft. Not yet reviewed by a scholar.</p>;
+export function UnreviewedLine({ className, status = 'draft' }: { className?: string; status?: 'draft' | 'source-checked' }) {
+  return (
+    <p className={cn('text-xs text-muted', className)}>
+      {status === 'draft' ? 'Draft' : 'Source-checked'}. Not yet reviewed by a scholar.
+    </p>
+  );
 }
 
 /**
@@ -15,8 +20,12 @@ export function UnreviewedLine({ className }: { className?: string }) {
  */
 export default function NoteBlock({ id, summary, open = false }: { id: ZakatNoteId; summary?: string; open?: boolean }) {
   const note = zakatNote(id);
+  // Opened for the user when a choice is waiting on it; it then stays as they
+  // leave it, so making the choice doesn't fold the positions away mid-read
+  const [prompted, setPrompted] = useState(open);
+  if (open && !prompted) setPrompted(true);
   return (
-    <details className="group mt-3 rounded-xl bg-foreground/[0.03] px-3.5 py-2.5" open={open} data-note={id}>
+    <details className="group mt-3 rounded-xl bg-foreground/[0.03] px-3.5 py-2.5" open={prompted} data-note={id}>
       <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-teal [&::-webkit-details-marker]:hidden">
         <span>{summary ?? (note.kind === 'differs' ? 'Where scholars differ' : 'Why')}</span>
         <span aria-hidden className="text-muted transition-transform group-open:rotate-45 motion-reduce:transition-none">+</span>
@@ -36,7 +45,7 @@ export default function NoteBlock({ id, summary, open = false }: { id: ZakatNote
         <p className="mt-2.5 text-xs leading-snug text-muted">
           <span className="font-semibold">Where to check:</span> {note.sourceLead}
         </p>
-        {note.status !== 'scholar-reviewed' && <UnreviewedLine className="mt-1" />}
+        {note.status !== 'scholar-reviewed' && <UnreviewedLine className="mt-1" status={note.status} />}
       </div>
     </details>
   );

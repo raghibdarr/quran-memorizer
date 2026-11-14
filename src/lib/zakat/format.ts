@@ -19,12 +19,30 @@ export function formatGrams(g: number): string {
 /**
  * A typed amount as a number: accepts "1,234.5", " 12 ", "0.75"; an empty
  * field is null; anything else (negative, letters) is NaN so the field can say so.
+ *
+ * Many phone keyboards give a comma as the decimal key, so a comma is read the
+ * way it was most likely meant and never silently dropped: "12,5" and "12,50"
+ * are 12.5, "1.234,56" is 1234.56, and "1,234" or "1,234,567" (groups of
+ * three) are thousands. Anything else with a comma ("1,23,4") is NaN.
  */
 export function parseAmount(text: string): number | null {
-  const t = text.replace(/[,\s]/g, '');
+  // Arabic-Indic and Persian digits and separators, as their keyboards type them
+  let t = text
+    .replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+    .replace(/[\u06f0-\u06f9]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
+    .replace(/\u066b/g, '.')
+    .replace(/\u066c/g, ',')
+    .replace(/[\s\u00a0\u202f]/g, '');
   if (t === '') return null;
+  if (t.includes(',')) {
+    if (/^\d{1,3}(,\d{3})+(\.\d*)?$/.test(t)) t = t.replace(/,/g, ''); // 1,234 · 1,234,567.8
+    else if (/^\d{1,3}(\.\d{3})+,\d*$/.test(t)) t = t.replace(/\./g, '').replace(',', '.'); // 1.234,56
+    else if (/^\d*,\d*$/.test(t)) t = t.replace(',', '.'); // 12,5 · ,75
+    else return NaN;
+  }
   if (!/^\d*\.?\d*$/.test(t) || t === '.') return NaN;
-  return Number(t);
+  const n = Number(t);
+  return Number.isFinite(n) ? n : NaN;
 }
 
 /** "Saturday 6 March 2027" for a civil date (built from parts: ICU versions differ on the comma) */
