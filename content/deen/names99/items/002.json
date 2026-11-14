@@ -1,0 +1,34 @@
+{
+  "id": "002",
+  "rev": 1,
+  "order": 2,
+  "arabic": "ٱلرَّحْمَٰنُ",
+  "transliteration": "Ar-Rahmaan",
+  "meaning": "The Most Merciful",
+  "explanation": "From rahmah, mercy. It follows the name Allah in \"In the name of Allah, the Most Merciful, the Ever Merciful\" (al-Fatihah 1:1) and again in 1:3.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 1,
+        "ayah": 1
+      },
+      {
+        "surahId": 1,
+        "ayah": 3
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Fatihah 1:1; Al-Fatihah 1:3"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

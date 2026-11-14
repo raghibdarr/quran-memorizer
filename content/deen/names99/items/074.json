@@ -1,0 +1,30 @@
+{
+  "id": "074",
+  "rev": 1,
+  "order": 74,
+  "arabic": "ٱلْآخِرُ",
+  "transliteration": "Al-'Aakhir",
+  "meaning": "The Last",
+  "explanation": "Al-Hadid 57:3: He is the First and the Last, the Manifest and the Hidden, and He knows all things.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 57,
+        "ayah": 3
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hadid 57:3"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

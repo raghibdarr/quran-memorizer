@@ -1,0 +1,30 @@
+{
+  "id": "006",
+  "rev": 1,
+  "order": 6,
+  "arabic": "ٱلسَّلَامُ",
+  "transliteration": "As-Salaam",
+  "meaning": "The Source of Peace, free of every flaw",
+  "explanation": "From salam, peace and soundness. It is named in al-Hashr 59:23, after al-Quddus.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 59,
+        "ayah": 23
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

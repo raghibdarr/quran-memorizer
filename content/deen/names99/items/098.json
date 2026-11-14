@@ -1,0 +1,24 @@
+{
+  "id": "098",
+  "rev": 1,
+  "order": 98,
+  "arabic": "ٱلرَّشِيدُ",
+  "transliteration": "Ar-Rasheed",
+  "meaning": "The Guide to the right course",
+  "explanation": "From rushd, sound direction. It is found in the enumerated list, not as a Name in the Quran.",
+  "evidence": {
+    "kind": "list-only"
+  },
+  "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

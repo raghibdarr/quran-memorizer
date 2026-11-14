@@ -1,0 +1,30 @@
+{
+  "id": "034",
+  "rev": 1,
+  "order": 34,
+  "arabic": "ٱلْعَظِيمُ",
+  "transliteration": "Al-'Azeem",
+  "meaning": "The Magnificent, the Supremely Great",
+  "explanation": "From 'azamah, greatness. It ends Ayat al-Kursi, al-Baqarah 2:255: He is the Most High, the Magnificent.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 2,
+        "ayah": 255
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:255"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

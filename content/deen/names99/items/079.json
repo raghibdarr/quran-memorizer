@@ -1,0 +1,30 @@
+{
+  "id": "079",
+  "rev": 1,
+  "order": 79,
+  "arabic": "ٱلْبَرُّ",
+  "transliteration": "Al-Barr",
+  "meaning": "The Most Kind, the Source of all good",
+  "explanation": "From birr, goodness and kindness. The people of Paradise say in al-Tur 52:28: we used to call on Him; He is the Most Kind, the Ever Merciful.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 52,
+        "ayah": 28
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "At-Tur 52:28"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

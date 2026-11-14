@@ -1,0 +1,30 @@
+{
+  "id": "027",
+  "rev": 1,
+  "order": 27,
+  "arabic": "ٱلسَّمِيعُ",
+  "transliteration": "As-Samee'",
+  "meaning": "The All-Hearing",
+  "explanation": "From sam', hearing. Al-Shura 42:11: there is nothing like Him, and He is the All-Hearing, the All-Seeing.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 42,
+        "ayah": 11
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ash-Shuraa 42:11"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

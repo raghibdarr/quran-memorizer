@@ -1,0 +1,31 @@
+{
+  "id": "024",
+  "rev": 1,
+  "order": 24,
+  "arabic": "ٱلرَّافِعُ",
+  "transliteration": "Ar-Raafi'",
+  "meaning": "The Exalter, who raises whom He wills",
+  "explanation": "From raf', raising. In Al Imran 3:55 Allah says to 'Isa: I will take you and raise you to Myself.",
+  "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+      {
+        "surahId": 3,
+        "ayah": 55
+      }
+    ],
+    "form": "وَرَافِعُكَ"
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:55"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

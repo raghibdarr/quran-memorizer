@@ -1,0 +1,31 @@
+{
+  "id": "021",
+  "rev": 1,
+  "order": 21,
+  "arabic": "ٱلْقَابِضُ",
+  "transliteration": "Al-Qaabid",
+  "meaning": "The Withholder, who restricts as He wills",
+  "explanation": "From qabd, holding in. The Quran uses the verb: Allah withholds and extends (al-Baqarah 2:245). In the list it is paired with al-Basit.",
+  "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+      {
+        "surahId": 2,
+        "ayah": 245
+      }
+    ],
+    "form": "يَقْبِضُ"
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:245"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "064",
+  "rev": 1,
+  "order": 64,
+  "arabic": "ٱلْقَيُّومُ",
+  "transliteration": "Al-Qayyoom",
+  "meaning": "The Self-Subsisting, Sustainer of all",
+  "explanation": "From qiyam, standing and upholding. It follows al-Hayy in al-Baqarah 2:255 and Al Imran 3:2, and in Ta Ha 20:111.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 2,
+        "ayah": 255
+      },
+      {
+        "surahId": 3,
+        "ayah": 2
+      },
+      {
+        "surahId": 20,
+        "ayah": 111
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:255; Ali 'Imran 3:2; Taha 20:111"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package)."
+    ]
+  }
+}
