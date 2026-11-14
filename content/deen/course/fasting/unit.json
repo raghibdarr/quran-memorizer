@@ -12,5 +12,12 @@
     "fasting-05-making-up",
     "fasting-06-recommended-acts",
     "fasting-07-recap"
-  ]
+  ],
+  "primers": {
+    "hanafi": "mukhtasar-al-quduri",
+    "maliki": "al-risala",
+    "shafii": "matn-abi-shuja",
+    "hanbali": "umdat-al-fiqh"
+  },
+  "footer": "For your own situation, ask a scholar you trust."
 }

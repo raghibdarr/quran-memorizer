@@ -1,11 +1,11 @@
 {
  "deck": "course-fasting",
  "kind": "course",
- "hash": "93883076c909a27e",
+ "hash": "789a01dc93b4daf5",
  "items": [
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-01-who-must-fast",
    "order": 1,
    "title": "Who must fast",
@@ -208,7 +208,7 @@
     {
      "id": "clouded-crescent",
      "kind": "differs",
-     "text": "When cloud hides the crescent on the night after the twenty-ninth of Sha’ban, the schools differ about the following day, often called the day of doubt.",
+     "text": "When cloud hides the crescent on the night after the twenty-ninth of Sha’ban, the schools differ about the following day, often called the day of doubt. The Shafi’i primer used here speaks of the day of doubt in general and does not mention cloud by name.",
      "evidence": [
       {
        "quran": {
@@ -259,7 +259,7 @@
       {
        "id": "clouded-crescent-1",
        "front": "Cloud hides the crescent on the thirtieth night of Sha’ban. What do the four primers say about the next day?",
-       "back": "Hanafi and Maliki: complete thirty days of Sha’ban first. Shafi’i: fasting the day of doubt is disliked, with exceptions. Hanbali: the fast is due."
+       "back": "Hanafi and Maliki: complete thirty days of Sha’ban first. Shafi’i: it does not mention cloud by name; fasting the day of doubt is disliked, with exceptions. Hanbali: the fast is due."
       },
       {
        "id": "clouded-crescent-hanafi",
@@ -327,16 +327,16 @@
   },
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-02-intention",
    "order": 2,
    "title": "The intention",
-   "intro": "A fast is more than going without food. This lesson covers the intention behind it: the part that is agreed, and where the primers of the schools place it differently.",
+   "intro": "A fast is more than going without food. This lesson covers the intention behind it: the part that is reported as agreed, and where the primers of the schools place it differently.",
    "claims": [
     {
      "id": "intention-needed",
      "kind": "agreed",
-     "text": "A fast is kept with an intention. Ibn al-Mundhir reports agreement that someone who intends the fast on each night of Ramadan, and then fasts, has a complete fast.",
+     "text": "A fast is kept with an intention: Ibn Rushd gives this as the position of the great majority and names one early jurist, Zufar, who held otherwise for Ramadan. Ibn al-Mundhir reports agreement that someone who intends the fast on each night of Ramadan, and then fasts, has a complete fast.",
      "evidence": [
       {
        "consensus": {
@@ -470,7 +470,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-03-what-breaks-the-fast",
    "order": 3,
    "title": "What breaks the fast",
@@ -673,7 +673,7 @@
     {
      "id": "mistaken-time",
      "kind": "how-to",
-     "text": "The Hanafi and Hanbali primers say that someone who eats believing it is still night, or that the sun has set, and then finds out otherwise, makes that day up.",
+     "text": "The Hanafi and Hanbali primers say that someone who eats believing it is still night, or that the sun has set, and then finds out otherwise, makes that day up. Ibn Rushd notes that the jurists differed on this; the Maliki and Shafi’i primers used here do not address it.",
      "evidence": [
       {
        "quran": {

@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 1,
+  "rev": 2,
   "id": "fasting-01-who-must-fast",
   "order": 1,
   "title": "Who must fast",
@@ -203,7 +203,7 @@
     {
       "id": "clouded-crescent",
       "kind": "differs",
-      "text": "When cloud hides the crescent on the night after the twenty-ninth of Sha’ban, the schools differ about the following day, often called the day of doubt.",
+      "text": "When cloud hides the crescent on the night after the twenty-ninth of Sha’ban, the schools differ about the following day, often called the day of doubt. The Shafi’i primer used here speaks of the day of doubt in general and does not mention cloud by name.",
       "evidence": [
         {
           "quran": {
@@ -254,7 +254,7 @@
         {
           "id": "clouded-crescent-1",
           "front": "Cloud hides the crescent on the thirtieth night of Sha’ban. What do the four primers say about the next day?",
-          "back": "Hanafi and Maliki: complete thirty days of Sha’ban first. Shafi’i: fasting the day of doubt is disliked, with exceptions. Hanbali: the fast is due."
+          "back": "Hanafi and Maliki: complete thirty days of Sha’ban first. Shafi’i: it does not mention cloud by name; fasting the day of doubt is disliked, with exceptions. Hanbali: the fast is due."
         },
         {
           "id": "clouded-crescent-hanafi",
@@ -321,7 +321,8 @@
     "log": [
       "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
-      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
+      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar."
     ]
   }
 }

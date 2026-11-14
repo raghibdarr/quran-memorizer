@@ -36,6 +36,17 @@ Needs in shared files (spec section 9, rule 4). The package builds and passes wi
 ## 3. `unit.json` shape
 
 - **What**: the spec names `course/<unit>/unit.json` but not its fields, and the build does
-  not emit it. This unit's file has `{ id, deck, order, title, blurb, lessons[] }`.
-- **Why**: if course-ui or course-purification settled on other field names, align them at
-  integration. Lesson order is also carried by each lesson's own `order`.
+  not emit it. This unit's file has `{ id, deck, order, title, blurb, lessons[], primers, footer }`,
+  the same fields as course-purification's (`primers` maps each school to its fixed primer;
+  `footer` is the closing line from STYLE.md, "For your own situation, ask a scholar you trust.").
+- **Why**: the lesson JSON has no field for the closing line, so course-ui has to render
+  `footer` (or its own constant) under every lesson. Lesson order is also carried by each
+  lesson's own `order`.
+
+## 4. A test file beside the deck module
+
+- **What**: `src/content/deen/decks/course-fasting.test.ts` (added in review). vitest only
+  picks up `src/**/*.test.ts`, so the unit's own checks cannot live under `content/`.
+- **Why**: it runs the hadith guardrails on `evidence/*.json` (nothing else in CI reads that
+  folder until need 1 lands) and checks the brief's counts. When need 1 lands, drop its last
+  `describe` block in favour of the shared build check.

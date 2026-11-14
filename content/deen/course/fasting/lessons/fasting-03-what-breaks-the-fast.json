@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 1,
+  "rev": 2,
   "id": "fasting-03-what-breaks-the-fast",
   "order": 3,
   "title": "What breaks the fast",
@@ -203,7 +203,7 @@
     {
       "id": "mistaken-time",
       "kind": "how-to",
-      "text": "The Hanafi and Hanbali primers say that someone who eats believing it is still night, or that the sun has set, and then finds out otherwise, makes that day up.",
+      "text": "The Hanafi and Hanbali primers say that someone who eats believing it is still night, or that the sun has set, and then finds out otherwise, makes that day up. Ibn Rushd notes that the jurists differed on this; the Maliki and Shafi’i primers used here do not address it.",
       "evidence": [
         {
           "quran": {
@@ -279,7 +279,8 @@
     "log": [
       "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
-      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar."
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
+      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar."
     ]
   }
 }

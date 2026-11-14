@@ -130,3 +130,40 @@ zihar that the Hanafi primer names as the model.
 5. The glossary lines for zihar, kaffarah, fidyah and mudd are our own short wording.
 6. Second copies were read only for al-Quduri. Al-Risala, Matn Abi Shuja' and 'Umdat al-Fiqh
    were each read in one online copy.
+
+## 7. Fresh check pass (2026-11-14, a second agent that did not draft the unit)
+
+Every source page was downloaded again (shamela.ws books 124336, 985, 11373, 11370, 11315,
+21739, 12445, 1726, 9771; hadith-api ara-bukhari 1894 and 1933, ara-abudawud 2357 and 2358)
+and matched by normalised skeleton with a script written for this pass, not the drafter's.
+
+- Primer quotes: 58 of 58 re-located. 54 sit whole on one page. Four run across a page break
+  in the online copy and were read by eye on both pages: who-it-falls-on / shafii
+  (11370 /19 to /20), pregnant-nursing / hanafi (985 /191 to /192; in 124336 the sentence has
+  the slip `والمريض` noted in SOURCES.md), kaffarah / hanbali (11315 /55 to /56),
+  eid-days / maliki (11373 /74 to /75).
+- Each English position was read against its Arabic quote: no additions or omissions found
+  beyond the two shortenings already visible in the quotes (`في أحد السبيلين`, `في الفرج`).
+- Consensus citations and Bidayat al-Mujtahid cross-locations (sections 3 and 4): all 36
+  quoted phrases found on the pages named. Al-Ijma' nos. 68, 123 to 127 and 129 read in place.
+- Hadith: the three evidence items and the variant match both witnesses; stored hashes equal
+  the skeleton hashes; al-Daraqutni's `تفرد به الحسين بن واقد وإسناده حسن` is on the page cited.
+
+Findings, and what was changed (lessons 1, 2 and 3 raised to rev 2):
+
+1. intention-needed (lesson 2). The claim opened "A fast is kept with an intention" under
+   kind "agreed", but Ibn Rushd gives the need for an intention as the majority position, not
+   agreement: Bidaya 2:55 `أما كون النية شرطا في صحة الصيام: فإنه قول الجمهور; وشذ زفر فقال: لا يحتاج رمضان إلى نية`.
+   The claim now says so and names Zufar; what is reported as agreed (al-Ijma' no. 123) is
+   unchanged. The intro now reads "reported as agreed". Bidaya is not listed as consensus
+   evidence for it.
+2. clouded-crescent (lesson 1). The Shafi'i quote is about the day of doubt in general (the
+   first OPEN note above). The claim text and the summary card now say that the primer does
+   not mention cloud by name, so the card no longer reads as that school's answer to cloud.
+3. mistaken-time (lesson 3). Bidaya 2:66 records a difference
+   (`اختلافهم فيمن ظن أن الشمس قد غربت فأفطر ثم ظهرت الشمس بعد ذلك، هل عليه قضاء أم لا`).
+   The claim now says the jurists differed and that the Maliki and Shafi'i primers used here
+   do not address it, so two primers agreeing is not read as everyone agreeing.
+
+Left as they are, for the scholar reviewer: the remaining OPEN notes in section 4 and the
+doubts in section 6. Nothing here is scholar-reviewed.
