@@ -2,7 +2,7 @@
   "id": "recap-09",
   "unit": "purification",
   "order": 9,
-  "rev": 2,
+  "rev": 3,
   "title": "Purification: the whole picture",
   "intro": "Eight lessons on one page. This recap gathers the points the schools share, so the map of purification is clear. Where their primers differ, the earlier lessons show each position with its source.",
   "claims": [
@@ -92,7 +92,7 @@
     },
     {
       "id": "c4",
-      "text": "What comes out of the two passages, and losing one’s mind, break [[wudu]] by agreement; whatever breaks [[wudu]] also breaks [[tayammum]].",
+      "text": "Urine, stool and wind leaving the body in the ordinary, healthy way, and losing one’s mind, break [[wudu]] by agreement; whatever breaks [[wudu]] also breaks [[tayammum]].",
       "kind": "agreed",
       "evidence": [
         {
@@ -186,7 +186,8 @@
     "date": "2026-11-14",
     "log": [
       "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
-      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log",
+      "2026-11-14 independent verifier (wrote none of it): primer, consensus and Bidayat al-Mujtahid pages re-read in full against the English; fixes in review.log"
     ]
   }
 }

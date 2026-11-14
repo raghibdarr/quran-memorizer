@@ -1,13 +1,13 @@
 {
  "deck": "course-purification",
  "kind": "course",
- "hash": "76ad2756c8d4d4e0",
+ "hash": "446068b6e09e64b7",
  "items": [
   {
    "id": "ghusl-05",
    "unit": "purification",
    "order": 5,
-   "rev": 2,
+   "rev": 3,
    "title": "The full-body wash",
    "intro": "Some states call for more than [[wudu]]: a wash of the whole body, called [[ghusl]]. This lesson covers when it is due, how the primers describe it, and two points where they differ.",
    "claims": [
@@ -157,7 +157,7 @@
       },
       {
        "school": "hanbali",
-       "text": "He does as Maymunah described: he washed his hands, then his private parts, then made [[wudu]] as for the prayer, then poured water over his body, then stepped aside and washed his feet.",
+       "text": "He does as Maymunah described the Prophet ﷺ washing: he washed his hands, then his private parts, struck his hand on the wall and the ground, made [[wudu]] as for the prayer, poured water over his body, then stepped aside and washed his feet.",
        "source": {
         "work": "umdat-al-fiqh",
         "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah"
@@ -369,7 +369,7 @@
    "id": "khuff-07",
    "unit": "purification",
    "order": 7,
-   "rev": 2,
+   "rev": 3,
    "title": "Wiping over leather socks",
    "intro": "Taking footwear off for every [[wudu]] can be hard, on a journey or in the cold. The primers of all four schools have a chapter on wiping over leather socks in place of washing the feet. This lesson covers when that applies and where they differ.",
    "claims": [
@@ -587,7 +587,7 @@
     },
     {
      "id": "c5",
-     "text": "Whatever breaks [[wudu]] breaks a [[wudu]] made with wiping over the socks. The primers add taking the socks off and, where a time limit is held, its end.",
+     "text": "Whatever breaks [[wudu]] breaks a [[wudu]] made with wiping over the socks. The primers add that taking the socks off and, where a time limit is held, its end bring the wiping to an end. Ibn Rushd records a difference on whether taking them off breaks the [[wudu]] itself.",
      "kind": "agreed",
      "evidence": [
       {
@@ -600,12 +600,12 @@
      "positions": [
       {
        "school": "hanafi",
-       "text": "What breaks [[wudu]] breaks the wiping; so do taking the sock off and the end of the time.",
+       "text": "What breaks [[wudu]] breaks the wiping; so do taking the sock off and the end of the time. When the time ends he takes them off, washes his feet and prays, without repeating the rest of the [[wudu]].",
        "source": {
         "work": "mukhtasar-al-quduri",
         "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
        },
-       "quote": "وينقضه أيضا نزع الخف ومضي المدة"
+       "quote": "وينقضه أيضا نزع الخف ومضي المدة فإذا مضت المدة نزع خفيه وغسل رجليه وصلى"
       },
       {
        "school": "maliki",
@@ -639,7 +639,7 @@
       {
        "id": "c5a",
        "front": "What ends a [[wudu]] made with wiping over leather socks?",
-       "back": "Whatever breaks [[wudu]], by agreement. The primers add taking the socks off and, where a time limit is held, its end."
+       "back": "Whatever breaks [[wudu]], by agreement. The primers add that taking the socks off and, where a time limit is held, its end bring the wiping to an end; whether that breaks the [[wudu]] itself is differed on."
       }
      ]
     }
@@ -685,7 +685,7 @@
    "id": "najasa-08",
    "unit": "purification",
    "order": 8,
-   "rev": 2,
+   "rev": 3,
    "title": "Removing impurity",
    "intro": "Purity also concerns what gets on the body, the clothes and the ground. This lesson covers what the scholars count as impure, where it matters for the prayer, and how it is cleaned away.",
    "claims": [
@@ -737,7 +737,7 @@
     },
     {
      "id": "c3",
-     "text": "Four things are impure by agreement: the dead body of a land animal that has blood; the flesh of the pig; blood that flows in quantity from a land animal; and human urine and stool.",
+     "text": "Four things are impure by agreement: carrion, meaning a land animal with blood that died without being slaughtered; the flesh of the pig, however it died; blood that flows in quantity from a land animal; and human urine and stool.",
      "kind": "agreed",
      "evidence": [
       {
@@ -757,7 +757,7 @@
       {
        "id": "c3a",
        "front": "Name the four things Ibn Rushd reports as impure by agreement.",
-       "back": "The dead body of a land animal that has blood; the flesh of the pig; blood that flows in quantity from a land animal; human urine and stool."
+       "back": "Carrion (a land animal with blood that died without being slaughtered); the flesh of the pig, however it died; blood that flows in quantity from a land animal; human urine and stool."
       }
      ]
     },
@@ -957,7 +957,7 @@
    "id": "recap-09",
    "unit": "purification",
    "order": 9,
-   "rev": 2,
+   "rev": 3,
    "title": "Purification: the whole picture",
    "intro": "Eight lessons on one page. This recap gathers the points the schools share, so the map of purification is clear. Where their primers differ, the earlier lessons show each position with its source.",
    "claims": [
@@ -1047,7 +1047,7 @@
     },
     {
      "id": "c4",
-     "text": "What comes out of the two passages, and losing one’s mind, break [[wudu]] by agreement; whatever breaks [[wudu]] also breaks [[tayammum]].",
+     "text": "Urine, stool and wind leaving the body in the ordinary, healthy way, and losing one’s mind, break [[wudu]] by agreement; whatever breaks [[wudu]] also breaks [[tayammum]].",
      "kind": "agreed",
      "evidence": [
       {
@@ -2385,13 +2385,13 @@
    "id": "wudu-04",
    "unit": "purification",
    "order": 4,
-   "rev": 2,
+   "rev": 3,
    "title": "What breaks the wash for prayer",
    "intro": "[[wudu]] lasts until something ends it. Some causes are shared by every school. On sleep, touch and bleeding the schools read the evidence differently, and each primer gives its own list.",
    "claims": [
     {
      "id": "c1",
-     "text": "Urine, stool and wind break [[wudu]]. So do [[madhy]], and wady, a thick white fluid that can follow urine.",
+     "text": "Urine, stool, wind, [[madhy]] and wady (a thick white fluid that can follow urine) break [[wudu]] when they leave the body in the ordinary, healthy way.",
      "kind": "agreed",
      "evidence": [
       {
@@ -2417,7 +2417,7 @@
       {
        "id": "c1a",
        "front": "Which things that leave the body break [[wudu]] by agreement?",
-       "back": "Urine, stool, wind, [[madhy]], and wady (a thick white fluid that can follow urine)."
+       "back": "Urine, stool, wind, [[madhy]], and wady (a thick white fluid that can follow urine), when they leave the body in the ordinary, healthy way."
       }
      ]
     },

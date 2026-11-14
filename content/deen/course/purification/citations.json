@@ -950,7 +950,7 @@
       "work": "umdat-al-fiqh",
       "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah",
       "quote": "ثم توضأ وضوءه للصلاة ثم أفاض الماء على بدنه ثم تنحى فغسل رجليه",
-      "english": "He does as Maymunah described: he washed his hands, then his private parts, then made [[wudu]] as for the prayer, then poured water over his body, then stepped aside and washed his feet.",
+      "english": "He does as Maymunah described the Prophet ﷺ washing: he washed his hands, then his private parts, struck his hand on the wall and the ground, made [[wudu]] as for the prayer, poured water over his body, then stepped aside and washed his feet.",
       "url": "https://shamela.ws/book/11315/11",
       "printPage": "17"
     },
@@ -1492,12 +1492,22 @@
     {
       "lesson": "khuff-07",
       "claim": "c5",
+      "role": "difference-cross-location",
+      "work": "bidayat-al-mujtahid",
+      "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 29)",
+      "quote": "واختلفوا هل نزع الخف ناقض لهذه الطهارة أم لا",
+      "url": "https://shamela.ws/book/21739/21",
+      "printPage": "29"
+    },
+    {
+      "lesson": "khuff-07",
+      "claim": "c5",
       "role": "position",
       "school": "hanafi",
       "work": "mukhtasar-al-quduri",
       "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn",
-      "quote": "وينقضه أيضا نزع الخف ومضي المدة",
-      "english": "What breaks [[wudu]] breaks the wiping; so do taking the sock off and the end of the time.",
+      "quote": "وينقضه أيضا نزع الخف ومضي المدة فإذا مضت المدة نزع خفيه وغسل رجليه وصلى",
+      "english": "What breaks [[wudu]] breaks the wiping; so do taking the sock off and the end of the time. When the time ends he takes them off, washes his feet and prays, without repeating the rest of the [[wudu]].",
       "url": "https://shamela.ws/book/124336/7",
       "printPage": "17"
     },

@@ -2,13 +2,13 @@
   "id": "wudu-04",
   "unit": "purification",
   "order": 4,
-  "rev": 2,
+  "rev": 3,
   "title": "What breaks the wash for prayer",
   "intro": "[[wudu]] lasts until something ends it. Some causes are shared by every school. On sleep, touch and bleeding the schools read the evidence differently, and each primer gives its own list.",
   "claims": [
     {
       "id": "c1",
-      "text": "Urine, stool and wind break [[wudu]]. So do [[madhy]], and wady, a thick white fluid that can follow urine.",
+      "text": "Urine, stool, wind, [[madhy]] and wady (a thick white fluid that can follow urine) break [[wudu]] when they leave the body in the ordinary, healthy way.",
       "kind": "agreed",
       "evidence": [
         {
@@ -34,7 +34,7 @@
         {
           "id": "c1a",
           "front": "Which things that leave the body break [[wudu]] by agreement?",
-          "back": "Urine, stool, wind, [[madhy]], and wady (a thick white fluid that can follow urine)."
+          "back": "Urine, stool, wind, [[madhy]], and wady (a thick white fluid that can follow urine), when they leave the body in the ordinary, healthy way."
         }
       ]
     },
@@ -440,7 +440,8 @@
     "date": "2026-11-14",
     "log": [
       "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
-      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log",
+      "2026-11-14 independent verifier (wrote none of it): primer, consensus and Bidayat al-Mujtahid pages re-read in full against the English; fixes in review.log"
     ]
   }
 }

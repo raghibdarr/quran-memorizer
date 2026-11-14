@@ -101,3 +101,52 @@ Noted, no change:
   treats rubbing as a difference under ghusl, not as a mas'ala of wudu, so it is carried by
   ghusl-05/c5 and wudu-03 has no rubbing claim. Left out rather than cross-located loosely.
 - No hadith is cited as evidence; every claim rests on a Quran ref or a consensus citation.
+
+2026-11-14  Independent content verification (a verifier that wrote none of the package)
+----------------------------------------------------------------------------------------
+Method: all 73 recorded pages fetched afresh and read, not only searched. The four primers'
+chapters (al-Quduri, al-Risala, Abu Shuja', 'Umdat al-Fiqh) and the cited entries of
+Ibn al-Mundhir and Ibn Hazm were read in full; every Bidayat al-Mujtahid quote was read
+with the sentences around it, looking for qualifiers the English had dropped. Each claim,
+position, card and check question was then read against that Arabic.
+- tools/verify-citations.mjs: all quotes found on their recorded pages, before and after
+  the changes below. build-deen.mjs --check: 9 of 9 shipped.
+- The unit ships no hadith item, dhikr or grading. The one hadith wording in it is the
+  Maymunah narration inside the Hanbali primer's own text (ghusl-05/c4), given as the
+  primer gives it.
+Findings fixed (wudu-04, ghusl-05, khuff-07, najasa-08, recap-09 raised to rev 3):
+1. wudu-04/c1: Ibn Rushd's agreement on urine, stool, wind, madhy and wady is "إذا كان
+   خروجها على وجه الصحة". The claim dropped the condition and so reported agreement on more
+   than he does (he goes on to record the difference about what leaves through illness).
+   Claim and card now say "in the ordinary, healthy way". Same slip as ghusl-05/c1 earlier.
+2. recap-09/c4: "What comes out of the two passages" was wider than the agreed list (Ibn
+   Rushd records a difference about other things that come out, and about illness). Now
+   names urine, stool and wind in the ordinary, healthy way.
+3. najasa-08/c3: "the dead body of a land animal" for "ميتة الحيوان" read as if slaughtered
+   meat were included. Now "carrion ... that died without being slaughtered". Ibn Rushd's
+   "بأي سبب اتفق أن تذهب حياته" on the pig, which the English had left out, is restored
+   ("however it died"). Claim and card.
+4. khuff-07/c5: the claim and card said the primers "add" taking the socks off and the end
+   of the time to what ends a wudu made with wiping. Al-Quduri and Abu Shuja' say these end
+   the wiping, and al-Quduri then has him wash his feet without repeating the rest; only
+   'Umdat al-Fiqh says the purification is void. Ibn Rushd records this as a difference in
+   the same mas'ala ("واختلفوا هل نزع الخف ناقض لهذه الطهارة أم لا"). Claim and card now say
+   the wiping ends and that the effect on the wudu is differed on; the Hanafi position
+   carries al-Quduri's next sentence (quote extended; the online copy has the typos "عيه"
+   and "بقيه" in the words after the stored quote); the cross-location is recorded.
+5. ghusl-05/c4 Hanbali: the position paraphrased the primer's Maymunah narration without
+   saying whose washing she described, and skipped "ثم ضرب بيده على الحائط والأرض". Now
+   names the Prophet ﷺ and keeps that step.
+Read and left as they are:
+- wudu-04/c4 Shafi'i: "a woman who is not close kin" for "المرأة الأجنبية". Literal enough;
+  the primer does not define the term further.
+- tayammum-06/c5: "with water" is not in Ibn al-Mundhir's sentence but follows from "ثم وجد
+  الماء"; the card has it without.
+- wudu-03/c4, c5 and khuff-07/c4: Ibn Rushd gives Malik's view on each, but al-Risala's
+  chapters read here do not state it in a quotable phrase, so no Maliki position is shown
+  (positions come from the primer only). The claim text names the difference either way.
+- 'Umdat al-Fiqh, ghusl: the online copy reads "وتسن التسمية ويدلك بدنه بيديه" and drops
+  "تعميم" before "بدنه بالغسل". Our reading (rubbing recommended; washing the whole body
+  obligatory) is what the sentence says with or without the slips.
+Limits unchanged: one online copy per work, and a located phrase is not a scholar's reading.
+Nothing removed; no item could not be verified.

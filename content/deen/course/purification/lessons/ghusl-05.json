@@ -2,7 +2,7 @@
   "id": "ghusl-05",
   "unit": "purification",
   "order": 5,
-  "rev": 2,
+  "rev": 3,
   "title": "The full-body wash",
   "intro": "Some states call for more than [[wudu]]: a wash of the whole body, called [[ghusl]]. This lesson covers when it is due, how the primers describe it, and two points where they differ.",
   "claims": [
@@ -152,7 +152,7 @@
         },
         {
           "school": "hanbali",
-          "text": "He does as Maymunah described: he washed his hands, then his private parts, then made [[wudu]] as for the prayer, then poured water over his body, then stepped aside and washed his feet.",
+          "text": "He does as Maymunah described the Prophet ﷺ washing: he washed his hands, then his private parts, struck his hand on the wall and the ground, made [[wudu]] as for the prayer, poured water over his body, then stepped aside and washed his feet.",
           "source": {
             "work": "umdat-al-fiqh",
             "location": "Kitab al-Tahara, Bab al-ghusl min al-janabah"
@@ -360,7 +360,8 @@
     "date": "2026-11-14",
     "log": [
       "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
-      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log",
+      "2026-11-14 independent verifier (wrote none of it): primer, consensus and Bidayat al-Mujtahid pages re-read in full against the English; fixes in review.log"
     ]
   }
 }
