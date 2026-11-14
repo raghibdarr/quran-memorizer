@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import MatchWizard from '@/components/prayer/match/match-wizard';
 
 export const metadata: Metadata = { title: 'Match my mosque · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the match-mosque package replaces this page.
 export default function Page() {
-  return <StubPage title="Match my mosque" back="/prayer/settings" note="Line the times up with your mosque's timetable. Coming soon." />;
+  return <MatchWizard />;
 }
