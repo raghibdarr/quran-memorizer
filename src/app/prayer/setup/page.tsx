@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import PrayerSetupFlow from '@/components/prayer/times/setup-flow';
 
 export const metadata: Metadata = { title: 'Set up prayer times · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the prayer-times package replaces this page.
+// Prayer setup (all-in-one spec 2.7): place, method and Asr, then alerts
 export default function Page() {
-  return <StubPage title="Set up prayer times" back="/prayer" note="Choose your place and how times are worked out. Coming soon." />;
+  return <PrayerSetupFlow />;
 }
