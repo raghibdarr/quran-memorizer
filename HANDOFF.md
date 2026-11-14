@@ -294,3 +294,29 @@ Requests for shared files (spec 9.4). The package builds and passes without any 
   learn flow that returns to where it was opened from; `sessionHref(deck?)`.
 - SELECTION.md: `/sources` lists the section whose heading contains "Not included" (any level)
   from every deck's SELECTION.md, read at build time.
+
+# HANDOFF: course-ui
+
+Needs in shared files (spec section 9, rule 4). The package builds and passes without them.
+
+## 1. Emit a course unit's evidence hadith beside its lessons (pairs with course-fasting need 1)
+
+- **What**: in `scripts/build-deen.mjs`, for a course deck, also read
+  `content/deen/course/<unit>/evidence/*.json`, validate them as hadith items (all guardrails,
+  only `source-checked` or better), add their ids as `<deck>-evidence:<id>` to the known item
+  ids, and emit them as an `evidence` array beside `items` in `src/data/deen/<deck>.json`
+  (and add `evidence?: TextItem[]` to `EmittedDeck` in `src/types/deen.ts`).
+- **Why**: Unit Fasting cites three hadith as `{ "item": "course-fasting-evidence:<id>" }`.
+  The lesson screen already resolves that form: it looks the ref up as a live corpus item first
+  and then in the course deck's `evidence` array (`resolveEvidenceItem` in
+  `src/components/course/course-data.ts`, tested end to end with the fixture unit). Until the
+  build emits them, those three chips say "This hadith's text and reference aren't in the app
+  yet." (lesson 3's `forgetting` claim has no other mention of its hadith).
+- **No course-ui change needed** once the build emits the array; drafts are filtered out again
+  on screen.
+
+## 2. Local builds in this worktree
+
+Turbopack refuses the `node_modules` junction; `npx next build --webpack` with placeholder
+`NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, then
+`node scripts/flatten-segments.mjs`.

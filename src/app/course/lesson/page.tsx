@@ -1,9 +1,15 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import LessonPlayer from '@/components/course/lesson-player';
 
 export const metadata: Metadata = { title: 'Lesson · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the course-ui package replaces this page.
+// One micro-lesson, /course/lesson?l=<lessonId> (all-in-one spec 2.2).
 export default function Page() {
-  return <StubPage title="Lesson" back="/course" note="A short lesson with a few questions at the end. Coming soon." />;
+  // Suspense: the client reads useSearchParams, which static export requires to be bounded
+  return (
+    <Suspense>
+      <LessonPlayer />
+    </Suspense>
+  );
 }
