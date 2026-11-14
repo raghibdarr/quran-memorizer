@@ -6,6 +6,10 @@ import { isNative } from '@/lib/native';
 // Must match RESYNC_EVENT in prayer/alerts/sync-runner.ts (kept here so callers don't load the runner)
 const RESYNC_EVENT = 'takrar:prayer-resync';
 
+/** Fired on window after every replan, so the alerts screen can look at what is pending again.
+ *  Must match SYNCED_EVENT in prayer/alerts/sync-runner.ts */
+export const PRAYER_SYNCED_EVENT = 'takrar:prayer-synced';
+
 /** Ask PrayerSync to replan now (the alerts screen calls this after a permission or exact-alarm grant) */
 export function requestPrayerResync() {
   if (typeof window !== 'undefined') window.dispatchEvent(new Event(RESYNC_EVENT));

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { CheckCircleIcon, ClockIcon } from '@/components/ui/icons';
-import { requestPrayerResync } from '@/components/prayer-sync';
+import { PRAYER_SYNCED_EVENT, requestPrayerResync } from '@/components/prayer-sync';
 import { cn } from '@/lib/cn';
 import {
   alertPermission,
@@ -76,6 +76,12 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
     refresh();
   }, [refresh, checkKey]);
 
+  // The sync can take a while to hand a month of alerts to the phone: look again when it is done
+  useEffect(() => {
+    window.addEventListener(PRAYER_SYNCED_EVENT, refresh);
+    return () => window.removeEventListener(PRAYER_SYNCED_EVENT, refresh);
+  }, [refresh]);
+
   useEffect(() => {
     let wasExact: Health['exact'] | null = null;
     const onVisible = () => {
@@ -125,7 +131,7 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
                     ? 'Turned off for Takrar. Allow them in your phone’s settings.'
                     : 'Not allowed yet'
               }
-              action={h.permission === 'prompt' ? { label: 'Allow', run: () => onAllow().then(refresh) } : undefined}
+              action={h.permission === 'prompt' ? { label: 'Allow', hint: 'Allow notifications', run: () => onAllow().then(refresh) } : undefined}
             />
             {platform === 'android' && (
               <Row
@@ -133,7 +139,7 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
                 ok={h.exact === 'granted'}
                 title="On-time delivery"
                 detail={h.exact === 'granted' ? 'Alerts arrive at the minute' : 'Alerts may arrive several minutes late'}
-                action={h.exact === 'denied' ? { label: 'Open settings', run: () => openExactAlarmSetting().then(() => undefined) } : undefined}
+                action={h.exact === 'denied' ? { label: 'Open settings', hint: 'Open alarm settings', run: () => openExactAlarmSetting().then(() => undefined) } : undefined}
               />
             )}
             {platform === 'android' && h.battery !== null && (
@@ -142,7 +148,7 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
                 ok={h.battery}
                 title="Battery saving"
                 detail={h.battery ? 'Takrar is not restricted' : 'Battery saving can delay or stop alerts'}
-                action={h.battery ? undefined : { label: 'Open settings', run: () => openBatterySettings().then(() => undefined) }}
+                action={h.battery ? undefined : { label: 'Open settings', hint: 'Open battery settings', run: () => openBatterySettings().then(() => undefined) }}
               />
             )}
             <Row
@@ -177,7 +183,11 @@ export default function HealthCheck({ platform, anyOn, tz, checkKey, onAllow, te
       </button>
       {test !== 'idle' && (
         <p className="mt-2 px-1 text-center text-xs text-muted" role="status">
-          {test === 'sent' ? 'On its way. Lock your phone to see it as it will arrive.' : 'Couldn’t send a test alert. Check that notifications are allowed.'}
+          {test === 'sent'
+            ? h?.exact === 'denied'
+              ? 'On its way. Without on-time delivery it can take a few minutes.'
+              : 'On its way. Lock your phone to see it as it will arrive.'
+            : 'Couldn’t send a test alert. Check that notifications are allowed.'}
         </p>
       )}
     </section>
@@ -197,7 +207,8 @@ function Row({
   neutral?: boolean;
   title: string;
   detail: string;
-  action?: { label: string; run: () => Promise<unknown> };
+  /** `hint` is the button's name for screen readers (two rows say "Open settings") */
+  action?: { label: string; hint?: string; run: () => Promise<unknown> };
 }) {
   return (
     <div className="flex min-h-14 items-center gap-3 px-4 py-3" data-health={id} data-ok={ok ? 'true' : 'false'}>
@@ -206,6 +217,7 @@ function Row({
       ) : (
         <ClockIcon size={20} className="shrink-0 text-gold-deep" />
       )}
+      {!neutral && <span className="sr-only">{ok ? 'Fine: ' : 'Needs attention: '}</span>}
       <div className="min-w-0 flex-1">
         <p className="text-sm font-medium text-foreground">{title}</p>
         <p className="text-xs text-muted">{detail}</p>
@@ -214,6 +226,7 @@ function Row({
         <button
           type="button"
           onClick={() => void action.run()}
+          aria-label={action.hint}
           className="pressable min-h-11 shrink-0 rounded-xl bg-gold/10 px-4 text-sm font-semibold text-gold-deep"
         >
           {action.label}

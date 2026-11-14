@@ -40,7 +40,7 @@ export default function PrayerAlertRow({ prayer, time, alert, modes, platform, o
         <span className="text-base font-semibold text-foreground">{label}</span>
         {time && <span className="text-sm tabular-nums text-muted">today {time}</span>}
       </div>
-      <div aria-label={`${label} alert`}>
+      <div role="group" aria-label={`${label} alert`}>
         <SegmentedControl options={modes.map((m) => ({ value: m, label: MODE_LABELS[m] }))} value={shown} onChange={onMode} />
       </div>
       {alert.mode !== 'off' && (

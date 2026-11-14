@@ -301,9 +301,32 @@ export async function syncPrayerAlerts(plan: AlertPlan, deps: PrayerNotifyDeps =
   return { alerts, tail };
 }
 
-/** Clear every prayer alert, but only if a plan was ever handed over (no OS calls otherwise) */
+let orphansChecked = false;
+/** For tests: look for left-behind alerts again */
+export function resetOrphanCheck() {
+  orphansChecked = false;
+}
+
+/**
+ * Clear every prayer alert. With a memo of a handed-over plan it clears at once.
+ * Without one it asks the OS what is pending, once per app run: "Erase everything
+ * on this device" wipes the memo and the settings but not the alarms the OS
+ * holds, and those would otherwise keep ringing for up to 30 days with every
+ * prayer shown as off. After that one look, no OS calls.
+ */
 export async function clearPrayerAlerts(deps: PrayerNotifyDeps = defaultDeps()): Promise<boolean> {
-  if (deps.platform === 'web' || !readAlertMeta(deps)) return false;
+  if (deps.platform === 'web') return false;
+  if (!readAlertMeta(deps)) {
+    if (orphansChecked) return false;
+    const { notifications } = await deps.getPending();
+    orphansChecked = true;
+    const left = notifications.some(
+      (n) => n.id !== TEST_ALERT_ID && (inRange(n.id, NOTIFY_RANGES.prayer) || inRange(n.id, NOTIFY_RANGES.prayerTail)),
+    );
+    if (!left) return false;
+    // The stored hash may say "already empty": make the clear really run
+    forcePrayerResync(deps.apply);
+  }
   await syncPrayerAlerts({ alerts: [], tail: null, days: 0 }, deps);
   writeAlertMeta(deps, null);
   return true;

@@ -40,7 +40,7 @@ vi.mock('@/lib/prayer/notifications', () => ({
 
 import { usePlaceStore } from '@/stores/place-store'
 import { usePrayerStore } from '@/stores/prayer-store'
-import { RESYNC_EVENT, startPrayerSync } from './sync-runner'
+import { RESYNC_EVENT, SYNCED_EVENT, startPrayerSync } from './sync-runner'
 
 const LONDON = { lat: 51.5074, lng: -0.1278, label: 'London', countryCode: 'GB', tz: 'Europe/London', source: 'city' as const }
 
@@ -120,6 +120,19 @@ describe('startPrayerSync', () => {
       expect(env.calls.clear).toBeGreaterThan(0)
     })
     expect(env.calls.sync).toBe(0)
+  })
+
+  it('says when a replan is done, so the health check can look again', async () => {
+    let done = 0
+    const onDone = () => void done++
+    window.addEventListener(SYNCED_EVENT, onDone)
+    stop = startPrayerSync()
+    await settle()
+    expect(done).toBe(1)
+    window.dispatchEvent(new Event(RESYNC_EVENT))
+    await settle()
+    expect(done).toBe(2)
+    window.removeEventListener(SYNCED_EVENT, onDone)
   })
 
   it('stops listening after cleanup', async () => {

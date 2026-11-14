@@ -63,6 +63,7 @@ import {
   pendingPrayerAlerts,
   readAlertMeta,
   requestAlertPermission,
+  resetOrphanCheck,
   resetPrayerChannels,
   sendTestAlert,
   soundFields,
@@ -115,6 +116,7 @@ beforeEach(() => {
     changeExactCalls: 0,
   })
   resetPrayerChannels()
+  resetOrphanCheck()
 })
 afterEach(() => vi.unstubAllGlobals())
 
@@ -187,14 +189,39 @@ describe('syncPrayerAlerts (Android)', () => {
     expect(localStorage.getItem(ALERT_META_KEY)).toBeNull()
   })
 
-  it('clearPrayerAlerts makes no OS call for someone who never had alerts', async () => {
-    const spy = vi.spyOn(os.plugin, 'getPending')
+  it('clearPrayerAlerts looks once per run for someone who never had alerts, and changes nothing', async () => {
+    os.state.pending.set(7100, stub(7100))
+    const pending = vi.spyOn(os.plugin, 'getPending')
     expect(await clearPrayerAlerts()).toBe(false)
-    expect(spy).not.toHaveBeenCalled()
+    expect(await clearPrayerAlerts()).toBe(false)
+    expect(pending).toHaveBeenCalledTimes(1)
+    expect(os.state.cancelled).toEqual([])
+    expect(os.state.scheduleCalls).toBe(0)
     await syncPrayerAlerts(planFor())
     expect(await clearPrayerAlerts()).toBe(true)
+    expect(pendingIds()).toEqual([7100])
+    pending.mockRestore()
+  })
+
+  it('clearPrayerAlerts removes alerts left behind after the device was erased', async () => {
+    os.state.pending.set(7100, stub(7100))
+    os.state.pending.set(22000, stub(22000))
+    await syncPrayerAlerts(planFor())
+    expect(pendingIds().length).toBeGreaterThan(100)
+    // "Erase everything on this device": storage is wiped, the OS keeps its alarms
+    localStorage.clear()
+    expect(readAlertMeta()).toBeNull()
+    expect(await clearPrayerAlerts()).toBe(true)
+    expect(pendingIds()).toEqual([7100, 22000])
+    expect(os.state.cancelled.every((id) => id >= 20000 && id <= 21000)).toBe(true)
+  })
+
+  it('a stale "already empty" hash does not stop left-behind alerts being cleared', async () => {
+    await syncPrayerAlerts(planFor(alertsAll('off'))) // stores the empty hash
+    os.state.pending.set(20040, stub(20040))
+    os.state.pending.set(21000, stub(21000))
+    expect(await clearPrayerAlerts()).toBe(true)
     expect(pendingIds()).toEqual([])
-    spy.mockRestore()
   })
 
   it('reports pending prayer alerts, leaving out the tail and a test alert', async () => {

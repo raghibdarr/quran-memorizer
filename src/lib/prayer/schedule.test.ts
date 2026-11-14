@@ -254,6 +254,50 @@ describe('planPrayerAlerts', () => {
     }
   })
 
+  it('keeps every invariant at high latitude and at the edges of the date line (property)', () => {
+    const far: Place[] = [
+      { lat: 69.65, lng: 18.96, label: 'Tromso', countryCode: 'NO', tz: 'Europe/Oslo', source: 'city' },
+      { lat: 64.15, lng: -21.94, label: 'Reykjavik', countryCode: 'IS', tz: 'Atlantic/Reykjavik', source: 'city' },
+      { lat: 78.22, lng: 15.65, label: 'Longyearbyen', countryCode: 'SJ', tz: 'Arctic/Longyearbyen', source: 'city' },
+      { lat: 1.87, lng: -157.43, label: 'Kiritimati', countryCode: 'KI', tz: 'Pacific/Kiritimati', source: 'city' },
+      { lat: 21.31, lng: -157.86, label: 'Honolulu', countryCode: 'US', tz: 'Pacific/Honolulu', source: 'city' },
+      { lat: -13.83, lng: -171.77, label: 'Apia', countryCode: 'WS', tz: 'Pacific/Apia', source: 'city' },
+    ]
+    fc.assert(
+      fc.property(
+        fc.constantFrom<AlertPlatform>('ios', 'android'),
+        fc.constantFrom(...far),
+        fc.constantFrom(0, 15, 60),
+        fc.integer({ min: Date.parse('2026-01-01T00:00:00Z'), max: Date.parse('2027-12-31T00:00:00Z') }),
+        (platform, place, pre, now) => {
+          const p = planPrayerAlerts({ now, place, settings: settingsWith(allAlerts('default', pre)), platform })
+          expectWellFormed(p, platform, now)
+          for (const a of p.alerts) {
+            expect(Number.isFinite(a.at)).toBe(true)
+            // The text shows the place's own clock
+            if (a.kind === 'start') expect(a.body.endsWith(formatTime(a.at, place.tz))).toBe(true)
+            // A prayer belongs to its own day or, past midnight, the day before
+            const fired = isoInTz(a.kind === 'start' ? a.at : a.at + pre * 60_000, place.tz)
+            expect(Math.abs(Date.parse(fired) - Date.parse(a.iso))).toBeLessThanOrEqual(86_400_000)
+          }
+        },
+      ),
+      { numRuns: 60 },
+    )
+  })
+
+  it('a traveller far from the device clock is planned by the place, not the device', () => {
+    // 09:00 UTC on the 13th is already 23:00 on the 13th in Kiritimati (UTC+14) and 23:00 on the 12th in Honolulu
+    const kiritimati: Place = { lat: 1.87, lng: -157.43, label: 'Kiritimati', countryCode: 'KI', tz: 'Pacific/Kiritimati', source: 'city' }
+    const honolulu: Place = { lat: 21.31, lng: -157.86, label: 'Honolulu', countryCode: 'US', tz: 'Pacific/Honolulu', source: 'city' }
+    const k = plan('android', allAlerts('default'), kiritimati)
+    const h = plan('android', allAlerts('default'), honolulu)
+    expect(k.alerts[0]).toMatchObject({ prayer: 'fajr', iso: '2026-11-14' })
+    expect(h.alerts[0]).toMatchObject({ prayer: 'fajr', iso: '2026-11-13' })
+    expectWellFormed(k, 'android', NOW)
+    expectWellFormed(h, 'android', NOW)
+  })
+
   it('day indexes wrap within the 50-day id window', () => {
     const seen = new Set<number>()
     for (let i = 0; i < 50; i++) seen.add(dayIndexOf(new Date(Date.UTC(2026, 0, 1 + i)).toISOString().slice(0, 10)))

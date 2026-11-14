@@ -13,6 +13,8 @@ import { nativePlatform } from '@/lib/native';
 import type { Place } from '@/types/prayer';
 
 export const RESYNC_EVENT = 'takrar:prayer-resync';
+/** Fired after every replan, whatever it did (must match PRAYER_SYNCED_EVENT in prayer-sync.tsx) */
+export const SYNCED_EVENT = 'takrar:prayer-synced';
 const RESCHEDULE_DEBOUNCE_MS = 1500;
 const ROLLOVER_CHECK_MS = 60_000;
 
@@ -62,7 +64,12 @@ export function startPrayerSync(): () => void {
   const schedule = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      queue = queue.then(replan, replan).catch(() => {});
+      queue = queue
+        .then(replan, replan)
+        .catch(() => {})
+        .then(() => {
+          window.dispatchEvent(new Event(SYNCED_EVENT));
+        });
     }, RESCHEDULE_DEBOUNCE_MS);
   };
 

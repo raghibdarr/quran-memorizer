@@ -16,3 +16,15 @@ Nothing in a shared file is required for this package to build or pass. Two note
 
 Local builds in this worktree: Turbopack refuses the `node_modules` junction, so `npx next build --webpack`
 (with placeholder `NEXT_PUBLIC_SUPABASE_*` values; without them the static pages throw on load).
+
+## Review pass (fresh reviewer)
+
+3. **"Erase everything on this device" (`src/components/layout/erase-device.tsx`, not owned here)** wipes
+   localStorage but not the alarms the OS holds. PrayerSync now looks once per app run and clears left-behind
+   prayer alerts (ids 20000-21000), so nothing is needed there for prayer; other features that schedule
+   (adhkar 22000+, reminders 22100+) need their own clean-up or a `LocalNotifications.cancel` in the erase flow.
+4. **Churn.** A plan drops each alert as it passes, so its hash changes after every prayer and the next open
+   cancels and re-sets the whole range (about 150-310 alarms on Android). Correct, but if it shows up as lag on
+   a slow phone, `applyRange` (foundations) could diff by id instead of replacing the range.
+5. **Delivered alerts pile up in the tray** (each has its own id; a heads-up stays beside its prayer). Possible
+   follow-up: `removeDeliveredNotifications` for older prayer ids on app open.
