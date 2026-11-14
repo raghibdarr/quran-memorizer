@@ -1,0 +1,75 @@
+// Every user-facing line on the tasbih and prayer log screens, in one place so
+// the copy test (copy.test.ts) can hold it to the calm-wording rule (spec 1.6,
+// 7): no streak talk that scolds, nothing about what was "missed" beyond the
+// one plain option label a user picks for themselves.
+
+import type { PrayerMark } from '@/stores/worship-store';
+
+export const MARK_LABELS: Record<PrayerMark, string> = {
+  ontime: 'On time',
+  late: 'Late',
+  missed: 'Missed',
+};
+
+export const TRACKER_COPY = {
+  title: 'Prayer log',
+  todayHeading: 'Today',
+  todayHint: "Tap when you've prayed. Tap again to change it.",
+  noPlaceHint: 'Set your place on the Prayer screen to see times here.',
+  setPlace: 'Set your place',
+  clear: 'Clear',
+  notYet: 'Not time yet',
+  notMarked: 'not marked yet',
+  tickAria: (prayer: string, state: string) => `${prayer}, ${state}`,
+  sheetHint: 'Choose how to log it.',
+  dayHint: 'Tap a choice to log it, or tap it again to clear it.',
+  weekHeading: 'Last 7 days',
+  weekNone: 'Nothing logged yet this week.',
+  weekPrayed: (n: number) => `${n} prayed`,
+  weekOnTime: (n: number) => `${n} on time`,
+  run: (n: number) => `All five, ${n} days running`,
+  monthPrev: 'Previous month',
+  monthNext: 'Next month',
+  monthHint: 'Tap a day to fill it in.',
+  legendOnTime: 'On time',
+  legendLate: 'Late',
+  legendPaused: 'Paused',
+  dayLogged: (n: number) => (n === 0 ? 'nothing logged' : `${n} of 5 logged`),
+  dayPaused: 'Paused. Anything you tick still saves, but stays out of the counts.',
+  pauseHint: 'For travel, illness, or any stretch you would rather not log. No reason needed.',
+  pauseAction: 'Pause tracking',
+  pausedSince: (date: string) => `Paused since ${date}`,
+  pausedFrom: (date: string) => `Paused from ${date}`,
+  pausedFromHint: "Today's prayers still count. Days from then on stay out of every count.",
+  pausedHint: 'Days while paused stay out of every count.',
+  resume: 'Resume',
+  makeUpHeading: 'Make-up prayers (qada)',
+  makeUpHint: 'Prayers you mark "Missed" gather here, so you can make them up in your own time.',
+  makeUpCount: (n: number) => (n === 1 ? '1 to make up' : `${n} to make up`),
+  makeUpDone: 'All made up.',
+  madeOneUp: 'Made one up',
+  undo: 'Undo',
+  whichPrayers: (n: number) => `Which prayers (${n})`,
+  oldestFirst: 'Each one you make up comes off the oldest first.',
+} as const;
+
+export const TASBIH_COPY = {
+  title: 'Tasbih',
+  free: 'Switch to free count',
+  targetHeading: 'Count to',
+  noTarget: 'None',
+  custom: 'Other',
+  customLabel: 'Your own target',
+  customApply: 'Set',
+  tapHint: 'Tap anywhere on the counter',
+  reachedTarget: 'Target reached. Keep going if you like.',
+  undo: 'Undo',
+  reset: 'Start again',
+  resetTitle: 'Start again from zero?',
+  resetMessage: 'This count goes back to 0. Your lifetime total stays.',
+  resetConfirm: 'Start again',
+  lifetime: (n: string) => `${n} in all`,
+  fromEssentials: 'Dhikr from Essentials',
+  source: (s: string) => `Source: ${s}`,
+  countOf: (count: number, target?: number) => (target ? `${count} of ${target}` : `${count}`),
+} as const;

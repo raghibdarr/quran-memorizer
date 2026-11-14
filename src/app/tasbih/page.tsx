@@ -1,9 +1,15 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import TasbihClient from '@/components/worship/tasbih-client';
 
 export const metadata: Metadata = { title: 'Tasbih · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the worship-tracking package replaces this page.
+// Suspense: the client reads ?d= with useSearchParams, which a static export
+// needs bounded
 export default function Page() {
-  return <StubPage title="Tasbih" back="/prayer" note="A counter for dhikr. Coming soon." />;
+  return (
+    <Suspense>
+      <TasbihClient />
+    </Suspense>
+  );
 }
