@@ -1,0 +1,259 @@
+{
+  "unit": "fasting",
+  "rev": 2,
+  "id": "fasting-06-recommended-acts",
+  "order": 6,
+  "title": "Keeping the fast well",
+  "intro": "Beyond what makes a fast count, there is a way of keeping it well: when to eat, how to speak, what to say at sunset, and which nights to look for. This lesson gathers those habits with their sources.",
+  "claims": [
+    {
+      "id": "suhur-and-iftar-timing",
+      "kind": "agreed",
+      "text": "Eating [[suhur]], leaving it late, and breaking the fast promptly at sunset belong to the [[sunnah]] of fasting. Ibn Rushd and Ibn al-Mundhir report agreement.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, the sunnahs of fasting"
+          }
+        },
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Siyam wa al-I’tikaf, no. 124"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "maliki",
+          "text": "It is from the [[sunnah]] to hasten breaking the fast and to delay [[suhur]].",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ومن السنة تعجيل الفطر وتأخير السحور"
+        },
+        {
+          "school": "shafii",
+          "text": "Three things are recommended in fasting: hastening to break the fast, delaying [[suhur]], and leaving foul speech.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ويستحب في الصوم ثلاثة أشياء تعجيل الفطر وتأخير السحور وترك الهجر من الكلام"
+        }
+      ],
+      "cards": [
+        {
+          "id": "suhur-and-iftar-timing-1",
+          "front": "What is the [[sunnah]] for the timing of [[suhur]] and of breaking the fast?",
+          "back": "Delay [[suhur]]; break the fast promptly at sunset."
+        }
+      ]
+    },
+    {
+      "id": "guarding-the-tongue",
+      "kind": "how-to",
+      "text": "A fasting person guards the tongue. The Prophet ﷺ said that fasting is a shield, and that one who is insulted while fasting answers: “I am fasting.”",
+      "evidence": [
+        {
+          "item": "course-fasting-evidence:fasting-is-a-shield"
+        }
+      ],
+      "positions": [
+        {
+          "school": "maliki",
+          "text": "A fasting person should guard his tongue and his limbs, and honour in the month of Ramadan what Allah, glorified is He, has honoured.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "وينبغي للصائم أن يحفظ لسانه وجوارحه ويعظم من شهر رمضان ما عظم الله سبحانه"
+        },
+        {
+          "school": "shafii",
+          "text": "Three things are recommended in fasting: hastening to break the fast, delaying [[suhur]], and leaving foul speech.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ويستحب في الصوم ثلاثة أشياء تعجيل الفطر وتأخير السحور وترك الهجر من الكلام"
+        }
+      ],
+      "cards": [
+        {
+          "id": "guarding-the-tongue-1",
+          "front": "What does the Prophet ﷺ tell a fasting person to say when someone insults or fights them?",
+          "back": "“I am fasting.”"
+        },
+        {
+          "id": "guarding-the-tongue-2",
+          "front": "Complete the saying of the Prophet ﷺ: “Fasting is a …”",
+          "back": "Shield."
+        }
+      ]
+    },
+    {
+      "id": "iftar-dua",
+      "kind": "how-to",
+      "text": "On breaking the fast the Prophet ﷺ used to say: “The thirst has gone, the veins are moist, and the reward is assured, if Allah wills.” Another wording is also widely said: “O Allah, for You I have fasted, and on Your provision I break my fast.” Al-Daraqutni called the chain of the first report [[hasan]]. The second report is [[mursal]], as al-Nawawi notes.",
+      "evidence": [
+        {
+          "item": "course-fasting-evidence:iftar-dhahaba-al-zama"
+        }
+      ],
+      "cards": [
+        {
+          "id": "iftar-dua-1",
+          "front": "What did the Prophet ﷺ say on breaking the fast, in the report graded [[hasan]] by al-Daraqutni?",
+          "back": "“The thirst has gone, the veins are moist, and the reward is assured, if Allah wills.”"
+        },
+        {
+          "id": "iftar-dua-2",
+          "front": "What does al-Nawawi note about the report of “O Allah, for You I have fasted, and on Your provision I break my fast”?",
+          "back": "That it is [[mursal]]."
+        }
+      ]
+    },
+    {
+      "id": "laylat-al-qadr",
+      "kind": "agreed",
+      "text": "The Quran was sent down in Ramadan, on [[laylat-al-qadr]], a night better than a thousand months.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 97,
+            "ayah": 1,
+            "ayahEnd": 3
+          }
+        },
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 185
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanbali",
+          "text": "[[laylat-al-qadr]] falls in the odd nights of the last ten of Ramadan.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab siyam al-tatawwu’"
+          },
+          "quote": "وليلة القدر في الوتر من العشر الأواخر من رمضان"
+        }
+      ],
+      "cards": [
+        {
+          "id": "laylat-al-qadr-1",
+          "front": "What does Surah al-Qadr say about [[laylat-al-qadr]]?",
+          "back": "The Quran was sent down on it, and it is better than a thousand months."
+        }
+      ]
+    },
+    {
+      "id": "eid-days",
+      "kind": "agreed",
+      "text": "The day of Eid al-Fitr and the day of Eid al-Adha are not fasted. Ibn Rushd lists them as the days on which fasting is prohibited by agreement.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam al-thani, the days on which fasting is prohibited"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "maliki",
+          "text": "It is not allowed to fast the day of Fitr or the day of sacrifice.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ولا يجوز صيام يوم الفطر ولا يوم النحر"
+        },
+        {
+          "school": "shafii",
+          "text": "Fasting is forbidden on five days: the two Eids and the three days of Tashriq.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ويحرم صيام خمسة أيام العيدان وأيام التشريق الثلاثة"
+        },
+        {
+          "school": "hanbali",
+          "text": "The Messenger of Allah ﷺ forbade fasting on two days: the day of Fitr and the day of Adha.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab siyam al-tatawwu’"
+          },
+          "quote": "ونهى رسول الله صلى الله عليه وسلم عن صوم يومين: يوم الفطر ويوم الأضحى"
+        }
+      ],
+      "cards": [
+        {
+          "id": "eid-days-1",
+          "front": "On which two days is fasting prohibited by agreement?",
+          "back": "The day of Eid al-Fitr and the day of Eid al-Adha."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which belongs to the prophetic way of fasting?",
+      "options": [
+        "Delaying the meal at sunset",
+        "Eating the pre-dawn meal late and breaking the fast promptly",
+        "Skipping the pre-dawn meal"
+      ],
+      "answer": 1,
+      "claim": "suhur-and-iftar-timing"
+    },
+    {
+      "q": "Someone insults a fasting person. What are they taught to answer?",
+      "options": [
+        "“I am fasting.”",
+        "The same insult back",
+        "Nothing can be said while fasting"
+      ],
+      "answer": 0,
+      "claim": "guarding-the-tongue"
+    },
+    {
+      "q": "What did al-Daraqutni say about the chain of the report “The thirst has gone, the veins are moist…”?",
+      "options": [
+        "That it is broken",
+        "That it is good",
+        "He did not comment on it"
+      ],
+      "answer": 1,
+      "claim": "iftar-dua"
+    },
+    {
+      "q": "On which days is fasting prohibited by agreement?",
+      "options": [
+        "Mondays and Thursdays",
+        "The two Eid days",
+        "The first day of every month"
+      ],
+      "answer": 1,
+      "claim": "eid-days"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
+      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). The Shafi’i quote on guarding the tongue is now the whole sentence, so the English says no more than the Arabic shown; rev raised to 2. Not reviewed by a scholar."
+    ]
+  }
+}

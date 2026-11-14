@@ -1,0 +1,84 @@
+{
+  "id": "iftar-dhahaba-al-zama",
+  "deck": "course-fasting-evidence",
+  "rev": 1,
+  "title": "Words on breaking the fast",
+  "cue": "What the Prophet ﷺ said when he broke his fast",
+  "arabic": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
+  "translation": "The thirst has gone, the veins are moist, and the reward is assured, if Allah wills.",
+  "citations": [
+    {
+      "collection": "abu-dawud",
+      "number": "2357",
+      "numbering": "muhyi-al-din-abd-al-hamid",
+      "book": "Kitab al-Sawm, bab al-qawl ‘inda al-iftar",
+      "narrator": "Abdullah ibn Umar"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "hasan",
+      "by": "al-daraqutni",
+      "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (Mu’assasat al-Risala edition)",
+      "quote": "تفرد به الحسين بن واقد وإسناده حسن"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, vol. 2 p. 306, no. 2357 (shamela.ws/book/1726/3158)",
+        "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "ara-abudawud, hadith 2357",
+        "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+      }
+    ],
+    "note": "The Arabic stored is the supplication only. In Abu Dawud it follows the frame “the Messenger of Allah ﷺ, when he broke his fast, used to say”, which is given here in the cue and the usage line, not in the Arabic."
+  },
+  "notes": [
+    {
+      "text": "Al-Nawawi quotes the second wording from Abu Dawud, where Mu’adh ibn Zuhrah says it reached him that the Prophet ﷺ used to say it on breaking his fast, and remarks that he narrated it like this, [[mursal]].",
+      "source": {
+        "work": "al-adhkar",
+        "location": "Bab ma yaqul ‘inda al-iftar"
+      }
+    }
+  ],
+  "usage": {
+    "when": [
+      "On breaking the fast at sunset"
+    ]
+  },
+  "variants": [
+    {
+      "label": "Another wording, from a mursal report: “O Allah, for You I have fasted, and on Your provision I break my fast.”",
+      "arabic": "اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ",
+      "citations": [
+        {
+          "collection": "abu-dawud",
+          "number": "2358",
+          "numbering": "muhyi-al-din-abd-al-hamid",
+          "book": "Kitab al-Sawm, bab al-qawl ‘inda al-iftar",
+          "narrator": "Mu’adh ibn Zuhrah, who says it reached him"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 B/C Arabic taken from witness 1 and collated against witness 2 by normalised skeleton: identical for the words kept",
+      "2026-11-13 D vocalisation checked against the vocalised witness texts",
+      "2026-11-13 E/F our own translation from the Arabic; re-read against the Arabic for omissions and additions",
+      "2026-11-13 G citation number confirmed in both witnesses",
+      "2026-11-13 H al-Daraqutni's verdict located in his Sunan after no. 2279 and quoted; al-Nawawi's remark on the second wording located in al-Adhkar (OpenITI text of the Shamela copy, no. 986)",
+      "2026-11-13 variant (no. 2358) collated the same way in both witnesses",
+      "2026-11-13 status source-checked. Stages were run by one agent with a mechanical collation, not by separate agents. Not reviewed by a scholar.",
+      "2026-11-14 independent verifier pass: nos. 2357 and 2358 collated again in both witnesses; al-Daraqutni’s words read on the page cited; al-Nawawi’s remark read at no. 986 of al-Adhkar (OpenITI text). No change. Not reviewed by a scholar."
+    ]
+  }
+}

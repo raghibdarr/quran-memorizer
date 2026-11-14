@@ -1,0 +1,287 @@
+{
+  "unit": "fasting",
+  "rev": 3,
+  "id": "fasting-03-what-breaks-the-fast",
+  "order": 3,
+  "title": "What breaks the fast",
+  "intro": "Some acts end a fast and some leave it whole. This lesson starts with what is agreed, then shows a place where the four primers part ways. Modern questions such as injections and inhalers are outside this unit: for those, ask a scholar you trust.",
+  "claims": [
+    {
+      "id": "food-drink-intercourse",
+      "kind": "agreed",
+      "text": "Eating, drinking or having intercourse on purpose during the fasting day breaks the fast. Ibn Rushd reports agreement that a fasting person holds back from all three.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 187
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, the second pillar: holding back"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "food-drink-intercourse-1",
+          "front": "Which three things, done on purpose, break a fast by agreement?",
+          "back": "Eating, drinking and intercourse."
+        }
+      ]
+    },
+    {
+      "id": "vomiting",
+      "kind": "agreed",
+      "text": "Vomiting that overcomes a person leaves the fast whole. Making oneself vomit on purpose breaks it. Ibn al-Mundhir reports agreement on both. Ibn Rushd gives them as the position of the great majority and names an early dissenter on each.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Siyam wa al-I’tikaf, nos. 125 and 126"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "If vomit overcomes him, his fast is not broken. If he deliberately brings up a mouthful, he owes a make-up day.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "وإن ذرعه القيء لم يفطر وإن استقاء عامدا ملء فيه فعليه القضاء"
+        },
+        {
+          "school": "maliki",
+          "text": "Whoever is overcome by vomit in Ramadan owes no make-up day. If he brings it on and vomits, he owes one.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ومن ذرعه القيء في رمضان فلا قضاء عليه وإن استقاء فقاء فعليه القضاء"
+        },
+        {
+          "school": "shafii",
+          "text": "Ten things break the fast, among them: what deliberately reaches the inside of the body or the head, an enema by either passage, and deliberate vomiting.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والذي يفطر به الصائم عشرة أشياء: ما وصل عمدا إلى الجوف أو الرأس والحقنة في أحد السبيلين والقيء عمدا"
+        },
+        {
+          "school": "hanbali",
+          "text": "If he has a wet dream, or vomit overcomes him, his fast is not spoiled.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ma yufsid al-sawm"
+          },
+          "quote": "أو احتلم أو ذرعه القيء لم يفسد صومه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "vomiting-1",
+          "front": "Does vomiting break the fast?",
+          "back": "Not when it overcomes you. Making yourself vomit on purpose breaks it."
+        }
+      ]
+    },
+    {
+      "id": "what-does-not-break",
+      "kind": "agreed",
+      "text": "A wet dream during the day does not spoil the fast, and nothing is owed for what is swallowed with saliva from between the teeth when it cannot be helped.",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Siyam, end of the third pillar (the intention)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Siyam wa al-I’tikaf, no. 127"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "what-does-not-break-1",
+          "front": "Does a wet dream during the day spoil the fast?",
+          "back": "No. Ibn Rushd cites agreement on this."
+        },
+        {
+          "id": "what-does-not-break-2",
+          "front": "A trace of food between the teeth is swallowed with saliva and could not be helped. Is anything owed?",
+          "back": "No. Ibn al-Mundhir reports agreement on this."
+        }
+      ]
+    },
+    {
+      "id": "forgetting",
+      "kind": "differs",
+      "text": "The schools differ about someone who eats or drinks having forgotten that they are fasting.",
+      "evidence": [
+        {
+          "item": "course-fasting-evidence:forgetful-eater"
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "If a fasting person eats, drinks or has intercourse forgetfully, the fast is not broken.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "فإن أكل الصائم أو شرب أو جامع ناسيا لم يفطر"
+        },
+        {
+          "school": "maliki",
+          "text": "Whoever breaks the fast in the daytime of Ramadan forgetfully owes the make-up day and nothing more.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-Siyam"
+          },
+          "quote": "ومن أفطر في نهار رمضان ناسيا فعليه القضاء فقط"
+        },
+        {
+          "school": "shafii",
+          "text": "Ten things break the fast, the first being what deliberately reaches the inside of the body or the head.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "والذي يفطر به الصائم عشرة أشياء: ما وصل عمدا إلى الجوف أو الرأس"
+        },
+        {
+          "school": "hanbali",
+          "text": "If he does it forgetfully or under compulsion, his fast is not spoiled.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ma yufsid al-sawm"
+          },
+          "quote": "وإن فعله ناسيا أو مكرها لم يفسد صومه"
+        }
+      ],
+      "cards": [
+        {
+          "id": "forgetting-1",
+          "front": "Someone eats, having forgotten they are fasting. What do the four primers say?",
+          "back": "Hanafi and Hanbali: the fast is whole. Shafi’i: only what reaches the inside deliberately breaks it. Maliki: the day is made up, and nothing more."
+        },
+        {
+          "id": "forgetting-hanafi",
+          "school": "hanafi",
+          "front": "Hanafi primer: a fasting person eats or drinks forgetfully. Is the fast broken?",
+          "back": "No."
+        },
+        {
+          "id": "forgetting-maliki",
+          "school": "maliki",
+          "front": "Maliki primer: someone breaks the fast in Ramadan forgetfully. What is owed?",
+          "back": "The make-up day only."
+        },
+        {
+          "id": "forgetting-shafii",
+          "school": "shafii",
+          "front": "Shafi’i primer: what condition is attached to food or drink breaking the fast?",
+          "back": "That it reaches the inside of the body deliberately."
+        },
+        {
+          "id": "forgetting-hanbali",
+          "school": "hanbali",
+          "front": "Hanbali primer: a fasting person eats forgetfully or under compulsion. Is the fast spoiled?",
+          "back": "No."
+        }
+      ]
+    },
+    {
+      "id": "mistaken-time",
+      "kind": "how-to",
+      "text": "The Hanafi and Hanbali primers say that someone who eats believing it is still night, or that the sun has set, and then finds out otherwise, makes that day up. Ibn Rushd notes that the jurists differed on this; the Maliki and Shafi’i primers used here do not address it.",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 187
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Whoever eats before dawn thinking it has not yet risen, or breaks the fast believing the sun has set, and then it turns out that dawn had risen or the sun had not set, makes up that day and owes no expiation.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Sawm"
+          },
+          "quote": "ومن تسحر وهو يظن أن الفجر لم يطلع أو أفطر وهو يرى أن الشمس قد غربت ثم تبين أن الفجر كان قد طلع أو أن الشمس لم تغرب قضى ذلك اليوم ولا كفارة عليه"
+        },
+        {
+          "school": "hanbali",
+          "text": "Whoever eats thinking it is night, and it turns out to be day, owes the make-up day.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Siyam, bab ma yufsid al-sawm"
+          },
+          "quote": "ومن أكل يظنه ليلا فبان نهارا فعليه القضاء"
+        }
+      ],
+      "cards": [
+        {
+          "id": "mistaken-time-1",
+          "front": "Someone eats thinking it is still night, then learns dawn had already come. What do the Hanafi and Hanbali primers say?",
+          "back": "The day is made up. The Hanafi primer adds that no expiation is owed."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which of these breaks the fast by agreement?",
+      "options": [
+        "A wet dream during the day",
+        "Drinking water on purpose",
+        "Vomit that overcomes you"
+      ],
+      "answer": 1,
+      "claim": "food-drink-intercourse"
+    },
+    {
+      "q": "Making yourself vomit on purpose:",
+      "options": [
+        "breaks the fast",
+        "leaves the fast whole",
+        "matters only at night"
+      ],
+      "answer": 0,
+      "claim": "vomiting"
+    },
+    {
+      "q": "Someone eats, having forgotten they are fasting. The four primers:",
+      "options": [
+        "all say the fast is whole",
+        "all say a make-up day is owed",
+        "do not all say the same thing"
+      ],
+      "answer": 2,
+      "claim": "forgetting"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-13",
+    "log": [
+      "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
+      "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
+      "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
+      "2026-11-14 fresh review pass by a second agent: every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-located in a new download of the sources (review.log section 7); wording tightened where the source says less than the claim did; rev raised to 2. Not reviewed by a scholar.",
+      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). The Shafi’i quote under forgetting now includes the words its English opens with; rev raised to 3. Not reviewed by a scholar."
+    ]
+  }
+}

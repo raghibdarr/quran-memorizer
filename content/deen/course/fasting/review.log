@@ -1,0 +1,223 @@
+# Unit Fasting: check pass
+
+2026-11-13. Drafting and checking were done by one agent. The brief asked for a separate
+checker agent; none could be started in this run, so the check below is mechanical (a fresh
+download of every source page, then a skeleton match of every quote) plus a second read of
+each English position against its Arabic. The content-audit package re-checks all of this
+with a fresh verifier. Nothing here is scholar-reviewed.
+
+## 1. Primer quotes re-located (58 of 58)
+
+```
+ok   fasting-01-who-must-fast / who-it-falls-on / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-01-who-must-fast / who-it-falls-on / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-01-who-must-fast / who-it-falls-on / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-01-who-must-fast / who-it-falls-on / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-01-who-must-fast / what-the-fast-is / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; not found in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-01-who-must-fast / start-of-month / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-01-who-must-fast / start-of-month / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-01-who-must-fast / clouded-crescent / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-01-who-must-fast / clouded-crescent / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-01-who-must-fast / clouded-crescent / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-01-who-must-fast / clouded-crescent / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-02-intention / intention-needed / hanafi: not found in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-02-intention / intention-needed / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-02-intention / intention-timing / hanafi: not found in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-02-intention / intention-timing / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-03-what-breaks-the-fast / vomiting / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; not found in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-03-what-breaks-the-fast / vomiting / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-03-what-breaks-the-fast / vomiting / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-03-what-breaks-the-fast / vomiting / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-03-what-breaks-the-fast / forgetting / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-03-what-breaks-the-fast / forgetting / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-03-what-breaks-the-fast / forgetting / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-03-what-breaks-the-fast / forgetting / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-03-what-breaks-the-fast / mistaken-time / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; not found in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-03-what-breaks-the-fast / mistaken-time / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-04-exemptions / sick-and-traveller / hanafi: not found in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-04-exemptions / sick-and-traveller / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-04-exemptions / traveller-which-is-better / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-04-exemptions / traveller-which-is-better / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-04-exemptions / traveller-which-is-better / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-04-exemptions / menstruation / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-04-exemptions / menstruation / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-04-exemptions / pregnant-nursing / hanafi: not found in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-04-exemptions / pregnant-nursing / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-04-exemptions / pregnant-nursing / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-04-exemptions / pregnant-nursing / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-04-exemptions / elderly / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-04-exemptions / elderly / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-04-exemptions / elderly / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-04-exemptions / elderly / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-05-making-up / qada-definition / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-05-making-up / fidyah-definition / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-05-making-up / fidyah-definition / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-05-making-up / delayed-qada / hanafi: not found in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-05-making-up / delayed-qada / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-05-making-up / delayed-qada / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-05-making-up / kaffarah / hanafi: FOUND in shamela 124336 (Mukhtasar al-Quduri, ed. Uwayda, Dar al-Kutub al-Ilmiyya), pp. 62-64; FOUND in shamela 985 (al-Tashih wa al-Tarjih, matn of al-Quduri), pp. 204-207
+ok   fasting-05-making-up / kaffarah / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-05-making-up / kaffarah / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-05-making-up / kaffarah / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-06-recommended-acts / suhur-and-iftar-timing / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-06-recommended-acts / suhur-and-iftar-timing / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-06-recommended-acts / guarding-the-tongue / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-06-recommended-acts / guarding-the-tongue / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-06-recommended-acts / laylat-al-qadr / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+ok   fasting-06-recommended-acts / eid-days / maliki: FOUND in shamela 11373 (al-Risala, Dar al-Fikr), pp. 59-63
+ok   fasting-06-recommended-acts / eid-days / shafii: FOUND in shamela 11370 (Matn Abi Shuja, Alam al-Kutub), pp. 18-19
+ok   fasting-06-recommended-acts / eid-days / hanbali: FOUND in shamela 11315 (Umdat al-Fiqh, ed. Azzuz, al-Maktaba al-Asriyya), pp. 41-43
+```
+
+## 2. Evidence hadith collated
+
+```
+ok   iftar 2357: shamela (Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, vol. 2 p. 306, no. 2357 (shamela.ws/book/1726/3158))
+ok   iftar 2357: hadith-api (ara-abudawud, hadith 2357)
+ok   iftar variant 2358: shamela (no. 2358 (shamela.ws/book/1726/3159))
+ok   iftar variant 2358: hadith-api (ara-abudawud, hadith 2358)
+ok   Daraqutni verdict located after no. 2279 (shamela.ws/book/9771/2240)
+ok   forgetful 1933: dorar (dorar.net hadith encyclopedia: Sahih al-Bukhari, no. 1933, narrator Abu Hurayrah)
+ok   forgetful 1933: hadith-api (ara-bukhari, hadith 1933)
+ok   shield 1894: dorar (dorar.net hadith encyclopedia: Sahih al-Bukhari, no. 1894, narrator Abu Hurayrah)
+ok   shield 1894: hadith-api (ara-bukhari, hadith 1894)
+evidence items written
+```
+
+## 3. Consensus citations re-read (Arabic as found, diacritics dropped)
+
+- ramadan-obligation: Bidaya 2:45-46 `فهو واجب بالكتاب والسنة والإجماع` ... `وأما الإجماع: فإنه لم ينقل إلينا خلاف عن أحد من الأئمة في ذلك`
+- who-it-falls-on, menstruation: Bidaya 2:46 `فهو البالغ العاقل الحاضر الصحيح إذا لم تكن فيه الصفة المانعة من الصوم وهي: الحيض للنساء، وهذا لا خلاف فيه`
+- start-of-month: Bidaya 2:46 `فإن العلماء أجمعوا على أن الشهر العربي يكون تسعا وعشرين ويكون ثلاثين، وعلى أن الاعتبار في تحديد شهر رمضان إنما هو الرؤية`
+- what-the-fast-is: Bidaya 2:51 `فإنهم اتفقوا على أن آخره غيبوبة الشمس`; 2:52 `وأجمعوا على أنه يجب على الصائم الإمساك زمان الصوم عن المطعوم والمشروب والجماع`. The start of the day is not reported as agreed (`واختلفوا في أوله، فقال الجمهور: هو طلوع الفجر الثاني`), so the claim says "dawn" and reports agreement only on the three things and on sunset.
+- food-drink-intercourse, agreed-core: the same passage at 2:52.
+- what-does-not-break: Bidaya 2:56 `الإجماع على أن الاحتلام بالنهار لا يفسد الصوم`; al-Ijma' no. 127 `وأجمعوا على أن لا شيء على الصائم فيما يزدرده مما يجري مع الريق مما بين أسنانه، فيما لا يقدر على الامتناع منه`
+- intention-needed, intention-timing: al-Ijma' no. 123 `وأجمعوا على أن من نوى الصيام كل ليلة من الصيام شهر رمضان، فصام: أن صومه تام`
+- vomiting: al-Ijma' no. 125 `وأجمعوا على أنه لا شيء على الصائم إذا ذرعه القيء، وانفرد الحسن البصري، فقال: عليه، ووافق في أخرى`; no. 126 `وأجمعوا على إبطال صوم من استقاء عامدا`. Bidaya 2:54 gives both as the majority position and names Rabi'a and Tawus as dissenting; the claim says so, and Bidaya is not listed as consensus evidence for it.
+- menstruation: al-Ijma' no. 68 `وأجمعوا على أن عليها قضاء الصوم الذي تفطره في أيام حيضتها في شهر رمضان` (no. 30 says the same).
+- elderly: al-Ijma' no. 129 `وأجمعوا على أن للشيخ الكبير، والعجوز العاجزين عن الصوم أن يفطرا`
+- suhur-and-iftar-timing: Bidaya 2:69 `وأجمعوا على أن من سنن الصوم تأخير السحور وتعجيل الفطر`; al-Ijma' no. 124 `وأجمعوا على أن السحور مندوب إليه`
+- eid-days: Bidaya 2:71 `أما المتفق عليها: فيوم الفطر، ويوم الأضحى ; لثبوت النهي عن صيامهما`
+
+## 4. Differences cross-located in Bidayat al-Mujtahid
+
+- clouded-crescent: 2:46-47 `واختلفوا في الحكم إذا غم الشهر` ... the majority complete thirty; `وذهب ابن عمر إلى أنه ... صيم اليوم الثاني وهو الذي يعرف بيوم الشك`. OPEN: Ibn Rushd gives the fasting view to Ibn Umar and does not name Ahmad; the Hanbali position rests on the 'Umda quote alone. The Shafi'i quote is about the day of doubt in general, not the clouded night by name.
+- intention-timing: 2:56 `وأما اختلافهم في وقت النية: فإن مالكا رأى أنه لا يجزئ الصيام إلا بنية قبل الفجر ... وقال أبو حنيفة: تجزئ النية بعد الفجر في الصيام المتعلق وجوبه بوقت معين مثل رمضان`. Renewal each day is listed among the disputed questions at 2:54-55 (`وهل يجب تجديدها في كل يوم من أيام رمضان أم يكفي في ذلك النية الواقعة في اليوم الأول`). OPEN: Ibn Rushd lists the renewal question but does not set out who holds what; the Maliki position rests on the Risala quote alone.
+- forgetting: 2:65 `إذا جامع ناسيا لصومه: فإن الشافعي وأبا حنيفة يقولان: لا قضاء عليه ولا كفارة. وقال مالك: عليه القضاء دون الكفارة`, with the hadith of Abu Hurayrah on eating forgetfully cited there from al-Bukhari and Muslim. OPEN: the same passage gives Ahmad "make-up and expiation" for forgetful intercourse; the 'Umda sentence quoted covers the acts it lists before it (eating, drinking and the rest), and the claim is worded about eating and drinking only.
+- traveller-which-is-better: 2:58 `فبعضهم رأى أن الصوم أفضل، وممن قال بهذا القول مالك وأبو حنيفة. وبعضهم رأى أن الفطر أفضل، وممن قال بهذا القول أحمد`
+- pregnant-nursing: 2:62-63, four views: feeding only (Ibn Umar, Ibn Abbas); make-up only (Abu Hanifa); both (al-Shafi'i); the pregnant woman makes up without feeding and the nursing woman makes up and feeds.
+- elderly: 2:63 `واختلفوا فيما عليهما إذا أفطرا ... وبالأول قال الشافعي وأبو حنيفة، وبالثاني قال مالك إلا أنه استحبه`
+- delayed-qada: 2:61 `يجب عليه بعد صيام رمضان الداخل القضاء والكفارة، وبه قال مالك والشافعي وأحمد. وقال قوم: لا كفارة عليه وبه قال الحسن البصري وإبراهيم النخعي`. OPEN: Ibn Rushd does not name Abu Hanifa for "no feeding"; the Hanafi position rests on the Quduri quote (`ولا فدية عليه`) alone.
+- kaffarah: 2:65 `فإن مالكا وأصحابه وأبا حنيفة وأصحابه ... من أفطر متعمدا بأكل أو شرب أن عليه القضاء والكفارة ... وذهب الشافعي وأحمد ... إلى أن الكفارة إنما تلزم في الإفطار من الجماع فقط`; 2:67 `فقال الشافعي وأبو حنيفة ... هي مرتبة ... وقال مالك: هي على التخيير`, with the comparison to the expiation of zihar.
+- mistaken-time (kind how-to, two primers): Bidaya 2:66 notes that people differed on one who breaks the fast thinking the sun has set. Only the Hanafi and Hanbali primers address it; the claim is worded as their statement, not as agreement.
+
+## 5. Quran references
+
+2:183, 2:184, 2:185, 2:187, 58:3-4, 97:1-3: resolved by `build-deen --check` against
+src/data/surah-*.json and read in the Arabic there. 2:184 carries `فعدة من أيام أخر` and
+`فدية طعام مسكين`; 2:187 carries the limits of the fasting day; 58:3-4 is the expiation of
+zihar that the Hanafi primer names as the model.
+
+## 6. Open doubts for a scholar reviewer
+
+1. The four OPEN notes above.
+2. Evidence on "differs" claims is the verse or hadith the question turns on, not proof for
+   one side. `forgetting` cites the hadith of the forgetful eater, which three of the four
+   positions follow; the Maliki reading of it is not explained in the lesson.
+3. `kaffarah` lists freeing a slave because all four primers do. Nothing is said about how
+   the expiation is carried out today.
+4. `laylat-al-qadr`: only the Hanbali primer speaks of which nights; shown as its statement.
+5. The glossary lines for zihar, kaffarah, fidyah and mudd are our own short wording.
+6. Second copies were read only for al-Quduri. Al-Risala, Matn Abi Shuja' and 'Umdat al-Fiqh
+   were each read in one online copy.
+
+## 7. Fresh check pass (2026-11-14, a second agent that did not draft the unit)
+
+Every source page was downloaded again (shamela.ws books 124336, 985, 11373, 11370, 11315,
+21739, 12445, 1726, 9771; hadith-api ara-bukhari 1894 and 1933, ara-abudawud 2357 and 2358)
+and matched by normalised skeleton with a script written for this pass, not the drafter's.
+
+- Primer quotes: 58 of 58 re-located. 54 sit whole on one page. Four run across a page break
+  in the online copy and were read by eye on both pages: who-it-falls-on / shafii
+  (11370 /19 to /20), pregnant-nursing / hanafi (985 /191 to /192; in 124336 the sentence has
+  the slip `والمريض` noted in SOURCES.md), kaffarah / hanbali (11315 /55 to /56),
+  eid-days / maliki (11373 /74 to /75).
+- Each English position was read against its Arabic quote: no additions or omissions found
+  beyond the two shortenings already visible in the quotes (`في أحد السبيلين`, `في الفرج`).
+- Consensus citations and Bidayat al-Mujtahid cross-locations (sections 3 and 4): all 36
+  quoted phrases found on the pages named. Al-Ijma' nos. 68, 123 to 127 and 129 read in place.
+- Hadith: the three evidence items and the variant match both witnesses; stored hashes equal
+  the skeleton hashes; al-Daraqutni's `تفرد به الحسين بن واقد وإسناده حسن` is on the page cited.
+
+Findings, and what was changed (lessons 1, 2 and 3 raised to rev 2):
+
+1. intention-needed (lesson 2). The claim opened "A fast is kept with an intention" under
+   kind "agreed", but Ibn Rushd gives the need for an intention as the majority position, not
+   agreement: Bidaya 2:55 `أما كون النية شرطا في صحة الصيام: فإنه قول الجمهور; وشذ زفر فقال: لا يحتاج رمضان إلى نية`.
+   The claim now says so and names Zufar; what is reported as agreed (al-Ijma' no. 123) is
+   unchanged. The intro now reads "reported as agreed". Bidaya is not listed as consensus
+   evidence for it.
+2. clouded-crescent (lesson 1). The Shafi'i quote is about the day of doubt in general (the
+   first OPEN note above). The claim text and the summary card now say that the primer does
+   not mention cloud by name, so the card no longer reads as that school's answer to cloud.
+3. mistaken-time (lesson 3). Bidaya 2:66 records a difference
+   (`اختلافهم فيمن ظن أن الشمس قد غربت فأفطر ثم ظهرت الشمس بعد ذلك، هل عليه قضاء أم لا`).
+   The claim now says the jurists differed and that the Maliki and Shafi'i primers used here
+   do not address it, so two primers agreeing is not read as everyone agreeing.
+
+Left as they are, for the scholar reviewer: the remaining OPEN notes in section 4 and the
+doubts in section 6. Nothing here is scholar-reviewed.
+
+## 8. Independent verifier pass (2026-11-14, an agent that wrote none of the unit)
+
+Every source page was downloaded once more and read with a script written for this pass:
+shamela.ws books 124336, 985, 11373, 11370, 11315 (the four primers, whole fasting chapters
+read by eye as well), 21739 (/291 to /321), 12445 (/40, /48, /49), 1726 (/3158, /3159),
+9771 (/2240), 1681 (/3024, /3084); hadith-api ara-bukhari 1894 and 1933, ara-abudawud 2357
+and 2358; the OpenITI text of al-Adhkar (no. 986).
+
+Checked, and found sound:
+
+- Primer quotes: 58 of 58 located. The same four run across a page break and were read on
+  both pages. Where the two copies of al-Quduri differ, each quote follows a copy that has
+  the sentence whole, as SOURCES.md says.
+- Each English position read against its Arabic, sentence by sentence. Nothing added and
+  nothing softened in meaning. Two renderings are shorter than the Arabic and are left so:
+  `في أحد السبيلين` (Hanafi) and `في الفرج` (Shafi'i, Hanbali) under kaffarah are given as
+  "intercourse". The Arabic is shown beside them.
+- Consensus citations: Bidayat al-Mujtahid 2:45-46, 2:46, 2:51, 2:52, 2:56, 2:69, 2:71 and
+  al-Ijma' nos. 68, 123 to 127, 129 read in place. No. 68 does sit in Kitab al-Salah in this
+  edition. Every claim of kind "agreed" rests on a phrase of agreement that is on the page,
+  or on the ayah cited.
+- Differences: every "differs" claim is cross-located in Bidayat al-Mujtahid (2:46-47, 2:56,
+  2:58, 2:61, 2:62-63, 2:65, 2:67). Where Ibn Rushd names the imams, his attribution agrees
+  with the primer quoted. No position is ranked above another anywhere in the unit.
+- Hadith: al-Bukhari 1894 and 1933 and Abu Dawud 2357 and 2358 carry the wording stored,
+  under those numbers, in every witness read. Stored skeleton hashes equal the hashes of the
+  shipped Arabic. Vocalisation read against the vocalised prints. Translations read against
+  the Arabic: faithful.
+- Gradings: al-Daraqutni's `تفرد به الحسين بن واقد وإسناده حسن` follows no. 2279 in his
+  Sunan, and the lesson reports it as his verdict on the chain. Al-Nawawi's `هكذا رواه مرسلا`
+  follows the second wording at al-Adhkar no. 986. The second wording is shown only as a
+  variant with that status, which is the stance the spec sets for it (section 6, iftar dua).
+- Quran references 2:183, 2:184, 2:185, 2:187, 58:3-4 and 97:1-3 say what the claims take
+  from them.
+
+Changed:
+
+1. intention-timing / hanafi (lesson 2, rev 3). The English opened with "A fast tied to a set
+   time, such as Ramadan", words that are in al-Quduri just before the quote but were not in
+   the quote. The quote now starts at `منه ما يتعلق بزمان بعينه كصوم رمضان والنذر المعين`
+   and the English follows it, vow included.
+2. forgetting / shafii (lesson 3, rev 3) and guarding-the-tongue / shafii (lesson 6, rev 2).
+   Each English line named the list the phrase belongs to ("the ten things", "the three
+   things") while the quote held only the phrase. Each quote now carries the opening words of
+   its sentence.
+3. Evidence items fasting-is-a-shield and forgetful-eater (rev 2). dorar.net refused this
+   pass's download, so its witness could not be read again. Both hadith were collated instead
+   against the Shamela copy of the Sultaniyya print of Sahih al-Bukhari
+   (shamela.ws/book/1681/3024 and /3084): identical skeletons. That copy is recorded as a
+   third witness, so each item keeps a witness outside Sunnah.com that was read in this pass.
+
+Nothing was removed. The OPEN notes in section 4 and the doubts in section 6 stand for a
+scholar reviewer. Nothing here is scholar-reviewed.
