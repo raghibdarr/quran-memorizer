@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildHub, inRamadan, stripLine, zoneDiffers, zoneOffsetMin, type ModelSettings } from './model'
+import { buildHub, inOrder, inRamadan, stripLine, zoneDiffers, zoneOffsetMin, type ModelSettings } from './model'
 import { formatTime } from '@/lib/prayer/engine'
 
 const ZERO = { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }
@@ -50,6 +50,67 @@ describe('buildHub', () => {
     const m = buildHub(tromso, { ...S, method: 'MuslimWorldLeague', highLatRule: 'middleofthenight' }, Date.parse('2026-06-21T12:00:00+02:00'))
     expect(m.missing.length).toBeGreaterThan(0)
     for (const r of m.rows) if (m.missing.includes(r.name)) expect(r.startMs).toBeNull()
+  })
+})
+
+describe('the day read top to bottom', () => {
+  it('marks passed times, the one in now and the next, and nothing later', () => {
+    const m = buildHub(MAKKAH, S, at('14:00'))
+    const state = (r: (typeof m.rows)[number]) => (r.isPassed ? 'passed' : r.isCurrent ? 'now' : r.isNext ? 'next' : 'later')
+    expect(m.rows.map(state)).toEqual(['passed', 'passed', 'now', 'next', 'later', 'later'])
+  })
+
+  it('after Isha: Isha is now and the rest of today has passed', () => {
+    const m = buildHub(MAKKAH, S, at('21:00'))
+    expect(m.rows.filter((r) => r.isCurrent).map((r) => r.name)).toEqual(['isha'])
+    expect(m.rows.filter((r) => !r.isCurrent).every((r) => r.isPassed)).toBe(true)
+  })
+})
+
+describe('inOrder', () => {
+  const H = 3_600_000
+  const row = (name: 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha', h: number | null) => ({ name, startMs: h === null ? null : h * H, endMs: null as number | null })
+  const day = (hs: Array<number | null>) => {
+    const names = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const
+    const rows = names.map((n, i) => row(n, hs[i]))
+    rows.forEach((r, i) => (r.endMs = i < 5 ? rows[i + 1].startMs : 29 * H))
+    return rows
+  }
+
+  it('leaves an ordinary day alone', () => {
+    const rows = day([5, 6.5, 12.5, 15.9, 18.5, 20])
+    expect(inOrder(rows)).toEqual(rows)
+  })
+
+  it('drops an Asr before Dhuhr (far north in winter) and lets Dhuhr run to the next time', () => {
+    const out = inOrder(day([6, null, 11.5, 10.9, 13, 15]))
+    expect(out.map((r) => r.startMs)).toEqual([6 * H, null, 11.5 * H, null, 13 * H, 15 * H])
+    expect(out[2].endMs).toBe(13 * H)
+    expect(out[0].endMs).toBe(null) // ended at the missing sunrise before; unchanged
+  })
+
+  it('never lists times out of order, Tromsø in December included', () => {
+    const tromso = { lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }
+    for (const day of ['2026-12-01', '2026-12-21', '2027-01-10']) {
+      const m = buildHub(tromso, { ...S, method: 'MuslimWorldLeague' }, Date.parse(`${day}T11:40:00+01:00`))
+      const times = m.rows.map((r) => r.startMs).filter((t): t is number => t !== null)
+      expect(times).toEqual([...times].sort((a, b) => a - b))
+      const now = m.rows.find((r) => r.isCurrent)
+      if (now) expect(now.startMs!).toBeLessThanOrEqual(Date.parse(`${day}T11:40:00+01:00`))
+    }
+  })
+
+  it('moves "now" to the kept prayer when the engine’s lands on a dropped time', () => {
+    const tromso = { lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }
+    const m = buildHub(tromso, { ...S, method: 'MuslimWorldLeague' }, Date.parse('2026-12-21T12:00:00+01:00'))
+    expect(m.rows.find((r) => r.name === 'asr')!.startMs).toBeNull()
+    expect(m.current?.prayer).toBe('dhuhr')
+    expect(m.rows.filter((r) => r.isCurrent).map((r) => r.name)).toEqual(['dhuhr'])
+  })
+
+  it('drops a morning time that comes after the one following it', () => {
+    const out = inOrder(day([7, 6.5, 12, 15, 18, 20]))
+    expect(out.map((r) => r.startMs)).toEqual([null, 6.5 * H, 12 * H, 15 * H, 18 * H, 20 * H])
   })
 })
 

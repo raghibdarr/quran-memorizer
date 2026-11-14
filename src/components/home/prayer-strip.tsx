@@ -38,10 +38,15 @@ export function HomePrayerStrip() {
     }
   });
   if (!wanted) return null;
+  // The width of Home's card column at every size (its main is max-w-2xl with px-4
+  // inside; this header has its padding outside), and -mb-3 brings the gap to the
+  // first card down to the 12px the cards keep between themselves
   return (
-    <Suspense fallback={<div className="mt-3 min-h-11 rounded-xl border border-foreground/10 bg-card" aria-hidden />}>
-      <PrayerStripLive />
-    </Suspense>
+    <div className="mx-auto mt-3 -mb-3 max-w-[40rem]">
+      <Suspense fallback={<div className="min-h-11 rounded-2xl border border-foreground/10 bg-card" aria-hidden />}>
+        <PrayerStripLive />
+      </Suspense>
+    </div>
   );
 }
 

@@ -17,6 +17,8 @@ export interface City {
   tz: string;
   /** 0-9: 0 under 30,000 people, each step doubles */
   tier: number;
+  /** State or province code where the file carries one (United States only: "MO") */
+  admin1?: string;
 }
 
 /** The file as scripts/build-cities.mjs writes it */
@@ -34,6 +36,8 @@ export interface CitiesFile {
   z: number[];
   pop: string;
   ascii: Record<string, string>;
+  /** Per country, one two-letter admin1 code per row of that country, concatenated */
+  admin1?: Record<string, string>;
 }
 
 export interface CityIndex {
@@ -66,11 +70,14 @@ export function decodeCities(file: CitiesFile): CityIndex {
   let lng = 0;
   let row = 0;
   file.countries.forEach((cc, ci) => {
+    const codes = file.admin1?.[cc];
+    if (codes !== undefined && codes.length !== file.counts[ci] * 2) throw new Error('cities.json: admin1 does not add up');
     for (let k = 0; k < file.counts[ci]; k++, row++) {
       lat += file.lat[row];
       lng += file.lng[row];
       const name = file.name[row];
       cities[row] = { id: row, name, cc, lat: lat / 100, lng: lng / 100, tz: file.zones[file.z[row]], tier: Number(file.pop[row]) };
+      if (codes) cities[row].admin1 = codes.slice(k * 2, k * 2 + 2);
       const ascii = file.ascii[String(row)];
       keys[row] = ascii ? [fold(name), fold(ascii)] : [fold(name)];
     }
@@ -141,6 +148,25 @@ export function countryName(cc: string): string {
   } catch {
     return cc;
   }
+}
+
+// US states (and DC) by their two-letter code: our own table, for telling apart
+// the many US towns that share a name
+const US_STATES: Record<string, string> = {
+  AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California', CO: 'Colorado', CT: 'Connecticut',
+  DE: 'Delaware', DC: 'District of Columbia', FL: 'Florida', GA: 'Georgia', HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois',
+  IN: 'Indiana', IA: 'Iowa', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana', ME: 'Maine', MD: 'Maryland',
+  MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri', MT: 'Montana',
+  NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey', NM: 'New Mexico', NY: 'New York',
+  NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio', OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania',
+  RI: 'Rhode Island', SC: 'South Carolina', SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah',
+  VT: 'Vermont', VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
+};
+
+/** "Missouri" for a US city; '' where the list carries no state or province */
+export function regionName(city: Pick<City, 'cc' | 'admin1'>): string {
+  if (!city.admin1) return '';
+  return city.cc === 'US' ? (US_STATES[city.admin1] ?? city.admin1) : city.admin1;
 }
 
 /** "Makkah, Saudi Arabia" */

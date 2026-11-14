@@ -99,48 +99,105 @@ function NextHero({ model, format, now, until }: { model: HubModel; format: (ms:
 
 function TimesList({ model, format }: { model: HubModel; format: (ms: number) => string }) {
   return (
-    <ul className="group/times divide-y divide-foreground/5 overflow-hidden rounded-2xl border border-foreground/10 bg-card" aria-label="Today’s prayer times">
-      {model.rows.map((r) => {
-        const isPrayer = r.name !== 'sunrise';
-        return (
-          <li
-            key={r.name}
-            data-prayer-row={r.name}
-            data-next={r.isNext ? 'true' : undefined}
-            aria-current={r.isNext ? 'time' : undefined}
-            className={cn('flex min-h-14 items-center gap-3 px-4 py-2.5', r.isNext && 'bg-teal/[0.08]')}
-          >
-            <span className={cn('h-2 w-2 shrink-0 rounded-full', r.isNext ? 'bg-teal' : r.isCurrent ? 'bg-gold' : 'bg-transparent')} aria-hidden />
-            <span className={cn('flex-1 text-[15px]', isPrayer ? 'font-semibold text-foreground' : 'text-muted', r.isNext && 'text-teal')}>
-              {TIME_LABELS[r.name]}
-              {r.isNext && <span className="sr-only"> (next)</span>}
-            </span>
-            {r.startMs === null ? (
-              <span className="text-sm text-muted">No time today</span>
-            ) : (
-              <span className={cn('text-right text-[15px] tabular-nums', isPrayer ? 'font-semibold text-foreground' : 'text-muted', r.isNext && 'text-teal')}>
-                {format(r.startMs)}
-                {/* Past midnight (a summer Isha far north): say so, or the time reads as this morning's */}
-                {r.dayShift !== 0 && (
-                  <span className="block text-[11px] font-normal leading-4 text-muted" data-day-shift={r.dayShift}>
-                    {r.dayShift > 0 ? 'after midnight' : 'before midnight'}
+    <section className="space-y-2">
+      {/* After Isha the hero shows tomorrow's Fajr: this says the list is still today's */}
+      {model.nextIsTomorrow && (
+        <h2 className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted" data-times-day>
+          Today
+        </h2>
+      )}
+      <ul className="group/times divide-y divide-foreground/5 overflow-hidden rounded-2xl border border-foreground/10 bg-card" aria-label="Today’s prayer times">
+        {model.rows.map((r) => {
+          const isPrayer = r.name !== 'sunrise';
+          // Passed times and sunrise in the muted colour, so the day reads: passed, now, next, later
+          const tone = r.isNext ? 'text-teal' : r.isPassed || !isPrayer ? 'text-muted' : 'text-foreground';
+          const weight = isPrayer && !r.isPassed ? 'font-semibold' : 'font-medium';
+          return (
+            <li
+              key={r.name}
+              data-prayer-row={r.name}
+              data-next={r.isNext ? 'true' : undefined}
+              data-now={r.isCurrent ? 'true' : undefined}
+              data-passed={r.isPassed ? 'true' : undefined}
+              aria-current={r.isNext ? 'time' : undefined}
+              className={cn(
+                'relative flex min-h-14 items-center gap-3 px-5 py-2.5',
+                // A bar at the left edge: teal for the next prayer, gold for the one whose time is in
+                (r.isNext || r.isCurrent) && 'before:absolute before:inset-y-2.5 before:left-0 before:w-[3px] before:rounded-r-full',
+                r.isNext && 'bg-teal/[0.08] before:bg-teal',
+                r.isCurrent && 'before:bg-gold',
+              )}
+            >
+              <span className={cn('flex-1 text-[15px]', weight, tone)}>
+                {TIME_LABELS[r.name]}
+                {r.isNext && <span className="sr-only"> (next)</span>}
+                {r.isCurrent && (
+                  <span className="ml-2 text-[11px] font-semibold text-gold-deep" data-now-tag>
+                    now
                   </span>
                 )}
               </span>
-            )}
-            {/* The tracker's column: every row takes its width once any row draws a tick, so the times line up */}
-            <span
-              data-tracker-slot
-              className="-ml-3 flex w-0 shrink-0 justify-end group-has-[[data-tracker-slot]:not(:empty)]/times:ml-0 group-has-[[data-tracker-slot]:not(:empty)]/times:w-9"
-            >
-              {isPrayer && r.startMs !== null && r.endMs !== null && (
-                <RowTracker iso={model.iso} prayer={r.name as PrayerName} startMs={r.startMs} endMs={r.endMs} />
+              {r.startMs === null ? (
+                <span className="text-sm text-muted">No time today</span>
+              ) : (
+                <span className={cn('text-right text-[15px] tabular-nums', weight, tone)}>
+                  {format(r.startMs)}
+                  {/* Past midnight (a summer Isha far north): say so, or the time reads as this morning's */}
+                  {r.dayShift !== 0 && (
+                    <span className="block text-[11px] font-normal leading-4 text-muted" data-day-shift={r.dayShift}>
+                      {r.dayShift > 0 ? 'after midnight' : 'before midnight'}
+                    </span>
+                  )}
+                </span>
               )}
-            </span>
-          </li>
-        );
-      })}
-    </ul>
+              {/* The tracker's column: every row takes its width once any row draws a tick, so the times line up */}
+              <span
+                data-tracker-slot
+                className="-ml-3 flex w-0 shrink-0 justify-end group-has-[[data-tracker-slot]:not(:empty)]/times:ml-0 group-has-[[data-tracker-slot]:not(:empty)]/times:w-9"
+              >
+                {isPrayer && r.startMs !== null && r.endMs !== null && (
+                  <RowTracker iso={model.iso} prayer={r.name as PrayerName} startMs={r.startMs} endMs={r.endMs} />
+                )}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
+/** Under the list when a time doesn't exist today: what happened, and the fix where there is one */
+function MissingNote({ missing, rule }: { missing: readonly string[]; rule: string }) {
+  const names = joinNames(missing);
+  return (
+    <p className="px-1 text-xs leading-relaxed text-muted" data-missing-times>
+      {rule === 'auto' ? (
+        <>At this latitude the sun doesn’t give {names} today, so none is shown rather than a wrong one.</>
+      ) : (
+        <>
+          The sun doesn’t give {names} here today.{' '}
+          <Link href="/prayer/settings#high-latitude" className="font-semibold text-teal underline underline-offset-2">
+            Switch the high-latitude rule to Automatic
+          </Link>{' '}
+          to fill {missing.length === 1 ? 'it' : 'them'} in.
+        </>
+      )}
+    </p>
+  );
+}
+
+/** Prayer settings and the explainer, straight under the times they change */
+function SettingsLinks() {
+  return (
+    <div className="flex flex-wrap justify-center gap-x-5 text-sm">
+      <Link href="/prayer/settings" className="inline-flex min-h-11 items-center font-semibold text-teal" data-hub-settings>
+        Prayer settings
+      </Link>
+      <Link href="/prayer/why" className="inline-flex min-h-11 items-center font-semibold text-teal">
+        Why times differ
+      </Link>
+    </div>
   );
 }
 
@@ -179,9 +236,18 @@ export default function PrayerHub() {
     <div className="min-h-dvh bg-cream pb-[calc(var(--tabbar-clearance)+1rem)]" data-prayer-hub="times">
       <Header
         subtitle={
-          <Link href="/prayer/settings" className="mt-0.5 flex min-w-0 items-center gap-1 text-sm text-muted hover:text-foreground" data-place-label>
-            <MapPinIcon size={13} className="shrink-0" />
-            <span className="truncate">{place.label || 'Your place'}</span>
+          // The place as a chip: it opens prayer settings (the gear is the app's own settings)
+          <Link
+            href="/prayer/settings"
+            className="relative mt-1 flex min-h-9 w-fit max-w-full items-center gap-1.5 rounded-full border border-foreground/10 bg-card py-1 pl-2.5 pr-1.5 text-sm text-foreground after:absolute after:-inset-y-1 after:inset-x-0 hover:bg-foreground/[0.03]"
+            data-place-label
+          >
+            <MapPinIcon size={14} className="shrink-0 text-teal" />
+            <span className="truncate font-medium">{place.label || 'Your place'}</span>
+            <span className="sr-only">, prayer settings</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
           </Link>
         }
       />
@@ -217,17 +283,11 @@ export default function PrayerHub() {
         {model ? (
           <>
             <NextHero model={model} format={format} now={now} until={mod!.formatUntil} />
-            {model.missing.length > 0 && (
-              <p className="px-1 text-sm leading-relaxed text-muted" data-missing-times>
-                At this latitude the sun doesn’t give {joinNames(model.missing)} today, so no time is shown rather than a wrong one. A
-                high-latitude rule in{' '}
-                <Link href="/prayer/settings#high-latitude" className="font-semibold text-teal underline underline-offset-2">
-                  settings
-                </Link>{' '}
-                can fill it in.
-              </p>
-            )}
-            <TimesList model={model} format={format} />
+            <div className="space-y-1.5">
+              <TimesList model={model} format={format} />
+              {model.missing.length > 0 && <MissingNote missing={model.missing} rule={settings.highLatRule} />}
+              <SettingsLinks />
+            </div>
             {/*
               At most one contextual chip. The Ramadan banner decides for itself whether it is in
               season (it renders nothing otherwise, spec 3.4); only when it is empty do the adhkar
@@ -245,15 +305,6 @@ export default function PrayerHub() {
         )}
 
         <PrayerToolTiles />
-
-        <div className="flex flex-wrap justify-center gap-x-5 gap-y-1 pt-1 text-sm">
-          <Link href="/prayer/settings" className="py-2 font-semibold text-teal">
-            Prayer settings
-          </Link>
-          <Link href="/prayer/why" className="py-2 font-semibold text-teal">
-            Why times differ
-          </Link>
-        </div>
       </main>
       <BottomNav />
     </div>

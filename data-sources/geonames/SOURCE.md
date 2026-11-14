@@ -15,8 +15,10 @@
 
 Only five fields per place: name, country code, latitude and longitude (rounded to 2 decimal
 places), and IANA time zone, most populous first. Where GeoNames' ASCII name differs from the
-name with its accents removed, the ASCII name is kept too, for search. Alternate names,
-populations, admin codes and ids are dropped.
+name with its accents removed, the ASCII name is kept too, for search. For the United States
+only, the admin1 code (the two-letter state code) is kept as well, so search results can show
+the state for towns that share a name; the state names themselves are our own table in
+`src/lib/prayer/cities.ts`. Alternate names, populations, other admin codes and ids are dropped.
 
 ## Changes we made
 

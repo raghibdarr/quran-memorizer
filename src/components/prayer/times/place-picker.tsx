@@ -1,8 +1,7 @@
 'use client';
 
 import { useDeferredValue, useEffect, useRef, useState } from 'react';
-import { MapPinIcon } from '@/components/ui/icons';
-import { cn } from '@/lib/cn';
+import { MapPinIcon, XIcon } from '@/components/ui/icons';
 import { deviceTimeZone, getCoarseLocation, type LocationResult } from '@/lib/location';
 import {
   countryName,
@@ -10,6 +9,7 @@ import {
   nearestCity,
   placeFromCity,
   placeFromFix,
+  regionName,
   searchCities,
   type City,
   type CityIndex,
@@ -17,8 +17,9 @@ import {
 import type { Place } from '@/types/prayer';
 
 type Mode = 'choose' | 'locating' | 'search';
+type Failure = Exclude<LocationResult, { ok: true }>['reason'];
 
-const FAILED: Record<Exclude<LocationResult, { ok: true }>['reason'], string> = {
+const FAILED: Record<Failure, string> = {
   denied: 'Location is off for Takrar, so choose your city instead.',
   timeout: 'Your phone couldn’t find a location in time. Choose your city instead.',
   unavailable: 'Your phone couldn’t find a location. Choose your city instead.',
@@ -34,8 +35,24 @@ function SearchIcon({ size = 18, className = '' }: { size?: number; className?: 
   );
 }
 
+const TILE =
+  'pressable flex min-h-[4.5rem] flex-col items-center justify-center gap-1.5 rounded-2xl border-[1.5px] border-foreground/15 bg-card px-3 py-3 text-sm font-semibold text-foreground disabled:opacity-60';
+
+/** Scrolls an element up to just under the screen's sticky header (room for the results above the keyboard) */
+function scrollUnderHeader(el: HTMLElement) {
+  let headerBottom = 0;
+  document.querySelectorAll<HTMLElement>('.sticky').forEach((h) => {
+    const r = h.getBoundingClientRect();
+    if (r.top <= 1 + parseFloat(getComputedStyle(h).top || '0')) headerBottom = Math.max(headerBottom, r.bottom);
+  });
+  const top = el.getBoundingClientRect().top + window.scrollY - headerBottom - 8;
+  if (top > window.scrollY) window.scrollTo({ top, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}
+
 /**
  * Where are you: "Use my location" and "Choose a city", side by side and equal.
+ * Once the search is open the two give way to one line ("Use my location
+ * instead") so the field and its results sit high, above the keyboard.
  * Location is asked for only on that tap (one coarse fix, rounded); a refusal
  * goes straight to the city search, which needs no permission at all. The
  * city list loads only here, from the app's own files.
@@ -43,6 +60,7 @@ function SearchIcon({ size = 18, className = '' }: { size?: number; className?: 
 export default function PlacePicker({ onPick, autoSearch = false }: { onPick: (place: Place) => void; autoSearch?: boolean }) {
   const [mode, setMode] = useState<Mode>(autoSearch ? 'search' : 'choose');
   const [note, setNote] = useState<string | null>(null);
+  const [failure, setFailure] = useState<Failure | null>(null);
 
   // Bumped whenever the user moves on (taps "Choose a city", asks again, leaves the
   // screen): a fix that arrives after that is dropped instead of replacing their choice
@@ -57,11 +75,13 @@ export default function PlacePicker({ onPick, autoSearch = false }: { onPick: (p
   const locate = async () => {
     const mine = ++request.current;
     setNote(null);
+    setFailure(null);
     setMode('locating');
     const fix = await getCoarseLocation();
     if (mine !== request.current) return;
     if (!fix.ok) {
       setNote(FAILED[fix.reason]);
+      setFailure(fix.reason);
       setMode('search');
       return;
     }
@@ -77,44 +97,44 @@ export default function PlacePicker({ onPick, autoSearch = false }: { onPick: (p
     onPick(placeFromFix(fix.lat, fix.lng, near, deviceTimeZone(), index));
   };
 
+  const searching = mode === 'search';
   return (
     <div className="space-y-3" data-place-picker>
-      <div className="grid grid-cols-2 gap-3">
-        <button
-          type="button"
-          onClick={locate}
-          disabled={mode === 'locating'}
-          className={cn(
-            'pressable flex min-h-[4.5rem] flex-col items-center justify-center gap-1.5 rounded-2xl border-[1.5px] px-3 py-3 text-sm font-semibold',
-            'border-teal/30 bg-teal/5 text-teal disabled:opacity-60',
-          )}
-        >
-          <MapPinIcon size={20} />
-          {mode === 'locating' ? 'Finding you…' : 'Use my location'}
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            request.current++;
-            setNote(null);
-            setMode('search');
-          }}
-          aria-pressed={mode === 'search'}
-          className={cn(
-            'pressable flex min-h-[4.5rem] flex-col items-center justify-center gap-1.5 rounded-2xl border-[1.5px] px-3 py-3 text-sm font-semibold',
-            'border-teal/30 bg-teal/5 text-teal',
-          )}
-        >
-          <SearchIcon size={20} />
-          Choose a city
-        </button>
-      </div>
+      {searching ? (
+        // Location off for Takrar: asking again would only fail again, so the line is left out
+        failure !== 'denied' && (
+          <button type="button" onClick={locate} className="-my-1 flex min-h-11 items-center gap-2 px-1 text-sm font-semibold text-teal" data-use-location>
+            <MapPinIcon size={16} className="shrink-0" />
+            Use my location instead
+          </button>
+        )
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          <button type="button" onClick={locate} disabled={mode === 'locating'} className={TILE}>
+            <MapPinIcon size={20} className="text-teal" />
+            {mode === 'locating' ? 'Finding you…' : 'Use my location'}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              request.current++;
+              setNote(null);
+              setFailure(null);
+              setMode('search');
+            }}
+            className={TILE}
+          >
+            <SearchIcon size={20} className="text-teal" />
+            Choose a city
+          </button>
+        </div>
+      )}
       {note && (
         <p className="px-1 text-sm text-muted" role="status">
           {note}
         </p>
       )}
-      {mode === 'search' && <CitySearch onPick={(city, index) => onPick(placeFromCity(city, index))} />}
+      {searching && <CitySearch onPick={(city, index) => onPick(placeFromCity(city, index))} />}
     </div>
   );
 }
@@ -142,16 +162,27 @@ export function CitySearch({ onPick }: { onPick: (city: City, index: CityIndex) 
     };
   }, [attempt]);
 
+  // Focus, and bring the field up under the header: with the keyboard open there is room for the results
+  const rootRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     inputRef.current?.focus({ preventScroll: true });
+    // The whole picker, so a note above the field ("Location is off…") stays in view too
+    const id = requestAnimationFrame(() => {
+      const el = rootRef.current;
+      if (el) scrollUnderHeader(el.closest<HTMLElement>('[data-place-picker]') ?? el);
+    });
+    return () => cancelAnimationFrame(id);
   }, []);
 
   const results = index && deferred.trim() ? searchCities(index, deferred, 8) : [];
-  // Same name, same country (three Springfields): tell them apart by position
-  const twins = new Set(results.filter((c, i) => results.some((d, j) => j !== i && d.name === c.name && d.cc === c.cc)).map((c) => c.id));
+  // Same name, same country and no state to tell them apart (rare outside the US): by position
+  const twins = new Set(
+    results.filter((c, i) => !c.admin1 && results.some((d, j) => j !== i && d.name === c.name && d.cc === c.cc)).map((c) => c.id),
+  );
 
   return (
-    <div className="space-y-2" data-city-search>
+    // The height keeps room below the field, so it can scroll up above the keyboard on a short screen
+    <div ref={rootRef} className="min-h-[70dvh] space-y-2" data-city-search>
       <label className="sr-only" htmlFor="city-search">
         City
       </label>
@@ -168,8 +199,21 @@ export function CitySearch({ onPick }: { onPick: (city: City, index: CityIndex) 
           placeholder="Search for your city"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="min-h-12 w-full rounded-xl border-[1.5px] border-foreground/15 bg-card py-3 pl-10 pr-3 text-base text-foreground placeholder:text-muted focus:border-teal focus:outline-none"
+          className="min-h-12 w-full rounded-xl border-[1.5px] border-foreground/15 bg-card py-3 pl-10 pr-11 text-base text-foreground placeholder:text-muted focus:border-teal focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
         />
+        {query && (
+          <button
+            type="button"
+            aria-label="Clear"
+            onClick={() => {
+              setQuery('');
+              inputRef.current?.focus();
+            }}
+            className="absolute right-1 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-lg text-muted hover:bg-foreground/5"
+          >
+            <XIcon size={16} />
+          </button>
+        )}
       </div>
 
       {failed && !index ? (
@@ -208,11 +252,11 @@ export function CitySearch({ onPick }: { onPick: (city: City, index: CityIndex) 
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold text-foreground">{c.name}</span>
                   <span className="block truncate text-xs text-muted">
-                    {countryName(c.cc)}
+                    {regionName(c) ? `${regionName(c)} · ${countryName(c.cc)}` : countryName(c.cc)}
                     {twins.has(c.id) && ` · ${coordText(c.lat, c.lng)}`}
                   </span>
                 </span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </button>

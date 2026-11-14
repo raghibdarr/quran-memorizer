@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from '@/components/app-link';
 import Button from '@/components/ui/button';
-import { MapPinIcon } from '@/components/ui/icons';
+import { ClockIcon, MapPinIcon } from '@/components/ui/icons';
 import { useAppBack } from '@/hooks/use-app-back';
 import { cn } from '@/lib/cn';
 import { NAV_BACK } from '@/lib/nav';
@@ -82,7 +82,8 @@ export default function PrayerSetupFlow() {
       : null;
 
   return (
-    <div className="min-h-dvh bg-cream pb-32" data-prayer-setup={step}>
+    // group/setup: while the city search has focus (keyboard up) the footer steps aside for the results
+    <div className="group/setup min-h-dvh bg-cream pb-32" data-prayer-setup={step}>
       <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-4 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-start justify-between gap-3">
@@ -182,45 +183,51 @@ export default function PrayerSetupFlow() {
         )}
 
         {step === 3 && (
-          <div className="space-y-4">
-            <p className="text-sm leading-relaxed text-muted">
+          <div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal/10 text-teal">
+              <ClockIcon size={22} />
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
               Takrar can let you know when each prayer’s time begins. You choose which prayers, and a sound or silent.
             </p>
-            <Link
-              href="/prayer/alerts"
-              replace
-              className="tactile-btn block rounded-xl bg-teal px-6 py-3 text-center font-semibold text-on-teal hover:bg-teal-light"
-              data-setup-alerts
-            >
-              Set up alerts
-            </Link>
-            <Button variant="ghost" className="w-full" onClick={() => router.replace('/prayer', { transitionTypes: [NAV_BACK] })}>
-              Not now
-            </Button>
           </div>
         )}
       </main>
 
-      {step < 3 && (
-        <div
-          className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm"
-          style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
-        >
-          <div className="mx-auto flex max-w-2xl gap-3">
-            <Button variant="ghost" className="flex-1" onClick={goBack}>
-              {step > 1 ? 'Back' : 'Cancel'}
-            </Button>
-            <Button
-              className="flex-1"
-              disabled={!draft || (step === 1 && changingPlace)}
-              onClick={() => (step === 1 ? draft && setStep(2) : confirm())}
-              data-setup-next
-            >
-              {step === 2 ? 'Save' : 'Continue'}
-            </Button>
-          </div>
+      <div
+        className="fixed bottom-0 left-0 right-0 border-t border-foreground/5 bg-cream/95 p-4 backdrop-blur-sm group-has-[#city-search:focus]/setup:hidden"
+        style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+      >
+        <div className="mx-auto flex max-w-2xl gap-3">
+          {step === 3 ? (
+            <>
+              <Button variant="ghost" className="flex-1" onClick={() => router.replace('/prayer', { transitionTypes: [NAV_BACK] })}>
+                Not now
+              </Button>
+              <Link
+                href="/prayer/alerts"
+                replace
+                className="tactile-btn flex-1 rounded-xl bg-teal px-6 py-3 text-center font-semibold text-on-teal hover:bg-teal-light"
+                data-setup-alerts
+              >
+                Set up alerts
+              </Link>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" className="flex-1" onClick={goBack}>
+                {step > 1 ? 'Back' : 'Cancel'}
+              </Button>
+              {/* Picking a place moves on by itself, so step 1 offers Continue only for a place already chosen */}
+              {(step === 2 || (draft && !changingPlace)) && (
+                <Button className="flex-1" disabled={!draft} onClick={() => (step === 1 ? setStep(2) : confirm())} data-setup-next>
+                  {step === 2 ? 'Save' : 'Continue'}
+                </Button>
+              )}
+            </>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

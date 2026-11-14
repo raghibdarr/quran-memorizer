@@ -4,9 +4,9 @@ import PrayerScreen from './screen';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="space-y-2">
-      <h2 className="text-base font-bold text-foreground">{title}</h2>
-      <div className="space-y-2 text-sm leading-relaxed text-foreground/85">{children}</div>
+    <section className="space-y-3">
+      <h2 className="text-[17px] font-bold text-foreground">{title}</h2>
+      <div className="space-y-3 text-[15px] leading-7 text-foreground/85">{children}</div>
     </section>
   );
 }
@@ -23,8 +23,9 @@ export default function WhyTimesDiffer() {
   const methods = METHODS.filter((m) => m.id !== 'custom');
   return (
     <PrayerScreen title="Why times differ" back="/prayer/settings">
-      <article className="space-y-6 pb-2">
-        <p className="text-sm leading-relaxed text-foreground/85">
+      {/* A reading width (about 70 characters a line) on wide screens; the phone column is narrower anyway */}
+      <article className="mx-auto max-w-[34rem] space-y-7 pb-2">
+        <p className="text-[15px] leading-7 text-foreground/85">
           Each prayer time is set by the sun: dawn, sunrise, the sun passing its highest point, the length of the afternoon shadow, sunset and nightfall.
           Turning those into clock times takes a few choices, and apps, mosques and countries make them differently. A difference of a few minutes
           usually means a different choice, not a mistake.
@@ -77,7 +78,7 @@ export default function WhyTimesDiffer() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted">
+          <p className="px-1 text-xs leading-5 text-muted">
             The Moonsighting Committee method also adjusts Fajr and Isha through the year, so its times are not set by the angle alone.
           </p>
         </Section>

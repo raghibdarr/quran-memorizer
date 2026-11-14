@@ -9,7 +9,7 @@ import { regionDefault } from '@/lib/prayer/regions';
 import { usePlaceStore } from '@/stores/place-store';
 import { MAX_OFFSET_MIN, usePrayerStore } from '@/stores/prayer-store';
 import { TIME_LABELS, TIME_NAMES, type CustomAngles, type HighLatRule, type MethodId } from '@/types/prayer';
-import { AsrChoice, MethodChoice, RadioRow, RowGroup, Stepper, SwitchRow, TimesPreview } from './calc-controls';
+import { AsrChoice, ListChoice, MethodChoice, RowGroup, Stepper, SwitchRow, TimesPreview } from './calc-controls';
 import PlacePicker from './place-picker';
 import PrayerScreen, { SectionLabel } from './screen';
 import { prefers12h, useModelSettings, useNow, usePlace, usePrayerModule } from './use-prayer-model';
@@ -142,6 +142,8 @@ export default function PrayerSettingsScreen() {
   // No place yet: the picker is open from the start
   const [changingPlace, setChangingPlace] = useState(() => !place);
   const [suggest, setSuggest] = useState<ReturnType<typeof regionDefault> | null>(null);
+  // Arriving from the hub's "Switch to Automatic" the rules are open already
+  const [highLatOpen] = useState(() => typeof window !== 'undefined' && window.location.hash === '#high-latitude');
 
   // Arriving at #place or #high-latitude from the hub: the section, below the sticky header
   useEffect(() => {
@@ -236,69 +238,6 @@ export default function PrayerSettingsScreen() {
         <AsrChoice value={store.madhab} onChange={store.setMadhab} />
       </section>
 
-      <section id="high-latitude" className="scroll-mt-20 space-y-2">
-        <SectionLabel>Far north and south</SectionLabel>
-        <RowGroup label="High-latitude rule">
-          {HIGH_LAT.map((r) => (
-            <RadioRow
-              key={r.id}
-              selected={store.highLatRule === r.id}
-              onSelect={() => store.setHighLatRule(r.id)}
-              title={r.id === 'auto' && effective ? `Automatic (${HIGH_LAT_SHORT[effective]} here)` : r.title}
-              detail={r.detail}
-              testId={`highlat-${r.id}`}
-            />
-          ))}
-        </RowGroup>
-        <p className="px-1 text-xs leading-relaxed text-muted">
-          In summer far from the equator, the sky may not get dark enough for the usual Fajr and Isha angles. These rules give a time anyway.
-        </p>
-      </section>
-
-      <section className="space-y-2">
-        <SectionLabel>Adjust times</SectionLabel>
-        <RowGroup>
-          {TIME_NAMES.map((t) => (
-            <div key={t} className="flex items-center justify-between gap-3 px-4 py-2" data-offset={t}>
-              <span className="text-sm font-semibold text-foreground">{TIME_LABELS[t]}</span>
-              <Stepper
-                label={`${TIME_LABELS[t]} adjustment`}
-                value={store.offsets[t]}
-                min={-MAX_OFFSET_MIN}
-                max={MAX_OFFSET_MIN}
-                format={signedMin}
-                onChange={(n) => store.setOffset(t, n)}
-              />
-            </div>
-          ))}
-        </RowGroup>
-        <p className="px-1 text-xs leading-relaxed text-muted">
-          Add or take away minutes, for example to follow your mosque. Or let{' '}
-          <Link href="/prayer/match" className="font-semibold text-teal underline underline-offset-2">
-            Match my mosque
-          </Link>{' '}
-          work them out.
-        </p>
-      </section>
-
-      <section className="space-y-2">
-        <SectionLabel>Hijri date</SectionLabel>
-        <RowGroup>
-          <div className="flex items-center justify-between gap-3 px-4 py-3">
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-foreground">Adjust by</p>
-              {mod && place && (
-                <p className="mt-0.5 text-xs text-muted" data-hijri-preview>
-                  Today: {mod.hijriToday(place, store.hijriOffset, now)} (expected)
-                </p>
-              )}
-            </div>
-            <Stepper label="Hijri date adjustment" value={store.hijriOffset} min={-2} max={2} format={signedDays} onChange={store.setHijriOffset} />
-          </div>
-        </RowGroup>
-        <p className="px-1 text-xs leading-relaxed text-muted">Move the date a day or two to match the moon sighting announced where you live.</p>
-      </section>
-
       <section className="space-y-2">
         <SectionLabel>Home</SectionLabel>
         <RowGroup>
@@ -325,6 +264,71 @@ export default function PrayerSettingsScreen() {
             </Link>
           ))}
         </RowGroup>
+      </section>
+
+      <section id="high-latitude" className="scroll-mt-20 space-y-2">
+        <SectionLabel>Far north and south</SectionLabel>
+        <ListChoice
+          label="High-latitude rule"
+          value={store.highLatRule}
+          onChange={store.setHighLatRule}
+          defaultOpen={highLatOpen}
+          testPrefix="highlat"
+          options={HIGH_LAT.map((r) => (r.id === 'auto' && effective ? { ...r, title: `Automatic (${HIGH_LAT_SHORT[effective]} here)` } : r))}
+        />
+        <p className="px-1 text-xs leading-relaxed text-muted">
+          In summer far from the equator, the sky may not get dark enough for the usual Fajr and Isha angles. These rules give a time anyway.
+        </p>
+      </section>
+
+      <section className="space-y-2">
+        <SectionLabel>Adjust times</SectionLabel>
+        <RowGroup>
+          {TIME_NAMES.map((t) => (
+            <div key={t} className="flex min-h-14 items-center justify-between gap-3 px-4 py-1.5" data-offset={t}>
+              {/* The time it gives, beside the control, so a tap shows its effect where it happens */}
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold text-foreground">{TIME_LABELS[t]}</span>
+                <span className="block text-xs tabular-nums text-muted" data-offset-time>
+                  {times ? (times[t] === null ? 'No time today' : format(times[t]!)) : ' '}
+                </span>
+              </span>
+              <Stepper
+                label={`${TIME_LABELS[t]} adjustment`}
+                value={store.offsets[t]}
+                min={-MAX_OFFSET_MIN}
+                max={MAX_OFFSET_MIN}
+                format={signedMin}
+                onChange={(n) => store.setOffset(t, n)}
+              />
+            </div>
+          ))}
+        </RowGroup>
+        <p className="px-1 text-xs leading-relaxed text-muted">
+          Add or take away minutes, for example to follow your mosque. Or let{' '}
+          <Link href="/prayer/match" className="font-semibold text-teal underline underline-offset-2">
+            Match my mosque
+          </Link>{' '}
+          work them out.
+        </p>
+      </section>
+
+      <section className="space-y-2">
+        <SectionLabel>Hijri date</SectionLabel>
+        <RowGroup>
+          <div className="px-4 py-2">
+            <div className="flex min-h-11 items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-foreground">Adjust by</p>
+              <Stepper label="Hijri date adjustment" value={store.hijriOffset} min={-2} max={2} format={signedDays} onChange={store.setHijriOffset} />
+            </div>
+            {mod && place && (
+              <p className="pb-1 text-xs text-muted" data-hijri-preview>
+                Today: {mod.hijriToday(place, store.hijriOffset, now)} (expected)
+              </p>
+            )}
+          </div>
+        </RowGroup>
+        <p className="px-1 text-xs leading-relaxed text-muted">Move the date a day or two to match the moon sighting announced where you live.</p>
       </section>
 
       <p className="px-1 pb-2 text-center text-xs text-muted">Your place and these settings stay on this phone. They are not synced.</p>

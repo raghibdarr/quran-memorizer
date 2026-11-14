@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
@@ -85,6 +85,66 @@ export function MethodList({
   );
 }
 
+/**
+ * A choice shown as one summary card: the chosen option, a line about it, and
+ * "Change", which opens the full list under it. Picking one closes the list
+ * again and brings the card (and what it changed, above it) back into view.
+ */
+export function ChoiceCard({
+  title,
+  detail,
+  open,
+  onOpenChange,
+  children,
+  testId,
+}: {
+  title: string;
+  detail?: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  children: React.ReactNode;
+  testId?: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <div className="scroll-mt-32 rounded-2xl border border-foreground/10 bg-card px-4 py-3.5" data-choice-card={testId}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-foreground" data-method-label={testId === 'method' ? true : undefined}>
+              {title}
+            </p>
+            {detail && <p className="mt-0.5 text-xs leading-relaxed text-muted">{detail}</p>}
+          </div>
+          <button
+            type="button"
+            onClick={() => onOpenChange(!open)}
+            aria-expanded={open}
+            className="-my-1 -mr-1 min-h-9 shrink-0 rounded-lg px-2 text-sm font-semibold text-teal hover:bg-teal/5"
+          >
+            {open ? 'Close' : 'Change'}
+          </button>
+        </div>
+      </div>
+      {open && children}
+    </div>
+  );
+}
+
+/** Closes a ChoiceCard's list and scrolls the card back into view if the list had taken it off screen */
+function useCloseAndReveal(setOpen: (o: boolean) => void) {
+  const ref = useRef<HTMLDivElement>(null);
+  return {
+    ref,
+    close: () => {
+      setOpen(false);
+      requestAnimationFrame(() => {
+        const card = ref.current?.querySelector<HTMLElement>('[data-choice-card]');
+        if (card && card.getBoundingClientRect().top < 0) card.scrollIntoView({ block: 'start' });
+      });
+    },
+  };
+}
+
 /** The chosen method with its reason, and a way to pick another */
 export function MethodChoice({
   value,
@@ -99,36 +159,63 @@ export function MethodChoice({
   includeCustom?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const { ref, close } = useCloseAndReveal(setOpen);
   const info = methodInfo(value);
   return (
-    <div className="space-y-2">
-      <div className="rounded-2xl border border-foreground/10 bg-card px-4 py-3.5">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <p className="text-sm font-semibold text-foreground" data-method-label>
-              {info.label}
-            </p>
-            <p className="mt-0.5 text-xs leading-relaxed text-muted">{reason ?? info.about}</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setOpen((o) => !o)}
-            aria-expanded={open}
-            className="-mr-1 shrink-0 rounded-lg px-2 py-1 text-sm font-semibold text-teal hover:bg-teal/5"
-          >
-            {open ? 'Done' : 'Change'}
-          </button>
-        </div>
-      </div>
-      {open && (
+    <div ref={ref}>
+      <ChoiceCard title={info.label} detail={reason ?? info.about} open={open} onOpenChange={setOpen} testId="method">
         <MethodList
           value={value}
           includeCustom={includeCustom}
           onChange={(m) => {
             onChange(m);
+            close();
           }}
         />
-      )}
+      </ChoiceCard>
+    </div>
+  );
+}
+
+/** A ChoiceCard over a radio list, closing once something is picked */
+export function ListChoice<T extends string>({
+  value,
+  options,
+  onChange,
+  label,
+  defaultOpen = false,
+  testPrefix,
+}: {
+  value: T;
+  options: ReadonlyArray<{ id: T; title: string; detail: string }>;
+  onChange: (v: T) => void;
+  /** The group's name, for screen readers */
+  label: string;
+  defaultOpen?: boolean;
+  testPrefix: string;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  const { ref, close } = useCloseAndReveal(setOpen);
+  const chosen = options.find((o) => o.id === value) ?? options[0];
+  return (
+    <div ref={ref}>
+      <ChoiceCard title={chosen.title} detail={chosen.detail} open={open} onOpenChange={setOpen} testId={testPrefix}>
+        <RowGroup label={label}>
+          {options.map((o) => (
+            <RadioRow
+              key={o.id}
+              selected={o.id === value}
+              onSelect={() => {
+                onChange(o.id);
+                close();
+              }}
+              title={o.title}
+              detail={o.detail}
+              testId={`${testPrefix}-${o.id}`}
+            />
+          ))}
+        </RowGroup>
+      </ChoiceCard>
     </div>
   );
 }
@@ -189,17 +276,28 @@ export function Stepper({
   label: string;
 }) {
   const btn =
-    'pressable flex h-10 w-10 items-center justify-center rounded-lg border border-foreground/15 text-lg font-semibold text-foreground disabled:opacity-30';
+    // 36px to the eye, 44px to the finger
+    'pressable relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-foreground/[0.06] text-foreground after:absolute after:-inset-1 disabled:opacity-30';
   return (
-    <div className="flex items-center gap-1.5" role="group" aria-label={label}>
+    <div className="flex items-center gap-1" role="group" aria-label={label}>
       <button type="button" className={btn} onClick={() => onChange(value - 1)} disabled={value <= min} aria-label={`Less: ${label}`}>
-        −
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
       </button>
-      <span className="min-w-[4.5rem] text-center text-sm font-semibold tabular-nums text-foreground" aria-live="polite">
+      {/* Teal once changed, so the adjusted ones stand out in a list */}
+      <span
+        className={cn('min-w-14 text-center text-sm tabular-nums', value === 0 ? 'font-medium text-muted' : 'font-semibold text-teal')}
+        aria-live="polite"
+        data-stepper-value
+      >
         {format(value)}
       </span>
       <button type="button" className={btn} onClick={() => onChange(value + 1)} disabled={value >= max} aria-label={`More: ${label}`}>
-        +
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <line x1="12" y1="5" x2="12" y2="19" />
+        </svg>
       </button>
     </div>
   );

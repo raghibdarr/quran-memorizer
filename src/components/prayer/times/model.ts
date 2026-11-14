@@ -37,6 +37,8 @@ export interface HubRow {
   isNext: boolean;
   /** Its time is in now */
   isCurrent: boolean;
+  /** It began earlier today and its time is over (or, for sunrise, the sun is up) */
+  isPassed: boolean;
   /**
    * The time falls on another calendar day at the place than the one listed: 1
    * when it is past midnight (a summer Isha far north), -1 when before the day began
@@ -71,17 +73,65 @@ function dayShiftOf(ms: number | null, iso: string, tz: string): -1 | 0 | 1 {
   return on === iso ? 0 : on > iso ? 1 : -1;
 }
 
+/**
+ * The day's rows with any time that falls out of order dropped (shown as "no time
+ * today"), each row then ending where the next remaining time begins. Dhuhr, the
+ * sun's highest point, is the anchor: the times before it must climb towards it,
+ * the times after it must follow on. Far north in winter the automatic rule can
+ * otherwise give an Asr before Dhuhr, which reads as a broken screen.
+ */
+export function inOrder<R extends { name: TimeName; startMs: number | null; endMs: number | null }>(rows: R[]): R[] {
+  const out = rows.map((r) => ({ ...r }));
+  const noon = out.findIndex((r) => r.name === 'dhuhr');
+  if (noon < 0 || out[noon].startMs === null) return out;
+  let bound = out[noon].startMs!;
+  for (let i = noon - 1; i >= 0; i--) {
+    const t = out[i].startMs;
+    if (t === null) continue;
+    if (t < bound) bound = t;
+    else out[i].startMs = null;
+  }
+  bound = out[noon].startMs!;
+  for (let i = noon + 1; i < out.length; i++) {
+    const t = out[i].startMs;
+    if (t === null) continue;
+    if (t > bound) bound = t;
+    else out[i].startMs = null;
+  }
+  // A row whose following time was dropped ends where the next kept one begins
+  for (let i = 0; i < out.length - 1; i++) {
+    if (rows[i + 1].startMs === out[i + 1].startMs) continue;
+    const later = out.slice(i + 1).find((r) => r.startMs !== null);
+    out[i].endMs = later ? later.startMs : rows[rows.length - 1].endMs;
+  }
+  return out;
+}
+
 /** Everything the /prayer hub shows at `now` */
 export function buildHub(place: Where, s: ModelSettings, now: number): HubModel {
   const iso = isoInTz(now, place.tz);
   const next = nextPrayer(place, s, now);
-  const current = currentPrayer(place, s, now);
-  const rows = prayerRows(place, iso, s).map((r) => ({
-    ...r,
-    isNext: !!next && next.iso === iso && next.prayer === r.name,
-    isCurrent: !!current && current.iso === iso && current.prayer === r.name,
-    dayShift: dayShiftOf(r.startMs, iso, place.tz),
-  }));
+  const raw = prayerRows(place, iso, s);
+  const kept = inOrder(raw);
+  const dropped = (name: TimeName) => kept.find((r) => r.name === name)!.startMs === null && raw.find((r) => r.name === name)!.startMs !== null;
+  const engineCurrent = currentPrayer(place, s, now);
+  // The engine's "now" can land on a dropped time; then "now" is the kept prayer whose time is in, if any
+  let current = engineCurrent;
+  if (engineCurrent && engineCurrent.iso === iso && dropped(engineCurrent.prayer)) {
+    const inNow = kept.find((r) => r.name !== 'sunrise' && r.startMs !== null && r.endMs !== null && now >= r.startMs && now < r.endMs);
+    current = inNow ? { prayer: inNow.name as PrayerName, startMs: inNow.startMs!, endMs: inNow.endMs!, iso } : null;
+  }
+  const rows = kept.map((r) => {
+    const isNext = !!next && next.iso === iso && next.prayer === r.name;
+    const isCurrent = !!current && current.iso === iso && current.prayer === r.name;
+    return {
+      ...r,
+      isNext,
+      isCurrent,
+      isPassed: !isNext && !isCurrent && r.startMs !== null && r.startMs <= now,
+      dayShift: dayShiftOf(r.startMs, iso, place.tz),
+    };
+  });
   return {
     iso,
     rows,

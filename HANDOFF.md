@@ -17,6 +17,12 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
    Muslim World League, `highLatRule: 'auto'`: Fajr 07:38, Sunrise 10:57, Dhuhr 11:32, **Asr 10:52**, Maghrib 12:06,
    Isha 15:24, so Asr precedes Dhuhr and `currentPrayer` reports Asr before Dhuhr has begun. The hub shows what the
    engine returns; the engine should either keep the order or return null for a time it cannot place.
+   Until then the hub guards itself (`inOrder` in `src/components/prayer/times/model.ts`): a time out of order is shown
+   as "No time today" and "now" moves to the kept prayer whose time is in. `nextPrayer`, alerts and the Home strip
+   still read the engine directly, so the engine fix is still needed.
 7. **Review pass, for hijri-ramadan and adhkar-duas:** the hub now always mounts `<RamadanBanner/>` and shows
    `<AdhkarNow/>` only while the banner renders nothing (CSS, `data-chip="ramadan"` / `data-chip="adhkar"`), so the
    banner alone decides its season. Both slots must render no DOM at all (return null) when they have nothing to show.
+8. **Integration, settings panel (foundations-owned):** the hub's gear opens the app-wide settings panel. Its
+   "Prayer times and alerts" row (spec 2.4) should sit near the top when the panel is opened from the Prayer tab. The
+   hub also has a place chip under the title and a "Prayer settings" link straight under the times list.

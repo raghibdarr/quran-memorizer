@@ -18,10 +18,15 @@
 //     zones: [tz...], name: [...],
 //     lat, lng: [lat*100 or lng*100, each as the difference from the row before],
 //     z: [zoneIdx...], pop: "0-9 population tier per row",
-//     ascii: { "<row>": "ascii name" } }
+//     ascii: { "<row>": "ascii name" },
+//     admin1: { "US": "two-letter state code per US row, concatenated" } }
 // Rows are grouped by country, south to north within each.
 // `ascii` holds GeoNames' ASCII name only where it can't be got by stripping
 // accents from `name` (so search finds "Sultanah" for "Sulţānah" either way).
+// `admin1` is kept only for the United States, whose GeoNames admin1 codes are
+// the two-letter state codes: search results show the state ("Springfield,
+// Missouri"), since many US towns share a name. The state names are our own
+// table in src/lib/prayer/cities.ts.
 
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -90,11 +95,11 @@ for (const line of text.split('\n')) {
   const f = line.split('\t');
   // geonameid, name, asciiname, alternatenames, latitude, longitude, feature class,
   // feature code, country code, cc2, admin1..4, population, elevation, dem, timezone, modified
-  const [, name, ascii, , lat, lng, , , cc, , , , , , pop, , , tz] = f;
+  const [, name, ascii, , lat, lng, , , cc, , admin1, , , , pop, , , tz] = f;
   const latN = Number(lat);
   const lngN = Number(lng);
   if (!name || !tz || !/^[A-Z]{2}$/.test(cc ?? '') || !Number.isFinite(latN) || !Number.isFinite(lngN)) continue;
-  rows.push({ name: name.trim(), ascii: (ascii ?? '').trim(), lat: latN, lng: lngN, cc, tz: tz.trim(), pop: Number(pop) || 0 });
+  rows.push({ name: name.trim(), ascii: (ascii ?? '').trim(), lat: latN, lng: lngN, cc, tz: tz.trim(), pop: Number(pop) || 0, admin1: (admin1 ?? '').trim() });
 }
 
 const round100 = (n) => {
@@ -124,6 +129,19 @@ rows.forEach((r, i) => {
   if (r.ascii && fold(r.ascii) !== fold(r.name)) ascii[i] = r.ascii;
 });
 
+/** Countries whose admin1 codes ship (two letters each, in row order) */
+const ADMIN1_COUNTRIES = ['US'];
+const admin1 = {};
+for (const cc of ADMIN1_COUNTRIES) {
+  const codes = rows.filter((r) => r.cc === cc).map((r) => r.admin1);
+  const bad = codes.find((c) => !/^[A-Z]{2}$/.test(c));
+  if (bad !== undefined) {
+    console.error(`${cc}: admin1 code ${JSON.stringify(bad)} is not two letters`);
+    process.exit(1);
+  }
+  if (codes.length) admin1[cc] = codes.join('');
+}
+
 const out = {
   v: 1,
   source: 'GeoNames cities15000 (https://www.geonames.org)',
@@ -138,6 +156,7 @@ const out = {
   z: rows.map((r) => zIdx.get(r.tz)),
   pop: rows.map((r) => tier(r.pop)).join(''),
   ascii,
+  admin1,
 };
 
 const json = JSON.stringify(out);

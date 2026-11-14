@@ -12,6 +12,7 @@ import {
   nearestCity,
   placeFromCity,
   placeFromFix,
+  regionName,
   resetCitiesForTests,
   searchCities,
   usableZone,
@@ -23,6 +24,21 @@ const RAW = readFileSync(join(__dirname, '../../../public/data/cities.json'), 'u
 const FILE = JSON.parse(RAW) as CitiesFile
 const index = decodeCities(FILE)
 const names = (q: string, limit?: number) => searchCities(index, q, limit).map((c) => `${c.name}/${c.cc}`)
+
+describe('US states', () => {
+  it('names the state of every US row, so same-name towns can be told apart', () => {
+    const us = index.cities.filter((c) => c.cc === 'US')
+    expect(us.length).toBeGreaterThan(3000)
+    for (const c of us) expect(regionName(c)).toMatch(/^[A-Z][a-z]+( (of )?[A-Z][a-z]+)*$/)
+    const springfields = searchCities(index, 'Springfield', 8).filter((c) => c.cc === 'US').map(regionName)
+    expect(springfields).toEqual(expect.arrayContaining(['Missouri', 'Illinois', 'Massachusetts']))
+    expect(regionName(index.cities.find((c) => c.cc === 'GB')!)).toBe('')
+  })
+
+  it('refuses a file whose state codes do not add up', () => {
+    expect(() => decodeCities({ ...FILE, admin1: { US: 'MO' } })).toThrow()
+  })
+})
 
 describe('cities.json', () => {
   it('stays under the 350 KB gzip budget', () => {
@@ -50,10 +66,11 @@ describe('cities.json', () => {
     }
   })
 
-  it('keeps only the five licensed fields (no ids, populations or alternate names)', () => {
+  it('keeps only the licensed fields it needs (no ids, populations or alternate names)', () => {
     expect(Object.keys(FILE).sort()).toEqual(
-      ['ascii', 'counts', 'countries', 'lat', 'licence', 'lng', 'name', 'pop', 'retrieved', 'source', 'v', 'z', 'zones'].sort(),
+      ['admin1', 'ascii', 'counts', 'countries', 'lat', 'licence', 'lng', 'name', 'pop', 'retrieved', 'source', 'v', 'z', 'zones'].sort(),
     )
+    expect(Object.keys(FILE.admin1 ?? {})).toEqual(['US'])
     expect(FILE.licence).toContain('CC BY 4.0')
     expect(FILE.source).toContain('GeoNames')
   })
