@@ -110,6 +110,58 @@ test.describe('prayer log', () => {
     expect(stored.madeUp.prayers).toBe(1)
   })
 
+  test('the day sheet holds back prayers whose time has not begun', async ({ page }) => {
+    // 13:00 in London: Fajr and Dhuhr have begun; Asr, Maghrib and Isha have not
+    await page.clock.install({ time: new Date('2026-03-10T13:00:00Z') })
+    await seed(page)
+    await page.goto('/prayer/tracker')
+    await expect(page.locator('[data-today="2026-03-10"]')).toBeVisible()
+    await page.locator('[data-day="2026-03-10"]').click()
+    const day = page.locator('[data-day-sheet="2026-03-10"]')
+    await expect(day).toBeVisible()
+    await expect(day.locator('[data-not-yet="asr"]')).toBeVisible()
+    await expect(day.locator('[data-not-yet="isha"]')).toBeVisible()
+    await expect(day.locator('[data-choice^="asr:"]')).toHaveCount(0)
+    await day.locator('[data-choice="dhuhr:ontime"]').click()
+    await expect(day.locator('[data-choice="dhuhr:ontime"]')).toHaveAttribute('aria-pressed', 'true')
+    await page.getByRole('button', { name: 'Done' }).click()
+
+    // A past day is open in full
+    await page.locator('[data-day="2026-03-09"]').click()
+    await expect(page.locator('[data-day-sheet="2026-03-09"] [data-choice="isha:ontime"]')).toBeVisible()
+  })
+
+  test('clearing a made-up mark takes the make-up back, so the next one still counts', async ({ page }) => {
+    await page.clock.install({ time: new Date('2026-03-10T20:00:00Z') })
+    await seed(page, { place: false })
+    await page.goto('/prayer/tracker')
+
+    await page.locator('[data-day="2026-03-08"]').click()
+    const day = page.locator('[data-day-sheet="2026-03-08"]')
+    await day.locator('[data-choice="asr:missed"]').click()
+    await page.getByRole('button', { name: 'Done' }).click()
+    await page.getByRole('button', { name: 'Made one up' }).click()
+    await expect(page.locator('[data-owed]')).toHaveAttribute('data-owed', '0')
+
+    // The mark is corrected to Late, then another prayer is marked
+    await page.locator('[data-day="2026-03-08"]').click()
+    await day.locator('[data-choice="asr:late"]').click()
+    await day.locator('[data-choice="fajr:missed"]').click()
+    await page.getByRole('button', { name: 'Done' }).click()
+    await expect(page.locator('[data-owed]')).toHaveAttribute('data-owed', '1')
+    const madeUp = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-worship') ?? '{}').state.madeUp.prayers)
+    expect(madeUp).toBe(0)
+  })
+
+  test('month days say how much is logged', async ({ page }) => {
+    await page.clock.install({ time: new Date('2026-03-10T20:00:00Z') })
+    await seed(page, { place: false })
+    await page.goto('/prayer/tracker')
+    await tick(page, '2026-03-10', 'fajr').click()
+    await expect(page.locator('[data-day="2026-03-10"]')).toHaveAccessibleName(/1 of 5 logged/)
+    await expect(page.locator('[data-day="2026-03-09"]')).toHaveAccessibleName(/nothing logged/)
+  })
+
   test('without a place, a tick still logs the prayer', async ({ page }) => {
     await page.clock.install({ time: new Date('2026-03-10T20:00:00Z') })
     await seed(page, { place: false })

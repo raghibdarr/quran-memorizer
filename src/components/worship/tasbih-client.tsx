@@ -159,7 +159,7 @@ export default function TasbihClient() {
           </section>
         )}
 
-        <div className="flex min-h-[18rem] flex-1 flex-col">
+        <div className={cn('flex min-h-[18rem] flex-1 flex-col', waitingForBinding && 'invisible')}>
           <Counter
             count={count}
             target={target}

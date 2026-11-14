@@ -136,6 +136,19 @@ export function makeUpOwed(
   return Math.max(0, missed - Math.max(0, madeUp));
 }
 
+/**
+ * How far the made-up count has run ahead of the prayers marked missed (paused
+ * days included, so pausing never trims it). When a missed mark is cleared or
+ * changed after it was made up, the caller takes this many back; otherwise the
+ * spare make-up would quietly cancel the next prayer marked missed.
+ */
+export function madeUpSurplus(log: PrayerLog, madeUp: number, archive: Readonly<Record<string, MonthFold>> = {}): number {
+  let missed = 0;
+  for (const day of Object.values(log)) missed += dayTally(day).missed;
+  for (const m of Object.values(archive)) missed += m.missed;
+  return Math.max(0, Math.max(0, madeUp) - missed);
+}
+
 // ---------- Compaction ----------
 // About 60 bytes a logged day is small, but the log grows forever. Once it runs
 // past two years, whole months older than that fold into per-month counts.

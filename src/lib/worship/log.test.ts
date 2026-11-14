@@ -10,6 +10,7 @@ import {
   dayTally,
   inferMark,
   isPaused,
+  madeUpSurplus,
   makeUpOwed,
   missedEntries,
   openPause,
@@ -262,6 +263,48 @@ describe('compact', () => {
         }
         expect(sum(once)).toEqual(sum({ prayers: log, archive: {} }))
         expect(makeUpOwed(once.prayers, pauses, 0, once.archive)).toBe(makeUpOwed(log, pauses, 0))
+      }),
+    )
+  })
+})
+
+describe('madeUpSurplus', () => {
+  it('is zero while every make-up has a missed prayer behind it', () => {
+    const log = setMark(setMark({}, '2026-03-01', 'fajr', 'missed', 1), '2026-03-02', 'asr', 'missed', 2)
+    expect(madeUpSurplus(log, 0)).toBe(0)
+    expect(madeUpSurplus(log, 2)).toBe(0)
+    expect(madeUpSurplus(log, 3)).toBe(1)
+  })
+
+  it('a made-up prayer whose mark is then cleared does not cancel the next one marked', () => {
+    // Missed, made up, then the mark is corrected to Late: the make-up is spare
+    let log = setMark({}, '2026-03-01', 'fajr', 'missed', 1)
+    let madeUp = 1
+    log = setMark(log, '2026-03-01', 'fajr', 'late', 2)
+    madeUp -= madeUpSurplus(log, madeUp)
+    expect(madeUp).toBe(0)
+    log = setMark(log, '2026-03-05', 'isha', 'missed', 3)
+    expect(makeUpOwed(log, [], madeUp)).toBe(1)
+  })
+
+  it('counts paused days and the archive, so a pause or a fold never trims the made-up count', () => {
+    const log = setMark({}, '2026-03-01', 'fajr', 'missed', 1)
+    const pauses: Pause[] = [{ id: 'a', from: '2026-02-20', to: '2026-03-03' }]
+    expect(makeUpOwed(log, pauses, 1)).toBe(0)
+    expect(madeUpSurplus(log, 1)).toBe(0)
+    expect(madeUpSurplus({}, 4, { '2023-01': { ontime: 0, late: 0, missed: 3 } })).toBe(1)
+  })
+
+  it('property: after taking the surplus back, made-up never exceeds what was marked, and nothing owed is hidden', () => {
+    fc.assert(
+      fc.property(logArb, fc.integer({ min: 0, max: 60 }), (log, madeUp) => {
+        const surplus = madeUpSurplus(log, madeUp)
+        const settled = madeUp - surplus
+        expect(surplus).toBeGreaterThanOrEqual(0)
+        expect(settled).toBeGreaterThanOrEqual(0)
+        expect(madeUpSurplus(log, settled)).toBe(0)
+        // With no pauses the amount still to make up is unchanged by settling
+        expect(makeUpOwed(log, [], settled)).toBe(makeUpOwed(log, [], madeUp))
       }),
     )
   })

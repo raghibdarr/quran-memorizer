@@ -8,6 +8,7 @@ import { useWorshipStore, type PrayerMark } from '@/stores/worship-store';
 import { TIME_LABELS, type PrayerName } from '@/types/prayer';
 import { MARK_LABELS, TRACKER_COPY } from './copy';
 import { dayLabel } from './dates';
+import { changeMark } from './marks';
 
 const CHOICES: PrayerMark[] = ['ontime', 'late', 'missed'];
 
@@ -24,12 +25,10 @@ export default function MarkSheet({
   prayer: PrayerName;
 }) {
   const current = useWorshipStore((s) => s.prayers[iso]?.[prayer]?.s);
-  const markPrayer = useWorshipStore((s) => s.markPrayer);
-  const clearPrayer = useWorshipStore((s) => s.clearPrayer);
 
   const choose = (s: PrayerMark) => {
     haptic.selection();
-    markPrayer(iso, prayer, s);
+    changeMark(iso, prayer, s);
     onClose();
   };
 
@@ -60,7 +59,7 @@ export default function MarkSheet({
             type="button"
             onClick={() => {
               haptic.selection();
-              clearPrayer(iso, prayer);
+              changeMark(iso, prayer, null);
               onClose();
             }}
             className="min-h-12 rounded-xl text-sm font-semibold text-muted hover:text-foreground"

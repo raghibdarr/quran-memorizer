@@ -48,7 +48,12 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
         data-count={count}
         data-reached={reached || undefined}
         className={cn(
-          'tactile-btn relative flex min-h-56 w-full flex-1 select-none flex-col items-center justify-center overflow-hidden rounded-3xl',
+          // The tactile-print look, spelled out: the .tactile-btn class would add the
+          // app-wide press haptic on top of the one each count fires here
+          'relative flex min-h-56 w-full flex-1 select-none flex-col items-center justify-center overflow-hidden rounded-3xl',
+          'border-[1.5px] border-[var(--c-ink)] shadow-[3px_3px_0_var(--shadow-btn-color)]',
+          'transition-[transform,box-shadow,background-color,color] duration-150 motion-reduce:transition-none',
+          'active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_var(--shadow-btn-color)]',
           'touch-manipulation [-webkit-tap-highlight-color:transparent]',
           reached ? 'bg-teal text-on-teal' : 'bg-card text-foreground',
         )}
@@ -79,10 +84,11 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
             of {goal}
           </span>
         )}
-        <span aria-live="polite" className="sr-only">
-          {reached && count === goal ? TASBIH_COPY.reachedTarget : ''}
-        </span>
       </button>
+      {/* Outside the button: a labelled button hides its children from screen readers */}
+      <span aria-live="polite" className="sr-only">
+        {reached && count === goal ? TASBIH_COPY.reachedTarget : ''}
+      </span>
 
       <div className="flex min-h-11 items-center justify-between gap-3 px-1 text-sm">
         <span className="text-xs text-muted">{reached ? TASBIH_COPY.reachedTarget : TASBIH_COPY.tapHint}</span>

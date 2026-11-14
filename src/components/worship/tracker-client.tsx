@@ -89,6 +89,18 @@ export default function TrackerClient() {
   const owed = makeUpOwed(prayers, pauses, madeUp);
   const showMakeUp = missed.length > 0 || madeUp > 0;
 
+  // In the day sheet, as on the rows, a prayer can't be logged before its time:
+  // the prayer day on screen keeps its not-yet-begun prayers back, and a day
+  // after it (the new date between midnight and Fajr) has not begun at all
+  const notYet: PrayerName[] =
+    !dayIso || !place || !rows
+      ? []
+      : dayIso > rowsIso
+        ? [...PRAYER_NAMES]
+        : dayIso === rowsIso
+          ? rows.filter((r) => r.startMs !== null && now < r.startMs).map((r) => r.prayer)
+          : [];
+
   const resume = () => {
     if (!paused) return;
     const r = resumeFor(paused, today);
@@ -263,7 +275,7 @@ export default function TrackerClient() {
         )}
       </main>
 
-      <DaySheet iso={dayIso} open={dayOpen} onClose={() => setDayOpen(false)} />
+      <DaySheet iso={dayIso} open={dayOpen} onClose={() => setDayOpen(false)} notYet={notYet} />
       <BottomNav />
     </div>
   );

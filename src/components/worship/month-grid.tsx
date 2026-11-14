@@ -2,7 +2,7 @@
 
 import { ChevronLeftIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
-import { isPaused, type PrayerLog } from '@/lib/worship/log';
+import { dayTally, isPaused, type PrayerLog } from '@/lib/worship/log';
 import type { Pause } from '@/stores/worship-store';
 import { TRACKER_COPY } from './copy';
 import { dayLabel, daysInMonth, monthLabel, mondayColumn, shiftMonth } from './dates';
@@ -72,13 +72,15 @@ export default function MonthGrid({
           const iso = `${month}-${String(i + 1).padStart(2, '0')}`;
           const future = iso > today;
           const paused = isPaused(iso, pauses);
+          const t = dayTally(log[iso]);
+          const state = future ? '' : paused ? TRACKER_COPY.legendPaused : TRACKER_COPY.dayLogged(t.prayed + t.missed);
           return (
             <button
               key={iso}
               type="button"
               disabled={future}
               onClick={() => onDay(iso)}
-              aria-label={dayLabel(iso)}
+              aria-label={state ? `${dayLabel(iso)}, ${state}` : dayLabel(iso)}
               aria-current={iso === today ? 'date' : undefined}
               data-day={iso}
               className={cn(

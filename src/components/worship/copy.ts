@@ -34,6 +34,7 @@ export const TRACKER_COPY = {
   legendOnTime: 'On time',
   legendLate: 'Late',
   legendPaused: 'Paused',
+  dayLogged: (n: number) => (n === 0 ? 'nothing logged' : `${n} of 5 logged`),
   dayPaused: 'Tracking was paused on this day, so it stays out of every count.',
   pauseHint: 'For travel, illness, or any stretch you would rather not log. No reason needed.',
   pauseAction: 'Pause tracking',
