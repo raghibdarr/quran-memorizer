@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import BackButton from '@/components/ui/back-button';
 import BottomNav from '@/components/layout/bottom-nav';
 import Card from '@/components/ui/card';
 import ConfirmSheet from '@/components/ui/confirm-sheet';
 import SegmentedControl from '@/components/ui/segmented-control';
-import { CoinsIcon } from '@/components/ui/icons';
+import { ArrowRightIcon, CoinsIcon } from '@/components/ui/icons';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/cn';
 import { useZakatStore, type NisabBasis } from '@/stores/zakat-store';
 import { usePrayerStore } from '@/stores/prayer-store';
@@ -28,7 +29,7 @@ import { hijriLabel, nextHawlDate } from '@/lib/zakat/hawl';
 import { hawlReminderSupported, requestHawlPermission, syncHawlReminder } from '@/lib/zakat/reminder';
 import { daysBetween, todayIso } from '@/lib/dates';
 import NoteBlock, { UnreviewedLine } from './note-block';
-import { AmountField, ChoiceChips, SectionTitle, Toggle } from './fields';
+import { AmountField, ChoiceChips, ChoiceQuestion, SectionTitle, Toggle, inputClass } from './fields';
 
 const noop = () => () => {};
 
@@ -49,12 +50,34 @@ export default function ZakatCalculator() {
         </div>
       </div>
       <main className="mx-auto max-w-2xl space-y-3 px-4 pt-5">
-        {client ? <Calculator /> : <div className="h-64 animate-pulse rounded-2xl bg-foreground/5" />}
+        {client ? (
+          <Calculator />
+        ) : (
+          <>
+            <Skeleton className="h-40 rounded-2xl" />
+            <Skeleton className="h-64 rounded-2xl" />
+          </>
+        )}
       </main>
       <BottomNav />
     </div>
   );
 }
+
+/** Amount fields the result can wait on, with the line that sends the user back to each */
+const FIELD_FIX: Record<string, string> = {
+  'zakat-in-price-gold': 'Fix the gold price.',
+  'zakat-in-price-silver': 'Fix the silver price.',
+  'zakat-in-cash': 'Fix the amount in Cash and savings.',
+  'zakat-in-goldGrams': 'Fix the amount in Gold you keep.',
+  'zakat-in-silverGrams': 'Fix the amount in Silver you keep.',
+  'zakat-in-tradeGoods': 'Fix the amount in Goods for sale.',
+  'zakat-in-receivables': 'Fix the amount in Money owed to you.',
+  'zakat-in-goldWornGrams': 'Fix the amount of gold jewellery.',
+  'zakat-in-silverWornGrams': 'Fix the amount of silver jewellery.',
+  'zakat-in-debts': 'Fix the amount in Debts due now.',
+};
+const FIELD_ORDER = Object.keys(FIELD_FIX);
 
 function Calculator() {
   const z = useZakatStore();
@@ -62,37 +85,55 @@ function Calculator() {
   const [confirmClear, setConfirmClear] = useState(false);
   // Fields keep their own typing state; bumping this remounts them after a clear
   const [formKey, setFormKey] = useState(0);
+  // Fields whose text doesn't read as an amount right now (the store still holds the last good one)
+  const [invalid, setInvalid] = useState<string[]>([]);
+  const onValidity = useCallback((id: string, bad: boolean) => {
+    setInvalid((list) => (bad === list.includes(id) ? list : bad ? [...list, id] : list.filter((x) => x !== id)));
+  }, []);
 
   const input = useMemo(() => inputFromStore(z), [z]);
   const result = useMemo(() => calculateZakat(input), [input]);
   const currency = z.currency;
   const money = (n: number) => formatMoney(n, currency);
   const unit = currency.trim() || undefined;
-  const field = (id: ZakatField) => ({ value: z.inputs[id], onChange: (n: number | null) => z.setInput(id, n), testId: `zakat-${id}` });
+  const field = (id: ZakatField) => ({
+    value: z.inputs[id],
+    onChange: (n: number | null) => z.setInput(id, n),
+    testId: `zakat-${id}`,
+    inputId: `zakat-in-${id}`,
+    onValidity,
+  });
+
+  // What the result is waiting on, in page order, each with where to go to sort it
+  const todo: Todo[] = [
+    ...FIELD_ORDER.filter((id) => invalid.includes(id)).map((id) => ({ key: id, text: FIELD_FIX[id], target: `#${id}` })),
+    ...result.missing.map((m) => ({ key: m, text: MISSING_TEXT[m], target: MISSING_TARGET[m] })),
+  ];
+  if (!todo.length && result[z.nisabBasis].status === 'incomplete') {
+    const b = z.nisabBasis;
+    todo.push({ key: `${b}-basis`, text: `Add the ${b} price to compare with nisab.`, target: `#zakat-in-price-${b}` });
+  }
 
   return (
     <>
-      <Card className="flex gap-3.5">
-        <CoinsIcon size={24} className="mt-0.5 shrink-0 text-gold-deep" />
-        <div className="min-w-0">
+      <Card>
+        <div className="flex items-center gap-3">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-teal/10 text-teal">
+            <CoinsIcon size={18} />
+          </span>
           <p className="text-base font-bold text-foreground">Work out your zakat</p>
-          <p className="mt-1 text-sm leading-relaxed text-muted">
-            For cash, gold, silver, goods for sale and money owed to you. Everything you enter stays on this phone.
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-muted">
-            Not covered here: livestock, crops, and business cases such as shares, pensions and long-term debts. For those, ask a
-            scholar you trust.
-          </p>
         </div>
+        <p className="mt-3 text-sm leading-relaxed text-muted">
+          For cash, gold, silver, goods for sale and money owed to you. Everything you enter stays on this phone.
+        </p>
       </Card>
 
       <div key={formKey} className="space-y-3">
         {/* ---------- prices ---------- */}
         <SectionTitle>Today&apos;s prices</SectionTitle>
         <Card className="space-y-4">
-          <p className="text-sm text-muted">
-            Takrar has no price feed, so enter today&apos;s prices from a source you trust. They stay as you left them until you change
-            them.
+          <p className="text-sm leading-relaxed text-muted">
+            There&apos;s no price feed here, so enter today&apos;s prices from a source you trust. They stay until you change them.
           </p>
           <div>
             <label htmlFor="zakat-currency" className="block text-sm font-medium text-foreground">
@@ -107,25 +148,30 @@ function Calculator() {
               autoComplete="off"
               placeholder="£"
               onChange={(e) => z.setCurrency(e.target.value)}
-              className="mt-1.5 w-28 rounded-xl border border-foreground/15 bg-card px-3.5 py-2.5 text-base text-foreground focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
+              className={cn(inputClass, 'mt-1.5 w-28')}
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <AmountField label="Gold, per gram" value={z.pricePerGram.gold} onChange={(n) => z.setPrice('gold', n)} unit={unit} testId="zakat-price-gold" />
-            <AmountField label="Silver, per gram" value={z.pricePerGram.silver} onChange={(n) => z.setPrice('silver', n)} unit={unit} testId="zakat-price-silver" />
+            <AmountField
+              label="Gold, per gram"
+              value={z.pricePerGram.gold}
+              onChange={(n) => z.setPrice('gold', n)}
+              unit={unit}
+              testId="zakat-price-gold"
+              inputId="zakat-in-price-gold"
+              onValidity={onValidity}
+            />
+            <AmountField
+              label="Silver, per gram"
+              value={z.pricePerGram.silver}
+              onChange={(n) => z.setPrice('silver', n)}
+              unit={unit}
+              testId="zakat-price-silver"
+              inputId="zakat-in-price-silver"
+              onValidity={onValidity}
+            />
           </div>
         </Card>
-
-        {/* ---------- nisab ---------- */}
-        <SectionTitle>Nisab</SectionTitle>
-        <NisabCard
-          basis={z.nisabBasis}
-          onBasis={z.setNisabBasis}
-          reckoning={input.reckoning}
-          onReckoning={(r) => z.setOption(ZAKAT_OPTIONS.reckoning, r)}
-          result={result}
-          money={money}
-        />
 
         {/* ---------- assets ---------- */}
         <SectionTitle>What you have</SectionTitle>
@@ -137,11 +183,11 @@ function Calculator() {
           </div>
           <div>
             <AmountField label="Goods for sale" hint="At what they would sell for today" unit={unit} {...field('tradeGoods')} />
-            <NoteBlock id="trade-goods" />
+            <NoteBlock id="trade-goods" summary="Goods for sale: how they are counted" />
           </div>
           <div>
             <AmountField label="Money owed to you" hint="That you expect to be repaid" unit={unit} {...field('receivables')} />
-            <NoteBlock id="receivables" />
+            <NoteBlock id="receivables" summary="Money owed: where scholars differ" />
           </div>
         </Card>
 
@@ -151,7 +197,7 @@ function Calculator() {
             <AmountField label="Gold" unit="g" {...field('goldWornGrams')} />
             <AmountField label="Silver" unit="g" {...field('silverWornGrams')} />
           </div>
-          <p className="mt-3 text-sm text-muted">Count worn jewellery?</p>
+          <ChoiceQuestion>Count worn jewellery?</ChoiceQuestion>
           <ChoiceChips<WornChoice>
             name="worn-jewellery"
             label="Count worn jewellery"
@@ -162,14 +208,14 @@ function Calculator() {
               { value: 'exclude', label: 'Leave it out' },
             ]}
           />
-          <NoteBlock id="worn-jewellery" open={result.missing.includes('worn-choice')} />
+          <NoteBlock id="worn-jewellery" summary="Worn jewellery: where scholars differ" open={result.missing.includes('worn-choice')} />
         </Card>
 
         {/* ---------- debts ---------- */}
         <SectionTitle>What you owe</SectionTitle>
         <Card>
           <AmountField label="Debts due now" hint="Money you owe that is due to be paid" unit={unit} {...field('debts')} />
-          <p className="mt-3 text-sm text-muted">Take debts off before comparing with nisab?</p>
+          <ChoiceQuestion>Take debts off before comparing with nisab?</ChoiceQuestion>
           <ChoiceChips<DebtChoice>
             name="debts"
             label="Take debts off"
@@ -180,13 +226,24 @@ function Calculator() {
               { value: 'keep', label: 'Leave them in' },
             ]}
           />
-          <NoteBlock id="debts" open={result.missing.includes('debt-choice')} />
+          <NoteBlock id="debts" summary="Debts: where scholars differ" open={result.missing.includes('debt-choice')} />
         </Card>
       </div>
 
+      {/* ---------- nisab: just above the result, where the comparison is made ---------- */}
+      <SectionTitle>Nisab</SectionTitle>
+      <NisabCard
+        basis={z.nisabBasis}
+        onBasis={z.setNisabBasis}
+        reckoning={input.reckoning}
+        onReckoning={(r) => z.setOption(ZAKAT_OPTIONS.reckoning, r)}
+        result={result}
+        money={money}
+      />
+
       {/* ---------- result ---------- */}
       <SectionTitle>Result</SectionTitle>
-      <ResultCard result={result} basis={z.nisabBasis} money={money} />
+      <ResultCard result={result} basis={z.nisabBasis} money={money} todo={todo} />
 
       {/* ---------- hawl ---------- */}
       <SectionTitle>Your zakat year</SectionTitle>
@@ -199,7 +256,10 @@ function Calculator() {
       />
 
       <div className="space-y-2 px-1 pt-3 text-center">
-        <p className="text-sm text-muted">For your own situation, ask a scholar you trust.</p>
+        <p className="text-sm leading-relaxed text-muted">
+          Not covered here: livestock, crops, and business cases such as shares, pensions and long-term debts. For those, and for
+          your own situation, ask a scholar you trust.
+        </p>
         <UnreviewedLine />
         <button
           type="button"
@@ -232,10 +292,11 @@ function Calculator() {
 // ---------- nisab ----------
 
 const RECKONING_OPTIONS: { value: Reckoning; label: string }[] = [
-  { value: 'dinar', label: '85 g · 595 g' },
-  { value: 'tola', label: '87.48 g · 612.36 g' },
+  { value: 'dinar', label: 'Dinar weights' },
+  { value: 'tola', label: 'Tola weights' },
 ];
 
+/** Silver first, as the tiles are: it is the default basis */
 const BASIS_OPTIONS: { value: NisabBasis; label: string }[] = [
   { value: 'silver', label: 'Silver' },
   { value: 'gold', label: 'Gold' },
@@ -260,36 +321,47 @@ function NisabCard({
     const grams = NISAB_GRAMS[reckoning][b];
     const other = NISAB_GRAMS[reckoning === 'dinar' ? 'tola' : 'dinar'][b];
     const nisab = result[b].nisab;
+    const amount = nisab === null ? null : money(nisab);
+    const chosen = b === basis;
     return (
       <div
-        className={cn('rounded-xl border px-3.5 py-3', b === basis ? 'border-teal/50 bg-teal/[0.06]' : 'border-foreground/10')}
+        className={cn(
+          'min-w-0 rounded-xl border px-3.5 py-3 transition-colors duration-200',
+          chosen ? 'border-teal bg-teal/[0.08]' : 'border-foreground/10 bg-card',
+        )}
         data-nisab={b}
       >
-        <p className="text-xs font-semibold text-muted">{b === 'gold' ? 'Gold' : 'Silver'}</p>
+        <p className={cn('text-xs font-semibold', chosen ? 'text-teal' : 'text-muted')}>{b === 'gold' ? 'Gold' : 'Silver'}</p>
         <p className="mt-0.5 text-lg font-bold tabular-nums text-foreground">{formatGrams(grams)}</p>
-        <p className="text-sm tabular-nums text-foreground">{nisab === null ? <span className="text-muted">Add the price</span> : money(nisab)}</p>
+        <p
+          className={cn(
+            'overflow-hidden text-ellipsis whitespace-nowrap tabular-nums text-foreground',
+            amount && amount.length > 11 ? 'text-[13px]' : 'text-sm',
+          )}
+        >
+          {amount ?? <span className="text-muted">Add the price</span>}
+        </p>
         <p className="mt-1 text-xs leading-snug text-muted">
-          {b === 'gold' ? '20 mithqal' : '200 dirhams'}. {formatGrams(other)} in the {reckoning === 'dinar' ? 'tola' : 'dinar'} reckoning.
+          {b === 'gold' ? '20 mithqal' : '200 dirhams'}. {formatGrams(other)} in {reckoning === 'dinar' ? 'tola' : 'dinar'} weights.
         </p>
       </div>
     );
   };
   return (
     <Card>
-      <p className="text-sm text-muted">The least wealth on which zakat is due. Both measures, side by side:</p>
+      <p className="text-sm text-muted">The least wealth on which zakat is due, by both measures.</p>
+      <p className="mt-4 text-sm font-semibold text-foreground">Measure your wealth against</p>
+      <SegmentedControl<NisabBasis> className="mt-2" options={BASIS_OPTIONS} value={basis} onChange={onBasis} />
       <div className="mt-3 grid grid-cols-2 gap-3">
-        {metal('gold')}
         {metal('silver')}
+        {metal('gold')}
       </div>
+      <NoteBlock id="basis" summary="Gold or silver: where scholars differ" />
       <NoteBlock id="nisab-metals" summary="Where nisab comes from" />
 
       <p className="mt-4 text-sm font-semibold text-foreground">Gram figures</p>
       <SegmentedControl<Reckoning> className="mt-2" options={RECKONING_OPTIONS} value={reckoning} onChange={onReckoning} />
       <NoteBlock id="nisab-grams" summary="Why there are two sets of figures" />
-
-      <p className="mt-4 text-sm font-semibold text-foreground">Measure your wealth against</p>
-      <SegmentedControl<NisabBasis> className="mt-2" options={BASIS_OPTIONS} value={basis} onChange={onBasis} />
-      <NoteBlock id="basis" summary="Gold or silver: where scholars differ" />
     </Card>
   );
 }
@@ -303,20 +375,67 @@ const MISSING_TEXT: Record<Missing, string> = {
   'debt-choice': 'Choose whether to take your debts off.',
 };
 
-const BASIS_NAME: Record<NisabBasis, string> = { gold: 'gold', silver: 'silver' };
+/** Where each missing piece is asked for */
+const MISSING_TARGET: Record<Missing, string> = {
+  'gold-price': '#zakat-in-price-gold',
+  'silver-price': '#zakat-in-price-silver',
+  'worn-choice': '[data-choice="worn-jewellery"] [role="radio"]',
+  'debt-choice': '[data-choice="debts"] [role="radio"]',
+};
 
-function headline(r: BasisResult, net: number, money: (n: number) => string): string {
-  const on = `On the ${BASIS_NAME[r.basis]} basis`;
-  if (r.status === 'at-or-above-nisab') return `${on}, zakat on ${money(net)} is ${money(r.due)}.`;
-  if (r.status === 'below-nisab') return `${on}, ${money(net)} is below nisab of ${money(r.nisab ?? 0)}, so no zakat is due on it.`;
-  return `${on}: add the ${BASIS_NAME[r.basis]} price to compare.`;
+interface Todo {
+  key: string;
+  text: string;
+  /** CSS selector for the field or choice to bring into view and focus */
+  target: string;
 }
 
-function ResultCard({ result, basis, money }: { result: ZakatResult; basis: NisabBasis; money: (n: number) => string }) {
-  const chosen = result[basis];
-  const other = result[basis === 'gold' ? 'silver' : 'gold'];
+function goTo(selector: string) {
+  const el = document.querySelector<HTMLElement>(selector);
+  if (!el) return;
+  const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({ block: 'center', behavior: still ? 'auto' : 'smooth' });
+  el.focus({ preventScroll: true });
+}
 
-  if (chosen.status === 'nothing') {
+const otherOf = (b: NisabBasis): NisabBasis => (b === 'gold' ? 'silver' : 'gold');
+
+/** The outcome on one basis as one plain sentence (read out by screen readers) */
+function sentence(r: BasisResult, net: number, money: (n: number) => string): string {
+  const on = `On the ${r.basis} basis`;
+  if (r.status === 'at-or-above-nisab') return `${on}, zakat on ${money(net)} is ${money(r.due)}.`;
+  if (r.status === 'below-nisab') {
+    return net === 0
+      ? `${on}, nothing is left to count after debts, so no zakat is due.`
+      : `${on}, ${money(net)} is below nisab of ${money(r.nisab ?? 0)}, so no zakat is due on it.`;
+  }
+  return `${on}: add the ${r.basis} price to compare.`;
+}
+
+/** The other basis, said briefly: only spelt out when its outcome differs */
+function otherLine(chosen: BasisResult, other: BasisResult, money: (n: number) => string): string {
+  if (other.status === 'incomplete') return `On the ${other.basis} basis: add the ${other.basis} price to compare.`;
+  if (other.status === chosen.status) return `The same on the ${other.basis} basis.`;
+  if (other.status === 'below-nisab') return `On the ${other.basis} basis nothing is due: its nisab is ${money(other.nisab ?? 0)}.`;
+  return `On the ${other.basis} basis ${money(other.due)} is due: its nisab is ${money(other.nisab ?? 0)}.`;
+}
+
+function ResultCard({
+  result,
+  basis,
+  money,
+  todo,
+}: {
+  result: ZakatResult;
+  basis: NisabBasis;
+  money: (n: number) => string;
+  todo: Todo[];
+}) {
+  const chosen = result[basis];
+  const other = result[otherOf(basis)];
+  const blocked = todo.length > 0;
+
+  if (chosen.status === 'nothing' && !blocked) {
     return (
       <Card className="text-sm text-muted">
         <span data-testid="zakat-result">Enter what you have above and the result appears here.</span>
@@ -324,66 +443,90 @@ function ResultCard({ result, basis, money }: { result: ZakatResult; basis: Nisa
     );
   }
 
-  const blocked = result.missing.length > 0;
+  const showBreakdown = result.assets > 0 || result.deducted > 0;
   return (
     <div className="tactile-card rounded-2xl bg-card p-5" data-testid="zakat-result">
-      {/* Only the outcome is announced as amounts change, not the whole breakdown */}
-      <div aria-live="polite" aria-atomic="true">
       {blocked ? (
-        <div>
+        <div aria-live="polite">
           <p className="text-base font-bold text-foreground">A little more first</p>
-          <ul className="mt-2 space-y-1 text-sm text-muted">
-            {result.missing.map((m) => (
-              <li key={m}>{MISSING_TEXT[m]}</li>
+          <ul className="mt-1">
+            {todo.map((t) => (
+              <li key={t.key}>
+                <button
+                  type="button"
+                  onClick={() => goTo(t.target)}
+                  className="flex min-h-11 w-full items-center justify-between gap-3 rounded-lg text-left text-sm font-medium text-teal hover:underline hover:underline-offset-2"
+                >
+                  <span>{t.text}</span>
+                  <ArrowRightIcon size={16} className="shrink-0 -rotate-90 text-muted" />
+                </button>
+              </li>
             ))}
           </ul>
         </div>
       ) : (
         <>
-          <p className="text-xs font-semibold text-muted">Measured against {BASIS_NAME[basis]}</p>
-          <p className="mt-1 text-lg font-bold leading-snug text-foreground" data-testid="zakat-headline">
-            {headline(chosen, result.net, money)}
+          {/* Only the outcome is announced as amounts change, as whole sentences */}
+          <p className="sr-only" aria-live="polite" aria-atomic="true">
+            {sentence(chosen, result.net, money)} {otherLine(chosen, other, money)}
           </p>
-          {chosen.status === 'at-or-above-nisab' && (
-            <p className="mt-1 text-3xl font-bold tabular-nums text-teal" data-testid="zakat-due">
-              {money(chosen.due)}
-            </p>
-          )}
-          <p className="mt-3 border-t border-foreground/10 pt-3 text-sm text-muted" data-testid="zakat-other-basis">
-            {headline(other, result.net, money)}
+          <div aria-hidden data-testid="zakat-headline">
+            {chosen.status === 'at-or-above-nisab' ? (
+              <>
+                <p className="text-xs font-semibold text-muted">Zakat due, measured against {basis}</p>
+                <p className="mt-1 text-4xl font-bold leading-none tabular-nums text-teal" data-testid="zakat-due">
+                  {money(chosen.due)}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">2.5% of {money(result.net)}</p>
+              </>
+            ) : (
+              <>
+                <p className="text-xs font-semibold text-muted">Measured against {basis}</p>
+                <p className="mt-1 text-lg font-bold leading-snug text-foreground">No zakat due</p>
+                <p className="mt-0.5 text-sm leading-relaxed text-muted">
+                  {result.net === 0
+                    ? 'After debts, nothing is left to count.'
+                    : `${money(result.net)} is below the ${basis} nisab of ${money(chosen.nisab ?? 0)}.`}
+                </p>
+              </>
+            )}
+          </div>
+          <p aria-hidden className="mt-3 border-t border-foreground/10 pt-3 text-sm text-muted" data-testid="zakat-other-basis">
+            {otherLine(chosen, other, money)}
           </p>
         </>
       )}
-      </div>
 
-      <dl className="mt-4 space-y-1.5 border-t border-foreground/10 pt-3 text-sm">
-        {(
-          [
-            ['Cash and savings', result.lines.cash],
-            ['Gold', result.lines.gold],
-            ['Silver', result.lines.silver],
-            ['Goods for sale', result.lines.tradeGoods],
-            ['Owed to you', result.lines.receivables],
-          ] as const
-        )
-          .filter(([, v]) => v > 0)
-          .map(([k, v]) => (
-            <div key={k} className="flex justify-between gap-3">
-              <dt className="text-muted">{k}</dt>
-              <dd className="tabular-nums text-foreground">{money(v)}</dd>
+      {showBreakdown && (
+        <dl className="mt-4 space-y-1.5 border-t border-foreground/10 pt-3 text-sm">
+          {(
+            [
+              ['Cash and savings', result.lines.cash],
+              ['Gold', result.lines.gold],
+              ['Silver', result.lines.silver],
+              ['Goods for sale', result.lines.tradeGoods],
+              ['Owed to you', result.lines.receivables],
+            ] as const
+          )
+            .filter(([, v]) => v > 0)
+            .map(([k, v]) => (
+              <div key={k} className="flex justify-between gap-3">
+                <dt className="text-muted">{k}</dt>
+                <dd className="tabular-nums text-foreground">{money(v)}</dd>
+              </div>
+            ))}
+          {result.deducted > 0 && (
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted">Debts taken off</dt>
+              <dd className="tabular-nums text-foreground">−{money(result.deducted)}</dd>
             </div>
-          ))}
-        {result.deducted > 0 && (
-          <div className="flex justify-between gap-3">
-            <dt className="text-muted">Debts taken off</dt>
-            <dd className="tabular-nums text-foreground">−{money(result.deducted)}</dd>
+          )}
+          <div className={cn('mt-1.5 flex justify-between gap-3 border-t border-foreground/10 pt-1.5', !blocked && 'font-semibold')}>
+            <dt className={blocked ? 'text-muted' : 'text-foreground'}>{blocked ? 'Counted so far' : 'Counted'}</dt>
+            <dd className={cn('tabular-nums', blocked ? 'text-muted' : 'text-foreground')}>{money(result.net)}</dd>
           </div>
-        )}
-        <div className="flex justify-between gap-3 font-semibold">
-          <dt className="text-foreground">Counted</dt>
-          <dd className="tabular-nums text-foreground">{money(result.net)}</dd>
-        </div>
-      </dl>
+        </dl>
+      )}
       <NoteBlock id="rate" summary="Why 2.5%" />
       <NoteBlock id="combining" summary="Adding it all together" />
     </div>
@@ -428,7 +571,7 @@ function HawlCard({
         max={today}
         value={startIso ?? ''}
         onChange={(e) => onStart(e.target.value || null)}
-        className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-card px-3.5 py-2.5 text-base text-foreground focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
+        className={cn(inputClass, 'mt-1.5 block min-h-[46px] w-full appearance-none')}
       />
       {startIso && <p className="mt-1.5 text-xs text-muted">{hijriLabel(startIso, offset)}, expected</p>}
 

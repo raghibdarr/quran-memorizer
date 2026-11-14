@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronDownIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { zakatNote, type ZakatNoteId } from '@/lib/zakat/notes';
 
@@ -16,7 +17,8 @@ export function UnreviewedLine({ className, status = 'draft' }: { className?: st
 /**
  * One explainer note from src/data/zakat-notes.json: the statement, the
  * positions side by side when the schools differ (none picked), and where to
- * check it. Collapsed by default under a "Why" line so the form stays calm.
+ * check it. Collapsed by default to a quiet text row so the form stays calm;
+ * the tinted panel appears only once it is open.
  */
 export default function NoteBlock({ id, summary, open = false }: { id: ZakatNoteId; summary?: string; open?: boolean }) {
   const note = zakatNote(id);
@@ -25,27 +27,30 @@ export default function NoteBlock({ id, summary, open = false }: { id: ZakatNote
   const [prompted, setPrompted] = useState(open);
   if (open && !prompted) setPrompted(true);
   return (
-    <details className="group mt-3 rounded-xl bg-foreground/[0.03] px-3.5 py-2.5" open={prompted} data-note={id}>
-      <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-teal [&::-webkit-details-marker]:hidden">
+    <details className="group mt-2 rounded-xl open:mt-3 open:bg-foreground/[0.03]" open={prompted} data-note={id}>
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-xl text-sm font-medium text-teal group-open:px-3.5 [&::-webkit-details-marker]:hidden">
         <span>{summary ?? (note.kind === 'differs' ? 'Where scholars differ' : 'Why')}</span>
-        <span aria-hidden className="text-muted transition-transform group-open:rotate-45 motion-reduce:transition-none">+</span>
+        <ChevronDownIcon
+          size={16}
+          className="shrink-0 text-muted transition-transform duration-200 group-open:rotate-180 motion-reduce:transition-none"
+        />
       </summary>
-      <div className="pt-1.5 pb-1">
+      <div className="px-3.5 pb-3">
         <p className="text-sm leading-relaxed text-foreground">{note.text}</p>
         {note.positions && (
           <dl className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {note.positions.map((p) => (
-              <div key={p.by} className="rounded-lg border border-foreground/10 bg-card px-3 py-2">
-                <dt className="text-xs font-semibold text-foreground">{p.by}</dt>
-                <dd className="mt-0.5 text-sm leading-snug text-muted">{p.text}</dd>
+              <div key={p.by} className="rounded-lg bg-card px-3 py-2 [.dark_&]:border [.dark_&]:border-foreground/10">
+                <dt className="text-xs font-semibold text-teal">{p.by}</dt>
+                <dd className="mt-0.5 text-sm leading-relaxed text-foreground/85">{p.text}</dd>
               </div>
             ))}
           </dl>
         )}
-        <p className="mt-2.5 text-xs leading-snug text-muted">
-          <span className="font-semibold">Where to check:</span> {note.sourceLead}
+        <p className="mt-3 border-t border-foreground/10 pt-2.5 text-xs leading-relaxed text-muted">
+          <span className="font-semibold text-foreground/80">Where to check:</span> {note.sourceLead}
         </p>
-        {note.status !== 'scholar-reviewed' && <UnreviewedLine className="mt-1" status={note.status} />}
+        {note.status !== 'scholar-reviewed' && <UnreviewedLine className="mt-1.5" status={note.status} />}
       </div>
     </details>
   );
