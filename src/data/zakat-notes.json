@@ -1,0 +1,453 @@
+{
+  "about": "The zakat screen's explainer statements (all-in-one spec 5.1, 6). A note is 'source-checked' when every statement in it was located in the fetched Arabic of the school primers (or, where a primer is silent, a named work of the same school) and cross-located in Bidayat al-Mujtahid; the located Arabic is stored in evidence[].quote. Notes that rest on modern figures or on a single witness stay 'draft'. Nothing here is scholar-reviewed. No hadith number or page is stated.",
+  "notes": [
+    {
+      "id": "rate",
+      "kind": "agreed",
+      "text": "Zakat on cash, gold, silver and goods for sale is one fortieth (2.5%) of their value, once a full lunar year has passed over wealth that reaches nisab.",
+      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, reporting agreement on one fortieth for gold and silver; Ibn al-Mundhir, al-Ijma', Book of Zakat; the four schools' primers, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, section on gold and silver",
+          "quote": "فإنهم اتفقوا على أن الواجب في ذلك هو ربع العشر: أعني في الفضة والذهب معا"
+        },
+        {
+          "work": "al-Ijma' of Ibn al-Mundhir",
+          "place": "Book of Zakat",
+          "quote": "وأجمعوا أن في مائتي درهم خمسة دراهم"
+        },
+        {
+          "work": "Matn Abi Shuja'",
+          "place": "Book of Zakat, section on trade goods",
+          "quote": "وتقوم عروض التجارة عند آخر الحول بما اشتريت به ويخرج من ذلك ربع العشر"
+        },
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat, chapter on silver",
+          "quote": "فإذا كانت مائتي درهم وحال عليها الحول ففيها خمسة دراهم"
+        }
+      ]
+    },
+    {
+      "id": "nisab-metals",
+      "kind": "agreed",
+      "text": "In all four schools, nisab, the least wealth on which zakat is due, is twenty mithqal (dinars) of gold or two hundred dirhams of silver. The silver figure is agreed. For gold, Ibn Rushd records a few early scholars who set it differently.",
+      "sourceLead": "Hadith of Abu Sa'id al-Khudri on five awaq of silver, in al-Bukhari and Muslim, Book of Zakat. For gold, the report from Ali in Abu Dawud, Book of Zakat; Ibn Rushd notes that nothing is established from the Prophet ﷺ for gold as it is for silver. Ibn al-Mundhir, al-Ijma', Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, section on gold and silver",
+          "quote": "فإن أكثر العلماء على أن الزكاة تجب في عشرين دينارا وزنا كما تجب في مائتي درهم، هذا مذهب مالك والشافعي وأبي حنيفة وأصحابهم وأحمد وجماعة فقهاء الأمصار"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, section on gold and silver",
+          "quote": "وسبب اختلافهم في نصاب الذهب أنه لم يثبت في ذلك شيء عن النبي"
+        },
+        {
+          "work": "al-Ijma' of Ibn al-Mundhir",
+          "place": "Book of Zakat",
+          "quote": "وأجمعوا على أن الذهب إذا كان عشرين مثقالا قيمتها مائتا درهم أن الزكاة تجب فيه"
+        },
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat, chapter on silver",
+          "quote": "ليس فيما دون مائتي درهم صدقة"
+        },
+        {
+          "work": "al-Risala of Ibn Abi Zayd",
+          "place": "Chapter on zakat of money, crops and livestock",
+          "quote": "ولا زكاة من الذهب في أقل من عشرين دينارا"
+        },
+        {
+          "work": "Matn Abi Shuja'",
+          "place": "Book of Zakat",
+          "quote": "ونصاب الذهب عشرون مثقالا وفيه ربع العشر وهو نصف مثقال وفيما زاد بحسابه ونصاب الورق مائتا درهم"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on gold and silver",
+          "quote": "ولا زكاة في الفضة حتى تبلغ مائتي درهم فيجب فيها خمسة دراهم ولا في الذهب حتى يبلغ عشرين مثقالا"
+        }
+      ]
+    },
+    {
+      "id": "nisab-grams",
+      "kind": "differs",
+      "text": "Turning dinars and dirhams into grams depends on how much a dinar and a dirham are reckoned to weigh, so two sets of figures are in common use.",
+      "positions": [
+        {
+          "by": "A dinar of 4.25 g and a dirham of 2.975 g",
+          "text": "85 g of gold and 595 g of silver. Widely used today; Ibn 'Uthaymin gives these figures."
+        },
+        {
+          "by": "7.5 tola of gold and 52.5 tola of silver",
+          "text": "87.48 g of gold and 612.36 g of silver, with a tola of 11.664 g. The figures Hanafi fatwa councils of the South Asian tradition give."
+        }
+      ],
+      "sourceLead": "Al-Durar al-Saniyya fiqh encyclopedia, on the nisab of gold and silver in grams, quoting Ibn 'Uthaymin; Darul Ifta Birmingham, answer on the nisab threshold for gold, for the tola figures",
+      "status": "draft"
+    },
+    {
+      "id": "basis",
+      "kind": "differs",
+      "text": "Cash and goods for sale have no nisab of their own, so they are measured against gold or silver. Scholars today differ on which to use, and the two can be far apart.",
+      "positions": [
+        {
+          "by": "Silver",
+          "text": "Many Hanafi scholars use silver, the lower threshold today, holding that it serves those in need better."
+        },
+        {
+          "by": "Gold",
+          "text": "Others use gold, holding that silver has fallen far in value against gold since nisab was set, and that the gold figure is nearer the other nisab thresholds."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat, on valuing goods for sale by whichever of gold or silver serves the poor better; Darul Ifta Birmingham, answer on the nisab threshold for gold; IslamOnline fiqh, answer on what the nisab of money is measured by, for the gold view",
+      "status": "draft",
+      "evidence": [
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat, chapter on trade goods",
+          "quote": "يقومها بما هو أنفع للفقراء والمساكين منهما"
+        }
+      ]
+    },
+    {
+      "id": "combining",
+      "kind": "differs",
+      "text": "This calculator adds all your assets together by value and compares the total with one nisab.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": [
+            "hanafi"
+          ],
+          "text": "Gold, silver and goods for sale are added together to reach nisab."
+        },
+        {
+          "by": "Maliki",
+          "school": [
+            "maliki"
+          ],
+          "text": "Gold and silver are added together to reach nisab."
+        },
+        {
+          "by": "Shafi'i",
+          "school": [
+            "shafii"
+          ],
+          "text": "Gold is not added to silver, nor silver to gold; each needs its own nisab."
+        },
+        {
+          "by": "Hanbali",
+          "school": [
+            "hanbali"
+          ],
+          "text": "Gold or silver you hold is added to the value of your goods for sale to reach nisab."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat, chapter on trade goods; al-Risala of Ibn Abi Zayd, chapter on zakat of money; 'Umdat al-Fiqh, Book of Zakat, chapter on trade goods; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, on adding gold to silver. Matn Abi Shuja' does not address it, so the Shafi'i position rests on Ibn Rushd's report alone",
+      "status": "draft",
+      "evidence": [
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat, chapter on trade goods",
+          "quote": "وتضم قيمة العروض إلى الذهب والفضة وكذلك يضم الذهب إلى الفضة بالقيمة حتى يتم النصاب عند أبي حنيفة وقال أبو يوسف ومحمد: لا يضم الذهب إلى الفضة بالقيمة ويضم بالأجزاء"
+        },
+        {
+          "work": "al-Risala of Ibn Abi Zayd",
+          "place": "Chapter on zakat of money, crops and livestock",
+          "quote": "ويجمع الذهب والفضة في الزكاة فمن كان له مائة درهم وعشرة دنانير فليخرج من كل مال ربع عشره"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on trade goods",
+          "quote": "وإن كان عنده ذهب أو فضة ضمها إلى قيمة العروض في تكميل النصاب"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, section on gold and silver, third question",
+          "quote": "فإن عند مالك وأبي حنيفة وجماعة أنها تضم الدراهم إلى الدنانير، فإذا كمل من مجموعهما نصاب وجبت فيه الزكاة؛ وقال الشافعي وأبو ثور وداود: لا يضم ذهب إلى فضة ولا فضة إلى ذهب"
+        }
+      ]
+    },
+    {
+      "id": "worn-jewellery",
+      "kind": "differs",
+      "text": "Gold and silver kept as savings, coins or bars count in every school. Jewellery that is worn is where they differ.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": [
+            "hanafi"
+          ],
+          "text": "Zakat is due on gold and silver jewellery, whether it is worn or not."
+        },
+        {
+          "by": "Maliki, Shafi'i, Hanbali",
+          "school": [
+            "maliki",
+            "shafii",
+            "hanbali"
+          ],
+          "text": "No zakat is due on jewellery kept for permitted wear. Jewellery kept as savings counts."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat, chapter on gold; al-Risala of Ibn Abi Zayd, chapter on zakat of money; Matn Abi Shuja', Book of Zakat; 'Umdat al-Fiqh, Book of Zakat, chapter on gold and silver; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat, chapter on gold",
+          "quote": "وفي تبر الذهب والفضة وحليهما والآنية منهما الزكاة"
+        },
+        {
+          "work": "al-Risala of Ibn Abi Zayd",
+          "place": "Chapter on zakat of money, crops and livestock",
+          "quote": "ولا فيما يتخذ للباس"
+        },
+        {
+          "work": "Matn Abi Shuja'",
+          "place": "Book of Zakat",
+          "quote": "ولا تجب في الحلي المباح زكاة"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on gold and silver",
+          "quote": "ولا زكاة في الحلي المباح المعد للاستعمال والعارية"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on gold and silver",
+          "quote": "فأما المعد للكراء أو الادخار والمحرم ففيه الزكاة"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, second part",
+          "quote": "ذهب فقهاء الحجاز مالك والليث والشافعي إلى أنه لا زكاة فيه إذا أريد للزينة واللباس؛ وقال أبو حنيفة وأصحابه: فيه الزكاة"
+        }
+      ]
+    },
+    {
+      "id": "debts",
+      "kind": "differs",
+      "text": "Debts you owe are where the schools differ on what to take off before comparing with nisab.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": [
+            "hanafi"
+          ],
+          "text": "A debt that covers all your wealth means no zakat is due. If you have more than you owe, zakat is due on what is left when it reaches nisab."
+        },
+        {
+          "by": "Maliki",
+          "school": [
+            "maliki"
+          ],
+          "text": "Debts are taken off cash, gold and silver, but they are first set against belongings you own that carry no zakat, when those can cover them."
+        },
+        {
+          "by": "Hanbali",
+          "school": [
+            "hanbali"
+          ],
+          "text": "A debt that covers your nisab, or takes you below it, means no zakat is due."
+        },
+        {
+          "by": "Shafi'i",
+          "school": [
+            "shafii"
+          ],
+          "text": "In the school's relied-upon view, debts are not taken off. Zakat is due on the wealth you hold."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat; al-Risala of Ibn Abi Zayd, chapter on zakat of money; 'Umdat al-Fiqh, Book of Zakat, chapter on debt; for the Shafi'i school, al-Nawawi's Minhaj al-Talibin, Book of Zakat, and Kifayat al-Akhyar, since Matn Abi Shuja' does not address it; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat",
+          "quote": "ومن كان عليه دين يحيط فلا زكاة عليه وإن كان ماله أكثر من الدين زكى الفاضل إذا بلغ نصابا"
+        },
+        {
+          "work": "al-Risala of Ibn Abi Zayd",
+          "place": "Chapter on zakat of money, crops and livestock",
+          "quote": "ومن له مال تجب فيه الزكاة وعليه دين مثله أو ينقصه عن مقدار مال الزكاة فلا زكاة عليه إلا أن يكون عنده مما لا يزكى من عروض مقتناة أو رقيق أو حيوان مقتناة أو عقار أو ريع ما فيه وفاء لدينه فليزك ما بيده من المال فإن لم تف عروضه بدينه حسب بقية دينه فيما بيده فإن بقي بعد ذلك ما فيه الزكاة زكاه ولا يسقط الدين زكاة حب ولا تمر ولا ماشية"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on debt",
+          "quote": "ومن كان عليه دين يستغرق النصاب الذي معه أو ينقصه فلا زكاة فيه"
+        },
+        {
+          "work": "Minhaj al-Talibin of al-Nawawi",
+          "place": "Book of Zakat, chapter on who owes zakat",
+          "quote": "ولا يمنع الدين وجوبها في أظهر الأقوال"
+        },
+        {
+          "work": "Kifayat al-Akhyar of al-Hisni, a commentary on Matn Abi Shuja'",
+          "place": "Book of Zakat",
+          "quote": "أظهرها وهو المذهب الذي نص عليه الشافعي في أكثر كتبه الجديدة أنه لا يمنع وجوبها"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, first part",
+          "quote": "وقال مالك: الدين يمنع الزكاة الناض فقط إلا أن يكون له عروض فيها وفاء من دينه فإنه لا يمنع"
+        }
+      ]
+    },
+    {
+      "id": "trade-goods",
+      "kind": "differs",
+      "text": "Goods you hold to sell are counted at what they would sell for on the day your zakat year completes. The Maliki school treats a trader who holds goods for a long time, waiting for a price, differently from one who buys and sells all the time. For your own situation, ask a scholar you trust.",
+      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, section on trade goods; al-Risala of Ibn Abi Zayd, chapter on zakat of money; Matn Abi Shuja' and 'Umdat al-Fiqh, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, section on trade goods",
+          "quote": "وقال الجمهور، الشافعي وأبو حنيفة وأحمد والثوري والأوزاعي وغيرهم: المدير وغير المدير حكمه واحد، وأنه من اشترى عرضا للتجارة فحال عليه الحول قومه وزكاه"
+        },
+        {
+          "work": "al-Risala of Ibn Abi Zayd",
+          "place": "Chapter on zakat of money, crops and livestock",
+          "quote": "ففي ثمنها الزكاة لحول واحد أقامت قبل البيع حولا أو أكثر إلا أن تكون مديرا لا يستقر بيدك عين ولا عرض فإنك تقوم عروضك كل عام وتزكي ذلك مع ما بيدك من العين"
+        },
+        {
+          "work": "Matn Abi Shuja'",
+          "place": "Book of Zakat, section on trade goods",
+          "quote": "وتقوم عروض التجارة عند آخر الحول"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on trade goods",
+          "quote": "ثم يقومها فإذا بلغت أقل نصاب من الذهب والفضة أخرج الزكاة من قيمتها"
+        }
+      ]
+    },
+    {
+      "id": "receivables",
+      "kind": "differs",
+      "text": "Money owed to you that you expect to be repaid is counted. The schools differ on when its zakat is paid: each year, or once it is repaid. For your own situation, ask a scholar you trust.",
+      "sourceLead": "Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, on the year of a debt owed to a person; al-Risala of Ibn Abi Zayd, chapter on zakat of money; 'Umdat al-Fiqh, Book of Zakat, chapter on debt; al-Nawawi, Minhaj al-Talibin, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "al-Risala of Ibn Abi Zayd",
+          "place": "Chapter on zakat of money, crops and livestock",
+          "quote": "ولا زكاة عليه في دين حتى يقبضه وإن أقام أعواما فإنما يزكيه لعام واحد بعد قبضه"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on debt",
+          "quote": "من كان له دين على مليء أو مال يمكن خلاصه كالمجحود الذي له به بينة والمغصوب الذي يتمكن من أخذه فعليه زكاته إذا قبضه لما مضى"
+        },
+        {
+          "work": "Minhaj al-Talibin of al-Nawawi",
+          "place": "Book of Zakat, chapter on who owes zakat",
+          "quote": "وإن تيسر وجب تزكيته في الحال"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, fourth part, fourth question",
+          "quote": "فإن قوما قالوا: يعتبر ذلك فيه من أول ما كان دينا يزكيه لعدة ذلك إن كان حولا فحول، وإن كان أحوالا فأحوال"
+        }
+      ]
+    },
+    {
+      "id": "hawl",
+      "kind": "agreed",
+      "text": "The zakat year is a lunar year, counted from the day your wealth first reached nisab.",
+      "sourceLead": "Ibn al-Mundhir, al-Ijma', Book of Zakat; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat, who reports the jurists' agreement and says no hadith on it is firmly established. The report \"no zakat on wealth until a year passes over it\" is in Abu Dawud, from Ali, and Ibn Majah, from Aisha, Book of Zakat. Ibn Hazm, al-Muhalla, on the year being twelve months by the new moons",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "al-Ijma' of Ibn al-Mundhir",
+          "place": "Book of Zakat",
+          "quote": "وأجمعوا على أن المال إذا حال عليه الحول أن الزكاة تجب فيه"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, fourth part",
+          "quote": "فإن جمهور الفقهاء يشترطون في وجوب الزكاة في الذهب والفضة والماشية الحول، لثبوت ذلك عن الخلفاء الأربعة"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, fourth part",
+          "quote": "وهذا مجمع عليه عند فقهاء الأمصار، وليس فيه في الصدر الأول خلاف إلا ما روي عن ابن عباس ومعاوية. وسبب الاختلاف أنه لم يرد في ذلك حديث ثابت"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, fourth part, third question",
+          "quote": "فإنهم أجمعوا على أن المال إذا كان أقل من نصاب واستفيد إليه مال من غير ربحه يكمل من مجموعهما نصاب أنه يستقل به الحول من يوم كمل"
+        },
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat",
+          "quote": "إذا ملك نصابا ملكا تاما وحال عليه الحول"
+        }
+      ]
+    },
+    {
+      "id": "hawl-dip",
+      "kind": "differs",
+      "text": "If your wealth drops below nisab during the year, the schools differ on whether the year starts again. The Maliki position is not shown: we could not confirm it in the school's primer.",
+      "positions": [
+        {
+          "by": "Hanafi",
+          "school": [
+            "hanafi"
+          ],
+          "text": "What counts is having nisab at the start and the end of the year. A dip in between does not restart it."
+        },
+        {
+          "by": "Shafi'i",
+          "school": [
+            "shafii"
+          ],
+          "text": "Gold and silver must be at nisab for the whole year. Goods for sale are measured at the end of the year only, in the school's relied-upon view."
+        },
+        {
+          "by": "Hanbali",
+          "school": [
+            "hanbali"
+          ],
+          "text": "Goods for sale must be worth nisab for the whole year."
+        }
+      ],
+      "sourceLead": "Mukhtasar al-Quduri, Book of Zakat, chapter on trade goods; Kifayat al-Akhyar and al-Nawawi's Minhaj al-Talibin, Book of Zakat, for the Shafi'i school; 'Umdat al-Fiqh, Book of Zakat, chapter on trade goods; Ibn Rushd, Bidayat al-Mujtahid, Book of Zakat",
+      "status": "source-checked",
+      "evidence": [
+        {
+          "work": "Mukhtasar al-Quduri",
+          "place": "Book of Zakat, chapter on trade goods",
+          "quote": "وإذا كان النصاب كاملا في طرفي الحول فنقصانه فيما بين ذلك لا يسقط الزكاة"
+        },
+        {
+          "work": "Kifayat al-Akhyar of al-Hisni, a commentary on Matn Abi Shuja'",
+          "place": "Book of Zakat, on gold and silver",
+          "quote": "ويشترط أن يملك النصاب حولا كاملا"
+        },
+        {
+          "work": "Minhaj al-Talibin of al-Nawawi",
+          "place": "Book of Zakat, chapter on trade",
+          "quote": "شرط زكاة التجارة الحول والنصاب معتبرا بآخر الحول وفي قول بطرفيه وفي قول بجميعه"
+        },
+        {
+          "work": "'Umdat al-Fiqh",
+          "place": "Book of Zakat, chapter on trade goods",
+          "quote": "ولا زكاة فيها حتى ينوي بها تجارة وهي نصاب حولا"
+        },
+        {
+          "work": "Bidayat al-Mujtahid of Ibn Rushd",
+          "place": "Book of Zakat, fourth part, third question",
+          "quote": "أنه ليس من شرط الحول أن يوجد المال نصابا في جميع أجزائه بل أن يوجد نصابا في طرفيه فقط"
+        }
+      ]
+    }
+  ]
+}
