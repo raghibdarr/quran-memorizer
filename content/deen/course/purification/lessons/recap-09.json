@@ -1,0 +1,192 @@
+{
+  "id": "recap-09",
+  "unit": "purification",
+  "order": 9,
+  "rev": 1,
+  "title": "Purification: the whole picture",
+  "intro": "Eight lessons on one page. This recap gathers the points the schools share, so the map of purification is clear. Where their primers differ, the earlier lessons show each position with its source.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "Purity is a condition of the prayer, and it has two sides: purity from a ritual state, and purity from physical impurity.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 5 (Dar al-Hadith ed., vol. 1, p. 47)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "Before praying, which two kinds of purity does a person look to?",
+          "back": "Purity from a ritual state (by [[wudu]], [[ghusl]] or [[tayammum]]), and purity from physical impurity on the body, clothes and place of prayer."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "Each ritual state has its purification: [[wudu]] before the prayer, [[ghusl]] after [[janabah]] and when menstruation ends, and [[tayammum]] in their place when there is no water.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        },
+        {
+          "quran": {
+            "surahId": 2,
+            "ayah": 222
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "Match each to its purification: after using the toilet; after [[janabah]]; no water to be found.",
+          "back": "[[wudu]]; [[ghusl]]; [[tayammum]]."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "The agreed core of [[wudu]] is in one ayah: the face, the arms, the head and the feet. One thorough wash of each washed part fulfils what is due.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 19)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "Where in the Quran is the core of [[wudu]] found, and which parts does it name?",
+          "back": "Quran 5:6: the face, the arms to the elbows, the head, and the feet to the ankles."
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "What comes out of the two passages, and losing one’s mind, break [[wudu]] by agreement; whatever breaks [[wudu]] also breaks [[tayammum]].",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 4 (what breaks wudu) (Dar al-Hadith ed., vol. 1, p. 40)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 2 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 33)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tayammum, Bab 6 (Dar al-Hadith ed., vol. 1, p. 78)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "You made [[tayammum]] and then passed wind. Is the [[tayammum]] still standing?",
+          "back": "No. Wind breaks [[wudu]] by agreement, and whatever breaks [[wudu]] breaks [[tayammum]]."
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "Impurity is removed from the body, the clothes and the place of prayer, and pure water removes it.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 3 (Dar al-Hadith ed., vol. 1, p. 89)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Najas, Bab 4 (Dar al-Hadith ed., vol. 1, p. 90)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "A drop of urine lands on your sleeve before the prayer. What removes it, by agreement?",
+          "back": "Washing it with pure water. Clothes are one of the three places impurity is removed from."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which purification stands in when there is no water?",
+      "options": [
+        "[[tayammum]]",
+        "[[ghusl]]",
+        "Wiping over leather socks"
+      ],
+      "answer": 0,
+      "claim": "c2"
+    },
+    {
+      "q": "Which ayah names the core parts of [[wudu]]?",
+      "options": [
+        "Quran 5:6",
+        "Quran 2:222",
+        "Quran 74:4"
+      ],
+      "answer": 0,
+      "claim": "c3"
+    },
+    {
+      "q": "Whatever breaks [[wudu]] also breaks…",
+      "options": [
+        "[[tayammum]]",
+        "The fast",
+        "Nothing else"
+      ],
+      "answer": 0,
+      "claim": "c4"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+    ]
+  }
+}

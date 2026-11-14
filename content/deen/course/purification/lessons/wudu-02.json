@@ -1,0 +1,216 @@
+{
+  "id": "wudu-02",
+  "unit": "purification",
+  "order": 2,
+  "rev": 1,
+  "title": "Washing for prayer, step by step",
+  "intro": "One ayah of the Quran names the parts that are washed and wiped before the prayer. This lesson walks through a complete [[wudu]] from start to finish, as the primers describe it.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "The ayah of [[wudu]] names four acts: washing the face, washing the arms to the elbows, wiping the head, and the feet to the ankles. All four primers describe the feet as washed.",
+      "kind": "how-to",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Washing the three parts and wiping the head; the elbows and the ankles are included in the washing.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara"
+          },
+          "quote": "غسل الأعضاء الثلاثة ومسح الرأس والمرفقان والكعبان يدخلان في الغسل"
+        },
+        {
+          "school": "maliki",
+          "text": "Then he washes his feet, pouring water with the right hand and rubbing with the left.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab sifat al-wudu’ wa masnunihi wa mafrudihi"
+          },
+          "quote": "ثم يغسل رجليه يصب الماء بيده اليمنى على رجله اليمنى ويعركها بيده اليسرى"
+        },
+        {
+          "school": "shafii",
+          "text": "Washing the feet up to the ankles is one of the six obligatory acts.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: the obligatory acts of wudu"
+          },
+          "quote": "وغسل الرجلين إلى الكعبين"
+        },
+        {
+          "school": "hanbali",
+          "text": "Then he washes his feet to the ankles three times, including the ankles in the washing.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Wudu’"
+          },
+          "quote": "ثم يغسل رجليه إلى الكعبين ثلاثا ويدخلهما في الغسل"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "Which four acts does the ayah of [[wudu]] (Quran 5:6) name?",
+          "back": "Washing the face, washing the arms to the elbows, wiping the head, and the feet to the ankles, which all four primers describe as washed."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "A complete [[wudu]], as Ibn Qudamah describes it in the Hanbali primer: intend it and say “bismillah”; wash the hands three times; rinse the mouth and the nose three times; wash the whole face three times; wash the arms up to and including the elbows three times; wipe the head, with the ears; wash the feet up to and including the ankles three times.",
+      "kind": "how-to",
+      "evidence": [
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        },
+        {
+          "consensus": {
+            "work": "maratib-al-ijma",
+            "location": "Kitab al-Tahara (p. 18)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "maratib-al-ijma",
+            "location": "Kitab al-Tahara (p. 19)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanbali",
+          "text": "He says “bismillah”, washes his hands three times, then rinses his mouth and nose three times, then washes his face three times, then his arms to the elbows three times, then wipes his head with the ears, then washes his feet to the ankles three times.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-Wudu’"
+          },
+          "quote": "ثم يقول بسم الله ويغسل كفيه ثلاثا ثم يتمضمض ويستنشق ثلاثا"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "Put a complete [[wudu]] in order, from the hands to the feet.",
+          "back": "Hands; mouth and nose; face; arms with the elbows; head with the ears; feet with the ankles."
+        },
+        {
+          "id": "c2b",
+          "front": "In a complete [[wudu]], what comes between washing the hands and washing the face?",
+          "back": "Rinsing the mouth and the nose."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "Washing each washed part once, thoroughly, fulfils what is due. A second and a third wash are recommended.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, Bab 2, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 19)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "How many washes of each part does [[wudu]] need, and how many are recommended?",
+          "back": "One thorough wash fulfils what is due. A second and a third are recommended."
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "Someone who washes the left before the right does not repeat anything.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 14 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "You washed your left arm before your right. Do you repeat anything?",
+          "back": "No. Ibn al-Mundhir reports agreement that nothing is repeated."
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "Purification with water before the time of a prayer comes in is complete; it does not wait for the time.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 19 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 36)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "Does [[wudu]] made before a prayer’s time comes in count for that prayer?",
+          "back": "Yes. Purification with water before the time is complete."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "In the ayah of [[wudu]], which part is wiped?",
+      "options": [
+        "The head",
+        "The face",
+        "The arms"
+      ],
+      "answer": 0,
+      "claim": "c1"
+    },
+    {
+      "q": "You washed each part once, thoroughly. What is the state of your [[wudu]]?",
+      "options": [
+        "Complete: the second and third washes are recommended extras",
+        "Incomplete until each part is washed three times",
+        "Complete, but for one prayer only"
+      ],
+      "answer": 0,
+      "claim": "c3"
+    },
+    {
+      "q": "Someone washed the left foot before the right. What now?",
+      "options": [
+        "Nothing is repeated",
+        "Both feet are washed again",
+        "The whole [[wudu]] starts again"
+      ],
+      "answer": 0,
+      "claim": "c4"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+    ]
+  }
+}

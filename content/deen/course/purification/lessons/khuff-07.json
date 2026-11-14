@@ -1,0 +1,320 @@
+{
+  "id": "khuff-07",
+  "unit": "purification",
+  "order": 7,
+  "rev": 1,
+  "title": "Wiping over leather socks",
+  "intro": "Taking footwear off for every [[wudu]] can be hard, on a journey or in the cold. The primers of all four schools have a chapter on wiping over leather socks in place of washing the feet. This lesson covers when that applies and where they differ.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "Someone who completes their purification, then puts on leather socks ([[khuff]]), then breaks [[wudu]], may wipe over the socks in place of washing the feet. The feet being pure by [[wudu]] when the socks go on is the agreed condition; Ibn Rushd notes one isolated dissent.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 15 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 6 (Dar al-Hadith ed., vol. 1, p. 28)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "What is the agreed condition for wiping over leather socks?",
+          "back": "That they were put on with the feet already pure by a complete [[wudu]]."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "The schools differ on whether wiping over leather socks has a time limit.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 15 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "A day and a night for a resident, three days and nights for a traveller, counted from when [[wudu]] is first broken.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+          },
+          "quote": "فإن كان مقيما مسح يوما وليلة وإن كان مسافرا مسح ثلاثة أيام ولياليها وابتداؤها عقيب الحدث"
+        },
+        {
+          "school": "maliki",
+          "text": "At home or travelling, for as long as he does not take them off; the primer names no time limit.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-mash ‘ala al-khuffayn"
+          },
+          "quote": "وله أن يمسح على الخفين في الحضر والسفر ما لم ينزعهما"
+        },
+        {
+          "school": "shafii",
+          "text": "A day and a night for a resident, three days and nights for a traveller, counted from when he breaks [[wudu]] after putting them on.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: wiping over the khuffayn"
+          },
+          "quote": "ويمسح المقيم يوما وليلة والمسافر ثلاثة أيام بلياليهن وابتداء المدة من حين يحدث بعد لبس الخفين"
+        },
+        {
+          "school": "hanbali",
+          "text": "A day and a night for a resident, three days and nights for a traveller.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-mash ‘ala al-khuffayn"
+          },
+          "quote": "في الطهارة الصغرى يوما وليلة للمقيم"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "Is there a time limit on wiping over leather socks?",
+          "back": "The schools differ: a day and a night for a resident and three for a traveller, or no limit while they stay on."
+        },
+        {
+          "id": "c2-hanafi",
+          "front": "Hanafi primer (al-Quduri): how long may leather socks be wiped over?",
+          "back": "A day and a night for a resident, three days and nights for a traveller, counted from when [[wudu]] is first broken.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c2-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): how long may leather socks be wiped over?",
+          "back": "At home or travelling, for as long as he does not take them off; the primer names no time limit.",
+          "school": "maliki"
+        },
+        {
+          "id": "c2-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): how long may leather socks be wiped over?",
+          "back": "A day and a night for a resident, three days and nights for a traveller, counted from when he breaks [[wudu]] after putting them on.",
+          "school": "shafii"
+        },
+        {
+          "id": "c2-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): how long may leather socks be wiped over?",
+          "back": "A day and a night for a resident, three days and nights for a traveller.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "The schools differ on which part of the sock is wiped.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 15 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "The tops, in lines drawn with the fingers from the toes towards the shin.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+          },
+          "quote": "والمسح على الخفين على ظاهرهما خطوطا بالأصابع يبدأ من رؤوس أصابع الرجل إلى الساق"
+        },
+        {
+          "school": "maliki",
+          "text": "Top and bottom: the right hand over the top from the toes and the left underneath, drawn to the ankles.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-mash ‘ala al-khuffayn"
+          },
+          "quote": "أن يجعل يده اليمنى من فوق الخف من طرف الأصابع ويده اليسرى من تحت ذلك ثم يذهب بيده إلى حد الكعبين"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "Which part of a leather sock is wiped?",
+          "back": "The schools differ: the primers shown here give the tops only, or the top and the bottom."
+        },
+        {
+          "id": "c3-hanafi",
+          "front": "Hanafi primer (al-Quduri): which part of the leather sock is wiped?",
+          "back": "The tops, in lines drawn with the fingers from the toes towards the shin.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c3-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): which part of the leather sock is wiped?",
+          "back": "Top and bottom: the right hand over the top from the toes and the left underneath, drawn to the ankles.",
+          "school": "maliki"
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "Wiping over leather socks is agreed among those who hold wiping. The schools differ on wiping over socks that are not leather.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 3 (Dar al-Hadith ed., vol. 1, p. 26)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "Abu Hanifah: not over socks unless they are soled or covered with leather. Abu Yusuf and Muhammad: over socks that are thick and do not let water through.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+          },
+          "quote": "ولا يجوز المسح على الجوربين عند أبي حنيفة رحمه الله إلا أن يكونا منعلين أو مجلدين"
+        },
+        {
+          "school": "hanbali",
+          "text": "Over leather socks and what is like them: thick socks that stay up on the feet.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-mash ‘ala al-khuffayn"
+          },
+          "quote": "يجوز المسح على الخفين وما أشبههما من الجوارب الصفيقة التي تثبت في القدمين"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "May ordinary thick socks be wiped over like leather socks?",
+          "back": "The schools differ, and views differ inside the Hanafi primer itself."
+        },
+        {
+          "id": "c4-hanafi",
+          "front": "Hanafi primer (al-Quduri): may socks that are not leather be wiped over?",
+          "back": "Abu Hanifah: not over socks unless they are soled or covered with leather. Abu Yusuf and Muhammad: over socks that are thick and do not let water through.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c4-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): may socks that are not leather be wiped over?",
+          "back": "Over leather socks and what is like them: thick socks that stay up on the feet.",
+          "school": "hanbali"
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "Whatever breaks [[wudu]] breaks a [[wudu]] made with wiping over the socks. The primers add taking the socks off and, where a time limit is held, its end.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Wudu’, al-Mash ‘ala al-Khuffayn, mas’ala 7 (Dar al-Hadith ed., vol. 1, p. 29)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "What breaks [[wudu]] breaks the wiping; so do taking the sock off and the end of the time.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara, Bab al-Mash ‘ala al-Khuffayn"
+          },
+          "quote": "وينقضه أيضا نزع الخف ومضي المدة"
+        },
+        {
+          "school": "maliki",
+          "text": "He wipes for as long as he does not take them off.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab fi al-mash ‘ala al-khuffayn"
+          },
+          "quote": "ما لم ينزعهما"
+        },
+        {
+          "school": "shafii",
+          "text": "Three things end the wiping: taking them off, the end of the time, and whatever makes [[ghusl]] due.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: wiping over the khuffayn"
+          },
+          "quote": "ويبطل المسح بثلاثة أشياء: بخلعهما وانقضاء المدة وما يوجب الغسل"
+        },
+        {
+          "school": "hanbali",
+          "text": "When the time ends, or he takes them off before it does, his purification is void.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab al-mash ‘ala al-khuffayn"
+          },
+          "quote": "ومتى مسح ثم انقضت المدة أو خلع قبلها بطلت طهارته"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "What ends a [[wudu]] made with wiping over leather socks?",
+          "back": "Whatever breaks [[wudu]], by agreement. The primers add taking the socks off and, where a time limit is held, its end."
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "When do the socks have to go on for wiping over them to apply?",
+      "options": [
+        "After a complete [[wudu]]",
+        "At any time",
+        "Only on a journey"
+      ],
+      "answer": 0,
+      "claim": "c1"
+    },
+    {
+      "q": "On a time limit for wiping, the four primers…",
+      "options": [
+        "Differ: three give a limit, one gives none",
+        "All give one day and night",
+        "All give no limit"
+      ],
+      "answer": 0,
+      "claim": "c2"
+    },
+    {
+      "q": "On thick socks that are not leather, the primers…",
+      "options": [
+        "Differ",
+        "All include them",
+        "All exclude them"
+      ],
+      "answer": 0,
+      "claim": "c4"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+    ]
+  }
+}

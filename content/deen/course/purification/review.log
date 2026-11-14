@@ -1,0 +1,85 @@
+Unit Purification: checker log
+==============================
+
+2026-11-14  Checker pass (stage G of spec 5.4), by an agent that did not draft the lessons
+and saw none of the drafting reasoning. Scope: every primer quote, every consensus citation,
+every Bidayat al-Mujtahid cross-location, every Quran ref, and the English of each claim,
+position, card and check question read against the Arabic it rests on.
+
+Mechanical
+----------
+- tools/verify-citations.mjs re-fetched all 73 recorded pages afresh: 160 of 160 quotes found
+  on the page recorded for them (skeleton match, same normalisation as the build). Every
+  position and consensus location in the lessons has a record; every difference has a
+  Bidayat al-Mujtahid record; every Quran ref resolves.
+- Quran refs read for sense: 5:6 (wudu, janabah, tayammum, "touched women"), 4:43
+  (tayammum), 2:222 (menstruation), 25:48 and 8:11 (water that purifies), 74:4 (garments).
+
+Position text that says more than its stored quote: re-located on the same page
+-------------------------------------------------------------------------------
+- water-01/c6 Hanafi: "other water that an impurity falls into is not used" and the flowing
+  water sentence: found in al-Quduri (the first at the end of the page before the quote; the
+  online copy has the typo "اوضوء" for "الوضوء" there). Confirmed.
+- water-01/c6 Shafi'i: "about five hundred Baghdad ratls": found ("خمسمائة رطل بغدادي تقريبا").
+- wudu-02/c2 Hanbali: the full sequence (intention, bismillah, hands, mouth and nose, face,
+  arms with elbows, head with ears, feet with ankles): found in order in 'Umdat al-Fiqh.
+- wudu-03/c4 Hanafi: order falls under "ويستحب للمتوضئ" in al-Quduri. Confirmed.
+- wudu-03/c5 Shafi'i: al-muwalat is the last item of Abu Shuja's sunan list. Confirmed.
+- ghusl-05/c4 Hanafi and Hanbali: stepping aside and washing the feet last: found in both.
+- ghusl-05/c1: the early dissent about a woman's wet dream: Ibn Rushd names al-Nakha'i. Found.
+- tayammum-06/c3 Maliki (to the elbows), Hanbali (more strikes or wiping further also
+  count); tayammum-06/c4 Hanafi (Abu Yusuf: soil and sand only); tayammum-06/c6 Maliki
+  (other views recorded): all found.
+- khuff-07/c2 Hanbali (three days and nights for the traveller); khuff-07/c4 Hanafi (Abu
+  Yusuf and Muhammad: "ثخينين لا يشفان الماء"); khuff-07/c5 Hanafi ("وينقض المسح ما ينقض
+  الوضوء"): all found.
+- najasa-08/c6 Hanafi ("وما ليس له عين مرئية"): found.
+
+Positions worded as "not among the acts/causes the primer lists"
+----------------------------------------------------------------
+These state a fact about an enumerated list in the primer, not a ruling we infer. Each list
+was read in full and the absent item searched for on the page(s):
+- wudu-03/c5 Hanafi (continuity): al-Quduri's fard, sunan and mustahabb lists do not mention
+  al-muwalat. Ibn Rushd, same mas'ala: "وذهب الشافعي وأبو حنيفة إلى أن الموالاة ليست من واجبات
+  الوضوء". Consistent.
+- wudu-04/c4 and c5 Hanafi (touching a woman, touching the private part): al-Quduri's list of
+  what breaks wudu (which runs onto the next page: fainting, madness, laughing aloud in the
+  prayer) has neither. Ibn Rushd on touching the penis: "ومنهم من لم ير فيه وضوءا أصلا وهو أبو
+  حنيفة وأصحابه". Consistent.
+- wudu-04/c6 Maliki and Shafi'i (bleeding): neither al-Risala's chapter nor Abu Shuja's six
+  causes names blood from elsewhere in the body. Ibn Rushd attributes "the two passages"
+  as the test to al-Shafi'i and his companions. Consistent for the Shafi'i entry; the Maliki
+  entry rests on the primer's own list.
+
+Findings fixed
+--------------
+1. water-01/c4: "every kind of natural water": "natural" is not in Ibn Rushd's sentence
+   ("جميع أنواع المياه"). Removed from the claim and its card.
+2. khuff-07/c1: Ibn Rushd says the condition is agreed "إلا خلافا شاذا". The claim now says
+   that he notes one isolated dissent.
+3. khuff-07/c2 Maliki: "No time limit" was our inference from "ما لم ينزعهما". Reworded to
+   what the primer says, adding that it names no time limit (position text and school card).
+4. wudu-04/c6 Hanafi: "spreads beyond its place" was loose for "فتجاوز إلى موضع يلحقه حكم
+   التطهير". Now "reaches a part that purification applies to" (position text and card).
+
+Findings answered, no change
+----------------------------
+- najasa-08/c5 Maliki: the quote is about water changed by something pure, not about vinegar
+  by name. The position text says only what the primer says; the claim is carried by the
+  Hanafi and Hanbali positions and Ibn Rushd's statement of the difference. Kept.
+- wudu-04/c1: "wady, a thick white fluid that can follow urine" is a lexical gloss; the same
+  description is in al-Risala's chapter ("ماء أبيض خاثر يخرج بإثر البول"). Kept.
+- tayammum-06/c3 Shafi'i: the online copy of Matn Abi Shuja' drops "ومسح الوجه" from the four
+  obligatory acts of tayammum (a copy error). Our position cites only "ومسح اليدين مع
+  المرفقين", which is there. Kept.
+- Claims of kind "differs" with fewer than four positions (wudu-03/c4, c5; ghusl-05/c6;
+  khuff-07/c3, c4; najasa-08/c6): the missing primers either do not address the point in a
+  quotable phrase or address it only by implication. Left out rather than inferred.
+
+Primer citations that could not be confirmed
+--------------------------------------------
+None. Every shipped primer quote was located. Limits of this check: one online copy per
+work (shamela.ws) was read, not a second independent print; and locating a phrase is not a
+scholar's reading of it. The lessons carry "Source-checked. Not yet reviewed by a scholar."
+
+Result: 9 of 9 lessons source-checked; 0 left as draft.

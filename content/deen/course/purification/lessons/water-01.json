@@ -1,0 +1,262 @@
+{
+  "id": "water-01",
+  "unit": "purification",
+  "order": 1,
+  "rev": 1,
+  "title": "Purity and water",
+  "intro": "Before standing to pray, a Muslim gets ready, and the Quran ties that readiness to water. This lesson sets out the two kinds of purity the scholars speak of, the three ways of reaching it, and which water does the job.",
+  "claims": [
+    {
+      "id": "c1",
+      "text": "Purity in the sacred law is of two kinds: purity from a ritual state ([[hadath]]), and purity from physical impurity ([[najasah]]).",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "front": "What are the two kinds of purity in the sacred law?",
+          "back": "Purity from a ritual state ([[hadath]]), and purity from physical impurity ([[najasah]])."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "text": "Purity from a ritual state is reached in three ways: [[wudu]], [[ghusl]], and [[tayammum]], which stands in for them.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, opening (Dar al-Hadith ed., vol. 1, p. 13)"
+          }
+        },
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "front": "Name the three ways of becoming pure from a ritual state.",
+          "back": "[[wudu]], [[ghusl]], and [[tayammum]], which stands in for the other two."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "text": "Purity is a condition of the prayer.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 5 (Dar al-Hadith ed., vol. 1, p. 47)"
+          }
+        },
+        {
+          "quran": {
+            "surahId": 5,
+            "ayah": 6
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "front": "How does purity relate to the prayer?",
+          "back": "It is a condition of the prayer. Ibn Rushd reports that Muslims are agreed on this."
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "text": "Every kind of water is pure in itself and purifies other things. Ibn Rushd notes one early, isolated disagreement about seawater.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 3 (on water) (Dar al-Hadith ed., vol. 1, p. 29)"
+          }
+        },
+        {
+          "quran": {
+            "surahId": 25,
+            "ayah": 48
+          }
+        },
+        {
+          "quran": {
+            "surahId": 8,
+            "ayah": 11
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "front": "Which kinds of water are pure in themselves and purifying?",
+          "back": "Every kind. Ibn Rushd reports agreement, apart from an early, isolated disagreement about seawater."
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "text": "Water whose taste, colour or smell has been changed by an impurity is impure, whether it is a little or a lot, and is not used for purification.",
+      "kind": "agreed",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 11 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+          }
+        },
+        {
+          "consensus": {
+            "work": "bidayat-al-mujtahid",
+            "location": "Kitab al-Tahara min al-Hadath, Kitab al-Wudu’, Bab 3 (on water) (Dar al-Hadith ed., vol. 1, p. 30)"
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "front": "Which three qualities of water show that an impurity has spoiled it?",
+          "back": "Its taste, colour or smell. If an impurity changes any of them the water is impure, whether a little or a lot."
+        }
+      ]
+    },
+    {
+      "id": "c6",
+      "text": "A very large body of water that an impurity has not changed stays as it was and is used for purification. The schools differ about a smaller amount that an impurity falls into without changing it.",
+      "kind": "differs",
+      "evidence": [
+        {
+          "consensus": {
+            "work": "al-ijma",
+            "location": "Kitab al-Wudu’, no. 12 (ed. Fu’ad ‘Abd al-Mun‘im Ahmad, Dar al-Muslim, p. 35)"
+          }
+        }
+      ],
+      "positions": [
+        {
+          "school": "hanafi",
+          "text": "A pool so large that moving one side does not move the other is used from the far side when an impurity falls in at one side, and flowing water is used while no trace of the impurity shows. Other water that an impurity falls into is not used.",
+          "source": {
+            "work": "mukhtasar-al-quduri",
+            "location": "Kitab al-Tahara"
+          },
+          "quote": "والغدير العظيم الذي لا يتحرك أحد طرفيه بتحريك الطرف الآخر إذا وقعت نجاسة في أحد جانبيه جاز الوضوء من الجانب الآخر"
+        },
+        {
+          "school": "maliki",
+          "text": "A small amount of water becomes impure from a small amount of impurity, even if it is not changed.",
+          "source": {
+            "work": "al-risala",
+            "location": "Bab taharat al-ma’ wa al-thawb wa al-buq‘a"
+          },
+          "quote": "وقليل الماء ينجسه قليل النجاسة وإن لم تغيره"
+        },
+        {
+          "school": "shafii",
+          "text": "Less than two large jars (about five hundred Baghdad ratls) becomes impure when an impurity enters it; two jars or more only if it changes.",
+          "source": {
+            "work": "matn-abi-shuja",
+            "location": "Kitab al-Tahara, fasl: the kinds of water"
+          },
+          "quote": "وماء نجس وهو الذي حلت فيه نجاسة وهو دون القلتين أو كان قلتين فتغير"
+        },
+        {
+          "school": "hanbali",
+          "text": "Water that reaches two large jars, or is flowing, becomes impure only if its colour, taste or smell changes. Less than that becomes impure when an impurity mixes with it.",
+          "source": {
+            "work": "umdat-al-fiqh",
+            "location": "Kitab al-Tahara, Bab ahkam al-miyah"
+          },
+          "quote": "فإذا بلغ الماء قلتين أو كان جاريا لم ينجسه شيء إلا ما غير لونه أو طعمه أو ريحه وما عدا ذلك ينجس بمخالطة النجاسة"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c6a",
+          "front": "An impurity falls into a small amount of water and nothing about the water changes. Is the water still used?",
+          "back": "The schools differ. What is agreed: a very large body of unchanged water stays pure, and changed water is impure."
+        },
+        {
+          "id": "c6-hanafi",
+          "front": "Hanafi primer (al-Quduri): when does water become impure if an impurity falls in without changing it?",
+          "back": "A pool so large that moving one side does not move the other is used from the far side when an impurity falls in at one side, and flowing water is used while no trace of the impurity shows. Other water that an impurity falls into is not used.",
+          "school": "hanafi"
+        },
+        {
+          "id": "c6-maliki",
+          "front": "Maliki primer (Ibn Abi Zayd): when does water become impure if an impurity falls in without changing it?",
+          "back": "A small amount of water becomes impure from a small amount of impurity, even if it is not changed.",
+          "school": "maliki"
+        },
+        {
+          "id": "c6-shafii",
+          "front": "Shafi’i primer (Abu Shuja’): when does water become impure if an impurity falls in without changing it?",
+          "back": "Less than two large jars (about five hundred Baghdad ratls) becomes impure when an impurity enters it; two jars or more only if it changes.",
+          "school": "shafii"
+        },
+        {
+          "id": "c6-hanbali",
+          "front": "Hanbali primer (Ibn Qudamah): when does water become impure if an impurity falls in without changing it?",
+          "back": "Water that reaches two large jars, or is flowing, becomes impure only if its colour, taste or smell changes. Less than that becomes impure when an impurity mixes with it.",
+          "school": "hanbali"
+        }
+      ]
+    }
+  ],
+  "check": [
+    {
+      "q": "Which of these is a way of becoming pure from a ritual state?",
+      "options": [
+        "[[tayammum]]",
+        "Fasting",
+        "Giving charity"
+      ],
+      "answer": 0,
+      "claim": "c2"
+    },
+    {
+      "q": "Water has taken on the smell of an impurity. What is its state?",
+      "options": [
+        "Impure, whether a little or a lot",
+        "Pure if there is a lot of it",
+        "Pure, as long as its colour is clear"
+      ],
+      "answer": 0,
+      "claim": "c5"
+    },
+    {
+      "q": "The two kinds of purity the sacred law speaks of are purity from…",
+      "options": [
+        "A ritual state, and physical impurity",
+        "Hunger, and thirst",
+        "Travel, and illness"
+      ],
+      "answer": 0,
+      "claim": "c1"
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+    ]
+  }
+}

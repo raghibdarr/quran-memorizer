@@ -1,0 +1,15 @@
+{
+  "id": "purification",
+  "deck": "course-purification",
+  "title": "Purification",
+  "blurb": "Water, wudu, ghusl, tayammum and removing impurity, with each school's position from its own primer",
+  "order": 1,
+  "lessons": ["water-01", "wudu-02", "wudu-03", "wudu-04", "ghusl-05", "tayammum-06", "khuff-07", "najasa-08", "recap-09"],
+  "primers": {
+    "hanafi": "mukhtasar-al-quduri",
+    "maliki": "al-risala",
+    "shafii": "matn-abi-shuja",
+    "hanbali": "umdat-al-fiqh"
+  },
+  "footer": "For your own situation, ask a scholar you trust."
+}

@@ -1,0 +1,61 @@
+[
+ {
+  "id": "hadath",
+  "arabic": "حدث",
+  "translit": "hadath",
+  "short": "A ritual state, such as the one after using the toilet, that is lifted by purification before the prayer.",
+  "seeAlso": [
+   "wudu",
+   "ghusl",
+   "janabah"
+  ]
+ },
+ {
+  "id": "istinja",
+  "arabic": "استنجاء",
+  "translit": "istinja’",
+  "short": "Cleaning the two passages after relieving oneself.",
+  "seeAlso": [
+   "najasah"
+  ]
+ },
+ {
+  "id": "janabah",
+  "arabic": "جنابة",
+  "translit": "janabah",
+  "short": "The state a person is in after intercourse or the emission of semen, lifted by a full-body wash.",
+  "seeAlso": [
+   "ghusl",
+   "hadath"
+  ]
+ },
+ {
+  "id": "khuff",
+  "arabic": "خف",
+  "translit": "khuff",
+  "short": "A leather sock that covers the foot up to and including the ankle.",
+  "seeAlso": [
+   "wudu"
+  ]
+ },
+ {
+  "id": "madhy",
+  "arabic": "مذي",
+  "translit": "madhy",
+  "short": "A thin fluid released in arousal, apart from semen.",
+  "seeAlso": [
+   "hadath",
+   "wudu"
+  ]
+ },
+ {
+  "id": "najasah",
+  "arabic": "نجاسة",
+  "translit": "najasah",
+  "short": "Physical impurity, such as urine, that is cleaned off the body, the clothes and the place of prayer.",
+  "seeAlso": [
+   "taharah",
+   "istinja"
+  ]
+ }
+]

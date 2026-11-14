@@ -1,0 +1,20 @@
+=== Foundations course, Unit Purification
+The lessons, recall cards, check questions and glossary definitions of the purification
+unit are Takrar's own work, written for this app.
+
+Each school's position is cited, by work and chapter, to one classical primer, with a short
+phrase of its Arabic quoted as the words relied on:
+  Hanafi:   Mukhtasar al-Quduri, by Abu al-Husayn al-Quduri (d. 428 AH)
+  Maliki:   al-Risala, by Ibn Abi Zayd al-Qayrawani (d. 386 AH)
+  Shafi'i:  Matn Abi Shuja' (al-Ghaya wa al-Taqrib), by Abu Shuja' al-Asfahani (d. 593 AH)
+  Hanbali:  'Umdat al-Fiqh, by Ibn Qudamah al-Maqdisi (d. 620 AH)
+Points of agreement and difference are cited to Bidayat al-Mujtahid by Ibn Rushd (d. 595 AH),
+al-Ijma' by Ibn al-Mundhir (d. 318 AH) and Maratib al-Ijma' by Ibn Hazm (d. 456 AH).
+
+These works are in the public domain. They are cited and briefly quoted, not reproduced; no
+edition's notes, introduction or apparatus is used. The quotations were read in the copies at
+shamela.ws (al-Maktaba al-Shamila), page by page, as recorded in
+content/deen/course/purification/citations.json. Quran references are rendered from the
+app's own Quran text.
+
+Status: source-checked by the authoring pipeline. Not yet reviewed by a scholar.
