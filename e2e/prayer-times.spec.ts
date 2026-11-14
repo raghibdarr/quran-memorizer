@@ -116,6 +116,51 @@ test.describe('prayer hub', () => {
     await context.close()
   })
 
+  test('far north: a time that does not exist is named, never shown, and a time past midnight says so', async ({ page }) => {
+    const seedPlace = (place: object, prayer: object) =>
+      page.addInitScript(
+        ({ place, prayer }) => {
+          localStorage.setItem('onboarding-complete', 'true')
+          localStorage.setItem('takrar-place', JSON.stringify({ state: { place }, version: 1 }))
+          // Only on first load: the test changes the rule below and reloads
+          if (!localStorage.getItem('takrar-prayer')) {
+            localStorage.setItem('takrar-prayer', JSON.stringify({ state: { ...prayer, madhab: 'standard', setupDone: true }, version: 1 }))
+          }
+        },
+        { place, prayer },
+      )
+    // Tromsø at midsummer under a fixed rule: the sun never sets, so Fajr, Sunrise, Maghrib and Isha have no time
+    await page.clock.setFixedTime(new Date('2026-06-21T12:00:00+02:00'))
+    await seedPlace(
+      { lat: 69.65, lng: 18.96, label: 'Tromsø, Norway', countryCode: 'NO', tz: 'Europe/Oslo', source: 'city' },
+      { method: 'MuslimWorldLeague', highLatRule: 'middleofthenight' },
+    )
+    await page.goto('/prayer')
+    await expect(page.locator('[data-prayer-row]')).toHaveCount(6)
+    for (const name of ['fajr', 'sunrise', 'maghrib', 'isha']) {
+      const row = page.locator(`[data-prayer-row="${name}"]`)
+      await expect(row).toContainText('No time today')
+      await expect(row).not.toContainText(/\d\d:\d\d/)
+    }
+    await expect(page.locator('[data-prayer-row="dhuhr"]')).toContainText(/12:\d\d/)
+    await expect(page.locator('[data-missing-times]')).toContainText('Fajr, Sunrise, Maghrib and Isha')
+    await expect(page.locator('[data-next-hero]')).toHaveAttribute('data-next-hero', 'dhuhr')
+    await expect(page.locator('[data-day-shift]')).toHaveCount(0)
+
+    // The automatic rule fills them in; Isha then falls after midnight and the row says so
+    await page.evaluate(() => {
+      const raw = JSON.parse(localStorage.getItem('takrar-prayer')!)
+      raw.state.highLatRule = 'auto'
+      localStorage.setItem('takrar-prayer', JSON.stringify(raw))
+    })
+    await page.reload()
+    await expect(page.locator('[data-prayer-row]')).toHaveCount(6)
+    await expect(page.locator('[data-missing-times]')).toHaveCount(0)
+    await expect(page.locator('[data-prayer-row="isha"]')).toContainText(/00:\d\d/)
+    await expect(page.locator('[data-prayer-row="isha"] [data-day-shift]')).toHaveText('after midnight')
+    await expect(page.locator('[data-prayer-row="dhuhr"] [data-day-shift]')).toHaveCount(0)
+  })
+
   test('before setup: one setup card and no location request', async ({ page }) => {
     await watchGeolocation(page)
     await seed(page, { place: false })

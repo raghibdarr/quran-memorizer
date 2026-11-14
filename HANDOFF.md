@@ -12,3 +12,11 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
 4. **Local builds in a worktree:** Turbopack refuses the node_modules junction; `npx next build --webpack` works.
    Without a `.env.local` the app needs `NEXT_PUBLIC_SUPABASE_URL` set to anything (a dummy local URL was used here).
 5. `src/components/prayer/tool-tiles.tsx` is unchanged; the hub renders it (readyTools()).
+6. **Review pass (fresh reviewer), for foundations' `src/lib/prayer/engine.ts`** (not edited here, spec 3.8): in polar
+   night with the automatic rule the day's times come out of order. Tromsø (69.65, 18.96, Europe/Oslo), 2026-12-21,
+   Muslim World League, `highLatRule: 'auto'`: Fajr 07:38, Sunrise 10:57, Dhuhr 11:32, **Asr 10:52**, Maghrib 12:06,
+   Isha 15:24, so Asr precedes Dhuhr and `currentPrayer` reports Asr before Dhuhr has begun. The hub shows what the
+   engine returns; the engine should either keep the order or return null for a time it cannot place.
+7. **Review pass, for hijri-ramadan and adhkar-duas:** the hub now always mounts `<RamadanBanner/>` and shows
+   `<AdhkarNow/>` only while the banner renders nothing (CSS, `data-chip="ramadan"` / `data-chip="adhkar"`), so the
+   banner alone decides its season. Both slots must render no DOM at all (return null) when they have nothing to show.

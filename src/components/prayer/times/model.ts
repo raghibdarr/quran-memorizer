@@ -37,6 +37,11 @@ export interface HubRow {
   isNext: boolean;
   /** Its time is in now */
   isCurrent: boolean;
+  /**
+   * The time falls on another calendar day at the place than the one listed: 1
+   * when it is past midnight (a summer Isha far north), -1 when before the day began
+   */
+  dayShift: -1 | 0 | 1;
 }
 
 export interface HubModel {
@@ -60,6 +65,12 @@ export function inRamadan(place: Where, s: Pick<ModelSettings, 'ramadanMode' | '
   return isRamadan(isoInTz(now, place.tz), s.hijriOffset);
 }
 
+function dayShiftOf(ms: number | null, iso: string, tz: string): -1 | 0 | 1 {
+  if (ms === null) return 0;
+  const on = isoInTz(ms, tz);
+  return on === iso ? 0 : on > iso ? 1 : -1;
+}
+
 /** Everything the /prayer hub shows at `now` */
 export function buildHub(place: Where, s: ModelSettings, now: number): HubModel {
   const iso = isoInTz(now, place.tz);
@@ -69,6 +80,7 @@ export function buildHub(place: Where, s: ModelSettings, now: number): HubModel 
     ...r,
     isNext: !!next && next.iso === iso && next.prayer === r.name,
     isCurrent: !!current && current.iso === iso && current.prayer === r.name,
+    dayShift: dayShiftOf(r.startMs, iso, place.tz),
   }));
   return {
     iso,

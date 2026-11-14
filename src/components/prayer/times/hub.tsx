@@ -83,7 +83,7 @@ function NextHero({ model, format, now, until }: { model: HubModel; format: (ms:
   const label = model.ramadan && next.prayer === 'maghrib' ? 'Maghrib (iftar)' : TIME_LABELS[next.prayer];
   return (
     <Card variant="tactile" className="p-5">
-      <div data-next-hero={next.prayer} aria-live="polite">
+      <div data-next-hero={next.prayer}>
         <p className="text-[11px] font-bold uppercase tracking-wider text-teal">{model.nextIsTomorrow ? 'Next prayer, tomorrow' : 'Next prayer'}</p>
         <div className="mt-1 flex items-baseline justify-between gap-3">
           <p className="text-3xl font-bold text-foreground">{label}</p>
@@ -118,8 +118,14 @@ function TimesList({ model, format }: { model: HubModel; format: (ms: number) =>
             {r.startMs === null ? (
               <span className="text-sm text-muted">No time today</span>
             ) : (
-              <span className={cn('text-[15px] tabular-nums', isPrayer ? 'font-semibold text-foreground' : 'text-muted', r.isNext && 'text-teal')}>
+              <span className={cn('text-right text-[15px] tabular-nums', isPrayer ? 'font-semibold text-foreground' : 'text-muted', r.isNext && 'text-teal')}>
                 {format(r.startMs)}
+                {/* Past midnight (a summer Isha far north): say so, or the time reads as this morning's */}
+                {r.dayShift !== 0 && (
+                  <span className="block text-[11px] font-normal leading-4 text-muted" data-day-shift={r.dayShift}>
+                    {r.dayShift > 0 ? 'after midnight' : 'before midnight'}
+                  </span>
+                )}
               </span>
             )}
             {/* The tracker's column: every row takes its width once any row draws a tick, so the times line up */}
@@ -193,7 +199,7 @@ export default function PrayerHub() {
             <button
               type="button"
               aria-label="Dismiss"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-foreground/5"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-foreground/5"
               onClick={() => {
                 setDismissedTz(deviceTz);
                 try {
@@ -222,8 +228,17 @@ export default function PrayerHub() {
               </p>
             )}
             <TimesList model={model} format={format} />
-            {/* At most one contextual chip: Ramadan in season, else the adhkar for now */}
-            {model.ramadan ? <RamadanBanner /> : <AdhkarNow window={model.window} afterPrayer={afterPrayer} />}
+            {/*
+              At most one contextual chip. The Ramadan banner decides for itself whether it is in
+              season (it renders nothing otherwise, spec 3.4); only when it is empty do the adhkar
+              for now show. An empty slot takes no room.
+            */}
+            <div className="peer/ramadan empty:hidden" data-chip="ramadan">
+              <RamadanBanner />
+            </div>
+            <div className="empty:hidden peer-[:not(:empty)]/ramadan:hidden" data-chip="adhkar">
+              <AdhkarNow window={model.window} afterPrayer={afterPrayer} />
+            </div>
           </>
         ) : (
           <HubSkeleton />

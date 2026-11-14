@@ -44,10 +44,22 @@ export default function PlacePicker({ onPick, autoSearch = false }: { onPick: (p
   const [mode, setMode] = useState<Mode>(autoSearch ? 'search' : 'choose');
   const [note, setNote] = useState<string | null>(null);
 
+  // Bumped whenever the user moves on (taps "Choose a city", asks again, leaves the
+  // screen): a fix that arrives after that is dropped instead of replacing their choice
+  const request = useRef(0);
+  useEffect(
+    () => () => {
+      request.current++;
+    },
+    [],
+  );
+
   const locate = async () => {
+    const mine = ++request.current;
     setNote(null);
     setMode('locating');
     const fix = await getCoarseLocation();
+    if (mine !== request.current) return;
     if (!fix.ok) {
       setNote(FAILED[fix.reason]);
       setMode('search');
@@ -60,6 +72,7 @@ export default function PlacePicker({ onPick, autoSearch = false }: { onPick: (p
     } catch {
       index = null;
     }
+    if (mine !== request.current) return;
     const near = index ? nearestCity(index, fix.lat, fix.lng) : null;
     onPick(placeFromFix(fix.lat, fix.lng, near, deviceTimeZone(), index));
   };
@@ -82,6 +95,7 @@ export default function PlacePicker({ onPick, autoSearch = false }: { onPick: (p
         <button
           type="button"
           onClick={() => {
+            request.current++;
             setNote(null);
             setMode('search');
           }}
@@ -174,9 +188,13 @@ export function CitySearch({ onPick }: { onPick: (city: City, index: CityIndex) 
           .
         </p>
       ) : !index ? (
-        <p className="px-1 text-sm text-muted">Loading cities…</p>
+        <p className="px-1 text-sm text-muted" role="status">
+          Loading cities…
+        </p>
       ) : deferred.trim() && results.length === 0 ? (
-        <p className="px-1 text-sm text-muted">No city by that name. Try the nearest larger town.</p>
+        <p className="px-1 text-sm text-muted" role="status">
+          No city by that name. Try the nearest larger town.
+        </p>
       ) : results.length > 0 ? (
         <ul className="overflow-hidden rounded-2xl border border-foreground/10 bg-card" role="list">
           {results.map((c) => (

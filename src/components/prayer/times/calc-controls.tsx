@@ -189,7 +189,7 @@ export function Stepper({
   label: string;
 }) {
   const btn =
-    'pressable flex h-9 w-9 items-center justify-center rounded-lg border border-foreground/15 text-lg font-semibold text-foreground disabled:opacity-30';
+    'pressable flex h-10 w-10 items-center justify-center rounded-lg border border-foreground/15 text-lg font-semibold text-foreground disabled:opacity-30';
   return (
     <div className="flex items-center gap-1.5" role="group" aria-label={label}>
       <button type="button" className={btn} onClick={() => onChange(value - 1)} disabled={value <= min} aria-label={`Less: ${label}`}>

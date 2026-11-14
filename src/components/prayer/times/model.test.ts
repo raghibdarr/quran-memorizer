@@ -53,6 +53,69 @@ describe('buildHub', () => {
   })
 })
 
+describe('buildHub at the edges of the day', () => {
+  const MWL: ModelSettings = { ...S, method: 'MuslimWorldLeague' }
+
+  it('marks a time that falls past midnight, and none in an ordinary day', () => {
+    expect(buildHub(MAKKAH, S, at('14:00')).rows.every((r) => r.dayShift === 0)).toBe(true)
+    // Reykjavik at midsummer: the sun sets after midnight, so Maghrib and Isha belong to the next calendar day
+    const reykjavik = { lat: 64.15, lng: -21.94, tz: 'Atlantic/Reykjavik' }
+    const m = buildHub(reykjavik, MWL, Date.parse('2026-06-21T12:00:00Z'))
+    const shift = Object.fromEntries(m.rows.map((r) => [r.name, r.dayShift]))
+    expect(shift).toMatchObject({ fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 1, isha: 1 })
+    expect(formatTime(m.rows[4].startMs!, reykjavik.tz)).toMatch(/^00:/)
+    expect(m.missing).toEqual([])
+  })
+
+  it('keeps the late Isha of the day before as the next prayer after midnight, without marking a row of the new day', () => {
+    // London, midsummer, middle-of-the-night rule: Isha of the 21st comes at about 01:02 on the 22nd
+    const london = { lat: 51.51, lng: -0.13, tz: 'Europe/London' }
+    const m = buildHub(london, { ...MWL, highLatRule: 'middleofthenight' }, Date.parse('2026-06-21T23:20:00Z'))
+    expect(m.iso).toBe('2026-06-22')
+    expect(m.next).toMatchObject({ prayer: 'isha', iso: '2026-06-21' })
+    expect(m.nextIsTomorrow).toBe(false)
+    expect(m.rows.some((r) => r.isNext)).toBe(false)
+    expect(m.current).toMatchObject({ prayer: 'maghrib', iso: '2026-06-21' })
+  })
+
+  it('reads the right day and times across a daylight-saving change', () => {
+    const london = { lat: 51.51, lng: -0.13, tz: 'Europe/London' }
+    // 29 March 2026: clocks go forward at 01:00 UTC
+    const before = buildHub(london, MWL, Date.parse('2026-03-29T00:30:00Z'))
+    const after = buildHub(london, MWL, Date.parse('2026-03-29T02:30:00Z'))
+    for (const m of [before, after]) {
+      expect(m.iso).toBe('2026-03-29')
+      expect(m.next).toMatchObject({ prayer: 'fajr', iso: '2026-03-29' })
+      expect(m.current).toMatchObject({ prayer: 'isha', iso: '2026-03-28' })
+      expect(m.rows.every((r) => r.dayShift === 0)).toBe(true)
+    }
+    expect(before.rows.map((r) => r.startMs)).toEqual(after.rows.map((r) => r.startMs))
+    // Dhuhr is on summer time (about 13:06), and the countdown to Fajr spans the lost hour
+    expect(formatTime(before.rows[2].startMs!, london.tz)).toMatch(/^13:0\d$/)
+    expect(stripLine(london, MWL, Date.parse('2026-03-29T00:30:00Z'))?.until).toMatch(/^in 3 h \d+ min$/)
+    // 25 October 2026: clocks go back; 00:30 UTC is 01:30 BST
+    const autumn = buildHub(london, MWL, Date.parse('2026-10-25T00:30:00Z'))
+    expect(autumn.iso).toBe('2026-10-25')
+    expect(formatTime(autumn.rows[2].startMs!, london.tz)).toMatch(/^11:4\d$/)
+  })
+
+  it('goes by the calendar day at the place, not in UTC or on the phone', () => {
+    const now = Date.parse('2026-03-15T11:00:00Z')
+    // 00:00 on the 16th in Apia (UTC+13), 01:00 on the 15th in Honolulu (UTC-10)
+    expect(buildHub({ lat: -13.83, lng: -171.77, tz: 'Pacific/Apia' }, MWL, now)).toMatchObject({ iso: '2026-03-16', next: { prayer: 'fajr', iso: '2026-03-16' } })
+    expect(buildHub({ lat: 21.31, lng: -157.86, tz: 'Pacific/Honolulu' }, MWL, now)).toMatchObject({ iso: '2026-03-15', next: { prayer: 'fajr', iso: '2026-03-15' } })
+  })
+
+  it('gives every time with the automatic rule in polar summer, and in the far south', () => {
+    const auto = buildHub({ lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }, MWL, Date.parse('2026-06-21T12:00:00+02:00'))
+    expect(auto.missing).toEqual([])
+    expect(auto.next?.prayer).toBe('dhuhr')
+    const ushuaia = buildHub({ lat: -54.8, lng: -68.3, tz: 'America/Argentina/Ushuaia' }, MWL, Date.parse('2026-12-21T15:00:00Z'))
+    expect(ushuaia.missing).toEqual([])
+    for (let i = 1; i < 6; i++) expect(ushuaia.rows[i].startMs!).toBeGreaterThan(ushuaia.rows[i - 1].startMs!)
+  })
+})
+
 describe('inRamadan', () => {
   // 1 Ramadan 1448 is expected about 8 February 2027
   const mid = Date.parse('2027-02-20T12:00:00+03:00')
