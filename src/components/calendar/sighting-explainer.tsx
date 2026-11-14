@@ -27,8 +27,7 @@ export default function SightingExplainer({ engine }: { engine: 'umalqura' | 'ta
       </summary>
       <div className="space-y-3 px-5 pb-5 text-sm leading-relaxed text-muted">
         <p>
-          A Hijri month starts with the new moon, and Muslims follow different, long-held positions on how to fix that
-          day:
+          A Hijri month starts with the new moon, and Muslims follow different positions on how to fix that day:
         </p>
         <ul className="space-y-2">
           {POSITIONS.map((p) => (
