@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatCivilDate, formatGrams, formatMoney, parseAmount } from './format';
+import { amountText, formatCivilDate, formatGrams, formatMoney, parseAmount } from './format';
 
 describe('zakat formatting', () => {
   it('formats money with the user\'s own currency text', () => {
@@ -54,5 +54,15 @@ describe('zakat formatting', () => {
 
   it('formats a civil date without time-zone drift', () => {
     expect(formatCivilDate('2027-03-06')).toBe('Saturday 6 March 2027');
+  });
+  it('a remembered amount reads back as the same number, with no exponent form', () => {
+    for (const n of [0, 0.8, 2345.67, 1250.5, 0.0000001, 1e21, 123456789012]) {
+      const t = amountText(n);
+      expect(t).not.toMatch(/e/i);
+      expect(parseAmount(t)).toBe(n);
+    }
+    expect(amountText(null)).toBe('');
+    expect(amountText(undefined)).toBe('');
+    expect(amountText(NaN)).toBe('');
   });
 });

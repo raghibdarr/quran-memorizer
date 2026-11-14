@@ -3,7 +3,7 @@
 import { useId, useState } from 'react';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
-import { parseAmount } from '@/lib/zakat/format';
+import { amountText, parseAmount } from '@/lib/zakat/format';
 
 /**
  * An amount field. Keeps the text the user is typing ("12." stays "12.") and
@@ -27,7 +27,7 @@ export function AmountField({
   testId?: string;
 }) {
   const id = useId();
-  const [text, setText] = useState(value === undefined || value === null ? '' : String(value));
+  const [text, setText] = useState(amountText(value));
   const parsed = parseAmount(text);
   const invalid = Number.isNaN(parsed);
   return (

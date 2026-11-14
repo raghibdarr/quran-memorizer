@@ -45,6 +45,16 @@ export function parseAmount(text: string): number | null {
   return Number.isFinite(n) ? n : NaN;
 }
 
+/**
+ * A remembered amount as the text of its field: plain digits, never the
+ * exponent form String() gives very small or very large numbers ("1e-7"),
+ * which parseAmount would then reject on the next visit.
+ */
+export function amountText(n: number | null | undefined): string {
+  if (typeof n !== 'number' || !Number.isFinite(n) || n < 0) return '';
+  return n.toLocaleString('en', { useGrouping: false, maximumFractionDigits: 20 });
+}
+
 /** "Saturday 6 March 2027" for a civil date (built from parts: ICU versions differ on the comma) */
 export function formatCivilDate(iso: string): string {
   const [y, m, d] = iso.split('-').map(Number);
