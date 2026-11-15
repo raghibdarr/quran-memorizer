@@ -349,3 +349,16 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
    al-Daraqutni on `duas-daily:iftar`, was read in a single copy (en.tohed.com) only.
 8. **e2e**: `e2e/adhkar.spec.ts` (6 tests) passed against this worktree's static build on port 4424
    with an ad-hoc config; the repo's Playwright configs were not run.
+9. **Review pass (fresh reviewer, 2026-11-15).** `witness.mjs verify --all` re-run: 45 checked, 0 problems. Every
+   shipped item's English was re-read against its Arabic by an agent that had not seen the drafting; two wordings
+   were corrected (rev raised: `duas-daily:leaving-home` usage note, `adhkar-morning-evening:la-ilaha-illallah-100`
+   title). Grading quotes were not all re-located (only al-Tirmidhi after 3426 was re-read on Shamela), so stage H
+   still wants its own pass in the wave-3 audit. Left as authored, for the owner or a scholar to decide:
+   `duas-daily:istikhara` keeps the narrator's aside "أو قال في عاجل أمري وآجله" inside the Arabic that is memorised
+   (faithful to al-Bukhari 6382; the usage note explains it); the sleep set counts each of the three surahs three
+   times in a row, where al-Bukhari 5017 describes the three read together, three times over.
+10. **/prayer chips.** `AdhkarNow` now renders up to two chips: after Fajr and after Asr it offers the prayer's own
+   adhkar and the morning or evening set (before, the window hid the after-prayer set for its whole length). The
+   hub's comment says "at most one contextual chip"; the second is one 48px row. Also for prayer-times /
+   integration: the hub hides the adhkar slot whenever the Ramadan banner shows (the month and the week before),
+   so there is no adhkar chip on /prayer for about five weeks a year; /adhkar still has every set.

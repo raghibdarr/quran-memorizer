@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from '@/components/app-link';
 import ScreenHeader from '@/components/worship/screen-header';
@@ -66,16 +66,23 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
   const [index, setIndex] = useState(0);
   // Counts per step, so stepping back shows where you were
   const [counts, setCounts] = useState<number[]>(() => steps.map(() => 0));
+  // Moving between steps puts focus on the new step's text, so a screen reader
+  // reads what is to be said next instead of staying on the button just pressed
+  const stepRef = useRef<HTMLDivElement>(null);
+  const moved = useRef(false);
+  useEffect(() => {
+    if (moved.current) stepRef.current?.focus({ preventScroll: true });
+  }, [index]);
 
   if (!steps.length) return <Missing />;
 
   if (index >= steps.length) {
     return (
-      <section className="flex flex-1 flex-col items-center justify-center gap-4 text-center" style={{ paddingBottom: 'calc(var(--tabbar-clearance) + 4rem)' }} data-now-done>
+      <section ref={stepRef} tabIndex={-1} className="flex flex-1 flex-col items-center justify-center gap-4 text-center outline-none" style={{ paddingBottom: 'calc(var(--tabbar-clearance) + 4rem)' }} data-now-done>
         <p className="text-base font-semibold text-foreground">{DONE_LINE[set.id]}</p>
         <p className="max-w-xs text-sm leading-relaxed text-muted">May Allah accept it from you.</p>
         <div className="flex flex-wrap justify-center gap-2">
-          <button type="button" onClick={() => { setIndex(0); setCounts(steps.map(() => 0)); }} className="min-h-11 rounded-full px-4 text-sm font-semibold text-muted hover:text-foreground">
+          <button type="button" onClick={() => { moved.current = true; setIndex(0); setCounts(steps.map(() => 0)); }} className="min-h-11 rounded-full px-4 text-sm font-semibold text-muted hover:text-foreground">
             Say them again
           </button>
           <Link href="/adhkar" className="inline-flex min-h-11 items-center rounded-full bg-teal/10 px-4 text-sm font-semibold text-teal">
@@ -92,6 +99,7 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
   const setCount = (n: number) => setCounts((c) => c.map((v, i) => (i === index ? Math.max(0, n) : v)));
   const next = () => {
     haptic.selection();
+    moved.current = true;
     setIndex((i) => i + 1);
     if (typeof window !== 'undefined') window.scrollTo({ top: 0 });
   };
@@ -100,20 +108,23 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
 
   return (
     <div className="flex flex-1 flex-col gap-4" data-now-step={step.item.id} data-step-index={index}>
-      <div className="flex items-center gap-3" aria-label={`Step ${index + 1} of ${steps.length}`}>
+      <div className="flex items-center gap-3">
         <span className="h-1 flex-1 overflow-hidden rounded-full bg-foreground/10" aria-hidden>
           <span className="block h-full rounded-full bg-teal transition-[width] duration-300 motion-reduce:transition-none" style={{ width: `${(index / steps.length) * 100}%` }} />
         </span>
         <span className="shrink-0 text-xs tabular-nums text-muted">
+          <span className="sr-only">Step </span>
           {index + 1} of {steps.length}
         </span>
       </div>
 
-      <StepText step={step} />
+      <div ref={stepRef} tabIndex={-1} className="outline-none">
+        <StepText step={step} />
+      </div>
 
       {counted ? (
         <div className="flex min-h-[13rem] flex-1 flex-col">
-          <Counter count={count} target={step.repeat} onCount={() => setCount(count + 1)} onUndo={() => setCount(count - 1)} label={step.item.title} />
+          <Counter count={count} target={step.repeat} onCount={() => setCount(count + 1)} onUndo={() => setCount(count - 1)} label={step.title} />
         </div>
       ) : (
         <div className="flex-1" />
@@ -122,7 +133,10 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
       <div className="sticky bottom-0 z-10 -mx-4 flex items-center justify-between gap-3 bg-cream/95 px-4 pt-2 backdrop-blur-sm" style={{ paddingBottom: 'calc(var(--tabbar-clearance) + 0.5rem)' }}>
         <button
           type="button"
-          onClick={() => setIndex((i) => Math.max(0, i - 1))}
+          onClick={() => {
+            moved.current = true;
+            setIndex((i) => Math.max(0, i - 1));
+          }}
           disabled={index === 0}
           className="min-h-11 rounded-full px-3 text-sm font-semibold text-muted hover:text-foreground disabled:opacity-0"
         >
@@ -151,13 +165,14 @@ function StepText({ step }: { step: SetStep }) {
   return (
     <article className="space-y-3 rounded-2xl border border-foreground/10 bg-card p-4">
       <header>
-        <h2 className="text-[15px] font-semibold text-foreground">{item.title}</h2>
+        <h2 className="text-[15px] font-semibold text-foreground">{step.title}</h2>
         <p className="mt-0.5 text-xs text-muted">
           {item.quran ? refLabel(item.quran, surahName) : null}
           {item.quran && repeat ? ' · ' : null}
           {repeat}
         </p>
-        {item.usage?.when?.length ? (
+        {/* A step showing another time of day's wording says so in its own line below */}
+        {item.usage?.when?.length && !step.variantLabel ? (
           <p className="mt-0.5 text-xs leading-relaxed text-muted">
             <RichText text={item.usage.when.join(' · ')} />
           </p>
@@ -179,7 +194,8 @@ function StepText({ step }: { step: SetStep }) {
       ) : (
         <>
           {step.arabic && <ItemArabic text={step.arabic} className="text-[1.5rem]" />}
-          {item.translation && !step.variantLabel && (
+          {/* A replaced wording carries its English in its label; an opening leaves the text, and so its English, as it is */}
+          {item.translation && (!step.variantLabel || step.opening) && (
             <p className="text-sm leading-relaxed text-foreground">
               <RichText text={item.translation} />
             </p>

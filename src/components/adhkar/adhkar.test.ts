@@ -1,19 +1,29 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ADHKAR_SETS, SET_IDS, isSetId, nowHref, setForNow, stepsFor } from './sets';
+import { ADHKAR_SETS, SET_IDS, isSetId, nowHref, setsForNow, stepsFor } from './sets';
 import { DEFAULT_REMINDERS, EVENING_REMINDER_ID, MORNING_REMINDER_ID, parseReminders, planAdhkarReminders } from './reminders';
 import type { EmittedDeck, TextItem } from '@/types/deen';
 
 const items = (id: string) => (JSON.parse(readFileSync(join(process.cwd(), 'src', 'data', 'deen', `${id}.json`), 'utf8')) as EmittedDeck).items as TextItem[];
 
 describe('Pray it now: which set fits', () => {
-  it('morning from Fajr to sunrise, evening from Asr to Maghrib, else after the prayer that has entered', () => {
-    expect(setForNow('morning', 'fajr')).toEqual({ set: 'morning', label: 'Morning adhkar' });
-    expect(setForNow('evening', 'asr')).toEqual({ set: 'evening', label: 'Evening adhkar' });
-    expect(setForNow(null, 'dhuhr')).toEqual({ set: 'after-prayer', label: 'After Dhuhr adhkar' });
-    expect(setForNow(null, 'isha')?.label).toBe('After Isha adhkar');
-    expect(setForNow(null, null)).toBeNull();
+  it('after the prayer that has entered, with the morning set from Fajr to sunrise and the evening set from Asr to Maghrib', () => {
+    expect(setsForNow(null, 'dhuhr')).toEqual([{ set: 'after-prayer', label: 'After Dhuhr adhkar' }]);
+    expect(setsForNow(null, 'isha')[0].label).toBe('After Isha adhkar');
+    // After Fajr and after Asr both fit: the prayer's own adhkar come first
+    expect(setsForNow('morning', 'fajr')).toEqual([
+      { set: 'after-prayer', label: 'After Fajr adhkar' },
+      { set: 'morning', label: 'Morning adhkar' },
+    ]);
+    expect(setsForNow('evening', 'asr').map((c) => c.set)).toEqual(['after-prayer', 'evening']);
+    expect(setsForNow(null, null)).toEqual([]);
+  });
+
+  it('sunrise is a time, not a prayer: nothing is offered after it', () => {
+    expect(setsForNow(null, 'sunrise' as never)).toEqual([]);
+    // A window with no prayer entered (a high-latitude day with a missing time) still offers its set
+    expect(setsForNow('morning', null)).toEqual([{ set: 'morning', label: 'Morning adhkar' }]);
   });
 
   it('knows its set ids and links', () => {
@@ -41,10 +51,14 @@ describe('Pray it now: the steps of each set', () => {
     const bika = evening.find((s) => s.item.id === 'bika-asbahna')!;
     expect(bika.arabic).toBe(bika.item.variants![0].arabic);
     expect(bika.variantLabel).toMatch(/evening/i);
+    expect(bika.title).toBe('By You we enter the evening');
     const morning = stepsFor(ADHKAR_SETS.morning, me);
     const mulk = morning.find((s) => s.item.id === 'al-mulku-lillah')!;
     expect(mulk.arabic).toBe(mulk.item.arabic);
     expect(mulk.opening).toBe(mulk.item.variants![0].arabic);
+    expect(mulk.title).toBe('We have reached the morning');
+    // The evening set shows it as stored, under its own title
+    expect(evening.find((s) => s.item.id === 'al-mulku-lillah')!.title).toBe(mulk.item.title);
     // Morning shows the stored morning wording untouched
     expect(morning.find((s) => s.item.id === 'bika-asbahna')!.arabic).toBe(bika.item.arabic);
   });

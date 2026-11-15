@@ -20,9 +20,10 @@ export interface AdhkarSet {
    * Items whose wording changes with the set: the variant (by its index in
    * item.variants) to show. 'replace' shows the variant instead of the item's
    * Arabic; 'opening' keeps the item's Arabic and shows the variant above it as
-   * the opening words to use (the source gives only the changed opening)
+   * the opening words to use (the source gives only the changed opening).
+   * `title` heads the step in this set, where the item's own title names the other time of day
    */
-  useVariant?: Readonly<Record<string, { index: number; mode: 'replace' | 'opening' }>>;
+  useVariant?: Readonly<Record<string, { index: number; mode: 'replace' | 'opening'; title?: string }>>;
 }
 
 export const SET_IDS: readonly SetId[] = ['morning', 'evening', 'after-prayer', 'sleep'];
@@ -48,7 +49,7 @@ export const ADHKAR_SETS: Readonly<Record<SetId, AdhkarSet>> = {
       'la-ilaha-illallah-100',
     ],
     // al-mulku-lillah is stored in its evening wording (Muslim 2723); the morning opening is its variant
-    useVariant: { 'al-mulku-lillah': { index: 0, mode: 'opening' } },
+    useVariant: { 'al-mulku-lillah': { index: 0, mode: 'opening', title: 'We have reached the morning' } },
   },
   evening: {
     id: 'evening',
@@ -69,7 +70,7 @@ export const ADHKAR_SETS: Readonly<Record<SetId, AdhkarSet>> = {
       'subhanallah-wa-bihamdihi',
     ],
     // bika-asbahna is stored in its morning wording; the evening one is its first variant
-    useVariant: { 'bika-asbahna': { index: 0, mode: 'replace' } },
+    useVariant: { 'bika-asbahna': { index: 0, mode: 'replace', title: 'By You we enter the evening' } },
   },
   'after-prayer': {
     id: 'after-prayer',
@@ -103,20 +104,25 @@ export interface NowChoice {
 }
 
 /**
- * The one set that fits now, for the chip on /prayer: the morning set from Fajr
- * to sunrise, the evening set from Asr to Maghrib (spec 2.7), otherwise the
- * adhkar after the prayer whose time has entered. Null when nothing fits.
+ * The sets that fit now, for the chips on /prayer (spec 2.7): the adhkar after
+ * the prayer whose time has entered, and with them the morning set from Fajr to
+ * sunrise or the evening set from Asr to Maghrib. The two overlap after Fajr and
+ * after Asr, when both are said, so both are offered: the prayer's own adhkar
+ * first, as they are said first. Empty when nothing fits.
  */
-export function setForNow(window: 'morning' | 'evening' | null, afterPrayer: PrayerName | null): NowChoice | null {
-  if (window === 'morning') return { set: 'morning', label: 'Morning adhkar' };
-  if (window === 'evening') return { set: 'evening', label: 'Evening adhkar' };
-  if (afterPrayer && AFTER_PRAYER.includes(afterPrayer)) return { set: 'after-prayer', label: `After ${PRAYER_LABEL[afterPrayer]} adhkar` };
-  return null;
+export function setsForNow(window: 'morning' | 'evening' | null, afterPrayer: PrayerName | null): NowChoice[] {
+  const out: NowChoice[] = [];
+  if (afterPrayer && AFTER_PRAYER.includes(afterPrayer)) out.push({ set: 'after-prayer', label: `After ${PRAYER_LABEL[afterPrayer]} adhkar` });
+  if (window === 'morning') out.push({ set: 'morning', label: 'Morning adhkar' });
+  if (window === 'evening') out.push({ set: 'evening', label: 'Evening adhkar' });
+  return out;
 }
 
 /** One step of a set: the item, the Arabic to show (a variant's, for some sets) and how many times */
 export interface SetStep {
   item: TextItem;
+  /** The step's heading (the item's title, unless the set shows another time of day's wording) */
+  title: string;
   /** The Arabic to show; undefined for a Quran item (it renders from the surah files) */
   arabic?: string;
   /** The wording's label when a variant is shown ("In the evening: …") */
@@ -137,9 +143,10 @@ export function stepsFor(set: AdhkarSet, items: readonly TextItem[]): SetStep[] 
     const use = set.useVariant?.[id];
     const variant = use ? item.variants?.[use.index] : undefined;
     const repeat = item.usage?.repeat && item.usage.repeat > 1 ? Math.floor(item.usage.repeat) : 1;
-    if (item.quran) out.push({ item, repeat });
-    else if (variant && use?.mode === 'opening') out.push({ item, arabic: item.arabic, variantLabel: variant.label, opening: variant.arabic, repeat });
-    else out.push({ item, arabic: variant?.arabic ?? item.arabic, variantLabel: variant?.label, repeat });
+    const title = (variant && use?.title) || item.title;
+    if (item.quran) out.push({ item, title: item.title, repeat });
+    else if (variant && use?.mode === 'opening') out.push({ item, title, arabic: item.arabic, variantLabel: variant.label, opening: variant.arabic, repeat });
+    else out.push({ item, title, arabic: variant?.arabic ?? item.arabic, variantLabel: variant?.label, repeat });
   }
   return out;
 }

@@ -31,7 +31,7 @@ async function apply(r: AdhkarReminders) {
  */
 export default function ReminderSwitches() {
   const [native] = useState(() => (typeof window === 'undefined' ? false : isNative()));
-  const [r, setR] = useState<AdhkarReminders>(() => (typeof window === 'undefined' ? readReminders() : readReminders()));
+  const [r, setR] = useState<AdhkarReminders>(readReminders);
   const [denied, setDenied] = useState(false);
 
   useEffect(() => {
@@ -86,7 +86,6 @@ export default function ReminderSwitches() {
           className={cn('relative h-7 w-12 shrink-0 rounded-full transition-colors motion-reduce:transition-none', slot.on ? 'bg-teal' : 'bg-foreground/20')}
         >
           <span className={cn('absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform motion-reduce:transition-none', slot.on ? 'translate-x-[1.375rem]' : 'translate-x-0.5')} />
-          <span className="sr-only">{label} reminder</span>
         </button>
       </div>
     );

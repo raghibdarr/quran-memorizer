@@ -115,4 +115,50 @@ test.describe('adhkar and duas', () => {
     await page.goto('/essentials/tasbih')
     await expect(page.getByText('SubhanAllah').first()).toBeVisible()
   })
+
+  test('the Prayer tab offers the adhkar that fit the time', async ({ page }) => {
+    // Makkah, 15 June 2026 (Umm al-Qura): Fajr about 04:10, sunrise 05:38, Dhuhr 12:21, Asr 15:41.
+    // Outside the Ramadan season, when the hub gives the chip's place to the Ramadan banner
+    const place = { lat: 21.42, lng: 39.83, label: 'Makkah, Saudi Arabia', countryCode: 'SA', tz: 'Asia/Riyadh', source: 'city' }
+    await seed(page, {
+      'takrar-place': JSON.stringify({ state: { place }, version: 1 }),
+      'takrar-prayer': JSON.stringify({ state: { method: 'UmmAlQura', madhab: 'standard', highLatRule: 'auto', setupDone: true, homeStrip: true }, version: 1 }),
+    })
+    const chips = page.locator('[data-adhkar-now-chip]')
+
+    // After Fajr, before sunrise: the prayer's adhkar first, then the morning set
+    await page.clock.setFixedTime(new Date('2026-06-15T04:45:00+03:00'))
+    await page.goto('/prayer')
+    await expect(chips).toHaveCount(2)
+    await expect(chips.nth(0)).toContainText('After Fajr adhkar')
+    await expect(chips.nth(1)).toContainText('Morning adhkar')
+
+    // Between sunrise and Dhuhr nothing fits, and the slot leaves no DOM behind
+    await page.clock.setFixedTime(new Date('2026-06-15T08:00:00+03:00'))
+    await page.goto('/prayer')
+    await expect(page.locator('[data-prayer-hub="times"]')).toBeVisible()
+    await expect(page.locator('[data-chip="adhkar"]')).toBeEmpty()
+
+    // Dhuhr has entered: one chip, which opens its set
+    await page.clock.setFixedTime(new Date('2026-06-15T14:00:00+03:00'))
+    await page.goto('/prayer')
+    await expect(chips).toHaveCount(1)
+    await expect(chips.first()).toContainText('After Dhuhr adhkar')
+    await chips.first().click()
+    await expect(page).toHaveURL(/\/adhkar\/now\?set=after-prayer/)
+    await expect(page.locator('[data-now-step="istighfar-3"]')).toBeVisible()
+  })
+
+  test('the morning set opens "We have reached the morning", and an unknown set says so', async ({ page }) => {
+    await seed(page)
+    await page.goto('/adhkar/now?set=morning')
+    for (let i = 0; i < 8 && !(await page.locator('[data-now-step="al-mulku-lillah"]').isVisible()); i++) {
+      await page.locator('[data-now-next]').click()
+    }
+    await expect(page.locator('[data-now-step="al-mulku-lillah"] [data-step-variant]')).toContainText('In the morning')
+    await expect(page.locator('[data-now-step="al-mulku-lillah"]')).toContainText('أَصْبَحْنَا')
+
+    await page.goto('/adhkar/now?set=noon')
+    await expect(page.getByText('This set isn’t here yet.')).toBeVisible()
+  })
 })

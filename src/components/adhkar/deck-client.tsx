@@ -55,7 +55,7 @@ export default function AdhkarDeckClient() {
               load.items.map((item) => <AdhkarItemCard key={item.id} item={item} state={states[item.id] ?? 'new'} />)
             )}
             <p className="px-1 pt-2 text-xs leading-relaxed text-muted">
-              Arabic checked against two printed editions. Translations are our own.{' '}
+              Arabic checked against the printed edition and a second copy. Translations are our own.{' '}
               <Link href="/sources" className="font-semibold text-teal">
                 How we check
               </Link>
