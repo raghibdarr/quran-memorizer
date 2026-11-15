@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import deckModule from './course-purification';
 import emitted from '@/data/deen/course-purification.json';
 import glossary from '@/data/deen/glossary/course-purification.json';
@@ -70,6 +72,66 @@ describe('course-purification deck', () => {
       for (const q of l.check) {
         expect(new Set(q.options).size, `${l.id}: ${q.q}`).toBe(q.options.length);
         expect(q.options.length, `${l.id}: ${q.q}`).toBeGreaterThanOrEqual(3);
+      }
+    }
+  });
+});
+
+// The authoring record behind the lessons (not shipped). tools/verify-citations.mjs checks
+// it against the online copies; this keeps it in step with the lessons without the network.
+describe('course-purification citation record', () => {
+  const dir = join(process.cwd(), 'content/deen/course/purification');
+  interface Rec { lesson: string; claim: string; role: string; school?: string; work: string; location: string; quote: string; url?: string }
+  const { citations } = JSON.parse(readFileSync(join(dir, 'citations.json'), 'utf8')) as { citations: Rec[] };
+  const authored = readdirSync(join(dir, 'lessons'))
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => JSON.parse(readFileSync(join(dir, 'lessons', f), 'utf8')) as Lesson);
+
+  it('emitted lessons are the authored ones at the same rev', () => {
+    const revs = Object.fromEntries(authored.map((l) => [l.id, l.rev]));
+    expect(Object.fromEntries(lessons.map((l) => [l.id, l.rev]))).toEqual(revs);
+    for (const l of lessons) expect(l.claims, l.id).toEqual(authored.find((a) => a.id === l.id)!.claims);
+  });
+
+  it('records every position quote and consensus location as shipped, each with its page', () => {
+    for (const l of authored) {
+      for (const c of l.claims) {
+        for (const p of c.positions ?? []) {
+          const rec = citations.find((r) => r.lesson === l.id && r.claim === c.id && r.role === 'position' && r.school === p.school);
+          expect(rec, `${l.id}/${c.id} ${p.school}`).toBeDefined();
+          expect({ quote: rec!.quote, work: rec!.work, location: rec!.location }, `${l.id}/${c.id} ${p.school}`).toEqual({ quote: p.quote, work: p.source.work, location: p.source.location });
+        }
+        for (const e of c.evidence) {
+          if (!('consensus' in e)) continue;
+          const rec = citations.find((r) => r.lesson === l.id && r.claim === c.id && r.role === 'evidence' && r.work === e.consensus.work && r.location === e.consensus.location);
+          expect(rec, `${l.id}/${c.id} ${e.consensus.work}`).toBeDefined();
+        }
+      }
+    }
+    for (const r of citations) {
+      expect(r.url, `${r.lesson}/${r.claim} ${r.role}`).toMatch(/^https:\/\/shamela\.ws\/book\/\d+\/\d+/);
+      expect(r.quote.trim(), `${r.lesson}/${r.claim} ${r.role}`).toBeTruthy();
+    }
+  });
+
+  it('locates every difference in Bidayat al-Mujtahid and cites no hadith item', () => {
+    for (const l of authored) {
+      for (const c of l.claims) {
+        expect(c.evidence.length, `${l.id}/${c.id}`).toBeGreaterThan(0);
+        expect(c.evidence.some((e) => 'item' in e), `${l.id}/${c.id}`).toBe(false);
+        if (c.kind !== 'differs') continue;
+        expect(citations.some((r) => r.lesson === l.id && r.claim === c.id && r.work === 'bidayat-al-mujtahid'), `${l.id}/${c.id}`).toBe(true);
+      }
+    }
+  });
+
+  it('ties every check question to a claim of its lesson, with the answer in range', () => {
+    for (const l of authored) {
+      const ids = new Set(l.claims.map((c) => c.id));
+      for (const q of l.check) {
+        expect(ids.has(q.claim), `${l.id}: ${q.q}`).toBe(true);
+        expect(q.answer, `${l.id}: ${q.q}`).toBeGreaterThanOrEqual(0);
+        expect(q.answer, `${l.id}: ${q.q}`).toBeLessThan(q.options.length);
       }
     }
   });
