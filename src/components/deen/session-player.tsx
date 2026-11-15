@@ -13,6 +13,7 @@ import { deckTitleOf } from './deck-source';
 import { parseCardId } from '@/lib/deen/cards';
 import { RATING_QUALITY, TAP_GUARD_MS } from './memorise-flow';
 import { correctionDate, formatIsoDate, whenLabel } from './text';
+import { StickyActions } from './sticky-actions';
 
 export { whenLabel };
 
@@ -26,7 +27,21 @@ export function correctionNote(content: CardContent, cardRev: number, errata: st
   return date ? `Text corrected on ${formatIsoDate(date)}.` : 'Text corrected since you learned it.';
 }
 
-function CardStage({ id, errata, onRated, onSkip, autoFocus }: { id: string; errata: string; onRated: (r: Rating) => void; onSkip: () => void; autoFocus: boolean }) {
+function CardStage({
+  id,
+  errata,
+  onRated,
+  onSkip,
+  onStop,
+  autoFocus,
+}: {
+  id: string;
+  errata: string;
+  onRated: (r: Rating) => void;
+  onSkip: () => void;
+  onStop: () => void;
+  autoFocus: boolean;
+}) {
   const { content, loading } = useCardContent(id);
   const card = useDeenStore((s) => s.cards[id]);
   const [revealed, setRevealed] = useState(false);
@@ -99,24 +114,29 @@ function CardStage({ id, errata, onRated, onSkip, autoFocus }: { id: string; err
           )}
         </div>
       </div>
-      {revealed ? (
-        <div className="space-y-2" aria-disabled={locked || undefined}>
-          <p className="text-center text-sm text-muted">How did it go?</p>
-          <RatingButtons onRate={(r) => !locked && onRated(r)} />
-        </div>
-      ) : (
-        <Button
-          className="w-full"
-          aria-disabled={locked || undefined}
-          onClick={() => {
-            if (locked) return;
-            setRevealed(true);
-            setLocked(true);
-          }}
-        >
-          Show me
-        </Button>
-      )}
+      <StickyActions>
+        {revealed ? (
+          <div className="space-y-2" aria-disabled={locked || undefined}>
+            <p className="text-center text-sm text-muted">How did it go?</p>
+            <RatingButtons onRate={(r) => !locked && onRated(r)} />
+          </div>
+        ) : (
+          <Button
+            className="w-full"
+            aria-disabled={locked || undefined}
+            onClick={() => {
+              if (locked) return;
+              setRevealed(true);
+              setLocked(true);
+            }}
+          >
+            Show me
+          </Button>
+        )}
+        <button type="button" onClick={onStop} className="mx-auto mt-1 block min-h-11 text-sm font-semibold text-muted hover:text-foreground">
+          Stop for now
+        </button>
+      </StickyActions>
       <p className="sr-only" aria-live="polite">
         {revealed ? 'Answer shown. How did it go?' : ''}
       </p>
@@ -209,10 +229,7 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
         </span>
         <BeadProgress total={cardIds.length} filled={index} size="sm" className="flex-1 justify-end" />
       </div>
-      <CardStage key={id} id={id} errata={errata} onRated={rate} onSkip={() => setIndex((i) => i + 1)} autoFocus={index > 0} />
-      <button type="button" onClick={onExit} className="mx-auto block min-h-11 text-sm font-semibold text-muted hover:text-foreground">
-        Stop for now
-      </button>
+      <CardStage key={id} id={id} errata={errata} onRated={rate} onSkip={() => setIndex((i) => i + 1)} onStop={onExit} autoFocus={index > 0} />
     </div>
   );
 }

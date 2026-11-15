@@ -27,6 +27,7 @@ import { CueText, ItemArabic } from './cue-text';
 import { deckKindOf } from './deck-source';
 import { workTitle } from './registry-names';
 import { learnParts, whenLabel } from './text';
+import { StickyActions } from './sticky-actions';
 
 /** Self-rating to SM-2 quality, as in the Quran reviews */
 export const RATING_QUALITY: Record<Rating, number> = { 'got-it': 5, hesitated: 3, missed: 1 };
@@ -447,18 +448,20 @@ export function MemoriseFlow({
 
         <ReviewBadge review={item.review} />
 
-        <Button
-          className="w-full"
-          disabled={item.quran ? !ayahs?.length : false}
-          onClick={() => {
-            if (canBuild) {
-              startUnit(0);
-              setStep('build');
-            } else toRecall();
-          }}
-        >
-          {canBuild ? 'Start memorising' : 'I’ve read it, test me'}
-        </Button>
+        <StickyActions>
+          <Button
+            className="w-full"
+            disabled={item.quran ? !ayahs?.length : false}
+            onClick={() => {
+              if (canBuild) {
+                startUnit(0);
+                setStep('build');
+              } else toRecall();
+            }}
+          >
+            {canBuild ? 'Start memorising' : 'I’ve read it, test me'}
+          </Button>
+        </StickyActions>
       </div>
     );
   } else if (step === 'build') {
@@ -578,23 +581,25 @@ export function MemoriseFlow({
             </div>
           )}
         </div>
-        {revealed ? (
-          <div className="space-y-2" aria-disabled={lock}>
-            <p className="text-center text-sm text-muted">How did it go?</p>
-            <RatingButtons onRate={guard(finish)} />
-          </div>
-        ) : (
-          <Button
-            className="w-full"
-            aria-disabled={lock}
-            onClick={guard(() => {
-              setRevealed(true);
-              move();
-            })}
-          >
-            Show me
-          </Button>
-        )}
+        <StickyActions>
+          {revealed ? (
+            <div className="space-y-2" aria-disabled={lock}>
+              <p className="text-center text-sm text-muted">How did it go?</p>
+              <RatingButtons onRate={guard(finish)} />
+            </div>
+          ) : (
+            <Button
+              className="w-full"
+              aria-disabled={lock}
+              onClick={guard(() => {
+                setRevealed(true);
+                move();
+              })}
+            >
+              Show me
+            </Button>
+          )}
+        </StickyActions>
       </div>
     );
   } else {
