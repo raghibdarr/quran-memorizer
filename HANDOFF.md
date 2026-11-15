@@ -323,3 +323,53 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
 8. **Integration, settings panel (foundations-owned):** the hub's gear opens the app-wide settings panel. Its
    "Prayer times and alerts" row (spec 2.4) should sit near the top when the panel is opened from the Prayer tab. The
    hub also has a place chip under the title and a "Prayer settings" link straight under the times list.
+
+# HANDOFF: course-ui
+
+Needs in shared files (spec section 9, rule 4). The package builds and passes without them.
+
+## 1. Emit a course unit's evidence hadith beside its lessons (pairs with course-fasting need 1)
+
+- **What**: in `scripts/build-deen.mjs`, for a course deck, also read
+  `content/deen/course/<unit>/evidence/*.json`, validate them as hadith items (all guardrails,
+  only `source-checked` or better), add their ids as `<deck>-evidence:<id>` to the known item
+  ids, and emit them as an `evidence` array beside `items` in `src/data/deen/<deck>.json`
+  (and add `evidence?: TextItem[]` to `EmittedDeck` in `src/types/deen.ts`).
+- **Why**: Unit Fasting cites three hadith as `{ "item": "course-fasting-evidence:<id>" }`.
+  The lesson screen already resolves that form: it looks the ref up as a live corpus item first
+  and then in the course deck's `evidence` array (`resolveEvidenceItem` in
+  `src/components/course/course-data.ts`, tested end to end with the fixture unit). Until the
+  build emits them, those three chips say "This hadith's text and reference aren't in the app
+  yet." (lesson 3's `forgetting` claim has no other mention of its hadith).
+- **No course-ui change needed** once the build emits the array; drafts are filtered out again
+  on screen.
+
+## 2. Local builds in this worktree
+
+Turbopack refuses the `node_modules` junction; `npx next build --webpack` with placeholder
+`NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, then
+`node scripts/flatten-segments.mjs`.
+
+## 3. UX/UI pass: asks for other packages (course-ui could not change these)
+
+- **deen-engine, `src/components/deen/positions-table.tsx`**: the primer source button under each
+  position is the only way to the Arabic quote, and it is a 12px line about 16px tall (32px when it
+  wraps), well under the 44px touch target. Ask: give the button `min-h-11` with vertical padding,
+  or `py-3 -my-3` so the hit area grows without moving the layout. Applies everywhere the table is used.
+- **foundations, `src/lib/deen/load.ts`**: `loadDeckModule` and `loadDeck` cache a failed download as
+  `null` for the life of the page, so no in-page retry can reach the network again. The course
+  screens now tell a failed load apart from "not ready" (a registry course deck whose module or
+  content didn't load) and show "The lessons couldn't be loaded" with Try again, which reloads the
+  page. Ask: drop the cache entry when a load throws, so screens can retry without a reload.
+- **course-purification** (content): in water-01's third question, drop the stray commas:
+  "Hunger and thirst", "Travel and illness", "A ritual state and physical impurity" (raise `rev`).
+- **course-purification / course-fasting** (content): a few claims are long procedures in one
+  semicolon-separated sentence (wudu-02 point 2 is 351 characters, fasting-06 `iftar-dua` 358).
+  The player now sets claims over 140 characters in regular weight so they read as a paragraph,
+  but they would read better split into shorter claims. If a numbered-steps form is wanted, it
+  needs a `steps?: string[]` field on `Claim` in `src/types/deen.ts` (foundations) first; the
+  player would render it as a numbered list.
+- **Evidence hadith (need 1 above)**: until the build emits them, the three Unit Fasting hadith
+  show as a plain "Hadith · reference to come" note, not a chip that opens to nothing.
+  `src/lib/course/evidence-refs.test.ts` fails if any other cited hadith does not resolve, and
+  fails again once one of these three resolves, so the waiting list is taken down when need 1 lands.

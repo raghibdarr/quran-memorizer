@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import CourseHome from '@/components/course/course-home';
 
 export const metadata: Metadata = { title: 'Foundations course · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the course-ui package replaces this page.
+// Foundations course (all-in-one spec 2.2): the units the registry has ready,
+// with a continue card and per-lesson done marks. Lessons load on this screen
+// only (dynamic import through the deck registry).
 export default function Page() {
-  return <StubPage title="Foundations course" back="/essentials" note="Short lessons on purification and fasting, with their sources. Coming soon." />;
+  return <CourseHome />;
 }

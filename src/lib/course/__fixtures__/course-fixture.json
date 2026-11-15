@@ -1,0 +1,94 @@
+{
+  "deck": "_course",
+  "kind": "course",
+  "hash": "fixture",
+  "items": [
+    {
+      "id": "fx-02",
+      "unit": "fixture",
+      "order": 2,
+      "rev": 1,
+      "title": "Fixture: a second lesson",
+      "intro": "A short made-up lesson, for tests only.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Fixture: a made-up statement with one Quran reference.",
+          "kind": "agreed",
+          "evidence": [{ "quran": { "surahId": 1, "ayah": 1 } }],
+          "cards": [{ "id": "c1a", "front": "Fixture: front of the second lesson's card", "back": "Fixture: its back." }]
+        }
+      ],
+      "check": [
+        { "q": "Fixture: pick the second option.", "options": ["First", "Second", "Third"], "answer": 1, "claim": "c1" },
+        { "q": "Fixture: pick the first option.", "options": ["First", "Second", "Third"], "answer": 0, "claim": "c1" }
+      ],
+      "review": { "status": "source-checked" }
+    },
+    {
+      "id": "fx-01",
+      "unit": "fixture",
+      "order": 1,
+      "rev": 3,
+      "title": "Fixture: the first lesson",
+      "intro": "A made-up lesson for tests. It walks through three statements, then asks two questions.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Fixture: a statement everyone agrees on, about [[wudu]].",
+          "kind": "agreed",
+          "evidence": [
+            { "consensus": { "work": "bidayat-al-mujtahid", "location": "Fixture chapter, p. 1" } },
+            { "quran": { "surahId": 5, "ayah": 6 } }
+          ],
+          "cards": [{ "id": "c1a", "front": "Fixture: what does everyone agree on?", "back": "Fixture: the agreed statement." }]
+        },
+        {
+          "id": "c2",
+          "text": "Fixture: a question the four schools answer differently.",
+          "kind": "differs",
+          "evidence": [{ "consensus": { "work": "al-ijma", "location": "Fixture entry, no. 2" } }],
+          "positions": [
+            { "school": "hanafi", "text": "Fixture Hanafi position.", "source": { "work": "mukhtasar-al-quduri", "location": "Fixture chapter" }, "quote": "نص تجريبي حنفي" },
+            { "school": "maliki", "text": "Fixture Maliki position.", "source": { "work": "al-risala", "location": "Fixture chapter" }, "quote": "نص تجريبي مالكي" },
+            { "school": "shafii", "text": "Fixture Shafi'i position.", "source": { "work": "matn-abi-shuja", "location": "Fixture chapter" }, "quote": "نص تجريبي شافعي" },
+            { "school": "hanbali", "text": "Fixture Hanbali position.", "source": { "work": "umdat-al-fiqh", "location": "Fixture chapter" }, "quote": "نص تجريبي حنبلي" }
+          ],
+          "cards": [
+            { "id": "c2a", "front": "Fixture: what is the question?", "back": "Fixture: the question the schools differ on." },
+            { "id": "c2-hanafi", "front": "Fixture: the Hanafi position?", "back": "Fixture Hanafi position.", "school": "hanafi" },
+            { "id": "c2-maliki", "front": "Fixture: the Maliki position?", "back": "Fixture Maliki position.", "school": "maliki" },
+            { "id": "c2-shafii", "front": "Fixture: the Shafi'i position?", "back": "Fixture Shafi'i position.", "school": "shafii" },
+            { "id": "c2-hanbali", "front": "Fixture: the Hanbali position?", "back": "Fixture Hanbali position.", "school": "hanbali" }
+          ]
+        },
+        {
+          "id": "c3",
+          "text": "Fixture: a definition, with a hadith as its evidence.",
+          "kind": "definition",
+          "evidence": [{ "item": "_course-evidence:fx-hadith" }, { "item": "_course-evidence:missing" }],
+          "cards": [{ "id": "c3a", "front": "Fixture: what is defined?", "back": "Fixture: the definition." }]
+        }
+      ],
+      "check": [
+        { "q": "Fixture: which option is right?", "options": ["Wrong one", "Right one", "Another wrong one"], "answer": 1, "claim": "c1" },
+        { "q": "Fixture: and here?", "options": ["Right here", "Not this", "Nor this"], "answer": 0, "claim": "c2" }
+      ],
+      "review": { "status": "source-checked" }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "fx-hadith",
+      "deck": "_course-evidence",
+      "rev": 1,
+      "title": "Fixture: an evidence hadith",
+      "cue": "A test hadith",
+      "arabic": "هَذَا نَصٌّ تَجْرِيبِيٌّ",
+      "translation": "This is a test text.",
+      "citations": [{ "collection": "bukhari", "number": "1", "numbering": "fath-al-bari", "narrator": "A fixture narrator" }],
+      "gradings": [],
+      "review": { "status": "source-checked" }
+    }
+  ]
+}
