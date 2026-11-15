@@ -28,7 +28,7 @@ test.describe('adhkar and duas', () => {
   test('Pray it now walks the after-prayer set to a quiet end, with nothing recorded', async ({ page }) => {
     await seed(page)
     await page.goto('/adhkar/now?set=after-prayer')
-    // Step 1 is said three times: the count button beside Next takes the taps
+    // Step 1 is said three times: the full-width count button under the text takes the taps
     await expect(page.locator('[data-now-step="istighfar-3"]')).toBeVisible()
     await expect(page.locator('[data-now-next]')).toHaveText('Skip ahead')
     const pill = page.locator('[data-now-count]')

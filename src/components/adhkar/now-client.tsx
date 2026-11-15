@@ -176,12 +176,14 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
         </span>
       </div>
 
-      {/* A short step sits in the middle of the free space, near the thumb; a tall one starts at the top */}
-      <div className={cn('flex flex-col', !big && 'flex-1 justify-center pb-6')}>
-        <div ref={stepRef} tabIndex={-1} className="outline-none">
-          <StepText step={step} roomy={!counted} />
-        </div>
+      {/* Top-aligned under the progress bar, so the text doesn't float between empty bands */}
+      <div ref={stepRef} tabIndex={-1} className="outline-none">
+        <StepText step={step} roomy={!counted} />
       </div>
+
+      {/* A few repeats: one full-width tap target under the text, its dots inside (a big count gets the tasbih counter) */}
+      {counted && !big && <CountPill count={count} target={step.repeat} label={step.title} onCount={() => setCount(Math.min(step.repeat, count + 1))} />}
+      {!big && <div className="flex-1" aria-hidden />}
 
       {big && (
         <div className="mx-auto flex max-h-[21rem] min-h-[17.5rem] w-full max-w-sm flex-1 flex-col">
@@ -198,13 +200,13 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
         >
           Previous
         </button>
-        {counted && !big && <CountPill count={count} target={step.repeat} label={step.title} onCount={() => setCount(Math.min(step.repeat, count + 1))} />}
         <button
           type="button"
           onClick={next}
           className={cn(
-            'min-h-12 shrink-0 whitespace-nowrap rounded-full px-5 text-sm font-semibold',
-            ready ? 'tactile-btn bg-teal text-on-teal' : 'border border-foreground/15 text-foreground',
+            'min-h-12 shrink-0 whitespace-nowrap rounded-full text-sm font-semibold',
+            // Until the count is done, moving on is a quiet text link, not a second button of equal weight
+            ready ? 'tactile-btn bg-teal px-5 text-on-teal' : 'px-2 text-muted hover:text-foreground',
           )}
           data-now-next
         >
@@ -232,17 +234,18 @@ function CountPill({ count, target, label, onCount }: { count: number; target: n
         data-now-count={count}
         data-reached={reached || undefined}
         className={cn(
-          'inline-flex min-h-12 min-w-0 select-none items-center gap-2 whitespace-nowrap rounded-full border-[1.5px] px-4 text-sm font-semibold tabular-nums touch-manipulation',
+          'flex min-h-20 w-full select-none flex-col items-center justify-center gap-2 rounded-2xl border-[1.5px] px-4 text-base font-semibold tabular-nums touch-manipulation',
+          'shadow-[3px_3px_0_var(--shadow-btn-color)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_var(--shadow-btn-color)]',
           'transition-colors motion-reduce:transition-none',
           reached ? 'border-teal/40 bg-teal/10 text-teal' : 'border-[var(--c-ink)] bg-card text-foreground active:bg-foreground/[0.04]',
         )}
       >
         <span className="flex gap-1" aria-hidden>
           {Array.from({ length: target }, (_, i) => (
-            <span key={i} className={cn('h-2 w-2 rounded-full', i < count ? 'bg-teal' : 'bg-foreground/15')} />
+            <span key={i} className={cn('h-2.5 w-2.5 rounded-full', i < count ? 'bg-teal' : 'bg-foreground/15')} />
           ))}
         </span>
-        {reached ? <CheckIcon size={14} /> : <span>{count === 0 ? 'Count' : `${count} of ${target}`}</span>}
+        {reached ? <CheckIcon size={16} /> : <span>{count === 0 ? 'Tap to count' : `${count} of ${target}`}</span>}
       </button>
       <span aria-live="polite" className="sr-only">
         {count > 0 ? `${count} of ${target}` : ''}
