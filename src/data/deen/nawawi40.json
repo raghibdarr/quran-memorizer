@@ -1,7 +1,7 @@
 {
  "deck": "nawawi40",
  "kind": "hadith",
- "hash": "69329d742f276fcb",
+ "hash": "cf04f60cccc449b7",
  "items": [
   {
    "id": "01",
@@ -474,7 +474,7 @@
   {
    "id": "07",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "The religion is sincere counsel",
    "cue": "The religion is sincere counsel: to whom?",
    "arabic": "عَنْ أَبِي رُقَيَّةَ تَمِيمِ بْنِ أَوْسٍ الدَّارِيِّ رَضِيَ اللَّهُ عَنْهُ أَنَّ النَّبِيَّ ﷺ قَالَ: «الدِّينُ النَّصِيحَةُ». قُلْنَا: لِمَنْ؟ قَالَ: «لِلَّهِ، وَلِكِتَابِهِ، وَلِرَسُولِهِ، وَلِأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ».",
@@ -522,7 +522,7 @@
    },
    "notes": [
     {
-     "text": "Ibn Daqiq al-'Id says Tamim al-Dari narrated no [[hadith]] but this one, and that \"sincere counsel\" is a word that gathers in wanting every good for the one counselled; no other single Arabic word says all of it.",
+     "text": "Ibn Daqiq al-'Id says \"sincere counsel\" is a word that gathers in wanting every good for the one counselled; no other single Arabic word says all of it.",
      "source": {
       "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
       "location": "on hadith 7, p. 50 (Mu'assasat al-Rayyan, 2003)"
@@ -531,7 +531,7 @@
    ],
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {

@@ -250,3 +250,11 @@ scholar-reviewed.
   break would fall mid-sentence). No word or punctuation mark changed; a test checks the
   paragraphs join back to the same text. Rev raised because the lock hashes the translation.
   Not an erratum: the text was not corrected, so ERRATA.md has no entry.
+
+## Content audit, 2026-11-15 (fresh auditor)
+
+All 15 items re-collated on an empty cache (`tools/collate.mjs --vowels`): every hash and
+every listed difference reproduced. Citation numbers re-confirmed in the Shamela prints and
+hadith-api. Notes read against Ibn Daqiq al-'Id's pages for hadith 4, 6, 7, 11, 13, 14.
+One change: the note on hadith 7 (rev 2, see `content/deen/ERRATA.md`). Full record:
+`content/deen/AUDIT-2026-11.md`.

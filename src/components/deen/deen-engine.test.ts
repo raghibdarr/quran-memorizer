@@ -320,10 +320,13 @@ describe('/sources and /glossary data', () => {
     expect(notIncludedSection('# Selection\n\nNothing else.')).toBeNull()
   })
 
-  it('reads errata entries, and treats the seeded file as empty', () => {
-    const seeded = readFileSync(join(__dirname, '../../../content/deen/ERRATA.md'), 'utf8')
-    expect(errataBody(seeded)).toBeNull()
-    expect(errataBody(seeded.replace('No corrections yet.', '- 2026-12-01 · nawawi40:02 rev 2: a word fixed'))).toBe('- 2026-12-01 · nawawi40:02 rev 2: a word fixed')
+  it('reads errata entries, and treats a file with none as empty', () => {
+    const intro = ['# Errata', '', 'Corrections to shipped deen content, newest first. Each entry: date, item id and rev.', '', ''].join('\n')
+    expect(errataBody(intro + 'No corrections yet.\n')).toBeNull()
+    expect(errataBody(intro + '- 2026-12-01 · nawawi40:02 rev 2: a word fixed\n')).toBe('- 2026-12-01 · nawawi40:02 rev 2: a word fixed')
+    // The real file: its title and format paragraph never reach the page; every entry is dated and names its item
+    const real = errataBody(readFileSync(join(__dirname, '../../../content/deen/ERRATA.md'), 'utf8'))
+    for (const line of (real ?? '').split('\n').filter(Boolean)) expect(line).toMatch(/^- \d{4}-\d{2}-\d{2} · [\w-]+:[\w-]+/)
   })
 
   it('maps a SELECTION.md path to its deck', () => {

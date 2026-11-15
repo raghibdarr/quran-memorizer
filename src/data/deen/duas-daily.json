@@ -1,7 +1,7 @@
 {
  "deck": "duas-daily",
  "kind": "dhikr",
- "hash": "59610d5d3500decb",
+ "hash": "bcbe8fc6e6ee859a",
  "items": [
   {
    "id": "after-eating",
@@ -272,7 +272,7 @@
   {
    "id": "iftar",
    "deck": "duas-daily",
-   "rev": 1,
+   "rev": 2,
    "title": "Breaking the fast",
    "cue": "\"The thirst has gone…\"",
    "arabic": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
@@ -290,7 +290,7 @@
     {
      "grade": "hasan",
      "by": "al-daraqutni",
-     "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (al-Risala numbering, read on en.tohed.com)",
+     "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (Mu'assasat al-Risala edition, vol. 3 p. 156)",
      "quote": "تَفَرَّدَ بِهِ الْحُسَيْنُ بْنُ وَاقِدٍ، وَإِسْنَادُهُ حَسَنٌ"
     }
    ],

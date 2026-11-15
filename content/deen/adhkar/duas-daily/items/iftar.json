@@ -1,7 +1,7 @@
 {
   "id": "iftar",
   "deck": "duas-daily",
-  "rev": 1,
+  "rev": 2,
   "title": "Breaking the fast",
   "cue": "\"The thirst has gone…\"",
   "arabic": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
@@ -19,7 +19,7 @@
     {
       "grade": "hasan",
       "by": "al-daraqutni",
-      "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (al-Risala numbering, read on en.tohed.com)",
+      "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (Mu'assasat al-Risala edition, vol. 3 p. 156)",
       "quote": "تَفَرَّدَ بِهِ الْحُسَيْنُ بْنُ وَاقِدٍ، وَإِسْنَادُهُ حَسَنٌ"
     }
   ],
@@ -70,7 +70,8 @@
       "2026-11-15 G: every cited number (abu-dawud 2357) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: hasan by al-daraqutni (quote located); al-Daraqutni's verdict read in one copy only (en.tohed.com)",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 content audit (fresh auditor): Abu Dawud 2357 and 2358 re-fetched in both witnesses; al-Daraqutni's verdict re-located in a second copy, the Shamela text of the Mu'assasat al-Risala print (shamela.ws/book/9771/2240), and the grading's reference now names that edition instead of the website it was first read on. No change to the Arabic or the English. See ERRATA.md."
     ]
   }
 }

@@ -206,3 +206,9 @@ Read and left as they are:
 Limits unchanged: one online copy per work, and a located phrase is not a scholar's reading.
 Nothing removed; no item could not be verified. content/deen/ERRATA.md is untouched: the unit
 has not been released, so these are pre-release corrections recorded here.
+
+## Content audit, 2026-11-15 (fresh auditor)
+
+Every primer quote, consensus citation and Bidayat al-Mujtahid cross-location was fetched
+again and found; every position was read against its Arabic quote. No change. Open doubts
+are listed in `content/deen/AUDIT-2026-11.md`.
