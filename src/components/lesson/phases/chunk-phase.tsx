@@ -21,6 +21,8 @@ import BottomSheet from '@/components/ui/bottom-sheet';
 
 import { PlayPill, HidePill } from '@/components/ui/ayah-actions';
 import WordText from '@/components/ui/word-text';
+import WordOrder from '@/components/ui/word-order';
+import { seededShuffle } from '@/lib/shuffle';
 import SimilarAyahs from '@/components/ui/similar-ayahs';
 interface ChunkPhaseProps {
   surah: Surah;
@@ -60,24 +62,6 @@ const STEP_LABELS: Record<LearnStep, string> = {
   'final-memory': 'Final recall from memory',
   'word-order': 'Arrange the words in order',
 };
-
-/**
- * Deterministic shuffle (seeded LCG) that never returns the original order for
- * 2+ items. Used when a lesson RESUMES on the word challenge: the random shuffle
- * made on entering the step isn't persisted, and render must stay pure.
- */
-function seededShuffle<T>(items: T[], seedText: string): T[] {
-  let seed = 0;
-  for (const ch of seedText) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
-  const next = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32;
-  const out = [...items];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(next() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  if (out.length > 1 && out.every((x, i) => x === items[i])) out.push(out.shift()!);
-  return out;
-}
 
 /** "Next up: …" in the Skip sheet */
 const NEXT_UP: Record<LearnStep, string> = {
@@ -163,8 +147,9 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
   const [savedUnitIndex, setSavedUnitIndex] = useState<number | null>(null);
 
   // Word ordering state
-  const [selectedOrder, setSelectedOrder] = useState<number[]>([]);
-  const [orderResult, setOrderResult] = useState<'correct' | 'wrong' | null>(null);
+  const [orderSolved, setOrderSolved] = useState(false);
+  // Bumped on entering the step, so the shared WordOrder starts with an empty row
+  const [orderRound, setOrderRound] = useState(0);
   const [shuffledWords, setShuffledWords] = useState<Array<{ position: number; text: string; transliteration: string | null }>>([]);
 
   const abortRef = useRef(false);
@@ -308,8 +293,8 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
         .map((w) => ({ position: w.position, text: w.textUthmani, transliteration: w.transliteration }))
         .sort(() => Math.random() - 0.5);
       setShuffledWords(shuffled);
-      setSelectedOrder([]);
-      setOrderResult(null);
+      setOrderSolved(false);
+      setOrderRound((r) => r + 1);
     }
   };
 
@@ -395,27 +380,6 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     if (isFirst) return { title: 'Now recite it from memory', subtitle: 'Try to recite without looking, then reveal to check' };
     if (isLast) return { title: 'Last one', subtitle: 'One more successful recall before the next step' };
     return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Each time makes it stronger' };
-  };
-
-  // --- Word ordering ---
-
-  const handleWordSelect = (position: number) => {
-    if (orderResult !== null) return;
-    const correctOrder = unitWords.map((w) => w.position);
-
-    // Reject only the wrong tap — the already-correct prefix stays, so one slip
-    // doesn't wipe the whole sequence.
-    if (position !== correctOrder[selectedOrder.length]) {
-      setOrderResult('wrong');
-      setTimeout(() => setOrderResult(null), 600);
-      return;
-    }
-
-    const newOrder = [...selectedOrder, position];
-    setSelectedOrder(newOrder);
-    if (newOrder.length === correctOrder.length) {
-      setOrderResult('correct');
-    }
   };
 
   // ============================================================
@@ -1020,69 +984,28 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
 
       {/* === WORD ORDER STEP === */}
       {learnStep === 'word-order' && (
-        <div className="space-y-5">
-          <p className="text-center text-sm text-muted">
-            Arrange the words in the correct order (right to left)
-          </p>
-
-          <div
-            className="flex min-h-[56px] flex-wrap justify-center gap-2 rounded-xl border-2 border-dashed border-foreground/25 bg-card/50 p-3"
-            dir="rtl"
-          >
-            {selectedOrder.length === 0 && (
-              <span dir="ltr" className="text-sm text-muted py-2">Tap the words below in order</span>
-            )}
-            {selectedOrder.map((pos, i) => {
-              return (
-                <span
-                  key={i}
-                  className={cn(
-                    'arabic-text rounded-lg px-3 py-1.5 text-xl',
-                    orderResult === 'wrong' ? 'border border-miss/30 bg-miss/10 text-miss' :
-                    orderResult === 'correct' ? 'border border-success/30 bg-success/10 text-success' :
-                    'border border-teal/30 bg-teal/10 text-teal'
-                  )}
-                >
-                  <WordText ayah={currentAyah} index={actualWords.findIndex((w) => w.position === pos)} />
-                </span>
-              );
-            })}
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-2" dir="rtl">
-            {wordChips.map((word) => {
-              const isUsed = selectedOrder.includes(word.position);
-              return (
-                <button
-                  key={word.position}
-                  onClick={() => handleWordSelect(word.position)}
-                  disabled={isUsed || orderResult !== null}
-                  className={cn(
-                    'flex flex-col items-center rounded-xl px-4 py-2',
-                    isUsed
-                      ? 'border-[1.5px] border-transparent bg-foreground/5 text-foreground/20'
-                      : 'tactile-chip bg-card hover:border-gold'
-                  )}
-                >
-                  <WordText ayah={currentAyah} index={actualWords.findIndex((w) => w.position === word.position)} className="text-xl" />
-                  {transliterationEnabled && word.transliteration && (
-                    <span className="text-[10px] text-muted" dir="ltr">{word.transliteration}</span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {orderResult === 'correct' && (
+        <WordOrder
+          key={orderRound}
+          prompt="Arrange the words in the correct order (right to left)"
+          order={unitWords.map((w) => ({ id: w.position, transliteration: w.transliteration }))}
+          tiles={wordChips.map((w) => ({ id: w.position, transliteration: w.transliteration }))}
+          onSolved={() => setOrderSolved(true)}
+          renderPlaced={(tile) => <WordText ayah={currentAyah} index={actualWords.findIndex((w) => w.position === tile.id)} />}
+          renderTile={(tile) => (
+            <>
+              <WordText ayah={currentAyah} index={actualWords.findIndex((w) => w.position === tile.id)} className="text-xl" />
+              {transliterationEnabled && tile.transliteration && (
+                <span className="text-[10px] text-muted" dir="ltr">{tile.transliteration}</span>
+              )}
+            </>
+          )}
+        >
+          {orderSolved && (
             <Button onClick={advance} className="w-full">
               {afterThisUnit().button}
             </Button>
           )}
-
-          {orderResult === 'wrong' && (
-            <p className="text-center text-sm text-miss">Not quite. Try again.</p>
-          )}
-        </div>
+        </WordOrder>
       )}
 
       {/* One "Skip…" that opens a sheet saying exactly what each skip does from here
