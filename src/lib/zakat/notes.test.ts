@@ -60,6 +60,12 @@ describe('zakat notes (spec 5.1 grounding rules)', () => {
     expect(zakatNote('nisab-metals').text).toMatch(/set it differently/);
   });
 
+  it('goods for sale are not presented as unanimous; counting receivables is stated as what the calculator does', () => {
+    expect(zakatNote('rate').text).toMatch(/In all four schools/);
+    expect(zakatNote('rate').text).toMatch(/Zahiri/);
+    expect(zakatNote('receivables').text).toMatch(/^This calculator counts/);
+  });
+
   it('positions: two or more, each with who holds it; schools are known', () => {
     for (const n of ZAKAT_NOTES) {
       if (n.kind === 'agreed') {
