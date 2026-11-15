@@ -377,3 +377,18 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
    al-Bukhari 2311 is given without his own full chain (the usage note says so); `duas-daily:toilet-leave` stays
    "Your forgiveness." because the length rule (G15) leaves no room for a bracketed "[I ask]"; Essentials ayah
    translations still carry footnote markers such as "[98]" from before this package.
+12. **UX/UI pass (2026-11-15), needs in files this package does not own.** The package builds and passes without them.
+   - `src/components/deen/citation-line.tsx` (deen-engine): at 375px the citation shares a row with the
+     Sunnah.com link and breaks into ragged lines, with the "(… numbering)" part in bold. Adhkar screens and
+     Essentials cards now use `src/components/adhkar/source-line.tsx` (`SourceLine`), which stacks below `sm`
+     (collection and number bold, scheme muted regular, narrator on its own line, link last). Suggest
+     CitationLine adopt the same layout so hadith and Names match.
+   - `src/components/deen/grading-line.tsx` (deen-engine): a grading's `in` such as
+     "al-Adhkar, no. 217 (ed. al-Arna'ut, shamela.ws/book/1956/77)" prints the bare path. Suggest rendering a
+     `shamela.ws/book/N/M` match as a "Shamela ↗" link (via `openExternal`).
+   - `src/components/essentials/learn-rows.tsx` (deen-engine): the Adhkar and duas row shows a bare "0/53".
+     Suggest "53 to learn" until something is started, as /adhkar's deck rows now say.
+   - `src/app/essentials/page.tsx` (foundations): under "Duas, dhikr and key ayahs", one line pointing to the
+     checked versions, e.g. "The checked versions, with their sources, are in Adhkar and duas" linking /adhkar.
+     The old collection titles in `src/data/essentials.json` ("Salah Duas", "Morning & Evening Adhkar",
+     "Tasbih & Dhikr") are Title Case with ampersands; sentence case would match the new screens.

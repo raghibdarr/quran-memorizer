@@ -85,7 +85,13 @@ export default function ReminderSwitches() {
           onClick={() => void update({ ...r, [key]: { ...slot, on: !slot.on } }, !slot.on)}
           className={cn('relative h-7 w-12 shrink-0 rounded-full transition-colors motion-reduce:transition-none', slot.on ? 'bg-teal' : 'bg-foreground/20')}
         >
-          <span className={cn('absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform motion-reduce:transition-none', slot.on ? 'translate-x-[1.375rem]' : 'translate-x-0.5')} />
+          {/* The same switch as prayer settings (calc-controls): the thumb sits in the flow, left-aligned */}
+          <span
+            className={cn(
+              'block h-6 w-6 rounded-full bg-white shadow transition-transform duration-300 ease-[cubic-bezier(.34,1.45,.64,1)] motion-reduce:transition-none',
+              slot.on ? 'translate-x-5.5' : 'translate-x-0.5',
+            )}
+          />
         </button>
       </div>
     );

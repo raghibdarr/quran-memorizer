@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ADHKAR_SETS, SET_IDS, isSetId, nowHref, setsForNow, stepsFor } from './sets';
+import { ADHKAR_SETS, SET_IDS, isSetId, labelEnglish, nowHref, setsForNow, stepsFor } from './sets';
+import { DECK_ORDER, orderDeck } from './deck-order';
+import { withoutRepeatedCite } from './source-line';
 import { DEFAULT_REMINDERS, EVENING_REMINDER_ID, MORNING_REMINDER_ID, parseReminders, planAdhkarReminders } from './reminders';
 import type { EmittedDeck, TextItem } from '@/types/deen';
 
@@ -41,7 +43,8 @@ describe('Pray it now: the steps of each set', () => {
       const shipped = items(set.deck);
       const missing = set.items.filter((i) => !shipped.some((s) => s.id === i));
       expect(missing).toEqual([]);
-      expect(stepsFor(set, shipped)).toHaveLength(set.items.length);
+      const leadIns = Object.values(set.leadIns ?? {}).reduce((n, l) => n + l.length, 0);
+      expect(stepsFor(set, shipped)).toHaveLength(set.items.length + leadIns);
     });
   }
 
@@ -52,11 +55,20 @@ describe('Pray it now: the steps of each set', () => {
     expect(bika.arabic).toBe(bika.item.variants![0].arabic);
     expect(bika.variantLabel).toMatch(/evening/i);
     expect(bika.title).toBe('By You we enter the evening');
+    // Its English is shown as a translation, from inside the label
+    expect(bika.english).toMatch(/^O Allah, by You we enter the evening/);
     const morning = stepsFor(ADHKAR_SETS.morning, me);
     const mulk = morning.find((s) => s.item.id === 'al-mulku-lillah')!;
     expect(mulk.arabic).toBe(mulk.item.arabic);
     expect(mulk.opening).toBe(mulk.item.variants![0].arabic);
     expect(mulk.title).toBe('We have reached the morning');
+    // The opening stands in for the same number of words, in Arabic, English and transliteration
+    expect(`${mulk.openingReplaces} ${mulk.arabicRest}`).toBe(mulk.item.arabic);
+    expect(mulk.openingReplaces).toBe('أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ،');
+    expect(mulk.englishRest).toMatch(/^and all praise is for Allah/);
+    expect(mulk.openingEnglish).toMatch(/^We have reached the morning/);
+    expect(mulk.translitRest).toMatch(/^wal-hamdu lillaah/);
+    expect(mulk.translitOpening).toMatch(/^Asbahnaa/);
     // The evening set shows it as stored, under its own title
     expect(evening.find((s) => s.item.id === 'al-mulku-lillah')!.title).toBe(mulk.item.title);
     // Morning shows the stored morning wording untouched
@@ -72,9 +84,69 @@ describe('Pray it now: the steps of each set', () => {
     expect(steps.find((s) => s.item.id === 'sayyid-al-istighfar')!.repeat).toBe(1);
   });
 
+  it('says the thirty-three of each before completing the hundred, with its citation', () => {
+    const steps = stepsFor(ADHKAR_SETS['after-prayer'], items('adhkar-after-prayer'));
+    const at = steps.findIndex((s) => s.item.id === 'tamam-al-mia');
+    expect(steps.slice(at - 3, at).map((s) => [s.title, s.repeat])).toEqual([
+      ['SubhanAllah', 33],
+      ['Alhamdulillah', 33],
+      ['Allahu akbar', 33],
+    ]);
+    for (const s of steps.slice(at - 3, at)) expect(s.item.citations).toEqual(steps[at].item.citations);
+    // The words are the Essentials tasbih items' checked text
+    const ess = (JSON.parse(readFileSync(join(process.cwd(), 'src', 'data', 'essentials.json'), 'utf8')) as { items: { id: string; arabic: string; translation: string }[] }[]).flatMap((c) => c.items);
+    const byId = (id: string) => ess.find((e) => e.id === id)!;
+    const lead = ADHKAR_SETS['after-prayer'].leadIns!['tamam-al-mia'];
+    expect(lead.map((l) => [l.arabic, l.translation])).toEqual(
+      ['dhikr-subhanallah', 'dhikr-alhamdulillah', 'dhikr-allahuakbar'].map((id) => [byId(id).arabic, byId(id).translation]),
+    );
+  });
+
+  it("reads the English out of a replaced wording's label", () => {
+    expect(labelEnglish('In the evening: "O Allah, by You."')).toBe('O Allah, by You.');
+    expect(labelEnglish('In the morning he said the same, opening with these words.')).toBeUndefined();
+  });
+
   it('skips ids a deck has not shipped', () => {
     const steps = stepsFor({ ...ADHKAR_SETS.sleep, items: ['nope', 'bismika-amutu'] }, items('adhkar-sleep-waking'));
     expect(steps.map((s) => s.item.id)).toEqual(['bismika-amutu']);
+  });
+});
+
+describe('Deck order', () => {
+  for (const [deck, groups] of Object.entries(DECK_ORDER)) {
+    it(`${deck} lists every shipped item once, in its set order`, () => {
+      const shipped = items(deck);
+      const listed = orderDeck(deck, shipped).flatMap((g) => g.items.map((i) => i.id));
+      expect([...listed].sort()).toEqual(shipped.map((i) => i.id).sort());
+      // Every id the order names is shipped, so a typo cannot hide an item at the end
+      expect(groups.flatMap((g) => g.ids).filter((id) => !shipped.some((s) => s.id === id))).toEqual([]);
+    });
+  }
+
+  it('follows the after-prayer set and the order of the prayer', () => {
+    const ap = orderDeck('adhkar-after-prayer', items('adhkar-after-prayer'))[0].items.map((i) => i.id);
+    expect(ap).toEqual([...ADHKAR_SETS['after-prayer'].items]);
+    const salah = orderDeck('salah-words', items('salah-words'))[0].items.map((i) => i.id);
+    expect(salah.indexOf('ruku')).toBeLessThan(salah.indexOf('sujud'));
+    expect(salah.at(-1)).toBe('qunut-al-witr');
+  });
+
+  it('puts an unlisted item at the end rather than dropping it', () => {
+    const extra = { ...items('salah-words')[0], id: 'zz-new' };
+    const out = orderDeck('salah-words', [...items('salah-words'), extra]);
+    expect(out.at(-1)!.items.at(-1)!.id).toBe('zz-new');
+    expect(orderDeck('unknown', [extra])).toEqual([{ items: [extra] }]);
+  });
+});
+
+describe('Evidence lines', () => {
+  it('drop a parenthesis that only repeats the citation above', () => {
+    const c = [{ collection: 'muslim', number: '2726', numbering: 'abd-al-baqi' }];
+    expect(withoutRepeatedCite('He said it (Muslim 2726).', c)).toBe('He said it.');
+    expect(withoutRepeatedCite("He said it (Muslim 2723, the narration of Za'idah).", c)).toBe("He said it (Muslim 2723, the narration of Za'idah).");
+    expect(withoutRepeatedCite('Al-Tirmidhi relates it (3391).', c)).toBe('Al-Tirmidhi relates it (3391).');
+    expect(withoutRepeatedCite('Also in (Abu Dawud 5068).', c)).toBe('Also in (Abu Dawud 5068).');
   });
 });
 

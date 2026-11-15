@@ -11,7 +11,7 @@ import { cn } from '@/lib/cn';
 import type { EssentialItem, Ayah } from '@/types/quran';
 import TranslationText from '@/components/ui/translation-text';
 import Link from '@/components/app-link';
-import { CitationLine } from '@/components/deen/citation-line';
+import { SourceLine } from '@/components/adhkar/source-line';
 import { GradingLine } from '@/components/deen/grading-line';
 import { useEssentialsMigration } from '@/components/adhkar/use-migration';
 import { auditOf } from '@/lib/essentials-data';
@@ -140,13 +140,13 @@ export default function EssentialCard({ item }: Props) {
           {audited.citations?.length ? (
             <div className="space-y-1.5 border-t border-foreground/10 pt-3" data-essential-sources onClick={(e) => e.stopPropagation()}>
               {audited.citations.map((c, i) => (
-                <CitationLine key={i} citation={c} />
+                <SourceLine key={i} citation={c} />
               ))}
               {audited.gradings?.map((g, i) => (
                 <GradingLine key={i} grading={g} />
               ))}
               {audited.deen && (
-                <Link href={`/adhkar/view?d=${audited.deen.deck}`} className="inline-flex min-h-11 items-center text-xs font-semibold text-teal">
+                <Link href={`/adhkar/view?d=${audited.deen.deck}&item=${audited.deen.item}`} className="inline-flex min-h-11 items-center text-xs font-semibold text-teal">
                   Learn it with its sources
                 </Link>
               )}
@@ -170,7 +170,7 @@ export default function EssentialCard({ item }: Props) {
                 <span className="text-2xl font-bold">{counter}</span>
               </button>
               <p className="text-xs text-muted">
-                {counter >= item.repetitions ? 'Complete! Tap to reset' : `${counter} / ${item.repetitions}`}
+                {counter >= item.repetitions ? 'Done. Tap to start again' : `${counter} / ${item.repetitions}`}
               </p>
             </div>
           )}
@@ -185,7 +185,7 @@ export default function EssentialCard({ item }: Props) {
                 : 'bg-foreground/5 text-muted hover:bg-foreground/10'
             )}
           >
-            {memorized ? 'Memorized' : 'Mark as memorized'}
+            {memorized ? 'Memorised' : 'Mark as memorised'}
           </button>
         </div>
       )}

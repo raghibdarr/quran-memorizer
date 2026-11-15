@@ -28,13 +28,24 @@ test.describe('adhkar and duas', () => {
   test('Pray it now walks the after-prayer set to a quiet end, with nothing recorded', async ({ page }) => {
     await seed(page)
     await page.goto('/adhkar/now?set=after-prayer')
-    // Step 1 is said three times: the counter takes the taps
+    // Step 1 is said three times: the count button beside Next takes the taps
     await expect(page.locator('[data-now-step="istighfar-3"]')).toBeVisible()
     await expect(page.locator('[data-now-next]')).toHaveText('Skip ahead')
-    const counter = page.locator('[data-counter] button[data-count]')
-    for (let i = 0; i < 3; i++) await counter.click()
-    await expect(counter).toHaveAttribute('data-count', '3')
+    const pill = page.locator('[data-now-count]')
+    for (let i = 0; i < 3; i++) await pill.click()
+    await expect(pill).toHaveAttribute('data-now-count', '3')
     await expect(page.locator('[data-now-next]')).toHaveText('Next')
+    // Leaving and coming back in the same session resumes the set where it was
+    await page.locator('[data-now-next]').click()
+    await expect(page.locator('[data-now-step="anta-al-salam"]')).toBeVisible()
+    await page.goto('/adhkar')
+    await page.goto('/adhkar/now?set=after-prayer')
+    await expect(page.locator('[data-now-step="anta-al-salam"]')).toBeVisible()
+    // The thirty-three of each come before completing the hundred, on the full counter
+    for (let i = 0; i < 6 && !(await page.locator('[data-now-step="tamam-al-mia:subhanallah"]').isVisible()); i++) {
+      await page.locator('[data-now-next]').click()
+    }
+    await expect(page.locator('[data-now-step="tamam-al-mia:subhanallah"] [data-counter]')).toBeVisible()
     // Then walk on to the end
     for (let i = 0; i < 20; i++) {
       if (await page.locator('[data-now-done]').isVisible()) break
@@ -52,7 +63,7 @@ test.describe('adhkar and duas', () => {
     for (let i = 0; i < 6 && !(await page.locator('[data-now-step="bika-asbahna"]').isVisible()); i++) {
       await page.locator('[data-now-next]').click()
     }
-    await expect(page.locator('[data-now-step="bika-asbahna"] [data-step-variant]')).toContainText('In the evening')
+    await expect(page.locator('[data-now-step="bika-asbahna"] [data-step-english]')).toContainText('by You we enter the evening')
   })
 
   test('a deck lists its items with sources, and memorising one puts its cards in review', async ({ page }) => {

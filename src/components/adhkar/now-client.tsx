@@ -7,12 +7,14 @@ import ScreenHeader from '@/components/worship/screen-header';
 import Counter from '@/components/worship/counter';
 import { ItemArabic } from '@/components/deen/cue-text';
 import { RichText } from '@/components/deen/term';
-import { CitationLine } from '@/components/deen/citation-line';
+import { CheckIcon } from '@/components/ui/icons';
+import { useSettingsStore } from '@/stores/settings-store';
 import { haptic } from '@/lib/haptics';
 import { cn } from '@/lib/cn';
 import { ADHKAR_SETS, isSetId, stepsFor, type AdhkarSet, type SetStep } from './sets';
 import { QuranRefText, refLabel, useRefAyahs } from './quran-text';
 import { repeatText } from './item-card';
+import { SourceLine } from './source-line';
 import { useAdhkarDeck } from './use-deck';
 
 /** The quiet line a finished set ends on (no score, no streak) */
@@ -23,10 +25,15 @@ export const DONE_LINE: Record<string, string> = {
   sleep: 'That is the bedtime adhkar said.',
 };
 
+/** Counts this high get the full tasbih counter; smaller ones a count button beside Next */
+const BIG_COUNT = 10;
+
 /**
  * /adhkar/now?set=morning|evening|after-prayer|sleep (spec 2.7, "Pray it now"):
- * walks one set item by item. Items said more than once get the tasbih counter;
- * the rest a plain "Next". Nothing is rated or recorded, and there is no streak.
+ * walks one set item by item. Items said many times get the tasbih counter, a
+ * few times a count button in the bottom bar; the rest a plain "Next". Nothing
+ * is rated or recorded, and there is no streak: the place in the set is kept for
+ * this session only, so leaving for a moment and coming back resumes it.
  * A full-screen flow (src/lib/nav.ts): no tab bar, the actions sit at the bottom.
  */
 export default function AdhkarNowClient() {
@@ -62,10 +69,50 @@ function Missing() {
   );
 }
 
+interface Place {
+  index: number;
+  counts: number[];
+}
+
+const placeKey = (set: string) => `takrar-adhkar-now-${set}`;
+
+/** Where this session left the set (sessionStorage: gone with the tab, never synced) */
+function readPlace(set: string, ids: string): Place | null {
+  try {
+    const raw = sessionStorage.getItem(placeKey(set));
+    if (!raw) return null;
+    const p = JSON.parse(raw) as { ids?: string; index?: number; counts?: number[] };
+    if (p.ids !== ids || typeof p.index !== 'number' || !Array.isArray(p.counts)) return null;
+    return { index: p.index, counts: p.counts.map((n) => (Number.isFinite(n) && n > 0 ? Math.floor(n) : 0)) };
+  } catch {
+    return null;
+  }
+}
+
+function writePlace(set: string, ids: string, place: Place | null) {
+  try {
+    if (place) sessionStorage.setItem(placeKey(set), JSON.stringify({ ids, ...place }));
+    else sessionStorage.removeItem(placeKey(set));
+  } catch {
+    // Private mode or storage off: the set simply starts from the top next time
+  }
+}
+
 function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
-  const [index, setIndex] = useState(0);
-  // Counts per step, so stepping back shows where you were
-  const [counts, setCounts] = useState<number[]>(() => steps.map(() => 0));
+  const ids = steps.map((s) => s.item.id).join(',');
+  const [place, setPlace] = useState<Place>(() => {
+    const saved = readPlace(set.id, ids);
+    return saved && saved.index < steps.length && saved.counts.length === steps.length ? saved : { index: 0, counts: steps.map(() => 0) };
+  });
+  const { index, counts } = place;
+  const setIndex = (f: (i: number) => number) => setPlace((p) => ({ ...p, index: f(p.index) }));
+
+  useEffect(() => {
+    // A finished set is not kept: coming back starts it fresh
+    const fresh = place.index === 0 && place.counts.every((c) => c === 0);
+    writePlace(set.id, ids, place.index >= steps.length || fresh ? null : place);
+  }, [place, set.id, ids, steps.length]);
+
   // Moving between steps puts focus on the new step's text, so a screen reader
   // reads what is to be said next instead of staying on the button just pressed
   const stepRef = useRef<HTMLDivElement>(null);
@@ -82,7 +129,14 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
         <p className="text-base font-semibold text-foreground">{DONE_LINE[set.id]}</p>
         <p className="max-w-xs text-sm leading-relaxed text-muted">May Allah accept it from you.</p>
         <div className="flex flex-wrap justify-center gap-2">
-          <button type="button" onClick={() => { moved.current = true; setIndex(0); setCounts(steps.map(() => 0)); }} className="min-h-11 rounded-full px-4 text-sm font-semibold text-muted hover:text-foreground">
+          <button
+            type="button"
+            onClick={() => {
+              moved.current = true;
+              setPlace({ index: 0, counts: steps.map(() => 0) });
+            }}
+            className="min-h-11 rounded-full px-4 text-sm font-semibold text-muted hover:text-foreground"
+          >
             Say them again
           </button>
           <Link href="/adhkar" className="inline-flex min-h-11 items-center rounded-full bg-teal/10 px-4 text-sm font-semibold text-teal">
@@ -96,12 +150,16 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
   const step = steps[index];
   const count = counts[index] ?? 0;
   const counted = step.repeat > 1;
-  const setCount = (n: number) => setCounts((c) => c.map((v, i) => (i === index ? Math.max(0, n) : v)));
+  const big = step.repeat >= BIG_COUNT;
+  const setCount = (n: number) => setPlace((p) => ({ ...p, counts: p.counts.map((v, i) => (i === p.index ? Math.max(0, n) : v)) }));
+  const go = (to: number) => {
+    moved.current = true;
+    setIndex(() => to);
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0 });
+  };
   const next = () => {
     haptic.selection();
-    moved.current = true;
-    setIndex((i) => i + 1);
-    if (typeof window !== 'undefined') window.scrollTo({ top: 0 });
+    go(index + 1);
   };
   const last = index === steps.length - 1;
   const ready = !counted || count >= step.repeat;
@@ -118,35 +176,34 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
         </span>
       </div>
 
-      <div ref={stepRef} tabIndex={-1} className="outline-none">
-        <StepText step={step} />
+      {/* A short step sits in the middle of the free space, near the thumb; a tall one starts at the top */}
+      <div className={cn('flex flex-col', !big && 'flex-1 justify-center pb-6')}>
+        <div ref={stepRef} tabIndex={-1} className="outline-none">
+          <StepText step={step} roomy={!counted} />
+        </div>
       </div>
 
-      {counted ? (
-        <div className="flex min-h-[13rem] flex-1 flex-col">
+      {big && (
+        <div className="mx-auto flex max-h-[21rem] min-h-[17.5rem] w-full max-w-sm flex-1 flex-col">
           <Counter count={count} target={step.repeat} onCount={() => setCount(count + 1)} onUndo={() => setCount(count - 1)} label={step.title} />
         </div>
-      ) : (
-        <div className="flex-1" />
       )}
 
-      <div className="sticky bottom-0 z-10 -mx-4 flex items-center justify-between gap-3 bg-cream/95 px-4 pt-2 backdrop-blur-sm" style={{ paddingBottom: 'calc(var(--tabbar-clearance) + 0.5rem)' }}>
+      <div className="sticky bottom-0 z-10 -mx-4 flex items-center justify-between gap-2 bg-cream/95 px-4 pt-2 backdrop-blur-sm" style={{ paddingBottom: 'calc(var(--tabbar-clearance) + 0.5rem)' }}>
         <button
           type="button"
-          onClick={() => {
-            moved.current = true;
-            setIndex((i) => Math.max(0, i - 1));
-          }}
+          onClick={() => go(Math.max(0, index - 1))}
           disabled={index === 0}
-          className="min-h-11 rounded-full px-3 text-sm font-semibold text-muted hover:text-foreground disabled:opacity-0"
+          className="min-h-11 shrink-0 whitespace-nowrap rounded-full px-2 text-sm font-semibold text-muted hover:text-foreground disabled:invisible"
         >
-          Back
+          Previous
         </button>
+        {counted && !big && <CountPill count={count} target={step.repeat} label={step.title} onCount={() => setCount(Math.min(step.repeat, count + 1))} />}
         <button
           type="button"
           onClick={next}
           className={cn(
-            'min-h-12 rounded-full px-6 text-sm font-semibold',
+            'min-h-12 shrink-0 whitespace-nowrap rounded-full px-5 text-sm font-semibold',
             ready ? 'tactile-btn bg-teal text-on-teal' : 'border border-foreground/15 text-foreground',
           )}
           data-now-next
@@ -158,51 +215,125 @@ function Walk({ set, steps }: { set: AdhkarSet; steps: SetStep[] }) {
   );
 }
 
-function StepText({ step }: { step: SetStep }) {
+/** A few repeats (a surah three times) counted from the bottom bar, so the text stays in view */
+function CountPill({ count, target, label, onCount }: { count: number; target: number; label: string; onCount: () => void }) {
+  const reached = count >= target;
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          if (reached) return;
+          if (count + 1 === target) haptic.success();
+          else haptic.selection();
+          onCount();
+        }}
+        aria-label={`${label}: ${count} of ${target}. Tap to count.`}
+        data-now-count={count}
+        data-reached={reached || undefined}
+        className={cn(
+          'inline-flex min-h-12 min-w-0 select-none items-center gap-2 whitespace-nowrap rounded-full border-[1.5px] px-4 text-sm font-semibold tabular-nums touch-manipulation',
+          'transition-colors motion-reduce:transition-none',
+          reached ? 'border-teal/40 bg-teal/10 text-teal' : 'border-[var(--c-ink)] bg-card text-foreground active:bg-foreground/[0.04]',
+        )}
+      >
+        <span className="flex gap-1" aria-hidden>
+          {Array.from({ length: target }, (_, i) => (
+            <span key={i} className={cn('h-2 w-2 rounded-full', i < count ? 'bg-teal' : 'bg-foreground/15')} />
+          ))}
+        </span>
+        {reached ? <CheckIcon size={14} /> : <span>{count === 0 ? 'Count' : `${count} of ${target}`}</span>}
+      </button>
+      <span aria-live="polite" className="sr-only">
+        {count > 0 ? `${count} of ${target}` : ''}
+      </span>
+    </>
+  );
+}
+
+/** Time-of-day labels say nothing inside a set that is already the morning's or the evening's */
+const SET_TIME = /^(morning|evening|bedtime|at night)$/i;
+
+function StepText({ step, roomy }: { step: SetStep; roomy: boolean }) {
   const { item } = step;
   const { surahName } = useRefAyahs(item.quran);
+  const showTranslit = useSettingsStore((s) => s.transliterationEnabled);
   const repeat = repeatText(step.repeat);
+  // An item with another time of day's wording explains it in its own lines below
+  const when = item.variants?.length ? [] : (item.usage?.when ?? []).filter((w) => !SET_TIME.test(w.trim()));
+  const meta = [item.quran ? refLabel(item.quran, surahName) : null, ...when].filter(Boolean) as string[];
+  // A short dhikr with the screen to itself can be larger; a long one stays at the reading size
+  const arabicSize = roomy && (step.arabic?.length ?? 0) < 140 ? 'text-[1.75rem]' : 'text-[1.5rem]';
+  const split = step.opening && step.openingReplaces && step.arabicRest;
+  const english = step.english ?? item.translation;
+
   return (
-    <article className="space-y-3 rounded-2xl border border-foreground/10 bg-card p-4">
+    <article className="space-y-3.5 rounded-2xl border border-foreground/10 bg-card p-4">
       <header>
         <h2 className="text-[15px] font-semibold text-foreground">{step.title}</h2>
-        <p className="mt-0.5 text-xs text-muted">
-          {item.quran ? refLabel(item.quran, surahName) : null}
-          {item.quran && repeat ? ' · ' : null}
-          {repeat}
-        </p>
-        {/* A step showing another time of day's wording says so in its own line below */}
-        {item.usage?.when?.length && !step.variantLabel ? (
+        {(meta.length > 0 || repeat) && (
           <p className="mt-0.5 text-xs leading-relaxed text-muted">
-            <RichText text={item.usage.when.join(' · ')} />
+            {meta.length > 0 && <RichText text={meta.join(' · ')} />}
+            {repeat && (
+              <span className="font-semibold text-foreground/80">
+                {meta.length > 0 && ' · '}
+                {repeat}
+              </span>
+            )}
           </p>
-        ) : null}
-        {item.id === 'tamam-al-mia' && (
-          <Link href="/tasbih" className="mt-1 inline-flex min-h-11 items-center text-xs font-semibold text-teal" data-tasbih-link>
-            Count the thirty-threes on the tasbih
-          </Link>
         )}
       </header>
-      {step.variantLabel && (
-        <p className="text-xs leading-relaxed text-muted" data-step-variant>
-          <RichText text={step.variantLabel} />
-        </p>
-      )}
-      {step.opening && <ItemArabic text={step.opening} className="text-xl text-teal" />}
+
       {item.quran ? (
         <QuranRefText quran={item.quran} arabicClass="text-[1.5rem]" />
-      ) : (
+      ) : split ? (
+        // The morning opening, said in place of the evening one the source text starts with
         <>
-          {step.arabic && <ItemArabic text={step.arabic} className="text-[1.5rem]" />}
-          {/* A replaced wording carries its English in its label; an opening leaves the text, and so its English, as it is */}
-          {item.translation && (!step.variantLabel || step.opening) && (
-            <p className="text-sm leading-relaxed text-foreground">
-              <RichText text={item.translation} />
+          <p className="text-xs leading-relaxed text-muted" data-step-variant>
+            In the morning, say the words in colour in place of the crossed-out ones.
+          </p>
+          <p dir="rtl" lang="ar" className={cn('arabic-text px-1 text-balance text-foreground', arabicSize)} style={{ textAlign: 'center' }} data-step-opening>
+            <span className="text-teal">{step.opening}</span>{' '}
+            <del className="text-[0.8em] text-muted/70 decoration-1">{step.openingReplaces}</del> {step.arabicRest}
+          </p>
+          {showTranslit && step.translitOpening && (
+            <p className="text-center text-sm italic leading-relaxed text-muted">
+              <span className="text-teal">{step.translitOpening}</span> <del className="decoration-1 opacity-70">{step.translitReplaces}</del> {step.translitRest}
             </p>
           )}
-          {item.citations[0] && <CitationLine citation={item.citations[0]} />}
+          {step.openingEnglish ? (
+            <p className="max-w-[60ch] text-pretty text-[15px] leading-relaxed text-foreground">
+              <span className="font-medium text-teal">{step.openingEnglish}</span> <del className="text-muted decoration-1">{step.englishReplaces}</del> <RichText text={step.englishRest ?? ''} />
+            </p>
+          ) : (
+            item.translation && (
+              <p className="max-w-[60ch] text-pretty text-[15px] leading-relaxed text-foreground">
+                <RichText text={item.translation} />
+              </p>
+            )
+          )}
+          <p className="text-xs leading-relaxed text-muted">The narration gives only this changed opening; the rest is said as it is.</p>
+        </>
+      ) : (
+        <>
+          {step.opening && <ItemArabic text={step.opening} className="px-1 text-xl text-teal" />}
+          {step.arabic && <ItemArabic text={step.arabic} className={cn('px-1 text-balance', arabicSize)} />}
+          {showTranslit && item.transliteration && !step.variantLabel && <p className="text-center text-sm italic leading-relaxed text-muted">{item.transliteration}</p>}
+          {english && (!step.variantLabel || step.english || step.opening) ? (
+            <p className="max-w-[60ch] text-pretty text-[15px] leading-relaxed text-foreground" data-step-english>
+              <RichText text={english} />
+            </p>
+          ) : (
+            step.variantLabel && (
+              <p className="text-xs leading-relaxed text-muted" data-step-variant>
+                <RichText text={step.variantLabel} />
+              </p>
+            )
+          )}
         </>
       )}
+      {/* A Quran step is the Quran itself; its hadith (why it is said) is on the deck card */}
+      {!item.quran && item.citations[0] && <SourceLine citation={item.citations[0]} compact className="border-t border-foreground/10 pt-3" />}
     </article>
   );
 }

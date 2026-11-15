@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from '@/components/app-link';
 import type { TextItem } from '@/types/deen';
-import { CitationLine } from '@/components/deen/citation-line';
 import { GradingLine } from '@/components/deen/grading-line';
 import { ReviewBadge } from '@/components/deen/review-badge';
 import { ItemArabic } from '@/components/deen/cue-text';
@@ -12,8 +11,10 @@ import { ITEM_STATE_LABEL, type ItemState } from '@/components/deen/item-state';
 import { learnHref } from '@/components/deen/links';
 import { workTitle } from '@/components/deen/registry-names';
 import { ChevronDownIcon } from '@/components/ui/icons';
+import { useSettingsStore } from '@/stores/settings-store';
 import { cn } from '@/lib/cn';
 import { QuranRefText, refLabel, useRefAyahs } from './quran-text';
+import { SourceLine, withoutRepeatedCite } from './source-line';
 
 const STATE_TONE: Record<ItemState, string> = {
   new: 'text-muted',
@@ -33,8 +34,9 @@ export function repeatText(n: number | undefined): string | null {
  * status) behind a "Sources" toggle, and a Memorise action that opens the deen
  * engine's Read → Build → Recall flow.
  */
-export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemState }) {
+export function AdhkarItemCard({ item, state, highlight }: { item: TextItem; state: ItemState; highlight?: boolean }) {
   const [open, setOpen] = useState(false);
+  const showTranslit = useSettingsStore((s) => s.transliterationEnabled);
   const { surahName } = useRefAyahs(item.quran);
   const repeat = repeatText(item.usage?.repeat);
   const panelId = `sources-${item.deck}-${item.id}`;
@@ -42,7 +44,12 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
   const hasVariants = !!item.variants?.length;
 
   return (
-    <article className="rounded-2xl border border-foreground/10 bg-card p-4" data-adhkar-item={item.id} aria-labelledby={`${panelId}-title`}>
+    <article
+      id={`item-${item.id}`}
+      className={cn('scroll-mt-20 rounded-2xl border bg-card p-4 transition-[border-color,box-shadow] duration-700 motion-reduce:transition-none', highlight ? 'border-teal/50 ring-4 ring-teal/15' : 'border-foreground/10')}
+      data-adhkar-item={item.id}
+      aria-labelledby={`${panelId}-title`}
+    >
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 id={`${panelId}-title`} className="text-[15px] font-semibold text-foreground">
@@ -62,7 +69,7 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
         </span>
       </header>
 
-      <div className="mt-3 space-y-2.5">
+      <div className="mt-3 space-y-3.5">
         {item.quran ? (
           <>
             <p className="text-xs font-medium text-muted">{refLabel(item.quran, surahName)}</p>
@@ -70,9 +77,10 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
           </>
         ) : (
           <>
-            {item.arabic && <ItemArabic text={item.arabic} className="text-[1.5rem]" />}
+            {item.arabic && <ItemArabic text={item.arabic} className="px-1 text-balance text-[1.5rem]" />}
+            {showTranslit && item.transliteration && <p className="text-center text-sm italic leading-relaxed text-muted">{item.transliteration}</p>}
             {item.translation && (
-              <p className="text-[15px] leading-relaxed text-foreground">
+              <p className="max-w-[60ch] text-pretty text-[15px] leading-relaxed text-foreground">
                 <RichText text={item.translation} />
               </p>
             )}
@@ -87,9 +95,9 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
               <p className="text-xs leading-relaxed text-muted">
                 <RichText text={v.label} />
               </p>
-              <ItemArabic text={v.arabic} className="text-xl" />
+              <ItemArabic text={v.arabic} className="px-1 text-balance text-xl" />
               {v.citations.map((c, j) => (
-                <CitationLine key={j} citation={c} />
+                <SourceLine key={j} citation={c} compact />
               ))}
             </div>
           ))}
@@ -109,7 +117,7 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
         </button>
         <Link
           href={learnHref(item.deck, item.id)}
-          className="tactile-chip inline-flex min-h-11 items-center rounded-full bg-teal/10 px-4 text-xs font-semibold text-teal"
+          className="inline-flex min-h-11 items-center rounded-full bg-teal/10 px-4 text-xs font-semibold text-teal hover:bg-teal/15"
           data-memorise={item.id}
         >
           {state === 'new' ? 'Memorise' : 'Go over it'}
@@ -121,7 +129,7 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
           {(item.citations.length > 0 || item.gradings.length > 0) && (
             <div className="space-y-2">
               {item.citations.map((c, i) => (
-                <CitationLine key={i} citation={c} />
+                <SourceLine key={i} citation={c} />
               ))}
               {item.gradings.map((g, i) => (
                 <GradingLine key={i} grading={g} />
@@ -130,7 +138,7 @@ export function AdhkarItemCard({ item, state }: { item: TextItem; state: ItemSta
           )}
           {item.usage?.evidence && (
             <p className="text-[13px] leading-relaxed text-muted">
-              <RichText text={item.usage.evidence} />
+              <RichText text={withoutRepeatedCite(item.usage.evidence, item.citations)} />
             </p>
           )}
           {hasNotes && (
