@@ -41,6 +41,8 @@ export function useFastTimes(enabled: boolean, today: string): FastDay | null {
         tomorrow: fastTimes(computeDay(place, addDays(today, 1), settings), imsakMin),
         tz: place.tz,
       });
+    }).catch(() => {
+      // The engine chunk couldn't load (offline before it was cached): the times stay out
     });
     return () => {
       live = false;

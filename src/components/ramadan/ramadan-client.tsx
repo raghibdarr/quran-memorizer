@@ -23,6 +23,7 @@ import MarkChips from './mark-chips';
 import MakeUp from './make-up';
 import RamadanLog from './ramadan-log';
 import { useFastTimes } from './use-fast-times';
+import { useMarkFast } from './use-mark-fast';
 
 const MODES: { value: RamadanMode; label: string }[] = [
   { value: 'auto', label: 'Auto' },
@@ -48,8 +49,7 @@ export default function RamadanClient() {
   const setImsakMin = usePrayerStore((s) => s.setImsakMin);
   const fasts = useWorshipStore((s) => s.fasts);
   const pauses = useWorshipStore((s) => s.pauses);
-  const markFast = useWorshipStore((s) => s.markFast);
-  const clearFast = useWorshipStore((s) => s.clearFast);
+  const mark = useMarkFast();
   const startPause = useWorshipStore((s) => s.startPause);
   const endPause = useWorshipStore((s) => s.endPause);
   const removePause = useWorshipStore((s) => s.removePause);
@@ -107,7 +107,7 @@ export default function RamadanClient() {
                 <MarkChips
                   options={fastOptionsFor(today, offset, season.active)}
                   value={fasts[today]?.s}
-                  onChange={(m) => (m ? markFast(today, m) : clearFast(today))}
+                  onChange={(m) => mark(today, m)}
                   labels={season.active ? undefined : { fasted: "I'm fasting today" }}
                 />
               </div>

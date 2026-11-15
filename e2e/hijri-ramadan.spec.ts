@@ -51,6 +51,22 @@ test.describe('Hijri calendar', () => {
     await expect(page.locator('[data-hijri-today]')).toContainText('3 Jumada al-Akhirah 1448')
   })
 
+  test('the month in view follows today when the adjustment carries it into the next month', async ({ page }) => {
+    // 9 December 2026 is the expected last day of Jumada al-Akhirah 1448
+    await page.clock.install({ time: new Date('2026-12-09T12:00:00Z') })
+    await seed(page)
+    await page.goto('/calendar')
+    await expect(page.locator('[data-month-title]')).toHaveText('Jumada al-Akhirah 1448')
+    await page.getByRole('button', { name: 'Start months a day earlier' }).click()
+    await expect(page.locator('[data-hijri-today]')).toContainText('1 Rajab 1448')
+    await expect(page.locator('[data-month-title]')).toHaveText('Rajab 1448')
+    await expect(page.locator('[data-month-grid] [aria-current="date"]')).toHaveAttribute('data-iso', '2026-12-09')
+    // A month the user moved to stays put
+    await page.getByRole('button', { name: 'Next month' }).click()
+    await page.getByRole('button', { name: 'Start months a day later' }).click()
+    await expect(page.locator('[data-month-title]')).toHaveText("Sha'ban 1448")
+  })
+
   test('reloads offline', async ({ page, context, baseURL }) => {
     // The service worker registers on a real host only (never on "localhost"),
     // and the dev server's chunks aren't cacheable: static builds only
@@ -101,6 +117,21 @@ test.describe('Ramadan', () => {
     await expect(page.locator('[data-make-up-left]')).toHaveText('0')
     await page.reload()
     await expect(page.locator('[data-make-up-left]')).toHaveText('0')
+  })
+
+  test('re-marking a made-up day takes the make-up back, so it never ticks off a later day', async ({ page }) => {
+    await page.clock.install({ time: new Date('2027-02-20T15:00:00Z') })
+    await seed(page)
+    await page.goto('/ramadan')
+    const log = page.locator('[data-ramadan-log]')
+    await log.locator('[data-day="2027-02-10"]').click()
+    await log.locator('button[data-mark="owed"]').click()
+    await page.locator('[data-made-up]').click()
+    await expect(page.locator('[data-make-up-left]')).toHaveText('0')
+    await log.locator('button[data-mark="fasted"]').click()
+    await log.locator('[data-day="2027-02-12"]').click()
+    await log.locator('button[data-mark="owed"]').click()
+    await expect(page.locator('[data-make-up-left]')).toHaveText('1')
   })
 
   test("after iftar: counts to tomorrow's suhoor and lists tomorrow's times", async ({ page }) => {

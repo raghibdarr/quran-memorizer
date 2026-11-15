@@ -8,6 +8,7 @@ import { useWorshipStore, type FastMark } from '@/stores/worship-store';
 import { ChevronDownIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import MarkChips from './mark-chips';
+import { useMarkFast } from './use-mark-fast';
 
 const CELL: Record<FastMark, string> = {
   fasted: 'bg-teal text-on-teal',
@@ -34,8 +35,7 @@ const LEGEND: { mark: FastMark; label: string }[] = [
 export default function RamadanLog({ span, today, collapsible = false }: { span: RamadanSpan; today: string; collapsible?: boolean }) {
   const fasts = useWorshipStore((s) => s.fasts);
   const pauses = useWorshipStore((s) => s.pauses);
-  const markFast = useWorshipStore((s) => s.markFast);
-  const clearFast = useWorshipStore((s) => s.clearFast);
+  const mark = useMarkFast();
   const days = ramadanDays(span);
   const defaultSel = days.find((d) => d.iso === today)?.iso ?? (today > span.end ? span.end : span.start);
   const [picked, setPicked] = useState<string | null>(null);
@@ -75,7 +75,7 @@ export default function RamadanLog({ span, today, collapsible = false }: { span:
           <>
             <ol className="mt-3 grid grid-cols-6 gap-1.5 sm:grid-cols-10" aria-label={`Days of Ramadan ${span.hijriYear}`}>
               {days.map((d) => {
-                const mark = fasts[d.iso]?.s;
+                const m = fasts[d.iso]?.s;
                 const paused = isPaused(d.iso, pauses);
                 const ahead = d.iso > today;
                 const isSel = d.iso === sel;
@@ -85,12 +85,12 @@ export default function RamadanLog({ span, today, collapsible = false }: { span:
                       type="button"
                       onClick={() => setPicked(d.iso)}
                       aria-pressed={isSel}
-                      aria-label={`Day ${d.day}, ${formatCivil(d.iso, { year: false })}${mark ? `: ${mark === 'owed' ? 'to make up' : mark}` : ''}${paused ? ', paused' : ''}`}
+                      aria-label={`Day ${d.day}, ${formatCivil(d.iso, { year: false })}${m ? `: ${m === 'owed' ? 'to make up' : m}` : ''}${paused ? ', paused' : ''}`}
                       data-day={d.iso}
-                      data-mark={mark ?? ''}
+                      data-mark={m ?? ''}
                       className={cn(
                         'pressable flex aspect-square w-full items-center justify-center rounded-lg text-sm font-semibold tabular-nums',
-                        mark ? CELL[mark] : 'bg-foreground/[0.04] text-foreground',
+                        m ? CELL[m] : 'bg-foreground/[0.04] text-foreground',
                         ahead && 'text-muted/60',
                         paused && 'opacity-40',
                         d.iso === today && !isSel && 'ring-2 ring-teal',
@@ -117,7 +117,7 @@ export default function RamadanLog({ span, today, collapsible = false }: { span:
                   <MarkChips
                     options={['fasted', 'owed', 'exempt']}
                     value={fasts[sel]?.s}
-                    onChange={(m) => (m ? markFast(sel, m) : clearFast(sel))}
+                    onChange={(m) => mark(sel, m)}
                   />
                 </div>
               )}
