@@ -42,7 +42,7 @@ export interface CitiesFile {
 
 export interface CityIndex {
   cities: City[];
-  /** Folded names (and ASCII names) per row, for search */
+  /** Folded names (ASCII names and short spellings too) per row, for search */
   keys: string[][];
 }
 
@@ -56,6 +56,24 @@ export function fold(s: string): string {
     .replace(/[-‐–—]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/** fold, with full stops read as spaces: "St. Louis" and "st louis" are the same thing typed */
+const plain = (s: string) => fold(s).replace(/\./g, ' ').replace(/\s+/g, ' ').trim();
+
+/** The short spelling of a name's leading words: "saint louis" and "st louis", "mount vernon" and "mt vernon" */
+const shortForm = (s: string) => s.replace(/\b(saint|sankt)\b/g, 'st').replace(/\bmount\b/g, 'mt');
+
+/** What a name can be found under: as written, in its short spelling, and by its ASCII name */
+function searchKeys(name: string, ascii?: string): string[] {
+  const keys: string[] = [];
+  for (const n of ascii ? [name, ascii] : [name]) {
+    const k = plain(n);
+    if (!keys.includes(k)) keys.push(k);
+    const short = shortForm(k);
+    if (!keys.includes(short)) keys.push(short);
+  }
+  return keys;
 }
 
 /** Turns the columnar file into rows (throws on a file it can't read) */
@@ -79,7 +97,7 @@ export function decodeCities(file: CitiesFile): CityIndex {
       cities[row] = { id: row, name, cc, lat: lat / 100, lng: lng / 100, tz: file.zones[file.z[row]], tier: Number(file.pop[row]) };
       if (codes) cities[row].admin1 = codes.slice(k * 2, k * 2 + 2);
       const ascii = file.ascii[String(row)];
-      keys[row] = ascii ? [fold(name), fold(ascii)] : [fold(name)];
+      keys[row] = searchKeys(name, ascii);
     }
   });
   if (row !== n) throw new Error('cities.json: counts do not add up');
@@ -129,6 +147,17 @@ const ALIASES: Record<string, Array<[string, string]>> = {
   madras: [['Chennai', 'IN']],
   dacca: [['Dhaka', 'BD']],
   constantinople: [['Istanbul', 'TR']],
+  taif: [['Ta’if', 'SA']],
+  kiev: [['Kyiv', 'UA']],
+  cologne: [['Köln', 'DE']],
+  hanover: [['Hannover', 'DE']],
+  seville: [['Sevilla', 'ES']],
+  marrakech: [['Marrakesh', 'MA']],
+  fez: [['Fes', 'MA']],
+  chittagong: [['Chattogram', 'BD']],
+  hargeisa: [['Hargeysa', 'SO']],
+  'mazar i sharif': [['Mazār-e Sharīf', 'AF']],
+  nyc: [['New York City', 'US']],
 };
 
 let displayNames: Intl.DisplayNames | null | undefined;
@@ -192,53 +221,60 @@ function matchRank(keys: string[], q: string): number {
   return best;
 }
 
+/** Whether a word typed after the name fits where the city is: "ca", "canada", "uk", "mo", "missouri" */
+function inRegion(city: City, token: string): boolean {
+  if (token.length < 2) return false;
+  if (token === 'uk') return city.cc === 'GB';
+  if (token === 'usa') return city.cc === 'US';
+  if (token.length === 2) return city.cc.toLowerCase() === token || city.admin1?.toLowerCase() === token;
+  return fold(countryName(city.cc)).startsWith(token) || (token.length >= 3 && fold(regionName(city)).startsWith(token));
+}
+
 /**
  * Cities matching what the user typed, best first: exact name, then names
  * starting with it, then a later word starting with it, then (3+ letters)
- * anywhere in the name; bigger places first within each. "London, Canada" or
- * "London CA" narrows by country.
+ * anywhere in the name; bigger places first within each. "London, Canada",
+ * "London CA" or "Springfield MO" narrows by country or US state.
  */
 export function searchCities(index: CityIndex, query: string, limit = 8): City[] {
-  let q = fold(query).replace(/[.]/g, '');
+  let q = plain(query);
   if (!q) return [];
-  let countryQ = '';
+  let regionQ = '';
   const comma = q.indexOf(',');
   if (comma >= 0) {
-    countryQ = q.slice(comma + 1).trim();
+    regionQ = q.slice(comma + 1).replace(/,/g, ' ').trim();
     q = q.slice(0, comma).trim();
   }
   if (!q) return [];
+  const short = shortForm(q);
+  const rankOf = (keys: string[], text: string, textShort: string) =>
+    textShort === text ? matchRank(keys, text) : Math.min(matchRank(keys, text), matchRank(keys, textShort));
 
-  const countryOk = (cc: string) => {
-    if (!countryQ) return true;
-    if (countryQ.length === 2 && cc.toLowerCase() === countryQ) return true;
-    return fold(countryName(cc)).startsWith(countryQ);
-  };
+  // "London Canada" without the comma: the last word may be a country or a state
+  const sp = regionQ ? -1 : q.lastIndexOf(' ');
+  const head = sp > 0 ? q.slice(0, sp) : '';
+  const headShort = shortForm(head);
+  const tail = sp > 0 ? q.slice(sp + 1) : '';
 
   const scored: Array<{ city: City; rank: number }> = [];
-  const aliasTargets = ALIASES[q];
+  const aliasTargets = ALIASES[q] ?? (head && ALIASES[head]);
+  const aliasRegion = ALIASES[q] ? regionQ : tail;
   if (aliasTargets) {
     for (const [name, cc] of aliasTargets) {
       const city = index.cities.find((c) => c.name === name && c.cc === cc);
-      if (city && countryOk(city.cc)) scored.push({ city, rank: -1 });
+      if (city && (!aliasRegion || inRegion(city, aliasRegion))) scored.push({ city, rank: -1 });
     }
   }
 
   for (let i = 0; i < index.cities.length; i++) {
     const city = index.cities[i];
-    if (aliasTargets && scored.some((s) => s.city.id === city.id)) continue;
-    let rank = matchRank(index.keys[i], q);
-    // "London Canada" without the comma: try the last word as a country
-    if (rank === Infinity && !countryQ) {
-      const sp = q.lastIndexOf(' ');
-      if (sp > 0) {
-        const head = q.slice(0, sp);
-        const tail = q.slice(sp + 1);
-        const r = matchRank(index.keys[i], head);
-        if (r !== Infinity && (tail.length === 2 ? city.cc.toLowerCase() === tail : tail.length >= 3 && fold(countryName(city.cc)).startsWith(tail))) rank = r;
-      }
+    if (scored.length && scored.some((s) => s.rank === -1 && s.city.id === city.id)) continue;
+    let rank = rankOf(index.keys[i], q, short);
+    if (rank === Infinity && head) {
+      const r = rankOf(index.keys[i], head, headShort);
+      if (r !== Infinity && inRegion(city, tail)) rank = r;
     }
-    if (rank === Infinity || !countryOk(city.cc)) continue;
+    if (rank === Infinity || (regionQ && !inRegion(city, regionQ))) continue;
     scored.push({ city, rank });
   }
 

@@ -132,6 +132,39 @@ describe('searchCities', () => {
     expect(names('jerusalem')).toContain('East Jerusalem/PS')
   })
 
+  it('reads full stops, "St" and "Saint", "Mt" and "Mount" as the same thing typed', () => {
+    for (const q of ['St. Louis', 'st louis', 'saint louis', 'St Louis, US']) expect(names(q)[0]).toBe('St. Louis/US')
+    expect(names('st petersburg')[0]).toBe('Saint Petersburg/RU')
+    expect(names('saint petersburg')[0]).toBe('Saint Petersburg/RU')
+    expect(names("st. john's")).toContain("St. John's/CA")
+    expect(names('st gallen')[0]).toBe('Sankt Gallen/CH')
+    expect(names('mt vernon')[0]).toBe('Mount Vernon/US')
+    // Still found while the long word is only half typed
+    expect(names('sain')[0]).toBe('Saint Petersburg/RU')
+    expect(names('mountain v')[0]).toBe('Mountain View/US')
+  })
+
+  it('narrows by a US state, and by "UK"', () => {
+    const first = (q: string) => searchCities(index, q)[0]
+    expect(first('Portland OR')).toMatchObject({ name: 'Portland', admin1: 'OR' })
+    expect(first('portland, maine')).toMatchObject({ name: 'Portland', admin1: 'ME' })
+    expect(first('Springfield Illinois')).toMatchObject({ name: 'Springfield', admin1: 'IL' })
+    expect(first('washington dc')).toMatchObject({ name: 'Washington', admin1: 'DC' })
+    expect(names('birmingham uk')[0]).toBe('Birmingham/GB')
+    expect(names('Birmingham, UK')[0]).toBe('Birmingham/GB')
+  })
+
+  it('finds more names GeoNames spells another way, with a country after them too', () => {
+    expect(names('taif')[0]).toBe('Ta’if/SA')
+    expect(names('Kiev')[0]).toBe('Kyiv/UA')
+    expect(names('cologne')[0]).toBe('Köln/DE')
+    expect(names('Chittagong')[0]).toBe('Chattogram/BD')
+    expect(names('marrakech')[0]).toBe('Marrakesh/MA')
+    expect(names('mecca sa')).toEqual(['Makkah/SA'])
+    expect(names('Mecca, Saudi Arabia')).toEqual(['Makkah/SA'])
+    expect(names('mecca, france')).toEqual([])
+  })
+
   it('returns nothing for an empty or unmatched query and respects the limit', () => {
     expect(names('')).toEqual([])
     expect(names('   ')).toEqual([])
