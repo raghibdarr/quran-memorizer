@@ -155,6 +155,9 @@ function Wizard({ place }: { place: Place }) {
       setApplied(false);
       setUndone(false);
       window.scrollTo({ top: 0 });
+    } catch {
+      // The matcher is loaded on demand: offline on the web it may not be there yet
+      showError('The matcher could not be loaded. Check your connection and try again.', []);
     } finally {
       setBusy(false);
     }
@@ -162,10 +165,14 @@ function Wizard({ place }: { place: Place }) {
 
   const apply = () => {
     if (!fitted) return;
-    // The fit covers the five prayers only: a sunrise adjustment the user set stays theirs
+    // The fit covers the five prayers only: a sunrise adjustment the user set stays
+    // theirs. Moving from a named method to our own angles, the minutes that method
+    // built in to sunrise come along (calc.offsets.sunrise) so sunrise stays put;
+    // settings already on custom angles carry theirs in the stored offset.
     const calc = fitted.result.calc;
-    const sunrise = usePrayerStore.getState().offsets.sunrise;
-    applyCalc({ ...calc, offsets: { ...calc.offsets, sunrise } });
+    const current = usePrayerStore.getState();
+    const carried = current.method === 'custom' ? 0 : calc.offsets.sunrise;
+    applyCalc({ ...calc, offsets: { ...calc.offsets, sunrise: current.offsets.sunrise + carried } });
     haptic.success();
     setApplied(true);
     setUndone(false);

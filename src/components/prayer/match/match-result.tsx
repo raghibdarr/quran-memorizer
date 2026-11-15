@@ -95,11 +95,11 @@ export function CompareTable({ days }: { days: CompareDay[] }) {
             </colgroup>
             <thead>
               <tr className="text-left text-xs text-muted">
-                <th className="py-1.5 font-medium">Prayer</th>
-                <th className="py-1.5 pl-2 text-right font-medium">Mosque</th>
+                <th scope="col" className="py-1.5 font-medium">Prayer</th>
+                <th scope="col" className="py-1.5 pl-2 text-right font-medium">Mosque</th>
                 {/* pr-8 sits the header over the digits, past the gap slot (w-7 + gap-1) */}
-                <th className="py-1.5 pr-8 pl-3 text-right font-medium">Now</th>
-                <th className="py-1.5 pr-8 pl-2 text-right font-medium">Match</th>
+                <th scope="col" className="py-1.5 pr-8 pl-3 text-right font-medium">Now</th>
+                <th scope="col" className="py-1.5 pr-8 pl-2 text-right font-medium">Match</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-foreground/5">
@@ -107,7 +107,9 @@ export function CompareTable({ days }: { days: CompareDay[] }) {
                 const entered = d.entered[p] ?? null;
                 return (
                   <tr key={p} data-prayer={p} data-entered={entered === null ? undefined : ''}>
-                    <td className={cn('py-2', entered === null ? 'text-muted' : 'text-foreground')}>{TIME_LABELS[p]}</td>
+                    <th scope="row" className={cn('py-2 text-left font-normal', entered === null ? 'text-muted' : 'text-foreground')}>
+                      {TIME_LABELS[p]}
+                    </th>
                     <td className="py-2 pl-2 text-right font-semibold text-foreground">
                       {entered === null ? (
                         <>

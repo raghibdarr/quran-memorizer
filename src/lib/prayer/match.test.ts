@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import fc from 'fast-check'
 import { addDaysIso } from '@/lib/dates'
+import { computeDay } from './engine'
 import { NAMED_METHODS } from './methods'
 import {
   checkMatchInput,
@@ -204,6 +205,47 @@ describe('matchMosque: recovery', () => {
     const want = dayMinutes(london, third, truth)
     const got = dayMinutes(london, third, r.calc)
     for (const p of PRAYER_NAMES) expect(clockGap(got[p]!, want[p]!), p).toBeLessThanOrEqual(1)
+  })
+
+  it('own angles leave sunrise and the prayers not typed where the closest method had them', () => {
+    // Only Fajr and Isha typed, on angles no preset has. Whichever named method
+    // came closest builds minutes in to the other times (Diyanet: -7 on sunrise,
+    // +5 on Dhuhr, +4 on Asr, +7 on Maghrib; Tehran: Maghrib by its own angle).
+    // Our own angles must not drop those: the rest of the day still reads as
+    // one named method, all year.
+    const istanbul = CITIES[7]
+    const truth = calc('custom', { customAngles: { fajr: 13, isha: 13 } })
+    const d1 = '2026-03-15'
+    const only = ['fajr', 'isha'] as const
+    const r = matchMosque(istanbul, [timetable(istanbul, d1, truth, only), timetable(istanbul, addDaysIso(d1, 30), truth, only)])!
+    expect(r.customAngles).toBe(true)
+    expect(r.maxOff).toBeLessThanOrEqual(1)
+    const rest = ['sunrise', 'dhuhr', 'asr', 'maghrib'] as const
+    const dates = [d1, addDaysIso(d1, 15), addDaysIso(d1, 200)]
+    const follows = (NAMED_METHODS as MethodId[]).filter((m) =>
+      dates.every((iso) => {
+        const want = computeDay(istanbul, iso, calc(m))
+        const got = computeDay(istanbul, iso, r.calc)
+        return rest.every((t) => Math.abs(got[t]! - want[t]!) <= 60_000)
+      }),
+    )
+    expect(follows.length).toBeGreaterThan(0)
+    // ...and that is not what bare angles give (the premise of this test)
+    const bare = computeDay(istanbul, d1, { ...r.calc, offsets: ZERO })
+    const got = computeDay(istanbul, d1, r.calc)
+    expect(rest.some((t) => bare[t] !== got[t])).toBe(true)
+    // A typed prayer is fitted to what was typed, not carried from the preset
+    const all = matchMosque(istanbul, [timetable(istanbul, d1, truth), timetable(istanbul, addDaysIso(d1, 30), truth)])!
+    expect(all.customAngles).toBe(true)
+    expect(all.maxOff).toBeLessThanOrEqual(1)
+  })
+
+  it('a named method never carries a sunrise offset', () => {
+    for (const city of CITIES) {
+      const r = matchMosque(city, [timetable(city, '2026-03-15', calc('Turkey', { offsets: { ...ZERO, fajr: 4 } }))])!
+      expect(r.customAngles).toBe(false)
+      expect(r.calc.offsets.sunrise).toBe(0)
+    }
   })
 
   it('keeps an interval Isha (Umm al-Qura) when only Fajr needs its own angle', () => {
