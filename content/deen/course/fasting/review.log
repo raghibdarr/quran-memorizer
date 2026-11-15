@@ -238,3 +238,41 @@ Changed (lessons 5 and 7 raised to rev 2):
    wording now says the three can come alone or together. No source or position changed.
 
 Nothing here is scholar-reviewed.
+
+## 10. Independent content verification (2026-11-15, an agent that wrote none of the unit)
+
+Downloaded again and read with a script written for this pass: shamela.ws books 124336
+(/51 to /55), 985 (/188 to /193), 11373 (/72 to /78), 11370 (/18 to /21), 11315 (/53 to /60),
+21739 (/291 to /321), 12445 (/40, /48, /49), 1726 (/3158, /3159), 9771 (/2240), 1681 (/3024,
+/3084); hadith-api ara-bukhari 1894 and 1933, ara-abudawud 2357 and 2358. dorar.net and the
+OpenITI text of al-Adhkar were not fetched in this pass.
+
+Checked, and found sound:
+
+- Primer quotes: 58 of 58 on the pages named. pregnant-nursing / hanafi is split by commentary
+  in book 985 and has the slip `والمريض` in 124336; read by eye in both. The four fasting
+  chapters were read whole against the English positions.
+- Consensus and difference phrases quoted in sections 3, 4 and 7: all found in Bidayat
+  al-Mujtahid and al-Ijma' on the pages named. Al-Ijma' nos. 68, 123 to 127 and 129 read in
+  place under those numbers.
+- Hadith: al-Bukhari 1894 and 1933 (Sultaniyya print on Shamela, and hadith-api) and Abu
+  Dawud 2357 and 2358 (Abd al-Hamid print on Shamela, and hadith-api) carry the stored
+  wording under the stored numbers. Translations read against the Arabic: faithful.
+  Al-Daraqutni's `تفرد به الحسين بن واقد وإسناده حسن` follows no. 2279 on the page cited, and
+  the lesson gives it as his verdict on the chain.
+- `build-deen --check` and `check-evidence.mjs` pass.
+
+Changed (lesson 4 raised to rev 2, lesson 5 to rev 3):
+
+1. kaffarah (lesson 5). Three English positions left out a limiting phrase that is in the
+   Arabic: Hanafi `في أحد السبيلين`, Shafi'i and Hanbali `في الفرج`. Sections 7 and 8 noted
+   the shortening and left it. A translation that drops a condition of the ruling is not
+   faithful, so each is now rendered ("by either passage", "penetrative intercourse").
+2. pregnant-nursing (lesson 4). The Maliki quote speaks only of feeding. Set beside the Hanafi
+   "make-up only", it could be read as owing no make-up days. The claim now says the sentence
+   is about feeding and points to the primer's next words, `والإطعام في هذا كله مد عن كل يوم يقضيه`
+   (11373 /74); the summary card says "on feeding". Bidaya 2:63 gives the fourth view as
+   `الحامل تقضي ولا تطعم، والمرضع تقضي وتطعم`.
+
+Nothing was removed. No quote, citation or grading changed. The OPEN notes in section 4 and
+the doubts in section 6 stand for a scholar reviewer. Nothing here is scholar-reviewed.

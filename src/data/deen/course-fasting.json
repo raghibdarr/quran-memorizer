@@ -1,7 +1,7 @@
 {
  "deck": "course-fasting",
  "kind": "course",
- "hash": "dc2ee65ae1cd33ed",
+ "hash": "373abd0962023de9",
  "items": [
   {
    "unit": "fasting",
@@ -750,7 +750,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-04-exemptions",
    "order": 4,
    "title": "Who may leave the fast",
@@ -918,7 +918,7 @@
     {
      "id": "pregnant-nursing",
      "kind": "differs",
-     "text": "A woman who is pregnant or nursing and fears harm may leave the fast. The schools differ on what she owes afterwards.",
+     "text": "A woman who is pregnant or nursing and fears harm may leave the fast. The schools differ on what she owes afterwards. The Maliki sentence quoted here speaks only of feeding; the primer goes on to set that feeding at a [[mudd]] “for each day he makes up”.",
      "evidence": [
       {
        "quran": {
@@ -969,7 +969,7 @@
       {
        "id": "pregnant-nursing-1",
        "front": "A pregnant or nursing woman leaves the fast out of fear for her child. What do the four primers say she owes?",
-       "back": "Hanafi: the make-up days only. Shafi’i and Hanbali: the make-up days and feeding for each day. Maliki: the pregnant woman does not feed (it is also said she does); the nursing woman feeds."
+       "back": "Hanafi: the make-up days only. Shafi’i and Hanbali: the make-up days and feeding for each day. Maliki, on feeding: the pregnant woman does not feed (it is also said she does); the nursing woman feeds."
       },
       {
        "id": "pregnant-nursing-hanafi",
@@ -1135,7 +1135,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 2,
+   "rev": 3,
    "id": "fasting-05-making-up",
    "order": 5,
    "title": "Making up, feeding and expiation",
@@ -1295,7 +1295,7 @@
      "positions": [
       {
        "school": "hanafi",
-       "text": "Whoever deliberately has intercourse, or eats or drinks what nourishes or is taken as medicine, owes the make-up day and an expiation like the expiation of [[zihar]].",
+       "text": "Whoever deliberately has intercourse by either passage, or eats or drinks what nourishes or is taken as medicine, owes the make-up day and an expiation like the expiation of [[zihar]].",
        "source": {
         "work": "mukhtasar-al-quduri",
         "location": "Kitab al-Sawm"
@@ -1313,7 +1313,7 @@
       },
       {
        "school": "shafii",
-       "text": "Whoever deliberately has intercourse in the daytime of Ramadan owes the make-up day and the expiation: freeing a believing slave; if he finds none, fasting two months in a row; if he is unable, feeding sixty poor people.",
+       "text": "Whoever deliberately has penetrative intercourse in the daytime of Ramadan owes the make-up day and the expiation: freeing a believing slave; if he finds none, fasting two months in a row; if he is unable, feeding sixty poor people.",
        "source": {
         "work": "matn-abi-shuja",
         "location": "Kitab al-Sawm"
@@ -1322,7 +1322,7 @@
       },
       {
        "school": "hanbali",
-       "text": "Everyone else who breaks the fast owes the make-up and nothing more, except one who breaks it by intercourse: he makes it up and frees a slave; if he finds none, he fasts two months in a row; if he is unable, he feeds sixty poor people.",
+       "text": "Everyone else who breaks the fast owes the make-up and nothing more, except one who breaks it by penetrative intercourse: he makes it up and frees a slave; if he finds none, he fasts two months in a row; if he is unable, he feeds sixty poor people.",
        "source": {
         "work": "umdat-al-fiqh",
         "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"

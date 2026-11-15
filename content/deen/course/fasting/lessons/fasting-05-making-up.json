@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 2,
+  "rev": 3,
   "id": "fasting-05-making-up",
   "order": 5,
   "title": "Making up, feeding and expiation",
@@ -160,7 +160,7 @@
       "positions": [
         {
           "school": "hanafi",
-          "text": "Whoever deliberately has intercourse, or eats or drinks what nourishes or is taken as medicine, owes the make-up day and an expiation like the expiation of [[zihar]].",
+          "text": "Whoever deliberately has intercourse by either passage, or eats or drinks what nourishes or is taken as medicine, owes the make-up day and an expiation like the expiation of [[zihar]].",
           "source": {
             "work": "mukhtasar-al-quduri",
             "location": "Kitab al-Sawm"
@@ -178,7 +178,7 @@
         },
         {
           "school": "shafii",
-          "text": "Whoever deliberately has intercourse in the daytime of Ramadan owes the make-up day and the expiation: freeing a believing slave; if he finds none, fasting two months in a row; if he is unable, feeding sixty poor people.",
+          "text": "Whoever deliberately has penetrative intercourse in the daytime of Ramadan owes the make-up day and the expiation: freeing a believing slave; if he finds none, fasting two months in a row; if he is unable, feeding sixty poor people.",
           "source": {
             "work": "matn-abi-shuja",
             "location": "Kitab al-Sawm"
@@ -187,7 +187,7 @@
         },
         {
           "school": "hanbali",
-          "text": "Everyone else who breaks the fast owes the make-up and nothing more, except one who breaks it by intercourse: he makes it up and frees a slave; if he finds none, he fasts two months in a row; if he is unable, he feeds sixty poor people.",
+          "text": "Everyone else who breaks the fast owes the make-up and nothing more, except one who breaks it by penetrative intercourse: he makes it up and frees a slave; if he finds none, he fasts two months in a row; if he is unable, he feeds sixty poor people.",
           "source": {
             "work": "umdat-al-fiqh",
             "location": "Kitab al-Siyam, bab ahkam al-muftirin fi Ramadan"
@@ -273,7 +273,8 @@
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
       "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
       "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). No change to this lesson. Not reviewed by a scholar.",
-      "2026-11-15 fresh review: the summary said a missed fast leads to \"one of three things\", but the unit itself shows them combined (make-up with feeding in lessons 4 and 5). Wording now says alone or together. No source or position changed. Hanbali primer pages (shamela.ws/book/11315/54 to /59) fetched again and read: quotes in place, and no sentence on the time of the intention, as SOURCES.md says. Not reviewed by a scholar."
+      "2026-11-15 fresh review: the summary said a missed fast leads to \"one of three things\", but the unit itself shows them combined (make-up with feeding in lessons 4 and 5). Wording now says alone or together. No source or position changed. Hanbali primer pages (shamela.ws/book/11315/54 to /59) fetched again and read: quotes in place, and no sentence on the time of the intention, as SOURCES.md says. Not reviewed by a scholar.",
+      "2026-11-15 independent content verification (an agent that wrote none of the unit): all sources downloaded again and read (review.log section 10). Under kaffarah, three English positions left out a limiting phrase of the Arabic (Hanafi “في أحد السبيلين”, Shafi’i and Hanbali “في الفرج”); each is now rendered. No quote or source changed. Not reviewed by a scholar."
     ]
   }
 }
