@@ -1,11 +1,11 @@
 {
   "id": "11",
   "deck": "nawawi40",
-  "rev": 2,
+  "rev": 3,
   "title": "Leave what makes you doubt",
   "cue": "Leave what makes you doubt for what does not",
   "arabic": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ ﷺ وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ ﷺ: «دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ».",
-  "translation": "It is narrated from Abu Muhammad al-Hasan ibn Ali ibn Abi Talib, grandson of the Messenger of Allah ﷺ and his sweet basil, may Allah be pleased with them both, who said: I memorised from the Messenger of Allah ﷺ: “Leave what makes you doubt for what does not make you doubt.”",
+  "translation": "It is narrated from Abu Muhammad al-Hasan ibn Ali ibn Abi Talib, grandson of the Messenger of Allah ﷺ and his fragrant flower, may Allah be pleased with them both, who said: I memorised from the Messenger of Allah ﷺ: “Leave what makes you doubt for what does not make you doubt.”",
   "citations": [
     {
       "collection": "tirmidhi",
@@ -76,7 +76,8 @@
       "2026-11-14 H: not in the two Sahihs. al-Nawawi quotes al-Tirmidhi: \"hasan sahih\"; located in al-Tirmidhi's Jami' after no. 2518 (hadith-api ara-tirmidhi text) and reported by Ibn Rajab (\"وصححه الترمذي\", Jami' al-'Ulum on hadith 11)",
       "2026-11-14 I: build-deen --check green",
       "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
-      "2026-11-15 review: rev 2. The grading line now gives al-Tirmidhi's own term, hasan sahih, in English beside the Arabic quote, so the label Sahih is not read as his whole verdict. Arabic, translation and numbers unchanged."
+      "2026-11-15 review: rev 2. The grading line now gives al-Tirmidhi's own term, hasan sahih, in English beside the Arabic quote, so the label Sahih is not read as his whole verdict. Arabic, translation and numbers unchanged.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. rev 3: ريحانته now \"his fragrant flower\", not \"his sweet basil\": ريحانة is any sweet-smelling plant (al-Haytami: he is likened to \"ريحان طيب الرائحة\"), so naming one species said more than the Arabic. al-Tirmidhi's \"حديث حسن صحيح\" read after no. 2518; Ibn Rajab's \"وصححه الترمذي\" read at Jami' al-'Ulum 1/278."
     ]
   }
 }

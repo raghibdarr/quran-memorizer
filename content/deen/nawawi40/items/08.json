@@ -83,7 +83,8 @@
       "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
       "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
       "2026-11-14 I: build-deen --check green",
-      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. No change."
     ]
   }
 }

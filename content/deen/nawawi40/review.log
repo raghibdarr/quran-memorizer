@@ -213,3 +213,32 @@ al-'Ulum (al-Arna'ut and Bajis) takhrij footnotes; api = the hadith-api text at 
 ```
 2026-11-15 build-deen G8 warning on 11 ("hasan" unmarked) is the narrator's name al-Hasan ibn Ali, not the grading term; left as plain English by design
 2026-11-15 reviewer pass: 11 rev 2, grading 'in' now names al-Tirmidhi's term (hasan sahih) in English; no text or number changed. SELECTION.md wording on segments corrected to match the items (long narrations only).
+
+## Independent verification, 2026-11-15
+
+A fresh agent that wrote none of the content checked hadith 1 to 15. Nothing here is
+scholar-reviewed.
+
+- **Arabic**: every witness page was fetched again into an empty cache and `collate.mjs --vowels`
+  re-run. Its output is the same as the block above, line for line, and every stored
+  `skeletonSha256` matches. Each matn was also read by eye on Ibn Daqiq al-'Id's page, with
+  al-Nawawi's attribution line; hadith 2, 4, 11 and 12 were read on al-Haytami's vowelled page
+  too. The readings chosen where the prints differ are as the provenance notes say. Each item
+  has at least one printed (non-Sunnah.com) witness that agrees with ours; in 4, 9 and 10 no
+  print is letter-identical, and the notes name each difference (a word-join in Ibn Daqiq for 4
+  and 9; in 10 Ibn Daqiq's print drops two phrases that al-Haytami and hadith-api both have).
+- **English**: re-read sentence by sentence against the Arabic. One change: 11, ريحانته is now
+  "his fragrant flower" (rev 3). "Sweet basil" named one species; ريحانة is any sweet-smelling
+  plant, and al-Haytami glosses it "ريحان طيب الرائحة". No omission, addition or softening found
+  elsewhere.
+- **Citations**: every Bukhari, Muslim, Tirmidhi, Nasa'i and Ibn Majah number was found in the
+  Dar al-Minhaj editors' footnotes (Ibn Majah 3976 on p. 301); 11 and 12 also in the footnotes
+  of Ibn Rajab's editors (1/278, 1/287).
+- **Gradings**: 11, al-Tirmidhi's "وهذا حديث حسن صحيح" read after no. 2518, and al-Nawawi quotes
+  it; Ibn Rajab: "وصححه الترمذي". 12, al-Nawawi's "حديث حسن" read in both prints; al-Tirmidhi's
+  word after no. 2317 is "غريب"; Ibn Rajab's quoted sentence read at 1/287, with Ahmad, Ibn
+  Ma'in, al-Bukhari and al-Daraqutni named for the mursal view. The note on 12 now also gives
+  Ibn Abd al-Barr's view from the same passage, which supports al-Nawawi, so both sides are
+  shown (rev 2).
+- **Notes**: each note's paraphrase was read against the page it cites; all fifteen hold.
+- Nothing was removed. `build-deen --check` green (the G8 warning on 11 is the name al-Hasan).

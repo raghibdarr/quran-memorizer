@@ -1,7 +1,7 @@
 {
   "id": "12",
   "deck": "nawawi40",
-  "rev": 1,
+  "rev": 2,
   "title": "Leaving what does not concern you",
   "cue": "Part of the excellence of a person's Islam",
   "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ».",
@@ -61,7 +61,7 @@
   },
   "notes": [
     {
-      "text": "Ibn Rajab reports that al-Tirmidhi called this chain gharib, that al-Nawawi graded it [[hasan]] because its narrators are trustworthy, and that most of the imams, Ahmad and Yahya ibn Ma'in among them, held it is preserved only as a [[mursal]] report from Ali ibn al-Husayn.",
+      "text": "Ibn Rajab reports that al-Tirmidhi called this chain gharib, that al-Nawawi graded it [[hasan]] because its narrators are trustworthy, that Ibn Abd al-Barr held it is preserved from al-Zuhri with this chain, which agrees with al-Nawawi, and that most of the imams, Ahmad and Yahya ibn Ma'in among them, held it is preserved only as a [[mursal]] report from Ali ibn al-Husayn.",
       "source": {
         "work": "Ibn Rajab, Jami' al-'Ulum wa al-Hikam",
         "location": "on hadith 12, vol. 1, p. 287 (Mu'assasat al-Risala, 7th printing, 1997)"
@@ -81,7 +81,8 @@
       "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
       "2026-11-14 H: not in the two Sahihs. al-Nawawi's verdict \"حديث حسن\" is in his attribution line (Ibn Daqiq and al-Haytami). Dissent located in Ibn Rajab, Jami' al-'Ulum on hadith 12 (vol. 1 p. 287): most imams, Ahmad and Ibn Ma'in among them, hold it mursal from Ali ibn al-Husayn; al-Tirmidhi's own word after no. 2317 is \"gharib\" (hadith-api ara-tirmidhi), which is not a grade on our scale and is given in a note",
       "2026-11-14 I: build-deen --check green",
-      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. rev 2: the note now also gives Ibn Abd al-Barr's view (in the same passage of Ibn Rajab, 1/287), so both sides of the disagreement are shown. Ibn Rajab's quoted words, al-Nawawi's \"حديث حسن\" and al-Tirmidhi's \"غريب\" after no. 2317 all read at the source; Ibn Majah 3976 found in the Dar al-Minhaj footnote (p. 301) and Ibn Rajab's editors' footnote."
     ]
   }
 }

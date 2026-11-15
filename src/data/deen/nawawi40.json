@@ -1,7 +1,7 @@
 {
  "deck": "nawawi40",
  "kind": "hadith",
- "hash": "e8564d03beae910d",
+ "hash": "2aa5a1f23ce065a9",
  "items": [
   {
    "id": "01",
@@ -760,11 +760,11 @@
   {
    "id": "11",
    "deck": "nawawi40",
-   "rev": 2,
+   "rev": 3,
    "title": "Leave what makes you doubt",
    "cue": "Leave what makes you doubt for what does not",
    "arabic": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ ﷺ وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ ﷺ: «دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ».",
-   "translation": "It is narrated from Abu Muhammad al-Hasan ibn Ali ibn Abi Talib, grandson of the Messenger of Allah ﷺ and his sweet basil, may Allah be pleased with them both, who said: I memorised from the Messenger of Allah ﷺ: “Leave what makes you doubt for what does not make you doubt.”",
+   "translation": "It is narrated from Abu Muhammad al-Hasan ibn Ali ibn Abi Talib, grandson of the Messenger of Allah ﷺ and his fragrant flower, may Allah be pleased with them both, who said: I memorised from the Messenger of Allah ﷺ: “Leave what makes you doubt for what does not make you doubt.”",
    "citations": [
     {
      "collection": "tirmidhi",
@@ -829,7 +829,7 @@
   {
    "id": "12",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "Leaving what does not concern you",
    "cue": "Part of the excellence of a person's Islam",
    "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ».",
@@ -889,7 +889,7 @@
    },
    "notes": [
     {
-     "text": "Ibn Rajab reports that al-Tirmidhi called this chain gharib, that al-Nawawi graded it [[hasan]] because its narrators are trustworthy, and that most of the imams, Ahmad and Yahya ibn Ma'in among them, held it is preserved only as a [[mursal]] report from Ali ibn al-Husayn.",
+     "text": "Ibn Rajab reports that al-Tirmidhi called this chain gharib, that al-Nawawi graded it [[hasan]] because its narrators are trustworthy, that Ibn Abd al-Barr held it is preserved from al-Zuhri with this chain, which agrees with al-Nawawi, and that most of the imams, Ahmad and Yahya ibn Ma'in among them, held it is preserved only as a [[mursal]] report from Ali ibn al-Husayn.",
      "source": {
       "work": "Ibn Rajab, Jami' al-'Ulum wa al-Hikam",
       "location": "on hadith 12, vol. 1, p. 287 (Mu'assasat al-Risala, 7th printing, 1997)"
