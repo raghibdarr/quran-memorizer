@@ -6,16 +6,19 @@ import { test, expect, type Page } from '@playwright/test'
 
 const LONDON = { lat: 51.51, lng: -0.13, label: 'London', countryCode: 'GB', tz: 'Europe/London', source: 'city' }
 
-async function seed(page: Page, { place = true }: { place?: boolean } = {}) {
+const TROMSO = { lat: 69.65, lng: 18.96, label: 'Tromsø', countryCode: 'NO', tz: 'Europe/Oslo', source: 'city' }
+
+async function seed(page: Page, { place = true, worship }: { place?: boolean | typeof LONDON; worship?: object } = {}) {
   await page.addInitScript(
-    ({ place }) => {
+    ({ place, worship }) => {
       // Only on the first load of the test: later reloads must keep what the test wrote
       if (sessionStorage.getItem('seeded')) return
       sessionStorage.setItem('seeded', '1')
       localStorage.setItem('onboarding-complete', 'true')
       if (place) localStorage.setItem('takrar-place', JSON.stringify({ state: { place }, version: 1 }))
+      if (worship) localStorage.setItem('takrar-worship', JSON.stringify({ state: worship, version: 1 }))
     },
-    { place: place ? LONDON : null },
+    { place: place === true ? LONDON : place || null, worship },
   )
 }
 
@@ -217,6 +220,47 @@ test.describe('prayer log', () => {
     await page.getByRole('button', { name: 'Resume' }).click()
     const pauses = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-worship') ?? '{}').state.pauses)
     expect(pauses).toEqual([])
+  })
+
+  test('between midnight and Fajr the run still counts the day before, whose Isha is current', async ({ page }) => {
+    const whole = Object.fromEntries(['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].map((p) => [p, { s: 'ontime', at: 1 }]))
+    const { isha: _isha, ...noIsha } = whole
+    void _isha
+    await page.clock.install({ time: new Date('2026-03-11T00:30:00Z') })
+    await seed(page, { worship: { prayers: { '2026-03-08': whole, '2026-03-09': whole, '2026-03-10': noIsha } } })
+    await page.goto('/prayer/tracker')
+    await expect(page.locator('[data-today="2026-03-10"]')).toBeVisible()
+    await expect(page.getByText('All five, 2 days running')).toBeVisible()
+    await tick(page, '2026-03-10', 'isha').click()
+    await expect(page.getByText('All five, 3 days running')).toBeVisible()
+  })
+
+  test('polar night: times that cross never make a tap late', async ({ page }) => {
+    // Tromsø on 21 December: the computed Asr falls before Dhuhr, so Dhuhr's end is before its start
+    await page.clock.install({ time: new Date('2026-12-21T12:00:00Z') })
+    await seed(page, { place: TROMSO })
+    await page.goto('/prayer/tracker')
+    await expect(page.locator('[data-today="2026-12-21"]')).toBeVisible()
+    await tick(page, '2026-12-21', 'dhuhr').click()
+    await expect(tick(page, '2026-12-21', 'dhuhr')).toHaveAttribute('data-mark', 'ontime')
+  })
+})
+
+test.describe('prayer log, device far from the place', () => {
+  // The phone is on Auckland time (already 11 March); the place is London
+  test.use({ timezoneId: 'Pacific/Auckland' })
+
+  test("the day on screen is the place's day, in the rows and in the month", async ({ page }) => {
+    await page.clock.install({ time: new Date('2026-03-10T20:00:00Z') })
+    await seed(page)
+    await page.goto('/prayer/tracker')
+    await expect(page.locator('[data-today="2026-03-10"]')).toBeVisible()
+    await expect(page.locator('[aria-current="date"]')).toHaveAttribute('data-day', '2026-03-10')
+    await expect(page.locator('[data-day="2026-03-11"]')).toBeDisabled()
+    await tick(page, '2026-03-10', 'isha').click()
+    await expect(tick(page, '2026-03-10', 'isha')).toHaveAttribute('data-mark', 'ontime')
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-worship') ?? '{}').state.prayers)
+    expect(Object.keys(stored)).toEqual(['2026-03-10'])
   })
 })
 

@@ -57,6 +57,24 @@ describe('inferMark', () => {
     expect(inferMark(5000, 1000, null)).toBe('ontime')
   })
 
+  // Polar night: the computed times can cross (Asr before Dhuhr), leaving an end before the start
+  it('treats an end at or before the start as no end, never as late', () => {
+    expect(inferMark(1500, 1000, 900)).toBe('ontime')
+    expect(inferMark(1000, 1000, 1000)).toBe('ontime')
+    expect(inferMark(999, 1000, 900)).toBeNull()
+  })
+
+  it('property: never late before the end, never anything before the start', () => {
+    fc.assert(
+      fc.property(fc.integer(), fc.integer(), fc.option(fc.integer(), { nil: null }), (at, start, end) => {
+        const m = inferMark(at, start, end)
+        if (at < start) expect(m).toBeNull()
+        else if (end === null || at < end) expect(m).toBe('ontime')
+        else expect(m).toBe(end > start ? 'late' : 'ontime')
+      }),
+    )
+  })
+
   // Isha's time runs past midnight to the next Fajr: a tick at 00:30 is still on time
   const PLACES = [
     { lat: 51.51, lng: -0.13, tz: 'Europe/London' },
