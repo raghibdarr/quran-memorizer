@@ -117,14 +117,22 @@ test.describe('adhkar and duas', () => {
     expect(await page.evaluate(() => localStorage.getItem('takrar-essentials-migrated-v1'))).toBe('["dua-ruku"]')
   })
 
-  test('Essentials collections still open, with numbered sources', async ({ page }) => {
+  test('Key ayahs still opens; the older collections open the decks that replaced them', async ({ page }) => {
     await seed(page)
-    for (const id of ['key-ayahs', 'tasbih', 'salah-duas']) {
-      await page.goto(`/essentials/${id}`)
-      await expect(page.locator('main, body').first()).not.toContainText('couldn’t load')
-    }
+    await page.goto('/essentials/key-ayahs')
+    await expect(page.getByRole('heading', { name: 'Key ayahs' })).toBeVisible()
+    await page.goto('/essentials/salah-duas')
+    await expect(page).toHaveURL(/\/adhkar\/view\?d=salah-words/)
     await page.goto('/essentials/tasbih')
-    await expect(page.getByText('SubhanAllah').first()).toBeVisible()
+    await expect(page).toHaveURL(/\/tasbih$/)
+    await expect(page.locator('[data-tasbih-presets]').getByText('SubhanAllah')).toBeVisible()
+  })
+
+  test('the Learn tab shows each subject once', async ({ page }) => {
+    await seed(page)
+    await page.goto('/essentials')
+    await expect(page.locator('[data-key-ayahs]')).toBeVisible()
+    for (const old of ['Salah duas', 'Morning and evening adhkar', 'Tasbih and dhikr']) await expect(page.getByText(old)).toHaveCount(0)
   })
 
   test('the Prayer tab offers the adhkar that fit the time', async ({ page }) => {

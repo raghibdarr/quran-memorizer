@@ -37,10 +37,17 @@ function writeTarget(n: number) {
   } catch { /* private mode: the choice lasts for this visit */ }
 }
 
-/** Every Essentials dhikr with a set count (the ones /tasbih?d= can bind) */
+/**
+ * The counted dhikr /tasbih?d= can bind: the tasbih items (33, 33 and 34 after
+ * the prayer, Muslim 596; the daily hundreds, al-Bukhari 6403 and Muslim 2702),
+ * whose words the content audit checked against the adhkar decks. Their ids
+ * keep the counts people already have.
+ */
+const TASBIH_IDS = ['dhikr-subhanallah', 'dhikr-alhamdulillah', 'dhikr-allahuakbar', 'dhikr-lailaha', 'dhikr-istighfar'];
+
 async function loadDhikr(): Promise<EssentialItem[]> {
-  const all = await getEssentialsIndex();
-  return all.flatMap((c) => c.items).filter((i) => i.category === 'dhikr' && (i.repetitions ?? 0) > 0);
+  const all = (await getEssentialsIndex()).flatMap((c) => c.items);
+  return TASBIH_IDS.map((id) => all.find((i) => i.id === id)).filter((i): i is EssentialItem => !!i && (i.repetitions ?? 0) > 0);
 }
 
 /**
@@ -198,7 +205,7 @@ export default function TasbihClient() {
         </div>
 
         {!bound && dhikr && dhikr.length > 0 && (
-          <section aria-labelledby="tasbih-dhikr" className="pb-2">
+          <section aria-labelledby="tasbih-dhikr" className="pb-2" data-tasbih-presets>
             <h2 id="tasbih-dhikr" className="mb-2 text-xs font-semibold text-muted">
               {TASBIH_COPY.fromEssentials}
             </h2>

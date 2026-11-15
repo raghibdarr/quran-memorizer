@@ -69,7 +69,8 @@ export const TASBIH_COPY = {
   resetMessage: 'This count goes back to 0. Your lifetime total stays.',
   resetConfirm: 'Start again',
   lifetime: (n: string) => `${n} in all`,
-  fromEssentials: 'Dhikr from Essentials',
+  fromEssentials: 'Dhikr',
   source: (s: string) => `Source: ${s}`,
   countOf: (count: number, target?: number) => (target ? `${count} of ${target}` : `${count}`),
+  counterName: (count: number, target?: number) => `Count, ${target ? `${count} of ${target}` : count}. Tap to add one`,
 } as const;

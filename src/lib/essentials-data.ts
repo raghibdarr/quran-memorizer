@@ -32,3 +32,20 @@ export async function getCollection(id: string): Promise<EssentialCollection | u
   const all = await getEssentialsIndex();
   return all.find((c) => c.id === id);
 }
+
+/**
+ * The older Essentials collections whose words now live in checked decks: they
+ * are off the Learn tab, and their old addresses open the deck that replaced
+ * them. Memorised flags already became seeded cards (deen-migrate-essentials);
+ * counters stay with Tasbih, which still binds the tasbih items.
+ */
+export const RETIRED_COLLECTIONS: Readonly<Record<string, string>> = {
+  'salah-duas': '/adhkar/view?d=salah-words',
+  'morning-evening-adhkar': '/adhkar/view?d=adhkar-morning-evening',
+  tasbih: '/tasbih',
+};
+
+/** The collections still shown on the Learn tab (Key ayahs) */
+export function liveCollections(all: EssentialCollection[]): EssentialCollection[] {
+  return all.filter((c) => !(c.id in RETIRED_COLLECTIONS));
+}

@@ -1,7 +1,7 @@
 [
   {
     "id": "salah-duas",
-    "title": "Salah Duas",
+    "title": "Salah duas",
     "description": "Essential supplications recited during prayer",
     "items": [
       {
@@ -218,7 +218,7 @@
   },
   {
     "id": "morning-evening-adhkar",
-    "title": "Morning & Evening Adhkar",
+    "title": "Morning and evening adhkar",
     "description": "Daily remembrances for morning and evening",
     "items": [
       {
@@ -291,7 +291,7 @@
   },
   {
     "id": "tasbih",
-    "title": "Tasbih & Dhikr",
+    "title": "Tasbih and dhikr",
     "description": "Post-prayer remembrances and prayer bead sequences",
     "items": [
       {
@@ -351,7 +351,7 @@
       {
         "id": "dhikr-allahuakbar",
         "category": "dhikr",
-        "title": "Allahu Akbar",
+        "title": "Allahu akbar",
         "titleArabic": "اللَّهُ أَكْبَرُ",
         "description": "Said thirty-four times after every obligatory prayer",
         "arabic": "اللَّهُ أَكْبَرُ",
@@ -378,7 +378,7 @@
       {
         "id": "dhikr-lailaha",
         "category": "dhikr",
-        "title": "La ilaha illAllah",
+        "title": "La ilaha illallah",
         "titleArabic": "لَا إِلَٰهَ إِلَّا اللَّهُ",
         "description": "Said a hundred times in a day",
         "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
@@ -448,17 +448,17 @@
   },
   {
     "id": "key-ayahs",
-    "title": "Key Ayahs",
+    "title": "Key ayahs",
     "description": "Important verses commonly memorized",
     "items": [
       {
         "id": "ayah-kursi",
         "category": "ayah",
-        "title": "Ayatul Kursi",
+        "title": "Ayat al-Kursi",
         "description": "Surah Al-Baqarah, Ayah 255, read on going to bed",
         "arabic": "ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ",
         "transliteration": "Allaahu laa ilaaha illaa Huwal-Hayyul-Qayyoom. Laa ta'khudhuhu sinatun wa laa nawm. Lahu maa fis-samaawaati wa maa fil-ard. Man dhal-ladhee yashfa'u 'indahu illaa bi-idhnih. Ya'lamu maa bayna aydeehim wa maa khalfahum. Wa laa yuheetoona bi shay'in min 'ilmihi illaa bimaa shaa'. Wasi'a kursiyyuhus-samaawaati wal-ard. Wa laa ya'ooduhu hifdhuhumaa wa Huwal-'Aliyyul-'Adheem.",
-        "translation": "Allāh - there is no deity except Him, the Ever-Living,[98] the Self-Sustaining.[99] Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them,[100] and they encompass not a thing of His knowledge except for what He wills. His Kursī[101] extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High,[102] the Most Great.[103]",
+        "translation": "Allāh - there is no deity except Him, the Ever-Living, the Self-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursī extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
         "source": "Quran 2:255; Sahih al-Bukhari 2311",
         "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/002255.mp3",
         "surahId": 2,
@@ -476,7 +476,7 @@
       {
         "id": "ayah-baqarah-285",
         "category": "ayah",
-        "title": "Last 2 Ayahs of Al-Baqarah (285)",
+        "title": "Al-Baqarah 285 (the last two ayahs)",
         "description": "Whoever recites them at night, they will suffice him",
         "arabic": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيْهِ مِن رَّبِّهِۦ وَٱلْمُؤْمِنُونَ ۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَـٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِۦ ۚ وَقَالُوا۟ سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ ٱلْمَصِيرُ",
         "transliteration": "Aamanar-Rasoolu bimaa unzila ilayhi mir-Rabbihi wal-mu'minoon. Kullun aamana billaahi wa malaa'ikatihi wa kutubihi wa rusulihi laa nufarriqu bayna ahadin mir-rusulih. Wa qaaloo sami'naa wa ata'naa ghufraanaka Rabbanaa wa ilaykal-maseer.",
@@ -504,11 +504,11 @@
       {
         "id": "ayah-baqarah-286",
         "category": "ayah",
-        "title": "Last 2 Ayahs of Al-Baqarah (286)",
+        "title": "Al-Baqarah 286 (the last two ayahs)",
         "description": "Whoever recites them at night, they will suffice him",
         "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا ٱكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِن نَّسِينَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًا كَمَا حَمَلْتَهُۥ عَلَى ٱلَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِۦ ۖ وَٱعْفُ عَنَّا وَٱغْفِرْ لَنَا وَٱرْحَمْنَآ ۚ أَنتَ مَوْلَىٰنَا فَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَـٰفِرِينَ",
         "transliteration": "Laa yukallifullaahu nafsan illaa wus'ahaa. Lahaa maa kasabat wa 'alayhaa maktasabat. Rabbanaa laa tu'aakhidhnaa in naseenaa aw akhta'naa. Rabbanaa wa laa tahmil 'alaynaa isran kamaa hamaltahu 'alal-ladheena min qablinaa. Rabbanaa wa laa tuhammilnaa maa laa taaqata lanaa bih. Wa'fu 'annaa waghfir lanaa warhamnaa Anta Mawlaanaa fansurnaa 'alal-qawmil-kaafireen.",
-        "translation": "Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"[111]",
+        "translation": "Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
         "source": "Quran 2:286; Sahih al-Bukhari 5009",
         "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/002286.mp3",
         "surahId": 2,

@@ -37,7 +37,9 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
     onCount();
   };
 
-  const spoken = `${label ? `${label}: ` : ''}${TASBIH_COPY.countOf(count, goal || undefined)}`;
+  // Named for what it does and where it stands; the live region below speaks only at milestones
+  const spoken = `${label ? `${label}. ` : ''}${TASBIH_COPY.counterName(count, goal || undefined)}`;
+  const milestone = reached && count === goal ? TASBIH_COPY.reachedTarget : count > 0 && count % 33 === 0 ? TASBIH_COPY.countOf(count, goal || undefined) : '';
 
   return (
     <div className="flex h-full min-h-0 w-full flex-1 flex-col gap-3" data-counter>
@@ -91,7 +93,7 @@ export function Counter({ count, target, onCount, onUndo, label }: CounterProps)
       </button>
       {/* Outside the button: a labelled button hides its children from screen readers */}
       <span aria-live="polite" className="sr-only">
-        {reached && count === goal ? TASBIH_COPY.reachedTarget : ''}
+        {milestone}
       </span>
 
       <div className="flex min-h-11 items-center justify-between gap-3 text-sm">

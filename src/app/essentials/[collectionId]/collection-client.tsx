@@ -3,8 +3,8 @@
 import Link from '@/components/app-link';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { getCollection } from '@/lib/essentials-data';
+import { useParams, useRouter } from 'next/navigation';
+import { getCollection, RETIRED_COLLECTIONS } from '@/lib/essentials-data';
 import type { EssentialCollection, EssentialItem } from '@/types/quran';
 import { useEssentialsStore } from '@/stores/essentials-store';
 import EssentialCard from '@/components/essentials/essential-card';
@@ -32,10 +32,17 @@ export default function CollectionPage() {
   const [category, setCategory] = useState<CategoryFilter>('all');
   const [reciteOpen, setReciteOpen] = useState(false);
   const favorites = useEssentialsStore((s) => s.favorites);
+  const router = useRouter();
+  const retiredTo = RETIRED_COLLECTIONS[collectionId];
 
   useEffect(() => {
+    // An older collection's address opens the checked deck that replaced it
+    if (retiredTo) {
+      router.replace(retiredTo);
+      return;
+    }
     getCollection(collectionId).then((c) => setCollection(c ?? null));
-  }, [collectionId]);
+  }, [collectionId, retiredTo, router]);
 
   const filteredItems = useMemo(() => {
     if (!collection) return [] as EssentialItem[];
