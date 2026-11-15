@@ -31,10 +31,4 @@ export default function PrayerScreen({
 }
 
 /** A small uppercase heading over a group, as the app's other screens use */
-export function SectionLabel({ children, id }: { children: React.ReactNode; id?: string }) {
-  return (
-    <h2 id={id} className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted">
-      {children}
-    </h2>
-  );
-}
+export { SectionLabel } from '@/components/ui/section-heading';

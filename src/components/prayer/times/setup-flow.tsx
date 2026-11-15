@@ -96,7 +96,7 @@ export default function PrayerSetupFlow() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">Step {step} of {total}</p>
-              <h1 className="text-xl font-bold text-teal">{TITLES[step]}</h1>
+              <h1 className="text-xl font-bold text-foreground">{TITLES[step]}</h1>
             </div>
           </div>
           <div className="mt-3 flex gap-1" aria-hidden>

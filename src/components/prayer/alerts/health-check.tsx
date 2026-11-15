@@ -118,7 +118,7 @@ export default function HealthCheck({ platform, tz, checkKey, onAllow, testMode 
   const h = health;
   return (
     <section aria-labelledby="alerts-health" data-alerts-health>
-      <h2 id="alerts-health" className="mb-2 px-1 text-xs font-semibold uppercase tracking-wide text-muted">
+      <h2 id="alerts-health" className="mb-2 px-1 text-[11px] font-bold uppercase tracking-wider text-muted">
         Health check
       </h2>
       <div className="divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card">

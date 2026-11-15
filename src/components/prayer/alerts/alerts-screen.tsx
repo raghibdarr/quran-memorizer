@@ -217,7 +217,7 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
       )}
 
       <section aria-labelledby="alerts-each">
-        <h2 id="alerts-each" className="mb-2 px-1 text-xs font-semibold uppercase tracking-wide text-muted">
+        <h2 id="alerts-each" className="mb-2 px-1 text-[11px] font-bold uppercase tracking-wider text-muted">
           Each prayer
         </h2>
         <div className="divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card">

@@ -99,7 +99,7 @@ export function deckInfo(id: string): DeckInfo | undefined {
 }
 
 export const GROUP_TITLES: Record<DeckGroup, string> = {
-  hadith: 'Hadith',
+  hadith: 'Forty Hadith of al-Nawawi',
   adhkar: 'Adhkar and duas',
   names: 'Names of Allah',
   course: 'Foundations course',

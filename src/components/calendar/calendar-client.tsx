@@ -146,7 +146,7 @@ export default function CalendarClient() {
 
         {monthEvents.length > 0 && (
           <section aria-labelledby="month-events">
-            <h2 id="month-events" className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted">
+            <h2 id="month-events" className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted" data-section-label>
               In {formatHijriMonth(view).replace(/ \d+$/, '')} · expected
             </h2>
             <ul className="mt-2 divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card px-5">

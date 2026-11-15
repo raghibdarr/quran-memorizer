@@ -14,6 +14,7 @@ import { countryName, formatBytes, packInfo } from '@/lib/mosques/index-data';
 import { mapsHref, mapsPlatform, opensInNewTab, type MapsPlatform } from '@/lib/mosques/links';
 import { fitsAppArabicFace, isArabicScript } from '@/lib/mosques/script';
 import type { Place } from '@/types/prayer';
+import { SectionLabel } from '@/components/ui/section-heading';
 
 const PAGE = 20;
 const MAX_SHOWN = 100;
@@ -146,7 +147,7 @@ function ForPlace({ place }: { place: Place }) {
     return (
       <div className="space-y-3" role="status" aria-busy="true" data-mosques-loading>
         <span className="sr-only">Loading mosques</span>
-        <p className="px-1 text-[11px] font-bold uppercase tracking-wider text-teal">Nearest to {near}</p>
+        <SectionLabel as="p">Nearest to {near}</SectionLabel>
         <SkeletonRows count={4} />
       </div>
     );
@@ -227,7 +228,7 @@ function MosqueList({ pack, place, country }: { pack: MosquePack; place: Place; 
   return (
     <>
       <div className="px-1">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Nearest to {place.label || country}</p>
+        <SectionLabel as="h2" className="px-0">Nearest to {place.label || country}</SectionLabel>
         <p className="mt-1 text-xs leading-relaxed text-muted">Straight-line distance. Tap a mosque to open it in Maps.</p>
       </div>
       <div className="overflow-hidden rounded-2xl border border-foreground/10 bg-card">

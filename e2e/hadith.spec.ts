@@ -21,7 +21,7 @@ test.describe('Forty Hadith', () => {
 
     // ---- The list
     await page.goto('/hadith')
-    await expect(page.getByRole('heading', { name: 'The Forty Hadith of al-Nawawi' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Forty Hadith', exact: true })).toBeVisible()
     const row = page.locator('[data-hadith-row="01"]')
     await expect(row).toContainText('Actions are by intentions')
     await expect(row.locator('[data-item-state="new"]')).toHaveText('Not started')

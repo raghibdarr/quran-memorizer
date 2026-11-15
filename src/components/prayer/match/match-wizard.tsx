@@ -200,7 +200,7 @@ function Wizard({ place }: { place: Place }) {
       <>
         <main className="mx-auto max-w-2xl space-y-4 px-4 pt-5">
           <div>
-            <h2 className="text-xl font-bold text-teal">Closest match</h2>
+            <h2 className="text-xl font-bold text-foreground">Closest match</h2>
             <p className="mt-1 text-sm text-muted">For {place.label || 'your place'}</p>
           </div>
 
@@ -292,7 +292,7 @@ function Wizard({ place }: { place: Place }) {
     <>
       <main className="mx-auto max-w-2xl space-y-4 px-4 pt-5">
         <div>
-          <h2 className="text-xl font-bold text-teal">Your mosque’s start times</h2>
+          <h2 className="text-xl font-bold text-foreground">Your mosque’s start times</h2>
           <p className="mt-1 text-sm leading-relaxed text-muted">
             Copy the start times from your mosque’s timetable for {place.label || 'your place'}. Use the start times
             (adhan), not the jama’ah or iqamah times. Two or more prayers are enough.

@@ -19,9 +19,8 @@ export default function Page() {
 
       <main className="mx-auto max-w-2xl space-y-5 px-4 pt-5">
         <div className="space-y-1.5">
-          <h2 className="text-2xl font-bold tracking-tight text-foreground">The Forty Hadith of al-Nawawi</h2>
           <p className="max-w-[34rem] text-[15px] leading-relaxed text-muted">
-            Imam al-Nawawi gathered forty-two short hadith, each one a foundation of the religion. Read each with its meaning, then learn
+            <span className="font-semibold text-foreground">Forty Hadith of al-Nawawi.</span> Imam al-Nawawi gathered forty-two short hadith, each one a foundation of the religion. Read each with its meaning, then learn
             it by heart a part at a time.
           </p>
         </div>

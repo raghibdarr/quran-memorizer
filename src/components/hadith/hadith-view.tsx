@@ -38,7 +38,7 @@ const QUIET_LINK = 'pressable flex min-h-11 items-center justify-center rounded-
 function Section({ title, children, className }: { title: string; children: ReactNode; className?: string }) {
   return (
     <section className={cn('space-y-2', className)}>
-      <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">{title}</h3>
+      <h3 className="text-[11px] font-bold uppercase tracking-wider text-muted">{title}</h3>
       {children}
     </section>
   );
@@ -209,7 +209,7 @@ function Found({ item, items }: { item: TextItem; items: TextItem[] }) {
       <header className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs font-semibold text-muted">
-            Hadith {n} of {NAWAWI_TOTAL}
+            Hadith {n}
           </p>
           <StateChip state={state} />
         </div>
