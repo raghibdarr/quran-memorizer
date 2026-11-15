@@ -242,6 +242,23 @@ test.describe('prayer setup', () => {
     await context.close()
   })
 
+  test('a place saved before setup (by qibla, say) still gets its country’s method and Asr', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem('onboarding-complete', 'true')
+      const place = { lat: 24.86, lng: 67.01, label: 'Karachi, Pakistan', countryCode: 'PK', tz: 'Asia/Karachi', source: 'city' }
+      localStorage.setItem('takrar-place', JSON.stringify({ state: { place }, version: 1 }))
+    })
+    await page.goto('/prayer')
+    await expect(page.locator('[data-prayer-hub="setup"]')).toBeVisible()
+    await page.goto('/prayer/setup')
+    await page.locator('[data-setup-next]').click()
+    await expect(page.locator('[data-method-label]')).toHaveText('University of Islamic Sciences, Karachi')
+    await expect(page.locator('[data-choice="asr-hanafi"]')).toHaveAttribute('aria-checked', 'true')
+    await page.locator('[data-setup-next]').click()
+    const prayer = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-prayer') ?? 'null'))
+    expect(prayer.state).toMatchObject({ method: 'Karachi', madhab: 'hanafi', setupDone: true })
+  })
+
   test('a refused location falls straight to the city search', async ({ browser, baseURL }) => {
     const context = await browser.newContext({ baseURL, locale: 'en-GB', timezoneId: 'Asia/Riyadh', permissions: [] })
     const page = await context.newPage()
@@ -249,7 +266,7 @@ test.describe('prayer setup', () => {
     await page.goto('/prayer/setup')
     await page.getByRole('button', { name: 'Use my location' }).click()
     await expect(page.getByPlaceholder('Search for your city')).toBeVisible()
-    await expect(page.getByRole('status')).toContainText('choose your city instead')
+    await expect(page.getByRole('status').filter({ hasText: 'choose your city instead' })).toBeVisible()
     await context.close()
   })
 })

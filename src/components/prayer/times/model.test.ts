@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { buildHub, inOrder, inRamadan, stripLine, zoneDiffers, zoneOffsetMin, type ModelSettings } from './model'
-import { formatTime } from '@/lib/prayer/engine'
+import { buildHub, dayTimes, inOrder, inRamadan, stripLine, zoneDiffers, zoneOffsetMin, type ModelSettings } from './model'
+import { currentPrayer, currentWindow, formatTime, nextPrayer } from '@/lib/prayer/engine'
 
 const ZERO = { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }
 const S: ModelSettings = { method: 'UmmAlQura', madhab: 'standard', highLatRule: 'auto', offsets: ZERO, hijriOffset: 0, ramadanMode: 'off' }
@@ -106,6 +106,40 @@ describe('inOrder', () => {
     expect(m.rows.find((r) => r.name === 'asr')!.startMs).toBeNull()
     expect(m.current?.prayer).toBe('dhuhr')
     expect(m.rows.filter((r) => r.isCurrent).map((r) => r.name)).toEqual(['dhuhr'])
+  })
+
+  it('never offers a dropped time as the next prayer, on the hub or the Home strip', () => {
+    // Tromsø, 21 December, Muslim World League: the engine puts Asr at 10:52, before Dhuhr at 11:32
+    const tromso = { lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }
+    const s = { ...S, method: 'MuslimWorldLeague' as const }
+    const now = Date.parse('2026-12-21T10:45:00+01:00')
+    const m = buildHub(tromso, s, now)
+    expect(m.next?.prayer).toBe('dhuhr')
+    expect(m.rows.filter((r) => r.isNext).map((r) => r.name)).toEqual(['dhuhr'])
+    expect(stripLine(tromso, s, now)?.prayer).toBe('dhuhr')
+  })
+
+  it('offers no evening adhkar from a dropped Asr, and previews the same times the hub lists', () => {
+    const tromso = { lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }
+    const s = { ...S, method: 'MuslimWorldLeague' as const }
+    for (const hhmm of ['11:10', '11:50']) {
+      const now = Date.parse(`2026-12-21T${hhmm}:00+01:00`)
+      const m = buildHub(tromso, s, now)
+      expect(m.window).toBeNull()
+      const preview = dayTimes(tromso, s, now)
+      for (const r of m.rows) expect(preview[r.name]).toBe(r.startMs)
+      expect(preview.asr).toBeNull()
+    }
+  })
+
+  it('agrees with the engine on an ordinary day', () => {
+    for (const hhmm of ['00:30', '05:30', '09:00', '13:00', '16:30', '19:00', '23:00']) {
+      const now = at(hhmm)
+      const m = buildHub(MAKKAH, S, now)
+      expect(m.next).toEqual(nextPrayer(MAKKAH, S, now))
+      expect(m.current).toEqual(currentPrayer(MAKKAH, S, now))
+      expect(m.window).toBe(currentWindow(MAKKAH, S, now))
+    }
   })
 
   it('drops a morning time that comes after the one following it', () => {

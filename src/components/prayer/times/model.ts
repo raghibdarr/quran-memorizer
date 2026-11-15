@@ -5,17 +5,17 @@
 
 import {
   computeDay,
-  currentPrayer,
-  currentWindow,
   effectiveHighLatRule,
   formatTime,
   formatUntil,
   isoInTz,
-  nextPrayer,
   prayerRows,
   type CurrentPrayer,
+  type DayTimes,
+  type PrayerRow,
   type UpcomingPrayer,
 } from '@/lib/prayer/engine';
+import { addDaysIso } from '@/lib/dates';
 import { formatHijri, isRamadan, toHijri } from '@/lib/hijri/convert';
 import { TIME_LABELS, type Place, type PrayerCalcSettings, type PrayerName, type RamadanMode, type TimeName } from '@/types/prayer';
 
@@ -107,21 +107,62 @@ export function inOrder<R extends { name: TimeName; startMs: number | null; endM
   return out;
 }
 
+/**
+ * The days around `now` as the screens show them (times out of order dropped),
+ * worked out once each. The next prayer, the one whose time is in and the adhkar
+ * window are all read from these, so the hero, the list, the chip and the Home
+ * strip can never disagree about a time the list doesn't show.
+ */
+function shownDays(place: Where, s: PrayerCalcSettings, now: number) {
+  const today = isoInTz(now, place.tz);
+  const cache = new Map<string, PrayerRow[]>();
+  const rows = (iso: string) => {
+    let r = cache.get(iso);
+    if (!r) cache.set(iso, (r = inOrder(prayerRows(place, iso, s))));
+    return r;
+  };
+
+  /** The next of the five prayers after `now`, looking from yesterday (a late Isha past midnight) to two days on */
+  const next = (): UpcomingPrayer | null => {
+    for (let i = -1; i <= 2; i++) {
+      const iso = addDaysIso(today, i);
+      for (const r of rows(iso)) {
+        if (r.name !== 'sunrise' && r.startMs !== null && r.startMs > now) return { prayer: r.name, at: r.startMs, iso };
+      }
+    }
+    return null;
+  };
+
+  /** The prayer whose time `now` is inside (none between sunrise and Dhuhr) */
+  const current = (): CurrentPrayer | null => {
+    for (const iso of [addDaysIso(today, -1), today]) {
+      for (const r of rows(iso)) {
+        if (r.name === 'sunrise' || r.startMs === null || r.endMs === null) continue;
+        if (now >= r.startMs && now < r.endMs) return { prayer: r.name, startMs: r.startMs, endMs: r.endMs, iso };
+      }
+    }
+    return null;
+  };
+
+  /** Morning adhkar from Fajr to sunrise, evening from Asr to Maghrib */
+  const window = (): 'morning' | 'evening' | null => {
+    const at = (name: TimeName) => rows(today).find((r) => r.name === name)!.startMs;
+    const inside = (a: number | null, b: number | null) => a !== null && b !== null && now >= a && now < b;
+    if (inside(at('fajr'), at('sunrise'))) return 'morning';
+    if (inside(at('asr'), at('maghrib'))) return 'evening';
+    return null;
+  };
+
+  return { today, rows, next, current, window };
+}
+
 /** Everything the /prayer hub shows at `now` */
 export function buildHub(place: Where, s: ModelSettings, now: number): HubModel {
-  const iso = isoInTz(now, place.tz);
-  const next = nextPrayer(place, s, now);
-  const raw = prayerRows(place, iso, s);
-  const kept = inOrder(raw);
-  const dropped = (name: TimeName) => kept.find((r) => r.name === name)!.startMs === null && raw.find((r) => r.name === name)!.startMs !== null;
-  const engineCurrent = currentPrayer(place, s, now);
-  // The engine's "now" can land on a dropped time; then "now" is the kept prayer whose time is in, if any
-  let current = engineCurrent;
-  if (engineCurrent && engineCurrent.iso === iso && dropped(engineCurrent.prayer)) {
-    const inNow = kept.find((r) => r.name !== 'sunrise' && r.startMs !== null && r.endMs !== null && now >= r.startMs && now < r.endMs);
-    current = inNow ? { prayer: inNow.name as PrayerName, startMs: inNow.startMs!, endMs: inNow.endMs!, iso } : null;
-  }
-  const rows = kept.map((r) => {
+  const days = shownDays(place, s, now);
+  const iso = days.today;
+  const next = days.next();
+  const current = days.current();
+  const rows = days.rows(iso).map((r) => {
     const isNext = !!next && next.iso === iso && next.prayer === r.name;
     const isCurrent = !!current && current.iso === iso && current.prayer === r.name;
     return {
@@ -138,7 +179,7 @@ export function buildHub(place: Where, s: ModelSettings, now: number): HubModel 
     next,
     nextIsTomorrow: !!next && next.iso > iso,
     current,
-    window: currentWindow(place, s, now),
+    window: days.window(),
     missing: rows.filter((r) => r.startMs === null).map((r) => r.name),
     ramadan: inRamadan(place, s, now),
   };
@@ -154,7 +195,7 @@ export interface StripLine {
 
 /** The Home strip: "Asr 15:12 · in 1 h 4 min" (in Ramadan, Maghrib reads "Iftar") */
 export function stripLine(place: Where, s: ModelSettings, now: number, hour12 = false): StripLine | null {
-  const next = nextPrayer(place, s, now);
+  const next = shownDays(place, s, now).next();
   if (!next) return null;
   const iftar = next.prayer === 'maghrib' && inRamadan(place, s, now);
   return {
@@ -165,9 +206,11 @@ export function stripLine(place: Where, s: ModelSettings, now: number, hour12 = 
   };
 }
 
-/** Today's six times for a settings preview (null where a time doesn't exist) */
-export function dayTimes(place: Where, s: PrayerCalcSettings, now: number) {
-  return computeDay(place, isoInTz(now, place.tz), s);
+/** Today's six times for a settings preview, as the hub lists them (null where a time doesn't exist or falls out of order) */
+export function dayTimes(place: Where, s: PrayerCalcSettings, now: number): DayTimes {
+  const out = {} as DayTimes;
+  for (const r of inOrder(prayerRows(place, isoInTz(now, place.tz), s))) out[r.name] = r.startMs;
+  return out;
 }
 
 /** "12 Jumada al-Akhirah 1448" for the place's day */

@@ -39,8 +39,10 @@ export default function PrayerSetupFlow() {
 
   const [step, setStep] = useState<Step>(1);
   const [draft, setDraft] = useState<Place | null>(savedPlace);
-  const [method, setMethod] = useState<MethodId>(store.method);
-  const [madhab, setMadhab] = useState<AsrMadhab>(store.madhab);
+  // A place can be here before setup (qibla or mosques saved one): its country's defaults are pre-chosen
+  // just as if it had been picked on this screen. Once setup is done, the user's own choices stand
+  const [method, setMethod] = useState<MethodId>(() => (savedPlace && !store.setupDone ? regionDefault(savedPlace.countryCode).method : store.method));
+  const [madhab, setMadhab] = useState<AsrMadhab>(() => (savedPlace && !store.setupDone ? regionDefault(savedPlace.countryCode).madhab : store.madhab));
   // A method the user picked themselves isn't replaced by the next place's default
   const [methodTouched, setMethodTouched] = useState(store.setupDone);
   const [madhabTouched, setMadhabTouched] = useState(store.setupDone);
