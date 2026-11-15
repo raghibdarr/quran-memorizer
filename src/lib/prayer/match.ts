@@ -23,6 +23,7 @@ import {
   type PrayerCalcSettings,
   type PrayerName,
   type PrayerOffsets,
+  type TimeName,
 } from '@/types/prayer';
 
 type Where = Pick<Place, 'lat' | 'lng' | 'tz'> & { countryCode?: string };
@@ -47,7 +48,11 @@ export interface MatchCell {
 }
 
 export interface MatchResult {
-  /** Ready for prayer-store applyCalc */
+  /**
+   * Ready for prayer-store applyCalc. offsets.sunrise is 0 for a named method;
+   * with our own angles it holds the minutes the closest named method builds in
+   * to sunrise, to add to whatever sunrise adjustment the user already has.
+   */
   calc: PrayerCalcSettings;
   /** One cell per entered time, in date then prayer order */
   cells: MatchCell[];
@@ -329,6 +334,31 @@ function customCandidate(place: Where, days: MatchDay[], preset: Fit): Omit<Pray
   return { ...common, customAngles: { fajr: fajr ?? presetFajr, isha: isha ?? presetIsha } };
 }
 
+/** The times a fit never types in for Fajr or Isha: a method's built-in minutes live here */
+const CARRIED: readonly TimeName[] = ['sunrise', 'dhuhr', 'asr', 'maghrib'];
+
+/**
+ * Our own angles drop the minutes a named method builds in (Diyanet's -7 on
+ * sunrise and +5 on Dhuhr, the Moonsighting Committee's +5 on Dhuhr, a method's
+ * rounding). For sunrise and any prayer the user did not type, carry them over
+ * as offsets so those times stay where the closest named method put them: the
+ * user gave us no reason to move them.
+ */
+function carryMethodMinutes(place: Where, days: MatchDay[], preset: PrayerCalcSettings, custom: PrayerCalcSettings): PrayerCalcSettings {
+  const iso = days[0].iso;
+  const a = computeDay(place, iso, preset);
+  const b = computeDay(place, iso, custom);
+  const offsets = { ...custom.offsets };
+  for (const t of CARRIED) {
+    if (t !== 'sunrise' && days.some((d) => typeof d.times[t] === 'number')) continue;
+    const x = a[t];
+    const y = b[t];
+    if (x === null || y === null) continue;
+    offsets[t] = clamp(offsets[t] + Math.round((x - y) / 60_000), -OFFSET_LIMIT, OFFSET_LIMIT);
+  }
+  return { ...custom, offsets };
+}
+
 /**
  * Fit a mosque's start times. `days` holds one or two dates; each date needs at
  * least two of the five start times (checkMatchInput says what's wrong).
@@ -372,7 +402,7 @@ export function matchMosque(place: Where, days: MatchDay[]): MatchResult | null 
         fit.mismatch <= best.mismatch &&
         (twilight(fit) + CUSTOM_MIN_GAIN <= twilight(best) || (bigOffset && twilight(fit) <= twilight(best)))
       ) {
-        chosen = fit;
+        chosen = { ...fit, calc: carryMethodMinutes(place, days, best.calc, fit.calc) };
         usedCustom = true;
       }
     }
