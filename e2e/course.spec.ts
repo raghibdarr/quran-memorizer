@@ -17,7 +17,8 @@ async function seed(page: Page, extra: Record<string, string> = {}) {
   await page.addInitScript(
     ({ deck, extra }) => {
       localStorage.setItem('onboarding-complete', 'true')
-      for (const [k, v] of Object.entries(extra)) localStorage.setItem(k, v)
+      // Seeded once: the init script runs on every load, and must not undo what the test did
+      for (const [k, v] of Object.entries(extra)) if (localStorage.getItem(k) === null) localStorage.setItem(k, v)
       ;(window as unknown as { __TAKRAR_TEST_DECKS__: unknown }).__TAKRAR_TEST_DECKS__ = [
         {
           info: { id: '_course', title: 'Fixture unit', blurb: 'Made-up lessons for tests', kind: 'course', group: 'course', route: '/course', defaultDepth: 'meaning' },

@@ -168,13 +168,14 @@ export default function TrackerClient() {
                 const waiting = r.startMs !== null && now < r.startMs && !prayers[rowsIso]?.[r.prayer];
                 return (
                   <li key={r.prayer} className="flex items-center justify-between gap-3 py-1">
-                    <span className="flex items-baseline gap-3">
-                      <span className="w-16 text-sm font-semibold text-foreground">{TIME_LABELS[r.prayer]}</span>
+                    {/* Shrinks and wraps at large text sizes so the tick stays on screen */}
+                    <span className="flex min-w-0 flex-wrap items-baseline gap-x-3">
+                      <span className="w-16 max-w-full text-sm font-semibold text-foreground">{TIME_LABELS[r.prayer]}</span>
                       {engine && place && r.startMs !== null && (
                         <span className="text-sm text-muted tabular-nums">{engine.formatTime(r.startMs, place.tz)}</span>
                       )}
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex shrink-0 items-center gap-1">
                       {waiting && (
                         <span className="text-xs text-muted" aria-hidden data-not-yet-row={r.prayer}>
                           {TRACKER_COPY.notYet}
@@ -298,8 +299,8 @@ export default function TrackerClient() {
         )}
 
         {!paused && (
-          <section className="flex items-center justify-between gap-3 px-1 py-2">
-            <p className="text-xs text-muted">{TRACKER_COPY.pauseHint}</p>
+          <section className="flex flex-wrap items-center justify-between gap-3 px-1 py-2">
+            <p className="min-w-[min(12rem,100%)] flex-1 text-xs text-muted">{TRACKER_COPY.pauseHint}</p>
             <button
               type="button"
               onClick={() => {

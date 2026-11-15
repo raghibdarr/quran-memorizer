@@ -134,7 +134,7 @@ export default function BottomNav() {
               aria-current={isActive ? 'page' : undefined}
               onClick={isActive ? undefined : haptic.selection}
               className={cn(
-                'relative flex min-h-12 flex-1 flex-col items-center justify-center gap-0.5 rounded-full py-1.5 transition-colors',
+                'relative flex min-h-12 min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-full py-1.5 transition-colors',
                 isActive ? 'text-teal' : 'text-muted hover:text-foreground',
               )}
             >
@@ -146,7 +146,7 @@ export default function BottomNav() {
                   </span>
                 )}
               </span>
-              <span className={cn('text-[10.5px] leading-none', isActive ? 'font-semibold' : 'font-medium')}>{item.label}</span>
+              <span className={cn('max-w-full truncate text-[10.5px] leading-none', isActive ? 'font-semibold' : 'font-medium')}>{item.label}</span>
             </Link>
           );
         })}

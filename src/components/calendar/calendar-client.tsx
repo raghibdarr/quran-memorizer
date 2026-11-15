@@ -183,7 +183,8 @@ export default function CalendarClient() {
           <p className="mt-0.5 text-sm text-muted">
             If your community started the month a day before or after the calendar, move every date to match.
           </p>
-          <div className="mt-3 flex items-center gap-2" role="group" aria-label="Hijri date adjustment">
+          {/* Wraps at large text sizes rather than running off the screen */}
+          <div className="mt-3 flex flex-wrap items-center gap-2" role="group" aria-label="Hijri date adjustment">
             <StepButton label="Start months a day later" disabled={offset <= -2} onClick={() => setHijriOffset(offset - 1)}>
               A day later
             </StepButton>
