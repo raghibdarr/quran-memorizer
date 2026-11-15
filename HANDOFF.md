@@ -362,3 +362,18 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
    hub's comment says "at most one contextual chip"; the second is one 48px row. Also for prayer-times /
    integration: the hub hides the adhkar slot whenever the Ramadan banner shows (the month and the week before),
    so there is no adhkar chip on /prayer for about five weeks a year; /adhkar still has every set.
+11. **Independent content verification (2026-11-15, an agent that wrote none of it).** All 53 items and the
+   Essentials citations were re-checked against freshly fetched witnesses (own cache): `witness.mjs verify --all`
+   45 checked, 0 problems; the hadith behind each Quran item (Abu Dawud 5082, al-Tirmidhi 3575, al-Bukhari 2311,
+   5009, 5017, Muslim 808) and the Essentials-only citations (Muslim 596, 2702) read on Shamela; the three
+   single-witness readings (al-Bukhari 6306, 6311, 6320) and Muslim 591 read in the Shamela print. Stage H done in
+   full: every grading quote was located and read in context (al-Tirmidhi after 7, 464, 1858, 3388, 3391, 3392,
+   3426, 3575; al-Nawawi, al-Adhkar nos. 71, 159, 192, 217, 545, 653 on Shamela book 1956; al-Daraqutni 2279 on
+   en.tohed.com, still the only copy read). No Arabic, citation or grading needed changing and nothing was
+   removed. Nine items had their English or usage note corrected (rev raised, reasons in each `review.log`):
+   `alim-al-ghayb`, `al-mulku-lillah`, `bika-asbahna`, `bismillah-la-yadurr` (morning-evening); `la-mania`
+   (after-prayer); `bismika-rabbi` (sleep-waking); `toilet-enter`, `leaving-home` (duas-daily); `subhanaka`
+   (salah-words). Left for the owner or a scholar: `sleep-waking:ayat-al-kursi` has no grading line because
+   al-Bukhari 2311 is given without his own full chain (the usage note says so); `duas-daily:toilet-leave` stays
+   "Your forgiveness." because the length rule (G15) leaves no room for a bracketed "[I ask]"; Essentials ayah
+   translations still carry footnote markers such as "[98]" from before this package.

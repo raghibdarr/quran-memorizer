@@ -1,12 +1,12 @@
 {
   "id": "alim-al-ghayb",
   "deck": "adhkar-morning-evening",
-  "rev": 1,
+  "rev": 2,
   "title": "Knower of the unseen",
   "cue": "What the Prophet ﷺ taught Abu Bakr for morning, evening and bedtime",
   "arabic": "اللَّهُمَّ فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ",
   "transliteration": "Allaahumma faatiras-samawaati wal-ard, 'aalimal-ghaybi wash-shahaadah, rabba kulli shay'in wamaleekah, ashhadu an laa ilaha illaa ant, a'oodhu bika min sharri nafsee, washarrish-shaytaani washirkih",
-  "translation": "O Allah, Originator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of everything: I bear witness that there is no god but You. I seek refuge with You from the evil of my own self, and from the evil of Satan and his call to associate others with You.",
+  "translation": "O Allah, Originator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of everything: I bear witness that there is no god but You. I seek refuge with You from the evil of my own self, and from the evil of Satan and his [call to] associating partners with Allah.",
   "citations": [
     {
       "collection": "abu-dawud",
@@ -58,7 +58,8 @@
       "2026-11-15 G: every cited number (abu-dawud 5067) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: sahih by al-tirmidhi (quote located)",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): the English rendered وشركه as \"his call to associate others with You\" with the supplied words unmarked; now \"his [call to] associating partners with Allah\". Arabic and citations unchanged; rev raised"
     ]
   }
 }

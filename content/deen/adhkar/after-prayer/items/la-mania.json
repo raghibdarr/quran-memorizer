@@ -1,12 +1,12 @@
 {
   "id": "la-mania",
   "deck": "adhkar-after-prayer",
-  "rev": 1,
+  "rev": 2,
   "title": "None can withhold what You give",
   "cue": "What the Prophet ﷺ said after every obligatory prayer, as al-Mughirah wrote to Mu'awiyah",
   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
   "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer, allaahumma laa maani'a limaa a'tayt, walaa mu'tiya limaa mana't, walaa yanfa'u dhal-jaddi minkal-jadd",
-  "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things. O Allah, none can withhold what You give, none can give what You withhold, and the wealth of the wealthy is of no avail to him against You.",
+  "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things. O Allah, none can withhold what You give, none can give what You withhold, and the fortune of the fortunate is of no avail to him against You.",
   "citations": [
     {
       "collection": "bukhari",
@@ -65,7 +65,8 @@
       "2026-11-15 G: every cited number (bukhari 844, muslim 593) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: in-sahih by al-bukhari; in-sahih by muslim",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): الجد was narrowed to \"wealth\"; now \"fortune\", which covers wealth and standing. Arabic and citations unchanged; rev raised"
     ]
   }
 }

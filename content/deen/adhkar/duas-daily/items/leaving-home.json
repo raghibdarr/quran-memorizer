@@ -1,7 +1,7 @@
 {
   "id": "leaving-home",
   "deck": "duas-daily",
-  "rev": 2,
+  "rev": 3,
   "title": "Leaving home",
   "cue": "\"In the name of Allah, I rely on Allah…\"",
   "arabic": "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
@@ -47,7 +47,7 @@
     "when": [
       "On going out of the house"
     ],
-    "evidence": "Whoever says this on leaving his house, it is said to him: you are guided, sufficed and protected, and the devils move away from him (Abu Dawud 5095; al-Tirmidhi 3426)."
+    "evidence": "Whoever says this on leaving his house, it is said to him: you are guided, sufficed and protected, and the devils move away from him (Abu Dawud 5095). Al-Tirmidhi relates it more briefly (3426): you are sufficed and protected, and Satan moves away from him."
   },
   "review": {
     "status": "source-checked",
@@ -63,7 +63,8 @@
       "2026-11-15 H: hasan by al-tirmidhi (quote located)",
       "2026-11-15 I: build-deen --check green",
       "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
-      "2026-11-15 F (fresh reviewer): the usage note rendered كفيت as \"provided for\"; corrected to \"sufficed\". Arabic, translation and citations unchanged; rev raised"
+      "2026-11-15 F (fresh reviewer): the usage note rendered كفيت as \"provided for\"; corrected to \"sufficed\". Arabic, translation and citations unchanged; rev raised",
+      "2026-11-15 F/G/H (independent verifier): the usage note gave Abu Dawud's wording for both citations; al-Tirmidhi 3426 has no \"guided\" and is now given separately. Arabic and citations unchanged; rev raised"
     ]
   }
 }

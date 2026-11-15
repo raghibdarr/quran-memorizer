@@ -1,7 +1,7 @@
 {
   "id": "bismillah-la-yadurr",
   "deck": "adhkar-morning-evening",
-  "rev": 1,
+  "rev": 2,
   "title": "In the name of Allah, with whose name nothing harms",
   "cue": "The protection said three times morning and evening",
   "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
@@ -49,7 +49,7 @@
       "Evening"
     ],
     "repeat": 3,
-    "evidence": "Uthman reports the Prophet ﷺ saying that whoever says it three times in the evening will not be struck by sudden calamity until morning, and whoever says it three times in the morning, not until evening (Abu Dawud 5088; al-Tirmidhi 3388)."
+    "evidence": "Uthman reports the Prophet ﷺ saying that whoever says it three times will not be struck by sudden calamity until morning, and whoever says it three times in the morning will not be struck by sudden calamity until evening (Abu Dawud 5088). In al-Tirmidhi (3388): no servant says it three times in the morning of each day and the evening of each night and is then harmed by anything."
   },
   "review": {
     "status": "source-checked",
@@ -64,7 +64,8 @@
       "2026-11-15 G: every cited number (abu-dawud 5088, tirmidhi 3388) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: sahih by al-tirmidhi (quote located)",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): the usage note added \"in the evening\" to Abu Dawud's first clause and gave one wording for two narrations; it now follows Abu Dawud 5088 and al-Tirmidhi 3388 separately, as read on Shamela. Arabic and citations unchanged; rev raised"
     ]
   }
 }

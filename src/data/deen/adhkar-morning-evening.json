@@ -1,7 +1,7 @@
 {
  "deck": "adhkar-morning-evening",
  "kind": "dhikr",
- "hash": "fc988f24343fbbae",
+ "hash": "c6d72d9acc441c55",
  "items": [
   {
    "id": "adada-khalqihi",
@@ -108,12 +108,12 @@
   {
    "id": "al-mulku-lillah",
    "deck": "adhkar-morning-evening",
-   "rev": 1,
+   "rev": 2,
    "title": "We have reached the evening",
    "cue": "\"We have reached the evening, and the dominion belongs to Allah…\"",
    "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ هَذِهِ اللَّيْلَةِ وَخَيْرِ مَا فِيهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيهَا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَسُوءِ الْكِبَرِ وَفِتْنَةِ الدُّنْيَا وَعَذَابِ الْقَبْرِ",
    "transliteration": "Amsaynaa wa'amsal-mulku lillaah, wal-hamdu lillaah, laa ilaha illallaahu wahdahu laa shareeka lah, allaahumma innee as'aluka min khayri hadhihil-laylati wakhayri maa feehaa, wa'a'oodhu bika min sharrihaa washarri maa feehaa, allaahumma innee a'oodhu bika minal-kasali wal-harami wasoo'il-kibari wafitnatid-dunyaa wa'adhaabil-qabr",
-   "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the misery of old age, from the trials of this world and from the punishment of the grave.",
+   "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the evil of old age, from the trials of this world and from the punishment of the grave.",
    "citations": [
     {
      "collection": "muslim",
@@ -171,12 +171,12 @@
   {
    "id": "alim-al-ghayb",
    "deck": "adhkar-morning-evening",
-   "rev": 1,
+   "rev": 2,
    "title": "Knower of the unseen",
    "cue": "What the Prophet ﷺ taught Abu Bakr for morning, evening and bedtime",
    "arabic": "اللَّهُمَّ فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ",
    "transliteration": "Allaahumma faatiras-samawaati wal-ard, 'aalimal-ghaybi wash-shahaadah, rabba kulli shay'in wamaleekah, ashhadu an laa ilaha illaa ant, a'oodhu bika min sharri nafsee, washarrish-shaytaani washirkih",
-   "translation": "O Allah, Originator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of everything: I bear witness that there is no god but You. I seek refuge with You from the evil of my own self, and from the evil of Satan and his call to associate others with You.",
+   "translation": "O Allah, Originator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of everything: I bear witness that there is no god but You. I seek refuge with You from the evil of my own self, and from the evil of Satan and his [call to] associating partners with Allah.",
    "citations": [
     {
      "collection": "abu-dawud",
@@ -223,12 +223,12 @@
   {
    "id": "bika-asbahna",
    "deck": "adhkar-morning-evening",
-   "rev": 1,
+   "rev": 2,
    "title": "By You we enter the morning",
    "cue": "\"O Allah, by You we enter the morning…\"",
    "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
    "transliteration": "Allaahumma bika asbahnaa, wabika amsaynaa, wabika nahyaa, wabika namoot, wa'ilaykan-nushoor",
-   "translation": "O Allah, by You we reach morning and by You evening; by You we live and die, and to You is the rising.",
+   "translation": "O Allah, by You we enter morning and by You evening; by You we live and by You we die, and to You is the rising.",
    "citations": [
     {
      "collection": "abu-dawud",
@@ -287,7 +287,7 @@
   {
    "id": "bismillah-la-yadurr",
    "deck": "adhkar-morning-evening",
-   "rev": 1,
+   "rev": 2,
    "title": "In the name of Allah, with whose name nothing harms",
    "cue": "The protection said three times morning and evening",
    "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
@@ -335,7 +335,7 @@
      "Evening"
     ],
     "repeat": 3,
-    "evidence": "Uthman reports the Prophet ﷺ saying that whoever says it three times in the evening will not be struck by sudden calamity until morning, and whoever says it three times in the morning, not until evening (Abu Dawud 5088; al-Tirmidhi 3388)."
+    "evidence": "Uthman reports the Prophet ﷺ saying that whoever says it three times will not be struck by sudden calamity until morning, and whoever says it three times in the morning will not be struck by sudden calamity until evening (Abu Dawud 5088). In al-Tirmidhi (3388): no servant says it three times in the morning of each day and the evening of each night and is then harmed by anything."
    },
    "review": {
     "status": "source-checked",

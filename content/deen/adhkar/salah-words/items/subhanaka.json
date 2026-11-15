@@ -1,7 +1,7 @@
 {
   "id": "subhanaka",
   "deck": "salah-words",
-  "rev": 1,
+  "rev": 2,
   "title": "Glory be to You, O Allah",
   "cue": "The opening praise Umar said aloud to teach it",
   "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، تَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ",
@@ -40,7 +40,7 @@
     "when": [
       "After the opening [[takbir]]"
     ],
-    "evidence": "Umar ibn al-Khattab used to say these words aloud [at the start of the prayer] (Muslim 399). It is Umar's practice; the narrations tracing it to the Prophet ﷺ in Abu Dawud and al-Tirmidhi have criticised chains, so they are not cited here."
+    "evidence": "Umar ibn al-Khattab used to say these words aloud [at the start of the prayer] (Muslim 399). It is cited here as Umar's practice. Al-Tirmidhi also relates it from the Prophet ﷺ (242, 243), says the chains of both narrations were criticised, and says most of the people of knowledge act on it."
   },
   "review": {
     "status": "source-checked",
@@ -55,7 +55,8 @@
       "2026-11-15 G: every cited number (muslim 399) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: mawquf by muslim",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): the usage note said the marfu' narrations \"have criticised chains\" without saying who said so; it now attributes the remark to al-Tirmidhi (after 242 and 243, read on Shamela) and adds his statement that most scholars act on it. Arabic and citations unchanged; rev raised"
     ]
   }
 }

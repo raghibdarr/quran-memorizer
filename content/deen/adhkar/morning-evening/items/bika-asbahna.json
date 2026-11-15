@@ -1,12 +1,12 @@
 {
   "id": "bika-asbahna",
   "deck": "adhkar-morning-evening",
-  "rev": 1,
+  "rev": 2,
   "title": "By You we enter the morning",
   "cue": "\"O Allah, by You we enter the morning…\"",
   "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
   "transliteration": "Allaahumma bika asbahnaa, wabika amsaynaa, wabika nahyaa, wabika namoot, wa'ilaykan-nushoor",
-  "translation": "O Allah, by You we reach morning and by You evening; by You we live and die, and to You is the rising.",
+  "translation": "O Allah, by You we enter morning and by You evening; by You we live and by You we die, and to You is the rising.",
   "citations": [
     {
       "collection": "abu-dawud",
@@ -70,7 +70,8 @@
       "2026-11-15 G: every cited number (abu-dawud 5068) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: hasan by al-tirmidhi (quote located)",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): the English folded وبك نحيا وبك نموت into \"we live and die\" and used \"reach\" where the title and the evening wording use \"enter\"; both fixed, within the length rule. Arabic and citations unchanged; rev raised"
     ]
   }
 }

@@ -1,12 +1,12 @@
 {
   "id": "toilet-enter",
   "deck": "duas-daily",
-  "rev": 1,
+  "rev": 2,
   "title": "Entering the toilet",
   "cue": "Refuge from the male and female devils",
   "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
   "transliteration": "Allaahumma innee a'oodhu bika minal-khubuthi wal-khabaa'ith",
-  "translation": "O Allah, I seek refuge with You from the male and female devils.",
+  "translation": "O Allah, I seek refuge with You from the evil ones, male and female [devils].",
   "citations": [
     {
       "collection": "bukhari",
@@ -65,7 +65,8 @@
       "2026-11-15 G: every cited number (bukhari 142, muslim 375) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: in-sahih by al-bukhari; in-sahih by muslim",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): الخبث والخبائث was translated by its explanation (\"male and female devils\"); the explanation is now in square brackets. Arabic and citations unchanged; rev raised"
     ]
   }
 }

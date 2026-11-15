@@ -1,12 +1,12 @@
 {
   "id": "al-mulku-lillah",
   "deck": "adhkar-morning-evening",
-  "rev": 1,
+  "rev": 2,
   "title": "We have reached the evening",
   "cue": "\"We have reached the evening, and the dominion belongs to Allah…\"",
   "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ هَذِهِ اللَّيْلَةِ وَخَيْرِ مَا فِيهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيهَا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَسُوءِ الْكِبَرِ وَفِتْنَةِ الدُّنْيَا وَعَذَابِ الْقَبْرِ",
   "transliteration": "Amsaynaa wa'amsal-mulku lillaah, wal-hamdu lillaah, laa ilaha illallaahu wahdahu laa shareeka lah, allaahumma innee as'aluka min khayri hadhihil-laylati wakhayri maa feehaa, wa'a'oodhu bika min sharrihaa washarri maa feehaa, allaahumma innee a'oodhu bika minal-kasali wal-harami wasoo'il-kibari wafitnatid-dunyaa wa'adhaabil-qabr",
-  "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the misery of old age, from the trials of this world and from the punishment of the grave.",
+  "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the evil of old age, from the trials of this world and from the punishment of the grave.",
   "citations": [
     {
       "collection": "muslim",
@@ -69,7 +69,8 @@
       "2026-11-15 G: every cited number (muslim 2723) holds the text in both witnesses, by tools/witness.mjs verify",
       "2026-11-15 H: in-sahih by muslim",
       "2026-11-15 I: build-deen --check green",
-      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): سوء الكبر was softened to \"the misery of old age\"; now \"the evil of old age\". Arabic and citations unchanged; rev raised"
     ]
   }
 }

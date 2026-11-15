@@ -1,7 +1,7 @@
 {
  "deck": "salah-words",
  "kind": "dhikr",
- "hash": "25c5bbe50653ef4f",
+ "hash": "6d0cca6949da2d43",
  "items": [
   {
    "id": "istiftah",
@@ -270,7 +270,7 @@
   {
    "id": "subhanaka",
    "deck": "salah-words",
-   "rev": 1,
+   "rev": 2,
    "title": "Glory be to You, O Allah",
    "cue": "The opening praise Umar said aloud to teach it",
    "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، تَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ",
@@ -309,7 +309,7 @@
     "when": [
      "After the opening [[takbir]]"
     ],
-    "evidence": "Umar ibn al-Khattab used to say these words aloud [at the start of the prayer] (Muslim 399). It is Umar's practice; the narrations tracing it to the Prophet ﷺ in Abu Dawud and al-Tirmidhi have criticised chains, so they are not cited here."
+    "evidence": "Umar ibn al-Khattab used to say these words aloud [at the start of the prayer] (Muslim 399). It is cited here as Umar's practice. Al-Tirmidhi also relates it from the Prophet ﷺ (242, 243), says the chains of both narrations were criticised, and says most of the people of knowledge act on it."
    },
    "review": {
     "status": "source-checked",
