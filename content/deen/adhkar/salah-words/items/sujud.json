@@ -1,0 +1,60 @@
+{
+  "id": "sujud",
+  "deck": "salah-words",
+  "rev": 1,
+  "title": "Prostration",
+  "cue": "The glorification said in prostration",
+  "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+  "transliteration": "Subhaana rabbiyal-a'laa",
+  "translation": "Glory to my Lord, the Most High.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "772",
+      "numbering": "abd-al-baqi",
+      "narrator": "Hudhayfah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 772"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 772: https://shamela.ws/book/1727/1743",
+        "skeletonSha256": "e82b806a83e3162341f52c6e5db707e369a0acd079bf039e64c0f9299ce35c8f"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 772 (comparison only)",
+        "skeletonSha256": "e82b806a83e3162341f52c6e5db707e369a0acd079bf039e64c0f9299ce35c8f"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "In prostration, more than once"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 772, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 772) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

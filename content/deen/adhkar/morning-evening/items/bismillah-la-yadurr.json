@@ -1,0 +1,71 @@
+{
+  "id": "bismillah-la-yadurr",
+  "deck": "adhkar-morning-evening",
+  "rev": 2,
+  "title": "In the name of Allah, with whose name nothing harms",
+  "cue": "The protection said three times morning and evening",
+  "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
+  "transliteration": "Bismillaahi lladhee laa yadurru ma'asmihi shay'un fil-ardi walaa fis-samaa'i, wahuwas-samee'ul-'aleem",
+  "translation": "In the name of Allah, with whose name nothing in the earth or in the heaven can cause harm, and He is the All-Hearing, the All-Knowing.",
+  "citations": [
+    {
+      "collection": "abu-dawud",
+      "number": "5088",
+      "numbering": "muhyi-al-din-abd-al-hamid",
+      "narrator": "Uthman ibn Affan"
+    },
+    {
+      "collection": "tirmidhi",
+      "number": "3388",
+      "numbering": "ahmad-shakir",
+      "narrator": "Uthman ibn Affan"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "sahih",
+      "by": "al-tirmidhi",
+      "in": "Jami' al-Tirmidhi, after hadith 3388",
+      "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ غَرِيبٌ"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 5088: https://shamela.ws/book/1726/6948",
+        "skeletonSha256": "9dbff4e34c1e80d9cf952168ba943fb57f7995a5de70c61eb7d0179147b62421"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 5088 (comparison only)",
+        "skeletonSha256": "9dbff4e34c1e80d9cf952168ba943fb57f7995a5de70c61eb7d0179147b62421"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "Morning",
+      "Evening"
+    ],
+    "repeat": 3,
+    "evidence": "Uthman reports the Prophet ﷺ saying that whoever says it three times will not be struck by sudden calamity until morning, and whoever says it three times in the morning will not be struck by sudden calamity until evening (Abu Dawud 5088). In al-Tirmidhi (3388): no servant says it three times in the morning of each day and the evening of each night and is then harmed by anything."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at abu-dawud 5088, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (abu-dawud 5088, tirmidhi 3388) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: sahih by al-tirmidhi (quote located)",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): the usage note added \"in the evening\" to Abu Dawud's first clause and gave one wording for two narrations; it now follows Abu Dawud 5088 and al-Tirmidhi 3388 separately, as read on Shamela. Arabic and citations unchanged; rev raised"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "aslamtu-nafsi",
+  "deck": "adhkar-sleep-waking",
+  "rev": 1,
+  "title": "I have submitted myself to You",
+  "cue": "The last words before sleep, lying on the right side",
+  "arabic": "اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَهْبَةً وَرَغْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ",
+  "transliteration": "Allaahumma aslamtu nafsee ilayk, wafawwadtu amree ilayk, wa'alja'tu zahree ilayk, rahbatan waraghbatan ilayk, laa malja'a walaa manjaa minka illaa ilayk, aamantu bikitaabika lladhee anzalt, wabinabiyyika lladhee arsalt",
+  "translation": "O Allah, I have submitted myself to You, entrusted my affair to You, and turned my back to You for support, in fear and in hope of You. There is no refuge and no escape from You except to You. I believe in Your Book which You sent down, and in Your Prophet whom You sent.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6311",
+      "numbering": "fath-al-bari",
+      "narrator": "al-Bara' ibn Azib"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6311"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6311: https://shamela.ws/book/1681/9461",
+        "skeletonSha256": "e312fc4d490beb9d42634ecf9080464ce2726ed76cc6b6e60baa1086ca516854"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6311 (comparison only)",
+        "skeletonSha256": "ce13c19f30f7c9d599019c2c04511900e86d7a98da80bbfaf08af41bf4e3aa59"
+      }
+    ],
+    "note": "We follow the printed al-Sultaniyya text of hadith 6311 on Shamela (أسلمت نفسي … رهبة ورغبة). Under the same number hadith-api gives أسلمت وجهي … رغبة ورهبة, the wording of another narration of this hadith."
+  },
+  "usage": {
+    "when": [
+      "Last thing before sleep"
+    ],
+    "evidence": "Make your ablution as for prayer, lie on your right side and say this; if you die, you die upon the natural way, so make these the last words you say. When al-Bara' repeated it back with \"Your Messenger\", the Prophet ﷺ said: no, \"Your Prophet whom You sent\" (al-Bukhari 6311)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6311, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6311) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

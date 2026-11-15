@@ -1,0 +1,362 @@
+{
+ "deck": "adhkar-after-prayer",
+ "kind": "dhikr",
+ "hash": "fce5b692dbb7da2d",
+ "items": [
+  {
+   "id": "aini-ala-dhikrik",
+   "deck": "adhkar-after-prayer",
+   "rev": 1,
+   "title": "Help me to remember You",
+   "cue": "What the Prophet ﷺ told Mu'adh never to leave after a prayer",
+   "arabic": "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ",
+   "transliteration": "Allaahumma a'innee 'alaa dhikrik, washukrik, wahusni 'ibaadatik",
+   "translation": "O Allah, help me to remember You, to thank You, and to worship You well.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "1522",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Mu'adh ibn Jabal"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-nawawi",
+     "in": "al-Adhkar, no. 192 (ed. al-Arna'ut, shamela.ws/book/1956/71)",
+     "quote": "بإسناد صحيح"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 1522: https://shamela.ws/book/1726/2039",
+      "skeletonSha256": "c3095ef7cda08069d5cb02f6a2a8994d2d626c7146c1b65122bbe3c766dde23c"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 1522 (comparison only)",
+      "skeletonSha256": "c3095ef7cda08069d5cb02f6a2a8994d2d626c7146c1b65122bbe3c766dde23c"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "At the end of every prayer"
+    ],
+    "evidence": "The Prophet ﷺ took Mu'adh by the hand, told him twice that he loved him, and said: never leave saying this at the end of every prayer (Abu Dawud 1522)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "anta-al-salam",
+   "deck": "adhkar-after-prayer",
+   "rev": 1,
+   "title": "You are Peace",
+   "cue": "\"O Allah, You are Peace, and from You is peace…\"",
+   "arabic": "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+   "transliteration": "Allaahumma antas-salaamu waminkas-salaam, tabaarakta yaa dhal-jalaali wal-ikraam",
+   "translation": "O Allah, You are Peace and from You is peace. Blessed are You, O Possessor of majesty and honour.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "591",
+     "numbering": "abd-al-baqi",
+     "narrator": "Thawban"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 591"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 591: https://shamela.ws/book/1727/1275",
+      "skeletonSha256": "b087ca7f140378927e3b50169a813763e5a1d97b6f25ba57ff9837f5ac2e5f40"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 591 (comparison only)",
+      "skeletonSha256": "a422f3dfafe89ca1e2a96e6420e732be97dec08c913f0fbd9427f3ffa30b53dc"
+     }
+    ],
+    "note": "The printed Abd al-Baqi text on Shamela has يا ذا الجلال; hadith-api has ذا الجلال without يا. We follow the printed edition."
+   },
+   "usage": {
+    "when": [
+     "After the prayer, following the three requests for forgiveness"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "istighfar-3",
+   "deck": "adhkar-after-prayer",
+   "rev": 1,
+   "title": "Asking forgiveness, three times",
+   "cue": "The first words once the prayer ends",
+   "arabic": "أَسْتَغْفِرُ اللَّهَ",
+   "transliteration": "Astaghfirullaah",
+   "translation": "I ask Allah's forgiveness.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "591",
+     "numbering": "abd-al-baqi",
+     "narrator": "Thawban"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 591"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 591: https://shamela.ws/book/1727/1275",
+      "skeletonSha256": "03c8d4107c3d66f0cf4d43bc5263c08a9dd6dbc85cc09cce347480a4235ca668"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 591 (comparison only)",
+      "skeletonSha256": "03c8d4107c3d66f0cf4d43bc5263c08a9dd6dbc85cc09cce347480a4235ca668"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Straight after the prayer"
+    ],
+    "repeat": 3,
+    "evidence": "Thawban reports that when the Prophet ﷺ finished his prayer he asked forgiveness three times. Al-Awza'i, asked how, said: you say astaghfirullah, astaghfirullah (Muslim 591)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "la-hawla-la-nabudu",
+   "deck": "adhkar-after-prayer",
+   "rev": 1,
+   "title": "We worship none but Him",
+   "cue": "What Ibn al-Zubayr said after each prayer and traced to the Prophet ﷺ",
+   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ، لَا إِلَهَ إِلَّا اللَّهُ، وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ، وَلَهُ الثَّنَاءُ الْحَسَنُ، لَا إِلَهَ إِلَّا اللَّهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ",
+   "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer, laa hawla walaa quwwata illaa billaah, laa ilaha illallaah, walaa na'budu illaa iyyaah, lahun-ni'matu walahul-fadl, walahuth-thanaa'ul-hasan, laa ilaha illallaahu mukhliseena lahud-deena walaw karihal-kaafiroon",
+   "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things. There is no power and no strength except through Allah. There is no god but Allah, and we worship none but Him. His is the blessing, His the bounty, and His the beautiful praise. There is no god but Allah; we are sincere to Him in religion, even if the disbelievers dislike it.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "594",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abdullah ibn al-Zubayr"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 594"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 594: https://shamela.ws/book/1727/1284",
+      "skeletonSha256": "a8a8cbff940cb8ddb5e8b185a7aff8000e2d234fa8c79f043f60734edb1c79ce"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 594 (comparison only)",
+      "skeletonSha256": "a8a8cbff940cb8ddb5e8b185a7aff8000e2d234fa8c79f043f60734edb1c79ce"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "After each prayer, once the salam is said"
+    ],
+    "evidence": "Abdullah ibn al-Zubayr said this after every prayer when he gave the salam, and said the Prophet ﷺ used to declare these words after every prayer (Muslim 594)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "la-mania",
+   "deck": "adhkar-after-prayer",
+   "rev": 2,
+   "title": "None can withhold what You give",
+   "cue": "What the Prophet ﷺ said after every obligatory prayer, as al-Mughirah wrote to Mu'awiyah",
+   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
+   "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer, allaahumma laa maani'a limaa a'tayt, walaa mu'tiya limaa mana't, walaa yanfa'u dhal-jaddi minkal-jadd",
+   "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things. O Allah, none can withhold what You give, none can give what You withhold, and the fortune of the fortunate is of no avail to him against You.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "844",
+     "numbering": "fath-al-bari",
+     "narrator": "al-Mughirah ibn Shu'bah"
+    },
+    {
+     "collection": "muslim",
+     "number": "593",
+     "numbering": "abd-al-baqi",
+     "narrator": "al-Mughirah ibn Shu'bah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 844"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 593"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 844: https://shamela.ws/book/1681/1385",
+      "skeletonSha256": "cf02392ccc2594fce674a5c4b8ad167cd34dc2c12ef9db6d85c30e260b7af2b5"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 844 (comparison only)",
+      "skeletonSha256": "cf02392ccc2594fce674a5c4b8ad167cd34dc2c12ef9db6d85c30e260b7af2b5"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "After each obligatory prayer"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "taawwudh-sad",
+   "deck": "adhkar-after-prayer",
+   "rev": 1,
+   "title": "Refuge from cowardice and a feeble old age",
+   "cue": "The refuge Sa'd taught his sons as the Prophet ﷺ said it after prayer",
+   "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
+   "transliteration": "Allaahumma innee a'oodhu bika minal-jubn, wa'a'oodhu bika an uradda ilaa ardhalil-'umur, wa'a'oodhu bika min fitnatid-dunyaa, wa'a'oodhu bika min 'adhaabil-qabr",
+   "translation": "O Allah, I seek refuge with You from cowardice. I seek refuge with You from being returned to the most feeble age. I seek refuge with You from the trials of this world. And I seek refuge with You from the punishment of the grave.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "2822",
+     "numbering": "fath-al-bari",
+     "narrator": "Sa'd ibn Abi Waqqas"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 2822"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 2822: https://shamela.ws/book/1681/4472",
+      "skeletonSha256": "d2c967ac964103eeabe4c9cf5e88196221ec7520dedfe48d1b7c4264d76dadcf"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 2822 (comparison only)",
+      "skeletonSha256": "d2c967ac964103eeabe4c9cf5e88196221ec7520dedfe48d1b7c4264d76dadcf"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "After the prayer"
+    ],
+    "evidence": "Sa'd ibn Abi Waqqas taught his sons these words as a teacher teaches children to write, saying the Prophet ﷺ sought refuge with them after the prayer (al-Bukhari 2822)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "tamam-al-mia",
+   "deck": "adhkar-after-prayer",
+   "rev": 1,
+   "title": "Completing the hundred",
+   "cue": "The words that complete the hundred after the glorification",
+   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+   "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer",
+   "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "597",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 597"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 597: https://shamela.ws/book/1727/1293",
+      "skeletonSha256": "ecfe986e063432c71508f81b1bd3aae56a6b29161b3280c2ae1f92b8a98fd0b1"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 597 (comparison only)",
+      "skeletonSha256": "ecfe986e063432c71508f81b1bd3aae56a6b29161b3280c2ae1f92b8a98fd0b1"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "After the thirty-three of each, to make a hundred"
+    ],
+    "evidence": "Whoever glorifies, praises and magnifies Allah thirty-three times each after every prayer, ninety-nine in all, and completes the hundred with these words, his sins are forgiven even if they are like the foam of the sea (Muslim 597)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  }
+ ]
+}

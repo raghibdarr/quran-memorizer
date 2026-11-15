@@ -1,0 +1,76 @@
+{
+  "id": "al-mulku-lillah",
+  "deck": "adhkar-morning-evening",
+  "rev": 2,
+  "title": "We have reached the evening",
+  "cue": "\"We have reached the evening, and the dominion belongs to Allah…\"",
+  "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ هَذِهِ اللَّيْلَةِ وَخَيْرِ مَا فِيهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيهَا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَسُوءِ الْكِبَرِ وَفِتْنَةِ الدُّنْيَا وَعَذَابِ الْقَبْرِ",
+  "transliteration": "Amsaynaa wa'amsal-mulku lillaah, wal-hamdu lillaah, laa ilaha illallaahu wahdahu laa shareeka lah, allaahumma innee as'aluka min khayri hadhihil-laylati wakhayri maa feehaa, wa'a'oodhu bika min sharrihaa washarri maa feehaa, allaahumma innee a'oodhu bika minal-kasali wal-harami wasoo'il-kibari wafitnatid-dunyaa wa'adhaabil-qabr",
+  "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the evil of old age, from the trials of this world and from the punishment of the grave.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "2723",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abdullah ibn Mas'ud"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2723"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2723: https://shamela.ws/book/1727/6841",
+        "skeletonSha256": "11b95dfd634500335f5dececae23a3b8e40754ff91b79f7e15b8903bc145acfc"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2723 (comparison only)",
+        "skeletonSha256": "11b95dfd634500335f5dececae23a3b8e40754ff91b79f7e15b8903bc145acfc"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "Evening; in the morning with its opening changed"
+    ],
+    "evidence": "Abdullah ibn Mas'ud reports that the Prophet ﷺ said this in the evening (Muslim 2723, the narration of Za'idah). Another narration under the same number adds, after \"without partner\", His is the dominion and His is the praise, and He has power over all things; and says that in the morning he opened with \"We have reached the morning\"."
+  },
+  "variants": [
+    {
+      "label": "In the morning he said the same, opening with these words.",
+      "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
+      "citations": [
+        {
+          "collection": "muslim",
+          "number": "2723",
+          "numbering": "abd-al-baqi",
+          "narrator": "Abdullah ibn Mas'ud"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 2723, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 2723) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): سوء الكبر was softened to \"the misery of old age\"; now \"the evil of old age\". Arabic and citations unchanged; rev raised"
+    ]
+  }
+}

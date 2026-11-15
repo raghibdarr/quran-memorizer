@@ -1,0 +1,63 @@
+{
+  "id": "bismika-rabbi",
+  "deck": "adhkar-sleep-waking",
+  "rev": 2,
+  "title": "In Your name, my Lord, I lie down",
+  "cue": "What to say after shaking out the bed",
+  "arabic": "بِاسْمِكَ رَبِّ وَضَعْتُ جَنْبِي وَبِكَ أَرْفَعُهُ، إِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ الصَّالِحِينَ",
+  "transliteration": "Bismika rabbi wada'tu janbee wabika arfa'uh, in amsakta nafsee farhamhaa, wa'in arsaltahaa fahfaz'haa bimaa tahfazu bihis-saaliheen",
+  "translation": "In Your name, my Lord, I lay down my side, and by You I raise it. If You keep my soul, have mercy on it; and if You send it back, guard it with what You guard the righteous with.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6320",
+      "numbering": "fath-al-bari",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6320"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6320: https://shamela.ws/book/1681/9477",
+        "skeletonSha256": "b9f4bb5509a08d2c7e91e811dae2786e5a7b09123a7cbb5dbc5dd931151d25d5"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6320 (comparison only)",
+        "skeletonSha256": "62389957e60caf3d86fbb7b59c78cdb57d432d56a5ce416b6eda957f36a04f87"
+      }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela ends تحفظ به الصالحين; hadith-api has عبادك الصالحين. We follow the printed edition."
+  },
+  "usage": {
+    "when": [
+      "On lying down to sleep"
+    ],
+    "evidence": "When one of you goes to bed, let him shake out his bed with the inside of his wrapper, for he does not know what has come onto it after him, then say this (al-Bukhari 6320)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6320, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6320) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F/G/H (independent verifier): أمسكت was rendered \"take\"; now \"keep\", the opposite of \"send it back\" as in the Arabic. Arabic and citations unchanged; rev raised"
+    ]
+  }
+}

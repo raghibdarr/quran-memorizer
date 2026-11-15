@@ -1,0 +1,38 @@
+{
+  "id": "ayat-al-kursi",
+  "deck": "adhkar-sleep-waking",
+  "rev": 1,
+  "title": "Ayat al-Kursi",
+  "cue": "The Verse of the Throne, read on going to bed",
+  "quran": {
+    "surahId": 2,
+    "ayah": 255
+  },
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "2311",
+      "numbering": "fath-al-bari",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [],
+  "usage": {
+    "when": [
+      "Bedtime"
+    ],
+    "evidence": "In the story of Abu Hurayrah guarding the zakat of Ramadan, he was told that whoever reads Ayat al-Kursi on going to bed has a guardian from Allah until morning, and the Prophet ﷺ said: he told you the truth, though he is a liar (al-Bukhari 2311, given by al-Bukhari without a full chain of his own)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B-F: a Quran item; it stores only the reference 2:255 and renders from the surah files",
+      "2026-11-15 G: the usage hadith (bukhari 2311) read in the Shamela copy of the printed edition and in hadith-api; both name these surahs and the count",
+      "2026-11-15 H: no grading needed: a Quran item",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "leaving-home",
+  "deck": "duas-daily",
+  "rev": 3,
+  "title": "Leaving home",
+  "cue": "\"In the name of Allah, I rely on Allah…\"",
+  "arabic": "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+  "transliteration": "Bismillaah, tawakkaltu 'alallaah, laa hawla walaa quwwata illaa billaah",
+  "translation": "In the name of Allah. I rely on Allah. There is no power and no strength except through Allah.",
+  "citations": [
+    {
+      "collection": "abu-dawud",
+      "number": "5095",
+      "numbering": "muhyi-al-din-abd-al-hamid",
+      "narrator": "Anas ibn Malik"
+    },
+    {
+      "collection": "tirmidhi",
+      "number": "3426",
+      "numbering": "ahmad-shakir",
+      "narrator": "Anas ibn Malik"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "hasan",
+      "by": "al-tirmidhi",
+      "in": "Jami' al-Tirmidhi, after hadith 3426",
+      "quote": "هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 5095: https://shamela.ws/book/1726/6957",
+        "skeletonSha256": "034cf40b5d9aa582931dfe2a22f04582b0f799be5a21054587099aaedcc13d6f"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 5095 (comparison only)",
+        "skeletonSha256": "034cf40b5d9aa582931dfe2a22f04582b0f799be5a21054587099aaedcc13d6f"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "On going out of the house"
+    ],
+    "evidence": "Whoever says this on leaving his house, it is said to him: you are guided, sufficed and protected, and the devils move away from him (Abu Dawud 5095). Al-Tirmidhi relates it more briefly (3426): you are sufficed and protected, and Satan moves away from him."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at abu-dawud 5095, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (abu-dawud 5095, tirmidhi 3426) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: hasan by al-tirmidhi (quote located)",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 F (fresh reviewer): the usage note rendered كفيت as \"provided for\"; corrected to \"sufficed\". Arabic, translation and citations unchanged; rev raised",
+      "2026-11-15 F/G/H (independent verifier): the usage note gave Abu Dawud's wording for both citations; al-Tirmidhi 3426 has no \"guided\" and is now given separately. Arabic and citations unchanged; rev raised"
+    ]
+  }
+}

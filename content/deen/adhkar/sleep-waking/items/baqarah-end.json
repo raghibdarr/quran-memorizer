@@ -1,0 +1,56 @@
+{
+  "id": "baqarah-end",
+  "deck": "adhkar-sleep-waking",
+  "rev": 1,
+  "title": "The last two ayahs of al-Baqarah",
+  "cue": "The two ayahs that suffice whoever reads them at night",
+  "quran": {
+    "surahId": 2,
+    "ayah": 285,
+    "ayahEnd": 286
+  },
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "5009",
+      "numbering": "fath-al-bari",
+      "narrator": "Abu Mas'ud al-Ansari"
+    },
+    {
+      "collection": "muslim",
+      "number": "808",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abu Mas'ud al-Ansari"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 5009"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 808"
+    }
+  ],
+  "usage": {
+    "when": [
+      "At night"
+    ],
+    "evidence": "Whoever recites the two ayahs at the end of Surat al-Baqarah in a night, they suffice him (al-Bukhari 5009; Muslim 808)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B-F: a Quran item; it stores only the reference 2:285-286 and renders from the surah files",
+      "2026-11-15 G: the usage hadith (bukhari 5009, muslim 808) read in the Shamela copy of the printed edition and in hadith-api; both name these surahs and the count",
+      "2026-11-15 H: in-sahih by al-bukhari; in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

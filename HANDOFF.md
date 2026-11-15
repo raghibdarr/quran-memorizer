@@ -373,3 +373,72 @@ Turbopack refuses the `node_modules` junction; `npx next build --webpack` with p
   show as a plain "Hadith · reference to come" note, not a chip that opens to nothing.
   `src/lib/course/evidence-refs.test.ts` fails if any other cited hadith does not resolve, and
   fails again once one of these three resolves, so the waiting list is taken down when need 1 lands.
+
+# HANDOFF: adhkar-duas
+
+Needs in shared files (spec 9.4). The package builds and passes without them.
+
+1. **`src/components/deen/sources-data.ts` (deen-engine): `deckIdForSelection`** maps
+   `adhkar/<dir>/SELECTION.md` to `<dir>`, but three adhkar deck ids are not their folder names
+   (`morning-evening` is `adhkar-morning-evening`, also `after-prayer`, `sleep-waking`). /sources then
+   titles those sections with the raw folder name. Suggested: look the folder up in build-deen's
+   `DECKS[*].dir` (or prefix `adhkar-` when the bare name is not a deck id).
+2. **App-wide Essentials carry-over.** `runEssentialsMigration` (src/components/adhkar/use-migration.ts)
+   runs on /adhkar, /adhkar/view and every Essentials card. To run it for users who never open those,
+   mount `useEssentialsMigration()` once in `providers.tsx` (foundations-owned). It is idempotent.
+3. **Erase on this device**: the adhkar reminders (ids 22000, 22001, channel `adhkar-v1`) survive
+   "Erase everything" (see prayer-alerts note 3). Clear range `NOTIFY_RANGES.adhkar` there.
+4. **Notification taps** carry `extra.url` (`/adhkar/now?set=morning|evening`), routed by the existing
+   ReminderSync listener, like prayer alerts.
+5. **course-fasting note 2**: the iftar dua is `duas-daily:iftar` (Abu Dawud 2357, variant 2358).
+6. **Integration**: regenerate `public/licenses.txt` (picks up `data-sources/licenses.d/55-adhkar.txt`).
+7. **Content process**: stages C, F, G and H were run by the authoring agent in separate passes
+   (no sub-agent tool was available), recorded in each item's `review.log`. C and G are mechanical
+   (`content/deen/adhkar/tools/seal.mjs`, `witness.mjs verify --all`), but F (blind back-check of the
+   English) and H (grading check) should get a fresh agent in the wave-3 content audit. One grading,
+   al-Daraqutni on `duas-daily:iftar`, was read in a single copy (en.tohed.com) only.
+8. **e2e**: `e2e/adhkar.spec.ts` (6 tests) passed against this worktree's static build on port 4424
+   with an ad-hoc config; the repo's Playwright configs were not run.
+9. **Review pass (fresh reviewer, 2026-11-15).** `witness.mjs verify --all` re-run: 45 checked, 0 problems. Every
+   shipped item's English was re-read against its Arabic by an agent that had not seen the drafting; two wordings
+   were corrected (rev raised: `duas-daily:leaving-home` usage note, `adhkar-morning-evening:la-ilaha-illallah-100`
+   title). Grading quotes were not all re-located (only al-Tirmidhi after 3426 was re-read on Shamela), so stage H
+   still wants its own pass in the wave-3 audit. Left as authored, for the owner or a scholar to decide:
+   `duas-daily:istikhara` keeps the narrator's aside "أو قال في عاجل أمري وآجله" inside the Arabic that is memorised
+   (faithful to al-Bukhari 6382; the usage note explains it); the sleep set counts each of the three surahs three
+   times in a row, where al-Bukhari 5017 describes the three read together, three times over.
+10. **/prayer chips.** `AdhkarNow` now renders up to two chips: after Fajr and after Asr it offers the prayer's own
+   adhkar and the morning or evening set (before, the window hid the after-prayer set for its whole length). The
+   hub's comment says "at most one contextual chip"; the second is one 48px row. Also for prayer-times /
+   integration: the hub hides the adhkar slot whenever the Ramadan banner shows (the month and the week before),
+   so there is no adhkar chip on /prayer for about five weeks a year; /adhkar still has every set.
+11. **Independent content verification (2026-11-15, an agent that wrote none of it).** All 53 items and the
+   Essentials citations were re-checked against freshly fetched witnesses (own cache): `witness.mjs verify --all`
+   45 checked, 0 problems; the hadith behind each Quran item (Abu Dawud 5082, al-Tirmidhi 3575, al-Bukhari 2311,
+   5009, 5017, Muslim 808) and the Essentials-only citations (Muslim 596, 2702) read on Shamela; the three
+   single-witness readings (al-Bukhari 6306, 6311, 6320) and Muslim 591 read in the Shamela print. Stage H done in
+   full: every grading quote was located and read in context (al-Tirmidhi after 7, 464, 1858, 3388, 3391, 3392,
+   3426, 3575; al-Nawawi, al-Adhkar nos. 71, 159, 192, 217, 545, 653 on Shamela book 1956; al-Daraqutni 2279 on
+   en.tohed.com, still the only copy read). No Arabic, citation or grading needed changing and nothing was
+   removed. Nine items had their English or usage note corrected (rev raised, reasons in each `review.log`):
+   `alim-al-ghayb`, `al-mulku-lillah`, `bika-asbahna`, `bismillah-la-yadurr` (morning-evening); `la-mania`
+   (after-prayer); `bismika-rabbi` (sleep-waking); `toilet-enter`, `leaving-home` (duas-daily); `subhanaka`
+   (salah-words). Left for the owner or a scholar: `sleep-waking:ayat-al-kursi` has no grading line because
+   al-Bukhari 2311 is given without his own full chain (the usage note says so); `duas-daily:toilet-leave` stays
+   "Your forgiveness." because the length rule (G15) leaves no room for a bracketed "[I ask]"; Essentials ayah
+   translations still carry footnote markers such as "[98]" from before this package.
+12. **UX/UI pass (2026-11-15), needs in files this package does not own.** The package builds and passes without them.
+   - `src/components/deen/citation-line.tsx` (deen-engine): at 375px the citation shares a row with the
+     Sunnah.com link and breaks into ragged lines, with the "(… numbering)" part in bold. Adhkar screens and
+     Essentials cards now use `src/components/adhkar/source-line.tsx` (`SourceLine`), which stacks below `sm`
+     (collection and number bold, scheme muted regular, narrator on its own line, link last). Suggest
+     CitationLine adopt the same layout so hadith and Names match.
+   - `src/components/deen/grading-line.tsx` (deen-engine): a grading's `in` such as
+     "al-Adhkar, no. 217 (ed. al-Arna'ut, shamela.ws/book/1956/77)" prints the bare path. Suggest rendering a
+     `shamela.ws/book/N/M` match as a "Shamela ↗" link (via `openExternal`).
+   - `src/components/essentials/learn-rows.tsx` (deen-engine): the Adhkar and duas row shows a bare "0/53".
+     Suggest "53 to learn" until something is started, as /adhkar's deck rows now say.
+   - `src/app/essentials/page.tsx` (foundations): under "Duas, dhikr and key ayahs", one line pointing to the
+     checked versions, e.g. "The checked versions, with their sources, are in Adhkar and duas" linking /adhkar.
+     The old collection titles in `src/data/essentials.json` ("Salah Duas", "Morning & Evening Adhkar",
+     "Tasbih & Dhikr") are Title Case with ampersands; sentence case would match the new screens.

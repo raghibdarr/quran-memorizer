@@ -1,0 +1,54 @@
+{
+  "id": "ikhlas",
+  "deck": "adhkar-morning-evening",
+  "rev": 1,
+  "title": "Al-Ikhlas",
+  "cue": "The surah of pure oneness, said three times morning and evening",
+  "quran": {
+    "surahId": 112,
+    "ayah": 1,
+    "ayahEnd": 4
+  },
+  "citations": [
+    {
+      "collection": "abu-dawud",
+      "number": "5082",
+      "numbering": "muhyi-al-din-abd-al-hamid",
+      "narrator": "Abdullah ibn Khubayb"
+    },
+    {
+      "collection": "tirmidhi",
+      "number": "3575",
+      "numbering": "ahmad-shakir",
+      "narrator": "Abdullah ibn Khubayb"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "sahih",
+      "by": "al-tirmidhi",
+      "in": "Jami' al-Tirmidhi, after hadith 3575",
+      "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ غَرِيبٌ"
+    }
+  ],
+  "usage": {
+    "when": [
+      "Morning",
+      "Evening"
+    ],
+    "repeat": 3,
+    "evidence": "Abdullah ibn Khubayb reports that the Prophet ﷺ told him to say Qul huwa Allahu ahad and the two Mu'awwidhat three times in the evening and the morning, and they would suffice him against everything (Abu Dawud 5082; al-Tirmidhi 3575, who says: hasan sahih gharib)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B-F: a Quran item; it stores only the reference 112:1-4 and renders from the surah files",
+      "2026-11-15 G: the usage hadith (abu-dawud 5082, tirmidhi 3575) read in the Shamela copy of the printed edition and in hadith-api; both name these surahs and the count",
+      "2026-11-15 H: sahih by al-tirmidhi (quote located)",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

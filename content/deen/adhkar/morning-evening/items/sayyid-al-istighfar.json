@@ -1,0 +1,63 @@
+{
+  "id": "sayyid-al-istighfar",
+  "deck": "adhkar-morning-evening",
+  "rev": 1,
+  "title": "The best way to ask forgiveness",
+  "cue": "\"You are my Lord, there is no god but You…\"",
+  "arabic": "اللَّهُمَّ أَنْتَ رَبِّي، لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، اغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+  "transliteration": "Allaahumma anta rabbee, laa ilaha illaa ant, khalaqtanee wa'anaa 'abduk, wa'anaa 'alaa 'ahdika wawa'dika mastata't, a'oodhu bika min sharri maa sana't, aboo'u laka bini'matika 'alayy, wa'aboo'u bidhanbee, ighfir lee, fa'innahu laa yaghfirudh-dhunooba illaa ant",
+  "translation": "O Allah, You are my Lord; there is no god but You. You created me and I am Your servant, and I keep to Your covenant and Your promise as far as I am able. I seek refuge with You from the evil of what I have done. I acknowledge to You Your favour upon me, and I acknowledge my sin. Forgive me, for no one forgives sins but You.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6306",
+      "numbering": "fath-al-bari",
+      "narrator": "Shaddad ibn Aws"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6306"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6306: https://shamela.ws/book/1681/9452",
+        "skeletonSha256": "91cccb398f03eeb42e158e2c14da785241ec0b2f4af5e102e32b09d3801f5d37"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6306 (comparison only)",
+        "skeletonSha256": "18cda5974b88594909b03630bafaeb1c4c304d0b9eb4a52f80afc78c16eff74f"
+      }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela reads وأبوء بذنبي، اغفر لي; hadith-api reads وأبوء لك بذنبي، فاغفر لي. We follow the printed edition."
+  },
+  "usage": {
+    "when": [
+      "Morning",
+      "Evening"
+    ],
+    "evidence": "The Prophet ﷺ said that whoever says it by day, certain of it, and dies that day before evening, is among the people of Paradise; and the same for whoever says it by night and dies before morning (al-Bukhari 6306)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6306, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6306) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

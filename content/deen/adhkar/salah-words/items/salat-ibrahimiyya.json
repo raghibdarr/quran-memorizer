@@ -1,0 +1,60 @@
+{
+  "id": "salat-ibrahimiyya",
+  "deck": "salah-words",
+  "rev": 1,
+  "title": "Blessings on the Prophet ﷺ",
+  "cue": "Blessings on the Prophet ﷺ, as Ka'b ibn Ujrah was taught them",
+  "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+  "transliteration": "Allaahumma salli 'alaa muhammadin wa'alaa aali muhammad, kamaa sallayta 'alaa ibraaheema wa'alaa aali ibraaheem, innaka hameedun majeed, allaahumma baarik 'alaa muhammadin wa'alaa aali muhammad, kamaa baarakta 'alaa ibraaheema wa'alaa aali ibraaheem, innaka hameedun majeed",
+  "translation": "O Allah, send prayers upon Muhammad and upon the family of Muhammad, as You sent prayers upon Ibrahim and upon the family of Ibrahim; You are Praiseworthy, Glorious. O Allah, send blessings upon Muhammad and upon the family of Muhammad, as You sent blessings upon Ibrahim and upon the family of Ibrahim; You are Praiseworthy, Glorious.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "3370",
+      "numbering": "fath-al-bari",
+      "narrator": "Ka'b ibn Ujrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 3370"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 3370: https://shamela.ws/book/1681/5232",
+        "skeletonSha256": "a16bd3fb4234f3afa7cd191dbe46406875c4bd2b3d9aaaaab14aec1ea2b1a374"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 3370 (comparison only)",
+        "skeletonSha256": "a16bd3fb4234f3afa7cd191dbe46406875c4bd2b3d9aaaaab14aec1ea2b1a374"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "In the last [[tashahhud]]"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 3370, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 3370) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

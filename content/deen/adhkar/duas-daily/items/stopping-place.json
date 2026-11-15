@@ -1,0 +1,61 @@
+{
+  "id": "stopping-place",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "Stopping at a place",
+  "cue": "What to say on halting at a place on a journey",
+  "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+  "transliteration": "A'oodhu bikalimaatillaahit-taammaati min sharri maa khalaq",
+  "translation": "I seek refuge in the perfect words of Allah from the evil of what He has created.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "2708",
+      "numbering": "abd-al-baqi",
+      "narrator": "Khawlah bint Hakim"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2708"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2708: https://shamela.ws/book/1727/6812",
+        "skeletonSha256": "08cb794794d3c95ccea6c25ee08883978697746a6061a968e9d32441b7b7cdcb"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2708 (comparison only)",
+        "skeletonSha256": "08cb794794d3c95ccea6c25ee08883978697746a6061a968e9d32441b7b7cdcb"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "On stopping at a place"
+    ],
+    "evidence": "Whoever stops at a place and says this, nothing will harm him until he moves on from it (Muslim 2708)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 2708, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 2708) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

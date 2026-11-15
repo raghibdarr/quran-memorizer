@@ -1,0 +1,696 @@
+{
+ "deck": "adhkar-morning-evening",
+ "kind": "dhikr",
+ "hash": "c6d72d9acc441c55",
+ "items": [
+  {
+   "id": "adada-khalqihi",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "As many as His creation",
+   "cue": "The four phrases, said three times, that outweigh a morning of remembrance",
+   "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
+   "transliteration": "Subhaanallaahi wabihamdihi 'adada khalqihi waridaa nafsihi wazinata 'arshihi wamidaada kalimaatih",
+   "translation": "Glory and praise be to Allah, as many as His creation, as much as pleases Him, the weight of His Throne, and the ink of His words.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "2726",
+     "numbering": "abd-al-baqi",
+     "narrator": "Juwayriyah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2726"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2726: https://shamela.ws/book/1727/6846",
+      "skeletonSha256": "cb490b8604e99f9727a142fb4ba6d6ef5ef858f6eebece1ee179b1dc8f105137"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2726 (comparison only)",
+      "skeletonSha256": "cb490b8604e99f9727a142fb4ba6d6ef5ef858f6eebece1ee179b1dc8f105137"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Morning"
+    ],
+    "repeat": 3,
+    "evidence": "The Prophet ﷺ told Juwayriyah, after she had sat in remembrance from the dawn prayer until mid-morning, that he had said four phrases three times which would outweigh all she had said (Muslim 2726)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "afiya",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "Asking for wellbeing",
+   "cue": "The duas the Prophet ﷺ never left, morning and evening",
+   "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، وَاحْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",
+   "transliteration": "Allaahumma innee as'alukal-'afwa wal-'aafiyata fid-dunyaa wal-'aakhirah, allaahumma as'alukal-'afwa wal-'aafiyata fee deenee wadunyaaya wa'ahlee wamaalee, allaahummastur 'awraatee, wa'aamin raw'aatee, wahfaznee mim bayni yadayy, wamin khalfee, wa'an yameenee, wa'an shimaalee, wamin fawqee, wa'a'oodhu bika an ughtaala min tahtee",
+   "translation": "O Allah, I ask You for pardon and wellbeing in this world and the next. O Allah, I ask You for pardon and wellbeing in my religion and my worldly life, my family and my wealth. O Allah, cover my faults and calm my fears, and guard me from in front of me and behind me, from my right and my left, and from above me; and I seek refuge with You from being seized unawares from beneath me.",
+   "citations": [
+    {
+     "collection": "ibn-majah",
+     "number": "3871",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abdullah ibn Umar"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-nawawi",
+     "in": "al-Adhkar, no. 217 (ed. al-Arna'ut, shamela.ws/book/1956/77)",
+     "quote": "بالأسانيد الصحيحة"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Ibn Majah, ed. Muhammad Fu’ad Abd al-Baqi, hadith 3871: https://shamela.ws/book/1198/5348",
+      "skeletonSha256": "3ac73699caac9987c48a86ac9a473324feb95141c6b6af102e34a3cf20f3ca2b"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-ibnmajah, hadith 3871 (comparison only)",
+      "skeletonSha256": "780aaf898d44317e60cea26b92cb412b363ace8c3654d10ea38feb4dc9310aad"
+     }
+    ],
+    "note": "The printed Abd al-Baqi text on Shamela has اللهم أسألك in the second sentence; hadith-api has اللهم إني أسألك. We follow the printed edition."
+   },
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "evidence": "Ibn Umar said the Prophet ﷺ never left these duas, evening and morning (Ibn Majah 3871; Abu Dawud 5074 relates it with small differences)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "al-mulku-lillah",
+   "deck": "adhkar-morning-evening",
+   "rev": 2,
+   "title": "We have reached the evening",
+   "cue": "\"We have reached the evening, and the dominion belongs to Allah…\"",
+   "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ هَذِهِ اللَّيْلَةِ وَخَيْرِ مَا فِيهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيهَا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَسُوءِ الْكِبَرِ وَفِتْنَةِ الدُّنْيَا وَعَذَابِ الْقَبْرِ",
+   "transliteration": "Amsaynaa wa'amsal-mulku lillaah, wal-hamdu lillaah, laa ilaha illallaahu wahdahu laa shareeka lah, allaahumma innee as'aluka min khayri hadhihil-laylati wakhayri maa feehaa, wa'a'oodhu bika min sharrihaa washarri maa feehaa, allaahumma innee a'oodhu bika minal-kasali wal-harami wasoo'il-kibari wafitnatid-dunyaa wa'adhaabil-qabr",
+   "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the evil of old age, from the trials of this world and from the punishment of the grave.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "2723",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abdullah ibn Mas'ud"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2723"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2723: https://shamela.ws/book/1727/6841",
+      "skeletonSha256": "11b95dfd634500335f5dececae23a3b8e40754ff91b79f7e15b8903bc145acfc"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2723 (comparison only)",
+      "skeletonSha256": "11b95dfd634500335f5dececae23a3b8e40754ff91b79f7e15b8903bc145acfc"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Evening; in the morning with its opening changed"
+    ],
+    "evidence": "Abdullah ibn Mas'ud reports that the Prophet ﷺ said this in the evening (Muslim 2723, the narration of Za'idah). Another narration under the same number adds, after \"without partner\", His is the dominion and His is the praise, and He has power over all things; and says that in the morning he opened with \"We have reached the morning\"."
+   },
+   "variants": [
+    {
+     "label": "In the morning he said the same, opening with these words.",
+     "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
+     "citations": [
+      {
+       "collection": "muslim",
+       "number": "2723",
+       "numbering": "abd-al-baqi",
+       "narrator": "Abdullah ibn Mas'ud"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "alim-al-ghayb",
+   "deck": "adhkar-morning-evening",
+   "rev": 2,
+   "title": "Knower of the unseen",
+   "cue": "What the Prophet ﷺ taught Abu Bakr for morning, evening and bedtime",
+   "arabic": "اللَّهُمَّ فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ",
+   "transliteration": "Allaahumma faatiras-samawaati wal-ard, 'aalimal-ghaybi wash-shahaadah, rabba kulli shay'in wamaleekah, ashhadu an laa ilaha illaa ant, a'oodhu bika min sharri nafsee, washarrish-shaytaani washirkih",
+   "translation": "O Allah, Originator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of everything: I bear witness that there is no god but You. I seek refuge with You from the evil of my own self, and from the evil of Satan and his [call to] associating partners with Allah.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5067",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3392",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 5067: https://shamela.ws/book/1726/6927",
+      "skeletonSha256": "28a5f36fc479ac64c6741a46e6c7ed3b7ecea3753a924852950953d45883f3df"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 5067 (comparison only)",
+      "skeletonSha256": "28a5f36fc479ac64c6741a46e6c7ed3b7ecea3753a924852950953d45883f3df"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening",
+     "Bedtime"
+    ],
+    "evidence": "Abu Bakr asked for words to say morning and evening; the Prophet ﷺ taught him these and said: say it in the morning, in the evening and when you lie down (Abu Dawud 5067). Al-Tirmidhi relates it with the first two phrases in the other order (3392) and calls it hasan sahih."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "bika-asbahna",
+   "deck": "adhkar-morning-evening",
+   "rev": 2,
+   "title": "By You we enter the morning",
+   "cue": "\"O Allah, by You we enter the morning…\"",
+   "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
+   "transliteration": "Allaahumma bika asbahnaa, wabika amsaynaa, wabika nahyaa, wabika namoot, wa'ilaykan-nushoor",
+   "translation": "O Allah, by You we enter morning and by You evening; by You we live and by You we die, and to You is the rising.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5068",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "hasan",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3391",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 5068: https://shamela.ws/book/1726/6928",
+      "skeletonSha256": "511e13af8641dce71bf2368a3706fdfa2301cbe5822ec79e97b3d9ee9b0357a7"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 5068 (comparison only)",
+      "skeletonSha256": "511e13af8641dce71bf2368a3706fdfa2301cbe5822ec79e97b3d9ee9b0357a7"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Morning; the evening wording is shown under it"
+    ],
+    "evidence": "Abu Hurayrah reports that the Prophet ﷺ said this on reaching the morning, and the shorter wording on reaching the evening (Abu Dawud 5068). Al-Tirmidhi relates it with إليك المصير in the morning wording (3391) and calls it hasan."
+   },
+   "variants": [
+    {
+     "label": "In the evening: \"O Allah, by You we enter the evening, by You we live and by You we die, and to You is the rising.\"",
+     "arabic": "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
+     "citations": [
+      {
+       "collection": "abu-dawud",
+       "number": "5068",
+       "numbering": "muhyi-al-din-abd-al-hamid",
+       "narrator": "Abu Hurayrah"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "bismillah-la-yadurr",
+   "deck": "adhkar-morning-evening",
+   "rev": 2,
+   "title": "In the name of Allah, with whose name nothing harms",
+   "cue": "The protection said three times morning and evening",
+   "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
+   "transliteration": "Bismillaahi lladhee laa yadurru ma'asmihi shay'un fil-ardi walaa fis-samaa'i, wahuwas-samee'ul-'aleem",
+   "translation": "In the name of Allah, with whose name nothing in the earth or in the heaven can cause harm, and He is the All-Hearing, the All-Knowing.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5088",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Uthman ibn Affan"
+    },
+    {
+     "collection": "tirmidhi",
+     "number": "3388",
+     "numbering": "ahmad-shakir",
+     "narrator": "Uthman ibn Affan"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3388",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ غَرِيبٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 5088: https://shamela.ws/book/1726/6948",
+      "skeletonSha256": "9dbff4e34c1e80d9cf952168ba943fb57f7995a5de70c61eb7d0179147b62421"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 5088 (comparison only)",
+      "skeletonSha256": "9dbff4e34c1e80d9cf952168ba943fb57f7995a5de70c61eb7d0179147b62421"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "repeat": 3,
+    "evidence": "Uthman reports the Prophet ﷺ saying that whoever says it three times will not be struck by sudden calamity until morning, and whoever says it three times in the morning will not be struck by sudden calamity until evening (Abu Dawud 5088). In al-Tirmidhi (3388): no servant says it three times in the morning of each day and the evening of each night and is then harmed by anything."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "falaq",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "Al-Falaq",
+   "cue": "Seeking refuge with the Lord of daybreak, three times morning and evening",
+   "quran": {
+    "surahId": 113,
+    "ayah": 1,
+    "ayahEnd": 5
+   },
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5082",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Abdullah ibn Khubayb"
+    },
+    {
+     "collection": "tirmidhi",
+     "number": "3575",
+     "numbering": "ahmad-shakir",
+     "narrator": "Abdullah ibn Khubayb"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3575",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ غَرِيبٌ"
+    }
+   ],
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "repeat": 3,
+    "evidence": "Abdullah ibn Khubayb reports that the Prophet ﷺ told him to say Qul huwa Allahu ahad and the two Mu'awwidhat three times in the evening and the morning, and they would suffice him against everything (Abu Dawud 5082; al-Tirmidhi 3575, who says: hasan sahih gharib)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "ikhlas",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "Al-Ikhlas",
+   "cue": "The surah of pure oneness, said three times morning and evening",
+   "quran": {
+    "surahId": 112,
+    "ayah": 1,
+    "ayahEnd": 4
+   },
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5082",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Abdullah ibn Khubayb"
+    },
+    {
+     "collection": "tirmidhi",
+     "number": "3575",
+     "numbering": "ahmad-shakir",
+     "narrator": "Abdullah ibn Khubayb"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3575",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ غَرِيبٌ"
+    }
+   ],
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "repeat": 3,
+    "evidence": "Abdullah ibn Khubayb reports that the Prophet ﷺ told him to say Qul huwa Allahu ahad and the two Mu'awwidhat three times in the evening and the morning, and they would suffice him against everything (Abu Dawud 5082; al-Tirmidhi 3575, who says: hasan sahih gharib)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "kalimat-allah-tammat",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "The perfect words of Allah",
+   "cue": "What to say in the evening for protection from harm",
+   "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+   "transliteration": "A'oodhu bikalimaatillaahit-taammaati min sharri maa khalaq",
+   "translation": "I seek refuge in the perfect words of Allah from the evil of what He has created.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "2709",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2709"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2709: https://shamela.ws/book/1727/6814",
+      "skeletonSha256": "08cb794794d3c95ccea6c25ee08883978697746a6061a968e9d32441b7b7cdcb"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2709 (comparison only)",
+      "skeletonSha256": "08cb794794d3c95ccea6c25ee08883978697746a6061a968e9d32441b7b7cdcb"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Evening"
+    ],
+    "evidence": "A man stung by a scorpion came to the Prophet ﷺ, who said: had you said this when evening came, it would not have harmed you (Muslim 2709)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "la-ilaha-illallah-100",
+   "deck": "adhkar-morning-evening",
+   "rev": 2,
+   "title": "There is no god but Allah alone, a hundred times",
+   "cue": "Said a hundred times in a day",
+   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+   "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer",
+   "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6403",
+     "numbering": "fath-al-bari",
+     "narrator": "Abu Hurayrah"
+    },
+    {
+     "collection": "muslim",
+     "number": "2691",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6403"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2691"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6403: https://shamela.ws/book/1681/9610",
+      "skeletonSha256": "ecfe986e063432c71508f81b1bd3aae56a6b29161b3280c2ae1f92b8a98fd0b1"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6403 (comparison only)",
+      "skeletonSha256": "ecfe986e063432c71508f81b1bd3aae56a6b29161b3280c2ae1f92b8a98fd0b1"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "During the day"
+    ],
+    "repeat": 100,
+    "evidence": "Whoever says it a hundred times in a day, it is for him like freeing ten slaves, a hundred good deeds are written for him and a hundred bad deeds wiped away, and it is a protection for him from Satan that day until evening (al-Bukhari 6403; Muslim 2691)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "nas",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "An-Nas",
+   "cue": "Seeking refuge with the Lord of people, three times morning and evening",
+   "quran": {
+    "surahId": 114,
+    "ayah": 1,
+    "ayahEnd": 6
+   },
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5082",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Abdullah ibn Khubayb"
+    },
+    {
+     "collection": "tirmidhi",
+     "number": "3575",
+     "numbering": "ahmad-shakir",
+     "narrator": "Abdullah ibn Khubayb"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3575",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ غَرِيبٌ"
+    }
+   ],
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "repeat": 3,
+    "evidence": "Abdullah ibn Khubayb reports that the Prophet ﷺ told him to say Qul huwa Allahu ahad and the two Mu'awwidhat three times in the evening and the morning, and they would suffice him against everything (Abu Dawud 5082; al-Tirmidhi 3575, who says: hasan sahih gharib)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "sayyid-al-istighfar",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "The best way to ask forgiveness",
+   "cue": "\"You are my Lord, there is no god but You…\"",
+   "arabic": "اللَّهُمَّ أَنْتَ رَبِّي، لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، اغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+   "transliteration": "Allaahumma anta rabbee, laa ilaha illaa ant, khalaqtanee wa'anaa 'abduk, wa'anaa 'alaa 'ahdika wawa'dika mastata't, a'oodhu bika min sharri maa sana't, aboo'u laka bini'matika 'alayy, wa'aboo'u bidhanbee, ighfir lee, fa'innahu laa yaghfirudh-dhunooba illaa ant",
+   "translation": "O Allah, You are my Lord; there is no god but You. You created me and I am Your servant, and I keep to Your covenant and Your promise as far as I am able. I seek refuge with You from the evil of what I have done. I acknowledge to You Your favour upon me, and I acknowledge my sin. Forgive me, for no one forgives sins but You.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6306",
+     "numbering": "fath-al-bari",
+     "narrator": "Shaddad ibn Aws"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6306"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6306: https://shamela.ws/book/1681/9452",
+      "skeletonSha256": "91cccb398f03eeb42e158e2c14da785241ec0b2f4af5e102e32b09d3801f5d37"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6306 (comparison only)",
+      "skeletonSha256": "18cda5974b88594909b03630bafaeb1c4c304d0b9eb4a52f80afc78c16eff74f"
+     }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela reads وأبوء بذنبي، اغفر لي; hadith-api reads وأبوء لك بذنبي، فاغفر لي. We follow the printed edition."
+   },
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "evidence": "The Prophet ﷺ said that whoever says it by day, certain of it, and dies that day before evening, is among the people of Paradise; and the same for whoever says it by night and dies before morning (al-Bukhari 6306)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "subhanallah-wa-bihamdihi",
+   "deck": "adhkar-morning-evening",
+   "rev": 1,
+   "title": "Glory and praise, a hundred times",
+   "cue": "Subhan Allah wa bihamdihi, a hundred times morning and evening",
+   "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+   "transliteration": "Subhaanallaahi wabihamdih",
+   "translation": "Glory and praise be to Allah.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "2692",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2692"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2692: https://shamela.ws/book/1727/6778",
+      "skeletonSha256": "a70723596912143de7d7d8172d21b25c22aedf2b7cf44611e76462026f0a1c9f"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2692 (comparison only)",
+      "skeletonSha256": "a70723596912143de7d7d8172d21b25c22aedf2b7cf44611e76462026f0a1c9f"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Morning",
+     "Evening"
+    ],
+    "repeat": 100,
+    "evidence": "Whoever says it a hundred times on reaching the morning and the evening, no one will bring anything better on the Day of Resurrection except one who said as much or more (Muslim 2692)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  }
+ ]
+}

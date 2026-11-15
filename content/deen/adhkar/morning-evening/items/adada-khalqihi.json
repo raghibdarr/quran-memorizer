@@ -1,0 +1,62 @@
+{
+  "id": "adada-khalqihi",
+  "deck": "adhkar-morning-evening",
+  "rev": 1,
+  "title": "As many as His creation",
+  "cue": "The four phrases, said three times, that outweigh a morning of remembrance",
+  "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
+  "transliteration": "Subhaanallaahi wabihamdihi 'adada khalqihi waridaa nafsihi wazinata 'arshihi wamidaada kalimaatih",
+  "translation": "Glory and praise be to Allah, as many as His creation, as much as pleases Him, the weight of His Throne, and the ink of His words.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "2726",
+      "numbering": "abd-al-baqi",
+      "narrator": "Juwayriyah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2726"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2726: https://shamela.ws/book/1727/6846",
+        "skeletonSha256": "cb490b8604e99f9727a142fb4ba6d6ef5ef858f6eebece1ee179b1dc8f105137"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2726 (comparison only)",
+        "skeletonSha256": "cb490b8604e99f9727a142fb4ba6d6ef5ef858f6eebece1ee179b1dc8f105137"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "Morning"
+    ],
+    "repeat": 3,
+    "evidence": "The Prophet ﷺ told Juwayriyah, after she had sat in remembrance from the dawn prayer until mid-morning, that he had said four phrases three times which would outweigh all she had said (Muslim 2726)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 2726, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 2726) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "anger",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "When angry",
+  "cue": "The word that takes anger away",
+  "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+  "transliteration": "A'oodhu billaahi minash-shaytaanir-rajeem",
+  "translation": "I seek refuge with Allah from Satan, the outcast.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6115",
+      "numbering": "fath-al-bari",
+      "narrator": "Sulayman ibn Surad"
+    },
+    {
+      "collection": "muslim",
+      "number": "2610",
+      "numbering": "abd-al-baqi",
+      "narrator": "Sulayman ibn Surad"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6115"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2610"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6115: https://shamela.ws/book/1681/9157",
+        "skeletonSha256": "3046be42fb01a5e197bf16b4cb845ed48f30eb45ca33b29ab5fd66ebedcb5245"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6115 (comparison only)",
+        "skeletonSha256": "3046be42fb01a5e197bf16b4cb845ed48f30eb45ca33b29ab5fd66ebedcb5245"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "When angry"
+    ],
+    "evidence": "Two men insulted each other, one red-faced with anger. The Prophet ﷺ said: I know a word which, if he said it, what he feels would leave him (al-Bukhari 6115)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6115, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6115, muslim 2610) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by al-bukhari; in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

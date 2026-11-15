@@ -1,0 +1,61 @@
+{
+  "id": "anta-al-salam",
+  "deck": "adhkar-after-prayer",
+  "rev": 1,
+  "title": "You are Peace",
+  "cue": "\"O Allah, You are Peace, and from You is peace…\"",
+  "arabic": "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+  "transliteration": "Allaahumma antas-salaamu waminkas-salaam, tabaarakta yaa dhal-jalaali wal-ikraam",
+  "translation": "O Allah, You are Peace and from You is peace. Blessed are You, O Possessor of majesty and honour.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "591",
+      "numbering": "abd-al-baqi",
+      "narrator": "Thawban"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 591"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 591: https://shamela.ws/book/1727/1275",
+        "skeletonSha256": "b087ca7f140378927e3b50169a813763e5a1d97b6f25ba57ff9837f5ac2e5f40"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 591 (comparison only)",
+        "skeletonSha256": "a422f3dfafe89ca1e2a96e6420e732be97dec08c913f0fbd9427f3ffa30b53dc"
+      }
+    ],
+    "note": "The printed Abd al-Baqi text on Shamela has يا ذا الجلال; hadith-api has ذا الجلال without يا. We follow the printed edition."
+  },
+  "usage": {
+    "when": [
+      "After the prayer, following the three requests for forgiveness"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 591, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 591) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

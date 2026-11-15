@@ -1,9 +1,14 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import AdhkarNowClient from '@/components/adhkar/now-client';
 
 export const metadata: Metadata = { title: 'Adhkar · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the adhkar-duas package replaces this page.
+// Suspense: the client reads ?set= with useSearchParams, which a static export needs bounded
 export default function Page() {
-  return <StubPage title="Adhkar" back="/prayer" note="The adhkar for this time of day, with a counter. Coming soon." />;
+  return (
+    <Suspense>
+      <AdhkarNowClient />
+    </Suspense>
+  );
 }
