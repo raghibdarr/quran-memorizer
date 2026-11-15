@@ -101,6 +101,18 @@ export default function BottomNav() {
       className="fixed inset-x-0 z-50 px-4"
       style={{ bottom: 'calc(env(safe-area-inset-bottom) + 10px)' }}
     >
+      {/* Fade the page out behind the bar. The bar is as wide as the cards, so a card
+          scrolling under the translucent glass showed as a hard-edged box around its
+          rounded ends (owner, 2026-11-15) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0"
+        style={{
+          top: '-1.75rem',
+          bottom: 'calc(-1 * (env(safe-area-inset-bottom) + 10px))',
+          background: 'linear-gradient(to bottom, color-mix(in srgb, var(--c-cream) 0%, transparent), color-mix(in srgb, var(--c-cream) 92%, transparent) 45%, var(--c-cream))',
+        }}
+      />
       <div
         // Named so screen transitions leave it anchored (and slide it away into
         // flows). The name must sit on the glass itself: a view-transition-name

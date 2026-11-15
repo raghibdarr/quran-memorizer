@@ -113,14 +113,19 @@ export function LearnRows() {
 
   const cardIds = useMemo(() => Object.keys(cards), [cards]);
   const ayahKeys = useMemo(() => new Set(ayahCards.map((c) => `${c.surahId}:${c.ayahNumber}`)), [ayahCards]);
-  if (!decks?.length || !rows?.length) return null;
+  // While the decks load, the rows render from the static titles with their
+  // counts held invisible, so the plans and guides below don't jump down when
+  // the decks arrive
+  const loading = decks === null || (decks.length > 0 && rows === null);
+  if (!loading && (!decks?.length || !rows?.length)) return null;
+  const shown: GroupRow[] = loading ? GROUP_ORDER.map((group) => ({ group, decks: [] })) : rows!;
 
   return (
-    <section aria-labelledby="learn-rows-title" className="space-y-2" data-learn-rows>
+    <section aria-labelledby="learn-rows-title" aria-busy={loading || undefined} className="space-y-2" data-learn-rows>
       <h2 id="learn-rows-title" className="px-1 pt-3 text-base font-bold text-foreground">
         Hadith, Names and more
       </h2>
-      {rows.map((row) => {
+      {shown.map((row) => {
         const { started, total } = groupProgress(row, cardIds, lessonsDone, ayahKeys);
         const unit = row.group === 'course' ? 'lessons' : row.group === 'names' ? 'Names' : 'texts';
         return (
@@ -137,8 +142,8 @@ export function LearnRows() {
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </div>
-              {total > 0 && (
-                <div className="mt-3 flex items-center gap-3">
+              {(total > 0 || loading) && (
+                <div className={`mt-3 flex items-center gap-3${loading ? ' invisible' : ''}`} aria-hidden={loading || undefined}>
                   <ProgressBar value={(started / total) * 100} className="flex-1" />
                   {/* Same count format as the collections further down the tab */}
                   <span className="shrink-0 text-[11px] tabular-nums text-muted">

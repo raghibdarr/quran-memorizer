@@ -27,7 +27,19 @@ import { cn } from '@/lib/cn';
 import { ayahRange } from '@/lib/ayah-range';
 import { DeenReviewSection } from '@/components/review/deen-section';
 import { useDeenQueue } from '@/hooks/use-deen-queue';
+// One tab bar for every state of this screen, outside the branches: built inside
+// each branch, it remounted when loading finished (and again when the hadith and
+// dua decks arrived), so the active pill stalled and restarted its slide
 export default function ReviewPage() {
+  return (
+    <>
+      <ReviewContent />
+      <BottomNav />
+    </>
+  );
+}
+
+function ReviewContent() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
   const plan = usePlanStore((s) => s.plan);
@@ -117,9 +129,9 @@ export default function ReviewPage() {
   };
 
   if (fromPlan) return null;
-  // Keep the tab bar while loading: a screen with no tab bar makes the transition
-  // slide it away and pop it back a moment later
-  if (loading) return <div className="min-h-dvh bg-cream"><BottomNav /></div>;
+  // With no Quran reviews, wait for the hadith and dua decks too, so the empty
+  // state doesn't flash before their reviews appear
+  if (loading || (surahIds.length === 0 && !deenQueue.ready)) return <div className="min-h-dvh bg-cream" />;
 
   // Empty state — route a hafiz to revision, not the beginner-lesson funnel (M4)
   if (surahIds.length === 0) {
@@ -138,7 +150,6 @@ export default function ReviewPage() {
             </p>
             <DeenReviewSection />
           </div>
-          <BottomNav />
         </div>
       );
     }
@@ -161,7 +172,6 @@ export default function ReviewPage() {
         <div className="mt-8 w-full max-w-2xl empty:hidden">
           <DeenReviewSection />
         </div>
-        <BottomNav />
       </div>
     );
   }
@@ -316,8 +326,6 @@ export default function ReviewPage() {
         {/* All-in-one slot, under the Quran streams: hadith, duas and Names (deen-engine) */}
         <DeenReviewSection />
       </main>
-
-      <BottomNav />
     </div>
   );
 }
