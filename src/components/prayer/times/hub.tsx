@@ -33,15 +33,16 @@ function readDismissed(): string {
 function Header({ subtitle }: { subtitle?: React.ReactNode }) {
   return (
     <header className="sticky top-[var(--safe-top)] z-10 bg-cream/95 px-4 pt-6 pb-3 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
-        <div className="min-w-0">
+      <div className="mx-auto max-w-2xl">
+        <div className="flex items-center justify-between gap-3">
           <h1 className="text-2xl font-bold text-foreground">Prayer</h1>
-          {subtitle}
+          <div className="flex shrink-0 items-center gap-2">
+            <SettingsPanel />
+            <UserButton />
+          </div>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
-          <SettingsPanel />
-          <UserButton />
-        </div>
+        {/* Its own full-width line, so a long place name fits */}
+        {subtitle}
       </div>
     </header>
   );
@@ -208,14 +209,11 @@ function PolarNote({ text }: { text: string }) {
   );
 }
 
-/** Prayer settings and the explainer, straight under the times they change */
-function SettingsLinks() {
+/** The explainer, under the times it explains (prayer settings open from the place chip at the top) */
+function WhyLink() {
   return (
-    <div className="flex flex-wrap justify-center gap-x-5 text-sm">
-      <Link href="/prayer/settings" className="inline-flex min-h-11 items-center font-semibold text-teal" data-hub-settings>
-        Prayer settings
-      </Link>
-      <Link href="/prayer/why" className="inline-flex min-h-11 items-center font-semibold text-teal">
+    <div className="flex justify-center text-sm">
+      <Link href="/prayer/why" className="inline-flex min-h-11 items-center font-semibold text-teal" data-hub-why>
         Why times differ
       </Link>
     </div>
@@ -260,12 +258,15 @@ export default function PrayerHub() {
           // The place as a chip: it opens prayer settings (the gear is the app's own settings)
           <Link
             href="/prayer/settings"
-            className="relative mt-1 flex min-h-9 w-fit max-w-full items-center gap-1.5 rounded-full border border-foreground/10 bg-card py-1 pl-2.5 pr-1.5 text-sm text-foreground after:absolute after:-inset-y-1 after:inset-x-0 hover:bg-foreground/[0.03]"
+            className="relative mt-2 flex min-h-9 w-fit max-w-full items-center gap-1.5 rounded-full border border-foreground/10 bg-card py-1 pl-2.5 pr-1.5 text-sm text-foreground after:absolute after:-inset-y-1 after:inset-x-0 hover:bg-foreground/[0.03]"
             data-place-label
           >
             <MapPinIcon size={14} className="shrink-0 text-teal" />
             <span className="truncate font-medium">{place.label || 'Your place'}</span>
             <span className="sr-only">, prayer settings</span>
+            <span className="shrink-0 text-xs text-muted" aria-hidden>
+              · Settings
+            </span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
               <polyline points="9 18 15 12 9 6" />
             </svg>
@@ -308,7 +309,6 @@ export default function PrayerHub() {
               <TimesList model={model} format={format} />
               {model.missing.length > 0 && <MissingNote missing={model.missing} rule={settings.highLatRule} />}
               {model.polar && mod && <PolarNote text={mod.polarNote(model.polar)!} />}
-              <SettingsLinks />
             </div>
             {/*
               At most one contextual chip. The Ramadan banner decides for itself whether it is in
@@ -321,6 +321,7 @@ export default function PrayerHub() {
             <div className="empty:hidden peer-[:not(:empty)]/ramadan:hidden" data-chip="adhkar">
               <AdhkarNow window={model.window} afterPrayer={afterPrayer} />
             </div>
+            <WhyLink />
           </>
         ) : (
           <HubSkeleton />
