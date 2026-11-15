@@ -58,6 +58,8 @@ export default function DaySheet({
                             key={s}
                             type="button"
                             aria-pressed={on}
+                            // By ear the prayer comes with each choice, not only with the group
+                            aria-label={`${TIME_LABELS[p]}: ${MARK_LABELS[s]}`}
                             data-choice={`${p}:${s}`}
                             onClick={() => {
                               haptic.selection();

@@ -99,6 +99,8 @@ test.describe('prayer log', () => {
     await day.locator('[data-choice="fajr:ontime"]').click()
     await day.locator('[data-choice="asr:missed"]').click()
     await expect(day.locator('[data-choice="asr:missed"]')).toHaveAttribute('aria-pressed', 'true')
+    // By ear: each row is a group named for its prayer, and each choice says which prayer it is for
+    await expect(day.getByRole('group', { name: 'Fajr' }).getByRole('button', { name: 'Fajr: On time' })).toHaveAttribute('aria-pressed', 'true')
     await page.getByRole('button', { name: 'Done' }).click()
     await expect(day).toBeHidden()
 
