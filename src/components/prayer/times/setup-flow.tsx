@@ -8,6 +8,7 @@ import { ClockIcon, MapPinIcon } from '@/components/ui/icons';
 import { useAppBack } from '@/hooks/use-app-back';
 import { cn } from '@/lib/cn';
 import { NAV_BACK } from '@/lib/nav';
+import { isNative } from '@/lib/native';
 import { regionDefault } from '@/lib/prayer/regions';
 import { usePlaceStore } from '@/stores/place-store';
 import { usePrayerStore } from '@/stores/prayer-store';
@@ -38,6 +39,9 @@ export default function PrayerSetupFlow() {
   const store = usePrayerStore();
 
   const [step, setStep] = useState<Step>(1);
+  // Alerts need the app: on the web the wizard is two steps and ends on the hub
+  const [withAlerts] = useState(() => isNative());
+  const total = withAlerts ? 3 : 2;
   const [draft, setDraft] = useState<Place | null>(savedPlace);
   // A place can be here before setup (qibla or mosques saved one): its country's defaults are pre-chosen
   // just as if it had been picked on this screen. Once setup is done, the user's own choices stand
@@ -66,7 +70,8 @@ export default function PrayerSetupFlow() {
     store.setMethod(method);
     store.setMadhab(madhab);
     store.completeSetup();
-    setStep(3);
+    if (withAlerts) setStep(3);
+    else router.replace('/prayer', { transitionTypes: [NAV_BACK] });
   };
 
   const goBack = () => {
@@ -90,12 +95,12 @@ export default function PrayerSetupFlow() {
         <div className="mx-auto max-w-2xl">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">Step {step} of 3</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted">Step {step} of {total}</p>
               <h1 className="text-xl font-bold text-teal">{TITLES[step]}</h1>
             </div>
           </div>
           <div className="mt-3 flex gap-1" aria-hidden>
-            {([1, 2, 3] as const).map((s) => (
+            {([1, 2, 3] as const).slice(0, total).map((s) => (
               <div key={s} className={cn('h-1.5 flex-1 rounded-full transition-colors', s <= step ? 'bg-teal' : 'bg-foreground/10')} />
             ))}
           </div>
@@ -181,6 +186,11 @@ export default function PrayerSetupFlow() {
                 Why times differ
               </Link>
             </p>
+            {!withAlerts && (
+              <p className="px-1 text-xs text-muted" data-alerts-in-app>
+                Alerts when each prayer starts are available in the app.
+              </p>
+            )}
           </>
         )}
 
@@ -223,7 +233,7 @@ export default function PrayerSetupFlow() {
               {/* Picking a place moves on by itself, so step 1 offers Continue only for a place already chosen */}
               {(step === 2 || (draft && !changingPlace)) && (
                 <Button className="flex-1" disabled={!draft} onClick={() => (step === 1 ? setStep(2) : confirm())} data-setup-next>
-                  {step === 2 ? 'Save' : 'Continue'}
+                  {step === 2 && !withAlerts ? 'Save' : 'Continue'}
                 </Button>
               )}
             </>

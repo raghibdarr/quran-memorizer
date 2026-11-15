@@ -275,7 +275,7 @@ test.describe('tasbih', () => {
     await page.getByRole('button', { name: 'Undo' }).click()
     await expect(counter(page)).toHaveAttribute('data-count', '2')
     await page.getByRole('button', { name: '33', exact: true }).click()
-    await expect(counter(page)).toHaveAccessibleName('2 of 33')
+    await expect(counter(page)).toHaveAccessibleName(/Count, 2 of 33/)
 
     await page.reload()
     await expect(counter(page)).toHaveAttribute('data-count', '2')

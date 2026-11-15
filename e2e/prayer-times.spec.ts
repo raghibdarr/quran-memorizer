@@ -198,10 +198,10 @@ test.describe('prayer setup', () => {
     await expect(page.getByText('Saudi Arabia’s official times use the Umm al-Qura method.')).toBeVisible()
     await expect(page.locator('[data-times-preview]')).toContainText('Maghrib')
 
+    // On the web alerts need the app: two steps, Save ends on the hub
+    await expect(page.getByText('Step 2 of 2')).toBeVisible()
+    await expect(page.locator('[data-setup-next]')).toHaveText('Save')
     await page.locator('[data-setup-next]').click()
-    await expect(page.getByRole('heading', { name: 'Tell me when each prayer starts?' })).toBeVisible()
-    await expect(page.locator('[data-setup-alerts]')).toHaveAttribute('href', '/prayer/alerts')
-    await page.getByRole('button', { name: 'Not now' }).click()
 
     await expect(page).toHaveURL(/\/prayer$/)
     await expect(page.locator('[data-prayer-row]')).toHaveCount(6)
@@ -231,7 +231,6 @@ test.describe('prayer setup', () => {
     await expect(page.locator('[data-method-label]')).toHaveText('Moonsighting Committee')
     await page.locator('[data-choice="asr-hanafi"]').click()
     await page.locator('[data-setup-next]').click()
-    await page.getByRole('button', { name: 'Not now' }).click()
 
     await expect(page.locator('[data-prayer-row]')).toHaveCount(6)
     const prayer = await page.evaluate(() => JSON.parse(localStorage.getItem('takrar-prayer') ?? 'null'))
