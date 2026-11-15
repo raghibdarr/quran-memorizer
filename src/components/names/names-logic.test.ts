@@ -180,3 +180,15 @@ describe('unseenNameCards', () => {
     expect(unseenNameCards({})).toBe(0)
   })
 })
+
+describe('plain romanisation for display', () => {
+  it('drops the doubled long vowels; the learner spelling stays for the sheet', async () => {
+    const { plainName } = await import('./names-logic')
+    expect(plainName('Allaah')).toBe('Allah')
+    expect(plainName('Ar-Rahmaan')).toBe('Ar-Rahman')
+    expect(plainName('Ar-Raheem')).toBe('Ar-Rahim')
+    expect(plainName('Al-Quddoos')).toBe('Al-Quddus')
+    expect(plainName("Al-'Aakhir")).toBe("Al-'Akhir")
+    expect(plainName('Al-Malik')).toBe('Al-Malik')
+  })
+})

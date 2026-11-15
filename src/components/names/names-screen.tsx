@@ -33,6 +33,7 @@ import {
   namesReadiness,
   namesStartedSince,
   nextNames,
+  plainName,
   sortNames,
   startedNameIds,
   unseenNameCards,
@@ -245,7 +246,7 @@ export default function NamesScreen() {
                 <div className="space-y-3">
                   <p className="text-sm text-foreground">
                     {startedCount === 0 ? 'Start with ' : 'Next: '}
-                    <span className="font-semibold">{next.map((n) => n.transliteration).join(', ')}</span>.
+                    <span className="font-semibold">{next.map((n) => plainName(n.transliteration)).join(', ')}</span>.
                   </p>
                   <button
                     type="button"
@@ -283,12 +284,12 @@ export default function NamesScreen() {
                         setOpenId(it.id);
                         setSheetOpen(true);
                       }}
-                      className="pressable relative flex h-full min-h-[6.5rem] w-full flex-col items-center justify-center gap-0.5 rounded-2xl border border-foreground/10 bg-card px-1.5 pb-3 pt-5 text-center hover:border-foreground/25"
+                      className="pressable relative flex h-full min-h-[7.25rem] w-full flex-col items-center justify-center gap-2 rounded-2xl border border-foreground/10 bg-card px-1.5 pb-3 pt-5 text-center hover:border-foreground/25"
                       data-name-tile={it.id}
                       data-state={state}
-                      aria-label={`${it.order}. ${it.transliteration}, ${it.meaning}. ${listOnly ? 'Found in the list only. ' : ''}${ITEM_STATE_LABEL[state]}`}
+                      aria-label={`${it.order}. ${plainName(it.transliteration)}, ${it.meaning}. ${listOnly ? 'Found in the list only. ' : ''}${ITEM_STATE_LABEL[state]}`}
                     >
-                      <span className="absolute left-2.5 top-2 text-[10px] font-medium leading-none tabular-nums text-muted/80">{it.order}</span>
+                      <span className="absolute left-2.5 top-2 text-[11px] font-medium leading-none tabular-nums text-muted">{it.order}</span>
                       <StateMark state={state} className="absolute right-2.5 top-2" />
                       {listOnly && (
                         <span className="absolute left-1/2 top-1.5 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold/15 px-1 text-[9px] font-semibold leading-[14px] text-gold-deep" data-list-only>
@@ -296,13 +297,13 @@ export default function NamesScreen() {
                         </span>
                       )}
                       <span
-                        className={cn('arabic-text flex h-[2.66rem] items-center whitespace-nowrap leading-[1.9]! text-teal', words === 2 ? 'text-[1.1rem]' : 'text-[1.4rem]')}
+                        className={cn('arabic-text flex h-[2.2em] items-center whitespace-nowrap leading-[2.2]! text-teal', words === 2 ? 'text-[1.1rem]' : 'text-[1.4rem]')}
                         lang="ar"
                         dir="rtl"
                       >
                         {it.arabic}
                       </span>
-                      <span className="line-clamp-2 w-full break-words text-[11px] font-semibold leading-tight text-foreground">{it.transliteration}</span>
+                      <span className="line-clamp-2 w-full break-words text-[11px] font-semibold leading-tight text-foreground">{plainName(it.transliteration)}</span>
                     </button>
                   </li>
                 );

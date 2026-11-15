@@ -126,6 +126,15 @@ export function depthChange(
   return { add, suspend, resume };
 }
 
+/**
+ * A Name as display text, in the app's plain romanisation (Allah, Ar-Rahman,
+ * Ar-Rahim): the deck's learner spelling marks long vowels by doubling them,
+ * which the detail sheet keeps as a pronunciation aid.
+ */
+export function plainName(transliteration: string): string {
+  return transliteration.replace(/aa/g, 'a').replace(/Aa/g, 'A').replace(/ee/g, 'i').replace(/oo/g, 'u');
+}
+
 export const EVIDENCE_LABEL: Record<NameItem['evidence']['kind'], { short: string; long: string }> = {
   'quran-name': { short: 'In the Quran', long: 'Named in the Quran' },
   'quran-derived': { short: 'From the Quran', long: 'Taken from a word the Quran uses of Allah' },

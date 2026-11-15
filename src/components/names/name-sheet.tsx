@@ -10,7 +10,7 @@ import { ITEM_STATE_LABEL, type ItemState } from '@/components/deen/item-state';
 import { ItemArabic } from '@/components/deen/cue-text';
 import { cn } from '@/lib/cn';
 import type { NameItem } from '@/types/deen';
-import { EVIDENCE_LABEL, readerHref, refLabel } from './names-logic';
+import { EVIDENCE_LABEL, plainName, readerHref, refLabel } from './names-logic';
 import { withHonorific } from './honorific';
 import { StateMark } from './state-mark';
 
@@ -35,7 +35,7 @@ interface NameSheetProps {
  */
 export function NameSheet({ item, state, open, onClose, onLearn, surahNames, onPrev, onNext }: NameSheetProps) {
   return (
-    <BottomSheet open={open && !!item} onClose={onClose} title={item ? `${item.transliteration}: ${item.meaning}` : 'Name'} titleHidden>
+    <BottomSheet open={open && !!item} onClose={onClose} title={item ? `${plainName(item.transliteration)}: ${item.meaning}` : 'Name'} titleHidden>
       {item && <NameDetails item={item} state={state} onLearn={() => onLearn(item)} surahNames={surahNames} onPrev={onPrev} onNext={onNext} />}
     </BottomSheet>
   );
@@ -103,7 +103,12 @@ function NameDetails({
           <StepButton dir="next" onClick={onNext} />
         </div>
         <ItemArabic text={item.arabic} className="text-[2.75rem] leading-[2.05]! text-teal" />
-        <p className="text-xl font-bold text-foreground">{item.transliteration}</p>
+        <p className="text-xl font-bold text-foreground">{plainName(item.transliteration)}</p>
+        {plainName(item.transliteration) !== item.transliteration && (
+          <p className="text-xs text-muted" data-pronunciation>
+            Say it: {item.transliteration}
+          </p>
+        )}
         <p className="mt-1 text-base font-medium text-foreground">{item.meaning}</p>
         <span aria-hidden className="mx-auto mt-4 block h-px w-10 bg-gold/50" />
       </div>
@@ -179,7 +184,7 @@ function NameDetails({
           )}
           <ReviewBadge review={item.review} />
         </div>
-        <ReportProblem itemId={`names99:${item.id}`} rev={item.rev} title={item.transliteration} />
+        <ReportProblem itemId={`names99:${item.id}`} rev={item.rev} title={plainName(item.transliteration)} />
       </div>
     </div>
   );

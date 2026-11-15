@@ -14,7 +14,7 @@ import { RichText } from './term';
 import { SCHOOL_NAME } from './positions-table';
 import { citationText } from './registry-names';
 import type { School } from '@/types/deen';
-import { EVIDENCE_LABEL } from '@/components/names/names-logic';
+import { EVIDENCE_LABEL, plainName } from '@/components/names/names-logic';
 
 export type CardContent =
   | { kind: 'term'; facet: string; term: GlossaryTerm; rev: number }
@@ -166,7 +166,7 @@ export function NameIntro({ item }: { item: NameItem }) {
   return (
     <div className="space-y-2" data-name-intro>
       <ItemArabic text={item.arabic} className="text-[2rem]" />
-      <p className="text-center text-sm font-semibold text-foreground">{item.transliteration}</p>
+      <p className="text-center text-sm font-semibold text-foreground">{plainName(item.transliteration)}</p>
       <p className="text-center text-base text-foreground">{item.meaning}</p>
       <p className="text-center text-xs text-muted">{EVIDENCE_LABEL[item.evidence.kind].long}</p>
     </div>
@@ -183,11 +183,11 @@ export function CardBack({ content }: { content: CardContent }) {
     return c.facet === 'en-ar' ? (
       <div className="space-y-1">
         <ItemArabic text={c.item.arabic} className="text-[2rem]" />
-        <p className="text-center text-sm font-semibold text-foreground">{c.item.transliteration}</p>
+        <p className="text-center text-sm font-semibold text-foreground">{plainName(c.item.transliteration)}</p>
       </div>
     ) : (
       <div className="space-y-1 text-center">
-        <p className="text-sm font-semibold text-foreground">{c.item.transliteration}</p>
+        <p className="text-sm font-semibold text-foreground">{plainName(c.item.transliteration)}</p>
         <p className="text-base text-foreground">{c.item.meaning}</p>
       </div>
     );
