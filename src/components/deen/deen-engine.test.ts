@@ -18,6 +18,7 @@ import { reviewStatusText } from './review-badge'
 import { correctionNote, whenLabel } from './session-player'
 import { resolveDepth } from './depth-choice'
 import { learnHref, sessionHref } from './links'
+import { groupProgress } from '@/components/essentials/learn-rows'
 import { UNREVIEWED_STATUS } from '@/lib/deen/flags'
 
 const NOW = new Date(2026, 10, 13, 10, 0).getTime()
@@ -289,6 +290,29 @@ describe('trust surfaces', () => {
   })
 })
 
+describe('Learn tab progress', () => {
+  const row = {
+    group: 'adhkar' as const,
+    decks: [{ id: 'adhkar-sleep-waking', items: ['ahyana', 'ayat-al-kursi', 'ikhlas'], quran: { 'ayat-al-kursi': '2:255', ikhlas: '112:1' } }],
+  }
+
+  it('a text is started once it has a card; look-alike ids do not count', () => {
+    expect(groupProgress(row, [], {})).toEqual({ started: 0, total: 3 })
+    expect(groupProgress(row, ['adhkar-sleep-waking:ahyana:meaning', 'adhkar-sleep-waking:ahyana:recall'], {})).toEqual({ started: 1, total: 3 })
+    expect(groupProgress(row, ['adhkar-sleep-waking:ahyana2:meaning', 'other:ahyana:meaning'], {})).toEqual({ started: 0, total: 3 })
+  })
+
+  it('a Quranic text is started once its first ayah is in the Quran review', () => {
+    expect(groupProgress(row, [], {}, new Set(['112:1']))).toEqual({ started: 1, total: 3 })
+    expect(groupProgress(row, ['adhkar-sleep-waking:ahyana:meaning'], {}, new Set(['112:1', '2:255', '2:1']))).toEqual({ started: 3, total: 3 })
+  })
+
+  it('a course counts finished lessons, not cards', () => {
+    const course = { group: 'course' as const, decks: [{ id: 'course-fasting', items: ['fasting-01', 'fasting-02'] }] }
+    expect(groupProgress(course, ['course-fasting:fasting-02:c1'], { 'fasting-01': 1 })).toEqual({ started: 1, total: 2 })
+  })
+})
+
 describe('/sources and /glossary data', () => {
   it('takes the "not included" section from a SELECTION.md', () => {
     const md = '# Selection\n\nWhy these.\n\n## Not included, and why\n\n- Item A: weak by all located.\n\n### Detail\nMore.\n\n## Order\n\nOther.'
@@ -306,6 +330,13 @@ describe('/sources and /glossary data', () => {
     expect(deckIdForSelection('nawawi40/SELECTION.md')).toBe('nawawi40')
     expect(deckIdForSelection('adhkar\\duas-daily\\SELECTION.md')).toBe('duas-daily')
     expect(deckIdForSelection('course/purification/SELECTION.md')).toBe('course-purification')
+    // With the registry to ask: a folder named after its deck less the group
+    const isDeck = (id: string) => ['adhkar-after-prayer', 'duas-daily', 'nawawi40', 'course-fasting'].includes(id)
+    expect(deckIdForSelection('adhkar/after-prayer/SELECTION.md', isDeck)).toBe('adhkar-after-prayer')
+    expect(deckIdForSelection('adhkar\\duas-daily\\SELECTION.md', isDeck)).toBe('duas-daily')
+    expect(deckIdForSelection('nawawi40/SELECTION.md', isDeck)).toBe('nawawi40')
+    expect(deckIdForSelection('course/fasting/SELECTION.md', isDeck)).toBe('course-fasting')
+    expect(deckIdForSelection('adhkar/unknown/SELECTION.md', isDeck)).toBe('unknown')
   })
 
   it('finds terms by any spelling', () => {

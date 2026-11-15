@@ -103,7 +103,13 @@ test.describe('deen engine', () => {
     await expect(page).toHaveURL(/\/review\/deen$/)
     for (let i = 0; i < 4; i++) {
       await expect(page.getByText(`Card ${i + 1} of 4`)).toBeVisible()
+      // No card gives its narrator away before it is turned over
+      const card = page.locator('[data-deen-card]')
+      await expect(card).toHaveAttribute('data-revealed', '0')
+      await expect(card).not.toContainText('A fixture narrator')
+      const isNarrator = (await card.getAttribute('data-deen-card'))?.endsWith(':narrator')
       await page.getByRole('button', { name: 'Show me' }).click()
+      if (isNarrator) await expect(card).toContainText('A fixture narrator')
       await page.getByRole('button', { name: 'Got it' }).click()
     }
     await expect(page.getByText('4 cards reviewed')).toBeVisible()
@@ -124,7 +130,7 @@ test.describe('deen engine', () => {
     await seed(page)
     await page.goto('/review/deen?learn=_fixture:03&depth=meaning')
     await expect(page.getByRole('heading', { name: 'Fixture: a graded item' })).toBeVisible()
-    await expect(page.locator('[data-grading="hasan"]')).toContainText('Fixture scholar')
+    await expect(page.locator('[data-grading="hasan"]')).toContainText(/fixture scholar/i)
     await page.getByRole('button', { name: /i’ve read it, test me/i }).click()
     await expect(page.getByText('What does it mean?', { exact: false })).toBeVisible()
     await page.getByRole('button', { name: 'Show me' }).click()
@@ -146,21 +152,31 @@ test.describe('deen engine', () => {
     await expect(page.getByText("This text isn't available")).toBeVisible()
   })
 
-  test('the Learn tab lists live decks only', async ({ page }) => {
-    // Without the fixture every registry deck is still { ready: false }: no rows
+  test('the Learn tab counts live decks only, and a text once it is started', async ({ page, context }) => {
+    // The hadith row's total without the fixture: the registry's live hadith decks (no row when none is ready)
     await page.addInitScript(() => localStorage.setItem('onboarding-complete', 'true'))
     await page.goto('/essentials')
     await expect(page.getByRole('heading', { name: 'Memorisation plans' })).toBeVisible()
-    await expect(page.locator('[data-learn-rows]')).toHaveCount(0)
+    const hadithRow = page.locator('[data-learn-row="hadith"]')
+    const live = await hadithRow.waitFor({ timeout: 4000 }).then(() => true, () => false)
+    const before = live ? Number((await hadithRow.innerText()).match(/0\/(\d+)/)?.[1] ?? NaN) : 0
+    expect(Number.isNaN(before)).toBe(false)
     await page.close()
-  })
 
-  test('the Learn tab shows a ready deck with its progress', async ({ page }) => {
-    await seed(page)
-    await page.goto('/essentials')
-    const row = page.locator('[data-learn-row="hadith"]')
-    await expect(row).toBeVisible()
-    await expect(row).toContainText('0/3')
+    // With the fixture deck live, its three items join the row
+    const withFixture = await context.newPage()
+    await seed(withFixture)
+    await withFixture.goto('/essentials')
+    const row = withFixture.locator('[data-learn-row="hadith"]')
+    await expect(row).toContainText(`0/${before + 3}`)
+
+    // A card for one item makes it started
+    await withFixture.evaluate(() => {
+      const card = { deck: '_fixture', itemRev: 1, addedAt: Date.now(), easeFactor: 2.5, interval: 0, repetitions: 0, nextReview: 0, lastReview: 0, lastQuality: 0 }
+      localStorage.setItem('quran-deen', JSON.stringify({ state: { cards: { '_fixture:01:meaning': card } }, version: 1 }))
+    })
+    await withFixture.reload()
+    await expect(row).toContainText(`1/${before + 3}`)
   })
 
   test('/glossary searches and opens a term; /sources shows the method', async ({ page }) => {
@@ -171,8 +187,14 @@ test.describe('deen engine', () => {
     await expect(page.getByText('Weak: the grading', { exact: false })).toBeVisible()
     await expect(page.getByRole('button', { name: 'Learn this term' })).toBeVisible()
 
+    // A link to one term opens it
+    await page.goto('/glossary#wudu')
+    await expect(page.locator('[data-term-row="wudu"] button').first()).toHaveAttribute('aria-expanded', 'true')
+
     await page.goto('/sources#method')
     await expect(page.getByRole('heading', { name: 'How each text is checked' })).toBeVisible()
+    // "Not included" sections are headed by their deck's title, never a folder name
+    for (const title of await page.locator('[data-not-included] h3').allInnerTexts()) expect(title).not.toMatch(/^[a-z0-9-]+$/)
     await expect(page.locator('[data-reviewers-empty]')).toHaveText('No scholar has reviewed this yet. We will name them here when one does.')
     await expect(page.getByRole('link', { name: 'Notices and licences' })).toHaveAttribute('href', '/licenses.txt')
   })

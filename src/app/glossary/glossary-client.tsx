@@ -25,16 +25,23 @@ export default function GlossaryScreen() {
   // /glossary#wudu: open that term once the list is in
   useEffect(() => {
     if (!terms) return;
-    let id = window.location.hash.slice(1);
-    try {
-      id = decodeURIComponent(id);
-    } catch {
-      // A malformed hash is just not a term
-    }
-    if (!id || !terms.has(id)) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- reads the URL hash after load
-    setOpen(id);
-    requestAnimationFrame(() => document.getElementById(`term-${id}`)?.scrollIntoView({ block: 'start' }));
+    const openFromHash = () => {
+      let id = window.location.hash.slice(1);
+      try {
+        id = decodeURIComponent(id);
+      } catch {
+        // A malformed hash is just not a term
+      }
+      if (!id || !terms.has(id)) return;
+      // A search that hides the term would leave nothing to open
+      setQuery('');
+      setOpen(id);
+      requestAnimationFrame(() => document.getElementById(`term-${id}`)?.scrollIntoView({ block: 'start' }));
+    };
+    openFromHash();
+    // Also when the hash changes while the page is open (a link to another term)
+    window.addEventListener('hashchange', openFromHash);
+    return () => window.removeEventListener('hashchange', openFromHash);
   }, [terms]);
 
   return (
