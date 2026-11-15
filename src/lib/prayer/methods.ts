@@ -4,6 +4,7 @@
 // methods without loading the engine.
 
 import type { MethodId } from '@/types/prayer';
+export { isMethodId } from '@/types/prayer';
 
 export interface MethodInfo {
   id: MethodId;
@@ -35,10 +36,6 @@ export const METHODS: readonly MethodInfo[] = [
 ];
 
 const BY_ID = new Map(METHODS.map((m) => [m.id, m]));
-
-export function isMethodId(id: unknown): id is MethodId {
-  return typeof id === 'string' && BY_ID.has(id as MethodId);
-}
 
 export function methodInfo(id: MethodId): MethodInfo {
   return BY_ID.get(id) ?? BY_ID.get('MuslimWorldLeague')!;

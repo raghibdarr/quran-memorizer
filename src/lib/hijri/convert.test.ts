@@ -116,3 +116,11 @@ describe('tabular fallback', () => {
     }), { numRuns: 200 })
   })
 })
+
+describe('civil years 0 to 99', () => {
+  it('reads year 1 as year 1, not 1901', () => {
+    const h = toHijri('0001-01-01', 0)
+    expect(h.year).toBeLessThan(0)
+    expect(toHijri('0700-01-01', 0).year).toBeGreaterThan(70)
+  })
+})

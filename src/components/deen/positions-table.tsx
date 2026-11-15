@@ -39,7 +39,7 @@ function PositionRow({ position, mine }: { position: Position; mine: boolean }) 
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
-            className="text-left underline decoration-foreground/20 underline-offset-2 hover:text-foreground"
+            className="-my-3 py-3 text-left underline decoration-foreground/20 underline-offset-2 hover:text-foreground"
           >
             {source}
             <span className="sr-only">{open ? ' (hide the Arabic)' : ' (show the Arabic)'}</span>

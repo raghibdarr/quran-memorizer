@@ -528,7 +528,8 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
       for (const t of glossary.values()) {
         for (const form of new Set([t.translit, t.id])) {
           if (form.length < 4) continue;
-          const re = new RegExp(`(^|[^\\p{L}'’])${form.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|[^\\p{L}'’])`, 'iu');
+          // "al-" before the form makes it a person's name (al-Hasan ibn Ali), not the term
+          const re = new RegExp(`(^|[^\\p{L}'’])(?<!al-)${form.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|[^\\p{L}'’])`, 'iu');
           if (re.test(bare)) { W('G8', id, `${label}: "${form}" appears unmarked; write [[${t.id}]] or plain English`); break; }
         }
       }
@@ -592,8 +593,20 @@ export function readDeck(root, id) {
   const lock = existsSync(lockPath) ? readJson(lockPath) : { ids: {} };
   const unitPath = join(dir, 'unit.json');
   const unit = spec.kind === 'course' && existsSync(unitPath) ? readJson(unitPath) : undefined;
-  return { deck: id, kind: spec.kind, pkg: spec.pkg, dir, lockPath, items, lock, unit };
+  // A course unit's own evidence hadith (content/deen/course/<unit>/evidence/*.json), cited by
+  // lessons as { item: "<deck>-evidence:<id>" } and emitted as `evidence` beside the lessons
+  const evidenceDir = join(dir, 'evidence');
+  const evidence = spec.kind === 'course' && existsSync(evidenceDir)
+    ? readdirSync(evidenceDir)
+      .filter((f) => f.endsWith('.json'))
+      .sort()
+      .map((f) => ({ file: f.replace(/.json$/, ''), data: readJson(join(evidenceDir, f)) }))
+    : [];
+  return { deck: id, kind: spec.kind, pkg: spec.pkg, dir, lockPath, items, lock, unit, evidence };
 }
+
+/** The pseudo-deck id a course unit's evidence items are cited under */
+export const evidenceDeckId = (id) => `${id}-evidence`;
 
 /** The ids every authored deck holds, for cross-deck evidence checks */
 function knownItemIds(root) {
@@ -604,6 +617,10 @@ function knownItemIds(root) {
     if (!d) continue;
     decks.add(id);
     for (const { data } of d.items) if (data?.id) items.add(`${id}:${data.id}`);
+    if (d.evidence?.length) {
+      decks.add(evidenceDeckId(id));
+      for (const { data } of d.evidence) if (data?.id && EMITTABLE.has(data?.review?.status)) items.add(`${evidenceDeckId(id)}:${data.id}`);
+    }
   }
   return { items, decks };
 }
@@ -637,20 +654,32 @@ export function checkAll(root = ROOT, { decks, includeFixture = false } = {}) {
     errors.push(...r.errors);
     warnings.push(...r.warnings);
     if (r.lockChanged) errors.push({ code: 'G14', deck: id, id: '-', msg: 'ids.lock.json is out of date: run node scripts/build-deen.mjs --deck ' + id });
-    results[id] = { ...r, spec: d };
+    // Evidence hadith get every hadith guardrail; they make no cards, so they have no ids lock
+    let evidence = [];
+    if (d.evidence?.length) {
+      const ev = validateDeck({ deck: evidenceDeckId(id), kind: 'hadith', items: d.evidence, lock: { ids: {} } }, ctx);
+      errors.push(...ev.errors);
+      warnings.push(...ev.warnings);
+      r.errors.push(...ev.errors);
+      evidence = ev.emitted;
+    }
+    results[id] = { ...r, evidence, spec: d };
   }
   return { errors, warnings, results, ctx };
 }
 
 // ---------- emitting ----------
 
-function emittedDeckJson(id, kind, items) {
-  const clean = items.map((it) => {
+function emittedDeckJson(id, kind, items, evidence = []) {
+  const strip = (it) => {
     const { review, ...rest } = it;
     // The review log is authoring history; the app needs the status (and named reviewers)
     return { ...rest, review: { status: review.status, ...(review.by ? { by: review.by } : {}), ...(review.date ? { date: review.date } : {}) } };
-  });
-  return { deck: id, kind, hash: sha256(canonical(clean)).slice(0, 16), items: clean };
+  };
+  const clean = items.map(strip);
+  if (!evidence.length) return { deck: id, kind, hash: sha256(canonical(clean)).slice(0, 16), items: clean };
+  const ev = evidence.map(strip);
+  return { deck: id, kind, hash: sha256(canonical({ items: clean, evidence: ev })).slice(0, 16), items: clean, evidence: ev };
 }
 
 /**
@@ -671,7 +700,7 @@ export function build(root = ROOT, { decks, outDir, includeFixture = false, writ
     if (r.errors.length) continue;
     mkdirSync(out, { recursive: true });
     const file = join(out, `${id}.json`);
-    writeFileSync(file, JSON.stringify(emittedDeckJson(id, r.spec.kind, r.emitted), null, 1) + '\n');
+    writeFileSync(file, JSON.stringify(emittedDeckJson(id, r.spec.kind, r.emitted, r.evidence), null, 1) + '\n');
     written.push(file);
     if (writeLock && r.lockChanged) writeFileSync(r.spec.lockPath, JSON.stringify(r.lock, null, 2) + '\n');
   }
@@ -700,7 +729,7 @@ function report(res) {
   if (warn.length) console.log(`Warnings (${warn.length}):\n${byCode(warn)}`);
   if (drafts.length) console.log(`Not emitted (draft): ${drafts.length}`);
   if (res.errors.length) console.error(`Errors (${res.errors.length}):\n${byCode(res.errors)}`);
-  const decks = Object.entries(res.results).map(([id, r]) => `${id}: ${r.emitted.length} shipped of ${r.spec.items.length}`);
+  const decks = Object.entries(res.results).map(([id, r]) => `${id}: ${r.emitted.length} shipped of ${r.spec.items.length}${r.spec.evidence?.length ? ` (+${r.evidence.length} of ${r.spec.evidence.length} evidence hadith)` : ''}`);
   console.log(decks.length ? decks.join('\n') : 'No authored decks yet.');
 }
 

@@ -44,7 +44,18 @@ Only openly licensed sources or our own work ship. Nothing comes from Quran.com,
 |---|---|---|---|
 | `adhan` 4.4.6 (npm, github.com/batoulapps/adhan-js) | prayer times and the qibla bearing, on the device | MIT | `licenses.d/10-foundations.txt` |
 | `@capacitor/geolocation` 8.2.4 (npm, github.com/ionic-team/capacitor-geolocation) | one coarse location fix in the apps, rounded, kept on the device | MIT | `licenses.d/10-foundations.txt` |
+| GeoNames cities15000 (download.geonames.org, retrieved 2026-11-13; `geonames/SOURCE.md`) | city search, the place label after a location fix, the place's time zone (`public/data/cities.json`) | CC BY 4.0 | `licenses.d/20-geonames.txt` |
+| Prayer-alert chime (`chime/SOURCE.md`, made by `scripts/build-chime.mjs`) | the Android `prayer-chime-v1` alert sound | own work | `licenses.d/25-chime.txt` |
+| World Magnetic Model WMM2025 (NOAA NCEI and British Geological Survey; coefficients pinned in `wmm/`, see its SOURCE.md) | correcting the phone's magnetic compass heading to true north on the qibla screen, on the device | public domain (US government work); credited | `licenses.d/30-wmm.txt` |
+| Hijri occasions (`src/data/hijri-events.json`; check record `hijri-events/VERIFICATION.md`) | the expected dates and one-line descriptions on `/calendar` and `/ramadan` | own work | `licenses.d/40-hijri-ramadan.txt` |
+| OpenStreetMap mosques, one extract 2026-11-14 (`osm-mosques/SOURCE.md`, made by `scripts/build-mosques.mjs`) | the per-country lists on `/mosques` (`public/data/mosques/`) | ODbL 1.0, attributed on screen | `licenses.d/40-osm.txt` |
+| al-Nawawi's Forty, Arabic collated per item (`hadith-arabic/SOURCE.md`) | the hadith deck (`content/deen/nawawi40`) | public-domain text; our vowelling and translation | `licenses.d/50-hadith.txt` |
+| Adhkar and duas, Arabic collated per item (`adhkar-arabic/SOURCE.md`) | the five adhkar and dua decks (`content/deen/adhkar`) | public-domain text; our vowelling and translation | `licenses.d/55-adhkar.txt` |
+| Names of Allah (`content/deen/names99`, check record `content/deen/names99/AUDIT.md`) | the Names deck: meanings, explanations, transliterations | own work (Arabic of the Names from al-Tirmidhi 3507 and the Quran) | `licenses.d/60-names.txt` |
+| Foundations course units (`content/deen/course/purification`, `content/deen/course/fasting`, with each unit's evidence hadith) | the course lessons and cards | own work, quoting public-domain primers | `licenses.d/65-course-purification.txt`, `licenses.d/66-course-fasting.txt` |
 
 The Hijri calendar uses the platform's `Intl` Umm al-Qura calendar with our own tabular
-fallback (`src/lib/hijri/convert.ts`); the method-by-country table, glossary and all English
-are our own work.
+fallback (`src/lib/hijri/convert.ts`); the method-by-country table, glossary, zakat notes
+(`src/data/zakat-notes.json`) and all English are our own work. The GeoNames zip is archived
+outside the repo at `Downloads/takrar-sources/geonames/cities15000.zip` (sha256 in its SOURCE.md).
+The content audit record is `content/deen/AUDIT-2026-11.md`; corrections are in `content/deen/ERRATA.md`.

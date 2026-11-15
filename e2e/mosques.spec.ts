@@ -46,7 +46,7 @@ test.describe('mosques', () => {
 
     // Sorted nearest first. Inside the place's rounding a row says "Under 1 mi" with no
     // direction; further out, a distance and a compass point. (The UK reads miles.)
-    const lines = (await rows.locator('[data-mosque-distance] > span[aria-hidden]').allInnerTexts()).map((t) => t.trim())
+    const lines = (await rows.locator('[data-mosque-distance] > span[aria-hidden]:not(:has(svg))').allInnerTexts()).map((t) => t.trim())
     // East London is not short of mosques: the nearest is under a mile away
     expect(lines[0]).toBe('Under 1 mi')
     for (const t of lines) expect(t).toMatch(/^(Under 1 mi|\d+(\.\d)? mi · (N|NE|E|SE|S|SW|W|NW))$/)

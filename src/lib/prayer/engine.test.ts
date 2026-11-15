@@ -138,7 +138,12 @@ describe('computeDay: properties', () => {
         methodArb,
         (lat, lng, iso, method) => {
           const d = computeDay({ lat, lng, tz: 'UTC' }, iso, settings(method))
-          for (const n of TIME_NAMES) expect(Number.isFinite(d[n])).toBe(true)
+          for (const n of TIME_NAMES) {
+            // Within a degree of the polar circle the sun can stay so low that adhan puts
+            // Asr before Dhuhr; the engine then gives no Asr rather than a misplaced one
+            if (n === 'asr' && Math.abs(lat) > 65 && d.asr === null) continue
+            expect(Number.isFinite(d[n])).toBe(true)
+          }
         },
       ),
       { numRuns: 400 },
@@ -277,5 +282,33 @@ describe('qibla, formatting', () => {
     expect(formatUntil(12 * 60_000 - 5, 0)).toBe('in 12 min')
     expect(formatUntil(120 * 60_000, 0)).toBe('in 2 h')
     expect(formatUntil(0, 10)).toBe('now')
+  })
+})
+
+describe('near the polar circles: no time the engine cannot place', () => {
+  const tromso = { lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }
+  const longyearbyen = { lat: 78.22, lng: 15.65, tz: 'Arctic/Longyearbyen' }
+
+  it('Tromsø in polar night: Asr is never before Dhuhr', () => {
+    const day = computeDay(tromso, '2026-12-21', settings('MuslimWorldLeague'))
+    expect(day.dhuhr).not.toBeNull()
+    if (day.asr !== null) {
+      expect(day.asr).toBeGreaterThan(day.dhuhr!)
+      if (day.maghrib !== null) expect(day.asr).toBeLessThan(day.maghrib)
+    }
+  })
+
+  it('Longyearbyen: every time it gives sits within a day of its own noon, and Asr between Dhuhr and Maghrib', () => {
+    for (const iso of ['2027-02-18', '2026-10-20', '2026-11-01', '2027-01-15']) {
+      const day = computeDay(longyearbyen, iso, settings('MuslimWorldLeague'))
+      for (const name of TIME_NAMES) {
+        const t = day[name]
+        if (t !== null && day.dhuhr !== null) expect(Math.abs(t - day.dhuhr)).toBeLessThanOrEqual(20 * 3_600_000)
+      }
+      if (day.asr !== null) {
+        expect(day.asr).toBeGreaterThanOrEqual(day.dhuhr! - 5 * 60_000)
+        if (day.maghrib !== null) expect(day.asr).toBeLessThanOrEqual(day.maghrib + 5 * 60_000)
+      }
+    }
   })
 })

@@ -71,6 +71,8 @@ export function planAdhkarReminders(r: AdhkarReminders): LocalNotificationSchema
       body,
       // Repeats every day at this time; inexact is fine for a nudge
       schedule: { on: { hour: Number(h), minute: Number(m) }, allowWhileIdle: true },
+      // Android: never open the exact-alarm settings screen for a daily nudge
+      isExactNotification: false,
       channelId: ADHKAR_CHANNEL_ID,
       smallIcon: 'ic_stat_takrar',
       iconColor: '#1B4D5C',

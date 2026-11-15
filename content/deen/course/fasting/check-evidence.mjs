@@ -4,9 +4,9 @@
 //
 //   node content/deen/course/fasting/check-evidence.mjs
 //
-// scripts/build-deen.mjs reads a course unit's lessons/ only, so until the build learns
-// about evidence/ (see HANDOFF.md) this script is how these items are checked. Lessons
-// cite them as { "item": "course-fasting-evidence:<id>" }.
+// scripts/build-deen.mjs now validates and emits these too (as the deck file's `evidence`);
+// this script stays as a quick standalone check. Lessons cite them as
+// { "item": "course-fasting-evidence:<id>" }.
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';

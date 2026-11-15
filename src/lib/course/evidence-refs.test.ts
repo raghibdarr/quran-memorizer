@@ -8,15 +8,8 @@ import { evidenceHostDeck, parseItemRef } from './lesson';
 
 // Every hadith a shipped lesson cites must open to its text and citation. A ref
 // that resolves to nothing would show the learner a source they can't check, so
-// it fails here. The one exception is the list below, which waits on the build
-// emitting a unit's own evidence (HANDOFF course-ui 1 / course-fasting 1): the
-// lesson shows those as a plain "reference to come" note, never as a chip. The
-// list may only shrink.
-const AWAITING_BUILD = new Set([
-  'course-fasting-evidence:forgetful-eater',
-  'course-fasting-evidence:fasting-is-a-shield',
-  'course-fasting-evidence:iftar-dhahaba-al-zama',
-]);
+// it fails here. A unit's own evidence hadith resolve through the `evidence`
+// array scripts/build-deen.mjs emits beside the unit's lessons.
 
 const dataDir = join(process.cwd(), 'src', 'data', 'deen');
 const readDeck = (id: string): (EmittedDeck & { evidence?: TextItem[] }) | null => {
@@ -41,13 +34,14 @@ describe('course evidence refs', () => {
     (readDeck(id)?.items ?? []).filter(isLesson).flatMap((l) => l.claims.flatMap((c) => c.evidence.flatMap((e) => ('item' in e ? [e.item] : [])))),
   );
 
-  it('every hadith a lesson cites opens, apart from the ones waiting on the build', () => {
-    const missing = [...new Set(refs.filter((r) => !resolves(r)))];
-    expect(missing.filter((r) => !AWAITING_BUILD.has(r))).toEqual([]);
+  it('every hadith a lesson cites opens', () => {
+    expect(refs.length).toBeGreaterThan(0);
+    expect([...new Set(refs.filter((r) => !resolves(r)))]).toEqual([]);
   });
 
-  it('the waiting list only holds refs that are still waiting', () => {
-    // Once the build emits one, take it off the list so the check above covers it
-    for (const r of AWAITING_BUILD) expect(resolves(r), `${r} now resolves: remove it from AWAITING_BUILD`).toBe(false);
+  it("a unit's own evidence hadith are emitted beside its lessons", () => {
+    const ev = readDeck('course-fasting')?.evidence ?? [];
+    expect(ev.map((i) => i.id).sort()).toEqual(['fasting-is-a-shield', 'forgetful-eater', 'iftar-dhahaba-al-zama']);
+    expect(refs.filter((r) => r.startsWith('course-fasting-evidence:')).length).toBe(3);
   });
 });

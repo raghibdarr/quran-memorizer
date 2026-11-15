@@ -75,6 +75,8 @@ export interface TakrarWidgetData {
   khatm: string;
   /** v2: the next days' prayers in time order (from prayerWidgetPayload); absent = no place set */
   prayers?: { name: string; at: number }[];
+  /** IANA zone of the place, so the widget shows times as the app does */
+  prayerTz?: string;
 }
 
 export interface TakrarWidgetPlugin {

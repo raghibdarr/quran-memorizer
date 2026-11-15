@@ -14,6 +14,7 @@ import AppBadgeSync from '@/components/app-badge-sync';
 import ReminderSync from '@/components/reminder-sync';
 import WidgetSync from '@/components/widget-sync';
 import { PrayerSync } from '@/components/prayer-sync';
+import { EssentialsCarryOver } from '@/components/essentials-carry-over';
 import EdgeSwipeBack from '@/components/edge-swipe-back';
 import TajweedExplainer from '@/components/tajweed-explainer';
 import { useNavHistoryTracking } from '@/hooks/use-app-back';
@@ -29,6 +30,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   useNavHistoryTracking();
 
   useEffect(() => {
+    // One flip after hydration, so client-only UI waits for the first client render
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
 
     // Apply dark mode — check localStorage first, fallback to system preference
@@ -148,6 +151,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ReminderSync />
       <WidgetSync />
       <PrayerSync />
+      <EssentialsCarryOver />
       <EdgeSwipeBack />
       <TajweedExplainer />
       {children}

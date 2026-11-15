@@ -9,11 +9,15 @@ interface CardProps {
   /** Adds press physics — use when the card (or its wrapper link) is tappable. */
   pressable?: boolean;
   onClick?: () => void;
+  /** data-* hooks pass through to the element (tests, e2e) */
+  [data: `data-${string}`]: string | boolean | undefined;
 }
 
-export default function Card({ children, className, variant = 'quiet', pressable, onClick }: CardProps) {
+export default function Card({ children, className, variant = 'quiet', pressable, onClick, ...rest }: CardProps) {
+  const dataProps = Object.fromEntries(Object.entries(rest).filter(([k]) => k.startsWith('data-')));
   return (
     <div
+      {...dataProps}
       className={cn(
         'rounded-2xl bg-card p-5',
         variant === 'quiet' && 'border border-foreground/10',

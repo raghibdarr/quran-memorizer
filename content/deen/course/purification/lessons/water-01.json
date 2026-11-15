@@ -2,7 +2,7 @@
   "id": "water-01",
   "unit": "purification",
   "order": 1,
-  "rev": 2,
+  "rev": 3,
   "title": "Purity and water",
   "intro": "Before standing to pray, a Muslim gets ready, and the Quran ties that readiness to water. This lesson sets out the two kinds of purity the scholars speak of, the three ways of reaching it, and which water does the job.",
   "claims": [
@@ -243,9 +243,9 @@
     {
       "q": "The two kinds of purity the sacred law speaks of are purity from…",
       "options": [
-        "Hunger, and thirst",
-        "Travel, and illness",
-        "A ritual state, and physical impurity"
+        "Hunger and thirst",
+        "Travel and illness",
+        "A ritual state and physical impurity"
       ],
       "answer": 2,
       "claim": "c1"
@@ -256,7 +256,8 @@
     "date": "2026-11-14",
     "log": [
       "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
-      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log",
+      "2026-11-15 integration: stray commas removed from the options of check question 3 (rev 3); no claim changed"
     ]
   }
 }

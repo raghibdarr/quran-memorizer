@@ -52,6 +52,9 @@ export async function applyReminders(reminders: Reminder[]): Promise<void> {
       body: r.body,
       // Inexact is fine for a nudge, and avoids Android's exact-alarm permission
       schedule: { at: new Date(r.at), allowWhileIdle: true },
+      // The plugin defaults to exact on Android 12+, which opens the "Alarms and reminders"
+      // screen on every schedule() when the grant is missing; a daily nudge doesn't need the minute
+      isExactNotification: false,
       channelId: CHANNEL_ID,
       smallIcon: 'ic_stat_takrar',
       iconColor: '#1B4D5C',

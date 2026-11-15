@@ -49,6 +49,16 @@ export type MethodId =
   | 'Turkey'
   | 'custom';
 
+/** Every MethodId, for validating stored values without loading the method table (keeps Home light) */
+export const METHOD_IDS: readonly MethodId[] = [
+  'MuslimWorldLeague', 'Egyptian', 'Karachi', 'UmmAlQura', 'Dubai', 'MoonsightingCommittee',
+  'NorthAmerica', 'Kuwait', 'Qatar', 'Singapore', 'Tehran', 'Turkey', 'custom',
+];
+
+export function isMethodId(id: unknown): id is MethodId {
+  return typeof id === 'string' && (METHOD_IDS as readonly string[]).includes(id);
+}
+
 /** Asr position: standard (Shafi'i, Maliki, Hanbali) or Hanafi */
 export type AsrMadhab = 'standard' | 'hanafi';
 

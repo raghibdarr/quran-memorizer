@@ -1,521 +1,161 @@
-# HANDOFF: android-native
+# HANDOFF: all-in-one, after integration (2026-11-15)
 
-1. **Push for the compile check (spec 9.6).** Push this branch as `mobile/allinone-native`
-   (`git push origin aio/android-native:mobile/allinone-native`) to trigger `.github/workflows/android.yml`
-   (assembleDebug). Merge only after that run is green. Nothing here was compiled locally (no JDK or Android SDK).
-2. **Optional, `src/lib/native-plugins.ts` (foundations-owned):** add `prayerTz?: string` to
-   `TakrarWidgetData` with the comment "IANA zone of the place, so the widget shows times as the app
-   does". `widget-sync.tsx` already sends it through a local `WidgetPayload` type, so nothing breaks without it.
-3. **Integration:** regenerate `public/licenses.txt` (picks up `data-sources/licenses.d/25-chime.txt`) and run
-   `npx cap sync` (the new raw resource and the AdhanHealth plugin need no plugin-list change: they are app-local).
-4. **Local builds in a worktree:** Turbopack refuses the `node_modules` junction ("points out of the filesystem root");
-   `npx next build --webpack && node scripts/flatten-segments.mjs` works.
+One list, replacing the per-package notes the union merge left behind. Each package's own
+history is in git (`git log -- HANDOFF.md`) and in its branch `aio/<package>`. The content
+record is `content/deen/AUDIT-2026-11.md`; corrections are in `content/deen/ERRATA.md`.
 
-# HANDOFF: course-fasting
+## 1. Owner: decisions
 
-Needs in shared files (spec section 9, rule 4). The package builds and passes without them.
+1. **Exact alarms (spec 12.1).** android-native declares `SCHEDULE_EXACT_ALARM` (one manifest
+   line). Confirm against Play policy at submission. Without the grant, prayer alerts are
+   scheduled inexactly and the alerts screen says they "may arrive several minutes late".
+   Hifz reminders, adhkar reminders and the hawl reminder now ask for inexact alarms
+   explicitly, so none of them opens the "Alarms and reminders" screen by itself.
+2. **Mosques, Indonesia.** 193 country packs, 216,523 mosques, 7.80 MB. Indonesia (74,436
+   mosques, 2.46 MB) does not fit the 8 MB budget and shows "We don't have a mosque list for
+   Indonesia yet". Raise the budget (`node scripts/build-mosques.mjs --budget 10.5`) or accept.
+   Also: packs are filed under the place picker's country codes (Crimea under UA, Western Sahara
+   under EH; table `PLACE_PICKER_CODES` in `scripts/build-mosques.mjs`), a border town sees only
+   its own country's list, small lists load without a confirm step, and on desktop browsers
+   without a `geo:` handler "Open in Maps" opens openstreetmap.org (`mapsHref` in
+   `src/lib/mosques/links.ts` if no web link-out is wanted).
+3. **Zakat basis.** `nisabBasis` defaults to silver (foundations contract); both bases are always
+   shown side by side. No preselected basis needs `nisabBasis: NisabBasis | null` in the store.
+4. **Zakat hawl reminder re-arm.** After it fires, next year's reminder is set the next time
+   `/zakat` opens. For a re-arm without opening the screen, mount `syncHawlReminder`
+   (`src/lib/zakat/reminder.ts`) in `providers.tsx`.
+5. **GeoNames zip.** Archived outside the repo at `Downloads/takrar-sources/geonames/cities15000.zip`
+   (sha256 in `data-sources/geonames/SOURCE.md`); commit the 3.3 MB zip instead if preferred.
+6. **Opt-in sync** of prayer settings and worship logs stays deferred (spec 11): device-only plus
+   backup is the default.
+7. **Content for a scholar** (nothing is scholar-reviewed; the app says so):
+   - The 12 open doubts in `content/deen/AUDIT-2026-11.md`, first.
+   - The course units follow one short primer per school, which is not always that school's
+     relied-upon view; each school's column wants a reviewer from that school.
+     `SHOW_UNREVIEWED_FIQH` in `src/lib/deen/flags.ts` holds the course back if wanted.
+   - Zakat notes `nisab-grams`, `basis` and `combining` stay draft; ten zakat quotes rest on the
+     first verifier's pass (Minhaj al-Talibin 4, Kifayat al-Akhyar 3, al-Muhalla 2, Fath al-Mu'in 1).
+   - `duas-daily:istikhara` keeps the narrator's aside inside the memorised Arabic (faithful to
+     al-Bukhari 6382); the sleep set counts each of the three surahs three times in a row, where
+     al-Bukhari 5017 describes the three read together three times over;
+     `adhkar-sleep-waking:ayat-al-kursi` has no grading line (al-Bukhari 2311 is given without his
+     own full chain); `duas-daily:toilet-leave` stays "Your forgiveness." (length rule G15).
+   - Unit Fasting's three evidence hadith (al-Bukhari 1894, 1933; Abu Dawud 2357) were
+     source-checked by the course-fasting verifier but not re-audited in the wave-3 audit (they
+     only shipped once integration taught the build to emit them). The iftar dua also exists as
+     the audited `duas-daily:iftar`, with slightly different English ("moist / assured" against
+     "moistened / certain"); pointing lesson 6 at `duas-daily:iftar` needs the claim and card
+     wording aligned and a `rev` raise.
+   - Essentials ayah translations still carry footnote markers such as "[98]"; the old
+     collection titles in `src/data/essentials.json` are Title Case with ampersands.
+8. **Bundle baseline.** `scripts/bundle-baseline.json` was measured with webpack on a461010.
+   Re-record it (`node scripts/check-bundle.mjs --write-baseline`) once this release ships.
 
-## 1. Evidence hadith under `content/deen/course/<unit>/evidence/` are not built or emitted
+## 2. Owner: device checks (never claimed as verified)
 
-- **What**: `scripts/build-deen.mjs` reads a course unit's `lessons/` only. The brief for the
-  course content packages says to put a hadith that is not yet a corpus item under
-  `content/deen/course/<unit>/evidence/` as a TextItem. Unit Fasting has three:
-  `iftar-dhahaba-al-zama` (Abu Dawud 2357, with 2358 as a variant), `forgetful-eater`
-  (al-Bukhari 1933) and `fasting-is-a-shield` (al-Bukhari 1894).
-- **Where**: `scripts/build-deen.mjs` (`readDeck`, `knownItemIds`, `build`), and wherever the
-  course lesson screen resolves `{ item: "<deck>:<itemId>" }` evidence
-  (`src/components/course`, owned by course-ui).
-- **Why**: lessons cite them as `{ "item": "course-fasting-evidence:<id>" }`. The build accepts
-  that today only because `course-fasting-evidence` is not a registered deck, so the reference
-  is not resolved and the items never reach `src/data/deen`. The lesson screen therefore
-  has nothing to open for those three evidence chips.
-- **Suggested change**: for a course deck, also read `evidence/*.json`, validate them as kind
-  `hadith` (the package's `content/deen/course/fasting/check-evidence.mjs` already does this
-  with `validateDeck` and passes), register `<deck>-evidence` ids in `knownItemIds`, and emit
-  them, either as `src/data/deen/<deck>-evidence.json` or as an `evidence` array beside
-  `items` in the course deck file. Then course-ui can show the citation, grading and Arabic.
-- **Until then**: `guarding-the-tongue` and `iftar-dua` (lesson 6) state the hadith in the
-  claim's own words with its attribution. `forgetting` (lesson 3) does not, to keep a claim
-  about a difference neutral, so its evidence chip is the only place that hadith appears.
+- **Android compile**: android-native was not compiled locally (no JDK or SDK). Push
+  `mobile/allinone-native` (or any `mobile/**` branch from `allinone`) and wait for a green
+  `.github/workflows/android.yml` run before releasing.
+- **Prayer alerts**: delivery at the minute with and without the exact-alarm grant, the
+  `prayer-chime-v1` chime, the silent channel, the "Open Takrar to keep prayer alerts coming" tail,
+  the test alert, and after a reboot (the plugin re-shows alerts missed while the phone was off,
+  15 s after boot). On iOS with every range full, the test alert is briefly a 65th pending
+  notification.
+- **Battery settings link** and the exact-alarm settings button on `/prayer/alerts`.
+- **Qibla compass** on a real phone (true north via WMM2025 on Android and iOS), calibration
+  hint, no-sensor fallback.
+- **Widget refresh** with prayers (Android), including after the place or method changes.
+- **iOS location prompt text**: "Used once to work out prayer times on your phone. Your location
+  is never sent anywhere." (`ios/App/App/Info.plist`).
+- **Adhkar and hawl reminders** fire at their times; taps open `/adhkar/now?set=…` and `/zakat`.
+- **Erase everything on this device** now also cancels pending hifz, adhkar, hawl and prayer
+  notifications; check nothing fires afterwards.
 
-## 2. Iftar dua overlaps with adhkar-duas
+## 3. Applied by integration (2026-11-15)
 
-- **What**: adhkar-duas is authoring the same iftar supplication in the `duas-daily` deck.
-- **Why**: once it lands, lesson 6's `iftar-dua` claim could cite `duas-daily:<its id>` in
-  place of the unit's own evidence item, so there is one copy of the Arabic. The id was not
-  known when this package was written. A one-line change in
-  `content/deen/course/fasting/lessons/fasting-06-recommended-acts.json` (raise `rev`).
+- `scripts/build-deen.mjs`: a course unit's `evidence/*.json` is validated with every hadith
+  guardrail and emitted as `evidence` beside the lessons; `<deck>-evidence:<id>` refs resolve in
+  G10 (course-fasting 1, course-ui 1). `EmittedDeck.evidence?` added to `src/types/deen.ts`.
+  The false G8 warning on `al-Hasan` (a person, not the term) is gone.
+- `src/lib/prayer/engine.ts` (prayer-alerts 6, prayer-times 6): a time more than 20 h from its
+  own Dhuhr is dropped, and Asr is dropped when adhan puts it outside Dhuhr..Maghrib by more
+  than rounding (only above about 65.7°). With no Asr the prayer log treats Dhuhr's end as
+  unknown (a tap is never "late" on a guess), and the hub runs Dhuhr on to Maghrib
+  (`inOrder` in `src/components/prayer/times/model.ts`).
+- `src/lib/hijri/convert.ts` (zakat 7): civil years 0 to 99 are read as written.
+- `src/components/ui/bottom-sheet.tsx` traps Tab and Shift+Tab in the topmost sheet;
+  `FocusTrap` removed from `term.tsx` (deen-engine 6).
+- `src/app/review/review-client.tsx` (deen-engine 3): with no Quran cards but deen cards, one
+  line "No Quran reviews yet. Find a surah" and the deen section first.
+- `src/lib/deen/load.ts` (course-ui 3): a failed deck download is not cached, so retries work.
+- `src/components/deen/positions-table.tsx` (course-ui 3): the primer source button's hit area
+  grows to 44 px without moving the layout.
+- `src/components/essentials/learn-rows.tsx` (adhkar 12): "53 to learn" until something is started.
+- `src/app/essentials/page.tsx` (deen-engine 7, adhkar 12): subtitle "Plans, guides, hadith,
+  duas and the Names"; a pointer to Adhkar and duas under the older Essentials section.
+- `src/components/prayer/slots/adhkar-now.tsx` (adhkar 10): one chip on `/prayer`, as the
+  spec says; when two sets fit, the second is a quiet second line inside it.
+- `src/components/essentials-carry-over.tsx`, mounted in `providers.tsx` (adhkar 2): the
+  Essentials carry-over runs for everyone, by dynamic import a few seconds after open.
+- `src/components/layout/erase-device.tsx` (adhkar 3, prayer-alerts 3): cancels the app's
+  pending notifications in every range.
+- `src/lib/reminder-notifications.ts`, `src/components/adhkar/reminders.ts`,
+  `src/lib/zakat/hawl.ts` (prayer-alerts 1): `isExactNotification: false`.
+- `src/lib/native-plugins.ts` (android-native 2): `prayerTz?` on `TakrarWidgetData`.
+- `src/components/ui/card.tsx` (prayer-alerts 12): `data-*` props reach the DOM.
+- `content/deen/course/purification/lessons/water-01.json` (course-ui 3): stray commas removed
+  from check question 3 (rev 3).
+- `data-sources/README.md` (qibla 1, prayer-times 1): a row for every shipped all-in-one
+  source; `public/licenses.txt` regenerated (11 fragments).
+- Home first load: `widget-sync.tsx` reads the place and prayer stores by dynamic import on
+  Android only, and the prayer store validates methods from a light id list
+  (`METHOD_IDS` in `src/types/prayer.ts`), so neither store nor the method table is in Home's
+  first load.
+- New tests: `e2e/allinone-integration.spec.ts`, `src/lib/notify/ios-budget.test.ts`
+  (everything on at once plans at most 64 on iOS), `src/lib/prayer/methods.test.ts`, polar-day
+  and civil-year cases.
 
-## 3. `unit.json` shape
+## 4. Not applied, and why
 
-- **What**: the spec names `course/<unit>/unit.json` but not its fields, and the build does
-  not emit it. This unit's file has `{ id, deck, order, title, blurb, lessons[], primers, footer }`,
-  the same fields as course-purification's (`primers` maps each school to its fixed primer;
-  `footer` is the closing line from STYLE.md, "For your own situation, ask a scholar you trust.").
-- **Why**: the lesson JSON has no field for the closing line, so course-ui has to render
-  `footer` (or its own constant) under every lesson. Lesson order is also carried by each
-  lesson's own `order`.
+- **deen-engine 1** (emit a merged `registry.json`): already solved in deen-engine by
+  `SIDECARS` in `src/components/deen/registry-names.ts`, guarded by a test that fails when a new
+  sidecar is not listed.
+- **course-fasting 2** (iftar evidence to `duas-daily:iftar`): needs a content edit, see 1.7.
+- **zakat 1** (split the 22100-22109 range): only the hawl reminder uses it today. Whoever adds
+  fasting reminders must split it first (for example `hawl: 22100-22101`, `fasting: 22102-22109`),
+  because `applyRange` cancels the whole range.
+- **prayer-alerts 4 and 5** (diff alarms by id instead of replacing the range; clear delivered
+  alerts from the tray): correct today; worth doing if replanning shows as lag on slow phones.
+- **prayer-alerts 8** (`AdhanHealth.openNotificationSettings()`): native code that cannot be
+  compile-checked here; for the next android-native pass.
+- **prayer-alerts 9** (move the bell icons into `src/components/ui/icons.tsx`): cosmetic.
+- **prayer-times 8** (the settings panel's "Prayer times and alerts" row near the top when opened
+  from the Prayer tab): the hub already has a gear, a place chip and a "Prayer settings" link.
+- **adhkar 12, CitationLine / GradingLine** (stacked citation layout at 375 px like
+  `src/components/adhkar/source-line.tsx`; Shamela paths as links): a deen-engine UI pass.
+- **course-ui 3, long claims** (wudu-02 point 2, fasting-06 `iftar-dua`): splitting them is a
+  content edit; a numbered-steps form needs `steps?: string[]` on `Claim` first.
+- **Engine, alerts and the Home strip near the poles**: the hub's `inOrder` guard stays as a
+  second line of defence.
 
-## 4. A test file beside the deck module
+## 5. Building in a worktree
 
-- **What**: `src/content/deen/decks/course-fasting.test.ts` (added in review). vitest only
-  picks up `src/**/*.test.ts`, so the unit's own checks cannot live under `content/`.
-- **Why**: it runs the hadith guardrails on `evidence/*.json` (nothing else in CI reads that
-  folder until need 1 lands) and checks the brief's counts. When need 1 lands, drop its last
-  `describe` block in favour of the shared build check.
+Turbopack refuses the `node_modules` junction ("points out of the filesystem root"). Build with
+`node scripts/build-workers.mjs && npx next build --webpack && node scripts/flatten-segments.mjs`
+and a `.env.local` (or placeholder `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`),
+or every page shows "This page couldn't load". The dev server likewise needs `--webpack`.
+`npx cap sync` in a worktree rewrites `android/capacitor.settings.gradle` and
+`ios/App/CapApp-SPM/Package.swift` with paths through the junction; do not commit those.
 
-# HANDOFF: qibla
-
-Needs in shared files (spec 9.4). The package builds and passes without them.
-
-1. **`data-sources/README.md`** (foundations-owned), "All-in-one sources" table: add a row
-   - Library/data: World Magnetic Model WMM2025 (NOAA NCEI and British Geological Survey), coefficients pinned in `data-sources/wmm/` (see its SOURCE.md)
-   - Used for: correcting the phone's magnetic compass heading (Android and iOS) to true north on the qibla screen, on the device
-   - Licence / terms: public domain (US government work); credited
-   - Fragment: `licenses.d/30-wmm.txt`
-
-   Why: every all-in-one source is recorded in the README as well as in its SOURCE.md and fragment.
-
-2. **Integration**: regenerate `public/licenses.txt` so `licenses.d/30-wmm.txt` is included.
-
-# HANDOFF: deen-engine
-
-Requests for shared files (spec 9.4). The package builds and passes without any of them.
-
-1. **scripts/build-deen.mjs: emit a merged registry.** Items cite collection, numbering,
-   scholar and work ids. The trust components resolve them from the shared files in
-   `content/deen/*.json` (`src/components/deen/registry-names.ts`), but a package's
-   `registry-additions.json` sidecar is merged only inside the build script. An id that
-   exists only in a sidecar therefore shows as a readable form of the id ("Ibn rajab").
-   Ask: have `build()` also write `src/data/deen/registry.json` (the merged collections,
-   numberings, scholars, works and reviewers, sidecars included); deen-engine then reads that
-   file instead of the four shared ones (one import change in `registry-names.ts`).
-
-2. **content/deen/ERRATA.md: entry format.** Cards whose item `rev` rose show "Text corrected
-   on <date>" once. The date is read from ERRATA.md lines that hold an ISO date and the item
-   as `<deck>:<itemId>`, for example
-   `- 2026-12-01 · nawawi40:02 rev 2: a vowel on the third word fixed (found by …)`.
-   Please add that example to the file's intro so content-audit writes entries this way.
-   Without a matching line the card falls back to `review.date`, then to "Text corrected
-   since you learned it."
-
-3. **src/app/review/review-client.tsx: empty state when only deen cards exist.** With no Quran
-   cards but some deen cards, the Review tab shows the full hero (large star, "Nothing to review
-   yet", "Lessons you finish come back here", "Find a surah") and, below the middle of a 375px
-   screen, a deen card saying "Start · 4 cards". It tells a new user there is nothing to review
-   while something is waiting, and after a session "Nothing to review yet" sits above "All done
-   for today". Ask: when `useDeenQueue().cardCount > 0`, drop the hero for one compact line at
-   the top, for example `No Quran reviews yet. <Link href="/">Find a surah</Link>` (text-sm
-   muted, the link teal and semibold, min-h-11), then `<DeenReviewSection/>` directly under it,
-   so its Start button is the first thing seen. The hafiz copy works the same way ("No Quran
-   reviews yet. Revise what I know"). Keep the full hero when `cardCount === 0`.
-
-4. **e2e test seam (note, no change asked).** `e2e/deen-engine.spec.ts` builds the fixture
-   deck with the real build script and hands it to the page through
-   `window.__TAKRAR_TEST_DECKS__`, read only by `src/components/deen/deck-source.ts`.
-   Nothing in the app sets it and no fixture data is bundled. Content packages can reuse it
-   for their own fixture tests.
-
-5. **Local builds in a worktree** (same as android-native): Turbopack refuses the
-   `node_modules` junction, so build with `npx next build --webpack && node
-   scripts/flatten-segments.mjs`, and with the CI placeholder Supabase env
-   (`NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=ci-placeholder`), or every page shows "This page couldn't
-   load".
-
-6. **src/components/ui/bottom-sheet.tsx: trap focus.** The sheet sets `aria-modal="true"` but
-   Tab runs out of it onto the dimmed page. deen-engine traps focus inside its own term sheet
-   (`FocusTrap` in `src/components/deen/term.tsx`, a document keydown handler cycling Tab and
-   Shift+Tab through the dialog's focusable elements); every other sheet in the app has the same
-   gap. Ask: do the same inside BottomSheet while `rendered` (or set `inert` on the app root while
-   open), after which `FocusTrap` in term.tsx can be deleted.
-
-7. **src/app/essentials/page.tsx: Learn tab copy.** The subtitle still says "Plans, guides, duas
-   and dhikr" with no hadith or Names; suggest "Plans, guides, hadith, duas and the Names" once a
-   deck is live (or simply "What to learn next"). The older "Duas, dhikr and key ayahs" heading now
-   sits under the deen rows (renamed "Hadith, Names and more" to avoid the clash); when the adhkar
-   deck goes live, suggest folding that section into the Adhkar and duas row or renaming it
-   "Key duas and ayahs". The deen rows now use the same card style and `n/total` count as those
-   collections, so the two sections read as one family.
-
-## Contracts other packages use (src/components/deen, also re-exported from `index.ts`)
+## 6. Contracts other packages use (deen-engine; `src/components/deen`, re-exported from `index.ts`)
 
 - `CitationLine({citation})`, `GradingLine({grading})`, `PositionsTable({positions, school})`,
   `Term({id, children})`, `RichText({text})`, `ReviewBadge({review})`,
   `ReportProblem({itemId, rev, title?})`, `MemoriseFlow({item, depth, onDone, kind?})`,
   `DepthChoice({title, onChoose})`, `useItemState(deck, itemId)`, `useDeckStates(deck)`.
-- `learnHref(deck, itemId, depth?)` → `/review/deen?learn=<deck>:<id>[&depth=]`, a full-screen
-  learn flow that returns to where it was opened from; `sessionHref(deck?)`.
-- SELECTION.md: `/sources` lists the section whose heading contains "Not included" (any level)
-  from every deck's SELECTION.md, read at build time.
-
-# HANDOFF: course-ui
-
-Needs in shared files (spec section 9, rule 4). The package builds and passes without them.
-
-## 1. Emit a course unit's evidence hadith beside its lessons (pairs with course-fasting need 1)
-
-- **What**: in `scripts/build-deen.mjs`, for a course deck, also read
-  `content/deen/course/<unit>/evidence/*.json`, validate them as hadith items (all guardrails,
-  only `source-checked` or better), add their ids as `<deck>-evidence:<id>` to the known item
-  ids, and emit them as an `evidence` array beside `items` in `src/data/deen/<deck>.json`
-  (and add `evidence?: TextItem[]` to `EmittedDeck` in `src/types/deen.ts`).
-- **Why**: Unit Fasting cites three hadith as `{ "item": "course-fasting-evidence:<id>" }`.
-  The lesson screen already resolves that form: it looks the ref up as a live corpus item first
-  and then in the course deck's `evidence` array (`resolveEvidenceItem` in
-  `src/components/course/course-data.ts`, tested end to end with the fixture unit). Until the
-  build emits them, those three chips say "This hadith's text and reference aren't in the app
-  yet." (lesson 3's `forgetting` claim has no other mention of its hadith).
-- **No course-ui change needed** once the build emits the array; drafts are filtered out again
-  on screen.
-
-## 2. Local builds in this worktree
-
-Turbopack refuses the `node_modules` junction; `npx next build --webpack` with placeholder
-`NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, then
-`node scripts/flatten-segments.mjs`.
-
-## 3. UX/UI pass: asks for other packages (course-ui could not change these)
-
-- **deen-engine, `src/components/deen/positions-table.tsx`**: the primer source button under each
-  position is the only way to the Arabic quote, and it is a 12px line about 16px tall (32px when it
-  wraps), well under the 44px touch target. Ask: give the button `min-h-11` with vertical padding,
-  or `py-3 -my-3` so the hit area grows without moving the layout. Applies everywhere the table is used.
-- **foundations, `src/lib/deen/load.ts`**: `loadDeckModule` and `loadDeck` cache a failed download as
-  `null` for the life of the page, so no in-page retry can reach the network again. The course
-  screens now tell a failed load apart from "not ready" (a registry course deck whose module or
-  content didn't load) and show "The lessons couldn't be loaded" with Try again, which reloads the
-  page. Ask: drop the cache entry when a load throws, so screens can retry without a reload.
-- **course-purification** (content): in water-01's third question, drop the stray commas:
-  "Hunger and thirst", "Travel and illness", "A ritual state and physical impurity" (raise `rev`).
-- **course-purification / course-fasting** (content): a few claims are long procedures in one
-  semicolon-separated sentence (wudu-02 point 2 is 351 characters, fasting-06 `iftar-dua` 358).
-  The player now sets claims over 140 characters in regular weight so they read as a paragraph,
-  but they would read better split into shorter claims. If a numbered-steps form is wanted, it
-  needs a `steps?: string[]` field on `Claim` in `src/types/deen.ts` (foundations) first; the
-  player would render it as a numbered list.
-- **Evidence hadith (need 1 above)**: until the build emits them, the three Unit Fasting hadith
-  show as a plain "Hadith · reference to come" note, not a chip that opens to nothing.
-  `src/lib/course/evidence-refs.test.ts` fails if any other cited hadith does not resolve, and
-  fails again once one of these three resolves, so the waiting list is taken down when need 1 lands.
-
-# HANDOFF: adhkar-duas
-
-Needs in shared files (spec 9.4). The package builds and passes without them.
-
-1. **`src/components/deen/sources-data.ts` (deen-engine): `deckIdForSelection`** maps
-   `adhkar/<dir>/SELECTION.md` to `<dir>`, but three adhkar deck ids are not their folder names
-   (`morning-evening` is `adhkar-morning-evening`, also `after-prayer`, `sleep-waking`). /sources then
-   titles those sections with the raw folder name. Suggested: look the folder up in build-deen's
-   `DECKS[*].dir` (or prefix `adhkar-` when the bare name is not a deck id).
-2. **App-wide Essentials carry-over.** `runEssentialsMigration` (src/components/adhkar/use-migration.ts)
-   runs on /adhkar, /adhkar/view and every Essentials card. To run it for users who never open those,
-   mount `useEssentialsMigration()` once in `providers.tsx` (foundations-owned). It is idempotent.
-3. **Erase on this device**: the adhkar reminders (ids 22000, 22001, channel `adhkar-v1`) survive
-   "Erase everything" (see prayer-alerts note 3). Clear range `NOTIFY_RANGES.adhkar` there.
-4. **Notification taps** carry `extra.url` (`/adhkar/now?set=morning|evening`), routed by the existing
-   ReminderSync listener, like prayer alerts.
-5. **course-fasting note 2**: the iftar dua is `duas-daily:iftar` (Abu Dawud 2357, variant 2358).
-6. **Integration**: regenerate `public/licenses.txt` (picks up `data-sources/licenses.d/55-adhkar.txt`).
-7. **Content process**: stages C, F, G and H were run by the authoring agent in separate passes
-   (no sub-agent tool was available), recorded in each item's `review.log`. C and G are mechanical
-   (`content/deen/adhkar/tools/seal.mjs`, `witness.mjs verify --all`), but F (blind back-check of the
-   English) and H (grading check) should get a fresh agent in the wave-3 content audit. One grading,
-   al-Daraqutni on `duas-daily:iftar`, was read in a single copy (en.tohed.com) only.
-8. **e2e**: `e2e/adhkar.spec.ts` (6 tests) passed against this worktree's static build on port 4424
-   with an ad-hoc config; the repo's Playwright configs were not run.
-9. **Review pass (fresh reviewer, 2026-11-15).** `witness.mjs verify --all` re-run: 45 checked, 0 problems. Every
-   shipped item's English was re-read against its Arabic by an agent that had not seen the drafting; two wordings
-   were corrected (rev raised: `duas-daily:leaving-home` usage note, `adhkar-morning-evening:la-ilaha-illallah-100`
-   title). Grading quotes were not all re-located (only al-Tirmidhi after 3426 was re-read on Shamela), so stage H
-   still wants its own pass in the wave-3 audit. Left as authored, for the owner or a scholar to decide:
-   `duas-daily:istikhara` keeps the narrator's aside "أو قال في عاجل أمري وآجله" inside the Arabic that is memorised
-   (faithful to al-Bukhari 6382; the usage note explains it); the sleep set counts each of the three surahs three
-   times in a row, where al-Bukhari 5017 describes the three read together, three times over.
-10. **/prayer chips.** `AdhkarNow` now renders up to two chips: after Fajr and after Asr it offers the prayer's own
-   adhkar and the morning or evening set (before, the window hid the after-prayer set for its whole length). The
-   hub's comment says "at most one contextual chip"; the second is one 48px row. Also for prayer-times /
-   integration: the hub hides the adhkar slot whenever the Ramadan banner shows (the month and the week before),
-   so there is no adhkar chip on /prayer for about five weeks a year; /adhkar still has every set.
-11. **Independent content verification (2026-11-15, an agent that wrote none of it).** All 53 items and the
-   Essentials citations were re-checked against freshly fetched witnesses (own cache): `witness.mjs verify --all`
-   45 checked, 0 problems; the hadith behind each Quran item (Abu Dawud 5082, al-Tirmidhi 3575, al-Bukhari 2311,
-   5009, 5017, Muslim 808) and the Essentials-only citations (Muslim 596, 2702) read on Shamela; the three
-   single-witness readings (al-Bukhari 6306, 6311, 6320) and Muslim 591 read in the Shamela print. Stage H done in
-   full: every grading quote was located and read in context (al-Tirmidhi after 7, 464, 1858, 3388, 3391, 3392,
-   3426, 3575; al-Nawawi, al-Adhkar nos. 71, 159, 192, 217, 545, 653 on Shamela book 1956; al-Daraqutni 2279 on
-   en.tohed.com, still the only copy read). No Arabic, citation or grading needed changing and nothing was
-   removed. Nine items had their English or usage note corrected (rev raised, reasons in each `review.log`):
-   `alim-al-ghayb`, `al-mulku-lillah`, `bika-asbahna`, `bismillah-la-yadurr` (morning-evening); `la-mania`
-   (after-prayer); `bismika-rabbi` (sleep-waking); `toilet-enter`, `leaving-home` (duas-daily); `subhanaka`
-   (salah-words). Left for the owner or a scholar: `sleep-waking:ayat-al-kursi` has no grading line because
-   al-Bukhari 2311 is given without his own full chain (the usage note says so); `duas-daily:toilet-leave` stays
-   "Your forgiveness." because the length rule (G15) leaves no room for a bracketed "[I ask]"; Essentials ayah
-   translations still carry footnote markers such as "[98]" from before this package.
-12. **UX/UI pass (2026-11-15), needs in files this package does not own.** The package builds and passes without them.
-   - `src/components/deen/citation-line.tsx` (deen-engine): at 375px the citation shares a row with the
-     Sunnah.com link and breaks into ragged lines, with the "(… numbering)" part in bold. Adhkar screens and
-     Essentials cards now use `src/components/adhkar/source-line.tsx` (`SourceLine`), which stacks below `sm`
-     (collection and number bold, scheme muted regular, narrator on its own line, link last). Suggest
-     CitationLine adopt the same layout so hadith and Names match.
-   - `src/components/deen/grading-line.tsx` (deen-engine): a grading's `in` such as
-     "al-Adhkar, no. 217 (ed. al-Arna'ut, shamela.ws/book/1956/77)" prints the bare path. Suggest rendering a
-     `shamela.ws/book/N/M` match as a "Shamela ↗" link (via `openExternal`).
-   - `src/components/essentials/learn-rows.tsx` (deen-engine): the Adhkar and duas row shows a bare "0/53".
-     Suggest "53 to learn" until something is started, as /adhkar's deck rows now say.
-   - `src/app/essentials/page.tsx` (foundations): under "Duas, dhikr and key ayahs", one line pointing to the
-     checked versions, e.g. "The checked versions, with their sources, are in Adhkar and duas" linking /adhkar.
-     The old collection titles in `src/data/essentials.json` ("Salah Duas", "Morning & Evening Adhkar",
-     "Tasbih & Dhikr") are Title Case with ampersands; sentence case would match the new screens.
-
----
-
-# HANDOFF: mosques
-
-Mosque finder (`/mosques`) from OpenStreetMap country packs. No shared files edited apart from
-replacing the foundations stub `src/app/mosques/page.tsx`.
-
-1. **Tile flag (`src/lib/prayer/tools.ts`, spec 3.8): keep `mosques` at `ready: true`.** The full
-   worldwide build succeeded on 2026-11-14: 193 country packs, 216,523 mosques, 7,796,771 bytes
-   (under the 8 MB budget). **Indonesia (ID) is not covered**: its list alone is 74,436 mosques /
-   2.46 MB and does not fit with the rest. A place in Indonesia sees "We don't have a mosque list for
-   Indonesia yet" with a "Change place" button (to `/prayer/settings`). To add it, either raise the budget (`--budget 10.5`) or make the
-   format smaller; the owner should decide. Every other country with OSM mosques is covered
-   (see `data-sources/osm-mosques/SOURCE.md` for the per-file list, counts and sha256).
-
-2. **Service worker:** nothing to do. Foundations' `public/sw.js` already caches `/data/*`
-   (stale-while-revalidate into `takrar-data-v1`), and the native apps carry `out/data/mosques/`
-   in the bundle.
-
-3. **Size:** `out/data/mosques/` is 7.80 MB; the `/mosques` page chunk is 40 KB (it carries the
-   5.9 KB pack index so the screen can show the size without a request). `scripts/check-bundle.mjs`:
-   Home +2.2 KB gzipped, out/ +5.97 MB against the 2026-11-13 baseline, OK.
-
-4. **Licences:** `data-sources/licenses.d/40-osm.txt` (ODbL attribution, Natural Earth used only at
-   build time). The screen shows "Data © OpenStreetMap contributors (ODbL)" linking to
-   openstreetmap.org/copyright.
-
-5. **Rebuilding the data** (maintainers only, never from the app):
-   `node scripts/build-mosques.mjs` (one worldwide Overpass query, cached in the OS temp dir);
-   `--check` verifies packs, index and SOURCE.md offline. If Overpass can't answer the worldwide
-   query, `--per-country GB,US,...` asks one country at a time.
-
-6. **e2e:** `e2e/mosques.spec.ts` (seeded London place lists the nearest UK mosques; a request
-   listener proves the tap makes exactly one GET, `/data/mosques/GB.json`, with no coordinates;
-   no place links to `/prayer/setup`; an uncovered country shows the empty state and loads
-   nothing). It was not run against the repo's Playwright configs (reserved for integration);
-   the same flow was checked with an ad-hoc script on port 4418 (light and dark, 375 px, no page
-   errors, no horizontal scroll).
-
-7. **Local builds in this worktree:** Turbopack refuses the `node_modules` junction; use
-   `npx next build --webpack && node scripts/flatten-segments.mjs` with placeholder
-   `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-
-8. **Review notes (2026-11-14):**
-   - "Open in Maps" (the whole row is the link): `geo:` on Android, `maps://` on iPhone, iPad and
-     Mac, and on other desktop browsers (Windows, Linux, which have no `geo:` handler) the mosque
-     on openstreetmap.org in a new tab with `rel="noopener noreferrer"`. The link carries only the
-     mosque's own position and is followed only on a tap; the app still draws no tiles. If the owner
-     prefers no web link-out at all, change the `'web'` branch of `mapsHref` in
-     `src/lib/mosques/links.ts`.
-   - Indonesia is the largest list and is the one left out (item 1). Fitting it needs about 2.3 MB
-     saved or a bigger budget; a denser pack format (integer, delta-coded positions) gets roughly
-     2 MB, not quite enough on its own.
-   - Small lists (under 500 KB, every country but Türkiye, Iran and Bangladesh; all of them in the
-     native apps, where the files are in the bundle) load as the screen opens. The three big ones
-     keep the "Mosques near <place>" card with the size and a "Show mosques" button.
-   - Rows under 1 km (1 mile in miles countries) say "Under 1 km" with no direction: the place is
-     rounded to about a kilometre, so closer than that neither means much.
-   - The e2e "only data request" check uses GB, whose nearest rows have no `name:ar`. A row with an
-     Arabic name makes the page fetch the app's own Arabic font files (same origin, no position);
-     keep that in mind if the test's country changes.
-
-9. **Integration gate (UX review, 2026-11-14):** in this worktree `/prayer/setup` is still the
-   foundations stub, so a first-time user's only action ("Set your place") is a dead end. After
-   merging prayer-times, drive first run -> setup -> (allow location / deny / choose a city) ->
-   back to `/mosques` and confirm the list shows. If setup ships later than this package, set
-   `mosques` to `ready: false` in `src/lib/prayer/tools.ts` (foundations' file) until it does.
-   A place with no country code (possible for a GPS place) gets "We couldn't tell which country
-   you're in" with "Choose a city" (to `/prayer/setup`).
-
-10. **Second review (2026-11-15), data fixes; packs rebuilt offline from the same 2026-11-14 OSM answer:**
-    - Packs are now filed under the code the place picker (GeoNames) gives a town, where Natural
-      Earth's drawing differs: Crimea under UA (was RU, so a place in Simferopol found none of its
-      own mosques), Western Sahara under EH (Laayoune, Dakhla; was MA), Christmas Island and the
-      Cocos Islands under CX and CC. The table is `PLACE_PICKER_CODES` in
-      `scripts/build-mosques.mjs`; the script and SOURCE.md say it takes no position on borders.
-      The owner may want to read that wording.
-    - 487 mosques that had been dropped as "open sea" are now placed by the nearest drawn coast
-      within 100 km: most of the Maldives (67 -> 301), Stavanger, Tromso, Bodo, Cairns, Recife,
-      Assab, Macau, Tuvalu. 34 are still unplaced (far islets, nearly all Indonesian).
-    - Not changed, for the owner to know: a place sees only its own country's list, so a town on a
-      border (or Jerusalem / East Jerusalem, which GeoNames files under IL and PS) misses mosques
-      across the line; the screen says "Only mosques in <country> are listed".
-    - Small lists load without a confirm step (the brief asked for a confirm line every time). The
-      request still names only the country. Left as the UX pass made it; say if every country
-      should ask first.
-
----
-
-# HANDOFF: prayer-alerts
-
-Nothing in a shared file is required for this package to build or pass. Two notes for the orchestrator:
-
-1. **Existing hifz reminders and exact alarms (`src/lib/reminder-notifications.ts`, not owned here).**
-   `@capacitor/local-notifications` 8.3 defaults `isExactNotification` to `true`. On Android 12+ without the
-   exact-alarm grant, `schedule()` then opens the system "Alarms and reminders" screen on every call.
-   Once android-native declares `SCHEDULE_EXACT_ALARM`, `applyReminders` would do that on every app open for a
-   user who hasn't granted it. Suggested fix (one line in the notification object):
-   `isExactNotification: false` (a daily nudge doesn't need the minute). Prayer alerts already set it from
-   `checkExactNotificationSetting()`, so they never open the screen by themselves.
-
-2. **Notification taps.** Prayer alerts carry `extra.url` (`/prayer`, the test alert `/prayer/alerts`).
-   ReminderSync's existing `onReminderTap` listener routes any notification with an `extra.url`, so
-   PrayerSync adds no second listener. If ReminderSync ever stops being mounted app-wide, move that listener.
-
-Local builds in this worktree: Turbopack refuses the `node_modules` junction, so `npx next build --webpack`
-(with placeholder `NEXT_PUBLIC_SUPABASE_*` values; without them the static pages throw on load).
-
-## Review pass (fresh reviewer)
-
-3. **"Erase everything on this device" (`src/components/layout/erase-device.tsx`, not owned here)** wipes
-   localStorage but not the alarms the OS holds. PrayerSync now looks once per app run and clears left-behind
-   prayer alerts (ids 20000-21000), so nothing is needed there for prayer; other features that schedule
-   (adhkar 22000+, reminders 22100+) need their own clean-up or a `LocalNotifications.cancel` in the erase flow.
-4. **Churn.** A plan drops each alert as it passes, so its hash changes after every prayer and the next open
-   cancels and re-sets the whole range (about 150-310 alarms on Android). Correct, but if it shows up as lag on
-   a slow phone, `applyRange` (foundations) could diff by id instead of replacing the range.
-5. **Delivered alerts pile up in the tray** (each has its own id; a heads-up stays beside its prayer). Possible
-   follow-up: `removeDeliveredNotifications` for older prayer ids on app open.
-
-## Second review pass
-
-6. **Engine oddities near the polar circles (`src/lib/prayer/engine.ts`, foundations, not owned here).** With
-   `highLatRule: 'auto'` at Longyearbyen (78.22, 15.65): on 2027-02-18 `computeDay` returns Asr on 22 Feb
-   (four days away); on 2026-10-20 and 2026-11-01 Asr comes out before Dhuhr; through the polar night
-   (Jan to mid Feb) Asr comes out after Maghrib. The planner now leaves out any time more than a day from its
-   own day (no alert rather than a wrong one), but the out-of-order Asr still reaches the times screen and the
-   alerts. Suggested fix in the engine: return null for Asr when it is not between Dhuhr and Maghrib.
-7. **The test alert shares the prayer range** (id 20019), so a replan used to cancel it. The glue now puts a
-   still-waiting test alert back after a replan. On iOS with every other range full it is briefly a 65th
-   pending notification; the furthest one is dropped by iOS until the next replan (unverified on device).
-
-## UX/UI pass
-
-8. **No button to Takrar's notification settings.** When notifications are off for Takrar the screen now says so
-   at the top on every visit (from the probed permission, not just a failed ask) and names where to go, but
-   there is no "Open settings" button: neither `@capacitor/local-notifications` nor the spec's `AdhanHealth`
-   contract can open the app's notification screen. Suggested for android-native: an
-   `AdhanHealth.openNotificationSettings()` (Android `Settings.ACTION_APP_NOTIFICATION_SETTINGS`; iOS
-   `UIApplication.openSettingsURLString`), then a button on the notice and the Notifications row.
-9. **Icons kept local.** The bell and the "needs attention" circle live in
-   `src/components/prayer/alerts/alert-icons.tsx`, since `src/components/ui/icons.tsx` is foundations-only.
-   Integration can move them into the shared set.
-
-## Third review pass
-
-10. **What the Android plugin really reports (`@capacitor/local-notifications` 8.3.1, read from its Kotlin source).**
-    `getPending()` returns every stored record, including alerts that already rang and still sit in the shade,
-    and gives `schedule.at` as Java's `Date.toString()` ("Sat Nov 14 12:41:00 CET 2026"), which JavaScript can't
-    parse for zones like CET or BST. The health check's "Set on this phone" row now counts only alerts still
-    ahead and takes the last date from the memo when a time can't be read (it used to sit on "Setting them up…").
-    The same applies to anything else that reads `getPending()` times on Android.
-11. **After a reboot the plugin shows alerts missed while the phone was off**, 15 seconds after boot
-    (`LocalNotificationRestoreReceiver`), so a stale "Dhuhr · 12:41" can appear late. Plugin behaviour, not
-    changeable from JS; unverified on device.
-12. **`Card` drops `data-*` props** (`src/components/ui/card.tsx`, foundations): the screen's `data-alerts-web`,
-    `data-alerts-no-place` and `data-alerts-intro` hooks never reached the DOM. They now sit on a wrapper div.
-
----
-
-# HANDOFF: prayer-times
-
-Needs in shared files (spec 9.4). The package builds and passes without them.
-
-1. **data-sources/README.md** (foundations-owned): add a row to the all-in-one sources table:
-   `| GeoNames cities15000 (download.geonames.org, retrieved 2026-11-13) | city search, place label after a location fix, the place's time zone | CC BY 4.0 | licenses.d/20-geonames.txt |`
-   and note that the zip is archived outside the repo at `Downloads/takrar-sources/geonames/cities15000.zip`
-   (sha256 in `data-sources/geonames/SOURCE.md`). Owner's call whether to commit the 3.3 MB zip instead.
-2. **Integration:** regenerate `public/licenses.txt` (picks up `data-sources/licenses.d/20-geonames.txt`).
-3. **Playwright:** `e2e/prayer-times.spec.ts` (14 tests) passed against this worktree's static build. Its offline test
-   swaps the host to 127.0.0.1 (the service worker is unregistered on localhost) and skips under the dev server.
-4. **Local builds in a worktree:** Turbopack refuses the node_modules junction; `npx next build --webpack` works.
-   Without a `.env.local` the app needs `NEXT_PUBLIC_SUPABASE_URL` set to anything (a dummy local URL was used here).
-5. `src/components/prayer/tool-tiles.tsx` is unchanged; the hub renders it (readyTools()).
-6. **Review pass (fresh reviewer), for foundations' `src/lib/prayer/engine.ts`** (not edited here, spec 3.8): in polar
-   night with the automatic rule the day's times come out of order. Tromsø (69.65, 18.96, Europe/Oslo), 2026-12-21,
-   Muslim World League, `highLatRule: 'auto'`: Fajr 07:38, Sunrise 10:57, Dhuhr 11:32, **Asr 10:52**, Maghrib 12:06,
-   Isha 15:24, so Asr precedes Dhuhr and `currentPrayer` reports Asr before Dhuhr has begun. The hub shows what the
-   engine returns; the engine should either keep the order or return null for a time it cannot place.
-   Until then the hub guards itself (`inOrder` in `src/components/prayer/times/model.ts`): a time out of order is shown
-   as "No time today" and "now" moves to the kept prayer whose time is in. `nextPrayer`, alerts and the Home strip
-   still read the engine directly, so the engine fix is still needed.
-7. **Review pass, for hijri-ramadan and adhkar-duas:** the hub now always mounts `<RamadanBanner/>` and shows
-   `<AdhkarNow/>` only while the banner renders nothing (CSS, `data-chip="ramadan"` / `data-chip="adhkar"`), so the
-   banner alone decides its season. Both slots must render no DOM at all (return null) when they have nothing to show.
-8. **Integration, settings panel (foundations-owned):** the hub's gear opens the app-wide settings panel. Its
-   "Prayer times and alerts" row (spec 2.4) should sit near the top when the panel is opened from the Prayer tab. The
-   hub also has a place chip under the title and a "Prayer settings" link straight under the times list.
-9. **Second review pass:** the hub, the Home strip and the settings/setup previews now all read the same
-   "shown" days (`shownDays` in `src/components/prayer/times/model.ts`): next prayer, current prayer and the adhkar
-   window come from the rows with out-of-order times dropped, so `<AdhkarNow window>` is never 'evening' from an Asr
-   the list doesn't show. Item 6 still stands for alerts and anything else that reads the engine directly.
-10. **For qibla / mosques (anything that saves a place before prayer setup):** setup now pre-chooses the country's
-    method and Asr for a place that was already saved, so those packages need do nothing beyond `setPlace`.
-
----
-
-# HANDOFF: zakat
-
-Requests for the orchestrator or integration. The package builds and passes without any of them.
-
-1. **Shared reminders range (22100-22109).** The hawl reminder calls `applyRange(NOTIFY_RANGES.reminders, …)` with id 22100. `applyRange` cancels everything pending in a range, so if another package later schedules fasting reminders in the same range with its own `applyRange` call, the two will cancel each other. Fix before that lands: either split the range in `src/lib/notify/registry.ts` (for example `hawl: 22100-22101`, `fasting: 22102-22109`, iOS slots 1 and 3), or have one planner own the whole range. Today only zakat uses it.
-2. **Yearly re-arm (optional).** The reminder is scheduled from the `/zakat` screen (on open and on every change). After it fires, next year's reminder is scheduled the next time the user opens `/zakat`. If the owner wants it re-armed without opening the screen, mount a tiny sync (`syncHawlReminder` from `src/lib/zakat/reminder.ts`, reading `useZakatStore` and `usePrayerStore.hijriOffset`) in `providers.tsx`.
-3. **Licensing.** Nothing new: the zakat notes are our own work and there is no data source. No `licenses.d` fragment.
-4. **Build note.** `npm run build` (Turbopack) fails in this worktree only because `node_modules` is a junction outside the worktree ("Symlink … points out of the filesystem root"). `npx next build --webpack` builds fine. This is the worktree setup, not the package.
-5. **Review notes (fresh reviewer).**
-   - A static build in a worktree without `.env.local` crashes every page at runtime with "supabaseUrl is required" (the page shows "This page couldn't load"). For local browser checks build with placeholder `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Integration should build with the real env.
-   - `zakat-store` defaults `nisabBasis` to `'silver'` (foundations contract), so the headline is on the silver basis until the user switches. Both bases are always shown side by side and the basis note names the difference, but the owner may prefer no basis preselected; that needs a store change (`nisabBasis: NisabBasis | null`).
-   - Content for the audit pass: done, see 6.
-6. **Content check (independent verifier, 2026-11-14).** The package ships no hadith text, dua or Arabic for display; its religious content is the eleven notes in `src/data/zakat-notes.json`. Each was checked against fetched Arabic, and the located phrase is now stored in `evidence[].quote` (a script confirmed every quote is a substring of the fetched text).
-   - Witnesses read: Mukhtasar al-Quduri, al-Risala of Ibn Abi Zayd, Matn Abi Shuja', 'Umdat al-Fiqh, al-Nawawi's Minhaj al-Talibin, Kifayat al-Akhyar, al-'Udda, Ibn al-Mundhir's al-Ijma' (all shamela.ws); Bidayat al-Mujtahid, Sahih al-Bukhari, Sahih Muslim, Sunan Abi Dawud (ar.wikisource.org); Sunan Ibn Majah (shamela.ws); al-Durar al-Saniyya fiqh encyclopedia; Darul Ifta Birmingham; IslamOnline fiqh; IslamQA (quoting Ibn Hazm).
-   - Corrected: `nisab-metals` presented twenty mithqal of gold as agreed. Ibn Rushd says "most scholars" and records al-Hasan al-Basri and others who set it differently; Ibn al-Mundhir's consensus is conditional on the gold being worth 200 dirhams. The note now says "in all four schools" and names the dissent.
-   - Corrected: `debts` grouped the Maliki school with "taken off first". The Risala sets the debt against non-zakatable belongings first; it now has its own position. The Hanafi and Hanbali lines now follow their primers' wording.
-   - Corrected: `hawl-dip` gave "Shafi'i, Hanbali: nisab through the whole year" for all wealth. The Minhaj measures goods for sale at the end of the year only (the relied-upon view), and 'Umdat al-Fiqh states the whole-year rule for goods for sale only; each school now says what its source says. The Maliki position could not be confirmed in the primer and is named as not shown.
-   - Corrected: `combining` showed two schools; the Maliki (Risala) and Hanbali ('Umda, as far as it goes) positions are added. Matn Abi Shuja' is silent, so the Shafi'i line rests on Ibn Rushd alone and the note stays `draft`.
-   - Corrected: `rate` said the year passes "with your wealth at or above nisab", which is one side of the `hawl-dip` difference; reworded.
-   - Removed (could not verify): every citation of al-Qaradawi's Fiqh al-Zakah (text not reachable), and the claims "many zakat bodies use 85 g / silver". The 85 g and 595 g figures are now attributed to Ibn 'Uthaymin as quoted by al-Durar al-Saniyya; the gold-basis reasoning follows the IslamOnline answer that was read.
-   - Status: `rate`, `nisab-metals`, `worn-jewellery`, `debts`, `trade-goods`, `receivables`, `hawl`, `hawl-dip` are `source-checked`; `nisab-grams`, `basis`, `combining` stay `draft` (modern figures with one fetched witness each, or a single witness for one school). Nothing is scholar-reviewed. For the Shafi'i school, `debts` and `hawl-dip` cite the Minhaj and Kifayat al-Akhyar because the spec's named primer does not address them.
-   - `scripts/build-deen.mjs --check` passes ("No authored decks yet": this package authors no deck). `content/deen/ERRATA.md` is untouched: nothing here had shipped, and the file is shared.
-7. **Second review (2026-11-15).**
-   - `src/lib/hijri/convert.ts` (shared, not edited here) reads civil years 0 to 99 as 1900 to 1999, because JS `Date` does: `toHijri('0001-01-01')` gives a date in 1318 AH. The zakat screen now refuses start dates before 622 CE itself (`src/lib/zakat/hawl.ts`), but other callers of `toHijri` with user-typed dates should guard the same way, or `convert.ts` should use `setUTCFullYear`.
-   - Amount fields now say how an entry like "8,125" or "1.234" was read ("Read as 8,125 g"), since a comma-decimal writer means 8.125.
-   - The hawl card keeps "today" current (foreground and past midnight), so the reminder re-arms for next year when the app comes back to `/zakat` without a remount. Item 2 above (re-arm without opening the screen) still stands.
-8. **Second content check (independent verifier, 2026-11-15).** Every stored Arabic quote (46 before this pass) was fetched again and matched as a substring (tashkil and hamza forms normalised) against: Bidayat al-Mujtahid and al-Muhalla (ar.wikisource.org); Mukhtasar al-Quduri, 'Umdat al-Fiqh, Minhaj al-Talibin, Matn Abi Shuja', al-Risala, Kifayat al-Akhyar, Ibn al-Mundhir's al-Ijma' and I'anat al-Talibin (shamela.ws). The four hadith named in source leads were read on sunnah.com (al-Bukhari and Muslim from Abu Sa'id on five awaq; Abu Dawud from Ali; Ibn Majah from Aisha). The gram figures were read on al-Durar al-Saniyya (85 g, 595 g, quoting Ibn 'Uthaymin) and Darul Ifta Birmingham (7.5 tola = 87.48 g, 52.5 tola = 612.36 g); the gold-basis reasoning on IslamOnline. All matched.
-   - Corrected: `rate` was marked agreed for goods for sale too. Ibn Rushd records that the Zahiri school holds no zakat on them; the note now says "in all four schools" and names the difference.
-   - Corrected: `nisab-metals` said "a few early scholars". Ibn Rushd names al-Hasan al-Basri and most of Dawud's followers, and a third group; reworded, with Ibn al-Mundhir's line on al-Hasan stored.
-   - Corrected: `worn-jewellery` gave the Shafi'i position flat; the Minhaj and Kifayat al-Akhyar give it as the relied-upon of two views. "Jewellery kept as savings counts" was located for the Shafi'i and Hanbali schools only (not in the Risala), so it is now stated for those two.
-   - Corrected: `receivables` said money owed "is counted" as though every school held so. The Risala has no zakat on a debt until it is received, then for one year. It is now stated as what the calculator does, with the difference named.
-   - Corrected: `nisab-grams` and `basis` generalised past their witnesses ("widely used today", "fatwa councils of the South Asian tradition", "many Hanafi scholars"). Each line now names only the source that was read.
-   - Added: a Shafi'i witness for `combining` (Fath al-Mu'in, read in I'anat al-Talibin); Ibn Hazm for `hawl` read in al-Muhalla itself rather than through a quotation. `combining` stays `draft`: the Hanbali line still rests on the 'Umda alone. Seven new quotes, each matched against its fetched text before it was stored (53 in all).
-   - Nothing removed. `content/deen/ERRATA.md` untouched (nothing here has shipped). `scripts/build-deen.mjs --check` passes.
-
-# HANDOFF: content-audit
-
-Fresh audit of every shipped religious item, 2026-11-15. The record is
-`content/deen/AUDIT-2026-11.md` (counts per deck, what was checked and how, open doubts for a
-scholar reviewer). Four corrections, all in `content/deen/ERRATA.md`; nothing was dropped.
-
-1. **ERRATA.md now has entries**, in the format deen-engine asked for (ISO date and
-   `<deck>:<itemId>` on one line); the example is in the file's intro. The deen-engine test that
-   expected the seeded file to be empty now tests an inline empty file and checks the real
-   file's entry format (`src/components/deen/deen-engine.test.ts`).
-2. **duas-daily:iftar**: al-Daraqutni's verdict is no longer single-copy. It was located in the
-   Mu'assasat al-Risala print (shamela.ws/book/9771/2240); this closes the adhkar-duas note
-   above about en.tohed.com.
-3. **HANDOFF.md tidied**: the union merge had left two copies of the mosques, prayer-alerts,
-   prayer-times and zakat sections. The earlier copy of each was removed; the later one is a
-   superset or the updated wording.
-4. **For the owner**: the course units, the zakat notes and the hijri event lines are faithful to
-   the sources named, and that is all this audit can say. The open doubts list is what to hand a
-   scholar first.
+- `learnHref(deck, itemId, depth?)` → `/review/deen?learn=<deck>:<id>[&depth=]`; `sessionHref(deck?)`.
+- `/sources` lists the section whose heading contains "Not included" from every deck's SELECTION.md.
+- ERRATA.md lines: `- <ISO date> · <deck>:<itemId> rev N: what changed`, read for "Text corrected on <date>".
+- e2e seam: `window.__TAKRAR_TEST_DECKS__` (read only by `src/components/deen/deck-source.ts`).
+- Notification taps carry `extra.url` and are routed by ReminderSync's `onReminderTap`; if
+  ReminderSync stops being mounted app-wide, move that listener.

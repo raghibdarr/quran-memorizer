@@ -17,7 +17,7 @@ import {
   type RamadanMode,
   type TimeName,
 } from '@/types/prayer';
-import { isMethodId } from '@/lib/prayer/methods';
+import { isMethodId } from '@/types/prayer';
 
 // Prayer-time settings (all-in-one spec 3.2). Device-only: a method choice hints
 // at a region, so this never syncs. It does ride in the backup file (it holds no

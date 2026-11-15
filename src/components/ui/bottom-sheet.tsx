@@ -19,6 +19,8 @@ const DISMISS_DISTANCE_MAX = 160; // …capped for tall sheets
 const DISMISS_VELOCITY = 0.5; // …or flicked faster than this (px/ms)
 const DRAG_SLOP = 6; // px before a touch counts as a drag rather than a tap/scroll
 
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 interface BottomSheetProps {
@@ -112,13 +114,32 @@ export default function BottomSheet({ open, onClose, title, titleHidden, dismiss
       .finished.then(finish);
   }, [open, rendered]);
 
-  // Body scroll lock + Esc while shown
+  // Body scroll lock, Esc, and Tab kept inside the sheet (aria-modal) while shown
   useEffect(() => {
     if (!rendered) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && dismissible) onCloseRef.current();
+      if (e.key !== 'Tab') return;
+      const sheet = sheetRef.current;
+      if (!sheet) return;
+      // Only the topmost sheet traps (a sheet opened from a sheet)
+      const modals = document.querySelectorAll('[role="dialog"][aria-modal="true"]');
+      if (modals[modals.length - 1] !== sheet) return;
+      const items = [...sheet.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const at = document.activeElement;
+      const inside = at instanceof Node && sheet.contains(at);
+      if (e.shiftKey && (!inside || at === first || at === sheet)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (!inside || at === last)) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener('keydown', onKey);
     return () => {

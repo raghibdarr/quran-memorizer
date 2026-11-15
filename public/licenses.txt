@@ -450,3 +450,171 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+==============================================================================
+City names and positions: GeoNames
+==============================================================================
+
+Place names and positions: GeoNames (https://www.geonames.org), from the cities15000 extract
+retrieved 2026-11-13 (https://download.geonames.org/export/dump/cities15000.zip). Licensed under
+the Creative Commons Attribution 4.0 International License
+(https://creativecommons.org/licenses/by/4.0/). The data is provided "as is" without warranty
+or any representation of accuracy, timeliness or completeness.
+
+Changes: trimmed to name, country, latitude and longitude (rounded to 2 decimal places) and time
+zone, and re-shaped into public/data/cities.json by scripts/build-cities.mjs. Used for city
+search, the place label after a location fix, and each place's time zone, all on your device.
+
+
+==============================================================================
+Prayer-alert chime
+==============================================================================
+
+The chime played by prayer alerts in the Android app is Takrar's own work: two soft tones
+synthesised from sine waves by scripts/build-chime.mjs. It uses no recording or third-party
+sound. Details: data-sources/chime/SOURCE.md.
+
+
+==============================================================================
+Qibla compass: World Magnetic Model 2025 (NOAA NCEI and British Geological Survey)
+==============================================================================
+
+The qibla compass corrects the phone's magnetic heading to true north with the
+World Magnetic Model WMM2025 (released 13 November 2024), produced by the US National Oceanic and
+Atmospheric Administration's National Centers for Environmental Information (NCEI) and the British
+Geological Survey. Takrar evaluates NOAA's published coefficient file on your device with its own
+code; nothing is sent anywhere. The model is a work of the US government and is in the public
+domain. https://www.ncei.noaa.gov/products/world-magnetic-model
+
+The qibla bearing comes from adhan (above). The sun's position for the sun aid is worked out on
+your device with Takrar's own implementation of Jean Meeus's published formulas (Astronomical
+Algorithms, 2nd edition, 1998).
+
+
+==============================================================================
+Hijri calendar and occasions
+==============================================================================
+
+Hijri dates come from your device's own Umm al-Qura calendar, or from Takrar's arithmetic
+calendar where the device has none. They are calculated, not sighted, and shown as expected.
+The list of occasions and its descriptions are Takrar's own work. Quran references point
+to the Quran text already in the app.
+
+
+==============================================================================
+Mosque lists: OpenStreetMap
+==============================================================================
+
+Data © OpenStreetMap contributors (https://www.openstreetmap.org/copyright), available under the
+Open Database License (ODbL) 1.0: https://opendatacommons.org/licenses/odbl/1-0/
+
+The mosque lists in the app (data/mosques/<country>.json) are a Derivative Database made from
+OpenStreetMap features tagged amenity=place_of_worship and religion=muslim: each mosque's map
+position, rounded, and its name. They are offered under the same licence. The files, and the
+script that builds them (scripts/build-mosques.mjs), are public in the app's source repository,
+so anyone can get, rebuild and reuse them. The app loads one country's list when you ask for it,
+sorts it by distance on your device, and never sends your position anywhere.
+
+Country assignment at build time used Natural Earth 1:10m admin-0 countries (public domain,
+https://www.naturalearthdata.com); the boundaries themselves are not included in the app.
+
+
+==============================================================================
+Hadith: the Forty Hadith of al-Nawawi
+==============================================================================
+
+al-Arba'in al-Nawawiyya by Yahya ibn Sharaf al-Nawawi (d. 676 AH). Classical works in the public
+domain; transcribed, vocalised and translated by Takrar; collated against the witnesses listed per
+item (Ibn Daqiq al-'Id's Sharh al-Arba'in and Ibn Hajar al-Haytami's al-Fath al-Mubin, read on
+shamela.ws, with hadith-api's ara-nawawi edition for comparison only). The English translation is
+Takrar's own work. Nothing from Sunnah.com's English, Darussalam or any published translation of
+the Forty is used.
+
+
+==============================================================================
+Adhkar and duas
+==============================================================================
+
+The adhkar and duas decks (morning and evening, after the prayer, sleeping and waking, duas for
+the day, the words of the prayer) quote hadith from Sahih al-Bukhari, Sahih Muslim, Sunan Abi
+Dawud, Jami' al-Tirmidhi and Sunan Ibn Majah: classical works in the public domain. The Arabic
+is transcribed and vowelled by Takrar from the printed editions as al-Maktaba al-Shamila
+(shamela.ws) gives them, and collated against fawazahmed0/hadith-api for comparison only.
+Gradings quote al-Tirmidhi's Jami', al-Nawawi's al-Adhkar (read in the al-Arna'ut edition on
+shamela.ws) and al-Daraqutni's Sunan; each is attributed by name on the item. The English
+translations are Takrar's own work. Nothing from Hisn al-Muslim, Sunnah.com's English,
+Darussalam or any published translation is used. Quranic items are references only and render
+from the app's licensed Quran text.
+
+
+==============================================================================
+Names of Allah
+==============================================================================
+
+The meanings, explanations, transliterations, intro text and glossary entry of the Names of
+Allah deck are Takrar's own work. The transliterations are made by Takrar's own scheme
+(src/lib/transliterate.ts) from our own vocalised Arabic of each Name.
+
+The order of the Names follows the enumeration narrated in the Jami' of al-Tirmidhi
+(d. 279 AH), a public-domain work; the Names themselves are not anyone's text. Quran
+references point to the Tanzil Quran text already bundled with the app (listed above); no
+Quran text is stored in the deck beyond the single word or phrase a derived Name is taken
+from, copied from that same Tanzil text. Hadith and works of scholarship (Sahih al-Bukhari,
+Sahih Muslim, al-Tirmidhi's Jami', al-Tabari's Jami' al-Bayan, Ibn Hajar's Fath al-Bari,
+Ibn Kathir's Tafsir) are cited, not reproduced.
+
+Online copies were read only to confirm the list, the citation numbers and the scholars'
+remarks (surahquran.com, hadithanswers.com, dorar.net, page views of sunnah.com, the
+hadith-api Arabic edition, the tafsir pages of quran.ksu.edu.sa, shamela.ws). Nothing from
+those sites is bundled.
+
+
+==============================================================================
+Foundations course, Unit Purification
+==============================================================================
+
+The lessons, recall cards, check questions and glossary definitions of the purification
+unit are Takrar's own work, written for this app.
+
+Each school's position is cited, by work and chapter, to one classical primer, with a short
+phrase of its Arabic quoted as the words relied on:
+  Hanafi:   Mukhtasar al-Quduri, by Abu al-Husayn al-Quduri (d. 428 AH)
+  Maliki:   al-Risala, by Ibn Abi Zayd al-Qayrawani (d. 386 AH)
+  Shafi'i:  Matn Abi Shuja' (al-Ghaya wa al-Taqrib), by Abu Shuja' al-Asfahani (d. 593 AH)
+  Hanbali:  'Umdat al-Fiqh, by Ibn Qudamah al-Maqdisi (d. 620 AH)
+Points of agreement and difference are cited to Bidayat al-Mujtahid by Ibn Rushd (d. 595 AH),
+al-Ijma' by Ibn al-Mundhir (d. 318 AH) and Maratib al-Ijma' by Ibn Hazm (d. 456 AH).
+
+These works are in the public domain. They are cited and briefly quoted, not reproduced; no
+edition's notes, introduction or apparatus is used. The quotations were read in the copies at
+shamela.ws (al-Maktaba al-Shamila), page by page, as recorded in
+content/deen/course/purification/citations.json. Quran references are rendered from the
+app's own Quran text.
+
+Status: source-checked by the authoring pipeline. Not yet reviewed by a scholar.
+
+
+==============================================================================
+Course, Unit Fasting
+==============================================================================
+
+The lessons, cards, questions, glossary entries and English wording of Unit Fasting are
+Takrar's own work.
+
+School positions are cited, by work and chapter with a short Arabic phrase, from four
+classical primers, all long in the public domain: Mukhtasar al-Quduri (al-Quduri, d. 428 AH),
+al-Risala (Ibn Abi Zayd al-Qayrawani, d. 386 AH), Matn Abi Shuja' (Abu Shuja' al-Asfahani,
+d. 593 AH) and 'Umdat al-Fiqh (Ibn Qudamah, d. 620 AH). Agreement and difference are cited
+from Bidayat al-Mujtahid (Ibn Rushd, d. 595 AH) and al-Ijma' (Ibn al-Mundhir, d. 318 AH),
+also public domain. These works are cited, not reproduced.
+
+Three hadith are quoted in Arabic from Sahih al-Bukhari and Sunan Abi Dawud (public-domain
+texts, our own transcription collated against two witnesses) with our own English translation.
+One grading is quoted, with attribution, from the Sunan of al-Daraqutni (d. 385 AH), and a remark
+of al-Nawawi (d. 676 AH) in al-Adhkar is paraphrased with attribution; both works are public domain.
+Quran passages are shown from the app's licensed Quran text and translation, listed above.
+
+Online copies were read to locate and check the wording (shamela.ws, dorar.net, hadith-api,
+and the OpenITI text of al-Adhkar).
+No text, translation or commentary from those sites is bundled.

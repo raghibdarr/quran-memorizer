@@ -6,8 +6,6 @@ import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
 import { useSettingsStore } from '@/stores/settings-store';
 import { useReaderStore } from '@/stores/reader-store';
-import { usePlaceStore } from '@/stores/place-store';
-import { calcSettingsOf, usePrayerStore } from '@/stores/prayer-store';
 import { upcoming } from '@/lib/upcoming';
 import { khatmStatus } from '@/lib/khatm';
 import { addDaysIso, todayIso } from '@/lib/dates';
@@ -49,9 +47,29 @@ export default function WidgetSync() {
   const lastActiveDate = useStatsStore((s) => s.lastActiveDate);
   const hideStats = useSettingsStore((s) => !!s.hideStats);
   const khatm = useReaderStore((s) => s.khatm);
-  const place = usePlaceStore((s) => s.place);
-  // A string, so the effect reruns only when the calculation really changes
-  const calcKey = usePrayerStore((s) => JSON.stringify(calcSettingsOf(s)));
+  // The place and the calculation, read from their stores by dynamic import in the
+  // Android app only, so neither store is in Home's first load. `key` is a string,
+  // so the effect below reruns only when the place or the calculation really changes
+  const [prayer, setPrayer] = useState<{ key: string; hasPlace: boolean; tz?: string }>({ key: '', hasPlace: false });
+  useEffect(() => {
+    if (!TakrarWidget.available()) return;
+    let live = true;
+    let unsubs: (() => void)[] = [];
+    void Promise.all([import('@/stores/place-store'), import('@/stores/prayer-store')]).then(([pl, pr]) => {
+      if (!live) return;
+      const read = () => {
+        const place = pl.usePlaceStore.getState().place;
+        const next = { key: JSON.stringify([place, pr.calcSettingsOf(pr.usePrayerStore.getState())]), hasPlace: !!place, tz: place?.tz };
+        setPrayer((prev) => (prev.key === next.key ? prev : next));
+      };
+      read();
+      unsubs = [pl.usePlaceStore.subscribe(read), pr.usePrayerStore.subscribe(read)];
+    }).catch(() => {});
+    return () => {
+      live = false;
+      unsubs.forEach((u) => u());
+    };
+  }, []);
 
   // Bumped when the app comes back to the foreground, so a long-lived session
   // doesn't let the widget's week of prayer times run out
@@ -82,18 +100,20 @@ export default function WidgetSync() {
       }
       const base = { due, streak: hideStats ? 0 : alive, khatm: line };
       // Loaded only here: the prayer engine (and adhan) stay out of every screen's first load
-      const prayers = place
+      const prayers = prayer.hasPlace
         ? import('@/lib/prayer/widget-payload').then((m) => m.prayerWidgetPayload()).catch(() => null)
         : Promise.resolve(null);
       void prayers.then((payload) => {
-        if (!cancelled) void TakrarWidget.update(widgetData(base, payload, place?.tz));
+        if (!cancelled) void TakrarWidget.update(widgetData(base, payload, prayer.tz));
       });
     }, 1500);
     return () => {
       cancelled = true;
       clearTimeout(t);
     };
-  }, [lessonCards, cards, streak, lastActiveDate, hideStats, khatm, place, calcKey, resumeTick]);
+    // prayer.key stands for hasPlace and tz too
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lessonCards, cards, streak, lastActiveDate, hideStats, khatm, prayer.key, resumeTick]);
 
   // What Android Auto can browse: the current reciter's surahs (roadmap #20)
   const reciter = useSettingsStore((s) => s.reciter);

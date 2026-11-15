@@ -1,7 +1,7 @@
 {
  "deck": "course-fasting",
  "kind": "course",
- "hash": "373abd0962023de9",
+ "hash": "be9cc38de4aaf40f",
  "items": [
   {
    "unit": "fasting",
@@ -1752,6 +1752,168 @@
      ],
      "answer": 2,
      "claim": "three-outcomes"
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  }
+ ],
+ "evidence": [
+  {
+   "id": "fasting-is-a-shield",
+   "deck": "course-fasting-evidence",
+   "rev": 2,
+   "title": "Fasting is a shield",
+   "cue": "What a fasting person says when insulted",
+   "arabic": "الصِّيَامُ جُنَّةٌ فَلَا يَرْفُثْ وَلَا يَجْهَلْ وَإِنِ امْرُؤٌ قَاتَلَهُ أَوْ شَاتَمَهُ فَلْيَقُلْ إِنِّي صَائِمٌ مَرَّتَيْنِ",
+   "translation": "Fasting is a shield, so let him not speak indecently or act ignorantly. If a man fights him or insults him, let him say: “I am fasting,” twice.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "1894",
+     "numbering": "fath-al-bari",
+     "book": "Kitab al-Sawm",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "dorar",
+      "ref": "dorar.net hadith encyclopedia: Sahih al-Bukhari, no. 1894, narrator Abu Hurayrah",
+      "skeletonSha256": "914a81c9eaede4eb752e410feb01307f2a3999dad9440b3e725ff73debffaaf6"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "ara-bukhari, hadith 1894",
+      "skeletonSha256": "914a81c9eaede4eb752e410feb01307f2a3999dad9440b3e725ff73debffaaf6"
+     },
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya edition, no. 1894 (shamela.ws/book/1681/3024)",
+      "skeletonSha256": "914a81c9eaede4eb752e410feb01307f2a3999dad9440b3e725ff73debffaaf6"
+     }
+    ],
+    "note": "The Arabic stored is the first part of the hadith, up to “twice”. The hadith continues with the fasting person’s breath and reward; that part is not quoted here. The chain of narrators is left out."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "id": "forgetful-eater",
+   "deck": "course-fasting-evidence",
+   "rev": 2,
+   "title": "The one who eats forgetfully",
+   "cue": "What the Prophet ﷺ said about a fasting person who forgets and eats",
+   "arabic": "إِذَا نَسِيَ فَأَكَلَ وَشَرِبَ فَلْيُتِمَّ صَوْمَهُ فَإِنَّمَا أَطْعَمَهُ اللَّهُ وَسَقَاهُ",
+   "translation": "If he forgets and eats and drinks, let him complete his fast, for it is Allah who fed him and gave him drink.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "1933",
+     "numbering": "fath-al-bari",
+     "book": "Kitab al-Sawm",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "dorar",
+      "ref": "dorar.net hadith encyclopedia: Sahih al-Bukhari, no. 1933, narrator Abu Hurayrah",
+      "skeletonSha256": "806f7b6d6e5b37283e84b0cb4242cae6a4f6984a2fe75efb12a599a55a9fddc2"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "ara-bukhari, hadith 1933",
+      "skeletonSha256": "806f7b6d6e5b37283e84b0cb4242cae6a4f6984a2fe75efb12a599a55a9fddc2"
+     },
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya edition, no. 1933 (shamela.ws/book/1681/3084)",
+      "skeletonSha256": "806f7b6d6e5b37283e84b0cb4242cae6a4f6984a2fe75efb12a599a55a9fddc2"
+     }
+    ],
+    "note": "The Arabic stored is the Prophet’s ﷺ words; the chain of narrators is left out."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-13"
+   }
+  },
+  {
+   "id": "iftar-dhahaba-al-zama",
+   "deck": "course-fasting-evidence",
+   "rev": 1,
+   "title": "Words on breaking the fast",
+   "cue": "What the Prophet ﷺ said when he broke his fast",
+   "arabic": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
+   "translation": "The thirst has gone, the veins are moist, and the reward is assured, if Allah wills.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "2357",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "book": "Kitab al-Sawm, bab al-qawl ‘inda al-iftar",
+     "narrator": "Abdullah ibn Umar"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "hasan",
+     "by": "al-daraqutni",
+     "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (Mu’assasat al-Risala edition)",
+     "quote": "تفرد به الحسين بن واقد وإسناده حسن"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, vol. 2 p. 306, no. 2357 (shamela.ws/book/1726/3158)",
+      "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "ara-abudawud, hadith 2357",
+      "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+     }
+    ],
+    "note": "The Arabic stored is the supplication only. In Abu Dawud it follows the frame “the Messenger of Allah ﷺ, when he broke his fast, used to say”, which is given here in the cue and the usage line, not in the Arabic."
+   },
+   "notes": [
+    {
+     "text": "Al-Nawawi quotes the second wording from Abu Dawud, where Mu’adh ibn Zuhrah says it reached him that the Prophet ﷺ used to say it on breaking his fast, and remarks that he narrated it like this, [[mursal]].",
+     "source": {
+      "work": "al-adhkar",
+      "location": "Bab ma yaqul ‘inda al-iftar"
+     }
+    }
+   ],
+   "usage": {
+    "when": [
+     "On breaking the fast at sunset"
+    ]
+   },
+   "variants": [
+    {
+     "label": "Another wording, from a mursal report: “O Allah, for You I have fasted, and on Your provision I break my fast.”",
+     "arabic": "اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ",
+     "citations": [
+      {
+       "collection": "abu-dawud",
+       "number": "2358",
+       "numbering": "muhyi-al-din-abd-al-hamid",
+       "book": "Kitab al-Sawm, bab al-qawl ‘inda al-iftar",
+       "narrator": "Mu’adh ibn Zuhrah, who says it reached him"
+      }
+     ]
     }
    ],
    "review": {

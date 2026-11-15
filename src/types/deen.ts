@@ -149,6 +149,8 @@ export interface EmittedDeck {
   /** Build stamp of the content (not a time: a hash, so re-emitting is stable) */
   hash: string;
   items: (TextItem | NameItem | Lesson)[];
+  /** A course unit's own evidence hadith (cited as "<deck>-evidence:<id>"), when it has any */
+  evidence?: TextItem[];
 }
 
 /** How deep a learner goes with a deck */

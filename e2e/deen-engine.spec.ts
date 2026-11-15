@@ -159,7 +159,7 @@ test.describe('deen engine', () => {
     await expect(page.getByRole('heading', { name: 'Memorisation plans' })).toBeVisible()
     const hadithRow = page.locator('[data-learn-row="hadith"]')
     const live = await hadithRow.waitFor({ timeout: 4000 }).then(() => true, () => false)
-    const before = live ? Number((await hadithRow.innerText()).match(/0\/(\d+)/)?.[1] ?? NaN) : 0
+    const before = live ? Number((await hadithRow.innerText()).match(/(\d+) to learn/)?.[1] ?? NaN) : 0
     expect(Number.isNaN(before)).toBe(false)
     await page.close()
 
@@ -168,7 +168,7 @@ test.describe('deen engine', () => {
     await seed(withFixture)
     await withFixture.goto('/essentials')
     const row = withFixture.locator('[data-learn-row="hadith"]')
-    await expect(row).toContainText(`0/${before + 3}`)
+    await expect(row).toContainText(`${before + 3} to learn`)
 
     // A card for one item makes it started
     await withFixture.evaluate(() => {

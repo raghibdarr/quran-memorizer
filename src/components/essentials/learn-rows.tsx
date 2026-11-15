@@ -127,12 +127,21 @@ export function LearnRows() {
                   <ProgressBar value={(started / total) * 100} className="flex-1" />
                   {/* Same count format as the collections further down the tab */}
                   <span className="shrink-0 text-[11px] tabular-nums text-muted">
-                    <span aria-hidden>
-                      {started}/{total}
-                    </span>
-                    <span className="sr-only">
-                      {started} of {total} {unit} started
-                    </span>
+                    {started === 0 ? (
+                      // Nothing started yet: say what is waiting, not a bare "0/53"
+                      <span>
+                        {total} to learn
+                      </span>
+                    ) : (
+                      <>
+                        <span aria-hidden>
+                          {started}/{total}
+                        </span>
+                        <span className="sr-only">
+                          {started} of {total} {unit} started
+                        </span>
+                      </>
+                    )}
                   </span>
                 </div>
               )}

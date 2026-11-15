@@ -30,13 +30,18 @@ const UNIX_EPOCH_JD = 2440587.5;
 
 type CivilInput = Date | string;
 
-/** Days since 1970-01-01 for a civil date */
+/** Days since 1970-01-01 for a civil date (years 0-99 are read as written, not as 19xx) */
 function dayNumber(input: CivilInput): number {
+  const utc = (y: number, m: number, d: number) => {
+    const t = new Date(Date.UTC(2000, m, d));
+    t.setUTCFullYear(y);
+    return t.getTime();
+  };
   if (typeof input === 'string') {
     const [y, m, d] = input.split('-').map(Number);
-    return Math.round(Date.UTC(y, m - 1, d) / MS_DAY);
+    return Math.round(utc(y, m - 1, d) / MS_DAY);
   }
-  return Math.round(Date.UTC(input.getFullYear(), input.getMonth(), input.getDate()) / MS_DAY);
+  return Math.round(utc(input.getFullYear(), input.getMonth(), input.getDate()) / MS_DAY);
 }
 
 function isoOfDayNumber(n: number): string {

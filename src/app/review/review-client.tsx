@@ -26,6 +26,7 @@ import { cn } from '@/lib/cn';
 
 import { ayahRange } from '@/lib/ayah-range';
 import { DeenReviewSection } from '@/components/review/deen-section';
+import { useDeenQueue } from '@/hooks/use-deen-queue';
 export default function ReviewPage() {
   const cards = useReviewStore((s) => s.cards);
   const lessonCards = useReviewStore((s) => s.lessonCards);
@@ -102,6 +103,7 @@ export default function ReviewPage() {
   const dueCount = dueCards.length;
   const leeches = useMemo(() => getLeeches(cards), [cards]);
   const weakCount = useMemo(() => getWeakAyahs(cards).length, [cards]);
+  const deenQueue = useDeenQueue();
 
   // Sessions are their own screen (M11b) — pushed, so back closes them
   const openSession = (query = '') =>
@@ -122,6 +124,24 @@ export default function ReviewPage() {
   // Empty state — route a hafiz to revision, not the beginner-lesson funnel (M4)
   if (surahIds.length === 0) {
     const isHafiz = (plan?.knownSurahIds.length ?? 0) > 0 || plan?.goalType === 'maintain';
+    // Hadith, duas or Names already waiting: one quiet line, then their Start button first
+    if (deenQueue.ready && deenQueue.cardCount > 0) {
+      return (
+        <div className="min-h-dvh bg-cream px-4 pb-[calc(var(--tabbar-clearance)+1rem)] pt-[calc(var(--safe-top)+1rem)]" data-review-deen-only>
+          <div className="mx-auto max-w-2xl space-y-3">
+            <h1 className="text-xl font-bold text-foreground">Review</h1>
+            <p className="text-sm text-muted">
+              No Quran reviews yet.{' '}
+              <Link href="/" className="inline-flex min-h-11 items-center font-semibold text-teal">
+                {isHafiz ? 'Revise what I know' : 'Find a surah'}
+              </Link>
+            </p>
+            <DeenReviewSection />
+          </div>
+          <BottomNav />
+        </div>
+      );
+    }
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center bg-cream px-4 pb-20">
         <StarIcon size={40} className="text-teal" />

@@ -16,7 +16,13 @@ export function loadDeckModule(id: string): Promise<DeckModule | null> {
   let p = modules.get(id);
   if (!p) {
     const info = deckInfo(id);
-    p = info ? info.module().then((m) => m.default).catch(() => null) : Promise.resolve(null);
+    p = info
+      ? info.module().then((m) => m.default).catch(() => {
+        // A failed download is not remembered, so a retry can reach the network again
+        modules.delete(id);
+        return null;
+      })
+      : Promise.resolve(null);
     modules.set(id, p);
   }
   return p;
@@ -41,10 +47,12 @@ export function loadDeck(id: string): Promise<EmittedDeck | null> {
     p = (async () => {
       const info = deckInfo(id);
       const mod = await loadDeckModule(id);
+      if (info && !mod) decks.delete(id); // the module failed to download: let a retry try again
       if (!info || !mod || !isDeckVisible(info, mod) || !mod.ready) return null;
       try {
         return unwrap(await mod.load());
       } catch {
+        decks.delete(id);
         return null;
       }
     })();

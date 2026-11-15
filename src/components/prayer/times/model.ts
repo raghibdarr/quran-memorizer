@@ -100,7 +100,10 @@ export function inOrder<R extends { name: TimeName; startMs: number | null; endM
   }
   // A row whose following time was dropped ends where the next kept one begins
   for (let i = 0; i < out.length - 1; i++) {
-    if (rows[i + 1].startMs === out[i + 1].startMs) continue;
+    // An Asr the engine itself left out (it does so near the poles rather than place it
+    // before Dhuhr) counts as dropped too, so Dhuhr still runs on to Maghrib here
+    const engineDroppedAsr = out[i + 1].name === 'asr' && out[i + 1].startMs === null && out[i].name === 'dhuhr';
+    if (rows[i + 1].startMs === out[i + 1].startMs && !engineDroppedAsr) continue;
     const later = out.slice(i + 1).find((r) => r.startMs !== null);
     out[i].endMs = later ? later.startMs : rows[rows.length - 1].endMs;
   }

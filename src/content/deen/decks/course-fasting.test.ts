@@ -128,7 +128,7 @@ describe('lessons follow the brief', () => {
   })
 })
 
-describe('evidence hadith (not yet read by the shared build, see HANDOFF.md)', () => {
+describe('evidence hadith (emitted by scripts/build-deen.mjs as the deck file\'s `evidence`)', () => {
   const res = deen.validateDeck({ deck: EVIDENCE_DECK, kind: 'hadith', items: evidence, lock: { ids: {} } }, deen.makeContext(root))
 
   it('pass the same guardrails as a hadith deck', () => {

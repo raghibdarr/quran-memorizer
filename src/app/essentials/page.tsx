@@ -91,7 +91,7 @@ export default function EssentialsPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-foreground">Learn</h1>
-              <p className="text-sm text-muted">Plans, guides, duas and dhikr</p>
+              <p className="text-sm text-muted">Plans, guides, hadith, duas and the Names</p>
             </div>
             <div className="flex items-center gap-2">
               <SettingsPanel />
@@ -117,6 +117,12 @@ export default function EssentialsPage() {
         {GUIDES.slice(0, 3).map((g) => <Row key={g.slug} href={`/blog/${g.slug}`} title={g.title} detail={`${g.minutes} min read · ${g.summary}`} />)}
 
         <SectionHead title="Duas, dhikr and key ayahs" />
+        <p className="px-1 text-xs text-muted" data-essentials-pointer>
+          The checked versions, with their sources, are in{' '}
+          <Link href="/adhkar" className="inline-flex min-h-9 items-center font-semibold text-teal">
+            Adhkar and duas
+          </Link>
+        </p>
         {/* Search sits with what it searches */}
         <input
           type="text"

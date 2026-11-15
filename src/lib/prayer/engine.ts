@@ -95,9 +95,24 @@ export function computeDay(place: Where, iso: string, settings: PrayerCalcSettin
       if (Math.abs(shift) === 1) times = timesFor(addDaysIso(iso, shift));
     }
   }
+  const raw = {} as DayTimes;
+  for (const name of TIME_NAMES) raw[name] = valid(times[name]);
+  // Near the polar circles adhan can answer with a time from another day or out of
+  // order (Asr before Dhuhr in a Tromsø December, Asr four days away at
+  // Longyearbyen). A time it cannot place on this day is no time, not a wrong one.
+  const noon = raw.dhuhr;
+  if (noon !== null) {
+    for (const name of TIME_NAMES) {
+      const t = raw[name];
+      if (t !== null && Math.abs(t - noon) > 20 * 60 * MIN) raw[name] = null;
+    }
+    // (a minute or two either side is adhan rounding where the sun barely rises, not a misplaced time)
+    const slack = 5 * MIN;
+    if (raw.asr !== null && (raw.asr < noon - slack || (raw.maghrib !== null && raw.asr > raw.maghrib + slack))) raw.asr = null;
+  }
   const out = {} as DayTimes;
   for (const name of TIME_NAMES) {
-    const t = valid(times[name]);
+    const t = raw[name];
     out[name] = t === null ? null : t + (settings.offsets?.[name] ?? 0) * MIN;
   }
   return out;
@@ -123,6 +138,8 @@ export interface PrayerRow {
 export function prayerRows(place: Where, iso: string, settings: PrayerCalcSettings): PrayerRow[] {
   const day = computeDay(place, iso, settings);
   const nextFajr = computeDay(place, addDaysIso(iso, 1), settings).fajr;
+  // A window ends when the next time begins; with no next time (no Asr near the poles)
+  // its end is unknown (null), so the prayer log never calls a tap late on a guess
   return TIME_NAMES.map((name, i) => ({
     name,
     startMs: day[name],

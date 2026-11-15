@@ -1,5 +1,7 @@
 # Takrar all-in-one: merged build spec
 
+Integration status (2026-11-15): all 17 packages merged on branch `allinone`; every deck and every Prayer tool is live (no `ready: false`); full gate green (see HANDOFF.md for owner follow-ups and device checks). Android not yet compiled in CI.
+
 Status: approved design for parallel build. Written 2026-11-13 by the judge pass over three independent designs (experience lens = D1, engineering lens = D2, content lens = D3). Source roadmap: `Downloads/reports/All in one Muslim app roadmap.md` (Phase 1 parity, Phase 2 differentiators). Every build agent reads this file plus its own brief.
 
 ## 0. Judgement of the three designs

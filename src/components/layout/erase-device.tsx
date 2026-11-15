@@ -25,12 +25,24 @@ export async function eraseThisDevice() {
   if (Capacitor.isNativePlatform()) {
     const { Filesystem, Directory } = await import('@capacitor/filesystem');
     await Filesystem.rmdir({ path: 'audio', directory: Directory.Data, recursive: true }).catch(() => {});
+    // Alarms the OS holds outlive localStorage: hifz reminders, adhkar and the hawl
+    // reminder (prayer alerts clear themselves on the next run, see PrayerSync)
+    await cancelScheduled().catch(() => {});
   }
   if ('caches' in window) {
     const names = await caches.keys().catch(() => [] as string[]);
     await Promise.all(names.map((n) => caches.delete(n).catch(() => false)));
   }
   window.location.replace('/');
+}
+
+async function cancelScheduled() {
+  const { LocalNotifications } = await import('@capacitor/local-notifications');
+  const { NOTIFY_RANGES, inRange } = await import('@/lib/notify/registry');
+  const ranges = [NOTIFY_RANGES.hifz, NOTIFY_RANGES.adhkar, NOTIFY_RANGES.reminders, NOTIFY_RANGES.prayer, NOTIFY_RANGES.prayerTail];
+  const { notifications } = await LocalNotifications.getPending();
+  const ours = notifications.filter((n) => ranges.some((r) => inRange(n.id, r)));
+  if (ours.length) await LocalNotifications.cancel({ notifications: ours.map((n) => ({ id: n.id })) });
 }
 
 export default function EraseDevice() {

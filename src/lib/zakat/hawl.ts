@@ -103,6 +103,8 @@ export function planHawlReminder(opts: {
       title: 'Your zakat year',
       body: `Your zakat year is expected to complete today, ${formatHijri(next.hijri)}. Open Takrar to work out what is due.`,
       schedule: { at, allowWhileIdle: true },
+      // Android: a once-a-year nudge needs no exact alarm (and must not open its settings screen)
+      isExactNotification: false,
       extra: { url: '/zakat' },
     },
   ];
