@@ -7,6 +7,7 @@
 // never needs to know about ayahs.
 
 import { getAudioUrl } from './quran-data';
+import type { AudioFixes } from './audio-fixes';
 
 export interface AyahRef { surah: number; ayah: number }
 
@@ -38,6 +39,8 @@ export interface QueueOptions {
   surahAudio: SurahAudioIndex | null;
   /** Per-ayah collection that fills a surah-audio reciter's missing ayahs */
   fallbackReciter: string;
+  /** Misfiled per-ayah ayahs: the slice that really holds each (audio-fixes.json) */
+  fixes?: AudioFixes | null;
   repeatEach: number;
   /** Merge consecutive ayahs into one slice (only when nothing repeats or pauses) */
   merge: boolean;
@@ -53,9 +56,12 @@ export function buildQueue(ayahs: AyahRef[], o: QueueOptions): QueueItem[] {
   for (const { surah, ayah } of ayahs) {
     const span = o.surahAudio?.verses[surah - 1]?.[ayah - 1] ?? null;
     const src = o.surahAudio?.src[surah - 1] ?? null;
+    const fix = o.fixes?.[`${surah}:${ayah}`];
     const base = span && src
       ? { url: local(src, surah), startMs: span[0], endMs: span[1] as number | null }
-      : { url: local(getAudioUrl(surah, ayah, o.surahAudio ? o.fallbackReciter : o.reciter), surah), startMs: 0, endMs: null };
+      : fix
+        ? { url: local(fix[0], surah), startMs: fix[1], endMs: fix[2] as number | null }
+        : { url: local(getAudioUrl(surah, ayah, o.surahAudio ? o.fallbackReciter : o.reciter), surah), startMs: 0, endMs: null };
 
     const prev = out[out.length - 1];
     if (o.merge && times === 1 && prev && span && prev.url === base.url && prev.surah === surah

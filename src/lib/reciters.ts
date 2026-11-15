@@ -76,7 +76,11 @@ export const RENAMED_RECITERS: Record<string, string> = {
   'qud-husary_mujawwad': 'Husary_128kbps_Mujawwad',
 };
 
+/** Per-ayah reciters with misfiled EveryAyah ayahs, corrected by public/segments/<id>/audio-fixes.json */
+const AUDIO_FIXES = new Set(['khalefa_al_tunaiji_64kbps']);
+
 export const isSurahAudio = (id: string) => SURAH_AUDIO.has(id);
+export const hasAudioFixes = (id: string) => AUDIO_FIXES.has(id);
 export const surahAudioFallback = (id: string) => SURAH_AUDIO.get(id) ?? 'Alafasy_128kbps';
 /** Whether public/segments has word timings for this reciter (highlighting, word slices) */
 export const hasWordTimings = (id: string) => AYAH_TIMED.has(id) || SURAH_AUDIO.has(id);

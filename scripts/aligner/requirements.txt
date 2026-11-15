@@ -1,0 +1,7 @@
+# torch: install the CUDA build first, see README
+torch>=2.6
+numpy>=2.2.6
+transformers>=4.55
+safetensors
+huggingface_hub
+quran-transcript==0.6.4

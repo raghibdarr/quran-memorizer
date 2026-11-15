@@ -31,6 +31,20 @@ describe('buildQueue', () => {
     expect(q[2]).toMatchObject({ startMs: 12000, endMs: 30000 });
   });
 
+  it('per-ayah reciters: misfiled ayahs play the slice audio-fixes points at', () => {
+    const fixes = {
+      '1:2': ['https://everyayah.com/data/T/001001.mp3', 0, 4000] as [string, number, number],
+      '1:3': ['https://m/001.mp3', 9000, 12000] as [string, number, number],
+    };
+    const q = buildQueue(fatihah.slice(0, 4), { reciter: 'T', reciterName: 'T', surahAudio: null, fallbackReciter: 'x', fixes, repeatEach: 1, merge: false, surahName: names });
+    expect(q.map((i) => [i.url, i.startMs, i.endMs])).toEqual([
+      ['https://everyayah.com/data/T/001001.mp3', 0, null],
+      ['https://everyayah.com/data/T/001001.mp3', 0, 4000],
+      ['https://m/001.mp3', 9000, 12000],
+      ['https://everyayah.com/data/T/001004.mp3', 0, null],
+    ]);
+  });
+
   it("doesn't merge when ayahs repeat", () => {
     const q = buildQueue(fatihah.slice(0, 2), { reciter: 'qud-x', reciterName: 'X', surahAudio: qud, fallbackReciter: 'A', repeatEach: 2, merge: true, surahName: names });
     expect(q.map((i) => i.tag)).toEqual(['1:1-1#0', '1:1-1#1', '1:2-2#0', '1:2-2#1']);

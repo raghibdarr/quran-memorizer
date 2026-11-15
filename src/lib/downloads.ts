@@ -15,6 +15,7 @@ import { Capacitor } from '@capacitor/core';
 import { getAudioUrl } from './quran-data';
 import { isSurahAudio, surahAudioFallback } from './reciters';
 import { loadAudioIndex } from './audio-index';
+import { loadAudioFixes } from './audio-fixes';
 
 export const AUDIO_CACHE = 'takrar-audio-v1';
 const MANIFEST_KEY = 'audio-downloads';
@@ -68,7 +69,9 @@ export async function filesForSurah(reciter: string, surah: number, ayahCount: n
     const missing = Array.from({ length: ayahCount }, (_, i) => i + 1).filter((a) => !src || !spans[a - 1]);
     return [...(src ? [src] : []), ...missing.map((a) => getAudioUrl(surah, a, fallback))];
   }
-  return Array.from({ length: ayahCount }, (_, i) => getAudioUrl(surah, i + 1, reciter));
+  const fixes = await loadAudioFixes(reciter);
+  const urls = Array.from({ length: ayahCount }, (_, i) => fixes?.[`${surah}:${i + 1}`]?.[0] ?? getAudioUrl(surah, i + 1, reciter));
+  return [...new Set(urls)];
 }
 
 let nativeBase: Promise<string> | null = null;
