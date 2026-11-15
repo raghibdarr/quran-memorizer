@@ -1,12 +1,12 @@
 {
  "deck": "nawawi40",
  "kind": "hadith",
- "hash": "2aa5a1f23ce065a9",
+ "hash": "69329d742f276fcb",
  "items": [
   {
    "id": "01",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "Actions are by intentions",
    "cue": "What the Prophet ﷺ said about intentions and emigration",
    "arabic": "عَنْ أَمِيرِ الْمُؤْمِنِينَ أَبِي حَفْصٍ عُمَرَ بْنِ الْخَطَّابِ رَضِيَ اللَّهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى. فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إِلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوِ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ».",
@@ -15,7 +15,7 @@
     297,
     413
    ],
-   "translation": "It is narrated from the Commander of the Believers, Abu Hafs Umar ibn al-Khattab, may Allah be pleased with him, who said: I heard the Messenger of Allah ﷺ say: “Actions are only by intentions, and every person will have only what he intended. So whoever’s emigration was to Allah and His Messenger, his emigration is to Allah and His Messenger. And whoever’s emigration was for something of this world he would gain, or a woman he would marry, his emigration is to what he emigrated for.”",
+   "translation": "It is narrated from the Commander of the Believers, Abu Hafs Umar ibn al-Khattab, may Allah be pleased with him, who said: I heard the Messenger of Allah ﷺ say: “Actions are only by intentions, and every person will have only what he intended.\n\nSo whoever’s emigration was to Allah and His Messenger, his emigration is to Allah and His Messenger.\n\nAnd whoever’s emigration was for something of this world he would gain, or a woman he would marry, his emigration is to what he emigrated for.”",
    "citations": [
     {
      "collection": "bukhari",
@@ -84,7 +84,7 @@
   {
    "id": "02",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "Jibril's questions",
    "cue": "Jibril asks the Prophet ﷺ about Islam, faith, excellence and the Hour",
    "arabic": "عَنْ عُمَرَ رَضِيَ اللَّهُ عَنْهُ أَيْضًا قَالَ: بَيْنَمَا نَحْنُ جُلُوسٌ عِنْدَ رَسُولِ اللَّهِ ﷺ ذَاتَ يَوْمٍ، إِذْ طَلَعَ عَلَيْنَا رَجُلٌ شَدِيدُ بَيَاضِ الثِّيَابِ، شَدِيدُ سَوَادِ الشَّعْرِ، لَا يُرَى عَلَيْهِ أَثَرُ السَّفَرِ، وَلَا يَعْرِفُهُ مِنَّا أَحَدٌ، حَتَّى جَلَسَ إِلَى النَّبِيِّ ﷺ، فَأَسْنَدَ رُكْبَتَيْهِ إِلَى رُكْبَتَيْهِ، وَوَضَعَ كَفَّيْهِ عَلَى فَخِذَيْهِ، وَقَالَ: يَا مُحَمَّدُ، أَخْبِرْنِي عَنِ الْإِسْلَامِ. فَقَالَ رَسُولُ اللَّهِ ﷺ: «الْإِسْلَامُ أَنْ تَشْهَدَ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَتُقِيمَ الصَّلَاةَ، وَتُؤْتِيَ الزَّكَاةَ، وَتَصُومَ رَمَضَانَ، وَتَحُجَّ الْبَيْتَ إِنِ اسْتَطَعْتَ إِلَيْهِ سَبِيلًا». قَالَ: صَدَقْتَ. فَعَجِبْنَا لَهُ يَسْأَلُهُ وَيُصَدِّقُهُ. قَالَ: فَأَخْبِرْنِي عَنِ الْإِيمَانِ. قَالَ: «أَنْ تُؤْمِنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْآخِرِ، وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ». قَالَ: صَدَقْتَ. قَالَ: فَأَخْبِرْنِي عَنِ الْإِحْسَانِ. قَالَ: «أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ». قَالَ: فَأَخْبِرْنِي عَنِ السَّاعَةِ. قَالَ: «مَا الْمَسْئُولُ عَنْهَا بِأَعْلَمَ مِنَ السَّائِلِ». قَالَ: فَأَخْبِرْنِي عَنْ أَمَارَاتِهَا. قَالَ: «أَنْ تَلِدَ الْأَمَةُ رَبَّتَهَا، وَأَنْ تَرَى الْحُفَاةَ الْعُرَاةَ الْعَالَةَ رِعَاءَ الشَّاءِ يَتَطَاوَلُونَ فِي الْبُنْيَانِ». ثُمَّ انْطَلَقَ، فَلَبِثْتُ مَلِيًّا، ثُمَّ قَالَ: «يَا عُمَرُ، أَتَدْرِي مَنِ السَّائِلُ؟». قُلْتُ: اللَّهُ وَرَسُولُهُ أَعْلَمُ. قَالَ: «فَإِنَّهُ جِبْرِيلُ أَتَاكُمْ يُعَلِّمُكُمْ دِينَكُمْ».",
@@ -98,7 +98,7 @@
     1348,
     1543
    ],
-   "translation": "It is also narrated from Umar, may Allah be pleased with him, who said: One day, while we were sitting with the Messenger of Allah ﷺ, a man came upon us whose clothes were intensely white and whose hair was intensely black. No trace of travel could be seen on him, and none of us knew him. He sat down by the Prophet ﷺ, rested his knees against his knees, placed his palms on his thighs, and said: “Muhammad, tell me about Islam.” The Messenger of Allah ﷺ said: “Islam is that you bear witness that there is no god but Allah and that Muhammad is the Messenger of Allah, that you establish the prayer, give the [[zakat]], fast Ramadan, and make pilgrimage to the House if you are able to find a way there.” He said: “You have spoken truly.” We were amazed at him: he asks him, then confirms what he says. He said: “Then tell me about faith.” He said: “That you believe in Allah, His angels, His books, His messengers and the Last Day, and that you believe in the decree, its good and its bad.” He said: “You have spoken truly.” He said: “Then tell me about [[ihsan]].” He said: “That you worship Allah as though you see Him; and if you do not see Him, He sees you.” He said: “Then tell me about the Hour.” He said: “The one asked about it knows no more of it than the one asking.” He said: “Then tell me about its signs.” He said: “That the slave woman gives birth to her mistress, and that you see the barefoot, the unclothed, the destitute, the shepherds of sheep, competing in raising tall buildings.” Then he went away, and I stayed a long while. Then he said: “Umar, do you know who the questioner was?” I said: “Allah and His Messenger know best.” He said: “That was Jibril. He came to you to teach you your religion.”",
+   "translation": "It is also narrated from Umar, may Allah be pleased with him, who said: One day, while we were sitting with the Messenger of Allah ﷺ, a man came upon us whose clothes were intensely white and whose hair was intensely black. No trace of travel could be seen on him, and none of us knew him.\n\nHe sat down by the Prophet ﷺ, rested his knees against his knees, placed his palms on his thighs, and said: “Muhammad, tell me about Islam.”\n\nThe Messenger of Allah ﷺ said: “Islam is that you bear witness that there is no god but Allah and that Muhammad is the Messenger of Allah, that you establish the prayer, give the [[zakat]], fast Ramadan, and make pilgrimage to the House if you are able to find a way there.” He said: “You have spoken truly.” We were amazed at him: he asks him, then confirms what he says.\n\nHe said: “Then tell me about faith.” He said: “That you believe in Allah, His angels, His books, His messengers and the Last Day, and that you believe in the decree, its good and its bad.” He said: “You have spoken truly.”\n\nHe said: “Then tell me about [[ihsan]].” He said: “That you worship Allah as though you see Him; and if you do not see Him, He sees you.”\n\nHe said: “Then tell me about the Hour.” He said: “The one asked about it knows no more of it than the one asking.”\n\nHe said: “Then tell me about its signs.” He said: “That the slave woman gives birth to her mistress, and that you see the barefoot, the unclothed, the destitute, the shepherds of sheep, competing in raising tall buildings.”\n\nThen he went away, and I stayed a long while. Then he said: “Umar, do you know who the questioner was?” I said: “Allah and His Messenger know best.” He said: “That was Jibril. He came to you to teach you your religion.”",
    "citations": [
     {
      "collection": "muslim",
@@ -230,7 +230,7 @@
   {
    "id": "04",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "Creation in the womb, and the written decree",
    "cue": "The stages of creation in the womb, and the four things written",
    "arabic": "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: حَدَّثَنَا رَسُولُ اللَّهِ ﷺ وَهُوَ الصَّادِقُ الْمَصْدُوقُ: «إِنَّ أَحَدَكُمْ يُجْمَعُ خَلْقُهُ فِي بَطْنِ أُمِّهِ أَرْبَعِينَ يَوْمًا نُطْفَةً، ثُمَّ يَكُونُ عَلَقَةً مِثْلَ ذَلِكَ، ثُمَّ يَكُونُ مُضْغَةً مِثْلَ ذَلِكَ، ثُمَّ يُرْسَلُ إِلَيْهِ الْمَلَكُ فَيَنْفُخُ فِيهِ الرُّوحَ، وَيُؤْمَرُ بِأَرْبَعِ كَلِمَاتٍ: بِكَتْبِ رِزْقِهِ، وَأَجَلِهِ، وَعَمَلِهِ، وَشَقِيٌّ أَوْ سَعِيدٌ. فَوَاللَّهِ الَّذِي لَا إِلَهَ غَيْرُهُ، إِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إِلَّا ذِرَاعٌ، فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ فَيَدْخُلُهَا، وَإِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إِلَّا ذِرَاعٌ، فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ فَيَدْخُلُهَا».",
@@ -240,7 +240,7 @@
     705,
     901
    ],
-   "translation": "It is narrated from Abu Abd al-Rahman Abd Allah ibn Mas’ud, may Allah be pleased with him, who said: The Messenger of Allah ﷺ, the truthful one, whose truth is confirmed, told us: “The creation of each of you is gathered in his mother’s womb for forty days as a drop, then he is a clinging clot for the same, then a lump of flesh for the same. Then the angel is sent to him and breathes the soul into him, and he is commanded with four words: to write his provision, his term, his deeds, and whether he is wretched or happy. By Allah, besides whom there is no god, one of you does the deeds of the people of Paradise until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of the Fire and enters it. And one of you does the deeds of the people of the Fire until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of Paradise and enters it.”",
+   "translation": "It is narrated from Abu Abd al-Rahman Abd Allah ibn Mas’ud, may Allah be pleased with him, who said: The Messenger of Allah ﷺ, the truthful one, whose truth is confirmed, told us: “The creation of each of you is gathered in his mother’s womb for forty days as a drop, then he is a clinging clot for the same, then a lump of flesh for the same.\n\nThen the angel is sent to him and breathes the soul into him, and he is commanded with four words: to write his provision, his term, his deeds, and whether he is wretched or happy.\n\nBy Allah, besides whom there is no god, one of you does the deeds of the people of Paradise until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of the Fire and enters it.\n\nAnd one of you does the deeds of the people of the Fire until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of Paradise and enters it.”",
    "citations": [
     {
      "collection": "bukhari",
@@ -395,7 +395,7 @@
   {
    "id": "06",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "The lawful, the unlawful and what is unclear",
    "cue": "The lawful, the unlawful, the doubtful matters between them, and the heart",
    "arabic": "عَنْ أَبِي عَبْدِ اللَّهِ النُّعْمَانِ بْنِ بَشِيرٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «إِنَّ الْحَلَالَ بَيِّنٌ، وَإِنَّ الْحَرَامَ بَيِّنٌ، وَبَيْنَهُمَا أُمُورٌ مُشْتَبِهَاتٌ لَا يَعْلَمُهُنَّ كَثِيرٌ مِنَ النَّاسِ. فَمَنِ اتَّقَى الشُّبُهَاتِ فَقَدِ اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ، وَمَنْ وَقَعَ فِي الشُّبُهَاتِ وَقَعَ فِي الْحَرَامِ، كَالرَّاعِي يَرْعَى حَوْلَ الْحِمَى يُوشِكُ أَنْ يَرْتَعَ فِيهِ. أَلَا وَإِنَّ لِكُلِّ مَلِكٍ حِمًى، أَلَا وَإِنَّ حِمَى اللَّهِ مَحَارِمُهُ. أَلَا وَإِنَّ فِي الْجَسَدِ مُضْغَةً إِذَا صَلَحَتْ صَلَحَ الْجَسَدُ كُلُّهُ، وَإِذَا فَسَدَتْ فَسَدَ الْجَسَدُ كُلُّهُ، أَلَا وَهِيَ الْقَلْبُ».",
@@ -405,7 +405,7 @@
     516,
     662
    ],
-   "translation": "It is narrated from Abu Abd Allah al-Nu’man ibn Bashir, may Allah be pleased with them both, who said: I heard the Messenger of Allah ﷺ say: “What is lawful is clear and what is unlawful is clear, and between them are unclear matters that many people do not know. Whoever guards against the unclear matters has kept his religion and his honour free of blame, and whoever falls into the unclear matters falls into the unlawful, like a shepherd grazing [his flock] around a protected pasture, who is soon to graze in it. Indeed, every king has a protected pasture. Indeed, the protected pasture of Allah is what He has made unlawful. Indeed, in the body there is a lump of flesh: if it is sound, the whole body is sound, and if it is corrupt, the whole body is corrupt. Indeed, it is the heart.”",
+   "translation": "It is narrated from Abu Abd Allah al-Nu’man ibn Bashir, may Allah be pleased with them both, who said: I heard the Messenger of Allah ﷺ say: “What is lawful is clear and what is unlawful is clear, and between them are unclear matters that many people do not know.\n\nWhoever guards against the unclear matters has kept his religion and his honour free of blame, and whoever falls into the unclear matters falls into the unlawful, like a shepherd grazing [his flock] around a protected pasture, who is soon to graze in it.\n\nIndeed, every king has a protected pasture. Indeed, the protected pasture of Allah is what He has made unlawful.\n\nIndeed, in the body there is a lump of flesh: if it is sound, the whole body is sound, and if it is corrupt, the whole body is corrupt. Indeed, it is the heart.”",
    "citations": [
     {
      "collection": "bukhari",
@@ -691,7 +691,7 @@
   {
    "id": "10",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "Allah accepts only what is good",
    "cue": "Allah is good and accepts only what is good; the traveller whose prayer is not answered",
    "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «إِنَّ اللَّهَ تَعَالَى طَيِّبٌ لَا يَقْبَلُ إِلَّا طَيِّبًا، وَإِنَّ اللَّهَ أَمَرَ الْمُؤْمِنِينَ بِمَا أَمَرَ بِهِ الْمُرْسَلِينَ، فَقَالَ تَعَالَى: ﴿يَا أَيُّهَا الرُّسُلُ كُلُوا مِنَ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا﴾، وَقَالَ تَعَالَى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِنْ طَيِّبَاتِ مَا رَزَقْنَاكُمْ﴾». ثُمَّ ذَكَرَ الرَّجُلَ يُطِيلُ السَّفَرَ أَشْعَثَ أَغْبَرَ، يَمُدُّ يَدَيْهِ إِلَى السَّمَاءِ: يَا رَبِّ، يَا رَبِّ، وَمَطْعَمُهُ حَرَامٌ، وَمَشْرَبُهُ حَرَامٌ، وَمَلْبَسُهُ حَرَامٌ، وَغُذِيَ بِالْحَرَامِ، فَأَنَّى يُسْتَجَابُ لَهُ؟",
@@ -701,7 +701,7 @@
     511,
     627
    ],
-   "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “Allah the Exalted is good and accepts only what is good. Allah has commanded the believers with what He commanded the messengers. He the Exalted said: ‘O messengers, eat of the good things and do righteous deeds.’ And He the Exalted said: ‘O you who believe, eat of the good things We have provided for you.’” Then he mentioned a man on a long journey, dishevelled and dusty, who stretches his hands to the sky: “My Lord, my Lord!”, while his food is unlawful, his drink is unlawful, his clothing is unlawful, and he has been nourished on the unlawful. So how could he be answered?",
+   "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “Allah the Exalted is good and accepts only what is good. Allah has commanded the believers with what He commanded the messengers.\n\nHe the Exalted said: ‘O messengers, eat of the good things and do righteous deeds.’ And He the Exalted said: ‘O you who believe, eat of the good things We have provided for you.’”\n\nThen he mentioned a man on a long journey, dishevelled and dusty, who stretches his hands to the sky: “My Lord, my Lord!”, while his food is unlawful, his drink is unlawful, his clothing is unlawful, and he has been nourished on the unlawful. So how could he be answered?",
    "citations": [
     {
      "collection": "muslim",

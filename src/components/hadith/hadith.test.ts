@@ -4,7 +4,19 @@ import glossary from '@/data/deen/glossary/nawawi40.json';
 import deckModule from '@/content/deen/decks/nawawi40';
 import type { EmittedDeck, TextItem } from '@/types/deen';
 import { splitSegments } from '@/components/deen/text';
-import { deckProgress, hadithHref, hadithNumber, learnActions, neighbours, normaliseHadithId, progressLine, readingParts } from './hadith-logic';
+import {
+  deckProgress,
+  hadithHref,
+  hadithNumber,
+  inSahihLine,
+  learnActions,
+  neighbours,
+  normaliseHadithId,
+  progressLine,
+  readingParts,
+  sourceRows,
+  translationParagraphs,
+} from './hadith-logic';
 
 const deck = emitted as unknown as EmittedDeck;
 const items = deck.items as TextItem[];
@@ -46,15 +58,58 @@ describe('hadith-logic', () => {
 });
 
 describe('learnActions', () => {
-  it('keeps "Start memorising" until the recall card exists, and drops the meaning offer once it is learned', () => {
-    expect(learnActions([], '01')).toEqual({ memoriseLabel: 'Start memorising', offerMeaning: true });
-    expect(learnActions(['nawawi40:01:meaning'], '01')).toEqual({ memoriseLabel: 'Start memorising', offerMeaning: false });
+  it('keeps "Start memorising" until the recall card exists, then offers going through it again', () => {
+    expect(learnActions([], '01')).toEqual({ memorise: 'start', memoriseLabel: 'Start memorising', offerMeaning: true });
+    expect(learnActions(['nawawi40:01:meaning'], '01')).toEqual({ memorise: 'start', memoriseLabel: 'Start memorising', offerMeaning: false });
     expect(learnActions(['nawawi40:01:meaning', 'nawawi40:01:narrator', 'nawawi40:01:recall'], '01')).toEqual({
-      memoriseLabel: 'Memorise it again',
+      memorise: 'again',
+      memoriseLabel: 'Go through it again',
       offerMeaning: false,
     });
     // another hadith's cards do not count
-    expect(learnActions(['nawawi40:02:recall', 'nawawi40:02:meaning'], '01')).toEqual({ memoriseLabel: 'Start memorising', offerMeaning: true });
+    expect(learnActions(['nawawi40:02:recall', 'nawawi40:02:meaning'], '01')).toMatchObject({ memorise: 'start', offerMeaning: true });
+  });
+});
+
+describe('the Source panel', () => {
+  const one = items.find((i) => i.id === '01')!;
+  const twelve = items.find((i) => i.id === '12')!;
+
+  it('leaves out the Forty citing itself, and folds "in a Sahih collection" into one attributed line', () => {
+    const rows = sourceRows(one);
+    expect(rows.citations.map((c) => c.collection)).toEqual(['bukhari', 'muslim']);
+    expect(rows.inSahih.map((g) => g.by)).toEqual(['al-bukhari', 'muslim']);
+    expect(rows.gradings).toEqual([]);
+    expect(inSahihLine(rows.inSahih)).toBe('In both Sahih collections: al-Bukhari and Muslim ibn al-Hajjaj');
+    expect(inSahihLine([{ by: 'muslim' }])).toBe('In a Sahih collection: Muslim ibn al-Hajjaj');
+  });
+
+  it('keeps every other grading, with its scholar, in full', () => {
+    const rows = sourceRows(twelve);
+    expect(rows.inSahih).toEqual([]);
+    expect(rows.gradings.map((g) => g.grade)).toEqual(['hasan', 'mursal']);
+  });
+
+  it('never drops a grading or a citation from any hadith', () => {
+    for (const it of items) {
+      const rows = sourceRows(it);
+      expect(rows.inSahih.length + rows.gradings.length, it.id).toBe(it.gradings.length);
+      expect(rows.citations.length, it.id).toBe(it.citations.filter((c) => c.collection !== 'nawawi40').length);
+    }
+  });
+});
+
+describe('translation paragraphs', () => {
+  it('splits only at authored blank lines, and keeps every word', () => {
+    expect(translationParagraphs('One.\n\nTwo, three.')).toEqual(['One.', 'Two, three.']);
+    expect(translationParagraphs(undefined)).toEqual([]);
+    for (const it of items) {
+      const paras = translationParagraphs(it.translation);
+      expect(paras.join(' '), it.id).toBe(it.translation!.replace(/\s+/g, ' ').trim());
+      // never more paragraphs than the Arabic has parts
+      expect(paras.length, it.id).toBeLessThanOrEqual(readingParts(it.arabic!, it.segments).length);
+    }
+    expect(translationParagraphs(items.find((i) => i.id === '02')!.translation)).toHaveLength(8);
   });
 });
 

@@ -62,7 +62,7 @@ test.describe('Forty Hadith', () => {
     await expect(page.locator('[data-hadith-row="01"] [data-item-state="learning"]')).toHaveText('Learning')
     await expect(page.locator('[data-hadith-progress]')).toContainText('1 of')
     await page.locator('[data-hadith-row="01"]').click()
-    await expect(page.locator('[data-start-memorising]')).toHaveText('Memorise it again')
+    await expect(page.locator('[data-start-memorising]')).toHaveText('Go through it again')
 
     // ---- And the cards are in the deen review session
     await page.goto('/review/deen?deck=nawawi40')
@@ -91,9 +91,13 @@ test.describe('Forty Hadith', () => {
 
   test('a hadith that is not in the deck says so calmly', async ({ page }) => {
     await seed(page)
+    // A number al-Nawawi gave, still being checked
+    await page.goto('/hadith/view?id=20')
+    await expect(page.locator('[data-hadith-missing="not-yet"]')).toContainText("This hadith isn't here yet")
+    // A number he never gave
     await page.goto('/hadith/view?id=99')
-    await expect(page.locator('[data-hadith-missing]')).toContainText("This hadith isn't here yet")
-    await page.getByRole('link', { name: 'See the hadith that are ready' }).click()
+    await expect(page.locator('[data-hadith-missing="no-such"]')).toContainText('There is no hadith with that number')
+    await page.getByRole('link', { name: 'See all the hadith' }).click()
     await expect(page).toHaveURL(/\/hadith$/)
   })
 })

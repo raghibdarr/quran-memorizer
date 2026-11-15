@@ -1,7 +1,8 @@
 // Pure helpers for the /hadith screens (hadith-nawawi40 package).
 
 import type { ItemState } from '@/components/deen/item-state';
-import type { TextItem } from '@/types/deen';
+import { collectionName, scholarName } from '@/components/deen/registry-names';
+import type { Citation, Grading, TextItem } from '@/types/deen';
 
 export const NAWAWI_DECK = 'nawawi40';
 /** How many narrations al-Nawawi's collection holds (his forty-two) */
@@ -84,8 +85,18 @@ export function readingParts(arabic: string, segments?: number[]): string[] {
   return out;
 }
 
+/** Our translation in paragraphs: authored breaks (a blank line) sit where the Arabic segments end */
+export function translationParagraphs(text: string | undefined): string[] {
+  return (text ?? '')
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+
 export interface LearnActions {
-  /** Label of the memorise button: the flow keeps existing cards and adds only the missing ones */
+  /** Whether the Arabic is still to memorise, or the recall card already exists */
+  memorise: 'start' | 'again';
+  /** Label of the memorise action: the flow keeps existing cards and adds only the missing ones */
   memoriseLabel: string;
   /** Offer "Just learn the meaning" only while the meaning card does not exist yet */
   offerMeaning: boolean;
@@ -94,11 +105,45 @@ export interface LearnActions {
 /**
  * What the hadith screen offers, from the card ids the learner already has.
  * Someone who took "Just learn the meaning" has not memorised the Arabic yet,
- * so the button still says "Start memorising" until the recall card exists.
+ * so the main action still says "Start memorising" until the recall card exists;
+ * after that, going through it again is only a quiet link.
  */
 export function learnActions(cardIds: Iterable<string>, itemId: string, deck: string = NAWAWI_DECK): LearnActions {
   const have = new Set(cardIds);
   const recall = have.has(`${deck}:${itemId}:recall`);
   const meaning = have.has(`${deck}:${itemId}:meaning`);
-  return { memoriseLabel: recall ? 'Memorise it again' : 'Start memorising', offerMeaning: !meaning };
+  return recall
+    ? { memorise: 'again', memoriseLabel: 'Go through it again', offerMeaning: !meaning }
+    : { memorise: 'start', memoriseLabel: 'Start memorising', offerMeaning: !meaning };
+}
+
+export interface SourceRows {
+  /** The collections that carry it, without the Forty itself (the screen already says which hadith of the Forty it is) */
+  citations: Citation[];
+  /** "In a Sahih collection" gradings that only restate one of those citations */
+  inSahih: Grading[];
+  /** Every other grading, shown in full with its scholar and work */
+  gradings: Grading[];
+}
+
+/** The Source panel of the hadith screen, without saying the same thing twice */
+export function sourceRows(item: Pick<TextItem, 'citations' | 'gradings'>, deck: string = NAWAWI_DECK): SourceRows {
+  const citations = item.citations.filter((c) => c.collection !== deck);
+  const restates = (g: Grading) =>
+    g.grade === 'in-sahih' && citations.some((c) => g.in === `${collectionName(c.collection)}, no. ${c.number}`);
+  return {
+    citations: citations.length ? citations : item.citations,
+    inSahih: item.gradings.filter(restates),
+    gradings: item.gradings.filter((g) => !restates(g)),
+  };
+}
+
+/** "In both Sahih collections: al-Bukhari and Muslim ibn al-Hajjaj", always naming who compiled them */
+export function inSahihLine(gradings: Pick<Grading, 'by'>[]): string {
+  const names = gradings.map((g) => scholarName(g.by));
+  if (!names.length) return '';
+  const both = gradings.length === 2 && new Set(gradings.map((g) => g.by)).size === 2 && gradings.every((g) => g.by === 'al-bukhari' || g.by === 'muslim');
+  const label = both ? 'In both Sahih collections' : names.length === 1 ? 'In a Sahih collection' : 'In Sahih collections';
+  const list = names.length === 1 ? names[0] : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+  return `${label}: ${list}`;
 }

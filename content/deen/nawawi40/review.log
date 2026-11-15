@@ -242,3 +242,11 @@ scholar-reviewed.
   shown (rev 2).
 - **Notes**: each note's paraphrase was read against the page it cites; all fifteen hold.
 - Nothing was removed. `build-deen --check` green (the G8 warning on 11 is the name al-Hasan).
+
+## 2026-11-15 · paragraph breaks in the English (rev 2 for 1, 2, 4, 6, 10)
+
+- Layout only: a blank line now starts a new paragraph of the translation at the points where
+  the Arabic's authored segments end (10 has three paragraphs for four Arabic parts: the last
+  break would fall mid-sentence). No word or punctuation mark changed; a test checks the
+  paragraphs join back to the same text. Rev raised because the lock hashes the translation.
+  Not an erratum: the text was not corrected, so ERRATA.md has no entry.
