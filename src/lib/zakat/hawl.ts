@@ -11,6 +11,16 @@ import { addDaysIso, isoFromMs } from '@/lib/dates';
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
 
+/**
+ * A civil date the zakat year can start on: well formed and not before the
+ * Hijri calendar. The year check is done on the text because JS dates read
+ * years 0 to 99 as 1900 to 1999, which would turn a typo like 0001 into a
+ * plausible-looking Hijri date.
+ */
+function placeable(iso: string): boolean {
+  return ISO.test(iso) && Number(iso.slice(0, 4)) >= 622;
+}
+
 /** The reminder's id: the first in the shared reminders range (spec 3.6) */
 export const HAWL_REMINDER_ID = NOTIFY_RANGES.reminders.start;
 
@@ -36,7 +46,7 @@ function civilOf(year: number, month: number, day: number, offset: number): { is
  * (the day a zakat year completes). Null for a malformed date.
  */
 export function nextHawlDate(startIso: string, todayIso: string, offset = 0): HawlAnniversary | null {
-  if (!ISO.test(startIso) || !ISO.test(todayIso)) return null;
+  if (!placeable(startIso) || !placeable(todayIso)) return null;
   try {
     const start = toHijri(startIso, offset);
     if (start.year < 1) return null; // a date before the Hijri calendar: a typo, not a zakat year
@@ -55,7 +65,7 @@ export function nextHawlDate(startIso: string, todayIso: string, offset = 0): Ha
 
 /** "3 Rajab 1448" for the start date, under the user's offset */
 export function hijriLabel(iso: string, offset = 0): string {
-  if (!ISO.test(iso)) return '';
+  if (!placeable(iso)) return '';
   try {
     const h = toHijri(iso, offset);
     return h.year < 1 ? '' : formatHijri(h);

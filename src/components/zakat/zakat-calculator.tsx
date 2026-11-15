@@ -535,6 +535,24 @@ function ResultCard({
 
 // ---------- hawl ----------
 
+/** Today's date, kept current when the app comes back to the front or is left open past midnight */
+function useToday(): string {
+  const [today, setToday] = useState(todayIso);
+  useEffect(() => {
+    const check = () => setToday((t) => (t === todayIso() ? t : todayIso()));
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') check();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    const timer = window.setInterval(check, 60_000);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisible);
+      window.clearInterval(timer);
+    };
+  }, []);
+  return today;
+}
+
 function HawlCard({
   startIso,
   onStart,
@@ -548,8 +566,9 @@ function HawlCard({
   reminderOn: boolean;
   onReminder: (on: boolean) => void;
 }) {
-  const today = todayIso();
+  const today = useToday();
   const next = startIso ? nextHawlDate(startIso, today, offset) : null;
+  const startLabel = startIso ? hijriLabel(startIso, offset) : '';
   const native = hawlReminderSupported();
   const [denied, setDenied] = useState(false);
 
@@ -557,7 +576,8 @@ function HawlCard({
   useEffect(() => {
     if (!native) return;
     syncHawlReminder({ enabled: reminderOn, hawlStartIso: startIso, offset }).catch(() => {});
-  }, [native, reminderOn, startIso, offset]);
+    // `today` is here so a new day (the app left open, or reopened after the reminder fired) re-arms it
+  }, [native, reminderOn, startIso, offset, today]);
 
   return (
     <Card>
@@ -573,7 +593,12 @@ function HawlCard({
         onChange={(e) => onStart(e.target.value || null)}
         className={cn(inputClass, 'mt-1.5 block min-h-[46px] w-full appearance-none')}
       />
-      {startIso && <p className="mt-1.5 text-xs text-muted">{hijriLabel(startIso, offset)}, expected</p>}
+      {startLabel && <p className="mt-1.5 text-xs text-muted">{startLabel}, expected</p>}
+      {startIso && !next && (
+        <p className="mt-1.5 text-xs font-medium text-gold-deep" data-testid="zakat-hawl-problem">
+          That date can&apos;t be placed in the Hijri calendar. Check the year.
+        </p>
+      )}
 
       {next && (
         <div className="mt-4 rounded-xl bg-gold/10 px-3.5 py-3" data-testid="zakat-next-hawl">

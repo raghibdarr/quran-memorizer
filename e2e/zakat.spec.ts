@@ -104,3 +104,21 @@ test.describe('zakat', () => {
     await expect(page.getByTestId('zakat-due')).toHaveText('22.50')
   })
 })
+
+test.describe('zakat: edge cases', () => {
+  test('an amount with two readings says which one was taken', async ({ page }) => {
+    await page.goto('/zakat')
+    await page.getByTestId('zakat-goldGrams').fill('8,125')
+    await expect(page.getByTestId('zakat-goldGrams-read')).toHaveText('Read as 8,125 g')
+    await page.getByTestId('zakat-goldGrams').fill('8,12')
+    await expect(page.getByTestId('zakat-goldGrams-read')).toHaveCount(0)
+  })
+
+  test('a start date the Hijri calendar cannot place says so', async ({ page }) => {
+    await page.goto('/zakat')
+    await page.getByTestId('zakat-hawl').fill('0001-01-01')
+    await expect(page.getByTestId('zakat-hawl-problem')).toBeVisible()
+    await expect(page.getByTestId('zakat-next-hawl')).toHaveCount(0)
+    await expect(page.getByText(', expected', { exact: true })).toHaveCount(0)
+  })
+})

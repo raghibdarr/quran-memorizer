@@ -96,6 +96,13 @@ describe('nextHawlDate', () => {
     expect(hijriLabel('0300-05-05')).toBe('');
   });
 
+  it('a year typed as 0001 or 0026 is not read as 1901 or 1926', () => {
+    for (const typo of ['0001-01-01', '0026-03-05', '0099-12-31', '0621-01-01']) {
+      expect(nextHawlDate(typo, '2026-11-15'), typo).toBeNull();
+      expect(hijriLabel(typo), typo).toBe('');
+    }
+  });
+
   it('rejects malformed dates', () => {
     expect(nextHawlDate('10/01/2026', '2026-01-01')).toBeNull();
     expect(hijriLabel('nope')).toBe('');

@@ -46,6 +46,19 @@ export function parseAmount(text: string): number | null {
 }
 
 /**
+ * How an amount with one separator and exactly three digits after it was read,
+ * or null when the text has only one reading. "1,234" is taken as a thousand
+ * and "1.234" as a decimal, but a writer who uses the comma as the decimal mark
+ * (or the dot for thousands) means the opposite, so the field says which it took.
+ */
+export function ambiguousReading(text: string): string | null {
+  if (!/^\s*[\d\u0660-\u0669\u06f0-\u06f9]{1,3}[.,\u066b\u066c][\d\u0660-\u0669\u06f0-\u06f9]{3}\s*$/.test(text)) return null;
+  const n = parseAmount(text);
+  if (n === null || Number.isNaN(n)) return null;
+  return n.toLocaleString('en', { maximumFractionDigits: 3 });
+}
+
+/**
  * A remembered amount as the text of its field: plain digits, never the
  * exponent form String() gives very small or very large numbers ("1e-7"),
  * which parseAmount would then reject on the next visit.
