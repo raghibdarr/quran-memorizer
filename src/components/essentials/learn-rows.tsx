@@ -23,7 +23,7 @@ const GROUP_BLURB: Record<DeckGroup, string> = {
   course: 'Purification and fasting, with where the schools differ',
 };
 
-interface GroupRow {
+export interface GroupRow {
   group: DeckGroup;
   /**
    * Deck ids in the group, with each deck's item ids. `quran` maps a Quranic
@@ -57,20 +57,8 @@ export function groupProgress(
   return { started, total };
 }
 
-/**
- * Slot (all-in-one spec 2.4, 3.4) at the top of the Learn tab: registry-driven
- * rows for Hadith, Adhkar and duas, Names of Allah and the course; decks with
- * `ready: false` are hidden, and nothing renders until one is ready. Owner:
- * deen-engine.
- */
-export function LearnRows() {
-  const decks = useLiveDecks();
-  const cards = useDeenStore((s) => s.cards);
-  const lessonsDone = useDeenStore((s) => s.lessonsDone);
-  const ayahCards = useReviewStore((s) => s.cards);
-  const hijriOffset = usePrayerStore((s) => s.hijriOffset);
-  // In Ramadan the course row leads with its fasting unit
-  const ramadan = useMemo(() => isRamadan(todayIso(), hijriOffset), [hijriOffset]);
+/** The live decks grouped as the Learn tab shows them, with each deck's item ids (null while loading) */
+export function useGroupRows(decks: ReturnType<typeof useLiveDecks>): GroupRow[] | null {
   const [rows, setRows] = useState<GroupRow[] | null>(null);
 
   useEffect(() => {
@@ -103,6 +91,25 @@ export function LearnRows() {
       live = false;
     };
   }, [decks]);
+
+  return rows;
+}
+
+/**
+ * Slot (all-in-one spec 2.4, 3.4) at the top of the Learn tab: registry-driven
+ * rows for Hadith, Adhkar and duas, Names of Allah and the course; decks with
+ * `ready: false` are hidden, and nothing renders until one is ready. Owner:
+ * deen-engine.
+ */
+export function LearnRows() {
+  const decks = useLiveDecks();
+  const cards = useDeenStore((s) => s.cards);
+  const lessonsDone = useDeenStore((s) => s.lessonsDone);
+  const ayahCards = useReviewStore((s) => s.cards);
+  const hijriOffset = usePrayerStore((s) => s.hijriOffset);
+  // In Ramadan the course row leads with its fasting unit
+  const ramadan = useMemo(() => isRamadan(todayIso(), hijriOffset), [hijriOffset]);
+  const rows = useGroupRows(decks);
 
   const cardIds = useMemo(() => Object.keys(cards), [cards]);
   const ayahKeys = useMemo(() => new Set(ayahCards.map((c) => `${c.surahId}:${c.ayahNumber}`)), [ayahCards]);

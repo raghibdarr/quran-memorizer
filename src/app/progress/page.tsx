@@ -17,6 +17,7 @@ import BottomNav from '@/components/layout/bottom-nav';
 import SettingsPanel from '@/components/layout/settings-panel';
 import UserButton from '@/components/auth/user-button';
 import CalendarHeatmap from '@/components/progress/calendar-heatmap';
+import DeenProgress from '@/components/progress/deen-progress';
 import TimelineChart from '@/components/progress/timeline-chart';
 import WeakSpots from '@/components/progress/weak-spots';
 import MushafMap from '@/components/progress/mushaf-map';
@@ -223,18 +224,18 @@ export default function ProgressPage() {
         {!hideStats && <div className="grid grid-cols-3 gap-3">
           <Card className="text-center">
             <p className="text-2xl font-bold text-gold">{stats.currentStreak}</p>
-            <p className="text-xs text-muted">Day Streak</p>
+            <p className="text-xs text-muted">Day streak</p>
             {stats.longestStreak > 1 && (
-              <p className="mt-0.5 text-[10px] text-muted/60">Best: {stats.longestStreak}</p>
+              <p className="mt-0.5 text-[11px] text-muted">Best: {stats.longestStreak}</p>
             )}
           </Card>
           <Card className="text-center">
             <p className="text-2xl font-bold text-success">{completedLessonCount}</p>
-            <p className="text-xs text-muted">Lessons Done</p>
+            <p className="text-xs text-muted">Lessons done</p>
           </Card>
           <Card className="text-center">
             <p className="text-2xl font-bold text-foreground">{thisWeekCount}</p>
-            <p className="text-xs text-muted">This Week</p>
+            <p className="text-xs text-muted">This week</p>
           </Card>
         </div>}
 
@@ -260,6 +261,8 @@ export default function ProgressPage() {
         <MushafMap cards={ayahCards} />
         <WeakSpots cards={ayahCards} />
 
+        <DeenProgress />
+
         {/* Tabs */}
         <div className="flex gap-1 rounded-xl bg-foreground/10 p-1">
           {([['calendar', 'Calendar'], ['timeline', 'Timeline']] as const).map(([key, label]) => (
@@ -270,7 +273,7 @@ export default function ProgressPage() {
                 'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
                 tab === key
                   ? 'bg-teal text-on-teal shadow-sm'
-                  : 'text-muted hover:text-foreground'
+                  : 'text-foreground/80 hover:text-foreground'
               )}
             >
               {label}
@@ -296,7 +299,7 @@ export default function ProgressPage() {
             <p className="text-lg text-muted">No progress yet</p>
             <p className="mt-1 text-sm text-muted">Start a lesson to track your progress</p>
             <Link href="/" className="mt-4 inline-block rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal">
-              Start Learning
+              Start learning
             </Link>
           </div>
         )}

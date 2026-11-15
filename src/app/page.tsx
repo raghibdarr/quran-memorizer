@@ -343,7 +343,7 @@ export default function HomePage() {
                 {/* Easing back in: the held-back backlog is "later", not a wall of "overdue" */}
                 {deferredCount > 0
                   ? `Due · ${deferredCount} more later`
-                  : overdueReviewCount > 0 ? `Due · ${overdueReviewCount} overdue` : 'Due Reviews'}
+                  : overdueReviewCount > 0 ? `Quran · ${overdueReviewCount} overdue` : 'Quran reviews'}
               </p>
             </Card>
           </Link>
