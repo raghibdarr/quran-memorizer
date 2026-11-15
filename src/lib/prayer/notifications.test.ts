@@ -233,10 +233,49 @@ describe('syncPrayerAlerts (Android)', () => {
     expect(new Date(test.schedule!.at!).getTime()).toBe(NOW + 10_000)
     expect(test.channelId).toBe('prayer-chime-v1')
     expect(plan.alerts.some((a) => a.id === 20019)).toBe(false)
-    const summary = await pendingPrayerAlerts()
+    const summary = await pendingPrayerAlerts(undefined, NOW)
     expect(summary.count).toBe(plan.alerts.length)
     expect(summary.lastAt).toBe(plan.alerts[plan.alerts.length - 1].at)
     expect(readAlertMeta()).toMatchObject({ count: plan.alerts.length, lastAt: summary.lastAt })
+  })
+
+  it('leaves out alerts that already rang (Android keeps their record until they are swiped away)', async () => {
+    const plan = planFor()
+    await syncPrayerAlerts(plan, undefined, NOW)
+    const later = plan.alerts[3].at
+    const summary = await pendingPrayerAlerts(undefined, later)
+    expect(summary.count).toBe(plan.alerts.filter((a) => a.at > later).length)
+    expect(summary.count).toBeLessThan(plan.alerts.length)
+    expect(summary.lastAt).toBe(plan.alerts[plan.alerts.length - 1].at)
+    // Everything rung: nothing is set any more
+    expect(await pendingPrayerAlerts(undefined, plan.alerts[plan.alerts.length - 1].at + 1)).toEqual({ count: 0, lastAt: null })
+  })
+
+  it("reads Android's Date.toString() times, and falls back to the memo when the zone can't be read", async () => {
+    const plan = planFor()
+    await syncPrayerAlerts(plan, undefined, NOW)
+    const last = plan.alerts[plan.alerts.length - 1].at
+    // What the Android plugin's getPending() really returns for schedule.at
+    const javaDate = (ms: number, zone: string, offsetH: number) => {
+      const d = new Date(ms + offsetH * 3600_000).toUTCString() // "Fri, 13 Nov 2026 12:41:00 GMT"
+      const [, wd, day, mon, year, time] = /^(\w+), (\d+) (\w+) (\d+) ([\d:]+)/.exec(d)!
+      return `${wd} ${mon} ${day} ${time} ${zone} ${year}`
+    }
+    const restamp = (zone: string, offsetH: number) => {
+      for (const [id, n] of os.state.pending) {
+        const at = plan.alerts.find((a) => a.id === id)?.at ?? last
+        os.state.pending.set(id, { ...(n as object), schedule: { at: javaDate(at, zone, offsetH) } })
+      }
+    }
+    restamp('GMT+01:00', 1)
+    expect(await pendingPrayerAlerts(undefined, NOW)).toEqual({ count: plan.alerts.length, lastAt: Math.floor(last / 1000) * 1000 })
+    // "CET" is not a zone JavaScript parses: every alert still counts, the date comes from the memo
+    restamp('CET', 1)
+    expect(Number.isNaN(Date.parse(javaDate(last, 'CET', 1)))).toBe(true)
+    expect(await pendingPrayerAlerts(undefined, NOW)).toEqual({ count: plan.alerts.length, lastAt: last })
+    // No memo either: the count alone, never a wrong date
+    localStorage.removeItem(ALERT_META_KEY)
+    expect(await pendingPrayerAlerts(undefined, NOW)).toEqual({ count: plan.alerts.length, lastAt: null })
   })
 
   it('a replan that lands while a test alert is waiting does not swallow it', async () => {
@@ -245,7 +284,7 @@ describe('syncPrayerAlerts (Android)', () => {
     await syncPrayerAlerts(plan, undefined, NOW + 1500)
     expect(os.state.cancelled).toContain(20019)
     expect(pendingIds()).toContain(20019)
-    expect((await pendingPrayerAlerts()).count).toBe(plan.alerts.length)
+    expect((await pendingPrayerAlerts(undefined, NOW)).count).toBe(plan.alerts.length)
     // Once it has rung, a later replan does not bring it back
     os.state.pending.delete(20019)
     await syncPrayerAlerts(planFor(alertsAll('silent')), undefined, NOW + 60_000)
