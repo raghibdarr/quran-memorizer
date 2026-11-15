@@ -88,16 +88,30 @@ test.describe('deen engine', () => {
     await expect(page.locator('[data-memorise-step="recall"]')).toBeVisible()
     await page.getByRole('button', { name: 'Show me' }).click()
     await page.getByRole('button', { name: 'Got it' }).click()
-    await expect(page.getByText('3 cards added. They come up in Review.')).toBeVisible()
+    await expect(page.getByText('3 cards added. They start coming up in Review tomorrow.')).toBeVisible()
     expect(await deenCards(page)).toEqual(['_fixture:01:meaning', '_fixture:01:narrator', '_fixture:01:recall', 'glossary:dhikr:term'])
+    // The self-rating counted: the recall card is scheduled, not left new to rate again
+    const recall = await page.evaluate(() => JSON.parse(localStorage.getItem('quran-deen')!).state.cards['_fixture:01:recall'])
+    expect(recall).toMatchObject({ repetitions: 1, lastQuality: 5 })
 
-    // ---- The Review tab shows them
+    // ---- The Review tab shows today's one: the term (the item's cards start tomorrow)
     await page.goto('/review')
     const section = page.locator('[data-deen-review-section]')
     await expect(section).toBeVisible()
-    await expect(section.locator('[data-deck-row="_fixture"]')).toContainText('3 new')
+    await expect(section.locator('[data-deck-row="_fixture"]')).toHaveCount(0)
     await expect(section.locator('[data-deck-row="glossary"]')).toContainText('1 new')
     await section.locator('[data-deen-start]').click()
+    await expect(page).toHaveURL(/\/review\/deen$/)
+    await expect(page.getByText('Card 1 of 1')).toBeVisible()
+    await page.getByRole('button', { name: 'Show me' }).click()
+    await page.getByRole('button', { name: 'Got it' }).click()
+    await expect(page.getByText('1 new card learned')).toBeVisible()
+
+    // ---- Tomorrow: the recall card is due and the other two start
+    await page.clock.setSystemTime(new Date('2026-11-14T09:00:00'))
+    await page.goto('/review')
+    await expect(page.locator('[data-deen-review-section] [data-deck-row="_fixture"]')).toContainText('1 due · 2 new')
+    await page.locator('[data-deen-start]').click()
 
     // ---- Rate every card
     await expect(page).toHaveURL(/\/review\/deen$/)
@@ -122,8 +136,8 @@ test.describe('deen engine', () => {
     // ---- And come back when the day moves on
     await page.clock.setSystemTime(new Date('2026-11-15T09:00:00'))
     await page.reload()
-    await expect(page.locator('[data-deen-review-section] [data-deck-row="_fixture"]')).toContainText('3 due')
-    await expect(page.locator('[data-deen-start]')).toContainText('Start · 4 cards')
+    await expect(page.locator('[data-deen-review-section] [data-deck-row="_fixture"]')).toContainText('2 due')
+    await expect(page.locator('[data-deen-start]')).toContainText('Start · 2 cards')
   })
 
   test('"Know the meaning" skips Build and adds only the meaning card', async ({ page }) => {

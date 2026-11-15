@@ -54,7 +54,7 @@ test.describe('Forty Hadith', () => {
     await expect(page.locator('[data-memorise-step="recall"]')).toBeVisible()
     await page.getByRole('button', { name: 'Show me' }).click()
     await page.getByRole('button', { name: 'Got it' }).click()
-    await expect(page.getByText('3 cards added. They come up in Review.')).toBeVisible()
+    await expect(page.getByText('3 cards added. They start coming up in Review tomorrow.')).toBeVisible()
     expect(await deenCards(page)).toEqual(['nawawi40:01:meaning', 'nawawi40:01:narrator', 'nawawi40:01:recall'])
 
     // ---- The list now shows it as learning
@@ -64,12 +64,13 @@ test.describe('Forty Hadith', () => {
     await page.locator('[data-hadith-row="01"]').click()
     await expect(page.locator('[data-start-memorising]')).toHaveText('Go through it again')
 
-    // ---- And the cards are in the deen review session
+    // ---- The rating counted: nothing to rate again today, and the session says when they come
     await page.goto('/review/deen?deck=nawawi40')
-    await expect(page.getByText('Card 1 of 3')).toBeVisible()
-    await page.getByRole('button', { name: 'Show me' }).click()
-    await page.getByRole('button', { name: 'Got it' }).click()
-    await expect(page.getByText('Card 2 of 3')).toBeVisible()
+    await expect(page.locator('[data-empty]').or(page.getByText('Nothing to review here right now'))).toBeVisible()
+    await expect(page.getByText('The next card comes back tomorrow.')).toBeVisible()
+    const recall = await page.evaluate(() => JSON.parse(localStorage.getItem('quran-deen')!).state.cards['nawawi40:01:recall'])
+    expect(recall.repetitions).toBe(1)
+    expect(recall.lastQuality).toBe(5)
   })
 
   test('"Just learn the meaning" adds only the meaning card', async ({ page }) => {

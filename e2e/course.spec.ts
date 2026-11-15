@@ -38,7 +38,11 @@ test.describe('foundations course', () => {
   test('a lesson end to end with a school chosen: four positions, cards added, done after reload', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 })
     await page.clock.install({ time: new Date('2026-11-14T10:00:00') })
-    await seed(page)
+    // Five new cards already introduced today (say, the first five Names): the daily
+    // cap is spent, and the lesson's cards must still come up when asked for
+    await seed(page, {
+      'quran-deen': JSON.stringify({ state: { cards: {}, lessonsDone: {}, depth: {}, school: null, newPerDay: 5, introduced: { '2026-11-14': 5 } }, version: 1 }),
+    })
 
     // ---- The course page lists the fixture unit, nothing done yet
     await page.goto('/course')
@@ -113,9 +117,11 @@ test.describe('foundations course', () => {
     expect(state.lessonsDone['fx-01']).toBeGreaterThan(0)
     await expect(page.locator('[data-next-lesson]')).toContainText('Fixture: a second lesson')
 
-    // ---- They are in the review session
-    await page.goto('/review/deen?deck=_course')
+    // ---- "Review them now" lands on them, never on an empty session
+    await page.locator('[data-lesson-done]').getByRole('link', { name: 'Review them now' }).click()
+    await expect(page).toHaveURL(/\/review\/deen\?deck=_course$/)
     await expect(page.getByText('Card 1 of 4')).toBeVisible()
+    await expect(page.getByText('Nothing to review here right now')).toHaveCount(0)
 
     // ---- Done after a reload, and the continue card moves on
     await page.goto('/course')

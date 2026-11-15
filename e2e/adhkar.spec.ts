@@ -101,8 +101,9 @@ test.describe('adhkar and duas', () => {
     const cards = await deenCards(page)
     expect(cards).toContain('duas-daily:rain:recall')
 
+    // Just practised: its cards start tomorrow, and the Review tab says when
     await page.goto('/review')
-    await expect(page.locator('[data-deen-review-section] [data-deck-row="duas-daily"]')).toBeVisible()
+    await expect(page.locator('[data-deen-caught-up]')).toContainText('comes back tomorrow')
   })
 
   test('a memorised Essentials item becomes seeded deen cards, once', async ({ page }) => {

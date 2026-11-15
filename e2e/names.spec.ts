@@ -74,6 +74,10 @@ test.describe('names of Allah', () => {
     await expect(page).toHaveURL(/\/review\/deen\?deck=names99/)
     const card = page.locator('[data-deen-card]')
     await expect(card).toHaveAttribute('data-deen-card', /^names99:001:/)
-    await expect(card).toContainText('What does this Name mean?')
+    // Shown whole first, then asked
+    await expect(card).toHaveAttribute('data-intro', '1')
+    await expect(card).toContainText('New Name')
+    await page.locator('[data-intro-next]').click()
+    await expect(page.locator('[data-deen-card]')).toContainText('What does this Name mean?')
   })
 })

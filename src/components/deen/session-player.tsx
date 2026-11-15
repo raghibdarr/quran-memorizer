@@ -8,7 +8,8 @@ import { haptic } from '@/lib/haptics';
 import Button from '@/components/ui/button';
 import BeadProgress from '@/components/ui/bead-progress';
 import RatingButtons, { type Rating } from '@/components/ui/rating-buttons';
-import { CardBack, CardFront, cardKindLabel, useCardContent, type CardContent } from './card-view';
+import { CardBack, CardFront, cardKindLabel, NameIntro, useCardContent, type CardContent } from './card-view';
+import { isNewCard } from '@/lib/deen/queue';
 import { deckTitleOf } from './deck-source';
 import { parseCardId } from '@/lib/deen/cards';
 import { RATING_QUALITY, TAP_GUARD_MS } from './memorise-flow';
@@ -46,19 +47,25 @@ function CardStage({
   const card = useDeenStore((s) => s.cards[id]);
   const [revealed, setRevealed] = useState(false);
   const [hint, setHint] = useState(false);
+  // A Name never seen before is shown whole first, then asked
+  const [wasNew] = useState(() => {
+    const c = useDeenStore.getState().cards[id];
+    return !!c && isNewCard(c);
+  });
+  const [introDone, setIntroDone] = useState(false);
   // A quick extra tap must not reveal the next card or rate it unseen (see TAP_GUARD_MS)
   const [locked, setLocked] = useState(true);
   useEffect(() => {
     const t = setTimeout(() => setLocked(false), TAP_GUARD_MS);
     return () => clearTimeout(t);
-  }, [revealed]);
+  }, [revealed, introDone]);
   // Focus goes to the card when it arrives (after the first) and when it turns over,
   // since the button that was pressed is gone
   const cardRef = useRef<HTMLDivElement>(null);
   const loaded = !loading;
   useEffect(() => {
     if (loaded && (autoFocus || revealed)) cardRef.current?.focus();
-  }, [loaded, autoFocus, revealed]);
+  }, [loaded, autoFocus, revealed, introDone]);
   // The correction note compares against the rev the card had when it first
   // showed; the card is then brought up to the item's rev, so it shows once
   const [firstRev] = useState(() => useDeenStore.getState().cards[id]?.itemRev);
@@ -88,6 +95,42 @@ function CardStage({
   }
   const deck = parseCardId(id)?.deck ?? '';
   const canHint = content.kind !== 'term' && content.kind !== 'names' && content.kind !== 'course' && content.facet === 'recall' && !!content.item.arabic;
+  // Once per Name: on its meaning card, or on its other card when that is the only one
+  const intro =
+    content.kind === 'names' &&
+    wasNew &&
+    !introDone &&
+    (content.facet === 'ar-en' || !useDeenStore.getState().cards[id.replace(/:en-ar$/, ':ar-en')]);
+  if (intro) {
+    return (
+      <div className="space-y-5" data-deen-card={id} data-intro="1">
+        <div className="relative">
+          <div className="absolute inset-0 translate-x-[8px] translate-y-[8px] rotate-[1deg] rounded-2xl border-[1.5px] border-ink/40 bg-cream" aria-hidden />
+          <div ref={cardRef} tabIndex={-1} className="tactile-card relative space-y-4 rounded-2xl bg-card p-6 text-center outline-none">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">New Name</p>
+            <NameIntro item={content.item} />
+          </div>
+        </div>
+        <StickyActions>
+          <Button
+            className="w-full"
+            aria-disabled={locked || undefined}
+            onClick={() => {
+              if (locked) return;
+              setIntroDone(true);
+              setLocked(true);
+            }}
+            data-intro-next
+          >
+            Now test me
+          </Button>
+          <button type="button" onClick={onStop} className="mx-auto mt-1 block min-h-11 text-sm font-semibold text-muted hover:text-foreground">
+            Stop for now
+          </button>
+        </StickyActions>
+      </div>
+    );
+  }
   return (
     <div className="space-y-5" data-deen-card={id} data-revealed={revealed ? '1' : '0'}>
       <div className="relative">
@@ -144,6 +187,18 @@ function CardStage({
   );
 }
 
+/** "5 Names learned", "3 new cards learned", "8 cards reviewed" */
+export function sessionHeading(ratedIds: string[], learnedIds: string[]): string {
+  const n = ratedIds.length;
+  if (n === 0) return 'Nothing rated';
+  if (learnedIds.length === n) {
+    const items = new Set(ratedIds.map((id) => parseCardId(id)).filter((p) => p?.deck === 'names99').map((p) => p!.itemId));
+    if (items.size && ratedIds.every((id) => id.startsWith('names99:'))) return `${items.size} ${items.size === 1 ? 'Name' : 'Names'} learned`;
+    return `${n} new ${n === 1 ? 'card' : 'cards'} learned`;
+  }
+  return `${n} ${n === 1 ? 'card' : 'cards'} reviewed`;
+}
+
 /** The finished session's button: ignores the tap that rated the last card */
 function DoneButton({ onExit }: { onExit: () => void }) {
   const [locked, setLocked] = useState(true);
@@ -173,6 +228,8 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
   const [rated, setRated] = useState(0);
   // The cards rated in this session (a skipped card is still where it was)
   const [ratedIds, setRatedIds] = useState<string[]>([]);
+  // The ones that were new when rated (learned in this session)
+  const [learnedIds, setLearnedIds] = useState<string[]>([]);
   const recorded = useRef(false);
   const doneRef = useRef<HTMLHeadingElement>(null);
 
@@ -200,9 +257,13 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
           </div>
           <div>
             <h2 ref={doneRef} tabIndex={-1} className="text-xl font-bold text-foreground outline-none">
-              {rated === 0 ? 'Nothing rated' : `${rated} ${rated === 1 ? 'card' : 'cards'} reviewed`}
+              {sessionHeading(ratedIds, learnedIds)}
             </h2>
-            {soonest !== null && rated > 0 && <p className="mt-1.5 text-sm text-muted">The next one comes back {whenLabel(soonest)}.</p>}
+            {soonest !== null && rated > 0 && (
+              <p className="mt-1.5 text-sm text-muted">
+                {learnedIds.length === rated ? (rated === 1 ? 'It comes' : 'They come') : 'The next one comes'} back {whenLabel(soonest)}.
+              </p>
+            )}
           </div>
           <DoneButton onExit={onExit} />
         </div>
@@ -213,7 +274,10 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
   const id = cardIds[index];
   const rate = (r: Rating) => {
     const card = useDeenStore.getState().cards[id];
-    if (card && card.lastReview === 0 && card.repetitions === 0) noteIntroduced(todayIso());
+    if (card && card.lastReview === 0 && card.repetitions === 0) {
+      noteIntroduced(todayIso());
+      setLearnedIds((ids) => [...ids, id]);
+    }
     reviewCard(id, RATING_QUALITY[r]);
     haptic.selection();
     setRated((n) => n + 1);

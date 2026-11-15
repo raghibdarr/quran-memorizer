@@ -14,6 +14,7 @@ import { RichText } from './term';
 import { SCHOOL_NAME } from './positions-table';
 import { citationText } from './registry-names';
 import type { School } from '@/types/deen';
+import { EVIDENCE_LABEL } from '@/components/names/names-logic';
 
 export type CardContent =
   | { kind: 'term'; facet: string; term: GlossaryTerm; rev: number }
@@ -66,7 +67,7 @@ export function useCardContent(id: string | undefined): { content: CardContent |
 /** A short label for the kind of question, shown above the card */
 export function cardKindLabel(c: CardContent): string {
   if (c.kind === 'term') return 'Term';
-  if (c.kind === 'names') return c.facet === 'en-ar' ? 'Name of Allah · which Name?' : 'Name of Allah · meaning';
+  if (c.kind === 'names') return c.facet === 'en-ar' ? 'Which Name?' : 'Meaning';
   if (c.kind === 'course') return 'Fact';
   return { recall: 'From memory', meaning: 'Meaning', narrator: 'Narrator', usage: 'When it is said' }[c.facet] ?? 'Review';
 }
@@ -154,6 +155,22 @@ export function CardFront({ content, hint }: { content: CardContent; hint?: bool
         </div>
       );
   }
+}
+
+/**
+ * A Name met for the first time: shown whole before it is asked (as the hadith
+ * flow reads before it tests): the Arabic, how it is said, what it means and
+ * where it comes from.
+ */
+export function NameIntro({ item }: { item: NameItem }) {
+  return (
+    <div className="space-y-2" data-name-intro>
+      <ItemArabic text={item.arabic} className="text-[2rem]" />
+      <p className="text-center text-sm font-semibold text-foreground">{item.transliteration}</p>
+      <p className="text-center text-base text-foreground">{item.meaning}</p>
+      <p className="text-center text-xs text-muted">{EVIDENCE_LABEL[item.evidence.kind].long}</p>
+    </div>
+  );
 }
 
 /** The answer side */
