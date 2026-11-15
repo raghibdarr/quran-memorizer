@@ -150,3 +150,17 @@ Read and left as they are:
   obligatory) is what the sentence says with or without the slips.
 Limits unchanged: one online copy per work, and a located phrase is not a scholar's reading.
 Nothing removed; no item could not be verified.
+
+2026-11-15  Second fresh review (a reviewer that wrote none of the package)
+---------------------------------------------------------------------------
+- tools/verify-citations.mjs re-run: 161 of 161 quotes found on their recorded pages.
+- Every consensus and cross-location quote read again against its claim, card and check
+  question; every position text read against its stored quote. build-deen.mjs --check green.
+Finding fixed (khuff-07 raised to rev 4):
+1. khuff-07/c4: "agreed among those who hold wiping" was hard to read for "الفقهاء القائلين
+   بالمسح اتفقوا على جواز المسح على الخفين". Now "The jurists who allow wiping agree that
+   leather socks may be wiped over". No change of sense.
+Added: a test that keeps citations.json in step with the lessons without the network
+(every position quote and consensus location has its record; every difference has a
+Bidayat al-Mujtahid record), and that every check question points at a claim of its lesson.
+Nothing removed; no primer citation could not be confirmed.
