@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 
 export const DEPTH_LABEL: Record<DeckDepth, { title: string; detail: string }> = {
   meaning: { title: 'Know the meaning', detail: 'Read it, understand it, and review what it means.' },
-  arabic: { title: 'Memorise the Arabic', detail: 'Learn the words by heart, part by part, and review them.' },
+  arabic: { title: 'Memorise the Arabic', detail: 'Understand it, then learn the words by heart, part by part.' },
 };
 
 /** The depth to use: the learner's choice for this deck, else the deck's default, else ask (null) */

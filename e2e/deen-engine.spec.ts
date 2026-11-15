@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { execFileSync } from 'node:child_process'
+import { walkBuild, walkRecall } from './helpers/memorise'
 
 // The deen engine end to end (all-in-one spec 2.5, 2.7, 5.6), on the fixture
 // deck: memorise an item → its cards show in the Review section → rate them →
@@ -71,23 +72,21 @@ test.describe('deen engine', () => {
     await page.keyboard.press('Escape')
     await expect(sheet).toHaveCount(0)
 
-    // ---- Build: two authored parts, then both chained
+    // ---- Build: two authored parts, each with its English under it, then both together
     await page.getByRole('button', { name: 'Start memorising' }).click()
-    for (let unit = 0; unit < 3; unit++) {
-      await expect(page.locator(`[data-memorise-step="build"][data-unit="${unit}"]`)).toBeVisible()
-      if (unit < 2) {
-        for (let r = 0; r < 3; r++) await page.getByRole('button', { name: 'I’ve read it aloud' }).click()
-      }
-      await expect(page.locator('[data-cue-text]')).toBeVisible()
-      await page.getByRole('button', { name: 'Try it from memory' }).click()
-      await page.getByRole('button', { name: /i’ve said it, show me/i }).click()
-      await page.getByRole('button', { name: /^yes/i }).click()
-    }
+    await expect(page.locator('[data-memorise-step="build"][data-unit="0"]')).toBeVisible()
+    await expect(page.locator('[data-unit-label]')).toHaveText('Part 1 of 2')
+    await expect(page.locator('[data-part-english]')).toHaveText('This is a test text,')
+    const walked = await walkBuild(page)
+    // Part 1 has three words to put in order; part 2 has two, too few to order; the chain is from memory
+    expect(walked).toEqual([
+      ['read', 'cue', 'order', 'hidden', 'check'],
+      ['read', 'cue', 'hidden', 'check'],
+      ['hidden', 'check'],
+    ])
 
-    // ---- Recall and self-rate
-    await expect(page.locator('[data-memorise-step="recall"]')).toBeVisible()
-    await page.getByRole('button', { name: 'Show me' }).click()
-    await page.getByRole('button', { name: 'Got it' }).click()
+    // ---- Recall: the Arabic is rated, then the meaning with its point, then the narrator
+    expect(await walkRecall(page)).toEqual(['arabic', 'meaning', 'narrator'])
     await expect(page.getByText('3 cards added. They start coming up in Review tomorrow.')).toBeVisible()
     expect(await deenCards(page)).toEqual(['_fixture:01:meaning', '_fixture:01:narrator', '_fixture:01:recall', 'glossary:dhikr:term'])
     // The self-rating counted: the recall card is scheduled, not left new to rate again
@@ -146,8 +145,9 @@ test.describe('deen engine', () => {
     await expect(page.getByRole('heading', { name: 'Fixture: a graded item' })).toBeVisible()
     await expect(page.locator('[data-grading="hasan"]')).toContainText(/fixture scholar/i)
     await page.getByRole('button', { name: /i’ve read it, test me/i }).click()
-    await expect(page.getByText('What does it mean?', { exact: false })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'What does it mean, and what is its point?' })).toBeVisible()
     await page.getByRole('button', { name: 'Show me' }).click()
+    await expect(page.locator('[data-recall-point]')).toContainText('Fixture: a graded item')
     await page.getByRole('button', { name: 'Hesitated' }).click()
     await expect(page.getByText('1 card added.', { exact: false })).toBeVisible()
     expect(await deenCards(page)).toEqual(['_fixture:03:meaning'])

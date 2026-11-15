@@ -8,7 +8,7 @@ import type { DeenCard } from '@/stores/deen-store'
 import type { Position, TextItem } from '@/types/deen'
 import { deenToday, reviewedToday } from './queue-logic'
 import { deckStatesOf, itemStateOf, stateOfCards, STRONG_INTERVAL_DAYS } from './item-state'
-import { autoChunks, correctionDate, formatIsoDate, gradingText, learnParts, mailtoHref, reportMessage, splitSegments } from './text'
+import { correctionDate, formatIsoDate, gradingText, mailtoHref, reportMessage, splitSegments } from './text'
 import { citationText, humanizeId, numberingLabel, sunnahComUrl } from './registry-names'
 import { orderPositions } from './positions-table'
 import { deckIdForSelection, errataBody, notIncludedSection } from './sources-data'
@@ -200,27 +200,6 @@ describe('text helpers', () => {
     expect(splitSegments('أ ب ج')).toEqual(['أ ب ج'])
     expect(splitSegments('أ ب ج', [1, 3])).toEqual(['أ', 'ب', 'ج'])
     expect(splitSegments('')).toEqual([])
-  })
-
-  it('splits a long text with no authored segments into even parts', () => {
-    const words = (n: number) => Array.from({ length: n }, (_, i) => `w${i + 1}`).join(' ')
-    const sizes = (t: string) => autoChunks(t).map((p) => p.split(' ').length)
-    expect(autoChunks('')).toEqual([])
-    expect(sizes(words(10))).toEqual([10])
-    expect(sizes(words(11))).toEqual([6, 5])
-    expect(sizes(words(30))).toEqual([8, 8, 8, 6])
-    // Never a tail under 3 words, and no word lost or reordered
-    for (let n = 1; n <= 60; n++) {
-      const parts = autoChunks(words(n))
-      expect(parts.join(' ')).toBe(words(n))
-      expect(Math.min(...parts.map((p) => p.split(' ').length))).toBeGreaterThanOrEqual(Math.min(n, 3))
-    }
-    // A pause near the cut ends the part early
-    expect(sizes('a b c d e f، g h i j k l m n')).toEqual([6, 8])
-    // Authored segments win; short texts stay whole
-    const item = fixtureItem('01')
-    expect(learnParts(item.arabic!, item.segments)).toEqual(splitSegments(item.arabic!, item.segments))
-    expect(learnParts('أ ب ج')).toEqual(['أ ب ج'])
   })
 
   it('finds the newest errata date for an item, exactly', () => {

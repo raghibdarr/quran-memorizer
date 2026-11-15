@@ -6,7 +6,9 @@ import type { Ayah } from '@/types/quran';
 import { getSurah } from '@/lib/quran-data';
 import { asChosen, cardId, cardsForItem, newDeenCard } from '@/lib/deen/cards';
 import { isNewCard } from '@/lib/deen/queue';
+import { buildUnits, itemParts, narratorOf, orderBank, orderWords, partGroups } from '@/lib/deen/parts';
 import { reviewSm2 } from '@/lib/spaced-repetition';
+import { seededShuffle } from '@/lib/shuffle';
 import { addLocalDays, startOfDayMs, todayIso } from '@/lib/dates';
 import { useDeenStore, type DeenCard } from '@/stores/deen-store';
 import { useReviewStore } from '@/stores/review-store';
@@ -19,6 +21,7 @@ import RatingButtons, { type Rating } from '@/components/ui/rating-buttons';
 import ArabicText from '@/components/ui/arabic-text';
 import TranslationText from '@/components/ui/translation-text';
 import HintAyah from '@/components/ui/hint-ayah';
+import WordOrder from '@/components/ui/word-order';
 import { CitationLine } from './citation-line';
 import { GradingLine } from './grading-line';
 import { ReviewBadge } from './review-badge';
@@ -26,13 +29,13 @@ import { RichText } from './term';
 import { CueText, ItemArabic } from './cue-text';
 import { deckKindOf } from './deck-source';
 import { workTitle } from './registry-names';
-import { learnParts, whenLabel } from './text';
+import { whenLabel } from './text';
 import { StickyActions } from './sticky-actions';
 
 /** Self-rating to SM-2 quality, as in the Quran reviews */
 export const RATING_QUALITY: Record<Rating, number> = { 'got-it': 5, hesitated: 3, missed: 1 };
 
-/** How many times a part is read aloud, text in view, before it is hidden */
+/** How many times an ayah is read aloud, text in view, before it is hidden (a hadith or dua part is read once, with its meaning) */
 export const READ_REPS = 3;
 
 /**
@@ -104,16 +107,65 @@ export function memoriseOutcome(
 }
 
 type Step = 'read' | 'build' | 'recall' | 'done';
-type Stage = 'read' | 'cue' | 'hidden' | 'check';
 
-/** One unit of the Build step: a part, or the chain of all of them */
+/** What the learner does with one Build unit, in order */
+export type BuildStage = 'read' | 'cue' | 'order' | 'hidden' | 'check';
+
+/**
+ * The stages of a Build unit. A part: read it with its meaning, say it from
+ * first-letter cues, put its words in order (when it has enough words), then
+ * say it with the text hidden and check. Parts said together: from memory
+ * straight away, then check.
+ */
+export function unitStages(unit: { chain: boolean; canOrder: boolean }): BuildStage[] {
+  if (unit.chain) return ['hidden', 'check'];
+  return unit.canOrder ? ['read', 'cue', 'order', 'hidden', 'check'] : ['read', 'cue', 'hidden', 'check'];
+}
+
+/** Where a rating at the check stage leads: on with "Got it", else once more through the cues (or, for a chain, another go from memory) */
+export function afterCheck(rating: Rating, chain: boolean): 'next' | BuildStage {
+  if (rating === 'got-it') return 'next';
+  return chain ? 'hidden' : 'cue';
+}
+
+/** One question of the Recall step */
+export type RecallStage = 'arabic' | 'meaning' | 'narrator' | 'usage';
+
+/**
+ * The Recall step's questions. "Memorise the Arabic": say the Arabic, then
+ * what it means, then who narrated it (a hadith) or when it is said (a dua).
+ * "Know the meaning": the meaning, then the same last question. The first one
+ * is the one that is rated.
+ */
+export function recallStages(item: TextItem, kind: DeckKind, depth: DeckDepth): RecallStage[] {
+  const out: RecallStage[] = [];
+  if (depth === 'arabic') out.push('arabic');
+  if (depth === 'meaning' || item.translation || item.quran) out.push('meaning');
+  if (kind === 'hadith' && narratorOf(item)) out.push('narrator');
+  else if (kind === 'dhikr' && item.usage?.when.length) out.push('usage');
+  return out;
+}
+
+/** A word tile of the put-in-order stage */
+interface Tile {
+  id: number;
+  match: string;
+}
+
+/** One unit of the Build step: a part, or several of them said together */
 interface Unit {
   /** "Part 1 of 2", "All together"; empty when the text is learned whole */
   label: string;
+  chain: boolean;
   /** Text items: the Arabic of this unit */
   text?: string;
+  /** Text items: this part's piece of our translation */
+  english?: string | null;
   /** Quran items: the ayahs of this unit */
   ayahs?: Ayah[];
+  /** Put-in-order: the opening words already in place, and the tiles in their right order */
+  lead: string[];
+  tiles: Tile[];
 }
 
 function useQuranAyahs(item: TextItem): { ayahs: Ayah[] | null; surahName: string } {
@@ -156,14 +208,20 @@ function useTapGuard() {
   return { locked, move: () => setMoves((m) => m + 1), guard };
 }
 
-/** Moves focus to `ref` whenever `key` changes after the first render */
-function useFocusOnChange(key: string, ref: RefObject<HTMLElement | null>) {
+/**
+ * Moves focus to `ref` whenever `key` changes after the first render. With
+ * `onlyIfLost`, only when the control that had focus has gone (so a button that
+ * stays in place keeps it).
+ */
+function useFocusOnChange(key: string, ref: RefObject<HTMLElement | null>, onlyIfLost = false) {
   const last = useRef(key);
   useEffect(() => {
     if (last.current === key) return;
     last.current = key;
+    const active = document.activeElement;
+    if (onlyIfLost && active && active !== document.body && active.isConnected && !(active as HTMLButtonElement).disabled) return;
     ref.current?.focus();
-  }, [key, ref]);
+  }, [key, ref, onlyIfLost]);
 }
 
 function StepDots({ step, depth }: { step: Step; depth: DeckDepth }) {
@@ -227,12 +285,11 @@ function ItemText({ item, ayahs, showEnglish = true }: { item: TextItem; ayahs: 
 }
 
 /**
- * A Build unit in all its forms stacked in one grid cell (text, first-letter
- * cues, hidden), only one visible: the card is as tall as the tallest form, so
- * it and the button under it stay put from stage to stage.
+ * The Arabic of a Build unit in its three forms stacked in one grid cell (text,
+ * first-letter cues, hidden), only one visible: the card is as tall as the
+ * tallest form, so it and what sits under it stay put from stage to stage.
  */
-function UnitView({ unit, stage, attempt }: { unit: Unit; stage: Stage; attempt: number }) {
-  const layer = stage === 'cue' ? 'cue' : stage === 'hidden' ? 'none' : 'text';
+function UnitArabic({ unit, layer, attempt }: { unit: Unit; layer: 'text' | 'cue' | 'none'; attempt: number }) {
   const cell = 'col-start-1 row-start-1 flex items-center justify-center';
   const text = unit.ayahs ? (
     <div className="w-full space-y-3">
@@ -253,10 +310,12 @@ function UnitView({ unit, stage, attempt }: { unit: Unit; stage: Stage; attempt:
     <CueText key={attempt} text={unit.text} />
   ) : null;
   return (
-    <div className="grid min-h-28">
+    <div className="grid min-h-24" data-unit-arabic={layer}>
       <div className={cn(cell, layer !== 'text' && 'invisible')}>{text}</div>
       <div className={cn(cell, layer !== 'cue' && 'invisible')}>{cue}</div>
-      {layer === 'none' && <div className={cn(cell, 'rounded-xl border-[1.5px] border-dashed border-foreground/20 px-4 text-center text-sm text-muted')}>Say it from memory</div>}
+      {layer === 'none' && (
+        <div className={cn(cell, 'rounded-xl border-[1.5px] border-dashed border-foreground/20 px-4 text-center text-sm text-muted')}>{unit.chain ? 'Say it all from memory' : 'Say it from memory'}</div>
+      )}
     </div>
   );
 }
@@ -264,15 +323,26 @@ function UnitView({ unit, stage, attempt }: { unit: Unit; stage: Stage; attempt:
 /** A quiet panel for the trust lines and notes under the text */
 const PANEL = 'divide-y divide-foreground/10 rounded-xl border border-foreground/10 bg-card-raised px-4 py-3';
 const PANEL_ROW = 'py-2.5 first:pt-0 last:pb-0';
+/** The small pill buttons inside a card (a hint, first letters) */
+const QUIET_PILL = 'min-h-11 rounded-full bg-foreground/[0.06] px-4 text-xs font-semibold text-foreground/80 hover:bg-foreground/10';
+/** A step that fills the screen, so the action bar under it rests at the bottom and does not move from stage to stage */
+const FILL = 'flex min-h-[calc(100dvh-9.5rem)] flex-col';
 
 /**
- * Learning one item (spec 2.7): Read (Arabic, our translation, citation,
- * grading, notes) → Build (part by part: read it aloud with the text, then with
- * first-letter cues, then from memory; then the parts chained) → Recall and
- * self-rate → its cards join the review queue. "Know the meaning" skips Build
- * and adds only the meaning card. Items with a Quran ref render from the surah
- * files and hand their ayahs to the normal Quran review. A long text with no
- * authored segments is split into even parts of about eight words.
+ * Learning one item (spec 2.7). Understanding comes first and the wording is
+ * built on it:
+ *   Read    the whole text with our translation, its sources and notes.
+ *   Build   part by part, each with its own English under it: read it aloud
+ *           with its meaning, say it from first-letter cues, put its words in
+ *           order, then say it with the text hidden and rate yourself; then
+ *           the parts together.
+ *   Recall  say the Arabic from memory, then what it means and its point, then
+ *           who narrated it (or when it is said). The first answer is rated,
+ *           and its card joins the review queue with the item's other cards.
+ * "Know the meaning" skips Build and adds only the meaning card. Items with a
+ * Quran ref render from the surah files, are learned ayah by ayah, and hand
+ * their ayahs to the normal Quran review. A text is cut only at its authored
+ * parts (content/deen/STYLE.md); without any it is learned whole.
  */
 export function MemoriseFlow({
   item,
@@ -295,37 +365,70 @@ export function MemoriseFlow({
   const recordActivity = useStatsStore((s) => s.recordActivity);
 
   const [step, setStep] = useState<Step>('read');
+  // Build
   const [unitIndex, setUnitIndex] = useState(0);
-  const [stage, setStage] = useState<Stage>('read');
+  const [stage, setStage] = useState<BuildStage>('read');
   const [reps, setReps] = useState(0);
   const [attempt, setAttempt] = useState(0);
+  const [tries, setTries] = useState(0);
+  const [cuesShown, setCuesShown] = useState(false);
+  const [orderSolved, setOrderSolved] = useState(false);
+  // Read
   const [showTranslit, setShowTranslit] = useState(false);
+  // Recall
+  const [recallAt, setRecallAt] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [hint, setHint] = useState(false);
+  const [rating, setRating] = useState<Rating | null>(null);
   const [result, setResult] = useState<MemoriseResult | null>(null);
   const { locked, move, guard } = useTapGuard();
 
-  // Focus follows the flow: the heading on each new step, the answer when it is shown
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const answerRef = useRef<HTMLDivElement>(null);
-  useFocusOnChange(step, headingRef);
-  useFocusOnChange(step === 'recall' && revealed ? 'answer' : 'question', answerRef);
-
-  // Build units: each part (authored, else automatic) or each ayah, then the chain when there are several
+  // Build units: each part (or ayah), parts together after a paragraph, then all of it together
   const units = useMemo<Unit[]>(() => {
-    const parts: Unit[] = item.quran
-      ? (ayahs ?? []).map((a, i, all) => ({ label: `Ayah ${a.number} · ${i + 1} of ${all.length}`, ayahs: [a] }))
-      : learnParts(item.arabic ?? '', item.segments).map((text, i, all) => ({ label: `Part ${i + 1} of ${all.length}`, text }));
-    if (parts.length <= 1) return parts.map((p) => ({ ...p, label: '' }));
-    const chain: Unit = item.quran ? { label: 'All together', ayahs: ayahs ?? [] } : { label: 'All together', text: parts.map((p) => p.text).join(' ') };
-    return [...parts, chain];
+    if (item.quran) {
+      const list = ayahs ?? [];
+      const parts: Unit[] = list.map((a, i) => ({ label: `Ayah ${a.number} · ${i + 1} of ${list.length}`, chain: false, ayahs: [a], lead: [], tiles: [] }));
+      if (parts.length <= 1) return parts.map((p) => ({ ...p, label: '' }));
+      return [...parts, { label: 'All together', chain: true, ayahs: list, lead: [], tiles: [] }];
+    }
+    const parts = itemParts(item);
+    return buildUnits(parts.length, partGroups(item)).map((u): Unit => {
+      if (u.kind === 'chain') {
+        const text = parts
+          .slice(u.from, u.to + 1)
+          .map((p) => p.ar)
+          .join(' ');
+        return { label: u.label, chain: true, text, lead: [], tiles: [] };
+      }
+      const part = parts[u.index];
+      const bank = orderBank(orderWords(part.ar));
+      return { label: u.label, chain: false, text: part.ar, english: part.en, lead: bank?.lead ?? [], tiles: (bank?.bank ?? []).map((w, i) => ({ id: i, match: w })) };
+    });
   }, [item, ayahs]);
 
   const meaningOnly = depth === 'meaning';
   const canBuild = !meaningOnly && (item.quran ? !!ayahs?.length : !!item.arabic);
   const lock = locked || undefined;
+  const narrator = narratorOf(item);
+  const questions = useMemo(() => recallStages(item, deckKind, depth), [item, deckKind, depth]);
+  const question = questions[Math.min(recallAt, questions.length - 1)];
 
-  const finish = (rating: Rating) => {
+  const unit: Unit | undefined = units[unitIndex];
+  const stages = unit ? unitStages({ chain: unit.chain, canOrder: unit.tiles.length > 0 }) : [];
+  // The tiles as offered: a fresh order on each go, the same on every render of it
+  const shuffled = useMemo(() => (unit ? seededShuffle(unit.tiles, `${item.deck}:${item.id}/${unitIndex}/${attempt}`) : []), [unit, item.deck, item.id, unitIndex, attempt]);
+
+  // Focus follows the flow: the heading on each new step or question, the answer when it is
+  // shown; within Build, the instruction when the control that had focus has gone
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const answerRef = useRef<HTMLDivElement>(null);
+  const helpRef = useRef<HTMLParagraphElement>(null);
+  const primaryRef = useRef<HTMLButtonElement>(null);
+  useFocusOnChange(`${step}:${step === 'recall' ? recallAt : ''}`, headingRef);
+  useFocusOnChange(step === 'recall' && revealed ? `answer:${recallAt}` : 'question', answerRef);
+  useFocusOnChange(step === 'build' ? `${unitIndex}:${stage}:${tries}` : 'idle', helpRef, true);
+
+  const finish = (rated: Rating) => {
     let ayahCount = 0;
     // Ayahs join the Quran review only when the Arabic was memorised: "Know the
     // meaning" must not put recitation cards in front of someone who never learned them
@@ -335,40 +438,57 @@ export function MemoriseFlow({
     }
     // Only cards that don't exist yet are added (and counted): learning an item again keeps its progress
     const store = useDeenStore.getState();
-    const { add, rated } = memoriseOutcome(item, deckKind, depth, store.cards, RATING_QUALITY[rating]);
+    const { add, rated: ratedId } = memoriseOutcome(item, deckKind, depth, store.cards, RATING_QUALITY[rated]);
     const ids = Object.keys(add);
     // A card already in the store (unrated) takes the rating through the store's own action
-    const existing = rated && store.cards[rated] ? rated : null;
+    const existing = ratedId && store.cards[ratedId] ? ratedId : null;
     addCards(existing ? Object.fromEntries(ids.filter((id) => id !== existing).map((id) => [id, add[id]])) : add);
-    if (existing) reviewCard(existing, RATING_QUALITY[rating]);
-    if (rated) noteIntroduced(todayIso());
+    if (existing) reviewCard(existing, RATING_QUALITY[rated]);
+    if (ratedId) noteIntroduced(todayIso());
     const after = useDeenStore.getState().cards;
     const times = ids.map((id) => after[id]?.nextReview).filter((t): t is number => typeof t === 'number');
     recordActivity();
     haptic.success();
-    setResult({ cardIds: ids.filter((id) => id !== existing), nextAt: times.length ? Math.min(...times) : null, ayahs: ayahCount, rating });
+    setResult({ cardIds: ids.filter((id) => id !== existing), nextAt: times.length ? Math.min(...times) : null, ayahs: ayahCount, rating: rated });
     setStep('done');
     move();
   };
 
-  const toStage = (s: Stage) => {
+  const toStage = (s: BuildStage) => {
     setStage(s);
     move();
   };
 
   const startUnit = (i: number) => {
+    const u = units[i];
     setUnitIndex(i);
-    setStage(i === units.length - 1 && units.length > 1 ? 'cue' : 'read');
+    setStage(u ? unitStages({ chain: u.chain, canOrder: u.tiles.length > 0 })[0] : 'read');
     setReps(0);
+    setTries(0);
+    setCuesShown(false);
+    setOrderSolved(false);
     setAttempt((a) => a + 1);
     move();
   };
 
   const toRecall = () => {
+    setRecallAt(0);
     setRevealed(false);
     setHint(false);
+    setRating(null);
     setStep('recall');
     move();
+  };
+
+  const nextUnit = () => (unitIndex + 1 < units.length ? startUnit(unitIndex + 1) : toRecall());
+
+  /** Another go at this unit: fresh cues and tiles; a second pass skips the tiles */
+  const goAgain = (to: BuildStage) => {
+    setTries((t) => t + 1);
+    setAttempt((a) => a + 1);
+    setCuesShown(false);
+    setOrderSolved(false);
+    toStage(to);
   };
 
   const top = (
@@ -464,20 +584,34 @@ export function MemoriseFlow({
         </StickyActions>
       </div>
     );
-  } else if (step === 'build') {
+  } else if (step === 'build' && unit) {
     // ---------- Build ----------
-    const unit = units[unitIndex];
-    const isChain = units.length > 1 && unitIndex === units.length - 1;
+    const readReps = unit.ayahs ? READ_REPS : 1;
     const hasNext = unitIndex + 1 < units.length;
+    const afterCue: BuildStage = tries === 0 && stages.includes('order') ? 'order' : 'hidden';
     const help =
       stage === 'read'
-        ? `Read it aloud ${READ_REPS} times, looking at the text.`
+        ? unit.ayahs
+          ? `Read it aloud ${READ_REPS} times, looking at the text.`
+          : unit.english
+            ? 'Read it aloud once, with its meaning.'
+            : 'Read it aloud once.'
         : stage === 'cue'
-          ? `${isChain ? 'Now all of it, with first letters only.' : 'Now say it with only the first letters.'} Tap a word if you need it.`
-          : stage === 'check'
-            ? 'Did you have it?'
-            : '';
-    const primary: { label: string; run: () => void } =
+          ? 'Say it from the first letters. Tap a word if you need it.'
+          : stage === 'order'
+            ? orderSolved
+              ? 'That is the order.'
+              : unit.lead.length
+                ? 'Tap the rest of the words in order.'
+                : 'Tap the words in order.'
+            : stage === 'hidden'
+              ? unit.chain
+                ? 'Say them together, from memory.'
+                : unit.english
+                  ? 'The text is hidden. Say the Arabic for this.'
+                  : 'The text is hidden. Say it from memory.'
+              : 'Check it against the text. How did it go?';
+    const primary: { label: string; run: () => void; off?: boolean } | null =
       stage === 'read'
         ? {
             label: 'I’ve read it aloud',
@@ -485,109 +619,235 @@ export function MemoriseFlow({
               haptic.selection();
               const n = reps + 1;
               setReps(n);
-              if (n >= READ_REPS) toStage('cue');
+              if (n >= readReps) toStage('cue');
             },
           }
         : stage === 'cue'
-          ? { label: 'Try it from memory', run: () => toStage('hidden') }
-          : stage === 'hidden'
-            ? { label: 'I’ve said it, show me', run: () => toStage('check') }
-            : { label: hasNext ? 'Yes, next' : 'Yes, on to recall', run: () => (hasNext ? startUnit(unitIndex + 1) : toRecall()) };
+          ? { label: 'I’ve said it', run: () => toStage(afterCue) }
+          : stage === 'order'
+            ? { label: 'Next', run: () => toStage('hidden'), off: !orderSolved }
+            : stage === 'hidden'
+              ? { label: 'I’ve said it, show me', run: () => toStage('check') }
+              : null;
     const where = unit.label || 'The whole text';
     announce =
       stage === 'read'
         ? reps === 0
-          ? `${where}. Read it aloud ${READ_REPS} times.`
-          : `Read ${reps} of ${READ_REPS}.`
+          ? `${where}. ${help}`
+          : `Read ${reps} of ${readReps}.`
         : stage === 'cue'
-          ? `${isChain ? `${where}. ` : ''}First letters only.`
-          : stage === 'hidden'
-            ? 'Text hidden. Say it from memory.'
-            : 'Text shown. Did you have it?';
+          ? 'First letters only.'
+          : stage === 'order'
+            ? orderSolved
+              ? 'That is the order.'
+              : 'Put the words in order.'
+            : stage === 'hidden'
+              ? `${unit.chain ? `${where}. ` : ''}Text hidden. Say it from memory.`
+              : 'Text shown. How did it go?';
+    const layer = stage === 'cue' || (stage === 'hidden' && cuesShown) ? 'cue' : stage === 'hidden' ? 'none' : 'text';
     content = (
-      <div className="space-y-5" data-memorise-step="build" data-unit={unitIndex} data-stage={stage}>
-        <StepDots step="build" depth={depth} />
-        {top}
-        {unit.label && <p className="px-1 text-xs font-semibold text-foreground">{unit.label}</p>}
-        <div className="tactile-card rounded-2xl bg-card p-5">
-          <UnitView key={unitIndex} unit={unit} stage={stage === 'check' ? 'read' : stage} attempt={attempt} />
+      <div className={FILL} data-memorise-step="build" data-unit={unitIndex} data-stage={stage}>
+        <div className="space-y-5">
+          <StepDots step="build" depth={depth} />
+          {top}
+          <div className="flex min-h-5 items-center justify-between gap-3 px-1">
+            <p className="text-xs font-semibold text-foreground" data-unit-label>
+              {unit.label}
+            </p>
+            <div className="flex gap-1.5" aria-hidden>
+              {stages.map((s) => (
+                <span key={s} className={cn('h-2 w-2 rounded-full transition-colors motion-reduce:transition-none', stages.indexOf(s) <= stages.indexOf(stage) ? 'bg-teal' : 'bg-foreground/15')} />
+              ))}
+            </div>
+          </div>
+
+          <div className="tactile-card space-y-4 rounded-2xl bg-card p-5">
+            {stage === 'order' ? (
+              <WordOrder
+                key={attempt}
+                order={unit.tiles}
+                tiles={shuffled}
+                lead={
+                  unit.lead.length > 0 &&
+                  unit.lead.map((w, i) => (
+                    <span key={`lead-${i}`} className="arabic-text rounded-lg border border-foreground/15 px-3 py-1.5 text-xl text-foreground/70">
+                      {w}
+                    </span>
+                  ))
+                }
+                renderPlaced={(t) => t.match}
+                renderTile={(t) => (
+                  <span className="arabic-text text-xl" lang="ar">
+                    {t.match}
+                  </span>
+                )}
+                onSolved={() => {
+                  haptic.selection();
+                  setOrderSolved(true);
+                  primaryRef.current?.focus();
+                }}
+              />
+            ) : (
+              <UnitArabic key={unitIndex} unit={unit} layer={layer} attempt={attempt} />
+            )}
+            {unit.ayahs && !unit.chain && unit.ayahs.map((a) => <TranslationText key={a.key} ayah={a} className="border-t border-foreground/10 pt-3 text-sm leading-relaxed text-foreground" />)}
+            {unit.english && (
+              <p className="border-t border-foreground/10 pt-3 text-[15px] leading-relaxed text-foreground" data-part-english>
+                <RichText text={unit.english} />
+              </p>
+            )}
+            {unit.chain && stage === 'hidden' && !cuesShown && (
+              <div className="text-center">
+                <button type="button" onClick={() => setCuesShown(true)} className={QUIET_PILL}>
+                  Show first letters
+                </button>
+              </div>
+            )}
+          </div>
+
+          <p ref={helpRef} tabIndex={-1} className="flex min-h-10 items-center justify-center text-center text-sm text-muted outline-none" data-build-help>
+            {help}
+          </p>
+          {readReps > 1 && (
+            <div className={cn('flex justify-center gap-2', stage !== 'read' && 'invisible')} aria-hidden>
+              {Array.from({ length: readReps }, (_, i) => (
+                <span key={i} className={cn('h-2.5 w-2.5 rounded-full transition-colors motion-reduce:transition-none', i < reps ? 'bg-teal' : 'bg-foreground/15')} />
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="space-y-3">
-          <p className="flex min-h-10 items-center justify-center text-center text-sm text-muted">{help}</p>
-          <div className={cn('flex justify-center gap-2', stage !== 'read' && 'invisible')} aria-hidden>
-            {Array.from({ length: READ_REPS }, (_, i) => (
-              <span key={i} className={cn('h-2.5 w-2.5 rounded-full transition-colors motion-reduce:transition-none', i < reps ? 'bg-teal' : 'bg-foreground/15')} />
-            ))}
-          </div>
-          {/* One button for every stage, so it keeps its place and keyboard focus */}
-          <Button className="w-full" aria-disabled={lock} onClick={guard(primary.run)} data-build-primary>
-            {primary.label}
-          </Button>
-          {stage === 'check' && (
-            <Button
-              variant="ghost"
-              className="w-full"
-              aria-disabled={lock}
-              onClick={guard(() => {
-                setAttempt((a) => a + 1);
-                toStage('cue');
-              })}
+        <StickyActions className="mt-auto">
+          {primary ? (
+            // One button for every stage but the last, so it keeps its place and keyboard focus
+            <button
+              ref={primaryRef}
+              type="button"
+              aria-disabled={lock || primary.off || undefined}
+              onClick={guard(() => !primary.off && primary.run())}
+              data-build-primary
+              className={cn(
+                'tactile-btn w-full rounded-xl px-6 py-3 font-semibold',
+                primary.off ? 'cursor-not-allowed bg-foreground/10 text-muted shadow-none' : 'bg-teal text-on-teal hover:bg-teal-light',
+              )}
             >
-              Not yet, go over it again
-            </Button>
+              {primary.label}
+            </button>
+          ) : (
+            <div className="space-y-2" aria-disabled={lock}>
+              <RatingButtons
+                onRate={guard((r: Rating) => {
+                  const to = afterCheck(r, unit.chain);
+                  if (to === 'next') nextUnit();
+                  else goAgain(to);
+                })}
+              />
+              <p className="text-center text-xs text-muted">
+                {tries > 0 ? (
+                  <button type="button" aria-disabled={lock} onClick={guard(nextUnit)} className="min-h-9 px-2 font-semibold text-foreground/80 underline underline-offset-2">
+                    {hasNext ? 'Move on for now' : 'Move on to recall'}
+                  </button>
+                ) : (
+                  'Anything but “Got it” takes you through it once more.'
+                )}
+              </p>
+            </div>
           )}
-        </div>
+        </StickyActions>
       </div>
     );
-  } else if (step === 'recall') {
+  } else if (step === 'recall' && question) {
     // ---------- Recall ----------
-    announce = revealed ? 'Answer shown. How did it go?' : '';
-    content = (
-      <div className="space-y-5" data-memorise-step="recall">
-        <StepDots step="recall" depth={depth} />
-        {top}
-        <div ref={answerRef} tabIndex={-1} className="tactile-card space-y-4 rounded-2xl bg-card p-5 text-center outline-none">
-          {meaningOnly ? (
-            <>
-              {item.arabic ? <ItemArabic text={item.arabic} /> : item.quran && ayahs ? <ItemText item={item} ayahs={ayahs} showEnglish={false} /> : <p className="text-sm text-muted">{item.cue}</p>}
-              <p className="text-sm font-medium text-foreground">What does it mean? Say it in your own words.</p>
-            </>
-          ) : (
-            <>
-              <p className="text-sm font-medium text-foreground">Recite it from memory</p>
-              <p className="text-xs text-muted">{item.cue}</p>
-              {hint && !revealed && (item.quran ? (ayahs ?? []).map((a) => <HintAyah key={a.key} ayah={a} className="text-2xl" />) : item.arabic && <CueText text={item.arabic} />)}
-              {!hint && !revealed && (
-                <button type="button" onClick={() => setHint(true)} className="min-h-11 rounded-full bg-foreground/[0.06] px-4 text-xs font-semibold text-foreground/80 hover:bg-foreground/10">
-                  Hint: first letters
-                </button>
-              )}
-            </>
+    const isLast = recallAt === questions.length - 1;
+    const isRated = recallAt === 0;
+    const nextQuestion = () => {
+      setRecallAt((i) => i + 1);
+      setRevealed(false);
+      move();
+    };
+    const heading =
+      question === 'arabic'
+        ? 'Say the Arabic from memory'
+        : question === 'meaning'
+          ? deckKind === 'hadith' && !item.quran
+            ? 'What does it mean, and what is its point?'
+            : 'What does it mean?'
+          : question === 'narrator'
+            ? 'Who narrated it?'
+            : 'When is it said?';
+    // What the question is asked about: the cue for the Arabic, the Arabic itself for the rest
+    const arabicShown = item.arabic ? <ItemArabic text={item.arabic} /> : item.quran && ayahs ? <ItemText item={item} ayahs={ayahs} showEnglish={false} /> : <p className="text-sm text-muted">{item.cue}</p>;
+    const prompt =
+      question === 'arabic' ? (
+        <>
+          <p className="text-xs text-muted">{item.cue}</p>
+          {hint && !revealed && (item.quran ? (ayahs ?? []).map((a) => <HintAyah key={a.key} ayah={a} className="text-2xl" />) : item.arabic && <CueText text={item.arabic} />)}
+          {!hint && !revealed && (
+            <button type="button" onClick={() => setHint(true)} className={QUIET_PILL}>
+              Hint: first letters
+            </button>
           )}
-          {revealed && (
-            <div className="border-t border-foreground/10 pt-4 text-start">
-              {meaningOnly ? (
-                item.translation ? (
-                  <p className="text-[15px] leading-relaxed text-foreground">
-                    <RichText text={item.translation} />
-                  </p>
-                ) : (
-                  <ItemText item={item} ayahs={ayahs} />
-                )
-              ) : (
-                <ItemText item={item} ayahs={ayahs} showEnglish={false} />
-              )}
-            </div>
+        </>
+      ) : question === 'narrator' ? (
+        <p className="text-sm text-muted">{item.title}</p>
+      ) : (
+        arabicShown
+      );
+    const answer =
+      question === 'arabic' ? (
+        <ItemText item={item} ayahs={ayahs} showEnglish={false} />
+      ) : question === 'meaning' ? (
+        <div className="space-y-3">
+          {item.translation ? (
+            <p className="text-[15px] leading-relaxed text-foreground">
+              <RichText text={item.translation} />
+            </p>
+          ) : (
+            <ItemText item={item} ayahs={ayahs} />
+          )}
+          {deckKind === 'hadith' && !item.quran && (
+            <p className="rounded-xl bg-foreground/[0.04] px-3 py-2.5 text-sm text-foreground" data-recall-point>
+              <span className="block text-xs font-semibold text-muted">Its point</span>
+              {item.title}
+            </p>
           )}
         </div>
-        <StickyActions>
-          {revealed ? (
-            <div className="space-y-2" aria-disabled={lock}>
-              <p className="text-center text-sm text-muted">How did it go?</p>
-              <RatingButtons onRate={guard(finish)} />
-            </div>
-          ) : (
+      ) : question === 'narrator' ? (
+        <p className="text-center text-lg font-bold text-foreground" data-recall-narrator>
+          {narrator}
+        </p>
+      ) : (
+        <ul className="space-y-1 text-[15px] leading-relaxed text-foreground" data-recall-usage>
+          {item.usage?.when.map((w) => (
+            <li key={w}>
+              <RichText text={w} />
+            </li>
+          ))}
+          {item.usage?.repeat && item.usage.repeat > 1 && <li className="text-xs text-muted">Said {item.usage.repeat} times</li>}
+        </ul>
+      );
+    announce = revealed ? (isRated ? 'Answer shown. How did it go?' : 'Answer shown.') : '';
+    content = (
+      <div className={FILL} data-memorise-step="recall" data-recall={question}>
+        <div className="space-y-5">
+          <StepDots step="recall" depth={depth} />
+          <div className="space-y-1 text-center">
+            <h2 ref={headingRef} tabIndex={-1} className="text-lg font-bold text-foreground outline-none">
+              {heading}
+            </h2>
+            {questions.length > 1 && (
+              <p className="text-xs text-muted">
+                {recallAt + 1} of {questions.length}
+              </p>
+            )}
+          </div>
+          <div ref={answerRef} tabIndex={-1} className="tactile-card space-y-4 rounded-2xl bg-card p-5 text-center outline-none">
+            {prompt}
+            {revealed && <div className="border-t border-foreground/10 pt-4 text-start">{answer}</div>}
+          </div>
+        </div>
+        <StickyActions className="mt-auto">
+          {!revealed ? (
             <Button
               className="w-full"
               aria-disabled={lock}
@@ -597,6 +857,21 @@ export function MemoriseFlow({
               })}
             >
               Show me
+            </Button>
+          ) : isRated ? (
+            <div className="space-y-2" aria-disabled={lock}>
+              <p className="text-center text-sm text-muted">How did it go?</p>
+              <RatingButtons
+                onRate={guard((r: Rating) => {
+                  if (isLast) return finish(r);
+                  setRating(r);
+                  nextQuestion();
+                })}
+              />
+            </div>
+          ) : (
+            <Button className="w-full" aria-disabled={lock} onClick={guard(() => (isLast ? finish(rating ?? 'hesitated') : nextQuestion()))}>
+              {isLast ? 'Finish' : 'Next'}
             </Button>
           )}
         </StickyActions>

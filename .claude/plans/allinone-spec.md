@@ -97,7 +97,7 @@ One new row: "Prayer times and alerts" → `/prayer/settings`. Nothing else edit
 - **Prayer setup**: card "Prayer times, worked out on your phone. Your location is never sent anywhere." → "Use my location" (OS prompt, coarse, one fix, rounded, label from nearest bundled city) or "Choose a city" (offline search). Confirm place, method (one sentence why), Asr: "Standard (Shafi'i, Maliki, Hanbali)" or "Hanafi". Then "Tell me when each prayer starts?". Denied location falls straight to the city picker. If the device timezone later differs from the place's, a dismissible line offers "Update location?". No background location.
 - **Match my mosque**: user types start times (not jama'ah; the copy says so) for one or two dates; app fits method, Asr, high-latitude rule and per-prayer offsets; shows before/after; Apply and Undo.
 - **Tracker**: tap a passed prayer = prayed (on time if before the next prayer starts, else late); long-press: On time / Late / Missed / Clear. Pause excludes days from all counts.
-- **Learning an item**: Read (Arabic, our translation, citation, grading, tap-to-define) → Build (segment by segment with hide-words from `first-letters.ts`, then chained) → Recall and self-rate (`RatingButtons`) → cards enter the queue. Depth per deck: "Know the meaning" or "Memorise the Arabic" (defaults: Names = meaning, adhkar = Arabic, hadith = ask).
+- **Learning an item**: Read (Arabic, our translation, citation, grading, tap-to-define) → Build (part by part, each authored part with its own English under it: read it aloud with its meaning, say it from first-letter cues, put its words in order, say it with the text hidden and self-rate; then the parts together) → Recall (say the Arabic and self-rate with `RatingButtons`, then its meaning and point, then its narrator or when it is said) → cards enter the queue. Understanding comes first for hadith and duas; tajweed colouring stays with the Quran. Depth per deck: "Know the meaning" or "Memorise the Arabic" (defaults: Names = meaning, adhkar = Arabic, hadith = ask).
 - **Pray it now**: `/prayer` shows "After Dhuhr adhkar" once that prayer's time has entered; morning set from Fajr to sunrise, evening set from Asr to Maghrib. Walks the set with tap counters. Not rated, no streak.
 
 ## 3. Shared foundations (package `foundations`, wave 0, alone)
@@ -242,7 +242,7 @@ interface Provenance { witnesses: { name: string; ref: string; skeletonSha256: s
 interface Review { status: ReviewStatus; by?: string[]; date?: string; log?: string[] }
 interface Note { text: string; source: { work: string; location: string } }
 interface TextItem { id: string; deck: string; rev: number; title: string; cue: string;
-  quran?: QuranRef; arabic?: string; segments?: number[]; transliteration?: string; translation?: string;
+  quran?: QuranRef; arabic?: string; segments?: number[]; transliteration?: string; translation?: string; parts?: { ar: number[]; en: number[] };
   citations: Citation[]; gradings: Grading[]; provenance?: Provenance; notes?: Note[];
   usage?: { when: string[]; repeat?: number; evidence?: string };
   variants?: { label: string; arabic: string; citations: Citation[] }[]; review: Review }

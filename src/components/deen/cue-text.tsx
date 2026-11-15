@@ -5,6 +5,19 @@ import { firstLetters } from '@/lib/first-letters';
 import { cn } from '@/lib/cn';
 import { arabicWords } from './text';
 
+/** An opening quote mark or bracket stays in front of the cue: the cue is the word's first letter, not the mark */
+const OPENING = /^[«﴿"“‘(]+/;
+const HONORIFIC = /^[ﷺﷻ﵀-﵏]/;
+
+/** The first-letter cue of one word of a hadith or dua */
+export function cueOf(word: string): string {
+  const lead = OPENING.exec(word)?.[0] ?? '';
+  const rest = word.slice(lead.length);
+  // An honorific sign (ﷺ) is shown as it is, whatever punctuation follows it
+  if (HONORIFIC.test(rest)) return lead + rest;
+  return lead + firstLetters(rest);
+}
+
 /**
  * Arabic shown as first-letter cues (hide-words recall, as in the Quran
  * lessons): each word shows its opening letter; tap a word to see it whole,
@@ -38,7 +51,7 @@ export function CueText({ text, className }: { text: string; className?: string 
             )}
           >
             <span className="arabic-text" style={{ lineHeight: 1.4 }}>
-              {open ? w : firstLetters(w)}
+              {open ? w : cueOf(w)}
             </span>
           </button>
         );

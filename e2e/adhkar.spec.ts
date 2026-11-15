@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import { walkBuild, walkRecall } from './helpers/memorise'
 
 // Adhkar and duas end to end (all-in-one spec 2.7, adhkar-duas brief), on the real
 // shipped decks: say a set with "Pray it now" to the end (nothing rated, nothing
@@ -77,26 +78,11 @@ test.describe('adhkar and duas', () => {
     await card.locator('[data-memorise="rain"]').click()
     await expect(page).toHaveURL(/\/review\/deen\?learn=duas-daily(%3A|:)rain/)
 
-    // Read → Build → Recall (the item has one part)
+    // Read → Build → Recall. Two words: learned whole, and too short to put in order
     await page.getByRole('button', { name: 'Start memorising' }).click()
-    for (let guard = 0; guard < 12; guard++) {
-      if (await page.locator('[data-memorise-step="recall"]').isVisible()) break
-      const readAloud = page.getByRole('button', { name: 'I’ve read it aloud' })
-      if (await readAloud.isVisible()) { await readAloud.click(); continue }
-      const tryIt = page.getByRole('button', { name: 'Try it from memory' })
-      if (await tryIt.isVisible()) { await tryIt.click(); continue }
-      const show = page.getByRole('button', { name: /i’ve said it, show me/i })
-      if (await show.isVisible()) { await show.click(); continue }
-      const yes = page.getByRole('button', { name: /^yes/i })
-      if (await yes.isVisible()) { await yes.click(); continue }
-      await page.waitForTimeout(100)
-    }
-    await expect(page.locator('[data-memorise-step="recall"]')).toBeVisible()
-    for (let guard = 0; guard < 6; guard++) {
-      if (await page.getByText(/cards? added/).isVisible()) break
-      await page.getByRole('button', { name: 'Show me' }).click()
-      await page.getByRole('button', { name: 'Got it' }).click()
-    }
+    expect(await walkBuild(page)).toEqual([['read', 'cue', 'hidden', 'check']])
+    // A dua is asked for its Arabic, its meaning, then when it is said
+    expect(await walkRecall(page)).toEqual(['arabic', 'meaning', 'usage'])
     await expect(page.getByText(/cards? added/)).toBeVisible()
     const cards = await deenCards(page)
     expect(cards).toContain('duas-daily:rain:recall')
@@ -104,6 +90,22 @@ test.describe('adhkar and duas', () => {
     // Just practised: its cards start tomorrow, and the Review tab says when
     await page.goto('/review')
     await expect(page.locator('[data-deen-caught-up]')).toContainText('comes back tomorrow')
+  })
+
+  test('a longer dua is learned in parts, each with its meaning, then all together', async ({ page }) => {
+    await seed(page)
+    await page.goto('/review/deen?learn=duas-daily:worry')
+    await page.getByRole('button', { name: 'Start memorising' }).click()
+    await expect(page.locator('[data-unit-label]')).toHaveText('Part 1 of 2')
+    await expect(page.locator('[data-part-english]')).toHaveText('O Allah, I seek refuge with You from worry and grief,')
+    const walked = await walkBuild(page)
+    expect(walked).toEqual([
+      ['read', 'cue', 'order', 'hidden', 'check'],
+      ['read', 'cue', 'order', 'hidden', 'check'],
+      ['hidden', 'check'],
+    ])
+    expect(await walkRecall(page)).toEqual(['arabic', 'meaning', 'usage'])
+    expect(await deenCards(page)).toEqual(expect.arrayContaining(['duas-daily:worry:recall', 'duas-daily:worry:meaning']))
   })
 
   test('a memorised Essentials item becomes seeded deen cards, once', async ({ page }) => {
