@@ -20,7 +20,7 @@ attribution lines, and the scholarly verdicts on the narrations outside the two 
   own citation.
 - Ayahs the Prophet ﷺ recites inside a narration (hadith 10) stay in the hadith's Arabic,
   because they are part of the narration as the witnesses give it; they are named in the note.
-- `segments` end at sentence ends; every narration of more than one sentence has them.
+- `segments` end at sentence ends; every long narration has them (short ones are learned whole).
 
 **Gradings**: inclusion in al-Bukhari or Muslim is shown as such. Outside the two Sahihs the
 grading is al-Nawawi's own verdict where he gives one, or the verdict he quotes (al-Tirmidhi's),

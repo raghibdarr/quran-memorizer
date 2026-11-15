@@ -83,3 +83,22 @@ export function readingParts(arabic: string, segments?: number[]): string[] {
   if (rest) out.push(rest);
   return out;
 }
+
+export interface LearnActions {
+  /** Label of the memorise button: the flow keeps existing cards and adds only the missing ones */
+  memoriseLabel: string;
+  /** Offer "Just learn the meaning" only while the meaning card does not exist yet */
+  offerMeaning: boolean;
+}
+
+/**
+ * What the hadith screen offers, from the card ids the learner already has.
+ * Someone who took "Just learn the meaning" has not memorised the Arabic yet,
+ * so the button still says "Start memorising" until the recall card exists.
+ */
+export function learnActions(cardIds: Iterable<string>, itemId: string, deck: string = NAWAWI_DECK): LearnActions {
+  const have = new Set(cardIds);
+  const recall = have.has(`${deck}:${itemId}:recall`);
+  const meaning = have.has(`${deck}:${itemId}:meaning`);
+  return { memoriseLabel: recall ? 'Memorise it again' : 'Start memorising', offerMeaning: !meaning };
+}

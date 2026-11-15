@@ -11,10 +11,11 @@ import { ReviewBadge } from '@/components/deen/review-badge';
 import { ReportProblem } from '@/components/deen/report-problem';
 import { RichText } from '@/components/deen/term';
 import { useItemState } from '@/components/deen/item-state';
+import { useDeenStore } from '@/stores/deen-store';
 import { learnHref, sessionHref } from '@/components/deen/links';
 import type { TextItem } from '@/types/deen';
 import { cn } from '@/lib/cn';
-import { hadithHref, hadithNumber, NAWAWI_DECK, NAWAWI_TOTAL, neighbours, normaliseHadithId, readingParts } from './hadith-logic';
+import { hadithHref, hadithNumber, learnActions, NAWAWI_DECK, NAWAWI_TOTAL, neighbours, normaliseHadithId, readingParts } from './hadith-logic';
 import { StateChip } from './state-chip';
 import { useHadithDeck } from './use-hadith-deck';
 
@@ -43,7 +44,10 @@ function HadithArabic({ item }: { item: TextItem }) {
 
 function Actions({ item }: { item: TextItem }) {
   const state = useItemState(NAWAWI_DECK, item.id);
-  const started = state !== 'new';
+  const hasRecall = useDeenStore((s) => Boolean(s.cards[`${NAWAWI_DECK}:${item.id}:recall`]));
+  const hasMeaning = useDeenStore((s) => Boolean(s.cards[`${NAWAWI_DECK}:${item.id}:meaning`]));
+  const ids = [hasRecall && `${NAWAWI_DECK}:${item.id}:recall`, hasMeaning && `${NAWAWI_DECK}:${item.id}:meaning`].filter(Boolean) as string[];
+  const { memoriseLabel, offerMeaning } = learnActions(ids, item.id);
   return (
     <div className="space-y-2" data-hadith-actions>
       {state === 'due' && (
@@ -62,15 +66,17 @@ function Actions({ item }: { item: TextItem }) {
         )}
         data-start-memorising
       >
-        {started ? 'Memorise it again' : 'Start memorising'}
+        {memoriseLabel}
       </Link>
-      <Link
-        href={learnHref(NAWAWI_DECK, item.id, 'meaning')}
-        className="flex min-h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold text-teal hover:bg-teal/5"
-        data-learn-meaning
-      >
-        Just learn the meaning
-      </Link>
+      {offerMeaning && (
+        <Link
+          href={learnHref(NAWAWI_DECK, item.id, 'meaning')}
+          className="flex min-h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold text-teal hover:bg-teal/5"
+          data-learn-meaning
+        >
+          Just learn the meaning
+        </Link>
+      )}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import glossary from '@/data/deen/glossary/nawawi40.json';
 import deckModule from '@/content/deen/decks/nawawi40';
 import type { EmittedDeck, TextItem } from '@/types/deen';
 import { splitSegments } from '@/components/deen/text';
-import { deckProgress, hadithHref, hadithNumber, neighbours, normaliseHadithId, progressLine, readingParts } from './hadith-logic';
+import { deckProgress, hadithHref, hadithNumber, learnActions, neighbours, normaliseHadithId, progressLine, readingParts } from './hadith-logic';
 
 const deck = emitted as unknown as EmittedDeck;
 const items = deck.items as TextItem[];
@@ -45,7 +45,31 @@ describe('hadith-logic', () => {
   });
 });
 
+describe('learnActions', () => {
+  it('keeps "Start memorising" until the recall card exists, and drops the meaning offer once it is learned', () => {
+    expect(learnActions([], '01')).toEqual({ memoriseLabel: 'Start memorising', offerMeaning: true });
+    expect(learnActions(['nawawi40:01:meaning'], '01')).toEqual({ memoriseLabel: 'Start memorising', offerMeaning: false });
+    expect(learnActions(['nawawi40:01:meaning', 'nawawi40:01:narrator', 'nawawi40:01:recall'], '01')).toEqual({
+      memoriseLabel: 'Memorise it again',
+      offerMeaning: false,
+    });
+    // another hadith's cards do not count
+    expect(learnActions(['nawawi40:02:recall', 'nawawi40:02:meaning'], '01')).toEqual({ memoriseLabel: 'Start memorising', offerMeaning: true });
+  });
+});
+
 describe('the emitted Forty', () => {
+  it('attributes every grading outside the two Sahihs with the scholar’s own words', () => {
+    for (const it of items) {
+      for (const g of it.gradings) {
+        if (g.grade === 'in-sahih') continue;
+        expect(g.quote, it.id).toMatch(/[ء-ي]/);
+      }
+      // al-Tirmidhi's "hasan sahih" is his own term: the line says so, not only "Sahih"
+      for (const g of it.gradings.filter((x) => x.quote?.includes('حَسَنٌ صَحِيحٌ'))) expect(g.in, it.id).toMatch(/hasan sahih/);
+    }
+  });
+
   it('ships at least hadith 1 to 15, in order, all source-checked', () => {
     const ids = items.map((i) => i.id);
     for (let n = 1; n <= 15; n++) expect(ids).toContain(String(n).padStart(2, '0'));

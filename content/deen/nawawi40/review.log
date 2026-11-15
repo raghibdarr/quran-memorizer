@@ -212,3 +212,4 @@ al-'Ulum (al-Arna'ut and Bajis) takhrij footnotes; api = the hadith-api text at 
 15 muslim 47 W2: yes W4: yes  api: 3 entries, best overlap 100%
 ```
 2026-11-15 build-deen G8 warning on 11 ("hasan" unmarked) is the narrator's name al-Hasan ibn Ali, not the grading term; left as plain English by design
+2026-11-15 reviewer pass: 11 rev 2, grading 'in' now names al-Tirmidhi's term (hasan sahih) in English; no text or number changed. SELECTION.md wording on segments corrected to match the items (long narrations only).

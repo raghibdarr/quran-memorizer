@@ -1,7 +1,7 @@
 {
   "id": "11",
   "deck": "nawawi40",
-  "rev": 1,
+  "rev": 2,
   "title": "Leave what makes you doubt",
   "cue": "Leave what makes you doubt for what does not",
   "arabic": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ ﷺ وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ ﷺ: «دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ».",
@@ -29,7 +29,7 @@
     {
       "grade": "sahih",
       "by": "al-tirmidhi",
-      "in": "al-Jami', after hadith 2518 (quoted by al-Nawawi in the Forty)",
+      "in": "al-Jami', after hadith 2518, in his words \"hasan sahih\" (quoted by al-Nawawi in the Forty)",
       "quote": "حَدِيثٌ حَسَنٌ صَحِيحٌ"
     }
   ],
@@ -75,7 +75,8 @@
       "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
       "2026-11-14 H: not in the two Sahihs. al-Nawawi quotes al-Tirmidhi: \"hasan sahih\"; located in al-Tirmidhi's Jami' after no. 2518 (hadith-api ara-tirmidhi text) and reported by Ibn Rajab (\"وصححه الترمذي\", Jami' al-'Ulum on hadith 11)",
       "2026-11-14 I: build-deen --check green",
-      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 review: rev 2. The grading line now gives al-Tirmidhi's own term, hasan sahih, in English beside the Arabic quote, so the label Sahih is not read as his whole verdict. Arabic, translation and numbers unchanged."
     ]
   }
 }

@@ -61,6 +61,8 @@ test.describe('Forty Hadith', () => {
     await page.goto('/hadith')
     await expect(page.locator('[data-hadith-row="01"] [data-item-state="learning"]')).toHaveText('Learning')
     await expect(page.locator('[data-hadith-progress]')).toContainText('1 of')
+    await page.locator('[data-hadith-row="01"]').click()
+    await expect(page.locator('[data-start-memorising]')).toHaveText('Memorise it again')
 
     // ---- And the cards are in the deen review session
     await page.goto('/review/deen?deck=nawawi40')
@@ -80,6 +82,11 @@ test.describe('Forty Hadith', () => {
     await page.getByRole('button', { name: 'Show me' }).click()
     await page.getByRole('button', { name: 'Got it' }).click()
     expect(await deenCards(page)).toEqual(['nawawi40:07:meaning'])
+
+    // The Arabic is still to memorise, and the meaning is not offered twice
+    await page.goto('/hadith/view?id=07')
+    await expect(page.locator('[data-start-memorising]')).toHaveText('Start memorising')
+    await expect(page.locator('[data-learn-meaning]')).toHaveCount(0)
   })
 
   test('a hadith that is not in the deck says so calmly', async ({ page }) => {

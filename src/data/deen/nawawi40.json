@@ -1,7 +1,7 @@
 {
  "deck": "nawawi40",
  "kind": "hadith",
- "hash": "77730c2ab08634d3",
+ "hash": "e8564d03beae910d",
  "items": [
   {
    "id": "01",
@@ -760,7 +760,7 @@
   {
    "id": "11",
    "deck": "nawawi40",
-   "rev": 1,
+   "rev": 2,
    "title": "Leave what makes you doubt",
    "cue": "Leave what makes you doubt for what does not",
    "arabic": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ ﷺ وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ ﷺ: «دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ».",
@@ -788,7 +788,7 @@
     {
      "grade": "sahih",
      "by": "al-tirmidhi",
-     "in": "al-Jami', after hadith 2518 (quoted by al-Nawawi in the Forty)",
+     "in": "al-Jami', after hadith 2518, in his words \"hasan sahih\" (quoted by al-Nawawi in the Forty)",
      "quote": "حَدِيثٌ حَسَنٌ صَحِيحٌ"
     }
    ],
