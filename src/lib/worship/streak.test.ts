@@ -88,6 +88,16 @@ describe('runs', () => {
     expect(currentRun(log, [], '2026-03-04')).toBe(0)
   })
 
+  // Between midnight and Fajr the screen counts from the prayer day (the day
+  // before), whose Isha is still current: it is in progress, not a gap
+  it('counted from the prayer day, the run holds across midnight until Isha is logged', () => {
+    const noIsha: DayLog = { ...WHOLE }
+    delete noIsha.isha
+    const log: PrayerLog = { '2026-03-01': WHOLE, '2026-03-02': WHOLE, '2026-03-03': noIsha }
+    expect(currentRun(log, [], '2026-03-03')).toBe(2)
+    expect(currentRun({ ...log, '2026-03-03': WHOLE }, [], '2026-03-03')).toBe(3)
+  })
+
   it('is zero for an empty log', () => {
     expect(currentRun({}, [], '2026-03-03')).toBe(0)
     expect(longestRun({}, [], '2026-03-03')).toBe(0)

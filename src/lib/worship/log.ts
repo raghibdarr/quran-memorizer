@@ -17,11 +17,13 @@ export type DayLog = PrayerLog[string];
  * What a tap on a passed prayer records: on time when it is marked before the
  * prayer's time ends (the next time begins: sunrise for Fajr, the next day's
  * Fajr for Isha), late after. Null while the prayer's time has not begun (the
- * tick is inert then). A missing end (high latitude) counts as on time.
+ * tick is inert then). A missing end (high latitude) counts as on time, and so
+ * does an end that is not after the start: in the polar night the computed
+ * times can cross (Asr before Dhuhr), and a time that never opens can't be late.
  */
 export function inferMark(at: number, startMs: number, endMs: number | null): Exclude<PrayerMark, 'missed'> | null {
   if (!Number.isFinite(at) || at < startMs) return null;
-  if (endMs === null || !Number.isFinite(endMs) || at < endMs) return 'ontime';
+  if (endMs === null || !Number.isFinite(endMs) || endMs <= startMs || at < endMs) return 'ontime';
   return 'late';
 }
 

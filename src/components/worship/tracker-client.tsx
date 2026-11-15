@@ -84,7 +84,9 @@ export default function TrackerClient() {
   const [dayIso, setDayIso] = useState<string | null>(null);
 
   const week = rangeTally(prayers, pauses, addDaysIso(today, -6), today);
-  const run = currentRun(prayers, pauses, today);
+  // Counted from the prayer day on screen: between midnight and Fajr the day
+  // before is still in progress (its Isha is current), not a gap in the run
+  const run = currentRun(prayers, pauses, rowsIso);
   const paused = openPause(pauses);
   const missed = missedEntries(prayers, pauses);
   const owed = makeUpOwed(prayers, pauses, madeUp);
