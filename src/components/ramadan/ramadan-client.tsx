@@ -19,6 +19,7 @@ import { useReaderStore } from '@/stores/reader-store';
 import { useWorshipStore } from '@/stores/worship-store';
 import type { RamadanMode } from '@/types/prayer';
 import FastHero from './fast-hero';
+import IftarDua from './iftar-dua';
 import MarkChips from './mark-chips';
 import MakeUp from './make-up';
 import RamadanLog from './ramadan-log';
@@ -118,6 +119,8 @@ export default function RamadanClient() {
             </Card>
           </section>
         )}
+
+        <IftarDua />
 
         <RamadanLog span={span} today={today} collapsible={!inSpan} />
 

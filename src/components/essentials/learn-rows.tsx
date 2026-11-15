@@ -10,6 +10,9 @@ import { useReviewStore } from '@/stores/review-store';
 import type { TextItem } from '@/types/deen';
 import { useLiveDecks } from '@/hooks/use-deen-queue';
 import { getDeck } from '@/components/deen/deck-source';
+import { isRamadan } from '@/lib/hijri/convert';
+import { todayIso } from '@/lib/dates';
+import { usePrayerStore } from '@/stores/prayer-store';
 
 const GROUP_ORDER: DeckGroup[] = ['hadith', 'adhkar', 'names', 'course'];
 const GROUP_ROUTE: Record<DeckGroup, string> = { hadith: '/hadith', adhkar: '/adhkar', names: '/names', course: '/course' };
@@ -65,6 +68,9 @@ export function LearnRows() {
   const cards = useDeenStore((s) => s.cards);
   const lessonsDone = useDeenStore((s) => s.lessonsDone);
   const ayahCards = useReviewStore((s) => s.cards);
+  const hijriOffset = usePrayerStore((s) => s.hijriOffset);
+  // In Ramadan the course row leads with its fasting unit
+  const ramadan = useMemo(() => isRamadan(todayIso(), hijriOffset), [hijriOffset]);
   const [rows, setRows] = useState<GroupRow[] | null>(null);
 
   useEffect(() => {
@@ -116,7 +122,9 @@ export function LearnRows() {
               <div className="flex items-start justify-between gap-3">
                 <span className="min-w-0 flex-1">
                   <span className="block text-base font-semibold text-foreground">{GROUP_TITLES[row.group]}</span>
-                  <span className="mt-0.5 block text-xs text-muted">{GROUP_BLURB[row.group]}</span>
+                  <span className="mt-0.5 block text-xs text-muted">
+                    {row.group === 'course' && ramadan ? 'Fasting in seven short lessons, for Ramadan; and purification' : GROUP_BLURB[row.group]}
+                  </span>
                 </span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted" aria-hidden>
                   <polyline points="9 18 15 12 9 6" />
