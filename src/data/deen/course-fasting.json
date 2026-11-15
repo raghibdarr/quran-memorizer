@@ -1,7 +1,7 @@
 {
  "deck": "course-fasting",
  "kind": "course",
- "hash": "82fa14885c136cf8",
+ "hash": "dc2ee65ae1cd33ed",
  "items": [
   {
    "unit": "fasting",
@@ -1135,11 +1135,11 @@
   },
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-05-making-up",
    "order": 5,
    "title": "Making up, feeding and expiation",
-   "intro": "A missed fast can lead to one of three things: making the day up, feeding a poor person, or a heavier expiation. This lesson sets out what each one is and where the schools differ. It does not work out your own case: for that, ask a scholar you trust.",
+   "intro": "A missed fast can lead to three things, alone or together: making the day up, feeding a poor person, and a heavier expiation. This lesson sets out what each one is and where the schools differ. It does not work out your own case: for that, ask a scholar you trust.",
    "claims": [
     {
      "id": "qada-definition",
@@ -1660,7 +1660,7 @@
   },
   {
    "unit": "fasting",
-   "rev": 1,
+   "rev": 2,
    "id": "fasting-07-recap",
    "order": 7,
    "title": "Recap: the fast at a glance",
@@ -1707,7 +1707,7 @@
     {
      "id": "three-outcomes",
      "kind": "definition",
-     "text": "A missed or broken fast leads to one of three things: [[qada]] alone, [[fidyah]], or [[qada]] together with [[kaffarah]]. Which one applies depends on the cause, and for several causes the schools differ.",
+     "text": "A missed or broken fast can lead to three things, alone or together: [[qada]], [[fidyah]] and [[kaffarah]]. Which apply depends on the cause, and for several causes the schools differ.",
      "evidence": [
       {
        "quran": {
@@ -1727,7 +1727,7 @@
       {
        "id": "three-outcomes-1",
        "front": "What three things can a missed or broken fast lead to?",
-       "back": "[[qada]] (making the day up), [[fidyah]] (feeding a poor person), or [[qada]] with [[kaffarah]] (the heavier expiation)."
+       "back": "[[qada]] (making the day up), [[fidyah]] (feeding a poor person) and [[kaffarah]] (the heavier expiation). They can come alone or together, depending on the cause."
       }
      ]
     }

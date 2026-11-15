@@ -221,3 +221,20 @@ Changed:
 
 Nothing was removed. The OPEN notes in section 4 and the doubts in section 6 stand for a
 scholar reviewer. Nothing here is scholar-reviewed.
+
+## 9. Fresh review pass (2026-11-15, an agent that wrote none of the unit)
+
+- Build check, vitest, tsc and check-evidence.mjs run: all green.
+- 'Umdat al-Fiqh, shamela.ws/book/11315 /54 to /59, downloaded again and read whole: the eleven
+  Hanbali quotes are on the pages, and the chapter has no sentence on the time of the
+  intention, as SOURCES.md says. The other sources were not downloaded again in this pass.
+- All claims, positions, cards and questions read for consistency with each other.
+
+Changed (lessons 5 and 7 raised to rev 2):
+
+1. three-outcomes (lesson 7) and the intro of lesson 5 said a missed fast leads to "one of
+   three things". The unit's own positions combine them (make-up with feeding: pregnant-nursing
+   in the Shafi'i and Hanbali primers, delayed-qada in the Maliki and Hanbali primers). The
+   wording now says the three can come alone or together. No source or position changed.
+
+Nothing here is scholar-reviewed.

@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 1,
+  "rev": 2,
   "id": "fasting-07-recap",
   "order": 7,
   "title": "Recap: the fast at a glance",
@@ -47,7 +47,7 @@
     {
       "id": "three-outcomes",
       "kind": "definition",
-      "text": "A missed or broken fast leads to one of three things: [[qada]] alone, [[fidyah]], or [[qada]] together with [[kaffarah]]. Which one applies depends on the cause, and for several causes the schools differ.",
+      "text": "A missed or broken fast can lead to three things, alone or together: [[qada]], [[fidyah]] and [[kaffarah]]. Which apply depends on the cause, and for several causes the schools differ.",
       "evidence": [
         {
           "quran": {
@@ -67,7 +67,7 @@
         {
           "id": "three-outcomes-1",
           "front": "What three things can a missed or broken fast lead to?",
-          "back": "[[qada]] (making the day up), [[fidyah]] (feeding a poor person), or [[qada]] with [[kaffarah]] (the heavier expiation)."
+          "back": "[[qada]] (making the day up), [[fidyah]] (feeding a poor person) and [[kaffarah]] (the heavier expiation). They can come alone or together, depending on the cause."
         }
       ]
     }
@@ -101,7 +101,8 @@
       "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
       "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
-      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). No change to this lesson. Not reviewed by a scholar."
+      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). No change to this lesson. Not reviewed by a scholar.",
+      "2026-11-15 fresh review: the summary said a missed fast leads to \"one of three things\", but the unit itself shows them combined (make-up with feeding in lessons 4 and 5). Wording now says alone or together. No source or position changed. Hanbali primer pages (shamela.ws/book/11315/54 to /59) fetched again and read: quotes in place, and no sentence on the time of the intention, as SOURCES.md says. Not reviewed by a scholar."
     ]
   }
 }
