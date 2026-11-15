@@ -23,33 +23,38 @@ country file and never sends a position anywhere.
 2. Each mosque is given a country by point-in-polygon against Natural Earth 1:10m admin-0
    countries v5.1.2 (public domain, https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_10m_admin_0_countries.geojson, sha256 239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255).
    The boundaries are used only at build time and are not shipped. A point just offshore of
-   the generalised coastline takes the country of the nearest mosque within 25 km. French
-   overseas departments get their own codes (RE, YT, GP, MQ, GF) to match the place picker.
+   the generalised coastline takes the country of the nearest mosque within 25 km, or
+   failing that of the nearest drawn coast within 100 km (fjord towns, and atolls the
+   boundary file leaves out, as in the Maldives). Codes follow GeoNames, which the place
+   picker uses, where the two differ: French overseas departments get their own (RE, YT,
+   GP, MQ, GF), Crimea is filed under UA, Western Sahara under EH, and Christmas Island and
+   the Cocos Islands under CX and CC. This is only so that a place finds the mosques of its
+   own town; it takes no position on any border.
 
 3. Kept per mosque: centre lat/lng rounded to 4 decimals (about 11 m), `name`, and `name:ar` /
    `name:en` when they differ from `name`. Nothing else: no OSM ids, addresses, or opening or
    prayer times.
 
 OSM features returned: 293754. Rows skipped as malformed: 34. Placed offshore
-by nearest neighbour: 4695. With no country (open sea, Antarctica): 521.
+by nearest neighbour or nearest coast: 5182. With no country (open sea, far islets): 34.
 
-Packs: 187 countries, 216193 mosques, 7785947 bytes (budget 8 MB).
+Packs: 193 countries, 216523 mosques, 7796771 bytes (budget 8 MB).
 
 Left out of this build to stay inside the size budget (largest lists; the script can build
-them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
+them with a bigger --budget): ID (74436 mosques, 2459551 bytes).
 
 ## Files
 
 | File | Mosques | Bytes | sha256 |
 |---|---:|---:|---|
-| AE.json | 2995 | 70984 | ac0af270600a038cb4ee24095d3435f9f1366bf4689b52e61bda61c688382366 |
+| AE.json | 2998 | 71084 | 63e29cada8c4863ee1a98c9ea5f93a4ae02816c0f724da0188143e495aee470a |
 | AF.json | 3494 | 85725 | 6905cd4f52a5e08d2860e2de7aa12db5ccb45ff9610f0c9c9ab0cb5bcf29b389 |
 | AL.json | 650 | 16995 | a6f4dd49845ddc59dade8cf073bec12546500b4bc3ed60a35e039c9e674f1e7e |
 | AM.json | 3 | 205 | e2d4a5b2af351620244f8a482d2f8217835218adda4a956bf9f4eadc7f85a2fe |
 | AO.json | 3 | 207 | 2558bbc5b1c6cc6ceb5328cffb4e23776c4be9509d3daf478a0e7b33d1f0862d |
 | AR.json | 6 | 381 | d1ca4347e37786758b097b402f76ae1d7d5853780d59c9835221079e0ecbfcdc |
 | AT.json | 184 | 9328 | 164745315fa3b0c1c74183c33614a23280c658cbf215dec077b962c3803fabb4 |
-| AU.json | 128 | 5402 | 4c6713e755bc73946c5818424af95d0952a8a1d28ea1d8519a96e9dacaba5294 |
+| AU.json | 129 | 5439 | 8e1d3686013b8f6263fe08a0427adbd6c073e99f4cad3b0ac4663a15ab3297f8 |
 | AW.json | 2 | 143 | 66e45aa68f08a8a106d3b95abd41ba829928aef5de9d310a51a7e8f51ae98093 |
 | AZ.json | 1083 | 45634 | 64f06f6826e8ef0b9e6e2853857848abfde6c75ee1bf622add2ad2dfb884df4d |
 | BA.json | 1370 | 42880 | e6810d6e3799151cee1df876ba2eaeb76f5860ae29fd4f60e3f6ad95e869988e |
@@ -64,12 +69,13 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | BM.json | 1 | 161 | 6ad2c4642f53f8bc0fd3d368418bd030dfd97cdcc3446fc31f0646afea8d2f45 |
 | BN.json | 118 | 6771 | 92d21c03e2ab86ece9eef460f0a2893faec39aba6d364e544cd05a503717c885 |
 | BO.json | 1 | 144 | 374c9ec53376542e2933ebcd0ad278f5749733626b9ceecc616e78d308c614d4 |
-| BR.json | 37 | 1840 | e452ca6ce44ce0f99016317f0b9b71124d246cf49c51f9ed2fce6935cac4052f |
-| BS.json | 1 | 153 | 52560d6d07043a95a008c3e33ca0454fefd372b522360bc21fe03bf250fbb436 |
+| BR.json | 40 | 1959 | 5763b0ac19faf3d57dd11ef6e25cc03500f7410f44975b0ade5e8ab804e99a6c |
+| BS.json | 2 | 171 | 40b42661e278e3622f4c90bc73c6f05338fbed60f9b9ba4adb8e4c6cd2652732 |
 | BW.json | 15 | 592 | 1404a65a354a2e8ef1ff14ddbd0d2dab1593b076dfafa6aa23703f69025b11c8 |
 | BY.json | 17 | 1043 | f0fbae0b0782e669216f7358168d2526a554a367d831530ae237da92272b2eee |
 | BZ.json | 2 | 185 | 69d257c45e8f848c95f6610474bc937fef0dfbec14ae8694d56e0fb0e20ebe8a |
 | CA.json | 339 | 16232 | 38e01619fa763a7b61ecf635c6c450c00f90b391814eb4b9fee0ca127de00811 |
+| CC.json | 1 | 123 | 4858791eff99eac80acc20a01d9741e5319f4404a30055372287c4f2e47ea9b7 |
 | CD.json | 101 | 3196 | 6c5094de40186182838bf8c76c338b1c9ce955c9b5f9e1c5b1f2023f678bb197 |
 | CF.json | 12 | 399 | e1feea9e940f7e9e36e7799ae6a6de25e60b779a193a02d2159445e8399332b5 |
 | CG.json | 10 | 348 | 688af6081afe76d4720519a902ed6cada1ced5da8ca1ce4c5f80c435233dc755 |
@@ -82,6 +88,7 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | CR.json | 1 | 141 | c3e37d0d5985d7de69e250869f18fdd8b7cc9a072c296176ee7654f5a23694e9 |
 | CU.json | 1 | 188 | a3a2a4092cd193aa19f4314375d91627380f597dffdb5e6fb9b24f715792c19a |
 | CW.json | 1 | 122 | 2eff0731126bb52172f13f018442f994678da1169e77c89abf9a373ab70de9f4 |
+| CX.json | 1 | 123 | 8f97d855b33741fb6cd8bf8faf938fffe4dfa334b986f615f48e3ad6828504cb |
 | CY.json | 171 | 5541 | e08d8bdad4ae34fd2fdfb0de20abe2408eeb58db4ce2be1c70a52dc83f2e66d9 |
 | CZ.json | 3 | 183 | df720094c92151e539df5f9ff6be854500d3a95d8e9246237a46338540c71ed8 |
 | DE.json | 1643 | 77224 | c03c81828a3e908b4a9fe20c07bf6e70dc7e4374deba8226d105bca072e40255 |
@@ -91,16 +98,16 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | DZ.json | 7959 | 319041 | 5346d5f9adf53f2c5cb44b84127891b085961c0e751f87a4690ebda26705f658 |
 | EC.json | 6 | 495 | 451249e3e2467d822d7692c6645803f7db31a34655d2c2d2bbcc95f0638156fc |
 | EE.json | 2 | 217 | d11def58a9ad11a8f242360286db8477bcf3fb176622758b5d9a071852201b62 |
-| EG.json | 2394 | 98789 | c905130e4683112a139b8499918625769e32abc266b78f49b032015887e8f77d |
-| EH.json | 1 | 123 | 5578c005332e4a8ff990186d35527c1af3cc28832841becd513c5684e4f3329d |
-| ER.json | 63 | 3420 | 02ba5dd9b394a0c7c7ad7457b1c2713db802d3d4a6c4f589100324ccd35c2ea5 |
-| ES.json | 223 | 9467 | c286c6730267294621e4b8d4ab03c2a8d33a501b56cb86fda413243fd191eb24 |
+| EG.json | 2395 | 98808 | 406c9fbd65da7d8c5547269fff504de08dc7746b2dd49ec4c13c4fcc3234a8c6 |
+| EH.json | 71 | 2841 | 5b46a7ea45d15b1f626827e6b3582b53fd9f57979c35f3aec350ecf018f3ebab |
+| ER.json | 67 | 3586 | d860904bfbbbe094e3fa458aa61fbed4bb6e95f7ed61935ab4ad767cbb440dbd |
+| ES.json | 226 | 9582 | 14cb9cae0242617f22cf63e838eda706c6eb4fc41acbf33f3824565c4acbac1b |
 | ET.json | 313 | 10108 | 3dbad99a69b2af7244ad92915fd5e74dd5a4fb28cd096f129487c58f4b178495 |
-| FI.json | 23 | 1296 | 95255545bdc7eec283a0206690742780d5f82347e2e735c72d69a77fadbed907 |
-| FJ.json | 13 | 541 | 220f8bc9e2bd020b40d3d85dcbf7193342779c55d5547b9a285b4361a96ed48e |
+| FI.json | 24 | 1334 | 67aa9d6920ace91ce405dcc8bb9a00fffed7d521228eb3c1ef5061133b555bbc |
+| FJ.json | 14 | 583 | 18597c385fa1bdea9b14a8f2e23072bc41a311b7fcfc5289aebe11f1b69d4090 |
 | FR.json | 868 | 35539 | 07eba0a23b0fcb26b864d0411ebf42eacf18a4dd66bcf1be987719250eea1d0a |
 | GA.json | 26 | 789 | 6d136a23ae289b4404d35fa3358f100fad2efd0328d9010a2af6dbd5188a6a77 |
-| GB.json | 1417 | 61114 | 9e4cb1ab6b31052afb1f9b71bce040a2cee5da58f24059b55d3aa2a758708df8 |
+| GB.json | 1419 | 61210 | 03944c49374a319819d03d73fa4dd5ad376af9e616cdfe11b324f91c9b6be6f9 |
 | GD.json | 1 | 139 | fe0c12434a2b8d5d7e2e7a7849b83c63c5c517680d907b6be0fdc3ad6541418c |
 | GE.json | 123 | 5192 | 236a74e77319f9c1dd1797dc5eb0cc03dc67b2998f057c6919e9110a6daffe3e |
 | GF.json | 2 | 178 | b6b0249f21f5f800f88a07b2f37e674161a54795f2ea5868527cf2aec30911b2 |
@@ -109,29 +116,30 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | GM.json | 209 | 5677 | 37d0ed7acc37986127612dacf9eea8aa574ee774ef9cc75ce5b5386e2c52e9b3 |
 | GN.json | 1179 | 29683 | cd3096187500ca1c5e52081ab5d2554d9defdf9ad0d13acf2544b599a3de80e1 |
 | GQ.json | 2 | 167 | 9bcff28349e3de67c635c472dde6d8572df3d08439b461077dd5360554237cc0 |
-| GR.json | 61 | 2441 | e7329348ea1d88493efec7e7dd21a01db167d74f1d35c07c80669bcbeea99412 |
+| GR.json | 62 | 2514 | 4b555c1963894f3dbde0edbbd435f96556cac03f08803f0ce36cd45aebbe1ae3 |
 | GT.json | 2 | 222 | 3c75c233336dd74330f0cc6b005c1aa1115d66c6b4843e57e002df4b9b900e6b |
-| GW.json | 8 | 263 | f1271a8e5ce1492584356444d6c22007b05d6cedee82ffcaaa99e3a106e2ead4 |
+| GW.json | 9 | 282 | 44de4d6df3308ded21230a77566f9f63190533b0314a5f0e39ca40cd31dbb9f6 |
 | GY.json | 67 | 2405 | c6f7412241990fa030756acc2f6fce889d63f0ab8a314b2cbc7414bbbe7a9d49 |
 | HK.json | 8 | 875 | cb291c8c83a9b9db9e5a4f79facd2129125b5bc40abbd23d73dec93fb9ce51ba |
-| HR.json | 18 | 738 | fdeaf9ab3221f5feb099072dd3c372f41a348a248af63ecffea5c588fe04e90f |
+| HR.json | 19 | 768 | a7e151e56c87797f2bd23c92fd4adbc01a565f4dd2217cd18955a697f979ac71 |
 | HT.json | 4 | 204 | c3a9d8036c7b69fcd77862f15bdefb00e5a240dc4a269109a00f34e56c072946 |
 | HU.json | 12 | 599 | a9886b0b66e9e7bb3994f5e50483e44beff3107079d307bd863bfee0289d664b |
 | IE.json | 22 | 1021 | f0766e0c34035394348251b6d38d552af09e961cdef94c739f442868c160a12a |
 | IL.json | 328 | 14182 | 8a98886ad47e78ebdd0cda4a64c6e11c436cbbf07567dee60cd3b3e5b798d286 |
 | IM.json | 1 | 161 | a0464bc92cc3d281327a1e47bde7634f2948717cf3ed6c8ab79776b7a6a0a6de |
-| IN.json | 9042 | 333081 | e7cb1546a062fb3b64dbab168b64c63e7901d0cb5ccb4b355a1aedf0894a1ccc |
+| IN.json | 9048 | 333233 | 62171936e72345b6a56feae65e9b1f2c99acb077bcb7accac67078f9c8c18581 |
 | IQ.json | 4046 | 233328 | 9caf866ef9d5e5295baa7ecb09d1be965e80b992998ebfd832cb8ecd957b2ced |
-| IR.json | 16165 | 718051 | 5dadf92a04e01482d347c44aa41668690eb8e186ab62f33c07f753dace4235dd |
+| IR.json | 16167 | 718200 | 98b7df2688c41fecc3eeed3f9727c8732c11bf93ef6ec852526f7f7151c59620 |
 | IS.json | 2 | 232 | e6b8f305b39b1e445ce903f180d4340428bc99dabb3fdbe4a64fcbb4ea351ff1 |
 | IT.json | 130 | 5787 | e2da7432684ab25fecc7e1fdf9f6b8fe7a177bb06db3dad4d60aa2cfe6b9f584 |
 | JM.json | 1 | 137 | 53c57d5d95bbc0720de0fada51f364bb223d0b3adb2f14c112d63ba0eaa2ef26 |
 | JO.json | 863 | 39173 | 1567ac2dc458fca0d156a509d6d9e3e44e9344a4e92e655e126b3f9b939e30f5 |
 | JP.json | 43 | 2676 | 863bc7a6842c1576929230ccd1bac53d3d7b307c15e245cfce490adfa68addb4 |
-| KE.json | 612 | 19424 | b7cd3550b05c3aae5db3cfb137f0ed611743f3bcf88fbd5f1b43b817ba1a8958 |
+| KE.json | 623 | 19685 | e07fc5572c6b36728b512c79847ec23c02af7d397b15302149eac3fe27f8e320 |
 | KG.json | 811 | 22387 | a1b65165589ae19f08a97f85f3d70aec84000ebe896c2c064206fefea7f6acaf |
 | KH.json | 95 | 3272 | 14ec64dfa9fa6c4bf578098d719d8abfa0dba495ce107d82deb1537c0a8fdd57 |
 | KM.json | 262 | 9613 | 0c88bd71b99e8888bbb578fc687020832806eabcec6e44efbf9b3b99607e82e0 |
+| KN.json | 1 | 147 | 165a8b96958e156e8a59409f5d0ecd1c55ebf6c4999cbaa5802f46ac194ea502 |
 | KP.json | 1 | 195 | 68ae5e6fef7d5e5629580a4560561f10ed4c6ca7174047feeed931455e85136e |
 | KR.json | 13 | 810 | e676a32be5ae311c736418282792f3e1001c8820e71b98f828c6e2e703ef3e4b |
 | KW.json | 1846 | 128342 | 2f98601f922e5469731a247b6e56c8fb98eb0570e3ddd94a1bde05dd1d44d708 |
@@ -146,22 +154,24 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | LU.json | 4 | 289 | c8f2f1a79d66c632fd8485d86aaf880d9c5f394df4eefadaf50465470270494d |
 | LV.json | 1 | 122 | 471311a0494e3c6a3cae3ead99e6ad42ea9737753e76ad7b51b33db63e7108a2 |
 | LY.json | 5198 | 191182 | 5af633907f35bb3deab8d88457084093c5909db101435717f525f919f2f00a09 |
-| MA.json | 4020 | 146121 | 4c0123b70a33b81b81f24c1ef34f576e5ad511d82d015fdc97068fecdbaece61 |
+| MA.json | 3950 | 143403 | 2fcb33bee7a10f60ec2ad17a523dab2739425c0310e8dfef8fea4ed1f0b700c6 |
 | MD.json | 2 | 204 | 45a5de3255917fe02da9973479530a552e4d48fefe8019d6d23b478514b739ff |
 | ME.json | 158 | 5975 | b9b1579bc2df0b8309a5a86888b5bc008b0ecac45b2c15cd79333d960f5b8283 |
-| MG.json | 108 | 3557 | 685573e6eac3fec1e8ddeec69163e19573944cfc8339fe90d5f344f6aa15ad00 |
+| MG.json | 110 | 3631 | 30b84251337ed277c9b7868c6b6334e48067f56303ad6ef2844c4797f8f1ebfb |
+| MH.json | 1 | 144 | b631304580ffd56d5856d648a76ccded6d9f955559c08ce8db51fb24384a3319 |
 | MK.json | 350 | 10690 | a633e213897e61e5c2e0a8a49c33af4ffc64034fbe61e30eb41f9719e5686d71 |
 | ML.json | 1353 | 34224 | 40c6cd729f67e2d5e67584097074528584884fd50bce961e853fe4795c955852 |
 | MM.json | 195 | 10647 | 6538f3795667e4ee2af06518ad948c60761b14f96cca504f5b327321f47d00f7 |
 | MN.json | 12 | 565 | 82126a7bdbabbbffedfe662cb62a7b676f099745f8c3bde660e0a3f8f643c01a |
+| MO.json | 1 | 123 | 185bdee5c5dc6436b8dab77f64b0d8542794324fedb2a9f883976a550400de58 |
 | MQ.json | 1 | 165 | b00882413ab9dfe3a9056e7b5fcdd0052c80eb25ab13f16536c5cc744d22045c |
 | MR.json | 771 | 26438 | b30f100cc79c2740bef27223abc51a34234a7f101f681e0bcd225f9b408b3d0b |
 | MT.json | 1 | 177 | 47c963aca5d9f79a804d6d94981f932b4bf4f0b33759f7530beff95c824da899 |
 | MU.json | 84 | 3265 | 79394df01571cba591e1ced0fa9630ef776ac4c7564487c5bb696bcec6f40642 |
-| MV.json | 67 | 2983 | 077fd965600e4558fe2c4ff1e02a8d8bc35dd37d9d4f799742617fedec28f93e |
+| MV.json | 301 | 10094 | 8d67ba46b32bc91f81a48db61580e13e6fe5a9d005b0729683f89158dbc4d666 |
 | MW.json | 87 | 2533 | 6e5544462de14e969a97675e1e16ad12fd78f39f882a489cfd9e3d32564496b0 |
 | MX.json | 11 | 655 | c062bdec549fd86e80c60fed40633ae0264751970c0b9bcf3f996f5495cb10f1 |
-| MY.json | 6731 | 241043 | 69af457af05fbb7d400f2d64bad81ecc9ea1b658e46d45fff91476f677ce91e9 |
+| MY.json | 6739 | 241288 | e531034f97ba19c2ae72ffbb0f3f513bef65254e2c4edea8a3e179d3d4ce0890 |
 | MZ.json | 104 | 3497 | 3f4647b47ba52cf0ca0bc2e0d1cfc9e0d68f3844b64a79189c561ef8ea5bfd3a |
 | NA.json | 6 | 309 | 0cc0819cba84e36ae2be18d2705b6f29bd64d6b02acd8d15c3d3b991126475a7 |
 | NC.json | 2 | 174 | 8df4ce4722bb4c7aa49ef12dfb54ad1f900968c529c61eca7c7da22beb883580 |
@@ -169,27 +179,27 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | NG.json | 634 | 21651 | e125e284ed00809c883b02da764166a3b154f073eb7403192612b160da7b5505 |
 | NI.json | 1 | 145 | 08f261db54f23dee9dc41b9a2bbccc40cfa841e415b8bc35421efe6f620f5e58 |
 | NL.json | 365 | 13837 | 14d4ad41b56922f36128b5f3f65a762c0bb9d5d62098442273f6fa02c979c5b4 |
-| NO.json | 24 | 1138 | a2d35614a2c25d6808a68905197ed59a85d83da9b4d2ce1f5598e46845527eed |
+| NO.json | 30 | 1389 | 282db830dafdc512aaee47fa6fa01b16ba99049c7590b80313a69ccb36c801f0 |
 | NP.json | 332 | 15085 | d9629fabc80f7986310535abb53710d4d68d8cd5face8ab927774c5f99cdea75 |
 | NZ.json | 69 | 3528 | 5518a1307795892da15c80e918531212490c7b985ecdee23c275e5ee68f14af2 |
-| OM.json | 2161 | 69173 | 17c456fbc17378bfb888290b9418c6c583cc68a44df8d8fcf6f64ed87fe67d65 |
+| OM.json | 2163 | 69211 | 17a7f7bd2551251d0eaf13ba7fb5fb5cad689e2671481e8657035fc6e163497f |
 | PA.json | 10 | 554 | 5731d28830de2e30c5ee1f53e5bda5f699196e5b8067651137b15a37b7434c89 |
 | PE.json | 4 | 381 | 479ffd2f6b9f6b55635622cfcbdcfe469d2de145dbeaa3ac8dbfab9f70e0fad0 |
 | PG.json | 4 | 254 | 0fa9e9a90597d43cc992f5007dfb35260dfc7dfc3f4d0a21ccd59768d39fb374 |
-| PH.json | 1111 | 29207 | f43480ab6cea5a11edf9ef59cc1a45153acf93660e92539a899f5c042a23159e |
-| PK.json | 8418 | 314943 | 9bbc106297e7ebce8c018da0dd7fc3791176c576b85b250fa4d92b014525bb4e |
+| PH.json | 1127 | 29532 | aec490c7bb178760b40ea5f02d179b7892cdebde2392b291ae0778724f2b6acd |
+| PK.json | 8419 | 314962 | cf3e56200ab70189907e247f68a93886860b50c5ef4ac44e8bb26c8edac8c906 |
 | PL.json | 19 | 1060 | e1ad2745c9a5d138e789fb6b9b67118737e548ec270ff3c76be0ca55429baba2 |
 | PR.json | 7 | 467 | 99f7795f0e2bb94c187a91a0ff4dbb971074d7c18b31c9829d54afb59d4fb301 |
 | PS.json | 2050 | 103212 | 266f5103ef4522fba27216626cd6189a6948603c67ff06c99bd5bbed28d1f203 |
 | PT.json | 21 | 1254 | adc8b6a7972dc8f79dd389e03da49e4eb617c71acb4b6f23f7c4e3aa379caf5e |
 | PY.json | 4 | 239 | 1cfefd4cf4407be8886ae3a56a059c407cf8a7d93bea41cab8e2a723713e5b08 |
-| QA.json | 682 | 17095 | f7afac804fea673301fe18289b67716436278466b8562608add01c609672ac90 |
+| QA.json | 684 | 17132 | d27d4370b1c2649837db6fa8e8f60a60eefdbdc9874ed5845b2db8e1de571512 |
 | RE.json | 22 | 909 | c0d5488ea25821445f9f80f4966c53ef406877a2a22e4190a007866d6dd958a8 |
 | RO.json | 61 | 2117 | a9b499312e1a89dafa41ace5d3cf4e7b8815aa1de0eddef5eb87deadfa50b172 |
 | RS.json | 198 | 5778 | 78614c6ea829ad1e42a5c0769e692ddbdd64ed8317c58592cc3f3e7b6b248264 |
-| RU.json | 4637 | 122957 | 549778f00474d98832a7445cf056497d9e7a00ef1bea9b106b8230ee02eecd7a |
+| RU.json | 4513 | 117653 | ef345fa71a72974a206ee1305827d42dd2f339da0219b4b36bfab36bf62c0f01 |
 | RW.json | 16 | 548 | 012c98858a3b2c3e521aca60b4d22a56b42238448d913d0ca0eafcf8eac2b4bf |
-| SA.json | 14122 | 413055 | 463e3f32b2d8c70671631780bd8c762591527118f08fcb4239bc1c5839d50333 |
+| SA.json | 14123 | 413073 | ffd24d640624e204a70d4f6c002d52feef76b37d9f8573cd69ca8493cc5c0bac |
 | SC.json | 3 | 269 | db866292f1ffc9050eca3829c06f2141775d9c5bee7024e1d17a97a1db8e636a |
 | SD.json | 3836 | 114489 | ae5a3e34bbb3efa79d6bde571d70ee9434616c51cb7f830bde730551a3cafa79 |
 | SE.json | 65 | 2776 | 7a950bcacf1e722b438ff240ea7b3827b4bf0b3065792673cef1b3a48888aae5 |
@@ -198,7 +208,7 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | SK.json | 2 | 184 | 9097704215dd18c6886d7a71e6d5f2ae95d6442232849beb928e88db975e3c84 |
 | SL.json | 300 | 11256 | 945b4a8f744301ef94b56fa8fb6d951348687a8f7a6b6970d03fcf4aa388a1f1 |
 | SN.json | 2897 | 78932 | 6b202e1c1170c812ba3a62e7cbbc70098a2cc64a7b2cf08c6625edde9073ecb9 |
-| SO.json | 1665 | 33679 | b20e5ad135236dfdc82ce4850a0413afb4164de6f2fc2faeb254d9c9c6048c8a |
+| SO.json | 1668 | 33791 | 9ca33f395674023764400343e9eaecfe733c8fddff7c51caf53dc26d37db460d |
 | SR.json | 33 | 1214 | fa888313883b8ad59e33206bb597959696770aa61040bc151aec3b35f2858bf4 |
 | SS.json | 25 | 770 | 4e17c7f137b16e7129e891dc8ed65d074f4317a530cb092ce02a91c0d139eb07 |
 | SX.json | 1 | 245 | 7d6e75d62ae920be7f8ab2029c11d720ad627836ab6be81edece36cd73599d6e |
@@ -206,16 +216,17 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | SZ.json | 1 | 123 | 259b329bb6b2cff37123416c0e9e8ca4d809231729b4d3317443e5ce33c64367 |
 | TD.json | 172 | 7635 | 3f53071a9a48603a77c763bba1c636adeecf6cadfc3c2c14cbc7e46fb21186d0 |
 | TG.json | 629 | 12953 | d52b17ccb2d427c20c8afe06844b5f64eb69ec030cf20c0a8f53e9afc52c0779 |
-| TH.json | 622 | 28391 | 74f9229993b6420493359591b07cf276e9aa0fc757cfe128f4a3a4c97882e5fe |
+| TH.json | 625 | 28516 | d83066df2bec6a4727a5d3aa32b9efb137f94c67601295707863ee84c1d4f376 |
 | TJ.json | 265 | 10287 | d75b5e8d7fc0a921b9d8b2f1a9c69ed30e99e4a4149a02204cabb689bf5038d6 |
 | TL.json | 4 | 241 | d61415f8905ea26d23182e0e63293cdb537433cabb1dc539f1de6e8160eb59ff |
 | TM.json | 193 | 6221 | f917b23427a1a1681aaffc7dfa29562a424e7e98e9505f8e234bc99566da4e04 |
 | TN.json | 2186 | 97991 | d48dad43e70df581209f7a0e395310d62764bc1da2b5eedd10c404567203ef20 |
 | TR.json | 47671 | 1401344 | b809c8bdabf492a21daa03178083a4b477724c858d2b592959c8b4c0edadd92f |
 | TT.json | 69 | 3001 | 3bd4335a0922311650a8bc8e0ecc25a3e5dace01f21e0edf46acb68c929f6483 |
-| TW.json | 14 | 783 | c9a1bacdf5dc0281aa6bc72cb3e705ff56a705a690d461134acea369bda5a98e |
-| TZ.json | 1387 | 45941 | eeec583fb45c42b544969cf30dddef9b25c724f97b213cd85fc94d900505508e |
-| UA.json | 25 | 1609 | f7bc7d73a94493af282ad44094f04dd24333ef19e94e56afd32cbac43c140f73 |
+| TV.json | 1 | 149 | 044ed5ebbdbb3ff61009337ad28408238c20d0c213b5fb40b8ae4ac17743e2d4 |
+| TW.json | 15 | 860 | c3f0a3fd00dd660adab45051a7e6e993a01c3ea407e36a763d144de0c682a133 |
+| TZ.json | 1388 | 46008 | 30d12bef428e1ab22ca3728b55b507bb837f7d2fcf51f7adca99f80d2974e7ca |
+| UA.json | 149 | 6913 | ccca681eac70856dcab0c15b03b942860ea805c55a523f521fe1601499b5d5a3 |
 | UG.json | 534 | 16272 | 903c3fd3651d01343a6cbcd6e5ac331aca22018e570763aa0f5ef86931daefc8 |
 | US.json | 1206 | 55788 | e52a0bbfa3c174f663c52599b8a371aa50078c0830f73b185df75694c54745aa |
 | UY.json | 1 | 124 | 461c7599a5ae66093a3da127b7f09fe0b625c6a4b66b099f497d701bc8fcf6c2 |
@@ -224,9 +235,9 @@ them with a bigger --budget): ID (74301 mosques, 2455820 bytes).
 | VN.json | 27 | 1675 | 9862b8367c34a6f113b693f66e9ea2275de37afb54d3323234ce161e5720f5cb |
 | WS.json | 1 | 148 | 14af707705059beba6c07f4da174a7ba40b7b983f7ec2f13cf80bfc23605dc6e |
 | XK.json | 613 | 18032 | f415397a48abd7f8568b3932efc2044ca1973eee49767f3b78f41a574e04fbc8 |
-| YE.json | 3399 | 117602 | 4cb433d9251b1e731a3104202f915c3d9850b51804f7bf843364ca9bc7405378 |
+| YE.json | 3400 | 117621 | d3c68fa3306724c6e07e68cde378ac54ae8cb12b9997b3037193d5ea7c4ac439 |
 | YT.json | 200 | 6762 | 10047151bae0d4f3cae2278cf2850d02700d5eefdeceac0771b482e21b0faecf |
-| ZA.json | 289 | 10616 | 77735f75e790864c954a5eb34673debe2dfce5920e91a9443763ffb673f64b28 |
+| ZA.json | 290 | 10679 | 01f3ffe0f4d726239fc5a82d37821978ebd8291b247f4707f7ef344c885bf7b1 |
 | ZM.json | 17 | 691 | 0e3816dc177e475b2a3a9fa0bf0e3efd226a288e739e2edb2b1bba104440c76e |
 | ZW.json | 12 | 475 | 8047f19a447f8095b5f1464f19ae7e59095b81de3adefaa5f80e09d825aa03a2 |
-| index.json | | 5929 | d179b654f063bdc7c271f0a2ba4818f4db3f8f89fd91066289cb40673889607c |
+| index.json | | 6108 | 046aecf1cf5fb0be5ef00e8947fafb90bcab822f0b5856a9ea7443c9bda2e4de |

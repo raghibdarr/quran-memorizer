@@ -4,8 +4,8 @@ Mosque finder (`/mosques`) from OpenStreetMap country packs. No shared files edi
 replacing the foundations stub `src/app/mosques/page.tsx`.
 
 1. **Tile flag (`src/lib/prayer/tools.ts`, spec 3.8): keep `mosques` at `ready: true`.** The full
-   worldwide build succeeded on 2026-11-14: 187 country packs, 216,193 mosques, 7,785,947 bytes
-   (under the 8 MB budget). **Indonesia (ID) is not covered**: its list alone is 74,301 mosques /
+   worldwide build succeeded on 2026-11-14: 193 country packs, 216,523 mosques, 7,796,771 bytes
+   (under the 8 MB budget). **Indonesia (ID) is not covered**: its list alone is 74,436 mosques /
    2.46 MB and does not fit with the rest. A place in Indonesia sees "We don't have a mosque list for
    Indonesia yet" with a "Change place" button (to `/prayer/settings`). To add it, either raise the budget (`--budget 10.5`) or make the
    format smaller; the owner should decide. Every other country with OSM mosques is covered
@@ -15,7 +15,7 @@ replacing the foundations stub `src/app/mosques/page.tsx`.
    (stale-while-revalidate into `takrar-data-v1`), and the native apps carry `out/data/mosques/`
    in the bundle.
 
-3. **Size:** `out/data/mosques/` is 7.79 MB; the `/mosques` page chunk is 40 KB (it carries the
+3. **Size:** `out/data/mosques/` is 7.80 MB; the `/mosques` page chunk is 40 KB (it carries the
    5.9 KB pack index so the screen can show the size without a request). `scripts/check-bundle.mjs`:
    Home +2.2 KB gzipped, out/ +5.97 MB against the 2026-11-13 baseline, OK.
 
@@ -65,3 +65,20 @@ replacing the foundations stub `src/app/mosques/page.tsx`.
    `mosques` to `ready: false` in `src/lib/prayer/tools.ts` (foundations' file) until it does.
    A place with no country code (possible for a GPS place) gets "We couldn't tell which country
    you're in" with "Choose a city" (to `/prayer/setup`).
+
+10. **Second review (2026-11-15), data fixes; packs rebuilt offline from the same 2026-11-14 OSM answer:**
+    - Packs are now filed under the code the place picker (GeoNames) gives a town, where Natural
+      Earth's drawing differs: Crimea under UA (was RU, so a place in Simferopol found none of its
+      own mosques), Western Sahara under EH (Laayoune, Dakhla; was MA), Christmas Island and the
+      Cocos Islands under CX and CC. The table is `PLACE_PICKER_CODES` in
+      `scripts/build-mosques.mjs`; the script and SOURCE.md say it takes no position on borders.
+      The owner may want to read that wording.
+    - 487 mosques that had been dropped as "open sea" are now placed by the nearest drawn coast
+      within 100 km: most of the Maldives (67 -> 301), Stavanger, Tromso, Bodo, Cairns, Recife,
+      Assab, Macau, Tuvalu. 34 are still unplaced (far islets, nearly all Indonesian).
+    - Not changed, for the owner to know: a place sees only its own country's list, so a town on a
+      border (or Jerusalem / East Jerusalem, which GeoNames files under IL and PS) misses mosques
+      across the line; the screen says "Only mosques in <country> are listed".
+    - Small lists load without a confirm step (the brief asked for a confirm line every time). The
+      request still names only the country. Left as the UX pass made it; say if every country
+      should ask first.

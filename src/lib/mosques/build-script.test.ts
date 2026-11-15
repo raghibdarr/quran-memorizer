@@ -96,6 +96,67 @@ describe('countries', () => {
   });
 });
 
+describe('codes follow the place picker (GeoNames) where Natural Earth differs', () => {
+  it('Crimea is filed under UA, Western Sahara under EH, the Indian Ocean territories under CX and CC', () => {
+    expect(build.pickerCode('RU', 44.95, 34.1)).toBe('UA'); // Simferopol
+    expect(build.pickerCode('RU', 45.36, 36.47)).toBe('UA'); // Kerch
+    expect(build.pickerCode('RU', 45.2, 36.72)).toBe('RU'); // Taman, across the strait
+    expect(build.pickerCode('RU', 55.75, 37.62)).toBe('RU'); // Moscow
+    expect(build.pickerCode('UA', 44.95, 34.1)).toBe('UA');
+    expect(build.pickerCode('MA', 27.15, -13.2)).toBe('EH'); // Laayoune
+    expect(build.pickerCode('MA', 23.7, -15.93)).toBe('EH'); // Dakhla
+    expect(build.pickerCode('MA', 27.94, -12.92)).toBe('MA'); // Tarfaya
+    expect(build.pickerCode('MA', 33.57, -7.59)).toBe('MA'); // Casablanca
+    expect(build.pickerCode('AU', -10.42, 105.68)).toBe('CX');
+    expect(build.pickerCode('AU', -12.12, 96.9)).toBe('CC');
+    expect(build.pickerCode('AU', -33.87, 151.21)).toBe('AU');
+    expect(build.pickerCode('FR', -21.1, 55.5)).toBe('RE');
+    expect(build.pickerCode('FR', 48.86, 2.35)).toBe('FR');
+  });
+
+  it('applies when a point is placed by polygon', () => {
+    const polys = build.loadCountryPolygons({
+      features: [{ properties: { ISO_A2_EH: 'RU', ISO_A2: 'RU', NAME: 'Russia' }, geometry: { type: 'Polygon', coordinates: [[[30, 40], [60, 40], [60, 60], [30, 60], [30, 40]]] } }],
+    });
+    expect(build.countryAt(polys, 44.95, 34.1)).toBe('UA');
+    expect(build.countryAt(polys, 55.75, 37.62)).toBe('RU');
+  });
+});
+
+describe('nearestCountry', () => {
+  // AA is a 10° square at the origin; BB a small island 0.5° east of it
+  const polys = build.loadCountryPolygons({
+    features: [
+      { properties: { ISO_A2_EH: 'AA', ISO_A2: 'AA', NAME: 'A' }, geometry: { type: 'Polygon', coordinates: [[[0, 0], [10, 0], [10, 10], [0, 10], [0, 0]]] } },
+      { properties: { ISO_A2_EH: 'BB', ISO_A2: 'BB', NAME: 'B' }, geometry: { type: 'Polygon', coordinates: [[[10.5, 5], [10.6, 5], [10.6, 5.1], [10.5, 5.1], [10.5, 5]]] } },
+    ],
+  });
+
+  it('takes the country whose coast is nearest, measured to the edge and not just the corners', () => {
+    expect(build.nearestCountry(polys, 5, 10.2)).toBe('AA'); // 22 km off the middle of a 1,100 km edge
+    expect(build.nearestCountry(polys, 5.05, 10.4)).toBe('BB');
+    expect(build.nearestCountry(polys, 5, -0.5)).toBe('AA');
+  });
+
+  it('gives up beyond 100 km', () => {
+    expect(build.nearestCountry(polys, 5, -0.8)).toBe('AA'); // about 89 km
+    expect(build.nearestCountry(polys, 5, -1)).toBeNull(); // about 111 km
+    expect(build.nearestCountry(polys, 50, 50)).toBeNull();
+  });
+
+  it("a mosque with no neighbour within 25 km still gets its coast's country", () => {
+    const rows = [
+      [5, 5],
+      [5.05, 10.3], // 22 km from BB's island, 33 km from AA's coast, no placed mosque near
+      [5, -3],
+    ];
+    const { cc, rescued, lost } = build.assignCountries(rows, polys);
+    expect(cc).toEqual(['AA', 'BB', null]);
+    expect(rescued).toBe(1);
+    expect(lost).toBe(1);
+  });
+});
+
 describe('pickWithinBudget', () => {
   it('keeps whole countries, smallest first, and names the ones left out', () => {
     const packs = [

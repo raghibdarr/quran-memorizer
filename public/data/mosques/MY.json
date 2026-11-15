@@ -1192,7 +1192,10 @@
 [2.5094,102.384,"Masjid Kampung Sri Asahan"],
 [2.5104,102.0016],
 [2.5114,101.8379,"Surau Taman Dato Hj Abd Samad"],
+[2.5119,111.4297,"Masjid Al Muhsinin Daerah Daro"],
+[2.5157,111.4294,"Masjid Tunku Abdul Rahman Daerah Daro"],
 [2.5183,102.0597,"Masjid Kariah Kampung Pilin"],
+[2.5183,111.4355,"Surau Darul Taqwa"],
 [2.5187,102.9549],
 [2.5197,102.1666,"Masjid Kariah Gadong"],
 [2.5197,102.807,"Masjid Jamek"],
@@ -5406,6 +5409,7 @@
 [5.5634,100.3686,"Masjid Jamek Permatang Keriang"],
 [5.5642,101.8827,"Masjid Kampung Lubuk Bongor"],
 [5.568,100.3861,"MASJID JAMEK KOTA AUR KEPALA BATAS PULAU PINANG"],
+[5.5715,115.5979],
 [5.5721,100.502],
 [5.5727,100.4163,"Masjid Al-Khalidiah"],
 [5.5729,100.3655],
@@ -6729,5 +6733,9 @@
 [6.8843,116.841],
 [6.8869,116.7091],
 [6.8977,116.8527,"Masjid Tanjung Kapor","","Kapor Cape Mosque"],
-[6.8978,116.8528]
+[6.8978,116.8528],
+[7.5088,117.3131],
+[7.5103,117.3109],
+[7.5108,117.3123],
+[7.5109,117.3146]
 ]}

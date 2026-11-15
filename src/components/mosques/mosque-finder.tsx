@@ -144,7 +144,8 @@ function ForPlace({ place }: { place: Place }) {
   // A small list loading on its own: just the shape of the list to come
   if (auto && state.status === 'loading') {
     return (
-      <div className="space-y-3" data-mosques-loading>
+      <div className="space-y-3" role="status" aria-busy="true" data-mosques-loading>
+        <span className="sr-only">Loading mosques</span>
         <p className="px-1 text-[11px] font-bold uppercase tracking-wider text-teal">Nearest to {near}</p>
         <SkeletonRows count={4} />
       </div>

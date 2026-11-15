@@ -49,6 +49,27 @@ describe('every committed pack', () => {
   });
 });
 
+describe('packs are filed under the code the place picker gives a town', () => {
+  const near = (cc: string, lat: number, lng: number, km: number) => {
+    const file = join(DIR, `${cc}.json`);
+    if (!existsSync(file)) return 0;
+    const pack = JSON.parse(readFileSync(file, 'utf8')) as MosquePack;
+    return nearestMosques(pack, { lat, lng }, 1000).filter((m) => m.distanceKm <= km).length;
+  };
+
+  it('Simferopol finds its mosques in UA, Laayoune in EH', () => {
+    expect(near('UA', 44.95, 34.1, 30)).toBeGreaterThan(0);
+    expect(near('RU', 44.95, 34.1, 30)).toBe(0);
+    expect(near('EH', 27.15, -13.2, 30)).toBeGreaterThan(0);
+    expect(near('MA', 27.15, -13.2, 30)).toBe(0);
+  });
+
+  it('towns on fjords and small islands are not dropped', () => {
+    expect(near('NO', 58.97, 5.73, 15)).toBeGreaterThan(0); // Stavanger
+    expect(near('MV', 4.18, 73.51, 1000)).toBeGreaterThan(200); // the atolls, not just Malé
+  });
+});
+
 describe('validatePack', () => {
   it('accepts a good pack and names the problems in a bad one', () => {
     expect(validatePack(pack([[51.5, -0.1, 'A'], [51.6, -0.2]]), 'GB')).toEqual([]);
@@ -135,6 +156,16 @@ describe('countryName', () => {
     expect(countryName('DE')).toBe('Germany');
     expect(countryName('CD')).toBe('the Democratic Republic of the Congo');
     expect(countryName('BA')).toBe('Bosnia and Herzegovina');
+    expect(countryName('MO')).toBe('Macao');
+    expect(countryName('CC')).toBe('the Cocos (Keeling) Islands');
+  });
+
+  it('every country with a pack has a name that reads as words', () => {
+    for (const cc of Object.keys(MOSQUE_INDEX.countries)) {
+      const name = countryName(cc);
+      expect(name, cc).not.toBe(cc);
+      expect(name, cc).not.toMatch(/&|SAR|St[.]|Burma/);
+    }
   });
 });
 

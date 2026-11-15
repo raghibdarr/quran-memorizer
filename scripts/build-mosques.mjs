@@ -9,7 +9,8 @@
 // 2. Each mosque is given a country by point-in-polygon against Natural Earth's
 //    1:10m admin-0 countries (public domain, pinned release, sha256 checked).
 //    A point just offshore of the generalised coastline takes the country of the
-//    nearest mosque within 25 km.
+//    nearest mosque within 25 km, or failing that the nearest coast within 100 km
+//    (fjord towns, atolls the boundary file doesn't draw).
 // 3. One compact pack per country, an index, and SOURCE.md with counts and
 //    sha256 per file.
 //
@@ -74,6 +75,21 @@ const FR_OVERSEAS = [
   ['MQ', -61.3, 14.3, -60.7, 15.0],
   ['GF', -54.7, 2.0, -51.5, 6.0],
 ];
+
+// Where Natural Earth's drawing and GeoNames disagree about the code, the pack
+// follows GeoNames, because that is the code the user's place carries: a place in
+// Simferopol or Laayoune must find its own town's mosques. This takes no position
+// on any border; it only keeps the lists and the place picker in step.
+// [code Natural Earth gives, code GeoNames uses, west, south, east, north]
+const PLACE_PICKER_CODES = [
+  ['RU', 'UA', 32.4, 44.3, 36.6, 46.3], // Crimea (Natural Earth 5.1.2 draws it with Russia)
+  ['MA', 'EH', -17.2, 20.7, -8.6, 27.6667], // Western Sahara west of the berm (drawn with Morocco)
+  ['AU', 'CC', 96.7, -12.3, 97.0, -11.7], // Cocos (Keeling) Islands
+  ['AU', 'CX', 105.5, -10.6, 105.8, -10.3], // Christmas Island
+];
+
+// How far from any drawn coast a mosque may be and still take that country
+const COAST_KM = 100;
 
 // ---- parsing and formatting (pure) ----
 
@@ -181,13 +197,55 @@ export function countryAt(polys, lat, lng) {
     if (lng < x0 || lng > x1 || lat < y0 || lat > y1) continue;
     if (!inRing(lng, lat, p.rings[0])) continue;
     if (p.rings.slice(1).some((h) => inRing(lng, lat, h))) continue;
-    if (p.cc === 'FR') {
-      const o = FR_OVERSEAS.find(([, a, b, c, d]) => lng >= a && lng <= c && lat >= b && lat <= d);
-      if (o) return o[0];
-    }
-    return p.cc;
+    return pickerCode(p.cc, lat, lng);
   }
   return null;
+}
+
+/** The code the place picker uses for a point Natural Earth files under `cc` */
+export function pickerCode(cc, lat, lng) {
+  if (cc === 'FR') {
+    const o = FR_OVERSEAS.find(([, a, b, c, d]) => lng >= a && lng <= c && lat >= b && lat <= d);
+    if (o) return o[0];
+  }
+  const o = PLACE_PICKER_CODES.find(([from, , a, b, c, d]) => from === cc && lng >= a && lng <= c && lat >= b && lat <= d);
+  return o ? o[1] : cc;
+}
+
+/**
+ * For a point inside no polygon: the country whose drawn coast or border is
+ * nearest, if within maxKm. Distances are on a local flat projection, which is
+ * well within a kilometre at this range.
+ */
+export function nearestCountry(polys, lat, lng, maxKm = COAST_KM) {
+  const kmLat = 110.574;
+  const kmLng = 111.32 * Math.max(0.01, Math.cos(toRad(lat)));
+  const padLat = maxKm / kmLat;
+  const padLng = maxKm / kmLng;
+  let best = null;
+  let bestKm = maxKm;
+  for (const p of polys) {
+    const [x0, y0, x1, y1] = p.box;
+    if (lng < x0 - padLng || lng > x1 + padLng || lat < y0 - padLat || lat > y1 + padLat) continue;
+    for (const ring of p.rings) {
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const ax = (ring[j][0] - lng) * kmLng;
+        const ay = (ring[j][1] - lat) * kmLat;
+        const bx = (ring[i][0] - lng) * kmLng;
+        const by = (ring[i][1] - lat) * kmLat;
+        const dx = bx - ax;
+        const dy = by - ay;
+        const len2 = dx * dx + dy * dy;
+        const t = len2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / len2)) : 0;
+        const d = Math.hypot(ax + t * dx, ay + t * dy);
+        if (d < bestKm) {
+          bestKm = d;
+          best = p.cc;
+        }
+      }
+    }
+  }
+  return best ? pickerCode(best, lat, lng) : null;
 }
 
 const toRad = (d) => (d * Math.PI) / 180;
@@ -196,7 +254,12 @@ function km(aLat, aLng, bLat, bLng) {
   return 2 * 6371.0088 * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
-/** Gives every row a country; rows offshore of the generalised coast take their nearest placed neighbour's within 25 km */
+/**
+ * Gives every row a country. Rows offshore of the generalised coast take their
+ * nearest placed neighbour's within 25 km; rows with no such neighbour (a fjord
+ * town, an atoll the boundary file doesn't draw) take the nearest drawn coast's
+ * within 100 km.
+ */
 export function assignCountries(rows, polys) {
   const cc = rows.map(([lat, lng]) => countryAt(polys, lat, lng));
   const grid = new Map();
@@ -224,6 +287,7 @@ export function assignCountries(rows, polys) {
             best = cc[j];
           }
         }
+    if (!best) best = nearestCountry(polys, lat, lng);
     if (best) rescued++;
     else lost++;
     cc[i] = best;
@@ -414,8 +478,13 @@ function writeSourceMd({ date, endpoint, packs, left, stats, perCountry }) {
           '2. Each mosque is given a country by point-in-polygon against Natural Earth 1:10m admin-0',
           `   countries v5.1.2 (public domain, ${NE.url}, sha256 ${NE.sha256}).`,
           '   The boundaries are used only at build time and are not shipped. A point just offshore of',
-          '   the generalised coastline takes the country of the nearest mosque within 25 km. French',
-          '   overseas departments get their own codes (RE, YT, GP, MQ, GF) to match the place picker.',
+          '   the generalised coastline takes the country of the nearest mosque within 25 km, or',
+          '   failing that of the nearest drawn coast within 100 km (fjord towns, and atolls the',
+          '   boundary file leaves out, as in the Maldives). Codes follow GeoNames, which the place',
+          '   picker uses, where the two differ: French overseas departments get their own (RE, YT,',
+          '   GP, MQ, GF), Crimea is filed under UA, Western Sahara under EH, and Christmas Island and',
+          '   the Cocos Islands under CX and CC. This is only so that a place finds the mosques of its',
+          '   own town; it takes no position on any border.',
         ]),
     '',
     '3. Kept per mosque: centre lat/lng rounded to 4 decimals (about 11 m), `name`, and `name:ar` /',
@@ -426,7 +495,7 @@ function writeSourceMd({ date, endpoint, packs, left, stats, perCountry }) {
       ? [`OSM features returned: ${stats.rows}. Rows skipped as malformed: ${stats.skipped}.`, ...(stats.failed.length ? [`Countries asked for that did not answer (not shipped): ${stats.failed.join(', ')}.`] : [])]
       : [
           `OSM features returned: ${stats.rows}. Rows skipped as malformed: ${stats.skipped}. Placed offshore`,
-          `by nearest neighbour: ${stats.rescued}. With no country (open sea, Antarctica): ${stats.lost}.`,
+          `by nearest neighbour or nearest coast: ${stats.rescued}. With no country (open sea, far islets): ${stats.lost}.`,
         ]),
     '',
     `Packs: ${packs.length} countries, ${packs.reduce((s, p) => s + p.count, 0)} mosques, ${total} bytes (budget 8 MB).`,
