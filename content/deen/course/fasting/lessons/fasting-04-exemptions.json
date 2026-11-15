@@ -1,6 +1,6 @@
 {
   "unit": "fasting",
-  "rev": 1,
+  "rev": 2,
   "id": "fasting-04-exemptions",
   "order": 4,
   "title": "Who may leave the fast",
@@ -168,7 +168,7 @@
     {
       "id": "pregnant-nursing",
       "kind": "differs",
-      "text": "A woman who is pregnant or nursing and fears harm may leave the fast. The schools differ on what she owes afterwards.",
+      "text": "A woman who is pregnant or nursing and fears harm may leave the fast. The schools differ on what she owes afterwards. The Maliki sentence quoted here speaks only of feeding; the primer goes on to set that feeding at a [[mudd]] “for each day he makes up”.",
       "evidence": [
         {
           "quran": {
@@ -219,7 +219,7 @@
         {
           "id": "pregnant-nursing-1",
           "front": "A pregnant or nursing woman leaves the fast out of fear for her child. What do the four primers say she owes?",
-          "back": "Hanafi: the make-up days only. Shafi’i and Hanbali: the make-up days and feeding for each day. Maliki: the pregnant woman does not feed (it is also said she does); the nursing woman feeds."
+          "back": "Hanafi: the make-up days only. Shafi’i and Hanbali: the make-up days and feeding for each day. Maliki, on feeding: the pregnant woman does not feed (it is also said she does); the nursing woman feeds."
         },
         {
           "id": "pregnant-nursing-hanafi",
@@ -385,7 +385,8 @@
       "2026-11-13 drafted from the fetched primer texts (shamela.ws copies listed in SOURCES.md); every position quote copied from the page, not from memory",
       "2026-11-13 check pass: every quote re-located by skeleton match in a second fetch of the sources; Quran refs resolved in src/data; consensus and Bidayat al-Mujtahid cross-locations re-read (details in review.log)",
       "2026-11-13 status source-checked. The check pass was mechanical plus a second read by the drafting agent: no separate checker agent was available in this run. Not reviewed by a scholar.",
-      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). No change to this lesson. Not reviewed by a scholar."
+      "2026-11-14 independent verifier pass (an agent that wrote none of the unit): sources downloaded again and every quote, citation and cross-location re-read (review.log section 8). No change to this lesson. Not reviewed by a scholar.",
+      "2026-11-15 independent content verification (an agent that wrote none of the unit): all sources downloaded again and read (review.log section 10). pregnant-nursing: the Maliki quote speaks only of feeding, so beside the Hanafi “make-up only” it could be read as owing no make-up days. The claim now says so and points to the primer’s next words (“والإطعام في هذا كله مد عن كل يوم يقضيه”); the summary card says “on feeding”. No quote or source changed. Not reviewed by a scholar."
     ]
   }
 }
