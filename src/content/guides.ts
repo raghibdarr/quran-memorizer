@@ -29,13 +29,13 @@ Every new ayah you learn in Takrar goes through the same four rounds:
 - **Four times with the text again.** Look back at what you just tried to remember.
 - **Six times from memory.** Hidden again, to fix it in place.
 
-Then you put the ayah's words back in order, as a last check that you know the sequence and not just the sound.
+Then you put the ayah's words back in order, as a last check that you know the order of the words as well as their sound.
 
 ## Why recite from memory so early
 
-Reading an ayah over and over feels productive, because it gets familiar quickly. But familiar isn't the same as remembered. You only find out what you really hold when the page is gone.
+Reading an ayah over and over feels productive, because it gets familiar quickly. A familiar ayah can still be one you can't recite, and you only find that out once the text is hidden.
 
-That's why the second round hides the text after only six readings, before it feels comfortable. Trying to recall something, even when you stumble, does more for memory than another look at it. The stumble shows you exactly where the gap is, and the third round, with the text back, fills that gap while it's fresh.
+That's why the second round hides the text after only six readings, before it feels comfortable. Trying to recall something, even when you stumble, does more for memory than another look at it. The stumble shows you where the gap is, and the third round, with the text back, fills that gap while it's fresh.
 
 ## Why the numbers are six, four, four and six
 
@@ -49,7 +49,7 @@ Knowing ayahs one by one isn't the same as reciting them in a row. So after the 
 
 ## When to skip a round
 
-If you already know an ayah well, you can skip ahead. The rounds are there to build memory, not to slow down someone who has it. Be honest, though: skipping a round you needed costs more in review later than it saves now.
+If you already know an ayah well, you can skip ahead. The rounds are there to build memory, and an ayah you already hold doesn't need them. Skipping a round you did need, though, costs more in review later than it saves now.
 `,
   },
   {
@@ -63,13 +63,13 @@ In many Quran schools, especially across South Asia, a student's day has three p
 
 - **Sabaq** is the new lesson: today's few lines, learned until they can be recited from memory.
 - **Sabqi** is the recent lessons: roughly the last week or so of sabaq, recited every day while they're still settling.
-- **Manzil** is everything older: the juz already memorised, revised in turn so that nothing fades.
+- **Manzil** is everything older: the juz already memorised, revised in turn so that it isn't forgotten.
 
-The idea behind it is simple. New memory is fragile and needs daily attention. Older memory is sturdier but still slips if it's left alone for long. So each part gets the attention it needs, every day.
+New memory is fragile and needs daily attention. Older memory is sturdier but still slips if it's left alone for long. So each part gets the attention it needs, every day.
 
 ## The common mistake
 
-Most people who give up on hifz don't stop learning new ayahs. They stop revising old ones. The sabaq is exciting; the manzil is work. A month later, the first surahs they learned have faded, and starting again feels worse than starting fresh.
+People who give up on hifz have usually kept learning new ayahs and stopped revising old ones. The sabaq is exciting; the manzil is work. A month later, the first surahs they learned have faded, and starting again feels worse than starting fresh.
 
 Keeping the three parts together is what prevents that. A smaller sabaq with a steady manzil goes further than a large sabaq with none.
 
@@ -117,7 +117,7 @@ Before you start, listen to the whole ayah once or twice while following the mea
   {
     slug: 'similar-verses',
     title: "Similar verses: how to stop mixing them up",
-    summary: "Hundreds of ayahs have a near-twin elsewhere in the Quran. Here's why that trips people up, and how to keep them apart.",
+    summary: 'Hundreds of ayahs have a near-twin elsewhere in the Quran. Why that trips people up, and how to keep them apart.',
     date: '2026-10-17',
     minutes: 4,
     body: `
@@ -131,7 +131,7 @@ When you recite from memory, the opening words of an ayah call up the rest. If t
 
 ## How to keep them apart
 
-- **Learn the difference, not just the ayah.** When you meet an ayah with a twin, look at both side by side and find exactly what changes: a word added, a word swapped, a different ending.
+- **Learn the difference as well as the ayah.** When you meet an ayah with a twin, look at both side by side and find exactly what changes: a word added, a word swapped, a different ending.
 - **Anchor each one to its place.** Notice what comes before and after each twin. The ayah that follows is often the best clue to which one you're in.
 - **Revise them together.** Reciting both versions in the same session, one after the other, trains you to choose rather than drift.
 
@@ -139,7 +139,7 @@ When you recite from memory, the opening words of an ayah call up the rest. If t
 
 When an ayah you're learning has a twin, Takrar tells you and shows the two together, with the differing words marked. There's also a short practice that asks you to tell similar ayahs apart, and in the page view you can mark the similar ayahs on the page.
 
-The aim isn't to avoid the similar verses. It's to know them so well that the difference is the first thing you notice.
+The aim is to know the similar verses so well that the difference is the first thing you notice.
 `,
   },
   {
@@ -169,11 +169,11 @@ Some ayahs keep slipping however often you revise them. Takrar notices when an a
 
 ## When you miss a day
 
-Life happens. If you miss a day, your reviews wait for you, ordered so that the ayahs most at risk come first. A streak freeze covers the occasional missed day, so one bad day doesn't undo weeks of habit.
+If you miss a day, your reviews wait for you, ordered so that the ayahs most at risk come first. A streak freeze covers the occasional missed day, so one bad day doesn't undo weeks of habit.
 
-If you've been away for longer, Takrar suggests a lighter catch-up instead of asking you to clear everything at once. Coming back is what matters.
+If you've been away for longer, Takrar suggests a lighter catch-up instead of asking you to clear everything at once.
 
-## A rhythm that lasts
+## How long reviews take
 
 Reviews usually take less time than you expect, because most ayahs you've held for a while only come back every few weeks. Most of your time goes on the ayahs that need it. Over months, that's what lets you keep learning new ayahs without losing the old ones.
 `,
@@ -185,11 +185,11 @@ Reviews usually take less time than you expect, because most ayahs you've held f
     date: '2026-10-17',
     minutes: 3,
     body: `
-Most people memorising the Quran aren't full-time students. They have work, exams, children, long commutes. The good news is that hifz rewards consistency far more than long sessions.
+Most people memorising the Quran aren't full-time students. They have work, exams, children, long commutes. Hifz rewards consistency far more than long sessions.
 
 ## Make the lesson small
 
-A lesson of two or three short ayahs takes about fifteen minutes. That's small enough to do on a hard day, which is the point: the habit survives the hard days. You can always do a second lesson when you have time; you can't make up for the week you stopped.
+A lesson of two or three short ayahs takes about fifteen minutes. That's small enough to do on a hard day, so the habit survives the hard days. You can always do a second lesson when you have time; you can't make up for the week you stopped.
 
 ## Give it a fixed time
 
