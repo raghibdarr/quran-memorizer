@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { createClient } from '@/lib/supabase/client'
+import { getLoadedClient, loadClient, type Client } from '@/lib/supabase/lazy'
 import type { User } from '@supabase/supabase-js'
 import {
   STORE_NAMES,
@@ -53,14 +53,15 @@ const warnedNewerSchema = new Set<string>()
 
 export function useSync(user: User | null) {
   const [status, setStatus] = useState<SyncStatus>('idle')
-  const supabaseRef = useRef(createClient())
+  // Sync runs only with a signed-in user, by which time useAuth has loaded the client
+  const supabaseRef = useRef<Client | null>(getLoadedClient())
   const syncingRef = useRef(false)
   const initialSyncDone = useRef(false)
   // Falls to false when the DB lacks the rev column (migration not applied yet)
   const casSupportedRef = useRef(true)
 
   const fetchCloudRows = useCallback(async (names?: SyncRowName[]): Promise<Map<string, CloudRow>> => {
-    const supabase = supabaseRef.current
+    const supabase = (supabaseRef.current ??= await loadClient())
     let query = supabase.from('user_data').select('store_name, data, updated_at, rev').eq('user_id', user!.id)
     if (names && names.length) query = query.in('store_name', names)
     const { data, error } = await query
@@ -92,7 +93,7 @@ export function useSync(user: User | null) {
    * conflict (another device wrote between our read and write).
    */
   const syncPass = useCallback(async (names: SyncRowName[], cloudRows: Map<string, CloudRow>): Promise<SyncRowName[]> => {
-    const supabase = supabaseRef.current
+    const supabase = (supabaseRef.current ??= await loadClient())
     const userId = user!.id
     const seen = getSeenMarkers(userId)
     const hashes = getLastSyncedHashes()

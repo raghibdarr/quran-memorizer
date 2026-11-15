@@ -9,7 +9,11 @@
 //     load by dynamic import, so Home's first load is unchanged for people
 //     without a place), or
 //   - Home's first-load JS grew more than 6 KB gzipped over the baseline, or
-//   - out/ grew more than 12 MB over the baseline.
+//   - out/ grew more than 12 MB over the baseline, or
+//   - Home's or Prayer's first-load JS is over FIRST_LOAD_CEILING gzipped, whatever
+//     the baseline says (the delta alone passed a baseline that was already
+//     heavy). About 165 KB of it is the framework: Next's router runtime,
+//     react-dom and the polyfills.
 // The baseline (scripts/bundle-baseline.json) was measured on the build before
 // the all-in-one work; integration may re-record it once a release ships.
 
@@ -29,6 +33,9 @@ const BASELINE = flag('--baseline') ?? join(ROOT, 'scripts', 'bundle-baseline.js
 
 export const HOME_GROWTH_LIMIT = 6 * 1024;
 export const OUT_GROWTH_LIMIT = 12 * 1024 * 1024;
+/** Absolute first-load budget for the two screens people open most (gzip) */
+export const FIRST_LOAD_CEILING = 275 * 1024;
+export const CEILING_PAGES = ['index.html', 'prayer.html'];
 /** Strings that survive minification and only adhan contains */
 export const ADHAN_MARKERS = /AqrabBalad|seasonAdjustedMorningTwilight|nightPortions/;
 
@@ -49,6 +56,18 @@ function dirBytes(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
     total += e.isDirectory() ? dirBytes(p) : statSync(p).size;
+  }
+  return total;
+}
+
+/** First-load JS of one exported page, gzipped */
+export function pageFirstLoad(outDir, page) {
+  const file = join(outDir, page);
+  if (!existsSync(file)) return null;
+  let total = 0;
+  for (const src of homeScripts(readFileSync(file, 'utf8'))) {
+    const js = join(outDir, src);
+    if (existsSync(js)) total += gzipSync(readFileSync(js), { level: 9 }).length;
   }
   return total;
 }
@@ -92,6 +111,12 @@ function main() {
   if (now.withAdhan.length) {
     console.error(`FAIL adhan is in Home's first-load scripts: ${now.withAdhan.join(', ')}. Load src/lib/prayer/engine with a dynamic import.`);
     failed = true;
+  }
+  for (const page of CEILING_PAGES) {
+    const size = pageFirstLoad(OUT, page);
+    if (size === null) continue;
+    console.log(`${page}: ${kb(size)} gzipped first-load JS (ceiling ${kb(FIRST_LOAD_CEILING)}).`);
+    if (size > FIRST_LOAD_CEILING) { console.error(`FAIL ${page} first-load JS is over the ceiling.`); failed = true; }
   }
   if (existsSync(BASELINE)) {
     const base = JSON.parse(readFileSync(BASELINE, 'utf8'));

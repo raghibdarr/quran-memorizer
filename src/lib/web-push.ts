@@ -5,7 +5,7 @@
  * stored in Supabase (migration 003) for the Netlify senders. The phone apps use
  * local notifications instead (reminder-store), so none of this runs natively.
  */
-import { createClient } from '@/lib/supabase/client';
+import { loadClient } from '@/lib/supabase/lazy';
 import { isNative } from '@/lib/native';
 
 const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
@@ -31,7 +31,7 @@ function keyBytes(base64url: string): Uint8Array {
 }
 
 async function userId(): Promise<string | null> {
-  const { data } = await createClient().auth.getUser();
+  const { data } = await (await loadClient()).auth.getUser();
   return data.user?.id ?? null;
 }
 
@@ -41,7 +41,7 @@ export async function getPushReminder(): Promise<{ hour: number } | null> {
   const reg = await navigator.serviceWorker.getRegistration();
   const sub = await reg?.pushManager.getSubscription();
   if (!sub) return null;
-  const { data } = await createClient().from('push_subscriptions').select('reminder_hour').eq('endpoint', sub.endpoint).maybeSingle();
+  const { data } = await (await loadClient()).from('push_subscriptions').select('reminder_hour').eq('endpoint', sub.endpoint).maybeSingle();
   return data ? { hour: data.reminder_hour as number } : null;
 }
 
@@ -55,7 +55,7 @@ export async function enablePushReminder(hour: number): Promise<'ok' | 'denied' 
     const sub = (await reg.pushManager.getSubscription())
       ?? await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(VAPID_PUBLIC_KEY!) as BufferSource });
     const json = sub.toJSON();
-    const { error } = await createClient().from('push_subscriptions').upsert({
+    const { error } = await (await loadClient()).from('push_subscriptions').upsert({
       endpoint: sub.endpoint, user_id: uid, p256dh: json.keys?.p256dh ?? '', auth: json.keys?.auth ?? '', tz: tz(), reminder_hour: hour,
     });
     return error ? 'failed' : 'ok';
@@ -68,7 +68,7 @@ export async function setPushReminderHour(hour: number): Promise<boolean> {
   const reg = await navigator.serviceWorker.getRegistration();
   const sub = await reg?.pushManager.getSubscription();
   if (!sub) return false;
-  const { error } = await createClient().from('push_subscriptions').update({ reminder_hour: hour, tz: tz() }).eq('endpoint', sub.endpoint);
+  const { error } = await (await loadClient()).from('push_subscriptions').update({ reminder_hour: hour, tz: tz() }).eq('endpoint', sub.endpoint);
   return !error;
 }
 
@@ -76,7 +76,7 @@ export async function disablePushReminder(): Promise<void> {
   const reg = await navigator.serviceWorker.getRegistration();
   const sub = await reg?.pushManager.getSubscription();
   if (!sub) return;
-  await createClient().from('push_subscriptions').delete().eq('endpoint', sub.endpoint);
+  await (await loadClient()).from('push_subscriptions').delete().eq('endpoint', sub.endpoint);
   await sub.unsubscribe().catch(() => {});
 }
 
@@ -84,13 +84,13 @@ export async function disablePushReminder(): Promise<void> {
 export async function getEmailDigest(): Promise<boolean> {
   const uid = await userId();
   if (!uid) return false;
-  const { data } = await createClient().from('notification_prefs').select('email_digest').eq('user_id', uid).maybeSingle();
+  const { data } = await (await loadClient()).from('notification_prefs').select('email_digest').eq('user_id', uid).maybeSingle();
   return !!data?.email_digest;
 }
 
 export async function setEmailDigest(on: boolean): Promise<boolean> {
   const uid = await userId();
   if (!uid) return false;
-  const { error } = await createClient().from('notification_prefs').upsert({ user_id: uid, email_digest: on, tz: tz(), updated_at: new Date().toISOString() });
+  const { error } = await (await loadClient()).from('notification_prefs').upsert({ user_id: uid, email_digest: on, tz: tz(), updated_at: new Date().toISOString() });
   return !error;
 }

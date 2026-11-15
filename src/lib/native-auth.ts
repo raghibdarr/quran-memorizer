@@ -11,7 +11,7 @@
 
 import { App } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
-import { createClient } from '@/lib/supabase/client';
+import { loadClient } from '@/lib/supabase/lazy';
 import { isNative, nativePlatform } from './native';
 
 export const NATIVE_AUTH_CALLBACK = 'takrar://auth/callback';
@@ -61,7 +61,7 @@ async function handle(url: string | undefined | null) {
   if (!parsed) return;
   Browser.close().catch(() => {});
   if (!parsed.code) return;
-  const { error } = await createClient().auth.exchangeCodeForSession(parsed.code);
+  const { error } = await (await loadClient()).auth.exchangeCodeForSession(parsed.code);
   if (!error && parsed.recovery) window.dispatchEvent(new Event(PASSWORD_RECOVERY_EVENT));
 }
 
