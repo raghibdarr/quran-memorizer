@@ -164,3 +164,45 @@ Added: a test that keeps citations.json in step with the lessons without the net
 (every position quote and consensus location has its record; every difference has a
 Bidayat al-Mujtahid record), and that every check question points at a claim of its lesson.
 Nothing removed; no primer citation could not be confirmed.
+
+2026-11-15  Second independent content verification (a verifier that wrote none of the package)
+-----------------------------------------------------------------------------------------------
+Method: all 73 recorded pages fetched afresh. The four primers' chapters and the cited entries
+of Ibn al-Mundhir and Ibn Hazm were read in full; every Bidayat al-Mujtahid quote was read with
+the sentences around it, and the tayammum chapter's Bab 1, 6 and 7 in full. Each claim, position,
+card and check question was read against that Arabic. Entry numbers (Ibn al-Mundhir nos. 2, 11,
+12, 14, 15, 18, 19, 21, 25, 31), chapter names and print pages were checked against the page
+headings of the online copies: all as recorded.
+- tools/verify-citations.mjs: all quotes found before the changes (161) and after (163).
+  build-deen.mjs --check: 9 of 9 shipped.
+- The unit ships no hadith item, dhikr, dua or grading; nothing here needs a two-witness
+  collation or an attributed verdict.
+Findings fixed (tayammum-06 raised to rev 3):
+1. tayammum-06/c6 Maliki: "a resident who is ill" misread "لضرر بجسمه مقيم". "مقيم" describes
+   the harm, not the person: al-Thamar al-Dani on this line glosses it "أي مرض لازم وبقي إلى وقت
+   الصلاة الثانية" (shamela.ws/book/7441/75). Now "a sick person who cannot touch water because
+   of a lasting harm to his body". "The primer also records other views" is replaced by the
+   view the primer gives next, "وقد قيل يتيمم لكل صلاة" (quote extended to include it).
+   Position text and school card.
+2. tayammum-06/c2: Ibn Hazm's agreement that tayammum stands in for ghusl as well as wudu was
+   given without the difference Ibn Rushd records in Bab 1: "واختلفوا في الكبرى فروي عن عمر
+   وابن مسعود أنهما كانا لا يريانها بدلا من الكبرى ... وبه قال عامة الفقهاء". The claim now
+   notes that early difference and that jurists generally hold it does. Cross-location recorded.
+3. tayammum-06/c5: Ibn al-Mundhir's agreement on finding water before the prayer was given
+   bare, while Ibn Rushd (Bab 6, mas'ala 2) has it as the majority's view against "وذهب قوم
+   إلى أن الناقض لها هو الحدث". The claim now attributes the agreement to Ibn al-Mundhir and
+   notes what Ibn Rushd records. Cross-location recorded. The card and check question keep
+   the answer Ibn al-Mundhir reports.
+Read and left as they are:
+- ghusl-05/c3: Ibn Rushd opens the mas'ala with a difference among the Companions on
+  intercourse without emission. The claim states only what the four primers list, which is
+  accurate for all four; the cross-location stays on record.
+- khuff-07/c3: Ibn Rushd gives Malik's view as the top obligatory and the bottom recommended;
+  al-Risala only describes wiping both, and the position says no more than that.
+- najasa-08/c3: "that died without being slaughtered" glosses "ميتة"; Ibn Rushd's sentence has
+  the word alone. Kept as a plain-English rendering of the term.
+- tayammum-06/c5: "Whatever breaks wudu breaks tayammum" shortens "ما ينقض الأصل الذي هو
+  الوضوء أو الطهر" (the original it stands in for, wudu or ghusl). Kept.
+Limits unchanged: one online copy per work, and a located phrase is not a scholar's reading.
+Nothing removed; no item could not be verified. content/deen/ERRATA.md is untouched: the unit
+has not been released, so these are pre-release corrections recorded here.

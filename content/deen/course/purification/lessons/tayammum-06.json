@@ -2,7 +2,7 @@
   "id": "tayammum-06",
   "unit": "purification",
   "order": 6,
-  "rev": 2,
+  "rev": 3,
   "title": "When there is no water",
   "intro": "Water is not always within reach, and sometimes using it would harm. For those times the Quran gives clean earth in its place. This lesson covers who it is for, how it is done, and what ends it.",
   "claims": [
@@ -40,7 +40,7 @@
     },
     {
       "id": "c2",
-      "text": "[[tayammum]] is for the sick person and the traveller who have no water. For a sick person who is harmed by water and has none, it stands in for both [[wudu]] and [[ghusl]].",
+      "text": "[[tayammum]] is for the sick person and the traveller who have no water. For a sick person who is harmed by water and has none, it stands in for both [[wudu]] and [[ghusl]]. Ibn Rushd records an early difference among the Companions on whether it stands in for [[ghusl]]; jurists generally hold that it does.",
       "kind": "agreed",
       "evidence": [
         {
@@ -236,7 +236,7 @@
     },
     {
       "id": "c5",
-      "text": "Whatever breaks [[wudu]] breaks [[tayammum]]. Someone who made [[tayammum]] and then finds water before starting the prayer purifies again, with water, and then prays.",
+      "text": "Whatever breaks [[wudu]] breaks [[tayammum]]. Someone who made [[tayammum]] and then finds water before starting the prayer purifies again, with water, and then prays. Ibn al-Mundhir reports agreement on this; Ibn Rushd gives it as the view of the majority and records that some held only a ritual state breaks it.",
       "kind": "agreed",
       "evidence": [
         {
@@ -284,12 +284,12 @@
         },
         {
           "school": "maliki",
-          "text": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
+          "text": "Two prayers are not prayed with one [[tayammum]], except by a sick person who cannot touch water because of a lasting harm to his body. The primer adds that it has also been said he makes [[tayammum]] for every prayer.",
           "source": {
             "work": "al-risala",
             "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum"
           },
-          "quote": "ولا يصلي صلاتين بتيمم واحد من هؤلاء إلا مريض لا يقدر على مس الماء لضرر بجسمه مقيم"
+          "quote": "ولا يصلي صلاتين بتيمم واحد من هؤلاء إلا مريض لا يقدر على مس الماء لضرر بجسمه مقيم وقد قيل يتيمم لكل صلاة"
         },
         {
           "school": "shafii",
@@ -325,7 +325,7 @@
         {
           "id": "c6-maliki",
           "front": "Maliki primer (Ibn Abi Zayd): how many obligatory prayers does one [[tayammum]] cover?",
-          "back": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
+          "back": "Two prayers are not prayed with one [[tayammum]], except by a sick person who cannot touch water because of a lasting harm to his body. The primer adds that it has also been said he makes [[tayammum]] for every prayer.",
           "school": "maliki"
         },
         {
@@ -380,7 +380,8 @@
     "date": "2026-11-14",
     "log": [
       "2026-11-14 checker pass (agent that did not draft): every primer quote, consensus citation and Bidayat al-Mujtahid cross-location re-fetched and found (tools/verify-citations.mjs)",
-      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log"
+      "2026-11-14 checker: English of each claim and position read against its Arabic; findings and answers in review.log",
+      "2026-11-15 independent verifier (wrote none of it): every source page fetched afresh and read against the English; al-Risala phrase checked in al-Thamar al-Dani; fixes in review.log"
     ]
   }
 }

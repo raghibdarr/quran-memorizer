@@ -1100,6 +1100,16 @@
     },
     {
       "lesson": "tayammum-06",
+      "claim": "c2",
+      "role": "difference-cross-location",
+      "work": "bidayat-al-mujtahid",
+      "location": "Kitab al-Tayammum, Bab 1 (Dar al-Hadith ed., vol. 1, p. 70)",
+      "quote": "واختلفوا في الكبرى فروي عن عمر وابن مسعود أنهما كانا لا يريانها بدلا من الكبرى وكان علي وغيره من الصحابة يرون أن التيمم يكون بدلا من الطهارة الكبرى وبه قال عامة الفقهاء",
+      "url": "https://shamela.ws/book/21739/62",
+      "printPage": "70"
+    },
+    {
+      "lesson": "tayammum-06",
       "claim": "c3",
       "role": "difference-cross-location",
       "work": "bidayat-al-mujtahid",
@@ -1256,6 +1266,16 @@
     },
     {
       "lesson": "tayammum-06",
+      "claim": "c5",
+      "role": "difference-cross-location",
+      "work": "bidayat-al-mujtahid",
+      "location": "Kitab al-Tayammum, Bab 6, mas’ala 2 (Dar al-Hadith ed., vol. 1, p. 78)",
+      "quote": "فإن الجمهور ذهبوا إلى أن وجود الماء ينقضها وذهب قوم إلى أن الناقض لها هو الحدث",
+      "url": "https://shamela.ws/book/21739/70",
+      "printPage": "78"
+    },
+    {
+      "lesson": "tayammum-06",
       "claim": "c6",
       "role": "difference-cross-location",
       "work": "bidayat-al-mujtahid",
@@ -1283,7 +1303,7 @@
       "school": "maliki",
       "work": "al-risala",
       "location": "Bab fi man lam yajid al-ma’ wa sifat al-tayammum",
-      "quote": "ولا يصلي صلاتين بتيمم واحد من هؤلاء إلا مريض لا يقدر على مس الماء لضرر بجسمه مقيم",
+      "quote": "ولا يصلي صلاتين بتيمم واحد من هؤلاء إلا مريض لا يقدر على مس الماء لضرر بجسمه مقيم وقد قيل يتيمم لكل صلاة",
       "english": "Two prayers are not prayed with one [[tayammum]], except by a resident who is ill and cannot touch water; the primer also records other views.",
       "url": "https://shamela.ws/book/11373/21",
       "printPage": "21"
