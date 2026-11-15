@@ -46,7 +46,7 @@ function effectiveSupport(): CompassSupport {
   return s;
 }
 
-/** iOS's own accuracy estimate: worse than this (or unknown) also asks for a figure 8 */
+/** iOS's own accuracy estimate: worse than this also asks for a figure 8 */
 const IOS_ACCURACY_LIMIT = 25;
 
 export default function QiblaClient() {
@@ -151,7 +151,7 @@ function QiblaFinder({ lat, lng, label }: { lat: number; lng: number; label: str
     const t = toTrueHeading({ heading: r.heading, reference: raw.reference }, declination);
     const entered = gateRef.current.update(turnToQibla(t.heading, bearing));
     if (entered) haptic.success();
-    const iosUnsure = raw.accuracy !== undefined && (raw.accuracy < 0 || raw.accuracy > IOS_ACCURACY_LIMIT);
+    const iosUnsure = raw.accuracy !== undefined && raw.accuracy > IOS_ACCURACY_LIMIT;
     const next: Live = {
       heading: t.heading,
       reference: t.reference,

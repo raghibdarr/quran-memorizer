@@ -167,10 +167,10 @@ describe('sensor plumbing', () => {
     expect(await requestCompassPermission({} as Window)).toBe('granted')
   })
 
-  it('reads iOS true headings, Android absolute headings, and ignores empty or relative events', () => {
+  it('reads iOS and Android headings as magnetic, and ignores empty or relative events', () => {
     const ev = (o: Record<string, unknown>) => o as unknown as DeviceOrientationEvent
     expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: 350, webkitCompassAccuracy: 10, alpha: 5 }), 0, 1))
-      .toEqual({ heading: 350, reference: 'true', accuracy: 10, t: 1 })
+      .toEqual({ heading: 350, reference: 'magnetic', accuracy: 10, t: 1 })
     expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: 350 }), 90, 1)!.heading).toBe(80)
     const abs = readOrientationEvent(ev({ type: 'deviceorientationabsolute', alpha: 90, beta: 0, gamma: 0, absolute: true }), 0, 2)!
     expect(abs.reference).toBe('magnetic')
@@ -190,5 +190,9 @@ describe('screen rotation', () => {
   });
   it('an uncalibrated iOS reading (negative heading) carries no heading', () => {
     expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: -1, alpha: 40, absolute: false }), 0, 0)).toBeNull();
+  });
+  it('iOS with no heading (0 with accuracy -1) is not read as facing north', () => {
+    expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: 0, webkitCompassAccuracy: -1, alpha: 40, absolute: false }), 0, 0)).toBeNull();
+    expect(readOrientationEvent(ev({ type: 'deviceorientation', webkitCompassHeading: 0, webkitCompassAccuracy: 15 }), 0, 0)?.heading).toBe(0);
   });
 });

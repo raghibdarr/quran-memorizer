@@ -3,9 +3,12 @@
 //
 //   iOS      `webkitCompassHeading` on deviceorientation, after
 //            DeviceOrientationEvent.requestPermission(), which Safari only
-//            allows from a tap. Apple reports it from true north.
+//            allows from a tap. It is measured from MAGNETIC north: WebKit
+//            passes CLHeading.magneticHeading (WebCoreMotionManager.mm), and
+//            Apple documents it as "relative to magnetic north".
 //   Android  deviceorientationabsolute: alpha/beta/gamma relative to MAGNETIC
-//            north; the caller adds the declination (declination.ts).
+//            north.
+// Either way the caller adds the declination (declination.ts) to get true north.
 //
 // Raw readings jitter, so they go through a circular low-pass filter (an
 // average of unit vectors: 359° and 1° average to 0°, not 180°), and the
@@ -225,7 +228,7 @@ export interface RawHeading {
   heading: number;
   /** Which north the sensor measures from */
   reference: 'true' | 'magnetic';
-  /** iOS only: the OS's own accuracy estimate in degrees, negative when unknown */
+  /** iOS only: the OS's own accuracy estimate in degrees */
   accuracy?: number;
   t: number;
 }
@@ -240,13 +243,12 @@ interface IOSOrientationEvent extends DeviceOrientationEvent {
  * (a desktop browser fires events with null angles).
  */
 export function readOrientationEvent(e: IOSOrientationEvent, screenDeg: number, t: number): RawHeading | null {
-  if (typeof e.webkitCompassHeading === 'number' && Number.isFinite(e.webkitCompassHeading) && e.webkitCompassHeading >= 0) {
-    return {
-      heading: norm360(e.webkitCompassHeading + screenDeg),
-      reference: 'true',
-      accuracy: typeof e.webkitCompassAccuracy === 'number' ? e.webkitCompassAccuracy : undefined,
-      t,
-    };
+  if (typeof e.webkitCompassHeading === 'number' && Number.isFinite(e.webkitCompassHeading)) {
+    const accuracy = typeof e.webkitCompassAccuracy === 'number' ? e.webkitCompassAccuracy : undefined;
+    // A negative heading or accuracy is iOS saying it has no heading (WebKit sends
+    // heading 0 with accuracy -1 then): that is not "facing north"
+    if (e.webkitCompassHeading < 0 || (accuracy !== undefined && accuracy < 0)) return null;
+    return { heading: norm360(e.webkitCompassHeading + screenDeg), reference: 'magnetic', accuracy, t };
   }
   if (e.alpha == null || !Number.isFinite(e.alpha)) return null;
   if (e.type === 'deviceorientation' && !e.absolute) return null; // relative to wherever the page loaded: useless
