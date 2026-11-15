@@ -211,3 +211,4 @@ al-'Ulum (al-Arna'ut and Bajis) takhrij footnotes; api = the hadith-api text at 
 15 bukhari 6018 W2: yes W4: yes  api: 1 entry, best overlap 100%
 15 muslim 47 W2: yes W4: yes  api: 3 entries, best overlap 100%
 ```
+2026-11-15 build-deen G8 warning on 11 ("hasan" unmarked) is the narrator's name al-Hasan ibn Ali, not the grading term; left as plain English by design
