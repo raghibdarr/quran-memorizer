@@ -7,7 +7,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/build-workers.mjs",
     "build": "next build",
-    "postbuild": "node scripts/flatten-segments.mjs",
+    "postbuild": "node scripts/flatten-segments.mjs && node scripts/build-precache.mjs",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest",

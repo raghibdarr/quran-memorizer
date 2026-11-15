@@ -9,12 +9,59 @@ const CACHE_AUDIO = 'takrar-audio-v1';
 // Kept across activations like the audio cache, so a city search works offline
 const CACHE_DATA = 'takrar-data-v1';
 
+// Stamped by scripts/build-precache.mjs from out/precache.json, so every deploy
+// installs a new worker that caches that deploy's app shell
+const PRECACHE_VERSION = 'dev';
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_PAGES).then((cache) => cache.addAll(['/offline.html']))
+    caches
+      .open(CACHE_PAGES)
+      .then((cache) => cache.addAll(['/offline.html']))
+      .then(() => precacheShell())
   );
   self.skipWaiting();
 });
+
+/**
+ * The offline app shell (out/precache.json): the tab and tool pages, their
+ * router payloads and the scripts and styles they load, so Qibla, Tasbih,
+ * Zakat and the rest open with no signal even if never visited. Hashed assets
+ * already cached are skipped. A failure here never blocks the install: the
+ * runtime caching below still fills in as pages are used.
+ */
+async function precacheShell() {
+  if (PRECACHE_VERSION === 'dev') return;
+  try {
+    const res = await fetch('/precache.json', { cache: 'no-store' });
+    if (!res.ok) return;
+    const list = await res.json();
+    const statics = await caches.open(CACHE_STATIC);
+    const pages = await caches.open(CACHE_PAGES);
+    const jobs = [
+      ...list.assets.map((url) => async () => {
+        if (await statics.match(url)) return;
+        const r = await fetch(url);
+        if (r.ok) await statics.put(url, r);
+      }),
+      ...list.pages.map((url) => async () => {
+        const r = await fetch(url, { cache: 'no-cache' });
+        if (r.ok) await pages.put(url, r.redirected ? new Response(await r.blob(), { headers: r.headers }) : r);
+      }),
+    ];
+    // A few at a time: a phone on a slow line shouldn't open 200 requests at once
+    let next = 0;
+    const worker = async () => {
+      while (next < jobs.length) {
+        const job = jobs[next++];
+        await job().catch(() => {});
+      }
+    };
+    await Promise.all(Array.from({ length: 6 }, worker));
+  } catch {
+    /* offline at install, or no list: runtime caching still applies */
+  }
+}
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
@@ -115,7 +162,8 @@ async function networkFirst(request, cacheName) {
     }
     return response;
   } catch {
-    const cached = await caches.match(request);
+    // Payloads are asked for with a cache-busting ?_rsc=; the precached copy has none
+    const cached = (await caches.match(request)) || (await caches.match(request, { ignoreSearch: true }));
     return cached || new Response('Offline', { status: 503 });
   }
 }
