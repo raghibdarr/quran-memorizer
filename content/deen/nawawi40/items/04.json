@@ -1,0 +1,92 @@
+{
+  "id": "04",
+  "deck": "nawawi40",
+  "rev": 2,
+  "title": "Creation in the womb, and the written decree",
+  "cue": "The stages of creation in the womb, and the four things written",
+  "arabic": "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: حَدَّثَنَا رَسُولُ اللَّهِ ﷺ وَهُوَ الصَّادِقُ الْمَصْدُوقُ: «إِنَّ أَحَدَكُمْ يُجْمَعُ خَلْقُهُ فِي بَطْنِ أُمِّهِ أَرْبَعِينَ يَوْمًا نُطْفَةً، ثُمَّ يَكُونُ عَلَقَةً مِثْلَ ذَلِكَ، ثُمَّ يَكُونُ مُضْغَةً مِثْلَ ذَلِكَ، ثُمَّ يُرْسَلُ إِلَيْهِ الْمَلَكُ فَيَنْفُخُ فِيهِ الرُّوحَ، وَيُؤْمَرُ بِأَرْبَعِ كَلِمَاتٍ: بِكَتْبِ رِزْقِهِ، وَأَجَلِهِ، وَعَمَلِهِ، وَشَقِيٌّ أَوْ سَعِيدٌ. فَوَاللَّهِ الَّذِي لَا إِلَهَ غَيْرُهُ، إِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إِلَّا ذِرَاعٌ، فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ فَيَدْخُلُهَا، وَإِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إِلَّا ذِرَاعٌ، فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ فَيَدْخُلُهَا».",
+  "segments": [
+    310,
+    471,
+    705,
+    901
+  ],
+  "translation": "It is narrated from Abu Abd al-Rahman Abd Allah ibn Mas’ud, may Allah be pleased with him, who said: The Messenger of Allah ﷺ, the truthful one, whose truth is confirmed, told us: “The creation of each of you is gathered in his mother’s womb for forty days as a drop, then he is a clinging clot for the same, then a lump of flesh for the same.\n\nThen the angel is sent to him and breathes the soul into him, and he is commanded with four words: to write his provision, his term, his deeds, and whether he is wretched or happy.\n\nBy Allah, besides whom there is no god, one of you does the deeds of the people of Paradise until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of the Fire and enters it.\n\nAnd one of you does the deeds of the people of the Fire until there is only an arm’s length between him and it; then what was written overtakes him, and he does the deeds of the people of Paradise and enters it.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "3208",
+      "numbering": "fath-al-bari",
+      "narrator": "Abd Allah ibn Mas'ud"
+    },
+    {
+      "collection": "muslim",
+      "number": "2643",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "4",
+      "numbering": "nawawi-order",
+      "narrator": "Abd Allah ibn Mas'ud"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 3208"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2643"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 4, p. 37: https://shamela.ws/book/11244/27",
+        "skeletonSha256": "3d1a46761acdb35763d50ad89725c2f354deff29c4d12ce5aa1ed3fe10035206"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 4, p. 197: https://shamela.ws/book/8889/193",
+        "skeletonSha256": "c92a0a9ff71365b8ae65a17d4153609c42ba7085017cafd02e041eec8efa924b"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 4 (comparison only)",
+        "skeletonSha256": "e440b9cfed2a9a496bac20d8dfe3d27d18f41961f54bc659017180cf302de5a8"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq writes فو الله as two words (the same reading). al-Haytami's print lacks نطفة and إليه and reads فوالذي; hadith-api reads أم for أو. Ours follows two of the three at each point. hadith-api vowels شقيٍّ and سعيدٍ in the genitive; we vowel them in the nominative, as a clause of their own, with al-Haytami's print leaving them bare."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id explains “the truthful one, whose truth is confirmed”: truthful in what he says, and confirmed in the revelation that comes to him.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 4, p. 37 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): each witness differs from ours in a reading the other two share (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): one conflict with hadith-api (case of شقي and سعيد), adjudicated in the note; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. No change."
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "_about": "Closing words to stop at, per item and witness, where the default (our own last words) does not occur in a witness's text of the narration. Used by collate.mjs only.",
+  "08": { "haytami-fath-al-mubin": "وحسابهم على الله" },
+  "10": { "ibn-daqiq-sharh": "فأنى يستجاب له", "haytami-fath-al-mubin": "فأنى يستجاب لذلك" }
+}

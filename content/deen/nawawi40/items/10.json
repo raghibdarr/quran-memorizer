@@ -1,0 +1,82 @@
+{
+  "id": "10",
+  "deck": "nawawi40",
+  "rev": 2,
+  "title": "Allah accepts only what is good",
+  "cue": "Allah is good and accepts only what is good; the traveller whose prayer is not answered",
+  "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ: «إِنَّ اللَّهَ تَعَالَى طَيِّبٌ لَا يَقْبَلُ إِلَّا طَيِّبًا، وَإِنَّ اللَّهَ أَمَرَ الْمُؤْمِنِينَ بِمَا أَمَرَ بِهِ الْمُرْسَلِينَ، فَقَالَ تَعَالَى: ﴿يَا أَيُّهَا الرُّسُلُ كُلُوا مِنَ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا﴾، وَقَالَ تَعَالَى: ﴿يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِنْ طَيِّبَاتِ مَا رَزَقْنَاكُمْ﴾». ثُمَّ ذَكَرَ الرَّجُلَ يُطِيلُ السَّفَرَ أَشْعَثَ أَغْبَرَ، يَمُدُّ يَدَيْهِ إِلَى السَّمَاءِ: يَا رَبِّ، يَا رَبِّ، وَمَطْعَمُهُ حَرَامٌ، وَمَشْرَبُهُ حَرَامٌ، وَمَلْبَسُهُ حَرَامٌ، وَغُذِيَ بِالْحَرَامِ، فَأَنَّى يُسْتَجَابُ لَهُ؟",
+  "segments": [
+    209,
+    394,
+    511,
+    627
+  ],
+  "translation": "It is narrated from Abu Hurayrah, may Allah be pleased with him, who said: The Messenger of Allah ﷺ said: “Allah the Exalted is good and accepts only what is good. Allah has commanded the believers with what He commanded the messengers.\n\nHe the Exalted said: ‘O messengers, eat of the good things and do righteous deeds.’ And He the Exalted said: ‘O you who believe, eat of the good things We have provided for you.’”\n\nThen he mentioned a man on a long journey, dishevelled and dusty, who stretches his hands to the sky: “My Lord, my Lord!”, while his food is unlawful, his drink is unlawful, his clothing is unlawful, and he has been nourished on the unlawful. So how could he be answered?",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "1015",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abu Hurayrah"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "10",
+      "numbering": "nawawi-order",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 1015"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 10, p. 59: https://shamela.ws/book/11244/49",
+        "skeletonSha256": "0ccf9a32a44fa4ddf4f06e46f6bf94cf2c7cd127c20cf1803196c36a754be28e"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 10, p. 284: https://shamela.ws/book/8889/280",
+        "skeletonSha256": "a34a9546432e9d5fb2eccdbcaf9a2f69ec4ac96381f4ea2b3338f49e062bbdaf"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 10 (comparison only)",
+        "skeletonSha256": "e6db7d0869ffe40255617450da986bd0f337b89953681b7fb4b6c61600a2bf6f"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq's print lacks واعملوا صالحا and ومشربه حرام and reads فقال for the second وقال; al-Haytami's print joins يا أيها as in the Quran's spelling and ends لذلك; hadith-api lacks تعالى after إن الله. Ours follows two of the three at each point. The two ayahs quoted are al-Mu'minun 23:51 and al-Baqarah 2:172."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id counts this among the [[hadith]]s the rules of Islam rest on: it urges spending from what is lawful, and teaches that whoever wants his [[dua]] answered should take the most care that his food, drink and clothing are lawful.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 10, p. 59 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): each witness differs from ours in a reading the other two share (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): غذي: al-Haytami has غُذِيَ, hadith-api غُذِّيَ; kept غُذِيَ with al-Haytami; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. No change."
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "05",
+  "deck": "nawawi40",
+  "rev": 1,
+  "title": "Whatever is newly introduced is rejected",
+  "cue": "What becomes of something added to the religion that is not of it",
+  "arabic": "عَنْ أُمِّ الْمُؤْمِنِينَ أُمِّ عَبْدِ اللَّهِ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا قَالَتْ: قَالَ رَسُولُ اللَّهِ ﷺ: «مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ».",
+  "translation": "It is narrated from the Mother of the Believers, Umm Abd Allah Aishah, may Allah be pleased with her, who said: The Messenger of Allah ﷺ said: “Whoever introduces into this matter of ours something that is not of it, it is rejected.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "2697",
+      "numbering": "fath-al-bari",
+      "narrator": "Aishah"
+    },
+    {
+      "collection": "muslim",
+      "number": "1718",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "5",
+      "numbering": "nawawi-order",
+      "narrator": "Aishah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 2697"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 1718"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 5, p. 41: https://shamela.ws/book/11244/31",
+        "skeletonSha256": "89232a328987ac63aec6158a531b18d14f2b0d6ebb09209d3a987e44b5695115"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 5, p. 220: https://shamela.ws/book/8889/216",
+        "skeletonSha256": "89232a328987ac63aec6158a531b18d14f2b0d6ebb09209d3a987e44b5695115"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 5 (comparison only)",
+        "skeletonSha256": "89232a328987ac63aec6158a531b18d14f2b0d6ebb09209d3a987e44b5695115"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. All three witnesses agree with ours. The variant is the wording al-Nawawi gives as \"in a narration of Muslim\"."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id calls this [[hadith]] a great rule of the religion and one of the Prophet's ﷺ concise, comprehensive sayings: it plainly rejects every innovation and invented practice.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 5, p. 41 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "variants": [
+    {
+      "label": "In a narration of Muslim: “Whoever does a deed that is not in keeping with our matter, it is rejected.”",
+      "arabic": "مَنْ عَمِلَ عَمَلًا لَيْسَ عَلَيْهِ أَمْرُنَا فَهُوَ رَدٌّ",
+      "citations": [
+        {
+          "collection": "muslim",
+          "number": "1718",
+          "numbering": "abd-al-baqi"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): all three identical",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): no conflicts; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. No change."
+    ]
+  }
+}

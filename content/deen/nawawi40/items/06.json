@@ -1,0 +1,92 @@
+{
+  "id": "06",
+  "deck": "nawawi40",
+  "rev": 2,
+  "title": "The lawful, the unlawful and what is unclear",
+  "cue": "The lawful, the unlawful, the doubtful matters between them, and the heart",
+  "arabic": "عَنْ أَبِي عَبْدِ اللَّهِ النُّعْمَانِ بْنِ بَشِيرٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: «إِنَّ الْحَلَالَ بَيِّنٌ، وَإِنَّ الْحَرَامَ بَيِّنٌ، وَبَيْنَهُمَا أُمُورٌ مُشْتَبِهَاتٌ لَا يَعْلَمُهُنَّ كَثِيرٌ مِنَ النَّاسِ. فَمَنِ اتَّقَى الشُّبُهَاتِ فَقَدِ اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ، وَمَنْ وَقَعَ فِي الشُّبُهَاتِ وَقَعَ فِي الْحَرَامِ، كَالرَّاعِي يَرْعَى حَوْلَ الْحِمَى يُوشِكُ أَنْ يَرْتَعَ فِيهِ. أَلَا وَإِنَّ لِكُلِّ مَلِكٍ حِمًى، أَلَا وَإِنَّ حِمَى اللَّهِ مَحَارِمُهُ. أَلَا وَإِنَّ فِي الْجَسَدِ مُضْغَةً إِذَا صَلَحَتْ صَلَحَ الْجَسَدُ كُلُّهُ، وَإِذَا فَسَدَتْ فَسَدَ الْجَسَدُ كُلُّهُ، أَلَا وَهِيَ الْقَلْبُ».",
+  "segments": [
+    251,
+    439,
+    516,
+    662
+  ],
+  "translation": "It is narrated from Abu Abd Allah al-Nu’man ibn Bashir, may Allah be pleased with them both, who said: I heard the Messenger of Allah ﷺ say: “What is lawful is clear and what is unlawful is clear, and between them are unclear matters that many people do not know.\n\nWhoever guards against the unclear matters has kept his religion and his honour free of blame, and whoever falls into the unclear matters falls into the unlawful, like a shepherd grazing [his flock] around a protected pasture, who is soon to graze in it.\n\nIndeed, every king has a protected pasture. Indeed, the protected pasture of Allah is what He has made unlawful.\n\nIndeed, in the body there is a lump of flesh: if it is sound, the whole body is sound, and if it is corrupt, the whole body is corrupt. Indeed, it is the heart.”",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "52",
+      "numbering": "fath-al-bari",
+      "narrator": "al-Nu'man ibn Bashir"
+    },
+    {
+      "collection": "muslim",
+      "number": "1599",
+      "numbering": "abd-al-baqi"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "6",
+      "numbering": "nawawi-order",
+      "narrator": "al-Nu'man ibn Bashir"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 52"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 1599"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 6, p. 43: https://shamela.ws/book/11244/33",
+        "skeletonSha256": "c03a422d0e2403de04a0c09dc740b2889e0cdfc3976adec436c17014b1cb9929"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 6, p. 231: https://shamela.ws/book/8889/227",
+        "skeletonSha256": "8558eff204d7c63a3d3b49044498f16e36170803ccba1e9ff14ccfdb354655c6"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 6 (comparison only)",
+        "skeletonSha256": "c03a422d0e2403de04a0c09dc740b2889e0cdfc3976adec436c17014b1cb9929"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print lacks أمور; ours follows the other two."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id reports that Abu Dawud al-Sijistani said Islam turns on four [[hadith]]s, and named this one among them.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 6, p. 43 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): Ibn Daqiq and hadith-api identical; al-Haytami one omission (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): al-Haytami vowels بيَّن (a misprint for بيِّن); kept بيِّن with hadith-api; segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: in Sahih al-Bukhari and Sahih Muslim; al-Nawawi's attribution line names the same, so the grading is inclusion in the Sahih",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. No change."
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "11",
+  "deck": "nawawi40",
+  "rev": 3,
+  "title": "Leave what makes you doubt",
+  "cue": "Leave what makes you doubt for what does not",
+  "arabic": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ ﷺ وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ ﷺ: «دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ».",
+  "translation": "It is narrated from Abu Muhammad al-Hasan ibn Ali ibn Abi Talib, grandson of the Messenger of Allah ﷺ and his fragrant flower, may Allah be pleased with them both, who said: I memorised from the Messenger of Allah ﷺ: “Leave what makes you doubt for what does not make you doubt.”",
+  "citations": [
+    {
+      "collection": "tirmidhi",
+      "number": "2518",
+      "numbering": "ahmad-shakir",
+      "narrator": "al-Hasan ibn Ali"
+    },
+    {
+      "collection": "nasai",
+      "number": "8/327",
+      "numbering": "mujtaba-volume-page"
+    },
+    {
+      "collection": "nawawi40",
+      "number": "11",
+      "numbering": "nawawi-order",
+      "narrator": "al-Hasan ibn Ali"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "sahih",
+      "by": "al-tirmidhi",
+      "in": "al-Jami', after hadith 2518, in his words \"hasan sahih\" (quoted by al-Nawawi in the Forty)",
+      "quote": "حَدِيثٌ حَسَنٌ صَحِيحٌ"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "ibn-daqiq-sharh",
+        "ref": "Ibn Daqiq al-'Id, Sharh al-Arba'in, Mu'assasat al-Rayyan 2003, hadith 11, p. 61: https://shamela.ws/book/11244/51",
+        "skeletonSha256": "cd20bafc421bb6e081cfc0671abdd859122aa51a38f683e129ceffe0c71ba941"
+      },
+      {
+        "name": "haytami-fath-al-mubin",
+        "ref": "al-Haytami, al-Fath al-Mubin, Dar al-Minhaj 2008, hadith 11, p. 293: https://shamela.ws/book/8889/289",
+        "skeletonSha256": "f6c19a8e2abed58376d72eaa29d2dd712acd71f9783ee5fcbb512d7de998a297"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-nawawi, hadith 11 (comparison only)",
+        "skeletonSha256": "cd20bafc421bb6e081cfc0671abdd859122aa51a38f683e129ceffe0c71ba941"
+      }
+    ],
+    "note": "Hashes are of each witness's text of this narration, from al-Nawawi's opening words to the end before his attribution line, with honorific formulas written as we print them (ﷺ, رضي الله عنه): see data-sources/hadith-arabic/SOURCE.md. Ibn Daqiq and hadith-api agree with ours. al-Haytami's print puts رضي الله عنهما before سبط; ours follows the other two. We vowel يَرِيبُك with fath on the ya, which Ibn Daqiq calls the more eloquent and better known reading; hadith-api has يُرِيبُك."
+  },
+  "notes": [
+    {
+      "text": "Ibn Daqiq al-'Id explains: leave what you are unsure of and turn to what you are not unsure of; he links it to [[hadith]] 6 on the unclear matters.",
+      "source": {
+        "work": "Ibn Daqiq al-'Id, Sharh al-Arba'in al-Nawawiyya",
+        "location": "on hadith 11, p. 61 (Mu'assasat al-Rayyan, 2003)"
+      }
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-14",
+    "log": [
+      "2026-11-14 A: al-Nawawi's own selection and order (SELECTION.md)",
+      "2026-11-14 B: Arabic transcribed from al-Nawawi's text as Ibn Daqiq al-'Id's commentary gives it (shamela.ws), no English consulted",
+      "2026-11-14 C: collated by tools/collate.mjs against al-Haytami's al-Fath al-Mubin and hadith-api (comparison only): Ibn Daqiq and hadith-api identical; al-Haytami word order (noted)",
+      "2026-11-14 D: vowelling ours, compared word by word with the vocalised witnesses (al-Haytami, hadith-api): يريبك: kept fath, citing Ibn Daqiq; al-Haytami vowels رسول اللهَ (a misprint); segments end at sentence ends",
+      "2026-11-14 E: English is our own, from the Arabic only",
+      "2026-11-14 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms (review.log)",
+      "2026-11-14 G: every number confirmed in two witnesses, the takhrij footnotes of al-Haytami's editors (Dar al-Minhaj) and of Ibn Rajab's editors (al-Arna'ut and Bajis); the hadith-api text at each Sahih number shares the matn",
+      "2026-11-14 H: not in the two Sahihs. al-Nawawi quotes al-Tirmidhi: \"hasan sahih\"; located in al-Tirmidhi's Jami' after no. 2518 (hadith-api ara-tirmidhi text) and reported by Ibn Rajab (\"وصححه الترمذي\", Jami' al-'Ulum on hadith 11)",
+      "2026-11-14 I: build-deen --check green",
+      "2026-11-14 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar.",
+      "2026-11-15 review: rev 2. The grading line now gives al-Tirmidhi's own term, hasan sahih, in English beside the Arabic quote, so the label Sahih is not read as his whole verdict. Arabic, translation and numbers unchanged.",
+      "2026-11-15 independent verification (a fresh agent that wrote none of this): witnesses re-fetched and collate.mjs re-run, hashes reproduced; Arabic, attribution line and the note read by eye against Ibn Daqiq al-'Id's page; citation numbers found in the Dar al-Minhaj footnotes; English re-read against the Arabic. rev 3: ريحانته now \"his fragrant flower\", not \"his sweet basil\": ريحانة is any sweet-smelling plant (al-Haytami: he is likened to \"ريحان طيب الرائحة\"), so naming one species said more than the Arabic. al-Tirmidhi's \"حديث حسن صحيح\" read after no. 2518; Ibn Rajab's \"وصححه الترمذي\" read at Jami' al-'Ulum 1/278."
+    ]
+  }
+}
