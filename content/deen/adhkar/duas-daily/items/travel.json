@@ -1,0 +1,62 @@
+{
+  "id": "travel",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "Setting out on a journey",
+  "cue": "What the Prophet ﷺ said once mounted for a journey",
+  "arabic": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ",
+  "transliteration": "Subhaana lladhee sakhkhara lanaa hadhaa wamaa kunnaa lahu muqrineen, wa'innaa ilaa rabbinaa lamunqaliboon, allaahumma innaa nas'aluka fee safarinaa hadhal-birra wat-taqwaa, waminal-'amali maa tardaa, allaahumma hawwin 'alaynaa safaranaa hadhaa watwi 'annaa bu'dah, allaahumma antas-saahibu fis-safar, wal-khaleefatu fil-ahl, allaahumma innee a'oodhu bika min wa'thaa'is-safar, waka'aabatil-manzar, wasoo'il-munqalabi fil-maali wal-ahl",
+  "translation": "Glory be to the One who has made this subservient to us, when we could not have managed it ourselves; and to our Lord we are returning. O Allah, we ask You on this journey of ours for righteousness and mindfulness of You, and for deeds that please You. O Allah, make this journey easy for us and fold up its distance for us. O Allah, You are the Companion on the journey and the One who looks after the family. O Allah, I seek refuge with You from the hardship of travel, from a distressing sight, and from an evil return to wealth and family.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "1342",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abdullah ibn Umar"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 1342"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 1342: https://shamela.ws/book/1727/3201",
+        "skeletonSha256": "2f6793c053ac71307c4a394c2f15c9d169f4c20c1c32667106c84e0a5a3721fe"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 1342 (comparison only)",
+        "skeletonSha256": "475071ace78b3aeda5f53e290ebad4a6a0f90189284612b6de9190d2b8ea8540"
+      }
+    ],
+    "note": "The Shamela copy of the printed text runs واطو عنا together as one word; hadith-api writes them apart, as we do."
+  },
+  "usage": {
+    "when": [
+      "Once mounted for a journey, after saying Allahu akbar three times"
+    ],
+    "evidence": "Ibn Umar taught that when the Prophet ﷺ settled on his camel to set out on a journey he said Allahu akbar three times, then this (Muslim 1342). Its opening words are from the Quran, 43:13-14."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 1342, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 1342) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

@@ -1,0 +1,880 @@
+{
+ "deck": "duas-daily",
+ "kind": "dhikr",
+ "hash": "e4934c981b53e69a",
+ "items": [
+  {
+   "id": "after-eating",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "After eating",
+   "cue": "What the Prophet ﷺ said when his meal was cleared away",
+   "arabic": "الْحَمْدُ لِلَّهِ كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ، غَيْرَ مَكْفِيٍّ وَلَا مُوَدَّعٍ وَلَا مُسْتَغْنًى عَنْهُ رَبَّنَا",
+   "transliteration": "Al-hamdu lillaahi katheeran tayyiban mubaarakan feeh, ghayra makfiyyin walaa muwadda'in walaa mustaghnan 'anhu rabbanaa",
+   "translation": "All praise is for Allah, abundant, good and blessed praise; [praise] that is never enough, never bid farewell to, and never done without, our Lord.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "5458",
+     "numbering": "fath-al-bari",
+     "narrator": "Abu Umamah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 5458"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 5458: https://shamela.ws/book/1681/8163",
+      "skeletonSha256": "19688a8a42c732258a2aa11b3d1868ef6085304209557790fdcf8162d4025e4d"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 5458 (comparison only)",
+      "skeletonSha256": "19688a8a42c732258a2aa11b3d1868ef6085304209557790fdcf8162d4025e4d"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "When the meal is finished"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "anger",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "When angry",
+   "cue": "The word that takes anger away",
+   "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+   "transliteration": "A'oodhu billaahi minash-shaytaanir-rajeem",
+   "translation": "I seek refuge with Allah from Satan, the outcast.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6115",
+     "numbering": "fath-al-bari",
+     "narrator": "Sulayman ibn Surad"
+    },
+    {
+     "collection": "muslim",
+     "number": "2610",
+     "numbering": "abd-al-baqi",
+     "narrator": "Sulayman ibn Surad"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6115"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2610"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6115: https://shamela.ws/book/1681/9157",
+      "skeletonSha256": "3046be42fb01a5e197bf16b4cb845ed48f30eb45ca33b29ab5fd66ebedcb5245"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6115 (comparison only)",
+      "skeletonSha256": "3046be42fb01a5e197bf16b4cb845ed48f30eb45ca33b29ab5fd66ebedcb5245"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "When angry"
+    ],
+    "evidence": "Two men insulted each other, one red-faced with anger. The Prophet ﷺ said: I know a word which, if he said it, what he feels would leave him (al-Bukhari 6115)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "distress",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "In distress",
+   "cue": "What the Prophet ﷺ said at times of distress",
+   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ",
+   "transliteration": "Laa ilaha illallaahul-'azeemul-haleem, laa ilaha illallaahu rabbul-'arshil-'azeem, laa ilaha illallaahu rabbus-samaawaati warabbul-ardi warabbul-'arshil-kareem",
+   "translation": "There is no god but Allah, the Mighty, the Forbearing. There is no god but Allah, Lord of the mighty Throne. There is no god but Allah, Lord of the heavens, Lord of the earth, and Lord of the noble Throne.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6346",
+     "numbering": "fath-al-bari",
+     "narrator": "Abdullah ibn Abbas"
+    },
+    {
+     "collection": "muslim",
+     "number": "2730",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abdullah ibn Abbas"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6346"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2730"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6346: https://shamela.ws/book/1681/9517",
+      "skeletonSha256": "c67a43b413583f6d408b3dacf6ae688baa0b4391eaa9c8b6c38cb557f4e54ec0"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6346 (comparison only)",
+      "skeletonSha256": "4ae8763c9e233f10bc69594ebae0c736c8b4a44b7f78554e3fe335dc5cb77c18"
+     }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela writes السماوات with its long alif; hadith-api writes السموات. The words are the same; we follow the printed edition."
+   },
+   "usage": {
+    "when": [
+     "In distress"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "entering-mosque",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Entering the mosque",
+   "cue": "\"O Allah, open for me the gates of Your mercy\"",
+   "arabic": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+   "transliteration": "Allaahummaftah lee abwaaba rahmatik",
+   "translation": "O Allah, open for me the gates of Your mercy.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "713",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Humayd or Abu Usayd"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 713"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 713: https://shamela.ws/book/1727/1585",
+      "skeletonSha256": "8f08915e4e6544adf242a57ca52cd63bb774db4a345a68b52648fa9aa738b1c7"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 713 (comparison only)",
+      "skeletonSha256": "8f08915e4e6544adf242a57ca52cd63bb774db4a345a68b52648fa9aa738b1c7"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On entering the mosque"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "forgot-bismillah",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "If you forgot to say Bismillah",
+   "cue": "What to say on remembering Allah's name partway through a meal",
+   "arabic": "بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ",
+   "transliteration": "Bismillaahi awwalahu wa'aakhirah",
+   "translation": "In the name of Allah, at its start and end.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "3767",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Aishah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "sahih",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 1858 (al-Nawawi quotes this verdict for the hadith in al-Adhkar, no. 653)",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 3767: https://shamela.ws/book/1726/5215",
+      "skeletonSha256": "26eb4a9b60cfd26ce4c2fb3eb504c4cd3e88123086d882c60abe442b330ec6dc"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 3767 (comparison only)",
+      "skeletonSha256": "26eb4a9b60cfd26ce4c2fb3eb504c4cd3e88123086d882c60abe442b330ec6dc"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Eating: say Bismillah at the start; if you forgot, say this when you remember"
+    ],
+    "evidence": "When one of you eats, let him mention the name of Allah; if he forgets at the start, let him say this (Abu Dawud 3767). Al-Tirmidhi relates it with the words في أوله وآخره (1858)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "iftar",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Breaking the fast",
+   "cue": "\"The thirst has gone…\"",
+   "arabic": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
+   "transliteration": "Dhahabaz-zama'u wabtallatil-'urooq, wathabatal-ajru in shaa'allaah",
+   "translation": "The thirst has gone, the veins are moistened, and the reward is certain, if Allah wills.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "2357",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Abdullah ibn Umar"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "hasan",
+     "by": "al-daraqutni",
+     "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (al-Risala numbering, read on en.tohed.com)",
+     "quote": "تَفَرَّدَ بِهِ الْحُسَيْنُ بْنُ وَاقِدٍ، وَإِسْنَادُهُ حَسَنٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 2357: https://shamela.ws/book/1726/3158",
+      "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 2357 (comparison only)",
+      "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On breaking the fast"
+    ],
+    "evidence": "Ibn Umar said that when the Prophet ﷺ broke his fast he said this (Abu Dawud 2357)."
+   },
+   "variants": [
+    {
+     "label": "Also related: \"O Allah, for You I fasted, and with Your provision I break my fast.\" Mursal: Mu'adh ibn Zuhrah relays it from the Prophet ﷺ without naming who told him. Al-Nawawi: \"هكذا رواه مرسلا\" (al-Adhkar, no. 545).",
+     "arabic": "اللَّهُمَّ لَكَ صُمْتُ، وَعَلَى رِزْقِكَ أَفْطَرْتُ",
+     "citations": [
+      {
+       "collection": "abu-dawud",
+       "number": "2358",
+       "numbering": "muhyi-al-din-abd-al-hamid",
+       "narrator": "Mu'adh ibn Zuhrah"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "istikhara",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Asking Allah to choose",
+   "cue": "The istikhara the Prophet ﷺ taught like a surah of the Quran",
+   "arabic": "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، أَوْ قَالَ فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاقْدُرْهُ لِي، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، أَوْ قَالَ فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ ثُمَّ رَضِّنِي بِهِ",
+   "transliteration": "Allaahumma innee astakheeruka bi'ilmik, wa'astaqdiruka biqudratik, wa'as'aluka min fadlikal-'azeem, fa'innaka taqdiru walaa aqdir, wata'lamu walaa a'lam, wa'anta 'allaamul-ghuyoob, allaahumma in kunta ta'lamu anna hadhal-amra khayrun lee fee deenee wama'aashee wa'aaqibati amree, aw qaala fee 'aajili amree wa'aajilih, faqdurhu lee, wa'in kunta ta'lamu anna hadhal-amra sharrun lee fee deenee wama'aashee wa'aaqibati amree, aw qaala fee 'aajili amree wa'aajilih, fasrifhu 'annee wasrifnee 'anh, waqdur liyal-khayra haythu kaana thumma raddinee bih",
+   "translation": "O Allah, I ask You to choose for me by Your knowledge, I ask You to empower me by Your power, and I ask You of Your immense bounty; for You are able and I am not, You know and I do not, and You are the Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood and the outcome of my affair (or he said: in my affair now and later), then decree it for me. And if You know that this matter is bad for me in my religion, my livelihood and the outcome of my affair (or he said: in my affair now and later), then turn it away from me and turn me away from it, and decree for me the good wherever it is, then make me content with it.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6382",
+     "numbering": "fath-al-bari",
+     "narrator": "Jabir ibn Abdullah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6382"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6382: https://shamela.ws/book/1681/9573",
+      "skeletonSha256": "b06b0654d066abb13657573df2af26dc460c1ea1cdd98242318b7ef394f968b6"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6382 (comparison only)",
+      "skeletonSha256": "9124a6ca4c7d738ec37b282ae2722b648534f50b5a0b3e3e943bfdcdc17eaafc"
+     }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela reads أو قال في عاجل أمري in both places; hadith-api has أو قال عاجل أمري in the first. We follow the printed edition."
+   },
+   "usage": {
+    "when": [
+     "When deciding a matter: pray two rak'ahs, then say this, naming the matter at \"this matter\""
+    ],
+    "evidence": "Jabir said the Prophet ﷺ taught them istikhara in all matters as he taught a surah of the Quran: when one of you intends a matter, let him pray two rak'ahs, then say this, and name his need (al-Bukhari 6382). \"Or he said\" marks a narrator unsure which of the two phrases was used."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "leaving-home",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Leaving home",
+   "cue": "\"In the name of Allah, I rely on Allah…\"",
+   "arabic": "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+   "transliteration": "Bismillaah, tawakkaltu 'alallaah, laa hawla walaa quwwata illaa billaah",
+   "translation": "In the name of Allah. I rely on Allah. There is no power and no strength except through Allah.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "5095",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Anas ibn Malik"
+    },
+    {
+     "collection": "tirmidhi",
+     "number": "3426",
+     "numbering": "ahmad-shakir",
+     "narrator": "Anas ibn Malik"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "hasan",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 3426",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 5095: https://shamela.ws/book/1726/6957",
+      "skeletonSha256": "034cf40b5d9aa582931dfe2a22f04582b0f799be5a21054587099aaedcc13d6f"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 5095 (comparison only)",
+      "skeletonSha256": "034cf40b5d9aa582931dfe2a22f04582b0f799be5a21054587099aaedcc13d6f"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On going out of the house"
+    ],
+    "evidence": "Whoever says this on leaving his house, it is said to him: you are guided, provided for and protected, and the devils move away from him (Abu Dawud 5095; al-Tirmidhi 3426)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "leaving-mosque",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Leaving the mosque",
+   "cue": "\"O Allah, I ask You of Your bounty\"",
+   "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+   "transliteration": "Allaahumma innee as'aluka min fadlik",
+   "translation": "O Allah, I ask You of Your bounty.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "713",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abu Humayd or Abu Usayd"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 713"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 713: https://shamela.ws/book/1727/1585",
+      "skeletonSha256": "4bf832801e6e43f6b4d3b2a07b668d15e62b51a77857b3490d88f7453e7e724b"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 713 (comparison only)",
+      "skeletonSha256": "4bf832801e6e43f6b4d3b2a07b668d15e62b51a77857b3490d88f7453e7e724b"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On leaving the mosque"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "rain",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "When it rains",
+   "cue": "Two words on seeing rain",
+   "arabic": "صَيِّبًا نَافِعًا",
+   "transliteration": "Sayyiban naafi'aa",
+   "translation": "[Make it] a beneficial rain.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "1032",
+     "numbering": "fath-al-bari",
+     "narrator": "Aishah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 1032"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 1032: https://shamela.ws/book/1681/1682",
+      "skeletonSha256": "caed3231a89a49933ee0e2b42af7827de4da31b950c549ee47ba78d4ffd2886f"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 1032 (comparison only)",
+      "skeletonSha256": "caed3231a89a49933ee0e2b42af7827de4da31b950c549ee47ba78d4ffd2886f"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On seeing rain"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "sneezing",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Sneezing",
+   "cue": "What the one who sneezes says, the reply, and the answer to it",
+   "arabic": "الْحَمْدُ لِلَّهِ",
+   "transliteration": "Al-hamdu lillaah",
+   "translation": "All praise is for Allah.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6224",
+     "numbering": "fath-al-bari",
+     "narrator": "Abu Hurayrah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6224"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6224: https://shamela.ws/book/1681/9316",
+      "skeletonSha256": "64d2fd2e2ac9ee8cfa866e3c68772059a1818ce6beb1703641dccf011b486c11"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6224 (comparison only)",
+      "skeletonSha256": "64d2fd2e2ac9ee8cfa866e3c68772059a1818ce6beb1703641dccf011b486c11"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On sneezing"
+    ]
+   },
+   "variants": [
+    {
+     "label": "The one who hears says: \"May Allah have mercy on you.\"",
+     "arabic": "يَرْحَمُكَ اللَّهُ",
+     "citations": [
+      {
+       "collection": "bukhari",
+       "number": "6224",
+       "numbering": "fath-al-bari",
+       "narrator": "Abu Hurayrah"
+      }
+     ]
+    },
+    {
+     "label": "The one who sneezed answers: \"May Allah guide you and set your affairs right.\"",
+     "arabic": "يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ",
+     "citations": [
+      {
+       "collection": "bukhari",
+       "number": "6224",
+       "numbering": "fath-al-bari",
+       "narrator": "Abu Hurayrah"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "stopping-place",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Stopping at a place",
+   "cue": "What to say on halting at a place on a journey",
+   "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+   "transliteration": "A'oodhu bikalimaatillaahit-taammaati min sharri maa khalaq",
+   "translation": "I seek refuge in the perfect words of Allah from the evil of what He has created.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "2708",
+     "numbering": "abd-al-baqi",
+     "narrator": "Khawlah bint Hakim"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 2708"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 2708: https://shamela.ws/book/1727/6812",
+      "skeletonSha256": "08cb794794d3c95ccea6c25ee08883978697746a6061a968e9d32441b7b7cdcb"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 2708 (comparison only)",
+      "skeletonSha256": "08cb794794d3c95ccea6c25ee08883978697746a6061a968e9d32441b7b7cdcb"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On stopping at a place"
+    ],
+    "evidence": "Whoever stops at a place and says this, nothing will harm him until he moves on from it (Muslim 2708)."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "toilet-enter",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Entering the toilet",
+   "cue": "Refuge from the male and female devils",
+   "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+   "transliteration": "Allaahumma innee a'oodhu bika minal-khubuthi wal-khabaa'ith",
+   "translation": "O Allah, I seek refuge with You from the male and female devils.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "142",
+     "numbering": "fath-al-bari",
+     "narrator": "Anas ibn Malik"
+    },
+    {
+     "collection": "muslim",
+     "number": "375",
+     "numbering": "abd-al-baqi",
+     "narrator": "Anas ibn Malik"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 142"
+    },
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 375"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 142: https://shamela.ws/book/1681/256",
+      "skeletonSha256": "b9706be91bc8531dfd168576c23f136dbd7cdc4800d8a55859c058a975fc35ba"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 142 (comparison only)",
+      "skeletonSha256": "b9706be91bc8531dfd168576c23f136dbd7cdc4800d8a55859c058a975fc35ba"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "Before entering the toilet"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "toilet-leave",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Leaving the toilet",
+   "cue": "One word on coming out",
+   "arabic": "غُفْرَانَكَ",
+   "transliteration": "Ghufraanak",
+   "translation": "Your forgiveness.",
+   "citations": [
+    {
+     "collection": "abu-dawud",
+     "number": "30",
+     "numbering": "muhyi-al-din-abd-al-hamid",
+     "narrator": "Aishah"
+    },
+    {
+     "collection": "tirmidhi",
+     "number": "7",
+     "numbering": "ahmad-shakir",
+     "narrator": "Aishah"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "hasan",
+     "by": "al-tirmidhi",
+     "in": "Jami' al-Tirmidhi, after hadith 7",
+     "quote": "هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ"
+    },
+    {
+     "grade": "sahih",
+     "by": "al-nawawi",
+     "in": "al-Adhkar, no. 71 (ed. al-Arna'ut, shamela.ws/book/1956/25)",
+     "quote": "ثبت في الحديث الصحيح"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 30: https://shamela.ws/book/1726/48",
+      "skeletonSha256": "edabd9fd3b83eb963066d69478b248cebae6eddfc9bd138b1822911314ef322e"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 30 (comparison only)",
+      "skeletonSha256": "edabd9fd3b83eb963066d69478b248cebae6eddfc9bd138b1822911314ef322e"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "On coming out of the toilet"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "travel",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Setting out on a journey",
+   "cue": "What the Prophet ﷺ said once mounted for a journey",
+   "arabic": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ",
+   "transliteration": "Subhaana lladhee sakhkhara lanaa hadhaa wamaa kunnaa lahu muqrineen, wa'innaa ilaa rabbinaa lamunqaliboon, allaahumma innaa nas'aluka fee safarinaa hadhal-birra wat-taqwaa, waminal-'amali maa tardaa, allaahumma hawwin 'alaynaa safaranaa hadhaa watwi 'annaa bu'dah, allaahumma antas-saahibu fis-safar, wal-khaleefatu fil-ahl, allaahumma innee a'oodhu bika min wa'thaa'is-safar, waka'aabatil-manzar, wasoo'il-munqalabi fil-maali wal-ahl",
+   "translation": "Glory be to the One who has made this subservient to us, when we could not have managed it ourselves; and to our Lord we are returning. O Allah, we ask You on this journey of ours for righteousness and mindfulness of You, and for deeds that please You. O Allah, make this journey easy for us and fold up its distance for us. O Allah, You are the Companion on the journey and the One who looks after the family. O Allah, I seek refuge with You from the hardship of travel, from a distressing sight, and from an evil return to wealth and family.",
+   "citations": [
+    {
+     "collection": "muslim",
+     "number": "1342",
+     "numbering": "abd-al-baqi",
+     "narrator": "Abdullah ibn Umar"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "muslim",
+     "in": "Sahih Muslim, no. 1342"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 1342: https://shamela.ws/book/1727/3201",
+      "skeletonSha256": "2f6793c053ac71307c4a394c2f15c9d169f4c20c1c32667106c84e0a5a3721fe"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 1342 (comparison only)",
+      "skeletonSha256": "475071ace78b3aeda5f53e290ebad4a6a0f90189284612b6de9190d2b8ea8540"
+     }
+    ],
+    "note": "The Shamela copy of the printed text runs واطو عنا together as one word; hadith-api writes them apart, as we do."
+   },
+   "usage": {
+    "when": [
+     "Once mounted for a journey, after saying Allahu akbar three times"
+    ],
+    "evidence": "Ibn Umar taught that when the Prophet ﷺ settled on his camel to set out on a journey he said Allahu akbar three times, then this (Muslim 1342). Its opening words are from the Quran, 43:13-14."
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "worry",
+   "deck": "duas-daily",
+   "rev": 1,
+   "title": "Worry and debt",
+   "cue": "Refuge from worry, grief, helplessness and debt",
+   "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْبُخْلِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ",
+   "transliteration": "Allaahumma innee a'oodhu bika minal-hammi wal-hazan, wal-'ajzi wal-kasal, wal-jubni wal-bukhl, wadala'id-dayni waghalabatir-rijaal",
+   "translation": "O Allah, I seek refuge with You from worry and grief, from helplessness and laziness, from cowardice and miserliness, and from the burden of debt and being overpowered by men.",
+   "citations": [
+    {
+     "collection": "bukhari",
+     "number": "6369",
+     "numbering": "fath-al-bari",
+     "narrator": "Anas ibn Malik"
+    }
+   ],
+   "gradings": [
+    {
+     "grade": "in-sahih",
+     "by": "al-bukhari",
+     "in": "Sahih al-Bukhari, no. 6369"
+    }
+   ],
+   "provenance": {
+    "witnesses": [
+     {
+      "name": "shamela",
+      "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6369: https://shamela.ws/book/1681/9554",
+      "skeletonSha256": "c7d4a5bfe51fec149b48b2d7643de74a1dde9cd783110cd8d341bcf6bb039ba3"
+     },
+     {
+      "name": "hadith-api",
+      "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6369 (comparison only)",
+      "skeletonSha256": "c7d4a5bfe51fec149b48b2d7643de74a1dde9cd783110cd8d341bcf6bb039ba3"
+     }
+    ]
+   },
+   "usage": {
+    "when": [
+     "When worried, or at any time"
+    ]
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  }
+ ]
+}

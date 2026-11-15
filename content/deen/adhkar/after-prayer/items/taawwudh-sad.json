@@ -1,0 +1,61 @@
+{
+  "id": "taawwudh-sad",
+  "deck": "adhkar-after-prayer",
+  "rev": 1,
+  "title": "Refuge from cowardice and a feeble old age",
+  "cue": "The refuge Sa'd taught his sons as the Prophet ﷺ said it after prayer",
+  "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
+  "transliteration": "Allaahumma innee a'oodhu bika minal-jubn, wa'a'oodhu bika an uradda ilaa ardhalil-'umur, wa'a'oodhu bika min fitnatid-dunyaa, wa'a'oodhu bika min 'adhaabil-qabr",
+  "translation": "O Allah, I seek refuge with You from cowardice. I seek refuge with You from being returned to the most feeble age. I seek refuge with You from the trials of this world. And I seek refuge with You from the punishment of the grave.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "2822",
+      "numbering": "fath-al-bari",
+      "narrator": "Sa'd ibn Abi Waqqas"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 2822"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 2822: https://shamela.ws/book/1681/4472",
+        "skeletonSha256": "d2c967ac964103eeabe4c9cf5e88196221ec7520dedfe48d1b7c4264d76dadcf"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 2822 (comparison only)",
+        "skeletonSha256": "d2c967ac964103eeabe4c9cf5e88196221ec7520dedfe48d1b7c4264d76dadcf"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "After the prayer"
+    ],
+    "evidence": "Sa'd ibn Abi Waqqas taught his sons these words as a teacher teaches children to write, saying the Prophet ﷺ sought refuge with them after the prayer (al-Bukhari 2822)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 2822, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 2822) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

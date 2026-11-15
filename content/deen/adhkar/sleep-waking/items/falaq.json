@@ -1,0 +1,46 @@
+{
+  "id": "falaq",
+  "deck": "adhkar-sleep-waking",
+  "rev": 1,
+  "title": "Al-Falaq",
+  "cue": "The second of the three surahs at bedtime",
+  "quran": {
+    "surahId": 113,
+    "ayah": 1,
+    "ayahEnd": 5
+  },
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "5017",
+      "numbering": "fath-al-bari",
+      "narrator": "Aishah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 5017"
+    }
+  ],
+  "usage": {
+    "when": [
+      "Bedtime"
+    ],
+    "repeat": 3,
+    "evidence": "Aishah reports that each night, on going to bed, the Prophet ﷺ cupped his hands, blew into them and recited these three surahs, then wiped as much of his body as he could, three times (al-Bukhari 5017)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B-F: a Quran item; it stores only the reference 113:1-5 and renders from the surah files",
+      "2026-11-15 G: the usage hadith (bukhari 5017) read in the Shamela copy of the printed edition and in hadith-api; both name these surahs and the count",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

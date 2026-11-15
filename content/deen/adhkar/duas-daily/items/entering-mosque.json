@@ -1,0 +1,60 @@
+{
+  "id": "entering-mosque",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "Entering the mosque",
+  "cue": "\"O Allah, open for me the gates of Your mercy\"",
+  "arabic": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+  "transliteration": "Allaahummaftah lee abwaaba rahmatik",
+  "translation": "O Allah, open for me the gates of Your mercy.",
+  "citations": [
+    {
+      "collection": "muslim",
+      "number": "713",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abu Humayd or Abu Usayd"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 713"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih Muslim, ed. Muhammad Fu’ad Abd al-Baqi, hadith 713: https://shamela.ws/book/1727/1585",
+        "skeletonSha256": "8f08915e4e6544adf242a57ca52cd63bb774db4a345a68b52648fa9aa738b1c7"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-muslim, hadith 713 (comparison only)",
+        "skeletonSha256": "8f08915e4e6544adf242a57ca52cd63bb774db4a345a68b52648fa9aa738b1c7"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "On entering the mosque"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at muslim 713, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (muslim 713) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "iftar",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "Breaking the fast",
+  "cue": "\"The thirst has gone…\"",
+  "arabic": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
+  "transliteration": "Dhahabaz-zama'u wabtallatil-'urooq, wathabatal-ajru in shaa'allaah",
+  "translation": "The thirst has gone, the veins are moistened, and the reward is certain, if Allah wills.",
+  "citations": [
+    {
+      "collection": "abu-dawud",
+      "number": "2357",
+      "numbering": "muhyi-al-din-abd-al-hamid",
+      "narrator": "Abdullah ibn Umar"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "hasan",
+      "by": "al-daraqutni",
+      "in": "Sunan al-Daraqutni, Kitab al-Siyam, after hadith 2279 (al-Risala numbering, read on en.tohed.com)",
+      "quote": "تَفَرَّدَ بِهِ الْحُسَيْنُ بْنُ وَاقِدٍ، وَإِسْنَادُهُ حَسَنٌ"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 2357: https://shamela.ws/book/1726/3158",
+        "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 2357 (comparison only)",
+        "skeletonSha256": "4da33cd89389508b1835efaa9533f423a82f23f5180143432ea43e9bd4c8bb76"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "On breaking the fast"
+    ],
+    "evidence": "Ibn Umar said that when the Prophet ﷺ broke his fast he said this (Abu Dawud 2357)."
+  },
+  "variants": [
+    {
+      "label": "Also related: \"O Allah, for You I fasted, and with Your provision I break my fast.\" Mursal: Mu'adh ibn Zuhrah relays it from the Prophet ﷺ without naming who told him. Al-Nawawi: \"هكذا رواه مرسلا\" (al-Adhkar, no. 545).",
+      "arabic": "اللَّهُمَّ لَكَ صُمْتُ، وَعَلَى رِزْقِكَ أَفْطَرْتُ",
+      "citations": [
+        {
+          "collection": "abu-dawud",
+          "number": "2358",
+          "numbering": "muhyi-al-din-abd-al-hamid",
+          "narrator": "Mu'adh ibn Zuhrah"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at abu-dawud 2357, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (abu-dawud 2357) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: hasan by al-daraqutni (quote located); al-Daraqutni's verdict read in one copy only (en.tohed.com)",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

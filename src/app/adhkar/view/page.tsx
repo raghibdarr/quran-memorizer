@@ -1,9 +1,14 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import AdhkarDeckClient from '@/components/adhkar/deck-client';
 
 export const metadata: Metadata = { title: 'Adhkar and duas · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the adhkar-duas package replaces this page.
+// Suspense: the client reads ?d= with useSearchParams, which a static export needs bounded
 export default function Page() {
-  return <StubPage title="Adhkar and duas" back="/adhkar" note="A set of adhkar to read, count and learn. Coming soon." />;
+  return (
+    <Suspense>
+      <AdhkarDeckClient />
+    </Suspense>
+  );
 }

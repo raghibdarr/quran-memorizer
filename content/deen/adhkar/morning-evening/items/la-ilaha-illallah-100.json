@@ -1,0 +1,73 @@
+{
+  "id": "la-ilaha-illallah-100",
+  "deck": "adhkar-morning-evening",
+  "rev": 1,
+  "title": "None has the right to be worshipped but Allah, a hundred times",
+  "cue": "Said a hundred times in a day",
+  "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+  "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer",
+  "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6403",
+      "numbering": "fath-al-bari",
+      "narrator": "Abu Hurayrah"
+    },
+    {
+      "collection": "muslim",
+      "number": "2691",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6403"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2691"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6403: https://shamela.ws/book/1681/9610",
+        "skeletonSha256": "ecfe986e063432c71508f81b1bd3aae56a6b29161b3280c2ae1f92b8a98fd0b1"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6403 (comparison only)",
+        "skeletonSha256": "ecfe986e063432c71508f81b1bd3aae56a6b29161b3280c2ae1f92b8a98fd0b1"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "During the day"
+    ],
+    "repeat": 100,
+    "evidence": "Whoever says it a hundred times in a day, it is for him like freeing ten slaves, a hundred good deeds are written for him and a hundred bad deeds wiped away, and it is a protection for him from Satan that day until evening (al-Bukhari 6403; Muslim 2691)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6403, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6403, muslim 2691) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by al-bukhari; in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

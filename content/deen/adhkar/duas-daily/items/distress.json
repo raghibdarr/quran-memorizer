@@ -1,0 +1,72 @@
+{
+  "id": "distress",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "In distress",
+  "cue": "What the Prophet ﷺ said at times of distress",
+  "arabic": "لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ",
+  "transliteration": "Laa ilaha illallaahul-'azeemul-haleem, laa ilaha illallaahu rabbul-'arshil-'azeem, laa ilaha illallaahu rabbus-samaawaati warabbul-ardi warabbul-'arshil-kareem",
+  "translation": "There is no god but Allah, the Mighty, the Forbearing. There is no god but Allah, Lord of the mighty Throne. There is no god but Allah, Lord of the heavens, Lord of the earth, and Lord of the noble Throne.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6346",
+      "numbering": "fath-al-bari",
+      "narrator": "Abdullah ibn Abbas"
+    },
+    {
+      "collection": "muslim",
+      "number": "2730",
+      "numbering": "abd-al-baqi",
+      "narrator": "Abdullah ibn Abbas"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6346"
+    },
+    {
+      "grade": "in-sahih",
+      "by": "muslim",
+      "in": "Sahih Muslim, no. 2730"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6346: https://shamela.ws/book/1681/9517",
+        "skeletonSha256": "c67a43b413583f6d408b3dacf6ae688baa0b4391eaa9c8b6c38cb557f4e54ec0"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6346 (comparison only)",
+        "skeletonSha256": "4ae8763c9e233f10bc69594ebae0c736c8b4a44b7f78554e3fe335dc5cb77c18"
+      }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela writes السماوات with its long alif; hadith-api writes السموات. The words are the same; we follow the printed edition."
+  },
+  "usage": {
+    "when": [
+      "In distress"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6346, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6346, muslim 2730) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by al-bukhari; in-sahih by muslim",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

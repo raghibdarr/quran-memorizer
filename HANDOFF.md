@@ -323,3 +323,29 @@ Needs in shared files (spec 9.4). The package builds and passes without them.
 8. **Integration, settings panel (foundations-owned):** the hub's gear opens the app-wide settings panel. Its
    "Prayer times and alerts" row (spec 2.4) should sit near the top when the panel is opened from the Prayer tab. The
    hub also has a place chip under the title and a "Prayer settings" link straight under the times list.
+
+# HANDOFF: adhkar-duas
+
+Needs in shared files (spec 9.4). The package builds and passes without them.
+
+1. **`src/components/deen/sources-data.ts` (deen-engine): `deckIdForSelection`** maps
+   `adhkar/<dir>/SELECTION.md` to `<dir>`, but three adhkar deck ids are not their folder names
+   (`morning-evening` is `adhkar-morning-evening`, also `after-prayer`, `sleep-waking`). /sources then
+   titles those sections with the raw folder name. Suggested: look the folder up in build-deen's
+   `DECKS[*].dir` (or prefix `adhkar-` when the bare name is not a deck id).
+2. **App-wide Essentials carry-over.** `runEssentialsMigration` (src/components/adhkar/use-migration.ts)
+   runs on /adhkar, /adhkar/view and every Essentials card. To run it for users who never open those,
+   mount `useEssentialsMigration()` once in `providers.tsx` (foundations-owned). It is idempotent.
+3. **Erase on this device**: the adhkar reminders (ids 22000, 22001, channel `adhkar-v1`) survive
+   "Erase everything" (see prayer-alerts note 3). Clear range `NOTIFY_RANGES.adhkar` there.
+4. **Notification taps** carry `extra.url` (`/adhkar/now?set=morning|evening`), routed by the existing
+   ReminderSync listener, like prayer alerts.
+5. **course-fasting note 2**: the iftar dua is `duas-daily:iftar` (Abu Dawud 2357, variant 2358).
+6. **Integration**: regenerate `public/licenses.txt` (picks up `data-sources/licenses.d/55-adhkar.txt`).
+7. **Content process**: stages C, F, G and H were run by the authoring agent in separate passes
+   (no sub-agent tool was available), recorded in each item's `review.log`. C and G are mechanical
+   (`content/deen/adhkar/tools/seal.mjs`, `witness.mjs verify --all`), but F (blind back-check of the
+   English) and H (grading check) should get a fresh agent in the wave-3 content audit. One grading,
+   al-Daraqutni on `duas-daily:iftar`, was read in a single copy (en.tohed.com) only.
+8. **e2e**: `e2e/adhkar.spec.ts` (6 tests) passed against this worktree's static build on port 4424
+   with an ad-hoc config; the repo's Playwright configs were not run.

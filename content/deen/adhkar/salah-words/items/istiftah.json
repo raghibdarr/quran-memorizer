@@ -1,0 +1,61 @@
+{
+  "id": "istiftah",
+  "deck": "salah-words",
+  "rev": 1,
+  "title": "Opening the prayer",
+  "cue": "\"O Allah, put distance between me and my sins…\"",
+  "arabic": "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ، اللَّهُمَّ نَقِّنِي مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ، اللَّهُمَّ اغْسِلْ خَطَايَايَ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ",
+  "transliteration": "Allaahumma baa'id baynee wabayna khataayaaya kamaa baa'adta baynal-mashriqi wal-maghrib, allaahumma naqqinee minal-khataayaa kamaa yunaqqath-thawbul-abyadu minad-danas, allaahummaghsil khataayaaya bil-maa'i wath-thalji wal-barad",
+  "translation": "O Allah, put distance between me and my sins as You have put distance between the east and the west. O Allah, cleanse me of sins as a white garment is cleansed of dirt. O Allah, wash away my sins with water, snow and hail.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "744",
+      "numbering": "fath-al-bari",
+      "narrator": "Abu Hurayrah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 744"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 744: https://shamela.ws/book/1681/1223",
+        "skeletonSha256": "9e3c9dca76e99cba2be731c980916f3e5278de4e9c838d6cefa1a6409531f7e4"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 744 (comparison only)",
+        "skeletonSha256": "9e3c9dca76e99cba2be731c980916f3e5278de4e9c838d6cefa1a6409531f7e4"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "Silently, after the opening [[takbir]] and before the Fatihah"
+    ],
+    "evidence": "Abu Hurayrah asked the Prophet ﷺ what he said in his silence between the takbir and the recitation, and he said this (al-Bukhari 744)."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 744, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 744) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

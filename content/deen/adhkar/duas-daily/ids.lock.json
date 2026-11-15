@@ -1,0 +1,68 @@
+{
+  "ids": {
+    "after-eating": {
+      "rev": 1,
+      "hash": "d5d1bf1e75eceae3"
+    },
+    "anger": {
+      "rev": 1,
+      "hash": "8b6114bb48dde14a"
+    },
+    "distress": {
+      "rev": 1,
+      "hash": "37accb3bb3ad16a4"
+    },
+    "entering-mosque": {
+      "rev": 1,
+      "hash": "a9cc3b5dc86e984f"
+    },
+    "forgot-bismillah": {
+      "rev": 1,
+      "hash": "ccec7fa42e95e3c3"
+    },
+    "iftar": {
+      "rev": 1,
+      "hash": "620a151dbdf0b7d0"
+    },
+    "istikhara": {
+      "rev": 1,
+      "hash": "cb51eae11cec8127"
+    },
+    "leaving-home": {
+      "rev": 1,
+      "hash": "47e88128ff7bcf22"
+    },
+    "leaving-mosque": {
+      "rev": 1,
+      "hash": "cc176c2caa4050c9"
+    },
+    "rain": {
+      "rev": 1,
+      "hash": "790acc5379ecc776"
+    },
+    "sneezing": {
+      "rev": 1,
+      "hash": "b417e822a96560a9"
+    },
+    "stopping-place": {
+      "rev": 1,
+      "hash": "a57fdc0ea0616489"
+    },
+    "toilet-enter": {
+      "rev": 1,
+      "hash": "37f6723aba828760"
+    },
+    "toilet-leave": {
+      "rev": 1,
+      "hash": "1bbf9e9c04a35b09"
+    },
+    "travel": {
+      "rev": 1,
+      "hash": "6ef08ec72829e1a5"
+    },
+    "worry": {
+      "rev": 1,
+      "hash": "6df1aa322295867f"
+    }
+  }
+}

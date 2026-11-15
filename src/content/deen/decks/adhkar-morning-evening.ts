@@ -1,6 +1,9 @@
 import type { DeckModule } from '@/content/deen/registry';
+import type { EmittedDeck } from '@/types/deen';
 
-// Stub (foundations). The owning content package replaces this file with
-// { ready: true, load: () => import('@/data/deen/adhkar-morning-evening.json') } once items ship.
-const deck: DeckModule = { ready: false };
+// Emitted by `node scripts/build-deen.mjs --deck adhkar-morning-evening` from content/deen/adhkar (package adhkar-duas)
+const deck: DeckModule = {
+  ready: true,
+  load: async () => (await import('@/data/deen/adhkar-morning-evening.json')).default as unknown as EmittedDeck,
+};
 export default deck;

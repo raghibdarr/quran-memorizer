@@ -1,0 +1,62 @@
+{
+  "id": "istikhara",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "Asking Allah to choose",
+  "cue": "The istikhara the Prophet ﷺ taught like a surah of the Quran",
+  "arabic": "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، أَوْ قَالَ فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاقْدُرْهُ لِي، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، أَوْ قَالَ فِي عَاجِلِ أَمْرِي وَآجِلِهِ، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ ثُمَّ رَضِّنِي بِهِ",
+  "transliteration": "Allaahumma innee astakheeruka bi'ilmik, wa'astaqdiruka biqudratik, wa'as'aluka min fadlikal-'azeem, fa'innaka taqdiru walaa aqdir, wata'lamu walaa a'lam, wa'anta 'allaamul-ghuyoob, allaahumma in kunta ta'lamu anna hadhal-amra khayrun lee fee deenee wama'aashee wa'aaqibati amree, aw qaala fee 'aajili amree wa'aajilih, faqdurhu lee, wa'in kunta ta'lamu anna hadhal-amra sharrun lee fee deenee wama'aashee wa'aaqibati amree, aw qaala fee 'aajili amree wa'aajilih, fasrifhu 'annee wasrifnee 'anh, waqdur liyal-khayra haythu kaana thumma raddinee bih",
+  "translation": "O Allah, I ask You to choose for me by Your knowledge, I ask You to empower me by Your power, and I ask You of Your immense bounty; for You are able and I am not, You know and I do not, and You are the Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood and the outcome of my affair (or he said: in my affair now and later), then decree it for me. And if You know that this matter is bad for me in my religion, my livelihood and the outcome of my affair (or he said: in my affair now and later), then turn it away from me and turn me away from it, and decree for me the good wherever it is, then make me content with it.",
+  "citations": [
+    {
+      "collection": "bukhari",
+      "number": "6382",
+      "numbering": "fath-al-bari",
+      "narrator": "Jabir ibn Abdullah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "in-sahih",
+      "by": "al-bukhari",
+      "in": "Sahih al-Bukhari, no. 6382"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sahih al-Bukhari, al-Sultaniyya print, hadith 6382: https://shamela.ws/book/1681/9573",
+        "skeletonSha256": "b06b0654d066abb13657573df2af26dc460c1ea1cdd98242318b7ef394f968b6"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-bukhari, hadith 6382 (comparison only)",
+        "skeletonSha256": "9124a6ca4c7d738ec37b282ae2722b648534f50b5a0b3e3e943bfdcdc17eaafc"
+      }
+    ],
+    "note": "The printed al-Sultaniyya text on Shamela reads أو قال في عاجل أمري in both places; hadith-api has أو قال عاجل أمري in the first. We follow the printed edition."
+  },
+  "usage": {
+    "when": [
+      "When deciding a matter: pray two rak'ahs, then say this, naming the matter at \"this matter\""
+    ],
+    "evidence": "Jabir said the Prophet ﷺ taught them istikhara in all matters as he taught a surah of the Quran: when one of you intends a matter, let him pray two rak'ahs, then say this, and name his need (al-Bukhari 6382). \"Or he said\" marks a narrator unsure which of the two phrases was used."
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at bukhari 6382, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): one reading differs, recorded in provenance.note",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (bukhari 6382) holds the text in both witnesses, by tools/witness.mjs verify (one witness with the variant noted)",
+      "2026-11-15 H: in-sahih by al-bukhari",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

@@ -10,12 +10,19 @@ import Card from '@/components/ui/card';
 import { cn } from '@/lib/cn';
 import type { EssentialItem, Ayah } from '@/types/quran';
 import TranslationText from '@/components/ui/translation-text';
+import Link from '@/components/app-link';
+import { CitationLine } from '@/components/deen/citation-line';
+import { GradingLine } from '@/components/deen/grading-line';
+import { useEssentialsMigration } from '@/components/adhkar/use-migration';
+import { auditOf } from '@/lib/essentials-data';
 
 interface Props {
   item: EssentialItem;
 }
 
 export default function EssentialCard({ item }: Props) {
+  useEssentialsMigration();
+  const audited = auditOf(item);
   const [expanded, setExpanded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [quranAyah, setQuranAyah] = useState<Ayah | null>(null);
@@ -129,9 +136,23 @@ export default function EssentialCard({ item }: Props) {
             ? <TranslationText ayah={quranAyah} className="text-center text-sm italic text-muted" />
             : <p className="text-center text-sm italic text-muted">{item.translation}</p>}
 
-          {/* Source */}
-          {item.source && (
-            <p className="text-center text-[10px] text-muted/60">Source: {item.source}</p>
+          {/* Sources: numbered citations and attributed gradings (the adhkar audit) */}
+          {audited.citations?.length ? (
+            <div className="space-y-1.5 border-t border-foreground/10 pt-3" data-essential-sources onClick={(e) => e.stopPropagation()}>
+              {audited.citations.map((c, i) => (
+                <CitationLine key={i} citation={c} />
+              ))}
+              {audited.gradings?.map((g, i) => (
+                <GradingLine key={i} grading={g} />
+              ))}
+              {audited.deen && (
+                <Link href={`/adhkar/view?d=${audited.deen.deck}`} className="inline-flex min-h-11 items-center text-xs font-semibold text-teal">
+                  Learn it with its sources
+                </Link>
+              )}
+            </div>
+          ) : (
+            item.source && <p className="text-center text-[10px] text-muted/60">Source: {item.source}</p>
           )}
 
           {/* Tasbih counter */}

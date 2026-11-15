@@ -1,0 +1,67 @@
+{
+  "id": "qunut-al-witr",
+  "deck": "salah-words",
+  "rev": 1,
+  "title": "The qunut of witr",
+  "cue": "The words the Prophet ﷺ taught his grandson to say in witr",
+  "arabic": "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ، فَإِنَّكَ تَقْضِي وَلَا يُقْضَى عَلَيْكَ، وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ",
+  "transliteration": "Allaahummahdinee feeman hadayt, wa'aafinee feeman 'aafayt, watawallanee feeman tawallayt, wabaarik lee feemaa a'tayt, waqinee sharra maa qadayt, fa'innaka taqdee walaa yuqdaa 'alayk, wa'innahu laa yadhillu man waalayt, tabaarakta rabbanaa wata'aalayt",
+  "translation": "O Allah, guide me among those You have guided, grant me wellbeing among those You have granted wellbeing, take me into Your care among those You have taken into Your care, bless me in what You have given, and protect me from the evil of what You have decreed. For You decree and none decrees over You, and none whom You befriend is ever humbled. Blessed are You, our Lord, and exalted.",
+  "citations": [
+    {
+      "collection": "tirmidhi",
+      "number": "464",
+      "numbering": "ahmad-shakir",
+      "narrator": "al-Hasan ibn Ali"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "hasan",
+      "by": "al-tirmidhi",
+      "in": "Jami' al-Tirmidhi, after hadith 464",
+      "quote": "هَذَا حَدِيثٌ حَسَنٌ"
+    },
+    {
+      "grade": "sahih",
+      "by": "al-nawawi",
+      "in": "al-Adhkar, no. 159 (ed. al-Arna'ut, shamela.ws/book/1956/58)",
+      "quote": "بالإسناد الصحيح"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sunan al-Tirmidhi, ed. Ahmad Shakir and others, hadith 464: https://shamela.ws/book/1435/824",
+        "skeletonSha256": "53d178d78d6d4a1b130860ad33ba8238455f1d2ce532f9a61b386ac3ba72664f"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-tirmidhi, hadith 464 (comparison only)",
+        "skeletonSha256": "53d178d78d6d4a1b130860ad33ba8238455f1d2ce532f9a61b386ac3ba72664f"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "In the witr prayer"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at tirmidhi 464, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (tirmidhi 464) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: hasan by al-tirmidhi (quote located); sahih by al-nawawi (quote located)",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}

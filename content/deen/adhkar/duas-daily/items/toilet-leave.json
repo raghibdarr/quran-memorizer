@@ -1,0 +1,73 @@
+{
+  "id": "toilet-leave",
+  "deck": "duas-daily",
+  "rev": 1,
+  "title": "Leaving the toilet",
+  "cue": "One word on coming out",
+  "arabic": "غُفْرَانَكَ",
+  "transliteration": "Ghufraanak",
+  "translation": "Your forgiveness.",
+  "citations": [
+    {
+      "collection": "abu-dawud",
+      "number": "30",
+      "numbering": "muhyi-al-din-abd-al-hamid",
+      "narrator": "Aishah"
+    },
+    {
+      "collection": "tirmidhi",
+      "number": "7",
+      "numbering": "ahmad-shakir",
+      "narrator": "Aishah"
+    }
+  ],
+  "gradings": [
+    {
+      "grade": "hasan",
+      "by": "al-tirmidhi",
+      "in": "Jami' al-Tirmidhi, after hadith 7",
+      "quote": "هَذَا حَدِيثٌ حَسَنٌ غَرِيبٌ"
+    },
+    {
+      "grade": "sahih",
+      "by": "al-nawawi",
+      "in": "al-Adhkar, no. 71 (ed. al-Arna'ut, shamela.ws/book/1956/25)",
+      "quote": "ثبت في الحديث الصحيح"
+    }
+  ],
+  "provenance": {
+    "witnesses": [
+      {
+        "name": "shamela",
+        "ref": "Sunan Abi Dawud, ed. Muhyi al-Din Abd al-Hamid, hadith 30: https://shamela.ws/book/1726/48",
+        "skeletonSha256": "edabd9fd3b83eb963066d69478b248cebae6eddfc9bd138b1822911314ef322e"
+      },
+      {
+        "name": "hadith-api",
+        "ref": "fawazahmed0/hadith-api, edition ara-abudawud, hadith 30 (comparison only)",
+        "skeletonSha256": "edabd9fd3b83eb963066d69478b248cebae6eddfc9bd138b1822911314ef322e"
+      }
+    ]
+  },
+  "usage": {
+    "when": [
+      "On coming out of the toilet"
+    ]
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-15 A: our own selection from the hadith and Quran (SELECTION.md); not Hisn al-Muslim's order or contents",
+      "2026-11-15 B: Arabic transcribed from the Shamela copy of the printed edition at abu-dawud 30, no English consulted",
+      "2026-11-15 C: collated by tools/seal.mjs against hadith-api (comparison only): skeletons identical",
+      "2026-11-15 D: vowelling compared word by word with the vocalised witnesses; differences were spelling only (لا/لاَ, شيء/شىء, dagger alif)",
+      "2026-11-15 E: English is our own, from the Arabic only",
+      "2026-11-15 F: English re-read against the Arabic in a separate pass for omissions, additions, tense, number and loaded terms",
+      "2026-11-15 G: every cited number (abu-dawud 30, tirmidhi 7) holds the text in both witnesses, by tools/witness.mjs verify",
+      "2026-11-15 H: hasan by al-tirmidhi (quote located); sahih by al-nawawi (quote located)",
+      "2026-11-15 I: build-deen --check green",
+      "2026-11-15 J: source-checked. All stages were run by one agent in separate passes; no fresh agent was available for C, F, G and H. Not reviewed by a scholar."
+    ]
+  }
+}
