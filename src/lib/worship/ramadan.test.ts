@@ -15,6 +15,7 @@ import {
   formatCountdown,
   isPaused,
   latestRamadan,
+  madeUpSurplus,
   makeUpList,
   nextFastMoment,
   ramadanDays,
@@ -248,6 +249,14 @@ describe('fasting log arithmetic', () => {
     // More made up than owed: nothing left, never below zero
     expect(makeUpList(fasts, 5, pauses).left).toBe(0)
     expect(makeUpList({}, 0, []).left).toBe(0)
+  })
+
+  it('a surplus of make-ups is what exceeds the days marked to make up, pauses aside', () => {
+    expect(madeUpSurplus(fasts, 3)).toBe(0)
+    expect(madeUpSurplus(fasts, 5)).toBe(2)
+    expect(madeUpSurplus({}, 1)).toBe(1)
+    expect(madeUpSurplus({ '2027-02-09': fast('fasted') }, 1)).toBe(1)
+    expect(madeUpSurplus(fasts, 0)).toBe(0)
   })
 
   it('left = owed - made up, never negative (property)', () => {

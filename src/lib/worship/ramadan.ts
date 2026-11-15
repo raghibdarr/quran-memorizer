@@ -194,6 +194,17 @@ export function makeUpList(
   };
 }
 
+/**
+ * Make-up fasts counted beyond the days marked "to make up" (pauses aside, so a
+ * pause never takes any away). It happens when a day that was made up is then
+ * re-marked or cleared; the screens take the surplus back, so it can't quietly
+ * tick off the next day marked later.
+ */
+export function madeUpSurplus(fasts: Readonly<Record<string, FastEntry>>, madeUp: number): number {
+  const owed = Object.values(fasts).filter((e) => e.s === 'owed').length;
+  return Math.max(0, Math.floor(madeUp) - owed);
+}
+
 // ---------- formatting (kept here so the banner needn't load the engine to print a time) ----------
 
 /** "05:20" in the place's zone, 24-hour like the prayer screens */

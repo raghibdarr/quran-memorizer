@@ -39,8 +39,11 @@ export default function CalendarClient() {
   const now = useNow(60_000);
   const { today, offset } = useHijriToday(now);
   const setHijriOffset = usePrayerStore((s) => s.setHijriOffset);
-  const todayMonth = hijriMonthOf(today, offset);
-  const [view, setView] = useState<HijriMonthRef>(todayMonth);
+  const todayMonth = useMemo(() => hijriMonthOf(today, offset), [today, offset]);
+  // null = follow today's month, so the grid moves with it at midnight, when the
+  // date adjustment carries today into another month, and once the stores load
+  const [picked, setView] = useState<HijriMonthRef | null>(null);
+  const view = picked ?? todayMonth;
   const [selected, setSelected] = useState<string | null>(null);
 
   const grid = useMemo(() => monthGrid(view, { offset, today }), [view, offset, today]);
@@ -55,7 +58,8 @@ export default function CalendarClient() {
   const selEvents = sel ? eventsOn(sel, offset) : [];
 
   const go = (n: number) => {
-    setView((v) => addHijriMonths(v, n));
+    const next = addHijriMonths(view, n);
+    setView(sameMonth(next, todayMonth) ? null : next);
     setSelected(null);
   };
 
@@ -108,7 +112,7 @@ export default function CalendarClient() {
               <button
                 type="button"
                 onClick={() => {
-                  setView(todayMonth);
+                  setView(null);
                   setSelected(null);
                 }}
                 className="min-h-8 shrink-0 rounded-full px-3 text-xs font-semibold whitespace-nowrap text-teal hover:bg-teal/10"
