@@ -296,14 +296,14 @@ test.describe('Home strip', () => {
   test('shows nothing without a place, or when turned off', async ({ page }) => {
     await seed(page, { place: false })
     await page.goto('/')
-    await expect(page.getByText('Quran Memorization')).toBeVisible()
+    await expect(page.locator('[data-home-tagline]')).toBeVisible()
     await expect(page.locator('[data-home-prayer-strip]')).toHaveCount(0)
   })
 
   test('respects the Home strip toggle', async ({ page }) => {
     await seed(page, { homeStrip: false })
     await page.goto('/')
-    await expect(page.getByText('Quran Memorization')).toBeVisible()
+    await expect(page.locator('[data-home-tagline]')).toBeVisible()
     await expect(page.locator('[data-home-prayer-strip]')).toHaveCount(0)
   })
 })

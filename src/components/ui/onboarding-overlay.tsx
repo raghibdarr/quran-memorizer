@@ -18,10 +18,11 @@ type Step = 'welcome' | 'intent' | 'look' | 'finish';
 const STEPS: Step[] = ['welcome', 'intent', 'look', 'finish'];
 
 const INTENTS: { value: Intent; title: string; sub: string }[] = [
-  { value: 'learn', title: "I'm new to memorizing", sub: 'Start with a first surah, one ayah at a time' },
-  { value: 'memorized-some', title: "I've memorized some already", sub: 'Keep what you know and add more' },
+  { value: 'learn', title: "I'm new to memorising", sub: 'Start with a first surah, one ayah at a time' },
+  { value: 'memorized-some', title: "I've memorised some already", sub: 'Keep what you know and add more' },
   { value: 'revise', title: 'I want to keep what I know', sub: 'Recite from memory and check yourself' },
   { value: 'listen', title: 'I just want to read and listen', sub: 'Follow the text while it is recited' },
+  { value: 'worship', title: 'Prayer times and daily worship', sub: 'Times, qibla, adhkar and the Names' },
 ];
 
 const SCRIPTS: { value: ArabicScriptStyle; label: string; note: string }[] = [
@@ -70,13 +71,16 @@ export default function OnboardingOverlay() {
 
   const back = () => {
     const i = STEPS.indexOf(step);
-    if (i > 0) setStep(STEPS[i - 1]);
+    // The prayer intent skipped the reading step, so Back returns to the choice
+    if (step === 'finish' && intent === 'worship') setStep('intent');
+    else if (i > 0) setStep(STEPS[i - 1]);
   };
 
   const chooseIntent = (value: Intent) => {
     setIntentState(value);
     setIntent(value);
-    setStep('look');
+    // Prayer times need no reading setup: straight on (no permission is asked until "Use my location")
+    setStep(value === 'worship' ? 'finish' : 'look');
   };
 
   if (!visible) return null;
@@ -109,8 +113,9 @@ export default function OnboardingOverlay() {
             <p className="arabic-text text-4xl text-teal">تكرار</p>
             <h2 className="mt-4 text-2xl font-bold text-teal">Welcome to Takrar</h2>
             <p className="mt-3 text-base leading-relaxed text-muted">
-              Memorize the Quran through steady repetition, keep what you already know, or simply recite and listen.
+              Memorise the Quran through steady repetition, keep what you already know, or simply recite and listen.
             </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">Plus prayer times, qibla, adhkar and short lessons, all free and on your phone.</p>
             <button onClick={() => setStep('intent')} className="tactile-btn mt-10 min-h-12 w-full rounded-xl bg-teal text-base font-semibold text-on-teal">
               Get started
             </button>
@@ -236,6 +241,15 @@ export default function OnboardingOverlay() {
                 body="Open any surah you know and tap Recite from memory. Peek at an ayah or hear it whenever you stumble. A revision plan can also schedule this for you."
                 primary={{ label: 'Plan my revision', onClick: () => finishTo('/plan/setup?goal=maintain') }}
                 secondary={{ label: 'Choose a surah', onClick: () => finishTo(null) }}
+              />
+            )}
+
+            {intent === 'worship' && (
+              <FinishCard
+                title="Prayer times, worked out on your phone"
+                body="Choose your city, or let your phone find it. Your location is never sent anywhere. Qibla, tasbih, adhkar and the rest are in the Prayer tab."
+                primary={{ label: 'Set up prayer times', onClick: () => finishTo('/prayer/setup') }}
+                secondary={{ label: 'Look around first', onClick: () => finishTo(null) }}
               />
             )}
 

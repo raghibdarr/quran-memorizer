@@ -2,10 +2,10 @@
 // onboarding hands off and what Home leads with. Per device, like other
 // first-run choices; absent = never answered (skipped or onboarded earlier).
 
-export type Intent = 'learn' | 'memorized-some' | 'revise' | 'listen';
+export type Intent = 'learn' | 'memorized-some' | 'revise' | 'listen' | 'worship';
 
 const KEY = 'user-intent';
-const INTENTS: Intent[] = ['learn', 'memorized-some', 'revise', 'listen'];
+const INTENTS: Intent[] = ['learn', 'memorized-some', 'revise', 'listen', 'worship'];
 
 export function getIntent(): Intent | null {
   try {

@@ -163,7 +163,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
         <div className="flex items-center justify-center gap-3 rounded-xl border border-foreground/10 bg-card p-3">
           <BeadProgress total={REQUIRED_LISTENS} filled={playCount} showCurrent />
           <span className="text-sm font-medium text-foreground">
-            {canContinue ? 'Ready to memorize' : `${playCount} / ${REQUIRED_LISTENS} listens`}
+            {canContinue ? 'Ready to memorise' : `${playCount} / ${REQUIRED_LISTENS} listens`}
           </span>
         </div>
       </div>
@@ -187,7 +187,7 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
 
       {canContinue && (
         <Button onClick={finish} className="w-full">
-          Continue to Memorize
+          Continue to Memorise
         </Button>
       )}
 
@@ -259,12 +259,12 @@ export default function ListenPhase({ surah, ayahs, lessonId, onComplete }: List
 
       {/* Bottom continue */}
       <Button onClick={finish} disabled={!canContinue} className="w-full">
-        {canContinue ? 'Continue to Memorize' : `Listen ${remaining} more time${remaining !== 1 ? 's' : ''}`}
+        {canContinue ? 'Continue to Memorise' : `Listen ${remaining} more time${remaining !== 1 ? 's' : ''}`}
       </Button>
 
       {!canContinue && (
         <button onClick={finish} className="mx-auto block min-h-11 text-xs text-muted transition-colors hover:text-foreground">
-          Already familiar? Skip to Memorize →
+          Already familiar? Skip to Memorise →
         </button>
       )}
     </div>

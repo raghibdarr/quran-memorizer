@@ -10,7 +10,7 @@ export const LESSON_STEPS: LessonPhase[] = ['listen', 'chunk', 'test', 'complete
 export const PHASE_LABELS: Record<LessonPhase, string> = {
   listen: 'Listen',
   understand: 'Listen',
-  chunk: 'Memorize',
+  chunk: 'Memorise',
   test: 'Test',
   complete: 'Done',
 };

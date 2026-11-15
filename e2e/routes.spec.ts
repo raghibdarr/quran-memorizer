@@ -16,7 +16,7 @@ test.describe('all-in-one routes cold-load', () => {
       await page.goto(route)
       await expect(page).toHaveURL((url) => url.pathname === route, { timeout: 15_000 })
       // Not Home under the wrong address
-      await expect(page.getByText('Quran Memorization')).toHaveCount(0)
+      await expect(page.locator('[data-home-tagline]')).toHaveCount(0)
       await expect(page.locator('h1, [data-stub-page], main').first()).toBeVisible()
     })
   }

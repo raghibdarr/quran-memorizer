@@ -53,8 +53,8 @@ export default function PlanCelebration() {
           You&apos;ve completed your plan: {goalLabel}.
         </p>
         <p className="mt-1 text-xs text-muted">
-          {progress.totalLessons} lesson{progress.totalLessons === 1 ? '' : 's'} memorized.
-          Reviews will continue to keep your memorization strong.
+          {progress.totalLessons} lesson{progress.totalLessons === 1 ? '' : 's'} memorised.
+          Reviews will continue to keep your memorisation strong.
         </p>
         <Button className="mt-5 w-full" onClick={() => markFinishCelebrated()}>
           Continue

@@ -1138,10 +1138,10 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
       </BottomSheet>
 
       {/* One-time explainer (a bottom sheet, M11c) */}
-      <BottomSheet open={showExplainer} onClose={dismissExplainer} title="How memorizing works">
+      <BottomSheet open={showExplainer} onClose={dismissExplainer} title="How memorising works">
           <div>
             <p className="text-sm text-muted leading-relaxed">
-              Each ayah goes through {LEARN_STEPS.length} steps to build deep memorization:
+              Each ayah goes through {LEARN_STEPS.length} steps to build deep memorisation:
             </p>
             <div className="mt-5 space-y-4">
               {[

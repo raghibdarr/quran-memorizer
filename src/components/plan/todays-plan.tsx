@@ -258,7 +258,7 @@ export default function TodaysPlanCard() {
           <section>
             <StreamLabel
               name="Sabaq"
-              hint={revisionPending && completedCount < newLessonCount ? 'New memorization, best done after the revision above' : 'Today’s new memorization'}
+              hint={revisionPending && completedCount < newLessonCount ? 'New memorisation, best done after the revision above' : 'Today’s new memorisation'}
             />
             {todaysPlan.newLessons.map((lesson) => {
               const surah = surahById.get(lesson.surahId);

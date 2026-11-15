@@ -502,7 +502,7 @@ export default function SettingsPanel() {
 
             {/* Daily Goal */}
             <div className="mt-5">
-              <p className="text-xs font-medium text-muted">Daily Goal</p>
+              <p className="text-xs font-medium text-muted">Daily goal</p>
               <div className="mt-1.5 flex items-center gap-3">
                 <button
                   onClick={() => { haptic.selection(); setDailyGoalActivities(Math.max(1, dailyGoalActivities - 1)); }}
@@ -526,7 +526,7 @@ export default function SettingsPanel() {
 
             {/* Data — backup & restore */}
             <div className="mt-5">
-              <p className="text-xs font-medium text-muted">Your Data</p>
+              <p className="text-xs font-medium text-muted">Your data</p>
               <div className="mt-1.5 flex gap-1.5">
                 <button
                   onClick={() => {

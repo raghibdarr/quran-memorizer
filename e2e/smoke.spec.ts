@@ -29,7 +29,7 @@ test.describe('smoke', () => {
     await expect(page.locator('[data-word-meaning]')).toBeVisible()
 
     // → Memorize → Test
-    await page.getByRole('button', { name: /skip to memorize/i }).click()
+    await page.getByRole('button', { name: /skip to memori[sz]e/i }).click()
     await expect(page.getByText(/listen & repeat aloud/i)).toBeVisible()
     await page.getByRole('button', { name: 'Skip…' }).click()
     await page.getByRole('button', { name: /i know the whole lesson/i }).click()

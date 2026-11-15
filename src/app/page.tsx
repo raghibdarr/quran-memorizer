@@ -207,7 +207,7 @@ export default function HomePage() {
               <Logo size={48} className="h-10 w-10 rounded-lg" />
               <div>
                 <h1 className="text-2xl font-bold text-teal">Takrar</h1>
-                <p className="text-sm text-muted">Quran Memorization</p>
+                <p className="text-sm text-muted" data-home-tagline>Quran, prayer and learning</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -296,7 +296,7 @@ export default function HomePage() {
             <span className="text-sm">
               <span className="font-semibold text-gold-deep">Hifdh Planner</span>
               <span className="text-muted">
-                {intent === 'revise' ? ' · schedule your revision' : ' · set a daily memorization goal'}
+                {intent === 'revise' ? ' · schedule your revision' : ' · set a daily memorisation goal'}
               </span>
             </span>
             <ArrowRightIcon size={14} className="shrink-0 text-gold-deep" />
@@ -309,7 +309,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh Planner</p>
-                  <p className="mt-1 text-lg font-bold text-foreground">Set a memorization goal</p>
+                  <p className="mt-1 text-lg font-bold text-foreground">Set a memorisation goal</p>
                   <p className="mt-0.5 text-xs text-muted">Pick a ready-made plan or build your own, with reviews and pacing.</p>
                 </div>
                 <span className="tactile-chip shrink-0 rounded-full bg-gold px-3.5 py-2 text-xs font-bold text-on-gold">Start →</span>

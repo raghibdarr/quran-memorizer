@@ -269,7 +269,7 @@ export default function PlanSetupPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">Step {visibleStep} of {totalSteps}</p>
               <h1 className="text-xl font-bold text-teal">
-                {step === 1 && (isMaintain ? 'What do you already know?' : 'What do you want to memorize?')}
+                {step === 1 && (isMaintain ? 'What do you already know?' : 'What do you want to memorise?')}
                 {step === 2 && 'Do you already know any of these?'}
                 {step === 3 && (isMaintain ? 'Set your revision rhythm' : 'Set your pace')}
                 {step === 4 && 'Ready to start'}
@@ -446,13 +446,13 @@ export default function PlanSetupPage() {
                     );
                   })}
                 </div>
-                <p className="mt-3 text-[11px] text-muted">Tip: Juz 30 (bottom row) is shortest and usually memorized first.</p>
+                <p className="mt-3 text-[11px] text-muted">Tip: Juz 30 (bottom row) is shortest and usually memorised first.</p>
               </Card>
             )}
 
             {goalType === 'full-quran' && (
               <Card>
-                <p className="text-sm text-foreground">You're setting a goal to memorize the whole Quran: all 114 surahs and 6,236 ayahs.</p>
+                <p className="text-sm text-foreground">You're setting a goal to memorise the whole Quran: all 114 surahs and 6,236 ayahs.</p>
                 <p className="mt-2 text-xs text-muted">
                   The curriculum orders surahs shortest-first (Juz 30, 29, 28, then the rest in traditional order).
                 </p>
@@ -464,7 +464,7 @@ export default function PlanSetupPage() {
         {step === 2 && (
           <Card>
             <p className="text-sm text-muted">
-              Tick any surahs you&apos;ve memorized. Tap a surah to mark individual lessons instead.
+              Tick any surahs you&apos;ve memorised. Tap a surah to mark individual lessons instead.
             </p>
             <p className="mt-1 text-xs text-muted/70">
               {knownSurahIds.length} surah{knownSurahIds.length === 1 ? '' : 's'}, {knownLessonIds.length} lesson{knownLessonIds.length === 1 ? '' : 's'} marked as known
@@ -740,11 +740,11 @@ export default function PlanSetupPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">Goal</p>
               <p className="mt-0.5 text-base font-semibold text-foreground">
-                {goalType === 'full-quran' && 'Memorize the full Quran'}
+                {goalType === 'full-quran' && 'Memorise the full Quran'}
                 {goalType === 'juz' &&
-                  `Memorize ${selectedJuzNumbers.length === 1 ? `Juz ${selectedJuzNumbers[0]}` : `${selectedJuzNumbers.length} juz`}`}
+                  `Memorise ${selectedJuzNumbers.length === 1 ? `Juz ${selectedJuzNumbers[0]}` : `${selectedJuzNumbers.length} juz`}`}
                 {goalType === 'surah' &&
-                  `Memorize ${selectedSurahIds.length} surah${selectedSurahIds.length === 1 ? '' : 's'}`}
+                  `Memorise ${selectedSurahIds.length} surah${selectedSurahIds.length === 1 ? '' : 's'}`}
                 {isMaintain &&
                   `Maintain ${selectedSurahIds.length} surah${selectedSurahIds.length === 1 ? '' : 's'}`}
               </p>

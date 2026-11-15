@@ -217,7 +217,7 @@ export default function PlanEditPage() {
             Edit plan {totalSteps > 1 ? `· Step ${visibleStep} of ${totalSteps}` : ''}
           </p>
           <h1 className="text-xl font-bold text-teal">
-            {step === 1 ? "Change what you're memorizing" : 'Update what you already know'}
+            {step === 1 ? "Change what you're memorising" : 'Update what you already know'}
           </h1>
         </div>
       </header>
@@ -367,7 +367,7 @@ export default function PlanEditPage() {
         {step === 2 && (
           <Card>
             <p className="text-sm text-muted">
-              Tick surahs you&apos;ve memorized. Tap a surah to tick individual lessons.
+              Tick surahs you&apos;ve memorised. Tap a surah to tick individual lessons.
             </p>
             <p className="mt-1 text-xs text-muted/70">
               {knownSurahIds.length} surah{knownSurahIds.length === 1 ? '' : 's'}, {knownLessonIds.length} lesson{knownLessonIds.length === 1 ? '' : 's'} marked as known

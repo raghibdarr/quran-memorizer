@@ -83,9 +83,9 @@ export default function ProgressPage() {
         return { pct, label: 'strong recall', sub: `across ${ayahBreakdown.covered} ayahs you know`, quranPct };
       }
       const goal = computeGoalAyahProgress(plan, surahs, juzIndex, progressLessons);
-      return { pct: goal.percentage, label: 'of your goal', sub: `${goal.memorized} of ${goal.total} ayahs memorized`, quranPct };
+      return { pct: goal.percentage, label: 'of your goal', sub: `${goal.memorized} of ${goal.total} ayahs memorised`, quranPct };
     }
-    return { pct: quranPct, label: 'of the Quran', sub: `${ayahBreakdown.covered} ayahs memorized`, quranPct: null as number | null };
+    return { pct: quranPct, label: 'of the Quran', sub: `${ayahBreakdown.covered} ayahs memorised`, quranPct: null as number | null };
   }, [plan, surahs, juzIndex, progressLessons, ayahBreakdown]);
 
   // This week: activities from the last 7 days

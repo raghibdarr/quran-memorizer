@@ -10,6 +10,6 @@ describe('lesson phases', () => {
 
   it('progress runs Listen → Memorize → Test → Done', () => {
     expect(['listen', 'chunk', 'test', 'complete'].map((p) => Math.round(phaseProgressPct(p as never)))).toEqual([0, 33, 67, 100]);
-    expect(PHASE_LABELS.chunk).toBe('Memorize');
+    expect(PHASE_LABELS.chunk).toBe('Memorise');
   });
 });

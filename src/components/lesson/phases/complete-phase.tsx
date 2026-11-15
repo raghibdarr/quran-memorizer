@@ -82,7 +82,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
         <p className="mt-1 text-muted">
           {isMultiLesson
             ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber} of ${totalLessons}`
-            : `You've memorized ${surah.nameSimple}`}
+            : `You've memorised ${surah.nameSimple}`}
         </p>
       </div>
 
@@ -136,7 +136,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
         <div className="w-full rounded-xl border border-teal/15 bg-teal/5 p-4 text-center">
           <p className="text-sm font-semibold text-teal">Use this in your next prayer</p>
           <p className="mt-1 text-xs text-muted">
-            Reciting {surah.nameSimple} during salah is the best way to solidify what you&apos;ve memorized.
+            Reciting {surah.nameSimple} during salah is the best way to solidify what you&apos;ve memorised.
           </p>
         </div>
       )}
