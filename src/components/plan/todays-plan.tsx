@@ -73,7 +73,7 @@ export default function TodaysPlanCard() {
     <Card>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-muted">Today&apos;s Plan</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted">Today&apos;s plan</p>
           <p className="mt-0.5 text-base font-bold text-foreground">
             {todaysPlan.isRestDay
               ? 'Rest day'
@@ -217,7 +217,7 @@ export default function TodaysPlanCard() {
 
         {(manzilReviewCount > 0 || revisionCount > 0) && (
           <section>
-            <StreamLabel name="Manzil" hint="Cycle everything older so nothing fades" />
+            <StreamLabel name="Manzil" hint="Cycle through everything older" />
             {manzilReviewCount > 0 && (
               <ReviewRow
                 href="/review/session?from=plan&stream=manzil"

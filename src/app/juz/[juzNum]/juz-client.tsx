@@ -321,7 +321,7 @@ export default function JuzDetailPage() {
                         practiceMode === 'lesson' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
                       )}
                     >
-                      By Lesson
+                      By lesson
                     </button>
                     <button
                       onClick={() => setPracticeMode('range')}
@@ -330,7 +330,7 @@ export default function JuzDetailPage() {
                         practiceMode === 'range' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
                       )}
                     >
-                      By Range
+                      By range
                     </button>
                   </div>
 
@@ -351,7 +351,7 @@ export default function JuzDetailPage() {
                       }}
                       className="text-xs font-medium text-teal"
                     >
-                      {selectedLessonIds.size === allJuzLessons.length ? 'Deselect All' : 'Select All'}
+                      {selectedLessonIds.size === allJuzLessons.length ? 'Deselect all' : 'Select all'}
                     </button>
                   </div>
 
@@ -394,7 +394,7 @@ export default function JuzDetailPage() {
                             }}
                             className="text-xs font-medium text-teal"
                           >
-                            {allSectionSelected ? 'Deselect' : 'Select All'}
+                            {allSectionSelected ? 'Deselect' : 'Select all'}
                           </button>
                         </div>
 
@@ -596,14 +596,14 @@ export default function JuzDetailPage() {
                               variant="secondary"
                               className="flex-1 text-sm"
                             >
-                              Ayah by Ayah
+                              Ayah by ayah
                             </Button>
                             <Button
                               onClick={() => startPractice('full-passage')}
                               disabled={!canStart}
                               className="flex-1 text-sm"
                             >
-                              All at Once
+                              All at once
                             </Button>
                           </div>
                         </div>

@@ -440,7 +440,7 @@ export default function PracticeSession({
               </button>
             )}
             <Button onClick={handleReveal} variant="secondary" className="flex-1">
-              Reveal Text
+              Reveal text
             </Button>
           </div>
         ) : (
@@ -501,7 +501,7 @@ export default function PracticeSession({
       <div className="space-y-4">
         <div className="text-center">
           <h3 className="text-lg font-bold text-foreground">
-            {hasPriorResults ? 'Recite Together' : title}
+            {hasPriorResults ? 'Recite together' : title}
           </h3>
           <p className="mt-1 text-sm text-muted">
             {hasPriorResults
@@ -517,7 +517,7 @@ export default function PracticeSession({
           onClick={allRevealed ? hideAll : revealAll}
           className="w-full rounded-xl bg-foreground/5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10"
         >
-          {allRevealed ? 'Hide All' : 'Reveal All'}
+          {allRevealed ? 'Hide all' : 'Reveal all'}
         </button>
 
         {/* Per-ayah cards */}
@@ -614,7 +614,7 @@ export default function PracticeSession({
             </Button>
           ) : (
             <Button onClick={() => finishSession()} disabled={!allAyahsRated} className="w-full">
-              {allAyahsRated ? 'See Results' : `Rate all ${ayahs.length} ayahs to continue`}
+              {allAyahsRated ? 'See results' : `Rate all ${ayahs.length} ayahs to continue`}
             </Button>
           )}
         </div>
@@ -642,7 +642,7 @@ export default function PracticeSession({
         >
           {overallScore}%
         </div>
-        <h3 className="mt-3 text-xl font-bold text-foreground">Practice Complete</h3>
+        <h3 className="mt-3 text-xl font-bold text-foreground">Practice complete</h3>
         <p className="text-sm text-muted">{title} · {ayahs.length} ayahs</p>
       </div>
 
@@ -703,7 +703,7 @@ export default function PracticeSession({
             resetAyahState();
             setStep(initialStep);
           }} className="w-full">
-            Retry with Weak Flagged
+            Retry with the weak ayahs flagged
           </Button>
         )}
         <Button onClick={onDone} variant={hasWeakAyahs ? 'secondary' : 'primary'} className="w-full">

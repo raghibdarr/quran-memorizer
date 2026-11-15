@@ -368,7 +368,7 @@ export default function SettingsPanel() {
 
             {/* Arabic Script */}
             <div className="mt-5">
-              <p className="text-xs font-medium text-muted">Arabic Script</p>
+              <p className="text-xs font-medium text-muted">Arabic script</p>
               <div className="mt-1.5 flex gap-1.5">
                 {SCRIPT_OPTIONS.map((opt) => (
                   <button
@@ -390,7 +390,7 @@ export default function SettingsPanel() {
             {/* Font Size */}
             <div className="mt-5">
               <div className="flex items-center justify-between">
-                <p className="text-xs font-medium text-muted">Arabic Font Size</p>
+                <p className="text-xs font-medium text-muted">Arabic font size</p>
                 {Math.round(arabicFontSize * 10) !== 10 && (
                   <button
                     onClick={() => setArabicFontSize(1)}
@@ -438,7 +438,7 @@ export default function SettingsPanel() {
             {/* Toggles */}
             <div className="mt-3 space-y-0.5">
               <label className="flex min-h-11 cursor-pointer items-center justify-between">
-                <span className="text-sm text-foreground">Dark Mode</span>
+                <span className="text-sm text-foreground">Dark mode</span>
                 <Toggle enabled={darkMode} onToggle={handleDarkModeToggle} />
               </label>
 

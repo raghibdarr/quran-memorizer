@@ -88,7 +88,7 @@ export default function PlanDashboardPage() {
           <Card className="text-center">
             <h1 className="text-xl font-bold text-teal">No plan yet</h1>
             <p className="mt-2 text-sm text-muted">
-              Set a hifdh goal and get a daily plan tailored to your pace.
+              Set a hifdh goal and get a daily plan that fits your pace.
             </p>
             <Button className="mt-4 w-full" onClick={() => router.push('/plan/setup', { transitionTypes: [NAV_FORWARD] })}>
               Create a plan
@@ -379,13 +379,13 @@ export default function PlanDashboardPage() {
             let recommendation: string;
             const have = `You have ${inRevision} surah${inRevision === 1 ? '' : 's'} in revision${trackedKnown > 0 ? ` (${trackedKnown} you already knew)` : ''}.`;
             if (inRevision === 0) {
-              recommendation = 'Revisions kick in once you finish your first surah.';
+              recommendation = 'Revisions start once you finish your first surah.';
             } else if (inRevision <= 5) {
-              recommendation = `${have} Intensive (3d) helps lock early wins in.`;
+              recommendation = `${have} Intensive (3d) helps your first surahs settle.`;
             } else if (inRevision <= 15) {
-              recommendation = `${have} Weekly (7d) is the sweet spot at this stage.`;
+              recommendation = `${have} Weekly (7d) suits this stage.`;
             } else {
-              recommendation = `${have} Light (14d) keeps the daily plan from flooding.`;
+              recommendation = `${have} Light (14d) keeps the daily plan manageable.`;
             }
 
             return (

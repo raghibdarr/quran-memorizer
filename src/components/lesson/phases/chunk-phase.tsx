@@ -342,12 +342,12 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
   const afterThisUnit = (): { button: string; detail: string } => {
     const to = nextPos(units, ayahs.length, { stage: 'learning', unit: unitIndex, step: 'word-order' });
     if (to.stage === 'chain-parts') return { button: `Join parts 1–${unit.seg.index + 1}`, detail: `recite parts 1–${unit.seg.index + 1} together` };
-    if (to.stage === 'chaining') return { button: 'Chain & Continue', detail: 'recite the ayahs so far together' };
-    if (to.stage === 'done') return { button: 'Continue to Test', detail: 'the Test' };
+    if (to.stage === 'chaining') return { button: 'Chain and continue', detail: 'recite the ayahs so far together' };
+    if (to.stage === 'done') return { button: 'Continue to the Test', detail: 'the Test' };
     const next = units[to.unit];
     return next.ayahIdx === ayahIndex
-      ? { button: `Next Part (${next.seg.index + 1}/${next.seg.count})`, detail: `part ${next.seg.index + 1}` }
-      : { button: 'Learn Next Ayah', detail: `ayah ${ayahs[next.ayahIdx].number}` };
+      ? { button: `Next part (${next.seg.index + 1}/${next.seg.count})`, detail: `part ${next.seg.index + 1}` }
+      : { button: 'Learn the next ayah', detail: `ayah ${ayahs[next.ayahIdx].number}` };
   };
 
   // --- Skipping (owner, 2026-09-27): 6-4-4-6 stays the default, but a learner who
@@ -387,13 +387,13 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     const isFinalStep = learnStep === 'final-memory';
 
     if (isFinalStep) {
-      if (isFirst) return { title: 'Final recall. No peeking!', subtitle: 'Recite the ayah from memory, then check' };
-      if (isLast) return { title: 'Last one!', subtitle: 'One more good recall and it\'s solid' };
+      if (isFirst) return { title: 'Final recall, without looking', subtitle: 'Recite the ayah from memory, then check' };
+      if (isLast) return { title: 'Last one', subtitle: 'One more good recall to finish this step' };
       return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Each recall makes it stick a little more' };
     }
 
-    if (isFirst) return { title: 'Time to test your memory', subtitle: 'Try to recite without looking, then reveal to check' };
-    if (isLast) return { title: 'Almost there!', subtitle: 'One more successful recall before the next step' };
+    if (isFirst) return { title: 'Now recite it from memory', subtitle: 'Try to recite without looking, then reveal to check' };
+    if (isLast) return { title: 'Last one', subtitle: 'One more successful recall before the next step' };
     return { title: `Recall ${repCount + 1} of ${currentStepReps}`, subtitle: 'Each time makes it stronger' };
   };
 
@@ -551,7 +551,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
             <p className="text-center text-sm text-muted">Could you recite them together smoothly?</p>
             <div className="flex gap-3">
               <Button onClick={() => { setChainRevealed(false); setRevealedAyahs(new Set()); stopChainPlay(); }} variant="secondary" className="flex-1">
-                Try Again
+                Try again
               </Button>
               <Button onClick={() => { stopChainPlay(); advance(); }} className="flex-1">
                 Got it
@@ -561,7 +561,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
         ) : (
           <>
             <Button onClick={() => { setChainRevealed(true); setRevealedAyahs(new Set(parts.map((_, i) => i))); }} variant="secondary" className="w-full">
-              Reveal All
+              Reveal all
             </Button>
             <button onClick={advance} className="mx-auto block min-h-11 px-3 text-xs text-muted hover:text-foreground">
               Skip joining, keep going →
@@ -598,7 +598,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
     return (
       <div className="space-y-6">
         <div className="text-center">
-          <h3 className="text-xl font-bold text-foreground">Chain Together</h3>
+          <h3 className="text-xl font-bold text-foreground">Chain together</h3>
           <p className="mt-1 text-sm text-muted">
             Recite ayahs {chainAyahs[0].number}–{chainAyahs[chainAyahs.length - 1].number} from memory
           </p>
@@ -657,7 +657,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
 
         {!allRevealed && (
           <Button onClick={revealAll} variant="secondary" className="w-full">
-            Reveal All
+            Reveal all
           </Button>
         )}
         {!allRevealed && (
@@ -694,7 +694,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
             <p className="text-center text-sm text-muted">Could you recite these together smoothly?</p>
             <div className="flex gap-3">
               <Button onClick={resetChain} variant="secondary" className="flex-1">
-                Try Again
+                Try again
               </Button>
               <Button onClick={advance} className="flex-1">
                 Got it, next ayah
@@ -932,7 +932,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
 
           {repCount >= currentStepReps && (
             <Button onClick={advance} className="w-full">
-              Next Step
+              Next step
             </Button>
           )}
         </div>
@@ -953,22 +953,22 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
               <div className="space-y-4 text-center">
                 <div className="rounded-2xl border-[1.5px] border-success/30 bg-success/5 p-6">
                   <p className="text-lg font-semibold text-success">
-                    {learnStep === 'final-memory' ? 'Memory locked in!' : 'Looking good!'}
+                    {learnStep === 'final-memory' ? 'Final recall done' : 'Step done'}
                   </p>
                   <p className="mt-1 text-sm text-muted">
                     {repCount} done, {learnStep === 'final-memory'
-                      ? 'ready for a word challenge'
+                      ? 'ready for the word challenge'
                       : 'ready for the next step'}
                   </p>
                 </div>
                 <Button onClick={advance} className="w-full">
-                  {learnStep === 'final-memory' ? 'Word Challenge' : 'Next Step'}
+                  {learnStep === 'final-memory' ? 'Word challenge' : 'Next step'}
                 </Button>
                 <button
                   onClick={() => setMemoryRevealed(false)}
                   className="tactile-chip w-full rounded-xl bg-card py-3 text-sm font-semibold text-foreground"
                 >
-                  Keep Reciting
+                  Keep reciting
                 </button>
               </div>
             ) : !memoryRevealed ? (
@@ -1022,7 +1022,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
       {learnStep === 'word-order' && (
         <div className="space-y-5">
           <p className="text-center text-sm text-muted">
-            Arrange the words in correct order (right to left)
+            Arrange the words in the correct order (right to left)
           </p>
 
           <div
@@ -1141,7 +1141,7 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
       <BottomSheet open={showExplainer} onClose={dismissExplainer} title="How memorising works">
           <div>
             <p className="text-sm text-muted leading-relaxed">
-              Each ayah goes through {LEARN_STEPS.length} steps to build deep memorisation:
+              Each ayah goes through {LEARN_STEPS.length} steps:
             </p>
             <div className="mt-5 space-y-4">
               {[
@@ -1161,14 +1161,14 @@ export default function ChunkPhase({ surah, ayahs, lessonId, onComplete, onPause
               ))}
             </div>
             <p className="mt-5 text-sm text-muted leading-relaxed">
-              After each ayah, you&apos;ll chain them together to build full passages. A long ayah is
+              After each ayah, you recite the ayahs so far together. A long ayah is
               learned a part at a time, and each new part is joined to the ones before it.
             </p>
             <button
               onClick={dismissExplainer}
               className="tactile-btn mt-5 min-h-12 w-full rounded-xl bg-teal text-sm font-semibold text-on-teal hover:bg-teal-light"
             >
-              Got It
+              Got it
             </button>
           </div>
       </BottomSheet>

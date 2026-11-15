@@ -98,7 +98,7 @@ export default function PracticeSelection({
             mode === 'lesson' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
           )}
         >
-          By Lesson
+          By lesson
         </button>
         <button
           onClick={() => setMode('range')}
@@ -107,7 +107,7 @@ export default function PracticeSelection({
             mode === 'range' ? 'bg-teal text-on-teal' : 'text-muted hover:text-foreground'
           )}
         >
-          By Range
+          By range
         </button>
       </div>
 
@@ -119,7 +119,7 @@ export default function PracticeSelection({
               {completedLessons.length > 0 && ` · ${completedLessons.length} completed`}
             </p>
             <button onClick={selectAll} className="text-xs font-medium text-teal">
-              {selectedLessonIds.size === lessons.length ? 'Deselect All' : 'Select All'}
+              {selectedLessonIds.size === lessons.length ? 'Deselect all' : 'Select all'}
             </button>
           </div>
           {lessons.map((lesson) => {
@@ -162,7 +162,7 @@ export default function PracticeSelection({
         <Card>
           <div className="space-y-4">
             <div>
-              <label className="mb-1 block text-xs font-medium text-muted">Start Ayah</label>
+              <label className="mb-1 block text-xs font-medium text-muted">Start ayah</label>
               <select
                 value={rangeStart}
                 onChange={(e) => {
@@ -178,7 +178,7 @@ export default function PracticeSelection({
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-muted">End Ayah</label>
+              <label className="mb-1 block text-xs font-medium text-muted">End ayah</label>
               <select
                 value={rangeEnd}
                 onChange={(e) => setRangeEnd(parseInt(e.target.value, 10))}
@@ -212,7 +212,7 @@ export default function PracticeSelection({
               variant="secondary"
               className="flex-1 text-sm"
             >
-              Ayah by Ayah
+              Ayah by ayah
             </Button>
             <Button
               onClick={() => {
@@ -222,7 +222,7 @@ export default function PracticeSelection({
               disabled={!canStart}
               className="flex-1 text-sm"
             >
-              All at Once
+              All at once
             </Button>
           </div>
         </div>

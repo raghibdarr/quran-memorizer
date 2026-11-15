@@ -328,7 +328,7 @@ export default function PlanSetupPage() {
               <Card className="border border-gold/20 bg-gold/5">
                 <p className="text-sm text-foreground">
                   A maintenance plan has <span className="font-semibold">no new lessons</span>. Pick the surahs
-                  you already know and Takrar cycles them through revision so nothing fades.
+                  you already know and Takrar brings them back for revision in turn.
                 </p>
                 <p className="mt-1.5 text-xs text-muted">Tip: use the range boxes below to add a whole juz at once (Juz 30 = surahs 78–114).</p>
               </Card>
@@ -802,7 +802,7 @@ export default function PlanSetupPage() {
             </Button>
           ) : (
             <Button className="flex-1" onClick={handleCreate}>
-              Start Plan
+              Start plan
             </Button>
           )}
         </div>
