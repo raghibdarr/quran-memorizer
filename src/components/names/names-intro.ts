@@ -4,8 +4,19 @@
 // Citation numbers were each confirmed in two online witnesses on 2026-11-14:
 // al-Bukhari 2736 (Fath al-Bari numbering) and Muslim 2677 (Abd al-Baqi) in the
 // takhrij on surahquran.com's hadith pages and on hadithanswers.com; al-Tirmidhi
-// 3507 on hadithanswers.com and surahquran.com. Ibn Hajar's and Ibn Kathir's remarks
-// are cited by work and place, without volume or page numbers.
+// 3507 on hadithanswers.com and surahquran.com.
+//
+// Independent audit, 2026-11-15 (see content/deen/names99/AUDIT.md): the three numbers
+// were confirmed again on dorar.net and in sunnah.com page views. Al-Tirmidhi's remark
+// after the hadith ("hadha hadithun gharib ... wa-la na'rifuhu illa min hadith Safwan
+// ibn Salih") was read in the Jami' and in Ibn Kathir's quotation of it. Ibn Kathir's
+// sentence on 7:180 is "wa-lladhi 'awwala 'alayhi jama'atun min al-huffaz anna sard
+// al-asma' fi hadha al-hadith mudraj fih". Ibn Hajar's sentence ("wa-khtalafa
+// al-'ulama' fi sard al-asma', hal huwa marfu' aw mudraj ... fa-masha kathirun minhum
+// 'ala al-awwal ... wa-dhahaba akharun ila anna al-ta'yin mudraj li-khuluww akthar
+// al-riwayat 'anhu") was read only as quoted from Fath al-Bari 11/215 in a later
+// study, not in a copy of the Fath itself. Both are cited by work and place, without
+// volume or page numbers.
 
 import type { Citation } from '@/types/deen';
 
@@ -13,7 +24,7 @@ export const INTRO_TITLE = 'How this list came to us';
 
 export const INTRO_PARAGRAPHS: string[] = [
   "The Prophet ﷺ said that Allah has ninety-nine Names, one hundred less one, and whoever counts them (in another wording, memorises them) enters Paradise. Al-Bukhari and Muslim both record this, and neither lists the Names.",
-  "The list most people know comes through one narration in al-Tirmidhi's Jami'. Al-Tirmidhi himself called it gharib: it reached him by a single route. Many hadith scholars, among them Ibn Hajar and Ibn Kathir, judged that the list was added by a narrator rather than said by the Prophet ﷺ.",
+  "The list most people know comes through one narration in al-Tirmidhi's Jami'. Al-Tirmidhi himself called it gharib: he knew it only through one narrator, Safwan ibn Salih. Scholars differ over the list itself. Ibn Hajar records that many took it as the words of the Prophet ﷺ, while others held that a narrator added it, since most routes of the hadith do not have it. Ibn Kathir says a group of the hadith masters relied on the second view.",
   'We teach it because it is the list people memorise, in its order. Each Name shows where it comes from: named in the Quran, taken from a word the Quran uses of Allah, named in a hadith, or found only in this list.',
 ];
 

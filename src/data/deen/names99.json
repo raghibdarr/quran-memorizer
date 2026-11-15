@@ -1,7 +1,7 @@
 {
  "deck": "names99",
  "kind": "names",
- "hash": "65cd108126ff52c9",
+ "hash": "b7939dbdfb778e5e",
  "items": [
   {
    "id": "001",
@@ -26,7 +26,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -56,7 +56,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -86,7 +86,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -116,7 +116,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -146,7 +146,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -172,7 +172,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -198,7 +198,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -224,7 +224,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -254,7 +254,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -280,7 +280,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -306,7 +306,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -332,7 +332,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -358,7 +358,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -384,7 +384,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -414,7 +414,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -444,7 +444,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -474,7 +474,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -500,7 +500,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -526,7 +526,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -552,7 +552,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -579,7 +579,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -606,7 +606,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -626,7 +626,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -653,7 +653,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -680,17 +680,17 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "026",
-   "rev": 1,
+   "rev": 2,
    "order": 26,
    "arabic": "ٱلْمُذِلُّ",
    "transliteration": "Al-Mudhill",
    "meaning": "The Humbler, who abases whom He wills",
-   "explanation": "From dhull, lowliness. Al Imran 3:26: You honour whom You will and You humble whom You will; in Your hand is all good.",
+   "explanation": "From dhull, lowliness. Al Imran 3:26: You honour whom You will and You humble whom You will; in Your hand is the good.",
    "evidence": {
     "kind": "quran-derived",
     "quran": [
@@ -707,7 +707,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -733,7 +733,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -763,7 +763,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -790,7 +790,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -810,7 +810,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -840,7 +840,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -870,7 +870,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -896,7 +896,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -922,7 +922,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -948,7 +948,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -978,7 +978,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1004,7 +1004,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1030,7 +1030,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1060,17 +1060,17 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "040",
-   "rev": 1,
+   "rev": 2,
    "order": 40,
    "arabic": "ٱلْمُقِيتُ",
    "transliteration": "Al-Muqeet",
-   "meaning": "The Sustainer, who gives every creature its nourishment",
-   "explanation": "From qut, nourishment. Al-Nisa' 4:85 ends: and Allah is ever Muqit over all things. The word appears only here in the Quran.",
+   "meaning": "The Keeper and Sustainer, with power over all things",
+   "explanation": "Al-Nisa' 4:85 ends: and Allah is ever Muqit over all things. Al-Tabari reports it read as keeper, as witness and as able, and prefers able. The word is related to qut, nourishment, and appears only here in the Quran.",
    "evidence": {
     "kind": "quran-name",
     "quran": [
@@ -1081,12 +1081,12 @@
     ]
    },
    "explanationSource": {
-    "work": "The Quran",
-    "location": "An-Nisa 4:85"
+    "work": "Jami' al-Bayan of al-Tabari",
+    "location": "on al-Nisa' 4:85"
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1116,7 +1116,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1136,7 +1136,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1166,7 +1166,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1196,7 +1196,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1222,7 +1222,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1252,7 +1252,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1282,7 +1282,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1312,7 +1312,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1338,7 +1338,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1365,7 +1365,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1395,7 +1395,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1425,7 +1425,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1455,7 +1455,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1485,7 +1485,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1511,7 +1511,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1541,7 +1541,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1571,7 +1571,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1598,7 +1598,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1625,7 +1625,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1652,7 +1652,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1679,7 +1679,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1706,7 +1706,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1736,7 +1736,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1770,7 +1770,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1790,7 +1790,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1810,7 +1810,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1840,7 +1840,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1866,7 +1866,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1892,7 +1892,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1922,12 +1922,12 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "071",
-   "rev": 1,
+   "rev": 2,
    "order": 71,
    "arabic": "ٱلْمُقَدِّمُ",
    "transliteration": "Al-Muqaddim",
@@ -1935,7 +1935,7 @@
    "explanation": "From taqdim, putting forward. The Prophet ﷺ said in a supplication in the prayer: You are al-Muqaddim and You are al-Mu'akhkhir (Muslim, 771).",
    "evidence": {
     "kind": "hadith",
-    "hadith": "Sahih Muslim 771 (Abd al-Baqi numbering), from 'Ali ibn Abi Talib: the Prophet's supplication in the prayer, \"You are al-Muqaddim and You are al-Mu'akhkhir\""
+    "hadith": "Sahih Muslim 771 (Abd al-Baqi numbering), from 'Ali ibn Abi Talib: the Prophet's ﷺ supplication in the prayer, \"You are al-Muqaddim and You are al-Mu'akhkhir\""
    },
    "explanationSource": {
     "work": "Sahih Muslim",
@@ -1943,12 +1943,12 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "072",
-   "rev": 1,
+   "rev": 2,
    "order": 72,
    "arabic": "ٱلْمُؤَخِّرُ",
    "transliteration": "Al-Mu'akhkhir",
@@ -1956,7 +1956,7 @@
    "explanation": "From ta'khir, putting back. Paired with al-Muqaddim in the same supplication of the Prophet ﷺ, narrated by 'Ali (Muslim, 771).",
    "evidence": {
     "kind": "hadith",
-    "hadith": "Sahih Muslim 771 (Abd al-Baqi numbering), from 'Ali ibn Abi Talib: the Prophet's supplication in the prayer, \"You are al-Muqaddim and You are al-Mu'akhkhir\""
+    "hadith": "Sahih Muslim 771 (Abd al-Baqi numbering), from 'Ali ibn Abi Talib: the Prophet's ﷺ supplication in the prayer, \"You are al-Muqaddim and You are al-Mu'akhkhir\""
    },
    "explanationSource": {
     "work": "Sahih Muslim",
@@ -1964,7 +1964,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -1990,7 +1990,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2016,7 +2016,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2042,7 +2042,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2068,17 +2068,17 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "077",
-   "rev": 1,
+   "rev": 2,
    "order": 77,
    "arabic": "ٱلْوَالِي",
    "transliteration": "Al-Waalee",
    "meaning": "The Governor, who manages all affairs",
-   "explanation": "From wilayah, taking charge. Al-Ra'd 13:11: when Allah wills harm for a people, none can turn it back, and they have no protector besides Him.",
+   "explanation": "From wilayah, taking charge. Al-Ra'd 13:11 denies that anyone else is this: when Allah wills harm for a people, none can turn it back, and they have no protector besides Him.",
    "evidence": {
     "kind": "quran-derived",
     "quran": [
@@ -2095,7 +2095,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2122,7 +2122,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2148,7 +2148,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2178,17 +2178,17 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "081",
-   "rev": 1,
+   "rev": 2,
    "order": 81,
    "arabic": "ٱلْمُنْتَقِمُ",
    "transliteration": "Al-Muntaqim",
-   "meaning": "The Avenger, who requites wrongdoers",
-   "explanation": "From intiqam, requital. Al-Sajdah 32:22: who does more wrong than one reminded of his Lord's signs who then turns away? We will requite the wrongdoers.",
+   "meaning": "The Avenger, who requites the guilty",
+   "explanation": "From intiqam, requital. Al-Sajdah 32:22: who does more wrong than one reminded of his Lord's signs who then turns away? We will take requital from the guilty.",
    "evidence": {
     "kind": "quran-derived",
     "quran": [
@@ -2205,7 +2205,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2239,7 +2239,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2265,7 +2265,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2291,17 +2291,17 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
    "id": "085",
-   "rev": 1,
+   "rev": 2,
    "order": 85,
    "arabic": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ",
    "transliteration": "Dhul-Jalaali wal-Ikraam",
    "meaning": "Possessor of Majesty and Honour",
-   "explanation": "Al-Rahman 55:27: all on the earth will pass away, and the Face of your Lord remains, Possessor of Majesty and Honour.",
+   "explanation": "Al-Rahman 55:26-27: all on the earth will pass away, and the Face of your Lord remains, Possessor of Majesty and Honour.",
    "evidence": {
     "kind": "quran-name",
     "quran": [
@@ -2313,11 +2313,11 @@
    },
    "explanationSource": {
     "work": "The Quran",
-    "location": "Ar-Rahman 55:27"
+    "location": "Ar-Rahman 55:26-27"
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2344,7 +2344,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2371,7 +2371,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2397,7 +2397,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2424,7 +2424,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2444,7 +2444,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2471,7 +2471,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2498,7 +2498,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2525,7 +2525,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2551,7 +2551,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2578,7 +2578,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2606,7 +2606,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2633,7 +2633,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2653,7 +2653,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   },
   {
@@ -2673,7 +2673,7 @@
    },
    "review": {
     "status": "source-checked",
-    "date": "2026-11-14"
+    "date": "2026-11-15"
    }
   }
  ]
