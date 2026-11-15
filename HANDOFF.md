@@ -33,7 +33,8 @@ record is `content/deen/AUDIT-2026-11.md`; corrections are in `content/deen/ERRA
    - The course units follow one short primer per school, which is not always that school's
      relied-upon view; each school's column wants a reviewer from that school.
      `SHOW_UNREVIEWED_FIQH` in `src/lib/deen/flags.ts` holds the course back if wanted.
-   - Zakat notes `nisab-grams`, `basis` and `combining` stay draft; ten zakat quotes rest on the
+   - Zakat notes `nisab-grams`, `basis` and `combining` stay draft and are now not shown at all
+     (they return once source-checked); ten zakat quotes rest on the
      first verifier's pass (Minhaj al-Talibin 4, Kifayat al-Akhyar 3, al-Muhalla 2, Fath al-Mu'in 1).
    - `duas-daily:istikhara` keeps the narrator's aside inside the memorised Arabic (faithful to
      al-Bukhari 6382); the sleep set counts each of the three surahs three times in a row, where
@@ -46,8 +47,9 @@ record is `content/deen/AUDIT-2026-11.md`; corrections are in `content/deen/ERRA
      the audited `duas-daily:iftar`, with slightly different English ("moist / assured" against
      "moistened / certain"); pointing lesson 6 at `duas-daily:iftar` needs the claim and card
      wording aligned and a `rev` raise.
-   - Essentials ayah translations still carry footnote markers such as "[98]"; the old
-     collection titles in `src/data/essentials.json` are Title Case with ampersands.
+   - Essentials ayah translations still carry Saheeh International's footnote markers such as
+     "[98]" without the notes (QuranEnc's terms: republish unchanged, so they stay). Rendering
+     Key ayahs from the surah files, with their footnotes, would fix it.
 8. **Bundle baseline.** `scripts/bundle-baseline.json` was measured with webpack on a461010.
    Re-record it (`node scripts/check-bundle.mjs --write-baseline`) once this release ships.
 
@@ -141,7 +143,7 @@ record is `content/deen/AUDIT-2026-11.md`; corrections are in `content/deen/ERRA
 ## 5. Building in a worktree
 
 Turbopack refuses the `node_modules` junction ("points out of the filesystem root"). Build with
-`node scripts/build-workers.mjs && npx next build --webpack && node scripts/flatten-segments.mjs`
+`node scripts/build-workers.mjs && npx next build --webpack && node scripts/flatten-segments.mjs && node scripts/build-precache.mjs`
 and a `.env.local` (or placeholder `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`),
 or every page shows "This page couldn't load". The dev server likewise needs `--webpack`.
 `npx cap sync` in a worktree rewrites `android/capacitor.settings.gradle` and
@@ -159,3 +161,51 @@ or every page shows "This page couldn't load". The dev server likewise needs `--
 - e2e seam: `window.__TAKRAR_TEST_DECKS__` (read only by `src/components/deen/deck-source.ts`).
 - Notification taps carry `extra.url` and are routed by ReminderSync's `onReminderTap`; if
   ReminderSync stops being mounted app-wide, move that listener.
+
+## 7. Holistic review pass (2026-11-15, after integration)
+
+Applied (one commit each on `allinone`):
+
+- Deen queue: cards added on purpose by a learn or lesson flow carry `chosen` and skip the daily
+  new-card cap for their first pass; Review says how many new cards are waiting instead of "All
+  done". The learn flow's self-rating is applied (reviewSm2, counted in `introduced`); the item's
+  other cards start tomorrow. The course e2e spends the cap first and checks "Review them now".
+- Progress calendar uses `src/lib/hijri/convert.ts` with the user's offset; one weekday helper
+  (`src/lib/weekdays.ts`, locale week start, "Mon") for every calendar grid.
+- Learn tab: Salah duas, Morning and evening adhkar and Tasbih and dhikr retired (their addresses
+  open the replacing deck or /tasbih); Key ayahs stays. Tasbih presets bind the five audited tasbih
+  items under "Dhikr".
+- Stores sanitize every rehydrate (persist `merge`); Hijri offset clamped in convert.ts; root and
+  Prayer `error.tsx` (Prayer offers "Reset prayer settings").
+- Polar days: `polarDay()` flags borrowed times; /prayer, /ramadan and the Home strip mark them
+  "est." with one calm line.
+- Web PWA precaches the app shell (`scripts/build-precache.mjs` → `out/precache.json`, sw.js
+  stamped per build); `e2e/offline.spec.ts` (static web, 127.0.0.1).
+- Sticky action bars on /review/deen and in the learn flow; Names read-first card; session
+  endings "5 Names learned"; plain romanisation for Names with "Say it:" in the sheet.
+- Home tagline "Quran, prayer and learning" (header, title, manifest); onboarding line and a fifth
+  intent "Prayer times and daily worship"; UK spelling swept; Home tile "Quran reviews".
+- Prayer setup on the web is two steps; place chip on its own line; Ramadan "At iftar" card and
+  the fasting-lessons row; zakat shows only source-checked notes; Progress "Hadith, duas, Names
+  and lessons" section with Prayer log and Fasting log rows.
+- Shared `SectionLabel`/`SectionTitle` (`src/components/ui/section-heading.tsx`); hadith deck named
+  "Forty Hadith of al-Nawawi" everywhere, detail page "Hadith 1".
+- Contrast: tajweed colours are themed tokens (`--tj-*`), ayah ends, Names numbers, zakat cards,
+  calendar, Progress. Native date and time inputs styled; disabled buttons muted.
+- Pray it now counts on a full-width button; tasbih counter named "Count, n of 33"; day-sheet
+  choices named "Fajr: On time"; calendars hold at 200% text (`e2e/large-text.spec.ts`).
+- Supabase loads lazily (`src/lib/supabase/lazy.ts`): Home first load 316 → 268 KB gzip for
+  signed-out users; `check-bundle.mjs` adds a 275 KB ceiling for Home and Prayer.
+
+Not applied, and why:
+
+- "Allah" in place of "Allāh" in the Quran translation on Pray it now: it is Saheeh International
+  via QuranEnc, whose terms require it unchanged (recorded in `data-sources/README.md`).
+- 250 KB first-load ceiling: about 165 KB is Next's router runtime, react-dom and polyfills; the
+  ceiling is 275 KB until more of the app shell is split.
+- Surah names inside authored prose ("al-Fatihah" in a Name's explanation): a content edit with a
+  rev raise, for the content owner.
+
+Owner: the tagline is a placeholder decision (one string in each of `src/app/page.tsx`,
+`src/app/layout.tsx`, `src/app/manifest.ts`). The tasbih presets still read `essentials.json`
+(audited), which keeps existing counts; Key ayahs could move to the surah files.
