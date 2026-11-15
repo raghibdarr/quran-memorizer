@@ -26,7 +26,7 @@ function selections(): { deck: string; title: string; body: string }[] {
         const file = join(dir, e.name);
         const body = notIncludedSection(readFileSync(file, 'utf8'));
         if (!body) continue;
-        const deck = deckIdForSelection(relative(CONTENT, file));
+        const deck = deckIdForSelection(relative(CONTENT, file), (id) => !!deckInfo(id));
         out.push({ deck, title: deckInfo(deck)?.title ?? deck, body });
       }
     }

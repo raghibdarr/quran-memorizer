@@ -161,6 +161,8 @@ export function Term({ id, children, className }: { id: string; children?: React
         type="button"
         data-term={id}
         onClick={(e) => {
+          // Inside a link or a pressable card, the tap defines the term and nothing else
+          e.preventDefault();
           e.stopPropagation();
           haptic.selection();
           setOpen(true);

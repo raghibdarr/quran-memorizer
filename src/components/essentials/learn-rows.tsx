@@ -6,6 +6,8 @@ import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import { GROUP_TITLES, type DeckGroup } from '@/content/deen/registry';
 import { useDeenStore } from '@/stores/deen-store';
+import { useReviewStore } from '@/stores/review-store';
+import type { TextItem } from '@/types/deen';
 import { useLiveDecks } from '@/hooks/use-deen-queue';
 import { getDeck } from '@/components/deen/deck-source';
 
@@ -20,19 +22,33 @@ const GROUP_BLURB: Record<DeckGroup, string> = {
 
 interface GroupRow {
   group: DeckGroup;
-  /** Deck ids in the group, with each deck's item ids */
-  decks: { id: string; items: string[] }[];
+  /**
+   * Deck ids in the group, with each deck's item ids. `quran` maps a Quranic
+   * item to its first ayah ("2:255"): those get no deen cards, their ayahs
+   * join the Quran review.
+   */
+  decks: { id: string; items: string[]; quran?: Record<string, string> }[];
 }
 
-/** Started items (any card) and finished lessons, per group */
-export function groupProgress(row: GroupRow, cardIds: string[], lessonsDone: Record<string, number>): { started: number; total: number } {
+/**
+ * Started items and finished lessons, per group. A text is started once it has
+ * a card; a Quranic text once its first ayah is in the Quran review (`ayahKeys`,
+ * "surah:ayah").
+ */
+export function groupProgress(
+  row: GroupRow,
+  cardIds: string[],
+  lessonsDone: Record<string, number>,
+  ayahKeys: ReadonlySet<string> = new Set(),
+): { started: number; total: number } {
   let started = 0;
   let total = 0;
   const startedItems = new Set(cardIds.map((id) => id.split(':').slice(0, 2).join(':')));
   for (const d of row.decks) {
     total += d.items.length;
     for (const item of d.items) {
-      if (row.group === 'course' ? lessonsDone[item] : startedItems.has(`${d.id}:${item}`)) started++;
+      const ayah = d.quran?.[item];
+      if (row.group === 'course' ? lessonsDone[item] : ayah ? ayahKeys.has(ayah) : startedItems.has(`${d.id}:${item}`)) started++;
     }
   }
   return { started, total };
@@ -48,6 +64,7 @@ export function LearnRows() {
   const decks = useLiveDecks();
   const cards = useDeenStore((s) => s.cards);
   const lessonsDone = useDeenStore((s) => s.lessonsDone);
+  const ayahCards = useReviewStore((s) => s.cards);
   const [rows, setRows] = useState<GroupRow[] | null>(null);
 
   useEffect(() => {
@@ -58,9 +75,23 @@ export function LearnRows() {
       const out: GroupRow[] = [];
       for (const group of GROUP_ORDER) {
         const inGroup = loaded.filter((l) => l.d.group === group);
-        if (inGroup.length) out.push({ group, decks: inGroup.map((l) => ({ id: l.d.id, items: (l.deck?.items ?? []).map((i) => i.id) })) });
+        if (!inGroup.length) continue;
+        out.push({
+          group,
+          decks: inGroup.map((l) => {
+            const items = l.deck?.items ?? [];
+            const quran: Record<string, string> = {};
+            for (const i of items) {
+              const ref = 'quran' in i ? (i as TextItem).quran : undefined;
+              if (ref) quran[i.id] = `${ref.surahId}:${ref.ayah}`;
+            }
+            return { id: l.d.id, items: items.map((i) => i.id), quran };
+          }),
+        });
       }
       setRows(out);
+    }).catch(() => {
+      // A deck that fails to load leaves the rows out rather than breaking the tab
     });
     return () => {
       live = false;
@@ -68,6 +99,7 @@ export function LearnRows() {
   }, [decks]);
 
   const cardIds = useMemo(() => Object.keys(cards), [cards]);
+  const ayahKeys = useMemo(() => new Set(ayahCards.map((c) => `${c.surahId}:${c.ayahNumber}`)), [ayahCards]);
   if (!decks?.length || !rows?.length) return null;
 
   return (
@@ -76,7 +108,7 @@ export function LearnRows() {
         Hadith, Names and more
       </h2>
       {rows.map((row) => {
-        const { started, total } = groupProgress(row, cardIds, lessonsDone);
+        const { started, total } = groupProgress(row, cardIds, lessonsDone, ayahKeys);
         const unit = row.group === 'course' ? 'lessons' : row.group === 'names' ? 'Names' : 'texts';
         return (
           <Link key={row.group} href={GROUP_ROUTE[row.group]} className="block" data-learn-row={row.group}>

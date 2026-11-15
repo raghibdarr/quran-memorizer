@@ -152,6 +152,13 @@ function StepDots({ step, depth }: { step: Step; depth: DeckDepth }) {
 function ItemText({ item, ayahs, showEnglish = true }: { item: TextItem; ayahs: Ayah[] | null; showEnglish?: boolean }) {
   if (item.quran) {
     if (!ayahs) return <p className="py-8 text-center text-sm text-muted">Loading the ayahs…</p>;
+    if (ayahs.length === 0) {
+      return (
+        <p className="py-8 text-center text-sm text-muted" role="status" data-ayahs-missing>
+          These ayahs couldn&apos;t be loaded. Check your connection and open this again.
+        </p>
+      );
+    }
     return (
       <div className="space-y-4">
         {ayahs.map((a) => (
@@ -391,7 +398,7 @@ export function MemoriseFlow({
 
         <Button
           className="w-full"
-          disabled={item.quran ? !ayahs : false}
+          disabled={item.quran ? !ayahs?.length : false}
           onClick={() => {
             if (canBuild) {
               startUnit(0);

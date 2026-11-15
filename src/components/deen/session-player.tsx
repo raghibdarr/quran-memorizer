@@ -161,6 +161,8 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
   const recordActivity = useStatsStore((s) => s.recordActivity);
   const [index, setIndex] = useState(0);
   const [rated, setRated] = useState(0);
+  // The cards rated in this session (a skipped card is still where it was)
+  const [ratedIds, setRatedIds] = useState<string[]>([]);
   const recorded = useRef(false);
   const doneRef = useRef<HTMLHeadingElement>(null);
 
@@ -176,7 +178,7 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
 
   if (done) {
     const cards = useDeenStore.getState().cards;
-    const next = cardIds.map((id) => cards[id]?.nextReview).filter((n): n is number => typeof n === 'number');
+    const next = ratedIds.map((id) => cards[id]?.nextReview).filter((n): n is number => typeof n === 'number');
     const soonest = next.length ? Math.min(...next) : null;
     return (
       <div className="flex min-h-[calc(100dvh-9rem)] flex-col items-center justify-center text-center" data-deen-session="done">
@@ -205,6 +207,7 @@ export function SessionPlayer({ cardIds, errata = '', onExit }: { cardIds: strin
     reviewCard(id, RATING_QUALITY[r]);
     haptic.selection();
     setRated((n) => n + 1);
+    setRatedIds((ids) => [...ids, id]);
     setIndex((i) => i + 1);
   };
 

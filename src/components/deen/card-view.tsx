@@ -131,12 +131,9 @@ export function CardFront({ content, hint }: { content: CardContent; hint?: bool
     case 'narrator':
       return (
         <div className="space-y-2">
+          {/* Title and cue only: the text itself opens with the narrator's name */}
           <p className="text-base font-semibold text-foreground">{item.title}</p>
-          {item.translation && (
-            <p className="line-clamp-4 text-start text-sm leading-relaxed text-muted">
-              <RichText text={item.translation} />
-            </p>
-          )}
+          <p className="text-xs text-muted">{item.cue}</p>
           <Prompt>Who narrated it?</Prompt>
         </div>
       );

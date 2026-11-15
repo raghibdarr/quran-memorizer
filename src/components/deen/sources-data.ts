@@ -31,11 +31,17 @@ export function errataBody(md: string): string | null {
   return text;
 }
 
-/** The deck id a SELECTION.md belongs to, from its path under content/deen */
-export function deckIdForSelection(relPath: string): string {
+/**
+ * The deck id a SELECTION.md belongs to, from its path under content/deen.
+ * `isDeck` says which ids the registry knows: a folder is named after its deck
+ * (nawawi40, adhkar/duas-daily) or after the deck less its group
+ * (adhkar/after-prayer → adhkar-after-prayer, course/fasting → course-fasting).
+ */
+export function deckIdForSelection(relPath: string, isDeck?: (id: string) => boolean): string {
   const parts = relPath.replace(/\\/g, '/').split('/').filter(Boolean);
   parts.pop(); // SELECTION.md
-  // adhkar/<deck>/SELECTION.md → <deck>; nawawi40/SELECTION.md → nawawi40; course/<unit> → course-<unit>
+  const last = parts[parts.length - 1] ?? '';
+  if (isDeck) return [last, parts.join('-')].find((id) => id && isDeck(id)) ?? last;
   if (parts[0] === 'course' && parts[1]) return `course-${parts[1]}`;
-  return parts[parts.length - 1] ?? '';
+  return last;
 }
