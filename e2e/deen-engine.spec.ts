@@ -171,7 +171,8 @@ test.describe('deen engine', () => {
     await page.addInitScript(() => localStorage.setItem('onboarding-complete', 'true'))
     await page.goto('/essentials')
     await expect(page.getByRole('heading', { name: 'Memorisation plans' })).toBeVisible()
-    const hadithRow = page.locator('[data-learn-row="hadith"]')
+    // The rows hold their place while the decks load (aria-busy); read the count once they have loaded
+    const hadithRow = page.locator('[data-learn-rows]:not([aria-busy]) [data-learn-row="hadith"]')
     const live = await hadithRow.waitFor({ timeout: 4000 }).then(() => true, () => false)
     const before = live ? Number((await hadithRow.innerText()).match(/(\d+) to learn/)?.[1] ?? NaN) : 0
     expect(Number.isNaN(before)).toBe(false)
