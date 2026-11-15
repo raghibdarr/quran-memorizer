@@ -4,7 +4,7 @@ import { useEffect, useId, useState } from 'react';
 import { CheckIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { haptic } from '@/lib/haptics';
-import { amountText, parseAmount } from '@/lib/zakat/format';
+import { ambiguousReading, amountText, parseAmount } from '@/lib/zakat/format';
 
 /**
  * The look every text, number and date box on the zakat page shares: a clear
@@ -68,6 +68,8 @@ export function AmountField({
   const [text, setText] = useState(amountText(value));
   const parsed = parseAmount(text);
   const invalid = Number.isNaN(parsed);
+  // "1,234" could be a thousand or a decimal: say which one was taken
+  const readAs = invalid ? null : ambiguousReading(text);
 
   useEffect(() => {
     if (!onValidity) return;
@@ -95,7 +97,7 @@ export function AmountField({
           placeholder="0"
           value={text}
           aria-invalid={invalid || undefined}
-          aria-describedby={[hint ? `${id}-hint` : '', invalid ? `${id}-error` : ''].filter(Boolean).join(' ') || undefined}
+          aria-describedby={[hint ? `${id}-hint` : '', invalid ? `${id}-error` : '', readAs ? `${id}-read` : ''].filter(Boolean).join(' ') || undefined}
           onChange={(e) => {
             setText(e.target.value);
             const n = parseAmount(e.target.value);
@@ -112,6 +114,12 @@ export function AmountField({
           </span>
         )}
       </div>
+      {readAs && (
+        <p id={`${id}-read`} className="mt-1.5 text-xs text-muted" data-testid={testId ? `${testId}-read` : undefined}>
+          Read as {readAs}
+          {unit ? ` ${unit}` : ''}
+        </p>
+      )}
       {invalid && (
         <p id={`${id}-error`} role="alert" className="mt-1.5 text-xs font-medium text-gold-deep">
           {amountProblem(text)}

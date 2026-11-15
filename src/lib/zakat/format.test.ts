@@ -1,5 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { amountText, formatCivilDate, formatGrams, formatMoney, parseAmount } from './format';
+import { ambiguousReading, amountText, formatCivilDate, formatGrams, formatMoney, parseAmount } from './format';
+
+describe('ambiguousReading', () => {
+  it('says how one separator with three digits after it was read', () => {
+    expect(ambiguousReading('1,234')).toBe('1,234');
+    expect(ambiguousReading('8,125')).toBe('8,125');
+    expect(ambiguousReading('1.234')).toBe('1.234');
+    expect(ambiguousReading(' 12,500 ')).toBe('12,500');
+  });
+  it('is quiet when there is only one reading', () => {
+    for (const t of ['', '1234', '12,5', '12.50', '1,234.5', '1.234,56', '1,234,567', '1234,567', 'abc', '1,23a']) {
+      expect(ambiguousReading(t), t).toBeNull();
+    }
+  });
+});
 
 describe('zakat formatting', () => {
   it('formats money with the user\'s own currency text', () => {
