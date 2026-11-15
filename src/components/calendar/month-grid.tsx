@@ -63,7 +63,7 @@ export default function MonthGrid({
                 )}
               >
                 <span className="text-base font-semibold tabular-nums">{d.hijri.day}</span>
-                <span className={cn('mt-0.5 text-[10px] tabular-nums', isSel ? 'text-on-teal/80' : 'text-muted')}>
+                <span className={cn('mt-0.5 text-[10px] tabular-nums', isSel ? 'text-on-teal' : 'text-muted')}>
                   {gd === 1 || d.hijri.day === 1 ? `${gd} ${SHORT_MONTHS[gm - 1]}` : gd}
                 </span>
                 <span

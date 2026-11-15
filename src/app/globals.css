@@ -223,7 +223,22 @@ body::after {
 @keyframes bar2 { 0%, 100% { height: 8px; } 50% { height: 12px; } }
 @keyframes bar3 { 0%, 100% { height: 6px; } 50% { height: 14px; } }
 
-/* Tajweed color-coded rules — matched to quran.com */
+/* Tajweed color-coded rules — matched to quran.com. The light theme's shades are
+   deepened to at least 3:1 on the paper; the dark theme keeps quran.com's own */
+:root {
+  --tj-silent: #8C8C8C;
+  --tj-madd-normal: #C2508F;
+  --tj-madd-permissible: #C2620E;
+  --tj-green: #1E8F4C;
+  --tj-qalqalah: #0E8F9C;
+}
+.dark {
+  --tj-silent: #7A7A7A;
+  --tj-madd-normal: #E07DB3;
+  --tj-madd-permissible: #E67E22;
+  --tj-green: #2ECC71;
+  --tj-qalqalah: #36D7E4;
+}
 .tajweed-text tajweed { font-family: inherit; }
 /* tappable for the rule (TajweedExplainer), except inside controls */
 .tajweed-text tajweed[class] { cursor: help; }
@@ -236,20 +251,13 @@ button .tajweed-text tajweed[class], a .tajweed-text tajweed[class] { cursor: in
 .tajweed-text .slnt,
 .tajweed-text .idgham_wo_ghunnah,
 .tajweed-text .idgham_mutajanisayn,
-.tajweed-text .idgham_mutaqaribayn { color: #AAAAAA; }
-/* On the dark page #AAA sat too close to the white text to read as silent */
-.dark .tajweed-text .ham_wasl,
-.dark .tajweed-text .laam_shamsiyah,
-.dark .tajweed-text .slnt,
-.dark .tajweed-text .idgham_wo_ghunnah,
-.dark .tajweed-text .idgham_mutajanisayn,
-.dark .tajweed-text .idgham_mutaqaribayn { color: #7A7A7A; }
+.tajweed-text .idgham_mutaqaribayn { color: var(--tj-silent); }
 
 /* Normal madd (2) — pink */
-.tajweed-text .madda_normal { color: #E07DB3; }
+.tajweed-text .madda_normal { color: var(--tj-madd-normal); }
 
 /* Separated madd (2/4/6) — orange */
-.tajweed-text .madda_permissible { color: #E67E22; }
+.tajweed-text .madda_permissible { color: var(--tj-madd-permissible); }
 
 /* Connected madd (4/5) — magenta */
 .tajweed-text .madda_obligatory { color: #DB2777; }
@@ -263,10 +271,10 @@ button .tajweed-text tajweed[class], a .tajweed-text tajweed[class] { cursor: in
 .tajweed-text .ikhafa_shafawi,
 .tajweed-text .idgham_ghunnah,
 .tajweed-text .idgham_shafawi,
-.tajweed-text .iqlab { color: #2ECC71; }
+.tajweed-text .iqlab { color: var(--tj-green); }
 
 /* Qalqala (echo) — cyan */
-.tajweed-text .qalaqah { color: #36D7E4; }
+.tajweed-text .qalaqah { color: var(--tj-qalqalah); }
 
 /* Tafkhim (heavy letters) — dark blue matching quran.com */
 .tajweed-text .tafkhim { color: #1B4B99; }
@@ -274,10 +282,10 @@ button .tajweed-text tajweed[class], a .tajweed-text tajweed[class] { cursor: in
 
 /* Verse end markers */
 .tajweed-text span.end {
-  color: var(--fg);
+  /* Full-strength muted: at 40% of the ink it fell to about 2.3:1 */
+  color: var(--c-muted);
   font-size: 0.6em;
   vertical-align: middle;
-  opacity: 0.4;
 }
 
 /* ---------- Screen transitions (M11b — native stack grammar) ----------

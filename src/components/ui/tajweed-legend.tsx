@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { useSettingsStore } from '@/stores/settings-store';
 
 const TAJWEED_RULES = [
-  { label: 'Silent letter', color: '#AAAAAA' },
-  { label: 'Normal madd (2)', color: '#E07DB3' },
-  { label: 'Permissible madd (2/4/6)', color: '#E67E22' },
+  { label: 'Silent letter', color: 'var(--tj-silent)' },
+  { label: 'Normal madd (2)', color: 'var(--tj-madd-normal)' },
+  { label: 'Permissible madd (2/4/6)', color: 'var(--tj-madd-permissible)' },
   { label: 'Madd before a hamzah (4/5)', color: '#DB2777' },
   { label: 'Necessary madd (6)', color: '#E74C3C' },
-  { label: "Ghunna/ikhfa'", color: '#2ECC71' },
-  { label: 'Qalqala (echo)', color: '#36D7E4' },
+  { label: "Ghunna/ikhfa'", color: 'var(--tj-green)' },
+  { label: 'Qalqala (echo)', color: 'var(--tj-qalqalah)' },
 ];
 
 /**

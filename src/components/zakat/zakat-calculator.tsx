@@ -339,9 +339,10 @@ function NisabCard({
             amount && amount.length > 11 ? 'text-[13px]' : 'text-sm',
           )}
         >
-          {amount ?? <span className="text-muted">Add the price</span>}
+          {amount ?? <span className={chosen ? 'text-foreground/75' : 'text-muted'}>Add the price</span>}
         </p>
-        <p className="mt-1 text-xs leading-snug text-muted">
+        {/* On the chosen card's teal tint the muted grey fell just under AA */}
+        <p className={cn('mt-1 text-xs leading-snug', chosen ? 'text-foreground/75' : 'text-muted')}>
           {b === 'gold' ? '20 mithqal' : '200 dirhams'}. {formatGrams(other)} in {reckoning === 'dinar' ? 'tola' : 'dinar'} weights.
         </p>
       </div>
