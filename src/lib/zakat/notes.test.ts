@@ -95,3 +95,13 @@ describe('zakat notes (spec 5.1 grounding rules)', () => {
     }
   });
 });
+
+describe('what the calculator shows', () => {
+  it('draft notes are not rendered (spec 5.5 rule 1); every shown note is source-checked', async () => {
+    const { isShownNote } = await import('@/components/zakat/note-block')
+    for (const id of IDS) {
+      const status = zakatNote(id).status
+      expect(isShownNote(id), id).toBe(status !== 'draft')
+    }
+  })
+})
