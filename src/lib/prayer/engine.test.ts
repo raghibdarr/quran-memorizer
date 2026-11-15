@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import fc from 'fast-check'
 import {
+  polarDay,
   computeDay,
   currentPrayer,
   currentWindow,
@@ -310,5 +311,21 @@ describe('near the polar circles: no time the engine cannot place', () => {
         if (day.maghrib !== null) expect(day.asr).toBeLessThanOrEqual(day.maghrib + 5 * 60_000)
       }
     }
+  })
+
+  it('Tromsø, 21 June and 21 December: borrowed times are flagged as estimates', () => {
+    const june = polarDay(tromso, '2026-06-21', settings('MuslimWorldLeague'))
+    expect(june?.kind).toBe('midnight-sun')
+    expect(june?.estimated).toEqual(expect.arrayContaining(['sunrise', 'maghrib']))
+    expect(june?.estimated).not.toContain('dhuhr')
+    const december = polarDay(tromso, '2026-12-21', settings('MuslimWorldLeague'))
+    expect(december?.kind).toBe('polar-night')
+    expect(december?.estimated).toEqual(expect.arrayContaining(['sunrise', 'maghrib']))
+  })
+
+  it('an ordinary day, or a chosen rule, flags nothing', () => {
+    expect(polarDay(tromso, '2026-03-20', settings('MuslimWorldLeague'))).toBeNull()
+    expect(polarDay({ lat: 51.51, lng: -0.13, tz: 'Europe/London' }, '2026-06-21', settings('MuslimWorldLeague'))).toBeNull()
+    expect(polarDay(tromso, '2026-06-21', settings('MuslimWorldLeague', { highLatRule: 'middleofthenight' }))).toBeNull()
   })
 })

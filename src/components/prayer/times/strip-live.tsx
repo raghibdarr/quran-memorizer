@@ -24,13 +24,14 @@ export default function PrayerStripLive() {
     <Link
       href="/prayer"
       className="pressable flex min-h-11 items-center gap-2.5 rounded-2xl border border-foreground/10 bg-card px-4 py-2 text-sm"
-      aria-label={line ? `Next prayer: ${line.label} at ${line.time}, ${line.until}` : 'Prayer times'}
+      aria-label={line ? `Next prayer: ${line.label} at ${line.time}${line.estimated ? ', estimated' : ''}, ${line.until}` : 'Prayer times'}
       data-home-prayer-strip
     >
       <PrayerIcon size={16} className="shrink-0 text-teal" />
       {line ? (
         <span className="min-w-0 flex-1 truncate">
           <span className="font-semibold text-foreground">{line.label}</span>{' '}
+          {line.estimated && <span className="text-[11px] font-semibold text-gold-deep" data-estimated>est. </span>}
           <span className="font-semibold tabular-nums text-foreground">{line.time}</span>
           <span className="text-muted"> · {line.until}</span>
         </span>

@@ -9,7 +9,9 @@ import {
   formatTime,
   formatUntil,
   isoInTz,
+  polarDay,
   prayerRows,
+  type PolarDay,
   type CurrentPrayer,
   type DayTimes,
   type PrayerRow,
@@ -19,7 +21,8 @@ import { addDaysIso } from '@/lib/dates';
 import { formatHijri, isRamadan, toHijri } from '@/lib/hijri/convert';
 import { TIME_LABELS, type Place, type PrayerCalcSettings, type PrayerName, type RamadanMode, type TimeName } from '@/types/prayer';
 
-export { computeDay, effectiveHighLatRule, formatTime, formatUntil, isoInTz };
+export { computeDay, effectiveHighLatRule, formatTime, formatUntil, isoInTz, polarDay };
+export type { PolarDay };
 
 type Where = Pick<Place, 'lat' | 'lng' | 'tz'>;
 
@@ -44,6 +47,8 @@ export interface HubRow {
    * when it is past midnight (a summer Isha far north), -1 when before the day began
    */
   dayShift: -1 | 0 | 1;
+  /** Borrowed from the nearest day that has it (inside the polar circles): an estimate */
+  estimated: boolean;
 }
 
 export interface HubModel {
@@ -58,6 +63,8 @@ export interface HubModel {
   /** Times that don't exist at this place today (high latitude) */
   missing: TimeName[];
   ramadan: boolean;
+  /** Midnight sun or polar night today, and which times are borrowed */
+  polar: PolarDay | null;
 }
 
 /** Ramadan as the user's setting has it: forced on or off, or by the Hijri date at the place */
@@ -165,6 +172,7 @@ export function buildHub(place: Where, s: ModelSettings, now: number): HubModel 
   const iso = days.today;
   const next = days.next();
   const current = days.current();
+  const polar = polarDay(place, iso, s);
   const rows = days.rows(iso).map((r) => {
     const isNext = !!next && next.iso === iso && next.prayer === r.name;
     const isCurrent = !!current && current.iso === iso && current.prayer === r.name;
@@ -174,6 +182,7 @@ export function buildHub(place: Where, s: ModelSettings, now: number): HubModel 
       isCurrent,
       isPassed: !isNext && !isCurrent && r.startMs !== null && r.startMs <= now,
       dayShift: dayShiftOf(r.startMs, iso, place.tz),
+      estimated: !!polar && r.startMs !== null && polar.estimated.includes(r.name),
     };
   });
   return {
@@ -185,6 +194,7 @@ export function buildHub(place: Where, s: ModelSettings, now: number): HubModel 
     window: days.window(),
     missing: rows.filter((r) => r.startMs === null).map((r) => r.name),
     ramadan: inRamadan(place, s, now),
+    polar,
   };
 }
 
@@ -194,6 +204,8 @@ export interface StripLine {
   time: string;
   until: string;
   prayer: PrayerName;
+  /** Borrowed from the nearest day that has it (polar day or night) */
+  estimated: boolean;
 }
 
 /** The Home strip: "Asr 15:12 · in 1 h 4 min" (in Ramadan, Maghrib reads "Iftar") */
@@ -206,6 +218,7 @@ export function stripLine(place: Where, s: ModelSettings, now: number, hour12 = 
     time: formatTime(next.at, place.tz, { hour12 }),
     until: formatUntil(next.at, now),
     prayer: next.prayer,
+    estimated: !!polarDay(place, next.iso, s)?.estimated.includes(next.prayer),
   };
 }
 
@@ -214,6 +227,13 @@ export function dayTimes(place: Where, s: PrayerCalcSettings, now: number): DayT
   const out = {} as DayTimes;
   for (const r of inOrder(prayerRows(place, isoInTz(now, place.tz), s))) out[r.name] = r.startMs;
   return out;
+}
+
+/** The calm line under the times on a polar day (null on an ordinary one) */
+export function polarNote(polar: PolarDay | null): string | null {
+  if (!polar) return null;
+  const sun = polar.kind === 'midnight-sun' ? 'The sun doesn’t set here today' : 'The sun doesn’t rise here today';
+  return `${sun}, so the times marked “est.” are taken from the nearest day that has them. Many communities this far north follow another city or Makkah instead.`;
 }
 
 /** "12 Jumada al-Akhirah 1448" for the place's day */

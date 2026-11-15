@@ -118,6 +118,42 @@ export function computeDay(place: Where, iso: string, settings: PrayerCalcSettin
   return out;
 }
 
+export interface PolarDay {
+  /** The sun stays up all day (midnight sun) or never rises (polar night) */
+  kind: 'midnight-sun' | 'polar-night';
+  /** Times shown that are borrowed from the nearest day that has them */
+  estimated: TimeName[];
+}
+
+/** The sun's declination in degrees on a civil date (a close approximation is enough to tell its sign) */
+function declination(iso: string): number {
+  const [y, m, d] = iso.split('-').map(Number);
+  const day = (Date.UTC(y, m - 1, d) - Date.UTC(y, 0, 0)) / 86_400_000;
+  return -23.44 * Math.cos(((2 * Math.PI) / 365) * (day + 10));
+}
+
+/**
+ * Whether today's times at the place were borrowed: under the automatic rule,
+ * inside the polar circles, a day with no sunrise or no sunset takes those
+ * times (and the ones that hang on them) from the nearest day that has them.
+ * Those times are estimates, and the screens say so. Null on an ordinary day,
+ * and under a chosen rule (which shows no time instead of a borrowed one).
+ */
+export function polarDay(place: Where, iso: string, settings: PrayerCalcSettings): PolarDay | null {
+  if (settings.highLatRule !== 'auto') return null;
+  const params = paramsFor(place, settings);
+  params.polarCircleResolution = PolarCircleResolution.Unresolved;
+  const [y, m, d] = iso.split('-').map(Number);
+  const plain = new PrayerTimes(new Coordinates(place.lat, place.lng), new Date(y, m - 1, d, 12), params);
+  if (valid(plain.sunrise) !== null && valid(plain.maghrib) !== null) return null;
+  const shown = computeDay(place, iso, settings);
+  const estimated = TIME_NAMES.filter((n) => shown[n] !== null && valid(plain[n]) === null);
+  if (!estimated.length) return null;
+  // Summer in the place's own hemisphere: the sun doesn't set
+  const kind = place.lat * declination(iso) > 0 ? 'midnight-sun' : 'polar-night';
+  return { kind, estimated };
+}
+
 /** isoInTz, or null for a zone name the platform doesn't know */
 function safeIsoInTz(ms: number, tz: string): string | null {
   try {

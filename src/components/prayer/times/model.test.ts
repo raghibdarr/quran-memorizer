@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildHub, dayTimes, inOrder, inRamadan, stripLine, zoneDiffers, zoneOffsetMin, type ModelSettings } from './model'
+import { buildHub, dayTimes, inOrder, inRamadan, polarNote, stripLine, zoneDiffers, zoneOffsetMin, type ModelSettings } from './model'
 import { currentPrayer, currentWindow, formatTime, nextPrayer } from '@/lib/prayer/engine'
 
 const ZERO = { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }
@@ -229,7 +229,7 @@ describe('inRamadan', () => {
 
 describe('stripLine', () => {
   it('reads "Asr 15:54 · in 1 h 54 min"', () => {
-    expect(stripLine(MAKKAH, S, at('14:00'))).toEqual({ label: 'Asr', time: '15:54', until: 'in 1 h 54 min', prayer: 'asr' })
+    expect(stripLine(MAKKAH, S, at('14:00'))).toEqual({ label: 'Asr', time: '15:54', until: 'in 1 h 54 min', prayer: 'asr', estimated: false })
   })
 
   it('says Iftar for Maghrib in Ramadan only', () => {
@@ -266,5 +266,26 @@ describe('time zones', () => {
     expect(zoneDiffers('Asia/Riyadh', 'Asia/Riyadh', winter)).toBe(false)
     expect(zoneDiffers('Asia/Riyadh', '', winter)).toBe(false)
     expect(zoneDiffers('Asia/Riyadh', 'Not/AZone', winter)).toBe(false)
+  })
+})
+
+describe('polar days on the hub and the strip', () => {
+  const TROMSO = { lat: 69.65, lng: 18.96, tz: 'Europe/Oslo' }
+  const MWL: ModelSettings = { ...S, method: 'MuslimWorldLeague' }
+  it('marks borrowed rows and says why, in June and December', () => {
+    const june = buildHub(TROMSO, MWL, Date.parse('2026-06-21T12:00:00+02:00'))
+    expect(june.polar?.kind).toBe('midnight-sun')
+    expect(june.rows.find((r) => r.name === 'maghrib')?.estimated).toBe(true)
+    expect(june.rows.find((r) => r.name === 'dhuhr')?.estimated).toBe(false)
+    expect(polarNote(june.polar)).toContain('doesn’t set')
+    const december = buildHub(TROMSO, MWL, Date.parse('2026-12-21T09:00:00+01:00'))
+    expect(december.polar?.kind).toBe('polar-night')
+    expect(polarNote(december.polar)).toContain('doesn’t rise')
+  })
+  it('an ordinary day has no note and no marks', () => {
+    const m = buildHub(MAKKAH, S, at('14:00'))
+    expect(m.polar).toBeNull()
+    expect(m.rows.some((r) => r.estimated)).toBe(false)
+    expect(stripLine(MAKKAH, S, at('14:00'))?.estimated).toBe(false)
   })
 })

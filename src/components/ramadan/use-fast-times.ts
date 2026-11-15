@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { addDays } from '@/lib/hijri/calendar';
 import { fastTimes, type FastTimes } from '@/lib/worship/ramadan';
+import type { PolarDay } from '@/lib/prayer/engine';
 import { usePlaceStore } from '@/stores/place-store';
 import { calcSettingsOf, usePrayerStore } from '@/stores/prayer-store';
 
@@ -12,6 +13,9 @@ export interface FastDay {
   today: FastTimes;
   tomorrow: FastTimes;
   tz: string;
+  /** Polar day or night: the times are borrowed from the nearest day that has them (null on an ordinary day) */
+  polarToday: PolarDay | null;
+  polarTomorrow: PolarDay | null;
 }
 
 /**
@@ -32,7 +36,7 @@ export function useFastTimes(enabled: boolean, today: string): FastDay | null {
       return;
     }
     let live = true;
-    import('@/lib/prayer/engine').then(({ computeDay }) => {
+    import('@/lib/prayer/engine').then(({ computeDay, polarDay }) => {
       if (!live) return;
       const settings = JSON.parse(calcKey);
       setDay({
@@ -40,6 +44,8 @@ export function useFastTimes(enabled: boolean, today: string): FastDay | null {
         today: fastTimes(computeDay(place, today, settings), imsakMin),
         tomorrow: fastTimes(computeDay(place, addDays(today, 1), settings), imsakMin),
         tz: place.tz,
+        polarToday: polarDay(place, today, settings),
+        polarTomorrow: polarDay(place, addDays(today, 1), settings),
       });
     }).catch(() => {
       // The engine chunk couldn't load (offline before it was cached): the times stay out

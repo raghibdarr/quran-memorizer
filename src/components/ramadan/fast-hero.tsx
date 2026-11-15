@@ -36,6 +36,14 @@ export default function FastHero({
 }) {
   const moment = times && countdown ? nextFastMoment(now, times.today, times.tomorrow) : null;
   const shown = times ? fastTimesToShow(now, times.today, times.tomorrow) : null;
+  // Inside the polar circles a time can be borrowed from the nearest day that has it: say so beside it
+  const polar = times && shown ? (shown.day === 'tomorrow' ? times.polarTomorrow : times.polarToday) : null;
+  const est = (name: 'fajr' | 'maghrib') =>
+    polar?.estimated.includes(name) ? (
+      <abbr title="estimated" aria-label="estimated" className="mr-1 text-[11px] font-semibold text-gold-deep no-underline">
+        est.
+      </abbr>
+    ) : null;
   // Mode turned on by hand outside the expected month: say so, and point at the date adjustment
   const forcedOn = season.active && !season.inRamadan;
   const heading = season.inRamadan
@@ -104,6 +112,7 @@ export default function FastHero({
               <div>
                 <dt className="text-xs text-muted">Suhoor ends</dt>
                 <dd className="text-base font-semibold tabular-nums text-foreground">
+                  {shown.times.suhoorEnd !== null && est('fajr')}
                   {shown.times.suhoorEnd !== null ? formatClock(shown.times.suhoorEnd, times.tz) : '–'}
                 </dd>
                 <dd className="text-[11px] leading-snug text-muted">
@@ -115,11 +124,23 @@ export default function FastHero({
               <div>
                 <dt className="text-xs text-muted">Iftar</dt>
                 <dd className="text-base font-semibold tabular-nums text-foreground">
+                  {shown.times.iftar !== null && est('maghrib')}
                   {shown.times.iftar !== null ? formatClock(shown.times.iftar, times.tz) : '–'}
                 </dd>
                 <dd className="text-[11px] leading-snug text-muted">At Maghrib</dd>
               </div>
             </dl>
+            {polar && (
+              <p className="mt-3 border-t border-foreground/10 pt-3 text-xs leading-relaxed text-muted" data-polar-note>
+                {polar.kind === 'midnight-sun' ? 'The sun doesn’t set here' : 'The sun doesn’t rise here'}
+                {shown.day === 'tomorrow' ? ' tomorrow' : ' today'}, so times marked “est.” are taken from the nearest day that has them. Many
+                communities this far north follow another city or Makkah instead; see{' '}
+                <Link href="/prayer/settings#high-latitude" className="font-semibold text-teal">
+                  Prayer settings
+                </Link>
+                .
+              </p>
+            )}
           </>
         ) : (
           <div className="mt-3 h-20 animate-pulse rounded-xl bg-foreground/5" aria-hidden />

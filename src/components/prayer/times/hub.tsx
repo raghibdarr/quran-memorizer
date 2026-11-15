@@ -140,7 +140,12 @@ function TimesList({ model, format }: { model: HubModel; format: (ms: number) =>
               {r.startMs === null ? (
                 <span className="text-sm text-muted">No time today</span>
               ) : (
-                <span className={cn('text-right text-[15px] tabular-nums', weight, tone)}>
+                <span className={cn('text-right text-[15px] tabular-nums', weight, tone)} data-estimated={r.estimated || undefined}>
+                  {r.estimated && (
+                    <abbr title="estimated" aria-label="estimated" className="mr-1.5 text-[11px] font-semibold text-gold-deep no-underline">
+                      est.
+                    </abbr>
+                  )}
                   {format(r.startMs)}
                   {/* Past midnight (a summer Isha far north): say so, or the time reads as this morning's */}
                   {r.dayShift !== 0 && (
@@ -183,6 +188,22 @@ function MissingNote({ missing, rule }: { missing: readonly string[]; rule: stri
           to fill {missing.length === 1 ? 'it' : 'them'} in.
         </>
       )}
+    </p>
+  );
+}
+
+/** On a polar day: which times are borrowed, said once, calmly, with where to change it */
+function PolarNote({ text }: { text: string }) {
+  return (
+    <p className="px-1 text-xs leading-relaxed text-muted" data-polar-note>
+      {text}{' '}
+      <Link href="/prayer/settings#high-latitude" className="font-semibold text-teal underline underline-offset-2">
+        High-latitude rule
+      </Link>
+      {' · '}
+      <Link href="/prayer/why" className="font-semibold text-teal underline underline-offset-2">
+        Why times differ
+      </Link>
     </p>
   );
 }
@@ -286,6 +307,7 @@ export default function PrayerHub() {
             <div className="space-y-1.5">
               <TimesList model={model} format={format} />
               {model.missing.length > 0 && <MissingNote missing={model.missing} rule={settings.highLatRule} />}
+              {model.polar && mod && <PolarNote text={mod.polarNote(model.polar)!} />}
               <SettingsLinks />
             </div>
             {/*
