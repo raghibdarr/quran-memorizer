@@ -18,6 +18,7 @@ import {
   refLabel,
   sortNames,
   startedNameIds,
+  unseenNameCards,
 } from './names-logic'
 
 const name = (order: number, kind: NameItem['evidence']['kind'] = 'quran-name'): NameItem => ({
@@ -162,5 +163,20 @@ describe('labels and links', () => {
 
   it('sorts a deck\'s items into list order', () => {
     expect(sortNames([name(3), name(1), name(2)]).map((n) => n.order)).toEqual([1, 2, 3])
+  })
+})
+
+describe('unseenNameCards', () => {
+  it('counts Names cards not yet seen, leaving out paused ones, seen ones and other decks', () => {
+    const fresh = newDeenCard(NAMES_DECK, 1, NOW)
+    const seen: DeenCard = { ...fresh, lastReview: NOW, repetitions: 1 }
+    const cards: Record<string, DeenCard> = {
+      'names99:001:ar-en': fresh,
+      'names99:002:ar-en': seen,
+      'names99:003:en-ar': { ...fresh, suspended: true },
+      'nawawi40:01:recall': newDeenCard('nawawi40', 1, NOW),
+    }
+    expect(unseenNameCards(cards)).toBe(1)
+    expect(unseenNameCards({})).toBe(0)
   })
 })

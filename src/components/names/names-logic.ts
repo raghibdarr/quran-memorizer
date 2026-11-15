@@ -63,6 +63,13 @@ export function namesReadiness(data: Pick<DeenData, 'cards' | 'newPerDay' | 'int
   return { ready: q.order.length, waiting: Math.max(0, fresh - q.fresh.length) };
 }
 
+/** Names cards not yet seen in a session (paused ones left out): while any remain, the screen offers no more */
+export function unseenNameCards(cards: Record<string, DeenCard>): number {
+  let n = 0;
+  for (const c of Object.values(cards)) if (c.deck === NAMES_DECK && !c.suspended && isNewCard(c)) n++;
+  return n;
+}
+
 /** The line under "Learn the Names" once something is in play: says only what the session will really show */
 export function learnStatus({ today, ready, waiting }: { today: number; ready: number; waiting: number }): string {
   const lead = today > 0 ? `${today === 1 ? '1 new Name' : `${today} new Names`} today. ` : '';

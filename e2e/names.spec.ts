@@ -34,6 +34,10 @@ test.describe('names of Allah', () => {
     await expect(sheet).toContainText('As-Salaam')
     await expect(sheet.locator('[data-evidence="quran-name"]')).toContainText('Named in the Quran')
     await expect(sheet.locator('[data-review-status="source-checked"]')).toContainText('Not yet reviewed by a scholar')
+    // Previous and next walk the list without closing the sheet
+    await sheet.locator('[data-name-step="next"]').click()
+    await expect(page.locator('[data-name-sheet="007"]')).toContainText('7 of 99')
+    await page.locator('[data-name-sheet="007"] [data-name-step="prev"]').click()
     await sheet.locator('[data-quran-ref="59:23"]').click()
     await expect(page).toHaveURL(/\/listen\?s=59&a=23/)
   })
@@ -44,7 +48,11 @@ test.describe('names of Allah', () => {
     await page.goto('/names')
     await expect(page.locator('[data-names-learn]')).toContainText('0 of 99 started')
 
+    // Starting goes straight to the first Name in the session
     await page.locator('[data-names-start]').click()
+    await expect(page).toHaveURL(/\/review\/deen\?deck=names99/)
+    await expect(page.locator('[data-deen-card]')).toHaveAttribute('data-deen-card', /^names99:001:/)
+    await page.goto('/names')
     await expect(page.locator('[data-names-started="5"]')).toBeVisible()
     await expect(page.locator('[data-names-today="5"]')).toBeVisible()
     expect(await deenCards(page)).toEqual(['names99:001:ar-en', 'names99:002:ar-en', 'names99:003:ar-en', 'names99:004:ar-en', 'names99:005:ar-en'])
