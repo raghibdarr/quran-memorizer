@@ -166,8 +166,8 @@ export default function HealthCheck({ platform, tz, checkKey, onAllow, testMode 
               status={h.pending.count > 0 ? 'ok' : h.permission === 'granted' ? 'wait' : 'fix'}
               title="Set on this phone"
               detail={
-                h.pending.count > 0 && h.pending.lastAt
-                  ? `${h.pending.count} ${h.pending.count === 1 ? 'alert' : 'alerts'}, up to ${upTo(h.pending.lastAt, tz)}`
+                h.pending.count > 0
+                  ? `${h.pending.count} ${h.pending.count === 1 ? 'alert' : 'alerts'}${h.pending.lastAt ? `, up to ${upTo(h.pending.lastAt, tz)}` : ''}`
                   : h.permission === 'granted'
                     ? 'Setting them up…'
                     : 'None yet: notifications aren’t allowed'

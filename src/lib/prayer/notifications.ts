@@ -231,14 +231,26 @@ export interface PendingSummary {
 export const TEST_ALERT_SLOT = 19;
 export const TEST_ALERT_ID = prayerAlertId(0, TEST_ALERT_SLOT);
 
-/** What the OS holds right now in the prayer range */
-export async function pendingPrayerAlerts(deps: PrayerNotifyDeps = defaultDeps()): Promise<PendingSummary> {
+/**
+ * What the OS holds right now in the prayer range, still to come.
+ * Android's plugin keeps an alert's record after it has rung (until it is
+ * swiped away), so anything already past is left out. It also reports times as
+ * Java's Date.toString(), whose zone abbreviation ("CET", "BST") JavaScript
+ * can't always read: when a time can't be read, the last date comes from the
+ * memo of the plan handed over instead.
+ */
+export async function pendingPrayerAlerts(deps: PrayerNotifyDeps = defaultDeps(), now = Date.now()): Promise<PendingSummary> {
   if (deps.platform === 'web') return { count: 0, lastAt: null };
   try {
     const { notifications } = await deps.getPending();
     const ours = notifications.filter((n) => inRange(n.id, NOTIFY_RANGES.prayer) && n.id !== TEST_ALERT_ID);
-    const times = ours.map(atMs).filter((t): t is number => t !== null);
-    return { count: ours.length, lastAt: times.length ? Math.max(...times) : null };
+    const times = ours.map(atMs);
+    const ahead = times.filter((t) => t === null || t > now);
+    if (!ahead.length) return { count: 0, lastAt: null };
+    const readable = ahead.filter((t): t is number => t !== null);
+    const memo = readable.length < ahead.length ? readAlertMeta(deps)?.lastAt ?? null : null;
+    const lastAt = memo !== null && memo > now ? memo : readable.length ? Math.max(...readable) : null;
+    return { count: ahead.length, lastAt };
   } catch {
     return { count: 0, lastAt: null };
   }

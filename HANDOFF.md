@@ -52,3 +52,17 @@ Local builds in this worktree: Turbopack refuses the `node_modules` junction, so
 9. **Icons kept local.** The bell and the "needs attention" circle live in
    `src/components/prayer/alerts/alert-icons.tsx`, since `src/components/ui/icons.tsx` is foundations-only.
    Integration can move them into the shared set.
+
+## Third review pass
+
+10. **What the Android plugin really reports (`@capacitor/local-notifications` 8.3.1, read from its Kotlin source).**
+    `getPending()` returns every stored record, including alerts that already rang and still sit in the shade,
+    and gives `schedule.at` as Java's `Date.toString()` ("Sat Nov 14 12:41:00 CET 2026"), which JavaScript can't
+    parse for zones like CET or BST. The health check's "Set on this phone" row now counts only alerts still
+    ahead and takes the last date from the memo when a time can't be read (it used to sit on "Setting them up…").
+    The same applies to anything else that reads `getPending()` times on Android.
+11. **After a reboot the plugin shows alerts missed while the phone was off**, 15 seconds after boot
+    (`LocalNotificationRestoreReceiver`), so a stale "Dhuhr · 12:41" can appear late. Plugin behaviour, not
+    changeable from JS; unverified on device.
+12. **`Card` drops `data-*` props** (`src/components/ui/card.tsx`, foundations): the screen's `data-alerts-web`,
+    `data-alerts-no-place` and `data-alerts-intro` hooks never reached the DOM. They now sit on a wrapper div.

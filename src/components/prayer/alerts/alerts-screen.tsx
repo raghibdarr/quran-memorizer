@@ -57,16 +57,18 @@ function IconTile() {
 
 function WebNotice() {
   return (
-    <Card className="px-5 py-8 text-center" data-alerts-web>
-      <IconTile />
-      <p className="mx-auto mt-4 max-w-[17rem] text-base font-semibold text-balance text-foreground">Prayer alerts need the app. Times work here.</p>
-      <p className="mx-auto mt-2 max-w-[19rem] text-sm leading-relaxed text-muted">
-        A browser can&apos;t be woken at prayer time without sending your times to a server, and your location stays on your device.
-      </p>
-      <Link href="/prayer" className="tactile-btn mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal/10 px-5 text-sm font-semibold text-teal">
-        See today&apos;s times
-      </Link>
-    </Card>
+    <div data-alerts-web>
+      <Card className="px-5 py-8 text-center">
+        <IconTile />
+        <p className="mx-auto mt-4 max-w-[17rem] text-base font-semibold text-balance text-foreground">Prayer alerts need the app. Times work here.</p>
+        <p className="mx-auto mt-2 max-w-[19rem] text-sm leading-relaxed text-muted">
+          A browser can&apos;t be woken at prayer time without sending your times to a server, and your location stays on your device.
+        </p>
+        <Link href="/prayer" className="tactile-btn mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal/10 px-5 text-sm font-semibold text-teal">
+          See today&apos;s times
+        </Link>
+      </Card>
+    </div>
   );
 }
 
@@ -152,15 +154,17 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
 
   if (!place) {
     return (
-      <Card className="px-5 py-8 text-center" data-alerts-no-place>
-        <IconTile />
-        <p className="mx-auto mt-4 max-w-[18rem] text-balance text-sm leading-relaxed text-muted">
-          Choose your place first, so alerts know when each prayer starts.
-        </p>
-        <Link href="/prayer/setup" className="tactile-btn mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal px-5 text-sm font-semibold text-on-teal">
-          Set up prayer times
-        </Link>
-      </Card>
+      <div data-alerts-no-place>
+        <Card className="px-5 py-8 text-center">
+          <IconTile />
+          <p className="mx-auto mt-4 max-w-[18rem] text-balance text-sm leading-relaxed text-muted">
+            Choose your place first, so alerts know when each prayer starts.
+          </p>
+          <Link href="/prayer/setup" className="tactile-btn mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-teal px-5 text-sm font-semibold text-on-teal">
+            Set up prayer times
+          </Link>
+        </Card>
+      </div>
     );
   }
 
@@ -173,15 +177,17 @@ function NativeAlerts({ platform }: { platform: Exclude<AlertPlatform, 'web'> })
   return (
     <>
       {!anyOn && (
-        <Card variant="tactile" className="text-center" data-alerts-intro>
-          <p className="text-base font-semibold text-foreground">Tell me when each prayer starts?</p>
-          <p className="mx-auto mt-1 max-w-[20rem] text-sm leading-relaxed text-muted">
-            Alerts are worked out and set on your phone, so they arrive offline too.
-          </p>
-          <Button onClick={turnAllOn} disabled={asking} className="mt-4 w-full min-h-11 text-sm">
-            Notify me for every prayer
-          </Button>
-        </Card>
+        <div data-alerts-intro>
+          <Card variant="tactile" className="text-center">
+            <p className="text-base font-semibold text-foreground">Tell me when each prayer starts?</p>
+            <p className="mx-auto mt-1 max-w-[20rem] text-sm leading-relaxed text-muted">
+              Alerts are worked out and set on your phone, so they arrive offline too.
+            </p>
+            <Button onClick={turnAllOn} disabled={asking} className="mt-4 w-full min-h-11 text-sm">
+              Notify me for every prayer
+            </Button>
+          </Card>
+        </div>
       )}
 
       {notice && (
