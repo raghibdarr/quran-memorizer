@@ -320,3 +320,27 @@ Needs in shared files (spec section 9, rule 4). The package builds and passes wi
 Turbopack refuses the `node_modules` junction; `npx next build --webpack` with placeholder
 `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, then
 `node scripts/flatten-segments.mjs`.
+
+## 3. UX/UI pass: asks for other packages (course-ui could not change these)
+
+- **deen-engine, `src/components/deen/positions-table.tsx`**: the primer source button under each
+  position is the only way to the Arabic quote, and it is a 12px line about 16px tall (32px when it
+  wraps), well under the 44px touch target. Ask: give the button `min-h-11` with vertical padding,
+  or `py-3 -my-3` so the hit area grows without moving the layout. Applies everywhere the table is used.
+- **foundations, `src/lib/deen/load.ts`**: `loadDeckModule` and `loadDeck` cache a failed download as
+  `null` for the life of the page, so no in-page retry can reach the network again. The course
+  screens now tell a failed load apart from "not ready" (a registry course deck whose module or
+  content didn't load) and show "The lessons couldn't be loaded" with Try again, which reloads the
+  page. Ask: drop the cache entry when a load throws, so screens can retry without a reload.
+- **course-purification** (content): in water-01's third question, drop the stray commas:
+  "Hunger and thirst", "Travel and illness", "A ritual state and physical impurity" (raise `rev`).
+- **course-purification / course-fasting** (content): a few claims are long procedures in one
+  semicolon-separated sentence (wudu-02 point 2 is 351 characters, fasting-06 `iftar-dua` 358).
+  The player now sets claims over 140 characters in regular weight so they read as a paragraph,
+  but they would read better split into shorter claims. If a numbered-steps form is wanted, it
+  needs a `steps?: string[]` field on `Claim` in `src/types/deen.ts` (foundations) first; the
+  player would render it as a numbered list.
+- **Evidence hadith (need 1 above)**: until the build emits them, the three Unit Fasting hadith
+  show as a plain "Hadith · reference to come" note, not a chip that opens to nothing.
+  `src/lib/course/evidence-refs.test.ts` fails if any other cited hadith does not resolve, and
+  fails again once one of these three resolves, so the waiting list is taken down when need 1 lands.

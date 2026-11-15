@@ -15,14 +15,18 @@ import {
 import {
   addCardsLabel,
   alsoHeld,
+  capitalise,
   cardsToAdd,
   clampStep,
   claimCardsFor,
   claimForCheck,
   evidenceHostDeck,
   evidenceKind,
+  consensusChipKind,
+  groupEvidence,
   isCorrect,
   lessonCardIdsFor,
+  optionLabels,
   lessonSteps,
   parseItemRef,
   quranLabel,
@@ -200,9 +204,48 @@ describe('evidence', () => {
     expect(evidenceHostDeck('nawawi40')).toBeNull();
     expect(evidenceHostDeck('-evidence')).toBeNull();
   });
+
+  it('folds places in one work into one chip, keeping authored order', () => {
+    const groups = groupEvidence([
+      { consensus: { work: 'maratib-al-ijma', location: 'p. 18' } },
+      { quran: { surahId: 5, ayah: 6 } },
+      { consensus: { work: 'maratib-al-ijma', location: 'p. 19' } },
+      { consensus: { work: 'al-ijma', location: 'no. 2' } },
+      { item: 'nawawi40:01' },
+      { item: 'nawawi40:01' },
+      { consensus: { work: 'maratib-al-ijma', location: 'p. 18' } },
+    ]);
+    expect(groups).toEqual([
+      { kind: 'consensus', work: 'maratib-al-ijma', locations: ['p. 18', 'p. 19'] },
+      { kind: 'quran', quran: { surahId: 5, ayah: 6 } },
+      { kind: 'consensus', work: 'al-ijma', locations: ['no. 2'] },
+      { kind: 'item', item: 'nawawi40:01' },
+    ]);
+  });
+
+  it('calls agreement on a differing claim only the agreed part', () => {
+    expect(consensusChipKind('differs')).toBe('Agreed part');
+    expect(consensusChipKind('agreed')).toBe('Scholars’ agreement');
+  });
 });
 
 describe('check questions', () => {
+  it('capitalises an option that opens with a term, and nothing else', () => {
+    expect(capitalise('tayammum')).toBe('Tayammum');
+    expect(capitalise('Fasting')).toBe('Fasting');
+    expect(capitalise('  wudu, then prayer')).toBe('  Wudu, then prayer');
+    expect(capitalise('“quoted”')).toBe('“quoted”');
+    expect(capitalise('3 days')).toBe('3 days');
+    expect(capitalise('')).toBe('');
+  });
+
+  it('evens out a mixed set of options, and leaves sentence endings alone', () => {
+    expect(optionLabels(['tayammum', 'Fasting', 'Giving charity'])).toEqual(['Tayammum', 'Fasting', 'Giving charity']);
+    expect(optionLabels(['from sunrise to sunset', 'from dawn to sunset'])).toEqual(['from sunrise to sunset', 'from dawn to sunset']);
+    expect(optionLabels(['The head', 'The face'])).toEqual(['The head', 'The face']);
+    expect(optionLabels(['“I am fasting.”', 'The same insult back'])).toEqual(['“I am fasting.”', 'The same insult back']);
+  });
+
   it('knows the right answer and the claim it is about', () => {
     const q = first.check[0];
     expect(isCorrect(q, 1)).toBe(true);

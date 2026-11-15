@@ -7,16 +7,16 @@ import BottomNav from '@/components/layout/bottom-nav';
 import Card from '@/components/ui/card';
 import ProgressBar from '@/components/ui/progress-bar';
 import { SkeletonRows } from '@/components/ui/skeleton';
-import { CheckIcon } from '@/components/ui/icons';
+import { ArrowRightIcon, CheckIcon } from '@/components/ui/icons';
 import { ReviewBadge } from '@/components/deen/review-badge';
 import { SCHOOL_NAME } from '@/components/deen/positions-table';
 import { useDeenStore } from '@/stores/deen-store';
 import { ASK_A_SCHOLAR, SHOW_UNREVIEWED_FIQH } from '@/lib/deen/flags';
 import { continuePoint, courseLessonHref, courseReview, unitProgress, type CourseUnit } from '@/lib/course/progress';
 import { cn } from '@/lib/cn';
-import { useCourseUnits, usePlainText } from './course-data';
+import { retryCourseLoad, useCourseUnits, usePlainText } from './course-data';
 import { SchoolSheet } from './school-sheet';
-import { CourseComingSoon } from './coming-soon';
+import { CourseComingSoon, CourseLoadFailed } from './coming-soon';
 
 function ContinueCard({ units, lessonsDone }: { units: CourseUnit[]; lessonsDone: Record<string, number> }) {
   const plain = usePlainText();
@@ -32,12 +32,23 @@ function ContinueCard({ units, lessonsDone }: { units: CourseUnit[]; lessonsDone
   const n = point.unit.lessons.indexOf(point.lesson) + 1;
   return (
     <Link href={courseLessonHref(point.lesson.id)} className="block" data-continue={point.lesson.id}>
-      <div className="tactile-card pressable rounded-2xl bg-teal px-5 py-4 text-on-teal">
-        <p className="text-xs font-semibold uppercase tracking-wide opacity-80">{point.started ? 'Continue' : 'Start here'}</p>
-        <p className="mt-1 text-lg font-bold leading-snug">{plain(point.lesson.title)}</p>
-        <p className="mt-0.5 text-sm opacity-85">
-          {point.unit.title} · Lesson {n} of {point.unit.lessons.length}
-        </p>
+      {/* Solid teal in light; in dark a tinted surface like Home's hero, so it doesn't glare */}
+      <div className="tactile-card pressable flex items-center justify-between gap-4 rounded-2xl bg-teal px-5 py-4 text-on-teal [.dark_&]:bg-teal/15 [.dark_&]:text-foreground">
+        <div className="min-w-0">
+          <p className="text-xs font-semibold uppercase tracking-wide opacity-80 [.dark_&]:text-teal [.dark_&]:opacity-100">
+            {point.started ? 'Continue' : 'Start here'}
+          </p>
+          <p className="mt-1 text-lg font-bold leading-snug text-pretty sm:text-xl">{plain(point.lesson.title)}</p>
+          <p className="mt-0.5 text-sm opacity-85">
+            {point.unit.title} · Lesson {n} of {point.unit.lessons.length}
+          </p>
+        </div>
+        <span
+          aria-hidden
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-on-teal/15 [.dark_&]:bg-teal [.dark_&]:text-on-teal"
+        >
+          <ArrowRightIcon size={16} />
+        </span>
       </div>
     </Link>
   );
@@ -103,7 +114,7 @@ function UnitSection({ unit, lessonsDone }: { unit: CourseUnit; lessonsDone: Rec
                 <span
                   className={cn(
                     'flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold tabular-nums',
-                    isDone ? 'bg-teal text-on-teal' : 'bg-foreground/[0.06] text-muted',
+                    isDone ? 'bg-teal/15 text-teal' : 'bg-foreground/[0.06] text-muted',
                   )}
                   aria-hidden
                 >
@@ -124,9 +135,10 @@ function UnitSection({ unit, lessonsDone }: { unit: CourseUnit; lessonsDone: Rec
 }
 
 function CourseBody() {
-  const units = useCourseUnits();
+  const { units, failed } = useCourseUnits();
   const lessonsDone = useDeenStore((s) => s.lessonsDone);
 
+  if (failed) return <CourseLoadFailed onRetry={retryCourseLoad} />;
   if (!units) {
     return (
       <div aria-busy="true" aria-label="Loading the lessons">

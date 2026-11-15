@@ -94,6 +94,59 @@ export function evidenceHostDeck(deck: string): string | null {
   return deck.endsWith('-evidence') && deck.length > '-evidence'.length ? deck.slice(0, -'-evidence'.length) : null;
 }
 
+/** One chip under a claim: a Quran ref, a hadith ref, or every place one work records the agreement */
+export type EvidenceGroup =
+  | { kind: 'quran'; quran: QuranRef }
+  | { kind: 'item'; item: string }
+  | { kind: 'consensus'; work: string; locations: string[] };
+
+/**
+ * The claim's evidence as chips, in authored order. Two places in the same work
+ * become one chip whose panel lists both, so no two chips ever read the same.
+ */
+export function groupEvidence(evidence: ClaimEvidence[]): EvidenceGroup[] {
+  const groups: EvidenceGroup[] = [];
+  for (const e of evidence) {
+    if ('quran' in e) groups.push({ kind: 'quran', quran: e.quran });
+    else if ('item' in e) {
+      if (!groups.some((g) => g.kind === 'item' && g.item === e.item)) groups.push({ kind: 'item', item: e.item });
+    } else {
+      const same = groups.find((g): g is Extract<EvidenceGroup, { kind: 'consensus' }> => g.kind === 'consensus' && g.work === e.consensus.work);
+      if (same) {
+        if (!same.locations.includes(e.consensus.location)) same.locations.push(e.consensus.location);
+      } else groups.push({ kind: 'consensus', work: e.consensus.work, locations: [e.consensus.location] });
+    }
+  }
+  return groups;
+}
+
+/** What an agreement chip is called: on a claim about a difference it is only the agreed part */
+export function consensusChipKind(claimKind: Claim['kind']): string {
+  return claimKind === 'differs' ? 'Agreed part' : 'Scholars’ agreement';
+}
+
+// ---- Type
+
+/** Past this many characters a claim reads as a paragraph, not a headline */
+export const LONG_CLAIM_CHARS = 140;
+
+/** "tayammum" → "Tayammum", for answer options that open with a glossary term */
+export function capitalise(text: string): string {
+  return text.replace(/^(\s*)(\p{Ll})/u, (_, space: string, first: string) => space + first.toUpperCase());
+}
+
+/**
+ * A question's options as shown (already plain text). When some open with a
+ * capital and others don't (usually an option that is a glossary term, like
+ * "tayammum" beside "Fasting"), all are capitalised so the odd one out doesn't
+ * give the answer away. A set that is all lower case finishes the question's
+ * sentence ("The fasting day runs:" "from dawn to sunset") and is left as written.
+ */
+export function optionLabels(options: string[]): string[] {
+  const opensLower = (o: string) => /^\s*\p{Ll}/u.test(o);
+  return options.some(opensLower) && !options.every(opensLower) ? options.map(capitalise) : options;
+}
+
 // ---- Check questions (they teach; they never grade cards)
 
 export function isCorrect(q: Lesson['check'][number], chosen: number): boolean {

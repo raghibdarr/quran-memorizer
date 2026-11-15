@@ -78,14 +78,14 @@ test.describe('foundations course', () => {
     await expect(rows.nth(1).locator('[lang="ar"]')).toBeVisible()
     await next(page)
 
-    // ---- Point 3: a hadith chip opens its citation; one not in the app says so
+    // ---- Point 3: a hadith chip opens its citation; one not in the app is a plain note, not a chip
     await expect(page.locator('[data-claim="c3"]')).toBeVisible()
     const chips = page.locator('[data-evidence-chip="item"]')
     await expect(chips.first()).toContainText('1')
     await chips.first().click()
     await expect(page.locator('[data-evidence-item="fx-hadith"] [data-citation]')).toBeVisible()
-    await chips.nth(1).click()
-    await expect(page.locator('[data-evidence-panel="item"]')).toContainText('aren’t in the app yet')
+    await expect(page.locator('[data-evidence-pending]')).toHaveText(/Hadith\s*reference to come/)
+    await expect(chips).toHaveCount(1)
     await next(page)
 
     // ---- Questions: not scored; a wrong pick is shown gently with the answer

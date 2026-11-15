@@ -20,6 +20,7 @@ import { cn } from '@/lib/cn';
 import { courseLessonHref, findLesson, nextInUnit, type CourseUnit } from '@/lib/course/progress';
 import {
   CLAIM_KIND_LABEL,
+  LONG_CLAIM_CHARS,
   addCardsLabel,
   cardsToAdd,
   clampStep,
@@ -27,13 +28,14 @@ import {
   isCorrect,
   lessonCardIdsFor,
   lessonSteps,
+  optionLabels,
   shouldAskSchool,
 } from '@/lib/course/lesson';
 import type { Lesson } from '@/types/deen';
-import { useCourseUnits, usePlainText } from './course-data';
+import { retryCourseLoad, useCourseUnits, usePlainText } from './course-data';
 import { EvidenceList } from './evidence-list';
 import { SchoolSheet, schoolAskedBefore } from './school-sheet';
-import { CourseComingSoon } from './coming-soon';
+import { CourseComingSoon, CourseLoadFailed } from './coming-soon';
 
 // ---- Where a lesson is up to, kept for the tab session so a trip to the reader and back resumes it
 
@@ -93,7 +95,7 @@ function Footer({ deck, lesson }: { deck: string; lesson: Lesson }) {
 /** The one primary action, pinned to the bottom so it is always in reach */
 function ActionBar({ children }: { children: ReactNode }) {
   return (
-    <div className="sticky bottom-0 z-10 -mx-4 mt-6 bg-gradient-to-t from-cream from-70% to-cream/0 px-4 pt-6 pb-[calc(env(safe-area-inset-bottom)+0.75rem)]">
+    <div className="sticky bottom-0 z-10 -mx-4 mt-2 bg-gradient-to-t from-cream from-70% to-cream/0 px-4 pt-6 pb-[calc(env(safe-area-inset-bottom)+0.75rem)]">
       <div className="flex items-center gap-2">{children}</div>
     </div>
   );
@@ -186,9 +188,9 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
 
   if (finished) {
     body = (
-      <div className="space-y-5 pt-6 text-center" data-lesson-done>
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal text-on-teal">
-          <CheckIcon size={26} />
+      <div className="flex min-h-[55dvh] flex-col items-center justify-center space-y-5 text-center" data-lesson-done>
+        <div className="mx-auto flex h-16 w-16 animate-[phase-in_300ms_ease-out] items-center justify-center rounded-full bg-teal text-on-teal">
+          <CheckIcon size={28} />
         </div>
         <div className="space-y-1.5">
           {heading('Lesson done', 'text-xl')}
@@ -207,11 +209,16 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
     );
     actions = next ? (
       <>
-        <Link href="/course" className="inline-flex min-h-12 items-center rounded-xl px-4 text-sm font-semibold text-muted hover:text-foreground">
+        <Link href="/course" className="inline-flex min-h-14 shrink-0 items-center rounded-xl px-4 text-sm font-semibold text-muted hover:text-foreground">
           The course
         </Link>
-        <Link href={courseLessonHref(next.id)} className="tactile-btn flex min-h-12 flex-1 items-center justify-center rounded-xl bg-teal px-4 text-center text-sm font-semibold text-on-teal" data-next-lesson>
-          Next: {plain(next.title)}
+        <Link
+          href={courseLessonHref(next.id)}
+          className="tactile-btn flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center rounded-xl bg-teal px-4 py-2 text-center text-on-teal"
+          data-next-lesson
+        >
+          <span className="text-[11px] font-semibold uppercase tracking-wide opacity-80">Next lesson</span>
+          <span className="line-clamp-2 max-w-full text-sm leading-snug font-semibold text-balance">{plain(next.title)}</span>
         </Link>
       </>
     ) : (
@@ -243,6 +250,8 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
     );
   } else if (current.kind === 'claim') {
     const claim = lesson.claims[current.index];
+    // A long claim is a paragraph: regular weight and open leading, with "Point n of m" carrying the hierarchy
+    const long = plain(claim.text).length > LONG_CLAIM_CHARS;
     body = (
       <div className="space-y-5" data-lesson-step="claim" data-claim={claim.id} data-claim-kind={claim.kind}>
         <div className="space-y-2">
@@ -253,9 +262,9 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
             <span aria-hidden>·</span>
             <span className={cn(claim.kind === 'differs' ? 'text-gold-deep' : 'text-teal')}>{CLAIM_KIND_LABEL[claim.kind]}</span>
           </p>
-          {heading(<RichText text={claim.text} />, 'text-lg font-semibold')}
+          {heading(<RichText text={claim.text} />, cn('text-pretty', long ? 'text-[17px] font-normal leading-relaxed' : 'text-lg font-semibold'))}
         </div>
-        <EvidenceList evidence={claim.evidence} claimKind={claim.kind} />
+        <EvidenceList evidence={claim.evidence} claimKind={claim.kind} hint={current.index === 0} />
         {claim.positions && claim.positions.length > 0 && (
           <div className="space-y-2" data-positions>
             <p className="text-xs font-semibold text-muted">{claim.kind === 'differs' ? 'What each school holds' : 'In the primers'}</p>
@@ -279,6 +288,7 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
     const chosen = answers[current.index];
     const answered = chosen !== undefined;
     const claim = claimForCheck(lesson, q);
+    const labels = optionLabels(q.options.map(plain));
     body = (
       <div className="space-y-5" data-lesson-step="check" data-check={current.index}>
         <div className="space-y-2">
@@ -288,7 +298,7 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
           {heading(<RichText text={q.q} />, 'text-lg font-semibold')}
         </div>
         <ul className="space-y-2" aria-label="Answers">
-          {q.options.map((o, i) => {
+          {q.options.map((_, i) => {
             const right = answered && i === q.answer;
             const wrongPick = answered && i === chosen && i !== q.answer;
             return (
@@ -310,7 +320,7 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
                     answered && !right && !wrongPick && 'border-foreground/10 bg-card text-muted',
                   )}
                 >
-                  <span>{plain(o)}</span>
+                  <span>{labels[i]}</span>
                   {right && <CheckIcon size={16} className="shrink-0 text-teal" />}
                 </button>
               </li>
@@ -320,7 +330,7 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
         {answered && (
           <div className="animate-[phase-in_200ms_ease-out] space-y-2 rounded-xl bg-foreground/[0.04] px-4 py-3" role="status" data-check-feedback>
             <p className="text-sm font-semibold text-foreground">
-              {isCorrect(q, chosen) ? 'That’s right.' : `Not quite. It’s “${plain(q.options[q.answer])}”.`}
+              {isCorrect(q, chosen) ? 'That’s right.' : `Not quite. It’s “${labels[q.answer]}”.`}
             </p>
             {claim && (
               <p className="text-sm leading-relaxed text-muted">
@@ -388,17 +398,19 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
   const progress = finished ? 100 : (step / (steps.length - 1)) * 100;
 
   return (
-    <>
+    // One screen tall, header included, so a short step doesn't scroll at all
+    <div className="flex min-h-dvh flex-col">
       <Header title={unit.title} progress={progress} />
-      <main className="mx-auto flex min-h-[calc(100dvh-4rem)] max-w-2xl flex-col px-4 pt-6 pb-[calc(env(safe-area-inset-bottom)+1rem)]" data-lesson={lesson.id}>
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pt-6 pb-[calc(env(safe-area-inset-bottom)+1rem)]" data-lesson={lesson.id}>
         <div key={finished ? 'done' : step} className="flex-1 animate-[phase-in_250ms_ease-out]">
           {body}
         </div>
-        <ActionBar>{actions}</ActionBar>
+        {/* Above the action bar, so the button is the last thing on screen and a short step doesn't scroll */}
         <Footer deck={unit.deck} lesson={lesson} />
+        <ActionBar>{actions}</ActionBar>
       </main>
       <SchoolSheet open={askSchool} onClose={() => setAskSchool(false)} />
-    </>
+    </div>
   );
 }
 
@@ -410,7 +422,7 @@ function LessonFlow({ unit, lesson, index }: { unit: CourseUnit; lesson: Lesson;
  */
 export default function LessonPlayer({ showFiqh = SHOW_UNREVIEWED_FIQH }: { showFiqh?: boolean }) {
   const lessonId = useSearchParams().get('l') ?? '';
-  const units = useCourseUnits();
+  const { units, failed } = useCourseUnits();
 
   let content: ReactNode;
   if (!showFiqh) {
@@ -419,6 +431,15 @@ export default function LessonPlayer({ showFiqh = SHOW_UNREVIEWED_FIQH }: { show
         <Header title="Foundations course" progress={null} />
         <main className="mx-auto max-w-2xl px-4 pt-5">
           <CourseComingSoon />
+        </main>
+      </>
+    );
+  } else if (failed) {
+    content = (
+      <>
+        <Header title="Lesson" progress={null} />
+        <main className="mx-auto max-w-2xl px-4 pt-5">
+          <CourseLoadFailed onRetry={retryCourseLoad} />
         </main>
       </>
     );

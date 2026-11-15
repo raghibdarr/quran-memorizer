@@ -5,7 +5,8 @@
 // seam), never a fetch. A course deck with `ready: false` simply isn't there.
 
 import { useEffect, useState } from 'react';
-import { getDeck, getItem, liveDecks } from '@/components/deen/deck-source';
+import { DECKS, getDeck, getItem, liveDecks } from '@/components/deen/deck-source';
+import { loadDeckModule } from '@/lib/deen/load';
 import { useGlossary } from '@/components/deen/term';
 import { plainText } from '@/lib/deen/glossary';
 import { unitFrom, type CourseUnit } from '@/lib/course/progress';
@@ -14,25 +15,55 @@ import type { EmittedDeck, GlossaryTerm, TextItem } from '@/types/deen';
 
 const EMPTY_TERMS: ReadonlyMap<string, GlossaryTerm> = new Map();
 
-export async function loadCourseUnits(): Promise<CourseUnit[]> {
-  const decks = (await liveDecks()).filter((d) => d.kind === 'course');
-  const units = await Promise.all(decks.map(async (d) => unitFrom(d, await getDeck(d.id).catch(() => null))));
-  return units.filter((u): u is CourseUnit => u !== null);
+/** A course deck the registry ships that couldn't be loaded (a chunk that failed on a bad connection or after a deploy) */
+export class CourseLoadError extends Error {
+  constructor() {
+    super('The course lessons could not be loaded');
+    this.name = 'CourseLoadError';
+  }
 }
 
-/** The live course units in registry order; null while loading */
-export function useCourseUnits(): CourseUnit[] | null {
-  const [units, setUnits] = useState<CourseUnit[] | null>(null);
+/**
+ * The live course units in registry order. Throws CourseLoadError when a course
+ * deck the registry has couldn't be loaded, so a failed download never reads as
+ * "coming soon" or "this lesson isn't available".
+ */
+export async function loadCourseUnits(): Promise<CourseUnit[]> {
+  const live = (await liveDecks()).filter((d) => d.kind === 'course');
+  // A registry course deck whose module didn't load is missing from `live`, not "not ready"
+  const registry = DECKS.filter((d) => d.kind === 'course' && !live.some((l) => l.id === d.id));
+  const unloaded = await Promise.all(registry.map(async (d) => (await loadDeckModule(d.id)) === null));
+  if (unloaded.some(Boolean)) throw new CourseLoadError();
+  const decks = await Promise.all(live.map(async (d) => [d, await getDeck(d.id).catch(() => null)] as const));
+  // A live deck is one whose package says it is ready: no content means the download failed
+  if (decks.some(([, deck]) => deck === null)) throw new CourseLoadError();
+  return decks.map(([d, deck]) => unitFrom(d, deck)).filter((u): u is CourseUnit => u !== null);
+}
+
+export type CourseUnitsState = { units: CourseUnit[] | null; failed: boolean };
+
+/** The live course units (null while loading), and whether loading failed */
+export function useCourseUnits(): CourseUnitsState {
+  const [state, setState] = useState<CourseUnitsState>({ units: null, failed: false });
   useEffect(() => {
     let live = true;
     loadCourseUnits()
-      .then((u) => live && setUnits(u))
-      .catch(() => live && setUnits([]));
+      .then((units) => live && setState({ units, failed: false }))
+      .catch(() => live && setState({ units: null, failed: true }));
     return () => {
       live = false;
     };
   }, []);
-  return units;
+  return state;
+}
+
+/**
+ * Try again after a failed load. The deck loader keeps a failed download as
+ * "nothing" for the rest of the page's life, so a fresh load is the only retry
+ * that reaches the network again; it also picks up a new deploy's files.
+ */
+export function retryCourseLoad() {
+  window.location.reload();
 }
 
 const shippable = (item: TextItem | undefined | null): TextItem | null =>
