@@ -1,0 +1,33 @@
+{
+  "id": "077",
+  "rev": 2,
+  "order": 77,
+  "arabic": "ٱلْوَالِي",
+  "transliteration": "Al-Waalee",
+  "meaning": "The Governor, who manages all affairs",
+  "explanation": "From wilayah, taking charge. Al-Ra'd 13:11 denies that anyone else is this: when Allah wills harm for a people, none can turn it back, and they have no protector besides Him.",
+  "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+      {
+        "surahId": 13,
+        "ayah": 11
+      }
+    ],
+    "form": "وَالٍ"
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:11"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it.",
+      "2026-11-15 audit fix (rev 2): in 13:11 the word wal is not said of Allah directly; the ayah denies any wal besides Him. The explanation now says so."
+    ]
+  }
+}

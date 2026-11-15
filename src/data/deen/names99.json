@@ -1,0 +1,2680 @@
+{
+ "deck": "names99",
+ "kind": "names",
+ "hash": "b7939dbdfb778e5e",
+ "items": [
+  {
+   "id": "001",
+   "rev": 1,
+   "order": 1,
+   "arabic": "ٱللَّهُ",
+   "transliteration": "Allaah",
+   "meaning": "The proper name of the One God, alone worthy of worship",
+   "explanation": "The Name that belongs to Him alone; the other Names are said of Him. Al-Hashr 59:22: He is Allah, there is no god but Him, Knower of the unseen and the seen.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 22
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:22"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "002",
+   "rev": 1,
+   "order": 2,
+   "arabic": "ٱلرَّحْمَٰنُ",
+   "transliteration": "Ar-Rahmaan",
+   "meaning": "The Most Merciful",
+   "explanation": "From rahmah, mercy. It follows the name Allah in \"In the name of Allah, the Most Merciful, the Ever Merciful\" (al-Fatihah 1:1) and again in 1:3.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 1,
+      "ayah": 1
+     },
+     {
+      "surahId": 1,
+      "ayah": 3
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Fatihah 1:1; Al-Fatihah 1:3"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "003",
+   "rev": 1,
+   "order": 3,
+   "arabic": "ٱلرَّحِيمُ",
+   "transliteration": "Ar-Raheem",
+   "meaning": "The Ever Merciful",
+   "explanation": "Also from rahmah, mercy. It is paired with al-Rahman in al-Fatihah 1:1 and 1:3, and in al-Hashr 59:22.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 1,
+      "ayah": 3
+     },
+     {
+      "surahId": 59,
+      "ayah": 22
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Fatihah 1:3; Al-Hashr 59:22"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "004",
+   "rev": 1,
+   "order": 4,
+   "arabic": "ٱلْمَلِكُ",
+   "transliteration": "Al-Malik",
+   "meaning": "The King, who owns and rules all things",
+   "explanation": "From mulk, sovereignty. Al-Hashr 59:23 opens its list with it, and Ta Ha 20:114 says: exalted is Allah, the King, the Truth.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     },
+     {
+      "surahId": 20,
+      "ayah": 114
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23; Taha 20:114"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "005",
+   "rev": 1,
+   "order": 5,
+   "arabic": "ٱلْقُدُّوسُ",
+   "transliteration": "Al-Quddoos",
+   "meaning": "The Most Pure, free of every fault",
+   "explanation": "From quds, purity. It comes straight after al-Malik in al-Hashr 59:23 and in al-Jumu'ah 62:1, where all in the heavens and the earth glorify Him.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     },
+     {
+      "surahId": 62,
+      "ayah": 1
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23; Al-Jumu'ah 62:1"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "006",
+   "rev": 1,
+   "order": 6,
+   "arabic": "ٱلسَّلَامُ",
+   "transliteration": "As-Salaam",
+   "meaning": "The Source of Peace, free of every flaw",
+   "explanation": "From salam, peace and soundness. It is named in al-Hashr 59:23, after al-Quddus.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "007",
+   "rev": 1,
+   "order": 7,
+   "arabic": "ٱلْمُؤْمِنُ",
+   "transliteration": "Al-Mu'min",
+   "meaning": "The Giver of Security; the One who affirms the truth",
+   "explanation": "From amn, safety, and iman, affirming as true. It is named in al-Hashr 59:23, after al-Salam.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "008",
+   "rev": 1,
+   "order": 8,
+   "arabic": "ٱلْمُهَيْمِنُ",
+   "transliteration": "Al-Muhaymin",
+   "meaning": "The Watchful Guardian over all things",
+   "explanation": "From haymanah, watching over and guarding. It is named in al-Hashr 59:23, after al-Mu'min.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "009",
+   "rev": 1,
+   "order": 9,
+   "arabic": "ٱلْعَزِيزُ",
+   "transliteration": "Al-'Azeez",
+   "meaning": "The Almighty, never overcome",
+   "explanation": "From 'izzah, might that cannot be overcome. It is one of the most frequent Names in the Quran, often paired with al-Hakim, as at the close of al-Hashr 59:24.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     },
+     {
+      "surahId": 59,
+      "ayah": 24
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23; Al-Hashr 59:24"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "010",
+   "rev": 1,
+   "order": 10,
+   "arabic": "ٱلْجَبَّارُ",
+   "transliteration": "Al-Jabbaar",
+   "meaning": "The Compeller, whose will prevails; the One who mends",
+   "explanation": "From jabr, which carries both compelling and setting right what is broken. It is named in al-Hashr 59:23.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "011",
+   "rev": 1,
+   "order": 11,
+   "arabic": "ٱلْمُتَكَبِّرُ",
+   "transliteration": "Al-Mutakabbir",
+   "meaning": "The Supreme in Greatness",
+   "explanation": "From kibriya', greatness. It is named in al-Hashr 59:23, which ends: glorified is Allah above what they associate with Him.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 23
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:23"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "012",
+   "rev": 1,
+   "order": 12,
+   "arabic": "ٱلْخَالِقُ",
+   "transliteration": "Al-Khaaliq",
+   "meaning": "The Creator, who brings things into being",
+   "explanation": "From khalq, creating. Al-Hashr 59:24 opens with it: He is Allah, the Creator, the Maker, the Shaper.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 24
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:24"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "013",
+   "rev": 1,
+   "order": 13,
+   "arabic": "ٱلْبَارِئُ",
+   "transliteration": "Al-Baari'",
+   "meaning": "The Maker, who brings creation into existence",
+   "explanation": "Named in al-Hashr 59:24, between al-Khaliq and al-Musawwir.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 24
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:24"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "014",
+   "rev": 1,
+   "order": 14,
+   "arabic": "ٱلْمُصَوِّرُ",
+   "transliteration": "Al-Musawwir",
+   "meaning": "The Shaper, who gives each thing its form",
+   "explanation": "From surah, form. Named in al-Hashr 59:24, which goes on: to Him belong the most beautiful Names.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 24
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:24"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "015",
+   "rev": 1,
+   "order": 15,
+   "arabic": "ٱلْغَفَّارُ",
+   "transliteration": "Al-Ghaffaar",
+   "meaning": "The Ever Forgiving, again and again",
+   "explanation": "From maghfirah, forgiveness and covering. Sad 38:66 and al-Zumar 39:5 pair it with al-'Aziz.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 38,
+      "ayah": 66
+     },
+     {
+      "surahId": 39,
+      "ayah": 5
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Sad 38:66; Az-Zumar 39:5"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "016",
+   "rev": 1,
+   "order": 16,
+   "arabic": "ٱلْقَهَّارُ",
+   "transliteration": "Al-Qahhaar",
+   "meaning": "The Subduer, over whom nothing prevails",
+   "explanation": "From qahr, overpowering. The Quran pairs it with al-Wahid, the One, as in al-Ra'd 13:16 and Ibrahim 14:48.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 13,
+      "ayah": 16
+     },
+     {
+      "surahId": 14,
+      "ayah": 48
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:16; Ibrahim 14:48"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "017",
+   "rev": 1,
+   "order": 17,
+   "arabic": "ٱلْوَهَّابُ",
+   "transliteration": "Al-Wahhaab",
+   "meaning": "The Bestower, who gives freely and without return",
+   "explanation": "From hibah, a gift. Al Imran 3:8 asks: grant us mercy from You, You are al-Wahhab. Sulayman asks by it in Sad 38:35.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 8
+     },
+     {
+      "surahId": 38,
+      "ayah": 35
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:8; Sad 38:35"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "018",
+   "rev": 1,
+   "order": 18,
+   "arabic": "ٱلرَّزَّاقُ",
+   "transliteration": "Ar-Razzaaq",
+   "meaning": "The Provider of all sustenance",
+   "explanation": "From rizq, provision. Al-Dhariyat 51:58: Allah is the Provider, the Possessor of strength, the Firm.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 51,
+      "ayah": 58
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Adh-Dhariyat 51:58"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "019",
+   "rev": 1,
+   "order": 19,
+   "arabic": "ٱلْفَتَّاحُ",
+   "transliteration": "Al-Fattaah",
+   "meaning": "The Opener; the Judge who decides between people",
+   "explanation": "From fath, opening, which also means deciding a matter. Saba' 34:26: our Lord will gather us, then judge between us in truth; He is al-Fattah, al-'Alim.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 34,
+      "ayah": 26
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Saba 34:26"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "020",
+   "rev": 1,
+   "order": 20,
+   "arabic": "ٱلْعَلِيمُ",
+   "transliteration": "Al-'Aleem",
+   "meaning": "The All-Knowing",
+   "explanation": "From 'ilm, knowledge. The angels say in al-Baqarah 2:32: You are the All-Knowing, the All-Wise.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 32
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:32"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "021",
+   "rev": 1,
+   "order": 21,
+   "arabic": "ٱلْقَابِضُ",
+   "transliteration": "Al-Qaabid",
+   "meaning": "The Withholder, who restricts as He wills",
+   "explanation": "From qabd, holding in. The Quran uses the verb: Allah withholds and extends (al-Baqarah 2:245). In the list it is paired with al-Basit.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 245
+     }
+    ],
+    "form": "يَقْبِضُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:245"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "022",
+   "rev": 1,
+   "order": 22,
+   "arabic": "ٱلْبَاسِطُ",
+   "transliteration": "Al-Baasit",
+   "meaning": "The Extender, who gives generously as He wills",
+   "explanation": "From bast, spreading out. The Quran uses the verb: Allah extends provision to whom He wills, and restricts it (al-Ra'd 13:26).",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 13,
+      "ayah": 26
+     }
+    ],
+    "form": "يَبْسُطُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:26"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "023",
+   "rev": 1,
+   "order": 23,
+   "arabic": "ٱلْخَافِضُ",
+   "transliteration": "Al-Khaafid",
+   "meaning": "The Abaser, who lowers whom He wills",
+   "explanation": "From khafd, lowering, and paired in the list with al-Rafi'. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "024",
+   "rev": 1,
+   "order": 24,
+   "arabic": "ٱلرَّافِعُ",
+   "transliteration": "Ar-Raafi'",
+   "meaning": "The Exalter, who raises whom He wills",
+   "explanation": "From raf', raising. In Al Imran 3:55 Allah says to 'Isa: I will take you and raise you to Myself.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 55
+     }
+    ],
+    "form": "وَرَافِعُكَ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:55"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "025",
+   "rev": 1,
+   "order": 25,
+   "arabic": "ٱلْمُعِزُّ",
+   "transliteration": "Al-Mu'izz",
+   "meaning": "The Giver of Honour",
+   "explanation": "From 'izz, honour. Al Imran 3:26: You honour whom You will and You humble whom You will.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 26
+     }
+    ],
+    "form": "وَتُعِزُّ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:26"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "026",
+   "rev": 2,
+   "order": 26,
+   "arabic": "ٱلْمُذِلُّ",
+   "transliteration": "Al-Mudhill",
+   "meaning": "The Humbler, who abases whom He wills",
+   "explanation": "From dhull, lowliness. Al Imran 3:26: You honour whom You will and You humble whom You will; in Your hand is the good.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 26
+     }
+    ],
+    "form": "وَتُذِلُّ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:26"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "027",
+   "rev": 1,
+   "order": 27,
+   "arabic": "ٱلسَّمِيعُ",
+   "transliteration": "As-Samee'",
+   "meaning": "The All-Hearing",
+   "explanation": "From sam', hearing. Al-Shura 42:11: there is nothing like Him, and He is the All-Hearing, the All-Seeing.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 42,
+      "ayah": 11
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ash-Shuraa 42:11"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "028",
+   "rev": 1,
+   "order": 28,
+   "arabic": "ٱلْبَصِيرُ",
+   "transliteration": "Al-Baseer",
+   "meaning": "The All-Seeing",
+   "explanation": "From basar, sight. Al-Shura 42:11 pairs it with al-Sami', and al-Isra' 17:1 ends the same way.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 42,
+      "ayah": 11
+     },
+     {
+      "surahId": 17,
+      "ayah": 1
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ash-Shuraa 42:11; Al-Isra 17:1"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "029",
+   "rev": 1,
+   "order": 29,
+   "arabic": "ٱلْحَكَمُ",
+   "transliteration": "Al-Hakam",
+   "meaning": "The Judge, whose judgement is final",
+   "explanation": "From hukm, judgement. Al-An'am 6:114: shall I seek a judge other than Allah, when He sent down to you the Book explained in detail?",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 6,
+      "ayah": 114
+     }
+    ],
+    "form": "حَكَمًا"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-An'am 6:114"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "030",
+   "rev": 1,
+   "order": 30,
+   "arabic": "ٱلْعَدْلُ",
+   "transliteration": "Al-'Adl",
+   "meaning": "The Just, whose every act is fair",
+   "explanation": "From 'adl, justice and balance. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "031",
+   "rev": 1,
+   "order": 31,
+   "arabic": "ٱللَّطِيفُ",
+   "transliteration": "Al-Lateef",
+   "meaning": "The Subtle, the Kind, aware of the finest things",
+   "explanation": "Lutf means both gentle kindness and fine subtlety. Al-Mulk 67:14: does He not know, who created? He is the Subtle, the All-Aware.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 67,
+      "ayah": 14
+     },
+     {
+      "surahId": 6,
+      "ayah": 103
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Mulk 67:14; Al-An'am 6:103"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "032",
+   "rev": 1,
+   "order": 32,
+   "arabic": "ٱلْخَبِيرُ",
+   "transliteration": "Al-Khabeer",
+   "meaning": "The All-Aware, who knows the inner reality of things",
+   "explanation": "From khibrah, knowledge of the inside of a matter. Paired with al-Latif in al-Mulk 67:14, and with al-Hakim in al-An'am 6:18.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 67,
+      "ayah": 14
+     },
+     {
+      "surahId": 6,
+      "ayah": 18
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Mulk 67:14; Al-An'am 6:18"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "033",
+   "rev": 1,
+   "order": 33,
+   "arabic": "ٱلْحَلِيمُ",
+   "transliteration": "Al-Haleem",
+   "meaning": "The Forbearing, who does not hasten to punish",
+   "explanation": "From hilm, forbearance. Al-Baqarah 2:225: Allah does not hold you to account for thoughtless oaths, and Allah is Forgiving, Forbearing.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 225
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:225"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "034",
+   "rev": 1,
+   "order": 34,
+   "arabic": "ٱلْعَظِيمُ",
+   "transliteration": "Al-'Azeem",
+   "meaning": "The Magnificent, the Supremely Great",
+   "explanation": "From 'azamah, greatness. It ends Ayat al-Kursi, al-Baqarah 2:255: He is the Most High, the Magnificent.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 255
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:255"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "035",
+   "rev": 1,
+   "order": 35,
+   "arabic": "ٱلْغَفُورُ",
+   "transliteration": "Al-Ghafoor",
+   "meaning": "The All-Forgiving",
+   "explanation": "From maghfirah, forgiveness. Al-Zumar 39:53: do not despair of Allah's mercy; Allah forgives all sins; He is the All-Forgiving, the Ever Merciful.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 39,
+      "ayah": 53
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Az-Zumar 39:53"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "036",
+   "rev": 1,
+   "order": 36,
+   "arabic": "ٱلشَّكُورُ",
+   "transliteration": "Ash-Shakoor",
+   "meaning": "The Appreciative, who rewards and gives more",
+   "explanation": "From shukr, thanks. Fatir 35:30 says He pays people their rewards in full and gives them more; He is Forgiving, Appreciative.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 35,
+      "ayah": 30
+     },
+     {
+      "surahId": 64,
+      "ayah": 17
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Fatir 35:30; At-Taghabun 64:17"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "037",
+   "rev": 1,
+   "order": 37,
+   "arabic": "ٱلْعَلِيُّ",
+   "transliteration": "Al-'Aliyy",
+   "meaning": "The Most High, above all things",
+   "explanation": "From 'uluww, height. Ayat al-Kursi, al-Baqarah 2:255, ends: He is the Most High, the Magnificent.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 255
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:255"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "038",
+   "rev": 1,
+   "order": 38,
+   "arabic": "ٱلْكَبِيرُ",
+   "transliteration": "Al-Kabeer",
+   "meaning": "The Most Great",
+   "explanation": "From kibar, greatness. Al-Ra'd 13:9: Knower of the unseen and the seen, the Most Great, the Most Exalted.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 13,
+      "ayah": 9
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:9"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "039",
+   "rev": 1,
+   "order": 39,
+   "arabic": "ٱلْحَفِيظُ",
+   "transliteration": "Al-Hafeez",
+   "meaning": "The Preserver, who keeps and protects all things",
+   "explanation": "From hifz, keeping safe. Hud 11:57: my Lord is Preserver over all things. Saba' 34:21 says the same.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 11,
+      "ayah": 57
+     },
+     {
+      "surahId": 34,
+      "ayah": 21
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Hud 11:57; Saba 34:21"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "040",
+   "rev": 2,
+   "order": 40,
+   "arabic": "ٱلْمُقِيتُ",
+   "transliteration": "Al-Muqeet",
+   "meaning": "The Keeper and Sustainer, with power over all things",
+   "explanation": "Al-Nisa' 4:85 ends: and Allah is ever Muqit over all things. Al-Tabari reports it read as keeper, as witness and as able, and prefers able. The word is related to qut, nourishment, and appears only here in the Quran.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 4,
+      "ayah": 85
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "Jami' al-Bayan of al-Tabari",
+    "location": "on al-Nisa' 4:85"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "041",
+   "rev": 1,
+   "order": 41,
+   "arabic": "ٱلْحَسِيبُ",
+   "transliteration": "Al-Haseeb",
+   "meaning": "The Reckoner, who suffices",
+   "explanation": "From hisab, reckoning, and hasb, enough. Al-Nisa' 4:6 and al-Ahzab 33:39: Allah is sufficient as Reckoner.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 4,
+      "ayah": 6
+     },
+     {
+      "surahId": 33,
+      "ayah": 39
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "An-Nisa 4:6; Al-Ahzab 33:39"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "042",
+   "rev": 1,
+   "order": 42,
+   "arabic": "ٱلْجَلِيلُ",
+   "transliteration": "Al-Jaleel",
+   "meaning": "The Majestic",
+   "explanation": "From jalal, majesty. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "043",
+   "rev": 1,
+   "order": 43,
+   "arabic": "ٱلْكَرِيمُ",
+   "transliteration": "Al-Kareem",
+   "meaning": "The Most Generous, the Noble",
+   "explanation": "From karam, generosity and nobility. Al-Infitar 82:6: O man, what has deceived you about your Lord, the Most Generous?",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 82,
+      "ayah": 6
+     },
+     {
+      "surahId": 27,
+      "ayah": 40
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Infitar 82:6; An-Naml 27:40"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "044",
+   "rev": 1,
+   "order": 44,
+   "arabic": "ٱلرَّقِيبُ",
+   "transliteration": "Ar-Raqeeb",
+   "meaning": "The Watchful, who misses nothing",
+   "explanation": "From muraqabah, keeping watch. 'Isa says in al-Ma'idah 5:117: You were the Watcher over them. Al-Nisa' 4:1 ends: Allah is ever Watchful over you.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 5,
+      "ayah": 117
+     },
+     {
+      "surahId": 4,
+      "ayah": 1
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Ma'idah 5:117; An-Nisa 4:1"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "045",
+   "rev": 1,
+   "order": 45,
+   "arabic": "ٱلْمُجِيبُ",
+   "transliteration": "Al-Mujeeb",
+   "meaning": "The Responsive, who answers those who call",
+   "explanation": "From ijabah, answering. Salih says in Hud 11:61: ask His forgiveness and turn to Him; my Lord is Near, Responsive.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 11,
+      "ayah": 61
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Hud 11:61"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "046",
+   "rev": 1,
+   "order": 46,
+   "arabic": "ٱلْوَاسِعُ",
+   "transliteration": "Al-Waasi'",
+   "meaning": "The All-Encompassing, vast in giving and knowledge",
+   "explanation": "From sa'ah, vastness. Al-Baqarah 2:115: wherever you turn, there is the Face of Allah; Allah is All-Encompassing, All-Knowing.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 115
+     },
+     {
+      "surahId": 2,
+      "ayah": 268
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:115; Al-Baqarah 2:268"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "047",
+   "rev": 1,
+   "order": 47,
+   "arabic": "ٱلْحَكِيمُ",
+   "transliteration": "Al-Hakeem",
+   "meaning": "The All-Wise",
+   "explanation": "From hikmah, wisdom, and hukm, judgement. It closes al-Hashr 59:24: He is the Almighty, the All-Wise.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 59,
+      "ayah": 24
+     },
+     {
+      "surahId": 2,
+      "ayah": 32
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hashr 59:24; Al-Baqarah 2:32"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "048",
+   "rev": 1,
+   "order": 48,
+   "arabic": "ٱلْوَدُودُ",
+   "transliteration": "Al-Wadood",
+   "meaning": "The Loving",
+   "explanation": "From wudd, love. Al-Buruj 85:14: He is the All-Forgiving, the Loving. Hud 11:90: my Lord is Ever Merciful, Loving.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 85,
+      "ayah": 14
+     },
+     {
+      "surahId": 11,
+      "ayah": 90
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Buruj 85:14; Hud 11:90"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "049",
+   "rev": 1,
+   "order": 49,
+   "arabic": "ٱلْمَجِيدُ",
+   "transliteration": "Al-Majeed",
+   "meaning": "The Glorious",
+   "explanation": "From majd, glory. The angels say to Ibrahim's household in Hud 11:73: He is Praiseworthy, Glorious.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 11,
+      "ayah": 73
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Hud 11:73"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "050",
+   "rev": 1,
+   "order": 50,
+   "arabic": "ٱلْبَاعِثُ",
+   "transliteration": "Al-Baa'ith",
+   "meaning": "The Resurrector, who raises the dead",
+   "explanation": "From ba'th, raising up and sending. Surah 22:7: the Hour is coming, no doubt about it, and Allah will raise those in the graves.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 22,
+      "ayah": 7
+     }
+    ],
+    "form": "يَبْعَثُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hajj 22:7"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "051",
+   "rev": 1,
+   "order": 51,
+   "arabic": "ٱلشَّهِيدُ",
+   "transliteration": "Ash-Shaheed",
+   "meaning": "The Witness, present to everything",
+   "explanation": "From shuhud, being present and bearing witness. Surah 22:17: Allah is Witness over all things. Al-Nisa' 4:79: Allah is sufficient as Witness.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 22,
+      "ayah": 17
+     },
+     {
+      "surahId": 4,
+      "ayah": 79
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hajj 22:17; An-Nisa 4:79"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "052",
+   "rev": 1,
+   "order": 52,
+   "arabic": "ٱلْحَقُّ",
+   "transliteration": "Al-Haqq",
+   "meaning": "The Truth, whose being is certain",
+   "explanation": "From haqq, what is true and firm. Surah 22:6: that is because Allah is the Truth, He gives life to the dead, and He has power over all things.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 22,
+      "ayah": 6
+     },
+     {
+      "surahId": 20,
+      "ayah": 114
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hajj 22:6; Taha 20:114"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "053",
+   "rev": 1,
+   "order": 53,
+   "arabic": "ٱلْوَكِيلُ",
+   "transliteration": "Al-Wakeel",
+   "meaning": "The Trustee, on whom one relies",
+   "explanation": "From tawkil, entrusting. The believers say in Al Imran 3:173: Allah is enough for us, and the best Trustee. Al-An'am 6:102: He is Trustee over all things.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 173
+     },
+     {
+      "surahId": 6,
+      "ayah": 102
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:173; Al-An'am 6:102"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "054",
+   "rev": 1,
+   "order": 54,
+   "arabic": "ٱلْقَوِيُّ",
+   "transliteration": "Al-Qawiyy",
+   "meaning": "The Strong, whose strength never fails",
+   "explanation": "From quwwah, strength. Surah 22:40: Allah is Strong, Almighty. Al-Shura 42:19 pairs the same two Names.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 22,
+      "ayah": 40
+     },
+     {
+      "surahId": 42,
+      "ayah": 19
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hajj 22:40; Ash-Shuraa 42:19"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "055",
+   "rev": 1,
+   "order": 55,
+   "arabic": "ٱلْمَتِينُ",
+   "transliteration": "Al-Mateen",
+   "meaning": "The Firm, whose strength is unshakeable",
+   "explanation": "From matanah, firmness. Al-Dhariyat 51:58: Allah is the Provider, the Possessor of strength, the Firm.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 51,
+      "ayah": 58
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Adh-Dhariyat 51:58"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "056",
+   "rev": 1,
+   "order": 56,
+   "arabic": "ٱلْوَلِيُّ",
+   "transliteration": "Al-Waliyy",
+   "meaning": "The Protecting Friend and Ally",
+   "explanation": "From wilayah, nearness and support. Al-Shura 42:9: Allah is the Protector. Al-Shura 42:28 pairs it with al-Hamid.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 42,
+      "ayah": 9
+     },
+     {
+      "surahId": 42,
+      "ayah": 28
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ash-Shuraa 42:9; Ash-Shuraa 42:28"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "057",
+   "rev": 1,
+   "order": 57,
+   "arabic": "ٱلْحَمِيدُ",
+   "transliteration": "Al-Hameed",
+   "meaning": "The Praiseworthy",
+   "explanation": "From hamd, praise. Fatir 35:15: you are the ones in need of Allah, and Allah is the Free of need, the Praiseworthy.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 35,
+      "ayah": 15
+     },
+     {
+      "surahId": 42,
+      "ayah": 28
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Fatir 35:15; Ash-Shuraa 42:28"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "058",
+   "rev": 1,
+   "order": 58,
+   "arabic": "ٱلْمُحْصِي",
+   "transliteration": "Al-Muhsee",
+   "meaning": "The Counter, who has numbered all things",
+   "explanation": "From ihsa', counting fully. Al-Jinn 72:28: He encompasses what is with them and has counted all things in number.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 72,
+      "ayah": 28
+     }
+    ],
+    "form": "وَأَحْصَىٰ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Jinn 72:28"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "059",
+   "rev": 1,
+   "order": 59,
+   "arabic": "ٱلْمُبْدِئُ",
+   "transliteration": "Al-Mubdi'",
+   "meaning": "The Originator, who begins creation",
+   "explanation": "From bad', beginning. Al-Buruj 85:13: it is He who begins and brings back.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 85,
+      "ayah": 13
+     }
+    ],
+    "form": "يُبْدِئُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Buruj 85:13"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "060",
+   "rev": 1,
+   "order": 60,
+   "arabic": "ٱلْمُعِيدُ",
+   "transliteration": "Al-Mu'eed",
+   "meaning": "The Restorer, who brings creation back",
+   "explanation": "From i'adah, bringing back. Al-Buruj 85:13: it is He who begins and brings back. Paired with al-Mubdi'.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 85,
+      "ayah": 13
+     }
+    ],
+    "form": "وَيُعِيدُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Buruj 85:13"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "061",
+   "rev": 1,
+   "order": 61,
+   "arabic": "ٱلْمُحْيِي",
+   "transliteration": "Al-Muhyee",
+   "meaning": "The Giver of Life",
+   "explanation": "From hayah, life. Al-Rum 30:50: look at the traces of Allah's mercy, how He revives the earth after its death; He is the One who gives life to the dead.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 30,
+      "ayah": 50
+     }
+    ],
+    "form": "لَمُحْىِ ٱلْمَوْتَىٰ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Rum 30:50"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "062",
+   "rev": 1,
+   "order": 62,
+   "arabic": "ٱلْمُمِيتُ",
+   "transliteration": "Al-Mumeet",
+   "meaning": "The Bringer of Death",
+   "explanation": "From mawt, death. Al-Hadid 57:2: His is the dominion of the heavens and the earth; He gives life and causes death.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 57,
+      "ayah": 2
+     }
+    ],
+    "form": "وَيُمِيتُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hadid 57:2"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "063",
+   "rev": 1,
+   "order": 63,
+   "arabic": "ٱلْحَيُّ",
+   "transliteration": "Al-Hayy",
+   "meaning": "The Ever Living",
+   "explanation": "From hayah, life. Ayat al-Kursi, al-Baqarah 2:255, opens: Allah, there is no god but Him, the Ever Living, the Sustainer of all.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 255
+     },
+     {
+      "surahId": 3,
+      "ayah": 2
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:255; Ali 'Imran 3:2"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "064",
+   "rev": 1,
+   "order": 64,
+   "arabic": "ٱلْقَيُّومُ",
+   "transliteration": "Al-Qayyoom",
+   "meaning": "The Self-Subsisting, Sustainer of all",
+   "explanation": "From qiyam, standing and upholding. It follows al-Hayy in al-Baqarah 2:255 and Al Imran 3:2, and in Ta Ha 20:111.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 255
+     },
+     {
+      "surahId": 3,
+      "ayah": 2
+     },
+     {
+      "surahId": 20,
+      "ayah": 111
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:255; Ali 'Imran 3:2; Taha 20:111"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "065",
+   "rev": 1,
+   "order": 65,
+   "arabic": "ٱلْوَاجِدُ",
+   "transliteration": "Al-Waajid",
+   "meaning": "The Finder, who lacks nothing",
+   "explanation": "From wujd, finding and having. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "066",
+   "rev": 1,
+   "order": 66,
+   "arabic": "ٱلْمَاجِدُ",
+   "transliteration": "Al-Maajid",
+   "meaning": "The Noble, the Illustrious",
+   "explanation": "From majd, glory, like al-Majid. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "067",
+   "rev": 2,
+   "order": 67,
+   "arabic": "ٱلْوَاحِدُ",
+   "transliteration": "Al-Waahid",
+   "meaning": "The One",
+   "explanation": "From wahdah, oneness. Al-Ra'd 13:16 and al-Zumar 39:4 pair it with al-Qahhar: the One, the Subduer.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 13,
+      "ayah": 16
+     },
+     {
+      "surahId": 39,
+      "ayah": 4
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:16; Az-Zumar 39:4"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "068",
+   "rev": 1,
+   "order": 68,
+   "arabic": "ٱلصَّمَدُ",
+   "transliteration": "As-Samad",
+   "meaning": "The Eternal Refuge, to whom all turn in need",
+   "explanation": "Al-Ikhlas 112:2: Allah, al-Samad. The word is used for one to whom people turn in their needs; it appears only in this ayah.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 112,
+      "ayah": 2
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Ikhlas 112:2"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "069",
+   "rev": 1,
+   "order": 69,
+   "arabic": "ٱلْقَادِرُ",
+   "transliteration": "Al-Qaadir",
+   "meaning": "The Able, who has power to do what He wills",
+   "explanation": "From qudrah, power. Al-An'am 6:65: say, He is the One able to send punishment on you from above you or from beneath your feet.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 6,
+      "ayah": 65
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-An'am 6:65"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "070",
+   "rev": 1,
+   "order": 70,
+   "arabic": "ٱلْمُقْتَدِرُ",
+   "transliteration": "Al-Muqtadir",
+   "meaning": "The All-Powerful, in full command",
+   "explanation": "From iqtidar, full power. Al-Kahf 18:45: Allah has full power over all things. Al-Qamar 54:55 speaks of a Sovereign, All-Powerful.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 18,
+      "ayah": 45
+     },
+     {
+      "surahId": 54,
+      "ayah": 55
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Kahf 18:45; Al-Qamar 54:55"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "071",
+   "rev": 2,
+   "order": 71,
+   "arabic": "ٱلْمُقَدِّمُ",
+   "transliteration": "Al-Muqaddim",
+   "meaning": "The One who brings forward whom He wills",
+   "explanation": "From taqdim, putting forward. The Prophet ﷺ said in a supplication in the prayer: You are al-Muqaddim and You are al-Mu'akhkhir (Muslim, 771).",
+   "evidence": {
+    "kind": "hadith",
+    "hadith": "Sahih Muslim 771 (Abd al-Baqi numbering), from 'Ali ibn Abi Talib: the Prophet's ﷺ supplication in the prayer, \"You are al-Muqaddim and You are al-Mu'akhkhir\""
+   },
+   "explanationSource": {
+    "work": "Sahih Muslim",
+    "location": "Hadith 771 (Abd al-Baqi numbering), narrated by 'Ali ibn Abi Talib"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "072",
+   "rev": 2,
+   "order": 72,
+   "arabic": "ٱلْمُؤَخِّرُ",
+   "transliteration": "Al-Mu'akhkhir",
+   "meaning": "The One who holds back whom He wills",
+   "explanation": "From ta'khir, putting back. Paired with al-Muqaddim in the same supplication of the Prophet ﷺ, narrated by 'Ali (Muslim, 771).",
+   "evidence": {
+    "kind": "hadith",
+    "hadith": "Sahih Muslim 771 (Abd al-Baqi numbering), from 'Ali ibn Abi Talib: the Prophet's ﷺ supplication in the prayer, \"You are al-Muqaddim and You are al-Mu'akhkhir\""
+   },
+   "explanationSource": {
+    "work": "Sahih Muslim",
+    "location": "Hadith 771 (Abd al-Baqi numbering), narrated by 'Ali ibn Abi Talib"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "073",
+   "rev": 1,
+   "order": 73,
+   "arabic": "ٱلْأَوَّلُ",
+   "transliteration": "Al-Awwal",
+   "meaning": "The First",
+   "explanation": "Al-Hadid 57:3: He is the First and the Last, the Manifest and the Hidden, and He knows all things.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 57,
+      "ayah": 3
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hadid 57:3"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "074",
+   "rev": 1,
+   "order": 74,
+   "arabic": "ٱلْآخِرُ",
+   "transliteration": "Al-'Aakhir",
+   "meaning": "The Last",
+   "explanation": "Al-Hadid 57:3: He is the First and the Last, the Manifest and the Hidden, and He knows all things.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 57,
+      "ayah": 3
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hadid 57:3"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "075",
+   "rev": 1,
+   "order": 75,
+   "arabic": "ٱلظَّاهِرُ",
+   "transliteration": "Az-Zaahir",
+   "meaning": "The Manifest",
+   "explanation": "From zuhur, being apparent and above. Al-Hadid 57:3 names it with al-Awwal, al-Akhir and al-Batin.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 57,
+      "ayah": 3
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hadid 57:3"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "076",
+   "rev": 1,
+   "order": 76,
+   "arabic": "ٱلْبَاطِنُ",
+   "transliteration": "Al-Baatin",
+   "meaning": "The Hidden",
+   "explanation": "From butun, being within and unseen. Al-Hadid 57:3 names it with al-Awwal, al-Akhir and al-Zahir.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 57,
+      "ayah": 3
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hadid 57:3"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "077",
+   "rev": 2,
+   "order": 77,
+   "arabic": "ٱلْوَالِي",
+   "transliteration": "Al-Waalee",
+   "meaning": "The Governor, who manages all affairs",
+   "explanation": "From wilayah, taking charge. Al-Ra'd 13:11 denies that anyone else is this: when Allah wills harm for a people, none can turn it back, and they have no protector besides Him.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 13,
+      "ayah": 11
+     }
+    ],
+    "form": "وَالٍ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:11"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "078",
+   "rev": 1,
+   "order": 78,
+   "arabic": "ٱلْمُتَعَالِي",
+   "transliteration": "Al-Muta'aalee",
+   "meaning": "The Most Exalted, above all",
+   "explanation": "From 'uluww, height. Al-Ra'd 13:9: Knower of the unseen and the seen, the Most Great, the Most Exalted.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 13,
+      "ayah": 9
+     }
+    ],
+    "form": "ٱلْمُتَعَالِ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:9"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "079",
+   "rev": 1,
+   "order": 79,
+   "arabic": "ٱلْبَرُّ",
+   "transliteration": "Al-Barr",
+   "meaning": "The Most Kind, the Source of all good",
+   "explanation": "From birr, goodness and kindness. The people of Paradise say in al-Tur 52:28: we used to call on Him; He is the Most Kind, the Ever Merciful.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 52,
+      "ayah": 28
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "At-Tur 52:28"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "080",
+   "rev": 1,
+   "order": 80,
+   "arabic": "ٱلتَّوَّابُ",
+   "transliteration": "At-Tawwaab",
+   "meaning": "The Accepter of Repentance, who turns to people again and again",
+   "explanation": "From tawbah, turning back. Al-Baqarah 2:37: Adam received words from his Lord, and He accepted his repentance; He is the Accepter of Repentance, the Ever Merciful.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 37
+     },
+     {
+      "surahId": 49,
+      "ayah": 12
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:37; Al-Hujurat 49:12"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "081",
+   "rev": 2,
+   "order": 81,
+   "arabic": "ٱلْمُنْتَقِمُ",
+   "transliteration": "Al-Muntaqim",
+   "meaning": "The Avenger, who requites the guilty",
+   "explanation": "From intiqam, requital. Al-Sajdah 32:22: who does more wrong than one reminded of his Lord's signs who then turns away? We will take requital from the guilty.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 32,
+      "ayah": 22
+     }
+    ],
+    "form": "مُنتَقِمُونَ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "As-Sajdah 32:22"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "082",
+   "rev": 1,
+   "order": 82,
+   "arabic": "ٱلْعَفُوُّ",
+   "transliteration": "Al-'Afuww",
+   "meaning": "The Pardoner, who erases sins",
+   "explanation": "From 'afw, erasing. Al-Nisa' 4:43 and 4:99: Allah is Pardoning, Forgiving. Surah 22:60 says the same.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 4,
+      "ayah": 43
+     },
+     {
+      "surahId": 4,
+      "ayah": 99
+     },
+     {
+      "surahId": 22,
+      "ayah": 60
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "An-Nisa 4:43; An-Nisa 4:99; Al-Hajj 22:60"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "083",
+   "rev": 1,
+   "order": 83,
+   "arabic": "ٱلرَّءُوفُ",
+   "transliteration": "Ar-Ra'oof",
+   "meaning": "The Most Compassionate, tender in mercy",
+   "explanation": "From ra'fah, tender compassion. Al-Baqarah 2:143: Allah is Most Compassionate and Ever Merciful to people.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 143
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:143"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "084",
+   "rev": 1,
+   "order": 84,
+   "arabic": "مَالِكُ ٱلْمُلْكِ",
+   "transliteration": "Maalikul-Mulk",
+   "meaning": "Owner of all Sovereignty",
+   "explanation": "Al Imran 3:26: say, O Allah, Owner of Sovereignty, You give sovereignty to whom You will and take it from whom You will.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 26
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:26"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "085",
+   "rev": 2,
+   "order": 85,
+   "arabic": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ",
+   "transliteration": "Dhul-Jalaali wal-Ikraam",
+   "meaning": "Possessor of Majesty and Honour",
+   "explanation": "Al-Rahman 55:26-27: all on the earth will pass away, and the Face of your Lord remains, Possessor of Majesty and Honour.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 55,
+      "ayah": 27
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Rahman 55:26-27"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "086",
+   "rev": 1,
+   "order": 86,
+   "arabic": "ٱلْمُقْسِطُ",
+   "transliteration": "Al-Muqsit",
+   "meaning": "The Equitable, who does justice",
+   "explanation": "From qist, justice. Al Imran 3:18: Allah bears witness that there is no god but Him, upholding justice.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 18
+     }
+    ],
+    "form": "بِٱلْقِسْطِ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:18"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "087",
+   "rev": 1,
+   "order": 87,
+   "arabic": "ٱلْجَامِعُ",
+   "transliteration": "Al-Jaami'",
+   "meaning": "The Gatherer, who brings all together",
+   "explanation": "From jam', gathering. Al Imran 3:9: our Lord, You will gather the people on a Day about which there is no doubt.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 3,
+      "ayah": 9
+     }
+    ],
+    "form": "جَامِعُ ٱلنَّاسِ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:9"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "088",
+   "rev": 1,
+   "order": 88,
+   "arabic": "ٱلْغَنِيُّ",
+   "transliteration": "Al-Ghaniyy",
+   "meaning": "The Self-Sufficient, free of all need",
+   "explanation": "From ghina, having no need. Fatir 35:15: you are the ones in need of Allah, and Allah is the Free of need, the Praiseworthy.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 35,
+      "ayah": 15
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Fatir 35:15"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "089",
+   "rev": 1,
+   "order": 89,
+   "arabic": "ٱلْمُغْنِي",
+   "transliteration": "Al-Mughnee",
+   "meaning": "The Enricher, who frees from need",
+   "explanation": "From ighna', making free of need. Al-Tawbah 9:28: if you fear poverty, Allah will enrich you from His bounty if He wills.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 9,
+      "ayah": 28
+     }
+    ],
+    "form": "يُغْنِيكُمُ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "At-Tawbah 9:28"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "090",
+   "rev": 1,
+   "order": 90,
+   "arabic": "ٱلْمَانِعُ",
+   "transliteration": "Al-Maani'",
+   "meaning": "The Preventer, who withholds what He wills",
+   "explanation": "From man', withholding. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "091",
+   "rev": 1,
+   "order": 91,
+   "arabic": "ٱلضَّارُّ",
+   "transliteration": "Ad-Daarr",
+   "meaning": "The One who brings harm, as He wills",
+   "explanation": "From darr, harm. Al-Fath 48:11: who can do anything for you against Allah if He intends harm for you or intends benefit?",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 48,
+      "ayah": 11
+     }
+    ],
+    "form": "ضَرًّا"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Fath 48:11"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "092",
+   "rev": 1,
+   "order": 92,
+   "arabic": "ٱلنَّافِعُ",
+   "transliteration": "An-Naafi'",
+   "meaning": "The One who brings benefit",
+   "explanation": "From naf', benefit. Al-Fath 48:11: who can do anything for you against Allah if He intends harm for you or intends benefit? Paired with al-Darr.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 48,
+      "ayah": 11
+     }
+    ],
+    "form": "نَفْعًۢا"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Fath 48:11"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "093",
+   "rev": 1,
+   "order": 93,
+   "arabic": "ٱلنُّورُ",
+   "transliteration": "An-Noor",
+   "meaning": "The Light",
+   "explanation": "Al-Nur 24:35: Allah is the Light of the heavens and the earth.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 24,
+      "ayah": 35
+     }
+    ],
+    "form": "نُورُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "An-Nur 24:35"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "094",
+   "rev": 1,
+   "order": 94,
+   "arabic": "ٱلْهَادِي",
+   "transliteration": "Al-Haadee",
+   "meaning": "The Guide",
+   "explanation": "From hidayah, guidance. Al-Furqan 25:31: your Lord is sufficient as Guide and Helper.",
+   "evidence": {
+    "kind": "quran-name",
+    "quran": [
+     {
+      "surahId": 25,
+      "ayah": 31
+     }
+    ]
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Furqan 25:31"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "095",
+   "rev": 1,
+   "order": 95,
+   "arabic": "ٱلْبَدِيعُ",
+   "transliteration": "Al-Badee'",
+   "meaning": "The Originator, who creates without precedent",
+   "explanation": "From ibda', making without any model. Al-Baqarah 2:117: Originator of the heavens and the earth; when He decrees a matter, He only says to it, Be, and it is.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 2,
+      "ayah": 117
+     }
+    ],
+    "form": "بَدِيعُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Baqarah 2:117"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "096",
+   "rev": 1,
+   "order": 96,
+   "arabic": "ٱلْبَاقِي",
+   "transliteration": "Al-Baaqee",
+   "meaning": "The Everlasting, who remains",
+   "explanation": "From baqa', remaining. Al-Rahman 55:26-27: all on the earth will pass away, and the Face of your Lord remains.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 55,
+      "ayah": 26,
+      "ayahEnd": 27
+     }
+    ],
+    "form": "وَيَبْقَىٰ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Rahman 55:26-27"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "097",
+   "rev": 1,
+   "order": 97,
+   "arabic": "ٱلْوَارِثُ",
+   "transliteration": "Al-Waarith",
+   "meaning": "The Inheritor, to whom all returns",
+   "explanation": "From irth, inheriting. Al-Hijr 15:23: it is We who give life and cause death, and We are the Inheritors.",
+   "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+     {
+      "surahId": 15,
+      "ayah": 23
+     }
+    ],
+    "form": "ٱلْوَٰرِثُونَ"
+   },
+   "explanationSource": {
+    "work": "The Quran",
+    "location": "Al-Hijr 15:23"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "098",
+   "rev": 1,
+   "order": 98,
+   "arabic": "ٱلرَّشِيدُ",
+   "transliteration": "Ar-Rasheed",
+   "meaning": "The Guide to the right course",
+   "explanation": "From rushd, sound direction. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  },
+  {
+   "id": "099",
+   "rev": 1,
+   "order": 99,
+   "arabic": "ٱلصَّبُورُ",
+   "transliteration": "As-Saboor",
+   "meaning": "The Patient, who does not hasten",
+   "explanation": "From sabr, patience. It is found in the enumerated list, not as a Name in the Quran.",
+   "evidence": {
+    "kind": "list-only"
+   },
+   "explanationSource": {
+    "work": "al-Jami' of al-Tirmidhi",
+    "location": "Book of Supplications, hadith 3507 (Ahmad Shakir numbering): the enumerated list"
+   },
+   "review": {
+    "status": "source-checked",
+    "date": "2026-11-15"
+   }
+  }
+ ]
+}

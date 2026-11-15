@@ -1,0 +1,32 @@
+{
+  "id": "085",
+  "rev": 2,
+  "order": 85,
+  "arabic": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ",
+  "transliteration": "Dhul-Jalaali wal-Ikraam",
+  "meaning": "Possessor of Majesty and Honour",
+  "explanation": "Al-Rahman 55:26-27: all on the earth will pass away, and the Face of your Lord remains, Possessor of Majesty and Honour.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 55,
+        "ayah": 27
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Rahman 55:26-27"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it.",
+      "2026-11-15 audit fix (rev 2): the quoted words span 55:26-27 (\"all on the earth will pass away\" is 55:26); the explanation and its source now cite both ayat. The Name itself is in 55:27."
+    ]
+  }
+}

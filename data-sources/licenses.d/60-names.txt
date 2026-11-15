@@ -1,0 +1,17 @@
+=== Names of Allah
+The meanings, explanations, transliterations, intro text and glossary entry of the Names of
+Allah deck are Takrar's own work. The transliterations are made by Takrar's own scheme
+(src/lib/transliterate.ts) from our own vocalised Arabic of each Name.
+
+The order of the Names follows the enumeration narrated in the Jami' of al-Tirmidhi
+(d. 279 AH), a public-domain work; the Names themselves are not anyone's text. Quran
+references point to the Tanzil Quran text already bundled with the app (listed above); no
+Quran text is stored in the deck beyond the single word or phrase a derived Name is taken
+from, copied from that same Tanzil text. Hadith and works of scholarship (Sahih al-Bukhari,
+Sahih Muslim, al-Tirmidhi's Jami', al-Tabari's Jami' al-Bayan, Ibn Hajar's Fath al-Bari,
+Ibn Kathir's Tafsir) are cited, not reproduced.
+
+Online copies were read only to confirm the list, the citation numbers and the scholars'
+remarks (surahquran.com, hadithanswers.com, dorar.net, page views of sunnah.com, the
+hadith-api Arabic edition, the tafsir pages of quran.ksu.edu.sa, shamela.ws). Nothing from
+those sites is bundled.

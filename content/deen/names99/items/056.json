@@ -1,0 +1,35 @@
+{
+  "id": "056",
+  "rev": 1,
+  "order": 56,
+  "arabic": "ٱلْوَلِيُّ",
+  "transliteration": "Al-Waliyy",
+  "meaning": "The Protecting Friend and Ally",
+  "explanation": "From wilayah, nearness and support. Al-Shura 42:9: Allah is the Protector. Al-Shura 42:28 pairs it with al-Hamid.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 42,
+        "ayah": 9
+      },
+      {
+        "surahId": 42,
+        "ayah": 28
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ash-Shuraa 42:9; Ash-Shuraa 42:28"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it."
+    ]
+  }
+}

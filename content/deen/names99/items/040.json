@@ -1,0 +1,32 @@
+{
+  "id": "040",
+  "rev": 2,
+  "order": 40,
+  "arabic": "ٱلْمُقِيتُ",
+  "transliteration": "Al-Muqeet",
+  "meaning": "The Keeper and Sustainer, with power over all things",
+  "explanation": "Al-Nisa' 4:85 ends: and Allah is ever Muqit over all things. Al-Tabari reports it read as keeper, as witness and as able, and prefers able. The word is related to qut, nourishment, and appears only here in the Quran.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 4,
+        "ayah": 85
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "Jami' al-Bayan of al-Tabari",
+    "location": "on al-Nisa' 4:85"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it.",
+      "2026-11-15 audit fix (rev 2): the explanation gave only the sense \"nourisher\" for muqit in 4:85. Al-Tabari on the ayah (read at quran.ksu.edu.sa) reports the early readings hafiz, shahid, hasib, al-qa'im bi-l-tadbir and qadir, prefers qadir, and relates the word to qut. Meaning and explanation now show this; source changed to al-Tabari."
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "017",
+  "rev": 1,
+  "order": 17,
+  "arabic": "ٱلْوَهَّابُ",
+  "transliteration": "Al-Wahhaab",
+  "meaning": "The Bestower, who gives freely and without return",
+  "explanation": "From hibah, a gift. Al Imran 3:8 asks: grant us mercy from You, You are al-Wahhab. Sulayman asks by it in Sad 38:35.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 3,
+        "ayah": 8
+      },
+      {
+        "surahId": 38,
+        "ayah": 35
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ali 'Imran 3:8; Sad 38:35"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it."
+    ]
+  }
+}

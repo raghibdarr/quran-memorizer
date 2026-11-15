@@ -1,0 +1,36 @@
+{
+  "id": "067",
+  "rev": 2,
+  "order": 67,
+  "arabic": "ٱلْوَاحِدُ",
+  "transliteration": "Al-Waahid",
+  "meaning": "The One",
+  "explanation": "From wahdah, oneness. Al-Ra'd 13:16 and al-Zumar 39:4 pair it with al-Qahhar: the One, the Subduer.",
+  "evidence": {
+    "kind": "quran-name",
+    "quran": [
+      {
+        "surahId": 13,
+        "ayah": 16
+      },
+      {
+        "surahId": 39,
+        "ayah": 4
+      }
+    ]
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Ra'd 13:16; Az-Zumar 39:4"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-14 review pass (rev 2): the explanation named Ibrahim 14:48 while the evidence cites 13:16 and 39:4; it now names the two cited ayat, both of which read al-Wahid al-Qahhar.",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it."
+    ]
+  }
+}

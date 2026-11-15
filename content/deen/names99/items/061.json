@@ -1,0 +1,32 @@
+{
+  "id": "061",
+  "rev": 1,
+  "order": 61,
+  "arabic": "ٱلْمُحْيِي",
+  "transliteration": "Al-Muhyee",
+  "meaning": "The Giver of Life",
+  "explanation": "From hayah, life. Al-Rum 30:50: look at the traces of Allah's mercy, how He revives the earth after its death; He is the One who gives life to the dead.",
+  "evidence": {
+    "kind": "quran-derived",
+    "quran": [
+      {
+        "surahId": 30,
+        "ayah": 50
+      }
+    ],
+    "form": "لَمُحْىِ ٱلْمَوْتَىٰ"
+  },
+  "explanationSource": {
+    "work": "The Quran",
+    "location": "Ar-Rum 30:50"
+  },
+  "review": {
+    "status": "source-checked",
+    "date": "2026-11-15",
+    "log": [
+      "2026-11-14 written (names99 package): meaning and explanation from the Arabic Name and the cited ayat only; order and wording of the list checked against al-Tirmidhi 3507 in two online witnesses.",
+      "2026-11-14 checked: every Quran reference re-read against the Tanzil text; check-names.mjs confirms each quran-name Name occurs as words in its ayat and each quran-derived form is copied exactly; build-deen G6 green. A fresh-agent audit is still due (content-audit package).",
+      "2026-11-15 independent audit (fresh agent, content verifier): the Name's Arabic and its place in the list collated against al-Tirmidhi 3507 in two witnesses (dorar.net hadith encyclopedia, plain text; hadith-api Arabic edition, vocalised): skeleton, order and vocalisation match. Every cited ayah re-read in the bundled Tanzil text and the meaning and explanation checked against it."
+    ]
+  }
+}

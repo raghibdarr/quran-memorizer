@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import StubPage from '@/components/ui/stub-page';
+import NamesScreen from '@/components/names/names-screen';
 
 export const metadata: Metadata = { title: 'Names of Allah · Takrar' };
 
-// Stub (foundations, all-in-one spec 2.2): the names99 package replaces this page.
+// The ninety-nine Names (all-in-one spec 2.2; names99 package)
 export default function Page() {
-  return <StubPage title="Names of Allah" back="/essentials" note="The Names of Allah, with their meanings. Coming soon." />;
+  return <NamesScreen />;
 }
