@@ -1,7 +1,8 @@
 # World Magnetic Model 2025 (WMM2025)
 
-Used by the qibla compass (`src/lib/qibla/declination.ts`) to turn Android's magnetic heading
-into a true-north heading. iOS reports true north itself.
+Used by the qibla compass (`src/lib/qibla/declination.ts`) to turn the phone's magnetic heading
+into a true-north heading, on Android and on iOS (WebKit's `webkitCompassHeading` is
+`CLHeading.magneticHeading`, so it needs the same correction).
 
 | | |
 |---|---|
@@ -30,5 +31,5 @@ against the `.COF` line by line, and checks our evaluation against all 112 NOAA 
 
 WMM2030 is due in December 2029. After 2030.0 the app keeps extrapolating for two more years
 (the error grows by roughly a tenth of a degree a year), then stops correcting and labels the
-Android heading "magnetic". To renew: replace `WMM2025.COF` and the test files with the new
+heading "magnetic". To renew: replace `WMM2025.COF` and the test files with the new
 release, update this file, run the build script, and adjust the file names in the test.

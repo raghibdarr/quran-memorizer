@@ -1,5 +1,5 @@
 === Qibla compass: World Magnetic Model 2025 (NOAA NCEI and British Geological Survey)
-The qibla compass in the Android app corrects the phone's magnetic heading to true north with the
+The qibla compass corrects the phone's magnetic heading to true north with the
 World Magnetic Model WMM2025 (released 13 November 2024), produced by the US National Oceanic and
 Atmospheric Administration's National Centers for Environmental Information (NCEI) and the British
 Geological Survey. Takrar evaluates NOAA's published coefficient file on your device with its own

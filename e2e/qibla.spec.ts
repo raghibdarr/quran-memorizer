@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
 import { sunAid, sunPosition } from '../src/lib/qibla/sun'
+import { declinationAt } from '../src/lib/qibla/declination'
 
 // Qibla (all-in-one spec 2.2, qibla package). The fallback (bearing, north-up
 // diagram, sun aid) is what every desktop browser shows, so it is what most of
@@ -135,6 +136,63 @@ test.describe('qibla', () => {
     await expect(page.locator('[data-qibla-dial="diagram"]')).toBeVisible()
     await expect(action).toBeFocused()
     await context.close()
+  })
+
+  test('iOS: motion access asked only on the tap, magnetic heading corrected to true north', async ({ page }) => {
+    // Seattle: magnetic north is about 15° east of true north, so a missed correction shows
+    const seattle = { ...LONDON, lat: 47.61, lng: -122.33, label: 'Seattle', countryCode: 'US', tz: 'America/Los_Angeles' }
+    const decl = declinationAt(seattle.lat, seattle.lng, new Date())
+    expect(decl.ok && Math.abs(decl.degrees) > 10).toBe(true)
+    const declination = decl.ok ? decl.degrees : 0
+    await seed(page, seattle)
+    await page.addInitScript(() => {
+      const w = window as unknown as { __asked: number; __answer: string; DeviceOrientationEvent: { requestPermission?: () => Promise<string> } }
+      w.__asked = 0
+      w.__answer = 'denied'
+      w.DeviceOrientationEvent.requestPermission = async () => {
+        w.__asked++
+        return w.__answer
+      }
+    })
+    await page.goto('/qibla')
+    const bearing = parseInt((await page.locator('[data-qibla-bearing]').textContent()) ?? '', 10)
+    expect(await page.evaluate(() => (window as unknown as { __asked: number }).__asked)).toBe(0)
+
+    // Refused: the diagram stays, with a plain note and a way to try again
+    await page.getByRole('button', { name: 'Use my phone’s compass' }).click()
+    await expect(page.locator('[data-qibla-notice="denied"]')).toBeVisible()
+    await expect(page.locator('[data-qibla-dial="diagram"]')).toBeVisible()
+    expect(await page.evaluate(() => (window as unknown as { __asked: number }).__asked)).toBe(1)
+
+    await page.evaluate(() => ((window as unknown as { __answer: string }).__answer = 'granted'))
+    await page.getByRole('button', { name: 'Try the compass again' }).click()
+    const send = async (heading: number, accuracy = 10) => {
+      for (let i = 0; i < 25; i++) {
+        await page.evaluate(
+          ([h, acc]) => {
+            const e = new Event('deviceorientation')
+            Object.assign(e, { webkitCompassHeading: h, webkitCompassAccuracy: acc, alpha: 0, beta: 0, gamma: 0, absolute: false })
+            window.dispatchEvent(e)
+          },
+          [heading, accuracy],
+        )
+        await page.waitForTimeout(20)
+      }
+    }
+    // The needle reads the qibla's number, but that is magnetic: true heading is off by the declination
+    await send(bearing)
+    await expect(page.locator('[data-qibla-dial="live"]')).toBeVisible()
+    const off = Math.round(Math.abs(declination))
+    await expect(page.locator('[data-qibla-readout="live"]')).toContainText(
+      new RegExp(`Turn (${off - 1}|${off}|${off + 1})° ${declination > 0 ? 'left' : 'right'}`),
+    )
+    // Magnetic heading = bearing minus declination is the true qibla
+    await send((((bearing - declination) % 360) + 360) % 360)
+    await expect(page.locator('[data-qibla-readout="live"]')).toContainText('Facing the qibla')
+    await expect(page.locator('[data-qibla-notes]')).not.toContainText('magnetic north')
+    // A poor accuracy estimate from iOS asks for the figure 8
+    await send((((bearing - declination) % 360) + 360) % 360, 40)
+    await expect(page.locator('[data-calibration-hint]')).toBeVisible()
   })
 
   test('a browser that offers the event but sends no readings falls back', async ({ browser }, testInfo) => {

@@ -11,8 +11,9 @@ export interface TrueHeading {
 }
 
 /**
- * True heading from a sensor reading: iOS already reports true north; a
- * magnetic reading (Android) gets the WMM declination added (east positive).
+ * True heading from a sensor reading: a magnetic reading (iOS and Android both
+ * give one) gets the WMM declination added (east positive); a reading already
+ * from true north passes through.
  */
 export function toTrueHeading(raw: Pick<RawHeading, 'heading' | 'reference'>, declination: DeclinationResult | null): TrueHeading {
   if (raw.reference === 'true') return { heading: norm360(raw.heading), reference: 'true' };

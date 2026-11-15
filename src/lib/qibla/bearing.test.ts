@@ -40,7 +40,7 @@ describe('qibla bearing: published values within 0.5 degrees', () => {
 })
 
 describe('heading helpers', () => {
-  it('iOS true headings pass through; Android magnetic ones get the declination', () => {
+  it('true headings pass through; magnetic ones (iOS and Android) get the declination', () => {
     expect(toTrueHeading({ heading: 100, reference: 'true' }, { ok: true, degrees: 15, weakField: false })).toEqual({ heading: 100, reference: 'true' })
     expect(toTrueHeading({ heading: 350, reference: 'magnetic' }, { ok: true, degrees: 15, weakField: false })).toEqual({ heading: 5, reference: 'true' })
     expect(toTrueHeading({ heading: 10, reference: 'magnetic' }, { ok: true, degrees: -15, weakField: false })).toEqual({ heading: 355, reference: 'true' })
