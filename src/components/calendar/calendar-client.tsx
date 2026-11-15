@@ -87,8 +87,9 @@ export default function CalendarClient() {
               <Chevron dir="left" />
             </button>
             <div className="min-w-0 text-center" aria-live="polite">
-              <h2 className="truncate text-base font-bold text-foreground" data-month-title>{formatHijriMonth(view)}</h2>
-              <p className="truncate text-xs text-muted">{grid.gregorianSpan}</p>
+              {/* Wraps rather than truncates: at large text sizes the month name still reads whole */}
+              <h2 className="text-base font-bold text-balance break-words text-foreground" data-month-title>{formatHijriMonth(view)}</h2>
+              <p className="text-xs text-balance text-muted">{grid.gregorianSpan}</p>
             </div>
             <button
               type="button"
@@ -161,12 +162,13 @@ export default function CalendarClient() {
           <h2 id="coming-up" className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted">Coming up · expected</h2>
           <ul className="mt-2 divide-y divide-foreground/5 rounded-2xl border border-foreground/10 bg-card px-5" data-coming-up>
             {upcoming.map((o) => (
-              <li key={o.event.id} className="flex min-h-12 items-center justify-between gap-3 py-2.5">
-                <span className="min-w-0">
+              // Title above, date and "in N days" below when there isn't room side by side (large text)
+              <li key={o.event.id} className="flex min-h-12 flex-wrap items-center justify-between gap-x-3 gap-y-0.5 py-2.5">
+                <span className="min-w-[min(12rem,100%)] flex-1">
                   <span className="block text-sm font-semibold text-foreground">{o.event.title}</span>
                   <span className="block text-xs text-muted">{formatCivil(o.first)}</span>
                 </span>
-                <span className="shrink-0 text-xs font-semibold text-teal">{inDays(daysUntil(today, o))}</span>
+                <span className="text-xs font-semibold text-teal">{inDays(daysUntil(today, o))}</span>
               </li>
             ))}
           </ul>

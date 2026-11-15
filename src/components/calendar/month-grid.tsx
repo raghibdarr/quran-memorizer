@@ -31,15 +31,16 @@ export default function MonthGrid({
 }) {
   return (
     <div role="grid" aria-label={`${HIJRI_MONTHS[grid.month - 1]} ${grid.year}`} data-month-grid>
-      <div role="row" className="grid grid-cols-7 gap-1 pb-1">
+      {/* minmax(0,1fr): columns never grow past a seventh, even at 200% text */}
+      <div role="row" className="grid grid-cols-[repeat(7,minmax(0,1fr))] gap-1 pb-1">
         {weekdayLabels(firstWeekday(grid)).map((w) => (
-          <span key={w} role="columnheader" className="text-center text-[11px] font-semibold text-muted">
+          <span key={w} role="columnheader" className="truncate text-center text-[min(0.6875rem,3.2vw)] font-semibold text-muted">
             {w}
           </span>
         ))}
       </div>
       {grid.weeks.map((week, i) => (
-        <div role="row" key={i} className="grid grid-cols-7 gap-1">
+        <div role="row" key={i} className="grid grid-cols-[repeat(7,minmax(0,1fr))] gap-1">
           {week.map((d, j) => {
             if (!d) return <span key={`b${j}`} role="gridcell" aria-hidden className="min-h-14" />;
             const [, gm, gd] = d.iso.split('-').map(Number);
@@ -62,8 +63,8 @@ export default function MonthGrid({
                   isSel ? 'bg-teal text-on-teal' : d.isToday ? 'bg-teal/10 text-teal ring-2 ring-teal' : 'text-foreground hover:bg-foreground/5',
                 )}
               >
-                <span className="text-base font-semibold tabular-nums">{d.hijri.day}</span>
-                <span className={cn('mt-0.5 text-[10px] tabular-nums', isSel ? 'text-on-teal' : 'text-muted')}>
+                <span className="text-[min(1rem,4.6vw)] font-semibold tabular-nums">{d.hijri.day}</span>
+                <span className={cn('mt-0.5 max-w-full truncate text-[min(0.625rem,2.9vw)] tabular-nums', isSel ? 'text-on-teal' : 'text-muted')}>
                   {gd === 1 || d.hijri.day === 1 ? `${gd} ${SHORT_MONTHS[gm - 1]}` : gd}
                 </span>
                 <span

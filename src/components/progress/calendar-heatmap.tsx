@@ -119,7 +119,7 @@ export default function CalendarHeatmap({ activityLog }: Props) {
       </div>
 
       {/* Day-of-week headers */}
-      <div className="grid grid-cols-7 gap-1 mb-1 mt-3">
+      <div className="mb-1 mt-3 grid grid-cols-[repeat(7,minmax(0,1fr))] gap-1">
         {weekdayLabels(weekStart).map((d, i) => (
           <div key={i} className="text-center text-[11px] font-medium text-muted">
             {d}
@@ -128,7 +128,7 @@ export default function CalendarHeatmap({ activityLog }: Props) {
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-[repeat(7,minmax(0,1fr))] gap-1">
         {cells.map((cell, i) => {
           const isSelected = cell.date === selectedDate;
           return (

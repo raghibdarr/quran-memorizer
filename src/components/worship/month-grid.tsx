@@ -65,7 +65,7 @@ export default function MonthGrid({
 
       {hint}
 
-      <div className="mt-2 grid grid-cols-7 gap-y-1 text-center" role="group" aria-label={monthLabel(month)}>
+      <div className="mt-2 grid grid-cols-[repeat(7,minmax(0,1fr))] gap-y-1 text-center" role="group" aria-label={monthLabel(month)}>
         {weekdayLabels(weekStart).map((d, i) => (
           <span key={i} className="pb-1 text-[11px] font-semibold text-muted" aria-hidden>
             {d}
