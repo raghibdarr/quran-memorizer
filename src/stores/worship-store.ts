@@ -129,6 +129,10 @@ export const useWorshipStore = create<WorshipState>()(
       name: WORSHIP_STORE_KEY,
       version: WORSHIP_STORE_VERSION,
       migrate: (p, v) => migrateWorship(p, v) as never,
+      // Every rehydrate goes through the sanitizer, not only a version change: a
+      // same-version value of the wrong shape (a newer build's id, a partial write)
+      // must fall back to defaults rather than crash the screens that read it
+      merge: (persisted, current) => ({ ...current, ...sanitizeWorshipData(persisted) }),
       partialize: ({ prayers, fasts, madeUp, pauses, tasbihTotals }) => ({ prayers, fasts, madeUp, pauses, tasbihTotals }),
     },
   ),

@@ -113,9 +113,14 @@ const same = (a: HijriDate, b: HijriDate) => a.year === b.year && a.month === b.
 
 // ---------- public API ----------
 
+/** The user's day adjustment, held to -2..2 whatever a stored value says (a second guard after the store's) */
+export function clampHijriOffset(offset: unknown): number {
+  return typeof offset === 'number' && Number.isFinite(offset) ? Math.max(-2, Math.min(2, Math.round(offset))) : 0;
+}
+
 /** The Hijri date of a civil date, shifted by the user's offset in days */
 export function toHijri(date: CivilInput, offset = 0): HijriDate {
-  return hijriOfDay(dayNumber(date) + offset);
+  return hijriOfDay(dayNumber(date) + clampHijriOffset(offset));
 }
 
 /** The civil date ('YYYY-MM-DD') of a Hijri date under the user's offset. Throws on a day the month lacks */
@@ -125,7 +130,7 @@ export function fromHijri(year: number, month: number, day: number, offset = 0):
   // Umm al-Qura and the tabular calendar stay within a couple of days of each other
   for (let delta = 0; delta <= 5; delta++) {
     for (const n of delta ? [guess + delta, guess - delta] : [guess]) {
-      if (same(hijriOfDay(n), target)) return isoOfDayNumber(n - offset);
+      if (same(hijriOfDay(n), target)) return isoOfDayNumber(n - clampHijriOffset(offset));
     }
   }
   throw new RangeError(`No such Hijri date: ${day} ${month} ${year}`);

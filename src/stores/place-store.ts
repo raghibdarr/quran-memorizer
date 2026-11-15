@@ -64,6 +64,8 @@ export const usePlaceStore = create<PlaceState>()(
       name: PLACE_STORE_KEY,
       version: PLACE_STORE_VERSION,
       migrate: (p, v) => migratePlace(p, v) as never,
+      // Every rehydrate is validated, not only a version change
+      merge: (persisted, current) => ({ ...current, place: sanitizePlace((persisted as { place?: unknown } | undefined)?.place) }),
       partialize: (s) => ({ place: s.place }),
     },
   ),

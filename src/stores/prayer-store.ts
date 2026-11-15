@@ -217,6 +217,10 @@ export const usePrayerStore = create<PrayerState>()(
       name: PRAYER_STORE_KEY,
       version: PRAYER_STORE_VERSION,
       migrate: (p, v) => migratePrayer(p, v) as never,
+      // Every rehydrate goes through the sanitizer, not only a version change: a
+      // same-version value of the wrong shape (a newer build's id, a partial write)
+      // must fall back to defaults rather than crash the screens that read it
+      merge: (persisted, current) => ({ ...current, ...sanitizePrayerData(persisted) }),
       partialize: ({ method, madhab, highLatRule, offsets, customAngles, hijriOffset, alerts, homeStrip, ramadanMode, imsakMin, setupDone, previous }) =>
         ({ method, madhab, highLatRule, offsets, customAngles, hijriOffset, alerts, homeStrip, ramadanMode, imsakMin, setupDone, previous }),
     },
