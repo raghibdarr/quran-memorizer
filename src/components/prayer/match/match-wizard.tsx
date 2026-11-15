@@ -348,6 +348,10 @@ function Wizard({ place }: { place: Place }) {
             >
               {error.text}
             </p>
+          ) : !filled ? (
+            <p className="px-1 text-xs text-muted" data-match-hint>
+              Enter at least one start time.
+            </p>
           ) : (
             undoneNote
           )

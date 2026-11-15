@@ -5,9 +5,11 @@ import { cn } from '@/lib/cn';
 type Variant = 'primary' | 'secondary' | 'ghost';
 
 const variants: Record<Variant, string> = {
-  primary: 'tactile-btn bg-teal text-on-teal hover:bg-teal-light',
-  secondary: 'tactile-btn bg-gold/10 text-gold-deep hover:bg-gold/20',
-  ghost: 'text-muted hover:text-foreground hover:bg-foreground/5',
+  // Disabled: a muted surface and muted text, so it reads as not yet, not as broken
+  primary:
+    'tactile-btn bg-teal text-on-teal hover:bg-teal-light disabled:bg-foreground/10 disabled:text-muted disabled:shadow-none disabled:hover:bg-foreground/10',
+  secondary: 'tactile-btn bg-gold/10 text-gold-deep hover:bg-gold/20 disabled:bg-foreground/10 disabled:text-muted disabled:shadow-none',
+  ghost: 'text-muted hover:text-foreground hover:bg-foreground/5 disabled:opacity-40',
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,7 +27,7 @@ export default function Button({
     <button
       className={cn(
         'rounded-xl px-6 py-3 font-semibold',
-        'disabled:opacity-40 disabled:cursor-not-allowed',
+        'disabled:cursor-not-allowed',
         variants[variant],
         className
       )}

@@ -517,3 +517,31 @@ html, body { overscroll-behavior-y: none; }
   color: transparent;
   background-color: color-mix(in srgb, var(--color-foreground) 7%, transparent);
 }
+
+/* Native date and time fields in the app's own type and colours (they rendered in a
+   system face with grey placeholders and stock picker icons beside the rounded type) */
+input[type='date'],
+input[type='time'] {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+  accent-color: var(--c-teal);
+  color-scheme: light;
+}
+.dark input[type='date'],
+.dark input[type='time'] {
+  color-scheme: dark;
+}
+input[type='date']::-webkit-datetime-edit-fields-wrapper,
+input[type='time']::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.55;
+}
+input[type='date']:hover::-webkit-calendar-picker-indicator,
+input[type='time']:hover::-webkit-calendar-picker-indicator {
+  opacity: 0.85;
+}
