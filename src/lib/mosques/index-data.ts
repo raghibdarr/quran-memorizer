@@ -18,9 +18,12 @@ const NAMES: Record<string, string> = {
   BA: 'Bosnia and Herzegovina',
   CD: 'the Democratic Republic of the Congo',
   CG: 'the Republic of the Congo',
+  CC: 'the Cocos (Keeling) Islands',
   HK: 'Hong Kong',
+  KN: 'Saint Kitts and Nevis',
   LC: 'Saint Lucia',
   MM: 'Myanmar',
+  MO: 'Macao',
   PS: 'Palestine',
   TT: 'Trinidad and Tobago',
 };
