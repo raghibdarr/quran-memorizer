@@ -23,6 +23,8 @@ export type DeenCard = Sm2Fields & {
   itemRev: number;
   addedAt: number;
   suspended?: boolean;
+  /** Added on purpose through a learn or lesson flow: exempt from the daily new-card cap */
+  chosen?: boolean;
 };
 
 export interface DeenData {
@@ -79,6 +81,7 @@ function sanitizeCard(raw: unknown): DeenCard | null {
   if (typeof c.lapses === 'number') card.lapses = c.lapses;
   if (Array.isArray(c.misses)) card.misses = c.misses.filter((m) => typeof m === 'number');
   if (c.suspended) card.suspended = true;
+  if (c.chosen) card.chosen = true;
   return card;
 }
 

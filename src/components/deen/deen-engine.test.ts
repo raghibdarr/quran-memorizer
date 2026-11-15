@@ -13,7 +13,7 @@ import { citationText, humanizeId, numberingLabel, sunnahComUrl } from './regist
 import { orderPositions } from './positions-table'
 import { deckIdForSelection, errataBody, notIncludedSection } from './sources-data'
 import { foldLatin, matchesTerm } from './glossary-search'
-import { cardsForMemorise } from './memorise-flow'
+import { cardsForMemorise, memoriseOutcome } from './memorise-flow'
 import { reviewStatusText } from './review-badge'
 import { correctionNote, whenLabel } from './session-player'
 import { resolveDepth } from './depth-choice'
@@ -164,6 +164,25 @@ describe('memorise: which cards an item adds', () => {
   })
   it('a Quranic item adds no deen cards (its ayahs go to the Quran review)', () => {
     expect(cardsForMemorise('_fixture', 'dhikr', fixtureItem('02'), 'arabic', NOW)).toEqual({})
+  })
+  it('finishing applies the self-rating to the tested card; the other facets start tomorrow, all chosen', () => {
+    const { add, rated } = memoriseOutcome(item, 'hadith', 'arabic', {}, 5, NOW)
+    expect(rated).toBe('_fixture:01:recall')
+    expect(add['_fixture:01:recall']).toMatchObject({ repetitions: 1, lastQuality: 5, chosen: true })
+    expect(add['_fixture:01:recall'].lastReview).toBeGreaterThan(0)
+    expect(add['_fixture:01:meaning']).toMatchObject({ repetitions: 0, lastReview: 0, chosen: true })
+    expect(add['_fixture:01:meaning'].nextReview).toBeGreaterThan(DAY_END)
+    // Nothing from this item is left for today's queue as a "new" card to rate again
+    const q = deenToday(data(add, { [TODAY]: 1 }), DAY_END, ['_fixture'])
+    expect(q.order).toEqual([])
+    expect(q.nextDue).not.toBeNull()
+  })
+  it('"Know the meaning" rates the meaning card; learning again keeps rated progress', () => {
+    const first = memoriseOutcome(item, 'hadith', 'meaning', {}, 3, NOW)
+    expect(first.rated).toBe('_fixture:01:meaning')
+    const again = memoriseOutcome(item, 'hadith', 'meaning', first.add, 5, NOW)
+    expect(again.rated).toBeNull()
+    expect(again.add).toEqual({})
   })
   it('new cards are due today and carry the item rev', () => {
     const c = Object.values(cardsForMemorise('_fixture', 'hadith', { ...item, rev: 3 }, 'meaning', NOW))[0]

@@ -2,6 +2,7 @@
 // labels, the errata log and the problem report message.
 
 import type { Grading } from '@/types/deen';
+import { daysBetween, isoFromMs, todayIso } from '@/lib/dates';
 import { scholarName, workTitle } from './registry-names';
 
 /**
@@ -129,4 +130,16 @@ export function reportMessage(itemId: string, rev: number, title?: string): { su
 
 export function mailtoHref(email: string, msg: { subject: string; body: string }): string {
   return `mailto:${email}?subject=${encodeURIComponent(msg.subject)}&body=${encodeURIComponent(msg.body)}`;
+}
+
+/** "tomorrow", "in 3 days", "in about 2 weeks" from a (midnight-aligned) due date */
+export function whenLabel(ts: number, today = todayIso()): string {
+  const days = daysBetween(today, isoFromMs(ts));
+  if (days <= 0) return 'later today';
+  if (days === 1) return 'tomorrow';
+  if (days < 7) return `in ${days} days`;
+  if (days < 14) return 'in about a week';
+  if (days < 30) return `in about ${Math.round(days / 7)} weeks`;
+  const months = Math.round(days / 30);
+  return `in about ${months} month${months === 1 ? '' : 's'}`;
 }

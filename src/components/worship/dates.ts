@@ -36,11 +36,6 @@ export function daysInMonth(month: string): number {
   return new Date(Date.UTC(y, m, 0)).getUTCDate();
 }
 
-/** Monday-first column (0..6) of a day */
-export function mondayColumn(iso: string): number {
-  return (at(iso).getUTCDay() + 6) % 7;
-}
-
 /** The month before or after a YYYY-MM month */
 export function shiftMonth(month: string, by: number): string {
   const [y, m] = month.split('-').map(Number);

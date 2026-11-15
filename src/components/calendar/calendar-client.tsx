@@ -1,5 +1,6 @@
 'use client';
 
+import { useWeekStart } from '@/hooks/use-week-start';
 import { useMemo, useState } from 'react';
 import Link from '@/components/app-link';
 import BottomNav from '@/components/layout/bottom-nav';
@@ -46,7 +47,8 @@ export default function CalendarClient() {
   const view = picked ?? todayMonth;
   const [selected, setSelected] = useState<string | null>(null);
 
-  const grid = useMemo(() => monthGrid(view, { offset, today }), [view, offset, today]);
+  const weekStart = useWeekStart();
+  const grid = useMemo(() => monthGrid(view, { offset, today, weekStart }), [view, offset, today, weekStart]);
   const marks = useMemo(() => gridMarks(grid), [grid]);
   const hasBars = useMemo(() => [...marks.values()].some((m) => m.bar), [marks]);
   const monthEvents = useMemo(() => occurrencesInMonth(view, offset), [view, offset]);

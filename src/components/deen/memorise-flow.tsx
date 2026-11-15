@@ -4,7 +4,10 @@ import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } 
 import type { DeckDepth, DeckKind, TextItem } from '@/types/deen';
 import type { Ayah } from '@/types/quran';
 import { getSurah } from '@/lib/quran-data';
-import { cardId, cardsForItem, newDeenCard } from '@/lib/deen/cards';
+import { asChosen, cardId, cardsForItem, newDeenCard } from '@/lib/deen/cards';
+import { isNewCard } from '@/lib/deen/queue';
+import { reviewSm2 } from '@/lib/spaced-repetition';
+import { addLocalDays, startOfDayMs, todayIso } from '@/lib/dates';
 import { useDeenStore, type DeenCard } from '@/stores/deen-store';
 import { useReviewStore } from '@/stores/review-store';
 import { useStatsStore } from '@/stores/stats-store';
@@ -23,7 +26,7 @@ import { RichText } from './term';
 import { CueText, ItemArabic } from './cue-text';
 import { deckKindOf } from './deck-source';
 import { workTitle } from './registry-names';
-import { learnParts } from './text';
+import { learnParts, whenLabel } from './text';
 
 /** Self-rating to SM-2 quality, as in the Quran reviews */
 export const RATING_QUALITY: Record<Rating, number> = { 'got-it': 5, hesitated: 3, missed: 1 };
@@ -41,6 +44,8 @@ export const TAP_GUARD_MS = 400;
 export interface MemoriseResult {
   /** Deen card ids added (existing cards are kept as they were) */
   cardIds: string[];
+  /** When the soonest of them comes up in Review (null when none were added) */
+  nextAt: number | null;
   /** Quran ayahs handed to the normal ayah review instead */
   ayahs: number;
   rating: Rating;
@@ -57,6 +62,44 @@ export function cardsForMemorise(deck: string, kind: DeckKind, item: TextItem, d
     return item.translation ? { [cardId(deck, item.id, 'meaning')]: newDeenCard(deck, item.rev, now) } : {};
   }
   return cardsForItem(deck, kind, item, { depth, school: null, now });
+}
+
+/** The card the Recall step tests: the recitation when the Arabic was memorised, else the meaning */
+export function testedFacet(depth: DeckDepth, cards: Record<string, unknown>, deck: string, itemId: string): string | null {
+  const recall = cardId(deck, itemId, 'recall');
+  const meaning = cardId(deck, itemId, 'meaning');
+  if (depth === 'arabic' && recall in cards) return recall;
+  return meaning in cards ? meaning : null;
+}
+
+/**
+ * What finishing the flow writes (spec 2.7, "cards enter the queue"): the
+ * self-rating is applied to the card the Recall step tested, so it next comes
+ * up on its scheduled day; the item's other cards start tomorrow. All of them
+ * were chosen on purpose, so none waits behind the daily new-card cap.
+ * Existing cards are left as they are (learning an item again keeps progress),
+ * except that a tested card still unrated takes this rating.
+ */
+export function memoriseOutcome(
+  item: TextItem,
+  deckKind: DeckKind,
+  depth: DeckDepth,
+  have: Record<string, DeenCard>,
+  quality: number,
+  now = Date.now(),
+): { add: Record<string, DeenCard>; rated: string | null } {
+  const all = cardsForMemorise(item.deck, deckKind, item, depth, now);
+  const fresh = asChosen(Object.fromEntries(Object.entries(all).filter(([id]) => !have[id])), addLocalDays(startOfDayMs(now), 1));
+  const tested = testedFacet(depth, all, item.deck, item.id);
+  let rated: string | null = null;
+  if (tested) {
+    const current = fresh[tested] ?? have[tested];
+    if (current && isNewCard(current)) {
+      fresh[tested] = reviewSm2(current, quality);
+      rated = tested;
+    }
+  }
+  return { add: fresh, rated };
 }
 
 type Step = 'read' | 'build' | 'recall' | 'done';
@@ -245,6 +288,8 @@ export function MemoriseFlow({
   const deckKind: DeckKind = kind ?? deckKindOf(item.deck) ?? 'hadith';
   const { ayahs, surahName } = useQuranAyahs(item);
   const addCards = useDeenStore((s) => s.addCards);
+  const reviewCard = useDeenStore((s) => s.reviewCard);
+  const noteIntroduced = useDeenStore((s) => s.noteIntroduced);
   const addAyahCard = useReviewStore((s) => s.addCard);
   const recordActivity = useStatsStore((s) => s.recordActivity);
 
@@ -280,7 +325,6 @@ export function MemoriseFlow({
   const lock = locked || undefined;
 
   const finish = (rating: Rating) => {
-    const deck = item.deck;
     let ayahCount = 0;
     // Ayahs join the Quran review only when the Arabic was memorised: "Know the
     // meaning" must not put recitation cards in front of someone who never learned them
@@ -289,12 +333,19 @@ export function MemoriseFlow({
       ayahCount = ayahs.length;
     }
     // Only cards that don't exist yet are added (and counted): learning an item again keeps its progress
-    const have = useDeenStore.getState().cards;
-    const fresh = Object.fromEntries(Object.entries(cardsForMemorise(deck, deckKind, item, depth)).filter(([id]) => !have[id]));
-    addCards(fresh);
+    const store = useDeenStore.getState();
+    const { add, rated } = memoriseOutcome(item, deckKind, depth, store.cards, RATING_QUALITY[rating]);
+    const ids = Object.keys(add);
+    // A card already in the store (unrated) takes the rating through the store's own action
+    const existing = rated && store.cards[rated] ? rated : null;
+    addCards(existing ? Object.fromEntries(ids.filter((id) => id !== existing).map((id) => [id, add[id]])) : add);
+    if (existing) reviewCard(existing, RATING_QUALITY[rating]);
+    if (rated) noteIntroduced(todayIso());
+    const after = useDeenStore.getState().cards;
+    const times = ids.map((id) => after[id]?.nextReview).filter((t): t is number => typeof t === 'number');
     recordActivity();
     haptic.success();
-    setResult({ cardIds: Object.keys(fresh), ayahs: ayahCount, rating });
+    setResult({ cardIds: ids.filter((id) => id !== existing), nextAt: times.length ? Math.min(...times) : null, ayahs: ayahCount, rating });
     setStep('done');
     move();
   };
@@ -552,7 +603,7 @@ export function MemoriseFlow({
     const summary = result?.ayahs
       ? `These ${result.ayahs === 1 ? 'ayah joins' : `${result.ayahs} ayahs join`} your Quran reviews.`
       : n > 0
-        ? `${n} ${n === 1 ? 'card' : 'cards'} added. They come up in Review.`
+        ? `${n} ${n === 1 ? 'card' : 'cards'} added. ${n === 1 ? 'It comes' : 'They start coming'} up in Review ${result?.nextAt ? whenLabel(result.nextAt) : 'soon'}.`
         : item.quran
           ? 'Read. To add these ayahs to your Quran reviews, choose “Memorise the Arabic”.'
           : 'Already in your reviews.';

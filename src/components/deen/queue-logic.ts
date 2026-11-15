@@ -54,7 +54,7 @@ export function deenToday(
   for (const c of Object.values(data.cards)) {
     if (c.suspended || !allow.has(c.deck)) continue;
     cardCount++;
-    if (!isNewCard(c) && c.nextReview > dayEnd && (nextDue === null || c.nextReview < nextDue)) nextDue = c.nextReview;
+    if (c.nextReview > dayEnd && (nextDue === null || c.nextReview < nextDue)) nextDue = c.nextReview;
   }
   return { ...q, order: [...q.due, ...q.fresh], cardCount, nextDue, reviewedToday: done };
 }

@@ -7,6 +7,7 @@ import { deckTitleOf } from '@/components/deen/deck-source';
 import { sessionHref } from '@/components/deen/links';
 import { whenLabel } from '@/components/deen/session-player';
 import { DEEN_REVIEW_CAP } from '@/lib/deen/queue';
+import { useDeenStore } from '@/stores/deen-store';
 
 /**
  * Slot (all-in-one spec 2.5, 3.4) under the Quran streams on the Review tab:
@@ -14,8 +15,14 @@ import { DEEN_REVIEW_CAP } from '@/lib/deen/queue';
  * deen-engine. Renders nothing until there are deen cards. Never badges the
  * tab, never gates "day complete".
  */
+/** New cards held back by the daily cap: say they are waiting, never "all done" */
+export function waitingLine(waiting: number, newPerDay: number): string {
+  return `${waiting} new ${waiting === 1 ? 'card is' : 'cards are'} waiting. They start on the coming days, ${newPerDay} new a day.`;
+}
+
 export function DeenReviewSection() {
   const q = useDeenQueue();
+  const newPerDay = useDeenStore((s) => s.newPerDay);
   if (!q.ready || q.cardCount === 0) return null;
 
   const total = q.order.length;
@@ -48,6 +55,7 @@ export function DeenReviewSection() {
             {q.dueTotal > q.due.length && (
               <p className="text-xs text-muted">Up to {DEEN_REVIEW_CAP} reviews a day. The rest wait for tomorrow.</p>
             )}
+            {q.waiting > 0 && <p className="text-xs text-muted">{waitingLine(q.waiting, newPerDay)}</p>}
             <Link
               href={sessionHref()}
               className="tactile-btn flex min-h-11 w-full items-center justify-center rounded-xl bg-teal px-6 py-3 font-semibold text-on-teal hover:bg-teal-light sm:w-auto sm:px-8"
@@ -57,9 +65,15 @@ export function DeenReviewSection() {
             </Link>
           </>
         ) : (
-          <p className="text-sm text-muted" data-deen-caught-up>
-            All done for today.
-            {q.dueTotal > 0 ? ' The rest wait for tomorrow.' : q.nextDue ? ` The next card comes back ${whenLabel(q.nextDue)}.` : ''}
+          <p className="text-sm text-muted" data-deen-caught-up data-waiting={q.waiting}>
+            {q.waiting > 0 ? (
+              waitingLine(q.waiting, newPerDay)
+            ) : (
+              <>
+                All done for today.
+                {q.dueTotal > 0 ? ' The rest wait for tomorrow.' : q.nextDue ? ` The next card comes back ${whenLabel(q.nextDue)}.` : ''}
+              </>
+            )}
           </p>
         )}
       </Card>

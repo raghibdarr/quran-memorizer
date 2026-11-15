@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDeenStore } from '@/stores/deen-store';
 import { useStatsStore } from '@/stores/stats-store';
-import { daysBetween, isoFromMs, todayIso } from '@/lib/dates';
+import { todayIso } from '@/lib/dates';
 import { haptic } from '@/lib/haptics';
 import Button from '@/components/ui/button';
 import BeadProgress from '@/components/ui/bead-progress';
@@ -12,19 +12,9 @@ import { CardBack, CardFront, cardKindLabel, useCardContent, type CardContent } 
 import { deckTitleOf } from './deck-source';
 import { parseCardId } from '@/lib/deen/cards';
 import { RATING_QUALITY, TAP_GUARD_MS } from './memorise-flow';
-import { correctionDate, formatIsoDate } from './text';
+import { correctionDate, formatIsoDate, whenLabel } from './text';
 
-/** "tomorrow", "in 3 days", "in about 2 weeks" from a (midnight-aligned) due date */
-export function whenLabel(ts: number, today = todayIso()): string {
-  const days = daysBetween(today, isoFromMs(ts));
-  if (days <= 0) return 'later today';
-  if (days === 1) return 'tomorrow';
-  if (days < 7) return `in ${days} days`;
-  if (days < 14) return 'in about a week';
-  if (days < 30) return `in about ${Math.round(days / 7)} weeks`;
-  const months = Math.round(days / 30);
-  return `in about ${months} month${months === 1 ? '' : 's'}`;
-}
+export { whenLabel };
 
 /** The line a card shows once when its item's text was corrected after the card was made */
 export function correctionNote(content: CardContent, cardRev: number, errata: string, deckId?: string): string | null {

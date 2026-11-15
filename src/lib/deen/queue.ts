@@ -1,6 +1,10 @@
 // The deen review queue (all-in-one spec 2.5, 3.3): due reviews first (oldest
 // due first, at most 20 a day), then new cards up to the daily new-card cap.
-// Deen cards never gate the Quran "day complete" and never badge the tab.
+// Cards the user added on purpose through a learn or lesson flow (`chosen`) are
+// exempt from that cap for their first pass: a "Review them now" button must
+// never land on an empty session. The cap still paces automatic introductions
+// (the Names, five at a time). Deen cards never gate the Quran "day complete"
+// and never badge the tab.
 
 import type { DeenCard } from '@/stores/deen-store';
 
@@ -24,6 +28,8 @@ export interface DeenQueue {
   dueTotal: number;
   /** Per deck: due reviews and new cards available today */
   perDeck: Record<string, { due: number; fresh: number }>;
+  /** New cards held back today by the new-card cap (they start on later days) */
+  waiting: number;
 }
 
 export const isNewCard = (c: DeenCard) => c.lastReview === 0 && c.repetitions === 0;
@@ -40,13 +46,23 @@ export function buildDeenQueue(cards: Record<string, DeenCard>, dayEnd: number, 
   const dueAll = entries
     .filter(([, c]) => !isNewCard(c) && c.nextReview <= dayEnd)
     .sort(([ia, a], [ib, b]) => a.nextReview - b.nextReview || (ia < ib ? -1 : 1));
+  // A new card can be set to start on a later day (the other facets of an item
+  // learned today start tomorrow)
   const freshAll = entries
-    .filter(([, c]) => isNewCard(c))
+    .filter(([, c]) => isNewCard(c) && c.nextReview <= dayEnd)
     .sort(([ia, a], [ib, b]) => a.addedAt - b.addedAt || (ia < ib ? -1 : 1));
 
-  const room = Math.max(0, opts.newPerDay - (opts.introducedToday ?? 0));
+  let room = Math.max(0, opts.newPerDay - (opts.introducedToday ?? 0));
   const due = dueAll.slice(0, reviewCap).map(([id]) => id);
-  const fresh = freshAll.slice(0, room).map(([id]) => id);
+  const fresh: string[] = [];
+  let waiting = 0;
+  for (const [id, c] of freshAll) {
+    if (c.chosen) fresh.push(id);
+    else if (room > 0) {
+      fresh.push(id);
+      room--;
+    } else waiting++;
+  }
 
   const perDeck: DeenQueue['perDeck'] = {};
   const bump = (deck: string, key: 'due' | 'fresh') => {
@@ -56,5 +72,5 @@ export function buildDeenQueue(cards: Record<string, DeenCard>, dayEnd: number, 
   for (const id of due) bump(cards[id].deck, 'due');
   for (const id of fresh) bump(cards[id].deck, 'fresh');
 
-  return { due, fresh, dueTotal: dueAll.length, perDeck };
+  return { due, fresh, dueTotal: dueAll.length, perDeck, waiting };
 }

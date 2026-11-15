@@ -5,10 +5,10 @@ import { cn } from '@/lib/cn';
 import { dayTally, isPaused, type PrayerLog } from '@/lib/worship/log';
 import type { Pause } from '@/stores/worship-store';
 import { TRACKER_COPY } from './copy';
-import { dayLabel, daysInMonth, monthLabel, mondayColumn, shiftMonth } from './dates';
+import { dayLabel, daysInMonth, monthLabel, shiftMonth } from './dates';
+import { weekColumn, weekdayLabels, weekdayOfIso } from '@/lib/weekdays';
+import { useWeekStart } from '@/hooks/use-week-start';
 import DayDots from './day-dots';
-
-const WEEKDAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
 /** A month of days, each with its five dots; past days and today open the day to fill in */
 export default function MonthGrid({
@@ -31,7 +31,8 @@ export default function MonthGrid({
   hint?: React.ReactNode;
 }) {
   const n = daysInMonth(month);
-  const lead = mondayColumn(`${month}-01`);
+  const weekStart = useWeekStart();
+  const lead = weekColumn(weekdayOfIso(`${month}-01`), weekStart);
   const isCurrent = month >= today.slice(0, 7);
 
   return (
@@ -65,7 +66,7 @@ export default function MonthGrid({
       {hint}
 
       <div className="mt-2 grid grid-cols-7 gap-y-1 text-center" role="group" aria-label={monthLabel(month)}>
-        {WEEKDAYS.map((d, i) => (
+        {weekdayLabels(weekStart).map((d, i) => (
           <span key={i} className="pb-1 text-[11px] font-semibold text-muted" aria-hidden>
             {d}
           </span>

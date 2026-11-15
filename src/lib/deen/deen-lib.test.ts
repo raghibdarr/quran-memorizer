@@ -63,6 +63,23 @@ describe('buildDeenQueue', () => {
     expect(buildDeenQueue(cards, dayEnd, { newPerDay: 5, decks: ['c'] }).fresh).toEqual(['c:1:meaning'])
   })
 
+  it('cards chosen on purpose (learn and lesson flows) skip the cap; the rest wait and are counted', () => {
+    const cards: Record<string, DeenCard> = {}
+    for (let i = 0; i < 5; i++) cards[`names:${i}:ar-en`] = card('names', { addedAt: 100 + i })
+    for (let i = 0; i < 7; i++) cards[`course:l1:c${i}`] = card('course', { addedAt: 200 + i, chosen: true })
+    // Five Names already introduced today: the lesson's seven still come up, the Names wait
+    const q = buildDeenQueue(cards, dayEnd, { newPerDay: 5, introducedToday: 5 })
+    expect(q.fresh).toHaveLength(7)
+    expect(q.waiting).toBe(5)
+    expect(buildDeenQueue(cards, dayEnd, { newPerDay: 5, introducedToday: 5, decks: ['course'] }).fresh).toHaveLength(7)
+  })
+
+  it('a new card set to start on a later day is not offered yet', () => {
+    const q = buildDeenQueue({ x: card('b', { nextReview: dayEnd + 1, chosen: true }) }, dayEnd, { newPerDay: 5 })
+    expect(q.fresh).toEqual([])
+    expect(q.waiting).toBe(0)
+  })
+
   it('a reviewed card leaves the new pile and schedules through the shared SM-2 core', () => {
     const reviewed = reviewSm2(card('b'), 5)
     expect(reviewed.repetitions).toBe(1)

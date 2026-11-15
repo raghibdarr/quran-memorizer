@@ -1,5 +1,6 @@
 'use client';
 
+import { WEEKDAY_LABELS, weekdayOfIso } from '@/lib/weekdays';
 import { useEffect, useMemo, useState } from 'react';
 import Link from '@/components/app-link';
 import BottomNav from '@/components/layout/bottom-nav';
@@ -211,7 +212,7 @@ export default function TrackerClient() {
               return (
                 <li key={iso} className="flex flex-col items-center gap-1.5">
                   <span className={iso === today ? 'text-[11px] font-bold text-teal' : 'text-[11px] text-muted'}>
-                    {dayLabel(iso).slice(0, 2)}
+                    {WEEKDAY_LABELS[weekdayOfIso(iso)]}
                   </span>
                   <span className="flex h-2 items-center">
                     <DayDots day={prayers[iso]} paused={isPaused(iso, pauses)} size="md" />

@@ -2,35 +2,52 @@
 
 import { useState, useRef } from 'react';
 import { todayIso } from '@/lib/dates';
+import { HIJRI_MONTHS, toHijri } from '@/lib/hijri/convert';
+import { weekColumn, weekdayLabels, weekdayOfIso } from '@/lib/weekdays';
+import { useWeekStart } from '@/hooks/use-week-start';
+import { usePrayerStore } from '@/stores/prayer-store';
 
-const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const HIJRI_MONTHS = ['Muharram', 'Safar', 'Rabi I', 'Rabi II', 'Jumada I', 'Jumada II', 'Rajab', 'Shaban', 'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'];
-const HIJRI_MONTHS_FULL = ['Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 'Jumada al-Ula', 'Jumada al-Thani', 'Rajab', 'Shaban', 'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'];
+
+/** One day's cell: its civil day and the Hijri day the rest of the app shows for it */
+export interface HeatCell {
+  day: number | null;
+  date: string;
+  count: number;
+  isToday: boolean;
+  hijriDay: number;
+  /** Set on the first of a Hijri month */
+  hijriMonth: number | null;
+}
 
 /**
- * Approximate Gregorian to Hijri conversion.
- * Uses the Umm al-Qura approximation — accurate to ±1 day.
+ * The cells of one civil month (leading blanks for the week's first day). Hijri
+ * days come from the app's one calendar (src/lib/hijri/convert.ts) under the
+ * user's Hijri adjustment, so they match /calendar, /prayer and /ramadan.
  */
-function toHijri(year: number, month: number, day: number): { year: number; month: number; day: number } {
-  const jd = Math.floor((1461 * (year + 4800 + Math.floor((month - 14) / 12))) / 4)
-    + Math.floor((367 * (month - 2 - 12 * Math.floor((month - 14) / 12))) / 12)
-    - Math.floor((3 * Math.floor((year + 4900 + Math.floor((month - 14) / 12)) / 100)) / 4)
-    + day - 32075;
+export function heatmapCells(year: number, month: number, opts: { activityLog: Record<string, number>; today: string; hijriOffset: number; weekStart: number }): HeatCell[] {
+  const cells: HeatCell[] = [];
+  const first = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+  const lead = weekColumn(weekdayOfIso(first), opts.weekStart);
+  for (let i = 0; i < lead; i++) cells.push({ day: null, date: '', count: 0, isToday: false, hijriDay: 0, hijriMonth: null });
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const h = toHijri(date, opts.hijriOffset);
+    cells.push({ day: d, date, count: opts.activityLog[date] ?? 0, isToday: date === opts.today, hijriDay: h.day, hijriMonth: h.day === 1 ? h.month : null });
+  }
+  return cells;
+}
 
-  const l = jd - 1948440 + 10632;
-  const n = Math.floor((l - 1) / 10631);
-  const remainder = l - 10631 * n + 354;
-  const j = Math.floor((10985 - remainder) / 5316) * Math.floor((50 * remainder) / 17719)
-    + Math.floor(remainder / 5670) * Math.floor((43 * remainder) / 15238);
-  const remainderL = remainder - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50)
-    - Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
-
-  const hMonth = Math.floor((24 * remainderL) / 709);
-  const hDay = remainderL - Math.floor((709 * hMonth) / 24);
-  const hYear = 30 * n + j - 30;
-
-  return { year: hYear, month: hMonth, day: hDay };
+/** "Jumada al-Ula – Jumada al-Akhirah 1448 AH" for the Hijri months a civil month spans */
+export function hijriSpan(cells: HeatCell[], hijriOffset: number): string {
+  const days = cells.filter((c) => c.day !== null);
+  const a = toHijri(days[0].date, hijriOffset);
+  const b = toHijri(days[days.length - 1].date, hijriOffset);
+  if (a.month === b.month) return `${HIJRI_MONTHS[a.month - 1]} ${a.year} AH`;
+  return a.year === b.year
+    ? `${HIJRI_MONTHS[a.month - 1]} – ${HIJRI_MONTHS[b.month - 1]} ${b.year} AH`
+    : `${HIJRI_MONTHS[a.month - 1]} ${a.year} – ${HIJRI_MONTHS[b.month - 1]} ${b.year} AH`;
 }
 
 function getIntensityClass(count: number): string {
@@ -64,43 +81,11 @@ export default function CalendarHeatmap({ activityLog }: Props) {
 
   const isCurrentMonth = year === new Date().getFullYear() && month === new Date().getMonth();
 
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
   const today = todayIso();
-
-  // Hijri date for subtitle
-  const hijri1st = toHijri(year, month + 1, 1);
-  const hijriLast = toHijri(year, month + 1, daysInMonth);
-  const hijriSubtitle = hijri1st.month === hijriLast.month
-    ? `${HIJRI_MONTHS_FULL[hijri1st.month - 1]} ${hijri1st.year} AH`
-    : `${HIJRI_MONTHS_FULL[hijri1st.month - 1]} – ${HIJRI_MONTHS_FULL[hijriLast.month - 1]} ${hijriLast.year} AH`;
-
-  // Build calendar grid
-  const cells: Array<{
-    day: number | null;
-    date: string;
-    count: number;
-    isToday: boolean;
-    hijriDay: number;
-    hijriMonthName: string | null;
-  }> = [];
-
-  for (let i = 0; i < firstDay; i++) {
-    cells.push({ day: null, date: '', count: 0, isToday: false, hijriDay: 0, hijriMonthName: null });
-  }
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-    const h = toHijri(year, month + 1, d);
-    cells.push({
-      day: d,
-      date: dateStr,
-      count: activityLog[dateStr] ?? 0,
-      isToday: dateStr === today,
-      hijriDay: h.day,
-      hijriMonthName: h.day === 1 ? HIJRI_MONTHS[h.month - 1] : null,
-    });
-  }
+  const hijriOffset = usePrayerStore((st) => st.hijriOffset);
+  const weekStart = useWeekStart();
+  const cells = heatmapCells(year, month, { activityLog, today, hijriOffset, weekStart });
+  const hijriSubtitle = hijriSpan(cells, hijriOffset);
 
   const monthTotal = cells.reduce((sum, c) => sum + c.count, 0);
   const activeDays = cells.filter((c) => c.count > 0).length;
@@ -135,7 +120,7 @@ export default function CalendarHeatmap({ activityLog }: Props) {
 
       {/* Day-of-week headers */}
       <div className="grid grid-cols-7 gap-1 mb-1 mt-3">
-        {DAYS.map((d, i) => (
+        {weekdayLabels(weekStart).map((d, i) => (
           <div key={i} className="text-center text-[11px] font-medium text-muted">
             {d}
           </div>
@@ -174,18 +159,19 @@ export default function CalendarHeatmap({ activityLog }: Props) {
                   ? 'ring-2 ring-teal font-bold text-teal'
                   : cell.count > 0
                   ? 'font-medium text-foreground'
-                  : 'text-muted/40'
+                  : 'text-muted'
               } ${cell.day !== null ? `${getIntensityClass(cell.count)} hover:bg-foreground/10` : ''}`}
             >
               {cell.day !== null && (
                 <>
                   <span className="leading-none">{cell.day}</span>
-                  <span className={`mt-0.5 leading-tight text-center ${cell.hijriMonthName ? 'text-[8px] text-gold/70' : 'text-[9px] text-muted/30'}`}>
-                    {cell.hijriMonthName
-                      ? <>{cell.hijriDay}<br />{cell.hijriMonthName}</>
-                      : cell.hijriDay}
+                  <span
+                    className={`mt-0.5 text-center text-[11px] leading-tight tabular-nums ${cell.hijriMonth ? 'font-semibold text-gold-deep' : 'font-normal'}`}
+                    data-hijri-day={cell.hijriDay}
+                  >
+                    {cell.hijriDay}
                   </span>
-                  {cell.count > 0 && !cell.hijriMonthName && (
+                  {cell.count > 0 && (
                     <div className="mt-0.5">
                       <div className="h-1.5 w-1.5 rounded-full bg-teal" />
                     </div>

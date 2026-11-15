@@ -1,7 +1,7 @@
 // One micro-lesson, as steps, and the review cards it adds (all-in-one spec 5.7).
 // Pure: the player renders the steps and hands the chosen cards to the deen store.
 
-import { cardId, newDeenCard } from '@/lib/deen/cards';
+import { asChosen, cardId, newDeenCard } from '@/lib/deen/cards';
 import type { DeenCard } from '@/stores/deen-store';
 import type { Claim, ClaimCard, ClaimEvidence, Lesson, QuranRef, School } from '@/types/deen';
 
@@ -55,7 +55,8 @@ export function cardsToAdd(
   now = Date.now(),
 ): Record<string, DeenCard> {
   const fresh = lessonCardIdsFor(deck, lesson, school).filter((id) => !existing[id]);
-  return Object.fromEntries(fresh.map((id) => [id, newDeenCard(deck, lesson.rev, now)]));
+  // Chosen on purpose: the lesson's "Review them now" never waits behind the daily new-card cap
+  return asChosen(Object.fromEntries(fresh.map((id) => [id, newDeenCard(deck, lesson.rev, now)])));
 }
 
 /** "Add 3 cards to review" */

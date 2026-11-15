@@ -34,6 +34,16 @@ export function newDeenCard(deck: string, itemRev: number, now = Date.now()): De
 }
 
 /**
+ * Marks cards as added on purpose (a learn or lesson flow): they skip the daily
+ * new-card cap for their first pass. `startAt` holds them back until that day.
+ */
+export function asChosen(cards: Record<string, DeenCard>, startAt?: number): Record<string, DeenCard> {
+  return Object.fromEntries(
+    Object.entries(cards).map(([id, c]) => [id, { ...c, chosen: true, ...(startAt !== undefined ? { nextReview: startAt } : {}) }]),
+  );
+}
+
+/**
  * A card for something the user already marked as memorised (an Essentials
  * `memorized` flag): conservative "shaky" strength, staggered over the next week,
  * lastReview 0 so any real review wins a sync merge (like createSeededCard).

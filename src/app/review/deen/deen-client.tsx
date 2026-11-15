@@ -13,6 +13,7 @@ import { SessionPlayer, whenLabel } from '@/components/deen/session-player';
 import { MemoriseFlow } from '@/components/deen/memorise-flow';
 import { DepthChoice, resolveDepth } from '@/components/deen/depth-choice';
 import { getItem, liveDeckInfo, deckTitleOf, type LiveDeck } from '@/components/deen/deck-source';
+import { waitingLine } from '@/components/review/deen-section';
 
 function Header({ title, fallback, label }: { title: string; fallback: string; label: string }) {
   return (
@@ -106,6 +107,7 @@ function LearnScreen({ learn, depthParam }: { learn: string; depthParam: DeckDep
 /** The review session over today's queue (all decks, or ?deck=) */
 function SessionScreen({ deck, errata }: { deck: string | null; errata: string }) {
   const queue = useDeenQueue(deck);
+  const newPerDay = useDeenStore((s) => s.newPerDay);
   const exit = useAppBack('/review');
   // Frozen when the queue is first known: ratings update the store as the session
   // runs, and it must not reshuffle underneath the user
@@ -123,7 +125,9 @@ function SessionScreen({ deck, errata }: { deck: string | null; errata: string }
           <SessionPlayer cardIds={frozen} errata={errata} onExit={exit} />
         ) : (
           <Message icon={<StarIcon size={24} />} title="Nothing to review here right now" onBack={exit} data="empty">
-            {queue.dueTotal > 0
+            {queue.waiting > 0
+              ? waitingLine(queue.waiting, newPerDay)
+              : queue.dueTotal > 0
               ? 'That is today’s reviews done. The rest wait for tomorrow.'
               : queue.nextDue
                 ? `The next card comes back ${whenLabel(queue.nextDue)}.`

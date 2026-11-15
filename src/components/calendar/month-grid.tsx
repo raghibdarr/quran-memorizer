@@ -1,9 +1,19 @@
 'use client';
 
 import { HIJRI_MONTHS } from '@/lib/hijri/convert';
-import { weekdayHeaders, type MonthGrid as Grid } from '@/lib/hijri/calendar';
+import type { MonthGrid as Grid } from '@/lib/hijri/calendar';
+import { weekdayLabels } from '@/lib/weekdays';
 import type { DayMarks } from '@/lib/hijri/grid-marks';
 import { cn } from '@/lib/cn';
+
+/** The weekday of the grid's first column, read from its first full week */
+function firstWeekday(grid: Grid): number {
+  for (const week of grid.weeks) {
+    const j = week.findIndex((d) => d);
+    if (j >= 0) return (week[j]!.weekday - j + 7) % 7;
+  }
+  return 0;
+}
 
 const SHORT_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -22,8 +32,8 @@ export default function MonthGrid({
   return (
     <div role="grid" aria-label={`${HIJRI_MONTHS[grid.month - 1]} ${grid.year}`} data-month-grid>
       <div role="row" className="grid grid-cols-7 gap-1 pb-1">
-        {weekdayHeaders().map((w) => (
-          <span key={w} role="columnheader" className="text-center text-[11px] font-semibold uppercase tracking-wide text-muted">
+        {weekdayLabels(firstWeekday(grid)).map((w) => (
+          <span key={w} role="columnheader" className="text-center text-[11px] font-semibold text-muted">
             {w}
           </span>
         ))}
