@@ -7,6 +7,18 @@
   "arabic": "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ، اللَّهُمَّ نَقِّنِي مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ، اللَّهُمَّ اغْسِلْ خَطَايَايَ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ",
   "transliteration": "Allaahumma baa'id baynee wabayna khataayaaya kamaa baa'adta baynal-mashriqi wal-maghrib, allaahumma naqqinee minal-khataayaa kamaa yunaqqath-thawbul-abyadu minad-danas, allaahummaghsil khataayaaya bil-maa'i wath-thalji wal-barad",
   "translation": "O Allah, put distance between me and my sins as You have put distance between the east and the west. O Allah, cleanse me of sins as a white garment is cleansed of dirt. O Allah, wash away my sins with water, snow and hail.",
+  "parts": {
+    "ar": [
+      96,
+      186,
+      251
+    ],
+    "en": [
+      100,
+      168,
+      222
+    ]
+  },
   "citations": [
     {
       "collection": "bukhari",

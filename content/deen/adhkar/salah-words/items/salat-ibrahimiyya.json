@@ -7,6 +7,20 @@
   "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
   "transliteration": "Allaahumma salli 'alaa muhammadin wa'alaa aali muhammad, kamaa sallayta 'alaa ibraaheema wa'alaa aali ibraaheem, innaka hameedun majeed, allaahumma baarik 'alaa muhammadin wa'alaa aali muhammad, kamaa baarakta 'alaa ibraaheema wa'alaa aali ibraaheem, innaka hameedun majeed",
   "translation": "O Allah, send prayers upon Muhammad and upon the family of Muhammad, as You sent prayers upon Ibrahim and upon the family of Ibrahim; You are Praiseworthy, Glorious. O Allah, send blessings upon Muhammad and upon the family of Muhammad, as You sent blessings upon Ibrahim and upon the family of Ibrahim; You are Praiseworthy, Glorious.",
+  "parts": {
+    "ar": [
+      55,
+      141,
+      199,
+      284
+    ],
+    "en": [
+      68,
+      165,
+      236,
+      335
+    ]
+  },
   "citations": [
     {
       "collection": "bukhari",

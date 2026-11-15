@@ -7,6 +7,16 @@
   "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
   "transliteration": "Bismillaahi lladhee laa yadurru ma'asmihi shay'un fil-ardi walaa fis-samaa'i, wahuwas-samee'ul-'aleem",
   "translation": "In the name of Allah, with whose name nothing in the earth or in the heaven can cause harm, and He is the All-Hearing, the All-Knowing.",
+  "parts": {
+    "ar": [
+      90,
+      119
+    ],
+    "en": [
+      91,
+      135
+    ]
+  },
   "citations": [
     {
       "collection": "abu-dawud",

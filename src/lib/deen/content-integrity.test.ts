@@ -171,7 +171,7 @@ describe('guardrails, each with a failing fixture', () => {
 
   it('G8: every [[term]] resolves; an unmarked glossary term is flagged', () => {
     expect(codes(run((it) => { it[0].translation = 'This is a test text, for testing only, with [[no-such-term]].' }))).toContain('G8')
-    const warned = run((it) => { it[0].translation = 'This is a test text about wudu, for testing only.'; it[0].rev = 2 })
+    const warned = run((it) => { it[0].translation = 'This is a test text about wudu, for testing only.'; it[0].rev = 2; delete it[0].parts })
     expect(warned.errors).toEqual([])
     expect(warned.warnings.map((w: Issue) => w.code)).toContain('G8')
   })
@@ -268,7 +268,7 @@ describe('guardrails, each with a failing fixture', () => {
   it('G14: locked ids never disappear; a change must raise rev', () => {
     expect(codes(run((it, lock) => { lock.ids['99'] = { rev: 1, hash: 'x' } }))).toContain('G14')
     expect(codes(run((it) => { it[0].translation = 'This is a changed test text, for testing only.' }))).toContain('G14')
-    const bumped = run((it) => { it[0].translation = 'This is a changed test text, for testing only.'; it[0].rev = 2 })
+    const bumped = run((it) => { it[0].translation = 'This is a changed test text, for testing only.'; it[0].rev = 2; delete it[0].parts })
     expect(bumped.errors).toEqual([])
     expect(bumped.lock.ids['01'].rev).toBe(2)
     expect(codes(run((it) => { it[0].review.status = 'draft' }))).toContain('G14')
@@ -289,5 +289,108 @@ describe('guardrails, each with a failing fixture', () => {
   it('an erroring item is never emitted', () => {
     const r = run((it) => { it[2].gradings = [] })
     expect(r.emitted.map((i: Item) => i.id)).toEqual(['01', '02'])
+  })
+})
+
+// ---------- learning parts (STYLE.md, "Learning parts") ----------
+
+describe('learning parts', () => {
+  // Fixture 01: five Arabic words, parts after the third; English cut after "text,"
+  const AR = 'هَذَا نَصٌّ تَجْرِيبِيٌّ لِلِاخْتِبَارِ فَقَطْ'
+  const EN = 'This is a test text, for testing only, with [[dhikr]] marked.'
+  const item = (parts: unknown, extra: Item = {}): Item => ({ arabic: AR, translation: EN, parts, ...extra })
+
+  it('accepts the fixture parts, and an item without any', () => {
+    expect(deen.checkParts(fixture.items[0].data)).toEqual([])
+    expect(deen.checkParts({ arabic: AR, translation: EN })).toEqual([])
+    expect(deen.checkParts(item({ ar: [24, AR.length], en: [20, EN.length] }))).toEqual([])
+  })
+
+  it('wants one English part per Arabic part, and at least two', () => {
+    expect(deen.checkParts(item({ ar: [24, AR.length], en: [EN.length] })).join()).toMatch(/one English part per Arabic part/)
+    expect(deen.checkParts(item({ ar: [AR.length], en: [EN.length] })).join()).toMatch(/at least two/)
+    expect(deen.checkParts(item({ ar: [24, AR.length] })).join()).toMatch(/must be \{ ar/)
+  })
+
+  it('wants increasing offsets, in range, ending at the end of the text', () => {
+    expect(deen.checkParts(item({ ar: [24, 10], en: [20, EN.length] })).join()).toMatch(/parts\.ar must be increasing/)
+    expect(deen.checkParts(item({ ar: [24, AR.length + 5], en: [20, EN.length] })).join()).toMatch(/parts\.ar must be increasing/)
+    expect(deen.checkParts(item({ ar: [24, AR.length], en: [0, EN.length] })).join()).toMatch(/parts\.en must be increasing/)
+    expect(deen.checkParts(item({ ar: [10, 24], en: [20, EN.length] })).join()).toMatch(/parts\.ar must end at the end of the text/)
+  })
+
+  it('refuses a cut inside a word, or inside square brackets', () => {
+    expect(deen.checkParts(item({ ar: [20, AR.length], en: [20, EN.length] })).join()).toMatch(/parts\.ar\[0\] \(20\) is not at the end of a word/)
+    expect(deen.checkParts(item({ ar: [24, AR.length], en: [18, EN.length] })).join()).toMatch(/parts\.en\[0\] \(18\) is not at the end of a word/)
+    const bracketed = 'He grazes [his own flock] around it.'
+    expect(deen.checkParts({ arabic: AR, translation: bracketed, parts: { ar: [24, AR.length], en: [18, bracketed.length] } }).join()).toMatch(/cuts inside square brackets/)
+  })
+
+  it('refuses a cut inside a name, or one that strands an honorific', () => {
+    // Nawawi 11 as the old automatic split had it: "… بن علي بن أبي | طالب"
+    const name = 'عَنِ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ قَالَ'
+    const english = 'From al-Hasan ibn Ali ibn Abi Talib, who said'
+    const cutAfter = (word: string) => name.indexOf(word) + word.length
+    const at = (ar: number) => deen.checkParts({ arabic: name, translation: english, parts: { ar: [ar, name.length], en: [4, english.length] } }).join()
+    expect(at(cutAfter('أَبِي'))).toMatch(/ends inside a name/)
+    expect(at(cutAfter('عَلِيِّ بْنِ'))).toMatch(/ends inside a name/)
+    expect(at(cutAfter('عَلِيِّ'))).toMatch(/starts inside a name/)
+    expect(at(cutAfter('طَالِبٍ'))).toBe('')
+    const honorific = 'قَالَ رَسُولُ اللَّهِ ﷺ كَذَا'
+    expect(deen.checkParts({ arabic: honorific, translation: english, parts: { ar: [honorific.indexOf('ﷺ') - 1, honorific.length], en: [4, english.length] } }).join()).toMatch(/honorific/)
+  })
+
+  it('keeps parts inside the reading segments and the translation paragraphs', () => {
+    expect(deen.checkParts(item({ ar: [24, AR.length], en: [20, EN.length] }, { segments: [AR.indexOf(' '), AR.length] })).join()).toMatch(/segments end \d+ is not a parts\.ar end/)
+    // An offset inside a word counts as that word's end, as the app reads it
+    expect(deen.checkParts(item({ ar: [24, AR.length], en: [20, EN.length] }, { segments: [17, 43] }))).toEqual([])
+    const paras = 'This is a test text,\n\nfor testing only.'
+    expect(deen.checkParts({ arabic: AR, translation: paras, parts: { ar: [24, AR.length], en: [7, paras.length] } }).join()).toMatch(/paragraph break at 20 is not a parts\.en end/)
+    expect(deen.checkParts({ arabic: AR, translation: paras, parts: { ar: [24, AR.length], en: [20, paras.length] } })).toEqual([])
+  })
+
+  it('a Quran item takes no parts', () => {
+    expect(deen.checkParts({ quran: { surahId: 112, ayah: 1 }, parts: { ar: [1, 2], en: [1, 2] } }).join()).toMatch(/takes no parts/)
+  })
+
+  it('bad parts fail the deck (PARTS); moving a cut needs no rev raise', () => {
+    expect(codes(run((it) => { it[0].parts = { ar: [20, 46], en: [20, 61] } }))).toContain('PARTS')
+    const moved = run((it) => { it[0].parts = { ar: [AR.indexOf(' '), 46], en: [7, 61] }; delete it[0].segments })
+    expect(moved.errors.filter((e: Issue) => e.code === 'PARTS')).toEqual([])
+    const removed = run((it) => { delete it[0].parts })
+    expect(removed.errors).toEqual([])
+    expect(removed.lockChanged).toBe(false)
+    const fixtureItem = fixture.items[0].data
+    expect(deen.itemHash({ ...fixtureItem, parts: { ar: [10, 46], en: [7, 61] } })).toBe(deen.itemHash(fixtureItem))
+    expect(deen.itemHash({ ...fixtureItem, translation: 'Other words.' })).not.toBe(deen.itemHash(fixtureItem))
+  })
+
+  it('every shipped hadith and dua over ten words has parts of at most fourteen words, matched in English', () => {
+    const res = deen.checkAll()
+    let withParts = 0
+    for (const [id, r] of Object.entries(res.results) as Array<[string, { emitted: Item[]; spec: { kind: string } }]>) {
+      if (r.spec.kind !== 'hadith' && r.spec.kind !== 'dhikr') continue
+      for (const it of r.emitted) {
+        if (it.quran) {
+          expect(it.parts, `${id}:${it.id}`).toBeUndefined()
+          continue
+        }
+        const count = it.arabic.split(/\s+/).length
+        if (count > 10) expect(it.parts, `${id}:${it.id} (${count} words) needs parts`).toBeDefined()
+        if (!it.parts) continue
+        withParts++
+        let a = 0
+        let e = 0
+        it.parts.ar.forEach((end: number, i: number) => {
+          const ar = it.arabic.slice(a, end).trim()
+          const en = it.translation.slice(e, it.parts.en[i]).trim()
+          expect(ar.split(/\s+/).length, `${id}:${it.id} part ${i + 1}`).toBeLessThanOrEqual(14)
+          expect(en.length, `${id}:${it.id} part ${i + 1} English`).toBeGreaterThan(0)
+          a = end
+          e = it.parts.en[i]
+        })
+      }
+    }
+    expect(withParts).toBeGreaterThanOrEqual(39)
   })
 })

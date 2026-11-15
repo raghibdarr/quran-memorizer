@@ -7,6 +7,18 @@
   "arabic": "لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ",
   "transliteration": "Laa ilaha illallaahul-'azeemul-haleem, laa ilaha illallaahu rabbul-'arshil-'azeem, laa ilaha illallaahu rabbus-samaawaati warabbul-ardi warabbul-'arshil-kareem",
   "translation": "There is no god but Allah, the Mighty, the Forbearing. There is no god but Allah, Lord of the mighty Throne. There is no god but Allah, Lord of the heavens, Lord of the earth, and Lord of the noble Throne.",
+  "parts": {
+    "ar": [
+      48,
+      102,
+      195
+    ],
+    "en": [
+      54,
+      108,
+      205
+    ]
+  },
   "citations": [
     {
       "collection": "bukhari",

@@ -7,6 +7,16 @@
   "arabic": "الْحَمْدُ لِلَّهِ كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ، غَيْرَ مَكْفِيٍّ وَلَا مُوَدَّعٍ وَلَا مُسْتَغْنًى عَنْهُ رَبَّنَا",
   "transliteration": "Al-hamdu lillaahi katheeran tayyiban mubaarakan feeh, ghayra makfiyyin walaa muwadda'in walaa mustaghnan 'anhu rabbanaa",
   "translation": "All praise is for Allah, abundant, good and blessed praise; [praise] that is never enough, never bid farewell to, and never done without, our Lord.",
+  "parts": {
+    "ar": [
+      53,
+      120
+    ],
+    "en": [
+      59,
+      147
+    ]
+  },
   "citations": [
     {
       "collection": "bukhari",

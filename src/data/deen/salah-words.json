@@ -1,7 +1,7 @@
 {
  "deck": "salah-words",
  "kind": "dhikr",
- "hash": "6d0cca6949da2d43",
+ "hash": "de3b3acf71b1cf07",
  "items": [
   {
    "id": "istiftah",
@@ -12,6 +12,18 @@
    "arabic": "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ، اللَّهُمَّ نَقِّنِي مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ، اللَّهُمَّ اغْسِلْ خَطَايَايَ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ",
    "transliteration": "Allaahumma baa'id baynee wabayna khataayaaya kamaa baa'adta baynal-mashriqi wal-maghrib, allaahumma naqqinee minal-khataayaa kamaa yunaqqath-thawbul-abyadu minad-danas, allaahummaghsil khataayaaya bil-maa'i wath-thalji wal-barad",
    "translation": "O Allah, put distance between me and my sins as You have put distance between the east and the west. O Allah, cleanse me of sins as a white garment is cleansed of dirt. O Allah, wash away my sins with water, snow and hail.",
+   "parts": {
+    "ar": [
+     96,
+     186,
+     251
+    ],
+    "en": [
+     100,
+     168,
+     222
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",
@@ -61,6 +73,20 @@
    "arabic": "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ، فَإِنَّكَ تَقْضِي وَلَا يُقْضَى عَلَيْكَ، وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ",
    "transliteration": "Allaahummahdinee feeman hadayt, wa'aafinee feeman 'aafayt, watawallanee feeman tawallayt, wabaarik lee feemaa a'tayt, waqinee sharra maa qadayt, fa'innaka taqdee walaa yuqdaa 'alayk, wa'innahu laa yadhillu man waalayt, tabaarakta rabbanaa wata'aalayt",
    "translation": "O Allah, guide me among those You have guided, grant me wellbeing among those You have granted wellbeing, take me into Your care among those You have taken into Your care, bless me in what You have given, and protect me from the evil of what You have decreed. For You decree and none decrees over You, and none whom You befriend is ever humbled. Blessed are You, our Lord, and exalted.",
+   "parts": {
+    "ar": [
+     67,
+     134,
+     204,
+     277
+    ],
+    "en": [
+     105,
+     204,
+     301,
+     385
+    ]
+   },
    "citations": [
     {
      "collection": "tirmidhi",
@@ -228,6 +254,20 @@
    "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
    "transliteration": "Allaahumma salli 'alaa muhammadin wa'alaa aali muhammad, kamaa sallayta 'alaa ibraaheema wa'alaa aali ibraaheem, innaka hameedun majeed, allaahumma baarik 'alaa muhammadin wa'alaa aali muhammad, kamaa baarakta 'alaa ibraaheema wa'alaa aali ibraaheem, innaka hameedun majeed",
    "translation": "O Allah, send prayers upon Muhammad and upon the family of Muhammad, as You sent prayers upon Ibrahim and upon the family of Ibrahim; You are Praiseworthy, Glorious. O Allah, send blessings upon Muhammad and upon the family of Muhammad, as You sent blessings upon Ibrahim and upon the family of Ibrahim; You are Praiseworthy, Glorious.",
+   "parts": {
+    "ar": [
+     55,
+     141,
+     199,
+     284
+    ],
+    "en": [
+     68,
+     165,
+     236,
+     335
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",
@@ -373,6 +413,20 @@
    "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
    "transliteration": "At-tahiyyaatu lillaahi was-salawaatu wat-tayyibaat, as-salaamu 'alayka ayyuhan-nabiyyu warahmatullaahi wabarakaatuh, as-salaamu 'alaynaa wa'alaa 'ibaadillaahis-saaliheen, ashhadu an laa ilaha illallaah, wa'ashhadu anna muhammadan 'abduhu warasooluh",
    "translation": "All greetings are for Allah, and all prayers and all good things. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His Messenger.",
+   "parts": {
+    "ar": [
+     53,
+     127,
+     187,
+     277
+    ],
+    "en": [
+     65,
+     137,
+     196,
+     310
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",

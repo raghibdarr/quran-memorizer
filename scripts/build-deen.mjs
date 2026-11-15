@@ -98,11 +98,78 @@ export function canonical(v) {
   return JSON.stringify(v);
 }
 
-/** The content hash ids.lock.json pins: everything except `rev` and `review` */
+/**
+ * The content hash ids.lock.json pins: everything except `rev`, `review` and
+ * `parts`. The learning parts are layout over an unchanged text (where the
+ * Arabic and its English are cut for memorising), so moving a cut is not a
+ * correction and does not raise `rev` (STYLE.md, "Learning parts").
+ */
 export function itemHash(item) {
-  const { rev: _rev, review: _review, ...rest } = item;
-  void _rev; void _review;
+  const { rev: _rev, review: _review, parts: _parts, ...rest } = item;
+  void _rev; void _review; void _parts;
   return sha256(canonical(rest)).slice(0, 16);
+}
+
+/** Words a learning part may not end on: the head of a name or of a construct (ibn, Abu, Abd, Umm) */
+const NAME_HEADS = new Set(['بن', 'ابن', 'ابي', 'ابو', 'ابا', 'عبد', 'ام'].map((w) => arabicSkeleton(w)));
+const NAME_LINK = new Set(['بن'].map((w) => arabicSkeleton(w)));
+const HONORIFIC = /^[\uFDFA\uFDFB\uFD40-\uFD4F]/;
+
+/**
+ * The learning parts of a text item (`parts: { ar, en }`): character offsets
+ * where each part ends, in the Arabic and in the translation, the last one
+ * being the end of the text. Returns what is wrong, as messages (none = fine).
+ * Checked: same count on both sides (two or more), increasing, in range, each
+ * cut at a word break; no English cut inside square brackets; no Arabic cut
+ * inside a name (after ibn, Abu, Abd, Umm; before ibn) or before an honorific;
+ * every `segments` end and every translation paragraph break is also a cut.
+ * @param {any} item
+ * @returns {string[]}
+ */
+export function checkParts(item) {
+  const out = [];
+  const parts = item?.parts;
+  if (parts === undefined) return out;
+  if (item.quran !== undefined) return ['an item with `quran` takes no parts (it is learned ayah by ayah)'];
+  if (!isObj(parts) || !Array.isArray(parts.ar) || !Array.isArray(parts.en)) return ['parts must be { ar: number[], en: number[] }'];
+  const arabic = typeof item.arabic === 'string' ? item.arabic : '';
+  const english = typeof item.translation === 'string' ? item.translation : '';
+  if (parts.ar.length !== parts.en.length) out.push(`parts.ar has ${parts.ar.length} ends and parts.en has ${parts.en.length}: one English part per Arabic part`);
+  if (parts.ar.length < 2) out.push('parts needs at least two parts (leave a short text whole, without `parts`)');
+  for (const [side, ends, text] of [['ar', parts.ar, arabic], ['en', parts.en, english]]) {
+    const rising = ends.every((e, i) => Number.isInteger(e) && e > 0 && e <= text.length && (i === 0 || e > ends[i - 1]));
+    if (!rising) { out.push(`parts.${side} must be increasing offsets within the text`); continue; }
+    if (ends[ends.length - 1] !== text.length) out.push(`parts.${side} must end at the end of the text (${text.length})`);
+    let start = 0;
+    ends.forEach((e, i) => {
+      const piece = text.slice(start, e);
+      if (i < ends.length - 1 && !(/\s/.test(text[e] ?? '') && /\S/.test(text[e - 1] ?? ''))) out.push(`parts.${side}[${i}] (${e}) is not at the end of a word`);
+      if (!piece.trim()) out.push(`parts.${side}[${i}] is empty`);
+      if (side === 'en' && (piece.match(/\[/g) ?? []).length !== (piece.match(/\]/g) ?? []).length) out.push(`parts.en[${i}] cuts inside square brackets`);
+      if (side === 'ar') {
+        const ws = piece.trim().split(/\s+/);
+        const last = arabicSkeleton(ws[ws.length - 1] ?? '');
+        const first = ws[0] ?? '';
+        if (i < ends.length - 1 && NAME_HEADS.has(last)) out.push(`parts.ar[${i}] ends inside a name or construct ("${ws[ws.length - 1]}")`);
+        if (i > 0 && NAME_LINK.has(arabicSkeleton(first))) out.push(`parts.ar[${i}] starts inside a name ("${first}")`);
+        if (i > 0 && HONORIFIC.test(first)) out.push(`parts.ar[${i}] starts with an honorific that belongs to the part before`);
+      }
+      start = e;
+    });
+  }
+  if (out.length) return out;
+  const arEnds = new Set(parts.ar);
+  for (const raw of Array.isArray(item.segments) ? item.segments : []) {
+    // As the app reads them: an offset inside a word means that word's end
+    let s = raw;
+    while (s < arabic.length && !/\s/.test(arabic[s])) s++;
+    if (!arEnds.has(s)) out.push(`segments end ${s} is not a parts.ar end: parts sit inside the reading segments`);
+  }
+  const enEnds = new Set(parts.en);
+  for (const m of english.matchAll(/\n\s*\n/g)) {
+    if (!enEnds.has(m.index)) out.push(`the translation's paragraph break at ${m.index} is not a parts.en end`);
+  }
+  return out;
 }
 
 // ---------- registry (collections, scholars, works, witnesses, reviewers) ----------
@@ -417,6 +484,7 @@ export function validateDeck({ deck, kind, items, lock, unit }, ctx) {
           E('SHAPE', id, 'segments must be increasing offsets within the Arabic');
         }
       }
+      for (const msg of checkParts(item)) E('PARTS', id, msg);
     }
 
     if (kind === 'names') {

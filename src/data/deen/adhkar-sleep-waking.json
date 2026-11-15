@@ -1,7 +1,7 @@
 {
  "deck": "adhkar-sleep-waking",
  "kind": "dhikr",
- "hash": "79308cef80effd6c",
+ "hash": "75d64226c4553877",
  "items": [
   {
    "id": "ahyana",
@@ -60,6 +60,20 @@
    "arabic": "اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَهْبَةً وَرَغْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ",
    "transliteration": "Allaahumma aslamtu nafsee ilayk, wafawwadtu amree ilayk, wa'alja'tu zahree ilayk, rahbatan waraghbatan ilayk, laa malja'a walaa manjaa minka illaa ilayk, aamantu bikitaabika lladhee anzalt, wabinabiyyika lladhee arsalt",
    "translation": "O Allah, I have submitted myself to You, entrusted my affair to You, and turned my back to You for support, in fear and in hope of You. There is no refuge and no escape from You except to You. I believe in Your Book which You sent down, and in Your Prophet whom You sent.",
+   "parts": {
+    "ar": [
+     69,
+     130,
+     181,
+     254
+    ],
+    "en": [
+     68,
+     135,
+     192,
+     271
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",
@@ -236,6 +250,18 @@
    "arabic": "بِاسْمِكَ رَبِّ وَضَعْتُ جَنْبِي وَبِكَ أَرْفَعُهُ، إِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ الصَّالِحِينَ",
    "transliteration": "Bismika rabbi wada'tu janbee wabika arfa'uh, in amsakta nafsee farhamhaa, wa'in arsaltahaa fahfaz'haa bimaa tahfazu bihis-saaliheen",
    "translation": "In Your name, my Lord, I lay down my side, and by You I raise it. If You keep my soul, have mercy on it; and if You send it back, guard it with what You guard the righteous with.",
+   "parts": {
+    "ar": [
+     51,
+     89,
+     157
+    ],
+    "en": [
+     65,
+     104,
+     178
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",

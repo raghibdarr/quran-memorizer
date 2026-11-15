@@ -7,6 +7,16 @@
   "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
   "transliteration": "Allaahumma bika asbahnaa, wabika amsaynaa, wabika nahyaa, wabika namoot, wa'ilaykan-nushoor",
   "translation": "O Allah, by You we enter morning and by You evening; by You we live and by You we die, and to You is the rising.",
+  "parts": {
+    "ar": [
+      48,
+      102
+    ],
+    "en": [
+      52,
+      112
+    ]
+  },
   "citations": [
     {
       "collection": "abu-dawud",

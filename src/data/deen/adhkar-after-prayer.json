@@ -1,7 +1,7 @@
 {
  "deck": "adhkar-after-prayer",
  "kind": "dhikr",
- "hash": "fce5b692dbb7da2d",
+ "hash": "91db37bbf8b73cd3",
  "items": [
   {
    "id": "aini-ala-dhikrik",
@@ -161,6 +161,24 @@
    "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ، لَا إِلَهَ إِلَّا اللَّهُ، وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ، وَلَهُ الثَّنَاءُ الْحَسَنُ، لَا إِلَهَ إِلَّا اللَّهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ",
    "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer, laa hawla walaa quwwata illaa billaah, laa ilaha illallaah, walaa na'budu illaa iyyaah, lahun-ni'matu walahul-fadl, walahuth-thanaa'ul-hasan, laa ilaha illallaahu mukhliseena lahud-deena walaw karihal-kaafiroon",
    "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things. There is no power and no strength except through Allah. There is no god but Allah, and we worship none but Him. His is the blessing, His the bounty, and His the beautiful praise. There is no god but Allah; we are sincere to Him in religion, even if the disbelievers dislike it.",
+   "parts": {
+    "ar": [
+     52,
+     120,
+     163,
+     222,
+     286,
+     366
+    ],
+    "en": [
+     49,
+     126,
+     182,
+     238,
+     305,
+     404
+    ]
+   },
    "citations": [
     {
      "collection": "muslim",
@@ -210,6 +228,20 @@
    "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
    "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer, allaahumma laa maani'a limaa a'tayt, walaa mu'tiya limaa mana't, walaa yanfa'u dhal-jaddi minkal-jadd",
    "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things. O Allah, none can withhold what You give, none can give what You withhold, and the fortune of the fortunate is of no avail to him against You.",
+   "parts": {
+    "ar": [
+     52,
+     120,
+     192,
+     236
+    ],
+    "en": [
+     49,
+     126,
+     201,
+     269
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",
@@ -269,6 +301,18 @@
    "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
    "transliteration": "Allaahumma innee a'oodhu bika minal-jubn, wa'a'oodhu bika an uradda ilaa ardhalil-'umur, wa'a'oodhu bika min fitnatid-dunyaa, wa'a'oodhu bika min 'adhaabil-qabr",
    "translation": "O Allah, I seek refuge with You from cowardice. I seek refuge with You from being returned to the most feeble age. I seek refuge with You from the trials of this world. And I seek refuge with You from the punishment of the grave.",
+   "parts": {
+    "ar": [
+     46,
+     100,
+     179
+    ],
+    "en": [
+     47,
+     114,
+     229
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",
@@ -318,6 +362,16 @@
    "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
    "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer",
    "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+   "parts": {
+    "ar": [
+     52,
+     119
+    ],
+    "en": [
+     49,
+     126
+    ]
+   },
    "citations": [
     {
      "collection": "muslim",

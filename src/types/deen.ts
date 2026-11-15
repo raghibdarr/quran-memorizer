@@ -61,6 +61,11 @@ export interface TextItem {
   segments?: number[];
   transliteration?: string;
   translation?: string;
+  /**
+   * The parts the text is memorised by: character offsets where each part ends, in `arabic`
+   * and in `translation` (same count; the last is the end of the text). Absent = learned whole.
+   */
+  parts?: { ar: number[]; en: number[] };
   citations: Citation[];
   gradings: Grading[];
   provenance?: Provenance;

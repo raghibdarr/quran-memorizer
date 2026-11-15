@@ -7,6 +7,7 @@
   "arabic": "هَذَا نَصٌّ تَجْرِيبِيٌّ لِلِاخْتِبَارِ فَقَطْ",
   "segments": [17, 43],
   "translation": "This is a test text, for testing only, with [[dhikr]] marked.",
+  "parts": { "ar": [24, 46], "en": [20, 61] },
   "citations": [
     { "collection": "fixture-sahih", "number": "1", "numbering": "fixture-numbering", "narrator": "A fixture narrator" }
   ],

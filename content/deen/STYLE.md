@@ -44,6 +44,27 @@ translator and the back-checker (spec 5.4, stages E and F).
   and the app renders the ayah from the surah files.
 - Segments (`segments`) end at sentence ends only.
 
+## Learning parts
+
+- `segments` are the reading paragraphs. `parts` are the smaller pieces a text is memorised
+  by: `parts: { ar: [...], en: [...] }`, the character offset where each part ends in the
+  Arabic and in the translation, the last one being the end of the text. Write them with
+  `node scripts/deen-parts.mjs set <item.json> --ar … --en …` (word numbers in, offsets out).
+- A part ends at a sense break: the end of a clause or of a phrase that can be said in one
+  breath, about four to twelve words. Never inside a name (not after ibn, Abu, Abd or Umm),
+  never inside a construct (idafa), never between a word and its honorific.
+- The narrator's opening ("عن … قال: سمعت رسول الله ﷺ يقول") is a part of its own. A short
+  one joins the first clause; a long name may end a part before the words that describe him.
+- Each English part is the existing translation cut at the matching point. The translation is
+  never reworded or reordered to make a cut possible: where the English order differs from the
+  Arabic, keep the two together in one part.
+- A text of ten words or fewer stays whole (no `parts`). Quranic items take none: they are
+  learned ayah by ayah.
+- Every `segments` end and every paragraph break in the translation is also a part end.
+- Parts are layout over an unchanged text. Adding or moving them is not a correction: it does
+  not raise `rev`, needs no errata line, and is left out of the hash in `ids.lock.json`. (A
+  raised `rev` tells the learner "Text corrected", which would be untrue.)
+
 ## Transliteration
 
 - One house scheme: `src/lib/transliterate.ts`, run on fully vocalised text. Do not hand-write

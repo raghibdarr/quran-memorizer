@@ -1,7 +1,7 @@
 {
  "deck": "adhkar-morning-evening",
  "kind": "dhikr",
- "hash": "c6d72d9acc441c55",
+ "hash": "b32fc0705845f1fc",
  "items": [
   {
    "id": "adada-khalqihi",
@@ -12,6 +12,16 @@
    "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
    "transliteration": "Subhaanallaahi wabihamdihi 'adada khalqihi waridaa nafsihi wazinata 'arshihi wamidaada kalimaatih",
    "translation": "Glory and praise be to Allah, as many as His creation, as much as pleases Him, the weight of His Throne, and the ink of His words.",
+   "parts": {
+    "ar": [
+     46,
+     103
+    ],
+    "en": [
+     54,
+     130
+    ]
+   },
    "citations": [
     {
      "collection": "muslim",
@@ -62,6 +72,20 @@
    "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، وَاحْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",
    "transliteration": "Allaahumma innee as'alukal-'afwa wal-'aafiyata fid-dunyaa wal-'aakhirah, allaahumma as'alukal-'afwa wal-'aafiyata fee deenee wadunyaaya wa'ahlee wamaalee, allaahummastur 'awraatee, wa'aamin raw'aatee, wahfaznee mim bayni yadayy, wamin khalfee, wa'an yameenee, wa'an shimaalee, wamin fawqee, wa'a'oodhu bika an ughtaala min tahtee",
    "translation": "O Allah, I ask You for pardon and wellbeing in this world and the next. O Allah, I ask You for pardon and wellbeing in my religion and my worldly life, my family and my wealth. O Allah, cover my faults and calm my fears, and guard me from in front of me and behind me, from my right and my left, and from above me; and I seek refuge with You from being seized unawares from beneath me.",
+   "parts": {
+    "ar": [
+     82,
+     172,
+     273,
+     366
+    ],
+    "en": [
+     71,
+     176,
+     268,
+     385
+    ]
+   },
    "citations": [
     {
      "collection": "ibn-majah",
@@ -114,6 +138,24 @@
    "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ هَذِهِ اللَّيْلَةِ وَخَيْرِ مَا فِيهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيهَا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَسُوءِ الْكِبَرِ وَفِتْنَةِ الدُّنْيَا وَعَذَابِ الْقَبْرِ",
    "transliteration": "Amsaynaa wa'amsal-mulku lillaah, wal-hamdu lillaah, laa ilaha illallaahu wahdahu laa shareeka lah, allaahumma innee as'aluka min khayri hadhihil-laylati wakhayri maa feehaa, wa'a'oodhu bika min sharrihaa washarri maa feehaa, allaahumma innee a'oodhu bika minal-kasali wal-harami wasoo'il-kibari wafitnatid-dunyaa wa'adhaabil-qabr",
    "translation": "We have reached the evening, and the dominion belongs to Allah, and all praise is for Allah. There is no god but Allah alone, without partner. O Allah, I ask You for the good of this night and the good of what is in it, and I seek refuge with You from its evil and the evil of what is in it. O Allah, I seek refuge with You from laziness, from decrepitude, from the evil of old age, from the trials of this world and from the punishment of the grave.",
+   "parts": {
+    "ar": [
+     61,
+     114,
+     195,
+     244,
+     302,
+     362
+    ],
+    "en": [
+     92,
+     142,
+     219,
+     291,
+     356,
+     450
+    ]
+   },
    "citations": [
     {
      "collection": "muslim",
@@ -177,6 +219,18 @@
    "arabic": "اللَّهُمَّ فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ",
    "transliteration": "Allaahumma faatiras-samawaati wal-ard, 'aalimal-ghaybi wash-shahaadah, rabba kulli shay'in wamaleekah, ashhadu an laa ilaha illaa ant, a'oodhu bika min sharri nafsee, washarrish-shaytaani washirkih",
    "translation": "O Allah, Originator of the heavens and the earth, Knower of the unseen and the seen, Lord and Sovereign of everything: I bear witness that there is no god but You. I seek refuge with You from the evil of my own self, and from the evil of Satan and his [call to] associating partners with Allah.",
+   "parts": {
+    "ar": [
+     110,
+     150,
+     215
+    ],
+    "en": [
+     118,
+     163,
+     294
+    ]
+   },
    "citations": [
     {
      "collection": "abu-dawud",
@@ -229,6 +283,16 @@
    "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",
    "transliteration": "Allaahumma bika asbahnaa, wabika amsaynaa, wabika nahyaa, wabika namoot, wa'ilaykan-nushoor",
    "translation": "O Allah, by You we enter morning and by You evening; by You we live and by You we die, and to You is the rising.",
+   "parts": {
+    "ar": [
+     48,
+     102
+    ],
+    "en": [
+     52,
+     112
+    ]
+   },
    "citations": [
     {
      "collection": "abu-dawud",
@@ -293,6 +357,16 @@
    "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
    "transliteration": "Bismillaahi lladhee laa yadurru ma'asmihi shay'un fil-ardi walaa fis-samaa'i, wahuwas-samee'ul-'aleem",
    "translation": "In the name of Allah, with whose name nothing in the earth or in the heaven can cause harm, and He is the All-Hearing, the All-Knowing.",
+   "parts": {
+    "ar": [
+     90,
+     119
+    ],
+    "en": [
+     91,
+     135
+    ]
+   },
    "citations": [
     {
      "collection": "abu-dawud",
@@ -492,6 +566,16 @@
    "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
    "transliteration": "Laa ilaha illallaahu wahdahu laa shareeka lah, lahul-mulku walahul-hamd, wahuwa 'alaa kulli shay'in qadeer",
    "translation": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things.",
+   "parts": {
+    "ar": [
+     52,
+     119
+    ],
+    "en": [
+     49,
+     126
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",
@@ -599,6 +683,20 @@
    "arabic": "اللَّهُمَّ أَنْتَ رَبِّي، لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، اغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
    "transliteration": "Allaahumma anta rabbee, laa ilaha illaa ant, khalaqtanee wa'anaa 'abduk, wa'anaa 'alaa 'ahdika wawa'dika mastata't, a'oodhu bika min sharri maa sana't, aboo'u laka bini'matika 'alayy, wa'aboo'u bidhanbee, ighfir lee, fa'innahu laa yaghfirudh-dhunooba illaa ant",
    "translation": "O Allah, You are my Lord; there is no god but You. You created me and I am Your servant, and I keep to Your covenant and Your promise as far as I am able. I seek refuge with You from the evil of what I have done. I acknowledge to You Your favour upon me, and I acknowledge my sin. Forgive me, for no one forgives sins but You.",
+   "parts": {
+    "ar": [
+     51,
+     132,
+     226,
+     287
+    ],
+    "en": [
+     50,
+     154,
+     280,
+     326
+    ]
+   },
    "citations": [
     {
      "collection": "bukhari",

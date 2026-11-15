@@ -7,6 +7,20 @@
   "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
   "transliteration": "At-tahiyyaatu lillaahi was-salawaatu wat-tayyibaat, as-salaamu 'alayka ayyuhan-nabiyyu warahmatullaahi wabarakaatuh, as-salaamu 'alaynaa wa'alaa 'ibaadillaahis-saaliheen, ashhadu an laa ilaha illallaah, wa'ashhadu anna muhammadan 'abduhu warasooluh",
   "translation": "All greetings are for Allah, and all prayers and all good things. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and His Messenger.",
+  "parts": {
+    "ar": [
+      53,
+      127,
+      187,
+      277
+    ],
+    "en": [
+      65,
+      137,
+      196,
+      310
+    ]
+  },
   "citations": [
     {
       "collection": "bukhari",
