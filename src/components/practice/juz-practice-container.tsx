@@ -60,7 +60,7 @@ export default function JuzPracticeContainer({ juzNum, sections }: JuzPracticeCo
 
   return (
     <Button onClick={handlePracticeEntireJuz} className="w-full">
-      Practice Entire Juz ({totalAyahs} ayahs)
+      Practise the whole juz ({totalAyahs} ayahs)
     </Button>
   );
 }

@@ -248,7 +248,7 @@ export default function HomePage() {
         ) : !plan && activeProgress && activeSurah ? (
           <Link href={lessonHref(activeSurah.id, Number(activeProgress.lessonId.split('-')[1]) || 1)} className="block">
             <Card variant="tactile" pressable className="p-6">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Continue Learning</p>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-teal">Continue learning</p>
               <div className="mt-1.5 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-xl font-bold text-foreground">{activeSurah.nameSimple}</p>
@@ -294,7 +294,7 @@ export default function HomePage() {
             className="pressable flex min-h-12 items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/5 px-4 py-2.5"
           >
             <span className="text-sm">
-              <span className="font-semibold text-gold-deep">Hifdh Planner</span>
+              <span className="font-semibold text-gold-deep">Hifdh planner</span>
               <span className="text-muted">
                 {intent === 'revise' ? ' · schedule your revision' : ' · set a daily memorisation goal'}
               </span>
@@ -308,7 +308,7 @@ export default function HomePage() {
             <Card variant="tactile" pressable className="bg-gold/10">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh Planner</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gold-deep">Hifdh planner</p>
                   <p className="mt-1 text-lg font-bold text-foreground">Set a memorisation goal</p>
                   <p className="mt-0.5 text-xs text-muted">Pick a ready-made plan or build your own, with reviews and pacing.</p>
                 </div>

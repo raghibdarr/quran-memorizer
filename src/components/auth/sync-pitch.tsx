@@ -28,7 +28,7 @@ export default function SyncPitch({ moment, className }: { moment: 'lesson' | 'd
   };
 
   const line =
-    moment === 'backup' ? 'A backup file is one copy. An account keeps your progress synced and safe without thinking about it.'
+    moment === 'backup' ? 'A backup file is one copy. An account keeps your progress synced and safe automatically.'
     : moment === 'day' ? 'Your streak and every lesson live on this device only. A free account keeps them safe and on all your devices.'
     : 'Your progress lives on this device only. A free account keeps it safe and syncs it to your other devices.';
 

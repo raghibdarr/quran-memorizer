@@ -113,7 +113,7 @@ export default function OnboardingOverlay() {
             <p className="arabic-text text-4xl text-teal">تكرار</p>
             <h2 className="mt-4 text-2xl font-bold text-teal">Welcome to Takrar</h2>
             <p className="mt-3 text-base leading-relaxed text-muted">
-              Memorise the Quran through steady repetition, keep what you already know, or simply recite and listen.
+              Memorise the Quran through steady repetition, keep what you already know, or recite and listen.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-muted">Plus prayer times, qibla, adhkar and short lessons, all free and on your phone.</p>
             <button onClick={() => setStep('intent')} className="tactile-btn mt-10 min-h-12 w-full rounded-xl bg-teal text-base font-semibold text-on-teal">
@@ -125,7 +125,7 @@ export default function OnboardingOverlay() {
         {step === 'intent' && (
           <div className="flex flex-1 flex-col justify-center">
             <h2 className="text-center text-2xl font-bold text-teal">What brings you here?</h2>
-            <p className="mt-2 text-center text-sm text-muted">You can do all of these later. This just decides where you start.</p>
+            <p className="mt-2 text-center text-sm text-muted">You can do all of these later. This only decides where you start.</p>
             <div className="mt-6 space-y-2.5">
               {INTENTS.map((o) => (
                 <button
@@ -229,7 +229,7 @@ export default function OnboardingOverlay() {
             {intent === 'memorized-some' && (
               <FinishCard
                 title="Let's build a plan around what you know"
-                body="Tell the planner which surahs you already have. It schedules their revision next to your new lessons, so nothing fades while you add more."
+                body="Tell the planner which surahs you already have. It schedules their revision next to your new lessons, so you keep them while you add more."
                 primary={{ label: 'Set up my plan', onClick: () => finishTo('/plan/setup') }}
                 secondary={{ label: 'Look around first', onClick: () => finishTo(null) }}
               />

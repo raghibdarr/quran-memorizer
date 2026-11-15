@@ -22,7 +22,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Takrar · Quran, prayer and learning",
   description:
-    "Memorise the Quran with guided lessons and spaced review, with prayer times, qibla, adhkar and short lessons alongside. Free, and worked out on your phone.",
+    "Memorise the Quran with guided lessons and spaced review, with prayer times, qibla, adhkar and short lessons alongside. Free. Prayer times and qibla are worked out on your phone.",
   icons: {
     icon: "/logos/takrar.svg",
     apple: "/icons/apple-touch-icon.png",

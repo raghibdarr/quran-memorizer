@@ -51,7 +51,7 @@ export default function ReviewSessionScreen() {
       <div className="sticky top-[var(--safe-top)] z-10 border-b border-foreground/5 bg-cream/95 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between">
           <CloseButton fallback={exitHref} label="Close review" />
-          <span className="text-sm font-semibold text-teal">Review Session</span>
+          <span className="text-sm font-semibold text-teal">Review session</span>
           <div className="flex items-center gap-2">
             <SettingsPanel />
             <UserButton />

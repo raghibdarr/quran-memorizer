@@ -80,7 +80,7 @@ export const PLAN_PRESETS: PlanPreset[] = [
   {
     id: 'whole-quran',
     title: 'The whole Quran, steadily',
-    summary: 'Two lessons each weekday, starting from the end of the Quran where the surahs are shortest. Years, not months; the reviews keep everything you have learned.',
+    summary: 'Two lessons each weekday, starting from the end of the Quran where the surahs are shortest. This takes years, and the reviews keep what you have learned along the way.',
     goalType: 'full-quran',
     lessonsPerDay: 2,
     studyDays: WEEKDAYS,

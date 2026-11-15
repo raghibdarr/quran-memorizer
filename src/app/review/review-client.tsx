@@ -212,7 +212,7 @@ export default function ReviewPage() {
           {dueCount === 0 && lessonCards.length > 0 && (
             <Card className="bg-success/5 border border-success/20">
               <div className="text-center">
-                <p className="text-sm font-bold text-success">All caught up!</p>
+                <p className="text-sm font-bold text-success">All caught up</p>
                 <p className="mt-0.5 text-xs text-muted">No lessons due for review right now</p>
               </div>
             </Card>

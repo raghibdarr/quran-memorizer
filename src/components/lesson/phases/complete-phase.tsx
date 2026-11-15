@@ -78,7 +78,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
       </div>
 
       <div>
-        <h3 className="text-2xl font-bold text-foreground">Lesson Complete!</h3>
+        <h3 className="text-2xl font-bold text-foreground">Lesson complete</h3>
         <p className="mt-1 text-muted">
           {isMultiLesson
             ? `${surah.nameSimple} · Lesson ${lessonDef.lessonNumber} of ${totalLessons}`
@@ -147,7 +147,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
         {hasNextLesson && (
           <Link href={nextLessonUrl}>
             <Button className="w-full">
-              Start Lesson {lessonDef.lessonNumber + 1}
+              Start lesson {lessonDef.lessonNumber + 1}
             </Button>
           </Link>
         )}
@@ -164,7 +164,7 @@ export default function CompletePhase({ surah, ayahs, lessonDef, totalLessons, o
           onClick={onPracticeAgain}
           className="w-full rounded-xl border-2 border-foreground/10 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
         >
-          Revise This Lesson
+          Revise this lesson
         </button>
         <button
           onClick={() => setShowResetConfirm(true)}

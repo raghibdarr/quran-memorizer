@@ -240,12 +240,12 @@ export default function SurahDetailPage() {
                         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-success text-on-success">
                           <CheckIcon size={20} />
                         </div>
-                        <p className="text-sm font-semibold text-foreground">Lesson Complete</p>
+                        <p className="text-sm font-semibold text-foreground">Lesson complete</p>
                         <p className="mt-1 text-xs text-muted">Tap to review</p>
                       </>
                     ) : isActive ? (
                       <>
-                        <p className="text-sm font-semibold text-foreground">Continue Lesson</p>
+                        <p className="text-sm font-semibold text-foreground">Continue lesson</p>
                         <div className="mt-2">
                           <ProgressBar value={phaseProgress} className="h-1.5" />
                           <p className="mt-1 text-xs text-teal">{PHASE_LABELS[progress.currentPhase]} step</p>
@@ -253,7 +253,7 @@ export default function SurahDetailPage() {
                       </>
                     ) : (
                       <>
-                        <p className="text-sm font-semibold text-foreground">{isKnown ? 'Relearn from scratch' : 'Start Lesson'}</p>
+                        <p className="text-sm font-semibold text-foreground">{isKnown ? 'Relearn from scratch' : 'Start lesson'}</p>
                         <p className="mt-1 text-xs text-muted">{surah.versesCount} ayahs</p>
                         <p className="mt-1 text-[11px] text-muted/70">
                           {isKnown

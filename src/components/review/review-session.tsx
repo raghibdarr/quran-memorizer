@@ -364,7 +364,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
               }}
               className="pressable w-full rounded-lg border border-foreground/15 bg-card py-2.5 text-xs font-semibold text-muted hover:text-foreground"
             >
-              {hiddenAyahs.size === 0 ? 'Hide All' : 'Show All'}
+              {hiddenAyahs.size === 0 ? 'Hide all' : 'Show all'}
             </button>
           )}
 
@@ -476,7 +476,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
                 worstRating === 'hesitated' && 'border-gold/30 bg-gold/10 text-gold-deep',
                 worstRating === 'missed' && 'border-miss/30 bg-miss/10 text-miss',
               )}>
-                {worstRating === 'got-it' && `Great recall! Next review ${nextReviewLabel}.`}
+                {worstRating === 'got-it' && `Well recalled. Next review ${nextReviewLabel}.`}
                 {worstRating === 'hesitated' && `Good effort. Next review ${nextReviewLabel}.`}
                 {worstRating === 'missed' && `No worries. Next review ${nextReviewLabel}.`}
             </div>
@@ -499,7 +499,7 @@ export default function ReviewSession({ dueCards, earlyIds, onComplete }: Review
             )}
             {submitted ? (
               <Button onClick={handleNext} className="w-full">
-                {isLastCard ? 'Finish Review' : isLastInBatch ? 'Finish Batch' : 'Next review'}
+                {isLastCard ? 'Finish review' : isLastInBatch ? 'Finish batch' : 'Next review'}
               </Button>
             ) : allRated ? (
               <Button onClick={() => handleSubmit()} className="w-full">

@@ -67,7 +67,7 @@ test.describe('smoke', () => {
 
     await page.goto('/review?start=1')
     // The ?start=1 deep link must auto-open the session on the due card
-    await expect(page.getByText('Review Session')).toBeVisible()
+    await expect(page.getByText('Review session')).toBeVisible()
     await expect(page.getByRole('button', { name: 'Close review' })).toBeVisible()
   })
 
@@ -101,7 +101,7 @@ test.describe('smoke', () => {
       await page.getByRole('button', { name: /i've recited it/i }).click()
       // The one-tap path: every ayah fine
       await page.getByRole('button', { name: /all good/i }).click()
-      await page.getByRole('button', { name: i < 9 ? 'Next review' : 'Finish Batch' }).click()
+      await page.getByRole('button', { name: i < 9 ? 'Next review' : 'Finish batch' }).click()
     }
 
     // The break: explicit framing, ratings already saved, a real choice
@@ -156,7 +156,7 @@ test.describe('smoke', () => {
     // The per-ayah path
     for (const rate of await page.getByRole('button', { name: 'Got it' }).all()) await rate.click()
     await page.getByRole('button', { name: 'Submit review' }).click()
-    await page.getByRole('button', { name: 'Finish Review' }).click()
+    await page.getByRole('button', { name: 'Finish review' }).click()
 
     // Back on Home (plan deep-link returns there): the moment, tied to streak + tomorrow
     await expect(moment).toBeVisible()
