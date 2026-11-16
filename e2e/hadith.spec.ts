@@ -171,6 +171,37 @@ test.describe('Forty Hadith', () => {
     expect(recall.lastQuality).toBe(3)
   })
 
+  test('leaving partway keeps your place: the next visit offers to carry on from that part', async ({ page }) => {
+    await seed(page)
+    await page.goto('/review/deen?learn=nawawi40:11&depth=arabic')
+    await page.getByRole('button', { name: 'Start memorising' }).click()
+    const build = page.locator('[data-memorise-step="build"]')
+    const arabic = { current: '' }
+    for (let i = 0; i < 12 && (await build.getAttribute('data-unit')) === '0'; i++) {
+      await buildStage(page, arabic)
+      await page.waitForTimeout(450)
+    }
+    await expect(build).toHaveAttribute('data-unit', '1')
+
+    // Leave and come back: the Read screen offers part 2, or the start
+    await page.reload()
+    await expect(page.locator('[data-resume]')).toHaveText('Carry on from part 2 of 4')
+    await page.locator('[data-resume]').click()
+    await expect(page.locator('[data-unit-label]')).toHaveText('Part 2 of 4')
+    await expect(build).toHaveAttribute('data-stage', 'read')
+
+    await page.reload()
+    await page.getByRole('button', { name: 'Start from the first part' }).click()
+    await expect(page.locator('[data-unit-label]')).toHaveText('Part 1 of 4')
+
+    // Finishing clears it
+    await walkBuild(page)
+    await walkRecall(page)
+    await page.reload()
+    await expect(page.getByRole('button', { name: 'Start memorising' })).toBeVisible()
+    await expect(page.locator('[data-resume]')).toHaveCount(0)
+  })
+
   test('a hadith that is not in the deck says so calmly', async ({ page }) => {
     await seed(page)
     // A number al-Nawawi gave, still being checked

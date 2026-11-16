@@ -61,6 +61,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Providers>{children}</Providers>
+        {/* Paper grain (globals.css .paper-grain): an element, not body::after, so it can keep its own layer above the page during screen transitions */}
+        <div aria-hidden className="paper-grain" />
       </body>
     </html>
   );

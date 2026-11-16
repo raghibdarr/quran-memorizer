@@ -81,22 +81,29 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Paper grain — full-screen print texture, multiply on paper / screen on slate */
-body::after {
-  content: '';
+/* Paper grain: a full-screen print texture. It is drawn as plain specks with
+   alpha (dark specks on paper, light on slate), not with a blend mode: a blended
+   layer can't blend through a view-transition snapshot, so on some GPUs the screen
+   dropped darker and then lightened again on every tab switch (owner, 2026-11-16).
+   Opacities are tuned to match the old multiply/screen look.
+   It is an element with its own view-transition layer, kept above the screens:
+   as part of the root snapshot it sat UNDER a transitioning page, so the grain
+   vanished for the length of every tab switch and came back after it, which read
+   as the page going dark then lighter (owner, 2026-11-16). */
+.paper-grain {
+  view-transition-name: paper-grain;
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.333 -0.333 -0.333 0 1'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  opacity: 0.032;
-  mix-blend-mode: multiply;
+  opacity: 0.013;
 }
 
-.dark body::after {
-  opacity: 0.05;
-  mix-blend-mode: screen;
+html.dark .paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.333 0.333 0.333 0 0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
 }
 
 /* === Tactile print physics === */
@@ -350,6 +357,10 @@ html[data-nav-dir]::view-transition-new(.nav-auto) { animation-duration: var(--n
 @keyframes tabbar-down { to { transform: translateY(140%); } }
 @keyframes tabbar-up { from { transform: translateY(140%); } }
 ::view-transition-group(tab-bar) { animation: none; z-index: 100; }
+/* The paper grain stays on top of everything, unmoving, through every transition */
+::view-transition-group(paper-grain) { animation: none; z-index: 101; }
+::view-transition-old(paper-grain) { display: none; }
+::view-transition-new(paper-grain) { animation: none; }
 ::view-transition-old(tab-bar) { display: none; }
 ::view-transition-new(tab-bar) { animation: none; }
 ::view-transition-old(tab-bar):only-child { display: block; animation: 260ms var(--nav-ease) both tabbar-down; }
@@ -407,6 +418,12 @@ body::before {
 
 /* No rubber-band dragging of the whole app; scroll containers keep their own */
 html, body { overscroll-behavior-y: none; }
+
+/* Keep room for the scrollbar on every page, scrolling or not. Without it a short
+   page (Review with nothing due) is a scrollbar wider than a long one, and the fixed
+   tab bar, centred in what is left, shifted sideways between tabs (owner, 2026-11-16).
+   Phones use overlay scrollbars, so this only changes desktop browsers. */
+html { scrollbar-gutter: stable; }
 
 /* Tap-target floor (M11c): grows the invisible HIT AREA of a small control to
    44×44 without changing how it looks or lays out. In the components layer so an

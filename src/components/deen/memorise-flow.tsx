@@ -31,6 +31,7 @@ import { deckKindOf } from './deck-source';
 import { workTitle } from './registry-names';
 import { whenLabel } from './text';
 import { StickyActions } from './sticky-actions';
+import { clearPosition, loadPosition, positionKey, savePosition, type FlowPosition } from '@/lib/deen/flow-position';
 
 /** Self-rating to SM-2 quality, as in the Quran reviews */
 export const RATING_QUALITY: Record<Rating, number> = { 'got-it': 5, hesitated: 3, missed: 1 };
@@ -144,6 +145,14 @@ export function recallStages(item: TextItem, kind: DeckKind, depth: DeckDepth): 
   if (kind === 'hadith' && narratorOf(item)) out.push('narrator');
   else if (kind === 'dhikr' && item.usage?.when.length) out.push('usage');
   return out;
+}
+
+/** The button that picks a saved place back up: "Carry on from part 5 of 9" */
+export function resumeLabel(pos: FlowPosition, unitLabel: string | undefined): string {
+  if (pos.step === 'recall') return 'Carry on to Recall';
+  if (!unitLabel) return 'Carry on where you were';
+  if (unitLabel === 'All together') return 'Carry on: all of it together';
+  return `Carry on from ${unitLabel.replace(/^Part/, 'part')}`;
 }
 
 /** A word tile of the put-in-order stage */
@@ -413,6 +422,22 @@ export function MemoriseFlow({
   const questions = useMemo(() => recallStages(item, deckKind, depth), [item, deckKind, depth]);
   const question = questions[Math.min(recallAt, questions.length - 1)];
 
+  // A saved place from an earlier visit (long texts take a while): offered on
+  // the Read screen, kept as the learner moves through Build, cleared at the end
+  const posKey = positionKey(item.deck, item.id, depth);
+  const [saved, setSaved] = useState<FlowPosition | null>(null);
+  useEffect(() => {
+    if (step === 'read') setSaved(canBuild && units.length > 1 ? loadPosition(posKey, units.length) : null);
+    // only when the units are known (Quran items load their ayahs first)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posKey, units.length, canBuild]);
+  useEffect(() => {
+    if (!canBuild || units.length < 2) return;
+    if (step === 'build') savePosition(posKey, { step: 'build', unit: unitIndex, units: units.length });
+    else if (step === 'recall') savePosition(posKey, { step: 'recall', unit: 0, units: units.length });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, unitIndex]);
+
   const unit: Unit | undefined = units[unitIndex];
   const stages = unit ? unitStages({ chain: unit.chain, canOrder: unit.tiles.length > 0 }) : [];
   // The tiles as offered: a fresh order on each go, the same on every render of it
@@ -429,6 +454,8 @@ export function MemoriseFlow({
   useFocusOnChange(step === 'build' ? `${unitIndex}:${stage}:${tries}` : 'idle', helpRef, true);
 
   const finish = (rated: Rating) => {
+    clearPosition(posKey);
+    setSaved(null);
     let ayahCount = 0;
     // Ayahs join the Quran review only when the Arabic was memorised: "Know the
     // meaning" must not put recitation cards in front of someone who never learned them
@@ -568,19 +595,47 @@ export function MemoriseFlow({
 
         <ReviewBadge review={item.review} />
 
-        <StickyActions>
-          <Button
-            className="w-full"
-            disabled={item.quran ? !ayahs?.length : false}
-            onClick={() => {
-              if (canBuild) {
-                startUnit(0);
-                setStep('build');
-              } else toRecall();
-            }}
-          >
-            {canBuild ? 'Start memorising' : 'I’ve read it, test me'}
-          </Button>
+        <StickyActions className="space-y-2">
+          {saved ? (
+            <>
+              <Button
+                className="w-full"
+                data-resume
+                onClick={() => {
+                  if (saved.step === 'build') {
+                    startUnit(saved.unit);
+                    setStep('build');
+                  } else toRecall();
+                }}
+              >
+                {resumeLabel(saved, units[saved.unit]?.label)}
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full"
+                onClick={() => {
+                  setSaved(null);
+                  startUnit(0);
+                  setStep('build');
+                }}
+              >
+                Start from the first part
+              </Button>
+            </>
+          ) : (
+            <Button
+              className="w-full"
+              disabled={item.quran ? !ayahs?.length : false}
+              onClick={() => {
+                if (canBuild) {
+                  startUnit(0);
+                  setStep('build');
+                } else toRecall();
+              }}
+            >
+              {canBuild ? 'Start memorising' : 'I’ve read it, test me'}
+            </Button>
+          )}
         </StickyActions>
       </div>
     );
